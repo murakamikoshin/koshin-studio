@@ -5,35 +5,54 @@
    作品が増えたら data/works.json に一行足して、これを走らせるだけ。
        node site/build.mjs
    ============================================================ */
-import { copyFileSync, existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
+import { copyFileSync, existsSync, mkdirSync, readFileSync, readdirSync, writeFileSync } from 'node:fs';
+import { execFileSync } from 'node:child_process';
+import { createHash } from 'node:crypto';
 
 const here = import.meta.dirname;
 
-/* ゲーム本体の在り処。site/ が sushitsumu の中にあっても、
-   別のリポジトリとして隣に並んでいても、どちらでも見つかるようにする。 */
-const CANDIDATES = [here + '/..', here + '/../sushitsumu', here + '/../../sushitsumu'];
-const root = CANDIDATES.find((d) => existsSync(d + '/index.html'));
-if (!root) {
-  console.error('ゲーム本体（index.html）が見つかりません。探した場所:\n  ' + CANDIDATES.join('\n  '));
-  process.exit(1);
-}
+/* 公開先。独自ドメインを繋いだら data/site.json の url を書き換える。
+   canonical・og・sitemap・feed・構造化データが全部ここを見ているので、
+   直すのはその一箇所でよい。一度だけ試したい時は SITE_URL= で上書きできる */
+const SITE = (process.env.SITE_URL
+  || (existsSync(here + '/data/site.json')
+      ? (JSON.parse(readFileSync(here + '/data/site.json', 'utf8')).url || '')
+      : '')
+  || 'https://koshin-studio.pages.dev').replace(/\/+$/, '');
+
+/* ゲーム本体はこのリポジトリには無い。
+   作品は、それぞれ自分の場所から配信している（sushitsumu なら
+   sushitsumu.koshinstudio.com）。ここが持つのは紹介と行き先だけ。
+   遊ぶ先は data/works.json の play に書く。
+
+   絵（表紙・画面写真）は出来上がったものを assets/ に置いてある。
+   撮り直したいときだけ、ゲームのリポジトリを隣に置いて
+   tools/shots.mjs と tools/images.py を走らせる。 */
+
+/* ---- 部品 ---- */
 const read = (p) => JSON.parse(readFileSync(here + p, 'utf8'));
 const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
 
-/* ---- ゲーム本体と絵 ---- */
-mkdirSync(here + '/works/sushitsumu/play', { recursive: true });
-mkdirSync(here + '/assets', { recursive: true });
-copyFileSync(root + '/index.html', here + '/works/sushitsumu/play/index.html');
-for (const [from, to] of [
-  ['cover-square-800x800.png', 'sushitsumu-square.png'],
-  ['cover-portrait-800x1200.png', 'sushitsumu-portrait.png'],
-  ['cover-landscape-1920x1080.png', 'sushitsumu-landscape.png'],
-]) copyFileSync(root + '/store/' + from, here + '/assets/' + to);
-
-/* ---- 部品 ---- */
 const works = read('/data/works.json');
 const notes = read('/data/notes.json');
 const kinds = read('/data/kinds.json');
+const conf  = existsSync(here + '/data/site.json') ? read('/data/site.json') : { social: [], ads: {} };
+const stack = existsSync(here + '/data/stack.json') ? read('/data/stack.json') : { groups: [] };
+
+/* ---- 中身が変わったら、名前も変える ----
+   style.css と motion.js は名前が変わらないので、一度読ませると
+   ブラウザがしばらく持ち続ける（_headers で一日）。直して配っても
+   古いものが動き続けてしまうので、中身の印を尻に付けて別物にする。
+   書体も同じ。字を足して作り直したのに古いものを掴むと、豆腐になる。 */
+const stamp = (rel) => {
+  const f = here + rel;
+  if (!existsSync(f)) return '';
+  return createHash('sha1').update(readFileSync(f)).digest('hex').slice(0, 8);
+};
+const stamped = (rel) => { const v = stamp(rel); return v ? rel + '?v=' + v : rel; };
+
+/* 絵の在り処は拡張子なしで持つ決まり。古い書き方（.png 付き）も受ける */
+const base = (p) => String(p || '').replace(/\.(png|jpe?g|webp|avif|gif)$/i, '');
 
 const head = (title, desc, extra = '') => `<!doctype html>
 <html lang="ja">
@@ -47,6 +66,7 @@ const head = (title, desc, extra = '') => `<!doctype html>
 <meta property="og:description" content="${esc(desc)}">
 <meta property="og:type" content="website">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<script>document.documentElement.className+=" js"</script>
 <link rel="stylesheet" href="/style.css">${extra}
 </head>
 <body>
@@ -54,12 +74,17 @@ const head = (title, desc, extra = '') => `<!doctype html>
 
 <header class="site"><div class="wrap">
   <a class="logo" href="/">Koshin Studio</a>
-  <nav><a href="/works/">Works</a><a href="/notes/">Notes</a><a href="/profile/">Profile</a></nav>
+  <nav><a href="/works/">Works</a><a href="/notes/">Notes</a><a href="/stack/">Stack</a><a href="/profile/">Profile</a><a class="nav-cta" href="/contact/">Contact</a></nav>
 </div></header>
 `;
+const socialHtml = (conf.social || []).map((x) =>
+  `<a class="sns" href="${x.url}" rel="me noopener" target="_blank">${esc(x.label)}<i>${esc(x.handle || '')}</i></a>`
+).join('');
+
 const foot = `
 <footer class="site"><div class="wrap">
   <span>© 2026 Koshin Studio</span>
+  <div class="sns-row">${socialHtml}</div>
   <nav><a href="/profile/">Profile</a><a href="/privacy/">あつかい</a></nav>
 </div></footer>
 <script src="/motion.js" defer></script>
@@ -67,12 +92,18 @@ const foot = `
 </html>
 `;
 
+/* 絵は拡張子を付けずに持つ。webp を先に出し、読めない相手には jpg を渡す。
+   元の PNG は重すぎるので配らない */
 const workCard = (w, i) => `      <li class="rv" data-kind="${w.kind}" data-delay="${i * 70}"><a class="work" href="${w.url}">
-        <img src="${w.cover}" alt="${esc(w.title)}の表紙" width="800" height="800" loading="lazy">
+        <picture>
+          <source srcset="${base(w.cover)}.webp 360w, ${base(w.cover)}@2x.webp 720w" sizes="132px" type="image/webp">
+          <img src="${base(w.cover)}.jpg" srcset="${base(w.cover)}.jpg 360w, ${base(w.cover)}@2x.jpg 720w" sizes="132px"
+               alt="${esc(w.title)}の表紙" width="${w.coverW || 720}" height="${w.coverH || 720}" loading="lazy" decoding="async">
+        </picture>
         <div>
           <h3>${esc(w.title)}</h3>
           <p>${esc(w.blurb)}</p>
-          <div class="tags"><span class="tag kind">${kinds[w.kind].ja}</span>${
+          <div class="tags"><span class="tag tag-kind">${kinds[w.kind].ja}</span>${
             w.tags.map((t) => `<span class="tag">${esc(t)}</span>`).join('')
           }<span class="tag">${esc(w.year)}</span></div>
         </div>
@@ -84,12 +115,13 @@ const chips = ['<button class="chip on" data-f="all">All<i>すべて</i></button
     `<button class="chip" data-f="${k}">${kinds[k].label}<i>${kinds[k].ja}</i></button>`)).join('');
 
 writeFileSync(here + '/works/index.html',
-  head('Works — Koshin Studio', '作ったものの一覧。ブラウザゲーム、スマートフォンのアプリ、Web サイト。') +
+  head('Works — ブラウザゲーム・アプリ・Web サイトの制作一覧 — Koshin Studio', 'これまでに作ったものの一覧。ブラウザゲーム、スマートフォンのアプリ、Web サイト、3D モデル。分野で絞り込めます。') +
 `<main><div class="wrap">
   <h1>Works</h1>
   <div class="rule"></div>
   <p class="lead">作ったものの一覧です。増えたらここに並びます。</p>
 
+  <h2 class="sr">作品の一覧</h2>
   <div class="chips rv">${chips}</div>
   <ul class="works" id="worklist">
 ${works.map(workCard).join('\n')}
@@ -97,6 +129,36 @@ ${works.map(workCard).join('\n')}
   <p class="soon rv" id="empty" hidden>こ の 種 類 は ま だ あ り ま せ ん</p>
   <p class="soon rv" style="margin-top:22px">次 の 作 品 を 用 意 し て い ま す</p>
 </div></main>` + foot);
+
+/* ---- 使っている道具 ---- */
+if (existsSync(here + '/stack/index.html')) {
+  const html = (stack.groups || []).map((g, gi) => `  <section class="stack-g">
+    <h2 class="rv">${esc(g.name)}</h2>
+    <div class="stack">
+${g.items.map((it, i) => `      <div class="si rv" data-delay="${i * 40}">
+        <b>${esc(it.n)}</b><span class="lv" data-l="${esc(it.level)}">${esc(it.level)}</span>
+        <p>${esc(it.d)}</p>
+      </div>`).join('\n')}
+    </div>
+  </section>`).join('\n');
+  const f = here + '/stack/index.html';
+  writeFileSync(f, readFileSync(f, 'utf8').replace(
+    /<!--stack:start-->[\s\S]*?<!--stack:end-->/,
+    '<!--stack:start-->\n' + html + '\n  <!--stack:end-->'));
+}
+
+/* ---- 記録の配信（RSS） ---- */
+writeFileSync(here + '/feed.xml',
+  '<?xml version="1.0" encoding="UTF-8"?>\n' +
+  '<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">\n<channel>\n' +
+  `  <title>Koshin Studio — Notes</title>\n  <link>${SITE}/notes/</link>\n` +
+  '  <description>作りながら考えたことの記録</description>\n  <language>ja</language>\n' +
+  `  <atom:link href="${SITE}/feed.xml" rel="self" type="application/rss+xml"/>\n` +
+  notes.map((n) => `  <item>\n    <title>${esc(n.title)}</title>\n` +
+    `    <link>${SITE}${n.url}</link>\n    <guid isPermaLink="true">${SITE}${n.url}</guid>\n` +
+    `    <pubDate>${new Date(n.date + 'T00:00:00+09:00').toUTCString()}</pubDate>\n` +
+    `    <description>${esc(n.blurb)}</description>\n  </item>`).join('\n') +
+  '\n</channel>\n</rss>\n');
 
 /* ---- /notes/ ---- */
 const noteRow = (n, i) => `    <li class="rv" data-delay="${i * 70}"><a class="note-row" href="${n.url}">
@@ -106,22 +168,393 @@ const noteRow = (n, i) => `    <li class="rv" data-delay="${i * 70}"><a class="n
     </a></li>`;
 
 writeFileSync(here + '/notes/index.html',
-  head('Notes — Koshin Studio', '作りながら考えたことの記録。数字を取って直した話が中心です。') +
+  head('Notes — 作りながら考えたことの記録 — Koshin Studio', '作りながら考えたことの記録。数字を取って直した話が中心です。') +
 `<main><div class="wrap">
   <h1>Notes</h1>
   <div class="rule"></div>
   <p class="lead">作りながら考えたことの記録。<br>勘で直す前に、まず測る——という話が多いです。</p>
+  <h2 class="sr">記録の一覧</h2>
   <ul class="notes">
 ${notes.map(noteRow).join('\n')}
   </ul>
 </div></main>` + foot);
 
-/* ---- トップの抜粋 ---- */
-const home = readFileSync(here + '/index.html', 'utf8');
-const marked = home.replace(
-  /<!--works:start-->[\s\S]*?<!--works:end-->/,
-  `<!--works:start-->\n${works.slice(0, 3).map(workCard).join('\n')}\n    <!--works:end-->`
-);
-writeFileSync(here + '/index.html', marked);
+/* ---- トップ ---- */
+const kindKeys = Object.keys(kinds);
 
-console.log(`site: works ${works.length} / notes ${notes.length} 件を書き出しました`);
+/* まわりを回るもの：作品の表紙が先、足りない分は分野の札で埋める */
+const orbitCells = []
+  .concat(works.map((w) => ({
+    href: w.url, img: w.cover, label: w.title, sub: kinds[w.kind].ja,
+  })))
+  .concat(kindKeys.map((k) => ({
+    href: '/works/#' + k, label: kinds[k].label, sub: kinds[k].ja, note: kinds[k].note,
+  })));
+
+const orbitHtml = orbitCells.map((c, i) => `      <a class="orb${c.img ? ' has-img' : ''}" href="${c.href}" style="--i:${i}">
+        ${c.img
+          ? `<picture><source srcset="${base(c.img)}.webp" type="image/webp"><img src="${base(c.img)}.jpg" alt="${esc(c.label)}" width="360" height="360" loading="eager" decoding="async"></picture>`
+          : `<span class="orb-mark">${esc(c.label)}</span>`}
+        <span class="orb-cap">${esc(c.img ? c.label : c.sub)}</span>
+      </a>`).join('\n');
+
+/* 分野の札（本文側） */
+const kindHtml = kindKeys.map((k, i) => {
+  const n = works.filter((w) => w.kind === k).length;
+  return `      <a class="kind rv" data-delay="${i * 70}" href="/works/#${k}">
+        <span class="kind-n">${String(i + 1).padStart(2, '0')}</span>
+        <h3>${kinds[k].label}<i>${kinds[k].ja}</i></h3>
+        <p>${kinds[k].note}</p>
+        <span class="kind-count">${n ? n + ' 点' : '準備中'}</span>
+      </a>`;
+}).join('\n');
+
+/* 表紙に出す作ったもの。/works/ と同じ札をそのまま使うので、
+   作品が増えたら表紙もそのまま育つ。一つの作品を大写しにすると、
+   その一つのための場所に見えてしまう */
+const worksTeaser = works.slice(0, 3).map(workCard).join('\n');
+
+/* 記録の抜粋 */
+const noteTeaser = notes.slice(0, 2).map(noteRow).join('\n');
+
+let home = readFileSync(here + '/index.html', 'utf8');
+const put = (key, body) => {
+  home = home.replace(
+    new RegExp('<!--' + key + ':start-->[\\s\\S]*?<!--' + key + ':end-->'),
+    '<!--' + key + ':start-->\n' + body + '\n    <!--' + key + ':end-->'
+  );
+};
+const logoSvg = existsSync(here + '/assets/logotype.svg')
+  ? readFileSync(here + '/assets/logotype.svg', 'utf8').replace(/\n\s*/g, ' ')
+  : '';
+put('logo', logoSvg);
+put('orbit', orbitHtml);
+put('kinds', kindHtml);
+put('works', worksTeaser);
+put('notes', noteTeaser);
+writeFileSync(here + '/index.html', home);
+
+
+/* ============================================================
+   さがしてもらうための下ごしらえ
+     ・正規 URL（canonical）と og:url を全ページに入れる
+     ・構造化データ（JSON-LD）を、ページの種類に応じて入れる
+     ・sitemap.xml と robots.txt を書き出す
+   手で書いたページにも後から差し込むので、ページを足しても勝手に付く。
+   ============================================================ */
+function walk(dir, out = []) {
+  for (const e of readdirSync(dir, { withFileTypes: true })) {
+    const full = dir + '/' + e.name;
+    if (e.isDirectory()) {
+      if (['vendor', 'assets', 'data', 'tools'].includes(e.name)) continue;
+      if (full.endsWith('/works/sushitsumu/play')) continue;
+      walk(full, out);
+    } else if (e.name.endsWith('.html') && e.name !== '404.html') out.push(full);
+  }
+  return out;
+}
+
+const pages = walk(here).sort();
+const urlOf = (f) => {
+  let u = f.slice(here.length).replace(/\/index\.html$/, '/');
+  if (!u.endsWith('/') && u.endsWith('.html')) u = u;
+  return SITE + (u === '' ? '/' : u);
+};
+
+const workBySlug = Object.fromEntries(works.map((w) => [w.slug, w]));
+const noteBySlug = Object.fromEntries(notes.map((n) => [n.slug, n]));
+
+/* 本名は書かない。確かめようのないことを構造化データに入れると、
+   検索側にも読む人にも嘘をつくことになる。
+   代わりに、footer に出しているのと同じ公開の持ち場だけを繋ぐ */
+const PERSON = {
+  '@type': 'Organization', '@id': SITE + '#studio', name: 'Koshin Studio',
+  url: SITE, description: 'ゲーム、アプリ、Web サイト、3D モデルを個人で制作しています。',
+  logo: SITE + '/assets/og/og_home.jpg',
+  sameAs: (conf.social || []).map((x) => x.url),
+};
+
+/* og 画像の在り処。head に入れるものと同じ絵を構造化データからも指す */
+const ogFor = (rel) => {
+  const n = 'og' + (rel === '/index.html' ? '_home'
+    : rel.replace(/\/index\.html$/, '').replace(/\.html$/, '').replace(/\//g, '_')) + '.jpg';
+  return existsSync(here + '/assets/og/' + n)
+    ? SITE + '/assets/og/' + n : SITE + '/assets/sushitsumu-wide.jpg';
+};
+
+function ldFor(file, url) {
+  const rel = file.slice(here.length);
+  const page = (name) => ({ '@type': 'WebPage', name: name, url: url,
+    inLanguage: 'ja', isPartOf: { '@id': SITE + '#studio' }, primaryImageOfPage: ogFor(rel) });
+  const crumbs = (trail) => ({
+    '@type': 'BreadcrumbList',
+    itemListElement: trail.map((t, i) => ({
+      '@type': 'ListItem', position: i + 1, name: t[0], item: SITE + t[1],
+    })),
+  });
+  if (rel === '/index.html') {
+    return [
+      PERSON,
+      { '@type': 'WebSite', url: SITE, name: 'Koshin Studio', publisher: { '@id': SITE + '#studio' },
+        inLanguage: 'ja' },
+      { '@type': 'ItemList', name: '作ったもの',
+        itemListElement: works.map((w, i) => ({
+          '@type': 'ListItem', position: i + 1, url: SITE + w.url, name: w.title })) },
+    ];
+  }
+  const wm = rel.match(/^\/works\/([^/]+)\/index\.html$/);
+  if (wm && workBySlug[wm[1]]) {
+    const w = workBySlug[wm[1]];
+    const type = w.kind === 'game' ? 'VideoGame' : 'SoftwareApplication';
+    return [
+      { '@type': type, name: w.title, url: SITE + w.url, description: w.blurb,
+        inLanguage: 'ja', image: SITE + '/assets/sushitsumu-wide.jpg',
+        applicationCategory: w.kind === 'game' ? 'GameApplication' : 'UtilitiesApplication',
+        operatingSystem: 'Web', datePublished: w.year,
+        ...(w.kind === 'game'
+          ? { genre: ['パズル', '落ち物パズル'], gamePlatform: 'Web browser', playMode: 'SinglePlayer' }
+          : {}),
+        author: { '@id': SITE + '#studio' }, publisher: { '@id': SITE + '#studio' },
+        offers: { '@type': 'Offer', price: '0', priceCurrency: 'JPY' } },
+      crumbs([['Koshin Studio', '/'], ['Works', '/works/'], [w.title, w.url]]),
+    ];
+  }
+  const nm = rel.match(/^\/notes\/([^/]+)\/index\.html$/);
+  if (nm && noteBySlug[nm[1]]) {
+    const nn = noteBySlug[nm[1]];
+    return [
+      { '@type': 'BlogPosting', headline: nn.title, url: SITE + nn.url, description: nn.blurb,
+        datePublished: nn.date, dateModified: nn.date, inLanguage: 'ja',
+        image: ogFor(rel),
+        author: { '@id': SITE + '#studio' }, publisher: { '@id': SITE + '#studio' },
+        mainEntityOfPage: SITE + nn.url },
+      crumbs([['Koshin Studio', '/'], ['Notes', '/notes/'], [nn.title, nn.url]]),
+    ];
+  }
+  if (rel === '/works/index.html') return [crumbs([['Koshin Studio', '/'], ['Works', '/works/']])];
+  if (rel === '/notes/index.html') return [crumbs([['Koshin Studio', '/'], ['Notes', '/notes/']])];
+  if (rel === '/profile/index.html') return [PERSON, crumbs([['Koshin Studio', '/'], ['Profile', '/profile/']])];
+  if (rel === '/stack/index.html') {
+    const tools = [].concat(...(stack.groups || []).map((g) => g.items || []));
+    return [
+      page('使っている道具'),
+      { '@type': 'ItemList', name: '使っている道具',
+        itemListElement: tools.map((t, i) => ({
+          '@type': 'ListItem', position: i + 1, name: t.name })) },
+      crumbs([['Koshin Studio', '/'], ['Stack', '/stack/']]),
+    ];
+  }
+  if (rel === '/contact/index.html') {
+    return [
+      { '@type': 'ContactPage', name: 'ご依頼・お問い合わせ', url: url, inLanguage: 'ja' },
+      { '@type': 'Service', serviceType: 'Web サイト制作',
+        provider: { '@id': SITE + '#studio' }, areaServed: 'JP',
+        offers: { '@type': 'Offer', priceCurrency: 'JPY',
+          priceSpecification: { '@type': 'PriceSpecification', minPrice: '50000',
+            priceCurrency: 'JPY', valueAddedTaxIncluded: false,
+            description: '1 ページあたり・税別' } } },
+      crumbs([['Koshin Studio', '/'], ['Contact', '/contact/']]),
+    ];
+  }
+  if (rel === '/privacy/index.html') {
+    return [page('あつかい（プライバシー）'),
+      crumbs([['Koshin Studio', '/'], ['あつかい', '/privacy/']])];
+  }
+  const gm = rel.match(/^\/works\/([^/]+)\/guide\.html$/);
+  if (gm && workBySlug[gm[1]]) {
+    const w = workBySlug[gm[1]];
+    return [
+      { '@type': 'WebPage', name: w.title + ' 遊び方', url: url, inLanguage: 'ja',
+        primaryImageOfPage: ogFor(rel),
+        about: { '@type': 'VideoGame', name: w.title, url: SITE + w.url } },
+      crumbs([['Koshin Studio', '/'], ['Works', '/works/'], [w.title, w.url],
+              ['遊び方', w.url + 'guide.html']]),
+    ];
+  }
+  return null;
+}
+
+/* style.css の中の書体にも印を付ける。書体は style.css より長く持たせて
+   いるので、字を足して作り直したときに古いものを掴むと豆腐になる */
+{
+  const cssPath = here + '/style.css';
+  if (existsSync(cssPath)) {
+    const before = readFileSync(cssPath, 'utf8');
+    const after = before.replace(/url\("(\/vendor\/fonts\/[^"?]+)(\?v=[0-9a-f]+)?"\)/g,
+      (m, path) => 'url("' + stamped(path) + '")');
+    if (after !== before) writeFileSync(cssPath, after);
+  }
+}
+
+for (const file of pages) {
+  const rel = file.slice(here.length);
+  let html = readFileSync(file, 'utf8');
+  /* 脚の SNS 欄と、広告の枠を差し替える（data/site.json が元） */
+  html = html.replace(/<nav><a href="\/works\/">Works<\/a><a href="\/notes\/">Notes<\/a>(<a href="\/stack\/">Stack<\/a>)?<a href="\/profile\/">Profile<\/a>(<a[^>]*>Contact<\/a>)?<\/nav>/g,
+    '<nav><a href="/works/">Works</a><a href="/notes/">Notes</a><a href="/stack/">Stack</a><a href="/profile/">Profile</a><a class="nav-cta" href="/contact/">Contact</a></nav>');
+  html = html.replace(/<div class="sns-row">[\s\S]*?<\/div>/g, `<div class="sns-row">${socialHtml}</div>`);
+  if (!/class="sns-row"/.test(html)) {
+    html = html.replace('<footer class="site"><div class="wrap">\n  <span>© 2026 Koshin Studio</span>',
+      `<footer class="site"><div class="wrap">\n  <span>© 2026 Koshin Studio</span>\n  <div class="sns-row">${socialHtml}</div>`);
+  }
+  /* 連絡先（data/site.json の contact） */
+  const ct = conf.contact || {};
+  /* 主役はひとつだけ置く。メールがあればメール、無ければフォーム。
+     両方あるときは、フォームを控えに回す。
+     フォームしか無いのに小さな副ボタンだと、仕事を頼む頁として弱い */
+  const ctMailMain = ct.email
+    ? `<a class="ct-main" href="mailto:${ct.email}?subject=${encodeURIComponent('制作のご相談')}">${esc(ct.email)}<span>メールで相談する</span></a>`
+    : '';
+  const ctFormMain = ct.form
+    ? `<a class="ct-main" href="${ct.form}" target="_blank" rel="noopener">ご相談フォーム<span>ここから送れます</span></a>`
+    : '';
+  const ctFormSub = ct.form
+    ? `<a class="ct-sub" href="${ct.form}" target="_blank" rel="noopener">フォームから送る</a>` : '';
+  const ctHtml = (ct.email || ct.form)
+    ? (ct.email ? ctMailMain + ctFormSub : ctFormMain)
+    : ((conf.social || []).length
+        ? `<p class="ct-soon">いまは ${(conf.social || []).map((x) =>
+             `<a href="${x.url}" rel="noopener" target="_blank">${esc(x.label)}</a>`).join(' か ')}` +
+          ` からご連絡ください。<br><span>専用の窓口は近く用意します。</span></p>`
+        : `<p class="ct-soon">連絡先は近く用意します。<br><span>もう少しお待ちください。</span></p>`);
+  html = html.replace(/<!--contact:start-->[\s\S]*?<!--contact:end-->/,
+    '<!--contact:start-->' + ctHtml + '<!--contact:end-->');
+
+  /* パンくず（見る人にも、検索にも効く） */
+  const TRAIL = {
+    '/works/index.html': [['Works', '/works/']],
+    '/notes/index.html': [['Notes', '/notes/']],
+    '/stack/index.html': [['Stack', '/stack/']],
+    '/profile/index.html': [['Profile', '/profile/']],
+    '/contact/index.html': [['Contact', '/contact/']],
+    '/privacy/index.html': [['あつかい', '/privacy/']],
+  };
+  let trail = TRAIL[rel];
+  const wm2 = rel.match(/^\/works\/([^/]+)\//);
+  const nm2 = rel.match(/^\/notes\/([^/]+)\//);
+  if (wm2 && workBySlug[wm2[1]]) {
+    const w = workBySlug[wm2[1]];
+    trail = [['Works', '/works/']].concat(
+      rel.endsWith('/index.html') && rel === w.url + 'index.html'
+        ? [[w.title, w.url]] : [[w.title, w.url], ['遊び方', rel.replace('index.html', '')]]);
+  } else if (nm2 && noteBySlug[nm2[1]]) {
+    trail = [['Notes', '/notes/'], [noteBySlug[nm2[1]].title, noteBySlug[nm2[1]].url]];
+  }
+  /* 属性付きも消えるようにする（class="crumbs" だけを見ると一致せず、
+     組み直すたびに増え続けていた） */
+  html = html.replace(/\s*<nav class="crumbs"[^>]*>[\s\S]*?<\/nav>/g, '');
+  if (trail) {
+    const items = [['Koshin Studio', '/']].concat(trail);
+    const cr = '<nav class="crumbs" aria-label="現在地">' + items.map((t, i) =>
+      i === items.length - 1
+        ? `<span aria-current="page">${esc(t[0])}</span>`
+        : `<a href="${t[1]}">${esc(t[0])}</a><i aria-hidden="true">›</i>`).join('') + '</nav>';
+    html = html.replace(/(<main[^>]*>\s*<div class="wrap">)/, `$1\n  ${cr}`);
+  }
+
+  const ads = conf.ads || {};
+  html = html.replace(/<div class="ad-slot"[^>]*>[\s\S]*?<\/div>\s*<!--\/ad-->/g, (m) => {
+    const kind = (m.match(/data-slot="([^"]+)"/) || [, 'article'])[1];
+    const id = (ads.slots || {})[kind];
+    const inner = ads.enabled && ads.client && id
+      ? `<ins class="adsbygoogle" style="display:block" data-ad-client="${ads.client}" data-ad-slot="${id}" data-ad-format="auto" data-full-width-responsive="true"></ins><script>(adsbygoogle=window.adsbygoogle||[]).push({});</script>`
+      : '';
+    return `<div class="ad-slot" data-slot="${kind}"${inner ? '' : ' hidden'}>${inner}</div>\n<!--/ad-->`;
+  });
+  /* 枠だけ置いても出ない。読み込む側の script が要る。
+     入れっぱなしにすると、広告を止めたあとも向こうへ繋ぎに行くので、
+     枠が生きているページにだけ、そのつど入れ直す */
+  html = html.replace(/\n?\s*<script async src="https:\/\/pagead2\.googlesyndication\.com[^>]*><\/script>/g, '');
+  if (ads.enabled && ads.client && /<ins class="adsbygoogle"/.test(html)) {
+    html = html.replace('</head>',
+      `<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${ads.client}" crossorigin="anonymous"></script>\n</head>`);
+  }
+  const url = urlOf(file);
+  html = html.replace(/\n?\s*<link rel="canonical"[^>]*>/g, '')
+             .replace(/\n?\s*<meta property="og:url"[^>]*>/g, '')
+             .replace(/\n?\s*<meta name="twitter:card"[^>]*>/g, '')
+             .replace(/\n?\s*<meta property="og:site_name"[^>]*>/g, '')
+             .replace(/\n?\s*<meta property="og:locale"[^>]*>/g, '')
+             .replace(/\n?\s*<link rel="alternate" type="application\/rss\+xml"[^>]*>/g, '')
+             .replace(/\n?\s*<script type="application\/ld\+json">[\s\S]*?<\/script>/g, '');
+  const ld = ldFor(file, url);
+  const head = [
+    `<link rel="canonical" href="${url}">`,
+    `<meta property="og:url" content="${url}">`,
+    `<meta property="og:site_name" content="Koshin Studio">`,
+    `<meta property="og:locale" content="ja_JP">`,
+    `<meta name="twitter:card" content="summary_large_image">`,
+    `<link rel="alternate" type="application/rss+xml" title="Koshin Studio — Notes" href="${SITE}/feed.xml">`,
+    ld ? `<script type="application/ld+json">${JSON.stringify(
+      { '@context': 'https://schema.org', '@graph': ld })}</script>` : '',
+  ].filter(Boolean).join('\n');
+  html = html.replace('</head>', head + '\n</head>');
+  /* ホーム画面に置いたときの絵と、manifest。
+     SVG だけだと iOS で何も出ない。消してから入れ直す */
+  html = html.replace(/\n?\s*<link rel="apple-touch-icon"[^>]*>/g, '')
+             .replace(/\n?\s*<link rel="manifest"[^>]*>/g, '');
+  html = html.replace('<script>document.documentElement.className+=" js"</script>',
+    '<link rel="apple-touch-icon" href="/assets/icon/icon-180.png">\n'
+    + '<link rel="manifest" href="/site.webmanifest">\n'
+    + '<script>document.documentElement.className+=" js"</script>');
+
+  /* 中身の印を付け直す。古い印は消してから入れるので、組み直しても増えない */
+  html = html.replace(/(["'])(\/(?:style\.css|motion\.js))(\?v=[0-9a-f]+)?\1/g,
+    (m, q, path) => q + stamped(path) + q);
+  html = html.replace(/(["'])(\/vendor\/[A-Za-z0-9@._/-]+\.(?:js|woff2|css))(\?v=[0-9a-f]+)?\1/g,
+    (m, q, path) => q + stamped(path) + q);
+
+  /* 遊ぶ先を入れ直す。作品はそれぞれ自分の場所から配信しているので、
+     行き先はここが持つ（works.json の play）。頁の側は
+     data-play="<slug>" と書いておけばよく、配信先が変わっても
+     直すのは works.json の一行だけ。組むたびに入れ直すので焼き付かない */
+  html = html.replace(/<a([^>]*?)\sdata-play="([^"]+)"([^>]*?)>/g, (m, a, slug, b) => {
+    const w = works.find((x) => x.slug === slug);
+    if (!w || !w.play) return m;
+    const rest = (a + b).replace(/\shref="[^"]*"/, '');
+    return `<a${rest} data-play="${slug}" href="${w.play}">`;
+  });
+
+  const ogPath = ogFor(rel);      /* 構造化データと同じ絵を指す */
+  html = html.replace(/\n?\s*<meta property="og:image"[^>]*>/g, '')
+             .replace(/\n?\s*<meta property="og:image:width"[^>]*>/g, '')
+             .replace(/\n?\s*<meta property="og:image:height"[^>]*>/g, '');
+  html = html.replace('</head>',
+    `<meta property="og:image" content="${ogPath}">\n` +
+    `<meta property="og:image:width" content="1200">\n` +
+    `<meta property="og:image:height" content="630">\n</head>`);
+  writeFileSync(file, html);
+}
+
+/* 最後に直した日。git が覚えている「実際に配った変更」の日を使う。
+   組み直すたびに今日の日付を並べると、嘘の更新を報せることになる。
+   git が無い所では日付を省く（無いほうが、間違った日より良い） */
+const lastMod = (f) => {
+  try {
+    const d = execFileSync('git', ['log', '-1', '--format=%cs', '--', f],
+      { cwd: here, encoding: 'utf8' }).trim();
+    return /^\d{4}-\d{2}-\d{2}$/.test(d) ? d : '';
+  } catch (e) { return ''; }
+};
+
+writeFileSync(here + '/sitemap.xml',
+  '<?xml version="1.0" encoding="UTF-8"?>\n' +
+  '<urlset xmlns="http://www.sitemap.org/schemas/sitemap/0.9">\n'.replace('sitemap.org', 'sitemaps.org') +
+  pages.map((f) => {
+    const rel = f.slice(here.length);
+    const pri = rel === '/index.html' ? '1.0'
+      : /^\/(works|notes)\/index\.html$/.test(rel) ? '0.9'
+      : /^\/works\/[^/]+\/index\.html$/.test(rel) ? '0.8'
+      : /^\/notes\/[^/]+\/index\.html$/.test(rel) ? '0.8'
+      : /^\/(contact|stack)\/index\.html$/.test(rel) ? '0.7' : '0.5';
+    const m = lastMod(f);
+    return `  <url><loc>${urlOf(f)}</loc>${m ? `<lastmod>${m}</lastmod>` : ''}`
+      + `<priority>${pri}</priority></url>`;
+  }).join('\n') + '\n</urlset>\n');
+
+writeFileSync(here + '/robots.txt',
+  'User-agent: *\nAllow: /\n\nSitemap: ' + SITE + '/sitemap.xml\n');
+
+console.log(`site: ${pages.length} ページに canonical と構造化データ、sitemap.xml を書きました`);
+
+console.log(`site: works ${works.length} / notes ${notes.length} / 分野 ${kindKeys.length} を書き出しました`);

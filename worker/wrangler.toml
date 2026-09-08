@@ -1,0 +1,12 @@
+name = "koshin-studio-routes"
+main = "index.js"
+compatibility_date = "2026-01-01"
+
+# /play/* と /app/* だけを受ける。ほかは Pages がそのまま返す
+[[routes]]
+pattern = "koshinstudio.com/play/*"
+zone_name = "koshinstudio.com"
+
+[[routes]]
+pattern = "koshinstudio.com/app/*"
+zone_name = "koshinstudio.com"

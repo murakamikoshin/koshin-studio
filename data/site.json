@@ -1,0 +1,28 @@
+{
+  "name": "Koshin Studio",
+  "url": "https://koshinstudio.com",
+  "urlNote": "独自ドメインを繋いだらここを書き換える（末尾のスラッシュは不要）。canonical・og・sitemap・feed・構造化データが全部ここを見る。",
+  "tagline": "ゲーム、アプリ、サイト、3D。ひとりで、ぜんぶ。",
+  "social": [
+    {
+      "label": "GitHub",
+      "url": "https://github.com/murakamikoshin",
+      "handle": "@murakamikoshin"
+    }
+  ],
+  "ads": {
+    "enabled": false,
+    "client": "",
+    "slots": {
+      "article": "",
+      "footer": ""
+    },
+    "gameHint": "60s",
+    "note": "AdSense に通ったら enabled を true にして client を埋める。client だけで、遊ぶ頁の区切り広告（H5 Games Ads）が入る。記事の枠を出すには slots も埋める。gameHint は広告の間隔の目安。"
+  },
+  "contact": {
+    "email": "",
+    "form": "",
+    "note": "form に Google フォームの URL を入れると、Contact の主役として出ます。email も入れるとメールが主役になり、フォームは控えに回ります。両方空なら SNS へ誘導します。"
+  }
+}

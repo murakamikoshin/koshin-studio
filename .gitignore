@@ -1,0 +1,8 @@
+.DS_Store
+.wrangler/
+# 実体でも symlink でも入らないように
+node_modules
+# 元の PNG（重い。webp と jpg を配っている）
+assets/*.png
+# 撮ったままの絵（配る形は assets/shots に出してある）
+assets/shots/raw/
