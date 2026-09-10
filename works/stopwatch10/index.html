@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>10秒ピッタリで止めろ！ — Koshin Studio</title>
+<meta name="description" content="頭の中で10秒を数えて止めるだけ。3回勝負で、1回あたりの誤差が小さいほど強い。導入も登録も要らないブラウザゲームです。">
+<meta property="og:title" content="10秒ピッタリで止めろ！">
+<meta property="og:description" content="数えて止めるだけ。3回勝負で、1回あたりの誤差が小さいほど強い。">
+<meta property="og:type" content="article">
+<meta name="theme-color" content="#070c17">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/assets/icon/icon-180.png">
+<link rel="manifest" href="/site.webmanifest">
+<script>document.documentElement.className+=" js"</script>
+<link rel="stylesheet" href="/style.css?v=dc51153e">
+<link rel="canonical" href="https://koshinstudio.com/works/stopwatch10/">
+<meta property="og:url" content="https://koshinstudio.com/works/stopwatch10/">
+<meta property="og:site_name" content="Koshin Studio">
+<meta property="og:locale" content="ja_JP">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="alternate" type="application/rss+xml" title="Koshin Studio — Notes" href="https://koshinstudio.com/feed.xml">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"VideoGame","name":"10秒ピッタリで止めろ！","url":"https://koshinstudio.com/works/stopwatch10/","description":"頭の中で10秒を数えて止めるだけ。3回勝負で、1回あたりの誤差が小さいほど強い。導入も登録も要らず、開いた瞬間に始まります。","inLanguage":"ja","image":"https://koshinstudio.com/assets/sushitsumu-wide.jpg","applicationCategory":"GameApplication","operatingSystem":"Web","datePublished":"2026","genre":["パズル","落ち物パズル"],"gamePlatform":"Web browser","playMode":"SinglePlayer","author":{"@id":"https://koshinstudio.com#studio"},"publisher":{"@id":"https://koshinstudio.com#studio"},"offers":{"@type":"Offer","price":"0","priceCurrency":"JPY"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Koshin Studio","item":"https://koshinstudio.com/"},{"@type":"ListItem","position":2,"name":"Works","item":"https://koshinstudio.com/works/"},{"@type":"ListItem","position":3,"name":"10秒ピッタリで止めろ！","item":"https://koshinstudio.com/works/stopwatch10/"}]}]}</script>
+<meta property="og:image" content="https://koshinstudio.com/assets/og/og_works_stopwatch10.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+</head>
+<body>
+<canvas id="motes"></canvas>
+
+<header class="site"><div class="wrap">
+  <a class="logo" href="/">Koshin Studio</a>
+  <nav><a href="/works/">Works</a><a href="/notes/">Notes</a><a href="/stack/">Stack</a><a href="/profile/">Profile</a><a class="nav-cta" href="/contact/">Contact</a></nav>
+</div></header>
+
+<main><div class="wrap">
+  <nav class="crumbs" aria-label="現在地"><a href="/">Koshin Studio</a><i aria-hidden="true">›</i><a href="/works/">Works</a><i aria-hidden="true">›</i><span aria-current="page">10秒ピッタリで止めろ！</span></nav>
+  <h1>10秒ピッタリで止めろ！</h1>
+  <div class="rule"></div>
+  <p class="lead">スタートを押して、頭の中で10秒。<br>そう思ったところで、止める。</p>
+
+  <p><a class="btn" data-play="stopwatch10" href="/play/stopwatch10/">遊 ぶ</a></p>
+
+  <div class="shots rv">
+    <figure>
+      <picture>
+        <source srcset="/assets/shots/sw10-ready.webp" type="image/webp">
+        <img src="/assets/shots/sw10-ready.jpg" alt="始める前の画面。オレンジの七segment表示は消えていて、下に大きなスタートの札がある" width="560" height="1212" loading="lazy" decoding="async">
+      </picture>
+      <figcaption>始める前</figcaption>
+    </figure>
+    <figure>
+      <picture>
+        <source srcset="/assets/shots/sw10-run.webp" type="image/webp">
+        <img src="/assets/shots/sw10-run.jpg" alt="数えている最中の画面。表示は真っ暗で、数字も目盛りも出ていない" width="560" height="1212" loading="lazy" decoding="async">
+      </picture>
+      <figcaption>数えているあいだ。何も動きません</figcaption>
+    </figure>
+    <figure>
+      <picture>
+        <source srcset="/assets/shots/sw10-done.webp" type="image/webp">
+        <img src="/assets/shots/sw10-done.jpg" alt="3回終わった画面。10.134 と表示され、1回あたりの誤差 0.084 秒と3回ぶんの記録が並んでいる" width="560" height="1212" loading="lazy" decoding="async">
+      </picture>
+      <figcaption>3回そろったところ</figcaption>
+    </figure>
+  </div>
+
+  <div class="stats rv">
+    <div><b data-count="3">0</b><span>回で勝負</span></div>
+    <div><b data-count="3">0</b><span>つのモード</span></div>
+    <div><b data-count="1000">0</b><span>分の1秒まで</span></div>
+  </div>
+
+  <h2 class="rv">どんな遊びか</h2>
+  <p>画面には数字も、目盛りも、音も出ません。押してから止めるまでのあいだ、何ひとつ動きません。頼れるのは自分の中の秒針だけです。</p>
+  <p>3回止めて、目標との<strong>誤差</strong>を見ます。0.5 秒ずれる人もいれば、0.02 秒で止める人もいます。合計ではなく「1回あたり」で出しているのは、そのほうが腕前が直感的にわかるからです。あわせて「3回のうちベスト1回」も残しています。平均が実力で、ベスト1回はその日の運です。</p>
+
+  <h2 class="rv">三つのモード</h2>
+  <h3>10秒・ヒントなし</h3>
+  <p>基本の遊び方。3回勝負です。手がかりは何もありません。</p>
+  <h3>10秒・ヒントあり</h3>
+  <p>最初の3秒だけ時計が出ます。そこで自分の刻みを合わせて、残りは自力で。3秒を越えた瞬間、表示は完全に消えます。</p>
+  <h3>100秒・一発勝負</h3>
+  <p>1回きり。100秒を数えるあいだ、やることは何もありません。途中で画面を離れる（タブを切り替える、画面が消える）と、その勝負は無効になります。</p>
+
+  <h2 class="rv">なぜ小数3桁までなのか</h2>
+  <p>ブラウザの時計は、端末によって粗さが違います。<code>performance.now()</code> は Spectre 対策で精度がわざと落としてあり、Chrome は 5µs 刻み、Safari と Firefox は 1ms 刻みです。</p>
+  <p>6桁まで出すと、<strong>時計の粗い端末ほど末尾が 000 になって有利</strong>になります。「ピッタリ」を競う遊びで、端末の当たり外れが順位を決めてしまう。だから3桁で切って、全部の端末を同じ土俵に揃えています。</p>
+
+  <h2 class="rv">動くものを置かない</h2>
+  <p>作っている途中、表示のどこかに点滅するランプを置いたことがあります。すると、それが<strong>メトロノーム代わり</strong>になってしまいました。1Hz で光るものが視界にあれば、人はそれに合わせて数えられる。自力で数える遊びが、丸ごと消えます。</p>
+  <p>いまは、計測中に周期的に動くものを一切置いていません。ボタンの脈打ちも、点滅も、アニメーションも。押した瞬間から止めるまで、画面は完全に静止しています。</p>
+
+  <h2 class="rv">作りについて</h2>
+  <p>全体が <strong>HTML ファイル一枚</strong>です。外部の library はゼロ。数字は七segmentの形を SVG の多角形で自前に描いているので、書体にも依存しません。効果音も音声ファイルを持たず、その場で作っています。</p>
+  <p>止めた時刻は <code>pointerdown</code> の <code>event.timeStamp</code> で取っています。<code>click</code> を待つと余計な遅れが乗るためです。記録は端末の中にモードごとに残ります。</p>
+
+  <p style="margin-top:40px">
+    <a class="btn" data-play="stopwatch10" href="/play/stopwatch10/">遊 ぶ</a>
+  </p>
+</div></main>
+
+<footer class="site"><div class="wrap">
+  <span>© 2026 Koshin Studio</span>
+  <div class="sns-row"><a class="sns" href="https://github.com/murakamikoshin" rel="me noopener" target="_blank">GitHub<i>@murakamikoshin</i></a></div>
+  <nav><a href="/profile/">Profile</a><a href="/privacy/">あつかい</a></nav>
+</div></footer>
+<script src="/vendor/gsap.min.js?v=9396f256" defer></script>
+<script src="/vendor/ScrollTrigger.min.js?v=05ca5ad8" defer></script>
+<script src="/vendor/lenis.min.js?v=daec1872" defer></script>
+<script src="/motion.js?v=942a2796" defer></script>
+</body>
+</html>

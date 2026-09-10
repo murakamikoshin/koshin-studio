@@ -16,6 +16,7 @@
 const ROUTES = {
   play: {
     sushitsumu: 'https://sushitsumu.pages.dev',
+    stopwatch10: 'https://stopwatch10.pages.dev',
   },
   app: {
     // つぎのどうぐ: 'https://tsugi.pages.dev',

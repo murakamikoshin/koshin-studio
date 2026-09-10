@@ -9,24 +9,42 @@ from PIL import Image
 
 here = os.path.dirname(os.path.abspath(__file__))
 site = os.path.dirname(here)
-# 表紙の元は、ゲームのリポジトリの store/ にある。
+# 表紙の元は、それぞれのゲームのリポジトリの store/ にある。
 # このリポジトリには無いので、隣に置くか場所を教えてもらう。
 #   GAME_DIR=~/Desktop/sushitsumu/sushitsumu python3 tools/images.py
-# 見つからなければ、画面写真だけ作り直す。
+#   GAME_DIR_STOPWATCH10=~/Desktop/sushitsumu/stopwatch10 python3 tools/images.py
+# 見つからなければ、そのゲームは飛ばす（絵は前のものが残る）。
 game = (sys.argv[1] if len(sys.argv) > 1 else os.environ.get('GAME_DIR')
         or os.path.join(site, '..', 'sushitsumu'))
 game = os.path.expanduser(game)
 out = os.path.join(site, 'assets')
 os.makedirs(out, exist_ok=True)
 
-JOBS = [
-    ('cover-square-800x800.png',     'sushitsumu-square',    [360, 720]),
-    ('cover-portrait-800x1200.png',  'sushitsumu-portrait',  [400, 800]),
-    ('cover-landscape-1920x1080.png','sushitsumu-wide',      [960, 1600]),
+
+def where(slug, *guesses):
+    """ゲームのリポジトリを探す。GAME_DIR_<SLUG> があればそれが勝つ。"""
+    told = os.environ.get('GAME_DIR_' + slug.upper())
+    for d in (told,) + guesses:
+        if d and os.path.exists(os.path.join(os.path.expanduser(d), 'index.html')):
+            return os.path.expanduser(d)
+    return None
+
+
+GAMES = [
+    (game, [
+        ('cover-square-800x800.png',     'sushitsumu-square',    [360, 720]),
+        ('cover-portrait-800x1200.png',  'sushitsumu-portrait',  [400, 800]),
+        ('cover-landscape-1920x1080.png','sushitsumu-wide',      [960, 1600]),
+    ]),
+    (where('stopwatch10', os.path.join(site, '..', 'stopwatch10')), [
+        ('cover-square-800x800.png',     'stopwatch10-square',   [360, 720]),
+    ]),
 ]
 
-for src, name, widths in JOBS:
-    path = os.path.join(game, 'store', src)
+JOBS = [(os.path.join(root, 'store', src), name, widths)
+        for root, jobs in GAMES if root for src, name, widths in jobs]
+
+for path, name, widths in JOBS:
     if not os.path.exists(path):
         print('見つからない:', path); continue
     im = Image.open(path).convert('RGB')
@@ -78,7 +96,8 @@ shots = os.path.join(site, 'assets', 'shots')
 raw = os.path.join(shots, 'raw')
 if os.path.isdir(raw):
     os.makedirs(shots, exist_ok=True)
-    for name, w in (('title', 560), ('play', 560), ('dex', 560), ('desktop', 1200)):
+    for name, w in (('title', 560), ('play', 560), ('dex', 560), ('desktop', 1200),
+                    ('sw10-ready', 560), ('sw10-run', 560), ('sw10-done', 560)):
         src = os.path.join(raw, name + '.png')
         if not os.path.exists(src):
             continue

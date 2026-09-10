@@ -31,5 +31,23 @@
       }
     ],
     "play": "/play/sushitsumu/"
+  },
+  {
+    "slug": "stopwatch10",
+    "title": "10秒ピッタリで止めろ！",
+    "kind": "game",
+    "year": "2026",
+    "status": "公開中",
+    "url": "/works/stopwatch10/",
+    "cover": "/assets/stopwatch10-square",
+    "blurb": "頭の中で10秒を数えて止めるだけ。3回勝負で、1回あたりの誤差が小さいほど強い。導入も登録も要らず、開いた瞬間に始まります。",
+    "tags": [
+      "ブラウザ",
+      "3回勝負",
+      "1ファイル"
+    ],
+    "coverW": 720,
+    "coverH": 720,
+    "play": "/play/stopwatch10/"
   }
 ]
