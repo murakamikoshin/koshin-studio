@@ -272,20 +272,33 @@ Works の絞り込み、Tab での辿り着きやすさ。
                              npx wrangler pages deploy dist --project-name <ゲーム名>
     ② 中継      worker/      npx wrangler deploy && node test.mjs
     ③ サイト    ここ         node build.mjs
-                             npx wrangler pages deploy . --project-name koshin-studio
+                             npx wrangler pages deploy . --project-name koshin-studio \
+                                 --branch koshin-studio
 
 ①②は、そこを変えた時だけでよい。文章や一覧を直しただけなら③だけ。
 **ただし作品を新しく並べた時は、必ず①②③の順で。** ③だけ先に出すと
 「遊ぶ」が 404 になる。
 
-出したあと `Deployment alias URL: https://main.koshin-studio.pages.dev` が
-出ていれば本番。別の名前（branch 名）が出ていたら preview なので、
-いる branch と Pages の Production branch を見直す。
+出したあと **alias の行が出なければ本番**、出たら preview。
+（`--branch` の指定が本番ブランチ名と一致した時だけ、alias が出ない）
 
 **サイト（このリポジトリ）**
 
     node build.mjs
-    npx wrangler pages deploy . --project-name koshin-studio
+    npx wrangler pages deploy . --project-name koshin-studio --branch koshin-studio
+
+**`--branch koshin-studio` を落とさないこと。** この Pages
+プロジェクトは本番ブランチの名前が `koshin-studio`（`main` ではない）。
+付け忘れると preview に入るだけで、`koshinstudio.com` は古いまま何も
+変わらない。しかもコマンドは成功したように見えるので気づけない。
+
+見分け方は最後の一行。
+
+    ✨ Deployment alias URL: https://main.koshin-studio.pages.dev   ← preview。入っていない
+    （alias の行が出ない）                                          ← production。入った
+
+Cloudflare の Settings → Builds & deployments で本番ブランチを `main` に
+変えたら、`--branch` は要らなくなる。変えたらこの節も直すこと。
 
 `.assetsignore` に、配らないもの（`.git` / `tools` / `data` / `worker` など）を
 並べてある。
