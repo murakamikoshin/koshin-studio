@@ -24,6 +24,26 @@ Cloudflare Pages に置く静的サイト。枠組み（Next.js など）は使�
 
 ---
 
+## 手元の置き方
+
+**三つとも横に並べる。入れ子にしない。**
+
+    <入れ物>/
+      koshin-studio/     ← このリポジトリ。koshinstudio.com そのもの
+      sushitsumu/        ← ゲーム
+      stopwatch10/       ← ゲーム
+
+入れ物の名前は何でもよい（`~/Desktop/koshin/` など）。
+**`koshin-studio` の中にゲームを clone してはいけない。**
+`npx wrangler pages deploy .` がそれごと上げようとして転ぶ
+（前に `tools/node_modules` の symlink を混ぜて実際に転んだ）。
+
+道具のうち `tools/shots.mjs` だけがゲーム本体を要る。隣に並んでいれば
+自分で見つける。別の場所に置くなら `GAME_DIR` で教える。無ければ黙って飛ばす。
+
+`build.mjs` はゲームを見に行かない。作品の場所は `data/works.json` の
+`play` に書いてある道だけで、実物は `worker/` が中継する。
+
 ## 作り物の置き場所（URL の決め方）
 
 `koshinstudio.com` の下は、こう分けてある。
@@ -96,6 +116,10 @@ Cloudflare Pages に置く静的サイト。枠組み（Next.js など）は使�
 
 ゲーム側とサイト側で、やることが分かれている。
 
+> **順番を守ること。** ゲーム → 中継 → サイト の順。
+> サイトを先に出すと、Works に並んだ「遊ぶ」が 404 になる。
+> 行き先（`<ゲーム名>.pages.dev`）がまだ存在しないため。
+
 **ゲームのリポジトリで**
 
 1. 配る形を組む（すし積むなら `node tools/dist.mjs` → `dist/`）
@@ -103,7 +127,14 @@ Cloudflare Pages に置く静的サイト。枠組み（Next.js など）は使�
 
        npx wrangler pages deploy dist --project-name <ゲーム名>
 
-   → `https://<ゲーム名>.pages.dev` ができる
+   → `https://<ゲーム名>.pages.dev` ができる。
+
+   初回は「そのプロジェクトは無い。作るか？」と聞かれる。**作る**を選び、
+   本番ブランチにはいま自分がいる branch 名をそのまま入れる。
+   ここで別の名前を入れると、出したものが preview 扱いになって
+   `<ゲーム名>.pages.dev` が空のままになる。
+   出たあとに `✨ Deployment complete!` の URL を開いて、
+   本当に動くところまで見てから次へ進む
 3. 配る形には `noindex, follow` を入れておく。検索に出すのは
    `koshinstudio.com/works/<ゲーム名>/` の紹介ページの方で、
    実物の方が先に拾われると具合が悪い
@@ -120,12 +151,19 @@ Cloudflare Pages に置く静的サイト。枠組み（Next.js など）は使�
          app: {},
        };
 
-5. 中継を出し直す
+5. `worker/test.mjs` にも一行足す
+
+       await check('/play/newgame/', { status: 200, asked: 'https://newgame.pages.dev/' });
+
+   `ROUTES` を書き換えたのに Pages へ出し忘れた、を検査で捕まえるため
+
+6. 中継を出し直す
 
        cd worker && npx wrangler deploy && node test.mjs
 
-   → `koshinstudio.com/play/newgame/` が繋がる
-6. `data/works.json` に足す
+   → `koshinstudio.com/play/newgame/` が繋がる。
+   **ここまで確かめてからサイトを出す**
+7. `data/works.json` に足す
 
        { "slug": "newgame", "title": "…", "kind": "game", "year": "2026",
          "status": "公開中", "url": "/works/newgame/",
@@ -139,9 +177,9 @@ Cloudflare Pages に置く静的サイト。枠組み（Next.js など）は使�
    紛れ込むことはない。構造化データの絵は `image`（拡張子つき）を書けば
    それ、無ければ表紙の `@2x.jpg` を使う。
 
-7. `works/newgame/index.html` を作る（`works/sushitsumu/index.html` を写す）
-8. 表紙の絵を置く（→「絵の置き方」）
-9. A と同じ（build → check → deploy）
+8. `works/newgame/index.html` を作る（`works/sushitsumu/index.html` を写す）
+9. 表紙の絵を置く（→「絵の置き方」）
+10. A と同じ（build → check → deploy）
 
 `play` を書いた作品には、`data-play` の付いたリンクが自動で
 その行き先に書き換わる。ボタンの `href` を手で書く必要はない。
@@ -228,6 +266,22 @@ Works の絞り込み、Tab での辿り着きやすさ。
 
 ## 出す
 
+**まとめて出すときの順番**
+
+    ① ゲーム    <ゲーム>/    node tools/dist.mjs
+                             npx wrangler pages deploy dist --project-name <ゲーム名>
+    ② 中継      worker/      npx wrangler deploy && node test.mjs
+    ③ サイト    ここ         node build.mjs
+                             npx wrangler pages deploy . --project-name koshin-studio
+
+①②は、そこを変えた時だけでよい。文章や一覧を直しただけなら③だけ。
+**ただし作品を新しく並べた時は、必ず①②③の順で。** ③だけ先に出すと
+「遊ぶ」が 404 になる。
+
+出したあと `Deployment alias URL: https://main.koshin-studio.pages.dev` が
+出ていれば本番。別の名前（branch 名）が出ていたら preview なので、
+いる branch と Pages の Production branch を見直す。
+
 **サイト（このリポジトリ）**
 
     node build.mjs
@@ -251,6 +305,16 @@ Works の絞り込み、Tab での辿り着きやすさ。
 | ドメイン | `koshinstudio.com`（Cloudflare Registrar） |
 | `www` | Redirect Rule で apex に飛ばしてある |
 | Worker | `koshin-studio-routes`（`/play/*` `/app/*`） |
+
+作品ごとの Pages プロジェクト（それぞれのリポジトリから出す）
+
+| 作品 | Pages | 道 |
+|---|---|---|
+| すし積む | `sushitsumu` | `/play/sushitsumu/` |
+| 10秒ピッタリで止めろ！ | `stopwatch10` | `/play/stopwatch10/` |
+
+Pages は Git 連携していない。**push しただけでは公開されない。**
+公開は必ず手元からの `wrangler pages deploy`。
 
 ---
 
