@@ -129,12 +129,25 @@ Cloudflare Pages に置く静的サイト。枠組み（Next.js など）は使�
 
    → `https://<ゲーム名>.pages.dev` ができる。
 
-   初回は「そのプロジェクトは無い。作るか？」と聞かれる。**作る**を選び、
-   本番ブランチにはいま自分がいる branch 名をそのまま入れる。
-   ここで別の名前を入れると、出したものが preview 扱いになって
-   `<ゲーム名>.pages.dev` が空のままになる。
+   **最初に `--branch main` を付けて出すこと。** 付けないと、そのとき
+   自分が居た git の branch 名がそのまま本番ブランチとして登録される。
+   作業ブランチに居たまま出すと、以後 `--branch main` で出したものが
+   全部 preview 行きになり、`<ゲーム名>.pages.dev` は最初の一回のまま
+   固まる（stopwatch10 で実際にこれを踏んだ。1時間気づかなかった）。
+
+   初回は「そのプロジェクトは無い。作るか？」と聞かれる。**作る**を選ぶ。
+   本番ブランチを聞かれたら `main`。
+
    出たあとに `✨ Deployment complete!` の URL を開いて、
-   本当に動くところまで見てから次へ進む
+   本当に動くところまで見てから次へ進む。
+
+   おかしいと思ったら、どの deploy が本番か一覧で見る。
+
+       npx wrangler pages deployment list --project-name <ゲーム名>
+
+   `Environment` が `Production` の行の `Branch` が、本番ブランチ。
+   そこが作業ブランチ名になっていたら、Settings → Builds & deployments の
+   **Production branch** を `main` に直してから出し直す
 3. 配る形には `noindex, follow` を入れておく。検索に出すのは
    `koshinstudio.com/works/<ゲーム名>/` の紹介ページの方で、
    実物の方が先に拾われると具合が悪い
