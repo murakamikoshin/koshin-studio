@@ -78,7 +78,8 @@ Cloudflare Pages に置く静的サイト。枠組み（Next.js など）は使�
 1. `data/*.json` を直す（手で書いても、管理画面でもいい）
 2. `node build.mjs`
 3. `node tools/check.mjs`（通ればよし）
-4. `npx wrangler pages deploy . --project-name koshin-studio`
+4. `npx wrangler pages deploy . --project-name koshin-studio --branch koshin-studio`
+   （`--branch` を落とすと preview に入るだけ。→「出す」）
 
 | したいこと | いじる場所 |
 |---|---|
