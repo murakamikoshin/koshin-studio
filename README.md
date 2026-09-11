@@ -238,7 +238,8 @@ Cloudflare Pages に置く静的サイト。枠組み（Next.js など）は使�
 | `images.py` | 絵を配る形（WebP / JPEG）に落とす |
 | `logotype.py` | ロゴの字（KOSHIN STUDIO）を起こす |
 | `ogimages.mjs` | ページごとの共有カード（1200×630）を撮る |
-| `shots.mjs` | ゲームの画面写真を撮る（自動で遊ばせて、いい所を残す） |
+| `shots.mjs` | すし積むの画面写真を撮る（自動で遊ばせて、いい所を残す） |
+| `shots-stopwatch10.mjs` | 10秒ピッタリの画面写真を撮る（押すだけなので別立て） |
 | `icons.mjs` | favicon.svg から貼り付け用の PNG と manifest を起こす |
 
 文章を書き足したら `fonts.py`、絵を差し替えたら `images.py`、
