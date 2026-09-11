@@ -142,13 +142,18 @@ Cloudflare Pages に置く静的サイト。枠組み（Next.js など）は使�
    出たあとに `✨ Deployment complete!` の URL を開いて、
    本当に動くところまで見てから次へ進む。
 
-   おかしいと思ったら、どの deploy が本番か一覧で見る。
+   おかしいと思ったら、**設定**を見る。
+
+       npx wrangler pages project list
+
+   `Production branch` の列が、いまの設定。ここが作業ブランチ名になって
+   いたら、Settings → General の **Production branch** を `main` に直す。
 
        npx wrangler pages deployment list --project-name <ゲーム名>
 
-   `Environment` が `Production` の行の `Branch` が、本番ブランチ。
-   そこが作業ブランチ名になっていたら、Settings → Builds & deployments の
-   **Production branch** を `main` に直してから出し直す
+   こちらは**履歴**。`Production` 行のブランチ名は、そのデプロイを出した
+   ときの名前で、設定を変えても書き換わらない。**設定と混同しない**
+   （stopwatch10 で実際に混同して、直っているのに直っていないと思った）
 3. 配る形には `noindex, follow` を入れておく。検索に出すのは
    `koshinstudio.com/works/<ゲーム名>/` の紹介ページの方で、
    実物の方が先に拾われると具合が悪い
@@ -296,6 +301,10 @@ Works の絞り込み、Tab での辿り着きやすさ。
 
 出したあと **alias の行が出なければ本番**、出たら preview。
 （`--branch` の指定が本番ブランチ名と一致した時だけ、alias が出ない）
+
+いまの本番ブランチが何かは `npx wrangler pages project list` の
+`Production branch` 列で見る。`deployment list` は履歴なので、そちらの
+`Production` 行に出る名前は設定とは別物。
 
 **サイト（このリポジトリ）**
 
