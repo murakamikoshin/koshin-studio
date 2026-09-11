@@ -132,7 +132,12 @@ Cloudflare Pages に置く静的サイト。枠組み（Next.js など）は使�
          "play": "/play/newgame/",
          "cover": "/assets/newgame-square",   ← 拡張子は書かない
          "coverW": 720, "coverH": 720,
+         "genre": ["…", "…"],                 ← 構造化データの分野。書かなければ出ない
          "blurb": "一覧に出る一行", "tags": ["…"], "featured": true }
+
+   `genre` は検索側に渡す分野。**書かないと出ない**ので、他の作品の分野が
+   紛れ込むことはない。構造化データの絵は `image`（拡張子つき）を書けば
+   それ、無ければ表紙の `@2x.jpg` を使う。
 
 7. `works/newgame/index.html` を作る（`works/sushitsumu/index.html` を写す）
 8. 表紙の絵を置く（→「絵の置き方」）

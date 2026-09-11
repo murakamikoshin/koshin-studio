@@ -30,7 +30,12 @@
         "label": "戦を自動で検証"
       }
     ],
-    "play": "/play/sushitsumu/"
+    "play": "/play/sushitsumu/",
+    "image": "/assets/sushitsumu-wide@2x.jpg",
+    "genre": [
+      "パズル",
+      "落ち物パズル"
+    ]
   },
   {
     "slug": "stopwatch10",
@@ -48,6 +53,10 @@
     ],
     "coverW": 720,
     "coverH": 720,
-    "play": "/play/stopwatch10/"
+    "play": "/play/stopwatch10/",
+    "genre": [
+      "カジュアル",
+      "タイミング"
+    ]
   }
 ]

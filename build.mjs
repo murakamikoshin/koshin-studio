@@ -306,13 +306,22 @@ function ldFor(file, url) {
   if (wm && workBySlug[wm[1]]) {
     const w = workBySlug[wm[1]];
     const type = w.kind === 'game' ? 'VideoGame' : 'SoftwareApplication';
+    /* 絵と分野は作品ごとに違う。ここを決め打ちにしていたせいで、
+       どの作品の構造化データにも すし積む の絵と「落ち物パズル」が
+       入っていた。検索側には「中身と合っていない」と読まれる。
+       image は works.json の image → 表紙の @2x → 共有カード の順で拾う。
+       genre は書いてある作品だけに入れる（嘘を書くより落とす） */
+    const wImage = w.image ? SITE + w.image
+      : w.cover ? SITE + w.cover + '@2x.jpg'
+      : ogFor(rel);
     return [
       { '@type': type, name: w.title, url: SITE + w.url, description: w.blurb,
-        inLanguage: 'ja', image: SITE + '/assets/sushitsumu-wide.jpg',
+        inLanguage: 'ja', image: wImage,
         applicationCategory: w.kind === 'game' ? 'GameApplication' : 'UtilitiesApplication',
         operatingSystem: 'Web', datePublished: w.year,
         ...(w.kind === 'game'
-          ? { genre: ['パズル', '落ち物パズル'], gamePlatform: 'Web browser', playMode: 'SinglePlayer' }
+          ? { gamePlatform: 'Web browser', playMode: 'SinglePlayer',
+              ...(w.genre && w.genre.length ? { genre: w.genre } : {}) }
           : {}),
         author: { '@id': SITE + '#studio' }, publisher: { '@id': SITE + '#studio' },
         offers: { '@type': 'Offer', price: '0', priceCurrency: 'JPY' } },
