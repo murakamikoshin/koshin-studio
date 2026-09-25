@@ -67,6 +67,7 @@ const srv = createServer((q, r) => {
 }).listen(PORT);
 
 const paths = ['/', '/works/', '/works/sushitsumu/', '/works/sushitsumu/guide.html',
+  '/works/stopwatch10/', '/works/shindananime/',
   '/notes/', '/notes/anago/', '/stack/', '/contact/',
   '/profile/', '/privacy/', '/404.html'];
 
