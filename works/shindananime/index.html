@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>神アニメ診断 — Koshin Studio</title>
+<meta name="description" content="18の質問から、世界観・後味・構成・人間関係・テイスト・視聴スタイルの6つの軸で好みを割り出し、いちばん刺さるアニメを3つ選ぶ無料の診断です。登録不要、ブラウザだけで動きます。">
+<meta property="og:title" content="神アニメ診断">
+<meta property="og:description" content="18問・6軸で、あなたにいちばん刺さるアニメを3つ。">
+<meta property="og:type" content="article">
+<meta name="theme-color" content="#070c17">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/assets/icon/icon-180.png">
+<link rel="manifest" href="/site.webmanifest">
+<script>document.documentElement.className+=" js"</script>
+<link rel="stylesheet" href="/style.css?v=53fdd5e0">
+<link rel="canonical" href="https://koshinstudio.com/works/shindananime/">
+<meta property="og:url" content="https://koshinstudio.com/works/shindananime/">
+<meta property="og:site_name" content="Koshin Studio">
+<meta property="og:locale" content="ja_JP">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="alternate" type="application/rss+xml" title="Koshin Studio — Notes" href="https://koshinstudio.com/feed.xml">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"SoftwareApplication","name":"神アニメ診断","url":"https://koshinstudio.com/works/shindananime/","description":"18の質問で、世界観・後味・構成・人間関係・テイスト・視聴スタイルの6軸を割り出し、いちばん刺さるアニメを3つ選ぶ診断。","inLanguage":"ja","image":"https://koshinstudio.com/assets/shindananime-square@2x.jpg","applicationCategory":"UtilitiesApplication","operatingSystem":"Web","datePublished":"2026","author":{"@id":"https://koshinstudio.com#studio"},"publisher":{"@id":"https://koshinstudio.com#studio"},"offers":{"@type":"Offer","price":"0","priceCurrency":"JPY"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Koshin Studio","item":"https://koshinstudio.com/"},{"@type":"ListItem","position":2,"name":"Works","item":"https://koshinstudio.com/works/"},{"@type":"ListItem","position":3,"name":"神アニメ診断","item":"https://koshinstudio.com/works/shindananime/"}]}]}</script>
+<meta property="og:image" content="https://koshinstudio.com/assets/og/og_works_shindananime.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+</head>
+<body>
+<canvas id="motes"></canvas>
+
+<header class="site"><div class="wrap">
+  <a class="logo" href="/">Koshin Studio</a>
+  <nav><a href="/works/">Works</a><a href="/notes/">Notes</a><a href="/stack/">Stack</a><a href="/profile/">Profile</a><a class="nav-cta" href="/contact/">Contact</a></nav>
+</div></header>
+
+<main><div class="wrap">
+  <nav class="crumbs" aria-label="現在地"><a href="/">Koshin Studio</a><i aria-hidden="true">›</i><a href="/works/">Works</a><i aria-hidden="true">›</i><span aria-current="page">神アニメ診断</span></nav>
+  <h1>神アニメ診断</h1>
+  <div class="rule"></div>
+  <p class="lead">18の質問に答えるだけ。<br>いちばん刺さるアニメを、3つだけ選びます。</p>
+
+  <p><a class="btn" data-play="shindananime" href="/app/shindananime/">診断する</a></p>
+
+  <div class="shots rv">
+    <figure>
+      <picture>
+        <source srcset="/assets/shots/sd-quiz.webp" type="image/webp">
+        <img src="/assets/shots/sd-quiz.jpg" alt="質問の画面。「物語の展開として脳汁が出るのはどっち？」の下に A と B の大きな選択肢、その下に「どちらかといえば」の小さな選択肢が三つ並ぶ" width="560" height="1212" loading="lazy" decoding="async">
+      </picture>
+      <figcaption>A か B か、または「どちらかといえば」</figcaption>
+    </figure>
+    <figure>
+      <picture>
+        <source srcset="/assets/shots/sd-loading.webp" type="image/webp">
+        <img src="/assets/shots/sd-loading.jpg" alt="解析中の画面。世界観・後味・構成・人間関係・テイスト・視聴の6本のバーが、答えに合わせて左右に伸びていく" width="560" height="1212" loading="lazy" decoding="async">
+      </picture>
+      <figcaption>6つの軸が伸びていく</figcaption>
+    </figure>
+    <figure>
+      <picture>
+        <source srcset="/assets/shots/sd-result.webp" type="image/webp">
+        <img src="/assets/shots/sd-result.jpg" alt="結果の画面。タイプの記号 RDCIPV と「現実の闇をのぞき込む考察の策士」という名前、6軸それぞれの寄り具合が並ぶ" width="560" height="1212" loading="lazy" decoding="async">
+      </picture>
+      <figcaption>タイプと、6軸の寄り具合</figcaption>
+    </figure>
+  </div>
+
+  <div class="stats rv">
+    <div><b data-count="18">0</b><span>の質問</span></div>
+    <div><b data-count="6">0</b><span>つの軸</span></div>
+    <div><b data-count="3">0</b><span>作だけ選ぶ</span></div>
+  </div>
+
+  <h2 class="rv">どんな診断か</h2>
+  <p>「ダークなアニメが好き」と一口に言っても、頭脳戦が好きな人と、泥沼の愛憎劇が好きな人では、刺さる作品がまるで違います。ジャンルで分けるだけでは、その違いが消えてしまいます。</p>
+  <p>この診断は、好みを<strong>6つの軸</strong>に分けて、それぞれがどちらにどれだけ寄っているかを測ります。軸ごとに3問、あわせて18問。作品の側も同じ6つの軸で持っていて、いちばん近い3作を選びます。</p>
+
+  <h2 class="rv">6つの軸</h2>
+  <h3>世界観　R（現実・現代）と F（異世界・SF）</h3>
+  <p>地続きのリアリティに惹かれるか、現実を忘れられる別世界に惹かれるか。</p>
+  <h3>後味・刺激　D（ダーク）と H（ハッピー）</h3>
+  <p>救いのない余韻が残るほうが好きか、逆転と大団円で満たされたいか。</p>
+  <h3>構成・テンポ　C（伏線・考察）と S（テンポ・直感）</h3>
+  <p>溜めて溜めて回収する構成を待てるか、一話目から掴まれたいか。</p>
+  <h3>人間関係　G（群像・絆）と I（孤高・推し）</h3>
+  <p>チームや群像の掛け合いに心が動くか、ひとりの推しや二人だけの関係に刺さるか。</p>
+  <h3>サブテイスト　P（心理戦・ドラマ）と A（アクション・熱量）</h3>
+  <p>言葉の読み合いと行間か、作画の迫力とテンションか。</p>
+  <h3>視聴・演出　V（映像美・じっくり）と L（気軽・一気見）</h3>
+  <p>一話ずつ噛み締めて考察まで読みたいか、面白ければ一気に完走して次へ行きたいか。</p>
+
+  <h2 class="rv">「どちらかといえば」がある理由</h2>
+  <p>二択しかないと、迷った答えも言い切った答えも同じ重さになります。だから A・B のほかに「どちらかといえば」と「どちらともいえない」を置いています。<strong>迷わず答えた軸ほど、作品選びで重く見ます。</strong>どちらでもない軸は、選ぶときにあまり効かせません。</p>
+
+  <h2 class="rv">3作が似たものばかりにならないように</h2>
+  <p>いちばん近い作品から順に取ると、同じ系統の作品が並びがちです。この診断では、すでに選んだ作品と近すぎる候補を少しだけ下げて、方向の違う3作になるようにしています。見たことのある作品は「見た」を押すと、次に合う作品に入れ替わります。</p>
+
+  <h2 class="rv">作品のデータについて</h2>
+  <p>作品の軸の値は、こちらで一作ずつ付けた見立てです。Filmarks のスコアが取れている作品は、取得した時点の★と、その作品のページへのリンクを添えます。取れていない作品にはスコアを出さず、リンクだけにしています。</p>
+  <p>回答は端末の中で計算するだけで、どこにも送りません。配信サービスへのリンクの一部は、アフィリエイト（PR）になることがあります。そのときはボタンに PR と表示します。詳しくは<a href="/privacy/">あつかい</a>に書いています。</p>
+
+  <p style="margin-top:40px">
+    <a class="btn" data-play="shindananime" href="/app/shindananime/">診断する</a>
+  </p>
+</div></main>
+
+<footer class="site"><div class="wrap">
+  <span>© 2026 Koshin Studio</span>
+  <div class="sns-row"><a class="sns" href="https://github.com/murakamikoshin" rel="me noopener" target="_blank">GitHub<i>@murakamikoshin</i></a></div>
+  <nav><a href="/profile/">Profile</a><a href="/privacy/">あつかい</a></nav>
+</div></footer>
+<script src="/vendor/gsap.min.js?v=9396f256" defer></script>
+<script src="/vendor/ScrollTrigger.min.js?v=05ca5ad8" defer></script>
+<script src="/vendor/lenis.min.js?v=daec1872" defer></script>
+<script src="/motion.js?v=942a2796" defer></script>
+</body>
+</html>

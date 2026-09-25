@@ -58,5 +58,37 @@
       "カジュアル",
       "タイミング"
     ]
+  },
+  {
+    "slug": "shindananime",
+    "title": "神アニメ診断",
+    "kind": "app",
+    "year": "2026",
+    "status": "公開中",
+    "url": "/works/shindananime/",
+    "cover": "/assets/shindananime-square",
+    "coverW": 720,
+    "coverH": 720,
+    "blurb": "18の質問で、世界観・後味・構成・人間関係・テイスト・視聴スタイルの6軸を割り出し、いちばん刺さるアニメを3つ選ぶ診断。",
+    "tags": [
+      "ブラウザ",
+      "18問",
+      "6軸"
+    ],
+    "stats": [
+      {
+        "n": 18,
+        "label": "の質問"
+      },
+      {
+        "n": 6,
+        "label": "つの軸"
+      },
+      {
+        "n": 50,
+        "label": "作品と照合"
+      }
+    ],
+    "play": "/app/shindananime/"
   }
 ]

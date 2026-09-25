@@ -13,6 +13,9 @@ site = os.path.dirname(here)
 # このリポジトリには無いので、隣に置くか場所を教えてもらう。
 #   GAME_DIR=~/Desktop/sushitsumu/sushitsumu python3 tools/images.py
 #   GAME_DIR_STOPWATCH10=~/Desktop/sushitsumu/stopwatch10 python3 tools/images.py
+#   GAME_DIR_SHINDANANIME=~/Desktop/koshin/shindananime python3 tools/images.py
+# 神アニメ診断の画面写真は、あちらで node tools/e2e.mjs --shots を走らせて
+# store/shot-*.png を assets/shots/raw/sd-*.png に写してから。
 # 見つからなければ、そのゲームは飛ばす（絵は前のものが残る）。
 game = (sys.argv[1] if len(sys.argv) > 1 else os.environ.get('GAME_DIR')
         or os.path.join(site, '..', 'sushitsumu'))
@@ -25,8 +28,10 @@ def where(slug, *guesses):
     """ゲームのリポジトリを探す。GAME_DIR_<SLUG> があればそれが勝つ。"""
     told = os.environ.get('GAME_DIR_' + slug.upper())
     for d in (told,) + guesses:
-        if d and os.path.exists(os.path.join(os.path.expanduser(d), 'index.html')):
-            return os.path.expanduser(d)
+        # 本体が直下に無い作品（神アニメ診断は src/ の下）もあるので、store/ があれば良しとする
+        d = d and os.path.expanduser(d)
+        if d and (os.path.exists(os.path.join(d, 'index.html')) or os.path.isdir(os.path.join(d, 'store'))):
+            return d
     return None
 
 
@@ -38,6 +43,9 @@ GAMES = [
     ]),
     (where('stopwatch10', os.path.join(site, '..', 'stopwatch10')), [
         ('cover-square-800x800.png',     'stopwatch10-square',   [360, 720]),
+    ]),
+    (where('shindananime', os.path.join(site, '..', 'shindananime')), [
+        ('cover-square-800x800.png',     'shindananime-square',  [360, 720]),
     ]),
 ]
 
@@ -97,7 +105,8 @@ raw = os.path.join(shots, 'raw')
 if os.path.isdir(raw):
     os.makedirs(shots, exist_ok=True)
     for name, w in (('title', 560), ('play', 560), ('dex', 560), ('desktop', 1200),
-                    ('sw10-ready', 560), ('sw10-run', 560), ('sw10-done', 560)):
+                    ('sw10-ready', 560), ('sw10-run', 560), ('sw10-done', 560),
+                    ('sd-quiz', 560), ('sd-loading', 560), ('sd-result', 560)):
         src = os.path.join(raw, name + '.png')
         if not os.path.exists(src):
             continue

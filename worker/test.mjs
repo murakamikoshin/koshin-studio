@@ -16,6 +16,7 @@ const cases = [
   ['/play/sushitsumu/favicon.svg', '中のファイルも中継'],
   ['/play/sushitsumu',             '末尾の / を足して送り直す'],
   ['/play/stopwatch10/',           '二本目も中継'],
+  ['/app/shindananime/',           'アプリも中継'],
   ['/play/',                       '作品一覧へ返す'],
   ['/play/しらないやつ/',            '知らない作品'],
   ['/works/',                      'ここが受ける道ではない'],
@@ -48,6 +49,9 @@ await check('/app/sushitsumu/', { status: 404 });   /* play のものは app に
 /* 作品が増えたら、ここにも一行足す。ROUTES を書き換えただけで
    出し忘れても気づけるようにしておく */
 await check('/play/stopwatch10/', { status: 200, asked: 'https://stopwatch10.pages.dev/' });
+await check('/app/shindananime/', { status: 200, asked: 'https://shindananime.pages.dev/' });
+await check('/app/shindananime/anime_data.json', { status: 200, asked: 'https://shindananime.pages.dev/anime_data.json' });
+await check('/play/shindananime/', { status: 404 });   /* app のものは play には無い */
 await check('/app/', { status: 302, loc: 'https://koshinstudio.com/works/' });
 await check('/app/nope/', { status: 404 });
 console.log(bad ? '\n合わないところがあります' : '\n判定はすべて狙いどおり。');
