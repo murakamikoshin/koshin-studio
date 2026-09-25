@@ -317,7 +317,10 @@ function ldFor(file, url) {
     return [
       { '@type': type, name: w.title, url: SITE + w.url, description: w.blurb,
         inLanguage: 'ja', image: wImage,
-        applicationCategory: w.kind === 'game' ? 'GameApplication' : 'UtilitiesApplication',
+        /* category は作品ごとに違うことがある（診断アプリを「実用」に
+           入れるのは実態と合わない）ので、works.json の category が
+           あればそちらを使う。無ければ今まで通りの決め打ち */
+        applicationCategory: w.category || (w.kind === 'game' ? 'GameApplication' : 'UtilitiesApplication'),
         operatingSystem: 'Web', datePublished: w.year,
         ...(w.kind === 'game'
           ? { gamePlatform: 'Web browser', playMode: 'SinglePlayer',
@@ -326,6 +329,15 @@ function ldFor(file, url) {
         author: { '@id': SITE + '#studio' }, publisher: { '@id': SITE + '#studio' },
         offers: { '@type': 'Offer', price: '0', priceCurrency: 'JPY' } },
       crumbs([['Koshin Studio', '/'], ['Works', '/works/'], [w.title, w.url]]),
+      /* よくある質問。ページの目に見える内容と揃っているものだけ書く
+         （works.json の faq がそのまま本文にも出る） */
+      ...(w.faq && w.faq.length ? [{
+        '@type': 'FAQPage',
+        mainEntity: w.faq.map((f) => ({
+          '@type': 'Question', name: f.q,
+          acceptedAnswer: { '@type': 'Answer', text: f.a },
+        })),
+      }] : []),
     ];
   }
   const nm = rel.match(/^\/notes\/([^/]+)\/index\.html$/);
