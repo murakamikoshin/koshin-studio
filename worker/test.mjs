@@ -50,5 +50,6 @@ await check('/app/sushitsumu/', { status: 404 });   /* play のものは app に
 await check('/play/stopwatch10/', { status: 200, asked: 'https://stopwatch10.pages.dev/' });
 await check('/app/', { status: 302, loc: 'https://koshinstudio.com/works/' });
 await check('/app/nope/', { status: 404 });
+await check('/app/shindananime/', { status: 200, asked: 'https://shindananime.pages.dev/' });
 console.log(bad ? '\n合わないところがあります' : '\n判定はすべて狙いどおり。');
 process.exit(bad);

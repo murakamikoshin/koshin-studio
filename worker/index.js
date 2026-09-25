@@ -19,7 +19,7 @@ const ROUTES = {
     stopwatch10: 'https://stopwatch10.pages.dev',
   },
   app: {
-    // つぎのどうぐ: 'https://tsugi.pages.dev',
+    shindananime: 'https://shindananime.pages.dev',
   },
 };
 
