@@ -1,12 +1,77 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://koshinstudio.com/contact/</loc><lastmod>2026-09-08</lastmod><priority>0.7</priority></url>
+  <url><loc>https://koshinstudio.com/about/</loc><priority>0.7</priority></url>
+  <url><loc>https://koshinstudio.com/anime/axes/</loc><priority>0.8</priority></url>
+  <url><loc>https://koshinstudio.com/anime/</loc><priority>0.8</priority></url>
+  <url><loc>https://koshinstudio.com/anime/types/fdca-tl/</loc><priority>0.6</priority></url>
+  <url><loc>https://koshinstudio.com/anime/types/fdca-tm/</loc><priority>0.6</priority></url>
+  <url><loc>https://koshinstudio.com/anime/types/fdca-vl/</loc><priority>0.6</priority></url>
+  <url><loc>https://koshinstudio.com/anime/types/fdca-vm/</loc><priority>0.6</priority></url>
+  <url><loc>https://koshinstudio.com/anime/types/fdcp-tl/</loc><priority>0.6</priority></url>
+  <url><loc>https://koshinstudio.com/anime/types/fdcp-tm/</loc><priority>0.6</priority></url>
+  <url><loc>https://koshinstudio.com/anime/types/fdcp-vl/</loc><priority>0.6</priority></url>
+  <url><loc>https://koshinstudio.com/anime/types/fdcp-vm/</loc><priority>0.6</priority></url>
+  <url><loc>https://koshinstudio.com/anime/types/fdsa-tl/</loc><priority>0.6</priority></url>
+  <url><loc>https://koshinstudio.com/anime/types/fdsa-tm/</loc><priority>0.6</priority></url>
+  <url><loc>https://koshinstudio.com/anime/types/fdsa-vl/</loc><priority>0.6</priority></url>
+  <url><loc>https://koshinstudio.com/anime/types/fdsa-vm/</loc><priority>0.6</priority></url>
+  <url><loc>https://koshinstudio.com/anime/types/fdsp-tl/</loc><priority>0.6</priority></url>
+  <url><loc>https://koshinstudio.com/anime/types/fdsp-tm/</loc><priority>0.6</priority></url>
+  <url><loc>https://koshinstudio.com/anime/types/fdsp-vl/</loc><priority>0.6</priority></url>
+  <url><loc>https://koshinstudio.com/anime/types/fdsp-vm/</loc><priority>0.6</priority></url>
+  <url><loc>https://koshinstudio.com/anime/types/fhca-tl/</loc><priority>0.6</priority></url>
+  <url><loc>https://koshinstudio.com/anime/types/fhca-tm/</loc><priority>0.6</priority></url>
+  <url><loc>https://koshinstudio.com/anime/types/fhca-vl/</loc><priority>0.6</priority></url>
+  <url><loc>https://koshinstudio.com/anime/types/fhca-vm/</loc><priority>0.6</priority></url>
+  <url><loc>https://koshinstudio.com/anime/types/fhcp-tl/</loc><priority>0.6</priority></url>
+  <url><loc>https://koshinstudio.com/anime/types/fhcp-tm/</loc><priority>0.6</priority></url>
+  <url><loc>https://koshinstudio.com/anime/types/fhcp-vl/</loc><priority>0.6</priority></url>
+  <url><loc>https://koshinstudio.com/anime/types/fhcp-vm/</loc><priority>0.6</priority></url>
+  <url><loc>https://koshinstudio.com/anime/types/fhsa-tl/</loc><priority>0.6</priority></url>
+  <url><loc>https://koshinstudio.com/anime/types/fhsa-tm/</loc><priority>0.6</priority></url>
+  <url><loc>https://koshinstudio.com/anime/types/fhsa-vl/</loc><priority>0.6</priority></url>
+  <url><loc>https://koshinstudio.com/anime/types/fhsa-vm/</loc><priority>0.6</priority></url>
+  <url><loc>https://koshinstudio.com/anime/types/fhsp-tl/</loc><priority>0.6</priority></url>
+  <url><loc>https://koshinstudio.com/anime/types/fhsp-tm/</loc><priority>0.6</priority></url>
+  <url><loc>https://koshinstudio.com/anime/types/fhsp-vl/</loc><priority>0.6</priority></url>
+  <url><loc>https://koshinstudio.com/anime/types/fhsp-vm/</loc><priority>0.6</priority></url>
+  <url><loc>https://koshinstudio.com/anime/types/</loc><priority>0.8</priority></url>
+  <url><loc>https://koshinstudio.com/anime/types/rdca-tl/</loc><priority>0.6</priority></url>
+  <url><loc>https://koshinstudio.com/anime/types/rdca-tm/</loc><priority>0.6</priority></url>
+  <url><loc>https://koshinstudio.com/anime/types/rdca-vl/</loc><priority>0.6</priority></url>
+  <url><loc>https://koshinstudio.com/anime/types/rdca-vm/</loc><priority>0.6</priority></url>
+  <url><loc>https://koshinstudio.com/anime/types/rdcp-tl/</loc><priority>0.6</priority></url>
+  <url><loc>https://koshinstudio.com/anime/types/rdcp-tm/</loc><priority>0.6</priority></url>
+  <url><loc>https://koshinstudio.com/anime/types/rdcp-vl/</loc><priority>0.6</priority></url>
+  <url><loc>https://koshinstudio.com/anime/types/rdcp-vm/</loc><priority>0.6</priority></url>
+  <url><loc>https://koshinstudio.com/anime/types/rdsa-tl/</loc><priority>0.6</priority></url>
+  <url><loc>https://koshinstudio.com/anime/types/rdsa-tm/</loc><priority>0.6</priority></url>
+  <url><loc>https://koshinstudio.com/anime/types/rdsa-vl/</loc><priority>0.6</priority></url>
+  <url><loc>https://koshinstudio.com/anime/types/rdsa-vm/</loc><priority>0.6</priority></url>
+  <url><loc>https://koshinstudio.com/anime/types/rdsp-tl/</loc><priority>0.6</priority></url>
+  <url><loc>https://koshinstudio.com/anime/types/rdsp-tm/</loc><priority>0.6</priority></url>
+  <url><loc>https://koshinstudio.com/anime/types/rdsp-vl/</loc><priority>0.6</priority></url>
+  <url><loc>https://koshinstudio.com/anime/types/rdsp-vm/</loc><priority>0.6</priority></url>
+  <url><loc>https://koshinstudio.com/anime/types/rhca-tl/</loc><priority>0.6</priority></url>
+  <url><loc>https://koshinstudio.com/anime/types/rhca-tm/</loc><priority>0.6</priority></url>
+  <url><loc>https://koshinstudio.com/anime/types/rhca-vl/</loc><priority>0.6</priority></url>
+  <url><loc>https://koshinstudio.com/anime/types/rhca-vm/</loc><priority>0.6</priority></url>
+  <url><loc>https://koshinstudio.com/anime/types/rhcp-tl/</loc><priority>0.6</priority></url>
+  <url><loc>https://koshinstudio.com/anime/types/rhcp-tm/</loc><priority>0.6</priority></url>
+  <url><loc>https://koshinstudio.com/anime/types/rhcp-vl/</loc><priority>0.6</priority></url>
+  <url><loc>https://koshinstudio.com/anime/types/rhcp-vm/</loc><priority>0.6</priority></url>
+  <url><loc>https://koshinstudio.com/anime/types/rhsa-tl/</loc><priority>0.6</priority></url>
+  <url><loc>https://koshinstudio.com/anime/types/rhsa-tm/</loc><priority>0.6</priority></url>
+  <url><loc>https://koshinstudio.com/anime/types/rhsa-vl/</loc><priority>0.6</priority></url>
+  <url><loc>https://koshinstudio.com/anime/types/rhsa-vm/</loc><priority>0.6</priority></url>
+  <url><loc>https://koshinstudio.com/anime/types/rhsp-tl/</loc><priority>0.6</priority></url>
+  <url><loc>https://koshinstudio.com/anime/types/rhsp-tm/</loc><priority>0.6</priority></url>
+  <url><loc>https://koshinstudio.com/anime/types/rhsp-vl/</loc><priority>0.6</priority></url>
+  <url><loc>https://koshinstudio.com/anime/types/rhsp-vm/</loc><priority>0.6</priority></url>
   <url><loc>https://koshinstudio.com/</loc><lastmod>2026-09-25</lastmod><priority>1.0</priority></url>
   <url><loc>https://koshinstudio.com/notes/anago/</loc><lastmod>2026-09-08</lastmod><priority>0.8</priority></url>
   <url><loc>https://koshinstudio.com/notes/</loc><lastmod>2026-09-08</lastmod><priority>0.9</priority></url>
   <url><loc>https://koshinstudio.com/privacy/</loc><lastmod>2026-09-11</lastmod><priority>0.5</priority></url>
-  <url><loc>https://koshinstudio.com/profile/</loc><lastmod>2026-09-08</lastmod><priority>0.5</priority></url>
-  <url><loc>https://koshinstudio.com/stack/</loc><lastmod>2026-09-08</lastmod><priority>0.7</priority></url>
   <url><loc>https://koshinstudio.com/works/</loc><lastmod>2026-09-25</lastmod><priority>0.9</priority></url>
   <url><loc>https://koshinstudio.com/works/shindananime/</loc><lastmod>2026-09-25</lastmod><priority>0.8</priority></url>
   <url><loc>https://koshinstudio.com/works/stopwatch10/</loc><lastmod>2026-09-11</lastmod><priority>0.8</priority></url>

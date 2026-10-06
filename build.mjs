@@ -74,7 +74,7 @@ const head = (title, desc, extra = '') => `<!doctype html>
 
 <header class="site"><div class="wrap">
   <a class="logo" href="/">Koshin Studio</a>
-  <nav><a href="/works/">Works</a><a href="/notes/">Notes</a><a href="/stack/">Stack</a><a href="/profile/">Profile</a><a class="nav-cta" href="/contact/">Contact</a></nav>
+  <nav><a href="/works/">Works</a><a href="/notes/">Notes</a><a href="/anime/">Anime</a><a href="/about/">About</a></nav>
 </div></header>
 `;
 const socialHtml = (conf.social || []).map((x) =>
@@ -85,7 +85,7 @@ const foot = `
 <footer class="site"><div class="wrap">
   <span>© 2026 Koshin Studio</span>
   <div class="sns-row">${socialHtml}</div>
-  <nav><a href="/profile/">Profile</a><a href="/privacy/">あつかい</a></nav>
+  <nav><a href="/about/">About</a><a href="/privacy/">あつかい</a></nav>
 </div></footer>
 <script src="/motion.js" defer></script>
 </body>
@@ -131,7 +131,7 @@ ${works.map(workCard).join('\n')}
 </div></main>` + foot);
 
 /* ---- 使っている道具 ---- */
-if (existsSync(here + '/stack/index.html')) {
+if (existsSync(here + '/about/index.html')) {
   const html = (stack.groups || []).map((g, gi) => `  <section class="stack-g">
     <h2 class="rv">${esc(g.name)}</h2>
     <div class="stack">
@@ -141,10 +141,151 @@ ${g.items.map((it, i) => `      <div class="si rv" data-delay="${i * 40}">
       </div>`).join('\n')}
     </div>
   </section>`).join('\n');
-  const f = here + '/stack/index.html';
+  const f = here + '/about/index.html';
   writeFileSync(f, readFileSync(f, 'utf8').replace(
     /<!--stack:start-->[\s\S]*?<!--stack:end-->/,
     '<!--stack:start-->\n' + html + '\n  <!--stack:end-->'));
+}
+
+/* ---- /anime/ ガチアニメ診断の読みもの ----
+   診断そのものは別リポジトリ（/app/shindananime/）。ここは、その 6 軸と
+   64 タイプを読ませるページ。材料は data/anime-axes.json（手書き）と
+   data/anime-types.json（tools/anime-types.mjs が診断本体から書き出す）。 */
+const animeAxes = read('/data/anime-axes.json').axes;
+const animeData = read('/data/anime-types.json');
+const animeTypes = animeData.types;
+const typeByCode = Object.fromEntries(animeTypes.map((t) => [t.code, t]));
+const typeUrl = (code) => `/anime/types/${code.toLowerCase()}/`;
+const APP = (works.find((w) => w.slug === 'shindananime') || {}).play || '/app/shindananime/';
+const sideOf = (t, i) => (t.letters[i] === animeAxes[i].pos.l ? animeAxes[i].pos : animeAxes[i].neg);
+const codeOf = (letters) => letters.slice(0, 4).join('') + '-' + letters.slice(4).join('');
+const flip = (t, i) => {
+  const l = t.letters.slice();
+  l[i] = l[i] === animeAxes[i].pos.l ? animeAxes[i].neg.l : animeAxes[i].pos.l;
+  return typeByCode[codeOf(l)];
+};
+const opposite = (t) => typeByCode[codeOf(t.letters.map((x, i) =>
+  (x === animeAxes[i].pos.l ? animeAxes[i].neg.l : animeAxes[i].pos.l)))];
+const ctaBtn = (label) => `<p class="rv" style="margin-top:30px"><a class="btn" data-play="shindananime" href="${APP}">${label}</a><a class="btn ghost" href="/works/shindananime/">この診断について</a></p>`;
+const typeChip = (t) => `<a class="type-chip" href="${typeUrl(t.code)}"><b>${t.code}</b><span>${esc(t.nickname)}</span></a>`;
+
+const writeAnime = (rel, html) => {
+  const f = here + rel;
+  mkdirSync(f.slice(0, f.lastIndexOf('/')), { recursive: true });
+  writeFileSync(f, html);
+};
+
+/* 入口 */
+const featured = ['RDCP-VM', 'FHSA-TL', 'FDCA-VM', 'RHSP-TL'].map((c) => typeByCode[c]);
+writeAnime('/anime/index.html',
+  head('Anime — ガチアニメ診断の読みもの：6つの軸と64タイプ — Koshin Studio',
+       'ガチアニメ診断の解説。6つの軸の意味、64タイプの二つ名と特徴、タイプごとに近いアニメ作品をまとめています。') +
+`<main><div class="wrap">
+  <h1>Anime</h1>
+  <div class="rule"></div>
+  <p class="lead">ガチアニメ診断の読みもの。<br>6つの軸と64タイプが、それぞれ何を表しているかを書いています。</p>
+
+  <h2 class="rv">診断のしくみ</h2>
+  <p class="rv">ガチアニメ診断は、全50問の選択式の質問から、アニメの好みを<strong>6つの軸</strong>で測ります。軸ごとにどちら側へ寄ったかを文字で表し、並べたものがタイプコード（例: <code>RDCP-VM</code>）です。6軸それぞれが2択なので、組み合わせは2の6乗で<strong>64タイプ</strong>になります。</p>
+  <p class="rv" data-delay="60">作品の側にも、同じ6軸の値が付いています。診断の結果は、あなたの6軸と作品の6軸をベクトルとして並べて、近さ（コサイン類似度）で選びます。タイプのページに並ぶ作品は、そのタイプの軸の向きに近い作品を、診断と同じ計算で選んだものです。</p>
+  ${ctaBtn('診断をはじめる（無料・1分）')}
+
+  <h2 class="rv">6つの軸</h2>
+  <div class="kinds">
+${animeAxes.map((a, i) => `    <div class="kind rv" data-delay="${i * 60}"><h3>${esc(a.label)}<i>${a.pos.l} / ${a.neg.l}</i></h3>
+      <p>${esc(a.ask)}。${esc(a.pos.name)}か、${esc(a.neg.name)}か。</p></div>`).join('\n')}
+  </div>
+  <p class="rv"><a href="/anime/axes/">6つの軸を詳しく読む →</a></p>
+
+  <h2 class="rv">64タイプ</h2>
+  <p class="rv">二つ名は、世界観×後味、構成×テイスト、視覚×視聴スタイルの組み合わせから決まります。まずは、よくあるタイプを4つ。</p>
+  <div class="type-list rv">${featured.map(typeChip).join('')}</div>
+  <p class="rv"><a href="/anime/types/">64タイプの一覧を見る →</a></p>
+</div></main>` + foot);
+
+/* 6 軸の解説 */
+writeAnime('/anime/axes/index.html',
+  head('6つの軸 — ガチアニメ診断が測っているもの — Koshin Studio',
+       '世界観、後味・刺激、構成・テンポ、サブテイスト、視覚・フェチ、視聴スタイル。ガチアニメ診断の6つの軸が何を測っているかを解説します。') +
+`<main><div class="wrap">
+  <h1>6つの軸</h1>
+  <div class="rule"></div>
+  <p class="lead">ガチアニメ診断が測っているのは、この6つ。<br>それぞれ2択で、どちら側に寄ったかが文字になります。</p>
+${animeAxes.map((a) => `
+  <h2 class="rv">${esc(a.label)}<span class="axis-code"> ${a.pos.l} / ${a.neg.l}</span></h2>
+  <p class="rv"><em>${esc(a.ask)}</em></p>
+  <p class="rv">${esc(a.body)}</p>
+  <div class="axis-sides rv">
+    <div><b>${a.pos.l} — ${esc(a.pos.name)}</b><p>${esc(a.pos.desc)}</p></div>
+    <div><b>${a.neg.l} — ${esc(a.neg.name)}</b><p>${esc(a.neg.desc)}</p></div>
+  </div>`).join('\n')}
+
+  <h2 class="rv">画質・年代の好みについて</h2>
+  <p class="rv">タイプコードには入らない項目として、「新しめ・高画質が好きか、年代は問わないか」も聞いています。同じタイプでも、この好みと、好き・苦手なジャンルの違いで、選ばれる作品は変わります。</p>
+  ${ctaBtn('診断をはじめる（無料・1分）')}
+  <p class="rv"><a href="/anime/types/">64タイプの一覧へ →</a></p>
+</div></main>` + foot);
+
+/* 64 タイプの一覧。世界観×後味の 4 グループに分ける */
+const groups = [['R', 'D'], ['R', 'H'], ['F', 'D'], ['F', 'H']].map(([w, m]) => ({
+  title: `${animeAxes[0][w === 'R' ? 'pos' : 'neg'].name} × ${animeAxes[1][m === 'D' ? 'pos' : 'neg'].name}`,
+  list: animeTypes.filter((t) => t.letters[0] === w && t.letters[1] === m),
+}));
+writeAnime('/anime/types/index.html',
+  head('64タイプ一覧 — ガチアニメ診断のタイプと二つ名 — Koshin Studio',
+       'ガチアニメ診断の64タイプの一覧。世界観と後味の組み合わせで4つに分けて、二つ名とタイプコードを並べています。') +
+`<main><div class="wrap">
+  <h1>64タイプ</h1>
+  <div class="rule"></div>
+  <p class="lead">6つの軸の組み合わせで、64タイプ。<br>世界観と後味で4つに分けて並べています。</p>
+${groups.map((g) => `
+  <h2 class="rv">${esc(g.title)}</h2>
+  <div class="type-list rv">${g.list.map(typeChip).join('')}</div>`).join('\n')}
+  ${ctaBtn('自分のタイプを診断する')}
+</div></main>` + foot);
+
+/* タイプ別 */
+for (const t of animeTypes) {
+  const opp = opposite(t);
+  const six = t.letters.map((_, i) => {
+    const a = animeAxes[i], me = sideOf(t, i), other = t.letters[i] === a.pos.l ? a.neg : a.pos;
+    return `    <li><b>${esc(a.label)}　${me.l} ${esc(me.name)}</b><span>${esc(me.desc)}。<i>反対側は${other.l}（${esc(other.name)}）</i></span></li>`;
+  }).join('\n');
+  const near = t.works.slice(0, 5).map((w) =>
+    `    <li>${esc(w.title)}${w.year ? `<span>${w.year}</span>` : ''}</li>`).join('\n');
+  const nb = animeAxes.map((a, i) => {
+    const o = flip(t, i);
+    return `<a class="type-chip" href="${typeUrl(o.code)}"><b>${o.code}</b><span>${esc(a.label)}だけ反対側（${esc(sideOf(o, i).name)}）</span></a>`;
+  }).join('');
+  writeAnime(`${typeUrl(t.code)}index.html`,
+    head(`${t.code}「${t.nickname}」 — ガチアニメ診断のタイプ解説 — Koshin Studio`,
+         `ガチアニメ診断のタイプ ${t.code}「${t.nickname}」の特徴。6つの軸の向き、近いアニメ作品、1軸だけ違うタイプを紹介します。`) +
+`<main><div class="wrap">
+  <h1>${t.code}<span class="type-nick">${esc(t.nickname)}</span></h1>
+  <div class="rule"></div>
+  <p class="lead">ガチアニメ診断の64タイプのひとつ。<br>6つの軸は、こう向いています。</p>
+
+  <ul class="axis-rows rv">
+${six}
+  </ul>
+
+  <h2 class="rv">このタイプに近い作品</h2>
+  <p class="rv">${t.code} の軸の向きに近い作品を、診断と同じ計算で選んだものです。実際の診断では、画質・年代や好きなジャンルの回答も加わるので、人によって結果は変わります。</p>
+  <ul class="near rv">
+${near}
+  </ul>
+
+  <h2 class="rv">1つだけ違うタイプ</h2>
+  <p class="rv">6つの軸のうち、1つだけ反対側になるタイプです。気分や時期でこちらに動く人も多いはずです。</p>
+  <div class="type-list rv">${nb}</div>
+
+  <h2 class="rv">正反対のタイプ</h2>
+  <p class="rv">6軸がすべて反対側になるタイプ。</p>
+  <div class="type-list rv">${typeChip(opp)}</div>
+
+  ${ctaBtn('診断で確かめる（無料・1分）')}
+  <p class="rv"><a href="/anime/types/">64タイプの一覧へ</a>　<a href="/anime/axes/">6つの軸の解説へ</a></p>
+</div></main>` + foot);
 }
 
 /* ---- 記録の配信（RSS） ---- */
@@ -269,7 +410,7 @@ const noteBySlug = Object.fromEntries(notes.map((n) => [n.slug, n]));
    代わりに、footer に出しているのと同じ公開の持ち場だけを繋ぐ */
 const PERSON = {
   '@type': 'Organization', '@id': SITE + '#studio', name: 'Koshin Studio',
-  url: SITE, description: 'ゲーム、アプリ、Web サイト、3D モデルを個人で制作しています。',
+  url: SITE, description: 'ブラウザゲームと診断アプリを個人で制作し、作り方と検証の記録を書いています。',
   logo: SITE + '/assets/og/og_home.jpg',
   sameAs: (conf.social || []).map((x) => x.url),
 };
@@ -279,7 +420,9 @@ const ogFor = (rel) => {
   const n = 'og' + (rel === '/index.html' ? '_home'
     : rel.replace(/\/index\.html$/, '').replace(/\.html$/, '').replace(/\//g, '_')) + '.jpg';
   return existsSync(here + '/assets/og/' + n)
-    ? SITE + '/assets/og/' + n : SITE + '/assets/sushitsumu-wide.jpg';
+    ? SITE + '/assets/og/' + n
+    : rel.startsWith('/anime/') ? SITE + '/assets/og/og_works_shindananime.jpg'
+    : SITE + '/assets/sushitsumu-wide.jpg';
 };
 
 function ldFor(file, url) {
@@ -354,28 +497,26 @@ function ldFor(file, url) {
   }
   if (rel === '/works/index.html') return [crumbs([['Koshin Studio', '/'], ['Works', '/works/']])];
   if (rel === '/notes/index.html') return [crumbs([['Koshin Studio', '/'], ['Notes', '/notes/']])];
-  if (rel === '/profile/index.html') return [PERSON, crumbs([['Koshin Studio', '/'], ['Profile', '/profile/']])];
-  if (rel === '/stack/index.html') {
+  if (rel === '/about/index.html') {
     const tools = [].concat(...(stack.groups || []).map((g) => g.items || []));
     return [
-      page('使っている道具'),
+      PERSON,
+      { '@type': 'AboutPage', name: 'About', url: url, inLanguage: 'ja',
+        isPartOf: { '@id': SITE + '#studio' } },
       { '@type': 'ItemList', name: '使っている道具',
         itemListElement: tools.map((t, i) => ({
-          '@type': 'ListItem', position: i + 1, name: t.name })) },
-      crumbs([['Koshin Studio', '/'], ['Stack', '/stack/']]),
+          '@type': 'ListItem', position: i + 1, name: t.n })) },
+      crumbs([['Koshin Studio', '/'], ['About', '/about/']]),
     ];
   }
-  if (rel === '/contact/index.html') {
-    return [
-      { '@type': 'ContactPage', name: 'ご依頼・お問い合わせ', url: url, inLanguage: 'ja' },
-      { '@type': 'Service', serviceType: 'Web サイト制作',
-        provider: { '@id': SITE + '#studio' }, areaServed: 'JP',
-        offers: { '@type': 'Offer', priceCurrency: 'JPY',
-          priceSpecification: { '@type': 'PriceSpecification', minPrice: '50000',
-            priceCurrency: 'JPY', valueAddedTaxIncluded: false,
-            description: '1 ページあたり・税別' } } },
-      crumbs([['Koshin Studio', '/'], ['Contact', '/contact/']]),
-    ];
+  if (rel === '/anime/index.html') return [page('Anime — ガチアニメ診断の読みもの'), crumbs([['Koshin Studio', '/'], ['Anime', '/anime/']])];
+  if (rel === '/anime/axes/index.html') return [page('6つの軸'), crumbs([['Koshin Studio', '/'], ['Anime', '/anime/'], ['6つの軸', '/anime/axes/']])];
+  if (rel === '/anime/types/index.html') return [page('64タイプ一覧'), crumbs([['Koshin Studio', '/'], ['Anime', '/anime/'], ['64タイプ', '/anime/types/']])];
+  const tm = rel.match(/^\/anime\/types\/([^/]+)\/index\.html$/);
+  if (tm && typeByCode[tm[1].toUpperCase()]) {
+    const t = typeByCode[tm[1].toUpperCase()];
+    return [page(t.code + '「' + t.nickname + '」'),
+      crumbs([['Koshin Studio', '/'], ['Anime', '/anime/'], ['64タイプ', '/anime/types/'], [t.code, typeUrl(t.code)]])];
   }
   if (rel === '/privacy/index.html') {
     return [page('あつかい（プライバシー）'),
@@ -411,8 +552,10 @@ for (const file of pages) {
   const rel = file.slice(here.length);
   let html = readFileSync(file, 'utf8');
   /* 脚の SNS 欄と、広告の枠を差し替える（data/site.json が元） */
-  html = html.replace(/<nav><a href="\/works\/">Works<\/a><a href="\/notes\/">Notes<\/a>(<a href="\/stack\/">Stack<\/a>)?<a href="\/profile\/">Profile<\/a>(<a[^>]*>Contact<\/a>)?<\/nav>/g,
-    '<nav><a href="/works/">Works</a><a href="/notes/">Notes</a><a href="/stack/">Stack</a><a href="/profile/">Profile</a><a class="nav-cta" href="/contact/">Contact</a></nav>');
+  html = html.replace(/<header class="site"><div class="wrap">\s*<a class="logo" href="\/">Koshin Studio<\/a>\s*<nav>[\s\S]*?<\/nav>/,
+    '<header class="site"><div class="wrap">\n  <a class="logo" href="/">Koshin Studio</a>\n  <nav><a href="/works/">Works</a><a href="/notes/">Notes</a><a href="/anime/">Anime</a><a href="/about/">About</a></nav>');
+  html = html.replace(/(<footer class="site"><div class="wrap">[\s\S]*?)<nav>[\s\S]*?<\/nav>(\s*<\/div><\/footer>)/,
+    '$1<nav><a href="/about/">About</a><a href="/privacy/">あつかい</a></nav>$2');
   html = html.replace(/<div class="sns-row">[\s\S]*?<\/div>/g, `<div class="sns-row">${socialHtml}</div>`);
   if (!/class="sns-row"/.test(html)) {
     html = html.replace('<footer class="site"><div class="wrap">\n  <span>© 2026 Koshin Studio</span>',
@@ -424,20 +567,16 @@ for (const file of pages) {
      両方あるときは、フォームを控えに回す。
      フォームしか無いのに小さな副ボタンだと、仕事を頼む頁として弱い */
   const ctMailMain = ct.email
-    ? `<a class="ct-main" href="mailto:${ct.email}?subject=${encodeURIComponent('制作のご相談')}">${esc(ct.email)}<span>メールで相談する</span></a>`
+    ? `<a class="ct-main" href="mailto:${ct.email}?subject=${encodeURIComponent('お問い合わせ')}">${esc(ct.email)}<span>メールで送る</span></a>`
     : '';
   const ctFormMain = ct.form
-    ? `<a class="ct-main" href="${ct.form}" target="_blank" rel="noopener">ご相談フォーム<span>ここから送れます</span></a>`
+    ? `<a class="ct-main" href="${ct.form}" target="_blank" rel="noopener">お問い合わせフォーム<span>ここから送れます</span></a>`
     : '';
   const ctFormSub = ct.form
     ? `<a class="ct-sub" href="${ct.form}" target="_blank" rel="noopener">フォームから送る</a>` : '';
-  const ctHtml = (ct.email || ct.form)
-    ? (ct.email ? ctMailMain + ctFormSub : ctFormMain)
-    : ((conf.social || []).length
-        ? `<p class="ct-soon">いまは ${(conf.social || []).map((x) =>
-             `<a href="${x.url}" rel="noopener" target="_blank">${esc(x.label)}</a>`).join(' か ')}` +
-          ` からご連絡ください。<br><span>専用の窓口は近く用意します。</span></p>`
-        : `<p class="ct-soon">連絡先は近く用意します。<br><span>もう少しお待ちください。</span></p>`);
+  const ctHtml = ct.email ? ctMailMain + ctFormSub : ctFormMain;
+  /* 連絡先がまだ無いときは、節ごと出さない（「準備中」と書くより、何も書かないほうが良い） */
+  if (!ctHtml) html = html.replace(/\s*<!--contact-section:start-->[\s\S]*?<!--contact-section:end-->/, '');
   html = html.replace(/<!--contact:start-->[\s\S]*?<!--contact:end-->/,
     '<!--contact:start-->' + ctHtml + '<!--contact:end-->');
 
@@ -445,14 +584,19 @@ for (const file of pages) {
   const TRAIL = {
     '/works/index.html': [['Works', '/works/']],
     '/notes/index.html': [['Notes', '/notes/']],
-    '/stack/index.html': [['Stack', '/stack/']],
-    '/profile/index.html': [['Profile', '/profile/']],
-    '/contact/index.html': [['Contact', '/contact/']],
+    '/about/index.html': [['About', '/about/']],
+    '/anime/index.html': [['Anime', '/anime/']],
+    '/anime/axes/index.html': [['Anime', '/anime/'], ['6つの軸', '/anime/axes/']],
+    '/anime/types/index.html': [['Anime', '/anime/'], ['64タイプ', '/anime/types/']],
     '/privacy/index.html': [['あつかい', '/privacy/']],
   };
   let trail = TRAIL[rel];
   const wm2 = rel.match(/^\/works\/([^/]+)\//);
   const nm2 = rel.match(/^\/notes\/([^/]+)\//);
+  const am2 = rel.match(/^\/anime\/types\/([^/]+)\/index\.html$/);
+  if (am2 && typeByCode[am2[1].toUpperCase()]) {
+    trail = [['Anime', '/anime/'], ['64タイプ', '/anime/types/'], [am2[1].toUpperCase(), '/anime/types/' + am2[1] + '/']];
+  }
   if (wm2 && workBySlug[wm2[1]]) {
     const w = workBySlug[wm2[1]];
     trail = [['Works', '/works/']].concat(
@@ -567,7 +711,9 @@ writeFileSync(here + '/sitemap.xml',
       : /^\/(works|notes)\/index\.html$/.test(rel) ? '0.9'
       : /^\/works\/[^/]+\/index\.html$/.test(rel) ? '0.8'
       : /^\/notes\/[^/]+\/index\.html$/.test(rel) ? '0.8'
-      : /^\/(contact|stack)\/index\.html$/.test(rel) ? '0.7' : '0.5';
+      : /^\/anime\/(index\.html|types\/index\.html|axes\/index\.html)$/.test(rel) ? '0.8'
+      : /^\/anime\/types\/[^/]+\/index\.html$/.test(rel) ? '0.6'
+      : /^\/about\/index\.html$/.test(rel) ? '0.7' : '0.5';
     const m = lastMod(f);
     return `  <url><loc>${urlOf(f)}</loc>${m ? `<lastmod>${m}</lastmod>` : ''}`
       + `<priority>${pri}</priority></url>`;

@@ -67,8 +67,8 @@ const srv = createServer((q, r) => {
 }).listen(PORT);
 
 const paths = ['/', '/works/', '/works/sushitsumu/', '/works/sushitsumu/guide.html',
-  '/notes/', '/notes/anago/', '/stack/', '/contact/',
-  '/profile/', '/privacy/', '/404.html'];
+  '/notes/', '/notes/anago/', '/about/', '/anime/', '/anime/axes/',
+  '/anime/types/', '/anime/types/rdcp-vm/', '/privacy/', '/404.html'];
 
 const b = await chromium.launch({ executablePath: CHROME });
 const c = await b.newContext({ viewport: { width: 1280, height: 860 }, locale: 'ja-JP' });

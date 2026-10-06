@@ -55,9 +55,8 @@ Cloudflare Pages に置く静的サイト。枠組み（Next.js など）は使�
 | `/play/<名前>/` | ゲームの実物 | 別リポジトリ → `worker/` が中継 |
 | `/app/<名前>/` | アプリの実物 | 別リポジトリ → `worker/` が中継 |
 | `/notes/` | 制作の記録・記事 | このリポジトリ |
-| `/stack/` | 使っている道具 | このリポジトリ |
-| `/profile/` | 誰が作っているか | このリポジトリ |
-| `/contact/` | ご依頼・お問い合わせ | このリポジトリ |
+| `/anime/` | ガチアニメ診断の読みもの（6軸・64タイプ）。`node tools/anime-types.mjs` で材料を作り、build が組む | このリポジトリ（生成） |
+| `/about/` | このサイトについて・使っている道具・連絡先（旧 /profile/ /stack/ /contact/ は `_redirects` で転送） | このリポジトリ |
 | `/privacy/` | あつかい（広告・記録） | このリポジトリ |
 
 **紹介（`/works/…`）と実物（`/play/…`）は別物**、と覚えておけばいい。
@@ -360,9 +359,9 @@ Pages は Git 連携していない。**push しただけでは公開されな�
     index.html            トップ
     works/                作品（一覧は生成、中身は手書き）
     notes/                制作の記録
-    stack/                使っている道具
-    contact/              ご依頼
-    profile/  privacy/    プロフィール・あつかい
+    anime/                ガチアニメ診断の読みもの（build が生成）
+    about/  privacy/      このサイトについて・あつかい
+    _redirects            旧 /profile/ /stack/ /contact/ の転送
     404.html
     data/                 一覧のもと（JSON）
     style.css  motion.js  見た目と動き

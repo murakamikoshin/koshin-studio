@@ -2,14 +2,8 @@
   "name": "Koshin Studio",
   "url": "https://koshinstudio.com",
   "urlNote": "独自ドメインを繋いだらここを書き換える（末尾のスラッシュは不要）。canonical・og・sitemap・feed・構造化データが全部ここを見る。",
-  "tagline": "ゲーム、アプリ、サイト、3D。ひとりで、ぜんぶ。",
-  "social": [
-    {
-      "label": "GitHub",
-      "url": "https://github.com/murakamikoshin",
-      "handle": "@murakamikoshin"
-    }
-  ],
+  "tagline": "ゲームと診断アプリを、ひとりで作って、試して、書いています。",
+  "social": [],
   "ads": {
     "enabled": false,
     "client": "",
@@ -23,6 +17,6 @@
   "contact": {
     "email": "",
     "form": "",
-    "note": "form に Google フォームの URL を入れると、Contact の主役として出ます。email も入れるとメールが主役になり、フォームは控えに回ります。両方空なら SNS へ誘導します。"
+    "note": "email か form を入れると、About に連絡先の節が出ます。両方空の間は節ごと非表示です。form は Google フォームの URL。email も入れるとメールが主役になり、フォームは控えに回ります。"
   }
 }

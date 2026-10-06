@@ -119,7 +119,7 @@ const b = await chromium.launch({ executablePath: CHROME });
       return (a.getAttribute('href') || a.className || a.tagName || '').toString().slice(0, 40);
     }));
   }
-  const want = ['/works/', '/notes/', '/contact/'];
+  const want = ['/works/', '/notes/', '/about/'];
   for (const w of want) {
     check(seen.some((s) => s.indexOf(w) >= 0), `Tab で ${w} に届く`, '届かない');
   }

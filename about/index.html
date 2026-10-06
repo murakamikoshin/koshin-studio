@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>About — Koshin Studio について・連絡先</title>
+<meta name="description" content="Koshin Studio について。ブラウザゲームと診断アプリをひとりで作り、作り方と検証の記録を書いています。使っている道具と連絡先もここにまとめています。">
+<meta name="theme-color" content="#070c17">
+<meta property="og:title" content="About — Koshin Studio">
+<meta property="og:description" content="ゲームと診断アプリをひとりで作り、作り方と検証の記録を書いています。">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/assets/icon/icon-180.png">
+<link rel="manifest" href="/site.webmanifest">
+<script>document.documentElement.className+=" js"</script>
+<link rel="stylesheet" href="/style.css?v=19008d13">
+<link rel="canonical" href="https://koshinstudio.com/about/">
+<meta property="og:url" content="https://koshinstudio.com/about/">
+<meta property="og:site_name" content="Koshin Studio">
+<meta property="og:locale" content="ja_JP">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="alternate" type="application/rss+xml" title="Koshin Studio — Notes" href="https://koshinstudio.com/feed.xml">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://koshinstudio.com#studio","name":"Koshin Studio","url":"https://koshinstudio.com","description":"ブラウザゲームと診断アプリを個人で制作し、作り方と検証の記録を書いています。","logo":"https://koshinstudio.com/assets/og/og_home.jpg","sameAs":[]},{"@type":"AboutPage","name":"About","url":"https://koshinstudio.com/about/","inLanguage":"ja","isPartOf":{"@id":"https://koshinstudio.com#studio"}},{"@type":"ItemList","name":"使っている道具","itemListElement":[{"@type":"ListItem","position":1,"name":"JavaScript"},{"@type":"ListItem","position":2,"name":"Python"},{"@type":"ListItem","position":3,"name":"Swift"},{"@type":"ListItem","position":4,"name":"HTML / CSS"},{"@type":"ListItem","position":5,"name":"Matter.js"},{"@type":"ListItem","position":6,"name":"Canvas 2D"},{"@type":"ListItem","position":7,"name":"Web Audio"},{"@type":"ListItem","position":8,"name":"GSAP / ScrollTrigger"},{"@type":"ListItem","position":9,"name":"Lenis"},{"@type":"ListItem","position":10,"name":"SVG"},{"@type":"ListItem","position":11,"name":"Cloudflare Pages"},{"@type":"ListItem","position":12,"name":"Cloudflare Workers"},{"@type":"ListItem","position":13,"name":"Cloudflare D1"},{"@type":"ListItem","position":14,"name":"Firebase"},{"@type":"ListItem","position":15,"name":"Git / GitHub"},{"@type":"ListItem","position":16,"name":"Playwright"},{"@type":"ListItem","position":17,"name":"fontTools"},{"@type":"ListItem","position":18,"name":"Pillow"},{"@type":"ListItem","position":19,"name":"Xcode"}]},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Koshin Studio","item":"https://koshinstudio.com/"},{"@type":"ListItem","position":2,"name":"About","item":"https://koshinstudio.com/about/"}]}]}</script>
+<meta property="og:image" content="https://koshinstudio.com/assets/og/og_about.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+</head>
+<body>
+<canvas id="motes"></canvas>
+
+<header class="site"><div class="wrap">
+  <a class="logo" href="/">Koshin Studio</a>
+  <nav><a href="/works/">Works</a><a href="/notes/">Notes</a><a href="/anime/">Anime</a><a href="/about/">About</a></nav>
+</div></header>
+
+<main><div class="wrap">
+  <nav class="crumbs" aria-label="現在地"><a href="/">Koshin Studio</a><i aria-hidden="true">›</i><span aria-current="page">About</span></nav>
+  <h1>About</h1>
+  <div class="rule"></div>
+  <p class="lead">Koshin Studio は、ひとりで作って、試して、書く場所です。<br>ブラウザで遊べるゲームと診断アプリを作り、作り方と検証の記録をここに残しています。</p>
+
+  <h2 class="rv">このサイトでできること</h2>
+  <ul class="rv">
+    <li><a href="/works/">Works</a> — 作ったゲームやアプリ。遊び方や仕組みも紹介しています</li>
+    <li><a href="/notes/">Notes</a> — 作る途中で測ったこと、詰まったことの記録</li>
+    <li><a href="/anime/">Anime</a> — ガチアニメ診断の読みもの。64タイプと6つの軸の解説、タイプごとの近い作品</li>
+  </ul>
+
+  <h2 class="rv">作り方</h2>
+  <p class="rv">だいたい一人で、手元で動かしながら作っています。設計から絵から音まで通しでやるので、直したいところがあれば、その場で直せます。</p>
+  <p class="rv" data-delay="60">釣り合いの調整には、<strong>測る手を必ず用意します</strong>。ゲームなら自動で何百回も遊ばせて、どこで詰まるかを数字で見る。勘で三回いじって確かめるより、ずっと速くて確かです。その過程は<a href="/notes/anago/">記録</a>に残しています。</p>
+  <blockquote class="rv" data-delay="120">感覚は当たっていた。<br>でも、原因は思っていたところになかった。</blockquote>
+  <p class="rv" data-delay="160">導入も登録も要らないこと。ブラウザで開いたらすぐ始まること。それだけは崩さないようにしています。</p>
+
+  <h2 class="rv">使っている道具</h2>
+  <p class="rv">これまでに手を動かして使ったもの。名前を並べるだけでなく、何に使ったかも書いています。</p>
+  <!--stack:start-->
+  <section class="stack-g">
+    <h2 class="rv">つくる言葉</h2>
+    <div class="stack">
+      <div class="si rv" data-delay="0">
+        <b>JavaScript</b><span class="lv" data-l="主力">主力</span>
+        <p>ゲームもサイトも、動くところは全部これ</p>
+      </div>
+      <div class="si rv" data-delay="40">
+        <b>Python</b><span class="lv" data-l="実務">実務</span>
+        <p>書体づくり、絵の変換、統計を取る道具</p>
+      </div>
+      <div class="si rv" data-delay="80">
+        <b>Swift</b><span class="lv" data-l="実務">実務</span>
+        <p>iOS のアプリ</p>
+      </div>
+      <div class="si rv" data-delay="120">
+        <b>HTML / CSS</b><span class="lv" data-l="主力">主力</span>
+        <p>枠組みに頼らず、手で書く</p>
+      </div>
+    </div>
+  </section>
+  <section class="stack-g">
+    <h2 class="rv">ゲーム</h2>
+    <div class="stack">
+      <div class="si rv" data-delay="0">
+        <b>Matter.js</b><span class="lv" data-l="主力">主力</span>
+        <p>物理演算。すし積むの土台</p>
+      </div>
+      <div class="si rv" data-delay="40">
+        <b>Canvas 2D</b><span class="lv" data-l="主力">主力</span>
+        <p>絵は画像を貼らず、毎回描く</p>
+      </div>
+      <div class="si rv" data-delay="80">
+        <b>Web Audio</b><span class="lv" data-l="実務">実務</span>
+        <p>音も合成して鳴らす</p>
+      </div>
+    </div>
+  </section>
+  <section class="stack-g">
+    <h2 class="rv">サイト</h2>
+    <div class="stack">
+      <div class="si rv" data-delay="0">
+        <b>GSAP / ScrollTrigger</b><span class="lv" data-l="主力">主力</span>
+        <p>立ち上がりとスクロール連動</p>
+      </div>
+      <div class="si rv" data-delay="40">
+        <b>Lenis</b><span class="lv" data-l="実務">実務</span>
+        <p>滑らかなスクロール</p>
+      </div>
+      <div class="si rv" data-delay="80">
+        <b>SVG</b><span class="lv" data-l="主力">主力</span>
+        <p>ロゴの字も自分で起こす</p>
+      </div>
+    </div>
+  </section>
+  <section class="stack-g">
+    <h2 class="rv">置き場所</h2>
+    <div class="stack">
+      <div class="si rv" data-delay="0">
+        <b>Cloudflare Pages</b><span class="lv" data-l="主力">主力</span>
+        <p>このサイトの置き場所</p>
+      </div>
+      <div class="si rv" data-delay="40">
+        <b>Cloudflare Workers</b><span class="lv" data-l="実務">実務</span>
+        <p>すし積むの番付サーバー</p>
+      </div>
+      <div class="si rv" data-delay="80">
+        <b>Cloudflare D1</b><span class="lv" data-l="実務">実務</span>
+        <p>番付のデータベース</p>
+      </div>
+      <div class="si rv" data-delay="120">
+        <b>Firebase</b><span class="lv" data-l="実務">実務</span>
+        <p>アプリの裏側（Firestore / Functions / Storage）</p>
+      </div>
+    </div>
+  </section>
+  <section class="stack-g">
+    <h2 class="rv">道具</h2>
+    <div class="stack">
+      <div class="si rv" data-delay="0">
+        <b>Git / GitHub</b><span class="lv" data-l="主力">主力</span>
+        <p>全部ここで管理する</p>
+      </div>
+      <div class="si rv" data-delay="40">
+        <b>Playwright</b><span class="lv" data-l="主力">主力</span>
+        <p>自動で遊ばせる・自動で見て回る</p>
+      </div>
+      <div class="si rv" data-delay="80">
+        <b>fontTools</b><span class="lv" data-l="実務">実務</span>
+        <p>書体を必要な字だけに削る</p>
+      </div>
+      <div class="si rv" data-delay="120">
+        <b>Pillow</b><span class="lv" data-l="実務">実務</span>
+        <p>絵を配る形に落とす</p>
+      </div>
+      <div class="si rv" data-delay="160">
+        <b>Xcode</b><span class="lv" data-l="実務">実務</span>
+        <p>iOS の開発</p>
+      </div>
+    </div>
+  </section>
+  <!--stack:end-->
+  <p class="rv">枠組みは、必要になってから入れます。このサイトも、動きを厚くする段になって初めて GSAP を足しました。外の CDN には繋がず、使うものは自分のサーバーに置きます。速いし、向こうが落ちても影響を受けません。書体も、既製品をそのまま貼らずに、必要な字だけに削って積んでいます。ロゴの字は自分で起こしました。</p>
+  <p class="note rv">個人情報や、診断の回答の扱いは<a href="/privacy/">あつかい</a>に書いています。</p>
+</div></main>
+
+<footer class="site"><div class="wrap">
+  <span>© 2026 Koshin Studio</span>
+  <div class="sns-row"></div>
+  <nav><a href="/about/">About</a><a href="/privacy/">あつかい</a></nav>
+</div></footer>
+<script src="/vendor/gsap.min.js?v=9396f256" defer></script>
+<script src="/vendor/ScrollTrigger.min.js?v=05ca5ad8" defer></script>
+<script src="/vendor/lenis.min.js?v=daec1872" defer></script>
+<script src="/motion.js?v=942a2796" defer></script>
+</body>
+</html>
