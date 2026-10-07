@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>「82%より80%が選ばれる」：診断の適合度%が、並び順と食い違っていた — ガチアニメ診断 開発の記録 — Koshin Studio</title>
+<meta name="description" content="診断の適合度%は、並び順とは別の物差しで作られていた。旧い表示では、回答者の35〜40%で上位3作の表示が逆転。作り物の回答者1,000人で測り直した記録。">
+<meta property="og:title" content="「82%より80%が選ばれる」：診断の適合度%が、並び順と食い違っていた">
+<meta property="og:description" content="診断の適合度%が並び順と食い違っていた問題を測り直した記録。">
+<meta property="og:type" content="article">
+<meta name="theme-color" content="#fbfaf7">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/assets/icon/icon-180.png">
+<link rel="manifest" href="/site.webmanifest">
+<script>document.documentElement.className+=" js"</script>
+<link rel="stylesheet" href="/style.css?v=e8482157">
+<link rel="canonical" href="https://koshinstudio.com/notes/match-percent/">
+<meta property="og:url" content="https://koshinstudio.com/notes/match-percent/">
+<meta property="og:site_name" content="Koshin Studio">
+<meta property="og:locale" content="ja_JP">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="alternate" type="application/rss+xml" title="Koshin Studio — Notes" href="https://koshinstudio.com/feed.xml">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BlogPosting","headline":"「82%より80%が選ばれる」：診断の適合度%が、並び順と食い違っていた","url":"https://koshinstudio.com/notes/match-percent/","description":"診断の適合度%は、並び順とは別の物差しで作られていた。旧い表示では、回答者の35〜40%で上位3作の表示が逆転。作り物の回答者1,000人で測り直した記録。","datePublished":"2026-10-08","dateModified":"2026-10-08","inLanguage":"ja","image":"https://koshinstudio.com/assets/og/og_notes_match-percent.jpg","author":{"@id":"https://koshinstudio.com#studio"},"publisher":{"@id":"https://koshinstudio.com#studio"},"mainEntityOfPage":"https://koshinstudio.com/notes/match-percent/"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Koshin Studio","item":"https://koshinstudio.com/"},{"@type":"ListItem","position":2,"name":"Notes","item":"https://koshinstudio.com/notes/"},{"@type":"ListItem","position":3,"name":"「82%より80%が選ばれる」：診断の適合度%が、並び順と食い違っていた","item":"https://koshinstudio.com/notes/match-percent/"}]}]}</script>
+<meta property="og:image" content="https://koshinstudio.com/assets/og/og_notes_match-percent.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+</head>
+<body>
+<canvas id="motes"></canvas>
+
+<header class="site"><div class="wrap">
+  <a class="logo" href="/">Koshin Studio</a>
+  <nav><a href="/works/">Works</a><a href="/notes/">Notes</a><a href="/about/">About</a></nav>
+</div></header>
+
+<main><div class="wrap">
+  <nav class="crumbs" aria-label="現在地"><a href="/">Koshin Studio</a><i aria-hidden="true">›</i><a href="/notes/">Notes</a><i aria-hidden="true">›</i><span aria-current="page">「82%より80%が選ばれる」：診断の適合度%が、並び順と食い違っていた</span></nav>
+  <h1>「82%より80%が選ばれる」：診断の適合度%が、並び順と食い違っていた</h1>
+  <div class="rule"></div>
+  <p class="lead">ガチアニメ診断 開発の記録 ／ 2026年10月</p>
+
+  <p><a href="/works/shindananime/">ガチアニメ診断</a>は、最後に「運命の1作」と、次点の2作を出します。それぞれに「適合度 82%」のような数字が付きます。この数字が、<strong>順位と食い違っていた</strong>ことがありました。「82% の作品より、80% の作品のほうが選ばれる」。どれくらい食い違っていたのかを、今回あらためて測ったので、書き残します。</p>
+
+  <h2 class="rv">数字と順位が、別の物差しだった</h2>
+  <p>診断は、アニメの好みを 6 本の軸で測って、作品ごとの「近さ」（コサイン類似度）を出します。ただ、最終的な並び順は、近さだけでは決まりません。<strong>近さ × 0.82 に、作品の評価（★）、人気、年代、好みの要素を足した合計（<code>total</code>）</strong>で並べています。</p>
+  <p>ところが、画面に出す適合度の%は、<strong>近さだけ</strong>から作っていました。並び順は合計、表示は近さ。物差しが二つあったのです。合計では 1 位でも、近さでは 2 位より低い、ということが起きます。そのとき、画面には「1 位 80%、2 位 82%」と出ます。</p>
+
+  <h2 class="rv">直し方</h2>
+  <p>適合度を、並び順と同じ <code>total</code> から出すように直しました（2026年9月25日）。同じ日に、もう一つ、表示の矛盾を直しています。軸のバーの値がちょうど 0 のときでも、「○○ 寄り 50%」と出ていました。寄っていないのに、寄っている、と言っている。最低でも 51% を出すことにしました。</p>
+
+  <h2 class="rv">どれだけ食い違っていたのか：測る</h2>
+  <p>当時のコミットには、割合の数字が残っていません。そこで、<a href="/notes/shindan12/">12問の記事</a>と同じ、<strong>作り物の回答者 1,000 人</strong>（50 問すべてに答える）で測りました。上位 3 作について、画面の表示がどうなるかを、3 通りで比べます。</p>
+  <ul>
+    <li><strong>旧：</strong>近さから出した、整数の%。</li>
+    <li><strong>中間：</strong><code>total</code> から出した、整数の%。</li>
+    <li><strong>いま：</strong><code>total</code> から出した、小数第一位までの%。</li>
+  </ul>
+  <p>数えたのは、二つです。「<strong>逆転</strong>」は、1 位の%が、2 位か 3 位の%より低い場合。「<strong>同率</strong>」は、1 位と 2 位が、同じ%に見える場合。回答のブレは、小さい（0.3）・中くらい（0.5）・大きい（0.8）の 3 通りです。</p>
+  <div class="scroll rv"><table>
+    <tr><th>表示のしかた</th><th>回答のブレ</th><th class="n">逆転</th><th class="n">1位と2位が同率</th></tr>
+    <tr><td rowspan="3">旧（近さ・整数）</td><td>小さい</td><td class="n">40.3%</td><td class="n">14.1%</td></tr>
+    <tr><td>中くらい</td><td class="n">37.7%</td><td class="n">15.3%</td></tr>
+    <tr><td>大きい</td><td class="n">35.1%</td><td class="n">15.3%</td></tr>
+    <tr><td rowspan="3">中間（total・整数）</td><td>小さい</td><td class="n">0.0%</td><td class="n">31.7%</td></tr>
+    <tr><td>中くらい</td><td class="n">0.0%</td><td class="n">30.1%</td></tr>
+    <tr><td>大きい</td><td class="n">0.0%</td><td class="n">27.7%</td></tr>
+    <tr><td rowspan="3">いま（total・小数第一位）</td><td>小さい</td><td class="n">0.0%</td><td class="n">3.6%</td></tr>
+    <tr><td>中くらい</td><td class="n">0.0%</td><td class="n">3.9%</td></tr>
+    <tr><td>大きい</td><td class="n">0.0%</td><td class="n">3.8%</td></tr>
+  </table></div>
+  <p><strong>旧の表示では、回答者の 35〜40% で、上位 3 作の表示が逆転していました。</strong>およそ 5 人に 2 人が、「選ばれたのが 1 位なのに、次点のほうが高い」を見ていた計算です。</p>
+
+  <h2 class="rv">直したら、別の問題が出た</h2>
+  <p>合計から出すようにして、逆転は 0% になりました。ところが、整数の%にしたままだと、<strong>1 位と 2 位が同じ%に見える</strong>ことが、3 割前後に増えました。上位には、合計の近い作品が並びます。整数に丸めると、その差が消えて、同じ数字に集まってしまうのです。</p>
+  <p>そこで、表示を<strong>小数第一位まで</strong>にしました（99.6% のように）。同率は、約 4% まで下がっています。0% にならないのは、本当に、合計の差が 0.1% に満たない場合があるからです。</p>
+
+  <h2 class="rv">この測り方の弱いところ</h2>
+  <ul>
+    <li><strong>回答者は作り物です。</strong>本物の人の答え方とは、違います。</li>
+    <li><strong>「旧」は、いまのコードの並び順に、昔の表示のやり方を当てて、再現したものです。</strong>当時のコードそのものを動かしたわけではありません。当時は、評価や好みの上乗せに上限が無く、結果が違った可能性があります。</li>
+    <li>測ったのは「表示が順位と一致するか」だけで、「その順位が、その人にとって正しいか」ではありません。</li>
+  </ul>
+
+  <h2 class="rv">分かったこと</h2>
+  <blockquote>画面に出す数字は、並べるのに使った物差しと、同じものから作る。</blockquote>
+  <p>当たり前に聞こえますが、計算を足していくうちに、並び順だけが変わって、表示の数字が置いていかれました。もう一つ、<strong>丸めは、順位の差を消す</strong>ことがあります。差が小さい場所では、桁を一つ増やすだけで、見える順位が戻ります。</p>
+  <p class="note">この記事の数字は、作り物の回答者 1,000 人（乱数は固定）で、2026年10月8日に測ったものです。当時のコミットの記録は、2026年9月25日です。</p>
+
+  <div class="ad-slot" data-slot="footer" hidden></div>
+<!--/ad-->
+
+  <div class="rule" style="margin:40px 0 22px"></div>
+  <p class="eyebrow">この話に出てくるもの</p>
+  <ul class="plain">
+    <li><a href="/works/shindananime/">ガチアニメ診断（作品ページ）</a> — 何を作ったのか、画面と数字で</li>
+    <li><a href="/notes/shindan12/">診断を12問にしたら、結果はどこまで変わるのか</a> — 同じ測り方の、別の記録</li>
+  </ul>
+  <p style="margin-top:32px"><a class="btn" data-play="shindananime" href="/app/shindananime/">診 断 す る</a><a class="btn ghost" href="/works/shindananime/">作品ページへ</a></p>
+
+<!--related-->
+  <div class="rule" style="margin:40px 0 22px"></div>
+  <p class="eyebrow">ほかの記録</p>
+  <ul class="plain">
+    <li><a href="/notes/u2028/">JSONLを読んだら壊れた：原因は、見えない改行文字だった</a> — あらすじに紛れた U+2028 のせいで、JSON が壊れた。splitlines() と split('\n') の違いを、実データの数字で確かめた記録。</li>
+    <li><a href="/notes/shindan12/">診断を12問にしたら、結果はどこまで変わるのか</a> — 50問の診断を12問から始められるようにした。短くして結果は変わらないのか、作り物の回答者1,000人で測った記録。タイプはほぼ同じ、運命の1作はかなり変わる。</li>
+    <li><a href="/notes/deploy-gotchas/">手元では動くのに、配ると壊れる：このサイトで起きた四つの事故</a> — 古いキャッシュ、組むたびに増えるパンくず、環境の中を指す symlink、手元にしか無い絵。サイトを配るときに続いた四つの事故と、検査を足してはじめて見つかった経緯。</li>
+  </ul>
+<!--/related-->
+</div>
+</main>
+
+<footer class="site"><div class="wrap">
+  <span>© 2026 Koshin Studio</span>
+  <div class="sns-row"></div>
+  <nav><a href="/about/">About</a><a href="/privacy/">あつかい</a></nav>
+</div></footer>
+<script src="/vendor/gsap.min.js?v=9396f256" defer></script>
+<script src="/vendor/ScrollTrigger.min.js?v=05ca5ad8" defer></script>
+<script src="/vendor/lenis.min.js?v=daec1872" defer></script>
+<script src="/motion.js?v=5f78b937" defer></script>
+</body>
+</html>

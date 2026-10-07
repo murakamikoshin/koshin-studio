@@ -7,6 +7,13 @@
   <language>ja</language>
   <atom:link href="https://koshinstudio.com/feed.xml" rel="self" type="application/rss+xml"/>
   <item>
+    <title>「82%より80%が選ばれる」：診断の適合度%が、並び順と食い違っていた</title>
+    <link>https://koshinstudio.com/notes/match-percent/</link>
+    <guid isPermaLink="true">https://koshinstudio.com/notes/match-percent/</guid>
+    <pubDate>Wed, 07 Oct 2026 15:00:00 GMT</pubDate>
+    <description>診断の適合度%は、並び順とは別の物差しで作られていた。旧い表示では、回答者の35〜40%で上位3作の表示が逆転。作り物の回答者1,000人で測り直した記録。</description>
+  </item>
+  <item>
     <title>手元では動くのに、配ると壊れる：このサイトで起きた四つの事故</title>
     <link>https://koshinstudio.com/notes/deploy-gotchas/</link>
     <guid isPermaLink="true">https://koshinstudio.com/notes/deploy-gotchas/</guid>
