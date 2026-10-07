@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>広告の間隔を、回数ではなく時間で測る — すし積む 開発の記録 — Koshin Studio</title>
+<meta name="description" content="「5プレイに一本」をやめて「前の広告から7分」に変えた理由と、変えたあとの動きの記録。書きながら、一戦の長さが分かっていないことに気づいた。">
+<meta property="og:title" content="広告の間隔を、回数ではなく時間で測る">
+<meta property="og:description" content="広告の間隔を回数から時間に変えた記録。">
+<meta property="og:type" content="article">
+<meta name="theme-color" content="#070c17">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/assets/icon/icon-180.png">
+<link rel="manifest" href="/site.webmanifest">
+<script>document.documentElement.className+=" js"</script>
+<link rel="stylesheet" href="/style.css?v=19008d13">
+<link rel="canonical" href="https://koshinstudio.com/notes/adgap/">
+<meta property="og:url" content="https://koshinstudio.com/notes/adgap/">
+<meta property="og:site_name" content="Koshin Studio">
+<meta property="og:locale" content="ja_JP">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="alternate" type="application/rss+xml" title="Koshin Studio — Notes" href="https://koshinstudio.com/feed.xml">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BlogPosting","headline":"広告の間隔を、回数ではなく時間で測る","url":"https://koshinstudio.com/notes/adgap/","description":"「5プレイに一本」をやめて「前の広告から7分」に変えた理由と、変えたあとの動きの記録。書きながら、一戦の長さが分かっていないことに気づいた。","datePublished":"2026-10-07","dateModified":"2026-10-07","inLanguage":"ja","image":"https://koshinstudio.com/assets/og/og_notes_adgap.jpg","author":{"@id":"https://koshinstudio.com#studio"},"publisher":{"@id":"https://koshinstudio.com#studio"},"mainEntityOfPage":"https://koshinstudio.com/notes/adgap/"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Koshin Studio","item":"https://koshinstudio.com/"},{"@type":"ListItem","position":2,"name":"Notes","item":"https://koshinstudio.com/notes/"},{"@type":"ListItem","position":3,"name":"広告の間隔を、回数ではなく時間で測る","item":"https://koshinstudio.com/notes/adgap/"}]}]}</script>
+<meta property="og:image" content="https://koshinstudio.com/assets/og/og_notes_adgap.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+</head>
+<body>
+<canvas id="motes"></canvas>
+
+<header class="site"><div class="wrap">
+  <a class="logo" href="/">Koshin Studio</a>
+  <nav><a href="/works/">Works</a><a href="/notes/">Notes</a><a href="/anime/">Anime</a><a href="/about/">About</a></nav>
+</div></header>
+
+<main><div class="wrap">
+  <nav class="crumbs" aria-label="現在地"><a href="/">Koshin Studio</a><i aria-hidden="true">›</i><a href="/notes/">Notes</a><i aria-hidden="true">›</i><span aria-current="page">広告の間隔を、回数ではなく時間で測る</span></nav>
+  <h1>広告の間隔を、回数ではなく時間で測る</h1>
+  <div class="rule"></div>
+  <p class="lead">すし積む 開発の記録 ／ 2026年10月</p>
+
+  <p><a href="/works/sushitsumu/">すし積む</a>には、一戦が終わって次の一戦に移る「区切り」で、広告を一本挟める仕組みがあります。最初は「5プレイに一本」にしていましたが、翌日、<strong>回数ではなく時間で数える</strong>ように変えました。その理由と、変えたあとの動きの記録です。</p>
+  <p class="note">いまのサイトでは、広告はまだ出していません（広告の読み込み先を空にしてあります）。ここに書くのは、出すときのために先に組んでおいた仕組みの話です。</p>
+
+  <h2 class="rv">最初の決め方：5プレイに一本</h2>
+  <p>9月7日の最初の版では、広告は「5プレイごとに一本、「もう一丁」の前に挟む。最初の1プレイは出さない」にしました。第一印象を損ねないように、最初の一戦だけは必ず見逃す、という考えです。広告の読み込みは、CrazyGames・Poki・Google の三つのどれで動いているかをゲーム自身が見分けて、SDK があればそれを使い、無ければ素通りする作りでした。</p>
+
+  <h2 class="rv">合っていなかった理由</h2>
+  <p>翌9月8日、この数え方をやめました。コミットに書いた理由は二つです。</p>
+  <ul>
+    <li><strong>一戦が長いと、出ない。</strong>一戦が30分にもなるので、5プレイ目は2時間半後になる。ほぼ誰もそこまで遊ばない。</li>
+    <li><strong>早く終わると、続けて出る。</strong>何度も早死にしたときは、数分のあいだに何本も出てしまう。</li>
+  </ul>
+  <p>どちらも、「回数」で数えたせいで起きます。遊ぶ人の邪魔になるのは広告の本数ではなく、<strong>広告と広告の間の時間</strong>です。そこで、数えるものを時間に替えました。</p>
+
+  <h2 class="rv">変えたあとの決まり</h2>
+  <ul>
+    <li>最初の一戦は出さない（前のまま）。</li>
+    <li>広告をまだ一度も出していない人には、2戦目の区切りで一本。</li>
+    <li>それ以降は、<strong>前の広告から7分以上経っているときだけ</strong>、次の区切りで一本。</li>
+  </ul>
+  <p>広告を出した時刻は、ブラウザの中（<code>localStorage</code>）に覚えておきます。サーバーには何も送りません。確かめた動きは、次のとおりです。</p>
+  <div class="scroll rv"><table>
+    <tr><th>場面</th><th class="n">広告</th></tr>
+    <tr><td>1プレイ目</td><td class="n">出ない</td></tr>
+    <tr><td>2プレイ目（広告はまだ一度も出ていない）</td><td class="n">出る</td></tr>
+    <tr><td>前の広告から 1 分 ／ 6 分</td><td class="n">出ない</td></tr>
+    <tr><td>前の広告から 8 分</td><td class="n">出る</td></tr>
+    <tr><td>長い一戦のあと（40 分）</td><td class="n">出る</td></tr>
+  </table></div>
+  <p>前の版（5プレイに一本）のほうは、偽の CrazyGames SDK で7戦まわして、「5戦目のあと1回だけ出る」「SDK が無ければ一度も出ず、エラーも0」を確かめていました。時間式でも同じように、広告が終わったら必ず元の画面に戻ることを確かめています。</p>
+
+  <h2 class="rv">書きながら気づいたこと</h2>
+  <p>「7分」をどう決めたかは、コミットには残っていません。ここは正直に、根拠は記録に無い、と書いておきます。</p>
+  <p>ひとつ気になる数字があります。<a href="/notes/anago/">穴子の記事</a>で測った、自動プレイの1戦の長さは<strong>中央値 7.7 分</strong>でした。これだと、7分の間隔は、ほぼ「毎戦」に近くなります。コミットにある「一戦は30分にもなる」とは、だいぶ違います。</p>
+  <div class="scroll rv"><table>
+    <tr><th>一戦の長さ</th><th class="n">5プレイに一本（旧）</th><th class="n">7分に一本（新）</th></tr>
+    <tr><td>7.7 分（自動プレイの中央値）</td><td class="n">約38分に一本</td><td class="n">ほぼ毎戦</td></tr>
+    <tr><td>30 分（コミットの言い方）</td><td class="n">2時間半に一本</td><td class="n">毎戦</td></tr>
+  </table></div>
+  <p>自動プレイは「合体を最優先して、山が落ち着いてから置く」程度の打ち手で、人間の遊び方とは違います。本当の人が一戦にどれだけかけているかは、いまは計測していないので分かりません。<strong>広告を実際に出す前に、一戦の長さを測るほうが先</strong>かもしれません。</p>
+
+  <h2 class="rv">分かったこと</h2>
+  <blockquote>回数で数えると、遊び方で広告の頻度が大きくぶれる。時間で数えれば、ぶれない。</blockquote>
+  <p>ただし、時間に変えたからといって、<strong>頻度が適切になった</strong>わけではありません。7分が長いのか短いのかは、人の一戦の長さが分からないと決められない、というのがいまの結論です。広告を出す準備ができたら、まず一戦の長さを測ります。</p>
+
+  <div class="ad-slot" data-slot="footer" hidden></div>
+<!--/ad-->
+
+  <div class="rule" style="margin:40px 0 22px"></div>
+  <p class="eyebrow">この話に出てくるもの</p>
+  <ul class="plain">
+    <li><a href="/works/sushitsumu/">すし積む（作品ページ）</a> — 落ち物パズルのゲーム</li>
+    <li><a href="/notes/anago/">穴子がデカすぎた話</a> — 一戦の長さを測った記録</li>
+  </ul>
+  <p style="margin-top:32px"><a class="btn ghost" href="/works/sushitsumu/">作品ページへ</a></p>
+</div>
+</main>
+
+<footer class="site"><div class="wrap">
+  <span>© 2026 Koshin Studio</span>
+  <div class="sns-row"></div>
+  <nav><a href="/about/">About</a><a href="/privacy/">あつかい</a></nav>
+</div></footer>
+<script src="/vendor/gsap.min.js?v=9396f256" defer></script>
+<script src="/vendor/ScrollTrigger.min.js?v=05ca5ad8" defer></script>
+<script src="/vendor/lenis.min.js?v=daec1872" defer></script>
+<script src="/motion.js?v=942a2796" defer></script>
+</body>
+</html>
