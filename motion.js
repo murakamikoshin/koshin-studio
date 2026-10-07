@@ -10,6 +10,8 @@
    ============================================================ */
 (function () {
   'use strict';
+  /* 端末がダーク設定なら紺の地、そうでなければ白の地（style.css の末尾と対） */
+  var DARK = !!(window.matchMedia && matchMedia('(prefers-color-scheme: dark)').matches);
   var calm = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var G = window.gsap;
   if (G && window.ScrollTrigger) G.registerPlugin(window.ScrollTrigger);
@@ -245,7 +247,8 @@
       bx.setTransform(bd, 0, 0, bd, 0, 0);
     }
     bsize(); window.addEventListener('resize', bsize);
-    var COL = ['#7ec8e3', '#b9e6f5', '#e9eef6', '#2f6fd0', '#c8d6e6'];
+    var COL = DARK ? ['#7ec8e3', '#b9e6f5', '#e9eef6', '#2f6fd0', '#c8d6e6']
+                   : ['#2f6fd0', '#4f95e0', '#1b6aa3', '#7ec8e3', '#173d82'];
     /* 弾けるのは押した一字だけ。ロゴ全体を揺らすと、
        どこを押しても同じに見えて、押した手応えが消える */
     var chars = [].slice.call(xl.querySelectorAll('.ks-ch'));
@@ -351,8 +354,8 @@
       var x = p.x + px * (0.25 + p.z), y = p.y + py * (0.25 + p.z);
       var tw = 0.72 + 0.28 * Math.sin(t0 * 2.1 + p.ph);
       c.beginPath(); c.arc(x, y, p.r, 0, 6.2832);
-      c.fillStyle = p.gold ? 'rgba(126,200,227,' + (p.a * tw * .85).toFixed(3) + ')'
-                           : 'rgba(200,214,230,' + (p.a * tw).toFixed(3) + ')';
+      c.fillStyle = p.gold ? (DARK ? 'rgba(126,200,227,' : 'rgba(47,111,208,') + (p.a * tw * .85).toFixed(3) + ')'
+                           : (DARK ? 'rgba(200,214,230,' : 'rgba(60,80,110,') + (p.a * tw).toFixed(3) + ')';
       c.fill();
     }
   }

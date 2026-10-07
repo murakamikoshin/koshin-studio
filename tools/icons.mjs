@@ -34,8 +34,8 @@ writeFileSync(SITE + '/site.webmanifest', JSON.stringify({
   scope: '/',
   display: 'browser',
   lang: 'ja',
-  background_color: '#070c17',
-  theme_color: '#080d16',
+  background_color: '#fbfaf7',
+  theme_color: '#fbfaf7',
   icons: [
     { src: '/favicon.svg', type: 'image/svg+xml', sizes: 'any', purpose: 'any' },
     { src: '/assets/icon/icon-192.png', type: 'image/png', sizes: '192x192' },
