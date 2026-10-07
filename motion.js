@@ -10,8 +10,8 @@
    ============================================================ */
 (function () {
   'use strict';
-  /* 端末がダーク設定なら紺の地、そうでなければ白の地（style.css の末尾と対） */
-  var DARK = !!(window.matchMedia && matchMedia('(prefers-color-scheme: dark)').matches);
+  /* 常に白の地（style.css の末尾と対）。紺に戻すときは true */
+  var DARK = false;
   var calm = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var G = window.gsap;
   if (G && window.ScrollTrigger) G.registerPlugin(window.ScrollTrigger);
