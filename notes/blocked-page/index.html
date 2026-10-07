@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>「取れた」と読んでいたのは、ただの案内ページだった：3日間、商品が0件 — トレカダッシュ 開発の記録 — Koshin Studio</title>
+<meta name="description" content="ポケモンセンターの取得が3日間ずっと商品0件だった。安い設定が返した2,410バイトの「JavaScriptを有効に」ページを、成功と読んでいた。判定を1か所に集めた記録。">
+<meta property="og:title" content="「取れた」と読んでいたのは、ただの案内ページだった：3日間、商品が0件">
+<meta property="og:description" content="「取れた」の判定が甘く、3日間0件に気づかなかった記録。">
+<meta property="og:type" content="article">
+<meta name="theme-color" content="#fbfaf7">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/assets/icon/icon-180.png">
+<link rel="manifest" href="/site.webmanifest">
+<script>document.documentElement.className+=" js"</script>
+<link rel="stylesheet" href="/style.css?v=e8482157">
+<link rel="canonical" href="https://koshinstudio.com/notes/blocked-page/">
+<meta property="og:url" content="https://koshinstudio.com/notes/blocked-page/">
+<meta property="og:site_name" content="Koshin Studio">
+<meta property="og:locale" content="ja_JP">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="alternate" type="application/rss+xml" title="Koshin Studio — Notes" href="https://koshinstudio.com/feed.xml">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BlogPosting","headline":"「取れた」と読んでいたのは、ただの案内ページだった：3日間、商品が0件","url":"https://koshinstudio.com/notes/blocked-page/","description":"ポケモンセンターの取得が3日間ずっと商品0件だった。安い設定が返した2,410バイトの「JavaScriptを有効に」ページを、成功と読んでいた。判定を1か所に集めた記録。","datePublished":"2026-10-08","dateModified":"2026-10-08","inLanguage":"ja","image":"https://koshinstudio.com/assets/og/og_notes_blocked-page.jpg","author":{"@id":"https://koshinstudio.com#studio"},"publisher":{"@id":"https://koshinstudio.com#studio"},"mainEntityOfPage":"https://koshinstudio.com/notes/blocked-page/"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Koshin Studio","item":"https://koshinstudio.com/"},{"@type":"ListItem","position":2,"name":"Notes","item":"https://koshinstudio.com/notes/"},{"@type":"ListItem","position":3,"name":"「取れた」と読んでいたのは、ただの案内ページだった：3日間、商品が0件","item":"https://koshinstudio.com/notes/blocked-page/"}]}]}</script>
+<meta property="og:image" content="https://koshinstudio.com/assets/og/og_notes_blocked-page.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+</head>
+<body>
+<canvas id="motes"></canvas>
+
+<header class="site"><div class="wrap">
+  <a class="logo" href="/">Koshin Studio</a>
+  <nav><a href="/works/">Works</a><a href="/notes/">Notes</a><a href="/about/">About</a></nav>
+</div></header>
+
+<main><div class="wrap">
+  <nav class="crumbs" aria-label="現在地"><a href="/">Koshin Studio</a><i aria-hidden="true">›</i><a href="/notes/">Notes</a><i aria-hidden="true">›</i><span aria-current="page">「取れた」と読んでいたのは、ただの案内ページだった：3日間、商品が0件</span></nav>
+  <h1>「取れた」と読んでいたのは、ただの案内ページだった：3日間、商品が0件</h1>
+  <div class="rule"></div>
+  <p class="lead">トレカダッシュ 開発の記録 ／ 2026年10月</p>
+
+  <p>iOS アプリ「トレカダッシュ」は、通販サイトの販売ページを定期的に見に行って、抽選や先着の情報を集めています。ある日、ポケモンセンターオンラインの取得が、<strong>3 日間ずっと、商品 0 件</strong>になっていたことが分かりました。エラーは出ていません。「取れた」と判定されていたからです。何が起きていたのか、コミットの記録で書きます。</p>
+  <p class="note">このサイトには、トレカダッシュの作品ページはまだありません。ここに書くのは、開発の記録です。</p>
+
+  <h2 class="rv">「取れた」の判定が、甘かった</h2>
+  <p>ページの取得は、外部のサービス（Scrape.do）を通して行っています。取得の設定には、安いものから高いものまであって、<strong>安い設定で取れなければ、強い設定に切り替える</strong>（昇格する）作りです（<a href="/notes/scrape-cost/">取得の費用の記事</a>と同じ仕組みです）。</p>
+  <p>この「取れたかどうか」の判定が、問題でした。ポケモンセンターのページは、安い設定で取ると、<strong>2,410 バイトの、「JavaScript を有効にしてください」という案内ページ</strong>が返ってきます。商品の一覧ではなく、ただの案内です。ところが、これを<strong>「取れた」と読んで、成功と扱って</strong>いました。成功なら、強い設定への切り替えも行われません。</p>
+  <p>こうして、9 月 4 日から 3 日間、取得は「成功」し続けて、商品は 0 件のまま、でした。</p>
+
+  <h2 class="rv">直し方</h2>
+  <ul>
+    <li><strong>「取れた」の判定を、1 か所に集める。</strong>それまで、判定が複数の場所に散らばっていました。ブロックされたページかどうかを見る関数（<code>scrapeDoResultLooksBlocked</code>）を 1 本にして、全部がそれを使うようにしました。</li>
+    <li><strong>通った設定を、覚える。</strong>一度成功した設定を覚えておき、次からは、そこから試します。これで、1 回の取得に使うクレジットが、36 から 25 に減りました。</li>
+  </ul>
+
+  <h2 class="rv">同じ日に見つかった、もう一つの汚れ</h2>
+  <p>同じ点検で、別の問題も見つかりました。商品名の「別表記」の食い違いを判定する処理が、<strong>照合の入口と、お掃除の側で、別々に書かれていました</strong>。お掃除の側にだけ、「商品の形が食い違う」という判定が無かったのです。その結果、トライアルデッキの別表記が、ブースターパックの商品に残ったままになり、<strong>毎日、誤った照合を呼び続けていました</strong>。判定を共通の関数にして、27 商品の 46 件を除去しました。</p>
+  <p>あわせて、「更新する文書が無い」というエラー（7 日間で 64 件）も解消しました。商品は、キャッシュが古いときに読み直す。記事は、消えていたら見送って、残りの重複処理を続ける、という形にしています。</p>
+
+  <h2 class="rv">分かったこと</h2>
+  <blockquote>「成功」と「中身が取れた」は、別のもの。</blockquote>
+  <ul>
+    <li><strong>成功の判定は、中身で見る。</strong>通信が通ったことと、欲しいものが取れたことは、別です。「取れたものが 0 件」が続いたら、それ自体を異常として見張る必要があります。</li>
+    <li><strong>判定は、1 か所に。</strong>同じ判定が 2 か所にあると、片方だけが古くなります。照合の入口とお掃除のように。</li>
+    <li><strong>エラーが出ないことは、うまくいっていることの証拠にならない。</strong></li>
+  </ul>
+  <p class="note">この記事は、コミット（2026年9月7日）の記録から書きました。3 日間 0 件だったことに、どうやって気づいたかは、コミットに書かれていません。</p>
+
+  <div class="ad-slot" data-slot="footer" hidden></div>
+<!--/ad-->
+
+  <div class="rule" style="margin:40px 0 22px"></div>
+  <p class="eyebrow">この話に出てくるもの</p>
+  <ul class="plain">
+    <li><a href="/notes/scrape-cost/">「しょうがない」を測り直したら、取得の費用は8分の1だった</a> — 同じ取得の仕組みの、費用の記録</li>
+    <li><a href="/notes/fail-open/">確認できなかったときに、通していた</a> — 同じアプリの、別の記録</li>
+  </ul>
+
+<!--related-->
+  <div class="rule" style="margin:40px 0 22px"></div>
+  <p class="eyebrow">ほかの記録</p>
+  <ul class="plain">
+    <li><a href="/notes/fail-open/">確認できなかったときに、通していた：「fail-open」が転売品を招いた話</a> — 「定価を確認できなかったら通す」という設計に、検索の1日上限という盲点があった。「知らなかった」と「調べられなかった」を区別して直した記録。</li>
+    <li><a href="/notes/typo-catalog/">一度だけ生まれた誤字が、店ごとに増えていった：「30th SEREBRATION」の件</a> — 誤字の商品が一度作られると、既存の商品として再利用され、店ごとに増える。13記事を直し、短い見出しを完全一致で拾う予防を入れ、保険のチェックの限界まで確かめた記録。</li>
+    <li><a href="/notes/scrape-cost/">「しょうがない」を測り直したら、取得の費用は8分の1だった</a> — 「イオンとあみあみは費用が重くて縮められない」は、古い単価に基づく思い込みだった。3つの取得設定で同じページを比べて、描画が丸ごと無駄だと分かった記録。</li>
+  </ul>
+<!--/related-->
+</div>
+</main>
+
+<footer class="site"><div class="wrap">
+  <span>© 2026 Koshin Studio</span>
+  <div class="sns-row"></div>
+  <nav><a href="/about/">About</a><a href="/privacy/">あつかい</a></nav>
+</div></footer>
+<script src="/vendor/gsap.min.js?v=9396f256" defer></script>
+<script src="/vendor/ScrollTrigger.min.js?v=05ca5ad8" defer></script>
+<script src="/vendor/lenis.min.js?v=daec1872" defer></script>
+<script src="/motion.js?v=5f78b937" defer></script>
+</body>
+</html>

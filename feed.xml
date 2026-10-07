@@ -7,6 +7,13 @@
   <language>ja</language>
   <atom:link href="https://koshinstudio.com/feed.xml" rel="self" type="application/rss+xml"/>
   <item>
+    <title>「取れた」と読んでいたのは、ただの案内ページだった：3日間、商品が0件</title>
+    <link>https://koshinstudio.com/notes/blocked-page/</link>
+    <guid isPermaLink="true">https://koshinstudio.com/notes/blocked-page/</guid>
+    <pubDate>Wed, 07 Oct 2026 15:00:00 GMT</pubDate>
+    <description>ポケモンセンターの取得が3日間ずっと商品0件だった。安い設定が返した2,410バイトの「JavaScriptを有効に」ページを、成功と読んでいた。判定を1か所に集めた記録。</description>
+  </item>
+  <item>
     <title>確認できなかったときに、通していた：「fail-open」が転売品を招いた話</title>
     <link>https://koshinstudio.com/notes/fail-open/</link>
     <guid isPermaLink="true">https://koshinstudio.com/notes/fail-open/</guid>
