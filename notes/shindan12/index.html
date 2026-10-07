@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>診断を12問にしたら、結果はどこまで変わるのか — ガチアニメ診断 開発の記録 — Koshin Studio</title>
+<meta name="description" content="50問の診断を12問から始められるようにした。短くして結果は変わらないのか、作り物の回答者1,000人で測った記録。タイプはほぼ同じ、運命の1作はかなり変わる。">
+<meta property="og:title" content="診断を12問にしたら、結果はどこまで変わるのか">
+<meta property="og:description" content="12問と50問で結果がどれだけ一致するかを、作り物の回答者1,000人で測った記録。">
+<meta property="og:type" content="article">
+<meta name="theme-color" content="#070c17">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/assets/icon/icon-180.png">
+<link rel="manifest" href="/site.webmanifest">
+<script>document.documentElement.className+=" js"</script>
+<link rel="stylesheet" href="/style.css?v=19008d13">
+<link rel="canonical" href="https://koshinstudio.com/notes/shindan12/">
+<meta property="og:url" content="https://koshinstudio.com/notes/shindan12/">
+<meta property="og:site_name" content="Koshin Studio">
+<meta property="og:locale" content="ja_JP">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="alternate" type="application/rss+xml" title="Koshin Studio — Notes" href="https://koshinstudio.com/feed.xml">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BlogPosting","headline":"診断を12問にしたら、結果はどこまで変わるのか","url":"https://koshinstudio.com/notes/shindan12/","description":"50問の診断を12問から始められるようにした。短くして結果は変わらないのか、作り物の回答者1,000人で測った記録。タイプはほぼ同じ、運命の1作はかなり変わる。","datePublished":"2026-10-07","dateModified":"2026-10-07","inLanguage":"ja","image":"https://koshinstudio.com/assets/og/og_notes_shindan12.jpg","author":{"@id":"https://koshinstudio.com#studio"},"publisher":{"@id":"https://koshinstudio.com#studio"},"mainEntityOfPage":"https://koshinstudio.com/notes/shindan12/"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Koshin Studio","item":"https://koshinstudio.com/"},{"@type":"ListItem","position":2,"name":"Notes","item":"https://koshinstudio.com/notes/"},{"@type":"ListItem","position":3,"name":"診断を12問にしたら、結果はどこまで変わるのか","item":"https://koshinstudio.com/notes/shindan12/"}]}]}</script>
+<meta property="og:image" content="https://koshinstudio.com/assets/og/og_notes_shindan12.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+</head>
+<body>
+<canvas id="motes"></canvas>
+
+<header class="site"><div class="wrap">
+  <a class="logo" href="/">Koshin Studio</a>
+  <nav><a href="/works/">Works</a><a href="/notes/">Notes</a><a href="/anime/">Anime</a><a href="/about/">About</a></nav>
+</div></header>
+
+<main><div class="wrap">
+  <nav class="crumbs" aria-label="現在地"><a href="/">Koshin Studio</a><i aria-hidden="true">›</i><a href="/notes/">Notes</a><i aria-hidden="true">›</i><span aria-current="page">診断を12問にしたら、結果はどこまで変わるのか</span></nav>
+  <h1>診断を12問にしたら、結果はどこまで変わるのか</h1>
+  <div class="rule"></div>
+  <p class="lead">ガチアニメ診断 開発の記録 ／ 2026年10月</p>
+
+  <p><a href="/works/shindananime/">ガチアニメ診断</a>は、全部で50問あります。長い、という声があって、<strong>最初の12問だけで結果を出せる</strong>ようにしました。続きの38問は、答えたい人だけ。</p>
+  <p>ただ、短くした分、結果は変わるはずです。<strong>どれだけ変わるのか</strong>を、気分ではなく数字で知っておきたくなりました。</p>
+
+  <h2 class="rv">12問は、どう選んだか</h2>
+  <p>診断は、アニメの好みを6本の軸で測っています（世界観、後味、構成、サブテイスト、視覚、視聴スタイル）。12問版は、<strong>各軸から2問ずつ、計12問</strong>。結果を出す計算は50問のときと同じで、答えていない質問は数えないだけです。</p>
+  <p>50問の中身は、6軸が18問、画質・年代が2問、好みの要素（恋愛、ホラー、ロボットなど）が30問です。12問版では、後ろの二つ（年代と好みの要素）は聞かないので、作品の並びに効いてきません。</p>
+
+  <h2 class="rv">測り方：作り物の回答者を1,000人</h2>
+  <p>本物の人に、12問と50問の両方を答えてもらうのは、すぐにはできません。そこで、<strong>作り物の回答者</strong>を使いました。ここは先に断っておきます。以下の数字は、実在の人の結果ではありません。</p>
+  <ol>
+    <li>回答者ごとに、6軸と年代、30の好みの要素について、「本当の好み」を −1〜+1 の乱数で決める。</li>
+    <li>各質問の答えは、その「本当の好み」にブレを足して、5段階（A寄り、ややA寄り、どちらでもない、ややB寄り、B寄り）に丸める。</li>
+    <li>この答えを、12問だけ使う場合と、50問全部使う場合で、実際のアプリと同じ計算（<code>logic.js</code>）に通す。</li>
+  </ol>
+  <p>ブレの大きさは分かりません。人は同じ気分でも答えが揺れるので、<strong>小さい（0.3）・中くらい（0.5）・大きい（0.8）</strong>の3通りで測りました。診断に使う作品は、軸の手がかりが足りるもの 6,074 作です。</p>
+
+  <h2 class="rv">タイプは、12問でもだいたい合う</h2>
+  <p>まず、タイプコード（6文字）が、12問と50問で同じになるかどうか。</p>
+  <div class="scroll rv"><table>
+    <tr><th>回答のブレ</th><th class="n">6文字が全部一致</th><th class="n">1文字ごとの一致</th></tr>
+    <tr><td>小さい（0.3）</td><td class="n">75.6%</td><td class="n">94.7〜96.1%</td></tr>
+    <tr><td>中くらい（0.5）</td><td class="n">60.8%</td><td class="n">90.9〜93.7%</td></tr>
+    <tr><td>大きい（0.8）</td><td class="n">43.2%</td><td class="n">85.5〜87.6%</td></tr>
+  </table></div>
+  <p>1文字ずつ見れば、ブレが中くらいでも、9割以上は同じ側に落ちます。6文字を<strong>全部</strong>当てるのは難しくなりますが、それは「6回続けて当てる」から。1文字の的中率が9割でも、6回続くと半分ちょっとになる計算です。</p>
+
+  <h2 class="rv">運命の1作は、かなり変わる</h2>
+  <p>次に、診断が最後に出す<strong>「運命の1作」</strong>です。6,074 作の中から1つを選ぶので、事情が違います。</p>
+  <div class="scroll rv"><table>
+    <tr><th>回答のブレ</th><th class="n">1作が同じ</th><th class="n">上位3作のどれかが共通</th></tr>
+    <tr><td>小さい（0.3）</td><td class="n">21.7%</td><td class="n">63.4%</td></tr>
+    <tr><td>中くらい（0.5）</td><td class="n">15.7%</td><td class="n">52.7%</td></tr>
+    <tr><td>大きい（0.8）</td><td class="n">12.4%</td><td class="n">39.9%</td></tr>
+  </table></div>
+  <p><strong>12問で出た1作が、50問でも1作目に来るのは、5〜8人に1人</strong>くらいです。ブレが中くらいなら、上位3作に共通がある人が、約半分。</p>
+
+  <div class="ad-slot" data-slot="article" hidden></div>
+<!--/ad-->
+
+  <h2 class="rv">どの段階で変わるのか</h2>
+  <p>変わる理由が、「好みの要素の30問」だけなのかを確かめました。12問と50問のあいだに、<strong>6軸だけの18問</strong>（好みの要素と年代は聞かない）を挟んで、1作を比べます（ブレは中くらい、600人）。</p>
+  <div class="scroll rv"><table>
+    <tr><th>比べるもの</th><th class="n">1作が同じ</th></tr>
+    <tr><td>12問 と 18問（軸だけ）</td><td class="n">33.8%</td></tr>
+    <tr><td>18問 と 50問</td><td class="n">27.5%</td></tr>
+    <tr><td>12問 と 50問</td><td class="n">15.0%</td></tr>
+  </table></div>
+  <p>好みの要素を足す前の、<strong>軸の質問を6問足すだけでも、1作は3人に2人で変わっています</strong>。6,000作の中から1つを選ぶ作業は、少しの入力の差で順位が入れ替わります。「好みの要素が悪さをしている」わけではありませんでした。</p>
+
+  <h2 class="rv">50問は、本当に当たりに近いのか</h2>
+  <p>この測り方では、「本当の好み」を知っているので、そこから選んだ1作を<strong>正解</strong>と見なせます。12問と50問は、それに近づけているでしょうか（ブレは中くらい）。</p>
+  <div class="scroll rv"><table>
+    <tr><th></th><th class="n">正解の1作と同じ</th><th class="n">正解の上位3作に入る</th></tr>
+    <tr><td>12問</td><td class="n">8.2%</td><td class="n">14.9%</td></tr>
+    <tr><td>50問</td><td class="n">14.3%</td><td class="n">28.5%</td></tr>
+  </table></div>
+  <p>50問のほうが、<strong>約1.7〜1.9倍</strong>、正解に近い。ブレが小さいと、差は 17.9% → 29.0%（1作）、29.0% → 52.6%（上位3作）です。続きの38問は、無駄ではありませんでした。ただし、50問でも、1作ぴったりで当たるのは1割ちょっとです。</p>
+
+  <h2 class="rv">この測り方の弱いところ</h2>
+  <ul>
+    <li><strong>回答者は作り物です。</strong>本当の人は、好みが乱数のように散らばっていないし、ブレ方も違います。</li>
+    <li><strong>ブレの大きさは仮置きです。</strong>3通りで測ったのはそのためで、本当の値は分かりません。</li>
+    <li><strong>「正解」は、診断と同じ物差しでの正解です。</strong>人が本当に好きになる作品かどうかは、測れていません。</li>
+    <li>測ったのは「同じになるか」で、「面白いか」ではありません。</li>
+  </ul>
+
+  <h2 class="rv">分かったこと</h2>
+  <blockquote>タイプは短くても決まる。運命の1作は、問題を足すたびに揺れる。</blockquote>
+  <p>12問で結果を出して、続きを任意にしたいまの作りは、この数字と矛盾していません。<strong>タイプを知りたいだけなら12問で十分で、1作の精度を上げたい人だけ、続きに進めばいい。</strong>結果の画面にも、そう伝わる言い方をしたほうがいい、と考えています。</p>
+  <p>本当に確かめたいのは、実際の人の答えです。12問の結果と50問の結果を、同じ人に見てもらって、「どちらがしっくりくるか」を聞くところまでいけたら、次の記録に書きます。</p>
+  <p class="note">測ったスクリプトは、診断のリポジトリに置いてあります（乱数は固定してあるので、同じ数字が再現できます）。</p>
+
+  <div class="ad-slot" data-slot="footer" hidden></div>
+<!--/ad-->
+
+  <div class="rule" style="margin:40px 0 22px"></div>
+  <p class="eyebrow">この話に出てくるもの</p>
+  <ul class="plain">
+    <li><a href="/works/shindananime/">ガチアニメ診断（作品ページ）</a> — 何を作ったのか、画面と数字で</li>
+    <li><a href="/anime/">Anime</a> — 6軸の解説と、64タイプの一覧</li>
+  </ul>
+  <p style="margin-top:32px"><a class="btn" href="/app/shindananime/">診 断 す る</a><a class="btn ghost" href="/works/shindananime/">作品ページへ</a></p>
+</div>
+</main>
+
+<footer class="site"><div class="wrap">
+  <span>© 2026 Koshin Studio</span>
+  <div class="sns-row"></div>
+  <nav><a href="/about/">About</a><a href="/privacy/">あつかい</a></nav>
+</div></footer>
+<script src="/vendor/gsap.min.js?v=9396f256" defer></script>
+<script src="/vendor/ScrollTrigger.min.js?v=05ca5ad8" defer></script>
+<script src="/vendor/lenis.min.js?v=daec1872" defer></script>
+<script src="/motion.js?v=942a2796" defer></script>
+</body>
+</html>
