@@ -183,7 +183,7 @@ const writeAnime = (rel, html) => {
 /* 入口 */
 const featured = ['RDCP-VM', 'FHSA-TL', 'FDCA-VM', 'RHSP-TL'].map((c) => typeByCode[c]);
 writeAnime('/anime/index.html',
-  head('ガチアニメ診断の読みもの：6つの軸と64タイプ — Koshin Studio',
+  head('アニメ診断の読みもの：ガチアニメ診断の6つの軸と64タイプ — Koshin Studio',
        'アニメ診断「ガチアニメ診断」の解説。6つの軸の意味、64タイプの二つ名と特徴、タイプごとに近いアニメ作品をまとめています。') +
 `<main><div class="wrap">
   <h1>ガチアニメ診断の読みもの</h1>

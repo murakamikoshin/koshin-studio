@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>一度だけ生まれた誤字が、店ごとに増えていった：「30th SEREBRATION」の件 — トレカダッシュ 開発の記録 — Koshin Studio</title>
+<meta name="description" content="誤字の商品が一度作られると、既存の商品として再利用され、店ごとに増える。13記事を直し、短い見出しを完全一致で拾う予防を入れ、保険のチェックの限界まで確かめた記録。">
+<meta property="og:title" content="一度だけ生まれた誤字が、店ごとに増えていった：「30th SEREBRATION」の件">
+<meta property="og:description" content="誤字の商品が増えていった原因と、予防の記録。">
+<meta property="og:type" content="article">
+<meta name="theme-color" content="#fbfaf7">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/assets/icon/icon-180.png">
+<link rel="manifest" href="/site.webmanifest">
+<script>document.documentElement.className+=" js"</script>
+<link rel="stylesheet" href="/style.css?v=e8482157">
+<link rel="canonical" href="https://koshinstudio.com/notes/typo-catalog/">
+<meta property="og:url" content="https://koshinstudio.com/notes/typo-catalog/">
+<meta property="og:site_name" content="Koshin Studio">
+<meta property="og:locale" content="ja_JP">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="alternate" type="application/rss+xml" title="Koshin Studio — Notes" href="https://koshinstudio.com/feed.xml">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BlogPosting","headline":"一度だけ生まれた誤字が、店ごとに増えていった：「30th SEREBRATION」の件","url":"https://koshinstudio.com/notes/typo-catalog/","description":"誤字の商品が一度作られると、既存の商品として再利用され、店ごとに増える。13記事を直し、短い見出しを完全一致で拾う予防を入れ、保険のチェックの限界まで確かめた記録。","datePublished":"2026-10-08","dateModified":"2026-10-08","inLanguage":"ja","image":"https://koshinstudio.com/assets/og/og_notes_typo-catalog.jpg","author":{"@id":"https://koshinstudio.com#studio"},"publisher":{"@id":"https://koshinstudio.com#studio"},"mainEntityOfPage":"https://koshinstudio.com/notes/typo-catalog/"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Koshin Studio","item":"https://koshinstudio.com/"},{"@type":"ListItem","position":2,"name":"Notes","item":"https://koshinstudio.com/notes/"},{"@type":"ListItem","position":3,"name":"一度だけ生まれた誤字が、店ごとに増えていった：「30th SEREBRATION」の件","item":"https://koshinstudio.com/notes/typo-catalog/"}]}]}</script>
+<meta property="og:image" content="https://koshinstudio.com/assets/og/og_notes_typo-catalog.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+</head>
+<body>
+<canvas id="motes"></canvas>
+
+<header class="site"><div class="wrap">
+  <a class="logo" href="/">Koshin Studio</a>
+  <nav><a href="/works/">Works</a><a href="/notes/">Notes</a><a href="/about/">About</a></nav>
+</div></header>
+
+<main><div class="wrap">
+  <nav class="crumbs" aria-label="現在地"><a href="/">Koshin Studio</a><i aria-hidden="true">›</i><a href="/notes/">Notes</a><i aria-hidden="true">›</i><span aria-current="page">一度だけ生まれた誤字が、店ごとに増えていった：「30th SEREBRATION」の件</span></nav>
+  <h1>一度だけ生まれた誤字が、店ごとに増えていった：「30th SEREBRATION」の件</h1>
+  <div class="rule"></div>
+  <p class="lead">トレカダッシュ 開発の記録 ／ 2026年10月</p>
+
+  <p>iOS アプリ「トレカダッシュ」で、利用者から、「この記事、別の記事と重複しているよ。それに、商品名がおかしい」という報告が来ました。調べると、<strong>一度だけ生まれた誤字の商品が、店ごとの記事が来るたびに、再利用されて増えていた</strong>ことが分かりました。原因と、直し方と、直し方の限界まで、コミットの記録で書きます。</p>
+  <p class="note">このサイトには、トレカダッシュの作品ページはまだありません。ここに書くのは、開発の記録です。</p>
+
+  <h2 class="rv">報告されたもの</h2>
+  <p>ポケモンカードの「30th CELEBRATION」という商品の記事が、<strong>「30th SEREBRATION」</strong>という商品名（CELEBRATION の綴りの間違い）で、複数の店に出ていました。しかも、同じ商品の、正しい名前の記事と重複していました。</p>
+
+  <h2 class="rv">根本原因：短い見出しが、公式名と一致しなかった</h2>
+  <p>まとめサイトの要約の投稿には、「『30th CELEBRATION』」のような、<strong>短い見出し</strong>が出てきます。一方、アプリの公式カタログの正式名は、「拡張パック『30th CELEBRATION』」です。短い見出しのほうが、公式名より短いので、「記事のタイトルが公式名を含むか」という、一方向の判定では、一致しませんでした。</p>
+  <p>一致しないと、AI による照合に回されます。その過程で、<strong>一度だけ</strong>、「30th SEREBRATION」という誤字の商品が作られました。コミットの推測では、カタログにある別の表記「30th セレブレーション」を、ローマ字に変換するときに間違えたもの、とのことです。</p>
+  <p>本当に困ったのは、その次です。誤字の商品は、いったん作られると、<strong>「既存の商品」として、繰り返し再利用されます</strong>。店ごとの新しい記事が来るたびに、同じ誤字、同じ重複が、量産されていきました。</p>
+
+  <h2 class="rv">まず、データを直す</h2>
+  <p>全店舗を調べました。ビックカメラ、三洋堂書店、ゲームプラザなどの 3 店舗では、正しい名前の記事と重複していたので、片方を非表示にしました。ほかの 10 記事は、商品を付け替えるだけで済みました。<strong>合わせて 13 記事</strong>です。誤字の商品は、削除しました。</p>
+  <p>ここで、一つ、わざと手を付けなかったところがあります。商品を統合する既存の道具は、「SEREBRATION」と「CELEBRATION」を、別の商品と判定して、弾きました。この関門は、意図的に厳しく作ってあるので、<strong>緩めませんでした</strong>。手作業で、個別に直しています。</p>
+
+  <h2 class="rv">本命の予防：「完全一致」で、短い見出しを拾う</h2>
+  <p>データを直しただけでは、また起きます。そこで、公式カタログとの照合を直しました。公式名の先頭にある<strong>汎用的な形態語</strong>（「拡張パック」など）を一つ取り除いて、残りが記事のタイトルと<strong>完全に一致する</strong>ときだけ、同じ商品とみなします。</p>
+  <p>「含む」ではなく「完全一致」にしたのは、「30th CELEBRATION カードセット○○」のような、<strong>より具体的な別の商品まで、拾ってしまわないため</strong>です。これで、最初から公式カタログと正しく一致するようになり、誤字が生まれた AI 照合の経路に、そもそも届かなくなります。確かめた結果は、こうです。</p>
+  <ul>
+    <li>「30th CELEBRATION」は、公式の商品に、正しく一致する。</li>
+    <li>誤字の「30th SEREBRATION」は、一致しない（誤って公式扱いにしない）。</li>
+    <li>既存の完全一致、別のジャンル、無関係な弾名で、以前と動きが変わらない。</li>
+  </ul>
+
+  <h2 class="rv">保険：編集距離のチェック、そして、その限界</h2>
+  <p>念のため、商品を作る前の合流点に、「公式カタログとの編集距離が近い候補は、誤字の疑いが強いので、却下する」というチェックも入れました。ところが、このチェックだけでは、<strong>「30th SEREBRATION」と、「拡張パック『30th CELEBRATION』」を、捕まえられません</strong>。文字数の差が大きすぎて、編集距離が遠くなるからです（確かめて、そう分かっています）。</p>
+  <p>つまり、今回の件には、保険は効きません。効くのは、上の本命の修正です。保険は、<strong>同じ長さの帯で起きる別の誤字</strong>（たとえば、ヴァイスシュヴァルツの「/」が抜けるもの）を捕まえるために、残してあります。さらに、誤字の疑いのあるカタログを見つける読み取り専用の監査も作りました。コミットの時点では、同じ形の疑いが 21 件、見つかっています。</p>
+
+  <h2 class="rv">分かったこと</h2>
+  <blockquote>一度だけ生まれた間違いは、「既存のもの」になって、増える。</blockquote>
+  <ul>
+    <li><strong>間違ったデータは、自分で増える。</strong>作られたものが、次からは、再利用される側になります。データを直すだけでは足りず、<strong>生まれる経路</strong>を直す必要があります。</li>
+    <li><strong>「含む」より、「完全一致」。</strong>広く拾うと、別の商品まで巻き込みます。</li>
+    <li><strong>保険の限界は、確かめて、書いておく。</strong>「このチェックで防げる」と思い込まずに、今回の誤字には効かないことを、先に確かめました。</li>
+    <li><strong>厳しい関門は、緩めない。</strong>統合の道具が弾いたのは、正しい動きでした。</li>
+  </ul>
+  <p class="note">この記事は、コミット（2026年9月28日）の記録から書きました。誤字が生まれた経緯は、コミットの推測によります。</p>
+
+  <div class="ad-slot" data-slot="footer" hidden></div>
+<!--/ad-->
+
+  <div class="rule" style="margin:40px 0 22px"></div>
+  <p class="eyebrow">この話に出てくるもの</p>
+  <ul class="plain">
+    <li><a href="/notes/torecadash-9set/">「9種セット」の正体は御三家9商品だった</a> — 同じアプリの、商品名の突き合わせの記録</li>
+    <li><a href="/notes/torecadash-ai/">「減るはず」が、二度外れた</a> — 同じアプリの、AI 照合の記録</li>
+  </ul>
+
+<!--related-->
+  <div class="rule" style="margin:40px 0 22px"></div>
+  <p class="eyebrow">ほかの記録</p>
+  <ul class="plain">
+    <li><a href="/notes/scrape-cost/">「しょうがない」を測り直したら、取得の費用は8分の1だった</a> — 「イオンとあみあみは費用が重くて縮められない」は、古い単価に基づく思い込みだった。3つの取得設定で同じページを比べて、描画が丸ごと無駄だと分かった記録。</li>
+    <li><a href="/notes/review-info-needed/">初めての審査で、「情報が必要です」と返ってきた</a> — App Store の初めての審査で届いたのは、不合格ではなく「情報が必要」というメールだった。求められた六つ（実機の画面収録、目的、外部サービスの一覧など）と、前に直したこととのつながり。</li>
+    <li><a href="/notes/torecadash-review/">審査に出そうとして止まった四つのこと</a> — iPad のスクリーンショット、自動検査の ITMS-91064、アカウント削除、投稿の通報。App Store の審査に出す手前で止まった四つと、その直し方の記録。</li>
+  </ul>
+<!--/related-->
+</div>
+</main>
+
+<footer class="site"><div class="wrap">
+  <span>© 2026 Koshin Studio</span>
+  <div class="sns-row"></div>
+  <nav><a href="/about/">About</a><a href="/privacy/">あつかい</a></nav>
+</div></footer>
+<script src="/vendor/gsap.min.js?v=9396f256" defer></script>
+<script src="/vendor/ScrollTrigger.min.js?v=05ca5ad8" defer></script>
+<script src="/vendor/lenis.min.js?v=daec1872" defer></script>
+<script src="/motion.js?v=5f78b937" defer></script>
+</body>
+</html>
