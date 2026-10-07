@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>「重複は実質ゼロ」と数えたのに、監査は112組を出していた — トレカダッシュ 開発の記録 — Koshin Studio</title>
+<meta name="description" content="重複を統合する処理が、毎晩、先頭のジャンルの途中で時間切れになっていた。「ゼロ」と数えた自分の測り方が間違っていた。持ち回りに直して112組を0組にした記録。">
+<meta property="og:title" content="「重複は実質ゼロ」と数えたのに、監査は112組を出していた">
+<meta property="og:description" content="「重複はゼロ」と数えた測り方が間違っていた記録。">
+<meta property="og:type" content="article">
+<meta name="theme-color" content="#fbfaf7">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/assets/icon/icon-180.png">
+<link rel="manifest" href="/site.webmanifest">
+<script>document.documentElement.className+=" js"</script>
+<link rel="stylesheet" href="/style.css?v=e8482157">
+<link rel="canonical" href="https://koshinstudio.com/notes/dup-zero/">
+<meta property="og:url" content="https://koshinstudio.com/notes/dup-zero/">
+<meta property="og:site_name" content="Koshin Studio">
+<meta property="og:locale" content="ja_JP">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="alternate" type="application/rss+xml" title="Koshin Studio — Notes" href="https://koshinstudio.com/feed.xml">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BlogPosting","headline":"「重複は実質ゼロ」と数えたのに、監査は112組を出していた","url":"https://koshinstudio.com/notes/dup-zero/","description":"重複を統合する処理が、毎晩、先頭のジャンルの途中で時間切れになっていた。「ゼロ」と数えた自分の測り方が間違っていた。持ち回りに直して112組を0組にした記録。","datePublished":"2026-10-08","dateModified":"2026-10-08","inLanguage":"ja","image":"https://koshinstudio.com/assets/og/og_notes_dup-zero.jpg","author":{"@id":"https://koshinstudio.com#studio"},"publisher":{"@id":"https://koshinstudio.com#studio"},"mainEntityOfPage":"https://koshinstudio.com/notes/dup-zero/"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Koshin Studio","item":"https://koshinstudio.com/"},{"@type":"ListItem","position":2,"name":"Notes","item":"https://koshinstudio.com/notes/"},{"@type":"ListItem","position":3,"name":"「重複は実質ゼロ」と数えたのに、監査は112組を出していた","item":"https://koshinstudio.com/notes/dup-zero/"}]}]}</script>
+<meta property="og:image" content="https://koshinstudio.com/assets/og/og_notes_dup-zero.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+</head>
+<body>
+<canvas id="motes"></canvas>
+
+<header class="site"><div class="wrap">
+  <a class="logo" href="/">Koshin Studio</a>
+  <nav><a href="/works/">Works</a><a href="/notes/">Notes</a><a href="/about/">About</a></nav>
+</div></header>
+
+<main><div class="wrap">
+  <nav class="crumbs" aria-label="現在地"><a href="/">Koshin Studio</a><i aria-hidden="true">›</i><a href="/notes/">Notes</a><i aria-hidden="true">›</i><span aria-current="page">「重複は実質ゼロ」と数えたのに、監査は112組を出していた</span></nav>
+  <h1>「重複は実質ゼロ」と数えたのに、監査は112組を出していた</h1>
+  <div class="rule"></div>
+  <p class="lead">トレカダッシュ 開発の記録 ／ 2026年10月</p>
+
+  <p>iOS アプリ「トレカダッシュ」には、同じ商品が複数の商品として登録されてしまう「重複」を、毎晩、統合する処理があります。ある日、自分で数えて、「重複は実質ゼロ」と記録しました。ところが、リポジトリの監査は、<strong>112 組</strong>を出していました。<strong>自分の測り方が、間違っていた</strong>のです。コミットの記録で、経緯を書きます。</p>
+  <p class="note">このサイトには、トレカダッシュの作品ページはまだありません。ここに書くのは、開発の記録です。</p>
+
+  <h2 class="rv">「ゼロ」と数えて、112 組が出た</h2>
+  <p>112 組の実体を見ると、たとえば、ヴァイスシュヴァルツの「ブースターパック ラブライブ！サンシャイン!!」が、<strong>7 件に割れて</strong>登録されていました。統合の処理が、毎晩動いているはずなのに、です。</p>
+
+  <h2 class="rv">原因：毎晩、途中で時間切れになっていた</h2>
+  <p>統合の処理は、全ジャンルを通すと、<strong>約 15 分</strong>かかります。ところが、毎晩の定期実行に与えている持ち時間は、<strong>480 秒（8 分）</strong>でした。順番は、毎回、同じジャンル（ポケモン）から始まります。つまり、<strong>毎晩、ポケモンの途中で時間切れになり、後ろのジャンルには、永久に届かなかった</strong>のです。</p>
+  <p>数えたときに「ゼロ」だったのは、見ていた範囲（先頭のジャンル）だけが、きれいだったからでした。</p>
+
+  <h2 class="rv">直し方</h2>
+  <ul>
+    <li><strong>持ち回りにする。</strong>前回の続きのジャンルから始めて、時間予算（6 分）が尽きたら、止めます。次の晩は、止まったところから続きます。</li>
+    <li><strong>まず、手で完走させる。</strong>全ジャンルを手で最後まで流すと、<strong>重複は 112 組から 0 組</strong>に、商品は <strong>2,753 件から 2,570 件</strong>になりました。</li>
+  </ul>
+
+  <h2 class="rv">その前に分かっていたこと：1 回では終わらない</h2>
+  <p>この 2 日前（9 月 5 日）にも、統合について、わかったことがありました。<strong>A を B に統合すると、B の名前が、別の C と同じになる</strong>ことがあります。すると、1 回では終わりません。実データでは、こうでした。</p>
+  <div class="scroll rv"><table>
+    <tr><th>回</th><th class="n">統合した件数</th><th>その結果</th></tr>
+    <tr><td>1 回目</td><td class="n">138</td><td>新たに 53 組の同名が発生</td></tr>
+    <tr><td>2 回目</td><td class="n">54</td><td>同名の重複は 0 組</td></tr>
+  </table></div>
+  <p>商品は 2,935 件から 2,713 件になりました。そこで、毎日の枠では、<strong>統合が 0 件になるまで繰り返す</strong>（上限 3 回）ようにしました。今回の「時間切れ」は、この繰り返しの、さらに手前の問題でした。</p>
+
+  <h2 class="rv">同じ日に、ほかにも三つ</h2>
+  <ul>
+    <li><strong>受付中の抽選 6 件が、別の商品の定価で、消えていた。</strong>7,200 円（公式の 360 円 × 20 パック）の抽選が、記事に残っていた<strong>別の商品の定価 27,500 円</strong>と比べられて、価格で却下されていました。直す条件に、「<strong>証明できるときだけ直す</strong>」を足しました。実データの全件で、条件に合うのは 10 件で、全部が正規の価格の販売でした。11 件を、表示に戻しています。</li>
+    <li><strong>突き合わせの誤報。</strong>「記事はあるのに非表示」の 17 件のうち、9 件は、同じ店の<strong>別の書き方</strong>で、代わりの記事が表示されていました（「千歳鳥山店」と「千歳烏山店」のように）。代わりが表示中なら、カバー済みと数えるようにして、カバー率は 87% から 90% に、非表示は 17 件から 4 件になりました。</li>
+    <li><strong>監査のほうが、止まっていた。</strong>監査用の読み取りの部品が、<code>=&gt;</code> のすぐ後ろにある正規表現を、割り算と読み違えて、監査 4 本が、<code>ReferenceError</code> で落ちていました。切り出せなかった名前を、黙って飛ばさず、理由を出すように直しています。</li>
+  </ul>
+
+  <h2 class="rv">分かったこと</h2>
+  <blockquote>「ゼロ」と数えたら、まず、何を数えたかを疑う。</blockquote>
+  <ul>
+    <li><strong>見た範囲が、全体とは限らない。</strong>毎晩、先頭のジャンルだけが処理されていたので、先頭だけを数えれば、きれいに見えます。</li>
+    <li><strong>時間に制限のある処理は、「終わったか」を見る。</strong>動いていることと、最後まで届いていることは、別です。</li>
+    <li><strong>数える道具も、壊れる。</strong>監査が止まっているときは、結果が「0 件」に見えます。止まっていることに、気づく仕組みが要ります。</li>
+  </ul>
+  <p class="note">この記事は、コミット（2026年9月5日、9月7日）の記録から書きました。</p>
+
+  <div class="ad-slot" data-slot="footer" hidden></div>
+<!--/ad-->
+
+  <div class="rule" style="margin:40px 0 22px"></div>
+  <p class="eyebrow">この話に出てくるもの</p>
+  <ul class="plain">
+    <li><a href="/notes/blocked-page/">「取れた」と読んでいたのは、ただの案内ページだった</a> — 同じ日の、別の記録</li>
+    <li><a href="/notes/torecadash-9set/">「9種セット」の正体は御三家9商品だった</a> — 同じアプリの、突き合わせの記録</li>
+  </ul>
+
+<!--related-->
+  <div class="rule" style="margin:40px 0 22px"></div>
+  <p class="eyebrow">ほかの記録</p>
+  <ul class="plain">
+    <li><a href="/notes/blocked-page/">「取れた」と読んでいたのは、ただの案内ページだった：3日間、商品が0件</a> — ポケモンセンターの取得が3日間ずっと商品0件だった。安い設定が返した2,410バイトの「JavaScriptを有効に」ページを、成功と読んでいた。判定を1か所に集めた記録。</li>
+    <li><a href="/notes/fail-open/">確認できなかったときに、通していた：「fail-open」が転売品を招いた話</a> — 「定価を確認できなかったら通す」という設計に、検索の1日上限という盲点があった。「知らなかった」と「調べられなかった」を区別して直した記録。</li>
+    <li><a href="/notes/typo-catalog/">一度だけ生まれた誤字が、店ごとに増えていった：「30th SEREBRATION」の件</a> — 誤字の商品が一度作られると、既存の商品として再利用され、店ごとに増える。13記事を直し、短い見出しを完全一致で拾う予防を入れ、保険のチェックの限界まで確かめた記録。</li>
+  </ul>
+<!--/related-->
+</div>
+</main>
+
+<footer class="site"><div class="wrap">
+  <span>© 2026 Koshin Studio</span>
+  <div class="sns-row"></div>
+  <nav><a href="/about/">About</a><a href="/privacy/">あつかい</a></nav>
+</div></footer>
+<script src="/vendor/gsap.min.js?v=9396f256" defer></script>
+<script src="/vendor/ScrollTrigger.min.js?v=05ca5ad8" defer></script>
+<script src="/vendor/lenis.min.js?v=daec1872" defer></script>
+<script src="/motion.js?v=5f78b937" defer></script>
+</body>
+</html>
