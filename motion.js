@@ -17,7 +17,9 @@
   if (G && window.ScrollTrigger) G.registerPlugin(window.ScrollTrigger);
 
   /* ---------- 滑らかなスクロール ---------- */
-  if (window.Lenis && !calm && !('ontouchstart' in window)) {
+  /* 2026-10-07 止めた：標準のスクロールのほうが、読む人の手に合う。
+     取りこぼしの原因にもなっていた（下の「現れ方」の注を参照） */
+  if (false && window.Lenis && !calm && !('ontouchstart' in window)) {
     /* 1.05 秒は長すぎた。ホイールを一回まわすたび、
        止まるまで 1 秒かかって「もっさり」の元になっていた。
        0.45 秒なら、滑らかさは残しつつ、指の動きに追いつく */
@@ -316,7 +318,8 @@
 
   /* ---------- 漂う粒 ---------- */
   var cv = document.getElementById('motes');
-  if (!cv || calm) return;
+  /* 粒はトップだけ。読みものの後ろでは動かさない */
+  if (!cv || calm || !document.body.classList.contains('home')) return;
   var c = cv.getContext('2d');
   var W = 0, H = 0, dpr = 1, parts = [], px = 0, py = 0, tx = 0, ty = 0;
   function seed() {

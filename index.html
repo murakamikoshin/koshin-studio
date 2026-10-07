@@ -15,7 +15,7 @@
 <link rel="apple-touch-icon" href="/assets/icon/icon-180.png">
 <link rel="manifest" href="/site.webmanifest">
 <script>document.documentElement.className+=" js"</script>
-<link rel="stylesheet" href="/style.css?v=ec191ed4">
+<link rel="stylesheet" href="/style.css?v=5b81520d">
 <link rel="canonical" href="https://koshinstudio.com/">
 <meta property="og:url" content="https://koshinstudio.com/">
 <meta property="og:site_name" content="Koshin Studio">
@@ -32,7 +32,7 @@
 
 <header class="site"><div class="wrap">
   <a class="logo" href="/">Koshin Studio</a>
-  <nav><a href="/works/">Works</a><a href="/notes/">Notes</a><a href="/anime/">Anime</a><a href="/about/">About</a></nav>
+  <nav><a href="/works/">Works</a><a href="/notes/">Notes</a><a href="/anime/">診断</a><a href="/about/">About</a></nav>
 </div></header>
 
 <main>
@@ -79,41 +79,10 @@
     <div class="cue" aria-hidden="true"><i></i>SCROLL</div>
   </section>
 
-  <!-- ================= 何を作るか ================= -->
-  <section class="band" id="what"><div class="wrap">
-    <h2 class="sec">作っているもの<span>2 つの分野</span></h2>
-    <div class="kinds big"><!--kinds:start-->
-      <a class="kind rv" data-delay="0" href="/works/#game">
-        <span class="kind-n">01</span>
-        <h3>Games<i>ゲーム</i></h3>
-        <p>あそぶもの</p>
-        <span class="kind-count">2 点</span>
-      </a>
-      <a class="kind rv" data-delay="70" href="/works/#app">
-        <span class="kind-n">02</span>
-        <h3>Apps<i>アプリ</i></h3>
-        <p>つかうもの</p>
-        <span class="kind-count">1 点</span>
-      </a>
-    <!--kinds:end--></div>
-  </div></section>
 
-  <!-- ================= 作り方 ================= -->
-  <section class="band" id="how"><div class="wrap">
-    <h2 class="sec">作り方<span>How</span></h2>
-    <p class="lead rv" style="max-width:34em">勘で決めない。動かして、数えて、それから直す。</p>
-    <ol class="steps">
-      <li class="rv"><b>01</b><div><h3>通しで作る</h3>
-        <p>設計から絵、音、サーバーまで一人で通します。間に人が入らないぶん、直したいところはその場で直せます。</p></div></li>
-      <li class="rv" data-delay="60"><b>02</b><div><h3>測る手を先に用意する</h3>
-        <p>釣り合いを直す前に、測る仕掛けを作ります。自動で何百回も動かして、どこで詰まるかを数字で見る。勘で三回いじって確かめるより、ずっと速くて確かです。</p></div></li>
-      <li class="rv" data-delay="120"><b>03</b><div><h3>出したあとも数える</h3>
-        <p>出して終わりにしません。直した前と後を同じ物差しで比べて、数字が動かなければ「直した」とは言いません。</p></div></li>
-    </ol>
-    <p class="rv" data-delay="160" style="margin-top:26px">
-      <a class="btn ghost" href="/notes/anago/">測って直した記録を読む</a>
-    </p>
-  </div></section>
+
+
+
 
   <!-- ================= 作ったもの ================= -->
   <section class="band" id="works-teaser"><div class="wrap">
@@ -160,6 +129,7 @@
     <p class="rv" style="margin-top:26px"><a class="btn ghost" href="/works/">Works をすべて見る</a></p>
   </div></section>
 
+
   <!-- ================= 記録 ================= -->
   <section class="band" id="notes-teaser"><div class="wrap">
     <h2 class="sec">制作の記録<span>Notes</span></h2>
@@ -174,18 +144,44 @@
       <div><h3>広告の間隔を、回数ではなく時間で測る</h3><p>「5プレイに一本」をやめて「前の広告から7分」に変えた理由と、変えたあとの動きの記録。書きながら、一戦の長さが分かっていないことに気づいた。</p>
       <div class="tags"><span class="tag">すし積む</span></div></div>
     </a></li>
+    <li class="rv" data-delay="140"><a class="note-row" href="/notes/u2028/">
+      <time datetime="2026-10-07">2026.10.07</time>
+      <div><h3>JSONLを読んだら壊れた：原因は、見えない改行文字だった</h3><p>あらすじに紛れた U+2028 のせいで、JSON が壊れた。splitlines() と split('\n') の違いを、実データの数字で確かめた記録。</p>
+      <div class="tags"><span class="tag">ガチアニメ診断</span></div></div>
+    </a></li>
     <!--notes:end--></ul>
     <p class="rv" style="margin-top:26px"><a class="btn ghost" href="/notes/">Notes をすべて読む</a></p>
   </div></section>
 
+
+  <!-- ================= 作り方 ================= -->
+  <section class="band" id="how"><div class="wrap">
+    <h2 class="sec">作り方<span>How</span></h2>
+    <p class="lead rv" style="max-width:34em">勘で決めない。動かして、数えて、それから直す。</p>
+    <ol class="steps">
+      <li class="rv"><b>01</b><div><h3>通しで作る</h3>
+        <p>設計から絵、音、サーバーまで一人で通します。間に人が入らないぶん、直したいところはその場で直せます。</p></div></li>
+      <li class="rv" data-delay="60"><b>02</b><div><h3>測る手を先に用意する</h3>
+        <p>釣り合いを直す前に、測る仕掛けを作ります。自動で何百回も動かして、どこで詰まるかを数字で見る。勘で三回いじって確かめるより、ずっと速くて確かです。</p></div></li>
+      <li class="rv" data-delay="120"><b>03</b><div><h3>出したあとも数える</h3>
+        <p>出して終わりにしません。直した前と後を同じ物差しで比べて、数字が動かなければ「直した」とは言いません。</p></div></li>
+    </ol>
+    <p class="rv" data-delay="160" style="margin-top:26px">
+      <a class="btn ghost" href="/notes/anago/">測って直した記録を読む</a>
+    </p>
+  </div></section>
+
+  <!-- ================= ガチアニメ診断の読みもの ================= -->
+  <section class="band" id="anime-teaser"><div class="wrap">
+    <h2 class="sec">診断の読みもの<span>Guide</span></h2>
+    <p class="lead rv" style="max-width:34em">ガチアニメ診断が、アニメの好みを何で測っているのか。6つの軸の解説と、64タイプの一覧です。</p>
+    <p class="rv"><a class="btn ghost" href="/anime/">診断の読みものへ</a><a class="btn ghost" data-play="shindananime" href="/app/shindananime/">診断してみる</a></p>
+  </div></section>
+
   <!-- ================= 締め ================= -->
   <section class="band closing"><div class="wrap">
-    <h2 class="closing-line rv">つくる。<br>ためす。<br><b>数える。</b></h2>
-    <p class="rv" style="max-width:30em;color:var(--muted)">Koshin Studio は、ひとりで作って、試して、書く場所です。作ったものと、作る途中で測ったことの記録を置いています。</p>
-    <p class="rv" style="margin-top:34px">
-      <a class="btn" href="/anime/">ガチアニメ診断の読みもの</a>
-      <a class="btn ghost" href="/about/">About</a>
-    </p>
+    <p class="rv" style="max-width:32em;color:var(--muted)">Koshin Studio は、ひとりで作って、試して、書く場所です。作ったものと、作る途中で測ったことの記録を置いています。</p>
+    <p class="rv" style="margin-top:26px"><a class="btn ghost" href="/about/">About</a></p>
   </div></section>
 
 </main>
@@ -199,6 +195,6 @@
 <script src="/vendor/gsap.min.js?v=9396f256" defer></script>
 <script src="/vendor/ScrollTrigger.min.js?v=05ca5ad8" defer></script>
 <script src="/vendor/lenis.min.js?v=daec1872" defer></script>
-<script src="/motion.js?v=48727315" defer></script>
+<script src="/motion.js?v=460aa073" defer></script>
 </body>
 </html>

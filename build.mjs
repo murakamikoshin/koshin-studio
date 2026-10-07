@@ -75,7 +75,7 @@ const head = (title, desc, extra = '') => `<!doctype html>
 
 <header class="site"><div class="wrap">
   <a class="logo" href="/">Koshin Studio</a>
-  <nav><a href="/works/">Works</a><a href="/notes/">Notes</a><a href="/anime/">Anime</a><a href="/about/">About</a></nav>
+  <nav><a href="/works/">Works</a><a href="/notes/">Notes</a><a href="/anime/">診断</a><a href="/about/">About</a></nav>
 </div></header>
 `;
 const socialHtml = (conf.social || []).map((x) =>
@@ -184,10 +184,10 @@ const writeAnime = (rel, html) => {
 /* 入口 */
 const featured = ['RDCP-VM', 'FHSA-TL', 'FDCA-VM', 'RHSP-TL'].map((c) => typeByCode[c]);
 writeAnime('/anime/index.html',
-  head('Anime — ガチアニメ診断の読みもの：6つの軸と64タイプ — Koshin Studio',
+  head('診断 — ガチアニメ診断の読みもの：6つの軸と64タイプ — Koshin Studio',
        'ガチアニメ診断の解説。6つの軸の意味、64タイプの二つ名と特徴、タイプごとに近いアニメ作品をまとめています。') +
 `<main><div class="wrap">
-  <h1>Anime</h1>
+  <h1>診断</h1>
   <div class="rule"></div>
   <p class="lead">ガチアニメ診断の読みもの。<br>6つの軸と64タイプが、それぞれ何を表しているかを書いています。</p>
 
@@ -362,7 +362,7 @@ const kindHtml = kindKeys.map((k, i) => {
 const worksTeaser = works.slice(0, 3).map(workCard).join('\n');
 
 /* 記録の抜粋 */
-const noteTeaser = notes.slice(0, 2).map(noteRow).join('\n');
+const noteTeaser = notes.slice(0, 3).map(noteRow).join('\n');
 
 let home = readFileSync(here + '/index.html', 'utf8');
 const put = (key, body) => {
@@ -515,14 +515,14 @@ function ldFor(file, url) {
       crumbs([['Koshin Studio', '/'], ['About', '/about/']]),
     ];
   }
-  if (rel === '/anime/index.html') return [page('Anime — ガチアニメ診断の読みもの'), crumbs([['Koshin Studio', '/'], ['Anime', '/anime/']])];
-  if (rel === '/anime/axes/index.html') return [page('6つの軸'), crumbs([['Koshin Studio', '/'], ['Anime', '/anime/'], ['6つの軸', '/anime/axes/']])];
-  if (rel === '/anime/types/index.html') return [page('64タイプ一覧'), crumbs([['Koshin Studio', '/'], ['Anime', '/anime/'], ['64タイプ', '/anime/types/']])];
+  if (rel === '/anime/index.html') return [page('診断 — ガチアニメ診断の読みもの'), crumbs([['Koshin Studio', '/'], ['診断', '/anime/']])];
+  if (rel === '/anime/axes/index.html') return [page('6つの軸'), crumbs([['Koshin Studio', '/'], ['診断', '/anime/'], ['6つの軸', '/anime/axes/']])];
+  if (rel === '/anime/types/index.html') return [page('64タイプ一覧'), crumbs([['Koshin Studio', '/'], ['診断', '/anime/'], ['64タイプ', '/anime/types/']])];
   const tm = rel.match(/^\/anime\/types\/([^/]+)\/index\.html$/);
   if (tm && typeByCode[tm[1].toUpperCase()]) {
     const t = typeByCode[tm[1].toUpperCase()];
     return [page(t.code + '「' + t.nickname + '」'),
-      crumbs([['Koshin Studio', '/'], ['Anime', '/anime/'], ['64タイプ', '/anime/types/'], [t.code, typeUrl(t.code)]])];
+      crumbs([['Koshin Studio', '/'], ['診断', '/anime/'], ['64タイプ', '/anime/types/'], [t.code, typeUrl(t.code)]])];
   }
   if (rel === '/privacy/index.html') {
     return [page('あつかい（プライバシー）'),
@@ -559,7 +559,7 @@ for (const file of pages) {
   let html = readFileSync(file, 'utf8');
   /* 脚の SNS 欄と、広告の枠を差し替える（data/site.json が元） */
   html = html.replace(/<header class="site"><div class="wrap">\s*<a class="logo" href="\/">Koshin Studio<\/a>\s*<nav>[\s\S]*?<\/nav>/,
-    '<header class="site"><div class="wrap">\n  <a class="logo" href="/">Koshin Studio</a>\n  <nav><a href="/works/">Works</a><a href="/notes/">Notes</a><a href="/anime/">Anime</a><a href="/about/">About</a></nav>');
+    '<header class="site"><div class="wrap">\n  <a class="logo" href="/">Koshin Studio</a>\n  <nav><a href="/works/">Works</a><a href="/notes/">Notes</a><a href="/anime/">診断</a><a href="/about/">About</a></nav>');
   html = html.replace(/(<footer class="site"><div class="wrap">[\s\S]*?)<nav>[\s\S]*?<\/nav>(\s*<\/div><\/footer>)/,
     '$1<nav><a href="/about/">About</a><a href="/privacy/">あつかい</a></nav>$2');
   html = html.replace(/<div class="sns-row">[\s\S]*?<\/div>/g, `<div class="sns-row">${socialHtml}</div>`);
@@ -591,9 +591,9 @@ for (const file of pages) {
     '/works/index.html': [['Works', '/works/']],
     '/notes/index.html': [['Notes', '/notes/']],
     '/about/index.html': [['About', '/about/']],
-    '/anime/index.html': [['Anime', '/anime/']],
-    '/anime/axes/index.html': [['Anime', '/anime/'], ['6つの軸', '/anime/axes/']],
-    '/anime/types/index.html': [['Anime', '/anime/'], ['64タイプ', '/anime/types/']],
+    '/anime/index.html': [['診断', '/anime/']],
+    '/anime/axes/index.html': [['診断', '/anime/'], ['6つの軸', '/anime/axes/']],
+    '/anime/types/index.html': [['診断', '/anime/'], ['64タイプ', '/anime/types/']],
     '/privacy/index.html': [['あつかい', '/privacy/']],
   };
   let trail = TRAIL[rel];
@@ -601,7 +601,7 @@ for (const file of pages) {
   const nm2 = rel.match(/^\/notes\/([^/]+)\//);
   const am2 = rel.match(/^\/anime\/types\/([^/]+)\/index\.html$/);
   if (am2 && typeByCode[am2[1].toUpperCase()]) {
-    trail = [['Anime', '/anime/'], ['64タイプ', '/anime/types/'], [am2[1].toUpperCase(), '/anime/types/' + am2[1] + '/']];
+    trail = [['診断', '/anime/'], ['64タイプ', '/anime/types/'], [am2[1].toUpperCase(), '/anime/types/' + am2[1] + '/']];
   }
   if (wm2 && workBySlug[wm2[1]]) {
     const w = workBySlug[wm2[1]];

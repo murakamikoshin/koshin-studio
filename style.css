@@ -664,3 +664,11 @@ h2::after{transform-origin:left center;transition:transform 1.1s var(--ease) .1s
     header.site nav a.nav-cta{background:rgba(27,106,163,.07)}
   }
 }
+
+/* ---- 読みものでは動かさない ----
+   記事・作品・Anime・About は、開いた瞬間から全部読める。
+   浮き上がりと粒はトップだけ。 */
+body:not(.home) .js .rv,.js body:not(.home) .rv{opacity:1;transform:none;transition:none}
+body:not(.home) #motes{display:none}
+
+h1,h2,h3{text-wrap:balance}
