@@ -21,7 +21,7 @@
 <meta property="og:locale" content="ja_JP">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="alternate" type="application/rss+xml" title="Koshin Studio — Notes" href="https://koshinstudio.com/feed.xml">
-<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BlogPosting","headline":"穴子がデカすぎた話","url":"https://koshinstudio.com/notes/anago/","description":"落ち物パズルの最後の一手に、どうしても届かない。勘で直す前に、自動プレイで三百戦以上の統計を取って原因を突き止めた記録。","datePublished":"2026-09-07","dateModified":"2026-09-07","inLanguage":"ja","image":"https://koshinstudio.com/assets/og/og_notes_anago.jpg","author":{"@id":"https://koshinstudio.com#studio"},"publisher":{"@id":"https://koshinstudio.com#studio"},"mainEntityOfPage":"https://koshinstudio.com/notes/anago/"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Koshin Studio","item":"https://koshinstudio.com/"},{"@type":"ListItem","position":2,"name":"Notes","item":"https://koshinstudio.com/notes/"},{"@type":"ListItem","position":3,"name":"穴子がデカすぎた話","item":"https://koshinstudio.com/notes/anago/"}]}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BlogPosting","headline":"穴子がデカすぎた話","url":"https://koshinstudio.com/notes/anago/","description":"落ち物パズルの最後の一手に、どうしても届かない。勘で直す前に、自動プレイで三百戦以上の統計を取って原因を突き止めた記録。","datePublished":"2026-09-07","dateModified":"2026-10-08","inLanguage":"ja","image":"https://koshinstudio.com/assets/og/og_notes_anago.jpg","author":{"@id":"https://koshinstudio.com#studio"},"publisher":{"@id":"https://koshinstudio.com#studio"},"mainEntityOfPage":"https://koshinstudio.com/notes/anago/"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Koshin Studio","item":"https://koshinstudio.com/"},{"@type":"ListItem","position":2,"name":"Notes","item":"https://koshinstudio.com/notes/"},{"@type":"ListItem","position":3,"name":"穴子がデカすぎた話","item":"https://koshinstudio.com/notes/anago/"}]}]}</script>
 <meta property="og:image" content="https://koshinstudio.com/assets/og/og_notes_anago.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
@@ -39,6 +39,7 @@
   <h1>穴子がデカすぎた話</h1>
   <div class="rule"></div>
   <p class="lead">すし積む 開発の記録 ／ 2026年9月</p>
+  <p class="note">2026年10月8日に追記しました。この記事の数字は<strong>9月8日の版</strong>のものです。そのあと、9月10日にもう一度、寸法と降ってくるネタを変えています（いちばん下の「その後」）。</p>
 
   <p><a href="/works/sushitsumu/">「すし積む」</a>を作り終えたあと、ひとつ引っかかっていることがありました。<strong>最後のネタ、金のすし桶に、一度も辿り着けない。</strong></p>
   <p>自分で何度遊んでも、その手前の伊勢海老すら滅多に見ない。感覚としては「穴子がデカすぎる」。でも、感覚で寸法をいじると、たいてい別のところが壊れます。まず測ることにしました。</p>
@@ -139,6 +140,19 @@
   <p>「穴子がデカすぎる」という違和感は正しかったんです。ただ、穴子を細くしただけでは終盤は動かず、本当の原因は<strong>寿司全体が桶に対して大きすぎたこと</strong>でした。一箇所を疑って直していたら、たぶん永遠に辿り着いていません。</p>
   <p>三百戦の統計を取るのにかかった時間は、合計で十分ほどです。勘で三回いじって確かめるより、ずっと速くて確かでした。</p>
 
+
+  <h2 class="rv">その後（9月10日）：もう一度、変えた</h2>
+  <p>この記事のあと、ゲームを CrazyGames に出して落ちました（くわしくは<a href="/notes/crazygames/">別の記事</a>）。見直したのは、桶の中の緊張が、審査の数分のうちに一度も起きていないことでした。コミットには、こう書いてあります。自動プレイで測ると、一戦は中央値 594 手・7分半。<strong>人が遊べば30分</strong>。桶がいつまでも埋まらず、危ない場面が最後まで来ない、と。</p>
+  <p>変えたのは、段ごとの寸法と面積比は触らずに、「合体して大きくなる感じ」を損なわずに直せる場所だけです。自動プレイで測って選びました。</p>
+  <ul>
+    <li><strong>降ってくるネタを、3種から5種に。</strong>シャリ・玉子・エビに、サーモンとマグロを足しました（出る重みは 1:1:2:3:2）。一手で積み上がる量が増えて、中央値が 594 手から 279 手になりました。上の段への到達率も上がっています。</li>
+    <li><strong>桶の形。</strong>縁を 320 から 250 に、高さを 308 から 378 に。遊ぶ場所が画面の 45% から 62% になりました。</li>
+    <li><strong>伊勢海老と金の桶を、さらに 0.89 倍。</strong>穴子から伊勢海老への面積比だけが 1.76 と飛んでいたのが、1.40 に揃いました。金の桶が二つ並ぶときの余りは 0px から 36px になり、<strong>W 金の桶</strong>（金の桶同士の合体）が、実戦で成り立つようになりました。この処理は前からあったのに、300戦で一度も出ていませんでした。</li>
+  </ul>
+  <p>一戦が半分の長さになったぶん、点も約2割下がっています（自動プレイの中央値 59,305 から 46,529）。番付のしきい値は、60戦の分位点から取り直して、前と同じ当たり方（若手 7％・中堅 28％・花板 40％・大将 17％・伝説 8％）に戻しました。W 金の桶の褒美も、8,000 から 25,000 に上げました。金の桶を一つ作るまでの合体だけで、約 34,000 点入るからです。</p>
+  <p>W 金の桶に要る手数は、無駄ゼロでも 275 手です。自動プレイは金の桶一個を理想の約 2.0 倍かけて作るので、自動プレイのままでは届きません（40戦で 0 回）。<strong>山を整えて打てる人だけが届く</strong>、という置き方にしてあります。</p>
+  <p class="note">上の「0.8 倍」の表の数字（中央値 58,741、1戦 7.7 分など）は9月8日の版のものです。いまの数字とは違います。</p>
+
   <div class="ad-slot" data-slot="footer" hidden></div>
 <!--/ad-->
 
@@ -155,9 +169,9 @@
   <div class="rule" style="margin:40px 0 22px"></div>
   <p class="eyebrow">ほかの記録</p>
   <ul class="plain">
+    <li><a href="/notes/crazygames/">CrazyGames に落ちた：理由は書かれていなかったので、撮って探した</a> — ゲームポータルの審査に「全体の品質が期待に達していない」とだけ書かれて落ちた。自分で画面を撮って見つけた四つの原因と、測って選んだ直し方の記録。</li>
     <li><a href="/notes/sushi-measure/">「山は89%で落ち着く」は誤りだった：測定のほうが間違っていた話</a> — すし積むのバランスを測りなおしたら、前の測定が落下中のネタを数えていた。大きさの階段の逆行、縦穴の桶、床のすり抜け。三つの原因と直したあとの数字。</li>
     <li><a href="/notes/adgap/">広告の間隔を、回数ではなく時間で測る</a> — 「5プレイに一本」をやめて「前の広告から7分」に変えた理由と、変えたあとの動きの記録。書きながら、一戦の長さが分かっていないことに気づいた。</li>
-    <li><a href="/notes/torecadash-ai/">「減るはず」が、二度外れた：AIへの問い合わせを削る話</a> — トレカ情報アプリで、AI への問い合わせを減らそうとした記録。45%減るはずが4.5%、配備したのに束ねが0回。数え直して見つかったことを、コミットの数字で書いた。</li>
   </ul>
 <!--/related-->
 </div></main>

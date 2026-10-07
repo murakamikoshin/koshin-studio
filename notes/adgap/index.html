@@ -21,7 +21,7 @@
 <meta property="og:locale" content="ja_JP">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="alternate" type="application/rss+xml" title="Koshin Studio — Notes" href="https://koshinstudio.com/feed.xml">
-<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BlogPosting","headline":"広告の間隔を、回数ではなく時間で測る","url":"https://koshinstudio.com/notes/adgap/","description":"「5プレイに一本」をやめて「前の広告から7分」に変えた理由と、変えたあとの動きの記録。書きながら、一戦の長さが分かっていないことに気づいた。","datePublished":"2026-10-07","dateModified":"2026-10-07","inLanguage":"ja","image":"https://koshinstudio.com/assets/og/og_notes_adgap.jpg","author":{"@id":"https://koshinstudio.com#studio"},"publisher":{"@id":"https://koshinstudio.com#studio"},"mainEntityOfPage":"https://koshinstudio.com/notes/adgap/"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Koshin Studio","item":"https://koshinstudio.com/"},{"@type":"ListItem","position":2,"name":"Notes","item":"https://koshinstudio.com/notes/"},{"@type":"ListItem","position":3,"name":"広告の間隔を、回数ではなく時間で測る","item":"https://koshinstudio.com/notes/adgap/"}]}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BlogPosting","headline":"広告の間隔を、回数ではなく時間で測る","url":"https://koshinstudio.com/notes/adgap/","description":"「5プレイに一本」をやめて「前の広告から7分」に変えた理由と、変えたあとの動きの記録。書きながら、一戦の長さが分かっていないことに気づいた。","datePublished":"2026-10-07","dateModified":"2026-10-08","inLanguage":"ja","image":"https://koshinstudio.com/assets/og/og_notes_adgap.jpg","author":{"@id":"https://koshinstudio.com#studio"},"publisher":{"@id":"https://koshinstudio.com#studio"},"mainEntityOfPage":"https://koshinstudio.com/notes/adgap/"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Koshin Studio","item":"https://koshinstudio.com/"},{"@type":"ListItem","position":2,"name":"Notes","item":"https://koshinstudio.com/notes/"},{"@type":"ListItem","position":3,"name":"広告の間隔を、回数ではなく時間で測る","item":"https://koshinstudio.com/notes/adgap/"}]}]}</script>
 <meta property="og:image" content="https://koshinstudio.com/assets/og/og_notes_adgap.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
@@ -73,13 +73,14 @@
 
   <h2 class="rv">書きながら気づいたこと</h2>
   <p>「7分」をどう決めたかは、コミットには残っていません。ここは正直に、根拠は記録に無い、と書いておきます。</p>
-  <p>ひとつ気になる数字があります。<a href="/notes/anago/">穴子の記事</a>で測った、自動プレイの1戦の長さは<strong>中央値 7.7 分</strong>でした。これだと、7分の間隔は、ほぼ「毎戦」に近くなります。コミットにある「一戦は30分にもなる」とは、だいぶ違います。</p>
+  <p>いちばん気になるのは、一戦の長さです。コミットにある「一戦は30分にもなる」は、あとのコミット（9月10日）に、<strong>「自動プレイでは中央値 7分半、人が遊べば30分」</strong>と書かれていました。つまり、30分は見立てで、<strong>実際に測った数字ではありません</strong>。自動プレイの 7分半（<a href="/notes/anago/">穴子の記事</a>の 7.7 分）のほうが測った値です。</p>
+  <p>しかも、9月10日にゲームの一戦は<strong>半分の長さ</strong>に変わりました（<a href="/notes/anago/">穴子の記事の「その後」</a>）。そのため、前の表は古くなっています。計算し直すと、こうなります（自動プレイの一戦は、7.7分の半分で約3.8分と置きました）。</p>
   <div class="scroll rv"><table>
     <tr><th>一戦の長さ</th><th class="n">5プレイに一本（旧）</th><th class="n">7分に一本（新）</th></tr>
-    <tr><td>7.7 分（自動プレイの中央値）</td><td class="n">約38分に一本</td><td class="n">ほぼ毎戦</td></tr>
-    <tr><td>30 分（コミットの言い方）</td><td class="n">2時間半に一本</td><td class="n">毎戦</td></tr>
+    <tr><td>約3.8 分（自動プレイ、半分にしたあと）</td><td class="n">約19分に一本</td><td class="n">およそ2戦に一本</td></tr>
+    <tr><td>約15 分（「人は30分」の半分）</td><td class="n">約75分に一本</td><td class="n">毎戦</td></tr>
   </table></div>
-  <p>自動プレイは「合体を最優先して、山が落ち着いてから置く」程度の打ち手で、人間の遊び方とは違います。本当の人が一戦にどれだけかけているかは、いまは計測していないので分かりません。<strong>広告を実際に出す前に、一戦の長さを測るほうが先</strong>かもしれません。</p>
+  <p>人の一戦の長さは、いまも測っていません。7分が長いのか短いのかは、これが分からないと決められません。<strong>広告を出す前に、一戦の長さを測るほうが先</strong>です。</p>
 
   <h2 class="rv">分かったこと</h2>
   <blockquote>回数で数えると、遊び方で広告の頻度が大きくぶれる。時間で数えれば、ぶれない。</blockquote>
@@ -100,9 +101,9 @@
   <div class="rule" style="margin:40px 0 22px"></div>
   <p class="eyebrow">ほかの記録</p>
   <ul class="plain">
+    <li><a href="/notes/crazygames/">CrazyGames に落ちた：理由は書かれていなかったので、撮って探した</a> — ゲームポータルの審査に「全体の品質が期待に達していない」とだけ書かれて落ちた。自分で画面を撮って見つけた四つの原因と、測って選んだ直し方の記録。</li>
     <li><a href="/notes/sushi-measure/">「山は89%で落ち着く」は誤りだった：測定のほうが間違っていた話</a> — すし積むのバランスを測りなおしたら、前の測定が落下中のネタを数えていた。大きさの階段の逆行、縦穴の桶、床のすり抜け。三つの原因と直したあとの数字。</li>
     <li><a href="/notes/anago/">穴子がデカすぎた話</a> — 落ち物パズルの最後の一手に、どうしても届かない。勘で直す前に、自動プレイで三百戦以上の統計を取って原因を突き止めた記録。</li>
-    <li><a href="/notes/torecadash-ai/">「減るはず」が、二度外れた：AIへの問い合わせを削る話</a> — トレカ情報アプリで、AI への問い合わせを減らそうとした記録。45%減るはずが4.5%、配備したのに束ねが0回。数え直して見つかったことを、コミットの数字で書いた。</li>
   </ul>
 <!--/related-->
 </div>

@@ -494,7 +494,7 @@ function ldFor(file, url) {
     const nn = noteBySlug[nm[1]];
     return [
       { '@type': 'BlogPosting', headline: nn.title, url: SITE + nn.url, description: nn.blurb,
-        datePublished: nn.date, dateModified: nn.date, inLanguage: 'ja',
+        datePublished: nn.date, dateModified: nn.updated || nn.date, inLanguage: 'ja',
         image: ogFor(rel),
         author: { '@id': SITE + '#studio' }, publisher: { '@id': SITE + '#studio' },
         mainEntityOfPage: SITE + nn.url },
