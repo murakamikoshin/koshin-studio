@@ -7,6 +7,13 @@
   <language>ja</language>
   <atom:link href="https://koshinstudio.com/feed.xml" rel="self" type="application/rss+xml"/>
   <item>
+    <title>「連」だけが壊れて出た：配信先で文字化けしたとき、ファイルは正しかった</title>
+    <link>https://koshinstudio.com/notes/ascii-text/</link>
+    <guid isPermaLink="true">https://koshinstudio.com/notes/ascii-text/</guid>
+    <pubDate>Wed, 07 Oct 2026 15:00:00 GMT</pubDate>
+    <description>ゲームポータルのプレビューで「大連鎖！」の「連」だけが壊れた。ファイルのバイト列は正しく、原因は特定できなかった。ASCII 表記に逃がした経緯と、14言語の枠の検査の記録。</description>
+  </item>
+  <item>
     <title>「変なところから出る」を三段階で直した：押すと弾けるロゴの記録</title>
     <link>https://koshinstudio.com/notes/logo-pop/</link>
     <guid isPermaLink="true">https://koshinstudio.com/notes/logo-pop/</guid>

@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>「連」だけが壊れて出た：配信先で文字化けしたとき、ファイルは正しかった — すし積む 開発の記録 — Koshin Studio</title>
+<meta name="description" content="ゲームポータルのプレビューで「大連鎖！」の「連」だけが壊れた。ファイルのバイト列は正しく、原因は特定できなかった。ASCII 表記に逃がした経緯と、14言語の枠の検査の記録。">
+<meta property="og:title" content="「連」だけが壊れて出た：配信先で文字化けしたとき、ファイルは正しかった">
+<meta property="og:description" content="文字化けの原因が分からないまま、影響を受けない形にした記録。">
+<meta property="og:type" content="article">
+<meta name="theme-color" content="#fbfaf7">
+<link rel="icon" href="/favicon.ico?v=1697d589" sizes="48x48">
+<link rel="icon" href="/favicon.svg?v=b9d7922f" type="image/svg+xml" sizes="any">
+<link rel="apple-touch-icon" href="/assets/icon/icon-180.png?v=84e7f0e6">
+<link rel="manifest" href="/site.webmanifest">
+<script>document.documentElement.className+=" js"</script>
+<link rel="stylesheet" href="/style.css?v=54ae5fe6">
+<link rel="canonical" href="https://koshinstudio.com/notes/ascii-text/">
+<meta property="og:url" content="https://koshinstudio.com/notes/ascii-text/">
+<meta property="og:site_name" content="Koshin Studio">
+<meta property="og:locale" content="ja_JP">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="alternate" type="application/rss+xml" title="Koshin Studio — Notes" href="https://koshinstudio.com/feed.xml">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BlogPosting","headline":"「連」だけが壊れて出た：配信先で文字化けしたとき、ファイルは正しかった","url":"https://koshinstudio.com/notes/ascii-text/","description":"ゲームポータルのプレビューで「大連鎖！」の「連」だけが壊れた。ファイルのバイト列は正しく、原因は特定できなかった。ASCII 表記に逃がした経緯と、14言語の枠の検査の記録。","datePublished":"2026-10-08","dateModified":"2026-10-08","inLanguage":"ja","image":"https://koshinstudio.com/assets/og/og_notes_ascii-text.jpg","author":{"@id":"https://koshinstudio.com#studio"},"publisher":{"@id":"https://koshinstudio.com#studio"},"mainEntityOfPage":"https://koshinstudio.com/notes/ascii-text/"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Koshin Studio","item":"https://koshinstudio.com/"},{"@type":"ListItem","position":2,"name":"Notes","item":"https://koshinstudio.com/notes/"},{"@type":"ListItem","position":3,"name":"「連」だけが壊れて出た：配信先で文字化けしたとき、ファイルは正しかった","item":"https://koshinstudio.com/notes/ascii-text/"}]}]}</script>
+<meta property="og:image" content="https://koshinstudio.com/assets/og/og_notes_ascii-text.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
+</head>
+<body>
+<canvas id="motes"></canvas>
+
+<header class="site"><div class="wrap">
+  <a class="logo" href="/">Koshin Studio</a>
+  <nav><a href="/works/">Works</a><a href="/notes/">Notes</a><a href="/about/">About</a></nav>
+</div></header>
+
+<main><div class="wrap">
+  <nav class="crumbs" aria-label="現在地"><a href="/">Koshin Studio</a><i aria-hidden="true">›</i><a href="/notes/">Notes</a><i aria-hidden="true">›</i><span aria-current="page">「連」だけが壊れて出た：配信先で文字化けしたとき、ファイルは正しかった</span></nav>
+  <h1>「連」だけが壊れて出た：配信先で文字化けしたとき、ファイルは正しかった</h1>
+  <div class="rule"></div>
+  <p class="lead">すし積む 開発の記録 ／ 2026年10月</p>
+
+  <p><a href="/works/sushitsumu/">すし積む</a>を、ゲームポータルのプレビューで開いたとき、「大連鎖！」の「連」の字だけが、壊れて出る、という報告がありました。ファイルを調べると、<strong>文字は、ちゃんと正しく入っていました</strong>。原因が分からないまま、「壊れても困らない形」にして、先に進んだ経緯を、コミットの記録で書きます。</p>
+
+  <h2 class="rv">「連」だけが、壊れる</h2>
+  <p>報告は、CrazyGames のプレビューからでした。ゲームの中で、連鎖が起きると、画面に「大連鎖！」と出ます。その「連」が、文字として壊れて表示される。ほかの字は、普通に出ています。</p>
+  <p>まず、ゲームのファイルそのものを調べました。<strong>バイト列は、正しい</strong>ものでした。つまり、手元のファイルは壊れていません。壊れているのは、配信先に届くまでの<strong>受け渡しの途中</strong>、あるいは、配信先での読み取りのどこか、ということになります。ただ、コミットには、どこで壊れたのかは、書かれていません。<strong>原因は、特定できていません</strong>。</p>
+
+  <h2 class="rv">原因が分からないときの、直し方</h2>
+  <p>原因の場所が、自分の手の外にあるなら、<strong>どこで壊れても、影響が出ない形</strong>にしておく、という方針にしました。</p>
+  <ul>
+    <li><strong>表示に使う文字を、ASCII だけの表記に置き換える。</strong>日本語の文字を、そのままファイルに書かず、スクリプトの文字列は <code>\uXXXX</code>、HTML の本文と属性は <code>&amp;#xXXXX;</code> の形にします。多バイトの文字が途中で壊れても、ASCII だけなら、壊れようがありません。</li>
+    <li><strong>置き換えは、道具（<code>tools/asciify.mjs</code>）に任せる。</strong>日本語のまま書き直したあとで、この道具を通せば整います。何度通しても、同じ結果になります。コメントは、読めるように日本語のまま残します（壊れても、画面には出ないからです）。</li>
+    <li><strong>書体の指定の後ろに、漢字を持つ書体を足す。</strong>書体に、その字が無くて、字が出ない、という筋道も、塞ぎました。</li>
+  </ul>
+
+  <h2 class="rv">同じ点検で見つかった、ほかの二つ</h2>
+  <ul>
+    <li><strong>絵文字が、端末によって出ない。</strong>地球と携帯電話の絵文字は、端末によっては表示されません。図形（SVG）で描き直しました。</li>
+    <li><strong>連鎖中に浮かぶ文字が、重なって読めない。</strong>近い位置に出る文字は、上へ逃がすようにしました。</li>
+  </ul>
+
+  <h2 class="rv">翌日：十四の言語で、枠に収まるか</h2>
+  <p>このゲームは、14 の言語に対応しています。訳文は、日本語より長くなることが多く、PC の脇の柱（幅 192px）や、札の中で、溢れやすくなります。そこで、言語を順に切り替えて、読み直して、<strong>親の枠からはみ出した所と、横に流れた所を数える</strong>道具を足しました。</p>
+  <p>結果は、<strong>14 言語 × 2 画面で、はみ出しなし</strong>です。字が壊れる問題と同じで、「溢れていない」ことも、目で見るより、数えるほうが確かです。</p>
+
+  <h2 class="rv">分かったこと</h2>
+  <blockquote>原因が分からないときは、原因の場所に、頼らない形にする。</blockquote>
+  <ul>
+    <li><strong>ファイルが正しくても、画面が正しいとは限らない。</strong>途中の受け渡しや、配信先の読み取りは、自分では直せません。</li>
+    <li><strong>分からないことは、分からないと、記録しておく。</strong>今回の「連」が、なぜ壊れたのかは、いまも特定できていません。ASCII 化は、原因を直したのではなく、<strong>原因に、影響されない形にした</strong>だけです。</li>
+    <li><strong>見た目の崩れは、機械に数えさせる。</strong>14 言語を、目で全部確かめるのは、現実的ではありません。</li>
+  </ul>
+  <p class="note">この記事は、コミット（2026年9月7日、9月8日）の記録から書きました。「連」が壊れた原因は、記録に残っていないため、書いていません。</p>
+
+  <div class="ad-slot" data-slot="footer" hidden></div>
+<!--/ad-->
+
+  <div class="rule" style="margin:40px 0 22px"></div>
+  <p class="eyebrow">この話に出てくるもの</p>
+  <ul class="plain">
+    <li><a href="/works/sushitsumu/">すし積む（作品ページ）</a> — 落ち物パズルのゲーム</li>
+    <li><a href="/notes/crazygames/">CrazyGames に落ちた</a> — 同じポータルの、別の記録</li>
+  </ul>
+  <p style="margin-top:32px"><a class="btn" data-play="sushitsumu" href="/play/sushitsumu/">遊ぶ</a><a class="btn ghost" href="/works/sushitsumu/">作品ページへ</a></p>
+
+<!--related-->
+  <div class="rule" style="margin:40px 0 22px"></div>
+  <p class="eyebrow">ほかの記録</p>
+  <ul class="plain">
+    <li><a href="/notes/ranking-free-tier/">無料枠を半分しか使わない番付にした：呼び出し5回を2回に</a> — 番付サーバーが無料枠を使う量を半分にした。一人が遊ぶ一回の呼び出しは5回から2回、読んだ行は421から221へ。順位の数え方と、前置きの呼び出しをなくした経緯。</li>
+    <li><a href="/notes/crazygames/">CrazyGames に落ちた：理由は書かれていなかったので、撮って探した</a> — ゲームポータルの審査に「全体の品質が期待に達していない」とだけ書かれて落ちた。自分で画面を撮って見つけた四つの原因と、測って選んだ直し方の記録。</li>
+    <li><a href="/notes/sushi-measure/">「山は89%で落ち着く」は誤りだった：測定のほうが間違っていた話</a> — すし積むのバランスを測りなおしたら、前の測定が落下中のネタを数えていた。大きさの階段の逆行、縦穴の桶、床のすり抜け。三つの原因と直したあとの数字。</li>
+  </ul>
+<!--/related-->
+</div>
+</main>
+
+<footer class="site"><div class="wrap">
+  <span>© 2026 Koshin Studio</span>
+  <div class="sns-row"></div>
+  <nav><a href="/about/">About</a><a href="/privacy/">あつかい</a></nav>
+</div></footer>
+<script src="/vendor/gsap.min.js?v=9396f256" defer></script>
+<script src="/vendor/ScrollTrigger.min.js?v=05ca5ad8" defer></script>
+<script src="/motion.js?v=a977b3a8" defer></script>
+</body>
+</html>

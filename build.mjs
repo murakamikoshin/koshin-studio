@@ -292,6 +292,7 @@ ${animeAxes.map((a) => `
 </div></main>` + foot);
 
 /* 64 タイプの一覧。世界観×後味の 4 グループに分ける */
+const codeEx = typeByCode['RDCP-VM'];
 const groups = [['R', 'D'], ['R', 'H'], ['F', 'D'], ['F', 'H']].map(([w, m]) => ({
   title: `${animeAxes[0][w === 'R' ? 'pos' : 'neg'].name} × ${animeAxes[1][m === 'D' ? 'pos' : 'neg'].name}`,
   list: animeTypes.filter((t) => t.letters[0] === w && t.letters[1] === m),
@@ -303,6 +304,14 @@ writeAnime('/anime/types/index.html',
   <h1>64タイプ</h1>
   <div class="rule"></div>
   <p class="lead">6つの軸の組み合わせで、64タイプ。<br>世界観と後味で4つに分けて並べています。</p>
+
+  <h2 class="rv">タイプコードの読み方</h2>
+  <p class="rv">タイプコードは、6つの軸それぞれで、どちら側に寄ったかを、1文字ずつ並べたものです。たとえば <code>${codeEx.code}</code>（二つ名「${esc(codeEx.nickname)}」）は、次の6文字でできています。</p>
+  <div class="scroll rv"><table>
+    <tr><th>軸</th><th>文字</th><th>寄った側</th></tr>
+${codeEx.letters.map((l, i) => { const ax = animeAxes[i]; const side = l === ax.pos.l ? ax.pos : ax.neg; return `    <tr><td>${esc(ax.label)}</td><td><code>${esc(l)}</code></td><td>${esc(side.name)}：${esc(side.desc)}</td></tr>`; }).join('\n')}
+  </table></div>
+  <p class="rv">6つの軸は、それぞれ2択です。2の6乗で、<strong>64タイプ</strong>になります。診断の仕組みは<a href="/anime/guide/">アニメ診断の選び方</a>に、軸の意味は<a href="/anime/axes/">6つの軸</a>に書いています。</p>
 ${groups.map((g) => `
   <h2 class="rv">${esc(g.title)}</h2>
   <div class="type-list rv">${g.list.map(typeChip).join('')}</div>`).join('\n')}
@@ -418,7 +427,7 @@ const kindHtml = kindKeys.map((k, i) => {
 /* 表紙に出す作ったもの。/works/ と同じ札をそのまま使うので、
    作品が増えたら表紙もそのまま育つ。一つの作品を大写しにすると、
    その一つのための場所に見えてしまう */
-const worksTeaser = works.slice(0, 3).map(workCard).join('\n');
+const worksTeaser = works.slice(0, 4).map(workCard).join('\n');
 
 /* 記録の抜粋 */
 const noteTeaser = notes.slice(0, 3).map(noteRow).join('\n');
@@ -529,7 +538,7 @@ function ldFor(file, url) {
            入れるのは実態と合わない）ので、works.json の category が
            あればそちらを使う。無ければ今まで通りの決め打ち */
         applicationCategory: w.category || (w.kind === 'game' ? 'GameApplication' : 'UtilitiesApplication'),
-        operatingSystem: 'Web', datePublished: w.year,
+        operatingSystem: w.os || 'Web', ...(w.status === '公開中' ? { datePublished: w.year } : {}),
         ...(w.kind === 'game'
           ? { gamePlatform: 'Web browser', playMode: 'SinglePlayer',
               ...(w.genre && w.genre.length ? { genre: w.genre } : {}) }
