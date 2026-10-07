@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>確認できなかったときに、通していた：「fail-open」が転売品を招いた話 — トレカダッシュ 開発の記録 — Koshin Studio</title>
+<meta name="description" content="「定価を確認できなかったら通す」という設計に、検索の1日上限という盲点があった。「知らなかった」と「調べられなかった」を区別して直した記録。">
+<meta property="og:title" content="確認できなかったときに、通していた：「fail-open」が転売品を招いた話">
+<meta property="og:description" content="「確認できなかったら通す」設計の盲点を直した記録。">
+<meta property="og:type" content="article">
+<meta name="theme-color" content="#fbfaf7">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/assets/icon/icon-180.png">
+<link rel="manifest" href="/site.webmanifest">
+<script>document.documentElement.className+=" js"</script>
+<link rel="stylesheet" href="/style.css?v=e8482157">
+<link rel="canonical" href="https://koshinstudio.com/notes/fail-open/">
+<meta property="og:url" content="https://koshinstudio.com/notes/fail-open/">
+<meta property="og:site_name" content="Koshin Studio">
+<meta property="og:locale" content="ja_JP">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="alternate" type="application/rss+xml" title="Koshin Studio — Notes" href="https://koshinstudio.com/feed.xml">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BlogPosting","headline":"確認できなかったときに、通していた：「fail-open」が転売品を招いた話","url":"https://koshinstudio.com/notes/fail-open/","description":"「定価を確認できなかったら通す」という設計に、検索の1日上限という盲点があった。「知らなかった」と「調べられなかった」を区別して直した記録。","datePublished":"2026-10-08","dateModified":"2026-10-08","inLanguage":"ja","image":"https://koshinstudio.com/assets/og/og_notes_fail-open.jpg","author":{"@id":"https://koshinstudio.com#studio"},"publisher":{"@id":"https://koshinstudio.com#studio"},"mainEntityOfPage":"https://koshinstudio.com/notes/fail-open/"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Koshin Studio","item":"https://koshinstudio.com/"},{"@type":"ListItem","position":2,"name":"Notes","item":"https://koshinstudio.com/notes/"},{"@type":"ListItem","position":3,"name":"確認できなかったときに、通していた：「fail-open」が転売品を招いた話","item":"https://koshinstudio.com/notes/fail-open/"}]}]}</script>
+<meta property="og:image" content="https://koshinstudio.com/assets/og/og_notes_fail-open.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+</head>
+<body>
+<canvas id="motes"></canvas>
+
+<header class="site"><div class="wrap">
+  <a class="logo" href="/">Koshin Studio</a>
+  <nav><a href="/works/">Works</a><a href="/notes/">Notes</a><a href="/about/">About</a></nav>
+</div></header>
+
+<main><div class="wrap">
+  <nav class="crumbs" aria-label="現在地"><a href="/">Koshin Studio</a><i aria-hidden="true">›</i><a href="/notes/">Notes</a><i aria-hidden="true">›</i><span aria-current="page">確認できなかったときに、通していた：「fail-open」が転売品を招いた話</span></nav>
+  <h1>確認できなかったときに、通していた：「fail-open」が転売品を招いた話</h1>
+  <div class="rule"></div>
+  <p class="lead">トレカダッシュ 開発の記録 ／ 2026年10月</p>
+
+  <p>iOS アプリ「トレカダッシュ」で、「Amazon に転売の価格がたくさん入ってきている」という報告が、アプリ内の不具合報告から 3 件届きました。うち 1 件は、¥79,800 の、明らかな転売品でした。原因は、<strong>わざと入れていた「確認できなかったら通す」という設計の、盲点</strong>でした。HANDOFF とコミット（2026年7月30日）の記録で書きます。</p>
+  <p class="note">このサイトには、トレカダッシュの作品ページはまだありません。ここに書くのは、開発の記録です。</p>
+
+  <h2 class="rv">価格の関門と、「通す」設計</h2>
+  <p>アプリは、通販サイト（楽天市場、Yahoo!ショッピング、Amazon など）の出品を拾って、フィードに出します。そのとき、<strong>出品価格が、商品の定価から見て妥当か</strong>を調べる「価格の関門」があります。定価を、AI（Web 検索つき）に調べさせて、極端に高い転売品を弾く仕組みです。</p>
+  <p>この関門には、<strong>「定価を確認できなかった場合は、審査せずに通す」</strong>という動きがありました。これは意図した設計です。AI が本当に定価を知らない商品を、確認できないだけで除外してしまうと、本物の出品まで消してしまうからです。いわゆる <strong>fail-open</strong>（失敗したら開く＝通す）です。</p>
+
+  <h2 class="rv">盲点：検索の上限に達した場合も、同じ道を通っていた</h2>
+  <p>AI の Web 検索には、1 日 300 回の上限があります（想定外の費用を防ぐための回路遮断器）。ところが、関門は、定価を確認できなかった<strong>理由を、区別していませんでした</strong>。</p>
+  <ul>
+    <li>AI が「この商品の定価は知らない」と答えた。</li>
+    <li>1 日の上限に達して、<strong>確認すること自体ができなかった</strong>。</li>
+  </ul>
+  <p>この二つが、どちらも「定価不明 → 通す」の同じ道を通っていました。前者は意図どおりです。後者は、「調べる前に、道が閉まっていた」だけなのに、<strong>関門が、素通しになっていた</strong>のです。</p>
+
+  <h2 class="rv">穴が、実害になった理由</h2>
+  <p>この穴は、前の変更（Amazon の対象を広げた回）をきっかけに表に出ました。対象を広げたことで、新しく価格を確認する必要がある商品が、一気に増えました。その結果、1 日の上限に、頻繁に達するようになった。上限に達した間は、関門が素通しになって、転売品が大量に混ざりました。</p>
+  <p>さらに、二次被害がありました。定価が分からなかった結果は、理由を問わず<strong>24 時間キャッシュされる</strong>設計でした。そのため、一度上限に当たった商品は、<strong>上限が解除されたあとも、最大 24 時間、素通しのまま</strong>になります。</p>
+
+  <h2 class="rv">直し方：理由を区別する</h2>
+  <p>専用の目印（<code>QUOTA_EXCEEDED</code>）を作って、二つを区別できるようにしました。</p>
+  <div class="scroll rv"><table>
+    <tr><th>状況</th><th>関門の動き</th></tr>
+    <tr><td>AI が本当に定価を知らなかった（null）</td><td>これまでどおり通す（fail-open のまま）</td></tr>
+    <tr><td>1 日の上限で、確認自体ができなかった（QUOTA_EXCEEDED）</td><td><strong>除外する</strong>（fail-close）</td></tr>
+  </table></div>
+  <p>後者は、24 時間のキャッシュにも入れません。次に呼ばれたときに、あらためて確認を試みます。この関門は、楽天市場、Yahoo!ショッピング、Amazon、AI による出品の発見、楽天ブックスの先着など、<strong>価格の審査を使うすべての機能</strong>に共通なので、一回の修正が、広い範囲に効きます（コミットの記録では、18 の関数を配備しています）。</p>
+  <p>報告のあった 3 件は、手作業で非表示にしました。そのあとは、5 分おきに動く再審査のバッチが、同じ見逃しを拾い直す想定です。</p>
+  <p><strong>確認できていないこと：</strong>記録には、「上限のリセット後に、転売価格の報告が来なくなったかを、次のセッションで確認する」と書いてあります。その結果は、この記事を書いた時点で、記録にありません。</p>
+
+  <h2 class="rv">ほかの判定にも、同じ穴は無いか</h2>
+  <p>その後の点検（2026年7月30日）で、販売形式の判定や商品の照合など、ほかの AI による判定も確認しました。いずれも、失敗したときは、安全側（除外、または null）に倒れる設計で、<strong>新しい fail-open の穴は見つかりませんでした</strong>。</p>
+
+  <h2 class="rv">分かったこと</h2>
+  <blockquote>「確認できなかった」には、二種類ある。知らなかったのと、調べられなかったのと。</blockquote>
+  <ul>
+    <li><strong>通す設計は、「通してよい理由」を、はっきりさせてから使う。</strong>「分からないから通す」と「調べられないから通す」は、別のものです。</li>
+    <li><strong>失敗の結果を、理由を問わず、キャッシュしない。</strong>一時的な失敗を、24 時間、固定してしまいました。</li>
+    <li><strong>前の変更が、別の場所の穴を、実害にする。</strong>Amazon の対象を広げたことが、上限の穴を、表に出しました。</li>
+  </ul>
+  <p class="note">この記事は、HANDOFF（第182回）とコミット（2026年7月30日）の記録から書きました。</p>
+
+  <div class="ad-slot" data-slot="footer" hidden></div>
+<!--/ad-->
+
+  <div class="rule" style="margin:40px 0 22px"></div>
+  <p class="eyebrow">この話に出てくるもの</p>
+  <ul class="plain">
+    <li><a href="/notes/typo-catalog/">一度だけ生まれた誤字が、店ごとに増えていった</a> — 同じアプリの、別の記録</li>
+    <li><a href="/notes/torecadash-ai/">「減るはず」が、二度外れた</a> — 同じアプリの、AI 呼び出しの記録</li>
+  </ul>
+
+<!--related-->
+  <div class="rule" style="margin:40px 0 22px"></div>
+  <p class="eyebrow">ほかの記録</p>
+  <ul class="plain">
+    <li><a href="/notes/typo-catalog/">一度だけ生まれた誤字が、店ごとに増えていった：「30th SEREBRATION」の件</a> — 誤字の商品が一度作られると、既存の商品として再利用され、店ごとに増える。13記事を直し、短い見出しを完全一致で拾う予防を入れ、保険のチェックの限界まで確かめた記録。</li>
+    <li><a href="/notes/scrape-cost/">「しょうがない」を測り直したら、取得の費用は8分の1だった</a> — 「イオンとあみあみは費用が重くて縮められない」は、古い単価に基づく思い込みだった。3つの取得設定で同じページを比べて、描画が丸ごと無駄だと分かった記録。</li>
+    <li><a href="/notes/review-info-needed/">初めての審査で、「情報が必要です」と返ってきた</a> — App Store の初めての審査で届いたのは、不合格ではなく「情報が必要」というメールだった。求められた六つ（実機の画面収録、目的、外部サービスの一覧など）と、前に直したこととのつながり。</li>
+  </ul>
+<!--/related-->
+</div>
+</main>
+
+<footer class="site"><div class="wrap">
+  <span>© 2026 Koshin Studio</span>
+  <div class="sns-row"></div>
+  <nav><a href="/about/">About</a><a href="/privacy/">あつかい</a></nav>
+</div></footer>
+<script src="/vendor/gsap.min.js?v=9396f256" defer></script>
+<script src="/vendor/ScrollTrigger.min.js?v=05ca5ad8" defer></script>
+<script src="/vendor/lenis.min.js?v=daec1872" defer></script>
+<script src="/motion.js?v=5f78b937" defer></script>
+</body>
+</html>
