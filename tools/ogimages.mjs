@@ -48,14 +48,14 @@ for (const f of pages()) {
     html,body{margin:0;width:1200px;height:630px;overflow:hidden}
     .card{width:1200px;height:630px;position:relative;display:flex;flex-direction:column;
       justify-content:center;padding:0 88px;
-      background:radial-gradient(70% 60% at 18% 4%, rgba(47,111,208,.42), transparent 62%),
-        radial-gradient(52% 46% at 88% 22%, rgba(126,200,227,.2), transparent 66%),
-        linear-gradient(170deg,#0b1navy 0%,#070c17 60%,#050912 100%),#070c17}
+      background:radial-gradient(70% 60% at 14% 0%, rgba(47,111,208,.12), transparent 62%),
+        radial-gradient(52% 46% at 90% 20%, rgba(126,200,227,.16), transparent 66%),
+        linear-gradient(170deg,#fdfcf9 0%,#fbfaf7 55%,#f3f1ec 100%),#fbfaf7}
     .card .ks-logo{width:${home ? 660 : 300}px;margin:0 0 ${home ? 40 : 34}px}
-    .card h1{font-family:var(--mincho);font-size:${home ? 34 : 56}px;letter-spacing:.1em;
-      color:#e9eef6;margin:0;line-height:1.4;max-width:960px}
-    .card p{font-family:var(--gothic);font-size:20px;letter-spacing:.1em;color:#9db0c8;margin:22px 0 0}
-    .card .bar{width:64px;height:3px;background:linear-gradient(90deg,#7ec8e3,#2f6fd0);margin:26px 0 0}
+    .card h1{font-family:var(--mincho);font-size:${home ? 42 : 52}px;letter-spacing:.08em;
+      color:#1b2433;margin:0;line-height:1.4;max-width:960px}
+    .card p{font-family:var(--gothic);font-size:20px;letter-spacing:.08em;color:#4a586c;margin:22px 0 0}
+    .card .bar{width:64px;height:3px;background:linear-gradient(90deg,#2f86c0,#2557b8);margin:26px 0 0}
   </style>
   <div class="card">${logo}
     ${home ? '<h1>なんでも、ひとりで挑戦する。</h1>'

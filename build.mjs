@@ -190,6 +190,8 @@ writeAnime('/anime/index.html',
   <div class="rule"></div>
   <p class="lead">ガチアニメ診断の読みもの。<br>6つの軸と64タイプが、それぞれ何を表しているかを書いています。</p>
 
+  <p class="rv"><strong>はじめての方へ：</strong><a href="/anime/guide/">アニメ診断の選び方</a>（診断の見分け方、答え方のコツ、結果の読み方）</p>
+
   <h2 class="rv">診断のしくみ</h2>
   <p class="rv">ガチアニメ診断は、12問から最大50問までの選択式の質問から、アニメの好みを<strong>6つの軸</strong>で測ります。軸ごとにどちら側へ寄ったかを文字で表し、並べたものがタイプコード（例: <code>RDCP-VM</code>）です。6軸それぞれが2択なので、組み合わせは2の6乗で<strong>64タイプ</strong>になります。</p>
   <p class="rv" data-delay="60">作品の側にも、同じ6軸の値が付いています。診断の結果は、あなたの6軸と作品の6軸をベクトルとして並べて、近さ（コサイン類似度）で選びます。タイプのページに並ぶ作品は、そのタイプの軸の向きに近い作品を、診断と同じ計算で選んだものです。</p>
@@ -206,6 +208,64 @@ ${animeAxes.map((a, i) => `    <div class="kind rv" data-delay="${i * 60}"><h3>$
   <p class="rv">二つ名は、世界観×後味、構成×テイスト、視覚×視聴スタイルの組み合わせから決まります。まずは、よくあるタイプを4つ。</p>
   <div class="type-list rv">${featured.map(typeChip).join('')}</div>
   <p class="rv"><a href="/anime/types/">64タイプの一覧を見る →</a></p>
+</div></main>` + foot);
+
+/* アニメ診断の選び方（「おすすめのアニメ診断」を探す人に向けた解説。
+   診断の仕様と、このサイトで実測した数字だけで書く。他の診断への評価は書かない） */
+writeAnime('/anime/guide/index.html',
+  head('アニメ診断の選び方：自分に合う作品が見つかる診断の見分け方 — Koshin Studio',
+       'おすすめのアニメ診断を選ぶときに見る四つのこと、答え方のコツ、結果の読み方。ガチアニメ診断が何を測って、どう作品を選んでいるかを、実測の数字つきで書きました。') +
+`<main><div class="wrap">
+  <h1>アニメ診断の選び方</h1>
+  <div class="rule"></div>
+  <p class="lead">診断の結果が「当たる」かどうかは、<br>何を測っているかで決まります。</p>
+
+  <p class="rv">アニメの診断は、たくさんあります。名前は似ていても、やっていることは、同じではありません。ここでは、診断を選ぶときに見るところと、答え方、結果の読み方を、<a href="/works/shindananime/">ガチアニメ診断</a>を例に書きます。数字は、このサイトで実際に測ったものです。</p>
+
+  <h2 class="rv">アニメ診断には、二つの種類がある</h2>
+  <ul class="rv">
+    <li><strong>タイプを当てる診断。</strong>質問に答えて、あなたの「アニメの好みのタイプ」や、キャラクターを出します。結果は、ほとんどの場合「分類」です。</li>
+    <li><strong>作品をすすめる診断。</strong>好みから、見るべき作品を挙げます。結果は「作品の名前」です。</li>
+  </ul>
+  <p class="rv">ガチアニメ診断は、この<strong>両方を一度に</strong>出します。6つの軸でタイプ（例：<code>RDCP-VM</code>）を出して、そのうえで、データベースから、運命の1作と、次点の2作を選びます。</p>
+
+  <h2 class="rv">おすすめのアニメ診断を選ぶときに、見る四つのこと</h2>
+  <h3>1. 何を測っているか、書いてあるか</h3>
+  <p class="rv">「あなたはこのタイプ」と言われても、何を基準にしたのか分からなければ、納得できません。ガチアニメ診断は、<strong>世界観・後味・構成・サブテイスト・視覚・視聴スタイル</strong>の6つの軸で測っています。軸ごとの意味は、<a href="/anime/axes/">6つの軸</a>に書いてあります。</p>
+  <h3>2. 結果の理由が、分かるか</h3>
+  <p class="rv">タイプコードの一文字ずつが、どの軸のどちら側に寄ったかを表しています。結果の画面には、軸ごとの寄り方と、作品の適合度（%）が出ます。この数字は、並び順と同じ物差しから作っています（<a href="/notes/match-percent/">「82%より80%が選ばれる」</a>に、その経緯を書きました）。</p>
+  <h3>3. 何作の中から選んでいるか</h3>
+  <p class="rv">診断が実際に使う作品は、<strong>6,074 作</strong>です。もとは 16,177 件あって、レビューの言葉が少なく、軸を決める手がかりが足りない作品は、落としました。落とした基準と、残った作品の偏り（2000 年以降が 90.5%）は、<a href="/notes/anime-db/">データベースの記事</a>に、数字で書いています。</p>
+  <h3>4. 回答は、どこへ行くか</h3>
+  <p class="rv">ガチアニメ診断は、回答を、この端末の中だけで計算します。サーバーには送りません。診断のデータの扱いは、<a href="/privacy/">あつかい</a>に書いています。</p>
+
+  <h2 class="rv">答え方のコツ</h2>
+  <ul class="rv">
+    <li><strong>直感で答える。</strong>悩んだ質問は、「どちらかといえば」で十分です。</li>
+    <li><strong>「どちらでもない」を続けない。</strong>真ん中ばかりだと、軸の向きが決まらず、結果がぼやけます。</li>
+    <li><strong>まず 12 問、続きは気が向いたら。</strong>12 問（約 30 秒）で、タイプと運命の1作が出ます。続けて答えると、最大 50 問まで広がり、画質・年代や、恋愛・ホラー・異世界転生などの好みの要素も、加味して選び直します。</li>
+    <li><strong>見た作品は「見た」を押す。</strong>次点の作品に、差し替わります。</li>
+    <li><strong>放送年は、結果の画面で切り替えられる。</strong>「こだわらない」「2010 年以降」「2018 年以降」から選べます。</li>
+  </ul>
+
+  <h2 class="rv">結果の読み方：タイプは安定、1作は揺れる</h2>
+  <p class="rv">12 問と 50 問で、結果がどれだけ変わるかを、作り物の回答者 1,000 人で測りました（<a href="/notes/shindan12/">診断を12問にしたら、結果はどこまで変わるのか</a>）。</p>
+  <ul class="rv">
+    <li><strong>タイプは、短くても、だいたい合う。</strong>6 文字を 1 文字ずつ見ると、回答のブレが中くらいでも、9 割以上は、同じ側に落ちます。</li>
+    <li><strong>運命の1作は、質問を足すたびに、揺れる。</strong>12 問で出た 1 作が、50 問でも 1 作目に来るのは、5〜8 人に 1 人です。6,000 作から 1 つを選ぶので、少しの入力の差で、順位が入れ替わります。</li>
+  </ul>
+  <p class="rv">タイプを知りたいだけなら、12 問で十分です。1 作の精度を上げたい人は、続きに進んでください。50 問のほうが、「本当の好み」に、約 1.7〜1.9 倍、近づきます。</p>
+
+  <h2 class="rv">診断で分かること、分からないこと</h2>
+  <ul class="rv">
+    <li><strong>分かる：</strong>あなたの好みの<strong>傾向</strong>と、その傾向に近い作品。</li>
+    <li><strong>分からない：</strong>その作品を、あなたが<strong>面白いと感じるか</strong>。診断が測っているのは、好みと作品の「近さ」です。</li>
+    <li><strong>偏りがある：</strong>データベースは、新しい作品と、よく語られる作品に、寄っています。古い作品や、あまり語られない作品は、選ばれにくいです。</li>
+    <li><strong>好みは変わる：</strong>今日の結果が、来年も同じとは限りません。</li>
+  </ul>
+  ${ctaBtn('ガチアニメ診断をはじめる（無料・1分）')}
+
+  <p class="rv" style="margin-top:34px">続けて読む：<a href="/anime/axes/">6つの軸</a> ／ <a href="/anime/types/">64タイプの一覧</a> ／ <a href="/anime/">診断の読みものの入り口</a></p>
 </div></main>` + foot);
 
 /* 6 軸の解説 */
@@ -414,7 +474,7 @@ const noteBySlug = Object.fromEntries(notes.map((n) => [n.slug, n]));
    検索側にも読む人にも嘘をつくことになる。
    代わりに、footer に出しているのと同じ公開の持ち場だけを繋ぐ */
 const PERSON = {
-  '@type': 'Organization', '@id': SITE + '#studio', name: 'Koshin Studio',
+  '@type': 'Organization', '@id': SITE + '#studio', name: 'Koshin Studio', alternateName: ['KoshinStudio'],
   url: SITE, description: 'なんでも、ひとりで挑戦して、作って、試して、書いています。ゲームや診断アプリなどを作り、作り方と検証の記録を公開しています。',
   logo: SITE + '/assets/og/og_home.jpg',
   sameAs: (conf.social || []).map((x) => x.url),
@@ -443,7 +503,7 @@ function ldFor(file, url) {
   if (rel === '/index.html') {
     return [
       PERSON,
-      { '@type': 'WebSite', url: SITE, name: 'Koshin Studio', publisher: { '@id': SITE + '#studio' },
+      { '@type': 'WebSite', url: SITE, name: 'Koshin Studio', alternateName: ['KoshinStudio'], publisher: { '@id': SITE + '#studio' },
         inLanguage: 'ja' },
       { '@type': 'ItemList', name: '作ったもの',
         itemListElement: works.map((w, i) => ({
@@ -515,6 +575,7 @@ function ldFor(file, url) {
     ];
   }
   if (rel === '/anime/index.html') return [page('ガチアニメ診断の読みもの'), crumbs([['Koshin Studio', '/'], ['Works', '/works/'], ['ガチアニメ診断', '/works/shindananime/'], ['読みもの', '/anime/']])];
+  if (rel === '/anime/guide/index.html') return [page('アニメ診断の選び方'), crumbs([['Koshin Studio', '/'], ['Works', '/works/'], ['ガチアニメ診断', '/works/shindananime/'], ['読みもの', '/anime/'], ['選び方', '/anime/guide/']])];
   if (rel === '/anime/axes/index.html') return [page('6つの軸'), crumbs([['Koshin Studio', '/'], ['Works', '/works/'], ['ガチアニメ診断', '/works/shindananime/'], ['読みもの', '/anime/'], ['6つの軸', '/anime/axes/']])];
   if (rel === '/anime/types/index.html') return [page('64タイプ一覧'), crumbs([['Koshin Studio', '/'], ['Works', '/works/'], ['ガチアニメ診断', '/works/shindananime/'], ['読みもの', '/anime/'], ['64タイプ', '/anime/types/']])];
   const tm = rel.match(/^\/anime\/types\/([^/]+)\/index\.html$/);
@@ -592,6 +653,7 @@ for (const file of pages) {
     '/about/index.html': [['About', '/about/']],
     '/anime/index.html': [['Works', '/works/'], ['ガチアニメ診断', '/works/shindananime/'], ['読みもの', '/anime/']],
     '/anime/axes/index.html': [['Works', '/works/'], ['ガチアニメ診断', '/works/shindananime/'], ['読みもの', '/anime/'], ['6つの軸', '/anime/axes/']],
+    '/anime/guide/index.html': [['Works', '/works/'], ['ガチアニメ診断', '/works/shindananime/'], ['読みもの', '/anime/'], ['選び方', '/anime/guide/']],
     '/anime/types/index.html': [['Works', '/works/'], ['ガチアニメ診断', '/works/shindananime/'], ['読みもの', '/anime/'], ['64タイプ', '/anime/types/']],
     '/privacy/index.html': [['あつかい', '/privacy/']],
   };
@@ -719,6 +781,12 @@ for (const file of pages) {
     relHtml = relBlock('この作品の記録', notes.filter((n) => n.work === workBySlug[rw[1]].title));
   }
   if (relHtml) html = html.replace(/<\/div>\s*<\/main>/, (m) => relHtml + m);
+  /* 検索結果・Discover で、大きい画像と、長い抜粋を出してよい、という意思表示。
+     noindex のページ（タイプ別など）には付けない。組み直しても増えないよう、消してから入れる */
+  html = html.replace(/\n?<meta name="robots" content="index,follow[^"]*">/g, '');
+  if (!/name="robots"/.test(html)) {
+    html = html.replace('</head>', '<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">\n</head>');
+  }
   writeFileSync(file, html);
 }
 
