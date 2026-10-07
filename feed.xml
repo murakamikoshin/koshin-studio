@@ -7,6 +7,13 @@
   <language>ja</language>
   <atom:link href="https://koshinstudio.com/feed.xml" rel="self" type="application/rss+xml"/>
   <item>
+    <title>手元では動くのに、配ると壊れる：このサイトで起きた四つの事故</title>
+    <link>https://koshinstudio.com/notes/deploy-gotchas/</link>
+    <guid isPermaLink="true">https://koshinstudio.com/notes/deploy-gotchas/</guid>
+    <pubDate>Wed, 07 Oct 2026 15:00:00 GMT</pubDate>
+    <description>古いキャッシュ、組むたびに増えるパンくず、環境の中を指す symlink、手元にしか無い絵。サイトを配るときに続いた四つの事故と、検査を足してはじめて見つかった経緯。</description>
+  </item>
+  <item>
     <title>初めての審査で、「情報が必要です」と返ってきた</title>
     <link>https://koshinstudio.com/notes/review-info-needed/</link>
     <guid isPermaLink="true">https://koshinstudio.com/notes/review-info-needed/</guid>

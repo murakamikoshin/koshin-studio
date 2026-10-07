@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>手元では動くのに、配ると壊れる：このサイトで起きた四つの事故 — Koshin Studio 開発の記録 — Koshin Studio</title>
+<meta name="description" content="古いキャッシュ、組むたびに増えるパンくず、環境の中を指す symlink、手元にしか無い絵。サイトを配るときに続いた四つの事故と、検査を足してはじめて見つかった経緯。">
+<meta property="og:title" content="手元では動くのに、配ると壊れる：このサイトで起きた四つの事故">
+<meta property="og:description" content="サイトを配るときに起きた四つの事故の記録。">
+<meta property="og:type" content="article">
+<meta name="theme-color" content="#fbfaf7">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/assets/icon/icon-180.png">
+<link rel="manifest" href="/site.webmanifest">
+<script>document.documentElement.className+=" js"</script>
+<link rel="stylesheet" href="/style.css?v=e8482157">
+<link rel="canonical" href="https://koshinstudio.com/notes/deploy-gotchas/">
+<meta property="og:url" content="https://koshinstudio.com/notes/deploy-gotchas/">
+<meta property="og:site_name" content="Koshin Studio">
+<meta property="og:locale" content="ja_JP">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="alternate" type="application/rss+xml" title="Koshin Studio — Notes" href="https://koshinstudio.com/feed.xml">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BlogPosting","headline":"手元では動くのに、配ると壊れる：このサイトで起きた四つの事故","url":"https://koshinstudio.com/notes/deploy-gotchas/","description":"古いキャッシュ、組むたびに増えるパンくず、環境の中を指す symlink、手元にしか無い絵。サイトを配るときに続いた四つの事故と、検査を足してはじめて見つかった経緯。","datePublished":"2026-10-08","dateModified":"2026-10-08","inLanguage":"ja","image":"https://koshinstudio.com/assets/og/og_notes_deploy-gotchas.jpg","author":{"@id":"https://koshinstudio.com#studio"},"publisher":{"@id":"https://koshinstudio.com#studio"},"mainEntityOfPage":"https://koshinstudio.com/notes/deploy-gotchas/"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Koshin Studio","item":"https://koshinstudio.com/"},{"@type":"ListItem","position":2,"name":"Notes","item":"https://koshinstudio.com/notes/"},{"@type":"ListItem","position":3,"name":"手元では動くのに、配ると壊れる：このサイトで起きた四つの事故","item":"https://koshinstudio.com/notes/deploy-gotchas/"}]}]}</script>
+<meta property="og:image" content="https://koshinstudio.com/assets/og/og_notes_deploy-gotchas.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+</head>
+<body>
+<canvas id="motes"></canvas>
+
+<header class="site"><div class="wrap">
+  <a class="logo" href="/">Koshin Studio</a>
+  <nav><a href="/works/">Works</a><a href="/notes/">Notes</a><a href="/anime/">診断</a><a href="/about/">About</a></nav>
+</div></header>
+
+<main><div class="wrap">
+  <nav class="crumbs" aria-label="現在地"><a href="/">Koshin Studio</a><i aria-hidden="true">›</i><a href="/notes/">Notes</a><i aria-hidden="true">›</i><span aria-current="page">手元では動くのに、配ると壊れる：このサイトで起きた四つの事故</span></nav>
+  <h1>手元では動くのに、配ると壊れる：このサイトで起きた四つの事故</h1>
+  <div class="rule"></div>
+  <p class="lead">Koshin Studio 開発の記録 ／ 2026年10月</p>
+
+  <p>このサイトは、HTML を組み立てて、Cloudflare Pages に配っています。作っていた 9 月の 1 日のうちに、「手元では動くのに、配ると壊れる」という種類の事故が、4 つ続きました。コミットに残っている記録で、順に書きます。</p>
+
+  <h2 class="rv">1. 直したのに、古いものが動き続けた</h2>
+  <p>ロゴの弾け方を直したのに、戻ってきた人には、古い動きのままに見える。原因は、<code>style.css</code> と <code>motion.js</code> の<strong>名前が変わらない</strong>ことでした。一度読み込んだブラウザが、1 日、持ち続けていました。配り直しても、手元の画面は新しいので、気づきません。</p>
+  <p>直し方は、ファイルの中身から作った印（sha1 の頭 8 桁）を、名前の尻に付けること（<code>style.css?v=19008d13</code> のような形）です。中身を直せば、別のものとして取りに行きます。書体にも、同じ印を付けました。字を足して作り直したのに、古い書体を掴むと、字が出なくなる（豆腐になる）からです。</p>
+  <p>名前が変わるようになったので、保持の期間は、1 日から <strong>30 日</strong>に延ばしました。組み直しても印は増えず、中身が同じなら、同じ印になることを、確かめてあります。</p>
+
+  <h2 class="rv">2. 組み直すたびに、中身が増えていった</h2>
+  <p>すし積むの作品ページで、パンくずリストが <strong>14 個</strong>に増えていました。このサイトの組み立ては、出来上がった HTML を書き換える作りです。差し込みの前に、前回の差し込みを「消す」処理があるのですが、その<strong>消す側が一致していない</strong>と、組むたびに積み重なります。</p>
+  <ul>
+    <li>パンくず：消す側の正規表現が <code>class="crumbs"</code> だけを見ていて、<code>aria-label</code> の付いた実物に一致していなかった。</li>
+    <li>RSS の <code>link</code>：消す側が、そもそも無く、毎回足されていた。</li>
+  </ul>
+  <p>同じ形の事故を、機械が見つけるようにしました。本命は、<strong>二度組んで、一文字でも変わったページを知らせる</strong>検査です。あわせて、帯・脚・本文・パンくず・見出しが二重に出ていないかも見ます。この検査を入れた直後に、RSS のほうが引っかかりました。</p>
+
+  <h2 class="rv">3. 自分の環境の中を指す symlink を、git に入れていた</h2>
+  <p><code>tools/node_modules</code> が、<strong>この環境の中を指すシンボリックリンク</strong>でした。それを git に入れてしまうと、他の機械では実体が無く、Cloudflare に配るもの（wrangler）を数える所で止まります。実際に止めました。追跡から外し、さらに、追跡されているファイルにシンボリックリンクがあれば、検査で知らせるようにしました。</p>
+
+  <h2 class="rv">4. 手元だけ、動いていた</h2>
+  <p>手元には、git に入れていない絵や、前に作ったままの残りがあります。そのせいで、<strong>手元だけ動いて、配ると 404 になる</strong>ことがあります。実際に、遊ぶページの favicon がそうでした。</p>
+  <p>そこで、コミット済みの中身だけを別の場所へ写し、組み直して、全ページを読み込んでみる検査を足しました。配らないと決めたもの（<code>.assetsignore</code> に並べたもの）も、写しから同じように落として確かめます。そのとき、8 件を落として、12 ページとも欠けなし、でした。</p>
+
+  <h2 class="rv">分かったこと</h2>
+  <blockquote>いちばん信用できないのは、自分の手元。</blockquote>
+  <ul>
+    <li><strong>名前が変わらないファイルは、直した中身が届かない。</strong>名前に、中身の印を付ける。</li>
+    <li><strong>組み直しの事故は、「二度やって、同じか」で見つかる。</strong>一度目の結果は、きれいに見える。</li>
+    <li><strong>手元にあるものと、配るものは、別。</strong>新しく clone した状態で、確かめる。</li>
+  </ul>
+  <p>四つとも、自分で気づいたものではなく、<strong>検査を足して、はじめて見つかった</strong>ものです。ページを見て回るだけでは、見えませんでした。</p>
+  <p class="note">この記事は、コミット（2026年9月8日）の記録から書きました。</p>
+
+  <div class="ad-slot" data-slot="footer" hidden></div>
+<!--/ad-->
+
+  <div class="rule" style="margin:40px 0 22px"></div>
+  <p class="eyebrow">この話に出てくるもの</p>
+  <ul class="plain">
+    <li><a href="/notes/u2028/">JSONLを読んだら壊れた</a> — 「見た目では分からない」食い違いの、別の記録</li>
+    <li><a href="/notes/stopwatch-rank/">10秒ピッタリのランキングを、公平にする</a> — 公開した日のつまずきも書いた、別の記録</li>
+  </ul>
+
+<!--related-->
+  <div class="rule" style="margin:40px 0 22px"></div>
+  <p class="eyebrow">ほかの記録</p>
+  <ul class="plain">
+    <li><a href="/notes/review-info-needed/">初めての審査で、「情報が必要です」と返ってきた</a> — App Store の初めての審査で届いたのは、不合格ではなく「情報が必要」というメールだった。求められた六つ（実機の画面収録、目的、外部サービスの一覧など）と、前に直したこととのつながり。</li>
+    <li><a href="/notes/stopwatch-rank/">10秒ピッタリのランキングを、公平にする：小数3桁・同着・書き込み回数</a> — 時計の精度の差で iPhone が有利にならないよう小数3桁に切り、同着の確率（約1/333）に備えてタイブレークを決め、KV の書き込み回数を数えた。設計の理由と、公開した日のつまずき。</li>
+    <li><a href="/notes/torecadash-review/">審査に出そうとして止まった四つのこと</a> — iPad のスクリーンショット、自動検査の ITMS-91064、アカウント削除、投稿の通報。App Store の審査に出す手前で止まった四つと、その直し方の記録。</li>
+  </ul>
+<!--/related-->
+</div>
+</main>
+
+<footer class="site"><div class="wrap">
+  <span>© 2026 Koshin Studio</span>
+  <div class="sns-row"></div>
+  <nav><a href="/about/">About</a><a href="/privacy/">あつかい</a></nav>
+</div></footer>
+<script src="/vendor/gsap.min.js?v=9396f256" defer></script>
+<script src="/vendor/ScrollTrigger.min.js?v=05ca5ad8" defer></script>
+<script src="/vendor/lenis.min.js?v=daec1872" defer></script>
+<script src="/motion.js?v=5f78b937" defer></script>
+</body>
+</html>

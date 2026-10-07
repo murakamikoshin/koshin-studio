@@ -1,5 +1,13 @@
 [
   {
+    "slug": "deploy-gotchas",
+    "title": "手元では動くのに、配ると壊れる：このサイトで起きた四つの事故",
+    "date": "2026-10-08",
+    "work": "Koshin Studio",
+    "url": "/notes/deploy-gotchas/",
+    "blurb": "古いキャッシュ、組むたびに増えるパンくず、環境の中を指す symlink、手元にしか無い絵。サイトを配るときに続いた四つの事故と、検査を足してはじめて見つかった経緯。"
+  },
+  {
     "slug": "review-info-needed",
     "title": "初めての審査で、「情報が必要です」と返ってきた",
     "date": "2026-10-08",
