@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>「9種セット」の正体は御三家9商品だった：同じ商品なのに、決して一致しなかった — トレカダッシュ 開発の記録 — Koshin Studio</title>
+<meta name="description" content="他のまとめサイトと突き合わせたら、抽選の表示は54%だった。商品の取り違え、比べ方の左右非対称、記事IDの穴。カバー率を91%にした記録。">
+<meta property="og:title" content="「9種セット」の正体は御三家9商品だった：同じ商品なのに、決して一致しなかった">
+<meta property="og:description" content="同じ商品が決して一致しなかった原因を探した記録。">
+<meta property="og:type" content="article">
+<meta name="theme-color" content="#fbfaf7">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/assets/icon/icon-180.png">
+<link rel="manifest" href="/site.webmanifest">
+<script>document.documentElement.className+=" js"</script>
+<link rel="stylesheet" href="/style.css?v=e8482157">
+<link rel="canonical" href="https://koshinstudio.com/notes/torecadash-9set/">
+<meta property="og:url" content="https://koshinstudio.com/notes/torecadash-9set/">
+<meta property="og:site_name" content="Koshin Studio">
+<meta property="og:locale" content="ja_JP">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="alternate" type="application/rss+xml" title="Koshin Studio — Notes" href="https://koshinstudio.com/feed.xml">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BlogPosting","headline":"「9種セット」の正体は御三家9商品だった：同じ商品なのに、決して一致しなかった","url":"https://koshinstudio.com/notes/torecadash-9set/","description":"他のまとめサイトと突き合わせたら、抽選の表示は54%だった。商品の取り違え、比べ方の左右非対称、記事IDの穴。カバー率を91%にした記録。","datePublished":"2026-10-08","dateModified":"2026-10-08","inLanguage":"ja","image":"https://koshinstudio.com/assets/og/og_notes_torecadash-9set.jpg","author":{"@id":"https://koshinstudio.com#studio"},"publisher":{"@id":"https://koshinstudio.com#studio"},"mainEntityOfPage":"https://koshinstudio.com/notes/torecadash-9set/"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Koshin Studio","item":"https://koshinstudio.com/"},{"@type":"ListItem","position":2,"name":"Notes","item":"https://koshinstudio.com/notes/"},{"@type":"ListItem","position":3,"name":"「9種セット」の正体は御三家9商品だった：同じ商品なのに、決して一致しなかった","item":"https://koshinstudio.com/notes/torecadash-9set/"}]}]}</script>
+<meta property="og:image" content="https://koshinstudio.com/assets/og/og_notes_torecadash-9set.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+</head>
+<body>
+<canvas id="motes"></canvas>
+
+<header class="site"><div class="wrap">
+  <a class="logo" href="/">Koshin Studio</a>
+  <nav><a href="/works/">Works</a><a href="/notes/">Notes</a><a href="/anime/">診断</a><a href="/about/">About</a></nav>
+</div></header>
+
+<main><div class="wrap">
+  <nav class="crumbs" aria-label="現在地"><a href="/">Koshin Studio</a><i aria-hidden="true">›</i><a href="/notes/">Notes</a><i aria-hidden="true">›</i><span aria-current="page">「9種セット」の正体は御三家9商品だった：同じ商品なのに、決して一致しなかった</span></nav>
+  <h1>「9種セット」の正体は御三家9商品だった：同じ商品なのに、決して一致しなかった</h1>
+  <div class="rule"></div>
+  <p class="lead">トレカダッシュ 開発の記録 ／ 2026年10月</p>
+
+  <p>iOS アプリ「トレカダッシュ」は、トレカの抽選・先着情報を集めて通知します。集めた情報に抜けがないか調べるため、他のまとめサイト（抽選図鑑、ポケチュー）の掲載と、自分のアプリの記事を<strong>突き合わせて数えて</strong>います。10月7日に測ったところ、抜けの多くは、<strong>同じ商品なのに、決して一致しない</strong>という、小さな食い違いが原因でした。HANDOFF とコミットの記録で書きます。</p>
+  <p class="note">このサイトには、トレカダッシュの作品ページはまだありません。ここに書くのは、開発の記録です。</p>
+
+  <h2 class="rv">測ったこと</h2>
+  <p>「まとめサイトが紹介している抽選が、全部アプリに出ているか」を、読み取りだけで確かめました。</p>
+  <ul>
+    <li>抽選図鑑：受付中 90 件のうち、アプリに表示されているのは <strong>49 件（54%）</strong>。記事はあるのに非表示が 12 件、フィードに無いのが 29 件。</li>
+    <li>ポケチュー：21 件のうち 18 件（86%）。</li>
+    <li>X のまとめ投稿：72 時間で 606 投稿。記事に結び付いたのは 9 件。</li>
+  </ul>
+
+  <h2 class="rv">非表示 12 件のうち 7 件は、行のほうが間違っていた</h2>
+  <p>非表示だった 12 件を調べると、7 件は、まとめサイトの行が<strong>応募ページと違う商品</strong>を書いていました。ある系列の 4 店は「エネルギーカードセット」、別の 3 店は「拡張パック」と書いてあります。応募ページ（抽選の応募フォーム）と店の X を見ると、実際は<strong>「カードセット 9種セット 10,800円」</strong>でした。</p>
+  <p>アプリの「価格の関門」（商品の定価と出品価格が合わないものを弾く仕組み）は、これを<strong>正しく弾いていました</strong>。間違っていたのは関門ではなく、商品の取り違えのほうです。商品を付け替えて、表示に戻しました。</p>
+
+  <h2 class="rv">「9種セット」の正体</h2>
+  <p>この「9種セット」は、ポケモンカードの 30th CELEBRATION のカードセットで、<strong>歴代 9 世代の御三家（3 匹）のセットが 9 商品</strong>あるものでした。カタログには、この 9 商品が、もともと正しい形で登録されていました。ところが、マーケットプレイスの出品や X の監視が新しい記事を作るたびに、3 匹のうち 1 匹だけの名前の、別の商品として登録されてしまうバグが、9 商品のうち複数で起きていました。たとえば「ヒノアラシ」だけの商品です。</p>
+
+  <h2 class="rv">同じ商品なのに、一致しない</h2>
+  <p>突き合わせの仕組みには、商品名を比べるための「キー」を作る処理があります。ここに、<strong>左右非対称</strong>がありました。</p>
+  <ul>
+    <li>相手側の「カードセット<strong>9種</strong>」は、末尾の「9種」を落として比べる。</li>
+    <li>カタログ側の「カードセット <strong>9種類セット</strong>」は、落とさない。</li>
+  </ul>
+  <p>同じ商品なのに、<strong>決して一致しません</strong>。そのため、相手の名前は「エネルギーカードセット」や「拡張パック」といった別の商品に、誤って解決されていました。これが、取り違えの出どころでした。両方に同じ規則（「N 種」「N 種類」「セット」を落とす）を当て、さらに、数の指定がある名前は、部分一致で一つに決めないようにしました。カタログ全体で、キーの衝突が 0 であることも確かめています。</p>
+
+  <h2 class="rv">もう一つの穴：前回の記事が、次の回を止めていた</h2>
+  <p>「フィードに無い」の主な原因は、別にありました。記事の ID が「まとめの URL ＋ 店 ＋ 商品」で作られていて、<strong>抽選の回が含まれていなかった</strong>のです。前回の期限切れの記事が、同じ店・同じ商品の新しい回の記事を作るのを止めていました（「同じ記事 ID が既にある」）。新しい回の締切が前回より 1 日超あとなら、日付を足した別の ID で作るようにしました。</p>
+
+  <h2 class="rv">結果</h2>
+  <div class="scroll rv"><table>
+    <tr><th>カバー率</th><th class="n">前</th><th class="n">後</th></tr>
+    <tr><td>抽選図鑑（受付中 90 件）</td><td class="n">54%（49件）</td><td class="n">91%（82件）</td></tr>
+    <tr><td>ポケチュー</td><td class="n">86%</td><td class="n">90%</td></tr>
+  </table></div>
+  <p>残りは、応募ページが「商品各種」としか書いておらず商品を特定できないもの、店名の手がかりがページに無いもの、などです。「安全のため採用しない」と決めたものも含まれています。取りこぼしがゼロになったわけではありません。</p>
+
+  <h2 class="rv">分かったこと</h2>
+  <blockquote>正しく弾いた関門と、間違っていたデータは、別の問題。</blockquote>
+  <ul>
+    <li><strong>弾いたものを疑う前に、弾かれた理由を見る。</strong>価格の関門は正しく動いていて、間違っていたのは商品の取り違えでした。</li>
+    <li><strong>「一致しない」の原因が、比べ方の左右非対称のことがある。</strong>同じ商品が決して一致しないのは、データの汚れではなく、規則の食い違いでした。</li>
+    <li><strong>カバー率を数えないと、抜けは見えない。</strong>54% という数字が出て、はじめて、どこを直すかが決まりました。</li>
+  </ul>
+  <p class="note">この記事の数字は、HANDOFF（§272、§281）とコミット（2026年10月7日）の記録から取りました。</p>
+
+  <div class="ad-slot" data-slot="footer" hidden></div>
+<!--/ad-->
+
+  <div class="rule" style="margin:40px 0 22px"></div>
+  <p class="eyebrow">この話に出てくるもの</p>
+  <ul class="plain">
+    <li><a href="/notes/torecadash-ai/">「減るはず」が、二度外れた</a> — 同じアプリの、AI への問い合わせの記録</li>
+    <li><a href="/notes/u2028/">JSONLを読んだら壊れた</a> — 見た目では分からない食い違いの、別の記録</li>
+  </ul>
+
+<!--related-->
+  <div class="rule" style="margin:40px 0 22px"></div>
+  <p class="eyebrow">ほかの記録</p>
+  <ul class="plain">
+    <li><a href="/notes/torecadash-review/">審査に出そうとして止まった四つのこと</a> — iPad のスクリーンショット、自動検査の ITMS-91064、アカウント削除、投稿の通報。App Store の審査に出す手前で止まった四つと、その直し方の記録。</li>
+    <li><a href="/notes/torecadash-watchdog/">「めっちゃクラッシュする」の原因は、画面の描き直しのたびの再計算だった</a> — 実機のログにあった 0x8BADF00D。951件の記事を、画面を描き直すたびにメインスレッドで数え直していた。原因の特定と、直す方式の記録。</li>
+    <li><a href="/notes/torecadash-ci/">TestFlight にビルドが来ない原因を、一度間違えた</a> — 「[ci skip] が原因」という最初の診断は、時系列が合わず誤りだった。Xcode Cloud の無料枠を使い切った本当の原因と、直し方の記録。</li>
+  </ul>
+<!--/related-->
+</div>
+</main>
+
+<footer class="site"><div class="wrap">
+  <span>© 2026 Koshin Studio</span>
+  <div class="sns-row"></div>
+  <nav><a href="/about/">About</a><a href="/privacy/">あつかい</a></nav>
+</div></footer>
+<script src="/vendor/gsap.min.js?v=9396f256" defer></script>
+<script src="/vendor/ScrollTrigger.min.js?v=05ca5ad8" defer></script>
+<script src="/vendor/lenis.min.js?v=daec1872" defer></script>
+<script src="/motion.js?v=5f78b937" defer></script>
+</body>
+</html>

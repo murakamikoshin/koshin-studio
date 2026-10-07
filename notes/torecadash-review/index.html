@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>審査に出そうとして止まった四つのこと — トレカダッシュ 開発の記録 — Koshin Studio</title>
+<meta name="description" content="iPad のスクリーンショット、自動検査の ITMS-91064、アカウント削除、投稿の通報。App Store の審査に出す手前で止まった四つと、その直し方の記録。">
+<meta property="og:title" content="審査に出そうとして止まった四つのこと">
+<meta property="og:description" content="App Store の審査に出す手前で止まった四つの記録。">
+<meta property="og:type" content="article">
+<meta name="theme-color" content="#fbfaf7">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/assets/icon/icon-180.png">
+<link rel="manifest" href="/site.webmanifest">
+<script>document.documentElement.className+=" js"</script>
+<link rel="stylesheet" href="/style.css?v=e8482157">
+<link rel="canonical" href="https://koshinstudio.com/notes/torecadash-review/">
+<meta property="og:url" content="https://koshinstudio.com/notes/torecadash-review/">
+<meta property="og:site_name" content="Koshin Studio">
+<meta property="og:locale" content="ja_JP">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="alternate" type="application/rss+xml" title="Koshin Studio — Notes" href="https://koshinstudio.com/feed.xml">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BlogPosting","headline":"審査に出そうとして止まった四つのこと","url":"https://koshinstudio.com/notes/torecadash-review/","description":"iPad のスクリーンショット、自動検査の ITMS-91064、アカウント削除、投稿の通報。App Store の審査に出す手前で止まった四つと、その直し方の記録。","datePublished":"2026-10-08","dateModified":"2026-10-08","inLanguage":"ja","image":"https://koshinstudio.com/assets/og/og_notes_torecadash-review.jpg","author":{"@id":"https://koshinstudio.com#studio"},"publisher":{"@id":"https://koshinstudio.com#studio"},"mainEntityOfPage":"https://koshinstudio.com/notes/torecadash-review/"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Koshin Studio","item":"https://koshinstudio.com/"},{"@type":"ListItem","position":2,"name":"Notes","item":"https://koshinstudio.com/notes/"},{"@type":"ListItem","position":3,"name":"審査に出そうとして止まった四つのこと","item":"https://koshinstudio.com/notes/torecadash-review/"}]}]}</script>
+<meta property="og:image" content="https://koshinstudio.com/assets/og/og_notes_torecadash-review.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+</head>
+<body>
+<canvas id="motes"></canvas>
+
+<header class="site"><div class="wrap">
+  <a class="logo" href="/">Koshin Studio</a>
+  <nav><a href="/works/">Works</a><a href="/notes/">Notes</a><a href="/anime/">診断</a><a href="/about/">About</a></nav>
+</div></header>
+
+<main><div class="wrap">
+  <nav class="crumbs" aria-label="現在地"><a href="/">Koshin Studio</a><i aria-hidden="true">›</i><a href="/notes/">Notes</a><i aria-hidden="true">›</i><span aria-current="page">審査に出そうとして止まった四つのこと</span></nav>
+  <h1>審査に出そうとして止まった四つのこと</h1>
+  <div class="rule"></div>
+  <p class="lead">トレカダッシュ 開発の記録 ／ 2026年10月</p>
+
+  <p>iOS アプリ「トレカダッシュ」を App Store の審査に出そうとして、<strong>何度か、出す手前で止まりました</strong>。Apple 側の自動検査で止まったもの、提出画面で止まったもの、ガイドラインに照らして点検して見つけたもの。コミットに残っている記録から、四つ書きます。</p>
+  <p class="note">このサイトには、トレカダッシュの作品ページはまだありません。審査の結果は、この記事には書いていません。</p>
+
+  <h2 class="rv">1. iPad のスクリーンショットを求められた</h2>
+  <p>App Store Connect で審査に提出しようとすると、「13 インチの iPad ディスプレイのスクリーンショットをアップロードする必要があります」と出て止まりました。プロジェクトの設定が、もともと iPhone と iPad の両方（1,2）になっていたためです。</p>
+  <p>ところが、iPad を意識して作った形跡はなく、実機の確認も、レイアウトの調整も、すべて iPhone でした。<strong>未検証のまま「iPad 対応」として審査に出すのはリスクがある</strong>ので、iPhone 専用（1）に変えました。</p>
+
+  <h2 class="rv">2. 自動検査で「無効なバイナリ」（ITMS-91064）</h2>
+  <p>ビルド 877 が、Apple 側の自動審査で、「無効なバイナリ」として却下されました。原因は、プライバシーマニフェスト（<code>PrivacyInfo.xcprivacy</code>）の、<strong>トラッキングは「する」(<code>NSPrivacyTracking=true</code>) と書いたのに、トラッキング先のドメイン一覧（<code>NSPrivacyTrackingDomains</code>）が空</strong>だったことです。Apple の検査は、この組み合わせを矛盾として弾きます。</p>
+  <p>アプリは、AdMob の広告（バナー、ネイティブ、アプリ起動広告）を、ATT の同意のあとにパーソナライズして出しています。トラッキング自体はしているので、「する」は正しい。直すべきは、空のドメイン一覧のほうでした。ただ、Google は AdMob 向けのドメインの公式な一覧を出していません。そこで、広く使われている広告配信のドメイン（<code>googlesyndication.com</code>、<code>googleadservices.com</code>、<code>doubleclick.net</code>、<code>google.com</code>）を追加しました。Release 構成のビルドが通ることは確認しています。</p>
+
+  <h2 class="rv">3. アカウント削除（ガイドライン 5.1.1(v)）</h2>
+  <p>アカウントを作れるアプリは、アプリの中からアカウントを削除できなければなりません。削除の処理は、利用者のマップ投稿（目撃情報）と、その付随データ（所有者、申告、通報、お礼）も消すようにしました。Apple でサインインしている人は、アプリ側で Apple に再確認してから、サーバーで削除して、トークンを取り消します。設定画面とプライバシーポリシーの説明も、実際の動きに合わせました。</p>
+  <p>さらに、<strong>アカウントを削除しても、購読は解約されません</strong>。これを、設定の説明と削除の確認画面に書き足しました（審査の要件として）。</p>
+
+  <h2 class="rv">4. 利用者の投稿（ガイドライン 1.2）</h2>
+  <p>マップ投稿は、利用者が自由に書けます。それまでは、文字数や座標の範囲といった形式のチェックだけで、内容を弾く仕組みがありませんでした。そこで、自由記述の 3 項目（店舗名・商品名・メモ）に、簡易の NG ワード判定を足しました。該当すれば、投稿は作りますが、最初からレビュー待ちの状態にします。</p>
+  <p>もう一つ。投稿の通報は、開発者が管理画面の URL を自分から思い出して開かない限り、誰にも気づかれない状態でした。毎日の運用連絡に、レビュー待ちの件数を足して、見落としを防ぎました。</p>
+
+  <h2 class="rv">分かったこと</h2>
+  <blockquote>審査は、出してから落ちるものではなく、出す手前の点検で半分、見つかる。</blockquote>
+  <ul>
+    <li>四つのうち、二つ（iPad、ITMS-91064）は、機械が止めてくれました。残りの二つ（削除、投稿）は、ガイドラインを読んで、自分で点検して見つけたものです。</li>
+    <li>「未検証のものを出さない」ほうが、「全部対応する」よりも、速くて安全でした（iPad の件）。</li>
+  </ul>
+  <p class="note">この記事は、コミット（2026年9月16日〜10月6日）の記録から書きました。</p>
+
+  <div class="ad-slot" data-slot="footer" hidden></div>
+<!--/ad-->
+
+  <div class="rule" style="margin:40px 0 22px"></div>
+  <p class="eyebrow">この話に出てくるもの</p>
+  <ul class="plain">
+    <li><a href="/notes/torecadash-ci/">TestFlight にビルドが来ない原因を、一度間違えた</a> — 同じアプリの、ビルドの記録</li>
+    <li><a href="/notes/torecadash-watchdog/">「めっちゃクラッシュする」の原因は…</a> — 同じアプリの、実機ログの記録</li>
+  </ul>
+
+<!--related-->
+  <div class="rule" style="margin:40px 0 22px"></div>
+  <p class="eyebrow">ほかの記録</p>
+  <ul class="plain">
+    <li><a href="/notes/torecadash-9set/">「9種セット」の正体は御三家9商品だった：同じ商品なのに、決して一致しなかった</a> — 他のまとめサイトと突き合わせたら、抽選の表示は54%だった。商品の取り違え、比べ方の左右非対称、記事IDの穴。カバー率を91%にした記録。</li>
+    <li><a href="/notes/torecadash-watchdog/">「めっちゃクラッシュする」の原因は、画面の描き直しのたびの再計算だった</a> — 実機のログにあった 0x8BADF00D。951件の記事を、画面を描き直すたびにメインスレッドで数え直していた。原因の特定と、直す方式の記録。</li>
+    <li><a href="/notes/torecadash-ci/">TestFlight にビルドが来ない原因を、一度間違えた</a> — 「[ci skip] が原因」という最初の診断は、時系列が合わず誤りだった。Xcode Cloud の無料枠を使い切った本当の原因と、直し方の記録。</li>
+  </ul>
+<!--/related-->
+</div>
+</main>
+
+<footer class="site"><div class="wrap">
+  <span>© 2026 Koshin Studio</span>
+  <div class="sns-row"></div>
+  <nav><a href="/about/">About</a><a href="/privacy/">あつかい</a></nav>
+</div></footer>
+<script src="/vendor/gsap.min.js?v=9396f256" defer></script>
+<script src="/vendor/ScrollTrigger.min.js?v=05ca5ad8" defer></script>
+<script src="/vendor/lenis.min.js?v=daec1872" defer></script>
+<script src="/motion.js?v=5f78b937" defer></script>
+</body>
+</html>
