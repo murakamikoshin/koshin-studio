@@ -659,12 +659,20 @@ for (const file of pages) {
       { '@context': 'https://schema.org', '@graph': ld })}</script>` : '',
   ].filter(Boolean).join('\n');
   html = html.replace('</head>', head + '\n</head>');
+  /* ファビコン。絵を替えても、名前が同じだと、ブラウザは覚えた古い絵を使い続ける。
+     中身の印（?v=）を付けて、替えたら別物として取りに行かせる。
+     .ico も並べる（SVG に対応しない環境や、/favicon.ico を決め打ちで取る相手のため） */
+  html = html.replace(/\n?\s*<link rel="icon"[^>]*>/g, '');
+  html = html.replace('<script>document.documentElement.className+=" js"</script>',
+    `<link rel="icon" href="${stamped('/favicon.ico')}" sizes="48x48">\n`
+    + `<link rel="icon" href="${stamped('/favicon.svg')}" type="image/svg+xml" sizes="any">\n`
+    + '<script>document.documentElement.className+=" js"</script>');
   /* ホーム画面に置いたときの絵と、manifest。
      SVG だけだと iOS で何も出ない。消してから入れ直す */
   html = html.replace(/\n?\s*<link rel="apple-touch-icon"[^>]*>/g, '')
              .replace(/\n?\s*<link rel="manifest"[^>]*>/g, '');
   html = html.replace('<script>document.documentElement.className+=" js"</script>',
-    '<link rel="apple-touch-icon" href="/assets/icon/icon-180.png">\n'
+    `<link rel="apple-touch-icon" href="${stamped('/assets/icon/icon-180.png')}">\n`
     + '<link rel="manifest" href="/site.webmanifest">\n'
     + '<script>document.documentElement.className+=" js"</script>');
 
