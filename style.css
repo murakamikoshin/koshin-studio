@@ -623,7 +623,7 @@ h2::after{transform-origin:left center;transition:transform 1.1s var(--ease) .1s
       linear-gradient(180deg,#fdfcf9 0%,#fbfaf7 55%,#f5f3ee 100%);
     animation:none}
   body::after{opacity:.025}
-  header.site{background:rgba(251,250,247,.82)}
+  header.site{background:#fbfaf7;backdrop-filter:none;-webkit-backdrop-filter:none}
   strong{color:var(--text)}
   .btn{box-shadow:0 10px 28px -14px rgba(37,87,184,.7)}
   .btn:hover{box-shadow:0 16px 36px -14px rgba(37,87,184,.85)}
