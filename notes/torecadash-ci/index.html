@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TestFlight にビルドが来ない原因を、一度間違えた — トレカダッシュ 開発の記録 — Koshin Studio</title>
+<meta name="description" content="「[ci skip] が原因」という最初の診断は、時系列が合わず誤りだった。Xcode Cloud の無料枠を使い切った本当の原因と、直し方の記録。">
+<meta property="og:title" content="TestFlight にビルドが来ない原因を、一度間違えた">
+<meta property="og:description" content="ビルドが来ない原因を一度間違えた、Xcode Cloud の記録。">
+<meta property="og:type" content="article">
+<meta name="theme-color" content="#fbfaf7" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#070c17" media="(prefers-color-scheme: dark)">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/assets/icon/icon-180.png">
+<link rel="manifest" href="/site.webmanifest">
+<script>document.documentElement.className+=" js"</script>
+<link rel="stylesheet" href="/style.css?v=5b81520d">
+<link rel="canonical" href="https://koshinstudio.com/notes/torecadash-ci/">
+<meta property="og:url" content="https://koshinstudio.com/notes/torecadash-ci/">
+<meta property="og:site_name" content="Koshin Studio">
+<meta property="og:locale" content="ja_JP">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="alternate" type="application/rss+xml" title="Koshin Studio — Notes" href="https://koshinstudio.com/feed.xml">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BlogPosting","headline":"TestFlight にビルドが来ない原因を、一度間違えた","url":"https://koshinstudio.com/notes/torecadash-ci/","description":"「[ci skip] が原因」という最初の診断は、時系列が合わず誤りだった。Xcode Cloud の無料枠を使い切った本当の原因と、直し方の記録。","datePublished":"2026-10-08","dateModified":"2026-10-08","inLanguage":"ja","image":"https://koshinstudio.com/assets/og/og_notes_torecadash-ci.jpg","author":{"@id":"https://koshinstudio.com#studio"},"publisher":{"@id":"https://koshinstudio.com#studio"},"mainEntityOfPage":"https://koshinstudio.com/notes/torecadash-ci/"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Koshin Studio","item":"https://koshinstudio.com/"},{"@type":"ListItem","position":2,"name":"Notes","item":"https://koshinstudio.com/notes/"},{"@type":"ListItem","position":3,"name":"TestFlight にビルドが来ない原因を、一度間違えた","item":"https://koshinstudio.com/notes/torecadash-ci/"}]}]}</script>
+<meta property="og:image" content="https://koshinstudio.com/assets/og/og_notes_torecadash-ci.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+</head>
+<body>
+<canvas id="motes"></canvas>
+
+<header class="site"><div class="wrap">
+  <a class="logo" href="/">Koshin Studio</a>
+  <nav><a href="/works/">Works</a><a href="/notes/">Notes</a><a href="/anime/">診断</a><a href="/about/">About</a></nav>
+</div></header>
+
+<main><div class="wrap">
+  <nav class="crumbs" aria-label="現在地"><a href="/">Koshin Studio</a><i aria-hidden="true">›</i><a href="/notes/">Notes</a><i aria-hidden="true">›</i><span aria-current="page">TestFlight にビルドが来ない原因を、一度間違えた</span></nav>
+  <h1>TestFlight にビルドが来ない原因を、一度間違えた</h1>
+  <div class="rule"></div>
+  <p class="lead">トレカダッシュ 開発の記録 ／ 2026年10月</p>
+
+  <p>iOS アプリ「トレカダッシュ」の開発で、「TestFlight に新しいビルドが来ない」という不具合が起きました。最初に出した原因は<strong>間違っていました</strong>。どこで間違えて、どう気づいて、本当の原因は何だったのか。HANDOFF（開発の引き継ぎ記録）とコミットに残っている数字で書きます。</p>
+  <p class="note">このサイトには、トレカダッシュの作品ページはまだありません。ここに書くのは、開発の記録です。</p>
+
+  <h2 class="rv">最初の診断：「[ci skip] が原因」</h2>
+  <p>9月2日、「9/1 以降のビルドがない」という報告がありました。最初に出した診断は、<strong>コミットメッセージに付けていた <code>[ci skip]</code> が、ビルドを止めている</strong>というものです。文書だけの変更で、Xcode Cloud の無料枠（月25時間）を使わないように付けていた印でした。診断と一緒に、「<code>[ci skip]</code> を使うな」という規則も作りました。</p>
+
+  <h2 class="rv">時系列が合わなかった</h2>
+  <p>App Store Connect の Xcode Cloud を見ると、こう出ていました。</p>
+  <blockquote>利用上限に達しました。上限は更新日の9月8日にリセットされます。</blockquote>
+  <p>過去30日の使用状況は、<strong>493ビルド・28時間14分</strong>。無料枠は月25時間なので、使い切っていました。</p>
+  <p>最初の診断が違うと分かった決め手は、<strong>時系列</strong>です。<code>[ci skip]</code> を付けたコミットは、9月2日の3件だけ。ビルドが止まったのは9月1日です。<strong>原因が結果より後に起きている</strong>ので、原因になりえません。しかも、作った規則は、枠が足りない状況では逆効果でした。</p>
+
+  <h2 class="rv">なぜ493回も回ったのか</h2>
+  <p>ワークフローの開始条件が「任意のファイルが変更された場合」でした。過去30日のコミットを数えると、こうです。</p>
+  <div class="scroll rv"><table>
+    <tr><th>過去30日</th><th class="n">件数</th></tr>
+    <tr><td>全コミット</td><td class="n">1,146</td></tr>
+    <tr><td>うち、iOS アプリに触ったもの</td><td class="n">219（19%）</td></tr>
+    <tr><td>Xcode Cloud が回したビルド</td><td class="n">493（1回あたり平均3.4分）</td></tr>
+  </table></div>
+  <p>つまり、<strong>8割は、サーバー側のコードや文書しか変わっていないのに、iOS アプリをまるごとビルドしていた</strong>ことになります。さらに「クリーンビルド」にチェックが入っていて、毎回キャッシュを使わず、一回が最大限に長くなる設定でした。</p>
+
+  <h2 class="rv">直し方は、印ではなく設定</h2>
+  <ol>
+    <li>開始条件を、ファイルとフォルダのカスタムルールにして、iOS アプリのフォルダと Xcode のプロジェクトだけに絞る。</li>
+    <li>クリーンビルドのチェックを外す。</li>
+  </ol>
+  <p>HANDOFF の見込みでは、これでビルドは 493回から約94回、時間は28時間から月に約5.4時間になります。これは見込みの計算で、設定を直したあとの実測ではありません。</p>
+
+  <h2 class="rv">分かったこと</h2>
+  <blockquote>その原因で説明がつくか、時系列で確かめてから決める。</blockquote>
+  <p>最初の診断は、「それらしい」原因を見つけたところで止まっていました。結果より後に起きたことは、原因になれません。この確認は、診断を出す前なら一分で済みます。HANDOFF の §183 には、「この診断は間違っていた」という注意書きを付けて、記録として残してあります。</p>
+  <p class="note">この記事の数字は、HANDOFF とコミット（2026年9月2日）の記録から取りました。</p>
+
+  <div class="ad-slot" data-slot="footer" hidden></div>
+<!--/ad-->
+
+  <div class="rule" style="margin:40px 0 22px"></div>
+  <p class="eyebrow">この話に出てくるもの</p>
+  <ul class="plain">
+    <li><a href="/notes/torecadash-ai/">「減るはず」が、二度外れた</a> — 同じアプリの、数え直した記録</li>
+    <li><a href="/notes/sushi-measure/">「山は89%で落ち着く」は誤りだった</a> — 自分の測定が間違っていた、別の記録</li>
+  </ul>
+
+<!--related-->
+  <div class="rule" style="margin:40px 0 22px"></div>
+  <p class="eyebrow">ほかの記録</p>
+  <ul class="plain">
+    <li><a href="/notes/torecadash-watchdog/">「めっちゃクラッシュする」の原因は、画面の描き直しのたびの再計算だった</a> — 実機のログにあった 0x8BADF00D。951件の記事を、画面を描き直すたびにメインスレッドで数え直していた。原因の特定と、直す方式の記録。</li>
+    <li><a href="/notes/torecadash-ai/">「減るはず」が、二度外れた：AIへの問い合わせを削る話</a> — トレカ情報アプリで、AI への問い合わせを減らそうとした記録。45%減るはずが4.5%、配備したのに束ねが0回。数え直して見つかったことを、コミットの数字で書いた。</li>
+    <li><a href="/notes/crazygames/">CrazyGames に落ちた：理由は書かれていなかったので、撮って探した</a> — ゲームポータルの審査に「全体の品質が期待に達していない」とだけ書かれて落ちた。自分で画面を撮って見つけた四つの原因と、測って選んだ直し方の記録。</li>
+  </ul>
+<!--/related-->
+</div>
+</main>
+
+<footer class="site"><div class="wrap">
+  <span>© 2026 Koshin Studio</span>
+  <div class="sns-row"></div>
+  <nav><a href="/about/">About</a><a href="/privacy/">あつかい</a></nav>
+</div></footer>
+<script src="/vendor/gsap.min.js?v=9396f256" defer></script>
+<script src="/vendor/ScrollTrigger.min.js?v=05ca5ad8" defer></script>
+<script src="/vendor/lenis.min.js?v=daec1872" defer></script>
+<script src="/motion.js?v=460aa073" defer></script>
+</body>
+</html>

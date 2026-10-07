@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>「めっちゃクラッシュする」の原因は、画面の描き直しのたびの再計算だった — トレカダッシュ 開発の記録 — Koshin Studio</title>
+<meta name="description" content="実機のログにあった 0x8BADF00D。951件の記事を、画面を描き直すたびにメインスレッドで数え直していた。原因の特定と、直す方式の記録。">
+<meta property="og:title" content="「めっちゃクラッシュする」の原因は、画面の描き直しのたびの再計算だった">
+<meta property="og:description" content="アプリが固まって強制終了される原因を特定した記録。">
+<meta property="og:type" content="article">
+<meta name="theme-color" content="#fbfaf7" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#070c17" media="(prefers-color-scheme: dark)">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/assets/icon/icon-180.png">
+<link rel="manifest" href="/site.webmanifest">
+<script>document.documentElement.className+=" js"</script>
+<link rel="stylesheet" href="/style.css?v=5b81520d">
+<link rel="canonical" href="https://koshinstudio.com/notes/torecadash-watchdog/">
+<meta property="og:url" content="https://koshinstudio.com/notes/torecadash-watchdog/">
+<meta property="og:site_name" content="Koshin Studio">
+<meta property="og:locale" content="ja_JP">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="alternate" type="application/rss+xml" title="Koshin Studio — Notes" href="https://koshinstudio.com/feed.xml">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BlogPosting","headline":"「めっちゃクラッシュする」の原因は、画面の描き直しのたびの再計算だった","url":"https://koshinstudio.com/notes/torecadash-watchdog/","description":"実機のログにあった 0x8BADF00D。951件の記事を、画面を描き直すたびにメインスレッドで数え直していた。原因の特定と、直す方式の記録。","datePublished":"2026-10-08","dateModified":"2026-10-08","inLanguage":"ja","image":"https://koshinstudio.com/assets/og/og_notes_torecadash-watchdog.jpg","author":{"@id":"https://koshinstudio.com#studio"},"publisher":{"@id":"https://koshinstudio.com#studio"},"mainEntityOfPage":"https://koshinstudio.com/notes/torecadash-watchdog/"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Koshin Studio","item":"https://koshinstudio.com/"},{"@type":"ListItem","position":2,"name":"Notes","item":"https://koshinstudio.com/notes/"},{"@type":"ListItem","position":3,"name":"「めっちゃクラッシュする」の原因は、画面の描き直しのたびの再計算だった","item":"https://koshinstudio.com/notes/torecadash-watchdog/"}]}]}</script>
+<meta property="og:image" content="https://koshinstudio.com/assets/og/og_notes_torecadash-watchdog.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+</head>
+<body>
+<canvas id="motes"></canvas>
+
+<header class="site"><div class="wrap">
+  <a class="logo" href="/">Koshin Studio</a>
+  <nav><a href="/works/">Works</a><a href="/notes/">Notes</a><a href="/anime/">診断</a><a href="/about/">About</a></nav>
+</div></header>
+
+<main><div class="wrap">
+  <nav class="crumbs" aria-label="現在地"><a href="/">Koshin Studio</a><i aria-hidden="true">›</i><a href="/notes/">Notes</a><i aria-hidden="true">›</i><span aria-current="page">「めっちゃクラッシュする」の原因は、画面の描き直しのたびの再計算だった</span></nav>
+  <h1>「めっちゃクラッシュする」の原因は、画面の描き直しのたびの再計算だった</h1>
+  <div class="rule"></div>
+  <p class="lead">トレカダッシュ 開発の記録 ／ 2026年10月</p>
+
+  <p>iOS アプリ「トレカダッシュ」で、「なんかアプリ、めっちゃクラッシュする」という報告がありました。実機のログを読むと、<strong>アプリが固まって、OS に強制終了されていた</strong>ことが分かりました。原因は、画面を描き直すたびに、951件の記事を毎回数え直していたことでした。コミットの記録で書きます。</p>
+  <p class="note">このサイトには、トレカダッシュの作品ページはまだありません。ここに書くのは、開発の記録です。</p>
+
+  <h2 class="rv">ログに残っていたもの</h2>
+  <p>実機のハングのログには、<code>0x8BADF00D</code> という終了コードと、<code>Failed to terminate gracefully after 5.0s</code> という一行がありました。<strong>5秒以内に応答しないアプリを、OS（watchdog）が強制終了した</strong>という意味です。メインスレッドは、<code>NSKeyedArchiver</code> を経由する処理で止まっていました。また、端末は発熱していて（Thermal State: serious）、普段なら一瞬で終わる処理が、5秒を超えていました。</p>
+
+  <h2 class="rv">本当の原因</h2>
+  <p>固まっていたのは、「フォロー中」タブの、商品の記事一覧です。記事が951件あるケースでした。</p>
+  <p>記事の一覧（<code>articles</code>）が、<strong>ただの計算プロパティ</strong>になっていました。SwiftUI は、画面（<code>body</code>）を何度も評価し直します。記事のデータが変わっていないときも、です。そのたびに、<strong>951件に対して、絞り込み4回・変換・並べ替えを、メインスレッドで毎回やり直していました</strong>。</p>
+  <p>普段は一瞬で終わるので、気づきません。発熱で端末が遅くなったときだけ、5秒を超えて、強制終了になります。</p>
+
+  <h2 class="rv">直し方</h2>
+  <p>記事のデータ、受け取り方法、並べ替えの3つが、<strong>実際に変わったときだけ</strong>、バックグラウンドのスレッドで計算し直すことにしました。結果は、表示用の状態（<code>displayArticles</code>、<code>@State</code>）に入れます。これで、メインスレッドを塞がなくなります。</p>
+  <pre><code>// （イメージです。実際のコードそのものではありません）
+// 前：body を評価するたびに、毎回
+var articles: [Article] { fetched.filter…filter…map…sorted }
+
+// 後：変わったときだけ、裏で計算して、結果を持っておく
+@State var displayArticles: [Article] = []
+// fetchedArticles / receiveMode / sortOption が変わったときに再計算</code></pre>
+
+  <h2 class="rv">確かめられていないこと</h2>
+  <p>コミットに書かれている確認は、<code>xcodebuild</code> でビルドが成功した（BUILD SUCCEEDED）ことだけです。<strong>実機で、固まらなくなったことは、記録にありません</strong>。発熱している状態は、再現しにくいので、確かめるのも簡単ではありません。この記事では、「直した」ではなく、「原因を特定して、直す方式に変えた」と書いておきます。</p>
+
+  <h2 class="rv">分かったこと</h2>
+  <blockquote>普段は一瞬で終わる処理は、遅い日にだけ、アプリを止める。</blockquote>
+  <p>計算プロパティは、書くのが楽です。ただ、画面が描き直されるたびに実行される場所に置くと、データの量に比例して、遅くなります。951件は、少なくない数です。「何回呼ばれるか」を意識して置き場所を決める、という当たり前のことを、実機のログで教わりました。</p>
+  <p class="note">この記事は、コミット（2026年10月5日）の記録から書きました。</p>
+
+  <div class="ad-slot" data-slot="footer" hidden></div>
+<!--/ad-->
+
+  <div class="rule" style="margin:40px 0 22px"></div>
+  <p class="eyebrow">この話に出てくるもの</p>
+  <ul class="plain">
+    <li><a href="/notes/torecadash-ai/">「減るはず」が、二度外れた</a> — 同じアプリの、AI への問い合わせの記録</li>
+    <li><a href="/notes/torecadash-ci/">TestFlight にビルドが来ない原因を、一度間違えた</a> — 同じアプリの、別の記録</li>
+  </ul>
+
+<!--related-->
+  <div class="rule" style="margin:40px 0 22px"></div>
+  <p class="eyebrow">ほかの記録</p>
+  <ul class="plain">
+    <li><a href="/notes/torecadash-ci/">TestFlight にビルドが来ない原因を、一度間違えた</a> — 「[ci skip] が原因」という最初の診断は、時系列が合わず誤りだった。Xcode Cloud の無料枠を使い切った本当の原因と、直し方の記録。</li>
+    <li><a href="/notes/torecadash-ai/">「減るはず」が、二度外れた：AIへの問い合わせを削る話</a> — トレカ情報アプリで、AI への問い合わせを減らそうとした記録。45%減るはずが4.5%、配備したのに束ねが0回。数え直して見つかったことを、コミットの数字で書いた。</li>
+    <li><a href="/notes/crazygames/">CrazyGames に落ちた：理由は書かれていなかったので、撮って探した</a> — ゲームポータルの審査に「全体の品質が期待に達していない」とだけ書かれて落ちた。自分で画面を撮って見つけた四つの原因と、測って選んだ直し方の記録。</li>
+  </ul>
+<!--/related-->
+</div>
+</main>
+
+<footer class="site"><div class="wrap">
+  <span>© 2026 Koshin Studio</span>
+  <div class="sns-row"></div>
+  <nav><a href="/about/">About</a><a href="/privacy/">あつかい</a></nav>
+</div></footer>
+<script src="/vendor/gsap.min.js?v=9396f256" defer></script>
+<script src="/vendor/ScrollTrigger.min.js?v=05ca5ad8" defer></script>
+<script src="/vendor/lenis.min.js?v=daec1872" defer></script>
+<script src="/motion.js?v=460aa073" defer></script>
+</body>
+</html>

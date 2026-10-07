@@ -1,5 +1,21 @@
 [
   {
+    "slug": "torecadash-watchdog",
+    "title": "「めっちゃクラッシュする」の原因は、画面の描き直しのたびの再計算だった",
+    "date": "2026-10-08",
+    "work": "トレカダッシュ",
+    "url": "/notes/torecadash-watchdog/",
+    "blurb": "実機のログにあった 0x8BADF00D。951件の記事を、画面を描き直すたびにメインスレッドで数え直していた。原因の特定と、直す方式の記録。"
+  },
+  {
+    "slug": "torecadash-ci",
+    "title": "TestFlight にビルドが来ない原因を、一度間違えた",
+    "date": "2026-10-08",
+    "work": "トレカダッシュ",
+    "url": "/notes/torecadash-ci/",
+    "blurb": "「[ci skip] が原因」という最初の診断は、時系列が合わず誤りだった。Xcode Cloud の無料枠を使い切った本当の原因と、直し方の記録。"
+  },
+  {
     "slug": "crazygames",
     "title": "CrazyGames に落ちた：理由は書かれていなかったので、撮って探した",
     "date": "2026-10-08",
