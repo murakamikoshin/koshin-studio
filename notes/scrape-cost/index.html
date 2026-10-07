@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>「しょうがない」を測り直したら、取得の費用は8分の1だった — トレカダッシュ 開発の記録 — Koshin Studio</title>
+<meta name="description" content="「イオンとあみあみは費用が重くて縮められない」は、古い単価に基づく思い込みだった。3つの取得設定で同じページを比べて、描画が丸ごと無駄だと分かった記録。">
+<meta property="og:title" content="「しょうがない」を測り直したら、取得の費用は8分の1だった">
+<meta property="og:description" content="取得の設定を測り直して、速さを3倍、使う量を8分の1にした記録。">
+<meta property="og:type" content="article">
+<meta name="theme-color" content="#fbfaf7">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/assets/icon/icon-180.png">
+<link rel="manifest" href="/site.webmanifest">
+<script>document.documentElement.className+=" js"</script>
+<link rel="stylesheet" href="/style.css?v=e8482157">
+<link rel="canonical" href="https://koshinstudio.com/notes/scrape-cost/">
+<meta property="og:url" content="https://koshinstudio.com/notes/scrape-cost/">
+<meta property="og:site_name" content="Koshin Studio">
+<meta property="og:locale" content="ja_JP">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="alternate" type="application/rss+xml" title="Koshin Studio — Notes" href="https://koshinstudio.com/feed.xml">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BlogPosting","headline":"「しょうがない」を測り直したら、取得の費用は8分の1だった","url":"https://koshinstudio.com/notes/scrape-cost/","description":"「イオンとあみあみは費用が重くて縮められない」は、古い単価に基づく思い込みだった。3つの取得設定で同じページを比べて、描画が丸ごと無駄だと分かった記録。","datePublished":"2026-10-08","dateModified":"2026-10-08","inLanguage":"ja","image":"https://koshinstudio.com/assets/og/og_notes_scrape-cost.jpg","author":{"@id":"https://koshinstudio.com#studio"},"publisher":{"@id":"https://koshinstudio.com#studio"},"mainEntityOfPage":"https://koshinstudio.com/notes/scrape-cost/"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Koshin Studio","item":"https://koshinstudio.com/"},{"@type":"ListItem","position":2,"name":"Notes","item":"https://koshinstudio.com/notes/"},{"@type":"ListItem","position":3,"name":"「しょうがない」を測り直したら、取得の費用は8分の1だった","item":"https://koshinstudio.com/notes/scrape-cost/"}]}]}</script>
+<meta property="og:image" content="https://koshinstudio.com/assets/og/og_notes_scrape-cost.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+</head>
+<body>
+<canvas id="motes"></canvas>
+
+<header class="site"><div class="wrap">
+  <a class="logo" href="/">Koshin Studio</a>
+  <nav><a href="/works/">Works</a><a href="/notes/">Notes</a><a href="/about/">About</a></nav>
+</div></header>
+
+<main><div class="wrap">
+  <nav class="crumbs" aria-label="現在地"><a href="/">Koshin Studio</a><i aria-hidden="true">›</i><a href="/notes/">Notes</a><i aria-hidden="true">›</i><span aria-current="page">「しょうがない」を測り直したら、取得の費用は8分の1だった</span></nav>
+  <h1>「しょうがない」を測り直したら、取得の費用は8分の1だった</h1>
+  <div class="rule"></div>
+  <p class="lead">トレカダッシュ 開発の記録 ／ 2026年10月</p>
+
+  <p>iOS アプリ「トレカダッシュ」は、通販サイトなどの販売ページを定期的に見に行って、抽選や先着の情報を集めています。ページの取得は、外部のサービス（Scrape.do）を通して行っていて、<strong>取得の設定ごとに、使うクレジットが違います</strong>。あるサイトについて、「これはしょうがない」と思っていたことを、測り直したら、<strong>3 倍速く、使う量は 8 分の 1</strong>になりました。コミットの記録で書きます。</p>
+  <p class="note">このサイトには、トレカダッシュの作品ページはまだありません。ここに書くのは、開発の記録です。金額は書かず、クレジットの数だけを書きます。</p>
+
+  <h2 class="rv">「しょうがない」の理由は、費用だった</h2>
+  <p>イオンスタイルオンラインと、あみあみの 2 サイトは、取得の間隔を縮められない、と考えていました。理由は、取得にかかる費用が重いこと。つまり、<strong>古い単価を前提にした結論</strong>です。それを、もう一度、測ってみることにしました。</p>
+
+  <h2 class="rv">3 つの設定で、同じページを取った</h2>
+  <p>取得の設定は、3 段階あります。単純に取る（1 クレジット）、ブラウザで描画してから取る（render、5 クレジット）、さらに強力な経路で描画して取る（super＋render、25 クレジット）。イオンの一覧ページを、この 3 つで取って、中身を比べました。2 ページを、それぞれ 3 回、くり返しています。</p>
+  <div class="scroll rv"><table>
+    <tr><th>設定</th><th class="n">クレジット</th><th class="n">サイズ（バイト）</th><th class="n">商品</th><th class="n">価格</th></tr>
+    <tr><td>単純に取る</td><td class="n">1</td><td class="n">649,734</td><td class="n">20 件</td><td class="n">25 件</td></tr>
+    <tr><td>render</td><td class="n">5</td><td class="n">663,026</td><td class="n">20 件</td><td class="n">25 件</td></tr>
+    <tr><td>super＋render</td><td class="n">25</td><td class="n">669,510</td><td class="n">20 件</td><td class="n">25 件</td></tr>
+  </table></div>
+  <p>3 つとも、<strong>取れた商品も価格も、まったく同じ</strong>でした。つまり、描画（render）は、<strong>まるごと無駄</strong>だったことになります。1 クレジットで足りるものに、25 クレジット払っていました。</p>
+
+  <h2 class="rv">直し方</h2>
+  <ul>
+    <li><strong>安い設定から先に試す。</strong>イオンは、まず単純に取ります。先着の開始時に出る「アクセス集中」のページが返ってきたときだけ、自動で強い設定に切り替えます。</li>
+    <li><strong>間隔を、15 分から 5 分に。</strong>5 分おきは、1 日 288 回です。2 ページなので、576 クレジット。前は、1 日に約 4,600 クレジットでした（コミットの記載です）。<strong>3 倍速くなって、使う量は約 8 分の 1</strong>です。</li>
+    <li><strong>あみあみにも、同じ実測の結果を当てた。</strong>描画を外して、1 回あたり 5 クレジットから 1 クレジットに。1 日に約 1,200 クレジットの節約です。</li>
+  </ul>
+  <p>ただし、あみあみの<strong>間隔は、15 分のまま</strong>にしました。その日、タイムアウトを 2 回出していて、1 回の実行が 284 秒もかかっていたからです。取得全体も混み合ってきていたので、触らないと決めました。測ったのは「描画が要るか」で、「間隔を縮めても大丈夫か」ではありません。</p>
+
+  <h2 class="rv">分かったこと</h2>
+  <blockquote>「しょうがない」は、いつ測った数字に、もとづいているか。</blockquote>
+  <ul>
+    <li><strong>古い結論は、測り直す。</strong>単価も、設定も、サイトの作りも、変わります。「イオンはしょうがない」は、測ったら、そうではありませんでした。</li>
+    <li><strong>強い設定は、「念のため」で入れがち。</strong>必要かどうかは、結果を比べれば分かります。同じ結果が出るなら、安いほうで足ります。</li>
+    <li><strong>一つ直したら、他の条件も確かめる。</strong>同じ測定で、あみあみの設定も直せましたが、間隔は別の事情（タイムアウト）があるので、そのままにしました。</li>
+  </ul>
+  <p class="note">この記事の数字は、コミット（2026年9月7日）の記録から取りました。「4,600」は、コミットの記載で、25 クレジット × 2 ページ × 96 回（15 分おき）の計算（4,800）とは、少しずれています。</p>
+
+  <div class="ad-slot" data-slot="footer" hidden></div>
+<!--/ad-->
+
+  <div class="rule" style="margin:40px 0 22px"></div>
+  <p class="eyebrow">この話に出てくるもの</p>
+  <ul class="plain">
+    <li><a href="/notes/torecadash-ai/">「減るはず」が、二度外れた</a> — 同じアプリの、AI への問い合わせの記録</li>
+    <li><a href="/notes/torecadash-9set/">「9種セット」の正体は御三家9商品だった</a> — 同じアプリの、突き合わせの記録</li>
+  </ul>
+
+<!--related-->
+  <div class="rule" style="margin:40px 0 22px"></div>
+  <p class="eyebrow">ほかの記録</p>
+  <ul class="plain">
+    <li><a href="/notes/review-info-needed/">初めての審査で、「情報が必要です」と返ってきた</a> — App Store の初めての審査で届いたのは、不合格ではなく「情報が必要」というメールだった。求められた六つ（実機の画面収録、目的、外部サービスの一覧など）と、前に直したこととのつながり。</li>
+    <li><a href="/notes/torecadash-review/">審査に出そうとして止まった四つのこと</a> — iPad のスクリーンショット、自動検査の ITMS-91064、アカウント削除、投稿の通報。App Store の審査に出す手前で止まった四つと、その直し方の記録。</li>
+    <li><a href="/notes/torecadash-9set/">「9種セット」の正体は御三家9商品だった：同じ商品なのに、決して一致しなかった</a> — 他のまとめサイトと突き合わせたら、抽選の表示は54%だった。商品の取り違え、比べ方の左右非対称、記事IDの穴。カバー率を91%にした記録。</li>
+  </ul>
+<!--/related-->
+</div>
+</main>
+
+<footer class="site"><div class="wrap">
+  <span>© 2026 Koshin Studio</span>
+  <div class="sns-row"></div>
+  <nav><a href="/about/">About</a><a href="/privacy/">あつかい</a></nav>
+</div></footer>
+<script src="/vendor/gsap.min.js?v=9396f256" defer></script>
+<script src="/vendor/ScrollTrigger.min.js?v=05ca5ad8" defer></script>
+<script src="/vendor/lenis.min.js?v=daec1872" defer></script>
+<script src="/motion.js?v=5f78b937" defer></script>
+</body>
+</html>

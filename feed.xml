@@ -7,6 +7,13 @@
   <language>ja</language>
   <atom:link href="https://koshinstudio.com/feed.xml" rel="self" type="application/rss+xml"/>
   <item>
+    <title>「しょうがない」を測り直したら、取得の費用は8分の1だった</title>
+    <link>https://koshinstudio.com/notes/scrape-cost/</link>
+    <guid isPermaLink="true">https://koshinstudio.com/notes/scrape-cost/</guid>
+    <pubDate>Wed, 07 Oct 2026 15:00:00 GMT</pubDate>
+    <description>「イオンとあみあみは費用が重くて縮められない」は、古い単価に基づく思い込みだった。3つの取得設定で同じページを比べて、描画が丸ごと無駄だと分かった記録。</description>
+  </item>
+  <item>
     <title>16,177作から6,091作へ：診断のデータベースは、6割以上を落として作った</title>
     <link>https://koshinstudio.com/notes/anime-db/</link>
     <guid isPermaLink="true">https://koshinstudio.com/notes/anime-db/</guid>
