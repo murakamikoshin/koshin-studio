@@ -264,11 +264,26 @@
       }
     }
 
+    /* 字の範囲（画面の座標）。ロゴの SVG は、字形そのものの範囲を data-box
+       （viewBox の座標）で持っている。下段は「字＝マスク」なので、
+       要素の枠（矩形）は字より大きい。字形の範囲から計算すると、
+       粒が字の真ん中から出る。data-box が無い SVG は、要素の枠で代用する */
+    function boxOf(el) {
+      var d = el.getAttribute('data-box'), svg = el.ownerSVGElement;
+      var m = svg && svg.getScreenCTM && svg.getScreenCTM();
+      if (d && m) {
+        var v = d.split(' ').map(Number);
+        var l = m.a * v[0] + m.e, t = m.d * v[1] + m.f, w = m.a * v[2], h = m.d * v[3];
+        return { left: l, top: t, width: w, height: h, right: l + w, bottom: t + h };
+      }
+      return el.getBoundingClientRect();
+    }
+
     /* 押した所に一番近い字を探す。字の隙間を押されても取りこぼさない */
     function charAt(px, py) {
       var best = null, bestD = Infinity;
       for (var i = 0; i < chars.length; i++) {
-        var b = chars[i].getBoundingClientRect();
+        var b = boxOf(chars[i]);
         if (!b.width || !b.height) continue;
         var dx = Math.max(b.left - px, 0, px - b.right);
         var dy = Math.max(b.top - py, 0, py - b.bottom);
@@ -287,15 +302,23 @@
       }
       var ch = charAt(px, py);
       if (!ch) return;
-      var b = ch.getBoundingClientRect();
+      var b = boxOf(ch);
       pop(b.left + b.width / 2, b.top + b.height / 2, 34);
-      if (G && !calm) {
+      if (!calm && ch.animate) {
         /* 下段は「字＝マスク、色＝矩形」なので、包んでいる <g> ごと動かす。
-           矩形だけ動かすと、字が止まったまま色だけ滑る */
-        G.fromTo(ch, { scale: .88 },
-          { scale: 1, duration: .9, ease: 'elastic.out(1,.4)', transformOrigin: '50% 50%' });
-        G.fromTo(ch, { filter: 'brightness(2.6)' },
-          { filter: 'brightness(1)', duration: .7, ease: 'power2.out' });
+           矩形だけ動かすと、字が止まったまま色だけ滑る。
+           GSAP で SVG の <g> を動かすと、終わったあとに位置が少しずれたまま
+           戻らなかった（変形の原点の計算が残る）。ブラウザ標準の
+           Web Animations なら、終わると元の状態に戻るので、ずれが残らない。
+           字の位置は、外側の <g transform> が持っている（ks-ch には無い） */
+        ch.style.transformBox = 'fill-box';
+        ch.style.transformOrigin = 'center';
+        ch.animate([
+          { transform: 'scale(.88)', filter: 'brightness(2.6)', offset: 0 },
+          { transform: 'scale(1.06)', filter: 'brightness(1.5)', offset: .35 },
+          { transform: 'scale(.98)', filter: 'brightness(1.1)', offset: .65 },
+          { transform: 'scale(1)', filter: 'brightness(1)', offset: 1 }
+        ], { duration: 900, easing: 'cubic-bezier(.2,.8,.3,1)' });
       }
     });
     (function bloop() {
