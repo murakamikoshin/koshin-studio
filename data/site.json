@@ -15,7 +15,7 @@
     "note": "AdSense に通ったら enabled を true にして client を埋める。client だけで、遊ぶ頁の区切り広告（H5 Games Ads）が入る。記事の枠を出すには slots も埋める。gameHint は広告の間隔の目安。"
   },
   "contact": {
-    "email": "",
+    "email": "koshinstudio88@gmail.com",
     "form": "",
     "note": "email か form を入れると、About に連絡先の節が出ます。両方空の間は節ごと非表示です。form は Google フォームの URL。email も入れるとメールが主役になり、フォームは控えに回ります。"
   }
