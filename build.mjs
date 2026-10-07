@@ -560,8 +560,14 @@ function ldFor(file, url) {
       crumbs([['Koshin Studio', '/'], ['Notes', '/notes/'], [nn.title, nn.url]]),
     ];
   }
-  if (rel === '/works/index.html') return [crumbs([['Koshin Studio', '/'], ['Works', '/works/']])];
-  if (rel === '/notes/index.html') return [crumbs([['Koshin Studio', '/'], ['Notes', '/notes/']])];
+  if (rel === '/works/index.html') return [crumbs([['Koshin Studio', '/'], ['Works', '/works/']]),
+    { '@type': 'CollectionPage', name: 'Works', url: url, inLanguage: 'ja', isPartOf: { '@id': SITE + '#studio' } },
+    { '@type': 'ItemList', name: '作ったもの',
+      itemListElement: works.map((w, i) => ({ '@type': 'ListItem', position: i + 1, url: SITE + w.url, name: w.title })) }];
+  if (rel === '/notes/index.html') return [crumbs([['Koshin Studio', '/'], ['Notes', '/notes/']]),
+    { '@type': 'CollectionPage', name: 'Notes', url: url, inLanguage: 'ja', isPartOf: { '@id': SITE + '#studio' } },
+    { '@type': 'ItemList', name: '制作の記録',
+      itemListElement: notes.map((n, i) => ({ '@type': 'ListItem', position: i + 1, url: SITE + n.url, name: n.title })) }];
   if (rel === '/about/index.html') {
     const tools = [].concat(...(stack.groups || []).map((g) => g.items || []));
     return [

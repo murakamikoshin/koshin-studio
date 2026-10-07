@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url><loc>https://koshinstudio.com/about/</loc><lastmod>2026-10-08</lastmod><priority>0.7</priority></url>
   <url><loc>https://koshinstudio.com/anime/axes/</loc><lastmod>2026-10-08</lastmod><priority>0.8</priority></url>
-  <url><loc>https://koshinstudio.com/anime/guide/</loc><priority>0.5</priority></url>
+  <url><loc>https://koshinstudio.com/anime/guide/</loc><lastmod>2026-10-08</lastmod><priority>0.5</priority></url>
   <url><loc>https://koshinstudio.com/anime/</loc><lastmod>2026-10-08</lastmod><priority>0.8</priority></url>
   <url><loc>https://koshinstudio.com/anime/types/</loc><lastmod>2026-10-08</lastmod><priority>0.8</priority></url>
   <url><loc>https://koshinstudio.com/</loc><lastmod>2026-10-08</lastmod><priority>1.0</priority></url>
@@ -38,5 +38,5 @@
   <url><loc>https://koshinstudio.com/works/stopwatch10/</loc><lastmod>2026-10-08</lastmod><priority>0.8</priority></url>
   <url><loc>https://koshinstudio.com/works/sushitsumu/guide.html</loc><lastmod>2026-10-08</lastmod><priority>0.5</priority></url>
   <url><loc>https://koshinstudio.com/works/sushitsumu/</loc><lastmod>2026-10-08</lastmod><priority>0.8</priority></url>
-  <url><loc>https://koshinstudio.com/works/torecadash/</loc><priority>0.8</priority></url>
+  <url><loc>https://koshinstudio.com/works/torecadash/</loc><lastmod>2026-10-08</lastmod><priority>0.8</priority></url>
 </urlset>

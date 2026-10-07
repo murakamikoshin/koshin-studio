@@ -31,6 +31,11 @@ used = set(' 　')
 for f in glob.glob(os.path.join(site, '**', '*.html'), recursive=True):
     if 'works/sushitsumu/play' in f or '/vendor/' in f:
         continue
+    # タイプ別 64 ページ（noindex・自動生成）は、作品名の珍しい漢字が多く、
+    # 書体を倍近く重くする。珍しい字は標準の書体に落ちてよいので、取り込まない
+    # （一覧 /anime/types/index.html は取り込む）
+    if '/anime/types/' in f and not f.endswith('/anime/types/index.html'):
+        continue
     s = open(f, encoding='utf-8').read()
     s = re.sub(r'<(script|style)\b[^>]*>[\s\S]*?</\1>', ' ', s)
     s = re.sub(r'<!--[\s\S]*?-->', ' ', s)
