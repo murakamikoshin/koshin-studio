@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>10秒ピッタリのランキングを、公平にする：小数3桁・同着・書き込み回数 — 10秒ピッタリ 開発の記録 — Koshin Studio</title>
+<meta name="description" content="時計の精度の差で iPhone が有利にならないよう小数3桁に切り、同着の確率（約1/333）に備えてタイブレークを決め、KV の書き込み回数を数えた。設計の理由と、公開した日のつまずき。">
+<meta property="og:title" content="10秒ピッタリのランキングを、公平にする：小数3桁・同着・書き込み回数">
+<meta property="og:description" content="10秒ピッタリのランキングを公平にするための設計の記録。">
+<meta property="og:type" content="article">
+<meta name="theme-color" content="#fbfaf7">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/assets/icon/icon-180.png">
+<link rel="manifest" href="/site.webmanifest">
+<script>document.documentElement.className+=" js"</script>
+<link rel="stylesheet" href="/style.css?v=e8482157">
+<link rel="canonical" href="https://koshinstudio.com/notes/stopwatch-rank/">
+<meta property="og:url" content="https://koshinstudio.com/notes/stopwatch-rank/">
+<meta property="og:site_name" content="Koshin Studio">
+<meta property="og:locale" content="ja_JP">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="alternate" type="application/rss+xml" title="Koshin Studio — Notes" href="https://koshinstudio.com/feed.xml">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BlogPosting","headline":"10秒ピッタリのランキングを、公平にする：小数3桁・同着・書き込み回数","url":"https://koshinstudio.com/notes/stopwatch-rank/","description":"時計の精度の差で iPhone が有利にならないよう小数3桁に切り、同着の確率（約1/333）に備えてタイブレークを決め、KV の書き込み回数を数えた。設計の理由と、公開した日のつまずき。","datePublished":"2026-10-08","dateModified":"2026-10-08","inLanguage":"ja","image":"https://koshinstudio.com/assets/og/og_notes_stopwatch-rank.jpg","author":{"@id":"https://koshinstudio.com#studio"},"publisher":{"@id":"https://koshinstudio.com#studio"},"mainEntityOfPage":"https://koshinstudio.com/notes/stopwatch-rank/"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Koshin Studio","item":"https://koshinstudio.com/"},{"@type":"ListItem","position":2,"name":"Notes","item":"https://koshinstudio.com/notes/"},{"@type":"ListItem","position":3,"name":"10秒ピッタリのランキングを、公平にする：小数3桁・同着・書き込み回数","item":"https://koshinstudio.com/notes/stopwatch-rank/"}]}]}</script>
+<meta property="og:image" content="https://koshinstudio.com/assets/og/og_notes_stopwatch-rank.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+</head>
+<body>
+<canvas id="motes"></canvas>
+
+<header class="site"><div class="wrap">
+  <a class="logo" href="/">Koshin Studio</a>
+  <nav><a href="/works/">Works</a><a href="/notes/">Notes</a><a href="/anime/">診断</a><a href="/about/">About</a></nav>
+</div></header>
+
+<main><div class="wrap">
+  <nav class="crumbs" aria-label="現在地"><a href="/">Koshin Studio</a><i aria-hidden="true">›</i><a href="/notes/">Notes</a><i aria-hidden="true">›</i><span aria-current="page">10秒ピッタリのランキングを、公平にする：小数3桁・同着・書き込み回数</span></nav>
+  <h1>10秒ピッタリのランキングを、公平にする：小数3桁・同着・書き込み回数</h1>
+  <div class="rule"></div>
+  <p class="lead">10秒ピッタリ 開発の記録 ／ 2026年10月</p>
+
+  <p><a href="/works/stopwatch10/">10秒ピッタリで止めろ！</a>は、頭の中で10秒を数えて止めるだけのゲームです。3回勝負で、誤差が小さいほど強い。これにランキングをつけるとき、「公平とは何か」を、三つの場所で決める必要がありました。リポジトリの README とコードの注記に残っている理由で書きます。</p>
+
+  <h2 class="rv">表示は小数3桁まで</h2>
+  <p>誤差は、ブラウザの <code>performance.now()</code> で測ります。README によると、この時計は、セキュリティ対策（Spectre）のために、わざと精度が落としてあります。Chrome は 5 マイクロ秒、Safari と Firefox は 1 ミリ秒刻み、とのことです。</p>
+  <p>ここで、誤差を 6 桁まで表示するとどうなるか。時計の粗い端末ほど、末尾が <code>000</code> になりやすく、<strong>有利になってしまいます</strong>。iPhone 勢が上位を独占する、というのが README の見立てです。そこで、<strong>3 桁に切って、全端末を揃える</strong>ことにしました。計測の起点も、<code>click</code> ではなく、<code>pointerdown</code> の <code>event.timeStamp</code> を使います。<code>click</code> には、余計な遅れが乗るからです。</p>
+
+  <h2 class="rv">同着は、思ったより起きる</h2>
+  <p>3 桁にすると、「ぴったり 0.000」は、1 回あたり 1/1000 の確率で出ます。3 回のうち、どれか 1 回でも 0.000 になる確率は、約 <strong>1/333</strong>。これで「3回のうちベスト 1 回」の盤を作ると、<strong>0.000 の同着が詰まります</strong>。</p>
+  <p>そこで、同着のときは、<strong>残り 2 回の誤差の合計が小さいほうを上</strong>にします。それも同じなら、先に出したほうです。0.000 を出して、しかも残り 2 回も揃えた人が上に来るので、まぐれの 1 回だけの人と、区別がつきます。</p>
+  <p>なお、「合計」と「平均」のランキングは、順位が完全に一致します（3 で割るだけだからです）。だから、1 本にまとめてあります。そのうえで、別の軸として、「ベスト 1 回」の盤を置きました。平均が実力、ベスト 1 回が運、という考えです。</p>
+
+  <h2 class="rv">書き込み回数を数える</h2>
+  <p>ランキングは、Cloudflare Workers と KV（キーと値の保存場所）でできています。コードの注記では、KV の書き込みは、無料枠で 1 日 1,000 回です。この枠に収めるために、次のことを決めています。</p>
+  <ul>
+    <li>盤面は、モードごとに<strong>1 つのキー</strong>にまとめる。1 回の投稿で書くのは、最大 2 回（今日のぶんと、通算のぶん）。</li>
+    <li>順位に入らない投稿と、同じ名前で前より悪い投稿は、<strong>そもそも書かない</strong>。</li>
+    <li>同じ名前は 1 行だけ残す。一人で盤を埋めることはできない。</li>
+  </ul>
+  <p>それから、記録はクライアントからの申告なので、不正は防げません。README にも、そう書いてあります。だから、<strong>毎日リセットする前提</strong>で運用します。日付は日本時間で切り、今日のぶんは 3 日で消えます。</p>
+
+  <h2 class="rv">公開の前後に直したこと</h2>
+  <ul>
+    <li><strong>受け付ける誤差の幅。</strong>画面が出せる一番遅い記録（10 秒モードで 99.999 秒）まで、受け付けるようにしました。ひどい記録でも、投稿は通します。どうせ盤には残らないからです。</li>
+    <li><strong>書く前の読みは、キャッシュしない。</strong>KV の読み取りに、短いキャッシュを付けていると、古い値の上に新しい値を書いてしまい、<strong>その間に入った投稿が消えます</strong>。書き込みの前の読みだけは、キャッシュを付けません。見るだけの読み取りは、寝かせたままです。</li>
+    <li><strong>繋がらなかったときの、やり直し。</strong>最初は、ゲームを開いたときにランキングへ繋がらなければ、ランキングの枠を出さず、その後は二度と試しませんでした。ランキングの置き場が、遊んでいる間に立ち上がっても、載せる道が戻ってきません。3 回そろったところで、枠が隠れたままなら、一度だけ読み直すようにしました。</li>
+    <li><strong>黙っておく。</strong>繋がるまでの間は、ランキングの枠そのものを出しません。断りも出しません。空の枠や赤い字を見せるより、黙っているほうがいい、と決めました。</li>
+  </ul>
+
+  <h2 class="rv">公開した日のつまずき</h2>
+  <p>最初に Cloudflare Pages へ出したとき、<code>--branch</code> を付けませんでした。そのとき居た作業ブランチの名前が、Pages の<strong>本番ブランチとして登録</strong>されてしまいました。その後、<code>--branch main</code> で出しても、プレビューに入るだけで、公開している URL は変わりません。<strong>1 時間、気づきませんでした</strong>。</p>
+  <p>ダッシュボードで、本番ブランチを main に直しました。もう一つ、混同していた点があります。デプロイ一覧の「Production」の行に出るブランチ名は、<strong>そのデプロイを出したときの名前</strong>で、設定を変えても書き換わりません。設定を見るのは、プロジェクト一覧の「Production branch」の列です。</p>
+
+  <h2 class="rv">分かったこと</h2>
+  <blockquote>公平さは、桁数と、同着と、書き込み回数で、できている。</blockquote>
+  <p>どれも、ゲームの面白さには見えない部分です。ただ、<strong>3 桁に切る</strong>、<strong>同着の決め方を先に決めておく</strong>、という二つは、遊ぶ人から見える順位の納得感に、直接効きます。</p>
+  <p class="note">この記事は、リポジトリの README、コードの注記、コミット（2026年9月8日〜12日）の記録から書きました。ブラウザごとの時計の精度は、README の記述によります。</p>
+
+  <div class="ad-slot" data-slot="footer" hidden></div>
+<!--/ad-->
+
+  <div class="rule" style="margin:40px 0 22px"></div>
+  <p class="eyebrow">この話に出てくるもの</p>
+  <ul class="plain">
+    <li><a href="/works/stopwatch10/">10秒ピッタリで止めろ！（作品ページ）</a> — 頭の中で10秒を数えるゲーム</li>
+    <li><a href="/notes/adgap/">広告の間隔を、回数ではなく時間で測る</a> — 数え方を決め直した、別の記録</li>
+  </ul>
+  <p style="margin-top:32px"><a class="btn" data-play="stopwatch10" href="/play/stopwatch10/">遊 ぶ</a><a class="btn ghost" href="/works/stopwatch10/">作品ページへ</a></p>
+
+<!--related-->
+  <div class="rule" style="margin:40px 0 22px"></div>
+  <p class="eyebrow">ほかの記録</p>
+  <ul class="plain">
+    <li><a href="/notes/torecadash-review/">審査に出そうとして止まった四つのこと</a> — iPad のスクリーンショット、自動検査の ITMS-91064、アカウント削除、投稿の通報。App Store の審査に出す手前で止まった四つと、その直し方の記録。</li>
+    <li><a href="/notes/torecadash-9set/">「9種セット」の正体は御三家9商品だった：同じ商品なのに、決して一致しなかった</a> — 他のまとめサイトと突き合わせたら、抽選の表示は54%だった。商品の取り違え、比べ方の左右非対称、記事IDの穴。カバー率を91%にした記録。</li>
+    <li><a href="/notes/torecadash-watchdog/">「めっちゃクラッシュする」の原因は、画面の描き直しのたびの再計算だった</a> — 実機のログにあった 0x8BADF00D。951件の記事を、画面を描き直すたびにメインスレッドで数え直していた。原因の特定と、直す方式の記録。</li>
+  </ul>
+<!--/related-->
+</div>
+</main>
+
+<footer class="site"><div class="wrap">
+  <span>© 2026 Koshin Studio</span>
+  <div class="sns-row"></div>
+  <nav><a href="/about/">About</a><a href="/privacy/">あつかい</a></nav>
+</div></footer>
+<script src="/vendor/gsap.min.js?v=9396f256" defer></script>
+<script src="/vendor/ScrollTrigger.min.js?v=05ca5ad8" defer></script>
+<script src="/vendor/lenis.min.js?v=daec1872" defer></script>
+<script src="/motion.js?v=5f78b937" defer></script>
+</body>
+</html>
