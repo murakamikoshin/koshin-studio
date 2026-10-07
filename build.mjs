@@ -126,8 +126,8 @@ writeFileSync(here + '/works/index.html',
   <ul class="works" id="worklist">
 ${works.map(workCard).join('\n')}
   </ul>
-  <p class="soon rv" id="empty" hidden>こ の 種 類 は ま だ あ り ま せ ん</p>
-  <p class="soon rv" style="margin-top:22px">次 の 作 品 を 用 意 し て い ま す</p>
+  <p class="soon rv" id="empty" hidden>この種類はまだありません</p>
+  <p class="soon rv" style="margin-top:22px">次の作品を用意しています</p>
 </div></main>` + foot);
 
 /* ---- 使っている道具 ---- */
