@@ -7,6 +7,13 @@
   <language>ja</language>
   <atom:link href="https://koshinstudio.com/feed.xml" rel="self" type="application/rss+xml"/>
   <item>
+    <title>アプリを完全に終了すると、サインインが消えた：19人中17人が使い捨ての匿名アカウントだった</title>
+    <link>https://koshinstudio.com/notes/apple-signin/</link>
+    <guid isPermaLink="true">https://koshinstudio.com/notes/apple-signin/</guid>
+    <pubDate>Wed, 07 Oct 2026 15:00:00 GMT</pubDate>
+    <description>「アプリを落とすと、また Apple のサインインを求められる」。管理画面を開くと、19人中17人が使い捨ての匿名アカウントだった。起動直後の同期的な確認が競争を起こしていた記録。</description>
+  </item>
+  <item>
     <title>「重複は実質ゼロ」と数えたのに、監査は112組を出していた</title>
     <link>https://koshinstudio.com/notes/dup-zero/</link>
     <guid isPermaLink="true">https://koshinstudio.com/notes/dup-zero/</guid>

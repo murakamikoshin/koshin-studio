@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>アプリを完全に終了すると、サインインが消えた：19人中17人が使い捨ての匿名アカウントだった — トレカダッシュ 開発の記録 — Koshin Studio</title>
+<meta name="description" content="「アプリを落とすと、また Apple のサインインを求められる」。管理画面を開くと、19人中17人が使い捨ての匿名アカウントだった。起動直後の同期的な確認が競争を起こしていた記録。">
+<meta property="og:title" content="アプリを完全に終了すると、サインインが消えた：19人中17人が使い捨ての匿名アカウントだった">
+<meta property="og:description" content="起動直後の確認が競争を起こして、サインインが消えていた記録。">
+<meta property="og:type" content="article">
+<meta name="theme-color" content="#fbfaf7">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/assets/icon/icon-180.png">
+<link rel="manifest" href="/site.webmanifest">
+<script>document.documentElement.className+=" js"</script>
+<link rel="stylesheet" href="/style.css?v=4815e90a">
+<link rel="canonical" href="https://koshinstudio.com/notes/apple-signin/">
+<meta property="og:url" content="https://koshinstudio.com/notes/apple-signin/">
+<meta property="og:site_name" content="Koshin Studio">
+<meta property="og:locale" content="ja_JP">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="alternate" type="application/rss+xml" title="Koshin Studio — Notes" href="https://koshinstudio.com/feed.xml">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BlogPosting","headline":"アプリを完全に終了すると、サインインが消えた：19人中17人が使い捨ての匿名アカウントだった","url":"https://koshinstudio.com/notes/apple-signin/","description":"「アプリを落とすと、また Apple のサインインを求められる」。管理画面を開くと、19人中17人が使い捨ての匿名アカウントだった。起動直後の同期的な確認が競争を起こしていた記録。","datePublished":"2026-10-08","dateModified":"2026-10-08","inLanguage":"ja","image":"https://koshinstudio.com/assets/og/og_notes_apple-signin.jpg","author":{"@id":"https://koshinstudio.com#studio"},"publisher":{"@id":"https://koshinstudio.com#studio"},"mainEntityOfPage":"https://koshinstudio.com/notes/apple-signin/"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Koshin Studio","item":"https://koshinstudio.com/"},{"@type":"ListItem","position":2,"name":"Notes","item":"https://koshinstudio.com/notes/"},{"@type":"ListItem","position":3,"name":"アプリを完全に終了すると、サインインが消えた：19人中17人が使い捨ての匿名アカウントだった","item":"https://koshinstudio.com/notes/apple-signin/"}]}]}</script>
+<meta property="og:image" content="https://koshinstudio.com/assets/og/og_notes_apple-signin.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+</head>
+<body>
+<canvas id="motes"></canvas>
+
+<header class="site"><div class="wrap">
+  <a class="logo" href="/">Koshin Studio</a>
+  <nav><a href="/works/">Works</a><a href="/notes/">Notes</a><a href="/about/">About</a></nav>
+</div></header>
+
+<main><div class="wrap">
+  <nav class="crumbs" aria-label="現在地"><a href="/">Koshin Studio</a><i aria-hidden="true">›</i><a href="/notes/">Notes</a><i aria-hidden="true">›</i><span aria-current="page">アプリを完全に終了すると、サインインが消えた：19人中17人が使い捨ての匿名アカウントだった</span></nav>
+  <h1>アプリを完全に終了すると、サインインが消えた：19人中17人が使い捨ての匿名アカウントだった</h1>
+  <div class="rule"></div>
+  <p class="lead">トレカダッシュ 開発の記録 ／ 2026年10月</p>
+
+  <p>iOS アプリ「トレカダッシュ」で、「アプリを一度落とすと、また Apple のサインインを求められる」という報告がありました。調べると、<strong>19 人のうち 17 人が、作られては捨てられた匿名アカウント</strong>でした。原因は、アプリを起動した直後の、たった 1 行の確認のしかたでした。HANDOFF とコミット（2026年8月14日）の記録で書きます。</p>
+  <p class="note">このサイトには、トレカダッシュの作品ページはまだありません。ここに書くのは、開発の記録です。</p>
+
+  <h2 class="rv">報告された症状</h2>
+  <p>「1 回アプリを落とすと、なぜか、また Apple のサインインが求められる」。聞き取ると、条件がありました。<strong>スワイプで完全に終了して、起動し直したとき</strong>だけ起こります。ホームボタンで離れて戻るだけなら、起きません。</p>
+
+  <h2 class="rv">実データを見る</h2>
+  <p>Firebase の管理画面で、認証（Authentication）のユーザー一覧を、実際に開いてみました。結果は、こうです。</p>
+  <div class="scroll rv"><table>
+    <tr><th>ユーザー</th><th class="n">人数</th></tr>
+    <tr><td>全体</td><td class="n">19</td></tr>
+    <tr><td>Apple のサインインが済んでいる</td><td class="n">2</td></tr>
+    <tr><td>使い捨ての匿名アカウント（作成した日とログインした日が同じ）</td><td class="n">17</td></tr>
+  </table></div>
+  <p>17 件のうち、<strong>8 月 13 日だけで 10 件</strong>。アプリを起動し直すたびに、新しい匿名アカウントが、作られていたことになります。</p>
+
+  <h2 class="rv">原因：「まだ戻っていない」ものを、同期的に見ていた</h2>
+  <p>アプリは、起動した直後に、「いまサインインしている人がいるか」（<code>Auth.auth().currentUser</code>）を、<strong>その場で</strong>確認していました。いなければ、匿名アカウントを新しく作る、という動きです。</p>
+  <p>ところが、Firebase の公式の説明にあるとおり、<code>currentUser</code> は、起動の直後には、保存場所（Keychain）からの復元が<strong>終わっているとは限りません</strong>。復元が間に合わないと、「誰もサインインしていない」と見えてしまいます。すると、本当は Apple のサインインが済んだ既存の状態が、もうすぐ復元されるところなのに、<strong>その直前に、新しい匿名アカウントを作ってしまう</strong>。競争（レースコンディション）です。</p>
+  <p>この競争が起きるのは、完全に終了してからの起動（冷起動）だけです。バックグラウンドから戻るときは、Firebase の初期化そのものが走り直さないので、起きません。報告の条件と、ぴったり合います。</p>
+
+  <h2 class="rv">直し方</h2>
+  <ul>
+    <li><strong>同期的な確認をやめる。</strong>復元が終わったことが確定するのは、状態の変化を知らせる仕組み（<code>addStateDidChangeListener</code>）の、<strong>最初の呼び出し</strong>のときです。判定を、その時点だけにしました。</li>
+    <li><strong>保険を一つ足す。</strong>アカウントを管理する側（<code>AccountStore</code>）でも、起動時に、サーバー側の実際の状態と突き合わせて（<code>reload()</code>）、手元の記録とずれていれば、補正して、診断のログを残すようにしました。</li>
+  </ul>
+
+  <h2 class="rv">もう一つ、分かったこと</h2>
+  <p>この調査の途中で、別の事実も分かりました。Apple のサインインは、実装した 8 月 7 日から、このときまで、<strong>実機で一度も成功していませんでした</strong>。</p>
+  <ul>
+    <li>最初のエラーは、「サインインの方式の設定が見つからない」。Firebase の管理画面で、Apple の方式そのものが、一度も有効にされていませんでした。</li>
+    <li>有効にして再挑戦すると、今度は「すでに連携されている」というエラーが出ました。有効にする前の試行が、実は途中まで成立していて、この端末の匿名アカウントに、Apple ID がもうリンクされていたのです。アプリは、これを「エラー」と表示していましたが、実質、サインイン済みです。<strong>成功として扱う</strong>ように直しました。</li>
+  </ul>
+
+  <h2 class="rv">確認できていないこと</h2>
+  <p>iOS 側の変更なので、TestFlight に届くまでは、実機で効果を確かめられません。記録には、「実機で、完全に終了して起動し直すことをくり返しても、Apple の連携が保たれるかを、最優先で確認する」と書いてあります。その結果は、この記事を書いた時点で、記録にありません。</p>
+
+  <h2 class="rv">分かったこと</h2>
+  <blockquote>「起動した直後」の状態は、まだ、確定していない。</blockquote>
+  <ul>
+    <li><strong>「まだ戻っていない」と、「ない」は、別のもの。</strong>復元を待たずに、「ない」と決めると、新しいものを作ってしまいます。</li>
+    <li><strong>症状は、実データに出る。</strong>管理画面を開いたら、17 件の使い捨てが並んでいました。「落とすとサインインが消える」を、手元の再現だけで追っていたら、見つけにくかったはずです。</li>
+    <li><strong>「一度も成功していない」ことは、成功の記録が無いことで、分かる。</strong>登録済みの 5 アカウントに、Apple の情報が 1 つも無かったことが、手がかりでした。</li>
+  </ul>
+  <p class="note">この記事は、HANDOFF とコミット（2026年8月14日）の記録から書きました。</p>
+
+  <div class="ad-slot" data-slot="footer" hidden></div>
+<!--/ad-->
+
+  <div class="rule" style="margin:40px 0 22px"></div>
+  <p class="eyebrow">この話に出てくるもの</p>
+  <ul class="plain">
+    <li><a href="/notes/review-info-needed/">初めての審査で、「情報が必要です」と返ってきた</a> — 同じアプリの、審査の記録（アカウント削除も）</li>
+    <li><a href="/notes/blocked-page/">「取れた」と読んでいたのは、ただの案内ページだった</a> — 同じアプリの、別の記録</li>
+  </ul>
+
+<!--related-->
+  <div class="rule" style="margin:40px 0 22px"></div>
+  <p class="eyebrow">ほかの記録</p>
+  <ul class="plain">
+    <li><a href="/notes/dup-zero/">「重複は実質ゼロ」と数えたのに、監査は112組を出していた</a> — 重複を統合する処理が、毎晩、先頭のジャンルの途中で時間切れになっていた。「ゼロ」と数えた自分の測り方が間違っていた。持ち回りに直して112組を0組にした記録。</li>
+    <li><a href="/notes/blocked-page/">「取れた」と読んでいたのは、ただの案内ページだった：3日間、商品が0件</a> — ポケモンセンターの取得が3日間ずっと商品0件だった。安い設定が返した2,410バイトの「JavaScriptを有効に」ページを、成功と読んでいた。判定を1か所に集めた記録。</li>
+    <li><a href="/notes/fail-open/">確認できなかったときに、通していた：「fail-open」が転売品を招いた話</a> — 「定価を確認できなかったら通す」という設計に、検索の1日上限という盲点があった。「知らなかった」と「調べられなかった」を区別して直した記録。</li>
+  </ul>
+<!--/related-->
+</div>
+</main>
+
+<footer class="site"><div class="wrap">
+  <span>© 2026 Koshin Studio</span>
+  <div class="sns-row"></div>
+  <nav><a href="/about/">About</a><a href="/privacy/">あつかい</a></nav>
+</div></footer>
+<script src="/vendor/gsap.min.js?v=9396f256" defer></script>
+<script src="/vendor/ScrollTrigger.min.js?v=05ca5ad8" defer></script>
+<script src="/vendor/lenis.min.js?v=daec1872" defer></script>
+<script src="/motion.js?v=5f78b937" defer></script>
+</body>
+</html>
