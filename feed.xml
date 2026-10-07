@@ -7,6 +7,13 @@
   <language>ja</language>
   <atom:link href="https://koshinstudio.com/feed.xml" rel="self" type="application/rss+xml"/>
   <item>
+    <title>JSONLを読んだら壊れた：原因は、見えない改行文字だった</title>
+    <link>https://koshinstudio.com/notes/u2028/</link>
+    <guid isPermaLink="true">https://koshinstudio.com/notes/u2028/</guid>
+    <pubDate>Tue, 06 Oct 2026 15:00:00 GMT</pubDate>
+    <description>あらすじに紛れた U+2028 のせいで、JSON が壊れた。splitlines() と split('\n') の違いを、実データの数字で確かめた記録。</description>
+  </item>
+  <item>
     <title>診断を12問にしたら、結果はどこまで変わるのか</title>
     <link>https://koshinstudio.com/notes/shindan12/</link>
     <guid isPermaLink="true">https://koshinstudio.com/notes/shindan12/</guid>

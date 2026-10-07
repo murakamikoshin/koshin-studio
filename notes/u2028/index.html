@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>JSONLを読んだら壊れた：原因は、見えない改行文字だった — ガチアニメ診断 開発の記録 — Koshin Studio</title>
+<meta name="description" content="あらすじに紛れた U+2028 のせいで、JSON が壊れた。splitlines() と split('\n') の違いを、実データの数字で確かめた記録。">
+<meta property="og:title" content="JSONLを読んだら壊れた：原因は、見えない改行文字だった">
+<meta property="og:description" content="見えない改行文字 U+2028 が、診断のデータ読み込みを壊した話。">
+<meta property="og:type" content="article">
+<meta name="theme-color" content="#070c17">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/assets/icon/icon-180.png">
+<link rel="manifest" href="/site.webmanifest">
+<script>document.documentElement.className+=" js"</script>
+<link rel="stylesheet" href="/style.css?v=19008d13">
+<link rel="canonical" href="https://koshinstudio.com/notes/u2028/">
+<meta property="og:url" content="https://koshinstudio.com/notes/u2028/">
+<meta property="og:site_name" content="Koshin Studio">
+<meta property="og:locale" content="ja_JP">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="alternate" type="application/rss+xml" title="Koshin Studio — Notes" href="https://koshinstudio.com/feed.xml">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BlogPosting","headline":"JSONLを読んだら壊れた：原因は、見えない改行文字だった","url":"https://koshinstudio.com/notes/u2028/","description":"あらすじに紛れた U+2028 のせいで、JSON が壊れた。splitlines() と split('\\n') の違いを、実データの数字で確かめた記録。","datePublished":"2026-10-07","dateModified":"2026-10-07","inLanguage":"ja","image":"https://koshinstudio.com/assets/og/og_notes_u2028.jpg","author":{"@id":"https://koshinstudio.com#studio"},"publisher":{"@id":"https://koshinstudio.com#studio"},"mainEntityOfPage":"https://koshinstudio.com/notes/u2028/"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Koshin Studio","item":"https://koshinstudio.com/"},{"@type":"ListItem","position":2,"name":"Notes","item":"https://koshinstudio.com/notes/"},{"@type":"ListItem","position":3,"name":"JSONLを読んだら壊れた：原因は、見えない改行文字だった","item":"https://koshinstudio.com/notes/u2028/"}]}]}</script>
+<meta property="og:image" content="https://koshinstudio.com/assets/og/og_notes_u2028.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+</head>
+<body>
+<canvas id="motes"></canvas>
+
+<header class="site"><div class="wrap">
+  <a class="logo" href="/">Koshin Studio</a>
+  <nav><a href="/works/">Works</a><a href="/notes/">Notes</a><a href="/anime/">Anime</a><a href="/about/">About</a></nav>
+</div></header>
+
+<main><div class="wrap">
+  <nav class="crumbs" aria-label="現在地"><a href="/">Koshin Studio</a><i aria-hidden="true">›</i><a href="/notes/">Notes</a><i aria-hidden="true">›</i><span aria-current="page">JSONLを読んだら壊れた：原因は、見えない改行文字だった</span></nav>
+  <h1>JSONLを読んだら壊れた：原因は、見えない改行文字だった</h1>
+  <div class="rule"></div>
+  <p class="lead">ガチアニメ診断 開発の記録 ／ 2026年10月</p>
+
+  <p><a href="/works/shindananime/">ガチアニメ診断</a>の作品データを作る途中で、<strong>JSON が壊れる</strong>という不具合を直しました。原因は、<code>splitlines()</code> という、ごくふつうの関数でした。</p>
+
+  <h2 class="rv">何が壊れたのか</h2>
+  <p>診断の元になる作品データは、Filmarks から取ったものを <code>data/filmarks_works.jsonl</code> に貯めています。JSONL は<strong>1行に1作品の JSON</strong> を書く形式で、読むときは行ごとに割って <code>json.loads</code> に渡します。読み込みは Python で、最初はこう書いていました。</p>
+  <pre><code>for line in path.read_text(encoding='utf-8').splitlines():
+    r = json.loads(line)</code></pre>
+  <p>ところが、あらすじの中に <strong>U+2028（LINE SEPARATOR）</strong>という文字を含む作品があると、その行が途中で割れて、<code>json.loads</code> が文字列の途中で切れた JSON を渡されて落ちます。</p>
+
+  <h2 class="rv">U+2028 とは</h2>
+  <p>U+2028 は「行の区切り」を表す Unicode の文字で、見た目はほとんど改行です。JSON としては、文字列の中に生のまま書いても<strong>正しい</strong>文字です。書き出す側（<code>json.dumps(..., ensure_ascii=False)</code>）も、これをそのまま出力します。</p>
+  <p>問題は読む側でした。Python の <code>str.splitlines()</code> は、<code>\n</code> だけでなく、U+2028 のような<strong>Unicode 上の改行文字でも</strong>割ります。<code>split('\n')</code> は <code>\n</code> でしか割りません。</p>
+  <pre><code>s = json.dumps({"a": "x y"}, ensure_ascii=False)
+len(s.splitlines())   # 2 （1行のはずが2つに割れる）
+len(s.split('\n'))    # 1</code></pre>
+  <p>割れた片方ずつを <code>json.loads</code> に渡すと、<code>Unterminated string</code>（文字列が閉じていない）というエラーになります。上の短い例で、そのとおり再現しました。</p>
+
+  <h2 class="rv">実際のデータでの数字</h2>
+  <p>いまのデータファイルで、両方の割り方を数えなおしました。</p>
+  <div class="scroll rv"><table>
+    <tr><th>割り方</th><th class="n">行の数</th></tr>
+    <tr><td><code>split('\n')</code>（本当の改行だけ）</td><td class="n">7,247</td></tr>
+    <tr><td><code>splitlines()</code></td><td class="n">7,255</td></tr>
+  </table></div>
+  <p>差は <strong>8</strong>。ファイルの中の U+2028 を数えると、ちょうど <strong>8 個</strong>でした。それが入っていたのは<strong>2 作品</strong>の行です。7,247 作品のうちの 2 つ、つまり 0.03% に満たない数で、データ全体を読めなくするのに十分でした。</p>
+
+  <h2 class="rv">直し方</h2>
+  <p>やったことは1行です。</p>
+  <pre><code>- for line in path.read_text(encoding='utf-8').splitlines():
++ for line in path.read_text(encoding='utf-8').split('\n'):</code></pre>
+  <p>コミットには、あとで読んだ自分が迷わないよう、理由をコメントで残しました。JSONL を作るときに行を区切っているのは <code>\n</code> だけで、読むときも <code>\n</code> だけで割るのが対になる、ということです。</p>
+
+  <h2 class="rv">気づきにくい理由</h2>
+  <ul>
+    <li><strong>見た目では分からない。</strong>U+2028 は、エディタによっては改行にも空白にも見えます。あらすじをいくら眺めても見つかりません。</li>
+    <li><strong>めったに出ない。</strong>7,247 作のうちの 2 作品です。少しだけ取って試している間は、一度も当たらなくても不思議はありません。全件を取りきってはじめて壊れる種類の不具合です。</li>
+    <li><strong>書く側は正しい。</strong>JSON として間違ったものは、どこにも書かれていません。壊しているのは、読む側が「行とは何か」を思い込んでいたことです。</li>
+  </ul>
+
+  <h2 class="rv">もうひとつ、同じ日に直したもの</h2>
+  <p>同じコミットでは、もうひとつ、<strong>見た目が似ているのに別の文字</strong>が原因の不具合も直しています。作品名の突き合わせで、Annict の <code>＜物語＞</code>（全角の不等号）と、Filmarks の <code>〈物語〉</code>（日本語の山括弧）が、同じ作品なのに一致しませんでした。正規化（NFKC）は全角の <code>＜＞</code> を半角にしてくれますが、<code>〈〉</code> はそのまま残るため、比較用の文字列から両方とも取り除くことにしました。</p>
+  <p>どちらも「文字が見た目どおりとは限らない」という話です。</p>
+
+  <h2 class="rv">分かったこと</h2>
+  <blockquote>改行のつもりで使った関数が、改行だと思っている範囲を、思ったより広く取っていた。</blockquote>
+  <p>JSONL を読むときは、<code>splitlines()</code> ではなく、書いた側が区切りに使った文字（<code>\n</code>）で割る。あるいは、ファイルを1行ずつ読む <code>for line in f:</code> を使う（こちらは <code>\n</code> でしか割りません）。次にデータが増えたときのために、ここに書いておきます。</p>
+  <p class="note">この記事の数字は、2026年10月7日に、データファイルを実際に数えなおしたものです。</p>
+
+  <div class="ad-slot" data-slot="footer" hidden></div>
+<!--/ad-->
+
+  <div class="rule" style="margin:40px 0 22px"></div>
+  <p class="eyebrow">この話に出てくるもの</p>
+  <ul class="plain">
+    <li><a href="/works/shindananime/">ガチアニメ診断（作品ページ）</a> — 何を作ったのか、画面と数字で</li>
+    <li><a href="/notes/shindan12/">診断を12問にしたら、結果はどこまで変わるのか</a> — 同じ診断の、別の記録</li>
+  </ul>
+  <p style="margin-top:32px"><a class="btn" href="/app/shindananime/">診 断 す る</a><a class="btn ghost" href="/works/shindananime/">作品ページへ</a></p>
+</div>
+</main>
+
+<footer class="site"><div class="wrap">
+  <span>© 2026 Koshin Studio</span>
+  <div class="sns-row"></div>
+  <nav><a href="/about/">About</a><a href="/privacy/">あつかい</a></nav>
+</div></footer>
+<script src="/vendor/gsap.min.js?v=9396f256" defer></script>
+<script src="/vendor/ScrollTrigger.min.js?v=05ca5ad8" defer></script>
+<script src="/vendor/lenis.min.js?v=daec1872" defer></script>
+<script src="/motion.js?v=942a2796" defer></script>
+</body>
+</html>
