@@ -14,6 +14,7 @@
   var DARK = false;
   var calm = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var G = window.gsap;
+  var heroOn = true;   // ヒーロー（トップの最初の画面）が見えているあいだだけ、札と粒を動かす
   if (G && window.ScrollTrigger) G.registerPlugin(window.ScrollTrigger);
 
   /* ---------- 滑らかなスクロール ---------- */
@@ -150,11 +151,23 @@
     var orbs = [].slice.call(orbit.querySelectorAll('.orb'));
     var n = orbs.length, ang = 0, spin = 1, hover = false;
     var lockEl = document.querySelector('.lockup');
+    /* 大きさの測り直しは、毎フレームやると、その都度レイアウトが強制される。
+       画面の大きさが変わったときと、書体や画像が揃う頃にだけ測る */
+    var meas = null;
+    function measure() {
+      meas = {
+        box: orbit.getBoundingClientRect(),
+        lb: lockEl ? lockEl.getBoundingClientRect() : { width: 0, height: 0 },
+        cw: orbs[0] ? orbs[0].offsetWidth : 120,
+        ch: orbs[0] ? orbs[0].offsetHeight : 150
+      };
+    }
+    window.addEventListener('resize', function () { meas = null; });
+    window.addEventListener('load', function () { meas = null; });
+    setTimeout(function () { meas = null; }, 900);
     function place(now) {
-      var box = orbit.getBoundingClientRect();
-      var lb = lockEl ? lockEl.getBoundingClientRect() : { width: 0, height: 0 };
-      var cw = orbs[0] ? orbs[0].offsetWidth : 120;
-      var ch = orbs[0] ? orbs[0].offsetHeight : 150;
+      if (!meas) measure();
+      var box = meas.box, lb = meas.lb, cw = meas.cw, ch = meas.ch;
       /* ロゴの箱（札の半分ぶん膨らませたもの）。ここへは入れない */
       var Wc = lb.width / 2 + cw / 2 + 26;
       var Hc = lb.height / 2 + ch / 2 + 34;
@@ -225,8 +238,13 @@
     }
     orbit.addEventListener('pointerenter', function () { hover = true; }, true);
     orbit.addEventListener('pointerleave', function () { hover = false; }, true);
+    var heroEl = document.getElementById('hero');
+    if (heroEl && 'IntersectionObserver' in window) {
+      new IntersectionObserver(function (es) { heroOn = es[0].isIntersecting; }).observe(heroEl);
+    }
     (function loop(t) {
       requestAnimationFrame(loop);
+      if (!heroOn) return;
       spin += ((hover ? 0.22 : 1) - spin) * 0.06;
       place(t || 0);
     })(0);
@@ -371,8 +389,10 @@
 
   /* ---------- 漂う粒 ---------- */
   var cv = document.getElementById('motes');
-  /* 粒はトップだけ。読みものの後ろでは動かさない */
-  if (!cv || calm || !document.body.classList.contains('home')) return;
+  /* 粒はトップだけ。読みものの後ろでは動かさない。
+     ここで return すると、下の「種類で絞る（Works）」まで動かなくなるので、
+     関数に包んで、条件に合うときだけ呼ぶ */
+  function startMotes() {
   var c = cv.getContext('2d');
   var W = 0, H = 0, dpr = 1, parts = [], px = 0, py = 0, tx = 0, ty = 0;
   function seed() {
@@ -399,6 +419,7 @@
   var t0 = 0;
   function frame() {
     requestAnimationFrame(frame);
+    if (!heroOn) return;
     t0 += 0.006;
     px += (tx - px) * 0.045; py += (ty - py) * 0.045;
     c.clearRect(0, 0, W, H);
@@ -416,6 +437,8 @@
     }
   }
   resize(); requestAnimationFrame(frame);
+  }
+  if (cv && !calm && document.body.classList.contains('home')) startMotes();
 
   /* ---------- 種類で絞る（Works） ---------- */
   var chips = document.querySelectorAll('.chip');

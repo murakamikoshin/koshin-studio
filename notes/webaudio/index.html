@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>音は聴けないので、波形を測った：すし積むの和楽器を、WebAudioで作る — すし積む 開発の記録 — Koshin Studio</title>
+<meta name="description" content="音声ファイルを使わず、箏・太鼓・拍子木・鉦をブラウザで合成した。聴けないので、波形のピークを測って音量を決めた。番付のしきい値も、自動プレイの実測で引き直した記録。">
+<meta property="og:title" content="音は聴けないので、波形を測った：すし積むの和楽器を、WebAudioで作る">
+<meta property="og:description" content="和楽器をブラウザで合成して、波形を測って調整した記録。">
+<meta property="og:type" content="article">
+<meta name="theme-color" content="#fbfaf7">
+<link rel="icon" href="/favicon.ico?v=1697d589" sizes="48x48">
+<link rel="icon" href="/favicon.svg?v=b9d7922f" type="image/svg+xml" sizes="any">
+<link rel="apple-touch-icon" href="/assets/icon/icon-180.png?v=84e7f0e6">
+<link rel="manifest" href="/site.webmanifest">
+<script>document.documentElement.className+=" js"</script>
+<link rel="stylesheet" href="/style.css?v=54ae5fe6">
+<link rel="canonical" href="https://koshinstudio.com/notes/webaudio/">
+<meta property="og:url" content="https://koshinstudio.com/notes/webaudio/">
+<meta property="og:site_name" content="Koshin Studio">
+<meta property="og:locale" content="ja_JP">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="alternate" type="application/rss+xml" title="Koshin Studio — Notes" href="https://koshinstudio.com/feed.xml">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BlogPosting","headline":"音は聴けないので、波形を測った：すし積むの和楽器を、WebAudioで作る","url":"https://koshinstudio.com/notes/webaudio/","description":"音声ファイルを使わず、箏・太鼓・拍子木・鉦をブラウザで合成した。聴けないので、波形のピークを測って音量を決めた。番付のしきい値も、自動プレイの実測で引き直した記録。","datePublished":"2026-10-08","dateModified":"2026-10-08","inLanguage":"ja","image":"https://koshinstudio.com/assets/sushitsumu-wide.jpg","author":{"@id":"https://koshinstudio.com#studio"},"publisher":{"@id":"https://koshinstudio.com#studio"},"mainEntityOfPage":"https://koshinstudio.com/notes/webaudio/"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Koshin Studio","item":"https://koshinstudio.com/"},{"@type":"ListItem","position":2,"name":"Notes","item":"https://koshinstudio.com/notes/"},{"@type":"ListItem","position":3,"name":"音は聴けないので、波形を測った：すし積むの和楽器を、WebAudioで作る","item":"https://koshinstudio.com/notes/webaudio/"}]}]}</script>
+<meta property="og:image" content="https://koshinstudio.com/assets/sushitsumu-wide.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
+</head>
+<body>
+<canvas id="motes"></canvas>
+
+<header class="site"><div class="wrap">
+  <a class="logo" href="/">Koshin Studio</a>
+  <nav><a href="/works/">Works</a><a href="/notes/">Notes</a><a href="/about/">About</a></nav>
+</div></header>
+
+<main><div class="wrap">
+  <nav class="crumbs" aria-label="現在地"><a href="/">Koshin Studio</a><i aria-hidden="true">›</i><a href="/notes/">Notes</a><i aria-hidden="true">›</i><span aria-current="page">音は聴けないので、波形を測った：すし積むの和楽器を、WebAudioで作る</span></nav>
+  <h1>音は聴けないので、波形を測った：すし積むの和楽器を、WebAudioで作る</h1>
+  <div class="rule"></div>
+  <p class="lead">すし積む 開発の記録 ／ 2026年10月</p>
+
+  <p><a href="/works/sushitsumu/">すし積む</a>の音は、音声ファイルを一つも使っていません。<strong>ブラウザの音の機能（WebAudio）で、和楽器を、その場で合成</strong>しています。問題は、作っている最中、私には、音を聴く手段が無かったことです。そこで、<strong>波形を測って、音量を調整しました</strong>。コミットに残っている数字で書きます。</p>
+
+  <h2 class="rv">なぜ、音声ファイルを使わないのか</h2>
+  <p>外部のライブラリや音声ファイルを使うと、ゲームを 1 つのファイルとして配る（オフラインでも動く）形が、壊れてしまいます。そこで、箏（爪弾き）、太鼓、拍子木、鉦（かね）を、WebAudio の部品から合成して、陽旋法（日本の音階）で曲を組みました。</p>
+  <ul>
+    <li><strong>BGM：</strong>八分音符を単位にした、先読みのスケジューラで鳴らします。桶の埋まり具合で、<strong>四段階</strong>に厚みが変わり、危なくなるほど、太鼓が増えます。</li>
+    <li><strong>効果音：</strong>合体、連鎖、大トロ、伊勢海老・ゴールデン、ゴールデン同士、の順に、音の数と太さを積み上げます。</li>
+    <li>昇段したときと、自己記録を更新したときに、祝いの一節を足しました。音の入切ボタンもあり、設定は端末に残します。</li>
+  </ul>
+
+  <h2 class="rv">音が聴けないので、波形を測る</h2>
+  <p>音量のつり合いは、本来、耳で決めるものです。でも、この作業では、聴けませんでした。そこで、同じ合成の関数を、書き出し専用の音の部品（<code>OfflineAudioContext</code>）に張り替えて、<strong>音を波形として書き出し、最大の振れ幅（ピーク）を測りました</strong>。</p>
+  <p>最初の状態は、こうでした。</p>
+  <ul>
+    <li>大当たりの音のピークが <strong>1.18</strong>。1.0 を超えると、音が割れて、歪みます。</li>
+    <li>合体の音は <strong>0.072</strong>。BGM に埋もれて、聞こえません。</li>
+  </ul>
+  <p>調整したあとは、BGM のピーク <strong>0.179</strong> の下に、効果音が、階段状に並びました。</p>
+  <div class="scroll rv"><table>
+    <tr><th>音</th><th class="n">ピーク</th></tr>
+    <tr><td>BGM（基準）</td><td class="n">0.179</td></tr>
+    <tr><td>合体</td><td class="n">0.16</td></tr>
+    <tr><td>3 連鎖</td><td class="n">0.48</td></tr>
+    <tr><td>大トロ</td><td class="n">0.49</td></tr>
+    <tr><td>ゴールデン</td><td class="n">0.85</td></tr>
+    <tr><td>大当たり</td><td class="n">0.81</td></tr>
+  </table></div>
+  <p>歪みは、なくなりました。「ありがたみのある音ほど、大きい」という順序が、数字で確かめられます。ただし、<strong>耳で聴いて心地よいか</strong>は、この方法では、分かりません。</p>
+
+  <h2 class="rv">番付も、実測で引き直した</h2>
+  <p>音と同じ日に、番付（ランク）のしきい値も、見直しました。自動プレイを 12 回まわして、点の分布を採ると、こうでした。</p>
+  <div class="scroll rv"><table>
+    <tr><th>モード</th><th class="n">点の範囲</th><th class="n">置いた手数</th></tr>
+    <tr><td>お任せ</td><td class="n">12,532〜22,413</td><td class="n">172〜267</td></tr>
+    <tr><td>お品書き</td><td class="n">20,992〜46,395</td><td class="n">171〜306</td></tr>
+  </table></div>
+  <p>それまでの基準（伝説＝30,000 点）では、<strong>工夫のない自動プレイが、最高位になってしまいました</strong>。そこで、しきい値を、その上へ引き直しました（0 / 4,000 / 10,000 / 18,000 / 30,000 / 50,000 / 85,000）。お品書きは、点の出方が約 1.8 倍なので、同じ比率で伸ばしています。両方の自動プレイが「中堅職人」で止まり、<strong>花板から上は、腕次第</strong>になりました。</p>
+  <p>翌日に、120 戦まわして、当たり方も測りました（若手 6%、中堅 32%、花板 40%、大将 14%、伝説 8%）。自動プレイは、人より上手いので、下の二段には落ちません。下の二段は、人が遊ぶときに効く前提の並びです。</p>
+
+  <h2 class="rv">連鎖の出し方も変えた</h2>
+  <ul>
+    <li>連鎖のボーナスを、お任せにも入れました。同じ条件で、得点が、倍近くになります。</li>
+    <li>3 連鎖は、1 ゲームに 20 回以上も出て、ありがたみがありませんでした。画面の中央に出すのは、<strong>4 連鎖から</strong>にしました（2〜3 連鎖は、浮かぶ文字と音だけ）。</li>
+  </ul>
+
+  <h2 class="rv">分かったこと</h2>
+  <blockquote>聴けなくても、測れる。</blockquote>
+  <ul>
+    <li><strong>感覚で決められないものは、数字で決める。</strong>音のつり合いも、番付も、実測が土台でした。</li>
+    <li><strong>測れることと、確かめられたことは、別。</strong>波形は、歪みの有無と、音の大小の順序を、教えてくれます。心地よさは、教えてくれません。</li>
+    <li><strong>「基準」は、基準を破るものに当てて、確かめる。</strong>工夫のない自動プレイが最高位になる基準は、基準として、機能していませんでした。</li>
+  </ul>
+  <p class="note">この記事の数字は、コミット（2026年9月7日、9月8日）の記録から取りました。この日のあとに、ネタの寸法が変わったため（<a href="/notes/anago/">穴子の記事</a>）、いまの点の範囲やしきい値は、ここに書いたものとは違います。</p>
+
+  <div class="ad-slot" data-slot="footer" hidden></div>
+<!--/ad-->
+
+  <div class="rule" style="margin:40px 0 22px"></div>
+  <p class="eyebrow">この話に出てくるもの</p>
+  <ul class="plain">
+    <li><a href="/works/sushitsumu/">すし積む（作品ページ）</a> — 落ち物パズルのゲーム</li>
+    <li><a href="/notes/anago/">穴子がデカすぎた話</a> — 自動プレイで測った、別の記録</li>
+  </ul>
+  <p style="margin-top:32px"><a class="btn" data-play="sushitsumu" href="/play/sushitsumu/">遊ぶ</a><a class="btn ghost" href="/works/sushitsumu/">作品ページへ</a></p>
+
+<!--related-->
+  <div class="rule" style="margin:40px 0 22px"></div>
+  <p class="eyebrow">ほかの記録</p>
+  <ul class="plain">
+    <li><a href="/notes/first-visit/">押すものを六つから一つに絞った：初めての人は、どれを押せばいいか分からなかった</a> — タイトル画面に押せるものが六つ並んでいた。初めての人に必要なのは最初の一歩だと考えて一つに絞った。iframeで保存が消える問題と、画面を離れたら止まる直しも含めた記録。</li>
+    <li><a href="/notes/ascii-text/">「連」だけが壊れて出た：配信先で文字化けしたとき、ファイルは正しかった</a> — ゲームポータルのプレビューで「大連鎖！」の「連」だけが壊れた。ファイルのバイト列は正しく、原因は特定できなかった。ASCII 表記に逃がした経緯と、14言語の枠の検査の記録。</li>
+    <li><a href="/notes/ranking-free-tier/">無料枠を半分しか使わない番付にした：呼び出し5回を2回に</a> — 番付サーバーが無料枠を使う量を半分にした。一人が遊ぶ一回の呼び出しは5回から2回、読んだ行は421から221へ。順位の数え方と、前置きの呼び出しをなくした経緯。</li>
+  </ul>
+<!--/related-->
+</div>
+</main>
+
+<footer class="site"><div class="wrap">
+  <span>© 2026 Koshin Studio</span>
+  <div class="sns-row"></div>
+  <nav><a href="/about/">About</a><a href="/privacy/">あつかい</a></nav>
+</div></footer>
+<script src="/vendor/gsap.min.js?v=9396f256" defer></script>
+<script src="/vendor/ScrollTrigger.min.js?v=05ca5ad8" defer></script>
+<script src="/motion.js?v=150119fe" defer></script>
+</body>
+</html>

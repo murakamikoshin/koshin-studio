@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>押すものを六つから一つに絞った：初めての人は、どれを押せばいいか分からなかった — すし積む 開発の記録 — Koshin Studio</title>
+<meta name="description" content="タイトル画面に押せるものが六つ並んでいた。初めての人に必要なのは最初の一歩だと考えて一つに絞った。iframeで保存が消える問題と、画面を離れたら止まる直しも含めた記録。">
+<meta property="og:title" content="押すものを六つから一つに絞った：初めての人は、どれを押せばいいか分からなかった">
+<meta property="og:description" content="初めての人のために、タイトル画面の押すものを一つに絞った記録。">
+<meta property="og:type" content="article">
+<meta name="theme-color" content="#fbfaf7">
+<link rel="icon" href="/favicon.ico?v=1697d589" sizes="48x48">
+<link rel="icon" href="/favicon.svg?v=b9d7922f" type="image/svg+xml" sizes="any">
+<link rel="apple-touch-icon" href="/assets/icon/icon-180.png?v=84e7f0e6">
+<link rel="manifest" href="/site.webmanifest">
+<script>document.documentElement.className+=" js"</script>
+<link rel="stylesheet" href="/style.css?v=54ae5fe6">
+<link rel="canonical" href="https://koshinstudio.com/notes/first-visit/">
+<meta property="og:url" content="https://koshinstudio.com/notes/first-visit/">
+<meta property="og:site_name" content="Koshin Studio">
+<meta property="og:locale" content="ja_JP">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="alternate" type="application/rss+xml" title="Koshin Studio — Notes" href="https://koshinstudio.com/feed.xml">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BlogPosting","headline":"押すものを六つから一つに絞った：初めての人は、どれを押せばいいか分からなかった","url":"https://koshinstudio.com/notes/first-visit/","description":"タイトル画面に押せるものが六つ並んでいた。初めての人に必要なのは最初の一歩だと考えて一つに絞った。iframeで保存が消える問題と、画面を離れたら止まる直しも含めた記録。","datePublished":"2026-10-08","dateModified":"2026-10-08","inLanguage":"ja","image":"https://koshinstudio.com/assets/sushitsumu-wide.jpg","author":{"@id":"https://koshinstudio.com#studio"},"publisher":{"@id":"https://koshinstudio.com#studio"},"mainEntityOfPage":"https://koshinstudio.com/notes/first-visit/"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Koshin Studio","item":"https://koshinstudio.com/"},{"@type":"ListItem","position":2,"name":"Notes","item":"https://koshinstudio.com/notes/"},{"@type":"ListItem","position":3,"name":"押すものを六つから一つに絞った：初めての人は、どれを押せばいいか分からなかった","item":"https://koshinstudio.com/notes/first-visit/"}]}]}</script>
+<meta property="og:image" content="https://koshinstudio.com/assets/sushitsumu-wide.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
+</head>
+<body>
+<canvas id="motes"></canvas>
+
+<header class="site"><div class="wrap">
+  <a class="logo" href="/">Koshin Studio</a>
+  <nav><a href="/works/">Works</a><a href="/notes/">Notes</a><a href="/about/">About</a></nav>
+</div></header>
+
+<main><div class="wrap">
+  <nav class="crumbs" aria-label="現在地"><a href="/">Koshin Studio</a><i aria-hidden="true">›</i><a href="/notes/">Notes</a><i aria-hidden="true">›</i><span aria-current="page">押すものを六つから一つに絞った：初めての人は、どれを押せばいいか分からなかった</span></nav>
+  <h1>押すものを六つから一つに絞った：初めての人は、どれを押せばいいか分からなかった</h1>
+  <div class="rule"></div>
+  <p class="lead">すし積む 開発の記録 ／ 2026年10月</p>
+
+  <p><a href="/works/sushitsumu/">すし積む</a>のタイトル画面には、押せるものが、<strong>六つ</strong>並んでいました。初めて開いた人は、どれを押せばいいか、分からない状態です。ゲームポータルに出すにあたって、「初めての人が、まず何を押すか」を、一つに絞りました。そのときに一緒に直した、保存が消える問題と、画面を離れたときの問題も、コミットの記録で書きます。</p>
+
+  <h2 class="rv">ポータルに出すと、何で測られるか</h2>
+  <p>コミットによると、出すことにしたポータル（CrazyGames）には、まず、限られた客層に二週間だけ出す試用の段階（Basic Launch）があります。次の段階（Full Launch）に上がれるかどうかは、その間の、次の三つで決まるそうです。</p>
+  <ul>
+    <li>遊び始めた人の割合</li>
+    <li>平均の遊んだ時間</li>
+    <li>戻ってくる人の割合</li>
+  </ul>
+  <p>広告は、この試用の間は無効なので、いま効くのは、これだけです。つまり、<strong>「開いた人が、遊び始める」「また来る」</strong>の二つを、設計で良くする必要がありました。</p>
+
+  <h2 class="rv">押すものを、一つに絞った</h2>
+  <p>タイトルには、「遊ぶ」「お品書き」「番付」「図鑑」「言葉」「あつかい」の六つが並んでいました。初めての人には、どれも同じ重さに見えます。そこで、こう並べ直しました。</p>
+  <ul>
+    <li>「<strong>遊ぶ</strong>」を、大きく、一つだけ置く。</li>
+    <li>「お品書き」は、細い二番手に。</li>
+    <li>番付、図鑑、言葉、あつかいは、下の細い一行に、畳む。</li>
+  </ul>
+  <p>番付と図鑑は、「戻ってくる理由」にはなりますが、<strong>初めてのときの、最初の一歩にはならない</strong>、という判断です。</p>
+
+  <h2 class="rv">二度目からは、続きがあることを見せる</h2>
+  <p>高得点と、図鑑の埋まり具合を、タイトルに出します。ただし、<strong>初めての人には出しません</strong>。0 点、0 種と見せても、意味がないからです。</p>
+
+  <h2 class="rv">ポータルの中では、保存が消える</h2>
+  <p>ポータルは、別のドメインの <code>iframe</code>（枠の中）で、ゲームを動かします。ブラウザによっては、この中では、端末への保存（<code>localStorage</code>）が塞がれていて、<strong>高得点も、図鑑も、毎回消えます</strong>。</p>
+  <p>ポータルが用意している保存の棚（CrazyGames の Data Module）があれば、そちらに保存して、無ければ、これまでどおり、端末に置く形にしました。ポータル側の部品は、あとから届くので、見つかるまで、毎回探します。</p>
+  <p>確かめ方は、偽の保存の棚を差し込むことでした。棚があるときは、そちらに書いて、端末側には書かない。端末への保存が、エラーを投げる環境でも、起動して、遊べる。</p>
+
+  <h2 class="rv">画面を離れたら、止まる</h2>
+  <p>それまでは、別のタブに移ると、<strong>締切だけが進んで</strong>、戻ったときには、もう終わっている、という作りでした。裏に回ったら、一時停止して、音も止めるようにしました。実際に、画面が隠れたときの出来事（<code>visibilitychange</code>）を起こして、止まること、1.5 秒放っても点が動かないこと、続けると戻ることを、確かめています。</p>
+
+  <h2 class="rv">確かめたこと</h2>
+  <ul>
+    <li>14 言語すべてで、iPhone SE の画面に収まる。</li>
+    <li>7 つの画面 × 3 言語で、縦横比 9:16 が崩れない。</li>
+    <li>通しプレイ二本（日本語 163 手、英語 263 手）が、60fps、エラー 0 件。</li>
+  </ul>
+
+  <h2 class="rv">分かったこと</h2>
+  <blockquote>初めての人に必要なのは、選択肢ではなく、最初の一歩。</blockquote>
+  <ul>
+    <li><strong>「戻ってくる理由」と「最初の一歩」は、別のもの。</strong>番付も図鑑も、価値はあります。でも、初めての人が、最初に押すものではありません。</li>
+    <li><strong>保存は、動く場所によって、使えないことがある。</strong>手元で動いたことは、枠の中で動くことの保証になりません。</li>
+    <li><strong>画面を離れたときの動きも、設計に入れる。</strong>作る側は、ずっと見ている前提で作りがちです。</li>
+  </ul>
+  <p class="note">この記事は、コミット（2026年9月7日）の記録から書きました。ポータルの審査の条件は、コミットの記述によります。このあと、このゲームは審査に落ちています（<a href="/notes/crazygames/">CrazyGames に落ちた</a>）。</p>
+
+  <div class="ad-slot" data-slot="footer" hidden></div>
+<!--/ad-->
+
+  <div class="rule" style="margin:40px 0 22px"></div>
+  <p class="eyebrow">この話に出てくるもの</p>
+  <ul class="plain">
+    <li><a href="/works/sushitsumu/">すし積む（作品ページ）</a> — 落ち物パズルのゲーム</li>
+    <li><a href="/notes/crazygames/">CrazyGames に落ちた</a> — このあとの、審査の記録</li>
+  </ul>
+  <p style="margin-top:32px"><a class="btn" data-play="sushitsumu" href="/play/sushitsumu/">遊ぶ</a><a class="btn ghost" href="/works/sushitsumu/">作品ページへ</a></p>
+
+<!--related-->
+  <div class="rule" style="margin:40px 0 22px"></div>
+  <p class="eyebrow">ほかの記録</p>
+  <ul class="plain">
+    <li><a href="/notes/webaudio/">音は聴けないので、波形を測った：すし積むの和楽器を、WebAudioで作る</a> — 音声ファイルを使わず、箏・太鼓・拍子木・鉦をブラウザで合成した。聴けないので、波形のピークを測って音量を決めた。番付のしきい値も、自動プレイの実測で引き直した記録。</li>
+    <li><a href="/notes/ascii-text/">「連」だけが壊れて出た：配信先で文字化けしたとき、ファイルは正しかった</a> — ゲームポータルのプレビューで「大連鎖！」の「連」だけが壊れた。ファイルのバイト列は正しく、原因は特定できなかった。ASCII 表記に逃がした経緯と、14言語の枠の検査の記録。</li>
+    <li><a href="/notes/ranking-free-tier/">無料枠を半分しか使わない番付にした：呼び出し5回を2回に</a> — 番付サーバーが無料枠を使う量を半分にした。一人が遊ぶ一回の呼び出しは5回から2回、読んだ行は421から221へ。順位の数え方と、前置きの呼び出しをなくした経緯。</li>
+  </ul>
+<!--/related-->
+</div>
+</main>
+
+<footer class="site"><div class="wrap">
+  <span>© 2026 Koshin Studio</span>
+  <div class="sns-row"></div>
+  <nav><a href="/about/">About</a><a href="/privacy/">あつかい</a></nav>
+</div></footer>
+<script src="/vendor/gsap.min.js?v=9396f256" defer></script>
+<script src="/vendor/ScrollTrigger.min.js?v=05ca5ad8" defer></script>
+<script src="/motion.js?v=150119fe" defer></script>
+</body>
+</html>
