@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>「変なところから出る」を三段階で直した：押すと弾けるロゴの記録 — Koshin Studio 開発の記録 — Koshin Studio</title>
+<meta name="description" content="ロゴを自作の書体で作り直したら、押して弾ける動きの粒が「変なところから出る」。字が7pxずれたまま戻らない問題と、Retinaで描く画面が2倍になる問題を、三段階で直した記録。">
+<meta property="og:title" content="「変なところから出る」を三段階で直した：押すと弾けるロゴの記録">
+<meta property="og:description" content="ロゴを押したあと字が元に戻らない不具合を測って直した記録。">
+<meta property="og:type" content="article">
+<meta name="theme-color" content="#fbfaf7">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/assets/icon/icon-180.png">
+<link rel="manifest" href="/site.webmanifest">
+<script>document.documentElement.className+=" js"</script>
+<link rel="stylesheet" href="/style.css?v=6ad2845c">
+<link rel="canonical" href="https://koshinstudio.com/notes/logo-pop/">
+<meta property="og:url" content="https://koshinstudio.com/notes/logo-pop/">
+<meta property="og:site_name" content="Koshin Studio">
+<meta property="og:locale" content="ja_JP">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="alternate" type="application/rss+xml" title="Koshin Studio — Notes" href="https://koshinstudio.com/feed.xml">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BlogPosting","headline":"「変なところから出る」を三段階で直した：押すと弾けるロゴの記録","url":"https://koshinstudio.com/notes/logo-pop/","description":"ロゴを自作の書体で作り直したら、押して弾ける動きの粒が「変なところから出る」。字が7pxずれたまま戻らない問題と、Retinaで描く画面が2倍になる問題を、三段階で直した記録。","datePublished":"2026-10-08","dateModified":"2026-10-08","inLanguage":"ja","image":"https://koshinstudio.com/assets/og/og_notes_logo-pop.jpg","author":{"@id":"https://koshinstudio.com#studio"},"publisher":{"@id":"https://koshinstudio.com#studio"},"mainEntityOfPage":"https://koshinstudio.com/notes/logo-pop/"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Koshin Studio","item":"https://koshinstudio.com/"},{"@type":"ListItem","position":2,"name":"Notes","item":"https://koshinstudio.com/notes/"},{"@type":"ListItem","position":3,"name":"「変なところから出る」を三段階で直した：押すと弾けるロゴの記録","item":"https://koshinstudio.com/notes/logo-pop/"}]}]}</script>
+<meta property="og:image" content="https://koshinstudio.com/assets/og/og_notes_logo-pop.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+</head>
+<body>
+<canvas id="motes"></canvas>
+
+<header class="site"><div class="wrap">
+  <a class="logo" href="/">Koshin Studio</a>
+  <nav><a href="/works/">Works</a><a href="/notes/">Notes</a><a href="/about/">About</a></nav>
+</div></header>
+
+<main><div class="wrap">
+  <nav class="crumbs" aria-label="現在地"><a href="/">Koshin Studio</a><i aria-hidden="true">›</i><a href="/notes/">Notes</a><i aria-hidden="true">›</i><span aria-current="page">「変なところから出る」を三段階で直した：押すと弾けるロゴの記録</span></nav>
+  <h1>「変なところから出る」を三段階で直した：押すと弾けるロゴの記録</h1>
+  <div class="rule"></div>
+  <p class="lead">Koshin Studio 開発の記録 ／ 2026年10月</p>
+
+  <p>このサイトのトップには、大きなロゴがあります。字を押すと、その字がぽんと弾けて、粒が散ります。ロゴを、自分で作った書体「恒紳ポップ」で作り直したあと、この動きについて、「粒が、字ではない変なところから出る」「まだ、右に寄っている」と指摘を受けました。直すまでに<strong>三段階</strong>かかったので、何が原因で、どう見つけたのかを、測った数字で書きます。</p>
+
+  <h2 class="rv">ロゴを、自作の書体で作り直す</h2>
+  <p>それまでのロゴは、明朝体の骨で欧文を組んだものでした。これを、自分で作った書体「恒紳ポップ」（欧文は、骨格から描き起こした、丸みのある字形）に替えました。書体のライセンスは、SIL Open Font License 1.1 で、ロゴへの利用に問題はありません。</p>
+  <p>作り方は、書体のファイルから、<strong>K O S H I N T U D の 9 文字の輪郭</strong>を取り出して、SVG の path にします（<code>tools/logotype_pop.py</code>）。ロゴは「絵」として配るので、サイトは書体のファイルを配りません。この書体は、同じ字でも「基本形」「pop1」「pop2」と、跳ね方の違う形を持っているので、3 通りの組み合わせを並べて見比べて、リズムのよい 1 つを選びました。「U」の右側に出た細い継ぎ目の線は、輪郭に、ごく細い線（3 単位）を足して消しました。</p>
+
+  <h2 class="rv">一段階目：押したあと、字がずれたまま戻らない</h2>
+  <p>まず、字を押したあとの位置を、時間を追って記録しました。すると、字が<strong>元の位置に戻っていません</strong>でした。</p>
+  <div class="scroll rv"><table>
+    <tr><th>字</th><th>押す前の中心</th><th>押したあと（2 秒後）</th></tr>
+    <tr><td>K（上段の左端）</td><td>(327, 306)</td><td>(320, 313)</td></tr>
+    <tr><td>S（下段の左端）</td><td>(331, 442)</td><td>(323, 435)</td></tr>
+  </table></div>
+  <p>約 7px のずれです。押したあとの変形を見ると、<code>matrix(1, 0, 0, 1, -46, -42)</code> が残っていました。大きさは 1 倍に戻っているのに、位置のずれだけが残っている状態です。</p>
+  <p><strong>原因：</strong>弾ける動きに使っていたアニメーションの部品（GSAP）が、字の SVG の <code>&lt;g&gt;</code> に、もともと付いていた位置の指定（<code>transform="translate(x,0)"</code>）を、自分の計算で書き換えて、その補正の一部が、終わったあとも残っていました。</p>
+  <p><strong>直し方：</strong>位置を持つ層（外側の <code>&lt;g transform&gt;</code>）と、動かす層（内側の <code>&lt;g class="ks-ch"&gt;</code>）を分けました。動きは、ブラウザ標準の Web Animations に替えました（終わると、効果が消えて、元の状態に戻ります）。確かめると、12 文字すべてで、字の中心は動かず、動きの終わりの変形は <code>none</code> に戻りました。</p>
+
+  <h2 class="rv">二段階目：「まだ右に寄っている」</h2>
+  <p>ところが、直したあとも、「まだ、アニメーションが右に寄っている」と言われました。私の測定では、粒は字の中心から 2〜13px 以内に出ていました。<strong>測った結果と、見えたものが、食い違っていました。</strong></p>
+  <p>私の測定は、<strong>倍率 1 倍の画面</strong>で、粒の位置を「画面上の座標」で数えたものでした。Retina ディスプレイ（倍率 2 倍）や、スマホ（3 倍）でも測ってみると、粒を描く画面（<code>#burst</code>）の、CSS 上の大きさが、おかしいことが分かりました。</p>
+  <div class="scroll rv"><table>
+    <tr><th>画面</th><th class="n">画面の幅</th><th class="n">粒の画面の幅（前）</th><th class="n">（後）</th></tr>
+    <tr><td>1280px・倍率 1</td><td class="n">1280</td><td class="n">1280</td><td class="n">1280</td></tr>
+    <tr><td>1440px・倍率 2</td><td class="n">1440</td><td class="n"><strong>2880</strong></td><td class="n">1440</td></tr>
+    <tr><td>390px・倍率 3（スマホ）</td><td class="n">390</td><td class="n"><strong>780</strong></td><td class="n">390</td></tr>
+  </table></div>
+  <p><strong>原因：</strong>粒を描く canvas は、CSS で <code>inset:0</code> と指定していましたが、<strong>canvas のような部品は、<code>inset:0</code> だけでは、画面いっぱいに広がりません</strong>。元の大きさ（描く画素数）のままです。倍率 2 の画面では、画素数が 2 倍なので、CSS 上の大きさも 2 倍になり、粒が、座標の 2 倍の位置（右下）に表示されていました。倍率 1 の画面では、同じ大きさなので、気づけません。</p>
+  <p><strong>直し方：</strong>幅と高さを、<code>100%</code> と明示しました。確かめると、どの倍率の画面でも、粒の画面は、画面と同じ大きさになりました。</p>
+
+  <h2 class="rv">三段階目：字そのものから出す</h2>
+  <p>最後に、「字自体から出るようにできないか」という要望がありました。それまでは、字の枠の<strong>中心</strong>から出していたので、「O」のように真ん中が空いた字では、字ではない所から出たように見えます。</p>
+  <p>そこで、字の形（path）の<strong>輪郭に沿って点を選び</strong>（<code>getPointAtLength</code>）、その画面上の位置から、字の中心と反対の向き（ばらつきあり）へ、粒を飛ばすようにしました。下段の字は「字＝マスク」で描いているので、矩形が指しているマスクの中の path を探して使います。押して撮ると、「O」は輪の周りから、「U」は形に沿って、粒が出ています。</p>
+
+  <h2 class="rv">分かったこと</h2>
+  <blockquote>測った数字と、見えたものが食い違ったら、測り方の条件を疑う。</blockquote>
+  <ul>
+    <li><strong>見る人の画面は、自分の画面と違う。</strong>倍率 1 倍の画面だけで測って、「ずれは小さい」と判断しました。実際は、倍率 2 倍の画面で、粒が 2 倍の場所に出ていました。</li>
+    <li><strong>測る空間を、見る空間に合わせる。</strong>私の測定は、粒の「論理的な座標」を数えていたので、画面に出た位置のずれは、そもそも見えませんでした。</li>
+    <li><strong>動きは、終わったあとの状態も測る。</strong>字が元に戻らないことは、動いている間だけを見ていたら、気づけませんでした。</li>
+    <li><strong>位置と動きは、別の層に置く。</strong>同じ要素に両方を持たせると、片方がもう一方を上書きします。</li>
+  </ul>
+  <p class="note">この記事の数字は、2026年10月8日に、このサイトのトップを、実際のブラウザ（Chrome）で操作して測ったものです。実際の Retina ディスプレイの実機で、直ったことは、まだ確かめていません（倍率 2 倍と 3 倍の状態を、ブラウザの設定で再現して確かめました）。</p>
+
+  <div class="ad-slot" data-slot="footer" hidden></div>
+<!--/ad-->
+
+  <div class="rule" style="margin:40px 0 22px"></div>
+  <p class="eyebrow">この話に出てくるもの</p>
+  <ul class="plain">
+    <li><a href="/notes/deploy-gotchas/">手元では動くのに、配ると壊れる</a> — このサイトの、別の記録</li>
+    <li><a href="/notes/apple-signin/">アプリを完全に終了すると、サインインが消えた</a> — 「終わったあとの状態」に出る問題の、別の記録</li>
+  </ul>
+
+<!--related-->
+  <div class="rule" style="margin:40px 0 22px"></div>
+  <p class="eyebrow">ほかの記録</p>
+  <ul class="plain">
+    <li><a href="/notes/deploy-gotchas/">手元では動くのに、配ると壊れる：このサイトで起きた四つの事故</a> — 古いキャッシュ、組むたびに増えるパンくず、環境の中を指す symlink、手元にしか無い絵。サイトを配るときに続いた四つの事故と、検査を足してはじめて見つかった経緯。</li>
+    <li><a href="/notes/apple-signin/">アプリを完全に終了すると、サインインが消えた：19人中17人が使い捨ての匿名アカウントだった</a> — 「アプリを落とすと、また Apple のサインインを求められる」。管理画面を開くと、19人中17人が使い捨ての匿名アカウントだった。起動直後の同期的な確認が競争を起こしていた記録。</li>
+    <li><a href="/notes/dup-zero/">「重複は実質ゼロ」と数えたのに、監査は112組を出していた</a> — 重複を統合する処理が、毎晩、先頭のジャンルの途中で時間切れになっていた。「ゼロ」と数えた自分の測り方が間違っていた。持ち回りに直して112組を0組にした記録。</li>
+  </ul>
+<!--/related-->
+</div>
+</main>
+
+<footer class="site"><div class="wrap">
+  <span>© 2026 Koshin Studio</span>
+  <div class="sns-row"></div>
+  <nav><a href="/about/">About</a><a href="/privacy/">あつかい</a></nav>
+</div></footer>
+<script src="/vendor/gsap.min.js?v=9396f256" defer></script>
+<script src="/vendor/ScrollTrigger.min.js?v=05ca5ad8" defer></script>
+<script src="/vendor/lenis.min.js?v=daec1872" defer></script>
+<script src="/motion.js?v=a977b3a8" defer></script>
+</body>
+</html>

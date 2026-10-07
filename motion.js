@@ -264,6 +264,37 @@
       }
     }
 
+    /* その字の形（path）を探す。上段は字そのもの。下段は「字＝マスク」なので、
+       矩形が指しているマスクの中の path が字の形 */
+    function glyphPath(ch) {
+      var path = ch.querySelector('path');
+      if (path) return path;
+      var rect = ch.querySelector('rect');
+      var m = rect && /url\(#([^)]+)\)/.exec(rect.getAttribute('mask') || '');
+      return m ? document.querySelector('#' + m[1] + ' path') : null;
+    }
+
+    /* 字の輪郭の上から、外へ向かって散らす。中心から出すと、「O」のように
+       真ん中が空いた字では、字ではない所から出たように見える。
+       輪郭の長さに沿って点を選び（getPointAtLength）、その画面上の位置から、
+       字の中心と反対の向き（ばらつきあり）へ飛ばす */
+    function popFromGlyph(ch, n) {
+      var path = glyphPath(ch), box = boxOf(ch);
+      var ccx = box.left + box.width / 2, ccy = box.top + box.height / 2;
+      var m = path && path.getScreenCTM && path.getScreenCTM();
+      var L = path && path.getTotalLength ? path.getTotalLength() : 0;
+      if (!m || !L) { pop(ccx, ccy, n); return; }
+      for (var i = 0; i < n; i++) {
+        var pt = path.getPointAtLength(Math.random() * L);
+        var x = m.a * pt.x + m.c * pt.y + m.e, y = m.b * pt.x + m.d * pt.y + m.f;
+        var a = Math.atan2(y - ccy, x - ccx) + (Math.random() - .5) * 1.6;
+        var v = 2.0 + Math.random() * 7.0;
+        bits.push({ x: x, y: y, vx: Math.cos(a) * v, vy: Math.sin(a) * v - 1.6,
+          r: 1.1 + Math.random() * 3.2, life: 1,
+          c: COL[(Math.random() * COL.length) | 0], sp: Math.random() * 6.28 });
+      }
+    }
+
     /* 字の範囲（画面の座標）。ロゴの SVG は、字形そのものの範囲を data-box
        （viewBox の座標）で持っている。下段は「字＝マスク」なので、
        要素の枠（矩形）は字より大きい。字形の範囲から計算すると、
@@ -302,8 +333,7 @@
       }
       var ch = charAt(px, py);
       if (!ch) return;
-      var b = boxOf(ch);
-      pop(b.left + b.width / 2, b.top + b.height / 2, 34);
+      popFromGlyph(ch, 34);
       if (!calm && ch.animate) {
         /* 下段は「字＝マスク、色＝矩形」なので、包んでいる <g> ごと動かす。
            矩形だけ動かすと、字が止まったまま色だけ滑る。
