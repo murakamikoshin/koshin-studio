@@ -7,6 +7,13 @@
   <language>ja</language>
   <atom:link href="https://koshinstudio.com/feed.xml" rel="self" type="application/rss+xml"/>
   <item>
+    <title>「減るはず」が、二度外れた：AIへの問い合わせを削る話</title>
+    <link>https://koshinstudio.com/notes/torecadash-ai/</link>
+    <guid isPermaLink="true">https://koshinstudio.com/notes/torecadash-ai/</guid>
+    <pubDate>Tue, 06 Oct 2026 15:00:00 GMT</pubDate>
+    <description>トレカ情報アプリで、AI への問い合わせを減らそうとした記録。45%減るはずが4.5%、配備したのに束ねが0回。数え直して見つかったことを、コミットの数字で書いた。</description>
+  </item>
+  <item>
     <title>広告の間隔を、回数ではなく時間で測る</title>
     <link>https://koshinstudio.com/notes/adgap/</link>
     <guid isPermaLink="true">https://koshinstudio.com/notes/adgap/</guid>

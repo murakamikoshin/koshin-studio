@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>「減るはず」が、二度外れた：AIへの問い合わせを削る話 — トレカダッシュ 開発の記録 — Koshin Studio</title>
+<meta name="description" content="トレカ情報アプリで、AI への問い合わせを減らそうとした記録。45%減るはずが4.5%、配備したのに束ねが0回。数え直して見つかったことを、コミットの数字で書いた。">
+<meta property="og:title" content="「減るはず」が、二度外れた：AIへの問い合わせを削る話">
+<meta property="og:description" content="AI への問い合わせを減らそうとして、二度外れた記録。">
+<meta property="og:type" content="article">
+<meta name="theme-color" content="#070c17">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/assets/icon/icon-180.png">
+<link rel="manifest" href="/site.webmanifest">
+<script>document.documentElement.className+=" js"</script>
+<link rel="stylesheet" href="/style.css?v=19008d13">
+<link rel="canonical" href="https://koshinstudio.com/notes/torecadash-ai/">
+<meta property="og:url" content="https://koshinstudio.com/notes/torecadash-ai/">
+<meta property="og:site_name" content="Koshin Studio">
+<meta property="og:locale" content="ja_JP">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="alternate" type="application/rss+xml" title="Koshin Studio — Notes" href="https://koshinstudio.com/feed.xml">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BlogPosting","headline":"「減るはず」が、二度外れた：AIへの問い合わせを削る話","url":"https://koshinstudio.com/notes/torecadash-ai/","description":"トレカ情報アプリで、AI への問い合わせを減らそうとした記録。45%減るはずが4.5%、配備したのに束ねが0回。数え直して見つかったことを、コミットの数字で書いた。","datePublished":"2026-10-07","dateModified":"2026-10-07","inLanguage":"ja","image":"https://koshinstudio.com/assets/og/og_notes_torecadash-ai.jpg","author":{"@id":"https://koshinstudio.com#studio"},"publisher":{"@id":"https://koshinstudio.com#studio"},"mainEntityOfPage":"https://koshinstudio.com/notes/torecadash-ai/"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Koshin Studio","item":"https://koshinstudio.com/"},{"@type":"ListItem","position":2,"name":"Notes","item":"https://koshinstudio.com/notes/"},{"@type":"ListItem","position":3,"name":"「減るはず」が、二度外れた：AIへの問い合わせを削る話","item":"https://koshinstudio.com/notes/torecadash-ai/"}]}]}</script>
+<meta property="og:image" content="https://koshinstudio.com/assets/og/og_notes_torecadash-ai.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+</head>
+<body>
+<canvas id="motes"></canvas>
+
+<header class="site"><div class="wrap">
+  <a class="logo" href="/">Koshin Studio</a>
+  <nav><a href="/works/">Works</a><a href="/notes/">Notes</a><a href="/anime/">Anime</a><a href="/about/">About</a></nav>
+</div></header>
+
+<main><div class="wrap">
+  <nav class="crumbs" aria-label="現在地"><a href="/">Koshin Studio</a><i aria-hidden="true">›</i><a href="/notes/">Notes</a><i aria-hidden="true">›</i><span aria-current="page">「減るはず」が、二度外れた：AIへの問い合わせを削る話</span></nav>
+  <h1>「減るはず」が、二度外れた：AIへの問い合わせを削る話</h1>
+  <div class="rule"></div>
+  <p class="lead">トレカダッシュ 開発の記録 ／ 2026年10月</p>
+
+  <p>iOS アプリ「トレカダッシュ」は、トレカ（ポケカ・遊戯王・ワンピース）の予約・抽選・先着販売の情報を集めて、通知するアプリです。集めた記事が「どの商品の話か」を決める処理に、AI（Gemini）を使っています。この AI への問い合わせを減らそうとして、<strong>「減るはず」と書いたものが、二度、外れました</strong>。コミットに残っている数字で、順に書きます。</p>
+  <p class="note">このサイトには、トレカダッシュの作品ページはまだありません。ここに書くのは、開発の記録です。</p>
+
+  <h2 class="rv">何をAIに聞いているのか</h2>
+  <p>記事の題名（たとえば「30th CELEBRATION プレミアムデッキセット エーフィ」）を、最近の商品の候補リスト（直近60件）と突き合わせて、<strong>どの商品なのかを AI に答えてもらう</strong>、という処理です。1回の問い合わせは約 3,083 トークンで、そのうち約 1,800 は、毎回同じ固定の説明文でした。</p>
+
+  <h2 class="rv">一つ目：題名が商品名そのものなら、聞かなくていい</h2>
+  <p>題名が、既知の商品名とそのまま一致するなら、AI に聞く必要はありません。この「短絡」を入れたところ、実データでは<strong>X の監視で 43%</strong>が当てはまりました。食い違い（短絡の答えが、AI の答えと違う）は 0 件です。そこで、これで<strong>約 45% 減る</strong>と記録しました。</p>
+  <p>ところが、配備して90分たっても、短絡は<strong>1回も発火しませんでした</strong>。数え直すと、こうでした。</p>
+  <div class="scroll rv"><table>
+    <tr><th>対象</th><th class="n">短絡できる件数</th><th class="n">元から無料だった</th><th class="n">新たに減る</th></tr>
+    <tr><td>X の監視</td><td class="n">813</td><td class="n">768</td><td class="n">45（2%）</td></tr>
+    <tr><td>その他</td><td class="n">419</td><td class="n">188</td><td class="n">231（32%）</td></tr>
+  </table></div>
+  <p>この処理の手前には、公式カタログと照らし合わせる、<strong>元から無料の経路</strong>がありました。短絡できる記事のほとんどは、そこで先に片付いていたのです。新たに減る分を足すと、<strong>1日に約39回、全体の約4.5%</strong>。45% ではなく、4.5% でした。</p>
+  <blockquote>その規則が当たる割合と、実際に減る呼び出しは、別物。</blockquote>
+  <p>手前に無料の経路があるなら、差し引きまで数えないといけない。コミットの教訓の欄には、そう書いてあります。処理自体は正しく安全だったので残しています。ただし、AI の削減としては小さいものでした。</p>
+
+  <h2 class="rv">二つ目：まとめて聞く</h2>
+  <p>次の本命は、<strong>複数の記事を1回の問い合わせにまとめる</strong>ことでした。固定の説明文が1回で済むからです。候補リストは、同じジャンルの記事なら「最近の60件」を共有するので、合併してもほとんど増えません。</p>
+  <p>設計では、二つのことに気をつけました。</p>
+  <ul>
+    <li><strong>待ち時間を入れない。</strong>実測では、数百ミリ秒の短い窓では、まとめられませんでした（同じ「秒」に来る記事は、24時間で12回だけ）。かといって、数分待つと、X 監視の巡回が5倍遅くなります。そこで、「まだ動いている記事が、全員、待ちに入った瞬間に送る」方式にしました。保険の上限は20秒です。</li>
+    <li><strong>精度を落とさない。</strong>まとめると、候補リストが全員ぶんの合併になり、他の記事の候補が見えてしまいます。そこで、答えは本物の商品IDで返してもらい、その記事自身の候補に含まれるかを、必ず検証します。候補外なら採用しません。返事が欠けた記事は、その記事だけ1件で聞き直します。</li>
+  </ul>
+  <p>効果は、直近2日の実際の記事で、候補リストを再現して測りました（送る文字数）。</p>
+  <div class="scroll rv"><table>
+    <tr><th>まとめる件数</th><th class="n">1件ずつ</th><th class="n">まとめて</th><th class="n">減り方</th></tr>
+    <tr><td>2件</td><td class="n">21,762字</td><td class="n">13,427字</td><td class="n">−38%</td></tr>
+    <tr><td>3件</td><td class="n">32,673字</td><td class="n">14,964字</td><td class="n">−54%</td></tr>
+    <tr><td>4件</td><td class="n">43,571字</td><td class="n">16,192字</td><td class="n">−63%</td></tr>
+    <tr><td>6件</td><td class="n">65,000字</td><td class="n">17,729字</td><td class="n">−73%</td></tr>
+  </table></div>
+
+  <h2 class="rv">三つ目：配備したのに、一度も束ねていなかった</h2>
+  <p>配備して6時間。商品照合は47回あり、<strong>束ねは0回</strong>でした。同じ分に2〜7件の呼び出しがあったのに、1件ずつ聞いていたのです。</p>
+  <p>原因は、「送る条件」でした。条件を「待っている数 ≧ まだ終わっていない処理の数（pending）」で見ていたのですが、<strong>待ちに入った処理も、pending に含まれていました</strong>。X の監視は32アカウントを同時に回します。先に31件が終わっていれば、pending は1。最後の1件が待ちに来た瞬間に、条件が成立して、<strong>1件のまま即送信</strong>されていました。</p>
+  <p>直し方は、「まだ待ちにも来ていない処理がゼロか」で見ること。完全に終わった数と、いま待っている数の合計が、全体に達したら送ります。あわせて、保険の上限を20秒から6秒に縮めました。1件しか来ない回で毎回20秒待つと、X 監視1回の実行（実測17.8秒）より長くなって、巡回が遅れるからです。</p>
+  <p>この確認のとき、一つ目の短絡も、見直されました。<strong>6時間で、47回中28回（60%）</strong>が、AI を呼ばずに済んでいました。短絡は、正しく効いていました。</p>
+
+  <h2 class="rv">分かったこと</h2>
+  <ul>
+    <li><strong>「当たる割合」を、削減量と書かない。</strong>手前に無料の経路があれば、減るのは差し引き分だけです。</li>
+    <li><strong>配備しただけでは、動いたことにならない。</strong>「束ね0回」は、数え直したから見つかりました。ログに「束ねた」と出るかを先に決めておけば、もっと早く気づけたはずです。</li>
+    <li>三つの数字（4.5%、−38〜73%、60%）は、どれも、<strong>最初に見積もった数字ではありません</strong>。配備したあとに、実データで測り直した数字です。</li>
+  </ul>
+  <p class="note">この記事の数字は、コミットの記録（2026年9月4日・5日）から取りました。料金の金額は書いていません。</p>
+
+  <div class="ad-slot" data-slot="footer" hidden></div>
+<!--/ad-->
+
+  <div class="rule" style="margin:40px 0 22px"></div>
+  <p class="eyebrow">この話に出てくるもの</p>
+  <ul class="plain">
+    <li><a href="/notes/adgap/">広告の間隔を、回数ではなく時間で測る</a> — 「測っていない」と気づいた、別の記録</li>
+    <li><a href="/notes/u2028/">JSONLを読んだら壊れた</a> — 数え直して原因が見つかった、別の記録</li>
+  </ul>
+
+<!--related-->
+  <div class="rule" style="margin:40px 0 22px"></div>
+  <p class="eyebrow">ほかの記録</p>
+  <ul class="plain">
+    <li><a href="/notes/adgap/">広告の間隔を、回数ではなく時間で測る</a> — 「5プレイに一本」をやめて「前の広告から7分」に変えた理由と、変えたあとの動きの記録。書きながら、一戦の長さが分かっていないことに気づいた。</li>
+    <li><a href="/notes/u2028/">JSONLを読んだら壊れた：原因は、見えない改行文字だった</a> — あらすじに紛れた U+2028 のせいで、JSON が壊れた。splitlines() と split('\n') の違いを、実データの数字で確かめた記録。</li>
+    <li><a href="/notes/shindan12/">診断を12問にしたら、結果はどこまで変わるのか</a> — 50問の診断を12問から始められるようにした。短くして結果は変わらないのか、作り物の回答者1,000人で測った記録。タイプはほぼ同じ、運命の1作はかなり変わる。</li>
+  </ul>
+<!--/related-->
+</div>
+</main>
+
+<footer class="site"><div class="wrap">
+  <span>© 2026 Koshin Studio</span>
+  <div class="sns-row"></div>
+  <nav><a href="/about/">About</a><a href="/privacy/">あつかい</a></nav>
+</div></footer>
+<script src="/vendor/gsap.min.js?v=9396f256" defer></script>
+<script src="/vendor/ScrollTrigger.min.js?v=05ca5ad8" defer></script>
+<script src="/vendor/lenis.min.js?v=daec1872" defer></script>
+<script src="/motion.js?v=942a2796" defer></script>
+</body>
+</html>
