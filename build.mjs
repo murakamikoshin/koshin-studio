@@ -415,7 +415,7 @@ const noteBySlug = Object.fromEntries(notes.map((n) => [n.slug, n]));
    代わりに、footer に出しているのと同じ公開の持ち場だけを繋ぐ */
 const PERSON = {
   '@type': 'Organization', '@id': SITE + '#studio', name: 'Koshin Studio',
-  url: SITE, description: 'ブラウザゲームと診断アプリを個人で制作し、作り方と検証の記録を書いています。',
+  url: SITE, description: 'なんでも、ひとりで挑戦して、作って、試して、書いています。ゲームや診断アプリなどを作り、作り方と検証の記録を公開しています。',
   logo: SITE + '/assets/og/og_home.jpg',
   sameAs: (conf.social || []).map((x) => x.url),
 };

@@ -58,7 +58,7 @@ for (const f of pages()) {
     .card .bar{width:64px;height:3px;background:linear-gradient(90deg,#7ec8e3,#2f6fd0);margin:26px 0 0}
   </style>
   <div class="card">${logo}
-    ${home ? '<h1>ゲーム、アプリ、サイト、3D。ひとりで、ぜんぶ。</h1>'
+    ${home ? '<h1>なんでも、ひとりで挑戦する。</h1>'
            : `<h1>${title}</h1>${lead ? `<p>${lead}</p>` : ''}`}
     <div class="bar"></div>
   </div>`);

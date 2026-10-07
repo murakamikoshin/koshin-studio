@@ -29,7 +29,7 @@ await b.close();
 writeFileSync(SITE + '/site.webmanifest', JSON.stringify({
   name: 'Koshin Studio',
   short_name: 'Koshin',
-  description: 'ゲーム、アプリ、Web サイト、3D モデル。ひとりで、ぜんぶ作っています。',
+  description: 'なんでも、ひとりで挑戦する。ゲーム、アプリ、Web サイト、3D モデルなど。',
   start_url: '/',
   scope: '/',
   display: 'browser',
