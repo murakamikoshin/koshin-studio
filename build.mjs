@@ -693,6 +693,24 @@ for (const file of pages) {
     `<meta property="og:image" content="${ogPath}">\n` +
     `<meta property="og:image:width" content="1200">\n` +
     `<meta property="og:image:height" content="630">\n</head>`);
+  /* 関連の読みもの。記事の終わりには「ほかの記録」、作品ページには
+     「この作品の記録」を入れる。印の間は組むたびに作り直すので、増えない */
+  html = html.replace(/\n?<!--related-->[\s\S]*?<!--\/related-->\n?/g, '');
+  const relBlock = (title, list) => !list.length ? '' :
+    `\n<!--related-->\n  <div class="rule" style="margin:40px 0 22px"></div>\n  <p class="eyebrow">${title}</p>\n`
+    + `  <ul class="plain">\n${list.map((n) => `    <li><a href="${n.url}">${esc(n.title)}</a> — ${esc(n.blurb)}</li>`).join('\n')}\n  </ul>\n<!--/related-->\n`;
+  const rn = rel.match(/^\/notes\/([^/]+)\/index\.html$/);
+  const rw = rel.match(/^\/works\/([^/]+)\/index\.html$/);
+  let relHtml = '';
+  if (rn && noteBySlug[rn[1]]) {
+    const me = noteBySlug[rn[1]];
+    const others = notes.filter((n) => n.slug !== me.slug)
+      .sort((a, b) => (b.work === me.work) - (a.work === me.work));
+    relHtml = relBlock('ほかの記録', others.slice(0, 3));
+  } else if (rw && workBySlug[rw[1]]) {
+    relHtml = relBlock('この作品の記録', notes.filter((n) => n.work === workBySlug[rw[1]].title));
+  }
+  if (relHtml) html = html.replace(/<\/div>\s*<\/main>/, (m) => relHtml + m);
   writeFileSync(file, html);
 }
 
