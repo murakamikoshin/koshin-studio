@@ -7,6 +7,13 @@
   <language>ja</language>
   <atom:link href="https://koshinstudio.com/feed.xml" rel="self" type="application/rss+xml"/>
   <item>
+    <title>初めての審査で、「情報が必要です」と返ってきた</title>
+    <link>https://koshinstudio.com/notes/review-info-needed/</link>
+    <guid isPermaLink="true">https://koshinstudio.com/notes/review-info-needed/</guid>
+    <pubDate>Wed, 07 Oct 2026 15:00:00 GMT</pubDate>
+    <description>App Store の初めての審査で届いたのは、不合格ではなく「情報が必要」というメールだった。求められた六つ（実機の画面収録、目的、外部サービスの一覧など）と、前に直したこととのつながり。</description>
+  </item>
+  <item>
     <title>10秒ピッタリのランキングを、公平にする：小数3桁・同着・書き込み回数</title>
     <link>https://koshinstudio.com/notes/stopwatch-rank/</link>
     <guid isPermaLink="true">https://koshinstudio.com/notes/stopwatch-rank/</guid>
