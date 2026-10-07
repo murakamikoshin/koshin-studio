@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>一括処理が「全記事」に当たった：書く前に数える、テストは壊して確かめる — トレカダッシュ 開発の記録 — Koshin Studio</title>
+<meta name="description" content="記事の状態をまとめて直す処理が、全記事に当たり、18件が誤って表示に戻った。履歴から戻した経緯と、テストが効くかを、規則を1つずつ外して確かめた記録。">
+<meta property="og:title" content="一括処理が「全記事」に当たった：書く前に数える、テストは壊して確かめる">
+<meta property="og:description" content="記事の状態をまとめて直す処理が、全記事に当たり、18件が誤って表示に戻った。履歴から戻した経緯と、テストが効くかを、規則を1つずつ外して確かめた記録。">
+<meta property="og:type" content="article">
+<meta name="theme-color" content="#fbfaf7">
+<link rel="icon" href="/favicon.ico?v=1697d589" sizes="48x48">
+<link rel="icon" href="/favicon.svg?v=b9d7922f" type="image/svg+xml" sizes="any">
+<link rel="apple-touch-icon" href="/assets/icon/icon-180.png?v=84e7f0e6">
+<link rel="manifest" href="/site.webmanifest">
+<script>document.documentElement.className+=" js"</script>
+<link rel="stylesheet" href="/style.css?v=54ae5fe6">
+<link rel="canonical" href="https://koshinstudio.com/notes/bulk-accident/">
+<meta property="og:url" content="https://koshinstudio.com/notes/bulk-accident/">
+<meta property="og:site_name" content="Koshin Studio">
+<meta property="og:locale" content="ja_JP">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="alternate" type="application/rss+xml" title="Koshin Studio — Notes" href="https://koshinstudio.com/feed.xml">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BlogPosting","headline":"一括処理が「全記事」に当たった：書く前に数える、テストは壊して確かめる","url":"https://koshinstudio.com/notes/bulk-accident/","description":"記事の状態をまとめて直す処理が、全記事に当たり、18件が誤って表示に戻った。履歴から戻した経緯と、テストが効くかを、規則を1つずつ外して確かめた記録。","datePublished":"2026-10-08","dateModified":"2026-10-08","inLanguage":"ja","image":"https://koshinstudio.com/assets/og/og_notes_bulk-accident.jpg","author":{"@id":"https://koshinstudio.com#studio"},"publisher":{"@id":"https://koshinstudio.com#studio"},"mainEntityOfPage":"https://koshinstudio.com/notes/bulk-accident/"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Koshin Studio","item":"https://koshinstudio.com/"},{"@type":"ListItem","position":2,"name":"Notes","item":"https://koshinstudio.com/notes/"},{"@type":"ListItem","position":3,"name":"一括処理が「全記事」に当たった：書く前に数える、テストは壊して確かめる","item":"https://koshinstudio.com/notes/bulk-accident/"}]}]}</script>
+<meta property="og:image" content="https://koshinstudio.com/assets/og/og_notes_bulk-accident.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
+</head>
+<body>
+<canvas id="motes"></canvas>
+
+<header class="site"><div class="wrap">
+  <a class="logo" href="/">Koshin Studio</a>
+  <nav><a href="/works/">Works</a><a href="/notes/">Notes</a><a href="/about/">About</a></nav>
+</div></header>
+
+<main><div class="wrap">
+  <nav class="crumbs" aria-label="現在地"><a href="/">Koshin Studio</a><i aria-hidden="true">›</i><a href="/notes/">Notes</a><i aria-hidden="true">›</i><span aria-current="page">一括処理が「全記事」に当たった：書く前に数える、テストは壊して確かめる</span></nav>
+  <h1>一括処理が「全記事」に当たった：書く前に数える、テストは壊して確かめる</h1>
+  <div class="rule"></div>
+  <p class="lead">トレカダッシュ 開発の記録 ／ 2026年10月</p>
+
+  <p>iOS アプリ「トレカダッシュ」で、記事の状態をまとめて直す新しい処理が、最初に流したとき、<strong>対象にするつもりのなかった記事まで、全部に当たりました</strong>。別のサイト由来の 18 件が、誤って、表示に戻っていました。事故の直し方と、その後に、同じ穴をふさぐ<strong>テスト</strong>を作ったとき、「そのテストが、本当に効くか」を、どう確かめたかを、HANDOFF の記録で書きます。</p>
+  <p class="note">このサイトには、トレカダッシュの作品ページがあります（<a href="/works/torecadash/">トレカダッシュ</a>）。ここに書くのは、開発の記録です。</p>
+
+  <h2 class="rv">何をする処理だったか</h2>
+  <p>アプリには、出品の価格が妥当かを調べる「価格の関門」があります（<a href="/notes/fail-open/">別の記事</a>に書きました）。この関門で、価格だけを理由に非表示にされた記事のうち、<strong>商品の取り違えが原因で、本当は正しい記事</strong>を、表示に戻す処理を足しました。戻す条件は、「正しい商品の定価と、出品価格が一致すること」です。</p>
+
+  <h2 class="rv">事故：全記事に当たった</h2>
+  <p>この処理は、最初、<strong>取り込み元を区別せず、全記事</strong>に当たりました。その結果、別のサイト（Amazon、カードラボ、ミニストップなど）由来の記事 18 件が、表示に戻ってしまいました。本来、非表示のままであるべきものです。</p>
+  <p>直し方は、二つです。</p>
+  <ul>
+    <li><strong>範囲を絞る。</strong>処理が当たる記事を、その取り込み元のものだけに、限りました（サイトの識別子が、その取り込み元で始まるもの）。</li>
+    <li><strong>戻したものを、元に戻す。</strong>誤って表示に戻した 18 件は、記事の状態の履歴（<code>statusHistory</code>）から特定して、元の状態（非表示で、価格で却下されたもの）に戻しました。</li>
+  </ul>
+  <p>ただし、この 18 件には、取り返せなかったものがあります。処理が、元の定価の欄を、<strong>出品価格で上書き</strong>していました。値は、出品価格のままです。</p>
+  <p><strong>原因は、書き込みの前に、対象の範囲を、数えていなかったこと</strong>でした。記録にも、そう書いてあります。「一括の書き込みは、対象の範囲を先に数えてから」。</p>
+
+  <h2 class="rv">同じ穴をふさぐ、テストを作る</h2>
+  <p>この日の点検で見つかった問題（9 種セットの誤分割、単品カードの混入、カードではない商品の混入など）を、二度と起こさないために、テストを作りました。<code>catalog-guards.test.js</code> に 66 件、ほかと合わせて、全 6 本を、1 つの手順（<code>run-all.sh</code>）で通せるようにしてあります。</p>
+  <p>あわせて、毎日の運用連絡に、警告を足しました。突き合わせの取りこぼし率が、基準（抽選図鑑 80%、ポケチュー 75%、X のまとめ 75%）を下回ったとき、30 時間動いていないとき、商品リストに、単品カードや、カードではない名前の商品が現れたときです。判定は、<strong>副作用のない純粋な関数</strong>で書いてあり、直れば、次の回で、自然に消えます。</p>
+
+  <h2 class="rv">テストが効くかを、壊して確かめる</h2>
+  <p>テストは、書いただけでは、効いているか分かりません。常に通るテストは、何も守っていないかもしれないからです。そこで、<strong>本番のコードの複製の、規則を 1 つずつ外して</strong>、テストが失敗することを、確かめました。</p>
+  <ul>
+    <li>規則を 1 つ外す（壊す）。</li>
+    <li>テストを流す。</li>
+    <li>失敗すれば、そのテストは、その規則を、守っている。</li>
+  </ul>
+  <p>この手順で、<strong>6 種類の改変を試して、6 種類とも、テストが失敗しました</strong>（全部、検出できた）。</p>
+  <p>運用のきまりも、記録に残しました。<code>functions/index.js</code> を触ったら、配備の前に、必ず、全テストを通します。</p>
+
+  <h2 class="rv">分かったこと</h2>
+  <blockquote>一括の書き込みは、先に数える。テストは、壊して確かめる。</blockquote>
+  <ul>
+    <li><strong>書く前に、「何件に当たるか」を数える。</strong>下見をせずに流すと、範囲の間違いに、書き終わってから気づきます。</li>
+    <li><strong>元に戻せる形で書く。</strong>履歴から特定できたので、18 件を戻せました。ただし、上書きした欄は、戻せません。</li>
+    <li><strong>通るテストより、壊れたら落ちるテスト。</strong>規則を外して、落ちることを見て、はじめて、そのテストを信じられます。</li>
+  </ul>
+  <p class="note">この記事は、HANDOFF（§272）の記録（2026年10月7日）から書きました。件数は、記録に書かれたものです。</p>
+
+  <div class="ad-slot" data-slot="footer" hidden></div>
+<!--/ad-->
+
+  <div class="rule" style="margin:40px 0 22px"></div>
+  <p class="eyebrow">この話に出てくるもの</p>
+  <ul class="plain">
+    <li><a href="/notes/fail-open/">確認できなかったときに、通していた</a> — 同じ「価格の関門」の、別の記録</li>
+    <li><a href="/notes/dup-zero/">「重複は実質ゼロ」と数えたのに、監査は112組を出していた</a> — 数え方を疑った、別の記録</li>
+  </ul>
+
+<!--related-->
+  <div class="rule" style="margin:40px 0 22px"></div>
+  <p class="eyebrow">ほかの記録</p>
+  <ul class="plain">
+    <li><a href="/notes/fake-products/">「9種セット」を中身ごとに分けて、偽の商品が80個できていた</a> — ポケモンカードの9種セットは1つの商品なのに、中身ごとに分けて、実在しない商品が80個できていた。入口を止め、親22件を戻し、子190件を外し、偽の商品を消した記録。</li>
+    <li><a href="/notes/apple-signin/">アプリを完全に終了すると、サインインが消えた：19人中17人が使い捨ての匿名アカウントだった</a> — 「アプリを落とすと、また Apple のサインインを求められる」。管理画面を開くと、19人中17人が使い捨ての匿名アカウントだった。起動直後の同期的な確認が競争を起こしていた記録。</li>
+    <li><a href="/notes/dup-zero/">「重複は実質ゼロ」と数えたのに、監査は112組を出していた</a> — 重複を統合する処理が、毎晩、先頭のジャンルの途中で時間切れになっていた。「ゼロ」と数えた自分の測り方が間違っていた。持ち回りに直して112組を0組にした記録。</li>
+  </ul>
+<!--/related-->
+</div>
+</main>
+
+<footer class="site"><div class="wrap">
+  <span>© 2026 Koshin Studio</span>
+  <div class="sns-row"></div>
+  <nav><a href="/about/">About</a><a href="/privacy/">あつかい</a></nav>
+</div></footer>
+<script src="/vendor/gsap.min.js?v=9396f256" defer></script>
+<script src="/vendor/ScrollTrigger.min.js?v=05ca5ad8" defer></script>
+<script src="/motion.js?v=150119fe" defer></script>
+</body>
+</html>

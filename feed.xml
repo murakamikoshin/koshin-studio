@@ -7,6 +7,20 @@
   <language>ja</language>
   <atom:link href="https://koshinstudio.com/feed.xml" rel="self" type="application/rss+xml"/>
   <item>
+    <title>一括処理が「全記事」に当たった：書く前に数える、テストは壊して確かめる</title>
+    <link>https://koshinstudio.com/notes/bulk-accident/</link>
+    <guid isPermaLink="true">https://koshinstudio.com/notes/bulk-accident/</guid>
+    <pubDate>Wed, 07 Oct 2026 15:00:00 GMT</pubDate>
+    <description>記事の状態をまとめて直す処理が、全記事に当たり、18件が誤って表示に戻った。履歴から戻した経緯と、テストが効くかを、規則を1つずつ外して確かめた記録。</description>
+  </item>
+  <item>
+    <title>「9種セット」を中身ごとに分けて、偽の商品が80個できていた</title>
+    <link>https://koshinstudio.com/notes/fake-products/</link>
+    <guid isPermaLink="true">https://koshinstudio.com/notes/fake-products/</guid>
+    <pubDate>Wed, 07 Oct 2026 15:00:00 GMT</pubDate>
+    <description>ポケモンカードの9種セットは1つの商品なのに、中身ごとに分けて、実在しない商品が80個できていた。入口を止め、親22件を戻し、子190件を外し、偽の商品を消した記録。</description>
+  </item>
+  <item>
     <title>押すものを六つから一つに絞った：初めての人は、どれを押せばいいか分からなかった</title>
     <link>https://koshinstudio.com/notes/first-visit/</link>
     <guid isPermaLink="true">https://koshinstudio.com/notes/first-visit/</guid>

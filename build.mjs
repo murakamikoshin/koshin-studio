@@ -210,6 +210,21 @@ ${animeAxes.map((a, i) => `    <div class="kind rv" data-delay="${i * 60}"><h3>$
   <p class="rv"><a href="/anime/types/">64タイプの一覧を見る →</a></p>
 </div></main>` + foot);
 
+/* アニメ診断の選び方に付ける「よくある質問」。画面に出す文と、構造化データ
+   （FAQPage）に出す文を、同じ配列から作る（食い違うと検索エンジンの指針に反する） */
+const guideFaq = [
+  { q: 'アニメ診断は無料ですか？何問ありますか？',
+    a: 'ガチアニメ診断は無料です。まず12問（約30秒）でタイプと運命の1作が出ます。続けて答えると、最大50問まで広がります。すべて選択式です。' },
+  { q: 'アニメ診断は当たりますか？',
+    a: '「当たる」の意味によります。タイプは、12問でもだいたい合います（作り物の回答者で測ると、6文字を1文字ずつ見て、9割以上が同じ側に落ちました）。一方、運命の1作は、質問を足すたびに揺れます（12問で出た1作が、50問でも1作目に来るのは、5〜8人に1人）。診断が測っているのは、好みと作品の「近さ」で、面白いと感じるかどうかの保証ではありません。' },
+  { q: '回答や結果は、どこかに保存されますか？',
+    a: 'いいえ。回答は、この端末の中だけで計算していて、サーバーには送りません。' },
+  { q: '何度やっても、同じ結果になりますか？',
+    a: 'タイプは安定しやすいですが、運命の1作は、答え方や、放送年の切り替え、好きなジャンルの選び方で変わります。すでに見た作品は、「見た」を押すと、次点の作品に差し替わります。' },
+  { q: '古いアニメも選ばれますか？',
+    a: '選ばれにくいです。診断が使う作品のデータベースは、2000年以降の作品が90.5%を占めていて、新しい作品とよく語られる作品に、偏っています。放送年は、結果の画面で、「こだわらない」「2010年以降」「2018年以降」から選べます。' },
+];
+
 /* アニメ診断の選び方（「おすすめのアニメ診断」を探す人に向けた解説。
    診断の仕様と、このサイトで実測した数字だけで書く。他の診断への評価は書かない） */
 writeAnime('/anime/guide/index.html',
@@ -263,6 +278,8 @@ writeAnime('/anime/guide/index.html',
     <li><strong>偏りがある：</strong>データベースは、新しい作品と、よく語られる作品に、寄っています。古い作品や、あまり語られない作品は、選ばれにくいです。</li>
     <li><strong>好みは変わる：</strong>今日の結果が、来年も同じとは限りません。</li>
   </ul>
+  <h2 class="rv">よくある質問</h2>
+${guideFaq.map((f) => `  <h3>${esc(f.q)}</h3>\n  <p class="rv">${esc(f.a)}</p>`).join('\n')}
   ${ctaBtn('ガチアニメ診断をはじめる（無料・1分）')}
 
   <p class="rv" style="margin-top:34px">続けて読む：<a href="/anime/axes/">6つの軸</a> ／ <a href="/anime/types/">64タイプの一覧</a> ／ <a href="/anime/">診断の読みものの入り口</a></p>
@@ -590,7 +607,10 @@ function ldFor(file, url) {
     ];
   }
   if (rel === '/anime/index.html') return [page('ガチアニメ診断の読みもの'), crumbs([['Koshin Studio', '/'], ['Works', '/works/'], ['ガチアニメ診断', '/works/shindananime/'], ['読みもの', '/anime/']])];
-  if (rel === '/anime/guide/index.html') return [page('アニメ診断の選び方'), crumbs([['Koshin Studio', '/'], ['Works', '/works/'], ['ガチアニメ診断', '/works/shindananime/'], ['読みもの', '/anime/'], ['選び方', '/anime/guide/']])];
+  if (rel === '/anime/guide/index.html') return [page('アニメ診断の選び方'),
+    { '@type': 'FAQPage', mainEntity: guideFaq.map((f) => ({ '@type': 'Question', name: f.q,
+      acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
+    crumbs([['Koshin Studio', '/'], ['Works', '/works/'], ['ガチアニメ診断', '/works/shindananime/'], ['読みもの', '/anime/'], ['選び方', '/anime/guide/']])];
   if (rel === '/anime/axes/index.html') return [page('6つの軸'), crumbs([['Koshin Studio', '/'], ['Works', '/works/'], ['ガチアニメ診断', '/works/shindananime/'], ['読みもの', '/anime/'], ['6つの軸', '/anime/axes/']])];
   if (rel === '/anime/types/index.html') return [page('64タイプ一覧'), crumbs([['Koshin Studio', '/'], ['Works', '/works/'], ['ガチアニメ診断', '/works/shindananime/'], ['読みもの', '/anime/'], ['64タイプ', '/anime/types/']])];
   const tm = rel.match(/^\/anime\/types\/([^/]+)\/index\.html$/);
