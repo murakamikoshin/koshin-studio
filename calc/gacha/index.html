@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ガチャのコンプリート計算機 — 全種そろえるのに、何回かかる？ — Koshin Studio</title>
+<meta name="description" content="ガチャの全種類をそろえるのに、何回・何円かかるかを計算します。種類数と、すでに持っている数を入れるだけ。平均、9割の人が揃う回数、コンプリートセットと比べた得か損かも出ます。">
+<meta property="og:title" content="ガチャのコンプリート計算機">
+<meta property="og:description" content="ガチャを全種そろえるのに何回・何円かかるか。平均と、9割の人が揃う回数を計算。">
+<meta property="og:type" content="article">
+<meta name="theme-color" content="#fbfaf7">
+<link rel="icon" href="/favicon.ico?v=1697d589" sizes="48x48">
+<link rel="icon" href="/favicon.svg?v=b9d7922f" type="image/svg+xml" sizes="any">
+<link rel="icon" href="/assets/icon/icon-192.png?v=e2566235" type="image/png" sizes="192x192">
+<link rel="apple-touch-icon" href="/assets/icon/icon-180.png?v=84e7f0e6">
+<link rel="manifest" href="/site.webmanifest">
+<script>document.documentElement.className+=" js"</script>
+<link rel="stylesheet" href="/style.css?v=7001672f">
+<meta name="google-adsense-account" content="ca-pub-3863314847163872">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3863314847163872" crossorigin="anonymous"></script>
+<link rel="canonical" href="https://koshinstudio.com/calc/gacha/">
+<meta property="og:url" content="https://koshinstudio.com/calc/gacha/">
+<meta property="og:site_name" content="Koshin Studio">
+<meta property="og:locale" content="ja_JP">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="alternate" type="application/rss+xml" title="Koshin Studio — Notes" href="https://koshinstudio.com/feed.xml">
+<meta property="og:image" content="https://koshinstudio.com/assets/og/og_calc_gacha.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
+</head>
+<body>
+<canvas id="motes"></canvas>
+
+<header class="site"><div class="wrap">
+  <a class="logo" href="/"><img class="logo-mark" src="/favicon.svg?v=b9d7922f" alt="" width="28" height="28">Koshin Studio</a>
+  <nav><a href="/works/">Works</a><a href="/notes/">Notes</a><a href="/about/">About</a></nav>
+</div></header>
+
+<main><div class="wrap">
+  <nav class="crumbs" aria-label="現在地"><a href="/">Koshin Studio</a><i aria-hidden="true">›</i><span aria-current="page">ガチャのコンプリート計算機</span></nav>
+  <h1>ガチャのコンプリート計算機</h1>
+  <div class="rule"></div>
+  <p class="lead">全種類そろえるのに、何回・何円かかる？</p>
+
+  <p>ガチャを回して、全種類を揃えるには、何回かかるのか。種類数と、すでに持っている数を入れると、<strong>平均の回数</strong>と、<strong>9 割の人が揃う回数</strong>、お金にするといくらか、を計算します。コンプリートセットが売っているときの、得か損かも出せます。</p>
+
+  <form class="calc" id="calc" onsubmit="return false">
+    <label>種類の数<input type="number" id="n" min="2" max="100" value="5" inputmode="numeric"></label>
+    <label>もう持っている種類の数<input type="number" id="k" min="0" max="99" value="0" inputmode="numeric"></label>
+    <label>1 回の値段（円）<input type="number" id="price" min="0" value="300" inputmode="numeric"></label>
+    <label>コンプリートセットの値段（円・任意）<input type="number" id="set" min="0" placeholder="例 1500" inputmode="numeric"></label>
+    <label>回す予定の回数（任意）<input type="number" id="m" min="0" placeholder="例 10" inputmode="numeric"></label>
+  </form>
+
+  <div class="calc-out" id="out" aria-live="polite"></div>
+  <noscript><p class="note">この計算機は、JavaScript で動きます。</p></noscript>
+
+  <h2 class="rv">例：5 種類を、1 回 300 円で、ぜんぶ集める</h2>
+  <ul>
+    <li>平均で、<strong>約 11.4 回</strong>（約 3,425 円）。そのうち、すでに持っている種類がもう一度出る「ダブり」が、約 6.4 回です。</li>
+    <li>半分の人が揃うのは <strong>10 回</strong>、9 割の人が揃うのは <strong>18 回</strong>、99% の人が揃うのは <strong>28 回</strong>。</li>
+    <li>ちょうど 5 回（ダブりなし）で揃う確率は、<strong>3.84%</strong>（5 の階乗 ÷ 5 の 5 乗）です。</li>
+  </ul>
+
+  <h2 class="rv">しくみ</h2>
+  <p>「いま <em>c</em> 種類持っている」とき、1 回で新しい種類が出る確率は、<em>(n − c) / n</em> です。持っている種類が増えるほど、新しいものは出にくくなります。最後の 1 種類を引くのに、平均で <em>n</em> 回かかります。</p>
+  <p>平均の回数は、<em>n × (1 + 1/2 + 1/3 + … + 1/残りの種類数)</em>。「9 割の人が揃う回数」は、1 回ずつ確率を進めて、揃った確率の合計が 90% を超えた回数です。式を足し引きせず、1 回ずつ進めているので、種類数が多くても、桁があふれません。</p>
+  <p>計算の正しさは、別の方法でも確かめました。5 種類で、コンピューターで 20 万人ぶんを実際に引かせたところ（平均 11.41 回、半分が 10 回、9 割が 18 回、99% が 28 回）、この計算機の答えと一致しました。</p>
+
+  <h2 class="rv">この計算が当てはまらないとき</h2>
+  <ul>
+    <li><strong>毎回、全種類から、同じ確率で出る</strong>という前提です。実際のガチャには、出やすさに差がある機械（出にくい「シークレット」など）もあります。差がある場合、ぜんぶ揃えるには、ここに出る回数より、<strong>多くかかります</strong>。</li>
+    <li>カプセルの入り方が決まっている機械（種類ごとに入っている数が決まっている）は、ダブりが減ることがあります。この計算機は、そういう機械には、対応していません。</li>
+    <li>お店や機械によって、値段が違うことがあります。1 回の値段は、自分で入れてください。</li>
+    <li>これは、確率の計算です。ガチャで、必ず揃えられるわけではありません。</li>
+  </ul>
+
+  <p class="note">コンプリートセットを買う場合の話は、<a href="/notes/ditto-charm/">メタモンのチャームを買った記事</a>にあります。</p>
+
+  <script src="/calc/gacha/gacha.js" defer></script>
+  <script src="/calc/gacha/page.js" defer></script>
+</div>
+</main>
+
+<footer class="site"><div class="wrap">
+  <span>© 2026 Koshin Studio</span>
+  <div class="sns-row"></div>
+  <nav><a href="/about/">About</a><a href="/privacy/">あつかい</a></nav>
+</div></footer>
+<script src="/motion.js?v=1e7447ec" defer></script>
+</body>
+</html>

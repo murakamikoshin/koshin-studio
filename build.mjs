@@ -708,6 +708,7 @@ for (const file of pages) {
     '/anime/guide/index.html': [['Works', '/works/'], ['ガチアニメ診断', '/works/shindananime/'], ['ガイド', '/anime/'], ['選び方', '/anime/guide/']],
     '/anime/types/index.html': [['Works', '/works/'], ['ガチアニメ診断', '/works/shindananime/'], ['ガイド', '/anime/'], ['64タイプ', '/anime/types/']],
     '/privacy/index.html': [['あつかい', '/privacy/']],
+    '/calc/gacha/index.html': [['ガチャのコンプリート計算機', '/calc/gacha/']],
   };
   let trail = TRAIL[rel];
   const wm2 = rel.match(/^\/works\/([^/]+)\//);
