@@ -732,3 +732,14 @@ h2[id]{scroll-margin-top:78px}
 .picks{margin-top:44px;padding-top:6px}
 .picks h2{font-family:var(--mincho);font-weight:600;font-size:20px;letter-spacing:.16em;margin:0 0 14px}
 .picks-note{margin:0 0 18px}
+
+/* 札が帯になるとき（motion.js が輪に収まらないと判断したとき）は、画面幅によらず、
+   ロゴの上に帯の場所を空ける。狭い画面の規則と同じ */
+.stage.is-strip{height:auto;min-height:0;display:block;padding:158px 0 8px}
+.stage.is-strip #orbit{position:absolute;left:0;right:0;top:0;height:150px;overflow:hidden}
+.stage.is-strip .orb{top:50%}
+.stage.is-strip .lockup{position:relative}
+@media(min-width:621px){
+  .stage.is-strip{padding-top:200px}
+  .stage.is-strip #orbit{height:192px}
+}

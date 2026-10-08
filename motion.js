@@ -138,6 +138,7 @@
     var orbs = [].slice.call(orbit.querySelectorAll('.orb'));
     var n = orbs.length, ang = 0, spin = 1, hover = false;
     var lockEl = document.querySelector('.lockup');
+    var stageEl = orbit.parentNode;
     /* 大きさの測り直しは、毎フレームやると、その都度レイアウトが強制される。
        画面の大きさが変わったときと、書体や画像が揃う頃にだけ測る */
     var meas = null;
@@ -163,6 +164,11 @@
 
       /* 輪がロゴを避けきれないほど狭い画面では、横に流れる帯にする */
       if (rxCap < Wc) {
+        /* 帯の配置（ロゴの上に場所を空ける）は、画面幅ではなく、この判定に合わせる。
+           切り替わった最初の一回は、配置が変わるので測り直してから置く */
+        if (stageEl && !stageEl.classList.contains('is-strip')) {
+          stageEl.classList.add('is-strip'); meas = null; return;
+        }
         orbit.classList.add('strip');
         if (!calm) ang += 0.00055 * spin;
         var span = n * (cw + 22);
@@ -185,6 +191,9 @@
         return;
       }
 
+      if (stageEl && stageEl.classList.contains('is-strip')) {
+        stageEl.classList.remove('is-strip'); orbit.classList.remove('strip'); meas = null; return;
+      }
       orbit.classList.remove('strip');
       var rx = Math.min(rxCap, Math.max(box.width * 0.30, Wc));
       var ry = Math.min(ryCap, Math.max(box.height * 0.22, Hc));
