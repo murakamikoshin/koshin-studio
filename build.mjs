@@ -414,7 +414,7 @@ for (const n of records) {
 }
 
 writeFileSync(here + '/notes/index.html',
-  head('Notes — 作りながら考えたことの記録 — Koshin Studio', '作りながら考えたことの記録。数字を取って直した話が中心です。') +
+  head('Notes — 作りながら考えたことの記録 — Koshin Studio', 'ゲームやアプリを作る中で、数字を取って、思い込みを直した記録。App Store の審査、広告の間隔、データの重複、API の移行など、実際に起きたことを、測った数字つきで書いています。') +
 `<main><div class="wrap">
   <h1>Notes</h1>
   <div class="rule"></div>
