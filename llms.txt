@@ -57,6 +57,7 @@
 - [10秒ピッタリで止めろ！](https://koshinstudio.com/works/stopwatch10/): 頭の中で10秒を数えて止めるだけ。3回勝負で、1回あたりの誤差が小さいほど強い。導入も登録も要らず、開いた瞬間に始まります。
 - [ガチアニメ診断](https://koshinstudio.com/works/shindananime/): 12問から6つの軸に分解して、あなたのアニメタイプと、6千作を超えるデータベースから今いちばん刺さる運命の1作を選ぶ診断。回答は端末の中だけで計算します。
 - [トレカダッシュ](https://koshinstudio.com/works/torecadash/): トレカの抽選・予約・先着販売の情報を、店舗やジャンルごとにまとめて通知する iPhone アプリ。締切カレンダーと応募の記録つき。App Store の審査を受けています。
+- [寝返り将棋](https://koshinstudio.com/works/negaeri-shogi/): 挟まれた駒は敵に寝返り、出世する。6×6の盤で、持ち駒を打って挟み、連鎖で一気に裏返す。AI 対戦と、レーティングつきのオンライン対戦。
 
 ## ガチアニメ診断のガイド
 - [ガイド](https://koshinstudio.com/anime/): 診断の仕組みと 64 タイプ

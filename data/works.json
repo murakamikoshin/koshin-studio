@@ -160,5 +160,27 @@
       }
     ],
     "os": "iOS"
+  },
+  {
+    "slug": "negaeri-shogi",
+    "title": "寝返り将棋",
+    "kind": "game",
+    "year": "2026",
+    "status": "公開中",
+    "url": "/works/negaeri-shogi/",
+    "cover": "/assets/negaeri-shogi-square",
+    "blurb": "挟まれた駒は敵に寝返り、出世する。6×6の盤で、持ち駒を打って挟み、連鎖で一気に裏返す。AI 対戦と、レーティングつきのオンライン対戦。",
+    "tags": [
+      "ブラウザ",
+      "オンライン対戦",
+      "日本語・英語"
+    ],
+    "coverW": 720,
+    "coverH": 720,
+    "play": "/play/negaeri-shogi/",
+    "genre": [
+      "ボードゲーム",
+      "対戦"
+    ]
   }
 ]

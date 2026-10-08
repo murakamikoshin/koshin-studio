@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>寝返り将棋 — Koshin Studio</title>
+<meta name="description" content="挟まれた駒は敵に寝返り、出世する。6×6の盤で、持ち駒を打って挟み、連鎖で一気に裏返す対戦ゲーム。AI 対戦、2人対戦、レーティングつきのオンライン対戦。ブラウザだけで遊べます。">
+<meta property="og:title" content="寝返り将棋">
+<meta property="og:description" content="挟まれた駒は敵に寝返り、出世する。6×6の盤の対戦ゲーム。">
+<meta property="og:type" content="article">
+<meta name="theme-color" content="#fbfaf7">
+<link rel="icon" href="/favicon.ico?v=1697d589" sizes="48x48">
+<link rel="icon" href="/favicon.svg?v=b9d7922f" type="image/svg+xml" sizes="any">
+<link rel="icon" href="/assets/icon/icon-192.png?v=e2566235" type="image/png" sizes="192x192">
+<link rel="apple-touch-icon" href="/assets/icon/icon-180.png?v=84e7f0e6">
+<link rel="manifest" href="/site.webmanifest">
+<script>document.documentElement.className+=" js"</script>
+<link rel="stylesheet" href="/style.css?v=7001672f">
+<meta name="google-adsense-account" content="ca-pub-3863314847163872">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3863314847163872" crossorigin="anonymous"></script>
+<link rel="canonical" href="https://koshinstudio.com/works/negaeri-shogi/">
+<meta property="og:url" content="https://koshinstudio.com/works/negaeri-shogi/">
+<meta property="og:site_name" content="Koshin Studio">
+<meta property="og:locale" content="ja_JP">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="alternate" type="application/rss+xml" title="Koshin Studio — Notes" href="https://koshinstudio.com/feed.xml">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"VideoGame","name":"寝返り将棋","url":"https://koshinstudio.com/works/negaeri-shogi/","description":"挟まれた駒は敵に寝返り、出世する。6×6の盤で、持ち駒を打って挟み、連鎖で一気に裏返す。AI 対戦と、レーティングつきのオンライン対戦。","inLanguage":"ja","image":"https://koshinstudio.com/assets/negaeri-shogi-square@2x.jpg","applicationCategory":"GameApplication","operatingSystem":"Web","datePublished":"2026","gamePlatform":"Web browser","playMode":"SinglePlayer","genre":["ボードゲーム","対戦"],"author":{"@id":"https://koshinstudio.com#studio"},"publisher":{"@id":"https://koshinstudio.com#studio"},"offers":{"@type":"Offer","price":"0","priceCurrency":"JPY"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Koshin Studio","item":"https://koshinstudio.com/"},{"@type":"ListItem","position":2,"name":"Works","item":"https://koshinstudio.com/works/"},{"@type":"ListItem","position":3,"name":"寝返り将棋","item":"https://koshinstudio.com/works/negaeri-shogi/"}]}]}</script>
+<meta property="og:image" content="https://koshinstudio.com/assets/sushitsumu-wide.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
+</head>
+<body>
+<canvas id="motes"></canvas>
+
+<header class="site"><div class="wrap">
+  <a class="logo" href="/"><img class="logo-mark" src="/favicon.svg?v=b9d7922f" alt="" width="28" height="28">Koshin Studio</a>
+  <nav><a href="/works/">Works</a><a href="/notes/">Notes</a><a href="/picks/">Picks</a><a href="/calc/">Tools</a><a href="/about/">About</a></nav>
+</div></header>
+
+<main><div class="wrap">
+  <nav class="crumbs" aria-label="現在地"><a href="/">Koshin Studio</a><i aria-hidden="true">›</i><a href="/works/">Works</a><i aria-hidden="true">›</i><span aria-current="page">寝返り将棋</span></nav>
+  <h1>寝返り将棋</h1>
+  <div class="rule"></div>
+  <p class="lead">挟まれた駒は、敵に寝返る。<br>寝返った駒は、出世する。</p>
+
+  <p><a class="btn" data-play="negaeri-shogi" href="/play/negaeri-shogi/">遊ぶ</a></p>
+
+  <div class="shots rv">
+    <figure>
+      <picture>
+        <source srcset="/assets/shots/negaeri-initial.webp" type="image/webp">
+        <img src="/assets/shots/negaeri-initial.jpg" alt="開始局面。6×6の盤に、玉・飛・角・歩が向かい合って並び、上下に持ち駒の欄がある" width="560" height="1019" loading="lazy" decoding="async">
+      </picture>
+      <figcaption>開始の盤</figcaption>
+    </figure>
+    <figure>
+      <picture>
+        <source srcset="/assets/shots/negaeri-ai.webp" type="image/webp">
+        <img src="/assets/shots/negaeri-ai.jpg" alt="AI 対戦の途中。盤の中ほどに飛が進み、先手の持ち駒は歩3・飛1・角1" width="560" height="1019" loading="lazy" decoding="async">
+      </picture>
+      <figcaption>AI 対戦の途中</figcaption>
+    </figure>
+  </div>
+
+  <div class="stats rv">
+    <div><b data-count="6">6</b><span>×6 の盤</span></div>
+    <div><b data-count="4">4</b><span>種類の駒</span></div>
+    <div><b data-count="3">3</b><span>段階の AI</span></div>
+  </div>
+
+  <h2 class="rv">どんな遊びか</h2>
+  <p>6×6 の小さな盤で、将棋の駒を使って、オセロのように挟みます。持ち駒を空きマスに打つと、縦・横・斜めの8方向で、相手の駒を挟んだぶんだけ裏返って、自分の駒になります。</p>
+  <p>裏返った駒は、同時に<strong>成ります</strong>（歩はと金、飛は竜、角は馬）。成った駒は、動ける範囲が広がります。その新しい動きで、さらに挟みが成り立てば、続けて裏返る。これが<strong>連鎖</strong>です。一手で盤の様子が、がらりと変わります。</p>
+
+  <h2 class="rv">ルールの要点</h2>
+  <ul>
+    <li>駒は、玉・歩・飛・角の4種類。動きは本将棋と同じです。</li>
+    <li>毎ターン、<strong>打つ</strong>（持ち駒を置く。ここで挟みが起きる）か、<strong>動かす</strong>（盤上の駒を動かす。挟みは起きない）かを選びます。</li>
+    <li><strong>盤の端も、挟みの終わり</strong>として数えます。端に追い込まれた駒は、まとめて寝返ります。</li>
+    <li><strong>玉は、裏返りません。</strong>自分の玉のとなりの駒も、寝返りません。玉のまわりが、守りの場所になります。</li>
+    <li>相手の玉を取ったら勝ちです。動かせる手がなければパス。両方がパスなら、盤の上の駒が多いほうが勝ちです。</li>
+  </ul>
+  <p>遊ぶ画面の「遊び方」で、短い手引きも見られます。</p>
+
+  <h2 class="rv">遊び方は、4つ</h2>
+  <h3>2人（同じ端末）</h3>
+  <p>1台を交代で。ルールを覚えるのに向いています。</p>
+  <h3>AI 対戦（弱・中・強）</h3>
+  <p>相手は、端末の中で動く AI です。登録も通信も要りません。</p>
+  <h3>オンライン対戦</h3>
+  <p>ボタンを押すと、同じように待っている人と組まれます。持ち時間は各3分で、1手ごとに5秒が足されます。勝敗でレーティングが上下し、順位表に載ります。名前は、あとから変えられます。</p>
+
+  <h2 class="rv">作りについて</h2>
+  <p>ルールの判定は、1か所にだけ書いてあります。画面と、オンライン対戦のサーバーは、そこから同じコードを読んでいるので、盤の状態が食い違いません。サーバーは、受け取った手を必ずそこで確かめ、端末が言う局面や時間、勝敗は信用しません。</p>
+  <p>画面は日本語と英語で、スマートフォンの縦持ちで遊べるように作りました。AI は、端末の中の別のスレッドで、先を読んで探索します。</p>
+  <p>数値（持ち駒の数や玉のまわりの決まりなど）は、AI 同士の対局で測って決めました。人どうしの対局での釣り合いは、まだ十分には確かめられていません。遊んでみて、先手か後手が有利すぎると感じたら、教えてください。</p>
+
+  <h2 class="rv">預かるもの</h2>
+  <p>オンライン対戦を遊ぶと、<strong>名前（既定は「名無し」）、レーティング、勝敗の数、対局の記録</strong>を、こちらのサーバーに預かります。登録の画面はなく、端末に作られる ID で本人を見分けます。くわしくは<a href="/privacy/">あつかい</a>に書いています。AI 対戦と2人対戦は、何も預かりません。</p>
+
+  <p style="margin-top:40px">
+    <a class="btn" data-play="negaeri-shogi" href="/play/negaeri-shogi/">遊ぶ</a>
+  </p>
+</div></main>
+
+<footer class="site"><div class="wrap">
+  <span>© 2026 Koshin Studio</span>
+  <div class="sns-row"></div>
+  <nav><a href="/picks/">Picks</a><a href="/calc/">Tools</a><a href="/about/">About</a><a href="/privacy/">あつかい</a></nav>
+</div></footer>
+<script src="/vendor/gsap.min.js?v=9396f256" defer></script>
+<script src="/vendor/ScrollTrigger.min.js?v=05ca5ad8" defer></script>
+<script src="/motion.js?v=1e7447ec" defer></script>
+</body>
+</html>
