@@ -220,7 +220,8 @@
         el.style.transform = 'translate3d(' + x.toFixed(1) + 'px,' + y.toFixed(1) + 'px,0) scale(' + s2.toFixed(3) + ')';
         el.style.opacity = o.toFixed(3);
         el.style.zIndex = String(20 + Math.round(z * 28));
-        el.style.filter = z < -0.1 ? 'blur(' + ((-z - 0.1) * 2.6).toFixed(2) + 'px)' : 'none';
+        /* 奥の札のぼかしは、毎フレーム描き直すので重い（実測で初回表示を遅らせた）。透明度と大きさだけで奥行きを出す */
+        el.style.filter = 'none';
       }
     }
     orbit.addEventListener('pointerenter', function () { hover = true; }, true);
@@ -425,7 +426,41 @@
   }
   resize(); requestAnimationFrame(frame);
   }
-  if (cv && !calm && document.body.classList.contains('home')) startMotes();
+  /* 粒は、最初の描画（と、札の配置）が済んでから始める。先に始めると、初回表示が遅れる */
+  if (cv && !calm && document.body.classList.contains('home')) {
+    var startLater = function () { setTimeout(startMotes, 400); };
+    if (document.readyState === 'complete') startLater(); else window.addEventListener('load', startLater);
+  }
+
+  /* ---------- コメント欄（giscus）：押したときだけ読み込む ---------- */
+  (function () {
+    var sec = document.getElementById('comments');
+    var btn = document.getElementById('load-comments');
+    if (!sec || !btn) return;
+    btn.addEventListener('click', function () {
+      btn.disabled = true; btn.textContent = '読み込んでいます…';
+      var s = document.createElement('script');
+      s.src = 'https://giscus.app/client.js';
+      s.async = true;
+      s.crossOrigin = 'anonymous';
+      var d = sec.dataset;
+      s.setAttribute('data-repo', d.repo);
+      s.setAttribute('data-repo-id', d.repoId);
+      s.setAttribute('data-category', d.category);
+      s.setAttribute('data-category-id', d.categoryId);
+      s.setAttribute('data-mapping', 'pathname');
+      s.setAttribute('data-strict', '1');
+      s.setAttribute('data-reactions-enabled', '1');
+      s.setAttribute('data-emit-metadata', '0');
+      s.setAttribute('data-input-position', 'top');
+      s.setAttribute('data-theme', 'light');
+      s.setAttribute('data-lang', 'ja');
+      s.setAttribute('data-loading', 'lazy');
+      s.onload = function () { btn.parentNode.hidden = true; };
+      s.onerror = function () { btn.disabled = false; btn.textContent = '読み込めませんでした。もう一度'; };
+      document.getElementById('giscus-box').appendChild(s);
+    });
+  })();
 
   /* ---------- 種類で絞る（Works） ---------- */
   var chips = document.querySelectorAll('.chip');

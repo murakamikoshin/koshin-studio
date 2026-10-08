@@ -147,7 +147,7 @@ ${g.items.map((it, i) => `      <div class="si rv" data-delay="${i * 40}">
     '<!--stack:start-->\n' + html + '\n  <!--stack:end-->'));
 }
 
-/* ---- /anime/ ガチアニメ診断の読みもの ----
+/* ---- /anime/ ガチアニメ診断ガイド ----
    診断そのものは別リポジトリ（/app/shindananime/）。ここは、その 6 軸と
    64 タイプを読ませるページ。材料は data/anime-axes.json（手書き）と
    data/anime-types.json（tools/anime-types.mjs が診断本体から書き出す）。 */
@@ -183,12 +183,12 @@ const writeAnime = (rel, html) => {
 /* 入口 */
 const featured = ['RDCP-VM', 'FHSA-TL', 'FDCA-VM', 'RHSP-TL'].map((c) => typeByCode[c]);
 writeAnime('/anime/index.html',
-  head('アニメ診断の読みもの：ガチアニメ診断の6つの軸と64タイプ — Koshin Studio',
+  head('アニメ診断ガイド：ガチアニメ診断の6つの軸と64タイプ — Koshin Studio',
        'アニメ診断「ガチアニメ診断」の解説。6つの軸の意味、64タイプの二つ名と特徴、タイプごとに近いアニメ作品をまとめています。') +
 `<main><div class="wrap">
-  <h1>ガチアニメ診断の読みもの</h1>
+  <h1>ガチアニメ診断ガイド</h1>
   <div class="rule"></div>
-  <p class="lead">ガチアニメ診断の読みもの。<br>6つの軸と64タイプが、それぞれ何を表しているかを書いています。</p>
+  <p class="lead">ガチアニメ診断ガイド。<br>6つの軸と64タイプが、それぞれ何を表しているかを書いています。</p>
 
   <p class="rv"><strong>はじめての方へ：</strong><a href="/anime/guide/">アニメ診断の選び方</a>（診断の見分け方、答え方のコツ、結果の読み方）</p>
 
@@ -282,7 +282,7 @@ writeAnime('/anime/guide/index.html',
 ${guideFaq.map((f) => `  <h3>${esc(f.q)}</h3>\n  <p class="rv">${esc(f.a)}</p>`).join('\n')}
   ${ctaBtn('ガチアニメ診断をはじめる（無料・1分）')}
 
-  <p class="rv" style="margin-top:34px">続けて読む：<a href="/anime/axes/">6つの軸</a> ／ <a href="/anime/types/">64タイプの一覧</a> ／ <a href="/anime/">診断の読みものの入り口</a></p>
+  <p class="rv" style="margin-top:34px">続けて読む：<a href="/anime/axes/">6つの軸</a> ／ <a href="/anime/types/">64タイプの一覧</a> ／ <a href="/anime/">診断ガイドの入り口</a></p>
 </div></main>` + foot);
 
 /* 6 軸の解説 */
@@ -622,18 +622,18 @@ function ldFor(file, url) {
       crumbs([['Koshin Studio', '/'], ['About', '/about/']]),
     ];
   }
-  if (rel === '/anime/index.html') return [page('ガチアニメ診断の読みもの'), crumbs([['Koshin Studio', '/'], ['Works', '/works/'], ['ガチアニメ診断', '/works/shindananime/'], ['読みもの', '/anime/']])];
+  if (rel === '/anime/index.html') return [page('ガチアニメ診断ガイド'), crumbs([['Koshin Studio', '/'], ['Works', '/works/'], ['ガチアニメ診断', '/works/shindananime/'], ['ガイド', '/anime/']])];
   if (rel === '/anime/guide/index.html') return [page('アニメ診断の選び方'),
     { '@type': 'FAQPage', mainEntity: guideFaq.map((f) => ({ '@type': 'Question', name: f.q,
       acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
-    crumbs([['Koshin Studio', '/'], ['Works', '/works/'], ['ガチアニメ診断', '/works/shindananime/'], ['読みもの', '/anime/'], ['選び方', '/anime/guide/']])];
-  if (rel === '/anime/axes/index.html') return [page('6つの軸'), crumbs([['Koshin Studio', '/'], ['Works', '/works/'], ['ガチアニメ診断', '/works/shindananime/'], ['読みもの', '/anime/'], ['6つの軸', '/anime/axes/']])];
-  if (rel === '/anime/types/index.html') return [page('64タイプ一覧'), crumbs([['Koshin Studio', '/'], ['Works', '/works/'], ['ガチアニメ診断', '/works/shindananime/'], ['読みもの', '/anime/'], ['64タイプ', '/anime/types/']])];
+    crumbs([['Koshin Studio', '/'], ['Works', '/works/'], ['ガチアニメ診断', '/works/shindananime/'], ['ガイド', '/anime/'], ['選び方', '/anime/guide/']])];
+  if (rel === '/anime/axes/index.html') return [page('6つの軸'), crumbs([['Koshin Studio', '/'], ['Works', '/works/'], ['ガチアニメ診断', '/works/shindananime/'], ['ガイド', '/anime/'], ['6つの軸', '/anime/axes/']])];
+  if (rel === '/anime/types/index.html') return [page('64タイプ一覧'), crumbs([['Koshin Studio', '/'], ['Works', '/works/'], ['ガチアニメ診断', '/works/shindananime/'], ['ガイド', '/anime/'], ['64タイプ', '/anime/types/']])];
   const tm = rel.match(/^\/anime\/types\/([^/]+)\/index\.html$/);
   if (tm && typeByCode[tm[1].toUpperCase()]) {
     const t = typeByCode[tm[1].toUpperCase()];
     return [page(t.code + '「' + t.nickname + '」'),
-      crumbs([['Koshin Studio', '/'], ['Works', '/works/'], ['ガチアニメ診断', '/works/shindananime/'], ['読みもの', '/anime/'], ['64タイプ', '/anime/types/'], [t.code, typeUrl(t.code)]])];
+      crumbs([['Koshin Studio', '/'], ['Works', '/works/'], ['ガチアニメ診断', '/works/shindananime/'], ['ガイド', '/anime/'], ['64タイプ', '/anime/types/'], [t.code, typeUrl(t.code)]])];
   }
   if (rel === '/privacy/index.html') {
     return [page('あつかい（プライバシー）'),
@@ -702,10 +702,10 @@ for (const file of pages) {
     '/works/index.html': [['Works', '/works/']],
     '/notes/index.html': [['Notes', '/notes/']],
     '/about/index.html': [['About', '/about/']],
-    '/anime/index.html': [['Works', '/works/'], ['ガチアニメ診断', '/works/shindananime/'], ['読みもの', '/anime/']],
-    '/anime/axes/index.html': [['Works', '/works/'], ['ガチアニメ診断', '/works/shindananime/'], ['読みもの', '/anime/'], ['6つの軸', '/anime/axes/']],
-    '/anime/guide/index.html': [['Works', '/works/'], ['ガチアニメ診断', '/works/shindananime/'], ['読みもの', '/anime/'], ['選び方', '/anime/guide/']],
-    '/anime/types/index.html': [['Works', '/works/'], ['ガチアニメ診断', '/works/shindananime/'], ['読みもの', '/anime/'], ['64タイプ', '/anime/types/']],
+    '/anime/index.html': [['Works', '/works/'], ['ガチアニメ診断', '/works/shindananime/'], ['ガイド', '/anime/']],
+    '/anime/axes/index.html': [['Works', '/works/'], ['ガチアニメ診断', '/works/shindananime/'], ['ガイド', '/anime/'], ['6つの軸', '/anime/axes/']],
+    '/anime/guide/index.html': [['Works', '/works/'], ['ガチアニメ診断', '/works/shindananime/'], ['ガイド', '/anime/'], ['選び方', '/anime/guide/']],
+    '/anime/types/index.html': [['Works', '/works/'], ['ガチアニメ診断', '/works/shindananime/'], ['ガイド', '/anime/'], ['64タイプ', '/anime/types/']],
     '/privacy/index.html': [['あつかい', '/privacy/']],
   };
   let trail = TRAIL[rel];
@@ -713,7 +713,7 @@ for (const file of pages) {
   const nm2 = rel.match(/^\/notes\/([^/]+)\//);
   const am2 = rel.match(/^\/anime\/types\/([^/]+)\/index\.html$/);
   if (am2 && typeByCode[am2[1].toUpperCase()]) {
-    trail = [['Works', '/works/'], ['ガチアニメ診断', '/works/shindananime/'], ['読みもの', '/anime/'], ['64タイプ', '/anime/types/'], [am2[1].toUpperCase(), '/anime/types/' + am2[1] + '/']];
+    trail = [['Works', '/works/'], ['ガチアニメ診断', '/works/shindananime/'], ['ガイド', '/anime/'], ['64タイプ', '/anime/types/'], [am2[1].toUpperCase(), '/anime/types/' + am2[1] + '/']];
   }
   if (wm2 && workBySlug[wm2[1]]) {
     const w = workBySlug[wm2[1]];
@@ -862,6 +862,25 @@ for (const file of pages) {
     relHtml = relBlock('この作品の記録', notes.filter((n) => n.work === workBySlug[rw[1]].title));
   }
   if (relHtml) html = html.replace(/<\/div>\s*<\/main>/, (m) => relHtml + m);
+  /* コメント欄（記事だけ。giscus ＝ GitHub Discussions）。site.json の comments.categoryId が
+     空の間は何も出さない。「コメントを開く」を押すまで、外部（giscus.app・GitHub）へは繋がない
+     （読み込みが重くなるのと、押さない人の接続を増やさないため）。組み直しても増えない */
+  html = html.replace(/\n?<!--comments-->[\s\S]*?<!--\/comments-->\n?/g, '');
+  const cm = conf.comments || {};
+  if (cm.repo && cm.repoId && cm.categoryId && /^\/notes\/[^/]+\/index\.html$/.test(rel)) {
+    const box = `\n<!--comments-->
+  <section class="comments" id="comments" data-repo="${esc(cm.repo)}" data-repo-id="${esc(cm.repoId)}"
+    data-category="${esc(cm.category || 'Comments')}" data-category-id="${esc(cm.categoryId)}">
+    <h2 id="comments-h">コメント</h2>
+    <p>感想や、記事の間違いの指摘は、ここへ。書くには、GitHub のアカウントが要ります。</p>
+    <p><button type="button" class="btn ghost" id="load-comments">コメントを開く</button></p>
+    <p class="note">押すと、giscus（giscus.app）と GitHub に接続します。押さなければ、接続しません。詳しくは<a href="/privacy/">あつかい</a>に書いています。</p>
+    <div id="giscus-box"></div>
+  </section>
+<!--/comments-->\n`;
+    html = html.replace(/<\/div>\s*<\/main>/, (m) => box + m);
+  }
+
   /* 検索結果・Discover で、大きい画像と、長い抜粋を出してよい、という意思表示。
      noindex のページ（タイプ別など）には付けない。組み直しても増えないよう、消してから入れる */
   html = html.replace(/\n?<meta name="robots" content="index,follow[^"]*">/g, '');

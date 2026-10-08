@@ -18,5 +18,12 @@
     "email": "koshinstudio88@gmail.com",
     "form": "",
     "note": "email か form を入れると、About に連絡先の節が出ます。両方空の間は節ごと非表示です。form は Google フォームの URL。email も入れるとメールが主役になり、フォームは控えに回ります。"
+  },
+  "comments": {
+    "repo": "murakamikoshin/koshin-studio",
+    "repoId": "R_kgDOURc3ew",
+    "category": "Comments",
+    "categoryId": "",
+    "note": "GitHub の Discussions を有効にして、giscus アプリを入れ、giscus.app の設定画面で出る category-id（DIC_ で始まる文字列）を categoryId に入れると、各記事の終わりにコメント欄が出ます。空の間は何も出ません。"
   }
 }

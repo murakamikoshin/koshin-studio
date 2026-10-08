@@ -80,7 +80,9 @@ img{max-width:100%;height:auto;display:block}
 .wrap{max-width:760px;margin:0 auto;padding:0 24px}
 
 /* ---- 帯 ---- */
-header.site{position:sticky;top:0;z-index:20;
+/* ヘッダーは最前面。トップでは、ロゴ（z 50）や回る札（z 20〜48）がヘッダーより前にあり、
+   スクロールすると、ヘッダーの上に重なって、透けて見えていた */
+header.site{position:sticky;top:0;z-index:100;
   backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
   background:rgba(8,13,22,.62);border-bottom:1px solid var(--line)}
 header.site .wrap{display:flex;align-items:center;gap:20px;height:60px}
@@ -459,7 +461,7 @@ body.nav-open .menu-btn span:nth-child(3){transform:translateY(-6.5px) rotate(-4
     max-height:0;overflow:hidden;transition:max-height .42s var(--ease)}
   body.nav-open header.site nav{max-height:340px}
   /* 品書きの後ろは暗幕で落とす。押せば閉じる */
-  .nav-scrim{position:fixed;inset:60px 0 0;z-index:19;background:rgba(4,8,15,.66);
+  .nav-scrim{position:fixed;inset:60px 0 0;z-index:99;background:rgba(4,8,15,.66);
     opacity:0;pointer-events:none;transition:opacity .32s var(--ease)}
   body.nav-open .nav-scrim{opacity:1;pointer-events:auto}
   header.site nav a{padding:16px 24px;font-size:14px;letter-spacing:.14em;
@@ -633,7 +635,9 @@ h2::after{transform-origin:left center;transition:transform 1.1s var(--ease) .1s
       radial-gradient(46% 38% at 88% 18%, rgba(126,200,227,.10), transparent 66%),
       linear-gradient(180deg,#fdfcf9 0%,#fbfaf7 55%,#f5f3ee 100%);
     animation:none}
-  body::after{opacity:.025}
+  /* 紙の粒（ノイズ）は、白基調では 2.5% でほとんど見えないのに、画面全体に敷くので、
+     トップの最初の描画を 500ms 近く遅らせていた（実測）。消す */
+  body::after{display:none}
   header.site{background:#fbfaf7;backdrop-filter:none;-webkit-backdrop-filter:none}
   strong{color:var(--text)}
   .btn{box-shadow:0 10px 28px -14px rgba(37,87,184,.7)}
@@ -718,3 +722,8 @@ h2[id]{scroll-margin-top:78px}
 /* 記事の一覧：作品ごとのまとまり */
 .group-n{font-family:var(--gothic);font-size:11.5px;letter-spacing:.18em;color:var(--dim);font-weight:400;order:3;flex:0 0 auto}
 .group-link{margin:-6px 0 12px;font-size:13px}
+
+/* ---- 記事のコメント欄（giscus） ---- */
+.comments{margin-top:44px;padding-top:6px}
+.comments h2{font-family:var(--mincho);font-weight:600;font-size:20px;letter-spacing:.16em;margin:0 0 14px}
+.comments #giscus-box{margin-top:12px;min-height:0}
