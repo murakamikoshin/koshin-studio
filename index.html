@@ -36,7 +36,7 @@
 
 <header class="site"><div class="wrap">
   <a class="logo" href="/"><img class="logo-mark" src="/favicon.svg?v=b9d7922f" alt="" width="28" height="28">Koshin Studio</a>
-  <nav><a href="/works/">Works</a><a href="/notes/">Notes</a><a href="/about/">About</a></nav>
+  <nav><a href="/works/">Works</a><a href="/notes/">Notes</a><a href="/picks/">Picks</a><a href="/calc/">Tools</a><a href="/about/">About</a></nav>
 </div></header>
 
 <main>
@@ -154,6 +154,29 @@
   <section class="band" id="notes-teaser"><div class="wrap">
     <h2 class="sec">制作の記録<span>Notes</span></h2>
     <ul class="notes"><!--notes:start-->
+    <li class="rv" data-delay="0"><a class="note-row" href="/notes/gemini-migration/">
+      <time datetime="2026-10-08">2026.10.08</time>
+      <div><h3>Claude API から Gemini API（gemini-3.1-flash-lite）へ移行した：16 か所の呼び出しを 1 つの関数にまとめた</h3><p>Anthropic の利用上限で予定外の課金が出たため Gemini へ移行。モデルの選び方（廃止予定日）、呼び出しの一本化、Web 検索の回数上限が無い問題への回路遮断器、止めるスイッチの記録。</p>
+      <div class="tags"><span class="tag">トレカダッシュ</span></div></div>
+    </a></li>
+    <li class="rv" data-delay="70"><a class="note-row" href="/notes/xcode152-sdk/">
+      <time datetime="2026-10-08">2026.10.08</time>
+      <div><h3>Xcode 15.2 で Firebase 12 が使えない（Swift 6.0 必須）：Firebase 11.4.0 と AdMob 11.5.0 に固定した理由</h3><p>古い Mac の Xcode 15.2 では、Firebase 12 以降と 11.12.0 以降は Xcode 16.2 が必須、AdMob 11.6.0 以降は MarketplaceKit で Xcode 15.3 が必須。Exact Version で固定した記録。</p>
+      <div class="tags"><span class="tag">トレカダッシュ</span></div></div>
+    </a></li>
+    <li class="rv" data-delay="140"><a class="note-row" href="/notes/itms-91064/">
+      <time datetime="2026-10-08">2026.10.08</time>
+      <div><h3>ITMS-91064「無効なバイナリ」：NSPrivacyTracking が true なのに NSPrivacyTrackingDomains が空だった</h3><p>ビルドが Apple の自動審査で ITMS-91064 により却下された。NSPrivacyTracking が true で、NSPrivacyTrackingDomains が空の配列だったのが原因。ドメインを補った経緯と、確認できていないこと。</p>
+      <div class="tags"><span class="tag">トレカダッシュ</span></div></div>
+    </a></li>
+    <!--notes:end--></ul>
+    <p class="rv" style="margin-top:26px"><a class="btn ghost" href="/notes/">Notes をすべて読む</a></p>
+  </div></section>
+
+  <!-- ================= Picks と Tools ================= -->
+  <section class="band" id="picks-teaser"><div class="wrap">
+    <h2 class="sec">比べたもの・買ったもの<span>Picks</span></h2>
+    <ul class="notes"><!--picks:start-->
     <li class="rv" data-delay="0"><a class="note-row" href="/notes/comment-services/">
       <time datetime="2026-10-08">2026.10.08</time>
       <div><h3>静的サイトのコメント欄を、公式の情報で比べる：giscus・utterances・Disqus・Remark42 ほか</h3><p>静的サイトのコメント欄を公式の情報で比較。調べた7つのうち4つは終了か更新停止の疑い。無料のDisqusは広告で払う。確認できなかったことも書いた。</p>
@@ -169,8 +192,8 @@
       <div><h3>静的サイトを置く場所を、公式の規約で比べる：Cloudflare Pages・Netlify・Vercel・GitHub Pages・Firebase Hosting</h3><p>静的サイトの置き場を公式の規約で比較。広告を載せていいかが一番の分かれ目で、Vercel Hobby は非商用のみ。確認できなかったことも書いた。</p>
       <div class="tags"><span class="tag">比べたもの</span></div></div>
     </a></li>
-    <!--notes:end--></ul>
-    <p class="rv" style="margin-top:26px"><a class="btn ghost" href="/notes/">Notes をすべて読む</a></p>
+    <!--picks:end--></ul>
+    <p class="rv" style="margin-top:26px"><a class="btn ghost" href="/picks/">Picks をすべて見る</a><a class="btn ghost" href="/calc/">計算機（Tools）を使う</a></p>
   </div></section>
 
 
@@ -193,7 +216,7 @@
 <footer class="site"><div class="wrap">
   <span>© 2026 Koshin Studio</span>
   <div class="sns-row"></div>
-  <nav><a href="/about/">About</a><a href="/privacy/">あつかい</a></nav>
+  <nav><a href="/picks/">Picks</a><a href="/calc/">Tools</a><a href="/about/">About</a><a href="/privacy/">あつかい</a></nav>
 </div></footer>
 
 <script src="/motion.js?v=1e7447ec" defer></script>

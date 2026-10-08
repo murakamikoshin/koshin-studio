@@ -35,6 +35,11 @@ const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replac
 
 const works = read('/data/works.json');
 const notes = read('/data/notes.json');
+/* Notes は制作の記録。比べたもの・買ったものは Picks に分ける（記事の置き場は同じ notes/） */
+const PICK_WORKS = new Set(['比べたもの', '買ったもの']);
+const isPick = (n) => PICK_WORKS.has(n.work);
+const records = notes.filter((n) => !isPick(n));
+const picks = notes.filter(isPick);
 const pickById = Object.fromEntries((read('/data/picks.json').items || []).map((x) => [x.id, x]));
 const kinds = read('/data/kinds.json');
 const conf  = existsSync(here + '/data/site.json') ? read('/data/site.json') : { social: [], ads: {} };
@@ -75,7 +80,7 @@ const head = (title, desc, extra = '') => `<!doctype html>
 
 <header class="site"><div class="wrap">
   <a class="logo" href="/"><img class="logo-mark" src="/favicon.svg" alt="" width="28" height="28">Koshin Studio</a>
-  <nav><a href="/works/">Works</a><a href="/notes/">Notes</a><a href="/about/">About</a></nav>
+  <nav><a href="/works/">Works</a><a href="/notes/">Notes</a><a href="/picks/">Picks</a><a href="/calc/">Tools</a><a href="/about/">About</a></nav>
 </div></header>
 `;
 const socialHtml = (conf.social || []).map((x) =>
@@ -402,7 +407,7 @@ const noteRow = (n, i) => `    <li class="rv" data-delay="${i * 70}"><a class="n
 
 /* 記事を作品ごとにまとめる（新しい記事が先に来る順を保つ）。作品ページがあれば、そこへのリンクも */
 const noteGroups = [];
-for (const n of notes) {
+for (const n of records) {
   let g = noteGroups.find((x) => x.work === n.work);
   if (!g) { g = { work: n.work, list: [], page: works.find((w) => w.title === n.work) }; noteGroups.push(g); }
   g.list.push(n);
@@ -423,6 +428,44 @@ ${noteGroups.map((g, i) => `
   <ul class="notes">
 ${g.list.map(noteRow).join('\n')}
   </ul>`).join('\n')}
+</div></main>` + foot);
+
+
+/* ---- /picks/（比べたもの・買ったもの）と /calc/（計算機） ---- */
+const af0 = conf.affiliate || {};
+mkdirSync(here + '/picks', { recursive: true });
+writeFileSync(here + '/picks/index.html',
+  head('Picks — 比べたもの・買ったもの — Koshin Studio', '使ったもの・買ったものの感想と、公式の情報だけで比べた記事。数字には出典と確認した日を付けています。') +
+`<main><div class="wrap">
+  <h1>Picks</h1>
+  <div class="rule"></div>
+  <p class="lead">比べたもの・買ったもの</p>
+  <p class="rv">使ったもの、買ったものの感想と、サービスや道具を<strong>公式の情報だけ</strong>で比べた記事です。比べた記事には、出典と、確認した日、確認できなかったことを書いています。</p>
+  <p class="rv note">${af0.enabled ? esc(af0.disclosure || '') : 'いまのところ、このページの記事に、広告やアフィリエイトのリンクはありません。リンクを付けるときは、記事の冒頭に書きます。'}</p>
+  <ul class="notes">
+${picks.map(noteRow).join('\n')}
+  </ul>
+  <p class="rv" style="margin-top:26px"><a class="btn ghost" href="/calc/">計算機（Tools）を見る</a></p>
+</div></main>` + foot);
+
+const tools = [
+  { url: '/calc/gacha/', title: 'ガチャのコンプリート計算機', blurb: '全種類をそろえるのに、何回・何円かかるか。平均と、9 割の人が揃う回数、コンプリートセットとの損得まで。' },
+  { url: '/calc/gacha-rate/', title: 'ガチャの当たり確率・天井計算機', blurb: '排出率から、何回で当たるか。欲しい個数と天井（○回で確定）にも対応。' },
+];
+mkdirSync(here + '/calc', { recursive: true });
+writeFileSync(here + '/calc/index.html',
+  head('Tools — 計算機 — Koshin Studio', 'ガチャのコンプリートと当たり確率・天井の計算機。計算は、コンピューターで 20 万人ぶん引かせた結果と照らして確かめています。') +
+`<main><div class="wrap">
+  <h1>Tools</h1>
+  <div class="rule"></div>
+  <p class="lead">計算機</p>
+  <p class="rv">ブラウザの中だけで動く計算機です。入れた数字は、どこにも送りません。計算が合っているかは、コンピューターで 20 万人ぶんを実際に引かせた結果と照らして、確かめています。</p>
+  <ul class="notes">
+${tools.map((t, i) => `    <li class="rv" data-delay="${i * 70}"><a class="note-row" href="${t.url}">
+      <time>計算機</time>
+      <div><h3>${esc(t.title)}</h3><p>${esc(t.blurb)}</p></div>
+    </a></li>`).join('\n')}
+  </ul>
 </div></main>` + foot);
 
 /* ---- トップ ---- */
@@ -461,7 +504,7 @@ const kindHtml = kindKeys.map((k, i) => {
 const worksTeaser = works.slice(0, 4).map(workCard).join('\n');
 
 /* 記録の抜粋 */
-const noteTeaser = notes.slice(0, 3).map(noteRow).join('\n');
+const noteTeaser = records.slice(0, 3).map(noteRow).join('\n');
 
 let home = readFileSync(here + '/index.html', 'utf8');
 const put = (key, body) => {
@@ -478,6 +521,7 @@ put('orbit', orbitHtml);
 put('kinds', kindHtml);
 put('works', worksTeaser);
 put('notes', noteTeaser);
+put('picks', picks.slice(0, 3).map(noteRow).join('\n'));
 writeFileSync(here + '/index.html', home);
 
 
@@ -600,7 +644,7 @@ function ldFor(file, url) {
         image: ogFor(rel),
         author: { '@id': SITE + '#studio' }, publisher: { '@id': SITE + '#studio' },
         mainEntityOfPage: SITE + nn.url },
-      crumbs([['Koshin Studio', '/'], ['Notes', '/notes/'], [nn.title, nn.url]]),
+      crumbs([['Koshin Studio', '/'], isPick(nn) ? ['Picks', '/picks/'] : ['Notes', '/notes/'], [nn.title, nn.url]]),
     ];
   }
   if (rel === '/works/index.html') return [crumbs([['Koshin Studio', '/'], ['Works', '/works/']]),
@@ -610,7 +654,13 @@ function ldFor(file, url) {
   if (rel === '/notes/index.html') return [crumbs([['Koshin Studio', '/'], ['Notes', '/notes/']]),
     { '@type': 'CollectionPage', name: 'Notes', url: url, inLanguage: 'ja', isPartOf: { '@id': SITE + '#studio' } },
     { '@type': 'ItemList', name: '制作の記録',
-      itemListElement: notes.map((n, i) => ({ '@type': 'ListItem', position: i + 1, url: SITE + n.url, name: n.title })) }];
+      itemListElement: records.map((n, i) => ({ '@type': 'ListItem', position: i + 1, url: SITE + n.url, name: n.title })) }];
+  if (rel === '/picks/index.html') return [crumbs([['Koshin Studio', '/'], ['Picks', '/picks/']]),
+    { '@type': 'CollectionPage', name: 'Picks', url: url, inLanguage: 'ja', isPartOf: { '@id': SITE + '#studio' } },
+    { '@type': 'ItemList', name: '比べたもの・買ったもの',
+      itemListElement: picks.map((n, i) => ({ '@type': 'ListItem', position: i + 1, url: SITE + n.url, name: n.title })) }];
+  if (rel === '/calc/index.html') return [crumbs([['Koshin Studio', '/'], ['Tools', '/calc/']]),
+    { '@type': 'CollectionPage', name: 'Tools', url: url, inLanguage: 'ja', isPartOf: { '@id': SITE + '#studio' } }];
   if (rel === '/about/index.html') {
     const tools = [].concat(...(stack.groups || []).map((g) => g.items || []));
     return [
@@ -671,9 +721,9 @@ for (const file of pages) {
   let html = readFileSync(file, 'utf8');
   /* 脚の SNS 欄と、広告の枠を差し替える（data/site.json が元） */
   html = html.replace(/<header class="site"><div class="wrap">\s*<a class="logo" href="\/">Koshin Studio<\/a>\s*<nav>[\s\S]*?<\/nav>/,
-    '<header class="site"><div class="wrap">\n  <a class="logo" href="/"><img class="logo-mark" src="/favicon.svg" alt="" width="28" height="28">Koshin Studio</a>\n  <nav><a href="/works/">Works</a><a href="/notes/">Notes</a><a href="/about/">About</a></nav>');
+    '<header class="site"><div class="wrap">\n  <a class="logo" href="/"><img class="logo-mark" src="/favicon.svg" alt="" width="28" height="28">Koshin Studio</a>\n  <nav><a href="/works/">Works</a><a href="/notes/">Notes</a><a href="/picks/">Picks</a><a href="/calc/">Tools</a><a href="/about/">About</a></nav>');
   html = html.replace(/(<footer class="site"><div class="wrap">[\s\S]*?)<nav>[\s\S]*?<\/nav>(\s*<\/div><\/footer>)/,
-    '$1<nav><a href="/about/">About</a><a href="/privacy/">あつかい</a></nav>$2');
+    '$1<nav><a href="/picks/">Picks</a><a href="/calc/">Tools</a><a href="/about/">About</a><a href="/privacy/">あつかい</a></nav>$2');
   html = html.replace(/<div class="sns-row">[\s\S]*?<\/div>/g, `<div class="sns-row">${socialHtml}</div>`);
   if (!/class="sns-row"/.test(html)) {
     html = html.replace('<footer class="site"><div class="wrap">\n  <span>© 2026 Koshin Studio</span>',
@@ -708,8 +758,10 @@ for (const file of pages) {
     '/anime/guide/index.html': [['Works', '/works/'], ['ガチアニメ診断', '/works/shindananime/'], ['ガイド', '/anime/'], ['選び方', '/anime/guide/']],
     '/anime/types/index.html': [['Works', '/works/'], ['ガチアニメ診断', '/works/shindananime/'], ['ガイド', '/anime/'], ['64タイプ', '/anime/types/']],
     '/privacy/index.html': [['あつかい', '/privacy/']],
-    '/calc/gacha/index.html': [['ガチャのコンプリート計算機', '/calc/gacha/']],
-    '/calc/gacha-rate/index.html': [['ガチャの当たり確率・天井計算機', '/calc/gacha-rate/']],
+    '/picks/index.html': [['Picks', '/picks/']],
+    '/calc/index.html': [['Tools', '/calc/']],
+    '/calc/gacha/index.html': [['Tools', '/calc/'], ['ガチャのコンプリート計算機', '/calc/gacha/']],
+    '/calc/gacha-rate/index.html': [['Tools', '/calc/'], ['ガチャの当たり確率・天井計算機', '/calc/gacha-rate/']],
   };
   let trail = TRAIL[rel];
   const wm2 = rel.match(/^\/works\/([^/]+)\//);
@@ -724,7 +776,7 @@ for (const file of pages) {
       rel.endsWith('/index.html') && rel === w.url + 'index.html'
         ? [[w.title, w.url]] : [[w.title, w.url], ['遊び方', rel.replace(/(index)?\.html$/, '')]]);
   } else if (nm2 && noteBySlug[nm2[1]]) {
-    trail = [['Notes', '/notes/'], [noteBySlug[nm2[1]].title, noteBySlug[nm2[1]].url]];
+    trail = [isPick(noteBySlug[nm2[1]]) ? ['Picks', '/picks/'] : ['Notes', '/notes/'], [noteBySlug[nm2[1]].title, noteBySlug[nm2[1]].url]];
   }
   /* 属性付きも消えるようにする（class="crumbs" だけを見ると一致せず、
      組み直すたびに増え続けていた） */
@@ -861,9 +913,9 @@ for (const file of pages) {
   let relHtml = '';
   if (rn && noteBySlug[rn[1]]) {
     const me = noteBySlug[rn[1]];
-    const others = notes.filter((n) => n.slug !== me.slug)
+    const others = notes.filter((n) => n.slug !== me.slug && isPick(n) === isPick(me))
       .sort((a, b) => (b.work === me.work) - (a.work === me.work));
-    relHtml = relBlock('ほかの記録', others.slice(0, 3));
+    relHtml = relBlock(isPick(me) ? 'ほかの Picks' : 'ほかの記録', others.slice(0, 3));
   } else if (rw && workBySlug[rw[1]]) {
     relHtml = relBlock('この作品の記録', notes.filter((n) => n.work === workBySlug[rw[1]].title));
   }
