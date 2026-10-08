@@ -659,6 +659,12 @@ function ldFor(file, url) {
     { '@type': 'CollectionPage', name: 'Picks', url: url, inLanguage: 'ja', isPartOf: { '@id': SITE + '#studio' } },
     { '@type': 'ItemList', name: '比べたもの・買ったもの',
       itemListElement: picks.map((n, i) => ({ '@type': 'ListItem', position: i + 1, url: SITE + n.url, name: n.title })) }];
+  const tool = { '/calc/gacha/index.html': ['ガチャのコンプリート計算機', '/calc/gacha/'], '/calc/gacha-rate/index.html': ['ガチャの当たり確率・天井計算機', '/calc/gacha-rate/'] }[rel];
+  if (tool) return [crumbs([['Koshin Studio', '/'], ['Tools', '/calc/'], [tool[0], tool[1]]]),
+    { '@type': 'WebApplication', name: tool[0], url: SITE + tool[1], applicationCategory: 'UtilitiesApplication',
+      operatingSystem: 'Any (ブラウザ)', inLanguage: 'ja', isAccessibleForFree: true,
+      offers: { '@type': 'Offer', price: '0', priceCurrency: 'JPY' },
+      author: { '@id': SITE + '#studio' }, publisher: { '@id': SITE + '#studio' } }];
   if (rel === '/calc/index.html') return [crumbs([['Koshin Studio', '/'], ['Tools', '/calc/']]),
     { '@type': 'CollectionPage', name: 'Tools', url: url, inLanguage: 'ja', isPartOf: { '@id': SITE + '#studio' } }];
   if (rel === '/about/index.html') {
