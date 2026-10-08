@@ -47,9 +47,21 @@
   <p>トレカダッシュでは、古い Mac の Xcode 15.2 に合わせて、Firebase 11.4.0 と AdMob 11.5.0 に版を固定しました（<a href="/notes/xcode152-sdk/">その記事</a>）。審査では、ITMS-91064 で却下もされています（<a href="/notes/itms-91064/">その記事</a>）。そのとき調べきれなかった周りの選択肢を、<strong>公式のページだけ</strong>で並べます。実際に使って比べたのは、AdMob と Firebase だけです。ほかは、使っていません。</p>
   <p class="note">2026 年 10 月 8 日に確認した内容です。SDK の版や要件は、すぐ変わります。使う前に、出典で確かめてください。</p>
 <!--toc-->
-  <nav class="toc" aria-label="目次"><p>目次</p><ol><li><a href="#s1">広告 SDK：しくみと支払い</a></li><li><a href="#s2">iOS のプライバシー要件</a></li><li><a href="#s3">最低の Xcode と iOS、入れ方</a></li><li><a href="#s4">解析・バックエンド：Firebase と Supabase の無料枠</a></li><li><a href="#s5">分かったこと</a></li><li><a href="#s6">確認できなかったこと</a></li><li><a href="#s7">出典（すべて 2026 年 10 月 8 日に確認）</a></li></ol></nav>
+  <nav class="toc" aria-label="目次"><p>目次</p><ol><li><a href="#s1">早見表：知りたいことから探す</a></li><li><a href="#s2">広告 SDK：しくみと支払い</a></li><li><a href="#s3">iOS のプライバシー要件</a></li><li><a href="#s4">最低の Xcode と iOS、入れ方</a></li><li><a href="#s5">解析・バックエンド：Firebase と Supabase の無料枠</a></li><li><a href="#s6">分かったこと</a></li><li><a href="#s7">確認できなかったこと</a></li><li><a href="#s8">出典（すべて 2026 年 10 月 8 日に確認）</a></li></ol></nav>
 <!--/toc-->
-  <h2 class="rv" id="s1">広告 SDK：しくみと支払い</h2>
+  <h2 class="rv" id="s1">早見表：知りたいことから探す</h2>
+  <p>先に、答えだけを並べます。くわしい数字と出典は、あとの節にあります。</p>
+  <div class="scroll rv"><table>
+    <tr><th>知りたいこと</th><th>公式から言えること</th></tr>
+    <tr><td>古い Xcode で、使える版を知りたい</td><td>AdMob 11.6.0 以降は Xcode 15.3 以上。Firebase 11.12.0 以降は Xcode 16.2 以上、12.0.0 以降は Swift 6.0 が必要（公式のリリースノート）</td></tr>
+    <tr><td>広告の、最低の支払い額を知りたい</td><td>AdMob は USD で最低 $100（公式の表）。AppLovin は額が公式 FAQ に無く、支払いは前月分を翌月 15 日。LevelPlay と Meta は、確認できなかった</td></tr>
+    <tr><td>広告のネットワークを、複数使いたい</td><td>AdMob・AppLovin MAX・LevelPlay に、メディエーションがある。AdMob の統合ガイドには、24 社のネットワークが載っている</td></tr>
+    <tr><td>CocoaPods で、Firebase を使い続けたい</td><td>Firebase は 2026 年 10 月に、CocoaPods への新しい版の公開を止めると公式に明記。SPM が推奨</td></tr>
+    <tr><td>無料で、サーバー側の処理も使いたい</td><td>Firebase の Spark では、Cloud Functions が使えない（Blaze のみ）。Supabase の無料は、1 週間操作が無いと、プロジェクトが一時停止する</td></tr>
+  </table></div>
+  <p class="note">表の中の内容は、2026 年 10 月 8 日に公式ページで確認したものです。SDK の要件は、ページの間で食い違うことがあるので、手元のビルドでも確かめてください。</p>
+
+<h2 class="rv" id="s2">広告 SDK：しくみと支払い</h2>
   <div class="scroll rv"><table>
     <tr><th>SDK</th><th>しくみ</th><th>最低の支払い額</th></tr>
     <tr><td>Google AdMob</td><td>メディエーション（複数の広告ネットワークから配信する機能）あり。iOS の統合ガイドに、AppLovin・ironSource・Meta Audience Network・Unity Ads など 24 社</td><td>USD の支払いは<strong>最低 $100</strong>（公式の表）。通貨ごとに値が違う</td></tr>
@@ -60,7 +72,7 @@
 
   <p><strong>Meta Audience Network については、公式の終了の告知も、継続の明言も、確認できませんでした。</strong>いま新しく入れられるのかは、公式の一次情報では確定できません。</p>
 
-  <h2 class="rv" id="s2">iOS のプライバシー要件</h2>
+  <h2 class="rv" id="s3">iOS のプライバシー要件</h2>
   <ul>
     <li><strong>Apple の決まり（共通）：</strong><code>NSPrivacyTracking</code> が true なら、<code>NSPrivacyTrackingDomains</code> にドメインの一覧が要ります。ユーザーが ATT（追跡の許可）を許可していないと、そのドメインへの通信は<strong>失敗し、アプリがエラーを受け取る</strong>、と Apple の文書にあります。ITMS-91064 の記事で起きたことと、一致しています。</li>
     <li><strong>AdMob：</strong>広告を読み込む前に ATT を求めます（SDK 7.64.0 以上）。プライバシーマニフェストへの対応は 11.2.0（2024-03-14）から。<strong>トラッキングのドメインの公式な一覧は、AdMob のページでは見つけられませんでした</strong>（「存在しない」とは断定できません）。</li>
@@ -69,7 +81,7 @@
     <li><strong>LevelPlay：</strong>調べた統合ページに、ATT とプライバシーマニフェストの記述は、確認できませんでした。</li>
   </ul>
 
-  <h2 class="rv" id="s3">最低の Xcode と iOS、入れ方</h2>
+  <h2 class="rv" id="s4">最低の Xcode と iOS、入れ方</h2>
   <div class="scroll rv"><table>
     <tr><th>SDK</th><th>最低の要件</th><th>入れ方</th></tr>
     <tr><td>AdMob</td><td>最新は 13.11.0（2026-09-29）。リリースノートでは、最低 Xcode 26.2（13.4.0 から）。<strong>ただし、クイックスタートは「Xcode 16.0 以上」「iOS 13.0 以上」と書いていて、ページの間で食い違っている</strong></td><td>SPM（推奨）・CocoaPods・手動</td></tr>
@@ -80,7 +92,7 @@
 
   <p>トレカダッシュが版を固定した理由は、この表でも確かめられます。AdMob の 11.6.0 は MarketplaceKit に依存して Xcode 15.3 以上が必要、Firebase の 11.12.0 以降は Xcode 16.2 が必要、という公式のリリースノートの記述は、記事と一致していました。</p>
 
-  <h2 class="rv" id="s4">解析・バックエンド：Firebase と Supabase の無料枠</h2>
+  <h2 class="rv" id="s5">解析・バックエンド：Firebase と Supabase の無料枠</h2>
   <div class="scroll rv"><table>
     <tr><th>サービス</th><th>公式に書かれていたこと</th></tr>
     <tr><td>Firebase（Spark）</td><td>Firestore：保存 1GiB、読み取り 5 万回/日、書き込み 2 万回/日、削除 2 万回/日。Authentication：月間アクティブ 5 万人（電話認証は使えない）。Cloud Functions：Spark では使えない（有料の Blaze のみ）。Analytics と Cloud Messaging：上限の数字なし（無料）</td></tr>
@@ -88,7 +100,7 @@
   </table></div>
 
 
-  <h2 class="rv" id="s5">分かったこと</h2>
+  <h2 class="rv" id="s6">分かったこと</h2>
   <blockquote>最新版に追いつけない環境では、「最低の要件」の表が、いちばん効く。</blockquote>
   <ul>
     <li><strong>SDK の要件は、ページの間で食い違うことがある。</strong>AdMob も LevelPlay も、リリースノートと導入の案内で、数字が違いました。両方を見て、手元でビルドして確かめるしかありません。</li>
@@ -96,7 +108,7 @@
     <li><strong>無料枠の止まり方を、先に見る。</strong>Supabase は、無操作で一時停止します。Firebase の Spark は、Functions が使えません。</li>
   </ul>
 
-  <h2 class="rv" id="s6">確認できなかったこと</h2>
+  <h2 class="rv" id="s7">確認できなかったこと</h2>
   <ul>
     <li>LevelPlay と Meta Audience Network の、最低の支払い額</li>
     <li>Meta Audience Network の、提供状況（終了・継続）と、最低の Xcode / iOS、SPM への対応、現行の版</li>
@@ -107,7 +119,7 @@
     <li>精度や収益の比較（公式に数字が無いので、していません）</li>
   </ul>
 
-  <h2 class="rv" id="s7">出典（すべて 2026 年 10 月 8 日に確認）</h2>
+  <h2 class="rv" id="s8">出典（すべて 2026 年 10 月 8 日に確認）</h2>
   <ul class="plain">
     <li><a href="https://developers.google.com/admob/ios/rel-notes" rel="noopener" target="_blank">AdMob：iOS のリリースノート</a></li>
     <li><a href="https://developers.google.com/admob/ios/quick-start" rel="noopener" target="_blank">AdMob：iOS のクイックスタート</a></li>

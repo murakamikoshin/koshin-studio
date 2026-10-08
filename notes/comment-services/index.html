@@ -47,9 +47,21 @@
   <p>このサイトのコメント欄は、giscus です。「コメントを開く」を押すまで、外部のサイトに接続しない形にしてあります。そのほかの選択肢は、どうなっているのか。<strong>公式の説明と、公式のリポジトリ</strong>だけを読んで、並べました。実際に使って比べたのは、giscus だけです。</p>
   <p class="note">2026 年 10 月 8 日に確認した内容です。サービスの状況は変わります。使う前に、出典で確かめてください。</p>
 <!--toc-->
-  <nav class="toc" aria-label="目次"><p>目次</p><ol><li><a href="#s1">どこに保存されて、誰が書けるか</a></li><li><a href="#s2">広告・追跡の公式の記述</a></li><li><a href="#s3">続いているか：更新の状況</a></li><li><a href="#s4">日本語・スパム対策・重さ</a></li><li><a href="#s5">このサイトが giscus で気をつけたこと</a></li><li><a href="#s6">分かったこと</a></li><li><a href="#s7">確認できなかったこと</a></li><li><a href="#s8">出典（すべて 2026 年 10 月 8 日に確認）</a></li></ol></nav>
+  <nav class="toc" aria-label="目次"><p>目次</p><ol><li><a href="#s1">早見表：知りたいことから探す</a></li><li><a href="#s2">どこに保存されて、誰が書けるか</a></li><li><a href="#s3">広告・追跡の公式の記述</a></li><li><a href="#s4">続いているか：更新の状況</a></li><li><a href="#s5">日本語・スパム対策・重さ</a></li><li><a href="#s6">このサイトが giscus で気をつけたこと</a></li><li><a href="#s7">分かったこと</a></li><li><a href="#s8">確認できなかったこと</a></li><li><a href="#s9">出典（すべて 2026 年 10 月 8 日に確認）</a></li></ol></nav>
 <!--/toc-->
-  <h2 class="rv" id="s1">どこに保存されて、誰が書けるか</h2>
+  <h2 class="rv" id="s1">早見表：知りたいことから探す</h2>
+  <p>先に、答えだけを並べます。くわしい情報と出典は、あとの節にあります。</p>
+  <div class="scroll rv"><table>
+    <tr><th>知りたいこと</th><th>公式から言えること</th></tr>
+    <tr><td>広告や追跡を、入れたくない</td><td>giscus・utterances・Cusdis・Remark42 は、公式に追跡・広告が無いと書いている。Disqus の無料版は、広告で運営されている</td></tr>
+    <tr><td>サーバーを、自分で持ちたくない</td><td>giscus（GitHub Discussions）と utterances（GitHub Issues）は、GitHub に保存される。どちらも、書くには GitHub のアカウントが要る</td></tr>
+    <tr><td>ログインなしで、書いてほしい</td><td>Cusdis はログイン不要だが、終了している。Remark42 は、設定で匿名の投稿ができる（自前のサーバーが要る）</td></tr>
+    <tr><td>続いているものだけに、絞りたい</td><td>最近の更新を確認できたのは、giscus（2026-05-26）と Remark42（2026-09-14）。utterances・Staticman・Commento は更新停止の疑い、Cusdis は終了</td></tr>
+    <tr><td>日本語の画面がほしい</td><td>giscus と Remark42 に、日本語の翻訳ファイルがある。ほかは、確認できなかった</td></tr>
+  </table></div>
+  <p class="note">表の中の内容は、2026 年 10 月 8 日に公式ページとリポジトリで確認したものです。「更新停止の疑い」は、公式な終了の宣言ではありません。</p>
+
+<h2 class="rv" id="s2">どこに保存されて、誰が書けるか</h2>
   <div class="scroll rv"><table>
     <tr><th>サービス</th><th>保存先</th><th>投稿に必要なもの</th><th>お金</th></tr>
     <tr><td>giscus</td><td>GitHub Discussions</td><td>GitHub のアカウント</td><td>無料（MIT）</td></tr>
@@ -62,7 +74,7 @@
   </table></div>
 
 
-  <h2 class="rv" id="s2">広告・追跡の公式の記述</h2>
+  <h2 class="rv" id="s3">広告・追跡の公式の記述</h2>
   <ul>
     <li><strong>giscus・utterances：</strong>どちらも「追跡も広告も無い」と公式に書いています。ただし、giscus のコメントを開けば、GitHub に接続するので、GitHub 側の扱いは別です。</li>
     <li><strong>Disqus：</strong>無料版は広告で運営されています。公式のヘルプに、Cookie で広告主のサイトの訪問を記録すること、Cookie ID などを広告のパートナーや関連会社と共有すること、「sold or shared（売る、または共有する）」という記述があります。<strong>導入すると、同意の管理や、広告まわりの表記が、いちばん重くなる</strong>と読めます（公式ポリシー上の扱いまでは、調べていません）。</li>
@@ -70,7 +82,7 @@
     <li><strong>Remark42・Commento：</strong>「ユーザーを追跡しない」「広告は無い」といった記述が、公式にあります。</li>
   </ul>
 
-  <h2 class="rv" id="s3">続いているか：更新の状況</h2>
+  <h2 class="rv" id="s4">続いているか：更新の状況</h2>
   <p>コメント欄は、一度入れると長く使います。止まっていないかは、大事な点です。</p>
   <div class="scroll rv"><table>
     <tr><th>サービス</th><th>公式のリポジトリ・ページで確認したこと</th><th>判断</th></tr>
@@ -84,17 +96,17 @@
   </table></div>
 
 
-  <h2 class="rv" id="s4">日本語・スパム対策・重さ</h2>
+  <h2 class="rv" id="s5">日本語・スパム対策・重さ</h2>
   <ul>
     <li><strong>日本語の画面：</strong>giscus と Remark42 には、日本語の翻訳ファイルがあります。ほかは、確認できませんでした。</li>
     <li><strong>スパム対策：</strong>giscus は「GitHub 上でモデレートできる」とだけ書いていて、スパム対策の記述はありません。Disqus は基本の無料版にもスパムフィルターがあります。Cusdis は、管理者が承認してから表示します。</li>
     <li><strong>重さ：</strong>数字を出していたのは、Cusdis（約 5kb の gzip）だけでした。giscus は、コメントの読み込みを遅らせるオプションがあります。utterances は「軽い」と書いていますが、数字は無し。</li>
   </ul>
 
-  <h2 class="rv" id="s5">このサイトが giscus で気をつけたこと</h2>
+  <h2 class="rv" id="s6">このサイトが giscus で気をつけたこと</h2>
   <p>giscus の公式は、「追跡も広告も無い」と書いています。それでも、このサイトでは、<strong>「コメントを開く」を押すまで、giscus と GitHub に接続しない</strong>ようにしました。読むだけの人の通信を増やさないためと、読み込みを軽くするためです。接続する条件は、<a href="/privacy/">プライバシーのページ</a>に書いています。</p>
 
-  <h2 class="rv" id="s6">分かったこと</h2>
+  <h2 class="rv" id="s7">分かったこと</h2>
   <blockquote>機能の表より、「いま、続いているか」。</blockquote>
   <ul>
     <li><strong>止まったサービスが、意外に多い。</strong>調べた 7 つのうち、4 つ（Cusdis・Staticman・Commento・utterances）は、終了か、更新停止の疑いがありました。</li>
@@ -102,7 +114,7 @@
     <li><strong>書くのに GitHub のアカウントが要る</strong>方式（giscus・utterances）は、読者を、開発に近い人に絞ります。記事の読者によっては、そこが合わないこともあります。</li>
   </ul>
 
-  <h2 class="rv" id="s7">確認できなかったこと</h2>
+  <h2 class="rv" id="s8">確認できなかったこと</h2>
   <ul>
     <li>Disqus：公式の料金ページ（本文が JavaScript で描かれ、読めなかった。価格は、ヘルプ記事のもの）、投稿者のアカウントの条件、日本語の画面、保存先の明記、読み込みの重さ</li>
     <li>utterances：日本語の画面、スパム対策</li>
@@ -112,7 +124,7 @@
     <li>AdSense の公式ポリシーでの、コメント欄の扱い（調べていません）</li>
   </ul>
 
-  <h2 class="rv" id="s8">出典（すべて 2026 年 10 月 8 日に確認）</h2>
+  <h2 class="rv" id="s9">出典（すべて 2026 年 10 月 8 日に確認）</h2>
   <ul class="plain">
     <li><a href="https://github.com/giscus/giscus" rel="noopener" target="_blank">giscus：リポジトリ</a></li>
     <li><a href="https://giscus.app/ja" rel="noopener" target="_blank">giscus：公式の設定ページ</a></li>

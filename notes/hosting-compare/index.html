@@ -47,9 +47,21 @@
   <p>このサイトと、トレカダッシュの周りの仕組みは、Cloudflare に置いています（<a href="/notes/deploy-gotchas/">配るときの落とし穴の記事</a>と、<a href="/notes/ranking-free-tier/">無料枠の記事</a>）。ほかの置き場は、どうなっているのか。<strong>公式の料金・上限・規約のページ</strong>だけを読んで、並べました。ほかの置き場を、実際に使って比べたわけではありません。</p>
   <p class="note">2026 年 10 月 8 日に確認した内容です。料金体系は、変わりやすいところです（Vercel と Netlify は、最近の変更を公式が案内しています）。決める前に、出典で確かめてください。</p>
 <!--toc-->
-  <nav class="toc" aria-label="目次"><p>目次</p><ol><li><a href="#s1">先に、いちばん大事なところ：広告を載せていいか</a></li><li><a href="#s2">無料の枠</a></li><li><a href="#s3">ファイルの数と大きさ</a></li><li><a href="#s4">リダイレクトとヘッダーの設定</a></li><li><a href="#s5">プレビュー配備・日本からの速さ</a></li><li><a href="#s6">分かったこと</a></li><li><a href="#s7">確認できなかったこと</a></li><li><a href="#s8">出典（すべて 2026 年 10 月 8 日に確認）</a></li></ol></nav>
+  <nav class="toc" aria-label="目次"><p>目次</p><ol><li><a href="#s1">早見表：知りたいことから探す</a></li><li><a href="#s2">先に、いちばん大事なところ：広告を載せていいか</a></li><li><a href="#s3">無料の枠</a></li><li><a href="#s4">ファイルの数と大きさ</a></li><li><a href="#s5">リダイレクトとヘッダーの設定</a></li><li><a href="#s6">プレビュー配備・日本からの速さ</a></li><li><a href="#s7">分かったこと</a></li><li><a href="#s8">確認できなかったこと</a></li><li><a href="#s9">出典（すべて 2026 年 10 月 8 日に確認）</a></li></ol></nav>
 <!--/toc-->
-  <h2 class="rv" id="s1">先に、いちばん大事なところ：広告を載せていいか</h2>
+  <h2 class="rv" id="s1">早見表：知りたいことから探す</h2>
+  <p>先に、答えだけを並べます。くわしい数字と出典は、あとの節にあります。</p>
+  <div class="scroll rv"><table>
+    <tr><th>知りたいこと</th><th>公式から言えること</th></tr>
+    <tr><td>広告（AdSense など）を載せたい</td><td>Vercel の Hobby は、広告の掲載を商用として、使えない。GitHub Pages は、オンラインビジネス用の使い方を不可とし、広告の明記は確認できなかった。Cloudflare・Netlify・Firebase は、調べた規約に制限が見つからなかった（許可の明記ではない）</td></tr>
+    <tr><td>上限に届いても、止まりたくない</td><td>Netlify（月 300 クレジット）と Firebase（保存 10GB・転送 月 10GB）は、届くと止まる。GitHub Pages の帯域（月 100GB）は、ソフトな上限</td></tr>
+    <tr><td>ファイルがたくさんある</td><td>Cloudflare は 1 サイト 20,000 ファイル・1 ファイル 25MiB。Vercel の Hobby は、元のファイル 15,000 個・合計 100MB</td></tr>
+    <tr><td><code>_redirects</code> / <code>_headers</code> を使いたい</td><td>Cloudflare と Netlify が対応。Vercel は <code>vercel.json</code>、Firebase は <code>firebase.json</code>。GitHub Pages は、確認できなかった</td></tr>
+    <tr><td>日本からの速さの、公式の記述がほしい</td><td>Cloudflare（東京・大阪・福岡・那覇の拠点）と Vercel（東京・大阪の計算リージョン）にあった。遅延の数字は、どこにも無い</td></tr>
+  </table></div>
+  <p class="note">表の中の内容は、2026 年 10 月 8 日に公式ページで確認したものです。「見つからなかった」は、「できる」という意味ではありません。</p>
+
+<h2 class="rv" id="s2">先に、いちばん大事なところ：広告を載せていいか</h2>
   <p>無料のプランで、広告やアフィリエイトを載せていいのか。サイトで収益を考えるなら、ここが一番の分かれ目でした。</p>
   <div class="scroll rv"><table>
     <tr><th>サービス</th><th>公式に書かれていたこと</th></tr>
@@ -62,7 +74,7 @@
 
   <p>「見つからなかった」は、「広告を載せていい」という意味ではありません。迷うときは、運営元に問い合わせるのが確実です。</p>
 
-  <h2 class="rv" id="s2">無料の枠</h2>
+  <h2 class="rv" id="s3">無料の枠</h2>
   <div class="scroll rv"><table>
     <tr><th>サービス</th><th>公式に書かれていたこと</th></tr>
     <tr><td>Cloudflare（Pages / Workers の静的アセット）</td><td>静的ファイルへのリクエストは「無料で無制限」。ビルドは月 500 回（Pages）。Worker を動かすリクエストは、1 日 10 万回（Workers Free）。帯域の上限は、確認できなかった</td></tr>
@@ -73,7 +85,7 @@
   </table></div>
 
 
-  <h2 class="rv" id="s3">ファイルの数と大きさ</h2>
+  <h2 class="rv" id="s4">ファイルの数と大きさ</h2>
   <div class="scroll rv"><table>
     <tr><th>サービス</th><th>公式に書かれていたこと</th></tr>
     <tr><td>Cloudflare</td><td>1 サイト 20,000 ファイル、1 ファイル 25MiB</td></tr>
@@ -84,7 +96,7 @@
   </table></div>
 
 
-  <h2 class="rv" id="s4">リダイレクトとヘッダーの設定</h2>
+  <h2 class="rv" id="s5">リダイレクトとヘッダーの設定</h2>
   <ul>
     <li><strong>Cloudflare：</strong><code>_redirects</code>（静的 2,000 ＋ 動的 100）と <code>_headers</code>（100 ルール）。リダイレクトのほうが、ヘッダーより先に処理されます。Worker が作った応答には、どちらも効きません。</li>
     <li><strong>Netlify：</strong><code>_redirects</code> と <code>_headers</code>、または <code>netlify.toml</code>。proxy や関数の応答には、ヘッダーが付きません。</li>
@@ -93,13 +105,13 @@
     <li><strong>GitHub Pages：</strong>調べたページに、記述が無く、確認できなかった。</li>
   </ul>
 
-  <h2 class="rv" id="s5">プレビュー配備・日本からの速さ</h2>
+  <h2 class="rv" id="s6">プレビュー配備・日本からの速さ</h2>
   <ul>
     <li><strong>プレビュー：</strong>Cloudflare・Netlify・Vercel は、プルリクエストやブランチごとに自動で作られます。Firebase は「プレビューチャンネル」で、既定で 7 日、最長 30 日で消えます。GitHub Pages は確認できませんでした。</li>
     <li><strong>日本からの速さ：</strong>公式に日本の記述があったのは、Cloudflare（東京・大阪・福岡・那覇に拠点）と、Vercel（計算のリージョンに東京と大阪。関数の既定は米国東部）だけでした。遅延の数字は、どこにも書かれていませんでした。</li>
   </ul>
 
-  <h2 class="rv" id="s6">分かったこと</h2>
+  <h2 class="rv" id="s7">分かったこと</h2>
   <blockquote>「無料で置ける」と「無料で稼げる」は、別の話。</blockquote>
   <ul>
     <li><strong>広告を載せる予定があるなら、最初に規約を読む。</strong>置いてから規約で止められると、移し替えになります。</li>
@@ -107,7 +119,7 @@
     <li><strong>設定のファイルが、サービスごとに違う。</strong>同じ <code>_redirects</code> でも、書ける数や、効く範囲は別です。移すときは、ここで手間が出ます。</li>
   </ul>
 
-  <h2 class="rv" id="s7">確認できなかったこと</h2>
+  <h2 class="rv" id="s8">確認できなかったこと</h2>
   <ul>
     <li>Cloudflare：静的アセットの帯域の上限や課金の記述、独自ドメインの証明書の出し方、無料プランでの広告の公式な可否</li>
     <li>Netlify：配備のファイル数・大きさの上限、独自ドメインが無料で使えるかの明記、日本の速さの記述</li>
@@ -117,7 +129,7 @@
     <li>速さの比較（公式に数字が無いので、していません）</li>
   </ul>
 
-  <h2 class="rv" id="s8">出典（すべて 2026 年 10 月 8 日に確認）</h2>
+  <h2 class="rv" id="s9">出典（すべて 2026 年 10 月 8 日に確認）</h2>
   <ul class="plain">
     <li><a href="https://developers.cloudflare.com/pages/platform/limits/" rel="noopener" target="_blank">Cloudflare：Pages の制限</a></li>
     <li><a href="https://developers.cloudflare.com/workers/static-assets/billing-and-limitations/" rel="noopener" target="_blank">Cloudflare：静的アセットの課金と制限</a></li>

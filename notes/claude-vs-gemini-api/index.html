@@ -47,9 +47,22 @@
   <p>トレカダッシュは、Claude API から Gemini API へ移行しました（経緯は<a href="/notes/gemini-migration/">移行の記事</a>）。あのとき書かなかった公式の数字を、ここで並べます。<strong>公式のページに書いてあることだけ</strong>を使います。精度や速さの比較は、公式の数字が無いので、していません。</p>
   <p class="note">数字はすべて、2026 年 10 月 8 日に公式ページで見たものです。料金や上限は変わります。使う前に、各項目の出典で、もう一度確かめてください。公式ページに書かれていなかったことは「確認できなかった」と書き、「無い」とは書きません。</p>
 <!--toc-->
-  <nav class="toc" aria-label="目次"><p>目次</p><ol><li><a href="#s1">小さいモデルの値段</a></li><li><a href="#s2">Web 検索のしくみと値段</a></li><li><a href="#s3">上限と、止まり方</a></li><li><a href="#s4">廃止の知らせ方</a></li><li><a href="#s5">構造化出力・ツール呼び出し・日本語</a></li><li><a href="#s6">分かったこと</a></li><li><a href="#s7">確認できなかったこと</a></li><li><a href="#s8">出典（すべて 2026 年 10 月 8 日に確認）</a></li></ol></nav>
+  <nav class="toc" aria-label="目次"><p>目次</p><ol><li><a href="#s1">早見表：知りたいことから探す</a></li><li><a href="#s2">小さいモデルの値段</a></li><li><a href="#s3">Web 検索のしくみと値段</a></li><li><a href="#s4">上限と、止まり方</a></li><li><a href="#s5">廃止の知らせ方</a></li><li><a href="#s6">構造化出力・ツール呼び出し・日本語</a></li><li><a href="#s7">分かったこと</a></li><li><a href="#s8">確認できなかったこと</a></li><li><a href="#s9">出典（すべて 2026 年 10 月 8 日に確認）</a></li></ol></nav>
 <!--/toc-->
-  <h2 class="rv" id="s1">小さいモデルの値段</h2>
+  <h2 class="rv" id="s1">早見表：知りたいことから探す</h2>
+  <p>先に、答えだけを並べます。くわしい数字と出典は、あとの節にあります。</p>
+  <div class="scroll rv"><table>
+    <tr><th>知りたいこと</th><th>公式から言えること</th></tr>
+    <tr><td>値段がいちばん安いのは？</td><td>いまの公式の表では、Claude Haiku 5.5（入力 $0.10・出力 $0.50）と Gemini 2.5 Flash-Lite（$0.10・$0.40）が近い価格帯。Gemini 3.1 Flash-Lite は $0.25・$1.50</td></tr>
+    <tr><td>検索の回数を、設定で止めたい</td><td>Claude は <code>max_uses</code> がある。Gemini は、公式ページに回数を決める設定の記述が見当たらなかった</td></tr>
+    <tr><td>検索を、無料で使いたい</td><td>Gemini の有料枠は、月 5,000 リクエストまで無料。ただし、無料枠（Free tier）では、3.1 Flash-Lite の検索は使えない。Claude は 1,000 検索ごとに $10</td></tr>
+    <tr><td>使いすぎで、止まる上限がほしい</td><td>どちらも月の支出の上限があり、届くと翌月 1 日まで止まる（Claude は Start $500 から、Gemini は Tier 1 $250 から）</td></tr>
+    <tr><td>廃止の知らせの約束がほしい</td><td>Claude は「退役の少なくとも 60 日前」と明記。Gemini は日数の約束を確認できず、表の日付は「最短の廃止日」</td></tr>
+    <tr><td>日本語の、公式の数字がほしい</td><td>Claude の多言語のページにある（Haiku 4.5 で英語比 93.5%）。Gemini は、確認できなかった</td></tr>
+  </table></div>
+  <p class="note">表の中の数字は、2026 年 10 月 8 日に公式ページで確認したものです。どれを選ぶべきか、という結論ではなく、「公式に書いてあること」の整理です。</p>
+
+<h2 class="rv" id="s2">小さいモデルの値段</h2>
   <p>100 万トークンあたり、米ドルです。移行前に使っていたのは Claude Haiku 4.5 でした。</p>
   <div class="scroll rv"><table>
     <tr><th>モデル</th><th>入力</th><th>出力</th></tr>
@@ -66,7 +79,7 @@
     <li>公式に、「Claude 4.7 以降は、新しい分割方式で、同じ文章でもトークンが約 30% 増える」という記載があります。Haiku 5.5 に当てはまるかは、確認できませんでした。</li>
   </ul>
 
-  <h2 class="rv" id="s2">Web 検索のしくみと値段</h2>
+  <h2 class="rv" id="s3">Web 検索のしくみと値段</h2>
   <div class="scroll rv"><table>
     <tr><th></th><th>Claude</th><th>Gemini</th></tr>
     <tr><td>料金</td><td>$10 / 1,000 検索（加えて、結果ぶんの通常のトークン代）</td><td>有料枠：月 5,000 リクエストまで無料、超えると $14 / 1,000 リクエスト。無料枠（Free tier）では、3.1 Flash-Lite の検索は使えない</td></tr>
@@ -77,7 +90,7 @@
 
   <p>移行の記事に書いた「Web 検索に回数の上限が無い問題」は、公式ページの記述の範囲でも、同じ読み取りになります。Claude の <code>max_uses</code> に当たるものが、Gemini の検索のページには書かれていませんでした。ただし、見つけられなかっただけの可能性は残ります。</p>
 
-  <h2 class="rv" id="s3">上限と、止まり方</h2>
+  <h2 class="rv" id="s4">上限と、止まり方</h2>
   <p>ここが、移行の理由に近いところです。</p>
   <div class="scroll rv"><table>
     <tr><th></th><th>Claude</th><th>Gemini</th></tr>
@@ -90,7 +103,7 @@
 
   <p>移行の記事は、理由を「Anthropic の利用上限に達して、予定外の課金が出た」と書いています。ただ、<strong>Claude の公式は「上限に届いたら止まる」と書いていて、予定外の課金が出るしくみは、公式からは説明できませんでした</strong>。記事の経緯は、手元の記録によるもので、公式の文書で裏づけられたものではありません。</p>
 
-  <h2 class="rv" id="s4">廃止の知らせ方</h2>
+  <h2 class="rv" id="s5">廃止の知らせ方</h2>
   <div class="scroll rv"><table>
     <tr><th></th><th>Claude</th><th>Gemini</th></tr>
     <tr><td>通知の約束</td><td>公開済みのモデルは、退役の<strong>少なくとも 60 日前</strong>に通知する（メールとドキュメント）</td><td>「正確な廃止日は事前に通知する」とあるが、日数の約束は確認できなかった。表の日付は「最短の廃止日」</td></tr>
@@ -100,14 +113,14 @@
 
   <p>選んだ <code>gemini-3.1-flash-lite</code> の廃止日は、公式の表でも 2027 年 5 月 7 日でした。移行の記事とは、一致しています。一方で、<strong>移行の記事の「2.5 Flash-Lite は 10 月 16 日に廃止予定」</strong>は、いまの公式の表（「廃止日の告知なし」）と食い違っています。記事には、訂正を書き足しました。</p>
 
-  <h2 class="rv" id="s5">構造化出力・ツール呼び出し・日本語</h2>
+  <h2 class="rv" id="s6">構造化出力・ツール呼び出し・日本語</h2>
   <ul>
     <li><strong>JSON の形を指定した出力：</strong>どちらも対応しています。Claude は「スキーマに沿うことを保証する」と書いています。Gemini は「一部の JSON スキーマの機能のみ対応」で、「値の意味は、検証が必要」とあります。</li>
     <li><strong>ツール呼び出し：</strong>どちらも対応しています。<strong>構造化出力と、検索などのツールを同時に使う</strong>のは、Gemini では 3 系だけで、「プレビュー機能」と書かれています。</li>
     <li><strong>日本語：</strong>Claude の多言語のページには、英語を 100% としたときの日本語の相対スコアがあります（Haiku 4.5 は 93.5%）。Gemini 3.1 Flash-Lite のページには、対応言語の公式な記述が、見つかりませんでした。「Gemini の日本語が弱い」という意味ではなく、<strong>公式の数字で比べられなかった</strong>ということです。</li>
   </ul>
 
-  <h2 class="rv" id="s6">分かったこと</h2>
+  <h2 class="rv" id="s7">分かったこと</h2>
   <blockquote>値段の表だけでは、選べない。</blockquote>
   <ul>
     <li><strong>値段は、時期で逆転する。</strong>移行の時点では安かった側が、いまは高い、ということが起きます。</li>
@@ -115,7 +128,7 @@
     <li><strong>廃止の知らせ方は、約束の有無が違う。</strong>日数の約束がある側と、最短の日付だけを出す側とでは、乗り換えの計画の立て方が変わります。</li>
   </ul>
 
-  <h2 class="rv" id="s7">確認できなかったこと</h2>
+  <h2 class="rv" id="s8">確認できなかったこと</h2>
   <ul>
     <li>Gemini の無料枠・各ティアの、具体的な毎分・毎日の上限の数字（文書に数字が無い）</li>
     <li>Gemini のバッチの割引率</li>
@@ -126,7 +139,7 @@
     <li>精度・速さの比較（公式の一次情報では取れないので、していません）</li>
   </ul>
 
-  <h2 class="rv" id="s8">出典（すべて 2026 年 10 月 8 日に確認）</h2>
+  <h2 class="rv" id="s9">出典（すべて 2026 年 10 月 8 日に確認）</h2>
   <ul class="plain">
     <li><a href="https://platform.claude.com/docs/en/about-claude/pricing" rel="noopener" target="_blank">Claude：料金</a></li>
     <li><a href="https://platform.claude.com/docs/en/api/rate-limits" rel="noopener" target="_blank">Claude：レート制限と支出の上限</a></li>
