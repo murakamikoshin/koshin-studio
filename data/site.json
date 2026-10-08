@@ -6,13 +6,14 @@
   "social": [],
   "ads": {
     "enabled": false,
-    "client": "",
+    "verify": true,
+    "client": "ca-pub-3863314847163872",
     "slots": {
       "article": "",
       "footer": ""
     },
     "gameHint": "60s",
-    "note": "AdSense に通ったら enabled を true にして client を埋める。client だけで、遊ぶ頁の区切り広告（H5 Games Ads）が入る。記事の枠を出すには slots も埋める。gameHint は広告の間隔の目安。"
+    "note": "verify を true にすると、広告は出さずに審査用の script とメタタグだけ全ページに入る。AdSense に通ったら enabled を true にして client を埋める。client だけで、遊ぶ頁の区切り広告（H5 Games Ads）が入る。記事の枠を出すには slots も埋める。gameHint は広告の間隔の目安。"
   },
   "contact": {
     "email": "koshinstudio88@gmail.com",

@@ -748,9 +748,12 @@ for (const file of pages) {
      入れっぱなしにすると、広告を止めたあとも向こうへ繋ぎに行くので、
      枠が生きているページにだけ、そのつど入れ直す */
   html = html.replace(/\n?\s*<script async src="https:\/\/pagead2\.googlesyndication\.com[^>]*><\/script>/g, '');
-  if (ads.enabled && ads.client && /<ins class="adsbygoogle"/.test(html)) {
+  html = html.replace(/\n?\s*<meta name="google-adsense-account"[^>]*>/g, '');
+  const live = ads.enabled && ads.client && /<ins class="adsbygoogle"/.test(html);
+  /* 審査中は枠が無くても、サイトの確認用に script とメタタグだけ入れる（広告は出ない） */
+  if (live || (ads.verify && ads.client)) {
     html = html.replace('</head>',
-      `<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${ads.client}" crossorigin="anonymous"></script>\n</head>`);
+      `<meta name="google-adsense-account" content="${ads.client}">\n<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${ads.client}" crossorigin="anonymous"></script>\n</head>`);
   }
   const url = urlOf(file);
   html = html.replace(/\n?\s*<link rel="canonical"[^>]*>/g, '')
