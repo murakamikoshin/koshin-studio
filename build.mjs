@@ -919,9 +919,15 @@ for (const file of pages) {
   let relHtml = '';
   if (rn && noteBySlug[rn[1]]) {
     const me = noteBySlug[rn[1]];
-    const others = notes.filter((n) => n.slug !== me.slug && isPick(n) === isPick(me))
+    /* 先に、notes.json の related（スラッグの配列）で指した記事。そのあとを、同じ作品の記事で埋める。
+       埋めるときは、自分の次の記事から順に取る。全記事が同じ 3 本を指して、
+       ほかの記事へリンクが届かなくなるのを防ぐため */
+    const same = (n) => n.slug !== me.slug && isPick(n) === isPick(me);
+    const pinned = (me.related || []).map((s) => noteBySlug[s]).filter((n) => n && same(n));
+    const at = notes.indexOf(me);
+    const rest = notes.slice(at + 1).concat(notes.slice(0, at)).filter((n) => same(n) && !pinned.includes(n))
       .sort((a, b) => (b.work === me.work) - (a.work === me.work));
-    relHtml = relBlock(isPick(me) ? 'ほかの Picks' : 'ほかの記録', others.slice(0, 3));
+    relHtml = relBlock(isPick(me) ? 'ほかの Picks' : 'ほかの記録', pinned.concat(rest).slice(0, 3));
   } else if (rw && workBySlug[rw[1]]) {
     relHtml = relBlock('この作品の記録', notes.filter((n) => n.work === workBySlug[rw[1]].title));
   }

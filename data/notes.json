@@ -13,7 +13,11 @@
     "date": "2026-10-08",
     "work": "比べたもの",
     "url": "/notes/comment-services/",
-    "blurb": "静的サイトのコメント欄を公式の情報で比較。調べた7つのうち4つは終了か更新停止の疑い。無料のDisqusは広告で払う。確認できなかったことも書いた。"
+    "blurb": "静的サイトのコメント欄を公式の情報で比較。調べた7つのうち4つは終了か更新停止の疑い。無料のDisqusは広告で払う。確認できなかったことも書いた。",
+    "related": [
+      "hosting-compare",
+      "ditto-charm"
+    ]
   },
   {
     "slug": "ios-sdk-compare",
@@ -21,7 +25,11 @@
     "date": "2026-10-08",
     "work": "比べたもの",
     "url": "/notes/ios-sdk-compare/",
-    "blurb": "iOSの広告SDKとFirebase・Supabaseを公式の情報で比較。SDKの要件はページの間で食い違うことがある。確認できなかったことも書いた。"
+    "blurb": "iOSの広告SDKとFirebase・Supabaseを公式の情報で比較。SDKの要件はページの間で食い違うことがある。確認できなかったことも書いた。",
+    "related": [
+      "claude-vs-gemini-api",
+      "ditto-charm"
+    ]
   },
   {
     "slug": "hosting-compare",
@@ -37,7 +45,10 @@
     "date": "2026-10-08",
     "work": "比べたもの",
     "url": "/notes/claude-vs-gemini-api/",
-    "blurb": "Claude API と Gemini API を公式の数字で比較。値段は時期で逆転し、安全装置と廃止の知らせ方は表の外にある。確認できなかったことも書いた。"
+    "blurb": "Claude API と Gemini API を公式の数字で比較。値段は時期で逆転し、安全装置と廃止の知らせ方は表の外にある。確認できなかったことも書いた。",
+    "related": [
+      "gemini-migration"
+    ]
   },
   {
     "slug": "ditto-charm",
@@ -54,7 +65,11 @@
     "work": "トレカダッシュ",
     "url": "/notes/gemini-migration/",
     "blurb": "Anthropic の利用上限で予定外の課金が出たため Gemini へ移行。モデルの選び方（廃止予定日）、呼び出しの一本化、Web 検索の回数上限が無い問題への回路遮断器、止めるスイッチの記録。",
-    "updated": "2026-10-08"
+    "updated": "2026-10-08",
+    "related": [
+      "claude-vs-gemini-api",
+      "torecadash-ai"
+    ]
   },
   {
     "slug": "xcode152-sdk",
@@ -70,7 +85,11 @@
     "date": "2026-10-08",
     "work": "トレカダッシュ",
     "url": "/notes/itms-91064/",
-    "blurb": "ビルドが Apple の自動審査で ITMS-91064 により却下された。NSPrivacyTracking が true で、NSPrivacyTrackingDomains が空の配列だったのが原因。ドメインを補った経緯と、確認できていないこと。"
+    "blurb": "ビルドが Apple の自動審査で ITMS-91064 により却下された。NSPrivacyTracking が true で、NSPrivacyTrackingDomains が空の配列だったのが原因。ドメインを補った経緯と、確認できていないこと。",
+    "related": [
+      "torecadash-review",
+      "review-info-needed"
+    ]
   },
   {
     "slug": "bulk-accident",
@@ -86,7 +105,11 @@
     "date": "2026-10-08",
     "work": "トレカダッシュ",
     "url": "/notes/fake-products/",
-    "blurb": "ポケモンカードの9種セットは1つの商品なのに、中身ごとに分けて、実在しない商品が80個できていた。入口を止め、親22件を戻し、子190件を外し、偽の商品を消した記録。"
+    "blurb": "ポケモンカードの9種セットは1つの商品なのに、中身ごとに分けて、実在しない商品が80個できていた。入口を止め、親22件を戻し、子190件を外し、偽の商品を消した記録。",
+    "related": [
+      "torecadash-9set",
+      "dup-zero"
+    ]
   },
   {
     "slug": "first-visit",
@@ -110,7 +133,10 @@
     "date": "2026-10-08",
     "work": "すし積む",
     "url": "/notes/ascii-text/",
-    "blurb": "ゲームポータルのプレビューで「大連鎖！」の「連」だけが壊れた。ファイルのバイト列は正しく、原因は特定できなかった。ASCII 表記に逃がした経緯と、14言語の枠の検査の記録。"
+    "blurb": "ゲームポータルのプレビューで「大連鎖！」の「連」だけが壊れた。ファイルのバイト列は正しく、原因は特定できなかった。ASCII 表記に逃がした経緯と、14言語の枠の検査の記録。",
+    "related": [
+      "crazygames"
+    ]
   },
   {
     "slug": "logo-pop",
@@ -134,7 +160,11 @@
     "date": "2026-10-08",
     "work": "トレカダッシュ",
     "url": "/notes/dup-zero/",
-    "blurb": "重複を統合する処理が、毎晩、先頭のジャンルの途中で時間切れになっていた。「ゼロ」と数えた自分の測り方が間違っていた。持ち回りに直して112組を0組にした記録。"
+    "blurb": "重複を統合する処理が、毎晩、先頭のジャンルの途中で時間切れになっていた。「ゼロ」と数えた自分の測り方が間違っていた。持ち回りに直して112組を0組にした記録。",
+    "related": [
+      "fake-products",
+      "torecadash-9set"
+    ]
   },
   {
     "slug": "blocked-page",
@@ -166,7 +196,11 @@
     "date": "2026-10-08",
     "work": "トレカダッシュ",
     "url": "/notes/scrape-cost/",
-    "blurb": "「イオンとあみあみは費用が重くて縮められない」は、古い単価に基づく思い込みだった。3つの取得設定で同じページを比べて、描画が丸ごと無駄だと分かった記録。"
+    "blurb": "「イオンとあみあみは費用が重くて縮められない」は、古い単価に基づく思い込みだった。3つの取得設定で同じページを比べて、描画が丸ごと無駄だと分かった記録。",
+    "related": [
+      "torecadash-ai",
+      "ranking-free-tier"
+    ]
   },
   {
     "slug": "anime-db",
@@ -190,7 +224,11 @@
     "date": "2026-10-08",
     "work": "すし積む",
     "url": "/notes/ranking-free-tier/",
-    "blurb": "番付サーバーが無料枠を使う量を半分にした。一人が遊ぶ一回の呼び出しは5回から2回、読んだ行は421から221へ。順位の数え方と、前置きの呼び出しをなくした経緯。"
+    "blurb": "番付サーバーが無料枠を使う量を半分にした。一人が遊ぶ一回の呼び出しは5回から2回、読んだ行は421から221へ。順位の数え方と、前置きの呼び出しをなくした経緯。",
+    "related": [
+      "scrape-cost",
+      "torecadash-ai"
+    ]
   },
   {
     "slug": "match-percent",
@@ -206,7 +244,11 @@
     "date": "2026-10-08",
     "work": "Koshin Studio",
     "url": "/notes/deploy-gotchas/",
-    "blurb": "古いキャッシュ、組むたびに増えるパンくず、環境の中を指す symlink、手元にしか無い絵。サイトを配るときに続いた四つの事故と、検査を足してはじめて見つかった経緯。"
+    "blurb": "古いキャッシュ、組むたびに増えるパンくず、環境の中を指す symlink、手元にしか無い絵。サイトを配るときに続いた四つの事故と、検査を足してはじめて見つかった経緯。",
+    "related": [
+      "qiita-post-interval",
+      "bulk-accident"
+    ]
   },
   {
     "slug": "review-info-needed",
@@ -214,7 +256,11 @@
     "date": "2026-10-08",
     "work": "トレカダッシュ",
     "url": "/notes/review-info-needed/",
-    "blurb": "初めての審査で届いたのは、不合格ではなく Guideline 2.1「Information Needed」だった。求められた六つ（実機の画面収録、目的、外部サービスの一覧など）と、前に直したこととのつながり。"
+    "blurb": "初めての審査で届いたのは、不合格ではなく Guideline 2.1「Information Needed」だった。求められた六つ（実機の画面収録、目的、外部サービスの一覧など）と、前に直したこととのつながり。",
+    "related": [
+      "torecadash-review",
+      "itms-91064"
+    ]
   },
   {
     "slug": "stopwatch-rank",
@@ -230,7 +276,12 @@
     "date": "2026-10-08",
     "work": "トレカダッシュ",
     "url": "/notes/torecadash-review/",
-    "blurb": "iPad スクリーンショットの要求、自動検査の ITMS-91064（NSPrivacyTrackingDomains が空）、アカウント削除（5.1.1(v)）、投稿の通報（1.2）。審査に出す手前で止まった四つと、その直し方。"
+    "blurb": "iPad スクリーンショットの要求、自動検査の ITMS-91064（NSPrivacyTrackingDomains が空）、アカウント削除（5.1.1(v)）、投稿の通報（1.2）。審査に出す手前で止まった四つと、その直し方。",
+    "related": [
+      "review-info-needed",
+      "itms-91064",
+      "torecadash-watchdog"
+    ]
   },
   {
     "slug": "torecadash-9set",
@@ -238,7 +289,11 @@
     "date": "2026-10-08",
     "work": "トレカダッシュ",
     "url": "/notes/torecadash-9set/",
-    "blurb": "他のまとめサイトと突き合わせたら、抽選の表示は54%だった。商品の取り違え、比べ方の左右非対称、記事IDの穴。カバー率を91%にした記録。"
+    "blurb": "他のまとめサイトと突き合わせたら、抽選の表示は54%だった。商品の取り違え、比べ方の左右非対称、記事IDの穴。カバー率を91%にした記録。",
+    "related": [
+      "fake-products",
+      "dup-zero"
+    ]
   },
   {
     "slug": "torecadash-watchdog",
@@ -262,7 +317,10 @@
     "date": "2026-10-08",
     "work": "すし積む",
     "url": "/notes/crazygames/",
-    "blurb": "ゲームポータルの審査に「全体の品質が期待に達していない」とだけ書かれて落ちた。自分で画面を撮って見つけた四つの原因と、測って選んだ直し方の記録。"
+    "blurb": "ゲームポータルの審査に「全体の品質が期待に達していない」とだけ書かれて落ちた。自分で画面を撮って見つけた四つの原因と、測って選んだ直し方の記録。",
+    "related": [
+      "ascii-text"
+    ]
   },
   {
     "slug": "sushi-measure",
@@ -279,7 +337,11 @@
     "date": "2026-10-07",
     "work": "トレカダッシュ",
     "url": "/notes/torecadash-ai/",
-    "blurb": "トレカ情報アプリで、AI への問い合わせを減らそうとした記録。45%減るはずが4.5%、配備したのに束ねが0回。数え直して見つかったことを、コミットの数字で書いた。"
+    "blurb": "トレカ情報アプリで、AI への問い合わせを減らそうとした記録。45%減るはずが4.5%、配備したのに束ねが0回。数え直して見つかったことを、コミットの数字で書いた。",
+    "related": [
+      "scrape-cost",
+      "ranking-free-tier"
+    ]
   },
   {
     "slug": "adgap",

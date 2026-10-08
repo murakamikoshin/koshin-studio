@@ -89,9 +89,9 @@ var articles: [Article] { fetched.filter…filter…map…sorted }
   <div class="rule" style="margin:40px 0 22px"></div>
   <p class="eyebrow">ほかの記録</p>
   <ul class="plain">
+    <li><a href="/notes/torecadash-ci/">TestFlight にビルドが来ない：Xcode Cloud の月25時間を使い切っていた（最初の診断は誤りだった）</a> — 「[ci skip] が原因」という最初の診断は、時系列が合わず誤りだった。Xcode Cloud の無料枠（月25時間）を使い切った本当の原因と、開始条件を絞る直し方の記録。</li>
+    <li><a href="/notes/torecadash-ai/">「減るはず」が、二度外れた：AIへの問い合わせを削る話</a> — トレカ情報アプリで、AI への問い合わせを減らそうとした記録。45%減るはずが4.5%、配備したのに束ねが0回。数え直して見つかったことを、コミットの数字で書いた。</li>
     <li><a href="/notes/gemini-migration/">Claude API から Gemini API（gemini-3.1-flash-lite）へ移行した：16 か所の呼び出しを 1 つの関数にまとめた</a> — Anthropic の利用上限で予定外の課金が出たため Gemini へ移行。モデルの選び方（廃止予定日）、呼び出しの一本化、Web 検索の回数上限が無い問題への回路遮断器、止めるスイッチの記録。</li>
-    <li><a href="/notes/xcode152-sdk/">Xcode 15.2 で Firebase 12 が使えない（Swift 6.0 必須）：Firebase 11.4.0 と AdMob 11.5.0 に固定した理由</a> — 古い Mac の Xcode 15.2 では、Firebase 12 以降と 11.12.0 以降は Xcode 16.2 が必須、AdMob 11.6.0 以降は MarketplaceKit で Xcode 15.3 が必須。Exact Version で固定した記録。</li>
-    <li><a href="/notes/itms-91064/">ITMS-91064「無効なバイナリ」：NSPrivacyTracking が true なのに NSPrivacyTrackingDomains が空だった</a> — ビルドが Apple の自動審査で ITMS-91064 により却下された。NSPrivacyTracking が true で、NSPrivacyTrackingDomains が空の配列だったのが原因。ドメインを補った経緯と、確認できていないこと。</li>
   </ul>
 <!--/related-->
 
