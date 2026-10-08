@@ -297,7 +297,7 @@ footer.site a:hover{color:var(--gold)}
 .logo-xl .l1{color:var(--text);text-shadow:0 0 60px rgba(10,16,26,.9)}
 .logo-xl .l2{background:linear-gradient(100deg,#e6f2fa 6%,#7ec8e3 38%,#2f6fd0 66%,#b9e6f5 96%);
   -webkit-background-clip:text;background-clip:text;color:transparent}
-.hairline{width:0;height:1px;margin:22px auto 16px;
+.hairline{width:min(280px,62%);height:1px;margin:22px auto 16px;
   background:linear-gradient(90deg,transparent,var(--gold),transparent)}
 .tagline{margin:0;font-family:var(--mincho);font-size:clamp(13px,2.5vw,16px);
   letter-spacing:.2em;color:var(--muted)}
@@ -683,3 +683,25 @@ body:not(.home) .js .rv,.js body:not(.home) .rv{opacity:1;transform:none;transit
 body:not(.home) #motes{display:none}
 
 h1,h2,h3{text-wrap:balance}
+
+/* ---- トップの最初の演出（以前は GSAP）。CSS だけで動かす ----
+   GSAP（50KB 弱）を、この演出のためだけに全ページへ配っていた。測ると、
+   JavaScript を止めた状態は、初回表示が約2倍速い。
+   backwards：待っているあいだと、動いている間だけ効かせる。終わったら元の状態に戻る
+   （forwards にすると、終わりの値が残って、ボタンの hover の動きを上書きしてしまう）。
+   ロゴ本体（SVG の <g>）は、位置を transform 属性で持っているので、動かすのは <svg> 全体にして、
+   上段と下段の差は、下段の透明度だけで付ける。
+   動きを減らす設定では、上の「*{animation:none!important}」が全部止める */
+@keyframes ksFade{from{opacity:0}}
+@keyframes ksRise{from{opacity:0;transform:translateY(16px)}}
+@keyframes ksDrop{from{opacity:0;transform:translateY(-6%)}}
+@keyframes ksLine{from{width:0}}
+.lockup .ks-logo{animation:ksDrop .8s cubic-bezier(.215,.61,.355,1) backwards}
+.lockup .ks-l2{animation:ksFade .8s .15s cubic-bezier(.215,.61,.355,1) backwards}
+.lockup .hairline{animation:ksLine .7s .4s cubic-bezier(.77,0,.175,1) backwards}
+.lockup .tagline{animation:ksRise .6s .45s cubic-bezier(.215,.61,.355,1) backwards}
+.hero-act>*{animation:ksRise .6s .6s cubic-bezier(.215,.61,.355,1) backwards}
+.hero-act>*:nth-child(2){animation-delay:.68s}
+.cue{animation:ksFade .6s .9s backwards}
+/* .orbit（回る札）には、現れる演出を付けない。画像が最大の部品として数えられ、
+   透明から現れるぶん、最大表示（LCP）が遅れる */

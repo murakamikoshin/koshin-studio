@@ -15,7 +15,7 @@
 <link rel="apple-touch-icon" href="/assets/icon/icon-180.png?v=84e7f0e6">
 <link rel="manifest" href="/site.webmanifest">
 <script>document.documentElement.className+=" js"</script>
-<link rel="stylesheet" href="/style.css?v=e2a04379">
+<link rel="stylesheet" href="/style.css?v=ff53d289">
 <link rel="canonical" href="https://koshinstudio.com/notes/bulk-accident/">
 <meta property="og:url" content="https://koshinstudio.com/notes/bulk-accident/">
 <meta property="og:site_name" content="Koshin Studio">
@@ -95,9 +95,9 @@
   <div class="rule" style="margin:40px 0 22px"></div>
   <p class="eyebrow">ほかの記録</p>
   <ul class="plain">
+    <li><a href="/notes/xcode152-sdk/">Xcode 15.2 で Firebase 12 が使えない（Swift 6.0 必須）：Firebase 11.4.0 と AdMob 11.5.0 に固定した理由</a> — 古い Mac の Xcode 15.2 では、Firebase 12 以降と 11.12.0 以降は Xcode 16.2 が必須、AdMob 11.6.0 以降は MarketplaceKit で Xcode 15.3 が必須。Exact Version で固定した記録。</li>
     <li><a href="/notes/itms-91064/">ITMS-91064「無効なバイナリ」：NSPrivacyTracking が true なのに NSPrivacyTrackingDomains が空だった</a> — ビルドが Apple の自動審査で ITMS-91064 により却下された。NSPrivacyTracking が true で、NSPrivacyTrackingDomains が空の配列だったのが原因。ドメインを補った経緯と、確認できていないこと。</li>
     <li><a href="/notes/fake-products/">「9種セット」を中身ごとに分けて、偽の商品が80個できていた</a> — ポケモンカードの9種セットは1つの商品なのに、中身ごとに分けて、実在しない商品が80個できていた。入口を止め、親22件を戻し、子190件を外し、偽の商品を消した記録。</li>
-    <li><a href="/notes/apple-signin/">Firebase Auth：アプリを完全に終了すると、匿名アカウントが量産された（currentUser の復元待ち）</a> — 「アプリを落とすと、また Apple のサインインを求められる」。管理画面を開くと、19人中17人が使い捨ての匿名アカウント。起動直後に currentUser を同期チェックしていた競争を、addStateDidChangeListener で直した記録。</li>
   </ul>
 <!--/related-->
 </div>
@@ -108,8 +108,6 @@
   <div class="sns-row"></div>
   <nav><a href="/about/">About</a><a href="/privacy/">あつかい</a></nav>
 </div></footer>
-<script src="/vendor/gsap.min.js?v=9396f256" defer></script>
-<script src="/vendor/ScrollTrigger.min.js?v=05ca5ad8" defer></script>
-<script src="/motion.js?v=150119fe" defer></script>
+<script src="/motion.js?v=02cdfdf5" defer></script>
 </body>
 </html>

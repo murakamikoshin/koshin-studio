@@ -781,6 +781,14 @@ for (const file of pages) {
     + '<link rel="manifest" href="/site.webmanifest">\n'
     + '<script>document.documentElement.className+=" js"</script>');
 
+  /* GSAP（と ScrollTrigger）を使うのは、数字を数え上げる data-count と、
+     スクロールで動く絵（feat-media）だけ。それが無いページには配らない
+     （測ると、JavaScript を止めた状態は、初回表示が約2倍速い）。
+     組み直しても、同じ結果になる（無いものは、消すだけ） */
+  if (!/data-count|feat-media/.test(html)) {
+    html = html.replace(/<script src="\/vendor\/(?:gsap|ScrollTrigger)\.min\.js[^"]*" defer><\/script>\n?/g, '');
+  }
+
   /* 中身の印を付け直す。古い印は消してから入れるので、組み直しても増えない */
   html = html.replace(/(["'])(\/(?:style\.css|motion\.js))(\?v=[0-9a-f]+)?\1/g,
     (m, q, path) => q + stamped(path) + q);

@@ -34,22 +34,9 @@
     }
   }
 
-  /* ---------- 立ち上がり ---------- */
-  var lock = document.querySelector('.lockup');
-  if (G && lock && !calm) {
-    var tl = G.timeline({ defaults: { ease: 'power3.out' } });
-    tl.from('.ks-l1', { yPercent: -22, opacity: 0, duration: 1.15 })
-      .from('.ks-l2', { yPercent: 22, opacity: 0, duration: 1.15 }, '-=0.95')
-      .to('.hairline', { width: 'min(280px, 62%)', duration: .9, ease: 'power2.inOut' }, '-=0.5')
-      .from('.tagline', { y: 16, opacity: 0, duration: .8 }, '-=0.55')
-      .from('.hero-act > *', { y: 20, opacity: 0, duration: .7, stagger: .09 }, '-=0.45')
-      .from('.cue', { opacity: 0, duration: .7 }, '-=0.3')
-      .from('.orb', { scale: .25, opacity: 0, duration: 1.15, stagger: { each: .07, from: 'random' },
-                      ease: 'back.out(1.5)' }, 0.35);
-  } else {
-    var hl = document.querySelector('.hairline');
-    if (hl) hl.style.width = 'min(280px, 62%)';
-  }
+  /* ---------- 立ち上がり ----------
+     トップの最初の演出は、style.css の「トップの最初の演出」（CSS だけ）に移した。
+     ここに GSAP の筋書きがあったが、全ページへ GSAP を配るのをやめるため、消した */
 
   /* ---------- 小さい画面の品書き ---------- */
   (function () {

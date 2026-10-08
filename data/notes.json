@@ -1,5 +1,13 @@
 [
   {
+    "slug": "xcode152-sdk",
+    "title": "Xcode 15.2 で Firebase 12 が使えない（Swift 6.0 必須）：Firebase 11.4.0 と AdMob 11.5.0 に固定した理由",
+    "date": "2026-10-08",
+    "work": "トレカダッシュ",
+    "url": "/notes/xcode152-sdk/",
+    "blurb": "古い Mac の Xcode 15.2 では、Firebase 12 以降と 11.12.0 以降は Xcode 16.2 が必須、AdMob 11.6.0 以降は MarketplaceKit で Xcode 15.3 が必須。Exact Version で固定した記録。"
+  },
+  {
     "slug": "itms-91064",
     "title": "ITMS-91064「無効なバイナリ」：NSPrivacyTracking が true なのに NSPrivacyTrackingDomains が空だった",
     "date": "2026-10-08",
