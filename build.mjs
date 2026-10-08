@@ -438,7 +438,7 @@ const orbitCells = []
 
 const orbitHtml = orbitCells.map((c, i) => `      <a class="orb${c.img ? ' has-img' : ''}" href="${c.href}" style="--i:${i}">
         ${c.img
-          ? `<picture><source srcset="${base(c.img)}.webp" type="image/webp"><img src="${base(c.img)}.jpg" alt="${esc(c.label)}" width="360" height="360" loading="eager" decoding="async"></picture>`
+          ? `<picture><source srcset="${base(c.img)}.webp" type="image/webp"><img src="${base(c.img)}.jpg" alt="" width="360" height="360" loading="eager" decoding="async"></picture>`
           : `<span class="orb-mark">${esc(c.label)}</span>`}
         <span class="orb-cap">${esc(c.img ? c.label : c.sub)}</span>
       </a>`).join('\n');
