@@ -1,4 +1,6 @@
 User-agent: *
 Allow: /
+Disallow: /submit
+Disallow: /top
 
 Sitemap: https://koshinstudio.com/sitemap.xml

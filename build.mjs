@@ -856,8 +856,12 @@ writeFileSync(here + '/sitemap.xml',
       + `<priority>${pri}</priority></url>`;
   }).join('\n') + '\n</urlset>\n');
 
+/* /submit と /top は、すし積むの番付サーバーへの通信先の名前で、ゲームの
+   プログラムの中に文字列として書いてある（実際の通信先は別のサーバー）。
+   検索ロボットがそれを URL だと思って取りに来て、404 になる（実害は無い）。
+   取りに来なくてよい、と伝えておく。このサイトに、同じ名前のページは無い */
 writeFileSync(here + '/robots.txt',
-  'User-agent: *\nAllow: /\n\nSitemap: ' + SITE + '/sitemap.xml\n');
+  'User-agent: *\nAllow: /\nDisallow: /submit\nDisallow: /top\n\nSitemap: ' + SITE + '/sitemap.xml\n');
 
 console.log(`site: ${pages.length} ページに canonical と構造化データ、sitemap.xml を書きました`);
 
