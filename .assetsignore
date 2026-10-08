@@ -21,3 +21,6 @@ assets/shots/raw
 # 元の PNG（重い。webp と jpg を配っている）。
 # 直下だけ。assets/icon/ の PNG は配る
 /assets/*.png
+
+# 他サイトに出す要約の下書き（配らない）
+drafts
