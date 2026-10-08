@@ -15,7 +15,7 @@
 <link rel="apple-touch-icon" href="/assets/icon/icon-180.png?v=84e7f0e6">
 <link rel="manifest" href="/site.webmanifest">
 <script>document.documentElement.className+=" js"</script>
-<link rel="stylesheet" href="/style.css?v=fa483aa4">
+<link rel="stylesheet" href="/style.css?v=1ac76cfe">
 <meta name="google-adsense-account" content="ca-pub-3863314847163872">
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3863314847163872" crossorigin="anonymous"></script>
 <link rel="canonical" href="https://koshinstudio.com/notes/gemini-migration/">
@@ -40,8 +40,7 @@
 
 <main><div class="wrap">
   <nav class="crumbs" aria-label="現在地"><a href="/">Koshin Studio</a><i aria-hidden="true">›</i><a href="/notes/">Notes</a><i aria-hidden="true">›</i><span aria-current="page">Claude API から Gemini API（gemini-3.1-flash-lite）へ移行した：16 か所の呼び出しを 1 つの関数にまとめた</span></nav>
-  <h1>Claude API から Gemini API（gemini-3.1-flash-lite）へ移行した：16 か所の呼び出しを 1 つの関数にまとめた</h1>
-  <div class="rule"></div>
+  <h1>Claude API から Gemini API（gemini-3.1-flash-lite）へ移行した：16 か所の呼び出しを 1 つの関数にまとめた</h1>  <div class="rule"></div>
   <p class="lead">トレカダッシュ 開発の記録 ／ 2026年10月</p>
 
   <p>iOS アプリ「トレカダッシュ」のサーバー側では、記事が「どの商品の話か」を判定するなどに、AI を使っています。2026 年 7 月 25 日に、この AI を、<strong>Anthropic の Claude（Haiku 4.5）から、Google の Gemini（<code>gemini-3.1-flash-lite</code>）へ、全面的に移行</strong>しました。何を決めて、どう一本化して、移行のあとに何を足したのか。開発の引き継ぎ記録で書きます。</p>

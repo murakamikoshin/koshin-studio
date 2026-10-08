@@ -1,0 +1,12 @@
+{
+  "note": "紹介する物の一覧。id は notes.json の picks から参照する。url が空の間は出ない。service は『Amazon』『楽天』など。",
+  "items": [
+    {
+      "id": "example",
+      "name": "（例）商品名",
+      "service": "",
+      "url": "",
+      "comment": "使って分かったことを一言。"
+    }
+  ]
+}

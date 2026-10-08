@@ -727,3 +727,8 @@ h2[id]{scroll-margin-top:78px}
 .comments{margin-top:44px;padding-top:6px}
 .comments h2{font-family:var(--mincho);font-weight:600;font-size:20px;letter-spacing:.16em;margin:0 0 14px}
 .comments #giscus-box{margin-top:12px;min-height:0}
+
+/* ---- 記事の紹介枠（アフィリエイト） ---- */
+.picks{margin-top:44px;padding-top:6px}
+.picks h2{font-family:var(--mincho);font-weight:600;font-size:20px;letter-spacing:.16em;margin:0 0 14px}
+.picks-note{margin:0 0 18px}

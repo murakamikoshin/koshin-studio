@@ -35,6 +35,7 @@ const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replac
 
 const works = read('/data/works.json');
 const notes = read('/data/notes.json');
+const pickById = Object.fromEntries((read('/data/picks.json').items || []).map((x) => [x.id, x]));
 const kinds = read('/data/kinds.json');
 const conf  = existsSync(here + '/data/site.json') ? read('/data/site.json') : { social: [], ads: {} };
 const stack = existsSync(here + '/data/stack.json') ? read('/data/stack.json') : { groups: [] };
@@ -865,6 +866,29 @@ for (const file of pages) {
     relHtml = relBlock('この作品の記録', notes.filter((n) => n.work === workBySlug[rw[1]].title));
   }
   if (relHtml) html = html.replace(/<\/div>\s*<\/main>/, (m) => relHtml + m);
+  /* 紹介の枠（記事だけ。アフィリエイト）。site.json の affiliate.enabled が true で、
+     data/notes.json の記事に picks があり、data/picks.json のその項目に url がある時だけ出す。
+     開示の一文を冒頭にも入れる（隠さない）。組み直しても増えないよう、印の間を消してから入れる */
+  html = html.replace(/\n?<!--picks-->[\s\S]*?<!--\/picks-->\n?/g, '')
+             .replace(/\n?<!--picks-note-->[\s\S]*?<!--\/picks-note-->\n?/g, '');
+  const af = conf.affiliate || {};
+  const pn = rel.match(/^\/notes\/([^/]+)\/index\.html$/);
+  if (af.enabled && pn && noteBySlug[pn[1]] && (noteBySlug[pn[1]].picks || []).length) {
+    const items = noteBySlug[pn[1]].picks.map((id) => pickById[id]).filter((x) => x && x.url);
+    if (items.length) {
+      const box = `\n<!--picks-->
+  <section class="picks" id="picks">
+    <h2 id="picks-h">この記事で使ったもの</h2>
+    <p class="note">${esc(af.disclosure || '')}</p>
+    <ul class="plain">${items.map((x) => `
+      <li><a href="${esc(x.url)}" rel="sponsored noopener" target="_blank">${esc(x.name)}</a>${x.service ? `（${esc(x.service)}）` : ''} — ${esc(x.comment || '')}</li>`).join('')}
+    </ul>
+  </section>
+<!--/picks-->\n`;
+      html = html.replace(/<\/div>\s*<\/main>/, (m) => box + m);
+      html = html.replace(/(<\/h1>)/, `$1\n<!--picks-note--><p class="note picks-note">${esc(af.disclosure || '')}</p><!--/picks-note-->`);
+    }
+  }
   /* コメント欄（記事だけ。giscus ＝ GitHub Discussions）。site.json の comments.categoryId が
      空の間は何も出さない。「コメントを開く」を押すまで、外部（giscus.app・GitHub）へは繋がない
      （読み込みが重くなるのと、押さない人の接続を増やさないため）。組み直しても増えない */
