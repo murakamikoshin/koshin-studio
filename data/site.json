@@ -22,8 +22,8 @@
   "comments": {
     "repo": "murakamikoshin/koshin-studio",
     "repoId": "R_kgDOURc3ew",
-    "category": "Comments",
+    "category": "Announcements",
     "categoryId": "",
-    "note": "GitHub の Discussions を有効にして、giscus アプリを入れ、giscus.app の設定画面で出る category-id（DIC_ で始まる文字列）を categoryId に入れると、各記事の終わりにコメント欄が出ます。空の間は何も出ません。"
+    "note": "GitHub の Discussions を有効にして、giscus アプリを入れ、giscus.app でカテゴリー『Announcements』（最初からある）を選んで出る category-id（DIC_ で始まる文字列）を categoryId に入れると、各記事の終わりにコメント欄が出ます。空の間は何も出ません。"
   }
 }
