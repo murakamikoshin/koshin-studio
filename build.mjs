@@ -489,7 +489,10 @@ function walk(dir, out = []) {
 const pages = walk(here).sort();
 const urlOf = (f) => {
   let u = f.slice(here.length).replace(/\/index\.html$/, '/');
-  if (!u.endsWith('/') && u.endsWith('.html')) u = u;
+  /* Cloudflare Pages は /x.html を /x へ 308 で転送する。正規の URL（canonical・sitemap・構造化データ）は、
+     転送先の形（.html なし）にそろえる。転送される URL を載せると、Search Console に
+     「ページにリダイレクトがあります」と出る */
+  if (!u.endsWith('/') && u.endsWith('.html')) u = u.replace(/\.html$/, '');
   return SITE + (u === '' ? '/' : u);
 };
 
@@ -631,7 +634,7 @@ function ldFor(file, url) {
         primaryImageOfPage: ogFor(rel),
         about: { '@type': 'VideoGame', name: w.title, url: SITE + w.url } },
       crumbs([['Koshin Studio', '/'], ['Works', '/works/'], [w.title, w.url],
-              ['遊び方', w.url + 'guide.html']]),
+              ['遊び方', w.url + 'guide']]),
     ];
   }
   return null;
@@ -703,7 +706,7 @@ for (const file of pages) {
     const w = workBySlug[wm2[1]];
     trail = [['Works', '/works/']].concat(
       rel.endsWith('/index.html') && rel === w.url + 'index.html'
-        ? [[w.title, w.url]] : [[w.title, w.url], ['遊び方', rel.replace('index.html', '')]]);
+        ? [[w.title, w.url]] : [[w.title, w.url], ['遊び方', rel.replace(/(index)?\.html$/, '')]]);
   } else if (nm2 && noteBySlug[nm2[1]]) {
     trail = [['Notes', '/notes/'], [noteBySlug[nm2[1]].title, noteBySlug[nm2[1]].url]];
   }
