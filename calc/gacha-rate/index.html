@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ガチャの当たり確率・天井計算機 — 排出率から、何回で当たる？ — Koshin Studio</title>
+<meta name="description" content="ガチャの排出率（%）と回数から、当たりが出る確率を計算します。欲しい個数、天井（○回で確定）にも対応。平均の回数、9割の人が当たる回数、必要な金額が出ます。">
+<meta property="og:title" content="ガチャの当たり確率・天井計算機">
+<meta property="og:description" content="ガチャの排出率と回数から、当たる確率を計算。天井、欲しい個数に対応。">
+<meta property="og:type" content="article">
+<meta name="theme-color" content="#fbfaf7">
+<link rel="icon" href="/favicon.ico?v=1697d589" sizes="48x48">
+<link rel="icon" href="/favicon.svg?v=b9d7922f" type="image/svg+xml" sizes="any">
+<link rel="icon" href="/assets/icon/icon-192.png?v=e2566235" type="image/png" sizes="192x192">
+<link rel="apple-touch-icon" href="/assets/icon/icon-180.png?v=84e7f0e6">
+<link rel="manifest" href="/site.webmanifest">
+<script>document.documentElement.className+=" js"</script>
+<link rel="stylesheet" href="/style.css?v=7001672f">
+<meta name="google-adsense-account" content="ca-pub-3863314847163872">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3863314847163872" crossorigin="anonymous"></script>
+<link rel="canonical" href="https://koshinstudio.com/calc/gacha-rate/">
+<meta property="og:url" content="https://koshinstudio.com/calc/gacha-rate/">
+<meta property="og:site_name" content="Koshin Studio">
+<meta property="og:locale" content="ja_JP">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="alternate" type="application/rss+xml" title="Koshin Studio — Notes" href="https://koshinstudio.com/feed.xml">
+<meta property="og:image" content="https://koshinstudio.com/assets/og/og_calc_gacha-rate.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
+</head>
+<body>
+<canvas id="motes"></canvas>
+
+<header class="site"><div class="wrap">
+  <a class="logo" href="/"><img class="logo-mark" src="/favicon.svg?v=b9d7922f" alt="" width="28" height="28">Koshin Studio</a>
+  <nav><a href="/works/">Works</a><a href="/notes/">Notes</a><a href="/about/">About</a></nav>
+</div></header>
+
+<main><div class="wrap">
+  <nav class="crumbs" aria-label="現在地"><a href="/">Koshin Studio</a><i aria-hidden="true">›</i><span aria-current="page">ガチャの当たり確率・天井計算機</span></nav>
+  <h1>ガチャの当たり確率・天井計算機</h1>
+  <div class="rule"></div>
+  <p class="lead">排出率から、何回で当たる？</p>
+
+  <p>ガチャの<strong>排出率（％）</strong>を入れると、「何回回せば、当たりが出るのか」を計算します。<strong>欲しい個数</strong>と、<strong>天井</strong>（○回で確定）にも対応しています。平均の回数、9 割の人が当たる回数、お金にするといくらか、が出ます。</p>
+
+  <form class="calc" id="calc" onsubmit="return false">
+    <label>排出率（％）<input type="number" id="p" min="0.001" max="100" step="any" value="3" inputmode="decimal"></label>
+    <label>欲しい個数<input type="number" id="k" min="1" max="10" value="1" inputmode="numeric"></label>
+    <label>天井（回目で確定・任意）<input type="number" id="N" min="2" max="500" placeholder="例 90" inputmode="numeric"></label>
+    <label>1 回の値段（円・任意）<input type="number" id="price" min="0" placeholder="例 300" inputmode="numeric"></label>
+    <label>回す予定の回数（任意）<input type="number" id="m" min="0" placeholder="例 100" inputmode="numeric"></label>
+  </form>
+
+  <div class="calc-out" id="out" aria-live="polite"></div>
+  <noscript><p class="note">この計算機は、JavaScript で動きます。</p></noscript>
+
+  <h2 class="rv">例：排出率 3％ を、100 回回す</h2>
+  <ul>
+    <li>1 つ以上、当たりが出る確率は <strong>95.2%</strong>（1 − 0.97 の 100 乗）。</li>
+    <li>平均では、<strong>約 33.3 回</strong>（1 ÷ 0.03）。半分の人は 23 回までに、9 割の人は 76 回までに、99% の人は 152 回までに当たります。</li>
+    <li>つまり、<strong>「排出率 3％」は「33 回で必ず当たる」ではありません</strong>。100 回回しても、約 5% の人は、一度も当たりません。</li>
+  </ul>
+
+  <h2 class="rv">しくみ</h2>
+  <ul>
+    <li><strong>天井が無いとき：</strong>1 つ当たるまでの回数は、1 回ごとの確率 <em>p</em> で決まる「当たるまでの回数」の分布です。欲しい個数が <em>k</em> なら、<em>k</em> 個目が <em>t</em> 回目に当たる確率は、<em>C(t−1, k−1) × p<sup>k</sup> × (1−p)<sup>t−k</sup></em> です。平均は <em>k ÷ p</em>。</li>
+    <li><strong>天井があるとき：</strong><em>N</em> 回目まで当たりが出なければ、<em>N</em> 回目は必ず当たり、当たったら数え直す、という前提です。1 個ぶんの回数の分布を作って、<em>k</em> 個ぶん重ねています。平均は <em>k × (1 − (1−p)<sup>N</sup>) ÷ p</em>。</li>
+  </ul>
+  <p>計算の正しさは、別の方法でも確かめました。排出率 3％・天井 90 回、排出率 0.6％・天井 80 回、排出率 3％で 3 個、排出率 1％・天井 100 回で 2 個、排出率 2％で 5 個を、それぞれコンピューターで 20 万人ぶん引かせて、平均と、半分・9 割・99% の人の回数を、この計算機と照らしました。どれも、一致しました（20 万人の試行のばらつきの範囲です）。</p>
+
+  <h2 class="rv">この計算が当てはまらないとき</h2>
+  <ul>
+    <li><strong>排出率は、公表されている数字をそのまま入れる</strong>前提です。公表の数字が、実際と同じかどうかは、この計算機には分かりません。</li>
+    <li><strong>毎回、同じ確率</strong>で、前の結果とは関係なく決まる前提です。回数に応じて確率が上がるゲーム（天井の前に、少しずつ確率が上がるもの）は、対応していません。</li>
+    <li>天井は「○回目で確定、当たったら数え直す」だけです。「天井で、別のものと交換できる」「天井を次に持ち越せる」といった仕組みは、含みません。</li>
+    <li>ピックアップ（特定のキャラが出やすい）や、複数の当たりが混ざる場合は、「欲しいものの排出率」を入れてください。</li>
+    <li>これは、確率の計算です。必ず当たる、という意味ではありません。使いすぎには、気をつけてください。</li>
+  </ul>
+
+  <p class="note">全種類を集めるときの計算は、<a href="/calc/gacha/">ガチャのコンプリート計算機</a>にあります。</p>
+
+  <script src="/calc/gacha-rate/rate.js" defer></script>
+  <script src="/calc/gacha-rate/page.js" defer></script>
+</div>
+</main>
+
+<footer class="site"><div class="wrap">
+  <span>© 2026 Koshin Studio</span>
+  <div class="sns-row"></div>
+  <nav><a href="/about/">About</a><a href="/privacy/">あつかい</a></nav>
+</div></footer>
+<script src="/motion.js?v=1e7447ec" defer></script>
+</body>
+</html>

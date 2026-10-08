@@ -2,7 +2,7 @@
   var $ = function (id) { return document.getElementById(id); };
   var out = $('out');
   var yen = function (x) { return Math.round(x).toLocaleString('ja-JP') + ' 円'; };
-  var pct = function (x) { return (x * 100 < 10 ? (x * 100).toFixed(1) : Math.round(x * 100)) + '%'; };
+  var pct = function (x) { return x * 100 >= 99.95 ? '99.9%以上' : (x * 100).toFixed(1) + '%'; };
   function num(id) { var v = $(id).value; return v === '' ? null : Number(v); }
   function render() {
     var n = num('n'), k = num('k') || 0, price = num('price'), set = num('set'), m = num('m');
