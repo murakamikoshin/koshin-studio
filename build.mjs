@@ -1010,7 +1010,66 @@ writeFileSync(here + '/sitemap.xml',
    検索ロボットがそれを URL だと思って取りに来て、404 になる（実害は無い）。
    取りに来なくてよい、と伝えておく。このサイトに、同じ名前のページは無い */
 writeFileSync(here + '/robots.txt',
-  'User-agent: *\nAllow: /\nDisallow: /submit\nDisallow: /top\n\nSitemap: ' + SITE + '/sitemap.xml\n');
+  [
+    '# 検索エンジンにも、AI の検索・回答のための取得にも、記事と計算機を読んでもらってかまいません。',
+    '# 下の名前付きの取得ロボットも、同じ規則で、許可しています（全部「User-agent: *」と同じ）。',
+    ...['GPTBot', 'OAI-SearchBot', 'ChatGPT-User', 'ClaudeBot', 'Claude-SearchBot', 'Claude-User',
+      'PerplexityBot', 'Perplexity-User', 'Google-Extended', 'Applebot-Extended', 'Bingbot', 'Googlebot']
+      .map((ua) => 'User-agent: ' + ua).concat(['User-agent: *']),
+    'Allow: /', 'Disallow: /submit', 'Disallow: /top', '',
+    'Sitemap: ' + SITE + '/sitemap.xml', ''].join('\n'));
+
+
+/* ---- llms.txt / llms-full.txt（AI が、このサイトを読み取りやすくする） ----
+   llms.txt: サイトの要約と、ページの一覧（題と、一文の説明つき）。
+   llms-full.txt: 主な頁の本文を、見出しと表を残した文章にして、一続きにしたもの。
+   記事に書いた内容を、そのまま取れる形で置く。組み直すたびに、作り直す */
+const decodeEnt = (s) => s.replace(/&nbsp;/g, ' ').replace(/&lt;/g, '<').replace(/&gt;/g, '>')
+  .replace(/&quot;/g, '"').replace(/&#39;/g, "'").replace(/&amp;/g, '&');
+function mainAsText(file) {
+  let h = readFileSync(file, 'utf8');
+  const m = h.match(/<main[^>]*>([\s\S]*?)<\/main>/);
+  if (!m) return '';
+  h = m[1]
+    .replace(/<!--toc-->[\s\S]*?<!--\/toc-->/g, '').replace(/<!--related-->[\s\S]*?<!--\/related-->/g, '')
+    .replace(/<!--comments-->[\s\S]*?<!--\/comments-->/g, '')
+    .replace(/<nav class="crumbs"[\s\S]*?<\/nav>/g, '').replace(/<nav class="toc"[\s\S]*?<\/nav>/g, '')
+    .replace(/<script[\s\S]*?<\/script>|<style[\s\S]*?<\/style>|<form[\s\S]*?<\/form>|<noscript[\s\S]*?<\/noscript>/g, '')
+    .replace(/<a [^>]*href="([^"]+)"[^>]*>([\s\S]*?)<\/a>/g, (x, u, t) => {
+      const txt = t.replace(/<[^>]+>/g, '').trim();
+      return /^(\/|https?:)/.test(u) && txt ? `${txt} (${u.startsWith('/') ? SITE + u : u})` : txt;
+    })
+    .replace(/<h1[^>]*>/g, '\n# ').replace(/<h2[^>]*>/g, '\n\n## ').replace(/<h3[^>]*>/g, '\n\n### ')
+    .replace(/<\/h[1-3]>/g, '\n').replace(/<li[^>]*>/g, '\n- ').replace(/<\/tr>/g, '\n')
+    .replace(/<\/t[hd]>\s*<t[hd][^>]*>/g, ' | ').replace(/<t[hd][^>]*>/g, '').replace(/<\/p>|<br\s*\/?>/g, '\n')
+    .replace(/<blockquote[^>]*>/g, '\n> ').replace(/<[^>]+>/g, '');
+  return decodeEnt(h).replace(/[ \t]+\n/g, '\n').replace(/\n{3,}/g, '\n\n').trim();
+}
+const abs = (u) => SITE + u;
+const line = (t, u, d) => `- [${t}](${abs(u)})${d ? ': ' + d : ''}`;
+const toolRows = (typeof tools !== 'undefined' ? tools : []);
+const llms = [
+  '# Koshin Studio', '',
+  `> ${conf.tagline || ''} 個人で、ゲーム・アプリ・診断を作って、試して、書いているスタジオです。記事は、実際に作って測ったことと、公式ページだけで比べた結果（出典と確認日つき）を書いています。確認できなかったことは、確認できなかったと書きます。`, '',
+  `サイト: ${SITE}/`, `全文: ${abs('/llms-full.txt')}`, '',
+  '## Notes（制作の記録）', ...records.map((n) => line(n.title, n.url, n.blurb)), '',
+  '## Picks（比べたもの・買ったもの）', ...picks.map((n) => line(n.title, n.url, n.blurb)), '',
+  '## Tools（計算機）', ...toolRows.map((t) => line(t.title, t.url, t.blurb)), '',
+  '## Works（作ったもの）', ...works.map((w) => line(w.title, w.url, w.blurb)), '',
+  '## ガチアニメ診断のガイド',
+  line('ガイド', '/anime/', '診断の仕組みと 64 タイプ'), line('6 つの軸', '/anime/axes/', ''), line('選び方', '/anime/guide/', 'アニメ診断の選び方'), line('64 タイプ一覧', '/anime/types/', ''), '',
+  '## そのほか', line('About', '/about/', '運営者・連絡先・記事の書き方と訂正について'), line('あつかい（プライバシー）', '/privacy/', ''), ''].join('\n');
+writeFileSync(here + '/llms.txt', llms);
+const fullPages = [].concat(
+  records.map((n) => n.url), picks.map((n) => n.url), toolRows.map((t) => t.url),
+  works.map((w) => w.url), ['/anime/', '/anime/axes/', '/anime/guide/', '/about/', '/privacy/']);
+const full = ['# Koshin Studio — 全文', '', `> ${SITE}/ の主な頁の本文です。出典は、各頁の URL。`, ''].concat(
+  fullPages.map((u) => {
+    const f = here + u + 'index.html';
+    return existsSync(f) ? `\n---\n\nURL: ${abs(u)}\n\n${mainAsText(f)}\n` : '';
+  })).join('\n');
+writeFileSync(here + '/llms-full.txt', full);
+console.log(`site: llms.txt（${llms.split('\n').length} 行）と llms-full.txt（${Math.round(full.length / 1024)} KB）を書きました`);
 
 console.log(`site: ${pages.length} ページに canonical と構造化データ、sitemap.xml を書きました`);
 
