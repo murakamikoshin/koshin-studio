@@ -15,7 +15,7 @@
 <link rel="apple-touch-icon" href="/assets/icon/icon-180.png?v=84e7f0e6">
 <link rel="manifest" href="/site.webmanifest">
 <script>document.documentElement.className+=" js"</script>
-<link rel="stylesheet" href="/style.css?v=ff53d289">
+<link rel="stylesheet" href="/style.css?v=c23fbd87">
 <link rel="canonical" href="https://koshinstudio.com/notes/webaudio/">
 <meta property="og:url" content="https://koshinstudio.com/notes/webaudio/">
 <meta property="og:site_name" content="Koshin Studio">
@@ -43,8 +43,10 @@
   <p class="lead">すし積む 開発の記録 ／ 2026年10月</p>
 
   <p><a href="/works/sushitsumu/">すし積む</a>の音は、音声ファイルを一つも使っていません。<strong>ブラウザの音の機能（WebAudio）で、和楽器を、その場で合成</strong>しています。問題は、作っている最中、私には、音を聴く手段が無かったことです。そこで、<strong>波形を測って、音量を調整しました</strong>。コミットに残っている数字で書きます。</p>
-
-  <h2 class="rv">なぜ、音声ファイルを使わないのか</h2>
+<!--toc-->
+  <nav class="toc" aria-label="目次"><p>目次</p><ol><li><a href="#s1">なぜ、音声ファイルを使わないのか</a></li><li><a href="#s2">音が聴けないので、波形を測る</a></li><li><a href="#s3">番付も、実測で引き直した</a></li><li><a href="#s4">連鎖の出し方も変えた</a></li><li><a href="#s5">分かったこと</a></li></ol></nav>
+<!--/toc-->
+  <h2 class="rv" id="s1">なぜ、音声ファイルを使わないのか</h2>
   <p>外部のライブラリや音声ファイルを使うと、ゲームを 1 つのファイルとして配る（オフラインでも動く）形が、壊れてしまいます。そこで、箏（爪弾き）、太鼓、拍子木、鉦（かね）を、WebAudio の部品から合成して、陽旋法（日本の音階）で曲を組みました。</p>
   <ul>
     <li><strong>BGM：</strong>八分音符を単位にした、先読みのスケジューラで鳴らします。桶の埋まり具合で、<strong>四段階</strong>に厚みが変わり、危なくなるほど、太鼓が増えます。</li>
@@ -52,7 +54,7 @@
     <li>昇段したときと、自己記録を更新したときに、祝いの一節を足しました。音の入切ボタンもあり、設定は端末に残します。</li>
   </ul>
 
-  <h2 class="rv">音が聴けないので、波形を測る</h2>
+  <h2 class="rv" id="s2">音が聴けないので、波形を測る</h2>
   <p>音量のつり合いは、本来、耳で決めるものです。でも、この作業では、聴けませんでした。そこで、同じ合成の関数を、書き出し専用の音の部品（<code>OfflineAudioContext</code>）に張り替えて、<strong>音を波形として書き出し、最大の振れ幅（ピーク）を測りました</strong>。</p>
   <p>最初の状態は、こうでした。</p>
   <ul>
@@ -71,7 +73,7 @@
   </table></div>
   <p>歪みは、なくなりました。「ありがたみのある音ほど、大きい」という順序が、数字で確かめられます。ただし、<strong>耳で聴いて心地よいか</strong>は、この方法では、分かりません。</p>
 
-  <h2 class="rv">番付も、実測で引き直した</h2>
+  <h2 class="rv" id="s3">番付も、実測で引き直した</h2>
   <p>音と同じ日に、番付（ランク）のしきい値も、見直しました。自動プレイを 12 回まわして、点の分布を採ると、こうでした。</p>
   <div class="scroll rv"><table>
     <tr><th>モード</th><th class="n">点の範囲</th><th class="n">置いた手数</th></tr>
@@ -81,13 +83,13 @@
   <p>それまでの基準（伝説＝30,000 点）では、<strong>工夫のない自動プレイが、最高位になってしまいました</strong>。そこで、しきい値を、その上へ引き直しました（0 / 4,000 / 10,000 / 18,000 / 30,000 / 50,000 / 85,000）。お品書きは、点の出方が約 1.8 倍なので、同じ比率で伸ばしています。両方の自動プレイが「中堅職人」で止まり、<strong>花板から上は、腕次第</strong>になりました。</p>
   <p>翌日に、120 戦まわして、当たり方も測りました（若手 6%、中堅 32%、花板 40%、大将 14%、伝説 8%）。自動プレイは、人より上手いので、下の二段には落ちません。下の二段は、人が遊ぶときに効く前提の並びです。</p>
 
-  <h2 class="rv">連鎖の出し方も変えた</h2>
+  <h2 class="rv" id="s4">連鎖の出し方も変えた</h2>
   <ul>
     <li>連鎖のボーナスを、お任せにも入れました。同じ条件で、得点が、倍近くになります。</li>
     <li>3 連鎖は、1 ゲームに 20 回以上も出て、ありがたみがありませんでした。画面の中央に出すのは、<strong>4 連鎖から</strong>にしました（2〜3 連鎖は、浮かぶ文字と音だけ）。</li>
   </ul>
 
-  <h2 class="rv">分かったこと</h2>
+  <h2 class="rv" id="s5">分かったこと</h2>
   <blockquote>聴けなくても、測れる。</blockquote>
   <ul>
     <li><strong>感覚で決められないものは、数字で決める。</strong>音のつり合いも、番付も、実測が土台でした。</li>

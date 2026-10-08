@@ -15,7 +15,7 @@
 <link rel="apple-touch-icon" href="/assets/icon/icon-180.png?v=84e7f0e6">
 <link rel="manifest" href="/site.webmanifest">
 <script>document.documentElement.className+=" js"</script>
-<link rel="stylesheet" href="/style.css?v=ff53d289">
+<link rel="stylesheet" href="/style.css?v=c23fbd87">
 <link rel="canonical" href="https://koshinstudio.com/notes/dup-zero/">
 <meta property="og:url" content="https://koshinstudio.com/notes/dup-zero/">
 <meta property="og:site_name" content="Koshin Studio">
@@ -44,21 +44,23 @@
 
   <p>iOS アプリ「トレカダッシュ」には、同じ商品が複数の商品として登録されてしまう「重複」を、毎晩、統合する処理があります。ある日、自分で数えて、「重複は実質ゼロ」と記録しました。ところが、リポジトリの監査は、<strong>112 組</strong>を出していました。<strong>自分の測り方が、間違っていた</strong>のです。コミットの記録で、経緯を書きます。</p>
   <p class="note">このサイトには、トレカダッシュの作品ページはまだありません。ここに書くのは、開発の記録です。</p>
-
-  <h2 class="rv">「ゼロ」と数えて、112 組が出た</h2>
+<!--toc-->
+  <nav class="toc" aria-label="目次"><p>目次</p><ol><li><a href="#s1">「ゼロ」と数えて、112 組が出た</a></li><li><a href="#s2">原因：毎晩、途中で時間切れになっていた</a></li><li><a href="#s3">直し方</a></li><li><a href="#s4">その前に分かっていたこと：1 回では終わらない</a></li><li><a href="#s5">同じ日に、ほかにも三つ</a></li><li><a href="#s6">分かったこと</a></li></ol></nav>
+<!--/toc-->
+  <h2 class="rv" id="s1">「ゼロ」と数えて、112 組が出た</h2>
   <p>112 組の実体を見ると、たとえば、ヴァイスシュヴァルツの「ブースターパック ラブライブ！サンシャイン!!」が、<strong>7 件に割れて</strong>登録されていました。統合の処理が、毎晩動いているはずなのに、です。</p>
 
-  <h2 class="rv">原因：毎晩、途中で時間切れになっていた</h2>
+  <h2 class="rv" id="s2">原因：毎晩、途中で時間切れになっていた</h2>
   <p>統合の処理は、全ジャンルを通すと、<strong>約 15 分</strong>かかります。ところが、毎晩の定期実行に与えている持ち時間は、<strong>480 秒（8 分）</strong>でした。順番は、毎回、同じジャンル（ポケモン）から始まります。つまり、<strong>毎晩、ポケモンの途中で時間切れになり、後ろのジャンルには、永久に届かなかった</strong>のです。</p>
   <p>数えたときに「ゼロ」だったのは、見ていた範囲（先頭のジャンル）だけが、きれいだったからでした。</p>
 
-  <h2 class="rv">直し方</h2>
+  <h2 class="rv" id="s3">直し方</h2>
   <ul>
     <li><strong>持ち回りにする。</strong>前回の続きのジャンルから始めて、時間予算（6 分）が尽きたら、止めます。次の晩は、止まったところから続きます。</li>
     <li><strong>まず、手で完走させる。</strong>全ジャンルを手で最後まで流すと、<strong>重複は 112 組から 0 組</strong>に、商品は <strong>2,753 件から 2,570 件</strong>になりました。</li>
   </ul>
 
-  <h2 class="rv">その前に分かっていたこと：1 回では終わらない</h2>
+  <h2 class="rv" id="s4">その前に分かっていたこと：1 回では終わらない</h2>
   <p>この 2 日前（9 月 5 日）にも、統合について、わかったことがありました。<strong>A を B に統合すると、B の名前が、別の C と同じになる</strong>ことがあります。すると、1 回では終わりません。実データでは、こうでした。</p>
   <div class="scroll rv"><table>
     <tr><th>回</th><th class="n">統合した件数</th><th>その結果</th></tr>
@@ -67,14 +69,14 @@
   </table></div>
   <p>商品は 2,935 件から 2,713 件になりました。そこで、毎日の枠では、<strong>統合が 0 件になるまで繰り返す</strong>（上限 3 回）ようにしました。今回の「時間切れ」は、この繰り返しの、さらに手前の問題でした。</p>
 
-  <h2 class="rv">同じ日に、ほかにも三つ</h2>
+  <h2 class="rv" id="s5">同じ日に、ほかにも三つ</h2>
   <ul>
     <li><strong>受付中の抽選 6 件が、別の商品の定価で、消えていた。</strong>7,200 円（公式の 360 円 × 20 パック）の抽選が、記事に残っていた<strong>別の商品の定価 27,500 円</strong>と比べられて、価格で却下されていました。直す条件に、「<strong>証明できるときだけ直す</strong>」を足しました。実データの全件で、条件に合うのは 10 件で、全部が正規の価格の販売でした。11 件を、表示に戻しています。</li>
     <li><strong>突き合わせの誤報。</strong>「記事はあるのに非表示」の 17 件のうち、9 件は、同じ店の<strong>別の書き方</strong>で、代わりの記事が表示されていました（「千歳鳥山店」と「千歳烏山店」のように）。代わりが表示中なら、カバー済みと数えるようにして、カバー率は 87% から 90% に、非表示は 17 件から 4 件になりました。</li>
     <li><strong>監査のほうが、止まっていた。</strong>監査用の読み取りの部品が、<code>=&gt;</code> のすぐ後ろにある正規表現を、割り算と読み違えて、監査 4 本が、<code>ReferenceError</code> で落ちていました。切り出せなかった名前を、黙って飛ばさず、理由を出すように直しています。</li>
   </ul>
 
-  <h2 class="rv">分かったこと</h2>
+  <h2 class="rv" id="s6">分かったこと</h2>
   <blockquote>「ゼロ」と数えたら、まず、何を数えたかを疑う。</blockquote>
   <ul>
     <li><strong>見た範囲が、全体とは限らない。</strong>毎晩、先頭のジャンルだけが処理されていたので、先頭だけを数えれば、きれいに見えます。</li>
@@ -97,9 +99,9 @@
   <div class="rule" style="margin:40px 0 22px"></div>
   <p class="eyebrow">ほかの記録</p>
   <ul class="plain">
+    <li><a href="/notes/gemini-migration/">Claude API から Gemini API（gemini-3.1-flash-lite）へ移行した：16 か所の呼び出しを 1 つの関数にまとめた</a> — Anthropic の利用上限で予定外の課金が出たため Gemini へ移行。モデルの選び方（廃止予定日）、呼び出しの一本化、Web 検索の回数上限が無い問題への回路遮断器、止めるスイッチの記録。</li>
     <li><a href="/notes/xcode152-sdk/">Xcode 15.2 で Firebase 12 が使えない（Swift 6.0 必須）：Firebase 11.4.0 と AdMob 11.5.0 に固定した理由</a> — 古い Mac の Xcode 15.2 では、Firebase 12 以降と 11.12.0 以降は Xcode 16.2 が必須、AdMob 11.6.0 以降は MarketplaceKit で Xcode 15.3 が必須。Exact Version で固定した記録。</li>
     <li><a href="/notes/itms-91064/">ITMS-91064「無効なバイナリ」：NSPrivacyTracking が true なのに NSPrivacyTrackingDomains が空だった</a> — ビルドが Apple の自動審査で ITMS-91064 により却下された。NSPrivacyTracking が true で、NSPrivacyTrackingDomains が空の配列だったのが原因。ドメインを補った経緯と、確認できていないこと。</li>
-    <li><a href="/notes/bulk-accident/">一括処理が「全記事」に当たった：書く前に数える、テストは壊して確かめる</a> — 記事の状態をまとめて直す処理が、全記事に当たり、18件が誤って表示に戻った。履歴から戻した経緯と、テストが効くかを、規則を1つずつ外して確かめた記録。</li>
   </ul>
 <!--/related-->
 </div>

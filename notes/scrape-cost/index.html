@@ -15,7 +15,7 @@
 <link rel="apple-touch-icon" href="/assets/icon/icon-180.png?v=84e7f0e6">
 <link rel="manifest" href="/site.webmanifest">
 <script>document.documentElement.className+=" js"</script>
-<link rel="stylesheet" href="/style.css?v=ff53d289">
+<link rel="stylesheet" href="/style.css?v=c23fbd87">
 <link rel="canonical" href="https://koshinstudio.com/notes/scrape-cost/">
 <meta property="og:url" content="https://koshinstudio.com/notes/scrape-cost/">
 <meta property="og:site_name" content="Koshin Studio">
@@ -44,11 +44,13 @@
 
   <p>iOS アプリ「トレカダッシュ」は、通販サイトなどの販売ページを定期的に見に行って、抽選や先着の情報を集めています。ページの取得は、外部のサービス（Scrape.do）を通して行っていて、<strong>取得の設定ごとに、使うクレジットが違います</strong>。あるサイトについて、「これはしょうがない」と思っていたことを、測り直したら、<strong>3 倍速く、使う量は 8 分の 1</strong>になりました。コミットの記録で書きます。</p>
   <p class="note">このサイトには、トレカダッシュの作品ページはまだありません。ここに書くのは、開発の記録です。金額は書かず、クレジットの数だけを書きます。</p>
-
-  <h2 class="rv">「しょうがない」の理由は、費用だった</h2>
+<!--toc-->
+  <nav class="toc" aria-label="目次"><p>目次</p><ol><li><a href="#s1">「しょうがない」の理由は、費用だった</a></li><li><a href="#s2">3 つの設定で、同じページを取った</a></li><li><a href="#s3">直し方</a></li><li><a href="#s4">分かったこと</a></li></ol></nav>
+<!--/toc-->
+  <h2 class="rv" id="s1">「しょうがない」の理由は、費用だった</h2>
   <p>イオンスタイルオンラインと、あみあみの 2 サイトは、取得の間隔を縮められない、と考えていました。理由は、取得にかかる費用が重いこと。つまり、<strong>古い単価を前提にした結論</strong>です。それを、もう一度、測ってみることにしました。</p>
 
-  <h2 class="rv">3 つの設定で、同じページを取った</h2>
+  <h2 class="rv" id="s2">3 つの設定で、同じページを取った</h2>
   <p>取得の設定は、3 段階あります。単純に取る（1 クレジット）、ブラウザで描画してから取る（render、5 クレジット）、さらに強力な経路で描画して取る（super＋render、25 クレジット）。イオンの一覧ページを、この 3 つで取って、中身を比べました。2 ページを、それぞれ 3 回、くり返しています。</p>
   <div class="scroll rv"><table>
     <tr><th>設定</th><th class="n">クレジット</th><th class="n">サイズ（バイト）</th><th class="n">商品</th><th class="n">価格</th></tr>
@@ -58,7 +60,7 @@
   </table></div>
   <p>3 つとも、<strong>取れた商品も価格も、まったく同じ</strong>でした。つまり、描画（render）は、<strong>まるごと無駄</strong>だったことになります。1 クレジットで足りるものに、25 クレジット払っていました。</p>
 
-  <h2 class="rv">直し方</h2>
+  <h2 class="rv" id="s3">直し方</h2>
   <ul>
     <li><strong>安い設定から先に試す。</strong>イオンは、まず単純に取ります。先着の開始時に出る「アクセス集中」のページが返ってきたときだけ、自動で強い設定に切り替えます。</li>
     <li><strong>間隔を、15 分から 5 分に。</strong>5 分おきは、1 日 288 回です。2 ページなので、576 クレジット。前は、1 日に約 4,600 クレジットでした（コミットの記載です）。<strong>3 倍速くなって、使う量は約 8 分の 1</strong>です。</li>
@@ -66,7 +68,7 @@
   </ul>
   <p>ただし、あみあみの<strong>間隔は、15 分のまま</strong>にしました。その日、タイムアウトを 2 回出していて、1 回の実行が 284 秒もかかっていたからです。取得全体も混み合ってきていたので、触らないと決めました。測ったのは「描画が要るか」で、「間隔を縮めても大丈夫か」ではありません。</p>
 
-  <h2 class="rv">分かったこと</h2>
+  <h2 class="rv" id="s4">分かったこと</h2>
   <blockquote>「しょうがない」は、いつ測った数字に、もとづいているか。</blockquote>
   <ul>
     <li><strong>古い結論は、測り直す。</strong>単価も、設定も、サイトの作りも、変わります。「イオンはしょうがない」は、測ったら、そうではありませんでした。</li>
@@ -89,9 +91,9 @@
   <div class="rule" style="margin:40px 0 22px"></div>
   <p class="eyebrow">ほかの記録</p>
   <ul class="plain">
+    <li><a href="/notes/gemini-migration/">Claude API から Gemini API（gemini-3.1-flash-lite）へ移行した：16 か所の呼び出しを 1 つの関数にまとめた</a> — Anthropic の利用上限で予定外の課金が出たため Gemini へ移行。モデルの選び方（廃止予定日）、呼び出しの一本化、Web 検索の回数上限が無い問題への回路遮断器、止めるスイッチの記録。</li>
     <li><a href="/notes/xcode152-sdk/">Xcode 15.2 で Firebase 12 が使えない（Swift 6.0 必須）：Firebase 11.4.0 と AdMob 11.5.0 に固定した理由</a> — 古い Mac の Xcode 15.2 では、Firebase 12 以降と 11.12.0 以降は Xcode 16.2 が必須、AdMob 11.6.0 以降は MarketplaceKit で Xcode 15.3 が必須。Exact Version で固定した記録。</li>
     <li><a href="/notes/itms-91064/">ITMS-91064「無効なバイナリ」：NSPrivacyTracking が true なのに NSPrivacyTrackingDomains が空だった</a> — ビルドが Apple の自動審査で ITMS-91064 により却下された。NSPrivacyTracking が true で、NSPrivacyTrackingDomains が空の配列だったのが原因。ドメインを補った経緯と、確認できていないこと。</li>
-    <li><a href="/notes/bulk-accident/">一括処理が「全記事」に当たった：書く前に数える、テストは壊して確かめる</a> — 記事の状態をまとめて直す処理が、全記事に当たり、18件が誤って表示に戻った。履歴から戻した経緯と、テストが効くかを、規則を1つずつ外して確かめた記録。</li>
   </ul>
 <!--/related-->
 </div>

@@ -15,7 +15,7 @@
 <link rel="apple-touch-icon" href="/assets/icon/icon-180.png?v=84e7f0e6">
 <link rel="manifest" href="/site.webmanifest">
 <script>document.documentElement.className+=" js"</script>
-<link rel="stylesheet" href="/style.css?v=ff53d289">
+<link rel="stylesheet" href="/style.css?v=c23fbd87">
 <link rel="canonical" href="https://koshinstudio.com/notes/bulk-accident/">
 <meta property="og:url" content="https://koshinstudio.com/notes/bulk-accident/">
 <meta property="og:site_name" content="Koshin Studio">
@@ -44,11 +44,13 @@
 
   <p>iOS アプリ「トレカダッシュ」で、記事の状態をまとめて直す新しい処理が、最初に流したとき、<strong>対象にするつもりのなかった記事まで、全部に当たりました</strong>。別のサイト由来の 18 件が、誤って、表示に戻っていました。事故の直し方と、その後に、同じ穴をふさぐ<strong>テスト</strong>を作ったとき、「そのテストが、本当に効くか」を、どう確かめたかを、HANDOFF の記録で書きます。</p>
   <p class="note">このサイトには、トレカダッシュの作品ページがあります（<a href="/works/torecadash/">トレカダッシュ</a>）。ここに書くのは、開発の記録です。</p>
-
-  <h2 class="rv">何をする処理だったか</h2>
+<!--toc-->
+  <nav class="toc" aria-label="目次"><p>目次</p><ol><li><a href="#s1">何をする処理だったか</a></li><li><a href="#s2">事故：全記事に当たった</a></li><li><a href="#s3">同じ穴をふさぐ、テストを作る</a></li><li><a href="#s4">テストが効くかを、壊して確かめる</a></li><li><a href="#s5">分かったこと</a></li></ol></nav>
+<!--/toc-->
+  <h2 class="rv" id="s1">何をする処理だったか</h2>
   <p>アプリには、出品の価格が妥当かを調べる「価格の関門」があります（<a href="/notes/fail-open/">別の記事</a>に書きました）。この関門で、価格だけを理由に非表示にされた記事のうち、<strong>商品の取り違えが原因で、本当は正しい記事</strong>を、表示に戻す処理を足しました。戻す条件は、「正しい商品の定価と、出品価格が一致すること」です。</p>
 
-  <h2 class="rv">事故：全記事に当たった</h2>
+  <h2 class="rv" id="s2">事故：全記事に当たった</h2>
   <p>この処理は、最初、<strong>取り込み元を区別せず、全記事</strong>に当たりました。その結果、別のサイト（Amazon、カードラボ、ミニストップなど）由来の記事 18 件が、表示に戻ってしまいました。本来、非表示のままであるべきものです。</p>
   <p>直し方は、二つです。</p>
   <ul>
@@ -58,11 +60,11 @@
   <p>ただし、この 18 件には、取り返せなかったものがあります。処理が、元の定価の欄を、<strong>出品価格で上書き</strong>していました。値は、出品価格のままです。</p>
   <p><strong>原因は、書き込みの前に、対象の範囲を、数えていなかったこと</strong>でした。記録にも、そう書いてあります。「一括の書き込みは、対象の範囲を先に数えてから」。</p>
 
-  <h2 class="rv">同じ穴をふさぐ、テストを作る</h2>
+  <h2 class="rv" id="s3">同じ穴をふさぐ、テストを作る</h2>
   <p>この日の点検で見つかった問題（9 種セットの誤分割、単品カードの混入、カードではない商品の混入など）を、二度と起こさないために、テストを作りました。<code>catalog-guards.test.js</code> に 66 件、ほかと合わせて、全 6 本を、1 つの手順（<code>run-all.sh</code>）で通せるようにしてあります。</p>
   <p>あわせて、毎日の運用連絡に、警告を足しました。突き合わせの取りこぼし率が、基準（抽選図鑑 80%、ポケチュー 75%、X のまとめ 75%）を下回ったとき、30 時間動いていないとき、商品リストに、単品カードや、カードではない名前の商品が現れたときです。判定は、<strong>副作用のない純粋な関数</strong>で書いてあり、直れば、次の回で、自然に消えます。</p>
 
-  <h2 class="rv">テストが効くかを、壊して確かめる</h2>
+  <h2 class="rv" id="s4">テストが効くかを、壊して確かめる</h2>
   <p>テストは、書いただけでは、効いているか分かりません。常に通るテストは、何も守っていないかもしれないからです。そこで、<strong>本番のコードの複製の、規則を 1 つずつ外して</strong>、テストが失敗することを、確かめました。</p>
   <ul>
     <li>規則を 1 つ外す（壊す）。</li>
@@ -72,7 +74,7 @@
   <p>この手順で、<strong>6 種類の改変を試して、6 種類とも、テストが失敗しました</strong>（全部、検出できた）。</p>
   <p>運用のきまりも、記録に残しました。<code>functions/index.js</code> を触ったら、配備の前に、必ず、全テストを通します。</p>
 
-  <h2 class="rv">分かったこと</h2>
+  <h2 class="rv" id="s5">分かったこと</h2>
   <blockquote>一括の書き込みは、先に数える。テストは、壊して確かめる。</blockquote>
   <ul>
     <li><strong>書く前に、「何件に当たるか」を数える。</strong>下見をせずに流すと、範囲の間違いに、書き終わってから気づきます。</li>
@@ -95,9 +97,9 @@
   <div class="rule" style="margin:40px 0 22px"></div>
   <p class="eyebrow">ほかの記録</p>
   <ul class="plain">
+    <li><a href="/notes/gemini-migration/">Claude API から Gemini API（gemini-3.1-flash-lite）へ移行した：16 か所の呼び出しを 1 つの関数にまとめた</a> — Anthropic の利用上限で予定外の課金が出たため Gemini へ移行。モデルの選び方（廃止予定日）、呼び出しの一本化、Web 検索の回数上限が無い問題への回路遮断器、止めるスイッチの記録。</li>
     <li><a href="/notes/xcode152-sdk/">Xcode 15.2 で Firebase 12 が使えない（Swift 6.0 必須）：Firebase 11.4.0 と AdMob 11.5.0 に固定した理由</a> — 古い Mac の Xcode 15.2 では、Firebase 12 以降と 11.12.0 以降は Xcode 16.2 が必須、AdMob 11.6.0 以降は MarketplaceKit で Xcode 15.3 が必須。Exact Version で固定した記録。</li>
     <li><a href="/notes/itms-91064/">ITMS-91064「無効なバイナリ」：NSPrivacyTracking が true なのに NSPrivacyTrackingDomains が空だった</a> — ビルドが Apple の自動審査で ITMS-91064 により却下された。NSPrivacyTracking が true で、NSPrivacyTrackingDomains が空の配列だったのが原因。ドメインを補った経緯と、確認できていないこと。</li>
-    <li><a href="/notes/fake-products/">「9種セット」を中身ごとに分けて、偽の商品が80個できていた</a> — ポケモンカードの9種セットは1つの商品なのに、中身ごとに分けて、実在しない商品が80個できていた。入口を止め、親22件を戻し、子190件を外し、偽の商品を消した記録。</li>
   </ul>
 <!--/related-->
 </div>

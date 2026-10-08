@@ -15,7 +15,7 @@
 <link rel="apple-touch-icon" href="/assets/icon/icon-180.png?v=84e7f0e6">
 <link rel="manifest" href="/site.webmanifest">
 <script>document.documentElement.className+=" js"</script>
-<link rel="stylesheet" href="/style.css?v=ff53d289">
+<link rel="stylesheet" href="/style.css?v=c23fbd87">
 <link rel="canonical" href="https://koshinstudio.com/notes/torecadash-9set/">
 <meta property="og:url" content="https://koshinstudio.com/notes/torecadash-9set/">
 <meta property="og:site_name" content="Koshin Studio">
@@ -44,8 +44,10 @@
 
   <p>iOS アプリ「トレカダッシュ」は、トレカの抽選・先着情報を集めて通知します。集めた情報に抜けがないか調べるため、他のまとめサイト（抽選図鑑、ポケチュー）の掲載と、自分のアプリの記事を<strong>突き合わせて数えて</strong>います。10月7日に測ったところ、抜けの多くは、<strong>同じ商品なのに、決して一致しない</strong>という、小さな食い違いが原因でした。HANDOFF とコミットの記録で書きます。</p>
   <p class="note">このサイトには、トレカダッシュの作品ページはまだありません。ここに書くのは、開発の記録です。</p>
-
-  <h2 class="rv">測ったこと</h2>
+<!--toc-->
+  <nav class="toc" aria-label="目次"><p>目次</p><ol><li><a href="#s1">測ったこと</a></li><li><a href="#s2">非表示 12 件のうち 7 件は、行のほうが間違っていた</a></li><li><a href="#s3">「9種セット」の正体</a></li><li><a href="#s4">同じ商品なのに、一致しない</a></li><li><a href="#s5">もう一つの穴：前回の記事が、次の回を止めていた</a></li><li><a href="#s6">結果</a></li><li><a href="#s7">分かったこと</a></li></ol></nav>
+<!--/toc-->
+  <h2 class="rv" id="s1">測ったこと</h2>
   <p>「まとめサイトが紹介している抽選が、全部アプリに出ているか」を、読み取りだけで確かめました。</p>
   <ul>
     <li>抽選図鑑：受付中 90 件のうち、アプリに表示されているのは <strong>49 件（54%）</strong>。記事はあるのに非表示が 12 件、フィードに無いのが 29 件。</li>
@@ -53,14 +55,14 @@
     <li>X のまとめ投稿：72 時間で 606 投稿。記事に結び付いたのは 9 件。</li>
   </ul>
 
-  <h2 class="rv">非表示 12 件のうち 7 件は、行のほうが間違っていた</h2>
+  <h2 class="rv" id="s2">非表示 12 件のうち 7 件は、行のほうが間違っていた</h2>
   <p>非表示だった 12 件を調べると、7 件は、まとめサイトの行が<strong>応募ページと違う商品</strong>を書いていました。ある系列の 4 店は「エネルギーカードセット」、別の 3 店は「拡張パック」と書いてあります。応募ページ（抽選の応募フォーム）と店の X を見ると、実際は<strong>「カードセット 9種セット 10,800円」</strong>でした。</p>
   <p>アプリの「価格の関門」（商品の定価と出品価格が合わないものを弾く仕組み）は、これを<strong>正しく弾いていました</strong>。間違っていたのは関門ではなく、商品の取り違えのほうです。商品を付け替えて、表示に戻しました。</p>
 
-  <h2 class="rv">「9種セット」の正体</h2>
+  <h2 class="rv" id="s3">「9種セット」の正体</h2>
   <p>この「9種セット」は、ポケモンカードの 30th CELEBRATION のカードセットで、<strong>歴代 9 世代の御三家（3 匹）のセットが 9 商品</strong>あるものでした。カタログには、この 9 商品が、もともと正しい形で登録されていました。ところが、マーケットプレイスの出品や X の監視が新しい記事を作るたびに、3 匹のうち 1 匹だけの名前の、別の商品として登録されてしまうバグが、9 商品のうち複数で起きていました。たとえば「ヒノアラシ」だけの商品です。</p>
 
-  <h2 class="rv">同じ商品なのに、一致しない</h2>
+  <h2 class="rv" id="s4">同じ商品なのに、一致しない</h2>
   <p>突き合わせの仕組みには、商品名を比べるための「キー」を作る処理があります。ここに、<strong>左右非対称</strong>がありました。</p>
   <ul>
     <li>相手側の「カードセット<strong>9種</strong>」は、末尾の「9種」を落として比べる。</li>
@@ -68,10 +70,10 @@
   </ul>
   <p>同じ商品なのに、<strong>決して一致しません</strong>。そのため、相手の名前は「エネルギーカードセット」や「拡張パック」といった別の商品に、誤って解決されていました。これが、取り違えの出どころでした。両方に同じ規則（「N 種」「N 種類」「セット」を落とす）を当て、さらに、数の指定がある名前は、部分一致で一つに決めないようにしました。カタログ全体で、キーの衝突が 0 であることも確かめています。</p>
 
-  <h2 class="rv">もう一つの穴：前回の記事が、次の回を止めていた</h2>
+  <h2 class="rv" id="s5">もう一つの穴：前回の記事が、次の回を止めていた</h2>
   <p>「フィードに無い」の主な原因は、別にありました。記事の ID が「まとめの URL ＋ 店 ＋ 商品」で作られていて、<strong>抽選の回が含まれていなかった</strong>のです。前回の期限切れの記事が、同じ店・同じ商品の新しい回の記事を作るのを止めていました（「同じ記事 ID が既にある」）。新しい回の締切が前回より 1 日超あとなら、日付を足した別の ID で作るようにしました。</p>
 
-  <h2 class="rv">結果</h2>
+  <h2 class="rv" id="s6">結果</h2>
   <div class="scroll rv"><table>
     <tr><th>カバー率</th><th class="n">前</th><th class="n">後</th></tr>
     <tr><td>抽選図鑑（受付中 90 件）</td><td class="n">54%（49件）</td><td class="n">91%（82件）</td></tr>
@@ -79,7 +81,7 @@
   </table></div>
   <p>残りは、応募ページが「商品各種」としか書いておらず商品を特定できないもの、店名の手がかりがページに無いもの、などです。「安全のため採用しない」と決めたものも含まれています。取りこぼしがゼロになったわけではありません。</p>
 
-  <h2 class="rv">分かったこと</h2>
+  <h2 class="rv" id="s7">分かったこと</h2>
   <blockquote>正しく弾いた関門と、間違っていたデータは、別の問題。</blockquote>
   <ul>
     <li><strong>弾いたものを疑う前に、弾かれた理由を見る。</strong>価格の関門は正しく動いていて、間違っていたのは商品の取り違えでした。</li>
@@ -102,9 +104,9 @@
   <div class="rule" style="margin:40px 0 22px"></div>
   <p class="eyebrow">ほかの記録</p>
   <ul class="plain">
+    <li><a href="/notes/gemini-migration/">Claude API から Gemini API（gemini-3.1-flash-lite）へ移行した：16 か所の呼び出しを 1 つの関数にまとめた</a> — Anthropic の利用上限で予定外の課金が出たため Gemini へ移行。モデルの選び方（廃止予定日）、呼び出しの一本化、Web 検索の回数上限が無い問題への回路遮断器、止めるスイッチの記録。</li>
     <li><a href="/notes/xcode152-sdk/">Xcode 15.2 で Firebase 12 が使えない（Swift 6.0 必須）：Firebase 11.4.0 と AdMob 11.5.0 に固定した理由</a> — 古い Mac の Xcode 15.2 では、Firebase 12 以降と 11.12.0 以降は Xcode 16.2 が必須、AdMob 11.6.0 以降は MarketplaceKit で Xcode 15.3 が必須。Exact Version で固定した記録。</li>
     <li><a href="/notes/itms-91064/">ITMS-91064「無効なバイナリ」：NSPrivacyTracking が true なのに NSPrivacyTrackingDomains が空だった</a> — ビルドが Apple の自動審査で ITMS-91064 により却下された。NSPrivacyTracking が true で、NSPrivacyTrackingDomains が空の配列だったのが原因。ドメインを補った経緯と、確認できていないこと。</li>
-    <li><a href="/notes/bulk-accident/">一括処理が「全記事」に当たった：書く前に数える、テストは壊して確かめる</a> — 記事の状態をまとめて直す処理が、全記事に当たり、18件が誤って表示に戻った。履歴から戻した経緯と、テストが効くかを、規則を1つずつ外して確かめた記録。</li>
   </ul>
 <!--/related-->
 </div>

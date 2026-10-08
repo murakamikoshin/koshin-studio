@@ -15,7 +15,7 @@
 <link rel="apple-touch-icon" href="/assets/icon/icon-180.png?v=84e7f0e6">
 <link rel="manifest" href="/site.webmanifest">
 <script>document.documentElement.className+=" js"</script>
-<link rel="stylesheet" href="/style.css?v=ff53d289">
+<link rel="stylesheet" href="/style.css?v=c23fbd87">
 <link rel="canonical" href="https://koshinstudio.com/notes/sushi-measure/">
 <meta property="og:url" content="https://koshinstudio.com/notes/sushi-measure/">
 <meta property="og:site_name" content="Koshin Studio">
@@ -45,12 +45,14 @@
   <p><a href="/works/sushitsumu/">すし積む</a>は、同じネタをぶつけて合体させ、桶いっぱいに育てていく落ち物パズルです。バランスを直していたとき、<strong>自分が出した測定結果が、間違っていた</strong>ことに気づきました。何が間違っていて、どう見つけて、どう直したか。コミットに残っている数字で書きます。</p>
 
   <p class="note">この記事の数字は、2026年9月7日の時点のものです。このあと、ネタの寸法は一律 0.8 倍になり、9月10日にもう一度（降ってくるネタの種類と、桶の形）変わっています（<a href="/notes/anago/">穴子の記事</a>に書きました）。いまの数字とは違います。</p>
-
-  <h2 class="rv">「89%で落ち着く」は、誤りだった</h2>
+<!--toc-->
+  <nav class="toc" aria-label="目次"><p>目次</p><ol><li><a href="#s1">「89%で落ち着く」は、誤りだった</a></li><li><a href="#s2">原因は三つ</a></li><li><a href="#s3">直したあとの数字</a></li><li><a href="#s4">分かったこと</a></li></ol></nav>
+<!--/toc-->
+  <h2 class="rv" id="s1">「89%で落ち着く」は、誤りだった</h2>
   <p>最初の測定では、「山が桶の89%の高さで落ち着く」という結果が出ていました。つまり、積んでも溢れず、負けないゲームだ、ということです。</p>
   <p>測りなおすと、これは<strong>落下中のネタを数えていたための見かけ</strong>でした。実際の山は、上がり続けていました。ただし上がり方が遅すぎて、<strong>240回落としても、桶の3分の1しか埋まりません</strong>。「負けられないゲーム」とは、安全という意味ではなく、<strong>負けようがないほど山が育たない</strong>という意味でした。</p>
 
-  <h2 class="rv">原因は三つ</h2>
+  <h2 class="rv" id="s2">原因は三つ</h2>
   <p>コミットでは、原因を三つに分けています。どれも、計測で確かめてから潰したものです。</p>
 
   <h3>1. 大きさの階段が、三か所で逆行していた</h3>
@@ -68,7 +70,7 @@
   <h3>3. 大きなネタが、床をすり抜けていた</h3>
   <p>壁と床の物理的な厚みが、見た目と同じ 12 しかなく、重くなったネタが、一枚板を<strong>貫通</strong>して桶の外へ落ちていました。厚みを 80 にして、合体で生まれたネタが壁に食い込む場合の位置も丸めました。こぼれたネタを片付ける処理（<code>sweepStrays</code>）も入れてあります。</p>
 
-  <h2 class="rv">直したあとの数字</h2>
+  <h2 class="rv" id="s3">直したあとの数字</h2>
   <div class="scroll rv"><table>
     <tr><th>測ったもの</th><th class="n">直す前</th><th class="n">直した後</th></tr>
     <tr><td>240回落としたときの桶の埋まり方</td><td class="n">約3分の1</td><td class="n">—</td></tr>
@@ -77,7 +79,7 @@
   </table></div>
   <p>山は縁の手前で上下して、大きな合体で一気に空く。この手のゲームらしい緊張が出ました。得点が伸びたのは、すり抜けて消えていた分が、戻ってきたからです。iPhone SE から 15 Pro Max、横向き、デスクトップで、9:16 が保たれること、はみ出しもエラーも無いこと、満杯の状態で 60fps が出ることを確かめています。</p>
 
-  <h2 class="rv">分かったこと</h2>
+  <h2 class="rv" id="s4">分かったこと</h2>
   <blockquote>測っているものが、知りたいものとは、限らない。</blockquote>
   <p>最初の「89%」は、落下中のネタを数えに入れていたので、「山の高さ」を測れていませんでした。<strong>測定の結果が良すぎたとき</strong>は、数字そのものよりも、何を数えているのかを疑ったほうがいい、と記録しておきます。そのうえで、直したあとの数字は、<a href="/notes/anago/">穴子の記事</a>と同じやり方（自動プレイで何百戦も回す）で、あらためて測りました。</p>
   <p class="note">この記事の数字は、コミット（2026年9月7日）の記録から取りました。</p>

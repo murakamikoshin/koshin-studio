@@ -15,7 +15,7 @@
 <link rel="apple-touch-icon" href="/assets/icon/icon-180.png?v=84e7f0e6">
 <link rel="manifest" href="/site.webmanifest">
 <script>document.documentElement.className+=" js"</script>
-<link rel="stylesheet" href="/style.css?v=ff53d289">
+<link rel="stylesheet" href="/style.css?v=c23fbd87">
 <link rel="canonical" href="https://koshinstudio.com/notes/logo-pop/">
 <meta property="og:url" content="https://koshinstudio.com/notes/logo-pop/">
 <meta property="og:site_name" content="Koshin Studio">
@@ -43,12 +43,14 @@
   <p class="lead">Koshin Studio 開発の記録 ／ 2026年10月</p>
 
   <p>このサイトのトップには、大きなロゴがあります。字を押すと、その字がぽんと弾けて、粒が散ります。ロゴを、自分で作った書体「恒紳ポップ」で作り直したあと、この動きについて、「粒が、字ではない変なところから出る」「まだ、右に寄っている」と指摘を受けました。直すまでに<strong>三段階</strong>かかったので、何が原因で、どう見つけたのかを、測った数字で書きます。</p>
-
-  <h2 class="rv">ロゴを、自作の書体で作り直す</h2>
+<!--toc-->
+  <nav class="toc" aria-label="目次"><p>目次</p><ol><li><a href="#s1">ロゴを、自作の書体で作り直す</a></li><li><a href="#s2">一段階目：押したあと、字がずれたまま戻らない</a></li><li><a href="#s3">二段階目：「まだ右に寄っている」</a></li><li><a href="#s4">三段階目：字そのものから出す</a></li><li><a href="#s5">分かったこと</a></li></ol></nav>
+<!--/toc-->
+  <h2 class="rv" id="s1">ロゴを、自作の書体で作り直す</h2>
   <p>それまでのロゴは、明朝体の骨で欧文を組んだものでした。これを、自分で作った書体「恒紳ポップ」（欧文は、骨格から描き起こした、丸みのある字形）に替えました。書体のライセンスは、SIL Open Font License 1.1 で、ロゴへの利用に問題はありません。</p>
   <p>作り方は、書体のファイルから、<strong>K O S H I N T U D の 9 文字の輪郭</strong>を取り出して、SVG の path にします（<code>tools/logotype_pop.py</code>）。ロゴは「絵」として配るので、サイトは書体のファイルを配りません。この書体は、同じ字でも「基本形」「pop1」「pop2」と、跳ね方の違う形を持っているので、3 通りの組み合わせを並べて見比べて、リズムのよい 1 つを選びました。「U」の右側に出た細い継ぎ目の線は、輪郭に、ごく細い線（3 単位）を足して消しました。</p>
 
-  <h2 class="rv">一段階目：押したあと、字がずれたまま戻らない</h2>
+  <h2 class="rv" id="s2">一段階目：押したあと、字がずれたまま戻らない</h2>
   <p>まず、字を押したあとの位置を、時間を追って記録しました。すると、字が<strong>元の位置に戻っていません</strong>でした。</p>
   <div class="scroll rv"><table>
     <tr><th>字</th><th>押す前の中心</th><th>押したあと（2 秒後）</th></tr>
@@ -59,7 +61,7 @@
   <p><strong>原因：</strong>弾ける動きに使っていたアニメーションの部品（GSAP）が、字の SVG の <code>&lt;g&gt;</code> に、もともと付いていた位置の指定（<code>transform="translate(x,0)"</code>）を、自分の計算で書き換えて、その補正の一部が、終わったあとも残っていました。</p>
   <p><strong>直し方：</strong>位置を持つ層（外側の <code>&lt;g transform&gt;</code>）と、動かす層（内側の <code>&lt;g class="ks-ch"&gt;</code>）を分けました。動きは、ブラウザ標準の Web Animations に替えました（終わると、効果が消えて、元の状態に戻ります）。確かめると、12 文字すべてで、字の中心は動かず、動きの終わりの変形は <code>none</code> に戻りました。</p>
 
-  <h2 class="rv">二段階目：「まだ右に寄っている」</h2>
+  <h2 class="rv" id="s3">二段階目：「まだ右に寄っている」</h2>
   <p>ところが、直したあとも、「まだ、アニメーションが右に寄っている」と言われました。私の測定では、粒は字の中心から 2〜13px 以内に出ていました。<strong>測った結果と、見えたものが、食い違っていました。</strong></p>
   <p>私の測定は、<strong>倍率 1 倍の画面</strong>で、粒の位置を「画面上の座標」で数えたものでした。Retina ディスプレイ（倍率 2 倍）や、スマホ（3 倍）でも測ってみると、粒を描く画面（<code>#burst</code>）の、CSS 上の大きさが、おかしいことが分かりました。</p>
   <div class="scroll rv"><table>
@@ -71,11 +73,11 @@
   <p><strong>原因：</strong>粒を描く canvas は、CSS で <code>inset:0</code> と指定していましたが、<strong>canvas のような部品は、<code>inset:0</code> だけでは、画面いっぱいに広がりません</strong>。元の大きさ（描く画素数）のままです。倍率 2 の画面では、画素数が 2 倍なので、CSS 上の大きさも 2 倍になり、粒が、座標の 2 倍の位置（右下）に表示されていました。倍率 1 の画面では、同じ大きさなので、気づけません。</p>
   <p><strong>直し方：</strong>幅と高さを、<code>100%</code> と明示しました。確かめると、どの倍率の画面でも、粒の画面は、画面と同じ大きさになりました。</p>
 
-  <h2 class="rv">三段階目：字そのものから出す</h2>
+  <h2 class="rv" id="s4">三段階目：字そのものから出す</h2>
   <p>最後に、「字自体から出るようにできないか」という要望がありました。それまでは、字の枠の<strong>中心</strong>から出していたので、「O」のように真ん中が空いた字では、字ではない所から出たように見えます。</p>
   <p>そこで、字の形（path）の<strong>輪郭に沿って点を選び</strong>（<code>getPointAtLength</code>）、その画面上の位置から、字の中心と反対の向き（ばらつきあり）へ、粒を飛ばすようにしました。下段の字は「字＝マスク」で描いているので、矩形が指しているマスクの中の path を探して使います。押して撮ると、「O」は輪の周りから、「U」は形に沿って、粒が出ています。</p>
 
-  <h2 class="rv">分かったこと</h2>
+  <h2 class="rv" id="s5">分かったこと</h2>
   <blockquote>測った数字と、見えたものが食い違ったら、測り方の条件を疑う。</blockquote>
   <ul>
     <li><strong>見る人の画面は、自分の画面と違う。</strong>倍率 1 倍の画面だけで測って、「ずれは小さい」と判断しました。実際は、倍率 2 倍の画面で、粒が 2 倍の場所に出ていました。</li>
@@ -100,8 +102,8 @@
   <p class="eyebrow">ほかの記録</p>
   <ul class="plain">
     <li><a href="/notes/deploy-gotchas/">手元では動くのに、配ると壊れる：このサイトで起きた四つの事故</a> — 古いキャッシュ、組むたびに増えるパンくず、環境の中を指す symlink、手元にしか無い絵。サイトを配るときに続いた四つの事故と、検査を足してはじめて見つかった経緯。</li>
+    <li><a href="/notes/gemini-migration/">Claude API から Gemini API（gemini-3.1-flash-lite）へ移行した：16 か所の呼び出しを 1 つの関数にまとめた</a> — Anthropic の利用上限で予定外の課金が出たため Gemini へ移行。モデルの選び方（廃止予定日）、呼び出しの一本化、Web 検索の回数上限が無い問題への回路遮断器、止めるスイッチの記録。</li>
     <li><a href="/notes/xcode152-sdk/">Xcode 15.2 で Firebase 12 が使えない（Swift 6.0 必須）：Firebase 11.4.0 と AdMob 11.5.0 に固定した理由</a> — 古い Mac の Xcode 15.2 では、Firebase 12 以降と 11.12.0 以降は Xcode 16.2 が必須、AdMob 11.6.0 以降は MarketplaceKit で Xcode 15.3 が必須。Exact Version で固定した記録。</li>
-    <li><a href="/notes/itms-91064/">ITMS-91064「無効なバイナリ」：NSPrivacyTracking が true なのに NSPrivacyTrackingDomains が空だった</a> — ビルドが Apple の自動審査で ITMS-91064 により却下された。NSPrivacyTracking が true で、NSPrivacyTrackingDomains が空の配列だったのが原因。ドメインを補った経緯と、確認できていないこと。</li>
   </ul>
 <!--/related-->
 </div>

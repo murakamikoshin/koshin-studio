@@ -15,7 +15,7 @@
 <link rel="apple-touch-icon" href="/assets/icon/icon-180.png?v=84e7f0e6">
 <link rel="manifest" href="/site.webmanifest">
 <script>document.documentElement.className+=" js"</script>
-<link rel="stylesheet" href="/style.css?v=ff53d289">
+<link rel="stylesheet" href="/style.css?v=c23fbd87">
 <link rel="canonical" href="https://koshinstudio.com/notes/apple-signin/">
 <meta property="og:url" content="https://koshinstudio.com/notes/apple-signin/">
 <meta property="og:site_name" content="Koshin Studio">
@@ -44,11 +44,13 @@
 
   <p>iOS アプリ「トレカダッシュ」で、「アプリを一度落とすと、また Apple のサインインを求められる」という報告がありました。調べると、<strong>19 人のうち 17 人が、作られては捨てられた匿名アカウント</strong>でした。原因は、アプリを起動した直後の、たった 1 行の確認のしかたでした。HANDOFF とコミット（2026年8月14日）の記録で書きます。</p>
   <p class="note">このサイトには、トレカダッシュの作品ページはまだありません。ここに書くのは、開発の記録です。</p>
-
-  <h2 class="rv">報告された症状</h2>
+<!--toc-->
+  <nav class="toc" aria-label="目次"><p>目次</p><ol><li><a href="#s1">報告された症状</a></li><li><a href="#s2">実データを見る</a></li><li><a href="#s3">原因：「まだ戻っていない」ものを、同期的に見ていた</a></li><li><a href="#s4">直し方</a></li><li><a href="#s5">もう一つ、分かったこと</a></li><li><a href="#s6">確認できていないこと</a></li><li><a href="#s7">分かったこと</a></li></ol></nav>
+<!--/toc-->
+  <h2 class="rv" id="s1">報告された症状</h2>
   <p>「1 回アプリを落とすと、なぜか、また Apple のサインインが求められる」。聞き取ると、条件がありました。<strong>スワイプで完全に終了して、起動し直したとき</strong>だけ起こります。ホームボタンで離れて戻るだけなら、起きません。</p>
 
-  <h2 class="rv">実データを見る</h2>
+  <h2 class="rv" id="s2">実データを見る</h2>
   <p>Firebase の管理画面で、認証（Authentication）のユーザー一覧を、実際に開いてみました。結果は、こうです。</p>
   <div class="scroll rv"><table>
     <tr><th>ユーザー</th><th class="n">人数</th></tr>
@@ -58,28 +60,28 @@
   </table></div>
   <p>17 件のうち、<strong>8 月 13 日だけで 10 件</strong>。アプリを起動し直すたびに、新しい匿名アカウントが、作られていたことになります。</p>
 
-  <h2 class="rv">原因：「まだ戻っていない」ものを、同期的に見ていた</h2>
+  <h2 class="rv" id="s3">原因：「まだ戻っていない」ものを、同期的に見ていた</h2>
   <p>アプリは、起動した直後に、「いまサインインしている人がいるか」（<code>Auth.auth().currentUser</code>）を、<strong>その場で</strong>確認していました。いなければ、匿名アカウントを新しく作る、という動きです。</p>
   <p>ところが、Firebase の公式の説明にあるとおり、<code>currentUser</code> は、起動の直後には、保存場所（Keychain）からの復元が<strong>終わっているとは限りません</strong>。復元が間に合わないと、「誰もサインインしていない」と見えてしまいます。すると、本当は Apple のサインインが済んだ既存の状態が、もうすぐ復元されるところなのに、<strong>その直前に、新しい匿名アカウントを作ってしまう</strong>。競争（レースコンディション）です。</p>
   <p>この競争が起きるのは、完全に終了してからの起動（冷起動）だけです。バックグラウンドから戻るときは、Firebase の初期化そのものが走り直さないので、起きません。報告の条件と、ぴったり合います。</p>
 
-  <h2 class="rv">直し方</h2>
+  <h2 class="rv" id="s4">直し方</h2>
   <ul>
     <li><strong>同期的な確認をやめる。</strong>復元が終わったことが確定するのは、状態の変化を知らせる仕組み（<code>addStateDidChangeListener</code>）の、<strong>最初の呼び出し</strong>のときです。判定を、その時点だけにしました。</li>
     <li><strong>保険を一つ足す。</strong>アカウントを管理する側（<code>AccountStore</code>）でも、起動時に、サーバー側の実際の状態と突き合わせて（<code>reload()</code>）、手元の記録とずれていれば、補正して、診断のログを残すようにしました。</li>
   </ul>
 
-  <h2 class="rv">もう一つ、分かったこと</h2>
+  <h2 class="rv" id="s5">もう一つ、分かったこと</h2>
   <p>この調査の途中で、別の事実も分かりました。Apple のサインインは、実装した 8 月 7 日から、このときまで、<strong>実機で一度も成功していませんでした</strong>。</p>
   <ul>
     <li>最初のエラーは、「サインインの方式の設定が見つからない」。Firebase の管理画面で、Apple の方式そのものが、一度も有効にされていませんでした。</li>
     <li>有効にして再挑戦すると、今度は「すでに連携されている」というエラーが出ました。有効にする前の試行が、実は途中まで成立していて、この端末の匿名アカウントに、Apple ID がもうリンクされていたのです。アプリは、これを「エラー」と表示していましたが、実質、サインイン済みです。<strong>成功として扱う</strong>ように直しました。</li>
   </ul>
 
-  <h2 class="rv">確認できていないこと</h2>
+  <h2 class="rv" id="s6">確認できていないこと</h2>
   <p>iOS 側の変更なので、TestFlight に届くまでは、実機で効果を確かめられません。記録には、「実機で、完全に終了して起動し直すことをくり返しても、Apple の連携が保たれるかを、最優先で確認する」と書いてあります。その結果は、この記事を書いた時点で、記録にありません。</p>
 
-  <h2 class="rv">分かったこと</h2>
+  <h2 class="rv" id="s7">分かったこと</h2>
   <blockquote>「起動した直後」の状態は、まだ、確定していない。</blockquote>
   <ul>
     <li><strong>「まだ戻っていない」と、「ない」は、別のもの。</strong>復元を待たずに、「ない」と決めると、新しいものを作ってしまいます。</li>
@@ -102,9 +104,9 @@
   <div class="rule" style="margin:40px 0 22px"></div>
   <p class="eyebrow">ほかの記録</p>
   <ul class="plain">
+    <li><a href="/notes/gemini-migration/">Claude API から Gemini API（gemini-3.1-flash-lite）へ移行した：16 か所の呼び出しを 1 つの関数にまとめた</a> — Anthropic の利用上限で予定外の課金が出たため Gemini へ移行。モデルの選び方（廃止予定日）、呼び出しの一本化、Web 検索の回数上限が無い問題への回路遮断器、止めるスイッチの記録。</li>
     <li><a href="/notes/xcode152-sdk/">Xcode 15.2 で Firebase 12 が使えない（Swift 6.0 必須）：Firebase 11.4.0 と AdMob 11.5.0 に固定した理由</a> — 古い Mac の Xcode 15.2 では、Firebase 12 以降と 11.12.0 以降は Xcode 16.2 が必須、AdMob 11.6.0 以降は MarketplaceKit で Xcode 15.3 が必須。Exact Version で固定した記録。</li>
     <li><a href="/notes/itms-91064/">ITMS-91064「無効なバイナリ」：NSPrivacyTracking が true なのに NSPrivacyTrackingDomains が空だった</a> — ビルドが Apple の自動審査で ITMS-91064 により却下された。NSPrivacyTracking が true で、NSPrivacyTrackingDomains が空の配列だったのが原因。ドメインを補った経緯と、確認できていないこと。</li>
-    <li><a href="/notes/bulk-accident/">一括処理が「全記事」に当たった：書く前に数える、テストは壊して確かめる</a> — 記事の状態をまとめて直す処理が、全記事に当たり、18件が誤って表示に戻った。履歴から戻した経緯と、テストが効くかを、規則を1つずつ外して確かめた記録。</li>
   </ul>
 <!--/related-->
 </div>

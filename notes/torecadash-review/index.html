@@ -15,7 +15,7 @@
 <link rel="apple-touch-icon" href="/assets/icon/icon-180.png?v=84e7f0e6">
 <link rel="manifest" href="/site.webmanifest">
 <script>document.documentElement.className+=" js"</script>
-<link rel="stylesheet" href="/style.css?v=ff53d289">
+<link rel="stylesheet" href="/style.css?v=c23fbd87">
 <link rel="canonical" href="https://koshinstudio.com/notes/torecadash-review/">
 <meta property="og:url" content="https://koshinstudio.com/notes/torecadash-review/">
 <meta property="og:site_name" content="Koshin Studio">
@@ -44,24 +44,26 @@
 
   <p>iOS アプリ「トレカダッシュ」を App Store の審査に出そうとして、<strong>何度か、出す手前で止まりました</strong>。Apple 側の自動検査で止まったもの、提出画面で止まったもの、ガイドラインに照らして点検して見つけたもの。コミットに残っている記録から、四つ書きます。</p>
   <p class="note">このサイトには、トレカダッシュの作品ページはまだありません。審査の結果は、この記事には書いていません。</p>
-
-  <h2 class="rv">1. iPad のスクリーンショットを求められた</h2>
+<!--toc-->
+  <nav class="toc" aria-label="目次"><p>目次</p><ol><li><a href="#s1">1. iPad のスクリーンショットを求められた</a></li><li><a href="#s2">2. 自動検査で「無効なバイナリ」（ITMS-91064）</a></li><li><a href="#s3">3. アカウント削除（ガイドライン 5.1.1(v)）</a></li><li><a href="#s4">4. 利用者の投稿（ガイドライン 1.2）</a></li><li><a href="#s5">分かったこと</a></li></ol></nav>
+<!--/toc-->
+  <h2 class="rv" id="s1">1. iPad のスクリーンショットを求められた</h2>
   <p>App Store Connect で審査に提出しようとすると、「13 インチの iPad ディスプレイのスクリーンショットをアップロードする必要があります」と出て止まりました。プロジェクトの設定が、もともと iPhone と iPad の両方（1,2）になっていたためです。</p>
   <p>ところが、iPad を意識して作った形跡はなく、実機の確認も、レイアウトの調整も、すべて iPhone でした。<strong>未検証のまま「iPad 対応」として審査に出すのはリスクがある</strong>ので、iPhone 専用（1）に変えました。</p>
 
-  <h2 class="rv">2. 自動検査で「無効なバイナリ」（ITMS-91064）</h2>
+  <h2 class="rv" id="s2">2. 自動検査で「無効なバイナリ」（ITMS-91064）</h2>
   <p>ビルド 877 が、Apple 側の自動審査で、「無効なバイナリ」として却下されました。原因は、プライバシーマニフェスト（<code>PrivacyInfo.xcprivacy</code>）の、<strong>トラッキングは「する」(<code>NSPrivacyTracking=true</code>) と書いたのに、トラッキング先のドメイン一覧（<code>NSPrivacyTrackingDomains</code>）が空</strong>だったことです。Apple の検査は、この組み合わせを矛盾として弾きます。</p>
   <p>アプリは、AdMob の広告（バナー、ネイティブ、アプリ起動広告）を、ATT の同意のあとにパーソナライズして出しています。トラッキング自体はしているので、「する」は正しい。直すべきは、空のドメイン一覧のほうでした。ただ、Google は AdMob 向けのドメインの公式な一覧を出していません。そこで、広く使われている広告配信のドメイン（<code>googlesyndication.com</code>、<code>googleadservices.com</code>、<code>doubleclick.net</code>、<code>google.com</code>）を追加しました。Release 構成のビルドが通ることは確認しています。</p>
 
-  <h2 class="rv">3. アカウント削除（ガイドライン 5.1.1(v)）</h2>
+  <h2 class="rv" id="s3">3. アカウント削除（ガイドライン 5.1.1(v)）</h2>
   <p>アカウントを作れるアプリは、アプリの中からアカウントを削除できなければなりません。削除の処理は、利用者のマップ投稿（目撃情報）と、その付随データ（所有者、申告、通報、お礼）も消すようにしました。Apple でサインインしている人は、アプリ側で Apple に再確認してから、サーバーで削除して、トークンを取り消します。設定画面とプライバシーポリシーの説明も、実際の動きに合わせました。</p>
   <p>さらに、<strong>アカウントを削除しても、購読は解約されません</strong>。これを、設定の説明と削除の確認画面に書き足しました（審査の要件として）。</p>
 
-  <h2 class="rv">4. 利用者の投稿（ガイドライン 1.2）</h2>
+  <h2 class="rv" id="s4">4. 利用者の投稿（ガイドライン 1.2）</h2>
   <p>マップ投稿は、利用者が自由に書けます。それまでは、文字数や座標の範囲といった形式のチェックだけで、内容を弾く仕組みがありませんでした。そこで、自由記述の 3 項目（店舗名・商品名・メモ）に、簡易の NG ワード判定を足しました。該当すれば、投稿は作りますが、最初からレビュー待ちの状態にします。</p>
   <p>もう一つ。投稿の通報は、開発者が管理画面の URL を自分から思い出して開かない限り、誰にも気づかれない状態でした。毎日の運用連絡に、レビュー待ちの件数を足して、見落としを防ぎました。</p>
 
-  <h2 class="rv">分かったこと</h2>
+  <h2 class="rv" id="s5">分かったこと</h2>
   <blockquote>審査は、出してから落ちるものではなく、出す手前の点検で半分、見つかる。</blockquote>
   <ul>
     <li>四つのうち、二つ（iPad、ITMS-91064）は、機械が止めてくれました。残りの二つ（削除、投稿）は、ガイドラインを読んで、自分で点検して見つけたものです。</li>
@@ -83,9 +85,9 @@
   <div class="rule" style="margin:40px 0 22px"></div>
   <p class="eyebrow">ほかの記録</p>
   <ul class="plain">
+    <li><a href="/notes/gemini-migration/">Claude API から Gemini API（gemini-3.1-flash-lite）へ移行した：16 か所の呼び出しを 1 つの関数にまとめた</a> — Anthropic の利用上限で予定外の課金が出たため Gemini へ移行。モデルの選び方（廃止予定日）、呼び出しの一本化、Web 検索の回数上限が無い問題への回路遮断器、止めるスイッチの記録。</li>
     <li><a href="/notes/xcode152-sdk/">Xcode 15.2 で Firebase 12 が使えない（Swift 6.0 必須）：Firebase 11.4.0 と AdMob 11.5.0 に固定した理由</a> — 古い Mac の Xcode 15.2 では、Firebase 12 以降と 11.12.0 以降は Xcode 16.2 が必須、AdMob 11.6.0 以降は MarketplaceKit で Xcode 15.3 が必須。Exact Version で固定した記録。</li>
     <li><a href="/notes/itms-91064/">ITMS-91064「無効なバイナリ」：NSPrivacyTracking が true なのに NSPrivacyTrackingDomains が空だった</a> — ビルドが Apple の自動審査で ITMS-91064 により却下された。NSPrivacyTracking が true で、NSPrivacyTrackingDomains が空の配列だったのが原因。ドメインを補った経緯と、確認できていないこと。</li>
-    <li><a href="/notes/bulk-accident/">一括処理が「全記事」に当たった：書く前に数える、テストは壊して確かめる</a> — 記事の状態をまとめて直す処理が、全記事に当たり、18件が誤って表示に戻った。履歴から戻した経緯と、テストが効くかを、規則を1つずつ外して確かめた記録。</li>
   </ul>
 <!--/related-->
 </div>

@@ -15,7 +15,7 @@
 <link rel="apple-touch-icon" href="/assets/icon/icon-180.png?v=84e7f0e6">
 <link rel="manifest" href="/site.webmanifest">
 <script>document.documentElement.className+=" js"</script>
-<link rel="stylesheet" href="/style.css?v=ff53d289">
+<link rel="stylesheet" href="/style.css?v=c23fbd87">
 <link rel="canonical" href="https://koshinstudio.com/notes/typo-catalog/">
 <meta property="og:url" content="https://koshinstudio.com/notes/typo-catalog/">
 <meta property="og:site_name" content="Koshin Studio">
@@ -44,20 +44,22 @@
 
   <p>iOS アプリ「トレカダッシュ」で、利用者から、「この記事、別の記事と重複しているよ。それに、商品名がおかしい」という報告が来ました。調べると、<strong>一度だけ生まれた誤字の商品が、店ごとの記事が来るたびに、再利用されて増えていた</strong>ことが分かりました。原因と、直し方と、直し方の限界まで、コミットの記録で書きます。</p>
   <p class="note">このサイトには、トレカダッシュの作品ページはまだありません。ここに書くのは、開発の記録です。</p>
-
-  <h2 class="rv">報告されたもの</h2>
+<!--toc-->
+  <nav class="toc" aria-label="目次"><p>目次</p><ol><li><a href="#s1">報告されたもの</a></li><li><a href="#s2">根本原因：短い見出しが、公式名と一致しなかった</a></li><li><a href="#s3">まず、データを直す</a></li><li><a href="#s4">本命の予防：「完全一致」で、短い見出しを拾う</a></li><li><a href="#s5">保険：編集距離のチェック、そして、その限界</a></li><li><a href="#s6">分かったこと</a></li></ol></nav>
+<!--/toc-->
+  <h2 class="rv" id="s1">報告されたもの</h2>
   <p>ポケモンカードの「30th CELEBRATION」という商品の記事が、<strong>「30th SEREBRATION」</strong>という商品名（CELEBRATION の綴りの間違い）で、複数の店に出ていました。しかも、同じ商品の、正しい名前の記事と重複していました。</p>
 
-  <h2 class="rv">根本原因：短い見出しが、公式名と一致しなかった</h2>
+  <h2 class="rv" id="s2">根本原因：短い見出しが、公式名と一致しなかった</h2>
   <p>まとめサイトの要約の投稿には、「『30th CELEBRATION』」のような、<strong>短い見出し</strong>が出てきます。一方、アプリの公式カタログの正式名は、「拡張パック『30th CELEBRATION』」です。短い見出しのほうが、公式名より短いので、「記事のタイトルが公式名を含むか」という、一方向の判定では、一致しませんでした。</p>
   <p>一致しないと、AI による照合に回されます。その過程で、<strong>一度だけ</strong>、「30th SEREBRATION」という誤字の商品が作られました。コミットの推測では、カタログにある別の表記「30th セレブレーション」を、ローマ字に変換するときに間違えたもの、とのことです。</p>
   <p>本当に困ったのは、その次です。誤字の商品は、いったん作られると、<strong>「既存の商品」として、繰り返し再利用されます</strong>。店ごとの新しい記事が来るたびに、同じ誤字、同じ重複が、量産されていきました。</p>
 
-  <h2 class="rv">まず、データを直す</h2>
+  <h2 class="rv" id="s3">まず、データを直す</h2>
   <p>全店舗を調べました。ビックカメラ、三洋堂書店、ゲームプラザなどの 3 店舗では、正しい名前の記事と重複していたので、片方を非表示にしました。ほかの 10 記事は、商品を付け替えるだけで済みました。<strong>合わせて 13 記事</strong>です。誤字の商品は、削除しました。</p>
   <p>ここで、一つ、わざと手を付けなかったところがあります。商品を統合する既存の道具は、「SEREBRATION」と「CELEBRATION」を、別の商品と判定して、弾きました。この関門は、意図的に厳しく作ってあるので、<strong>緩めませんでした</strong>。手作業で、個別に直しています。</p>
 
-  <h2 class="rv">本命の予防：「完全一致」で、短い見出しを拾う</h2>
+  <h2 class="rv" id="s4">本命の予防：「完全一致」で、短い見出しを拾う</h2>
   <p>データを直しただけでは、また起きます。そこで、公式カタログとの照合を直しました。公式名の先頭にある<strong>汎用的な形態語</strong>（「拡張パック」など）を一つ取り除いて、残りが記事のタイトルと<strong>完全に一致する</strong>ときだけ、同じ商品とみなします。</p>
   <p>「含む」ではなく「完全一致」にしたのは、「30th CELEBRATION カードセット○○」のような、<strong>より具体的な別の商品まで、拾ってしまわないため</strong>です。これで、最初から公式カタログと正しく一致するようになり、誤字が生まれた AI 照合の経路に、そもそも届かなくなります。確かめた結果は、こうです。</p>
   <ul>
@@ -66,11 +68,11 @@
     <li>既存の完全一致、別のジャンル、無関係な弾名で、以前と動きが変わらない。</li>
   </ul>
 
-  <h2 class="rv">保険：編集距離のチェック、そして、その限界</h2>
+  <h2 class="rv" id="s5">保険：編集距離のチェック、そして、その限界</h2>
   <p>念のため、商品を作る前の合流点に、「公式カタログとの編集距離が近い候補は、誤字の疑いが強いので、却下する」というチェックも入れました。ところが、このチェックだけでは、<strong>「30th SEREBRATION」と、「拡張パック『30th CELEBRATION』」を、捕まえられません</strong>。文字数の差が大きすぎて、編集距離が遠くなるからです（確かめて、そう分かっています）。</p>
   <p>つまり、今回の件には、保険は効きません。効くのは、上の本命の修正です。保険は、<strong>同じ長さの帯で起きる別の誤字</strong>（たとえば、ヴァイスシュヴァルツの「/」が抜けるもの）を捕まえるために、残してあります。さらに、誤字の疑いのあるカタログを見つける読み取り専用の監査も作りました。コミットの時点では、同じ形の疑いが 21 件、見つかっています。</p>
 
-  <h2 class="rv">分かったこと</h2>
+  <h2 class="rv" id="s6">分かったこと</h2>
   <blockquote>一度だけ生まれた間違いは、「既存のもの」になって、増える。</blockquote>
   <ul>
     <li><strong>間違ったデータは、自分で増える。</strong>作られたものが、次からは、再利用される側になります。データを直すだけでは足りず、<strong>生まれる経路</strong>を直す必要があります。</li>
@@ -94,9 +96,9 @@
   <div class="rule" style="margin:40px 0 22px"></div>
   <p class="eyebrow">ほかの記録</p>
   <ul class="plain">
+    <li><a href="/notes/gemini-migration/">Claude API から Gemini API（gemini-3.1-flash-lite）へ移行した：16 か所の呼び出しを 1 つの関数にまとめた</a> — Anthropic の利用上限で予定外の課金が出たため Gemini へ移行。モデルの選び方（廃止予定日）、呼び出しの一本化、Web 検索の回数上限が無い問題への回路遮断器、止めるスイッチの記録。</li>
     <li><a href="/notes/xcode152-sdk/">Xcode 15.2 で Firebase 12 が使えない（Swift 6.0 必須）：Firebase 11.4.0 と AdMob 11.5.0 に固定した理由</a> — 古い Mac の Xcode 15.2 では、Firebase 12 以降と 11.12.0 以降は Xcode 16.2 が必須、AdMob 11.6.0 以降は MarketplaceKit で Xcode 15.3 が必須。Exact Version で固定した記録。</li>
     <li><a href="/notes/itms-91064/">ITMS-91064「無効なバイナリ」：NSPrivacyTracking が true なのに NSPrivacyTrackingDomains が空だった</a> — ビルドが Apple の自動審査で ITMS-91064 により却下された。NSPrivacyTracking が true で、NSPrivacyTrackingDomains が空の配列だったのが原因。ドメインを補った経緯と、確認できていないこと。</li>
-    <li><a href="/notes/bulk-accident/">一括処理が「全記事」に当たった：書く前に数える、テストは壊して確かめる</a> — 記事の状態をまとめて直す処理が、全記事に当たり、18件が誤って表示に戻った。履歴から戻した経緯と、テストが効くかを、規則を1つずつ外して確かめた記録。</li>
   </ul>
 <!--/related-->
 </div>

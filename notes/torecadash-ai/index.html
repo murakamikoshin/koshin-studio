@@ -15,7 +15,7 @@
 <link rel="apple-touch-icon" href="/assets/icon/icon-180.png?v=84e7f0e6">
 <link rel="manifest" href="/site.webmanifest">
 <script>document.documentElement.className+=" js"</script>
-<link rel="stylesheet" href="/style.css?v=ff53d289">
+<link rel="stylesheet" href="/style.css?v=c23fbd87">
 <link rel="canonical" href="https://koshinstudio.com/notes/torecadash-ai/">
 <meta property="og:url" content="https://koshinstudio.com/notes/torecadash-ai/">
 <meta property="og:site_name" content="Koshin Studio">
@@ -44,11 +44,13 @@
 
   <p>iOS アプリ「トレカダッシュ」は、トレカ（ポケカ・遊戯王・ワンピース）の予約・抽選・先着販売の情報を集めて、通知するアプリです。集めた記事が「どの商品の話か」を決める処理に、AI（Gemini）を使っています。この AI への問い合わせを減らそうとして、<strong>「減るはず」と書いたものが、二度、外れました</strong>。コミットに残っている数字で、順に書きます。</p>
   <p class="note">このサイトには、トレカダッシュの作品ページはまだありません。ここに書くのは、開発の記録です。</p>
-
-  <h2 class="rv">何をAIに聞いているのか</h2>
+<!--toc-->
+  <nav class="toc" aria-label="目次"><p>目次</p><ol><li><a href="#s1">何をAIに聞いているのか</a></li><li><a href="#s2">一つ目：題名が商品名そのものなら、聞かなくていい</a></li><li><a href="#s3">二つ目：まとめて聞く</a></li><li><a href="#s4">三つ目：配備したのに、一度も束ねていなかった</a></li><li><a href="#s5">分かったこと</a></li></ol></nav>
+<!--/toc-->
+  <h2 class="rv" id="s1">何をAIに聞いているのか</h2>
   <p>記事の題名（たとえば「30th CELEBRATION プレミアムデッキセット エーフィ」）を、最近の商品の候補リスト（直近60件）と突き合わせて、<strong>どの商品なのかを AI に答えてもらう</strong>、という処理です。1回の問い合わせは約 3,083 トークンで、そのうち約 1,800 は、毎回同じ固定の説明文でした。</p>
 
-  <h2 class="rv">一つ目：題名が商品名そのものなら、聞かなくていい</h2>
+  <h2 class="rv" id="s2">一つ目：題名が商品名そのものなら、聞かなくていい</h2>
   <p>題名が、既知の商品名とそのまま一致するなら、AI に聞く必要はありません。この「短絡」を入れたところ、実データでは<strong>X の監視で 43%</strong>が当てはまりました。食い違い（短絡の答えが、AI の答えと違う）は 0 件です。そこで、これで<strong>約 45% 減る</strong>と記録しました。</p>
   <p>ところが、配備して90分たっても、短絡は<strong>1回も発火しませんでした</strong>。数え直すと、こうでした。</p>
   <div class="scroll rv"><table>
@@ -60,7 +62,7 @@
   <blockquote>その規則が当たる割合と、実際に減る呼び出しは、別物。</blockquote>
   <p>手前に無料の経路があるなら、差し引きまで数えないといけない。コミットの教訓の欄には、そう書いてあります。処理自体は正しく安全だったので残しています。ただし、AI の削減としては小さいものでした。</p>
 
-  <h2 class="rv">二つ目：まとめて聞く</h2>
+  <h2 class="rv" id="s3">二つ目：まとめて聞く</h2>
   <p>次の本命は、<strong>複数の記事を1回の問い合わせにまとめる</strong>ことでした。固定の説明文が1回で済むからです。候補リストは、同じジャンルの記事なら「最近の60件」を共有するので、合併してもほとんど増えません。</p>
   <p>設計では、二つのことに気をつけました。</p>
   <ul>
@@ -76,13 +78,13 @@
     <tr><td>6件</td><td class="n">65,000字</td><td class="n">17,729字</td><td class="n">−73%</td></tr>
   </table></div>
 
-  <h2 class="rv">三つ目：配備したのに、一度も束ねていなかった</h2>
+  <h2 class="rv" id="s4">三つ目：配備したのに、一度も束ねていなかった</h2>
   <p>配備して6時間。商品照合は47回あり、<strong>束ねは0回</strong>でした。同じ分に2〜7件の呼び出しがあったのに、1件ずつ聞いていたのです。</p>
   <p>原因は、「送る条件」でした。条件を「待っている数 ≧ まだ終わっていない処理の数（pending）」で見ていたのですが、<strong>待ちに入った処理も、pending に含まれていました</strong>。X の監視は32アカウントを同時に回します。先に31件が終わっていれば、pending は1。最後の1件が待ちに来た瞬間に、条件が成立して、<strong>1件のまま即送信</strong>されていました。</p>
   <p>直し方は、「まだ待ちにも来ていない処理がゼロか」で見ること。完全に終わった数と、いま待っている数の合計が、全体に達したら送ります。あわせて、保険の上限を20秒から6秒に縮めました。1件しか来ない回で毎回20秒待つと、X 監視1回の実行（実測17.8秒）より長くなって、巡回が遅れるからです。</p>
   <p>この確認のとき、一つ目の短絡も、見直されました。<strong>6時間で、47回中28回（60%）</strong>が、AI を呼ばずに済んでいました。短絡は、正しく効いていました。</p>
 
-  <h2 class="rv">分かったこと</h2>
+  <h2 class="rv" id="s5">分かったこと</h2>
   <ul>
     <li><strong>「当たる割合」を、削減量と書かない。</strong>手前に無料の経路があれば、減るのは差し引き分だけです。</li>
     <li><strong>配備しただけでは、動いたことにならない。</strong>「束ね0回」は、数え直したから見つかりました。ログに「束ねた」と出るかを先に決めておけば、もっと早く気づけたはずです。</li>
@@ -104,9 +106,9 @@
   <div class="rule" style="margin:40px 0 22px"></div>
   <p class="eyebrow">ほかの記録</p>
   <ul class="plain">
+    <li><a href="/notes/gemini-migration/">Claude API から Gemini API（gemini-3.1-flash-lite）へ移行した：16 か所の呼び出しを 1 つの関数にまとめた</a> — Anthropic の利用上限で予定外の課金が出たため Gemini へ移行。モデルの選び方（廃止予定日）、呼び出しの一本化、Web 検索の回数上限が無い問題への回路遮断器、止めるスイッチの記録。</li>
     <li><a href="/notes/xcode152-sdk/">Xcode 15.2 で Firebase 12 が使えない（Swift 6.0 必須）：Firebase 11.4.0 と AdMob 11.5.0 に固定した理由</a> — 古い Mac の Xcode 15.2 では、Firebase 12 以降と 11.12.0 以降は Xcode 16.2 が必須、AdMob 11.6.0 以降は MarketplaceKit で Xcode 15.3 が必須。Exact Version で固定した記録。</li>
     <li><a href="/notes/itms-91064/">ITMS-91064「無効なバイナリ」：NSPrivacyTracking が true なのに NSPrivacyTrackingDomains が空だった</a> — ビルドが Apple の自動審査で ITMS-91064 により却下された。NSPrivacyTracking が true で、NSPrivacyTrackingDomains が空の配列だったのが原因。ドメインを補った経緯と、確認できていないこと。</li>
-    <li><a href="/notes/bulk-accident/">一括処理が「全記事」に当たった：書く前に数える、テストは壊して確かめる</a> — 記事の状態をまとめて直す処理が、全記事に当たり、18件が誤って表示に戻った。履歴から戻した経緯と、テストが効くかを、規則を1つずつ外して確かめた記録。</li>
   </ul>
 <!--/related-->
 </div>

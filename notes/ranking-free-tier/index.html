@@ -15,7 +15,7 @@
 <link rel="apple-touch-icon" href="/assets/icon/icon-180.png?v=84e7f0e6">
 <link rel="manifest" href="/site.webmanifest">
 <script>document.documentElement.className+=" js"</script>
-<link rel="stylesheet" href="/style.css?v=ff53d289">
+<link rel="stylesheet" href="/style.css?v=c23fbd87">
 <link rel="canonical" href="https://koshinstudio.com/notes/ranking-free-tier/">
 <meta property="og:url" content="https://koshinstudio.com/notes/ranking-free-tier/">
 <meta property="og:site_name" content="Koshin Studio">
@@ -43,11 +43,13 @@
   <p class="lead">すし積む 開発の記録 ／ 2026年10月</p>
 
   <p><a href="/works/sushitsumu/">すし積む</a>には、オンラインの番付（ランキング）があります。置き場所は Cloudflare の Workers と D1（データベース）で、無料枠の中で動かしています。この番付サーバーの無料枠の使い方を、<strong>半分にしました</strong>。何を数えて、何を変えたのか。コミットに残っている実測値で書きます。</p>
-
-  <h2 class="rv">無料枠は、みんなで分け合う</h2>
+<!--toc-->
+  <nav class="toc" aria-label="目次"><p>目次</p><ol><li><a href="#s1">無料枠は、みんなで分け合う</a></li><li><a href="#s2">一人が遊ぶと、何が起きているか</a></li><li><a href="#s3">変えたのは二つ</a></li><li><a href="#s4">確かめたこと</a></li><li><a href="#s5">分かったこと</a></li></ol></nav>
+<!--/toc-->
+  <h2 class="rv" id="s1">無料枠は、みんなで分け合う</h2>
   <p>Cloudflare の無料枠は、アカウント単位です。そのアカウントの Workers と D1 のすべてで、分け合います。ほかのプロジェクトと同居するなら、番付のほうは、細くしておくに越したことはありません。さらにコミットには、<strong>2026年9月1日から、D1 はこの上限で、本当に問い合わせを断るようになった</strong>とあります。上限は、「読んだ行数」で、1 日 500 万行です。</p>
 
-  <h2 class="rv">一人が遊ぶと、何が起きているか</h2>
+  <h2 class="rv" id="s2">一人が遊ぶと、何が起きているか</h2>
   <p>「一人が一度遊び、点を送り、番付を一度見る」という、一番ふつうの流れで、サーバーへの呼び出しと、読んだ行数を数えました。数え方は、D1 の代わりに <code>node:sqlite</code> を噛ませた Worker を、実際に動かして、です。</p>
   <div class="scroll rv"><table>
     <tr><th></th><th class="n">前</th><th class="n">後</th></tr>
@@ -57,7 +59,7 @@
   </table></div>
   <p>頭打ちになるのは、読んだ行数です。500 万行を、一人あたりの行数で割ると、無料枠で遊べる人数が出ます。前は 5,000,000 ÷ 421 ≒ 11,876 人（コミットには「約 1 万 1 千人」とあり、割り算とは少しずれています）。後は 5,000,000 ÷ 221 ≒ <strong>22,624 人（コミットでは約 2 万 2 千人）</strong>。どちらの数え方でも、1 日あたりの上限が、<strong>およそ 2 倍</strong>になりました。</p>
 
-  <h2 class="rv">変えたのは二つ</h2>
+  <h2 class="rv" id="s3">変えたのは二つ</h2>
   <h3>1. 順位を、サーバーで数える</h3>
   <p>それまでは、ゲームのほうが、<strong>上位 100 件の一覧を二度引いて</strong>、その中から自分を探していました。これを、サーバーが順位を数えて返す形に変えました。数え方は、上位の一定の件数（<code>SCAN</code>）で打ち切る <code>COUNT</code> です。上位にいる人ほど、読む行が少なくて済みます。</p>
 
@@ -65,14 +67,14 @@
   <p>点を送る <code>/submit</code> を、<code>text/plain</code> で受けるようにしました。中身は JSON のままです。ただ、この型で送ると、ブラウザが、前置きの確認の呼び出し（<code>OPTIONS</code>）を投げません。呼び出しが、一つ減ります。</p>
   <p>なお、共有データベース（アーティファクト側）には、順位を数える仕組みがありません。そちらは、これまでどおり、ゲーム側で数えます。<code>submit</code> が <code>null</code> を返したときだけ、一覧を引く形にしました。</p>
 
-  <h2 class="rv">確かめたこと</h2>
+  <h2 class="rv" id="s4">確かめたこと</h2>
   <ul>
     <li>空の番付に二人送ると、1 位・2 位が出る。</li>
     <li>500 人の番付では、サーバーが数えた順位（「100 位圏外」を含む）が、正しく出る。</li>
     <li>点を書き換えた申告は、日本語でも英語でも、これまでどおり弾かれる。</li>
   </ul>
 
-  <h2 class="rv">分かったこと</h2>
+  <h2 class="rv" id="s5">分かったこと</h2>
   <blockquote>数えるのは、お金ではなく、呼び出しと行。</blockquote>
   <ul>
     <li><strong>無料枠の上限は、いちばん先に尽きるものを数える。</strong>ここでは、呼び出しの回数ではなく、読んだ行数でした。</li>

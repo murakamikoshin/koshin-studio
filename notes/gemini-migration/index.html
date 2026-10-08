@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Claude API から Gemini API（gemini-3.1-flash-lite）へ移行した：16 か所の呼び出しを 1 つの関数にまとめた — トレカダッシュ 開発の記録 — Koshin Studio</title>
+<meta name="description" content="Anthropic の利用上限で予定外の課金が出たため Gemini へ移行。モデルの選び方（廃止予定日）、呼び出しの一本化、Web 検索の回数上限が無い問題への回路遮断器、止めるスイッチの記録。">
+<meta property="og:title" content="Claude API から Gemini API（gemini-3.1-flash-lite）へ移行した：16 か所の呼び出しを 1 つの関数にまとめた">
+<meta property="og:description" content="Anthropic の利用上限で予定外の課金が出たため Gemini へ移行。モデルの選び方（廃止予定日）、呼び出しの一本化、Web 検索の回数上限が無い問題への回路遮断器、止めるスイッチの記録。">
+<meta property="og:type" content="article">
+<meta name="theme-color" content="#fbfaf7">
+<link rel="icon" href="/favicon.ico?v=1697d589" sizes="48x48">
+<link rel="icon" href="/favicon.svg?v=b9d7922f" type="image/svg+xml" sizes="any">
+<link rel="icon" href="/assets/icon/icon-192.png?v=e2566235" type="image/png" sizes="192x192">
+<link rel="apple-touch-icon" href="/assets/icon/icon-180.png?v=84e7f0e6">
+<link rel="manifest" href="/site.webmanifest">
+<script>document.documentElement.className+=" js"</script>
+<link rel="stylesheet" href="/style.css?v=c23fbd87">
+<link rel="canonical" href="https://koshinstudio.com/notes/gemini-migration/">
+<meta property="og:url" content="https://koshinstudio.com/notes/gemini-migration/">
+<meta property="og:site_name" content="Koshin Studio">
+<meta property="og:locale" content="ja_JP">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="alternate" type="application/rss+xml" title="Koshin Studio — Notes" href="https://koshinstudio.com/feed.xml">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BlogPosting","headline":"Claude API から Gemini API（gemini-3.1-flash-lite）へ移行した：16 か所の呼び出しを 1 つの関数にまとめた","url":"https://koshinstudio.com/notes/gemini-migration/","description":"Anthropic の利用上限で予定外の課金が出たため Gemini へ移行。モデルの選び方（廃止予定日）、呼び出しの一本化、Web 検索の回数上限が無い問題への回路遮断器、止めるスイッチの記録。","datePublished":"2026-10-08","dateModified":"2026-10-08","inLanguage":"ja","image":"https://koshinstudio.com/assets/og/og_notes_gemini-migration.jpg","author":{"@id":"https://koshinstudio.com#studio"},"publisher":{"@id":"https://koshinstudio.com#studio"},"mainEntityOfPage":"https://koshinstudio.com/notes/gemini-migration/"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Koshin Studio","item":"https://koshinstudio.com/"},{"@type":"ListItem","position":2,"name":"Notes","item":"https://koshinstudio.com/notes/"},{"@type":"ListItem","position":3,"name":"Claude API から Gemini API（gemini-3.1-flash-lite）へ移行した：16 か所の呼び出しを 1 つの関数にまとめた","item":"https://koshinstudio.com/notes/gemini-migration/"}]}]}</script>
+<meta property="og:image" content="https://koshinstudio.com/assets/og/og_notes_gemini-migration.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
+</head>
+<body>
+<canvas id="motes"></canvas>
+
+<header class="site"><div class="wrap">
+  <a class="logo" href="/"><img class="logo-mark" src="/favicon.svg?v=b9d7922f" alt="" width="28" height="28">Koshin Studio</a>
+  <nav><a href="/works/">Works</a><a href="/notes/">Notes</a><a href="/about/">About</a></nav>
+</div></header>
+
+<main><div class="wrap">
+  <nav class="crumbs" aria-label="現在地"><a href="/">Koshin Studio</a><i aria-hidden="true">›</i><a href="/notes/">Notes</a><i aria-hidden="true">›</i><span aria-current="page">Claude API から Gemini API（gemini-3.1-flash-lite）へ移行した：16 か所の呼び出しを 1 つの関数にまとめた</span></nav>
+  <h1>Claude API から Gemini API（gemini-3.1-flash-lite）へ移行した：16 か所の呼び出しを 1 つの関数にまとめた</h1>
+  <div class="rule"></div>
+  <p class="lead">トレカダッシュ 開発の記録 ／ 2026年10月</p>
+
+  <p>iOS アプリ「トレカダッシュ」のサーバー側では、記事が「どの商品の話か」を判定するなどに、AI を使っています。2026 年 7 月 25 日に、この AI を、<strong>Anthropic の Claude（Haiku 4.5）から、Google の Gemini（<code>gemini-3.1-flash-lite</code>）へ、全面的に移行</strong>しました。何を決めて、どう一本化して、移行のあとに何を足したのか。開発の引き継ぎ記録で書きます。</p>
+  <p class="note">このサイトには、トレカダッシュの作品ページがあります（<a href="/works/torecadash/">トレカダッシュ</a>）。ここに書くのは、開発の記録です。料金の金額は書きません。</p>
+<!--toc-->
+  <nav class="toc" aria-label="目次"><p>目次</p><ol><li><a href="#s1">きっかけ</a></li><li><a href="#s2">モデルの選び方</a></li><li><a href="#s3">16 か所の呼び出しを、1 つの関数に</a></li><li><a href="#s4">Web 検索には、「回数の上限」の設定が無かった</a></li><li><a href="#s5">止めるためのスイッチ</a></li><li><a href="#s6">新しい処理を足すときの注意</a></li><li><a href="#s7">確認できていないこと</a></li><li><a href="#s8">分かったこと</a></li></ol></nav>
+<!--/toc-->
+  <h2 class="rv" id="s1">きっかけ</h2>
+  <p>移行の理由は、記録によると、<strong>Anthropic の API の利用上限に達して、予定外の課金が出た</strong>ためです。それ以降は、Gemini だけが稼働していて、Anthropic の SDK とキーは、コードからも、秘密の置き場所（Secret Manager）からも、消しました。7 月 30 日の点検で、コードの中に Anthropic の記述が 0 件であることを、確かめています。</p>
+
+  <h2 class="rv" id="s2">モデルの選び方</h2>
+  <p>使うモデルは、<code>gemini-3.1-flash-lite</code> にしました。記録に、選ばなかったほうの理由も、残っています。</p>
+  <ul>
+    <li>より安い Gemini 2.5 Flash-Lite は、<strong>2026 年 10 月 16 日に廃止予定</strong>だったので、見送りました。</li>
+    <li>選んだ <code>gemini-3.1-flash-lite</code> の廃止予定日は、2027 年 5 月 7 日。移行した時点で、まだ約 1 年 10 か月ありました。</li>
+  </ul>
+  <p>安さだけで選ぶと、すぐに廃止されて、また移行することになります。「いつ廃止されるか」も、選ぶ基準に入れました。</p>
+
+  <h2 class="rv" id="s3">16 か所の呼び出しを、1 つの関数に</h2>
+  <p>AI を呼ぶ処理は、全部で 16 か所ありました（販売形式の判定、商品の照合、出品の発見など）。これらを、<code>functions/index.js</code> の冒頭にある、<strong>1 つの関数（<code>createGeminiInteraction</code>）</strong>を通すように、統一しました。中では、<code>@google/genai</code> の <code>client.interactions.create()</code> を呼んでいます。</p>
+  <p>呼び出し側は、元の Anthropic 形式に近い引数（<code>system_instruction</code>、<code>generation_config</code> の <code>max_output_tokens</code>、<code>input</code>）を、そのまま渡します。返ってくるのは、テキスト（<code>output_text</code>）です。<strong>呼び出し側を、ほとんど書き換えずに</strong>、中身だけを入れ替えられる形にしました。</p>
+
+  <h2 class="rv" id="s4">Web 検索には、「回数の上限」の設定が無かった</h2>
+  <p>4 か所（出品の発見、販売元の発見、楽天ブックスの調査、定価の調査）では、AI に Web 検索をさせます。Gemini では、<code>tools: [{type: "google_search"}]</code>（Google 検索による裏付け）を使います。</p>
+  <p>ここに、落とし穴がありました。Anthropic の Web 検索の機能には、<code>max_uses</code>（検索の回数の上限）がありましたが、<strong>Gemini には、それに当たる設定が無く</strong>、モデルが、必要だと思う回数だけ、自分で検索します。記録には、こうあります。「この設定項目の不在自体が、想定外コストの原因になり得る」。</p>
+  <p>そこで、移行の翌日（7 月 26 日）に、<code>createGeminiInteraction</code> の中に、<strong>日次のカウンタによる回路遮断器</strong>を足しました（1 日 300 回まで）。上限に達したときは、呼び出し元に、エラーとして返します。価格の審査では、このエラーを、「定価が分からなかった」のとは区別して、除外する設計にしています（<a href="/notes/fail-open/">別の記事</a>に書きました）。</p>
+
+  <h2 class="rv" id="s5">止めるためのスイッチ</h2>
+  <p>もう一つ、足したものがあります。<code>AI_CALLS_PAUSED</code> という、<strong>AI の呼び出し全体を、1 か所で止められるスイッチ</strong>です。記録には、7 月 25 日の反省が書いてあります。「呼び出しを止めたつもりが、実際には止まっておらず、10 分おきの自動処理が、エラーを出し続けた」。予算を超えそうなときは、まず、これを <code>true</code> にして、すぐに止める、と決めました。</p>
+
+  <h2 class="rv" id="s6">新しい処理を足すときの注意</h2>
+  <p>AI を呼ぶ関数（Cloud Functions）には、<code>secrets: ["GEMINI_API_KEY"]</code> を、必ず付けます。忘れると、配備したあとに、権限のエラーで失敗します。</p>
+
+  <h2 class="rv" id="s7">確認できていないこと</h2>
+  <p>この記事は、引き継ぎ記録の、AI に関する節から書きました。移行の前後で、判定の精度を比べた数字は、この記事の材料に含まれていません。ですので、「Gemini のほうが良い（悪い）」という評価は、ここでは、していません。</p>
+
+  <h2 class="rv" id="s8">分かったこと</h2>
+  <blockquote>呼び出しを 1 か所に集めると、止める場所も、1 か所で済む。</blockquote>
+  <ul>
+    <li><strong>呼び出しは、1 つの関数を通す。</strong>移行も、上限の安全装置も、止めるスイッチも、その 1 か所に置けます。</li>
+    <li><strong>「設定が無い」ことを、リスクとして数える。</strong>回数の上限が無いサービスに乗り換えるときは、自分の側に上限を作ります。</li>
+    <li><strong>止めるスイッチは、実際に止まることを、確かめておく。</strong>止めたつもりで止まっていない、が、いちばん高くつきます。</li>
+  </ul>
+  <p class="note">この記事は、HANDOFF（AI API 関連情報、2026年7月25日・26日）の記録から書きました。</p>
+
+  <div class="ad-slot" data-slot="footer" hidden></div>
+<!--/ad-->
+
+  <div class="rule" style="margin:40px 0 22px"></div>
+  <p class="eyebrow">この話に出てくるもの</p>
+  <ul class="plain">
+    <li><a href="/notes/torecadash-ai/">「減るはず」が、二度外れた：AIへの問い合わせを削る話</a> — このあとの、AI 呼び出しの記録</li>
+    <li><a href="/notes/fail-open/">確認できなかったときに、通していた</a> — 検索の上限が引き起こした、別の記録</li>
+  </ul>
+
+<!--related-->
+  <div class="rule" style="margin:40px 0 22px"></div>
+  <p class="eyebrow">ほかの記録</p>
+  <ul class="plain">
+    <li><a href="/notes/xcode152-sdk/">Xcode 15.2 で Firebase 12 が使えない（Swift 6.0 必須）：Firebase 11.4.0 と AdMob 11.5.0 に固定した理由</a> — 古い Mac の Xcode 15.2 では、Firebase 12 以降と 11.12.0 以降は Xcode 16.2 が必須、AdMob 11.6.0 以降は MarketplaceKit で Xcode 15.3 が必須。Exact Version で固定した記録。</li>
+    <li><a href="/notes/itms-91064/">ITMS-91064「無効なバイナリ」：NSPrivacyTracking が true なのに NSPrivacyTrackingDomains が空だった</a> — ビルドが Apple の自動審査で ITMS-91064 により却下された。NSPrivacyTracking が true で、NSPrivacyTrackingDomains が空の配列だったのが原因。ドメインを補った経緯と、確認できていないこと。</li>
+    <li><a href="/notes/bulk-accident/">一括処理が「全記事」に当たった：書く前に数える、テストは壊して確かめる</a> — 記事の状態をまとめて直す処理が、全記事に当たり、18件が誤って表示に戻った。履歴から戻した経緯と、テストが効くかを、規則を1つずつ外して確かめた記録。</li>
+  </ul>
+<!--/related-->
+</div>
+</main>
+
+<footer class="site"><div class="wrap">
+  <span>© 2026 Koshin Studio</span>
+  <div class="sns-row"></div>
+  <nav><a href="/about/">About</a><a href="/privacy/">あつかい</a></nav>
+</div></footer>
+<script src="/motion.js?v=02cdfdf5" defer></script>
+</body>
+</html>

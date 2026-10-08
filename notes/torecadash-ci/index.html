@@ -15,7 +15,7 @@
 <link rel="apple-touch-icon" href="/assets/icon/icon-180.png?v=84e7f0e6">
 <link rel="manifest" href="/site.webmanifest">
 <script>document.documentElement.className+=" js"</script>
-<link rel="stylesheet" href="/style.css?v=ff53d289">
+<link rel="stylesheet" href="/style.css?v=c23fbd87">
 <link rel="canonical" href="https://koshinstudio.com/notes/torecadash-ci/">
 <meta property="og:url" content="https://koshinstudio.com/notes/torecadash-ci/">
 <meta property="og:site_name" content="Koshin Studio">
@@ -44,17 +44,19 @@
 
   <p>iOS アプリ「トレカダッシュ」の開発で、「TestFlight に新しいビルドが来ない」という不具合が起きました。最初に出した原因は<strong>間違っていました</strong>。どこで間違えて、どう気づいて、本当の原因は何だったのか。HANDOFF（開発の引き継ぎ記録）とコミットに残っている数字で書きます。</p>
   <p class="note">このサイトには、トレカダッシュの作品ページはまだありません。ここに書くのは、開発の記録です。</p>
-
-  <h2 class="rv">最初の診断：「[ci skip] が原因」</h2>
+<!--toc-->
+  <nav class="toc" aria-label="目次"><p>目次</p><ol><li><a href="#s1">最初の診断：「[ci skip] が原因」</a></li><li><a href="#s2">時系列が合わなかった</a></li><li><a href="#s3">なぜ493回も回ったのか</a></li><li><a href="#s4">直し方は、印ではなく設定</a></li><li><a href="#s5">分かったこと</a></li></ol></nav>
+<!--/toc-->
+  <h2 class="rv" id="s1">最初の診断：「[ci skip] が原因」</h2>
   <p>9月2日、「9/1 以降のビルドがない」という報告がありました。最初に出した診断は、<strong>コミットメッセージに付けていた <code>[ci skip]</code> が、ビルドを止めている</strong>というものです。文書だけの変更で、Xcode Cloud の無料枠（月25時間）を使わないように付けていた印でした。診断と一緒に、「<code>[ci skip]</code> を使うな」という規則も作りました。</p>
 
-  <h2 class="rv">時系列が合わなかった</h2>
+  <h2 class="rv" id="s2">時系列が合わなかった</h2>
   <p>App Store Connect の Xcode Cloud を見ると、こう出ていました。</p>
   <blockquote>利用上限に達しました。上限は更新日の9月8日にリセットされます。</blockquote>
   <p>過去30日の使用状況は、<strong>493ビルド・28時間14分</strong>。無料枠は月25時間なので、使い切っていました。</p>
   <p>最初の診断が違うと分かった決め手は、<strong>時系列</strong>です。<code>[ci skip]</code> を付けたコミットは、9月2日の3件だけ。ビルドが止まったのは9月1日です。<strong>原因が結果より後に起きている</strong>ので、原因になりえません。しかも、作った規則は、枠が足りない状況では逆効果でした。</p>
 
-  <h2 class="rv">なぜ493回も回ったのか</h2>
+  <h2 class="rv" id="s3">なぜ493回も回ったのか</h2>
   <p>ワークフローの開始条件が「任意のファイルが変更された場合」でした。過去30日のコミットを数えると、こうです。</p>
   <div class="scroll rv"><table>
     <tr><th>過去30日</th><th class="n">件数</th></tr>
@@ -64,14 +66,14 @@
   </table></div>
   <p>つまり、<strong>8割は、サーバー側のコードや文書しか変わっていないのに、iOS アプリをまるごとビルドしていた</strong>ことになります。さらに「クリーンビルド」にチェックが入っていて、毎回キャッシュを使わず、一回が最大限に長くなる設定でした。</p>
 
-  <h2 class="rv">直し方は、印ではなく設定</h2>
+  <h2 class="rv" id="s4">直し方は、印ではなく設定</h2>
   <ol>
     <li>開始条件を、ファイルとフォルダのカスタムルールにして、iOS アプリのフォルダと Xcode のプロジェクトだけに絞る。</li>
     <li>クリーンビルドのチェックを外す。</li>
   </ol>
   <p>HANDOFF の見込みでは、これでビルドは 493回から約94回、時間は28時間から月に約5.4時間になります。これは見込みの計算で、設定を直したあとの実測ではありません。</p>
 
-  <h2 class="rv">分かったこと</h2>
+  <h2 class="rv" id="s5">分かったこと</h2>
   <blockquote>その原因で説明がつくか、時系列で確かめてから決める。</blockquote>
   <p>最初の診断は、「それらしい」原因を見つけたところで止まっていました。結果より後に起きたことは、原因になれません。この確認は、診断を出す前なら一分で済みます。HANDOFF の §183 には、「この診断は間違っていた」という注意書きを付けて、記録として残してあります。</p>
   <p class="note">この記事の数字は、HANDOFF とコミット（2026年9月2日）の記録から取りました。</p>
@@ -90,9 +92,9 @@
   <div class="rule" style="margin:40px 0 22px"></div>
   <p class="eyebrow">ほかの記録</p>
   <ul class="plain">
+    <li><a href="/notes/gemini-migration/">Claude API から Gemini API（gemini-3.1-flash-lite）へ移行した：16 か所の呼び出しを 1 つの関数にまとめた</a> — Anthropic の利用上限で予定外の課金が出たため Gemini へ移行。モデルの選び方（廃止予定日）、呼び出しの一本化、Web 検索の回数上限が無い問題への回路遮断器、止めるスイッチの記録。</li>
     <li><a href="/notes/xcode152-sdk/">Xcode 15.2 で Firebase 12 が使えない（Swift 6.0 必須）：Firebase 11.4.0 と AdMob 11.5.0 に固定した理由</a> — 古い Mac の Xcode 15.2 では、Firebase 12 以降と 11.12.0 以降は Xcode 16.2 が必須、AdMob 11.6.0 以降は MarketplaceKit で Xcode 15.3 が必須。Exact Version で固定した記録。</li>
     <li><a href="/notes/itms-91064/">ITMS-91064「無効なバイナリ」：NSPrivacyTracking が true なのに NSPrivacyTrackingDomains が空だった</a> — ビルドが Apple の自動審査で ITMS-91064 により却下された。NSPrivacyTracking が true で、NSPrivacyTrackingDomains が空の配列だったのが原因。ドメインを補った経緯と、確認できていないこと。</li>
-    <li><a href="/notes/bulk-accident/">一括処理が「全記事」に当たった：書く前に数える、テストは壊して確かめる</a> — 記事の状態をまとめて直す処理が、全記事に当たり、18件が誤って表示に戻った。履歴から戻した経緯と、テストが効くかを、規則を1つずつ外して確かめた記録。</li>
   </ul>
 <!--/related-->
 </div>

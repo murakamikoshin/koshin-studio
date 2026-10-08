@@ -15,7 +15,7 @@
 <link rel="apple-touch-icon" href="/assets/icon/icon-180.png?v=84e7f0e6">
 <link rel="manifest" href="/site.webmanifest">
 <script>document.documentElement.className+=" js"</script>
-<link rel="stylesheet" href="/style.css?v=ff53d289">
+<link rel="stylesheet" href="/style.css?v=c23fbd87">
 <link rel="canonical" href="https://koshinstudio.com/notes/ascii-text/">
 <meta property="og:url" content="https://koshinstudio.com/notes/ascii-text/">
 <meta property="og:site_name" content="Koshin Studio">
@@ -43,12 +43,14 @@
   <p class="lead">すし積む 開発の記録 ／ 2026年10月</p>
 
   <p><a href="/works/sushitsumu/">すし積む</a>を、ゲームポータルのプレビューで開いたとき、「大連鎖！」の「連」の字だけが、壊れて出る、という報告がありました。ファイルを調べると、<strong>文字は、ちゃんと正しく入っていました</strong>。原因が分からないまま、「壊れても困らない形」にして、先に進んだ経緯を、コミットの記録で書きます。</p>
-
-  <h2 class="rv">「連」だけが、壊れる</h2>
+<!--toc-->
+  <nav class="toc" aria-label="目次"><p>目次</p><ol><li><a href="#s1">「連」だけが、壊れる</a></li><li><a href="#s2">原因が分からないときの、直し方</a></li><li><a href="#s3">同じ点検で見つかった、ほかの二つ</a></li><li><a href="#s4">翌日：十四の言語で、枠に収まるか</a></li><li><a href="#s5">分かったこと</a></li></ol></nav>
+<!--/toc-->
+  <h2 class="rv" id="s1">「連」だけが、壊れる</h2>
   <p>報告は、CrazyGames のプレビューからでした。ゲームの中で、連鎖が起きると、画面に「大連鎖！」と出ます。その「連」が、文字として壊れて表示される。ほかの字は、普通に出ています。</p>
   <p>まず、ゲームのファイルそのものを調べました。<strong>バイト列は、正しい</strong>ものでした。つまり、手元のファイルは壊れていません。壊れているのは、配信先に届くまでの<strong>受け渡しの途中</strong>、あるいは、配信先での読み取りのどこか、ということになります。ただ、コミットには、どこで壊れたのかは、書かれていません。<strong>原因は、特定できていません</strong>。</p>
 
-  <h2 class="rv">原因が分からないときの、直し方</h2>
+  <h2 class="rv" id="s2">原因が分からないときの、直し方</h2>
   <p>原因の場所が、自分の手の外にあるなら、<strong>どこで壊れても、影響が出ない形</strong>にしておく、という方針にしました。</p>
   <ul>
     <li><strong>表示に使う文字を、ASCII だけの表記に置き換える。</strong>日本語の文字を、そのままファイルに書かず、スクリプトの文字列は <code>\uXXXX</code>、HTML の本文と属性は <code>&amp;#xXXXX;</code> の形にします。多バイトの文字が途中で壊れても、ASCII だけなら、壊れようがありません。</li>
@@ -56,17 +58,17 @@
     <li><strong>書体の指定の後ろに、漢字を持つ書体を足す。</strong>書体に、その字が無くて、字が出ない、という筋道も、塞ぎました。</li>
   </ul>
 
-  <h2 class="rv">同じ点検で見つかった、ほかの二つ</h2>
+  <h2 class="rv" id="s3">同じ点検で見つかった、ほかの二つ</h2>
   <ul>
     <li><strong>絵文字が、端末によって出ない。</strong>地球と携帯電話の絵文字は、端末によっては表示されません。図形（SVG）で描き直しました。</li>
     <li><strong>連鎖中に浮かぶ文字が、重なって読めない。</strong>近い位置に出る文字は、上へ逃がすようにしました。</li>
   </ul>
 
-  <h2 class="rv">翌日：十四の言語で、枠に収まるか</h2>
+  <h2 class="rv" id="s4">翌日：十四の言語で、枠に収まるか</h2>
   <p>このゲームは、14 の言語に対応しています。訳文は、日本語より長くなることが多く、PC の脇の柱（幅 192px）や、札の中で、溢れやすくなります。そこで、言語を順に切り替えて、読み直して、<strong>親の枠からはみ出した所と、横に流れた所を数える</strong>道具を足しました。</p>
   <p>結果は、<strong>14 言語 × 2 画面で、はみ出しなし</strong>です。字が壊れる問題と同じで、「溢れていない」ことも、目で見るより、数えるほうが確かです。</p>
 
-  <h2 class="rv">分かったこと</h2>
+  <h2 class="rv" id="s5">分かったこと</h2>
   <blockquote>原因が分からないときは、原因の場所に、頼らない形にする。</blockquote>
   <ul>
     <li><strong>ファイルが正しくても、画面が正しいとは限らない。</strong>途中の受け渡しや、配信先の読み取りは、自分では直せません。</li>

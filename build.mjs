@@ -399,16 +399,29 @@ const noteRow = (n, i) => `    <li class="rv" data-delay="${i * 70}"><a class="n
       <div class="tags"><span class="tag">${esc(n.work)}</span></div></div>
     </a></li>`;
 
+/* 記事を作品ごとにまとめる（新しい記事が先に来る順を保つ）。作品ページがあれば、そこへのリンクも */
+const noteGroups = [];
+for (const n of notes) {
+  let g = noteGroups.find((x) => x.work === n.work);
+  if (!g) { g = { work: n.work, list: [], page: works.find((w) => w.title === n.work) }; noteGroups.push(g); }
+  g.list.push(n);
+}
+
 writeFileSync(here + '/notes/index.html',
   head('Notes — 作りながら考えたことの記録 — Koshin Studio', '作りながら考えたことの記録。数字を取って直した話が中心です。') +
 `<main><div class="wrap">
   <h1>Notes</h1>
   <div class="rule"></div>
   <p class="lead">作りながら考えたことの記録。<br>勘で直す前に、まず測る——という話が多いです。</p>
-  <h2 class="sr">記録の一覧</h2>
+  <p class="rv">実際の作業の記録（コミットと、手元で測った数字）から書いています。作品ごとに、まとめました。</p>
+  <nav class="toc rv" aria-label="作品ごとの目次"><p>作品ごとに読む</p><ol>${noteGroups.map((g, i) =>
+    `<li><a href="#g${i + 1}">${esc(g.work)}</a>（${g.list.length}本）</li>`).join('')}</ol></nav>
+${noteGroups.map((g, i) => `
+  <h2 class="rv" id="g${i + 1}">${esc(g.work)}<span class="group-n">${g.list.length}本</span></h2>${
+    g.page ? `\n  <p class="rv group-link"><a href="${g.page.url}">${esc(g.work)}の作品ページ →</a></p>` : ''}
   <ul class="notes">
-${notes.map(noteRow).join('\n')}
-  </ul>
+${g.list.map(noteRow).join('\n')}
+  </ul>`).join('\n')}
 </div></main>` + foot);
 
 /* ---- トップ ---- */
@@ -814,6 +827,23 @@ for (const file of pages) {
     `<meta property="og:image" content="${ogPath}">\n` +
     `<meta property="og:image:width" content="1200">\n` +
     `<meta property="og:image:height" content="630">\n</head>`);
+  /* 目次（記事だけ）。見出し（h2）から作る。読む人が長い記事の中で迷わないのと、
+     見出しへの直接のリンク（#...）が検索結果の「ジャンプ先」に出ることがあるため。
+     組み直しても増えないよう、印の間を消してから入れ、id も付け直す */
+  html = html.replace(/\n?<!--toc-->[\s\S]*?<!--\/toc-->\n?/g, '');
+  if (/^\/notes\/[^/]+\/index\.html$/.test(rel)) {
+    let k = 0; const items = [];
+    html = html.replace(/<h2 class="rv"(?: id="[^"]*")?>([\s\S]*?)<\/h2>/g, (m, inner) => {
+      k += 1; items.push([`s${k}`, inner.replace(/<[^>]+>/g, '')]);
+      return `<h2 class="rv" id="s${k}">${inner}</h2>`;
+    });
+    if (items.length >= 3) {
+      const toc = `\n<!--toc-->\n  <nav class="toc" aria-label="目次"><p>目次</p><ol>${
+        items.map(([id, t]) => `<li><a href="#${id}">${esc(t)}</a></li>`).join('')}</ol></nav>\n<!--/toc-->\n`;
+      html = html.replace(/(\s*)<h2 class="rv" id="s1">/, (m) => toc + m.replace(/^\s*/, '  '));
+    }
+  }
+
   /* 関連の読みもの。記事の終わりには「ほかの記録」、作品ページには
      「この作品の記録」を入れる。印の間は組むたびに作り直すので、増えない */
   html = html.replace(/\n?<!--related-->[\s\S]*?<!--\/related-->\n?/g, '');

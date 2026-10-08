@@ -15,7 +15,7 @@
 <link rel="apple-touch-icon" href="/assets/icon/icon-180.png?v=84e7f0e6">
 <link rel="manifest" href="/site.webmanifest">
 <script>document.documentElement.className+=" js"</script>
-<link rel="stylesheet" href="/style.css?v=ff53d289">
+<link rel="stylesheet" href="/style.css?v=c23fbd87">
 <link rel="canonical" href="https://koshinstudio.com/notes/xcode152-sdk/">
 <meta property="og:url" content="https://koshinstudio.com/notes/xcode152-sdk/">
 <meta property="og:site_name" content="Koshin Studio">
@@ -44,8 +44,10 @@
 
   <p>iOS アプリ「トレカダッシュ」は、2017 年の古い Mac で、Xcode 15.2 を使って作っています。この環境では、Firebase の iOS SDK と、AdMob（Google Mobile Ads）の SDK を、<strong>新しい版にすると、ビルドできません</strong>。どの版から使えなくなって、どの版に固定したのか。開発の引き継ぎ記録（2026年7月）に残っている内容で書きます。</p>
   <p class="note">このサイトには、トレカダッシュの作品ページがあります（<a href="/works/torecadash/">トレカダッシュ</a>）。ここに書くのは、開発の記録です。版の番号は、2026 年 7 月の時点のもので、いまの最新版では、事情が違うかもしれません。</p>
-
-  <h2 class="rv">開発の環境</h2>
+<!--toc-->
+  <nav class="toc" aria-label="目次"><p>目次</p><ol><li><a href="#s1">開発の環境</a></li><li><a href="#s2">Firebase：11.4.0 に固定した</a></li><li><a href="#s3">AdMob：11.5.0 に固定した</a></li><li><a href="#s4">同じ環境の人に、伝えたいこと</a></li><li><a href="#s5">確認できていないこと</a></li></ol></nav>
+<!--/toc-->
+  <h2 class="rv" id="s1">開発の環境</h2>
   <ul>
     <li>Mac：MacBook Pro 13 インチ（2017）。macOS は、Ventura（13.7.8）が上限で、これ以上は上げられません。</li>
     <li>Xcode：15.2（Ventura で使える最新版）。正式に対応するのは、iOS 17.2 までです。</li>
@@ -53,7 +55,7 @@
     <li>手元では、<code>xcodebuild</code> でコンパイルが通るかを確かめます。SwiftUI のプレビューは、この Mac では、ほぼ表示されません。</li>
   </ul>
 
-  <h2 class="rv">Firebase：11.4.0 に固定した</h2>
+  <h2 class="rv" id="s2">Firebase：11.4.0 に固定した</h2>
   <p>Firebase の iOS SDK は、版が上がるほど、新しい Xcode を要求します。記録には、次のように残っています。</p>
   <div class="scroll rv"><table>
     <tr><th>Firebase の版</th><th>起きること</th></tr>
@@ -65,7 +67,7 @@
   <p>そこで、Swift Package Manager の指定を、<strong>Exact Version（その版ぴったり）で 11.4.0</strong> にしました。Xcode は、最新の版を提案してきますが、それには従いません。</p>
   <p>ここで、混乱しやすい点があります。Xcode Cloud（クラウド側のビルド）は、最新の Xcode で動きます。ただ、<strong>固定の設定はそのまま維持される</strong>ので、クラウド側でも、問題なくビルドが成功しています。つまり、手元の古い Xcode に合わせて固定しておけば、クラウド側の新しい Xcode でも、同じ版で通ります。</p>
 
-  <h2 class="rv">AdMob：11.5.0 に固定した</h2>
+  <h2 class="rv" id="s3">AdMob：11.5.0 に固定した</h2>
   <p>AdMob の SDK（<code>swift-package-manager-google-mobile-ads</code>）も、同じ理由で、<strong>11.5.0 に固定</strong>しました（2026 年 7 月 22 日）。</p>
   <ul>
     <li><strong>11.6.0 以降：</strong>Apple 純正の <code>MarketplaceKit</code> に依存するようになり、<strong>Xcode 15.3 以降が必須</strong>になります。Xcode 15.2 では、リンクのときに、<code>Undefined symbols</code>（MarketplaceKit 関連）のエラーで、ビルドが失敗します。</li>
@@ -73,14 +75,14 @@
   </ul>
   <p>将来、Xcode を新しくして、版を上げるときは、<strong>版の番号だけでなく、クラス名の書き換えも、必要</strong>になります。記録に、そう書き残してあります。</p>
 
-  <h2 class="rv">同じ環境の人に、伝えたいこと</h2>
+  <h2 class="rv" id="s4">同じ環境の人に、伝えたいこと</h2>
   <ol>
     <li><strong>固定は、「Exact Version」で。</strong>「この版以降」の指定のままだと、Xcode が、使えない新しい版を、選んでしまいます。</li>
     <li><strong>「どの版から壊れるか」を、版の番号で書いておく。</strong>数か月後に、自分が、なぜ固定したかを忘れても、理由が分かります。</li>
     <li><strong>手元の環境の制約は、クラウドでは、緩められる。</strong>実機の確認は、Xcode Cloud と TestFlight を通せば、古い Mac でも続けられます（ただし、無料枠には、上限があります。<a href="/notes/torecadash-ci/">TestFlight にビルドが来ない件</a>を、参考にしてください）。</li>
   </ol>
 
-  <h2 class="rv">確認できていないこと</h2>
+  <h2 class="rv" id="s5">確認できていないこと</h2>
   <p>この記事の版の番号は、2026 年 7 月の記録のものです。その後に出た版で、Xcode 15.2 の制約が、どうなっているかは、確かめていません。「この版以降は使えない」という境目は、<strong>その時点での、ビルドの結果</strong>です。</p>
 
   <div class="ad-slot" data-slot="footer" hidden></div>
@@ -97,9 +99,9 @@
   <div class="rule" style="margin:40px 0 22px"></div>
   <p class="eyebrow">ほかの記録</p>
   <ul class="plain">
+    <li><a href="/notes/gemini-migration/">Claude API から Gemini API（gemini-3.1-flash-lite）へ移行した：16 か所の呼び出しを 1 つの関数にまとめた</a> — Anthropic の利用上限で予定外の課金が出たため Gemini へ移行。モデルの選び方（廃止予定日）、呼び出しの一本化、Web 検索の回数上限が無い問題への回路遮断器、止めるスイッチの記録。</li>
     <li><a href="/notes/itms-91064/">ITMS-91064「無効なバイナリ」：NSPrivacyTracking が true なのに NSPrivacyTrackingDomains が空だった</a> — ビルドが Apple の自動審査で ITMS-91064 により却下された。NSPrivacyTracking が true で、NSPrivacyTrackingDomains が空の配列だったのが原因。ドメインを補った経緯と、確認できていないこと。</li>
     <li><a href="/notes/bulk-accident/">一括処理が「全記事」に当たった：書く前に数える、テストは壊して確かめる</a> — 記事の状態をまとめて直す処理が、全記事に当たり、18件が誤って表示に戻った。履歴から戻した経緯と、テストが効くかを、規則を1つずつ外して確かめた記録。</li>
-    <li><a href="/notes/fake-products/">「9種セット」を中身ごとに分けて、偽の商品が80個できていた</a> — ポケモンカードの9種セットは1つの商品なのに、中身ごとに分けて、実在しない商品が80個できていた。入口を止め、親22件を戻し、子190件を外し、偽の商品を消した記録。</li>
   </ul>
 <!--/related-->
 </div>

@@ -7,6 +7,13 @@
   <language>ja</language>
   <atom:link href="https://koshinstudio.com/feed.xml" rel="self" type="application/rss+xml"/>
   <item>
+    <title>Claude API から Gemini API（gemini-3.1-flash-lite）へ移行した：16 か所の呼び出しを 1 つの関数にまとめた</title>
+    <link>https://koshinstudio.com/notes/gemini-migration/</link>
+    <guid isPermaLink="true">https://koshinstudio.com/notes/gemini-migration/</guid>
+    <pubDate>Wed, 07 Oct 2026 15:00:00 GMT</pubDate>
+    <description>Anthropic の利用上限で予定外の課金が出たため Gemini へ移行。モデルの選び方（廃止予定日）、呼び出しの一本化、Web 検索の回数上限が無い問題への回路遮断器、止めるスイッチの記録。</description>
+  </item>
+  <item>
     <title>Xcode 15.2 で Firebase 12 が使えない（Swift 6.0 必須）：Firebase 11.4.0 と AdMob 11.5.0 に固定した理由</title>
     <link>https://koshinstudio.com/notes/xcode152-sdk/</link>
     <guid isPermaLink="true">https://koshinstudio.com/notes/xcode152-sdk/</guid>

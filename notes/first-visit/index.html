@@ -15,7 +15,7 @@
 <link rel="apple-touch-icon" href="/assets/icon/icon-180.png?v=84e7f0e6">
 <link rel="manifest" href="/site.webmanifest">
 <script>document.documentElement.className+=" js"</script>
-<link rel="stylesheet" href="/style.css?v=ff53d289">
+<link rel="stylesheet" href="/style.css?v=c23fbd87">
 <link rel="canonical" href="https://koshinstudio.com/notes/first-visit/">
 <meta property="og:url" content="https://koshinstudio.com/notes/first-visit/">
 <meta property="og:site_name" content="Koshin Studio">
@@ -43,8 +43,10 @@
   <p class="lead">すし積む 開発の記録 ／ 2026年10月</p>
 
   <p><a href="/works/sushitsumu/">すし積む</a>のタイトル画面には、押せるものが、<strong>六つ</strong>並んでいました。初めて開いた人は、どれを押せばいいか、分からない状態です。ゲームポータルに出すにあたって、「初めての人が、まず何を押すか」を、一つに絞りました。そのときに一緒に直した、保存が消える問題と、画面を離れたときの問題も、コミットの記録で書きます。</p>
-
-  <h2 class="rv">ポータルに出すと、何で測られるか</h2>
+<!--toc-->
+  <nav class="toc" aria-label="目次"><p>目次</p><ol><li><a href="#s1">ポータルに出すと、何で測られるか</a></li><li><a href="#s2">押すものを、一つに絞った</a></li><li><a href="#s3">二度目からは、続きがあることを見せる</a></li><li><a href="#s4">ポータルの中では、保存が消える</a></li><li><a href="#s5">画面を離れたら、止まる</a></li><li><a href="#s6">確かめたこと</a></li><li><a href="#s7">分かったこと</a></li></ol></nav>
+<!--/toc-->
+  <h2 class="rv" id="s1">ポータルに出すと、何で測られるか</h2>
   <p>コミットによると、出すことにしたポータル（CrazyGames）には、まず、限られた客層に二週間だけ出す試用の段階（Basic Launch）があります。次の段階（Full Launch）に上がれるかどうかは、その間の、次の三つで決まるそうです。</p>
   <ul>
     <li>遊び始めた人の割合</li>
@@ -53,7 +55,7 @@
   </ul>
   <p>広告は、この試用の間は無効なので、いま効くのは、これだけです。つまり、<strong>「開いた人が、遊び始める」「また来る」</strong>の二つを、設計で良くする必要がありました。</p>
 
-  <h2 class="rv">押すものを、一つに絞った</h2>
+  <h2 class="rv" id="s2">押すものを、一つに絞った</h2>
   <p>タイトルには、「遊ぶ」「お品書き」「番付」「図鑑」「言葉」「あつかい」の六つが並んでいました。初めての人には、どれも同じ重さに見えます。そこで、こう並べ直しました。</p>
   <ul>
     <li>「<strong>遊ぶ</strong>」を、大きく、一つだけ置く。</li>
@@ -62,25 +64,25 @@
   </ul>
   <p>番付と図鑑は、「戻ってくる理由」にはなりますが、<strong>初めてのときの、最初の一歩にはならない</strong>、という判断です。</p>
 
-  <h2 class="rv">二度目からは、続きがあることを見せる</h2>
+  <h2 class="rv" id="s3">二度目からは、続きがあることを見せる</h2>
   <p>高得点と、図鑑の埋まり具合を、タイトルに出します。ただし、<strong>初めての人には出しません</strong>。0 点、0 種と見せても、意味がないからです。</p>
 
-  <h2 class="rv">ポータルの中では、保存が消える</h2>
+  <h2 class="rv" id="s4">ポータルの中では、保存が消える</h2>
   <p>ポータルは、別のドメインの <code>iframe</code>（枠の中）で、ゲームを動かします。ブラウザによっては、この中では、端末への保存（<code>localStorage</code>）が塞がれていて、<strong>高得点も、図鑑も、毎回消えます</strong>。</p>
   <p>ポータルが用意している保存の棚（CrazyGames の Data Module）があれば、そちらに保存して、無ければ、これまでどおり、端末に置く形にしました。ポータル側の部品は、あとから届くので、見つかるまで、毎回探します。</p>
   <p>確かめ方は、偽の保存の棚を差し込むことでした。棚があるときは、そちらに書いて、端末側には書かない。端末への保存が、エラーを投げる環境でも、起動して、遊べる。</p>
 
-  <h2 class="rv">画面を離れたら、止まる</h2>
+  <h2 class="rv" id="s5">画面を離れたら、止まる</h2>
   <p>それまでは、別のタブに移ると、<strong>締切だけが進んで</strong>、戻ったときには、もう終わっている、という作りでした。裏に回ったら、一時停止して、音も止めるようにしました。実際に、画面が隠れたときの出来事（<code>visibilitychange</code>）を起こして、止まること、1.5 秒放っても点が動かないこと、続けると戻ることを、確かめています。</p>
 
-  <h2 class="rv">確かめたこと</h2>
+  <h2 class="rv" id="s6">確かめたこと</h2>
   <ul>
     <li>14 言語すべてで、iPhone SE の画面に収まる。</li>
     <li>7 つの画面 × 3 言語で、縦横比 9:16 が崩れない。</li>
     <li>通しプレイ二本（日本語 163 手、英語 263 手）が、60fps、エラー 0 件。</li>
   </ul>
 
-  <h2 class="rv">分かったこと</h2>
+  <h2 class="rv" id="s7">分かったこと</h2>
   <blockquote>初めての人に必要なのは、選択肢ではなく、最初の一歩。</blockquote>
   <ul>
     <li><strong>「戻ってくる理由」と「最初の一歩」は、別のもの。</strong>番付も図鑑も、価値はあります。でも、初めての人が、最初に押すものではありません。</li>

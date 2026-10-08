@@ -15,7 +15,7 @@
 <link rel="apple-touch-icon" href="/assets/icon/icon-180.png?v=84e7f0e6">
 <link rel="manifest" href="/site.webmanifest">
 <script>document.documentElement.className+=" js"</script>
-<link rel="stylesheet" href="/style.css?v=ff53d289">
+<link rel="stylesheet" href="/style.css?v=c23fbd87">
 <link rel="canonical" href="https://koshinstudio.com/notes/fail-open/">
 <meta property="og:url" content="https://koshinstudio.com/notes/fail-open/">
 <meta property="og:site_name" content="Koshin Studio">
@@ -44,12 +44,14 @@
 
   <p>iOS アプリ「トレカダッシュ」で、「Amazon に転売の価格がたくさん入ってきている」という報告が、アプリ内の不具合報告から 3 件届きました。うち 1 件は、¥79,800 の、明らかな転売品でした。原因は、<strong>わざと入れていた「確認できなかったら通す」という設計の、盲点</strong>でした。HANDOFF とコミット（2026年7月30日）の記録で書きます。</p>
   <p class="note">このサイトには、トレカダッシュの作品ページはまだありません。ここに書くのは、開発の記録です。</p>
-
-  <h2 class="rv">価格の関門と、「通す」設計</h2>
+<!--toc-->
+  <nav class="toc" aria-label="目次"><p>目次</p><ol><li><a href="#s1">価格の関門と、「通す」設計</a></li><li><a href="#s2">盲点：検索の上限に達した場合も、同じ道を通っていた</a></li><li><a href="#s3">穴が、実害になった理由</a></li><li><a href="#s4">直し方：理由を区別する</a></li><li><a href="#s5">ほかの判定にも、同じ穴は無いか</a></li><li><a href="#s6">分かったこと</a></li></ol></nav>
+<!--/toc-->
+  <h2 class="rv" id="s1">価格の関門と、「通す」設計</h2>
   <p>アプリは、通販サイト（楽天市場、Yahoo!ショッピング、Amazon など）の出品を拾って、フィードに出します。そのとき、<strong>出品価格が、商品の定価から見て妥当か</strong>を調べる「価格の関門」があります。定価を、AI（Web 検索つき）に調べさせて、極端に高い転売品を弾く仕組みです。</p>
   <p>この関門には、<strong>「定価を確認できなかった場合は、審査せずに通す」</strong>という動きがありました。これは意図した設計です。AI が本当に定価を知らない商品を、確認できないだけで除外してしまうと、本物の出品まで消してしまうからです。いわゆる <strong>fail-open</strong>（失敗したら開く＝通す）です。</p>
 
-  <h2 class="rv">盲点：検索の上限に達した場合も、同じ道を通っていた</h2>
+  <h2 class="rv" id="s2">盲点：検索の上限に達した場合も、同じ道を通っていた</h2>
   <p>AI の Web 検索には、1 日 300 回の上限があります（想定外の費用を防ぐための回路遮断器）。ところが、関門は、定価を確認できなかった<strong>理由を、区別していませんでした</strong>。</p>
   <ul>
     <li>AI が「この商品の定価は知らない」と答えた。</li>
@@ -57,11 +59,11 @@
   </ul>
   <p>この二つが、どちらも「定価不明 → 通す」の同じ道を通っていました。前者は意図どおりです。後者は、「調べる前に、道が閉まっていた」だけなのに、<strong>関門が、素通しになっていた</strong>のです。</p>
 
-  <h2 class="rv">穴が、実害になった理由</h2>
+  <h2 class="rv" id="s3">穴が、実害になった理由</h2>
   <p>この穴は、前の変更（Amazon の対象を広げた回）をきっかけに表に出ました。対象を広げたことで、新しく価格を確認する必要がある商品が、一気に増えました。その結果、1 日の上限に、頻繁に達するようになった。上限に達した間は、関門が素通しになって、転売品が大量に混ざりました。</p>
   <p>さらに、二次被害がありました。定価が分からなかった結果は、理由を問わず<strong>24 時間キャッシュされる</strong>設計でした。そのため、一度上限に当たった商品は、<strong>上限が解除されたあとも、最大 24 時間、素通しのまま</strong>になります。</p>
 
-  <h2 class="rv">直し方：理由を区別する</h2>
+  <h2 class="rv" id="s4">直し方：理由を区別する</h2>
   <p>専用の目印（<code>QUOTA_EXCEEDED</code>）を作って、二つを区別できるようにしました。</p>
   <div class="scroll rv"><table>
     <tr><th>状況</th><th>関門の動き</th></tr>
@@ -72,10 +74,10 @@
   <p>報告のあった 3 件は、手作業で非表示にしました。そのあとは、5 分おきに動く再審査のバッチが、同じ見逃しを拾い直す想定です。</p>
   <p><strong>確認できていないこと：</strong>記録には、「上限のリセット後に、転売価格の報告が来なくなったかを、次のセッションで確認する」と書いてあります。その結果は、この記事を書いた時点で、記録にありません。</p>
 
-  <h2 class="rv">ほかの判定にも、同じ穴は無いか</h2>
+  <h2 class="rv" id="s5">ほかの判定にも、同じ穴は無いか</h2>
   <p>その後の点検（2026年7月30日）で、販売形式の判定や商品の照合など、ほかの AI による判定も確認しました。いずれも、失敗したときは、安全側（除外、または null）に倒れる設計で、<strong>新しい fail-open の穴は見つかりませんでした</strong>。</p>
 
-  <h2 class="rv">分かったこと</h2>
+  <h2 class="rv" id="s6">分かったこと</h2>
   <blockquote>「確認できなかった」には、二種類ある。知らなかったのと、調べられなかったのと。</blockquote>
   <ul>
     <li><strong>通す設計は、「通してよい理由」を、はっきりさせてから使う。</strong>「分からないから通す」と「調べられないから通す」は、別のものです。</li>
@@ -98,9 +100,9 @@
   <div class="rule" style="margin:40px 0 22px"></div>
   <p class="eyebrow">ほかの記録</p>
   <ul class="plain">
+    <li><a href="/notes/gemini-migration/">Claude API から Gemini API（gemini-3.1-flash-lite）へ移行した：16 か所の呼び出しを 1 つの関数にまとめた</a> — Anthropic の利用上限で予定外の課金が出たため Gemini へ移行。モデルの選び方（廃止予定日）、呼び出しの一本化、Web 検索の回数上限が無い問題への回路遮断器、止めるスイッチの記録。</li>
     <li><a href="/notes/xcode152-sdk/">Xcode 15.2 で Firebase 12 が使えない（Swift 6.0 必須）：Firebase 11.4.0 と AdMob 11.5.0 に固定した理由</a> — 古い Mac の Xcode 15.2 では、Firebase 12 以降と 11.12.0 以降は Xcode 16.2 が必須、AdMob 11.6.0 以降は MarketplaceKit で Xcode 15.3 が必須。Exact Version で固定した記録。</li>
     <li><a href="/notes/itms-91064/">ITMS-91064「無効なバイナリ」：NSPrivacyTracking が true なのに NSPrivacyTrackingDomains が空だった</a> — ビルドが Apple の自動審査で ITMS-91064 により却下された。NSPrivacyTracking が true で、NSPrivacyTrackingDomains が空の配列だったのが原因。ドメインを補った経緯と、確認できていないこと。</li>
-    <li><a href="/notes/bulk-accident/">一括処理が「全記事」に当たった：書く前に数える、テストは壊して確かめる</a> — 記事の状態をまとめて直す処理が、全記事に当たり、18件が誤って表示に戻った。履歴から戻した経緯と、テストが効くかを、規則を1つずつ外して確かめた記録。</li>
   </ul>
 <!--/related-->
 </div>
