@@ -1,5 +1,13 @@
 [
   {
+    "slug": "qiita-post-interval",
+    "title": "Qiita の「投稿頻度が高過ぎます」を測った：新しいアカウントは、投稿から約 30 分、次の記事を作れなかった",
+    "date": "2026-10-08",
+    "work": "このサイト",
+    "url": "/notes/qiita-post-interval/",
+    "blurb": "Qiita の投稿頻度の制限を、5 分おきの記録で測った。新しいアカウントでは、2 回とも、投稿から約 30 分。3 回目は記録が欠けた。"
+  },
+  {
     "slug": "comment-services",
     "title": "静的サイトのコメント欄を、公式の情報で比べる：giscus・utterances・Disqus・Remark42 ほか",
     "date": "2026-10-08",
