@@ -73,7 +73,7 @@ const head = (title, desc, extra = '') => `<!doctype html>
 <canvas id="motes"></canvas>
 
 <header class="site"><div class="wrap">
-  <a class="logo" href="/">Koshin Studio</a>
+  <a class="logo" href="/"><img class="logo-mark" src="/favicon.svg" alt="" width="28" height="28">Koshin Studio</a>
   <nav><a href="/works/">Works</a><a href="/notes/">Notes</a><a href="/about/">About</a></nav>
 </div></header>
 `;
@@ -657,7 +657,7 @@ for (const file of pages) {
   let html = readFileSync(file, 'utf8');
   /* 脚の SNS 欄と、広告の枠を差し替える（data/site.json が元） */
   html = html.replace(/<header class="site"><div class="wrap">\s*<a class="logo" href="\/">Koshin Studio<\/a>\s*<nav>[\s\S]*?<\/nav>/,
-    '<header class="site"><div class="wrap">\n  <a class="logo" href="/">Koshin Studio</a>\n  <nav><a href="/works/">Works</a><a href="/notes/">Notes</a><a href="/about/">About</a></nav>');
+    '<header class="site"><div class="wrap">\n  <a class="logo" href="/"><img class="logo-mark" src="/favicon.svg" alt="" width="28" height="28">Koshin Studio</a>\n  <nav><a href="/works/">Works</a><a href="/notes/">Notes</a><a href="/about/">About</a></nav>');
   html = html.replace(/(<footer class="site"><div class="wrap">[\s\S]*?)<nav>[\s\S]*?<\/nav>(\s*<\/div><\/footer>)/,
     '$1<nav><a href="/about/">About</a><a href="/privacy/">あつかい</a></nav>$2');
   html = html.replace(/<div class="sns-row">[\s\S]*?<\/div>/g, `<div class="sns-row">${socialHtml}</div>`);
@@ -759,6 +759,8 @@ for (const file of pages) {
       { '@context': 'https://schema.org', '@graph': ld })}</script>` : '',
   ].filter(Boolean).join('\n');
   html = html.replace('</head>', head + '\n</head>');
+  /* ヘッダーのロゴ画像も、ファビコンと同じ印を付ける（絵を替えたら別の URL に） */
+  html = html.replace(/src="\/favicon\.svg[^"]*"/g, () => `src="${stamped('/favicon.svg')}"`);
   /* ファビコン。絵を替えても、名前が同じだと、ブラウザは覚えた古い絵を使い続ける。
      中身の印（?v=）を付けて、替えたら別物として取りに行かせる。
      .ico も並べる（SVG に対応しない環境や、/favicon.ico を決め打ちで取る相手のため） */
@@ -766,6 +768,9 @@ for (const file of pages) {
   html = html.replace('<script>document.documentElement.className+=" js"</script>',
     `<link rel="icon" href="${stamped('/favicon.ico')}" sizes="48x48">\n`
     + `<link rel="icon" href="${stamped('/favicon.svg')}" type="image/svg+xml" sizes="any">\n`
+    /* Google は、検索結果のファビコンに、48px の倍数の正方形（PNG・ICO・SVG）を勧めている。
+       SVG に画像を埋め込んだものだけだと拾われにくいので、192px の PNG も並べる */
+    + `<link rel="icon" href="${stamped('/assets/icon/icon-192.png')}" type="image/png" sizes="192x192">\n`
     + '<script>document.documentElement.className+=" js"</script>');
   /* ホーム画面に置いたときの絵と、manifest。
      SVG だけだと iOS で何も出ない。消してから入れ直す */

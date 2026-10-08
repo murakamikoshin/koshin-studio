@@ -86,6 +86,10 @@ header.site{position:sticky;top:0;z-index:20;
 header.site .wrap{display:flex;align-items:center;gap:20px;height:60px}
 header.site .logo{font-family:var(--mincho);font-size:16px;letter-spacing:.2em;
   text-decoration:none;color:var(--text);white-space:nowrap;position:relative}
+/* 左に、ファビコンと同じ藍の K を置く。文字の前に並べる */
+header.site .logo{display:inline-flex;align-items:center;gap:10px}
+header.site .logo-mark{width:28px;height:28px;border-radius:7px;flex:none}
+@media(max-width:760px){header.site .logo-mark{width:26px;height:26px;gap:8px}}
 header.site .logo::after{content:"";position:absolute;left:0;right:100%;bottom:-5px;
   height:1px;background:var(--shu);transition:right .45s var(--ease)}
 header.site .logo:hover::after{right:0}

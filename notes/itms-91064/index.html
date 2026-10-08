@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ITMS-91064「無効なバイナリ」：NSPrivacyTracking が true なのに NSPrivacyTrackingDomains が空だった — トレカダッシュ 開発の記録 — Koshin Studio</title>
+<meta name="description" content="ビルドが Apple の自動審査で ITMS-91064 により却下された。NSPrivacyTracking が true で、NSPrivacyTrackingDomains が空の配列だったのが原因。ドメインを補った経緯と、確認できていないこと。">
+<meta property="og:title" content="ITMS-91064「無効なバイナリ」：NSPrivacyTracking が true なのに NSPrivacyTrackingDomains が空だった">
+<meta property="og:description" content="ビルドが Apple の自動審査で ITMS-91064 により却下された。NSPrivacyTracking が true で、NSPrivacyTrackingDomains が空の配列だったのが原因。ドメインを補った経緯と、確認できていないこと。">
+<meta property="og:type" content="article">
+<meta name="theme-color" content="#fbfaf7">
+<link rel="icon" href="/favicon.ico?v=1697d589" sizes="48x48">
+<link rel="icon" href="/favicon.svg?v=b9d7922f" type="image/svg+xml" sizes="any">
+<link rel="icon" href="/assets/icon/icon-192.png?v=e2566235" type="image/png" sizes="192x192">
+<link rel="apple-touch-icon" href="/assets/icon/icon-180.png?v=84e7f0e6">
+<link rel="manifest" href="/site.webmanifest">
+<script>document.documentElement.className+=" js"</script>
+<link rel="stylesheet" href="/style.css?v=e2a04379">
+<link rel="canonical" href="https://koshinstudio.com/notes/itms-91064/">
+<meta property="og:url" content="https://koshinstudio.com/notes/itms-91064/">
+<meta property="og:site_name" content="Koshin Studio">
+<meta property="og:locale" content="ja_JP">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="alternate" type="application/rss+xml" title="Koshin Studio — Notes" href="https://koshinstudio.com/feed.xml">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BlogPosting","headline":"ITMS-91064「無効なバイナリ」：NSPrivacyTracking が true なのに NSPrivacyTrackingDomains が空だった","url":"https://koshinstudio.com/notes/itms-91064/","description":"ビルドが Apple の自動審査で ITMS-91064 により却下された。NSPrivacyTracking が true で、NSPrivacyTrackingDomains が空の配列だったのが原因。ドメインを補った経緯と、確認できていないこと。","datePublished":"2026-10-08","dateModified":"2026-10-08","inLanguage":"ja","image":"https://koshinstudio.com/assets/og/og_notes_itms-91064.jpg","author":{"@id":"https://koshinstudio.com#studio"},"publisher":{"@id":"https://koshinstudio.com#studio"},"mainEntityOfPage":"https://koshinstudio.com/notes/itms-91064/"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Koshin Studio","item":"https://koshinstudio.com/"},{"@type":"ListItem","position":2,"name":"Notes","item":"https://koshinstudio.com/notes/"},{"@type":"ListItem","position":3,"name":"ITMS-91064「無効なバイナリ」：NSPrivacyTracking が true なのに NSPrivacyTrackingDomains が空だった","item":"https://koshinstudio.com/notes/itms-91064/"}]}]}</script>
+<meta property="og:image" content="https://koshinstudio.com/assets/og/og_notes_itms-91064.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
+</head>
+<body>
+<canvas id="motes"></canvas>
+
+<header class="site"><div class="wrap">
+  <a class="logo" href="/"><img class="logo-mark" src="/favicon.svg?v=b9d7922f" alt="" width="28" height="28">Koshin Studio</a>
+  <nav><a href="/works/">Works</a><a href="/notes/">Notes</a><a href="/about/">About</a></nav>
+</div></header>
+
+<main><div class="wrap">
+  <nav class="crumbs" aria-label="現在地"><a href="/">Koshin Studio</a><i aria-hidden="true">›</i><a href="/notes/">Notes</a><i aria-hidden="true">›</i><span aria-current="page">ITMS-91064「無効なバイナリ」：NSPrivacyTracking が true なのに NSPrivacyTrackingDomains が空だった</span></nav>
+  <h1>ITMS-91064「無効なバイナリ」：NSPrivacyTracking が true なのに NSPrivacyTrackingDomains が空だった</h1>
+  <div class="rule"></div>
+  <p class="lead">トレカダッシュ 開発の記録 ／ 2026年10月</p>
+
+  <p>iOS アプリ「トレカダッシュ」をアップロードしたところ、Apple 側の自動審査で、ビルド 877 が<strong>「無効なバイナリ」</strong>として却下されました。エラーコードは <code>ITMS-91064</code>。原因は、プライバシーマニフェスト（<code>PrivacyInfo.xcprivacy</code>）の、二つの項目の組み合わせでした。コミットの記録で、何が起きて、どう直したかを書きます。</p>
+  <p class="note">このサイトには、トレカダッシュの作品ページがあります（<a href="/works/torecadash/">トレカダッシュ</a>）。ここに書くのは、開発の記録です。</p>
+
+  <h2 class="rv">起きたこと</h2>
+  <p>ビルド 877 が、Apple の自動審査で、<strong>「無効なバイナリ」</strong>として却下されました（2026年10月6日）。人が見る審査の前に、機械の検査で弾かれた、ということです。</p>
+
+  <h2 class="rv">原因：「トラッキングする」と書いて、ドメインが空だった</h2>
+  <p>プライバシーマニフェストには、次の二つの項目がありました。</p>
+  <div class="scroll rv"><table>
+    <tr><th>項目</th><th>値</th></tr>
+    <tr><td><code>NSPrivacyTracking</code>（トラッキングをするか）</td><td>true</td></tr>
+    <tr><td><code>NSPrivacyTrackingDomains</code>（トラッキングに使うドメイン）</td><td>空の配列</td></tr>
+  </table></div>
+  <p>Apple の検査は、この組み合わせを、<strong>矛盾</strong>として弾きます。「トラッキングをする」と宣言しているのに、そのドメインが、一つも書かれていないからです。</p>
+  <p>では、<code>NSPrivacyTracking</code> のほうを false にすればよいか、というと、そうではありませんでした。このアプリは、AdMob の広告（バナー、ネイティブ、アプリ起動広告）を、ATT（トラッキングの許可）に同意した人に、パーソナライズして出しています。<strong>トラッキングは、実際にしている</strong>ので、<code>true</code> が正しい宣言です。直すべきは、空のドメインのほうでした。</p>
+
+  <h2 class="rv">直し方：ドメインを書く</h2>
+  <p>ただ、Google は、AdMob 向けの、トラッキングドメインの<strong>公式な一覧を、出していません</strong>。そこで、広く使われている広告配信のドメインを、追加しました。</p>
+  <ul>
+    <li><code>googlesyndication.com</code></li>
+    <li><code>googleadservices.com</code></li>
+    <li><code>doubleclick.net</code></li>
+    <li><code>google.com</code></li>
+  </ul>
+  <p>Release 構成で、ビルドが通る（<code>xcodebuild</code> が <code>BUILD SUCCEEDED</code>）ことは、確認しています。</p>
+
+  <h2 class="rv">確認できていないこと</h2>
+  <p>コミットに書かれているのは、ビルドが通ることまでです。<strong>修正したビルドを、Apple が受け付けたか</strong>は、この記事を書いた時点で、記録にありません。また、ここに挙げたドメインの一覧が、AdMob のトラッキングに使われるドメインを、<strong>すべて</strong>覆っているかも、公式の一覧が無いため、確かめられていません。</p>
+
+  <h2 class="rv">分かったこと</h2>
+  <blockquote>宣言と中身は、機械に、突き合わせられる。</blockquote>
+  <ul>
+    <li><strong>「する」と宣言したら、その中身（ドメイン）も書く。</strong>片方だけでは、矛盾として弾かれます。</li>
+    <li><strong>弾かれたとき、宣言のほうを消して、逃げない。</strong>実際にしていることなら、宣言を正しいまま、中身を補います。</li>
+    <li><strong>公式の一覧が無いものは、「どこまで確かめたか」を、書いておく。</strong></li>
+  </ul>
+  <p class="note">この記事は、コミット（2026年10月6日）の記録から書きました。</p>
+
+  <div class="ad-slot" data-slot="footer" hidden></div>
+<!--/ad-->
+
+  <div class="rule" style="margin:40px 0 22px"></div>
+  <p class="eyebrow">この話に出てくるもの</p>
+  <ul class="plain">
+    <li><a href="/notes/torecadash-review/">App Store の審査で止まった四つ</a> — ITMS-91064 を含む、審査の手前の記録</li>
+    <li><a href="/notes/review-info-needed/">App Store 審査で「Guideline 2.1 Information Needed」が届いた</a> — このあとの記録</li>
+  </ul>
+
+<!--related-->
+  <div class="rule" style="margin:40px 0 22px"></div>
+  <p class="eyebrow">ほかの記録</p>
+  <ul class="plain">
+    <li><a href="/notes/bulk-accident/">一括処理が「全記事」に当たった：書く前に数える、テストは壊して確かめる</a> — 記事の状態をまとめて直す処理が、全記事に当たり、18件が誤って表示に戻った。履歴から戻した経緯と、テストが効くかを、規則を1つずつ外して確かめた記録。</li>
+    <li><a href="/notes/fake-products/">「9種セット」を中身ごとに分けて、偽の商品が80個できていた</a> — ポケモンカードの9種セットは1つの商品なのに、中身ごとに分けて、実在しない商品が80個できていた。入口を止め、親22件を戻し、子190件を外し、偽の商品を消した記録。</li>
+    <li><a href="/notes/apple-signin/">Firebase Auth：アプリを完全に終了すると、匿名アカウントが量産された（currentUser の復元待ち）</a> — 「アプリを落とすと、また Apple のサインインを求められる」。管理画面を開くと、19人中17人が使い捨ての匿名アカウント。起動直後に currentUser を同期チェックしていた競争を、addStateDidChangeListener で直した記録。</li>
+  </ul>
+<!--/related-->
+</div>
+</main>
+
+<footer class="site"><div class="wrap">
+  <span>© 2026 Koshin Studio</span>
+  <div class="sns-row"></div>
+  <nav><a href="/about/">About</a><a href="/privacy/">あつかい</a></nav>
+</div></footer>
+<script src="/vendor/gsap.min.js?v=9396f256" defer></script>
+<script src="/vendor/ScrollTrigger.min.js?v=05ca5ad8" defer></script>
+<script src="/motion.js?v=150119fe" defer></script>
+</body>
+</html>

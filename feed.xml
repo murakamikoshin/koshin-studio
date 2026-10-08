@@ -7,6 +7,13 @@
   <language>ja</language>
   <atom:link href="https://koshinstudio.com/feed.xml" rel="self" type="application/rss+xml"/>
   <item>
+    <title>ITMS-91064「無効なバイナリ」：NSPrivacyTracking が true なのに NSPrivacyTrackingDomains が空だった</title>
+    <link>https://koshinstudio.com/notes/itms-91064/</link>
+    <guid isPermaLink="true">https://koshinstudio.com/notes/itms-91064/</guid>
+    <pubDate>Wed, 07 Oct 2026 15:00:00 GMT</pubDate>
+    <description>ビルドが Apple の自動審査で ITMS-91064 により却下された。NSPrivacyTracking が true で、NSPrivacyTrackingDomains が空の配列だったのが原因。ドメインを補った経緯と、確認できていないこと。</description>
+  </item>
+  <item>
     <title>一括処理が「全記事」に当たった：書く前に数える、テストは壊して確かめる</title>
     <link>https://koshinstudio.com/notes/bulk-accident/</link>
     <guid isPermaLink="true">https://koshinstudio.com/notes/bulk-accident/</guid>
@@ -35,25 +42,25 @@
     <description>音声ファイルを使わず、箏・太鼓・拍子木・鉦をブラウザで合成した。聴けないので、波形のピークを測って音量を決めた。番付のしきい値も、自動プレイの実測で引き直した記録。</description>
   </item>
   <item>
-    <title>「連」だけが壊れて出た：配信先で文字化けしたとき、ファイルは正しかった</title>
+    <title>CrazyGames のプレビューで日本語が文字化け：ファイルは正しかった。原因は特定できず、ASCII 表記に逃がした</title>
     <link>https://koshinstudio.com/notes/ascii-text/</link>
     <guid isPermaLink="true">https://koshinstudio.com/notes/ascii-text/</guid>
     <pubDate>Wed, 07 Oct 2026 15:00:00 GMT</pubDate>
     <description>ゲームポータルのプレビューで「大連鎖！」の「連」だけが壊れた。ファイルのバイト列は正しく、原因は特定できなかった。ASCII 表記に逃がした経緯と、14言語の枠の検査の記録。</description>
   </item>
   <item>
-    <title>「変なところから出る」を三段階で直した：押すと弾けるロゴの記録</title>
+    <title>Retina で canvas が2倍の大きさになる：inset:0 では広がらない（押すと弾けるロゴの不具合）</title>
     <link>https://koshinstudio.com/notes/logo-pop/</link>
     <guid isPermaLink="true">https://koshinstudio.com/notes/logo-pop/</guid>
     <pubDate>Wed, 07 Oct 2026 15:00:00 GMT</pubDate>
-    <description>ロゴを自作の書体で作り直したら、押して弾ける動きの粒が「変なところから出る」。字が7pxずれたまま戻らない問題と、Retinaで描く画面が2倍になる問題を、三段階で直した記録。</description>
+    <description>押して弾ける動きの粒が「変なところから出る」。原因は、Retina で canvas の CSS 上の大きさが2倍になること（inset:0 では広がらない）と、GSAP が位置を書き換えること。三段階で直した記録。</description>
   </item>
   <item>
-    <title>アプリを完全に終了すると、サインインが消えた：19人中17人が使い捨ての匿名アカウントだった</title>
+    <title>Firebase Auth：アプリを完全に終了すると、匿名アカウントが量産された（currentUser の復元待ち）</title>
     <link>https://koshinstudio.com/notes/apple-signin/</link>
     <guid isPermaLink="true">https://koshinstudio.com/notes/apple-signin/</guid>
     <pubDate>Wed, 07 Oct 2026 15:00:00 GMT</pubDate>
-    <description>「アプリを落とすと、また Apple のサインインを求められる」。管理画面を開くと、19人中17人が使い捨ての匿名アカウントだった。起動直後の同期的な確認が競争を起こしていた記録。</description>
+    <description>「アプリを落とすと、また Apple のサインインを求められる」。管理画面を開くと、19人中17人が使い捨ての匿名アカウント。起動直後に currentUser を同期チェックしていた競争を、addStateDidChangeListener で直した記録。</description>
   </item>
   <item>
     <title>「重複は実質ゼロ」と数えたのに、監査は112組を出していた</title>
@@ -126,11 +133,11 @@
     <description>古いキャッシュ、組むたびに増えるパンくず、環境の中を指す symlink、手元にしか無い絵。サイトを配るときに続いた四つの事故と、検査を足してはじめて見つかった経緯。</description>
   </item>
   <item>
-    <title>初めての審査で、「情報が必要です」と返ってきた</title>
+    <title>App Store 審査で「Guideline 2.1 Information Needed」が届いた：求められた6つ</title>
     <link>https://koshinstudio.com/notes/review-info-needed/</link>
     <guid isPermaLink="true">https://koshinstudio.com/notes/review-info-needed/</guid>
     <pubDate>Wed, 07 Oct 2026 15:00:00 GMT</pubDate>
-    <description>App Store の初めての審査で届いたのは、不合格ではなく「情報が必要」というメールだった。求められた六つ（実機の画面収録、目的、外部サービスの一覧など）と、前に直したこととのつながり。</description>
+    <description>初めての審査で届いたのは、不合格ではなく Guideline 2.1「Information Needed」だった。求められた六つ（実機の画面収録、目的、外部サービスの一覧など）と、前に直したこととのつながり。</description>
   </item>
   <item>
     <title>10秒ピッタリのランキングを、公平にする：小数3桁・同着・書き込み回数</title>
@@ -140,11 +147,11 @@
     <description>時計の精度の差で iPhone が有利にならないよう小数3桁に切り、同着の確率（約1/333）に備えてタイブレークを決め、KV の書き込み回数を数えた。設計の理由と、公開した日のつまずき。</description>
   </item>
   <item>
-    <title>審査に出そうとして止まった四つのこと</title>
+    <title>App Store の審査で止まった四つ：iPad のスクショ、ITMS-91064、アカウント削除、投稿の通報</title>
     <link>https://koshinstudio.com/notes/torecadash-review/</link>
     <guid isPermaLink="true">https://koshinstudio.com/notes/torecadash-review/</guid>
     <pubDate>Wed, 07 Oct 2026 15:00:00 GMT</pubDate>
-    <description>iPad のスクリーンショット、自動検査の ITMS-91064、アカウント削除、投稿の通報。App Store の審査に出す手前で止まった四つと、その直し方の記録。</description>
+    <description>iPad スクリーンショットの要求、自動検査の ITMS-91064（NSPrivacyTrackingDomains が空）、アカウント削除（5.1.1(v)）、投稿の通報（1.2）。審査に出す手前で止まった四つと、その直し方。</description>
   </item>
   <item>
     <title>「9種セット」の正体は御三家9商品だった：同じ商品なのに、決して一致しなかった</title>
@@ -154,18 +161,18 @@
     <description>他のまとめサイトと突き合わせたら、抽選の表示は54%だった。商品の取り違え、比べ方の左右非対称、記事IDの穴。カバー率を91%にした記録。</description>
   </item>
   <item>
-    <title>「めっちゃクラッシュする」の原因は、画面の描き直しのたびの再計算だった</title>
+    <title>iOS アプリが固まって強制終了される（0x8BADF00D）：SwiftUI の計算プロパティが毎回走っていた</title>
     <link>https://koshinstudio.com/notes/torecadash-watchdog/</link>
     <guid isPermaLink="true">https://koshinstudio.com/notes/torecadash-watchdog/</guid>
     <pubDate>Wed, 07 Oct 2026 15:00:00 GMT</pubDate>
-    <description>実機のログにあった 0x8BADF00D。951件の記事を、画面を描き直すたびにメインスレッドで数え直していた。原因の特定と、直す方式の記録。</description>
+    <description>実機のログにあった 0x8BADF00D（watchdog）。951件の記事を、画面を描き直すたびにメインスレッドで数え直していた。原因の特定と、バックグラウンドで計算する形に直した記録。</description>
   </item>
   <item>
-    <title>TestFlight にビルドが来ない原因を、一度間違えた</title>
+    <title>TestFlight にビルドが来ない：Xcode Cloud の月25時間を使い切っていた（最初の診断は誤りだった）</title>
     <link>https://koshinstudio.com/notes/torecadash-ci/</link>
     <guid isPermaLink="true">https://koshinstudio.com/notes/torecadash-ci/</guid>
     <pubDate>Wed, 07 Oct 2026 15:00:00 GMT</pubDate>
-    <description>「[ci skip] が原因」という最初の診断は、時系列が合わず誤りだった。Xcode Cloud の無料枠を使い切った本当の原因と、直し方の記録。</description>
+    <description>「[ci skip] が原因」という最初の診断は、時系列が合わず誤りだった。Xcode Cloud の無料枠（月25時間）を使い切った本当の原因と、開始条件を絞る直し方の記録。</description>
   </item>
   <item>
     <title>CrazyGames に落ちた：理由は書かれていなかったので、撮って探した</title>
@@ -196,11 +203,11 @@
     <description>「5プレイに一本」をやめて「前の広告から7分」に変えた理由と、変えたあとの動きの記録。書きながら、一戦の長さが分かっていないことに気づいた。</description>
   </item>
   <item>
-    <title>JSONLを読んだら壊れた：原因は、見えない改行文字だった</title>
+    <title>Python の splitlines() で JSONL が壊れる：犯人は U+2028（見えない改行文字）</title>
     <link>https://koshinstudio.com/notes/u2028/</link>
     <guid isPermaLink="true">https://koshinstudio.com/notes/u2028/</guid>
     <pubDate>Tue, 06 Oct 2026 15:00:00 GMT</pubDate>
-    <description>あらすじに紛れた U+2028 のせいで、JSON が壊れた。splitlines() と split('\n') の違いを、実データの数字で確かめた記録。</description>
+    <description>JSONL を splitlines() で読むと、あらすじ中の U+2028 で行が割れて JSON が壊れる。実データ（7,255行と7,247件、U+2028 は8個）で確かめて、split("\n") に直した記録。</description>
   </item>
   <item>
     <title>診断を12問にしたら、結果はどこまで変わるのか</title>

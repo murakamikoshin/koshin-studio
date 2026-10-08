@@ -3,25 +3,26 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>初めての審査で、「情報が必要です」と返ってきた — トレカダッシュ 開発の記録 — Koshin Studio</title>
-<meta name="description" content="App Store の初めての審査で届いたのは、不合格ではなく「情報が必要」というメールだった。求められた六つ（実機の画面収録、目的、外部サービスの一覧など）と、前に直したこととのつながり。">
-<meta property="og:title" content="初めての審査で、「情報が必要です」と返ってきた">
-<meta property="og:description" content="初めての審査で追加の情報を求められた記録。">
+<title>App Store 審査で「Guideline 2.1 Information Needed」が届いた：求められた6つ — トレカダッシュ 開発の記録 — Koshin Studio</title>
+<meta name="description" content="初めての審査で届いたのは、不合格ではなく Guideline 2.1「Information Needed」だった。求められた六つ（実機の画面収録、目的、外部サービスの一覧など）と、前に直したこととのつながり。">
+<meta property="og:title" content="App Store 審査で「Guideline 2.1 Information Needed」が届いた：求められた6つ">
+<meta property="og:description" content="初めての審査で届いたのは、不合格ではなく Guideline 2.1「Information Needed」だった。求められた六つ（実機の画面収録、目的、外部サービスの一覧など）と、前に直したこととの">
 <meta property="og:type" content="article">
 <meta name="theme-color" content="#fbfaf7">
 <link rel="icon" href="/favicon.ico?v=1697d589" sizes="48x48">
 <link rel="icon" href="/favicon.svg?v=b9d7922f" type="image/svg+xml" sizes="any">
+<link rel="icon" href="/assets/icon/icon-192.png?v=e2566235" type="image/png" sizes="192x192">
 <link rel="apple-touch-icon" href="/assets/icon/icon-180.png?v=84e7f0e6">
 <link rel="manifest" href="/site.webmanifest">
 <script>document.documentElement.className+=" js"</script>
-<link rel="stylesheet" href="/style.css?v=54ae5fe6">
+<link rel="stylesheet" href="/style.css?v=e2a04379">
 <link rel="canonical" href="https://koshinstudio.com/notes/review-info-needed/">
 <meta property="og:url" content="https://koshinstudio.com/notes/review-info-needed/">
 <meta property="og:site_name" content="Koshin Studio">
 <meta property="og:locale" content="ja_JP">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="alternate" type="application/rss+xml" title="Koshin Studio — Notes" href="https://koshinstudio.com/feed.xml">
-<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BlogPosting","headline":"初めての審査で、「情報が必要です」と返ってきた","url":"https://koshinstudio.com/notes/review-info-needed/","description":"App Store の初めての審査で届いたのは、不合格ではなく「情報が必要」というメールだった。求められた六つ（実機の画面収録、目的、外部サービスの一覧など）と、前に直したこととのつながり。","datePublished":"2026-10-08","dateModified":"2026-10-08","inLanguage":"ja","image":"https://koshinstudio.com/assets/og/og_notes_review-info-needed.jpg","author":{"@id":"https://koshinstudio.com#studio"},"publisher":{"@id":"https://koshinstudio.com#studio"},"mainEntityOfPage":"https://koshinstudio.com/notes/review-info-needed/"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Koshin Studio","item":"https://koshinstudio.com/"},{"@type":"ListItem","position":2,"name":"Notes","item":"https://koshinstudio.com/notes/"},{"@type":"ListItem","position":3,"name":"初めての審査で、「情報が必要です」と返ってきた","item":"https://koshinstudio.com/notes/review-info-needed/"}]}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BlogPosting","headline":"App Store 審査で「Guideline 2.1 Information Needed」が届いた：求められた6つ","url":"https://koshinstudio.com/notes/review-info-needed/","description":"初めての審査で届いたのは、不合格ではなく Guideline 2.1「Information Needed」だった。求められた六つ（実機の画面収録、目的、外部サービスの一覧など）と、前に直したこととのつながり。","datePublished":"2026-10-08","dateModified":"2026-10-08","inLanguage":"ja","image":"https://koshinstudio.com/assets/og/og_notes_review-info-needed.jpg","author":{"@id":"https://koshinstudio.com#studio"},"publisher":{"@id":"https://koshinstudio.com#studio"},"mainEntityOfPage":"https://koshinstudio.com/notes/review-info-needed/"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Koshin Studio","item":"https://koshinstudio.com/"},{"@type":"ListItem","position":2,"name":"Notes","item":"https://koshinstudio.com/notes/"},{"@type":"ListItem","position":3,"name":"App Store 審査で「Guideline 2.1 Information Needed」が届いた：求められた6つ","item":"https://koshinstudio.com/notes/review-info-needed/"}]}]}</script>
 <meta property="og:image" content="https://koshinstudio.com/assets/og/og_notes_review-info-needed.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
@@ -31,13 +32,13 @@
 <canvas id="motes"></canvas>
 
 <header class="site"><div class="wrap">
-  <a class="logo" href="/">Koshin Studio</a>
+  <a class="logo" href="/"><img class="logo-mark" src="/favicon.svg?v=b9d7922f" alt="" width="28" height="28">Koshin Studio</a>
   <nav><a href="/works/">Works</a><a href="/notes/">Notes</a><a href="/about/">About</a></nav>
 </div></header>
 
 <main><div class="wrap">
-  <nav class="crumbs" aria-label="現在地"><a href="/">Koshin Studio</a><i aria-hidden="true">›</i><a href="/notes/">Notes</a><i aria-hidden="true">›</i><span aria-current="page">初めての審査で、「情報が必要です」と返ってきた</span></nav>
-  <h1>初めての審査で、「情報が必要です」と返ってきた</h1>
+  <nav class="crumbs" aria-label="現在地"><a href="/">Koshin Studio</a><i aria-hidden="true">›</i><a href="/notes/">Notes</a><i aria-hidden="true">›</i><span aria-current="page">App Store 審査で「Guideline 2.1 Information Needed」が届いた：求められた6つ</span></nav>
+  <h1>App Store 審査で「Guideline 2.1 Information Needed」が届いた：求められた6つ</h1>
   <div class="rule"></div>
   <p class="lead">トレカダッシュ 開発の記録 ／ 2026年10月</p>
 
@@ -86,9 +87,9 @@
   <div class="rule" style="margin:40px 0 22px"></div>
   <p class="eyebrow">ほかの記録</p>
   <ul class="plain">
+    <li><a href="/notes/itms-91064/">ITMS-91064「無効なバイナリ」：NSPrivacyTracking が true なのに NSPrivacyTrackingDomains が空だった</a> — ビルドが Apple の自動審査で ITMS-91064 により却下された。NSPrivacyTracking が true で、NSPrivacyTrackingDomains が空の配列だったのが原因。ドメインを補った経緯と、確認できていないこと。</li>
     <li><a href="/notes/bulk-accident/">一括処理が「全記事」に当たった：書く前に数える、テストは壊して確かめる</a> — 記事の状態をまとめて直す処理が、全記事に当たり、18件が誤って表示に戻った。履歴から戻した経緯と、テストが効くかを、規則を1つずつ外して確かめた記録。</li>
     <li><a href="/notes/fake-products/">「9種セット」を中身ごとに分けて、偽の商品が80個できていた</a> — ポケモンカードの9種セットは1つの商品なのに、中身ごとに分けて、実在しない商品が80個できていた。入口を止め、親22件を戻し、子190件を外し、偽の商品を消した記録。</li>
-    <li><a href="/notes/apple-signin/">アプリを完全に終了すると、サインインが消えた：19人中17人が使い捨ての匿名アカウントだった</a> — 「アプリを落とすと、また Apple のサインインを求められる」。管理画面を開くと、19人中17人が使い捨ての匿名アカウントだった。起動直後の同期的な確認が競争を起こしていた記録。</li>
   </ul>
 <!--/related-->
 </div>
