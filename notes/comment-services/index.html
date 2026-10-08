@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>静的サイトのコメント欄を、公式の情報で比べる：giscus・utterances・Disqus・Remark42 ほか — 比べたもの — Koshin Studio</title>
+<meta name="description" content="静的サイト向けコメント欄（giscus、utterances、Disqus、Remark42、Cusdis、Staticman、Commento）を、2026年10月8日時点の公式ページとリポジトリだけで比較。保存先、広告・追跡、更新状況、確認できなかったこと。">
+<meta property="og:title" content="静的サイトのコメント欄を、公式の情報で比べる：giscus・utterances・Disqus・Remark42 ほか">
+<meta property="og:description" content="静的サイトのコメント欄を公式の情報で比較。調べた7つのうち4つは終了か更新停止の疑い。無料のDisqusは広告で払う。確認できなかったことも書いた。">
+<meta property="og:type" content="article">
+<meta name="theme-color" content="#fbfaf7">
+<link rel="icon" href="/favicon.ico?v=1697d589" sizes="48x48">
+<link rel="icon" href="/favicon.svg?v=b9d7922f" type="image/svg+xml" sizes="any">
+<link rel="icon" href="/assets/icon/icon-192.png?v=e2566235" type="image/png" sizes="192x192">
+<link rel="apple-touch-icon" href="/assets/icon/icon-180.png?v=84e7f0e6">
+<link rel="manifest" href="/site.webmanifest">
+<script>document.documentElement.className+=" js"</script>
+<link rel="stylesheet" href="/style.css?v=089bfce2">
+<meta name="google-adsense-account" content="ca-pub-3863314847163872">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3863314847163872" crossorigin="anonymous"></script>
+<link rel="canonical" href="https://koshinstudio.com/notes/comment-services/">
+<meta property="og:url" content="https://koshinstudio.com/notes/comment-services/">
+<meta property="og:site_name" content="Koshin Studio">
+<meta property="og:locale" content="ja_JP">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="alternate" type="application/rss+xml" title="Koshin Studio — Notes" href="https://koshinstudio.com/feed.xml">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BlogPosting","headline":"静的サイトのコメント欄を、公式の情報で比べる：giscus・utterances・Disqus・Remark42 ほか","url":"https://koshinstudio.com/notes/comment-services/","description":"静的サイトのコメント欄を公式の情報で比較。調べた7つのうち4つは終了か更新停止の疑い。無料のDisqusは広告で払う。確認できなかったことも書いた。","datePublished":"2026-10-08","dateModified":"2026-10-08","inLanguage":"ja","image":"https://koshinstudio.com/assets/og/og_notes_comment-services.jpg","author":{"@id":"https://koshinstudio.com#studio"},"publisher":{"@id":"https://koshinstudio.com#studio"},"mainEntityOfPage":"https://koshinstudio.com/notes/comment-services/"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Koshin Studio","item":"https://koshinstudio.com/"},{"@type":"ListItem","position":2,"name":"Notes","item":"https://koshinstudio.com/notes/"},{"@type":"ListItem","position":3,"name":"静的サイトのコメント欄を、公式の情報で比べる：giscus・utterances・Disqus・Remark42 ほか","item":"https://koshinstudio.com/notes/comment-services/"}]}]}</script>
+<meta property="og:image" content="https://koshinstudio.com/assets/og/og_notes_comment-services.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
+</head>
+<body>
+<canvas id="motes"></canvas>
+
+<header class="site"><div class="wrap">
+  <a class="logo" href="/"><img class="logo-mark" src="/favicon.svg?v=b9d7922f" alt="" width="28" height="28">Koshin Studio</a>
+  <nav><a href="/works/">Works</a><a href="/notes/">Notes</a><a href="/about/">About</a></nav>
+</div></header>
+
+<main><div class="wrap">
+  <nav class="crumbs" aria-label="現在地"><a href="/">Koshin Studio</a><i aria-hidden="true">›</i><a href="/notes/">Notes</a><i aria-hidden="true">›</i><span aria-current="page">静的サイトのコメント欄を、公式の情報で比べる：giscus・utterances・Disqus・Remark42 ほか</span></nav>
+  <h1>静的サイトのコメント欄を、公式の情報で比べる：giscus・utterances・Disqus・Remark42 ほか</h1>
+  <div class="rule"></div>
+  <p class="lead">比べたもの ／ 2026年10月</p>
+
+  <p>このサイトのコメント欄は、giscus です。「コメントを開く」を押すまで、外部のサイトに接続しない形にしてあります。そのほかの選択肢は、どうなっているのか。<strong>公式の説明と、公式のリポジトリ</strong>だけを読んで、並べました。実際に使って比べたのは、giscus だけです。</p>
+  <p class="note">2026 年 10 月 8 日に確認した内容です。サービスの状況は変わります。使う前に、出典で確かめてください。</p>
+<!--toc-->
+  <nav class="toc" aria-label="目次"><p>目次</p><ol><li><a href="#s1">どこに保存されて、誰が書けるか</a></li><li><a href="#s2">広告・追跡の公式の記述</a></li><li><a href="#s3">続いているか：更新の状況</a></li><li><a href="#s4">日本語・スパム対策・重さ</a></li><li><a href="#s5">このサイトが giscus で気をつけたこと</a></li><li><a href="#s6">分かったこと</a></li><li><a href="#s7">確認できなかったこと</a></li><li><a href="#s8">出典（すべて 2026 年 10 月 8 日に確認）</a></li></ol></nav>
+<!--/toc-->
+  <h2 class="rv" id="s1">どこに保存されて、誰が書けるか</h2>
+  <div class="scroll rv"><table>
+    <tr><th>サービス</th><th>保存先</th><th>投稿に必要なもの</th><th>お金</th></tr>
+    <tr><td>giscus</td><td>GitHub Discussions</td><td>GitHub のアカウント</td><td>無料（MIT）</td></tr>
+    <tr><td>utterances</td><td>GitHub Issues</td><td>GitHub のアカウント</td><td>無料（MIT）</td></tr>
+    <tr><td>Disqus</td><td>Disqus 側のサーバー（保存先の明記は確認できなかった）</td><td>確認できなかった</td><td>無料版は広告つき。有料の Plus は月 $12〜$35（見込み PV の帯による。公式ヘルプ 2025-04-30 版）</td></tr>
+    <tr><td>Remark42</td><td>自分で用意するサーバー（組み込みのデータ保存）</td><td>各種ログイン（Google・GitHub など）、メール、設定で匿名も可</td><td>無料（MIT）。サーバーの費用は自分持ち</td></tr>
+    <tr><td>Cusdis</td><td>自分で用意するサーバー（PostgreSQL など）</td><td>ログイン不要</td><td>OSS（GPL-3.0）</td></tr>
+    <tr><td>Staticman</td><td>GitHub・GitLab のリポジトリにファイルとして保存</td><td>確認できなかった</td><td>OSS（MIT）。自分で運用</td></tr>
+    <tr><td>Commento</td><td>自分で用意するサーバー（PostgreSQL）</td><td>ログインや SSO に対応。匿名は確認できなかった</td><td>自前でホストする版は無料のソフトウェア。クラウド版は、無料では提供されないと README にある</td></tr>
+  </table></div>
+
+
+  <h2 class="rv" id="s2">広告・追跡の公式の記述</h2>
+  <ul>
+    <li><strong>giscus・utterances：</strong>どちらも「追跡も広告も無い」と公式に書いています。ただし、giscus のコメントを開けば、GitHub に接続するので、GitHub 側の扱いは別です。</li>
+    <li><strong>Disqus：</strong>無料版は広告で運営されています。公式のヘルプに、Cookie で広告主のサイトの訪問を記録すること、Cookie ID などを広告のパートナーや関連会社と共有すること、「sold or shared（売る、または共有する）」という記述があります。<strong>導入すると、同意の管理や、広告まわりの表記が、いちばん重くなる</strong>と読めます（公式ポリシー上の扱いまでは、調べていません）。</li>
+    <li><strong>Cusdis：</strong>「Cookie をまったく使わない」と README にあります。</li>
+    <li><strong>Remark42・Commento：</strong>「ユーザーを追跡しない」「広告は無い」といった記述が、公式にあります。</li>
+  </ul>
+
+  <h2 class="rv" id="s3">続いているか：更新の状況</h2>
+  <p>コメント欄は、一度入れると長く使います。止まっていないかは、大事な点です。</p>
+  <div class="scroll rv"><table>
+    <tr><th>サービス</th><th>公式のリポジトリ・ページで確認したこと</th><th>判断</th></tr>
+    <tr><td>giscus</td><td>正式なリリース番号は無く、「rolling-release」と明記。最新の更新履歴は 2026-05-26。「GitHub 側の変更で、機能が壊れることがある」と警告あり</td><td>活発</td></tr>
+    <tr><td>Remark42</td><td>最新は v1.17.1（2026-09-14）</td><td>活発</td></tr>
+    <tr><td>utterances</td><td>最後のコミットは 2022-02-12。リリースなし。アーカイブはされていない</td><td><strong>更新停止の疑い</strong>（終了の宣言は無い）</td></tr>
+    <tr><td>Staticman</td><td>最後のコミットは 2020-07-06。リリースは 2016 年の v1.0.0 のみ</td><td><strong>更新停止の疑い</strong>（終了の公式な宣言は確認できなかった）</td></tr>
+    <tr><td>Commento</td><td>最後のタグは v1.8.0（2020-04）、最後のコミットは 2021-02-28。クラウド版のサイトと説明のページが、すべて 404</td><td><strong>停止の疑い</strong>（公式な終了の告知は確認できなかった）</td></tr>
+    <tr><td>Cusdis</td><td>リポジトリは 2026-07-17 にアーカイブ。README に「deprecated（非推奨）」</td><td><strong>終了</strong>と見てよい</td></tr>
+    <tr><td>Disqus</td><td>サービスは稼働中（料金のヘルプの日付は 2025-04-30）</td><td>稼働中</td></tr>
+  </table></div>
+
+
+  <h2 class="rv" id="s4">日本語・スパム対策・重さ</h2>
+  <ul>
+    <li><strong>日本語の画面：</strong>giscus と Remark42 には、日本語の翻訳ファイルがあります。ほかは、確認できませんでした。</li>
+    <li><strong>スパム対策：</strong>giscus は「GitHub 上でモデレートできる」とだけ書いていて、スパム対策の記述はありません。Disqus は基本の無料版にもスパムフィルターがあります。Cusdis は、管理者が承認してから表示します。</li>
+    <li><strong>重さ：</strong>数字を出していたのは、Cusdis（約 5kb の gzip）だけでした。giscus は、コメントの読み込みを遅らせるオプションがあります。utterances は「軽い」と書いていますが、数字は無し。</li>
+  </ul>
+
+  <h2 class="rv" id="s5">このサイトが giscus で気をつけたこと</h2>
+  <p>giscus の公式は、「追跡も広告も無い」と書いています。それでも、このサイトでは、<strong>「コメントを開く」を押すまで、giscus と GitHub に接続しない</strong>ようにしました。読むだけの人の通信を増やさないためと、読み込みを軽くするためです。接続する条件は、<a href="/privacy/">プライバシーのページ</a>に書いています。</p>
+
+  <h2 class="rv" id="s6">分かったこと</h2>
+  <blockquote>機能の表より、「いま、続いているか」。</blockquote>
+  <ul>
+    <li><strong>止まったサービスが、意外に多い。</strong>調べた 7 つのうち、4 つ（Cusdis・Staticman・Commento・utterances）は、終了か、更新停止の疑いがありました。</li>
+    <li><strong>無料のサービスは、広告や追跡で払うことがある。</strong>Disqus の無料版が、そうです。</li>
+    <li><strong>書くのに GitHub のアカウントが要る</strong>方式（giscus・utterances）は、読者を、開発に近い人に絞ります。記事の読者によっては、そこが合わないこともあります。</li>
+  </ul>
+
+  <h2 class="rv" id="s7">確認できなかったこと</h2>
+  <ul>
+    <li>Disqus：公式の料金ページ（本文が JavaScript で描かれ、読めなかった。価格は、ヘルプ記事のもの）、投稿者のアカウントの条件、日本語の画面、保存先の明記、読み込みの重さ</li>
+    <li>utterances：日本語の画面、スパム対策</li>
+    <li>Cusdis：クラウド版の料金、対応する言語の一覧</li>
+    <li>Staticman：投稿者の条件、Akismet などのスパム対策、広告・追跡の記述、終了の公式な宣言</li>
+    <li>Commento：クラウド版の現状と料金、日本語の画面、終了の公式な告知</li>
+    <li>AdSense の公式ポリシーでの、コメント欄の扱い（調べていません）</li>
+  </ul>
+
+  <h2 class="rv" id="s8">出典（すべて 2026 年 10 月 8 日に確認）</h2>
+  <ul class="plain">
+    <li><a href="https://github.com/giscus/giscus" rel="noopener" target="_blank">giscus：リポジトリ</a></li>
+    <li><a href="https://giscus.app/ja" rel="noopener" target="_blank">giscus：公式の設定ページ</a></li>
+    <li><a href="https://github.com/utterance/utterances" rel="noopener" target="_blank">utterances：リポジトリ</a></li>
+    <li><a href="https://help.disqus.com/en/articles/1717110-comments-pricing-and-plans" rel="noopener" target="_blank">Disqus：料金とプラン（ヘルプ）</a></li>
+    <li><a href="https://help.disqus.com/en/articles/1717103-disqus-privacy-faq" rel="noopener" target="_blank">Disqus：プライバシー FAQ</a></li>
+    <li><a href="https://github.com/umputun/remark42" rel="noopener" target="_blank">Remark42：リポジトリ</a></li>
+    <li><a href="https://github.com/djyde/cusdis" rel="noopener" target="_blank">Cusdis：リポジトリ</a></li>
+    <li><a href="https://github.com/eduardoboucas/staticman" rel="noopener" target="_blank">Staticman：リポジトリ</a></li>
+    <li><a href="https://gitlab.com/commento/commento" rel="noopener" target="_blank">Commento：リポジトリ（GitLab）</a></li>
+  </ul>
+
+  <p class="note">公式ページは、要約を通して読んだ箇所があります。特に Disqus の価格は、載せる前に原文で確かめてください。</p>
+
+
+<!--related-->
+  <div class="rule" style="margin:40px 0 22px"></div>
+  <p class="eyebrow">ほかの記録</p>
+  <ul class="plain">
+    <li><a href="/notes/ios-sdk-compare/">iOS アプリの広告 SDK と Firebase を、公式の情報で比べる：AdMob・AppLovin MAX・LevelPlay・Supabase</a> — iOSの広告SDKとFirebase・Supabaseを公式の情報で比較。SDKの要件はページの間で食い違うことがある。確認できなかったことも書いた。</li>
+    <li><a href="/notes/hosting-compare/">静的サイトを置く場所を、公式の規約で比べる：Cloudflare Pages・Netlify・Vercel・GitHub Pages・Firebase Hosting</a> — 静的サイトの置き場を公式の規約で比較。広告を載せていいかが一番の分かれ目で、Vercel Hobby は非商用のみ。確認できなかったことも書いた。</li>
+    <li><a href="/notes/claude-vs-gemini-api/">Claude API と Gemini API を、公式の数字で比べる：小さいモデルの値段・Web検索・上限・廃止予定</a> — Claude API と Gemini API を公式の数字で比較。値段は時期で逆転し、安全装置と廃止の知らせ方は表の外にある。確認できなかったことも書いた。</li>
+  </ul>
+<!--/related-->
+
+<!--comments-->
+  <section class="comments" id="comments" data-repo="murakamikoshin/koshin-studio" data-repo-id="R_kgDOURc3ew"
+    data-category="Announcements" data-category-id="DIC_kwDOURc3e84DHTVr">
+    <h2 id="comments-h">コメント</h2>
+    <p>感想や、記事の間違いの指摘は、ここへ。書くには、GitHub のアカウントが要ります。</p>
+    <p><button type="button" class="btn ghost" id="load-comments">コメントを開く</button></p>
+    <p class="note">押すと、giscus（giscus.app）と GitHub に接続します。押さなければ、接続しません。詳しくは<a href="/privacy/">あつかい</a>に書いています。</p>
+    <div id="giscus-box"></div>
+  </section>
+<!--/comments-->
+</div>
+</main>
+
+<footer class="site"><div class="wrap">
+  <span>© 2026 Koshin Studio</span>
+  <div class="sns-row"></div>
+  <nav><a href="/about/">About</a><a href="/privacy/">あつかい</a></nav>
+</div></footer>
+<script src="/motion.js?v=1e7447ec" defer></script>
+</body>
+</html>

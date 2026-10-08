@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>iOS アプリの広告 SDK と Firebase を、公式の情報で比べる：AdMob・AppLovin MAX・LevelPlay・Supabase — 比べたもの — Koshin Studio</title>
+<meta name="description" content="iOSアプリの広告SDK（AdMob、AppLovin MAX、LevelPlay）とFirebase・Supabaseを、2026年10月8日時点の公式ページだけで比較。支払い、プライバシー要件、最低のXcodeとiOS、無料枠、確認できなかったこと。">
+<meta property="og:title" content="iOS アプリの広告 SDK と Firebase を、公式の情報で比べる：AdMob・AppLovin MAX・LevelPlay・Supabase">
+<meta property="og:description" content="iOSの広告SDKとFirebase・Supabaseを公式の情報で比較。SDKの要件はページの間で食い違うことがある。確認できなかったことも書いた。">
+<meta property="og:type" content="article">
+<meta name="theme-color" content="#fbfaf7">
+<link rel="icon" href="/favicon.ico?v=1697d589" sizes="48x48">
+<link rel="icon" href="/favicon.svg?v=b9d7922f" type="image/svg+xml" sizes="any">
+<link rel="icon" href="/assets/icon/icon-192.png?v=e2566235" type="image/png" sizes="192x192">
+<link rel="apple-touch-icon" href="/assets/icon/icon-180.png?v=84e7f0e6">
+<link rel="manifest" href="/site.webmanifest">
+<script>document.documentElement.className+=" js"</script>
+<link rel="stylesheet" href="/style.css?v=089bfce2">
+<meta name="google-adsense-account" content="ca-pub-3863314847163872">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3863314847163872" crossorigin="anonymous"></script>
+<link rel="canonical" href="https://koshinstudio.com/notes/ios-sdk-compare/">
+<meta property="og:url" content="https://koshinstudio.com/notes/ios-sdk-compare/">
+<meta property="og:site_name" content="Koshin Studio">
+<meta property="og:locale" content="ja_JP">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="alternate" type="application/rss+xml" title="Koshin Studio — Notes" href="https://koshinstudio.com/feed.xml">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BlogPosting","headline":"iOS アプリの広告 SDK と Firebase を、公式の情報で比べる：AdMob・AppLovin MAX・LevelPlay・Supabase","url":"https://koshinstudio.com/notes/ios-sdk-compare/","description":"iOSの広告SDKとFirebase・Supabaseを公式の情報で比較。SDKの要件はページの間で食い違うことがある。確認できなかったことも書いた。","datePublished":"2026-10-08","dateModified":"2026-10-08","inLanguage":"ja","image":"https://koshinstudio.com/assets/og/og_notes_ios-sdk-compare.jpg","author":{"@id":"https://koshinstudio.com#studio"},"publisher":{"@id":"https://koshinstudio.com#studio"},"mainEntityOfPage":"https://koshinstudio.com/notes/ios-sdk-compare/"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Koshin Studio","item":"https://koshinstudio.com/"},{"@type":"ListItem","position":2,"name":"Notes","item":"https://koshinstudio.com/notes/"},{"@type":"ListItem","position":3,"name":"iOS アプリの広告 SDK と Firebase を、公式の情報で比べる：AdMob・AppLovin MAX・LevelPlay・Supabase","item":"https://koshinstudio.com/notes/ios-sdk-compare/"}]}]}</script>
+<meta property="og:image" content="https://koshinstudio.com/assets/og/og_notes_ios-sdk-compare.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
+</head>
+<body>
+<canvas id="motes"></canvas>
+
+<header class="site"><div class="wrap">
+  <a class="logo" href="/"><img class="logo-mark" src="/favicon.svg?v=b9d7922f" alt="" width="28" height="28">Koshin Studio</a>
+  <nav><a href="/works/">Works</a><a href="/notes/">Notes</a><a href="/about/">About</a></nav>
+</div></header>
+
+<main><div class="wrap">
+  <nav class="crumbs" aria-label="現在地"><a href="/">Koshin Studio</a><i aria-hidden="true">›</i><a href="/notes/">Notes</a><i aria-hidden="true">›</i><span aria-current="page">iOS アプリの広告 SDK と Firebase を、公式の情報で比べる：AdMob・AppLovin MAX・LevelPlay・Supabase</span></nav>
+  <h1>iOS アプリの広告 SDK と Firebase を、公式の情報で比べる：AdMob・AppLovin MAX・LevelPlay・Supabase</h1>
+  <div class="rule"></div>
+  <p class="lead">比べたもの ／ 2026年10月</p>
+
+  <p>トレカダッシュでは、古い Mac の Xcode 15.2 に合わせて、Firebase 11.4.0 と AdMob 11.5.0 に版を固定しました（<a href="/notes/xcode152-sdk/">その記事</a>）。審査では、ITMS-91064 で却下もされています（<a href="/notes/itms-91064/">その記事</a>）。そのとき調べきれなかった周りの選択肢を、<strong>公式のページだけ</strong>で並べます。実際に使って比べたのは、AdMob と Firebase だけです。ほかは、使っていません。</p>
+  <p class="note">2026 年 10 月 8 日に確認した内容です。SDK の版や要件は、すぐ変わります。使う前に、出典で確かめてください。</p>
+<!--toc-->
+  <nav class="toc" aria-label="目次"><p>目次</p><ol><li><a href="#s1">広告 SDK：しくみと支払い</a></li><li><a href="#s2">iOS のプライバシー要件</a></li><li><a href="#s3">最低の Xcode と iOS、入れ方</a></li><li><a href="#s4">解析・バックエンド：Firebase と Supabase の無料枠</a></li><li><a href="#s5">分かったこと</a></li><li><a href="#s6">確認できなかったこと</a></li><li><a href="#s7">出典（すべて 2026 年 10 月 8 日に確認）</a></li></ol></nav>
+<!--/toc-->
+  <h2 class="rv" id="s1">広告 SDK：しくみと支払い</h2>
+  <div class="scroll rv"><table>
+    <tr><th>SDK</th><th>しくみ</th><th>最低の支払い額</th></tr>
+    <tr><td>Google AdMob</td><td>メディエーション（複数の広告ネットワークから配信する機能）あり。iOS の統合ガイドに、AppLovin・ironSource・Meta Audience Network・Unity Ads など 24 社</td><td>USD の支払いは<strong>最低 $100</strong>（公式の表）。通貨ごとに値が違う</td></tr>
+    <tr><td>AppLovin MAX</td><td>メディエーションのプラットフォーム</td><td>具体的な額は、公式 FAQ に書かれていない（ダッシュボードで確認する形）。支払いは、前月分を翌月 15 日（NET15）</td></tr>
+    <tr><td>Unity LevelPlay（ironSource）</td><td>LevelPlay の広告とメディエーション。アダプタは別パッケージ</td><td>確認できなかった</td></tr>
+    <tr><td>Meta Audience Network</td><td>単体の広告ネットワーク。AdMob のメディエーションの対象としては掲載あり</td><td>確認できなかった</td></tr>
+  </table></div>
+
+  <p><strong>Meta Audience Network については、公式の終了の告知も、継続の明言も、確認できませんでした。</strong>いま新しく入れられるのかは、公式の一次情報では確定できません。</p>
+
+  <h2 class="rv" id="s2">iOS のプライバシー要件</h2>
+  <ul>
+    <li><strong>Apple の決まり（共通）：</strong><code>NSPrivacyTracking</code> が true なら、<code>NSPrivacyTrackingDomains</code> にドメインの一覧が要ります。ユーザーが ATT（追跡の許可）を許可していないと、そのドメインへの通信は<strong>失敗し、アプリがエラーを受け取る</strong>、と Apple の文書にあります。ITMS-91064 の記事で起きたことと、一致しています。</li>
+    <li><strong>AdMob：</strong>広告を読み込む前に ATT を求めます（SDK 7.64.0 以上）。プライバシーマニフェストへの対応は 11.2.0（2024-03-14）から。<strong>トラッキングのドメインの公式な一覧は、AdMob のページでは見つけられませんでした</strong>（「存在しない」とは断定できません）。</li>
+    <li><strong>AppLovin MAX：</strong>12.4.1 以降が、プライバシーマニフェストに対応。連携する各ネットワークにも、必要な版があります（AdMob 11.2.0 以上、Meta 6.15.0 以上、Unity Ads 4.10.0 以上）。</li>
+    <li><strong>Meta：</strong>Audience Network SDK の iOS 用プライバシーマニフェストがあり、「6.15.0 に更新を」と案内。ドメインは事前に入っていて、手動で足すことは勧めていません。</li>
+    <li><strong>LevelPlay：</strong>調べた統合ページに、ATT とプライバシーマニフェストの記述は、確認できませんでした。</li>
+  </ul>
+
+  <h2 class="rv" id="s3">最低の Xcode と iOS、入れ方</h2>
+  <div class="scroll rv"><table>
+    <tr><th>SDK</th><th>最低の要件</th><th>入れ方</th></tr>
+    <tr><td>AdMob</td><td>最新は 13.11.0（2026-09-29）。リリースノートでは、最低 Xcode 26.2（13.4.0 から）。<strong>ただし、クイックスタートは「Xcode 16.0 以上」「iOS 13.0 以上」と書いていて、ページの間で食い違っている</strong></td><td>SPM（推奨）・CocoaPods・手動</td></tr>
+    <tr><td>Firebase</td><td>最新は 13.0.0（2026-10-07）。Xcode 26.2 が最低、iOS 15.0。11.12.0 から Xcode 16.2 が必須、12.0.0 から Swift 6.0 が必須</td><td>SPM が推奨。<strong>2026 年 10 月に、CocoaPods への新しい版の公開を止める</strong>と公式に明記</td></tr>
+    <tr><td>AppLovin MAX</td><td>iOS 12.0 以上、Xcode 15 以上（統合ページ）</td><td>CocoaPods・SPM・手動。SPM なら、SDK と全アダプタを SPM でそろえる（混在は、版の衝突のもと）</td></tr>
+    <tr><td>LevelPlay</td><td>統合ページは iOS 12+・Xcode 15.4+。別のページ（Unity 用）は iOS 13+・Xcode 16+（検索結果の要約）。ページの間で食い違い</td><td>CocoaPods・SPM（9.3.0 以上）・手動</td></tr>
+  </table></div>
+
+  <p>トレカダッシュが版を固定した理由は、この表でも確かめられます。AdMob の 11.6.0 は MarketplaceKit に依存して Xcode 15.3 以上が必要、Firebase の 11.12.0 以降は Xcode 16.2 が必要、という公式のリリースノートの記述は、記事と一致していました。</p>
+
+  <h2 class="rv" id="s4">解析・バックエンド：Firebase と Supabase の無料枠</h2>
+  <div class="scroll rv"><table>
+    <tr><th>サービス</th><th>公式に書かれていたこと</th></tr>
+    <tr><td>Firebase（Spark）</td><td>Firestore：保存 1GiB、読み取り 5 万回/日、書き込み 2 万回/日、削除 2 万回/日。Authentication：月間アクティブ 5 万人（電話認証は使えない）。Cloud Functions：Spark では使えない（有料の Blaze のみ）。Analytics と Cloud Messaging：上限の数字なし（無料）</td></tr>
+    <tr><td>Supabase（無料）</td><td>月間アクティブ 5 万人、データベース 500MB、ファイルの保存 1GB、通信 5GB。有効なプロジェクトは 2 つまで。<strong>1 週間操作が無いと、無料のプロジェクトは一時停止</strong></td></tr>
+  </table></div>
+
+
+  <h2 class="rv" id="s5">分かったこと</h2>
+  <blockquote>最新版に追いつけない環境では、「最低の要件」の表が、いちばん効く。</blockquote>
+  <ul>
+    <li><strong>SDK の要件は、ページの間で食い違うことがある。</strong>AdMob も LevelPlay も、リリースノートと導入の案内で、数字が違いました。両方を見て、手元でビルドして確かめるしかありません。</li>
+    <li><strong>プライバシーの設定は、SDK の外で起きる。</strong><code>NSPrivacyTracking</code> を true にしたら、ドメインも書く。Apple の側の決まりで、SDK ごとの違いではありませんでした。</li>
+    <li><strong>無料枠の止まり方を、先に見る。</strong>Supabase は、無操作で一時停止します。Firebase の Spark は、Functions が使えません。</li>
+  </ul>
+
+  <h2 class="rv" id="s6">確認できなかったこと</h2>
+  <ul>
+    <li>LevelPlay と Meta Audience Network の、最低の支払い額</li>
+    <li>Meta Audience Network の、提供状況（終了・継続）と、最低の Xcode / iOS、SPM への対応、現行の版</li>
+    <li>AppLovin の最低の支払い額の具体額、MAX SDK の最新の版（リリースノートの URL が開けなかった）</li>
+    <li>AdMob の、アクセスできる範囲での、トラッキングのドメインの公式な一覧</li>
+    <li>Firebase 11.5.0 以降の <code>FirebaseDataEncoder</code> の不具合（記事に書いたとおり、手元のビルドで確かめたことで、公式の記載は確認できなかった）</li>
+    <li>supabase-swift のプライバシーマニフェストの中身</li>
+    <li>精度や収益の比較（公式に数字が無いので、していません）</li>
+  </ul>
+
+  <h2 class="rv" id="s7">出典（すべて 2026 年 10 月 8 日に確認）</h2>
+  <ul class="plain">
+    <li><a href="https://developers.google.com/admob/ios/rel-notes" rel="noopener" target="_blank">AdMob：iOS のリリースノート</a></li>
+    <li><a href="https://developers.google.com/admob/ios/quick-start" rel="noopener" target="_blank">AdMob：iOS のクイックスタート</a></li>
+    <li><a href="https://developers.google.com/admob/ios/mediation" rel="noopener" target="_blank">AdMob：メディエーション</a></li>
+    <li><a href="https://developers.google.com/admob/ios/privacy" rel="noopener" target="_blank">AdMob：プライバシー</a></li>
+    <li><a href="https://support.google.com/admob/answer/2772208?hl=en" rel="noopener" target="_blank">AdMob：支払いのしきい値</a></li>
+    <li><a href="https://firebase.google.com/support/release-notes/ios" rel="noopener" target="_blank">Firebase：iOS のリリースノート</a></li>
+    <li><a href="https://firebase.google.com/docs/ios/installation-methods" rel="noopener" target="_blank">Firebase：導入の方法</a></li>
+    <li><a href="https://firebase.google.com/pricing" rel="noopener" target="_blank">Firebase：料金</a></li>
+    <li><a href="https://support.applovin.com/en/max/ios/overview/integration" rel="noopener" target="_blank">AppLovin：統合（iOS）</a></li>
+    <li><a href="https://support.applovin.com/en/max/ios/overview/privacy-manifests" rel="noopener" target="_blank">AppLovin：プライバシーマニフェスト</a></li>
+    <li><a href="https://docs.unity.com/en-us/grow/levelplay/sdk/ios/sdk-integration" rel="noopener" target="_blank">Unity LevelPlay：iOS SDK の統合</a></li>
+    <li><a href="https://developer.apple.com/documentation/bundleresources/privacy-manifest-files" rel="noopener" target="_blank">Apple：プライバシーマニフェストファイル</a></li>
+    <li><a href="https://supabase.com/pricing" rel="noopener" target="_blank">Supabase：料金</a></li>
+  </ul>
+
+  <p class="note">公式ページは、要約を通して読んだ箇所があります（数字は、原文と一字ずつ照らし合わせたものではありません）。載せる前に、原文を見直すことを前提にしてください。</p>
+
+
+<!--related-->
+  <div class="rule" style="margin:40px 0 22px"></div>
+  <p class="eyebrow">ほかの記録</p>
+  <ul class="plain">
+    <li><a href="/notes/comment-services/">静的サイトのコメント欄を、公式の情報で比べる：giscus・utterances・Disqus・Remark42 ほか</a> — 静的サイトのコメント欄を公式の情報で比較。調べた7つのうち4つは終了か更新停止の疑い。無料のDisqusは広告で払う。確認できなかったことも書いた。</li>
+    <li><a href="/notes/hosting-compare/">静的サイトを置く場所を、公式の規約で比べる：Cloudflare Pages・Netlify・Vercel・GitHub Pages・Firebase Hosting</a> — 静的サイトの置き場を公式の規約で比較。広告を載せていいかが一番の分かれ目で、Vercel Hobby は非商用のみ。確認できなかったことも書いた。</li>
+    <li><a href="/notes/claude-vs-gemini-api/">Claude API と Gemini API を、公式の数字で比べる：小さいモデルの値段・Web検索・上限・廃止予定</a> — Claude API と Gemini API を公式の数字で比較。値段は時期で逆転し、安全装置と廃止の知らせ方は表の外にある。確認できなかったことも書いた。</li>
+  </ul>
+<!--/related-->
+
+<!--comments-->
+  <section class="comments" id="comments" data-repo="murakamikoshin/koshin-studio" data-repo-id="R_kgDOURc3ew"
+    data-category="Announcements" data-category-id="DIC_kwDOURc3e84DHTVr">
+    <h2 id="comments-h">コメント</h2>
+    <p>感想や、記事の間違いの指摘は、ここへ。書くには、GitHub のアカウントが要ります。</p>
+    <p><button type="button" class="btn ghost" id="load-comments">コメントを開く</button></p>
+    <p class="note">押すと、giscus（giscus.app）と GitHub に接続します。押さなければ、接続しません。詳しくは<a href="/privacy/">あつかい</a>に書いています。</p>
+    <div id="giscus-box"></div>
+  </section>
+<!--/comments-->
+</div>
+</main>
+
+<footer class="site"><div class="wrap">
+  <span>© 2026 Koshin Studio</span>
+  <div class="sns-row"></div>
+  <nav><a href="/about/">About</a><a href="/privacy/">あつかい</a></nav>
+</div></footer>
+<script src="/motion.js?v=1e7447ec" defer></script>
+</body>
+</html>

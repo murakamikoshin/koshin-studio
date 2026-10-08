@@ -1,5 +1,37 @@
 [
   {
+    "slug": "comment-services",
+    "title": "静的サイトのコメント欄を、公式の情報で比べる：giscus・utterances・Disqus・Remark42 ほか",
+    "date": "2026-10-08",
+    "work": "比べたもの",
+    "url": "/notes/comment-services/",
+    "blurb": "静的サイトのコメント欄を公式の情報で比較。調べた7つのうち4つは終了か更新停止の疑い。無料のDisqusは広告で払う。確認できなかったことも書いた。"
+  },
+  {
+    "slug": "ios-sdk-compare",
+    "title": "iOS アプリの広告 SDK と Firebase を、公式の情報で比べる：AdMob・AppLovin MAX・LevelPlay・Supabase",
+    "date": "2026-10-08",
+    "work": "比べたもの",
+    "url": "/notes/ios-sdk-compare/",
+    "blurb": "iOSの広告SDKとFirebase・Supabaseを公式の情報で比較。SDKの要件はページの間で食い違うことがある。確認できなかったことも書いた。"
+  },
+  {
+    "slug": "hosting-compare",
+    "title": "静的サイトを置く場所を、公式の規約で比べる：Cloudflare Pages・Netlify・Vercel・GitHub Pages・Firebase Hosting",
+    "date": "2026-10-08",
+    "work": "比べたもの",
+    "url": "/notes/hosting-compare/",
+    "blurb": "静的サイトの置き場を公式の規約で比較。広告を載せていいかが一番の分かれ目で、Vercel Hobby は非商用のみ。確認できなかったことも書いた。"
+  },
+  {
+    "slug": "claude-vs-gemini-api",
+    "title": "Claude API と Gemini API を、公式の数字で比べる：小さいモデルの値段・Web検索・上限・廃止予定",
+    "date": "2026-10-08",
+    "work": "比べたもの",
+    "url": "/notes/claude-vs-gemini-api/",
+    "blurb": "Claude API と Gemini API を公式の数字で比較。値段は時期で逆転し、安全装置と廃止の知らせ方は表の外にある。確認できなかったことも書いた。"
+  },
+  {
     "slug": "ditto-charm",
     "title": "ポケモン「へんしんが苦手なメタモン!」のチャームを買ったら、質感がまるでおはじきだった",
     "date": "2026-10-08",
@@ -13,7 +45,8 @@
     "date": "2026-10-08",
     "work": "トレカダッシュ",
     "url": "/notes/gemini-migration/",
-    "blurb": "Anthropic の利用上限で予定外の課金が出たため Gemini へ移行。モデルの選び方（廃止予定日）、呼び出しの一本化、Web 検索の回数上限が無い問題への回路遮断器、止めるスイッチの記録。"
+    "blurb": "Anthropic の利用上限で予定外の課金が出たため Gemini へ移行。モデルの選び方（廃止予定日）、呼び出しの一本化、Web 検索の回数上限が無い問題への回路遮断器、止めるスイッチの記録。",
+    "updated": "2026-10-08"
   },
   {
     "slug": "xcode152-sdk",
