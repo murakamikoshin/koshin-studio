@@ -562,6 +562,10 @@ const noteBySlug = Object.fromEntries(notes.map((n) => [n.slug, n]));
    英語版は /en/ の下に、手で書く（機械翻訳のままは出さない） */
 const enPairs = existsSync(here + '/data/en.json') ? read('/data/en.json') : [];
 const enByPath = Object.fromEntries(enPairs.map((p) => [p.en, p]));
+/* 言語ごとの入口（/en/ /es/ /zh/ …）。data/langs.json。ここにある言語の入口どうしは、
+   日本語のトップ（/）も含めて、互いに hreflang で結ぶ。x-default は英語 */
+const I18N = existsSync(here + '/data/langs.json') ? read('/data/langs.json') : {};
+const hubPaths = Object.fromEntries(Object.values(I18N).map((l) => [l.path, true]));
 const jaToEn = Object.fromEntries(enPairs.map((p) => [p.ja, p]));
 
 /* 本名は書かない。確かめようのないことを構造化データに入れると、
@@ -654,7 +658,8 @@ function ldFor(file, url) {
       crumbs([['Koshin Studio', '/en/'], [p.title, p.en]]),
     ];
   }
-  if (rel === '/en/index.html') return [page('Koshin Studio — English'), crumbs([['Koshin Studio', '/en/']])];
+  const hm = rel.match(/^\/([a-z]{2})\/index\.html$/);
+  if (hm && I18N[hm[1]]) return [page('Koshin Studio — ' + I18N[hm[1]].label), crumbs([['Koshin Studio', I18N[hm[1]].path]])];
   const nm = rel.match(/^\/notes\/([^/]+)\/index\.html$/);
   if (nm && noteBySlug[nm[1]]) {
     const nn = noteBySlug[nm[1]];
@@ -749,8 +754,8 @@ for (const file of pages) {
   html = html.replace(/<header class="site"><div class="wrap">\s*<a class="logo" href="\/">Koshin Studio<\/a>\s*<nav>[\s\S]*?<\/nav>/,
     '<header class="site"><div class="wrap">\n  <a class="logo" href="/"><img class="logo-mark" src="/favicon.svg" alt="" width="28" height="28">Koshin Studio</a>\n  <nav><a href="/works/">Works</a><a href="/notes/">Notes</a><a href="/picks/">Picks</a><a href="/calc/">Tools</a><a href="/about/">About</a></nav>');
   html = html.replace(/(<footer class="site"><div class="wrap">[\s\S]*?)<nav>[\s\S]*?<\/nav>(\s*<\/div><\/footer>)/,
-    '$1' + (rel.startsWith('/en/')
-      ? '<nav><a href="/en/">English</a><a href="/" hreflang="ja" lang="ja">日本語</a><a href="/privacy/" hreflang="ja" lang="ja">Privacy (Japanese)</a></nav>'
+    '$1' + (I18N[rel.split('/')[1]]
+      ? '<nav><a href="/en/" hreflang="en" lang="en">English</a><a href="/" hreflang="ja" lang="ja">日本語</a><a href="/privacy/" hreflang="ja" lang="ja">Privacy</a></nav>'
       : '<nav><a href="/picks/">Picks</a><a href="/calc/">Tools</a><a href="/about/">About</a><a href="/privacy/">あつかい</a><a href="/en/" hreflang="en" lang="en">English</a></nav>') + '$2');
   html = html.replace(/<div class="sns-row">[\s\S]*?<\/div>/g, `<div class="sns-row">${socialHtml}</div>`);
   if (!/class="sns-row"/.test(html)) {
@@ -808,7 +813,8 @@ for (const file of pages) {
   }
   /* 属性付きも消えるようにする（class="crumbs" だけを見ると一致せず、
      組み直すたびに増え続けていた） */
-  const isEn = rel.startsWith('/en/');
+  const L = I18N[rel.split('/')[1]] || null;
+  const isEn = !!L;
   if (!isEn) html = html.replace(/\s*<nav class="crumbs"[^>]*>[\s\S]*?<\/nav>/g, '');
   if (trail && !isEn) {
     const items = [['Koshin Studio', '/']].concat(trail);
@@ -849,13 +855,17 @@ for (const file of pages) {
              .replace(/\n?\s*<link rel="alternate" type="application\/rss\+xml"[^>]*>/g, '')
              .replace(/\n?\s*<script type="application\/ld\+json">[\s\S]*?<\/script>/g, '');
   const ld = ldFor(file, url);
-  html = html.replace(/<html lang="[^"]*">/, `<html lang="${isEn ? 'en' : 'ja'}">`);
+  html = html.replace(/<html lang="[^"]*">/, `<html lang="${L ? L.lang : 'ja'}">`);
   const relUrl = url.slice(SITE.length);
   const pair = enByPath[relUrl] || jaToEn[relUrl];
-  const hreflangs = pair ? [
+  const hubSet = (relUrl === '/' || hubPaths[relUrl])
+    ? [['ja', '/']].concat(Object.values(I18N).map((l) => [l.lang, l.path])) : null;
+  const hreflangs = hubSet ? hubSet.map(([c, p]) => `<link rel="alternate" hreflang="${c}" href="${SITE + p}">`)
+      .concat(`<link rel="alternate" hreflang="x-default" href="${SITE + '/en/'}">`)
+    : pair ? [
     `<link rel="alternate" hreflang="ja" href="${SITE + pair.ja}">`,
     `<link rel="alternate" hreflang="en" href="${SITE + pair.en}">`,
-    `<link rel="alternate" hreflang="x-default" href="${SITE + pair.ja}">`,
+    `<link rel="alternate" hreflang="x-default" href="${SITE + pair.en}">`,
   ] : [];
   /* 言語の切り替え。印の間は組むたびに作り直す */
   html = html.replace(/\n?<!--lang-->[\s\S]*?<!--\/lang-->\n?/g, '');
@@ -869,12 +879,12 @@ for (const file of pages) {
     `<link rel="canonical" href="${url}">`,
     `<meta property="og:url" content="${url}">`,
     `<meta property="og:site_name" content="Koshin Studio">`,
-    `<meta property="og:locale" content="${isEn ? 'en_US' : 'ja_JP'}">`,
+    `<meta property="og:locale" content="${L ? L.locale : 'ja_JP'}">`,
     ...hreflangs,
     `<meta name="twitter:card" content="summary_large_image">`,
     `<link rel="alternate" type="application/rss+xml" title="Koshin Studio — Notes" href="${SITE}/feed.xml">`,
     ld ? `<script type="application/ld+json">${JSON.stringify(
-      { '@context': 'https://schema.org', '@graph': ld }).replace(/"inLanguage":"ja"/g, `"inLanguage":"${isEn ? 'en' : 'ja'}"`)}</script>` : '',
+      { '@context': 'https://schema.org', '@graph': ld }).replace(/"inLanguage":"ja"/g, `"inLanguage":"${L ? L.lang : 'ja'}"`)}</script>` : '',
   ].filter(Boolean).join('\n');
   html = html.replace('</head>', head + '\n</head>');
   /* ヘッダーのロゴ画像も、ファビコンと同じ印を付ける（絵を替えたら別の URL に） */

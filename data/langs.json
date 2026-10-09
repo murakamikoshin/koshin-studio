@@ -1,0 +1,62 @@
+{
+  "en": {
+    "path": "/en/",
+    "lang": "en",
+    "locale": "en_US",
+    "label": "English"
+  },
+  "zh": {
+    "path": "/zh/",
+    "lang": "zh-Hans",
+    "locale": "zh_CN",
+    "label": "简体中文"
+  },
+  "es": {
+    "path": "/es/",
+    "lang": "es",
+    "locale": "es_ES",
+    "label": "Español"
+  },
+  "pt": {
+    "path": "/pt/",
+    "lang": "pt-BR",
+    "locale": "pt_BR",
+    "label": "Português"
+  },
+  "fr": {
+    "path": "/fr/",
+    "lang": "fr",
+    "locale": "fr_FR",
+    "label": "Français"
+  },
+  "de": {
+    "path": "/de/",
+    "lang": "de",
+    "locale": "de_DE",
+    "label": "Deutsch"
+  },
+  "ru": {
+    "path": "/ru/",
+    "lang": "ru",
+    "locale": "ru_RU",
+    "label": "Русский"
+  },
+  "id": {
+    "path": "/id/",
+    "lang": "id",
+    "locale": "id_ID",
+    "label": "Bahasa Indonesia"
+  },
+  "ko": {
+    "path": "/ko/",
+    "lang": "ko",
+    "locale": "ko_KR",
+    "label": "한국어"
+  },
+  "tr": {
+    "path": "/tr/",
+    "lang": "tr",
+    "locale": "tr_TR",
+    "label": "Türkçe"
+  }
+}
