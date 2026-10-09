@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Calculateur de collection gacha — combien de tirages pour tout avoir ? — Koshin Studio</title>
+<meta name="description" content="Calculez combien de tirages (et d’argent) il faut pour compléter tous les types d’un gacha ou d’une machine à capsules. Moyenne, tirages pour 90 % des gens et intérêt du lot complet.">
+<meta property="og:title" content="Calculateur de collection gacha">
+<meta property="og:description" content="Combien de tirages et d’argent pour réunir tous les types ?">
+<meta property="og:type" content="article">
+<meta name="theme-color" content="#fbfaf7">
+<link rel="icon" href="/favicon.ico?v=1697d589" sizes="48x48">
+<link rel="icon" href="/favicon.svg?v=b9d7922f" type="image/svg+xml" sizes="any">
+<link rel="icon" href="/assets/icon/icon-192.png?v=e2566235" type="image/png" sizes="192x192">
+<link rel="apple-touch-icon" href="/assets/icon/icon-180.png?v=84e7f0e6">
+<link rel="manifest" href="/site.webmanifest">
+<script>document.documentElement.className+=" js"</script>
+<link rel="stylesheet" href="/style.css?v=7001672f">
+<meta name="google-adsense-account" content="ca-pub-3863314847163872">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3863314847163872" crossorigin="anonymous"></script>
+<link rel="canonical" href="https://koshinstudio.com/fr/calc/gacha/">
+<meta property="og:url" content="https://koshinstudio.com/fr/calc/gacha/">
+<meta property="og:site_name" content="Koshin Studio">
+<meta property="og:locale" content="fr_FR">
+<link rel="alternate" hreflang="ja" href="https://koshinstudio.com/calc/gacha/">
+<link rel="alternate" hreflang="en" href="https://koshinstudio.com/en/calc/gacha/">
+<link rel="alternate" hreflang="zh-Hans" href="https://koshinstudio.com/zh/calc/gacha/">
+<link rel="alternate" hreflang="es" href="https://koshinstudio.com/es/calc/gacha/">
+<link rel="alternate" hreflang="pt-BR" href="https://koshinstudio.com/pt/calc/gacha/">
+<link rel="alternate" hreflang="fr" href="https://koshinstudio.com/fr/calc/gacha/">
+<link rel="alternate" hreflang="de" href="https://koshinstudio.com/de/calc/gacha/">
+<link rel="alternate" hreflang="ru" href="https://koshinstudio.com/ru/calc/gacha/">
+<link rel="alternate" hreflang="id" href="https://koshinstudio.com/id/calc/gacha/">
+<link rel="alternate" hreflang="ko" href="https://koshinstudio.com/ko/calc/gacha/">
+<link rel="alternate" hreflang="tr" href="https://koshinstudio.com/tr/calc/gacha/">
+<link rel="alternate" hreflang="x-default" href="https://koshinstudio.com/en/calc/gacha/">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="alternate" type="application/rss+xml" title="Koshin Studio — Notes" href="https://koshinstudio.com/feed.xml">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebApplication","name":"Calculateur de collection gacha","url":"https://koshinstudio.com/fr/calc/gacha/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any (browser)","inLanguage":"fr","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"JPY"},"author":{"@id":"https://koshinstudio.com#studio"},"publisher":{"@id":"https://koshinstudio.com#studio"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Koshin Studio","item":"https://koshinstudio.com/fr/"},{"@type":"ListItem","position":2,"name":"Calculateur de collection gacha","item":"https://koshinstudio.com/fr/calc/gacha/"}]}]}</script>
+<meta property="og:image" content="https://koshinstudio.com/assets/sushitsumu-wide.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
+</head>
+<body>
+<canvas id="motes"></canvas>
+
+<header class="site"><div class="wrap">
+  <a class="logo" href="/"><img class="logo-mark" src="/favicon.svg?v=b9d7922f" alt="" width="28" height="28">Koshin Studio</a>
+  <nav><a href="/works/">Works</a><a href="/notes/">Notes</a><a href="/picks/">Picks</a><a href="/calc/">Tools</a><a href="/about/">About</a></nav>
+</div></header>
+
+<main><div class="wrap">
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/fr/">Koshin Studio</a><i aria-hidden="true">›</i><span aria-current="page">Calculateur de collection gacha</span></nav>
+  <h1>Calculateur de collection gacha</h1>
+  <div class="rule"></div>
+  <p class="lead">Combien de tirages et d’argent pour réunir tous les types ?</p>
+
+  <p>Saisissez le nombre de types et ceux que vous avez déjà. Vous obtenez la <strong>moyenne de tirages</strong>, le nombre de tirages où <strong>90 % des gens ont fini</strong>, le coût et si le lot complet est moins cher.</p>
+
+  <form class="calc" id="calc" onsubmit="return false">
+    <label>Nombre de types<input type="number" id="n" min="2" max="100" value="5" inputmode="numeric"></label>
+    <label>Types déjà possédés<input type="number" id="k" min="0" max="99" value="0" inputmode="numeric"></label>
+    <label>Prix par tirage (toute devise)<input type="number" id="price" min="0" value="300" inputmode="numeric"></label>
+    <label>Prix du lot complet (facultatif)<input type="number" id="set" min="0" placeholder="1500" inputmode="numeric"></label>
+    <label>Tirages prévus (facultatif)<input type="number" id="m" min="0" placeholder="10" inputmode="numeric"></label>
+  </form>
+
+  <div class="calc-out" id="out" aria-live="polite"></div>
+
+  <h2 class="rv">Principe</h2>
+  <p>Si vous avez <em>c</em> types, un tirage donne un nouveau type avec la probabilité <em>(n − c) / n</em>. La moyenne est <em>n × (1 + 1/2 + 1/3 + …)</em>. Le nombre des « 90 % des gens » s’obtient en avançant tirage par tirage jusqu’à ce que la probabilité d’avoir fini dépasse 90 %. Pour 5 types, simuler 200 000 personnes a donné les mêmes chiffres (moyenne 11,41 ; la moitié en 10 ; 90 % en 18 ; 99 % en 28).</p>
+
+  <h2 class="rv">Quand ça ne s’applique pas</h2>
+  <ul>
+    <li>On suppose que chaque type sort avec la même probabilité. Si certains sont plus rares (comme un secret), il faut plus de tirages que prévu.</li>
+    <li>Les machines avec un ensemble fixe de capsules (moins de doublons) ne sont pas prises en charge.</li>
+    <li>C’est un calcul de probabilités. Cela ne signifie pas que vous finirez la collection.</li>
+  </ul>
+
+  <p class="note">Pour un seul objet ou un pity (garanti au tirage N), utilisez le <a href="/fr/calc/gacha-rate/">calculateur de taux et de pity</a>.</p>
+
+  <script src="/calc/i18n.js" defer></script>
+  <script src="/calc/gacha/gacha.js" defer></script>
+  <script src="/calc/gacha/page.js" defer></script>
+</div>
+</main>
+
+<footer class="site"><div class="wrap"></div></footer>
+<script src="/motion.js?v=1e7447ec" defer></script>
+</body>
+</html>

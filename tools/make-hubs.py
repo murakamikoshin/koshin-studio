@@ -79,6 +79,8 @@ LOGS = [('/en/notes/itms-91064/', 'ITMS-91064 “Invalid Binary”: NSPrivacyTra
  ('/en/notes/xcode152-sdk/', 'Firebase 12 does not work with Xcode 15.2: why I pinned Firebase 11.4.0 and AdMob 11.5.0'),
  ('/en/notes/torecadash-watchdog/', 'iOS app freezes and is killed (0x8BADF00D)')]
 e = lambda x: H.escape(x, quote=True)
+exec(open('tools/calc-pages-data.py', encoding='utf8').read())
+TOOLS_H = dict(en='Tools', zh='工具', es='Herramientas', pt='Ferramentas', fr='Outils', de='Werkzeuge', ru='Инструменты', id='Alat', ko='도구', tr='Araçlar')
 for code, L in langs.items():
     t = T[code]
     h = re.sub(r'<title>.*?</title>', f'<title>{e(t["title"])}</title>', head0, flags=re.S)
@@ -95,6 +97,12 @@ for code, L in langs.items():
   <p>{e(t["log"])}</p>
   <ul class="plain">
 ''' + '\n'.join(f'    <li><a href="{u}" hreflang="en" lang="en">{e(n)}</a></li>' for u, n in LOGS) + '\n  </ul>\n'
+    tools = f'''  <h2 class="rv">{e(TOOLS_H[code])}</h2>
+  <ul class="plain">
+    <li><a href="{L["path"]}calc/gacha/">{e(PG[code]["g"]["h1"])}</a> — {e(PG[code]["g"]["lead"])}</li>
+    <li><a href="{L["path"]}calc/gacha-rate/">{e(PG[code]["r"]["h1"])}</a> — {e(PG[code]["r"]["lead"])}</li>
+  </ul>
+'''
     main = f'''<main><div class="wrap">
   <h1>Koshin Studio</h1>
   <div class="rule"></div>
@@ -104,6 +112,7 @@ for code, L in langs.items():
   <h2 class="rv">{e(t["h_play"])}</h2>
 {play}
 
+{tools}
 {logs}
   <h2 class="rv">{e(t["h_lang"])}</h2>
   <p>{langlinks}</p>

@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Калькулятор коллекции гачи — сколько круток, чтобы собрать всё? — Koshin Studio</title>
+<meta name="description" content="Рассчитайте, сколько круток (и денег) нужно, чтобы собрать все виды в гаче или капсульном автомате. Среднее, число круток для 90% игроков и выгодность полного набора.">
+<meta property="og:title" content="Калькулятор коллекции гачи">
+<meta property="og:description" content="Сколько круток и денег нужно, чтобы собрать все виды?">
+<meta property="og:type" content="article">
+<meta name="theme-color" content="#fbfaf7">
+<link rel="icon" href="/favicon.ico?v=1697d589" sizes="48x48">
+<link rel="icon" href="/favicon.svg?v=b9d7922f" type="image/svg+xml" sizes="any">
+<link rel="icon" href="/assets/icon/icon-192.png?v=e2566235" type="image/png" sizes="192x192">
+<link rel="apple-touch-icon" href="/assets/icon/icon-180.png?v=84e7f0e6">
+<link rel="manifest" href="/site.webmanifest">
+<script>document.documentElement.className+=" js"</script>
+<link rel="stylesheet" href="/style.css?v=7001672f">
+<meta name="google-adsense-account" content="ca-pub-3863314847163872">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3863314847163872" crossorigin="anonymous"></script>
+<link rel="canonical" href="https://koshinstudio.com/ru/calc/gacha/">
+<meta property="og:url" content="https://koshinstudio.com/ru/calc/gacha/">
+<meta property="og:site_name" content="Koshin Studio">
+<meta property="og:locale" content="ru_RU">
+<link rel="alternate" hreflang="ja" href="https://koshinstudio.com/calc/gacha/">
+<link rel="alternate" hreflang="en" href="https://koshinstudio.com/en/calc/gacha/">
+<link rel="alternate" hreflang="zh-Hans" href="https://koshinstudio.com/zh/calc/gacha/">
+<link rel="alternate" hreflang="es" href="https://koshinstudio.com/es/calc/gacha/">
+<link rel="alternate" hreflang="pt-BR" href="https://koshinstudio.com/pt/calc/gacha/">
+<link rel="alternate" hreflang="fr" href="https://koshinstudio.com/fr/calc/gacha/">
+<link rel="alternate" hreflang="de" href="https://koshinstudio.com/de/calc/gacha/">
+<link rel="alternate" hreflang="ru" href="https://koshinstudio.com/ru/calc/gacha/">
+<link rel="alternate" hreflang="id" href="https://koshinstudio.com/id/calc/gacha/">
+<link rel="alternate" hreflang="ko" href="https://koshinstudio.com/ko/calc/gacha/">
+<link rel="alternate" hreflang="tr" href="https://koshinstudio.com/tr/calc/gacha/">
+<link rel="alternate" hreflang="x-default" href="https://koshinstudio.com/en/calc/gacha/">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="alternate" type="application/rss+xml" title="Koshin Studio — Notes" href="https://koshinstudio.com/feed.xml">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebApplication","name":"Калькулятор коллекции гачи","url":"https://koshinstudio.com/ru/calc/gacha/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any (browser)","inLanguage":"ru","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"JPY"},"author":{"@id":"https://koshinstudio.com#studio"},"publisher":{"@id":"https://koshinstudio.com#studio"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Koshin Studio","item":"https://koshinstudio.com/ru/"},{"@type":"ListItem","position":2,"name":"Калькулятор коллекции гачи","item":"https://koshinstudio.com/ru/calc/gacha/"}]}]}</script>
+<meta property="og:image" content="https://koshinstudio.com/assets/sushitsumu-wide.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
+</head>
+<body>
+<canvas id="motes"></canvas>
+
+<header class="site"><div class="wrap">
+  <a class="logo" href="/"><img class="logo-mark" src="/favicon.svg?v=b9d7922f" alt="" width="28" height="28">Koshin Studio</a>
+  <nav><a href="/works/">Works</a><a href="/notes/">Notes</a><a href="/picks/">Picks</a><a href="/calc/">Tools</a><a href="/about/">About</a></nav>
+</div></header>
+
+<main><div class="wrap">
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/ru/">Koshin Studio</a><i aria-hidden="true">›</i><span aria-current="page">Калькулятор коллекции гачи</span></nav>
+  <h1>Калькулятор коллекции гачи</h1>
+  <div class="rule"></div>
+  <p class="lead">Сколько круток и денег нужно, чтобы собрать все виды?</p>
+
+  <p>Введите число видов и сколько у вас уже есть. Вы получите <strong>среднее число круток</strong>, число круток, за которое <strong>собирают 90% игроков</strong>, стоимость и выгоду полного набора.</p>
+
+  <form class="calc" id="calc" onsubmit="return false">
+    <label>Число видов<input type="number" id="n" min="2" max="100" value="5" inputmode="numeric"></label>
+    <label>Сколько видов уже есть<input type="number" id="k" min="0" max="99" value="0" inputmode="numeric"></label>
+    <label>Цена одной крутки (любая валюта)<input type="number" id="price" min="0" value="300" inputmode="numeric"></label>
+    <label>Цена полного набора (необязательно)<input type="number" id="set" min="0" placeholder="1500" inputmode="numeric"></label>
+    <label>Планируемое число круток (необязательно)<input type="number" id="m" min="0" placeholder="10" inputmode="numeric"></label>
+  </form>
+
+  <div class="calc-out" id="out" aria-live="polite"></div>
+
+  <h2 class="rv">Как это работает</h2>
+  <p>Если у вас <em>c</em> видов, новая выпадает с вероятностью <em>(n − c) / n</em>. Среднее — <em>n × (1 + 1/2 + 1/3 + …)</em>. Число для «90% игроков» находится пошагово, пока вероятность закончить не превысит 90%. Для 5 видов симуляция 200 000 игроков дала то же (среднее 11,41; половина — за 10; 90% — за 18; 99% — за 28).</p>
+
+  <h2 class="rv">Когда это не применимо</h2>
+  <ul>
+    <li>Предполагается, что каждый вид выпадает с одинаковой вероятностью. Если есть редкие (например, секретный), понадобится больше круток, чем показано.</li>
+    <li>Автоматы с фиксированным набором капсул (меньше повторов) не поддерживаются.</li>
+    <li>Это расчёт вероятностей. Он не означает, что вы обязательно соберёте коллекцию.</li>
+  </ul>
+
+  <p class="note">Для одного предмета или гаранта (гарантия на N-й крутке) используйте <a href="/ru/calc/gacha-rate/">калькулятор шанса и гаранта</a>.</p>
+
+  <script src="/calc/i18n.js" defer></script>
+  <script src="/calc/gacha/gacha.js" defer></script>
+  <script src="/calc/gacha/page.js" defer></script>
+</div>
+</main>
+
+<footer class="site"><div class="wrap"></div></footer>
+<script src="/motion.js?v=1e7447ec" defer></script>
+</body>
+</html>

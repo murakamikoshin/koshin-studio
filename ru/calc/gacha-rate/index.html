@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Калькулятор шанса и гаранта гачи — сколько круток до выпадения? — Koshin Studio</title>
+<meta name="description" content="Введите шанс выпадения в гаче (%) и узнайте, сколько круток нужно. Поддерживает несколько копий и гарант (гарантия на N-й крутке). Среднее, число круток для 90% игроков и стоимость.">
+<meta property="og:title" content="Калькулятор шанса и гаранта гачи">
+<meta property="og:description" content="Сколько круток нужно при таком шансе?">
+<meta property="og:type" content="article">
+<meta name="theme-color" content="#fbfaf7">
+<link rel="icon" href="/favicon.ico?v=1697d589" sizes="48x48">
+<link rel="icon" href="/favicon.svg?v=b9d7922f" type="image/svg+xml" sizes="any">
+<link rel="icon" href="/assets/icon/icon-192.png?v=e2566235" type="image/png" sizes="192x192">
+<link rel="apple-touch-icon" href="/assets/icon/icon-180.png?v=84e7f0e6">
+<link rel="manifest" href="/site.webmanifest">
+<script>document.documentElement.className+=" js"</script>
+<link rel="stylesheet" href="/style.css?v=7001672f">
+<meta name="google-adsense-account" content="ca-pub-3863314847163872">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3863314847163872" crossorigin="anonymous"></script>
+<link rel="canonical" href="https://koshinstudio.com/ru/calc/gacha-rate/">
+<meta property="og:url" content="https://koshinstudio.com/ru/calc/gacha-rate/">
+<meta property="og:site_name" content="Koshin Studio">
+<meta property="og:locale" content="ru_RU">
+<link rel="alternate" hreflang="ja" href="https://koshinstudio.com/calc/gacha-rate/">
+<link rel="alternate" hreflang="en" href="https://koshinstudio.com/en/calc/gacha-rate/">
+<link rel="alternate" hreflang="zh-Hans" href="https://koshinstudio.com/zh/calc/gacha-rate/">
+<link rel="alternate" hreflang="es" href="https://koshinstudio.com/es/calc/gacha-rate/">
+<link rel="alternate" hreflang="pt-BR" href="https://koshinstudio.com/pt/calc/gacha-rate/">
+<link rel="alternate" hreflang="fr" href="https://koshinstudio.com/fr/calc/gacha-rate/">
+<link rel="alternate" hreflang="de" href="https://koshinstudio.com/de/calc/gacha-rate/">
+<link rel="alternate" hreflang="ru" href="https://koshinstudio.com/ru/calc/gacha-rate/">
+<link rel="alternate" hreflang="id" href="https://koshinstudio.com/id/calc/gacha-rate/">
+<link rel="alternate" hreflang="ko" href="https://koshinstudio.com/ko/calc/gacha-rate/">
+<link rel="alternate" hreflang="tr" href="https://koshinstudio.com/tr/calc/gacha-rate/">
+<link rel="alternate" hreflang="x-default" href="https://koshinstudio.com/en/calc/gacha-rate/">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="alternate" type="application/rss+xml" title="Koshin Studio — Notes" href="https://koshinstudio.com/feed.xml">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebApplication","name":"Калькулятор шанса и гаранта гачи","url":"https://koshinstudio.com/ru/calc/gacha-rate/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any (browser)","inLanguage":"ru","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"JPY"},"author":{"@id":"https://koshinstudio.com#studio"},"publisher":{"@id":"https://koshinstudio.com#studio"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Koshin Studio","item":"https://koshinstudio.com/ru/"},{"@type":"ListItem","position":2,"name":"Калькулятор шанса и гаранта гачи","item":"https://koshinstudio.com/ru/calc/gacha-rate/"}]}]}</script>
+<meta property="og:image" content="https://koshinstudio.com/assets/sushitsumu-wide.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
+</head>
+<body>
+<canvas id="motes"></canvas>
+
+<header class="site"><div class="wrap">
+  <a class="logo" href="/"><img class="logo-mark" src="/favicon.svg?v=b9d7922f" alt="" width="28" height="28">Koshin Studio</a>
+  <nav><a href="/works/">Works</a><a href="/notes/">Notes</a><a href="/picks/">Picks</a><a href="/calc/">Tools</a><a href="/about/">About</a></nav>
+</div></header>
+
+<main><div class="wrap">
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/ru/">Koshin Studio</a><i aria-hidden="true">›</i><span aria-current="page">Калькулятор шанса и гаранта гачи</span></nav>
+  <h1>Калькулятор шанса и гаранта гачи</h1>
+  <div class="rule"></div>
+  <p class="lead">Сколько круток нужно при таком шансе?</p>
+
+  <p>Введите <strong>шанс выпадения (%)</strong>. Вы увидите, сколько нужно круток: среднее и числа, за которые успеха добиваются 50%, 90% и 99% игроков. Поддерживаются также <strong>нужное количество</strong> и <strong>гарант</strong> (гарантия на N-й крутке).</p>
+
+  <form class="calc" id="calc" onsubmit="return false">
+    <label>Шанс выпадения (%)<input type="number" id="p" min="0.001" max="100" step="any" value="3" inputmode="decimal"></label>
+    <label>Нужное количество<input type="number" id="k" min="1" max="10" value="1" inputmode="numeric"></label>
+    <label>Гарант (гарантия на N-й крутке, необязательно)<input type="number" id="N" min="2" max="500" placeholder="90" inputmode="numeric"></label>
+    <label>Цена одной крутки (любая валюта, необязательно)<input type="number" id="price" min="0" placeholder="300" inputmode="numeric"></label>
+    <label>Планируемое число круток (необязательно)<input type="number" id="m" min="0" placeholder="100" inputmode="numeric"></label>
+  </form>
+
+  <div class="calc-out" id="out" aria-live="polite"></div>
+
+  <h2 class="rv">Как это работает</h2>
+  <p>Без гаранта число круток до первого успеха подчиняется геометрическому распределению с вероятностью <em>p</em>; для <em>k</em> копий среднее — <em>k ÷ p</em>. С гарантом на <em>N</em> крутка <em>N</em> гарантирована, а после выпадения счёт начинается заново. 3% не значит «гарантия за 33 крутки»: после 100 круток примерно у 5% игроков всё ещё ничего нет.</p>
+
+  <h2 class="rv">Когда это не применимо</h2>
+  <ul>
+    <li>Берите опубликованный шанс как есть. Калькулятор не знает, точен ли он.</li>
+    <li>Предполагается, что каждая крутка независима. Игры, где шанс растёт по мере круток (мягкий гарант), не поддерживаются.</li>
+    <li>Здесь гарант — «гарантия на N-й крутке, затем счёт заново». Обмены и переносимые гаранты не учитываются.</li>
+  </ul>
+
+  <p class="note">Чтобы собрать все виды, используйте <a href="/ru/calc/gacha/">калькулятор коллекции</a>.</p>
+
+  <script src="/calc/i18n.js" defer></script>
+  <script src="/calc/gacha-rate/rate.js" defer></script>
+  <script src="/calc/gacha-rate/page.js" defer></script>
+</div>
+</main>
+
+<footer class="site"><div class="wrap"></div></footer>
+<script src="/motion.js?v=1e7447ec" defer></script>
+</body>
+</html>

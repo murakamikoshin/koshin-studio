@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Calculadora de probabilidad y garantía gacha — ¿cuántas tiradas para conseguirlo? — Koshin Studio</title>
+<meta name="description" content="Introduce la probabilidad de un gacha (%) y calcula cuántas tiradas hacen falta. Admite varias copias y garantía (seguro en la tirada N). Media, tiradas para el 90 % de la gente y coste.">
+<meta property="og:title" content="Calculadora de probabilidad y garantía gacha">
+<meta property="og:description" content="Según la probabilidad, ¿cuántas tiradas hacen falta?">
+<meta property="og:type" content="article">
+<meta name="theme-color" content="#fbfaf7">
+<link rel="icon" href="/favicon.ico?v=1697d589" sizes="48x48">
+<link rel="icon" href="/favicon.svg?v=b9d7922f" type="image/svg+xml" sizes="any">
+<link rel="icon" href="/assets/icon/icon-192.png?v=e2566235" type="image/png" sizes="192x192">
+<link rel="apple-touch-icon" href="/assets/icon/icon-180.png?v=84e7f0e6">
+<link rel="manifest" href="/site.webmanifest">
+<script>document.documentElement.className+=" js"</script>
+<link rel="stylesheet" href="/style.css?v=7001672f">
+<meta name="google-adsense-account" content="ca-pub-3863314847163872">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3863314847163872" crossorigin="anonymous"></script>
+<link rel="canonical" href="https://koshinstudio.com/es/calc/gacha-rate/">
+<meta property="og:url" content="https://koshinstudio.com/es/calc/gacha-rate/">
+<meta property="og:site_name" content="Koshin Studio">
+<meta property="og:locale" content="es_ES">
+<link rel="alternate" hreflang="ja" href="https://koshinstudio.com/calc/gacha-rate/">
+<link rel="alternate" hreflang="en" href="https://koshinstudio.com/en/calc/gacha-rate/">
+<link rel="alternate" hreflang="zh-Hans" href="https://koshinstudio.com/zh/calc/gacha-rate/">
+<link rel="alternate" hreflang="es" href="https://koshinstudio.com/es/calc/gacha-rate/">
+<link rel="alternate" hreflang="pt-BR" href="https://koshinstudio.com/pt/calc/gacha-rate/">
+<link rel="alternate" hreflang="fr" href="https://koshinstudio.com/fr/calc/gacha-rate/">
+<link rel="alternate" hreflang="de" href="https://koshinstudio.com/de/calc/gacha-rate/">
+<link rel="alternate" hreflang="ru" href="https://koshinstudio.com/ru/calc/gacha-rate/">
+<link rel="alternate" hreflang="id" href="https://koshinstudio.com/id/calc/gacha-rate/">
+<link rel="alternate" hreflang="ko" href="https://koshinstudio.com/ko/calc/gacha-rate/">
+<link rel="alternate" hreflang="tr" href="https://koshinstudio.com/tr/calc/gacha-rate/">
+<link rel="alternate" hreflang="x-default" href="https://koshinstudio.com/en/calc/gacha-rate/">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="alternate" type="application/rss+xml" title="Koshin Studio — Notes" href="https://koshinstudio.com/feed.xml">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebApplication","name":"Calculadora de probabilidad y garantía gacha","url":"https://koshinstudio.com/es/calc/gacha-rate/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any (browser)","inLanguage":"es","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"JPY"},"author":{"@id":"https://koshinstudio.com#studio"},"publisher":{"@id":"https://koshinstudio.com#studio"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Koshin Studio","item":"https://koshinstudio.com/es/"},{"@type":"ListItem","position":2,"name":"Calculadora de probabilidad y garantía gacha","item":"https://koshinstudio.com/es/calc/gacha-rate/"}]}]}</script>
+<meta property="og:image" content="https://koshinstudio.com/assets/sushitsumu-wide.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
+</head>
+<body>
+<canvas id="motes"></canvas>
+
+<header class="site"><div class="wrap">
+  <a class="logo" href="/"><img class="logo-mark" src="/favicon.svg?v=b9d7922f" alt="" width="28" height="28">Koshin Studio</a>
+  <nav><a href="/works/">Works</a><a href="/notes/">Notes</a><a href="/picks/">Picks</a><a href="/calc/">Tools</a><a href="/about/">About</a></nav>
+</div></header>
+
+<main><div class="wrap">
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/es/">Koshin Studio</a><i aria-hidden="true">›</i><span aria-current="page">Calculadora de probabilidad y garantía gacha</span></nav>
+  <h1>Calculadora de probabilidad y garantía gacha</h1>
+  <div class="rule"></div>
+  <p class="lead">Según la probabilidad, ¿cuántas tiradas hacen falta?</p>
+
+  <p>Introduce la <strong>probabilidad (%)</strong>. Verás cuántas tiradas hacen falta: la media y las tiradas en las que lo consigue el 50 %, el 90 % y el 99 %. También admite <strong>cuántos quieres</strong> y una <strong>garantía</strong> (segura en la tirada N).</p>
+
+  <form class="calc" id="calc" onsubmit="return false">
+    <label>Probabilidad (%)<input type="number" id="p" min="0.001" max="100" step="any" value="3" inputmode="decimal"></label>
+    <label>Cuántos quieres<input type="number" id="k" min="1" max="10" value="1" inputmode="numeric"></label>
+    <label>Garantía (segura en la tirada N, opcional)<input type="number" id="N" min="2" max="500" placeholder="90" inputmode="numeric"></label>
+    <label>Precio por tirada (cualquier moneda, opcional)<input type="number" id="price" min="0" placeholder="300" inputmode="numeric"></label>
+    <label>Tiradas previstas (opcional)<input type="number" id="m" min="0" placeholder="100" inputmode="numeric"></label>
+  </form>
+
+  <div class="calc-out" id="out" aria-live="polite"></div>
+
+  <h2 class="rv">Cómo funciona</h2>
+  <p>Sin garantía, las tiradas hasta el primer acierto siguen una distribución geométrica con probabilidad <em>p</em>; para <em>k</em> copias la media es <em>k ÷ p</em>. Con garantía en <em>N</em>, la tirada <em>N</em> es segura y la cuenta se reinicia tras un acierto. Un 3 % no significa «seguro en 33 tiradas»: tras 100 tiradas, cerca del 5 % de la gente sigue sin nada.</p>
+
+  <h2 class="rv">Cuándo no se aplica</h2>
+  <ul>
+    <li>Usa la probabilidad publicada tal cual. La calculadora no puede saber si es exacta.</li>
+    <li>Supone que cada tirada es independiente. Los juegos cuya probabilidad sube al tirar (garantía blanda) no están soportados.</li>
+    <li>Aquí la garantía es «segura en la tirada N y se reinicia». No incluye canjes ni garantías acumulables.</li>
+  </ul>
+
+  <p class="note">Para conseguir todos los tipos, usa la <a href="/es/calc/gacha/">calculadora de colección</a>.</p>
+
+  <script src="/calc/i18n.js" defer></script>
+  <script src="/calc/gacha-rate/rate.js" defer></script>
+  <script src="/calc/gacha-rate/page.js" defer></script>
+</div>
+</main>
+
+<footer class="site"><div class="wrap"></div></footer>
+<script src="/motion.js?v=1e7447ec" defer></script>
+</body>
+</html>

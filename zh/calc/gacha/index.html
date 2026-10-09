@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="zh-Hans">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>扭蛋集齐计算器 — 集齐全部种类要抽几次？ — Koshin Studio</title>
+<meta name="description" content="计算集齐扭蛋或抽卡全部种类需要多少抽、多少钱。给出平均次数、90% 的人集齐所需次数，以及买套装是否划算。">
+<meta property="og:title" content="扭蛋集齐计算器">
+<meta property="og:description" content="集齐全部种类，要抽几次、花多少钱？">
+<meta property="og:type" content="article">
+<meta name="theme-color" content="#fbfaf7">
+<link rel="icon" href="/favicon.ico?v=1697d589" sizes="48x48">
+<link rel="icon" href="/favicon.svg?v=b9d7922f" type="image/svg+xml" sizes="any">
+<link rel="icon" href="/assets/icon/icon-192.png?v=e2566235" type="image/png" sizes="192x192">
+<link rel="apple-touch-icon" href="/assets/icon/icon-180.png?v=84e7f0e6">
+<link rel="manifest" href="/site.webmanifest">
+<script>document.documentElement.className+=" js"</script>
+<link rel="stylesheet" href="/style.css?v=7001672f">
+<meta name="google-adsense-account" content="ca-pub-3863314847163872">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3863314847163872" crossorigin="anonymous"></script>
+<link rel="canonical" href="https://koshinstudio.com/zh/calc/gacha/">
+<meta property="og:url" content="https://koshinstudio.com/zh/calc/gacha/">
+<meta property="og:site_name" content="Koshin Studio">
+<meta property="og:locale" content="zh_CN">
+<link rel="alternate" hreflang="ja" href="https://koshinstudio.com/calc/gacha/">
+<link rel="alternate" hreflang="en" href="https://koshinstudio.com/en/calc/gacha/">
+<link rel="alternate" hreflang="zh-Hans" href="https://koshinstudio.com/zh/calc/gacha/">
+<link rel="alternate" hreflang="es" href="https://koshinstudio.com/es/calc/gacha/">
+<link rel="alternate" hreflang="pt-BR" href="https://koshinstudio.com/pt/calc/gacha/">
+<link rel="alternate" hreflang="fr" href="https://koshinstudio.com/fr/calc/gacha/">
+<link rel="alternate" hreflang="de" href="https://koshinstudio.com/de/calc/gacha/">
+<link rel="alternate" hreflang="ru" href="https://koshinstudio.com/ru/calc/gacha/">
+<link rel="alternate" hreflang="id" href="https://koshinstudio.com/id/calc/gacha/">
+<link rel="alternate" hreflang="ko" href="https://koshinstudio.com/ko/calc/gacha/">
+<link rel="alternate" hreflang="tr" href="https://koshinstudio.com/tr/calc/gacha/">
+<link rel="alternate" hreflang="x-default" href="https://koshinstudio.com/en/calc/gacha/">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="alternate" type="application/rss+xml" title="Koshin Studio — Notes" href="https://koshinstudio.com/feed.xml">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebApplication","name":"扭蛋集齐计算器","url":"https://koshinstudio.com/zh/calc/gacha/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any (browser)","inLanguage":"zh-Hans","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"JPY"},"author":{"@id":"https://koshinstudio.com#studio"},"publisher":{"@id":"https://koshinstudio.com#studio"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Koshin Studio","item":"https://koshinstudio.com/zh/"},{"@type":"ListItem","position":2,"name":"扭蛋集齐计算器","item":"https://koshinstudio.com/zh/calc/gacha/"}]}]}</script>
+<meta property="og:image" content="https://koshinstudio.com/assets/sushitsumu-wide.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
+</head>
+<body>
+<canvas id="motes"></canvas>
+
+<header class="site"><div class="wrap">
+  <a class="logo" href="/"><img class="logo-mark" src="/favicon.svg?v=b9d7922f" alt="" width="28" height="28">Koshin Studio</a>
+  <nav><a href="/works/">Works</a><a href="/notes/">Notes</a><a href="/picks/">Picks</a><a href="/calc/">Tools</a><a href="/about/">About</a></nav>
+</div></header>
+
+<main><div class="wrap">
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/zh/">Koshin Studio</a><i aria-hidden="true">›</i><span aria-current="page">扭蛋集齐计算器</span></nav>
+  <h1>扭蛋集齐计算器</h1>
+  <div class="rule"></div>
+  <p class="lead">集齐全部种类，要抽几次、花多少钱？</p>
+
+  <p>输入种类数和已拥有的种类数，就能得到<strong>平均抽数</strong>、<strong>90% 的人集齐所需抽数</strong>、花费，以及套装是否更划算。</p>
+
+  <form class="calc" id="calc" onsubmit="return false">
+    <label>种类数<input type="number" id="n" min="2" max="100" value="5" inputmode="numeric"></label>
+    <label>已拥有的种类数<input type="number" id="k" min="0" max="99" value="0" inputmode="numeric"></label>
+    <label>单抽价格（任意货币）<input type="number" id="price" min="0" value="300" inputmode="numeric"></label>
+    <label>套装价格（可选）<input type="number" id="set" min="0" placeholder="1500" inputmode="numeric"></label>
+    <label>计划抽数（可选）<input type="number" id="m" min="0" placeholder="10" inputmode="numeric"></label>
+  </form>
+
+  <div class="calc-out" id="out" aria-live="polite"></div>
+
+  <h2 class="rv">计算原理</h2>
+  <p>已拥有 <em>c</em> 种时，抽一次出新种类的概率是 <em>(n − c) / n</em>。平均次数为 <em>n × (1 + 1/2 + 1/3 + …)</em>。“90% 的人”的抽数，是逐次推进，直到集齐概率超过 90% 为止。以 5 种为例，模拟 20 万人的结果与计算一致（平均 11.41，一半 10 抽内，90% 在 18 抽内，99% 在 28 抽内）。</p>
+
+  <h2 class="rv">不适用的情况</h2>
+  <ul>
+    <li>前提是每次每个种类出现的概率相同。如果有稀有款（如隐藏款），集齐需要的抽数比这里更多。</li>
+    <li>机器里装有固定扭蛋组合的情况（重复更少）不支持。</li>
+    <li>这只是概率计算，并不意味着一定能集齐。</li>
+  </ul>
+
+  <p class="note">只想要 1 个、或有保底（第 N 抽必出）时，请用<a href="/zh/calc/gacha-rate/">爆率与保底计算器</a>。</p>
+
+  <script src="/calc/i18n.js" defer></script>
+  <script src="/calc/gacha/gacha.js" defer></script>
+  <script src="/calc/gacha/page.js" defer></script>
+</div>
+</main>
+
+<footer class="site"><div class="wrap"></div></footer>
+<script src="/motion.js?v=1e7447ec" defer></script>
+</body>
+</html>

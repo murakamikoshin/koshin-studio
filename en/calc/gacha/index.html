@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Gacha completion calculator — how many pulls to collect every type? — Koshin Studio</title>
+<meta name="description" content="Calculate how many pulls (and how much money) it takes to collect every type in a gacha or capsule machine. Average, the number 90% of people finish within, and whether a complete set is worth it.">
+<meta property="og:title" content="Gacha completion calculator">
+<meta property="og:description" content="How many pulls, and how much money, to collect every type?">
+<meta property="og:type" content="article">
+<meta name="theme-color" content="#fbfaf7">
+<link rel="icon" href="/favicon.ico?v=1697d589" sizes="48x48">
+<link rel="icon" href="/favicon.svg?v=b9d7922f" type="image/svg+xml" sizes="any">
+<link rel="icon" href="/assets/icon/icon-192.png?v=e2566235" type="image/png" sizes="192x192">
+<link rel="apple-touch-icon" href="/assets/icon/icon-180.png?v=84e7f0e6">
+<link rel="manifest" href="/site.webmanifest">
+<script>document.documentElement.className+=" js"</script>
+<link rel="stylesheet" href="/style.css?v=7001672f">
+<meta name="google-adsense-account" content="ca-pub-3863314847163872">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3863314847163872" crossorigin="anonymous"></script>
+<link rel="canonical" href="https://koshinstudio.com/en/calc/gacha/">
+<meta property="og:url" content="https://koshinstudio.com/en/calc/gacha/">
+<meta property="og:site_name" content="Koshin Studio">
+<meta property="og:locale" content="en_US">
+<link rel="alternate" hreflang="ja" href="https://koshinstudio.com/calc/gacha/">
+<link rel="alternate" hreflang="en" href="https://koshinstudio.com/en/calc/gacha/">
+<link rel="alternate" hreflang="zh-Hans" href="https://koshinstudio.com/zh/calc/gacha/">
+<link rel="alternate" hreflang="es" href="https://koshinstudio.com/es/calc/gacha/">
+<link rel="alternate" hreflang="pt-BR" href="https://koshinstudio.com/pt/calc/gacha/">
+<link rel="alternate" hreflang="fr" href="https://koshinstudio.com/fr/calc/gacha/">
+<link rel="alternate" hreflang="de" href="https://koshinstudio.com/de/calc/gacha/">
+<link rel="alternate" hreflang="ru" href="https://koshinstudio.com/ru/calc/gacha/">
+<link rel="alternate" hreflang="id" href="https://koshinstudio.com/id/calc/gacha/">
+<link rel="alternate" hreflang="ko" href="https://koshinstudio.com/ko/calc/gacha/">
+<link rel="alternate" hreflang="tr" href="https://koshinstudio.com/tr/calc/gacha/">
+<link rel="alternate" hreflang="x-default" href="https://koshinstudio.com/en/calc/gacha/">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="alternate" type="application/rss+xml" title="Koshin Studio — Notes" href="https://koshinstudio.com/feed.xml">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebApplication","name":"Gacha completion calculator","url":"https://koshinstudio.com/en/calc/gacha/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any (browser)","inLanguage":"en","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"JPY"},"author":{"@id":"https://koshinstudio.com#studio"},"publisher":{"@id":"https://koshinstudio.com#studio"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Koshin Studio","item":"https://koshinstudio.com/en/"},{"@type":"ListItem","position":2,"name":"Gacha completion calculator","item":"https://koshinstudio.com/en/calc/gacha/"}]}]}</script>
+<meta property="og:image" content="https://koshinstudio.com/assets/sushitsumu-wide.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
+</head>
+<body>
+<canvas id="motes"></canvas>
+
+<header class="site"><div class="wrap">
+  <a class="logo" href="/"><img class="logo-mark" src="/favicon.svg?v=b9d7922f" alt="" width="28" height="28">Koshin Studio</a>
+  <nav><a href="/works/">Works</a><a href="/notes/">Notes</a><a href="/picks/">Picks</a><a href="/calc/">Tools</a><a href="/about/">About</a></nav>
+</div></header>
+
+<main><div class="wrap">
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/en/">Koshin Studio</a><i aria-hidden="true">›</i><span aria-current="page">Gacha completion calculator</span></nav>
+  <h1>Gacha completion calculator</h1>
+  <div class="rule"></div>
+  <p class="lead">How many pulls, and how much money, to collect every type?</p>
+
+  <p>Enter the number of types and how many you already own. You get the <strong>average number of pulls</strong>, the number of pulls within which <strong>90% of people finish</strong>, the cost, and whether a complete set is cheaper.</p>
+
+  <form class="calc" id="calc" onsubmit="return false">
+    <label>Number of types<input type="number" id="n" min="2" max="100" value="5" inputmode="numeric"></label>
+    <label>Types you already own<input type="number" id="k" min="0" max="99" value="0" inputmode="numeric"></label>
+    <label>Price per pull (any currency)<input type="number" id="price" min="0" value="300" inputmode="numeric"></label>
+    <label>Complete set price (optional)<input type="number" id="set" min="0" placeholder="1500" inputmode="numeric"></label>
+    <label>Planned number of pulls (optional)<input type="number" id="m" min="0" placeholder="10" inputmode="numeric"></label>
+  </form>
+
+  <div class="calc-out" id="out" aria-live="polite"></div>
+
+  <h2 class="rv">How it works</h2>
+  <p>If you own <em>c</em> types, one pull gives a new type with probability <em>(n − c) / n</em>. The average is <em>n × (1 + 1/2 + 1/3 + …)</em>. The “90% of people” number is found by stepping one pull at a time until the chance of being done passes 90%. For 5 types, simulating 200,000 people gave the same numbers (average 11.41, half within 10, 90% within 18, 99% within 28).</p>
+
+  <h2 class="rv">When this does not apply</h2>
+  <ul>
+    <li>It assumes every pull gives each type with the same probability. If some types are rarer (like a secret), completing takes more pulls than shown.</li>
+    <li>Machines with a fixed set of capsules inside have fewer duplicates. They are not supported.</li>
+    <li>This is a probability calculation. It does not mean you will complete the collection.</li>
+  </ul>
+
+  <p class="note">For a single item or a pity (guaranteed after N pulls), use the <a href="/en/calc/gacha-rate/">drop rate and pity calculator</a>.</p>
+
+  <script src="/calc/i18n.js" defer></script>
+  <script src="/calc/gacha/gacha.js" defer></script>
+  <script src="/calc/gacha/page.js" defer></script>
+</div>
+</main>
+
+<footer class="site"><div class="wrap"></div></footer>
+<script src="/motion.js?v=1e7447ec" defer></script>
+</body>
+</html>

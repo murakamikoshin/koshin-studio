@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>가챠 컴플리트 계산기 — 전부 모으려면 몇 번 뽑아야 할까? — Koshin Studio</title>
+<meta name="description" content="가챠나 캡슐 머신의 모든 종류를 모으는 데 필요한 횟수와 비용을 계산합니다. 평균, 90%의 사람이 끝내는 횟수, 컴플리트 세트가 이득인지까지.">
+<meta property="og:title" content="가챠 컴플리트 계산기">
+<meta property="og:description" content="모든 종류를 모으려면 몇 번, 얼마가 들까?">
+<meta property="og:type" content="article">
+<meta name="theme-color" content="#fbfaf7">
+<link rel="icon" href="/favicon.ico?v=1697d589" sizes="48x48">
+<link rel="icon" href="/favicon.svg?v=b9d7922f" type="image/svg+xml" sizes="any">
+<link rel="icon" href="/assets/icon/icon-192.png?v=e2566235" type="image/png" sizes="192x192">
+<link rel="apple-touch-icon" href="/assets/icon/icon-180.png?v=84e7f0e6">
+<link rel="manifest" href="/site.webmanifest">
+<script>document.documentElement.className+=" js"</script>
+<link rel="stylesheet" href="/style.css?v=7001672f">
+<meta name="google-adsense-account" content="ca-pub-3863314847163872">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3863314847163872" crossorigin="anonymous"></script>
+<link rel="canonical" href="https://koshinstudio.com/ko/calc/gacha/">
+<meta property="og:url" content="https://koshinstudio.com/ko/calc/gacha/">
+<meta property="og:site_name" content="Koshin Studio">
+<meta property="og:locale" content="ko_KR">
+<link rel="alternate" hreflang="ja" href="https://koshinstudio.com/calc/gacha/">
+<link rel="alternate" hreflang="en" href="https://koshinstudio.com/en/calc/gacha/">
+<link rel="alternate" hreflang="zh-Hans" href="https://koshinstudio.com/zh/calc/gacha/">
+<link rel="alternate" hreflang="es" href="https://koshinstudio.com/es/calc/gacha/">
+<link rel="alternate" hreflang="pt-BR" href="https://koshinstudio.com/pt/calc/gacha/">
+<link rel="alternate" hreflang="fr" href="https://koshinstudio.com/fr/calc/gacha/">
+<link rel="alternate" hreflang="de" href="https://koshinstudio.com/de/calc/gacha/">
+<link rel="alternate" hreflang="ru" href="https://koshinstudio.com/ru/calc/gacha/">
+<link rel="alternate" hreflang="id" href="https://koshinstudio.com/id/calc/gacha/">
+<link rel="alternate" hreflang="ko" href="https://koshinstudio.com/ko/calc/gacha/">
+<link rel="alternate" hreflang="tr" href="https://koshinstudio.com/tr/calc/gacha/">
+<link rel="alternate" hreflang="x-default" href="https://koshinstudio.com/en/calc/gacha/">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="alternate" type="application/rss+xml" title="Koshin Studio — Notes" href="https://koshinstudio.com/feed.xml">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebApplication","name":"가챠 컴플리트 계산기","url":"https://koshinstudio.com/ko/calc/gacha/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any (browser)","inLanguage":"ko","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"JPY"},"author":{"@id":"https://koshinstudio.com#studio"},"publisher":{"@id":"https://koshinstudio.com#studio"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Koshin Studio","item":"https://koshinstudio.com/ko/"},{"@type":"ListItem","position":2,"name":"가챠 컴플리트 계산기","item":"https://koshinstudio.com/ko/calc/gacha/"}]}]}</script>
+<meta property="og:image" content="https://koshinstudio.com/assets/sushitsumu-wide.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
+</head>
+<body>
+<canvas id="motes"></canvas>
+
+<header class="site"><div class="wrap">
+  <a class="logo" href="/"><img class="logo-mark" src="/favicon.svg?v=b9d7922f" alt="" width="28" height="28">Koshin Studio</a>
+  <nav><a href="/works/">Works</a><a href="/notes/">Notes</a><a href="/picks/">Picks</a><a href="/calc/">Tools</a><a href="/about/">About</a></nav>
+</div></header>
+
+<main><div class="wrap">
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/ko/">Koshin Studio</a><i aria-hidden="true">›</i><span aria-current="page">가챠 컴플리트 계산기</span></nav>
+  <h1>가챠 컴플리트 계산기</h1>
+  <div class="rule"></div>
+  <p class="lead">모든 종류를 모으려면 몇 번, 얼마가 들까?</p>
+
+  <p>종류 수와 이미 가진 수를 입력하세요. <strong>평균 횟수</strong>, <strong>90%의 사람이 다 모으는 횟수</strong>, 비용, 컴플리트 세트가 더 싼지를 알려 줍니다.</p>
+
+  <form class="calc" id="calc" onsubmit="return false">
+    <label>종류 수<input type="number" id="n" min="2" max="100" value="5" inputmode="numeric"></label>
+    <label>이미 가진 종류 수<input type="number" id="k" min="0" max="99" value="0" inputmode="numeric"></label>
+    <label>1회 가격(어떤 통화든)<input type="number" id="price" min="0" value="300" inputmode="numeric"></label>
+    <label>컴플리트 세트 가격(선택)<input type="number" id="set" min="0" placeholder="1500" inputmode="numeric"></label>
+    <label>뽑을 예정 횟수(선택)<input type="number" id="m" min="0" placeholder="10" inputmode="numeric"></label>
+  </form>
+
+  <div class="calc-out" id="out" aria-live="polite"></div>
+
+  <h2 class="rv">계산 방법</h2>
+  <p><em>c</em>종류를 가졌을 때, 1회에 새 종류가 나올 확률은 <em>(n − c) / n</em>입니다. 평균은 <em>n × (1 + 1/2 + 1/3 + …)</em>. “90%의 사람” 횟수는 한 번씩 진행하며 완성 확률이 90%를 넘는 시점을 찾습니다. 5종류에서 20만 명을 시뮬레이션해도 같은 결과였습니다(평균 11.41, 절반 10회, 90% 18회, 99% 28회).</p>
+
+  <h2 class="rv">적용되지 않는 경우</h2>
+  <ul>
+    <li>모든 종류가 같은 확률로 나온다고 가정합니다. 시크릿처럼 나오기 어려운 종류가 있으면 표시된 것보다 더 많이 뽑아야 합니다.</li>
+    <li>캡슐 구성이 정해진 머신(중복이 적음)은 지원하지 않습니다.</li>
+    <li>확률 계산일 뿐이며, 반드시 다 모을 수 있다는 뜻은 아닙니다.</li>
+  </ul>
+
+  <p class="note">하나만 원하거나 천장(N회째 확정)이 있다면 <a href="/ko/calc/gacha-rate/">확률·천장 계산기</a>를 쓰세요.</p>
+
+  <script src="/calc/i18n.js" defer></script>
+  <script src="/calc/gacha/gacha.js" defer></script>
+  <script src="/calc/gacha/page.js" defer></script>
+</div>
+</main>
+
+<footer class="site"><div class="wrap"></div></footer>
+<script src="/motion.js?v=1e7447ec" defer></script>
+</body>
+</html>

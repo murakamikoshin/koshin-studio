@@ -658,6 +658,17 @@ function ldFor(file, url) {
       crumbs([['Koshin Studio', '/en/'], [p.title, p.en]]),
     ];
   }
+  const cl = rel.match(/^\/([a-z]{2})\/calc\/(gacha|gacha-rate)\/index\.html$/);
+  if (cl && I18N[cl[1]]) {
+    const h1 = (readFileSync(file, 'utf8').match(/<h1>(.*?)<\/h1>/) || [, ''])[1];
+    return [
+      { '@type': 'WebApplication', name: h1, url: url, applicationCategory: 'UtilitiesApplication',
+        operatingSystem: 'Any (browser)', inLanguage: 'ja', isAccessibleForFree: true,
+        offers: { '@type': 'Offer', price: '0', priceCurrency: 'JPY' },
+        author: { '@id': SITE + '#studio' }, publisher: { '@id': SITE + '#studio' } },
+      crumbs([['Koshin Studio', I18N[cl[1]].path], [h1, '/' + cl[1] + '/calc/' + cl[2] + '/']]),
+    ];
+  }
   const hm = rel.match(/^\/([a-z]{2})\/index\.html$/);
   if (hm && I18N[hm[1]]) return [page('Koshin Studio — ' + I18N[hm[1]].label), crumbs([['Koshin Studio', I18N[hm[1]].path]])];
   const nm = rel.match(/^\/notes\/([^/]+)\/index\.html$/);
@@ -860,8 +871,13 @@ for (const file of pages) {
   const pair = enByPath[relUrl] || jaToEn[relUrl];
   const hubSet = (relUrl === '/' || hubPaths[relUrl])
     ? [['ja', '/']].concat(Object.values(I18N).map((l) => [l.lang, l.path])) : null;
-  const hreflangs = hubSet ? hubSet.map(([c, p]) => `<link rel="alternate" hreflang="${c}" href="${SITE + p}">`)
-      .concat(`<link rel="alternate" hreflang="x-default" href="${SITE + '/en/'}">`)
+  /* 計算機は、日本語と各言語のページを、同じ組にする */
+  const calcM = relUrl.match(/^(?:\/([a-z]{2}))?\/calc\/(gacha|gacha-rate)\/$/);
+  const calcSet = calcM && (!calcM[1] || I18N[calcM[1]])
+    ? [['ja', '/calc/' + calcM[2] + '/']].concat(Object.values(I18N).map((l) => [l.lang, l.path + 'calc/' + calcM[2] + '/'])) : null;
+  const grp = hubSet || calcSet;
+  const hreflangs = grp ? grp.map(([c, p]) => `<link rel="alternate" hreflang="${c}" href="${SITE + p}">`)
+      .concat(`<link rel="alternate" hreflang="x-default" href="${SITE + (hubSet ? '/en/' : '/en/calc/' + calcM[2] + '/')}">`)
     : pair ? [
     `<link rel="alternate" hreflang="ja" href="${SITE + pair.ja}">`,
     `<link rel="alternate" hreflang="en" href="${SITE + pair.en}">`,
