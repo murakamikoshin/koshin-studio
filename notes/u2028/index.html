@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Python の splitlines() で JSONL が壊れる：犯人は U+2028（見えない改行文字） — ガチアニメ診断 開発の記録 — Koshin Studio</title>
-<meta name="description" content="JSONL を splitlines() で読むと、あらすじ中の U+2028 で行が割れて JSON が壊れる。実データ（7,255行と7,247件、U+2028 は8個）で確かめて、split("\n") に直した記録。">
+<meta name="description" content="JSONL を splitlines() で読むと、あらすじ中の U+2028 で行が割れて JSON が壊れる。実データ（7,255行と7,247件、U+2028 は8個）で確かめて、split(&quot;\n&quot;) に直した記録。">
 <meta property="og:title" content="Python の splitlines() で JSONL が壊れる：犯人は U+2028（見えない改行文字）">
 <meta property="og:description" content="JSONL を splitlines() で読むと、あらすじ中の U+2028 で行が割れて JSON が壊れる。実データ（7,255行と7,247件、U+2028 は8個）で確かめて、split(&">
 <meta property="og:type" content="article">
@@ -47,8 +47,7 @@
   <div class="rule"></div>
 <!--lang-->
   <p class="note"><a href="/en/notes/u2028/" hreflang="en" lang="en">English version</a></p>
-<!--/lang-->
-  <p class="lead">ガチアニメ診断 開発の記録 ／ 2026年10月</p>
+<!--/lang-->  <p class="lead">ガチアニメ診断 開発の記録 ／ 2026年10月</p>
 
   <p><a href="/works/shindananime/">ガチアニメ診断</a>の作品データを作る途中で、<strong>JSON が壊れる</strong>という不具合を直しました。原因は、<code>splitlines()</code> という、ごくふつうの関数でした。</p>
 <!--toc-->

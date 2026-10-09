@@ -4179,6 +4179,172 @@ URL: https://koshinstudio.com/en/notes/itms-91064/
 
 ---
 
+URL: https://koshinstudio.com/en/works/negaeri-shogi/
+
+# Negaeri Shogi
+
+  日本語版 (https://koshinstudio.com/works/negaeri-shogi/)
+
+  Sandwiched pieces defect to your side.
+Defected pieces get promoted.
+
+  Play now (https://koshinstudio.com/play/negaeri-shogi/)
+
+  Free. Runs in your browser, no install or sign-up. The game is available in English and Japanese.
+
+      The starting position
+
+      Mid-game against the AI
+
+## What it is
+
+  A small 6×6 board and shogi pieces, played like Reversi: drop a piece from your hand so that it sandwiches your opponent’s pieces in a line, and the sandwiched pieces flip to your side. Every piece that flips is also promoted (pawn to tokin, rook to dragon, bishop to horse). A promoted piece moves in new ways, so it can create new sandwiches, and the flips chain. A single move can change the whole board.
+
+## Rules in short
+
+- Four kinds of pieces: king, pawn, rook and bishop. They move as in shogi.
+
+- On your turn you either drop a piece from your hand (this is when sandwiching happens) or move a piece on the board (no flipping).
+
+- Sandwiching works in all 8 directions. The edge of the board also counts as an end, so pieces pushed against the edge can flip together.
+
+- Kings never flip. Pieces next to your own king do not flip either, so the squares around the king are safe.
+
+- Capture the opponent’s king to win. If neither side can move, the player with more pieces wins.
+
+- Online games have 3 minutes per player, plus 5 seconds per move.
+
+## Ways to play
+
+- Two players on one device.
+
+- Against the AI at three levels (weak, medium, strong). The AI runs in your browser.
+
+- Online against another player, with an Elo-style rating and a ranking. A name is stored, and no sign-up is needed.
+
+## About the balance
+
+  The numbers (how many pieces each side holds, the king’s protection) were tuned by AI self-play. Balance in human-versus-human games has not been verified yet. If one side feels too strong, please tell me.
+
+  Play now (https://koshinstudio.com/play/negaeri-shogi/)
+
+  This is the English version of the Japanese page (https://koshinstudio.com/works/negaeri-shogi/). Online play stores your name, rating and results (see the privacy page (https://koshinstudio.com/privacy/), in Japanese).
+
+
+---
+
+URL: https://koshinstudio.com/en/privacy/
+
+# Privacy
+
+  日本語版 (https://koshinstudio.com/privacy/)
+
+  What is stored and what is not.
+Last updated October 2026
+
+## What is stored
+
+  Only when you submit to a ranking, the name and score you enter are stored on our servers. Some works store a little more, as described below.
+
+  Sushi Stack also stores a number generated on your device and the move history of that run. The history is used to check that the score adds up. The device number is a random string created on your device and is used only to group records from the same device. It does not identify anyone.
+
+  Stop at 10 seconds stores only your name, the errors of your three tries and the time you submitted. It does not create a device number. The day’s ranking is cleared when the date changes.
+
+  Negaeri Shogi, when you play online (and when you open the ranking), stores a device-generated number, your name (default: “Anonymous” in Japanese), your rating, win/loss counts, and the moves and result of each game. Your name and rating appear in the ranking. Playing against the AI, or two players on the same device, stores nothing.
+
+  Anime Type Quiz calculates your answers on your device only and sends them nowhere.
+
+  You can choose any name. You do not need to use your real name.
+
+## What is not stored
+
+  Nothing else is collected. There is no registration and no mechanism to track individuals. We do not receive your email address, phone number or location.
+
+  The site runs Cloudflare Web Analytics, which counts how many times pages are opened and which pages are read. It is not used to track individuals or for advertising.
+
+## What stays only on your device
+
+  High scores, personal bests, collection data, language and sound settings stay only on your device. If you do not submit to a ranking, nothing leaves your device. Clearing your browser’s storage removes it.
+
+## Comments on articles
+
+  Some articles have a comments section. Only when you press “Open comments” does your browser connect to giscus (giscus.app) and GitHub. If you do not press it, no connection is made. Writing a comment requires a GitHub account, and comments are public, stored in GitHub Discussions with your GitHub username. You can delete your own comment on GitHub.
+
+## If you want something deleted
+
+  To remove a record you submitted to a ranking, contact the address on the About page (https://koshinstudio.com/about/) (Japanese) with the name you used. We will confirm and delete it.
+
+## Where it is hosted
+
+  This site and the ranking servers run on Cloudflare. Sushi Stack and Negaeri Shogi rankings are stored in Cloudflare D1 (a database), and Stop at 10 seconds in Cloudflare KV.
+
+## About advertising
+
+  When our games are published on other sites (game portals), that site’s own advertising systems may apply, under that site’s policy. This site loads Google’s advertising script for Google AdSense review. No ads are shown until review is passed. When ads are shown, this page will describe what is used (such as cookies) and how to turn it off.
+
+## Children
+
+  We do not ask for age and do not collect information related to age. Apart from the name you put in a ranking, nothing reaches us.
+
+  This is the English version of the Japanese privacy page (https://koshinstudio.com/privacy/). If they differ, the Japanese page is the original.
+
+
+---
+
+URL: https://koshinstudio.com/en/works/shindananime/
+
+# Anime Type Quiz
+
+  日本語版 (https://koshinstudio.com/works/shindananime/)
+
+  12 questions, 6 axes.
+Your anime type, and the one anime that fits you right now.
+
+  Start the quiz (free, about 1 minute) (https://koshinstudio.com/app/shindananime/en/)
+
+  Free, runs in your browser, no sign-up. Your answers never leave your device.
+
+## What it is
+
+  The Anime Type Quiz is a free quiz that finds the anime that suits you right now. It asks up to 50 questions about six axes (world, aftertaste, structure, taste, visuals and viewing style), your taste in picture quality and era, and themes such as romance, gore and isekai. Twelve questions are enough to get your six-axis type; the rest are optional. From your answers it works out the direction of each axis and gives you a type code (for example RDCP-VM) and a nickname. There are 64 possible types.
+
+  Unlike most personality quizzes, it does not stop at the type. It then picks, from a database of over 6,000 anime, the one closest to you at the moment.
+
+## It picks real titles
+
+  You get a “destined pick” and two runners-up. Even people with the same type get different titles, because the pick also takes into account the years you prefer and the themes you like or dislike. If you have already seen a title, press “Seen it” and the next best match moves up.
+
+  Closeness between titles is measured by cosine similarity of the six-axis vectors. Popularity and era preferences add only a little, on purpose: if they counted for more, the same few titles would come up for everyone.
+
+## Frequently asked questions
+
+### How many questions, and how long does it take?
+
+  Twelve questions (about 30 seconds) give you your type and your destined pick. If you keep going, up to 50 questions refine the result with era and theme preferences. Every question is multiple choice.
+
+### Are my answers or results stored anywhere?
+
+  No. Your answers are calculated on your device and are not sent anywhere.
+
+### Will the same type always get the same anime?
+
+  No. The pick also reflects the years you prefer and the themes you like or avoid, so it differs from person to person.
+
+### Do I need to install anything?
+
+  No. It works in any browser, on a phone or a computer.
+
+### Where do the data and the English titles come from?
+
+  The database is built from publicly available information about anime and is used only for per-title tendencies; it does not keep review text. English titles and detail links come from AniList. A few titles have no English title yet and show the original Japanese title. Streaming availability differs by country, so the buttons link to JustWatch and other services rather than to a single store.
+
+  Start the quiz (free, about 1 minute) (https://koshinstudio.com/app/shindananime/en/)
+
+  This is the English version of the Japanese page (https://koshinstudio.com/works/shindananime/). The quiz’s questions and result texts are in English at the link above; the Japanese version is at /app/shindananime/ (https://koshinstudio.com/app/shindananime/).
+
+
+---
+
 URL: https://koshinstudio.com/en/notes/review-info-needed/
 
 # App Store review sent “Guideline 2.1 Information Needed”: the six things Apple asked for
@@ -4501,172 +4667,6 @@ URL: https://koshinstudio.com/en/notes/torecadash-ci/
   More in English
 
 - All English pages (https://koshinstudio.com/en/)
-
-
----
-
-URL: https://koshinstudio.com/en/works/negaeri-shogi/
-
-# Negaeri Shogi
-
-  日本語版 (https://koshinstudio.com/works/negaeri-shogi/)
-
-  Sandwiched pieces defect to your side.
-Defected pieces get promoted.
-
-  Play now (https://koshinstudio.com/play/negaeri-shogi/)
-
-  Free. Runs in your browser, no install or sign-up. The game is available in English and Japanese.
-
-      The starting position
-
-      Mid-game against the AI
-
-## What it is
-
-  A small 6×6 board and shogi pieces, played like Reversi: drop a piece from your hand so that it sandwiches your opponent’s pieces in a line, and the sandwiched pieces flip to your side. Every piece that flips is also promoted (pawn to tokin, rook to dragon, bishop to horse). A promoted piece moves in new ways, so it can create new sandwiches, and the flips chain. A single move can change the whole board.
-
-## Rules in short
-
-- Four kinds of pieces: king, pawn, rook and bishop. They move as in shogi.
-
-- On your turn you either drop a piece from your hand (this is when sandwiching happens) or move a piece on the board (no flipping).
-
-- Sandwiching works in all 8 directions. The edge of the board also counts as an end, so pieces pushed against the edge can flip together.
-
-- Kings never flip. Pieces next to your own king do not flip either, so the squares around the king are safe.
-
-- Capture the opponent’s king to win. If neither side can move, the player with more pieces wins.
-
-- Online games have 3 minutes per player, plus 5 seconds per move.
-
-## Ways to play
-
-- Two players on one device.
-
-- Against the AI at three levels (weak, medium, strong). The AI runs in your browser.
-
-- Online against another player, with an Elo-style rating and a ranking. A name is stored, and no sign-up is needed.
-
-## About the balance
-
-  The numbers (how many pieces each side holds, the king’s protection) were tuned by AI self-play. Balance in human-versus-human games has not been verified yet. If one side feels too strong, please tell me.
-
-  Play now (https://koshinstudio.com/play/negaeri-shogi/)
-
-  This is the English version of the Japanese page (https://koshinstudio.com/works/negaeri-shogi/). Online play stores your name, rating and results (see the privacy page (https://koshinstudio.com/privacy/), in Japanese).
-
-
----
-
-URL: https://koshinstudio.com/en/privacy/
-
-# Privacy
-
-  日本語版 (https://koshinstudio.com/privacy/)
-
-  What is stored and what is not.
-Last updated October 2026
-
-## What is stored
-
-  Only when you submit to a ranking, the name and score you enter are stored on our servers. Some works store a little more, as described below.
-
-  Sushi Stack also stores a number generated on your device and the move history of that run. The history is used to check that the score adds up. The device number is a random string created on your device and is used only to group records from the same device. It does not identify anyone.
-
-  Stop at 10 seconds stores only your name, the errors of your three tries and the time you submitted. It does not create a device number. The day’s ranking is cleared when the date changes.
-
-  Negaeri Shogi, when you play online (and when you open the ranking), stores a device-generated number, your name (default: “Anonymous” in Japanese), your rating, win/loss counts, and the moves and result of each game. Your name and rating appear in the ranking. Playing against the AI, or two players on the same device, stores nothing.
-
-  Anime Type Quiz calculates your answers on your device only and sends them nowhere.
-
-  You can choose any name. You do not need to use your real name.
-
-## What is not stored
-
-  Nothing else is collected. There is no registration and no mechanism to track individuals. We do not receive your email address, phone number or location.
-
-  The site runs Cloudflare Web Analytics, which counts how many times pages are opened and which pages are read. It is not used to track individuals or for advertising.
-
-## What stays only on your device
-
-  High scores, personal bests, collection data, language and sound settings stay only on your device. If you do not submit to a ranking, nothing leaves your device. Clearing your browser’s storage removes it.
-
-## Comments on articles
-
-  Some articles have a comments section. Only when you press “Open comments” does your browser connect to giscus (giscus.app) and GitHub. If you do not press it, no connection is made. Writing a comment requires a GitHub account, and comments are public, stored in GitHub Discussions with your GitHub username. You can delete your own comment on GitHub.
-
-## If you want something deleted
-
-  To remove a record you submitted to a ranking, contact the address on the About page (https://koshinstudio.com/about/) (Japanese) with the name you used. We will confirm and delete it.
-
-## Where it is hosted
-
-  This site and the ranking servers run on Cloudflare. Sushi Stack and Negaeri Shogi rankings are stored in Cloudflare D1 (a database), and Stop at 10 seconds in Cloudflare KV.
-
-## About advertising
-
-  When our games are published on other sites (game portals), that site’s own advertising systems may apply, under that site’s policy. This site loads Google’s advertising script for Google AdSense review. No ads are shown until review is passed. When ads are shown, this page will describe what is used (such as cookies) and how to turn it off.
-
-## Children
-
-  We do not ask for age and do not collect information related to age. Apart from the name you put in a ranking, nothing reaches us.
-
-  This is the English version of the Japanese privacy page (https://koshinstudio.com/privacy/). If they differ, the Japanese page is the original.
-
-
----
-
-URL: https://koshinstudio.com/en/works/shindananime/
-
-# Anime Type Quiz
-
-  日本語版 (https://koshinstudio.com/works/shindananime/)
-
-  12 questions, 6 axes.
-Your anime type, and the one anime that fits you right now.
-
-  Start the quiz (free, about 1 minute) (https://koshinstudio.com/app/shindananime/en/)
-
-  Free, runs in your browser, no sign-up. Your answers never leave your device.
-
-## What it is
-
-  The Anime Type Quiz is a free quiz that finds the anime that suits you right now. It asks up to 50 questions about six axes (world, aftertaste, structure, taste, visuals and viewing style), your taste in picture quality and era, and themes such as romance, gore and isekai. Twelve questions are enough to get your six-axis type; the rest are optional. From your answers it works out the direction of each axis and gives you a type code (for example RDCP-VM) and a nickname. There are 64 possible types.
-
-  Unlike most personality quizzes, it does not stop at the type. It then picks, from a database of over 6,000 anime, the one closest to you at the moment.
-
-## It picks real titles
-
-  You get a “destined pick” and two runners-up. Even people with the same type get different titles, because the pick also takes into account the years you prefer and the themes you like or dislike. If you have already seen a title, press “Seen it” and the next best match moves up.
-
-  Closeness between titles is measured by cosine similarity of the six-axis vectors. Popularity and era preferences add only a little, on purpose: if they counted for more, the same few titles would come up for everyone.
-
-## Frequently asked questions
-
-### How many questions, and how long does it take?
-
-  Twelve questions (about 30 seconds) give you your type and your destined pick. If you keep going, up to 50 questions refine the result with era and theme preferences. Every question is multiple choice.
-
-### Are my answers or results stored anywhere?
-
-  No. Your answers are calculated on your device and are not sent anywhere.
-
-### Will the same type always get the same anime?
-
-  No. The pick also reflects the years you prefer and the themes you like or avoid, so it differs from person to person.
-
-### Do I need to install anything?
-
-  No. It works in any browser, on a phone or a computer.
-
-### Where do the data and the English titles come from?
-
-  The database is built from publicly available information about anime and is used only for per-title tendencies; it does not keep review text. English titles and detail links come from AniList. A few titles have no English title yet and show the original Japanese title. Streaming availability differs by country, so the buttons link to JustWatch and other services rather than to a single store.
-
-  Start the quiz (free, about 1 minute) (https://koshinstudio.com/app/shindananime/en/)
-
-  This is the English version of the Japanese page (https://koshinstudio.com/works/shindananime/). The quiz’s questions and result texts are in English at the link above; the Japanese version is at /app/shindananime/ (https://koshinstudio.com/app/shindananime/).
 
 
 ---

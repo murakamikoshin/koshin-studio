@@ -126,7 +126,7 @@ var articles: [Article] { fetched.filter…filter…map…sorted }
 
 pairs.append(make('u2028',
  'Python splitlines() breaks JSONL: the culprit was U+2028, an invisible line separator',
- 'A JSONL file read with Python splitlines() broke because two of 7,247 records contained U+2028 (LINE SEPARATOR). Why it happens, the numbers, and the one-line fix: split on "\\n" only.',
+ 'A JSONL file read with Python splitlines() broke because two of 7,247 records contained U+2028 (LINE SEPARATOR). Why it happens, the numbers, and the one-line fix: split on the newline character only.',
  'splitlines() and U+2028',
  'Development log of the Anime Type Quiz / October 2026',
  '''  <p>While building the data for the <a href="/en/works/shindananime/">Anime Type Quiz</a>, I fixed a bug where <strong>the JSON broke</strong>. The cause was <code>splitlines()</code>, a perfectly ordinary function.</p>
