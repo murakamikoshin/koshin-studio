@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Python splitlines() breaks JSONL: the culprit was U+2028, an invisible line separator — Koshin Studio</title>
+<meta name="description" content="JSONL を splitlines() で読むと、あらすじ中の U+2028 で行が割れて JSON が壊れる。実データ（7,255行と7,247件、U+2028 は8個）で確かめて、split("\n") に直した記録。">
+<meta property="og:title" content="Python splitlines() breaks JSONL: the culprit was U+2028, an invisible line separator">
+<meta property="og:description" content="A JSONL file read with Python splitlines() broke because two of 7,247 records contained U+2028 (LINE SEPARATOR). Why it happens, the numbers, and the one-line fix: split on &quot;
+&quot; only.">
+<meta property="og:type" content="article">
+<meta name="theme-color" content="#fbfaf7">
+<link rel="icon" href="/favicon.ico?v=1697d589" sizes="48x48">
+<link rel="icon" href="/favicon.svg?v=b9d7922f" type="image/svg+xml" sizes="any">
+<link rel="icon" href="/assets/icon/icon-192.png?v=e2566235" type="image/png" sizes="192x192">
+<link rel="apple-touch-icon" href="/assets/icon/icon-180.png?v=84e7f0e6">
+<link rel="manifest" href="/site.webmanifest">
+<script>document.documentElement.className+=" js"</script>
+<link rel="stylesheet" href="/style.css?v=7001672f">
+<meta name="google-adsense-account" content="ca-pub-3863314847163872">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3863314847163872" crossorigin="anonymous"></script>
+<link rel="canonical" href="https://koshinstudio.com/en/notes/u2028/">
+<meta property="og:url" content="https://koshinstudio.com/en/notes/u2028/">
+<meta property="og:site_name" content="Koshin Studio">
+<meta property="og:locale" content="en_US">
+<link rel="alternate" hreflang="ja" href="https://koshinstudio.com/notes/u2028/">
+<link rel="alternate" hreflang="en" href="https://koshinstudio.com/en/notes/u2028/">
+<link rel="alternate" hreflang="x-default" href="https://koshinstudio.com/en/notes/u2028/">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="alternate" type="application/rss+xml" title="Koshin Studio — Notes" href="https://koshinstudio.com/feed.xml">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BlogPosting","headline":"Python splitlines() breaks JSONL: the culprit was U+2028, an invisible line separator","url":"https://koshinstudio.com/en/notes/u2028/","description":"A JSONL file read with Python splitlines() broke because two of 7,247 records contained U+2028 (LINE SEPARATOR). Why it happens, the numbers, and the one-line fix: split on \"\\n\" only.","datePublished":"2026-10-09","dateModified":"2026-10-09","inLanguage":"en","image":"https://koshinstudio.com/assets/og/og_notes_u2028.jpg","author":{"@id":"https://koshinstudio.com#studio"},"publisher":{"@id":"https://koshinstudio.com#studio"},"mainEntityOfPage":"https://koshinstudio.com/en/notes/u2028/"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Koshin Studio","item":"https://koshinstudio.com/en/"},{"@type":"ListItem","position":2,"name":"Python splitlines() breaks JSONL: the culprit was U+2028, an invisible line separator","item":"https://koshinstudio.com/en/notes/u2028/"}]}]}</script>
+<meta property="og:image" content="https://koshinstudio.com/assets/og/og_notes_u2028.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
+</head>
+<body>
+<canvas id="motes"></canvas>
+
+<header class="site"><div class="wrap">
+  <a class="logo" href="/"><img class="logo-mark" src="/favicon.svg?v=b9d7922f" alt="" width="28" height="28">Koshin Studio</a>
+  <nav><a href="/works/">Works</a><a href="/notes/">Notes</a><a href="/picks/">Picks</a><a href="/calc/">Tools</a><a href="/about/">About</a></nav>
+</div></header>
+
+<main><div class="wrap">
+  <nav class="crumbs" aria-label="You are here"><a href="/en/">Koshin Studio</a><i aria-hidden="true">›</i><span aria-current="page">splitlines() and U+2028</span></nav>
+  <h1>Python splitlines() breaks JSONL: the culprit was U+2028, an invisible line separator</h1>
+  <div class="rule"></div>
+<!--lang-->
+  <p class="note"><a href="/notes/u2028/" hreflang="ja" lang="ja">日本語版</a></p>
+<!--/lang-->
+  <p class="lead">Development log of the Anime Type Quiz / October 2026</p>
+
+  <p>While building the data for the <a href="/en/works/shindananime/">Anime Type Quiz</a>, I fixed a bug where <strong>the JSON broke</strong>. The cause was <code>splitlines()</code>, a perfectly ordinary function.</p>
+
+  <h2 class="rv" id="s1">What broke</h2>
+  <p>The quiz data comes from Filmarks and is stored in <code>data/filmarks_works.jsonl</code>. JSONL puts <strong>one JSON object per line</strong>, and you read it by splitting into lines and passing each one to <code>json.loads</code>. In Python I had first written:</p>
+  <pre><code>for line in path.read_text(encoding='utf-8').splitlines():
+    r = json.loads(line)</code></pre>
+  <p>But when a synopsis contained <strong>U+2028 (LINE SEPARATOR)</strong>, that line was split in the middle, and <code>json.loads</code> was handed JSON that ended inside a string, and failed.</p>
+
+  <h2 class="rv" id="s2">What U+2028 is</h2>
+  <p>U+2028 is a Unicode character meaning “line separator.” It looks almost like a newline. In JSON, it is <strong>valid</strong> to put it raw inside a string, and the writing side (<code>json.dumps(..., ensure_ascii=False)</code>) outputs it as is.</p>
+  <p>The problem was on the reading side. Python’s <code>str.splitlines()</code> splits not only on <code>\n</code> but also on <strong>Unicode line boundaries</strong> such as U+2028. <code>split('\n')</code> splits only on <code>\n</code>.</p>
+  <pre><code>s = json.dumps({"a": "x\u2028y"}, ensure_ascii=False)
+len(s.splitlines())   # 2  (one line splits in two)
+len(s.split('\n'))    # 1</code></pre>
+  <p>Passing each half to <code>json.loads</code> raises <code>Unterminated string</code>. The short example above reproduces exactly that.</p>
+
+  <h2 class="rv" id="s3">The numbers in the real data</h2>
+  <p>I recounted both ways on the current data file.</p>
+  <div class="scroll rv"><table>
+    <tr><th>How it is split</th><th class="n">Number of lines</th></tr>
+    <tr><td><code>split('\n')</code> (real newlines only)</td><td class="n">7,247</td></tr>
+    <tr><td><code>splitlines()</code></td><td class="n">7,255</td></tr>
+  </table></div>
+  <p>The difference is <strong>8</strong>. Counting U+2028 in the file gave exactly <strong>8</strong>, in the lines of <strong>2 works</strong>. Two works out of 7,247, under 0.03%, were enough to make the whole file unreadable.</p>
+
+  <h2 class="rv" id="s4">The fix</h2>
+  <p>One line:</p>
+  <pre><code>- for line in path.read_text(encoding='utf-8').splitlines():
++ for line in path.read_text(encoding='utf-8').split('\n'):</code></pre>
+  <p>I left the reason in a comment so that my future self would not be puzzled: when making JSONL, the only line separator is <code>\n</code>, so reading should split on <code>\n</code> only.</p>
+
+  <h2 class="rv" id="s5">Why it is hard to notice</h2>
+  <ul>
+    <li><strong>You cannot see it.</strong> Depending on the editor, U+2028 looks like a newline or a space. Staring at the synopsis will not find it.</li>
+    <li><strong>It is rare.</strong> 2 of 7,247 works. While you test with a small sample, it may never show up. It is the kind of bug that appears only once you have fetched everything.</li>
+    <li><strong>The writer is correct.</strong> Nothing written is wrong as JSON. What broke it was the reader’s assumption about what a “line” is.</li>
+  </ul>
+
+  <h2 class="rv" id="s6">One more fix from the same day</h2>
+  <p>The same commit fixed another bug caused by <strong>characters that look alike but are different</strong>. When matching titles, Annict’s <code>＜物語＞</code> (full-width angle brackets) and Filmarks’s <code>〈物語〉</code> (Japanese angle brackets) did not match even though they were the same work. NFKC normalization turns the full-width <code>＜＞</code> into half-width, but <code>〈〉</code> stays as it is, so I removed both from the comparison string.</p>
+  <p>Both are the same lesson: characters are not always what they look like.</p>
+
+  <h2 class="rv" id="s7">What I learned</h2>
+  <blockquote>A function I used “for newlines” had a wider idea of newlines than I assumed.</blockquote>
+  <p>When reading JSONL, do not use <code>splitlines()</code>. Split on the character the writer used as the separator (<code>\n</code>), or use <code>for line in f:</code>, which splits only on <code>\n</code>. I am writing it here for the next time the data grows.</p>
+  <p class="note">The numbers in this article come from recounting the data file on October 7, 2026.</p>
+
+  <p class="note">This is the English version of <a href="/notes/u2028/" hreflang="ja" lang="ja">the original Japanese article</a>.</p>
+
+  <div class="rule" style="margin:40px 0 22px"></div>
+  <p class="eyebrow">More in English</p>
+  <ul class="plain">
+    <li><a href="/en/">All English pages</a></li>
+  </ul>
+</div>
+</main>
+
+<footer class="site"><div class="wrap"></div></footer>
+<script src="/motion.js?v=1e7447ec" defer></script>
+</body>
+</html>

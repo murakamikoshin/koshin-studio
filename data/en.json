@@ -28,10 +28,38 @@
     "blurb": "An iOS app was force-quit by the watchdog (0x8BADF00D). A SwiftUI computed property re-filtered and re-sorted 951 articles on the main thread on every body evaluation. How I found it and changed it, and what is not verified."
   },
   {
+    "ja": "/notes/u2028/",
+    "en": "/en/notes/u2028/",
+    "title": "Python splitlines() breaks JSONL: the culprit was U+2028, an invisible line separator",
+    "date": "2026-10-09",
+    "blurb": "A JSONL file read with Python splitlines() broke because two of 7,247 records contained U+2028 (LINE SEPARATOR). Why it happens, the numbers, and the one-line fix: split on \"\\n\" only."
+  },
+  {
+    "ja": "/notes/torecadash-ci/",
+    "en": "/en/notes/torecadash-ci/",
+    "title": "No builds arriving in TestFlight: I had used up the 25 free Xcode Cloud hours (my first diagnosis was wrong)",
+    "date": "2026-10-09",
+    "blurb": "New builds stopped appearing in TestFlight. My first diagnosis, “[ci skip] is blocking builds,” was wrong; the real cause was a workflow that built the iOS app on every commit and burned the free 25 hours a month. The numbers and the fix."
+  },
+  {
     "ja": "/works/negaeri-shogi/",
     "en": "/en/works/negaeri-shogi/",
     "title": "Negaeri Shogi — a free 6×6 board game where sandwiched pieces defect",
     "date": "2026-10-09",
     "blurb": "Negaeri Shogi is a free browser board game on a 6×6 board. Drop a piece to sandwich your opponent’s pieces: they defect to your side and get promoted, and chains flip many at once. Play locally, vs AI, or online with ratings."
+  },
+  {
+    "ja": "/privacy/",
+    "en": "/en/privacy/",
+    "title": "Privacy: what this site keeps and what it does not",
+    "date": "2026-10-09",
+    "blurb": "What Koshin Studio stores (names and results you submit to rankings, online game ratings), what it does not collect, how comments and analytics work, and how to ask for deletion."
+  },
+  {
+    "ja": "/works/shindananime/",
+    "en": "/en/works/shindananime/",
+    "title": "Anime Type Quiz — find your anime type and the one anime that fits you",
+    "date": "2026-10-09",
+    "blurb": "A free anime quiz. Answer 12 questions (up to 50), get your anime type from 6 axes (like RDCP-VM) and a nickname, and see your destined anime plus two runners-up chosen from over 6,000 real titles."
   }
 ]

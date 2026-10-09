@@ -1831,6 +1831,8 @@ URL: https://koshinstudio.com/notes/torecadash-ci/
 
 # TestFlight にビルドが来ない：Xcode Cloud の月25時間を使い切っていた（最初の診断は誤りだった）
 
+  English version (https://koshinstudio.com/en/notes/torecadash-ci/)
+
   トレカダッシュ 開発の記録 ／ 2026年10月
 
   iOS アプリ「トレカダッシュ」の開発で、「TestFlight に新しいビルドが来ない」という不具合が起きました。最初に出した原因は間違っていました。どこで間違えて、どう気づいて、本当の原因は何だったのか。HANDOFF（開発の引き継ぎ記録）とコミットに残っている数字で書きます。
@@ -2191,6 +2193,8 @@ URL: https://koshinstudio.com/notes/adgap/
 URL: https://koshinstudio.com/notes/u2028/
 
 # Python の splitlines() で JSONL が壊れる：犯人は U+2028（見えない改行文字）
+
+  English version (https://koshinstudio.com/en/notes/u2028/)
 
   ガチアニメ診断 開発の記録 ／ 2026年10月
 
@@ -3464,6 +3468,8 @@ URL: https://koshinstudio.com/works/shindananime/
 
 # ガチアニメ診断
 
+  English version (https://koshinstudio.com/en/works/shindananime/)
+
   12問から6つの軸に分解して、
 あなたのアニメタイプと運命の1作を選び出す、無料のアニメ診断。
 
@@ -4056,6 +4062,8 @@ URL: https://koshinstudio.com/privacy/
 
 # あつかい
 
+  English version (https://koshinstudio.com/en/privacy/)
+
   預かるもの、預からないもの。
 最終更新 2026年10月
 
@@ -4102,3 +4110,607 @@ URL: https://koshinstudio.com/privacy/
 ## 子どもについて
 
   年齢を尋ねていませんし、年齢に関わる情報も集めていません。番付に名前を載せる以外に、こちらへ届くものはありません。
+
+
+---
+
+URL: https://koshinstudio.com/en/notes/itms-91064/
+
+# ITMS-91064 “Invalid Binary”: NSPrivacyTracking was true but NSPrivacyTrackingDomains was empty
+
+  日本語版 (https://koshinstudio.com/notes/itms-91064/)
+
+  Development log of Torecadash / October 2026
+
+  I uploaded my iOS app, Torecadash, and Apple's automated review rejected build 877 as an “Invalid Binary”. The error code was ITMS-91064. The cause was a combination of two entries in the privacy manifest (PrivacyInfo.xcprivacy). This is what happened and how I fixed it, written from my commit history.
+
+## What happened
+
+  Build 877 was rejected as an “Invalid Binary” by Apple's automated review (October 6, 2026). In other words, it was stopped by a machine check, before any human reviewer saw it.
+
+## The cause: tracking declared, but the domain list was empty
+
+  The privacy manifest had these two entries:
+
+    Key | Value
+
+    NSPrivacyTracking (whether the app tracks) | true
+
+    NSPrivacyTrackingDomains (domains used for tracking) | an empty array
+
+  Apple's check rejects this combination as a contradiction: the app declares that it tracks, but lists no domain at all.
+
+  Should I have just set NSPrivacyTracking to false? No. The app shows AdMob ads (banner, native and app-open) and personalizes them for users who agreed to ATT (App Tracking Transparency). The app really does track, so true is the correct declaration. The thing to fix was the empty domain list.
+
+## The fix: list the domains
+
+  However, Google does not publish an official list of tracking domains for AdMob. So I added widely used ad-serving domains:
+
+- googlesyndication.com
+
+- googleadservices.com
+
+- doubleclick.net
+
+- google.com
+
+  I confirmed that the Release configuration builds (xcodebuild reported BUILD SUCCEEDED).
+
+## What I have not verified
+
+  The commit only records that the build succeeds. At the time of writing, I have no record of whether Apple accepted the fixed build. I also could not check whether the domains above cover every domain AdMob uses for tracking, because there is no official list.
+
+## What I learned
+
+> A declaration and its contents can be cross-checked by a machine.
+
+- If you declare that you do it, write the contents (the domains) too. One without the other is rejected as a contradiction.
+
+- When rejected, don't escape by deleting the declaration. If the app really does it, keep the declaration true and fill in the contents.
+
+- When there is no official list, write down how far you verified.
+
+  This article was written from the commit record (October 6, 2026). It is the English version of the original Japanese article (https://koshinstudio.com/notes/itms-91064/).
+
+  More in English
+
+- All English pages (https://koshinstudio.com/en/)
+
+
+---
+
+URL: https://koshinstudio.com/en/notes/review-info-needed/
+
+# App Store review sent “Guideline 2.1 Information Needed”: the six things Apple asked for
+
+  日本語版 (https://koshinstudio.com/notes/review-info-needed/)
+
+  Development log of Torecadash / October 2026
+
+  I submitted my iOS app, Torecadash, to App Review for the first time on October 6 (4:24 a.m. Pacific time). What came back was not a rejection but an email saying “additional information is needed.” This is a summary of what Apple asked for.
+
+  I do not write the review result in this article. I will add it once there is one.
+
+## What arrived
+
+  It was Guideline 2.1 “Information Needed — New App Submissions.” The reason given was that this developer account has little review history. Apple wanted more information so it could understand the app well enough to finish the review. It was not a finding that the app is defective.
+
+## The six things requested
+
+  I was asked to reply in App Store Connect and also to put the same content in the “App Review Information” notes field. The six items (summarized):
+
+- A screen recording on a physical device. On a device with the latest OS, starting from launching the app, show the normal flow of use. If there are account registration, login and deletion, user-generated content (including the report and block mechanisms), or paid features, include those too.
+
+- The purpose of the app and its intended users. What problem it solves and what value it provides.
+
+- How to start using the main features. If login is required, the credentials or sample files.
+
+- A list of the external services used. Data providers, authentication, payments, AI, and so on.
+
+- Differences in features or content by region. If there are none, say that it works the same in every region.
+
+- Proof of rights if the app deals with a highly regulated field or third-party protected material.
+
+  The email also included a list of common problems: bugs and crashes on a real device, a demo account if login is required, screenshots that show actual use, submitting in-app purchase products together with the app, and so on.
+
+## How it connects to what I fixed before
+
+  The first item mentions account deletion and reporting user-generated content. These overlap with what I had fixed before submitting (https://koshinstudio.com/notes/torecadash-review/) (Japanese). Account deletion removed map posts too and revoked the Sign in with Apple token. Posts had a banned-word check and a report-review queue. I had also already drafted the review notes: the main features work without login, where deletion is, reporting of posts, and what Pro includes.
+
+  So the mechanisms existed, but I lacked something to show them. The screen recording in item 1 is exactly that.
+
+## What I learned
+
+> In a first review, you have to show the reviewer that it works.
+
+- The recording on a physical device is explicitly required to start from launching the app.
+
+- Put the same content in the notes field as in the reply. You can reuse it for the next submission.
+
+- Before submitting, check that you can answer the six questions yourself. If the answers come quickly, you save one round trip with review.
+
+  This article summarizes the email I received. It does not include the submission ID or other identifiers.
+
+  This is the English version of the original Japanese article (https://koshinstudio.com/notes/review-info-needed/).
+
+  More in English
+
+- All English pages (https://koshinstudio.com/en/)
+
+
+---
+
+URL: https://koshinstudio.com/en/notes/xcode152-sdk/
+
+# Firebase 12 does not work with Xcode 15.2 (Swift 6.0 required): why I pinned Firebase 11.4.0 and AdMob 11.5.0
+
+  日本語版 (https://koshinstudio.com/notes/xcode152-sdk/)
+
+  Development log of Torecadash / October 2026
+
+  I build my iOS app, Torecadash, on a 2017 Mac with Xcode 15.2. In this environment, newer versions of the Firebase iOS SDK and the AdMob (Google Mobile Ads) SDK do not build. This is which version breaks and which version I pinned, written from my hand-over notes (July 2026).
+
+  The version numbers are as of July 2026. The situation may be different with the latest versions today.
+
+## The environment
+
+- Mac: MacBook Pro 13-inch (2017). macOS tops out at Ventura (13.7.8) and cannot go higher.
+
+- Xcode: 15.2, the latest that runs on Ventura. It officially supports up to iOS 17.2.
+
+- My iPhone runs iOS 26, so I cannot install onto the device from the local Xcode with a cable. The only way to test on the device is to build with Xcode Cloud and distribute through TestFlight.
+
+- Locally I only check that xcodebuild compiles. SwiftUI previews almost never render on this Mac.
+
+## Firebase: pinned to 11.4.0
+
+  The newer the Firebase iOS SDK, the newer the Xcode it requires. My notes recorded this:
+
+    Firebase version | What happens
+
+    12.0.0 and later | Requires a Swift 6.0 toolchain (Xcode 16.2 or later)
+
+    11.12.0 and later | Also requires Xcode 16.2
+
+    11.5.0 onward | A bug in FirebaseDataEncoder.swift (Firebase issue #15029)
+
+    11.4.0 | Confirmed to work reliably
+
+  So I set the Swift Package Manager rule to Exact Version 11.4.0. Xcode keeps suggesting the latest version, and I do not follow it.
+
+  One point is easy to get confused about. Xcode Cloud (the cloud build) runs the latest Xcode, but the pinned setting is kept as it is, so cloud builds succeed without trouble. If you pin to suit the old local Xcode, the same version also builds on the newer Xcode in the cloud.
+
+## AdMob: pinned to 11.5.0
+
+  For the same reason, I pinned the AdMob SDK (swift-package-manager-google-mobile-ads) to 11.5.0 (July 22, 2026).
+
+- 11.6.0 and later: The SDK depends on Apple's MarketplaceKit, which requires Xcode 15.3 or later. On Xcode 15.2 the build fails at link time with Undefined symbols errors related to MarketplaceKit.
+
+- A caveat for 11.5.0: This version does not yet have the new Swift-style class names (BannerView, RewardedAd, and so on). You have to use the old names with the GAD prefix (GADBannerView, GADRewardedAd, GADRequest, GADMobileAds, GADFullScreenContentDelegate, and so on).
+
+  When I upgrade Xcode and raise the version later, I will need to rewrite the class names, not only change the version number. I left that in my notes.
+
+## What I would tell someone in the same situation
+
+- Pin with “Exact Version.” With an “up to next” rule, Xcode picks a newer version you cannot use.
+
+- Write down “from which version it breaks,” with version numbers. A few months later, when you have forgotten why you pinned, the reason is still there.
+
+- The limits of your local environment can be relaxed in the cloud. You can keep testing on a real device through Xcode Cloud and TestFlight even with an old Mac. (The free tier has a monthly limit, though. See builds not arriving in TestFlight (https://koshinstudio.com/notes/torecadash-ci/), in Japanese.)
+
+## What I have not verified
+
+  The version numbers in this article come from my July 2026 notes. I have not checked what the Xcode 15.2 constraints look like with versions released since. The “breaks from this version” boundaries are the build results at that time.
+
+  This is the English version of the original Japanese article (https://koshinstudio.com/notes/xcode152-sdk/).
+
+  More in English
+
+- All English pages (https://koshinstudio.com/en/)
+
+
+---
+
+URL: https://koshinstudio.com/en/notes/torecadash-watchdog/
+
+# iOS app freezes and is killed (0x8BADF00D): a SwiftUI computed property ran on every redraw
+
+  日本語版 (https://koshinstudio.com/notes/torecadash-watchdog/)
+
+  Development log of Torecadash / October 2026
+
+  For my iOS app, Torecadash, I received a report: “the app crashes a lot.” Reading the device log, I found that the app froze and was force-quit by the OS. The cause was that it recounted 951 articles every time the screen was redrawn. This is written from my commit history.
+
+## What the log showed
+
+  The hang log from the device had the exit code 0x8BADF00D and the line Failed to terminate gracefully after 5.0s. It means the OS (the watchdog) killed an app that did not respond within 5 seconds. The main thread was stuck in processing that went through NSKeyedArchiver. The device was also hot (Thermal State: serious), so work that normally finishes instantly took more than 5 seconds.
+
+## The real cause
+
+  What froze was the list of product articles in the “Following” tab, in a case with 951 articles.
+
+  The article list (articles) was just a computed property. SwiftUI evaluates the view (body) many times, even when the article data has not changed. Each time, it redid four filters, a transformation and a sort over 951 articles on the main thread.
+
+  Normally this finishes instantly, so you do not notice. Only when the device slows down from heat does it exceed 5 seconds and get killed.
+
+## The fix
+
+  I changed it to recompute on a background thread only when something actually changes: the article data, the receive mode, or the sort option. The result goes into a state for display (displayArticles, @State), so the main thread is no longer blocked.
+
+  // (Illustration only. Not the actual code.)
+// Before: every time body is evaluated
+var articles: [Article] { fetched.filter…filter…map…sorted }
+
+// After: compute in the background only on change, and keep the result
+@State var displayArticles: [Article] = []
+// recompute when fetchedArticles / receiveMode / sortOption change
+
+## What I have not verified
+
+  The only verification recorded in the commit is that xcodebuild succeeded (BUILD SUCCEEDED). There is no record that the freeze is gone on a real device. A hot device is hard to reproduce, so it is not easy to check. In this article I write “I identified the cause and changed the approach,” not “I fixed it.”
+
+## What I learned
+
+> Work that is instant on a normal day stops the app on a slow day.
+  Computed properties are easy to write. But if you put one where it runs on every redraw, it gets slower in proportion to the amount of data. 951 items is not a small number. The obvious lesson, “decide where to put things by how often they are called,” came from a real device log.
+
+  This article was written from the commit record (October 5, 2026).
+
+  This is the English version of the original Japanese article (https://koshinstudio.com/notes/torecadash-watchdog/).
+
+  More in English
+
+- All English pages (https://koshinstudio.com/en/)
+
+
+---
+
+URL: https://koshinstudio.com/en/notes/u2028/
+
+# Python splitlines() breaks JSONL: the culprit was U+2028, an invisible line separator
+
+  日本語版 (https://koshinstudio.com/notes/u2028/)
+
+  Development log of the Anime Type Quiz / October 2026
+
+  While building the data for the Anime Type Quiz (https://koshinstudio.com/en/works/shindananime/), I fixed a bug where the JSON broke. The cause was splitlines(), a perfectly ordinary function.
+
+## What broke
+
+  The quiz data comes from Filmarks and is stored in data/filmarks_works.jsonl. JSONL puts one JSON object per line, and you read it by splitting into lines and passing each one to json.loads. In Python I had first written:
+
+  for line in path.read_text(encoding='utf-8').splitlines():
+    r = json.loads(line)
+  But when a synopsis contained U+2028 (LINE SEPARATOR), that line was split in the middle, and json.loads was handed JSON that ended inside a string, and failed.
+
+## What U+2028 is
+
+  U+2028 is a Unicode character meaning “line separator.” It looks almost like a newline. In JSON, it is valid to put it raw inside a string, and the writing side (json.dumps(..., ensure_ascii=False)) outputs it as is.
+
+  The problem was on the reading side. Python’s str.splitlines() splits not only on \n but also on Unicode line boundaries such as U+2028. split('\n') splits only on \n.
+
+  s = json.dumps({"a": "x\u2028y"}, ensure_ascii=False)
+len(s.splitlines())   # 2  (one line splits in two)
+len(s.split('\n'))    # 1
+  Passing each half to json.loads raises Unterminated string. The short example above reproduces exactly that.
+
+## The numbers in the real data
+
+  I recounted both ways on the current data file.
+
+    How it is split | Number of lines
+
+    split('\n') (real newlines only) | 7,247
+
+    splitlines() | 7,255
+
+  The difference is 8. Counting U+2028 in the file gave exactly 8, in the lines of 2 works. Two works out of 7,247, under 0.03%, were enough to make the whole file unreadable.
+
+## The fix
+
+  One line:
+
+  - for line in path.read_text(encoding='utf-8').splitlines():
++ for line in path.read_text(encoding='utf-8').split('\n'):
+  I left the reason in a comment so that my future self would not be puzzled: when making JSONL, the only line separator is \n, so reading should split on \n only.
+
+## Why it is hard to notice
+
+- You cannot see it. Depending on the editor, U+2028 looks like a newline or a space. Staring at the synopsis will not find it.
+
+- It is rare. 2 of 7,247 works. While you test with a small sample, it may never show up. It is the kind of bug that appears only once you have fetched everything.
+
+- The writer is correct. Nothing written is wrong as JSON. What broke it was the reader’s assumption about what a “line” is.
+
+## One more fix from the same day
+
+  The same commit fixed another bug caused by characters that look alike but are different. When matching titles, Annict’s ＜物語＞ (full-width angle brackets) and Filmarks’s 〈物語〉 (Japanese angle brackets) did not match even though they were the same work. NFKC normalization turns the full-width ＜＞ into half-width, but 〈〉 stays as it is, so I removed both from the comparison string.
+
+  Both are the same lesson: characters are not always what they look like.
+
+## What I learned
+
+> A function I used “for newlines” had a wider idea of newlines than I assumed.
+  When reading JSONL, do not use splitlines(). Split on the character the writer used as the separator (\n), or use for line in f:, which splits only on \n. I am writing it here for the next time the data grows.
+
+  The numbers in this article come from recounting the data file on October 7, 2026.
+
+  This is the English version of the original Japanese article (https://koshinstudio.com/notes/u2028/).
+
+  More in English
+
+- All English pages (https://koshinstudio.com/en/)
+
+
+---
+
+URL: https://koshinstudio.com/en/notes/torecadash-ci/
+
+# No builds arriving in TestFlight: I had used up the 25 free Xcode Cloud hours (my first diagnosis was wrong)
+
+  日本語版 (https://koshinstudio.com/notes/torecadash-ci/)
+
+  Development log of Torecadash / October 2026
+
+  While developing my iOS app, Torecadash, I hit a bug: “new builds are not arriving in TestFlight.” The first cause I came up with was wrong. This is where I went wrong, how I noticed, and what the real cause was, written from the numbers in my hand-over notes and commits.
+
+## The first diagnosis: “[ci skip] is the cause”
+
+  On September 2, I got a report: “there have been no builds since 9/1.” My first diagnosis was that [ci skip] in my commit messages was stopping the builds. I had been adding it to documentation-only changes so they would not use up Xcode Cloud’s free tier (25 hours a month). Along with the diagnosis, I even wrote a rule: “do not use [ci skip].”
+
+## The timeline did not fit
+
+  Looking at Xcode Cloud in App Store Connect, it said:
+
+> You have reached your usage limit. The limit resets on September 8, your renewal date.
+  Usage over the last 30 days was 493 builds, 28 hours 14 minutes. The free tier is 25 hours a month, so it was used up.
+
+  What showed my first diagnosis was wrong was the timeline. Only three commits carried [ci skip], all on September 2. The builds had stopped on September 1. The cause came after the effect, so it could not be the cause. Worse, the rule I made was counterproductive when the quota was short.
+
+## Why did it run 493 times?
+
+  The workflow’s start condition was “any file changed.” Counting commits over the last 30 days:
+
+    Last 30 days | Count
+
+    All commits | 1,146
+
+    of which touched the iOS app | 219 (19%)
+
+    Builds run by Xcode Cloud | 493 (3.4 minutes each on average)
+
+  So 80% of the time, I was building the whole iOS app although only server code or documents had changed. On top of that, “Clean build” was checked, so every build skipped the cache and took as long as possible.
+
+## The fix is a setting, not a marker
+
+- Change the start condition to custom file and folder rules, limited to the iOS app folder and the Xcode project.
+
+- Uncheck “Clean build.”
+
+  My hand-over notes estimate this takes builds from 493 to about 94, and time from 28 hours to about 5.4 hours a month. That is a calculated estimate, not a measurement after the change.
+
+## What I learned
+
+> Check whether a cause explains the facts, using the timeline, before settling on it.
+  My first diagnosis stopped at the first plausible cause. Something that happened after the effect cannot be its cause. This check takes a minute if done before announcing the diagnosis. In my hand-over notes (§183) I left a warning that “this diagnosis was wrong,” as a record.
+
+  The numbers in this article come from my hand-over notes and the commit record (September 2, 2026).
+
+  This is the English version of the original Japanese article (https://koshinstudio.com/notes/torecadash-ci/).
+
+  More in English
+
+- All English pages (https://koshinstudio.com/en/)
+
+
+---
+
+URL: https://koshinstudio.com/en/works/negaeri-shogi/
+
+# Negaeri Shogi
+
+  日本語版 (https://koshinstudio.com/works/negaeri-shogi/)
+
+  Sandwiched pieces defect to your side.
+Defected pieces get promoted.
+
+  Play now (https://koshinstudio.com/play/negaeri-shogi/)
+
+  Free. Runs in your browser, no install or sign-up. The game is available in English and Japanese.
+
+      The starting position
+
+      Mid-game against the AI
+
+## What it is
+
+  A small 6×6 board and shogi pieces, played like Reversi: drop a piece from your hand so that it sandwiches your opponent’s pieces in a line, and the sandwiched pieces flip to your side. Every piece that flips is also promoted (pawn to tokin, rook to dragon, bishop to horse). A promoted piece moves in new ways, so it can create new sandwiches, and the flips chain. A single move can change the whole board.
+
+## Rules in short
+
+- Four kinds of pieces: king, pawn, rook and bishop. They move as in shogi.
+
+- On your turn you either drop a piece from your hand (this is when sandwiching happens) or move a piece on the board (no flipping).
+
+- Sandwiching works in all 8 directions. The edge of the board also counts as an end, so pieces pushed against the edge can flip together.
+
+- Kings never flip. Pieces next to your own king do not flip either, so the squares around the king are safe.
+
+- Capture the opponent’s king to win. If neither side can move, the player with more pieces wins.
+
+- Online games have 3 minutes per player, plus 5 seconds per move.
+
+## Ways to play
+
+- Two players on one device.
+
+- Against the AI at three levels (weak, medium, strong). The AI runs in your browser.
+
+- Online against another player, with an Elo-style rating and a ranking. A name is stored, and no sign-up is needed.
+
+## About the balance
+
+  The numbers (how many pieces each side holds, the king’s protection) were tuned by AI self-play. Balance in human-versus-human games has not been verified yet. If one side feels too strong, please tell me.
+
+  Play now (https://koshinstudio.com/play/negaeri-shogi/)
+
+  This is the English version of the Japanese page (https://koshinstudio.com/works/negaeri-shogi/). Online play stores your name, rating and results (see the privacy page (https://koshinstudio.com/privacy/), in Japanese).
+
+
+---
+
+URL: https://koshinstudio.com/en/privacy/
+
+# Privacy
+
+  日本語版 (https://koshinstudio.com/privacy/)
+
+  What is stored and what is not.
+Last updated October 2026
+
+## What is stored
+
+  Only when you submit to a ranking, the name and score you enter are stored on our servers. Some works store a little more, as described below.
+
+  Sushi Stack also stores a number generated on your device and the move history of that run. The history is used to check that the score adds up. The device number is a random string created on your device and is used only to group records from the same device. It does not identify anyone.
+
+  Stop at 10 seconds stores only your name, the errors of your three tries and the time you submitted. It does not create a device number. The day’s ranking is cleared when the date changes.
+
+  Negaeri Shogi, when you play online (and when you open the ranking), stores a device-generated number, your name (default: “Anonymous” in Japanese), your rating, win/loss counts, and the moves and result of each game. Your name and rating appear in the ranking. Playing against the AI, or two players on the same device, stores nothing.
+
+  Anime Type Quiz calculates your answers on your device only and sends them nowhere.
+
+  You can choose any name. You do not need to use your real name.
+
+## What is not stored
+
+  Nothing else is collected. There is no registration and no mechanism to track individuals. We do not receive your email address, phone number or location.
+
+  The site runs Cloudflare Web Analytics, which counts how many times pages are opened and which pages are read. It is not used to track individuals or for advertising.
+
+## What stays only on your device
+
+  High scores, personal bests, collection data, language and sound settings stay only on your device. If you do not submit to a ranking, nothing leaves your device. Clearing your browser’s storage removes it.
+
+## Comments on articles
+
+  Some articles have a comments section. Only when you press “Open comments” does your browser connect to giscus (giscus.app) and GitHub. If you do not press it, no connection is made. Writing a comment requires a GitHub account, and comments are public, stored in GitHub Discussions with your GitHub username. You can delete your own comment on GitHub.
+
+## If you want something deleted
+
+  To remove a record you submitted to a ranking, contact the address on the About page (https://koshinstudio.com/about/) (Japanese) with the name you used. We will confirm and delete it.
+
+## Where it is hosted
+
+  This site and the ranking servers run on Cloudflare. Sushi Stack and Negaeri Shogi rankings are stored in Cloudflare D1 (a database), and Stop at 10 seconds in Cloudflare KV.
+
+## About advertising
+
+  When our games are published on other sites (game portals), that site’s own advertising systems may apply, under that site’s policy. This site loads Google’s advertising script for Google AdSense review. No ads are shown until review is passed. When ads are shown, this page will describe what is used (such as cookies) and how to turn it off.
+
+## Children
+
+  We do not ask for age and do not collect information related to age. Apart from the name you put in a ranking, nothing reaches us.
+
+  This is the English version of the Japanese privacy page (https://koshinstudio.com/privacy/). If they differ, the Japanese page is the original.
+
+
+---
+
+URL: https://koshinstudio.com/en/works/shindananime/
+
+# Anime Type Quiz
+
+  日本語版 (https://koshinstudio.com/works/shindananime/)
+
+  12 questions, 6 axes.
+Your anime type, and the one anime that fits you right now.
+
+  Start the quiz (free, about 1 minute) (https://koshinstudio.com/app/shindananime/en/)
+
+  Free, runs in your browser, no sign-up. Your answers never leave your device.
+
+## What it is
+
+  The Anime Type Quiz is a free quiz that finds the anime that suits you right now. It asks up to 50 questions about six axes (world, aftertaste, structure, taste, visuals and viewing style), your taste in picture quality and era, and themes such as romance, gore and isekai. Twelve questions are enough to get your six-axis type; the rest are optional. From your answers it works out the direction of each axis and gives you a type code (for example RDCP-VM) and a nickname. There are 64 possible types.
+
+  Unlike most personality quizzes, it does not stop at the type. It then picks, from a database of over 6,000 anime, the one closest to you at the moment.
+
+## It picks real titles
+
+  You get a “destined pick” and two runners-up. Even people with the same type get different titles, because the pick also takes into account the years you prefer and the themes you like or dislike. If you have already seen a title, press “Seen it” and the next best match moves up.
+
+  Closeness between titles is measured by cosine similarity of the six-axis vectors. Popularity and era preferences add only a little, on purpose: if they counted for more, the same few titles would come up for everyone.
+
+## Frequently asked questions
+
+### How many questions, and how long does it take?
+
+  Twelve questions (about 30 seconds) give you your type and your destined pick. If you keep going, up to 50 questions refine the result with era and theme preferences. Every question is multiple choice.
+
+### Are my answers or results stored anywhere?
+
+  No. Your answers are calculated on your device and are not sent anywhere.
+
+### Will the same type always get the same anime?
+
+  No. The pick also reflects the years you prefer and the themes you like or avoid, so it differs from person to person.
+
+### Do I need to install anything?
+
+  No. It works in any browser, on a phone or a computer.
+
+### Where do the data and the English titles come from?
+
+  The database is built from publicly available information about anime and is used only for per-title tendencies; it does not keep review text. English titles and detail links come from AniList. A few titles have no English title yet and show the original Japanese title. Streaming availability differs by country, so the buttons link to JustWatch and other services rather than to a single store.
+
+  Start the quiz (free, about 1 minute) (https://koshinstudio.com/app/shindananime/en/)
+
+  This is the English version of the Japanese page (https://koshinstudio.com/works/shindananime/). The quiz’s questions and result texts are in English at the link above; the Japanese version is at /app/shindananime/ (https://koshinstudio.com/app/shindananime/).
+
+
+---
+
+URL: https://koshinstudio.com/en/
+
+# Koshin Studio
+
+  A one-person studio. I build browser games and small apps, and write down what I measure.
+
+  Free. No install, no sign-up.
+
+## Play
+
+- Sushi Stack (https://koshinstudio.com/play/sushitsumu/) — A falling-block puzzle: collide matching sushi toppings to grow them, all the way up to the golden sushi tub. Available in 14 languages, opens in your browser language.
+
+- Negaeri Shogi (https://koshinstudio.com/play/negaeri-shogi/) — A 6×6 board game. Pieces you sandwich defect to your side and get promoted, and chains flip many at once. Local, vs AI, and online with ratings. The game is in English and Japanese. (rules, English) (https://koshinstudio.com/en/works/negaeri-shogi/)
+
+- Stop at 10 seconds (https://koshinstudio.com/play/stopwatch10/) — Count ten seconds in your head and stop. Best of three; the smaller the error, the stronger you are. No setup, no sign-up. The interface is in Japanese.
+
+- Anime Type Quiz (https://koshinstudio.com/app/shindananime/en/) — 12 questions, 6 axes: your anime type and the one anime that fits you right now. Free, nothing is sent anywhere. In English.
+
+## Tools
+
+- Gacha completion calculator (https://koshinstudio.com/en/calc/gacha/) — How many pulls, and how much money, to collect every type?
+
+- Gacha drop rate and pity calculator (https://koshinstudio.com/en/calc/gacha-rate/) — From the drop rate, how many pulls until you get it?
+
+## Development logs
+
+  Measured results and fixes, written up with numbers. These articles are in English and Japanese.
+
+- ITMS-91064 “Invalid Binary”: NSPrivacyTracking was true but NSPrivacyTrackingDomains was empty (https://koshinstudio.com/en/notes/itms-91064/)
+
+- App Store review sent “Guideline 2.1 Information Needed”: the six things Apple asked for (https://koshinstudio.com/en/notes/review-info-needed/)
+
+- Firebase 12 does not work with Xcode 15.2: why I pinned Firebase 11.4.0 and AdMob 11.5.0 (https://koshinstudio.com/en/notes/xcode152-sdk/)
+
+- iOS app freezes and is killed (0x8BADF00D) (https://koshinstudio.com/en/notes/torecadash-watchdog/)
+
+- Python splitlines() breaks JSONL: the culprit was U+2028 (https://koshinstudio.com/en/notes/u2028/)
+
+- No builds arriving in TestFlight: I had used up the 25 free Xcode Cloud hours (https://koshinstudio.com/en/notes/torecadash-ci/)
+
+## Languages
+
+  English (https://koshinstudio.com/en/) · 简体中文 (https://koshinstudio.com/zh/) · Español (https://koshinstudio.com/es/) · Português (https://koshinstudio.com/pt/) · Français (https://koshinstudio.com/fr/) · Deutsch (https://koshinstudio.com/de/) · Русский (https://koshinstudio.com/ru/) · Bahasa Indonesia (https://koshinstudio.com/id/) · 한국어 (https://koshinstudio.com/ko/) · Türkçe (https://koshinstudio.com/tr/) · 日本語 (https://koshinstudio.com/)

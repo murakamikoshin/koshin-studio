@@ -65,6 +65,27 @@
 - [選び方](https://koshinstudio.com/anime/guide/): アニメ診断の選び方
 - [64 タイプ一覧](https://koshinstudio.com/anime/types/)
 
+## English (en)
+- [ITMS-91064 “Invalid Binary”: NSPrivacyTracking was true but NSPrivacyTrackingDomains was empty](https://koshinstudio.com/en/notes/itms-91064/): An iOS build was rejected by Apple's automated review with ITMS-91064. NSPrivacyTracking was true while NSPrivacyTrackingDomains was an empty array. How it was fixed, and what was not verified.
+- [App Store review sent “Guideline 2.1 Information Needed”: the six things Apple asked for](https://koshinstudio.com/en/notes/review-info-needed/): My first App Store submission did not get a rejection but a request for more information (Guideline 2.1). The six things Apple asked for, and how they connect to what I had already fixed.
+- [Firebase 12 does not work with Xcode 15.2 (Swift 6.0 required): why I pinned Firebase 11.4.0 and AdMob 11.5.0](https://koshinstudio.com/en/notes/xcode152-sdk/): On an old Mac stuck on Xcode 15.2, newer Firebase and AdMob SDKs fail to build. Which versions break, which versions I pinned, and what to do about AdMob class names. Notes from July 2026.
+- [iOS app freezes and is killed (0x8BADF00D): a SwiftUI computed property ran on every redraw](https://koshinstudio.com/en/notes/torecadash-watchdog/): An iOS app was force-quit by the watchdog (0x8BADF00D). A SwiftUI computed property re-filtered and re-sorted 951 articles on the main thread on every body evaluation. How I found it and changed it, and what is not verified.
+- [Python splitlines() breaks JSONL: the culprit was U+2028, an invisible line separator](https://koshinstudio.com/en/notes/u2028/): A JSONL file read with Python splitlines() broke because two of 7,247 records contained U+2028 (LINE SEPARATOR). Why it happens, the numbers, and the one-line fix: split on "\n" only.
+- [No builds arriving in TestFlight: I had used up the 25 free Xcode Cloud hours (my first diagnosis was wrong)](https://koshinstudio.com/en/notes/torecadash-ci/): New builds stopped appearing in TestFlight. My first diagnosis, “[ci skip] is blocking builds,” was wrong; the real cause was a workflow that built the iOS app on every commit and burned the free 25 hours a month. The numbers and the fix.
+- [Negaeri Shogi — a free 6×6 board game where sandwiched pieces defect](https://koshinstudio.com/en/works/negaeri-shogi/): Negaeri Shogi is a free browser board game on a 6×6 board. Drop a piece to sandwich your opponent’s pieces: they defect to your side and get promoted, and chains flip many at once. Play locally, vs AI, or online with ratings.
+- [Privacy: what this site keeps and what it does not](https://koshinstudio.com/en/privacy/): What Koshin Studio stores (names and results you submit to rankings, online game ratings), what it does not collect, how comments and analytics work, and how to ask for deletion.
+- [Anime Type Quiz — find your anime type and the one anime that fits you](https://koshinstudio.com/en/works/shindananime/): A free anime quiz. Answer 12 questions (up to 50), get your anime type from 6 axes (like RDCP-VM) and a nickname, and see your destined anime plus two runners-up chosen from over 6,000 real titles.
+- [English hub](https://koshinstudio.com/en/): Games, tools and development logs in English
+- [简体中文](https://koshinstudio.com/zh/): Games and tools in this language
+- [Español](https://koshinstudio.com/es/): Games and tools in this language
+- [Português](https://koshinstudio.com/pt/): Games and tools in this language
+- [Français](https://koshinstudio.com/fr/): Games and tools in this language
+- [Deutsch](https://koshinstudio.com/de/): Games and tools in this language
+- [Русский](https://koshinstudio.com/ru/): Games and tools in this language
+- [Bahasa Indonesia](https://koshinstudio.com/id/): Games and tools in this language
+- [한국어](https://koshinstudio.com/ko/): Games and tools in this language
+- [Türkçe](https://koshinstudio.com/tr/): Games and tools in this language
+
 ## そのほか
 - [About](https://koshinstudio.com/about/): 運営者・連絡先・記事の書き方と訂正について
 - [あつかい（プライバシー）](https://koshinstudio.com/privacy/)

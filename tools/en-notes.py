@@ -123,5 +123,98 @@ var articles: [Article] { fetched.filter…filter…map…sorted }
   <p>Computed properties are easy to write. But if you put one where it runs on every redraw, it gets slower in proportion to the amount of data. 951 items is not a small number. The obvious lesson, “decide where to put things by how often they are called,” came from a real device log.</p>
   <p class="note">This article was written from the commit record (October 5, 2026).</p>
 '''))
+
+pairs.append(make('u2028',
+ 'Python splitlines() breaks JSONL: the culprit was U+2028, an invisible line separator',
+ 'A JSONL file read with Python splitlines() broke because two of 7,247 records contained U+2028 (LINE SEPARATOR). Why it happens, the numbers, and the one-line fix: split on "\\n" only.',
+ 'splitlines() and U+2028',
+ 'Development log of the Anime Type Quiz / October 2026',
+ '''  <p>While building the data for the <a href="/en/works/shindananime/">Anime Type Quiz</a>, I fixed a bug where <strong>the JSON broke</strong>. The cause was <code>splitlines()</code>, a perfectly ordinary function.</p>
+
+  <h2 class="rv" id="s1">What broke</h2>
+  <p>The quiz data comes from Filmarks and is stored in <code>data/filmarks_works.jsonl</code>. JSONL puts <strong>one JSON object per line</strong>, and you read it by splitting into lines and passing each one to <code>json.loads</code>. In Python I had first written:</p>
+  <pre><code>for line in path.read_text(encoding='utf-8').splitlines():
+    r = json.loads(line)</code></pre>
+  <p>But when a synopsis contained <strong>U+2028 (LINE SEPARATOR)</strong>, that line was split in the middle, and <code>json.loads</code> was handed JSON that ended inside a string, and failed.</p>
+
+  <h2 class="rv" id="s2">What U+2028 is</h2>
+  <p>U+2028 is a Unicode character meaning “line separator.” It looks almost like a newline. In JSON, it is <strong>valid</strong> to put it raw inside a string, and the writing side (<code>json.dumps(..., ensure_ascii=False)</code>) outputs it as is.</p>
+  <p>The problem was on the reading side. Python’s <code>str.splitlines()</code> splits not only on <code>\\n</code> but also on <strong>Unicode line boundaries</strong> such as U+2028. <code>split('\\n')</code> splits only on <code>\\n</code>.</p>
+  <pre><code>s = json.dumps({"a": "x\\u2028y"}, ensure_ascii=False)
+len(s.splitlines())   # 2  (one line splits in two)
+len(s.split('\\n'))    # 1</code></pre>
+  <p>Passing each half to <code>json.loads</code> raises <code>Unterminated string</code>. The short example above reproduces exactly that.</p>
+
+  <h2 class="rv" id="s3">The numbers in the real data</h2>
+  <p>I recounted both ways on the current data file.</p>
+  <div class="scroll rv"><table>
+    <tr><th>How it is split</th><th class="n">Number of lines</th></tr>
+    <tr><td><code>split('\\n')</code> (real newlines only)</td><td class="n">7,247</td></tr>
+    <tr><td><code>splitlines()</code></td><td class="n">7,255</td></tr>
+  </table></div>
+  <p>The difference is <strong>8</strong>. Counting U+2028 in the file gave exactly <strong>8</strong>, in the lines of <strong>2 works</strong>. Two works out of 7,247, under 0.03%, were enough to make the whole file unreadable.</p>
+
+  <h2 class="rv" id="s4">The fix</h2>
+  <p>One line:</p>
+  <pre><code>- for line in path.read_text(encoding='utf-8').splitlines():
++ for line in path.read_text(encoding='utf-8').split('\\n'):</code></pre>
+  <p>I left the reason in a comment so that my future self would not be puzzled: when making JSONL, the only line separator is <code>\\n</code>, so reading should split on <code>\\n</code> only.</p>
+
+  <h2 class="rv" id="s5">Why it is hard to notice</h2>
+  <ul>
+    <li><strong>You cannot see it.</strong> Depending on the editor, U+2028 looks like a newline or a space. Staring at the synopsis will not find it.</li>
+    <li><strong>It is rare.</strong> 2 of 7,247 works. While you test with a small sample, it may never show up. It is the kind of bug that appears only once you have fetched everything.</li>
+    <li><strong>The writer is correct.</strong> Nothing written is wrong as JSON. What broke it was the reader’s assumption about what a “line” is.</li>
+  </ul>
+
+  <h2 class="rv" id="s6">One more fix from the same day</h2>
+  <p>The same commit fixed another bug caused by <strong>characters that look alike but are different</strong>. When matching titles, Annict’s <code>＜物語＞</code> (full-width angle brackets) and Filmarks’s <code>〈物語〉</code> (Japanese angle brackets) did not match even though they were the same work. NFKC normalization turns the full-width <code>＜＞</code> into half-width, but <code>〈〉</code> stays as it is, so I removed both from the comparison string.</p>
+  <p>Both are the same lesson: characters are not always what they look like.</p>
+
+  <h2 class="rv" id="s7">What I learned</h2>
+  <blockquote>A function I used “for newlines” had a wider idea of newlines than I assumed.</blockquote>
+  <p>When reading JSONL, do not use <code>splitlines()</code>. Split on the character the writer used as the separator (<code>\\n</code>), or use <code>for line in f:</code>, which splits only on <code>\\n</code>. I am writing it here for the next time the data grows.</p>
+  <p class="note">The numbers in this article come from recounting the data file on October 7, 2026.</p>
+'''))
+
+pairs.append(make('torecadash-ci',
+ 'No builds arriving in TestFlight: I had used up the 25 free Xcode Cloud hours (my first diagnosis was wrong)',
+ 'New builds stopped appearing in TestFlight. My first diagnosis, “[ci skip] is blocking builds,” was wrong; the real cause was a workflow that built the iOS app on every commit and burned the free 25 hours a month. The numbers and the fix.',
+ 'Xcode Cloud free hours ran out',
+ 'Development log of Torecadash / October 2026',
+ '''  <p>While developing my iOS app, Torecadash, I hit a bug: “new builds are not arriving in TestFlight.” The first cause I came up with was <strong>wrong</strong>. This is where I went wrong, how I noticed, and what the real cause was, written from the numbers in my hand-over notes and commits.</p>
+
+  <h2 class="rv" id="s1">The first diagnosis: “[ci skip] is the cause”</h2>
+  <p>On September 2, I got a report: “there have been no builds since 9/1.” My first diagnosis was that <strong><code>[ci skip]</code> in my commit messages was stopping the builds</strong>. I had been adding it to documentation-only changes so they would not use up Xcode Cloud’s free tier (25 hours a month). Along with the diagnosis, I even wrote a rule: “do not use <code>[ci skip]</code>.”</p>
+
+  <h2 class="rv" id="s2">The timeline did not fit</h2>
+  <p>Looking at Xcode Cloud in App Store Connect, it said:</p>
+  <blockquote>You have reached your usage limit. The limit resets on September 8, your renewal date.</blockquote>
+  <p>Usage over the last 30 days was <strong>493 builds, 28 hours 14 minutes</strong>. The free tier is 25 hours a month, so it was used up.</p>
+  <p>What showed my first diagnosis was wrong was the <strong>timeline</strong>. Only three commits carried <code>[ci skip]</code>, all on September 2. The builds had stopped on September 1. <strong>The cause came after the effect</strong>, so it could not be the cause. Worse, the rule I made was counterproductive when the quota was short.</p>
+
+  <h2 class="rv" id="s3">Why did it run 493 times?</h2>
+  <p>The workflow’s start condition was “any file changed.” Counting commits over the last 30 days:</p>
+  <div class="scroll rv"><table>
+    <tr><th>Last 30 days</th><th class="n">Count</th></tr>
+    <tr><td>All commits</td><td class="n">1,146</td></tr>
+    <tr><td>of which touched the iOS app</td><td class="n">219 (19%)</td></tr>
+    <tr><td>Builds run by Xcode Cloud</td><td class="n">493 (3.4 minutes each on average)</td></tr>
+  </table></div>
+  <p>So <strong>80% of the time, I was building the whole iOS app although only server code or documents had changed</strong>. On top of that, “Clean build” was checked, so every build skipped the cache and took as long as possible.</p>
+
+  <h2 class="rv" id="s4">The fix is a setting, not a marker</h2>
+  <ol>
+    <li>Change the start condition to custom file and folder rules, limited to the iOS app folder and the Xcode project.</li>
+    <li>Uncheck “Clean build.”</li>
+  </ol>
+  <p>My hand-over notes estimate this takes builds from 493 to about 94, and time from 28 hours to about 5.4 hours a month. That is a calculated estimate, not a measurement after the change.</p>
+
+  <h2 class="rv" id="s5">What I learned</h2>
+  <blockquote>Check whether a cause explains the facts, using the timeline, before settling on it.</blockquote>
+  <p>My first diagnosis stopped at the first plausible cause. Something that happened after the effect cannot be its cause. This check takes a minute if done before announcing the diagnosis. In my hand-over notes (§183) I left a warning that “this diagnosis was wrong,” as a record.</p>
+  <p class="note">The numbers in this article come from my hand-over notes and the commit record (September 2, 2026).</p>
+'''))
+
 json.dump(pairs, open('data/en.json', 'w', encoding='utf8'), ensure_ascii=False, indent=2)
 print(len(pairs))

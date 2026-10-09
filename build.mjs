@@ -768,7 +768,7 @@ for (const file of pages) {
     '<header class="site"><div class="wrap">\n  <a class="logo" href="/"><img class="logo-mark" src="/favicon.svg" alt="" width="28" height="28">Koshin Studio</a>\n  <nav><a href="/works/">Works</a><a href="/notes/">Notes</a><a href="/picks/">Picks</a><a href="/calc/">Tools</a><a href="/about/">About</a></nav>');
   html = html.replace(/(<footer class="site"><div class="wrap">[\s\S]*?)<nav>[\s\S]*?<\/nav>(\s*<\/div><\/footer>)/,
     '$1' + (I18N[rel.split('/')[1]]
-      ? '<nav><a href="/en/" hreflang="en" lang="en">English</a><a href="/" hreflang="ja" lang="ja">日本語</a><a href="/privacy/" hreflang="ja" lang="ja">Privacy</a></nav>'
+      ? '<nav><a href="/en/" hreflang="en" lang="en">English</a><a href="/" hreflang="ja" lang="ja">日本語</a><a href="/en/privacy/" hreflang="en" lang="en">Privacy</a></nav>'
       : '<nav><a href="/picks/">Picks</a><a href="/calc/">Tools</a><a href="/about/">About</a><a href="/privacy/">あつかい</a><a href="/en/" hreflang="en" lang="en">English</a></nav>') + '$2');
   html = html.replace(/<div class="sns-row">[\s\S]*?<\/div>/g, `<div class="sns-row">${socialHtml}</div>`);
   if (!/class="sns-row"/.test(html)) {
@@ -1134,11 +1134,15 @@ const llms = [
   '## Works（作ったもの）', ...works.map((w) => line(w.title, w.url, w.blurb)), '',
   '## ガチアニメ診断のガイド',
   line('ガイド', '/anime/', '診断の仕組みと 64 タイプ'), line('6 つの軸', '/anime/axes/', ''), line('選び方', '/anime/guide/', 'アニメ診断の選び方'), line('64 タイプ一覧', '/anime/types/', ''), '',
+  '## English (en)',
+  ...enPairs.map((p) => line(p.title, p.en, p.blurb)),
+  line('English hub', '/en/', 'Games, tools and development logs in English'),
+  ...Object.values(I18N).filter((l) => l.path !== '/en/').map((l) => line(l.label, l.path, 'Games and tools in this language')), '',
   '## そのほか', line('About', '/about/', '運営者・連絡先・記事の書き方と訂正について'), line('あつかい（プライバシー）', '/privacy/', ''), ''].join('\n');
 writeFileSync(here + '/llms.txt', llms);
 const fullPages = [].concat(
   records.map((n) => n.url), picks.map((n) => n.url), toolRows.map((t) => t.url),
-  works.map((w) => w.url), ['/anime/', '/anime/axes/', '/anime/guide/', '/about/', '/privacy/']);
+  works.map((w) => w.url), ['/anime/', '/anime/axes/', '/anime/guide/', '/about/', '/privacy/'], enPairs.map((p) => p.en), ['/en/']);
 const full = ['# Koshin Studio — 全文', '', `> ${SITE}/ の主な頁の本文です。出典は、各頁の URL。`, ''].concat(
   fullPages.map((u) => {
     const f = here + u + 'index.html';

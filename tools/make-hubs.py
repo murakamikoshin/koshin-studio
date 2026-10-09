@@ -74,10 +74,24 @@ T = {
   stop=('10 saniyede dur (10秒ピッタリ)', 'Aklından on saniye say ve dur. Üç tur; hata ne kadar küçükse o kadar iyi. Ayar ve üyelik yok. Arayüz Japonca.'),
   h_log='Geliştirme kayıtları', log='Ölçülen sonuçlar ve düzeltmeler, rakamlarla. Bu yazılar İngilizce ve Japonca.', logs=True, h_lang='Diller', free='Ücretsiz. Kurulum ve üyelik yok.'),
 }
+QUIZ = dict(
+ en='12 questions, 6 axes: your anime type and the one anime that fits you right now. Free, nothing is sent anywhere. In English.',
+ zh='12 个问题、6 条轴：得出你的动画类型和此刻最适合你的一部动画。免费，不会发送任何数据。英语界面。',
+ es='12 preguntas, 6 ejes: tu tipo de anime y el anime que mejor te encaja ahora. Gratis, no se envía nada. En inglés.',
+ pt='12 perguntas, 6 eixos: seu tipo de anime e o anime que mais combina com você agora. Grátis, nada é enviado. Em inglês.',
+ fr='12 questions, 6 axes : votre type d’anime et l’anime qui vous correspond le mieux en ce moment. Gratuit, rien n’est envoyé. En anglais.',
+ de='12 Fragen, 6 Achsen: dein Anime-Typ und der Anime, der gerade am besten zu dir passt. Kostenlos, nichts wird gesendet. Auf Englisch.',
+ ru='12 вопросов, 6 осей: ваш тип аниме и то аниме, которое сейчас подходит вам лучше всего. Бесплатно, ничего не отправляется. На английском.',
+ id='12 pertanyaan, 6 sumbu: tipe anime Anda dan anime yang paling cocok untuk Anda sekarang. Gratis, tidak ada data yang dikirim. Dalam bahasa Inggris.',
+ ko='12개 질문, 6개 축: 나의 애니 타입과 지금 가장 잘 맞는 애니 한 편. 무료이며 아무것도 전송하지 않습니다. 영어로 제공됩니다.',
+ tr='12 soru, 6 eksen: anime tipiniz ve şu an size en çok uyan anime. Ücretsiz, hiçbir şey gönderilmez. İngilizce.',
+)
 LOGS = [('/en/notes/itms-91064/', 'ITMS-91064 “Invalid Binary”: NSPrivacyTracking was true but NSPrivacyTrackingDomains was empty'),
  ('/en/notes/review-info-needed/', 'App Store review sent “Guideline 2.1 Information Needed”: the six things Apple asked for'),
  ('/en/notes/xcode152-sdk/', 'Firebase 12 does not work with Xcode 15.2: why I pinned Firebase 11.4.0 and AdMob 11.5.0'),
- ('/en/notes/torecadash-watchdog/', 'iOS app freezes and is killed (0x8BADF00D)')]
+ ('/en/notes/torecadash-watchdog/', 'iOS app freezes and is killed (0x8BADF00D)'),
+ ('/en/notes/u2028/', 'Python splitlines() breaks JSONL: the culprit was U+2028'),
+ ('/en/notes/torecadash-ci/', 'No builds arriving in TestFlight: I had used up the 25 free Xcode Cloud hours')]
 e = lambda x: H.escape(x, quote=True)
 exec(open('tools/calc-pages-data.py', encoding='utf8').read())
 TOOLS_H = dict(en='Tools', zh='工具', es='Herramientas', pt='Ferramentas', fr='Outils', de='Werkzeuge', ru='Инструменты', id='Alat', ko='도구', tr='Araçlar')
@@ -92,6 +106,7 @@ for code, L in langs.items():
     <li><a href="/play/sushitsumu/">{e(t["sushi"][0])}</a> — {e(t["sushi"][1])}</li>
     <li><a href="/play/negaeri-shogi/">{e(t["nega"][0])}</a> — {e(t["nega"][1])} <a href="/en/works/negaeri-shogi/" hreflang="en" lang="en">(rules, English)</a></li>
     <li><a href="/play/stopwatch10/">{e(t["stop"][0])}</a> — {e(t["stop"][1])}</li>
+    <li><a href="/app/shindananime/en/" hreflang="en" lang="en">Anime Type Quiz</a> — {e(QUIZ[code])}</li>
   </ul>'''
     logs = f'''  <h2 class="rv">{e(t["h_log"])}</h2>
   <p>{e(t["log"])}</p>
