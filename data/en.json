@@ -1,0 +1,9 @@
+[
+  {
+    "ja": "/notes/itms-91064/",
+    "en": "/en/notes/itms-91064/",
+    "title": "ITMS-91064 “Invalid Binary”: NSPrivacyTracking was true but NSPrivacyTrackingDomains was empty",
+    "date": "2026-10-08",
+    "blurb": "An iOS build was rejected by Apple's automated review with ITMS-91064. NSPrivacyTracking was true while NSPrivacyTrackingDomains was an empty array. How it was fixed, and what was not verified."
+  }
+]

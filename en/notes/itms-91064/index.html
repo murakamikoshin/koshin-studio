@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ITMS-91064 “Invalid Binary”: NSPrivacyTracking was true but NSPrivacyTrackingDomains was empty — Koshin Studio</title>
+<meta name="description" content="An iOS build was rejected by Apple's automated review with ITMS-91064. NSPrivacyTracking was true while NSPrivacyTrackingDomains was an empty array. How it was fixed, and what was not verified.">
+<meta property="og:title" content="ITMS-91064 “Invalid Binary”: NSPrivacyTracking was true but NSPrivacyTrackingDomains was empty">
+<meta property="og:description" content="An iOS build was rejected by Apple's automated review with ITMS-91064. NSPrivacyTracking was true while NSPrivacyTrackingDomains was an empty array. How it was fixed, and what was not verified.">
+<meta property="og:type" content="article">
+<meta name="theme-color" content="#fbfaf7">
+<link rel="icon" href="/favicon.ico?v=1697d589" sizes="48x48">
+<link rel="icon" href="/favicon.svg?v=b9d7922f" type="image/svg+xml" sizes="any">
+<link rel="icon" href="/assets/icon/icon-192.png?v=e2566235" type="image/png" sizes="192x192">
+<link rel="apple-touch-icon" href="/assets/icon/icon-180.png?v=84e7f0e6">
+<link rel="manifest" href="/site.webmanifest">
+<script>document.documentElement.className+=" js"</script>
+<link rel="stylesheet" href="/style.css?v=7001672f">
+<meta name="google-adsense-account" content="ca-pub-3863314847163872">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3863314847163872" crossorigin="anonymous"></script>
+<link rel="canonical" href="https://koshinstudio.com/en/notes/itms-91064/">
+<meta property="og:url" content="https://koshinstudio.com/en/notes/itms-91064/">
+<meta property="og:site_name" content="Koshin Studio">
+<meta property="og:locale" content="en_US">
+<link rel="alternate" hreflang="ja" href="https://koshinstudio.com/notes/itms-91064/">
+<link rel="alternate" hreflang="en" href="https://koshinstudio.com/en/notes/itms-91064/">
+<link rel="alternate" hreflang="x-default" href="https://koshinstudio.com/notes/itms-91064/">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="alternate" type="application/rss+xml" title="Koshin Studio — Notes" href="https://koshinstudio.com/feed.xml">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BlogPosting","headline":"ITMS-91064 “Invalid Binary”: NSPrivacyTracking was true but NSPrivacyTrackingDomains was empty","url":"https://koshinstudio.com/en/notes/itms-91064/","description":"An iOS build was rejected by Apple's automated review with ITMS-91064. NSPrivacyTracking was true while NSPrivacyTrackingDomains was an empty array. How it was fixed, and what was not verified.","datePublished":"2026-10-08","dateModified":"2026-10-08","inLanguage":"en","image":"https://koshinstudio.com/assets/og/og_notes_itms-91064.jpg","author":{"@id":"https://koshinstudio.com#studio"},"publisher":{"@id":"https://koshinstudio.com#studio"},"mainEntityOfPage":"https://koshinstudio.com/en/notes/itms-91064/"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Koshin Studio","item":"https://koshinstudio.com/en/"},{"@type":"ListItem","position":2,"name":"ITMS-91064 “Invalid Binary”: NSPrivacyTracking was true but NSPrivacyTrackingDomains was empty","item":"https://koshinstudio.com/en/notes/itms-91064/"}]}]}</script>
+<meta property="og:image" content="https://koshinstudio.com/assets/og/og_notes_itms-91064.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
+</head>
+<body>
+<canvas id="motes"></canvas>
+
+<header class="site"><div class="wrap">
+  <a class="logo" href="/"><img class="logo-mark" src="/favicon.svg?v=b9d7922f" alt="" width="28" height="28">Koshin Studio</a>
+  <nav><a href="/works/">Works</a><a href="/notes/">Notes</a><a href="/picks/">Picks</a><a href="/calc/">Tools</a><a href="/about/">About</a></nav>
+</div></header>
+
+<main><div class="wrap">
+  <nav class="crumbs" aria-label="You are here"><a href="/en/">Koshin Studio</a><i aria-hidden="true">›</i><span aria-current="page">ITMS-91064 “Invalid Binary”</span></nav>
+  <h1>ITMS-91064 “Invalid Binary”: NSPrivacyTracking was true but NSPrivacyTrackingDomains was empty</h1>
+  <div class="rule"></div>
+<!--lang-->
+  <p class="note"><a href="/notes/itms-91064/" hreflang="ja" lang="ja">日本語版</a></p>
+<!--/lang-->  <p class="lead">Development log of Torecadash / October 2026</p>
+
+  <p>I uploaded my iOS app, Torecadash, and Apple's automated review rejected build 877 as an <strong>“Invalid Binary”</strong>. The error code was <code>ITMS-91064</code>. The cause was a combination of two entries in the privacy manifest (<code>PrivacyInfo.xcprivacy</code>). This is what happened and how I fixed it, written from my commit history.</p>
+
+  <h2 class="rv" id="s1">What happened</h2>
+  <p>Build 877 was rejected as an <strong>“Invalid Binary”</strong> by Apple's automated review (October 6, 2026). In other words, it was stopped by a machine check, before any human reviewer saw it.</p>
+
+  <h2 class="rv" id="s2">The cause: tracking declared, but the domain list was empty</h2>
+  <p>The privacy manifest had these two entries:</p>
+  <div class="scroll rv"><table>
+    <tr><th>Key</th><th>Value</th></tr>
+    <tr><td><code>NSPrivacyTracking</code> (whether the app tracks)</td><td>true</td></tr>
+    <tr><td><code>NSPrivacyTrackingDomains</code> (domains used for tracking)</td><td>an empty array</td></tr>
+  </table></div>
+  <p>Apple's check rejects this combination as a <strong>contradiction</strong>: the app declares that it tracks, but lists no domain at all.</p>
+  <p>Should I have just set <code>NSPrivacyTracking</code> to false? No. The app shows AdMob ads (banner, native and app-open) and personalizes them for users who agreed to ATT (App Tracking Transparency). The app <strong>really does track</strong>, so <code>true</code> is the correct declaration. The thing to fix was the empty domain list.</p>
+
+  <h2 class="rv" id="s3">The fix: list the domains</h2>
+  <p>However, Google does <strong>not publish an official list</strong> of tracking domains for AdMob. So I added widely used ad-serving domains:</p>
+  <ul>
+    <li><code>googlesyndication.com</code></li>
+    <li><code>googleadservices.com</code></li>
+    <li><code>doubleclick.net</code></li>
+    <li><code>google.com</code></li>
+  </ul>
+  <p>I confirmed that the Release configuration builds (<code>xcodebuild</code> reported <code>BUILD SUCCEEDED</code>).</p>
+
+  <h2 class="rv" id="s4">What I have not verified</h2>
+  <p>The commit only records that the build succeeds. At the time of writing, I have no record of <strong>whether Apple accepted the fixed build</strong>. I also could not check whether the domains above cover <strong>every</strong> domain AdMob uses for tracking, because there is no official list.</p>
+
+  <h2 class="rv" id="s5">What I learned</h2>
+  <blockquote>A declaration and its contents can be cross-checked by a machine.</blockquote>
+  <ul>
+    <li><strong>If you declare that you do it, write the contents (the domains) too.</strong> One without the other is rejected as a contradiction.</li>
+    <li><strong>When rejected, don't escape by deleting the declaration.</strong> If the app really does it, keep the declaration true and fill in the contents.</li>
+    <li><strong>When there is no official list, write down how far you verified.</strong></li>
+  </ul>
+  <p class="note">This article was written from the commit record (October 6, 2026). It is the English version of <a href="/notes/itms-91064/" hreflang="ja" lang="ja">the original Japanese article</a>.</p>
+
+  <div class="rule" style="margin:40px 0 22px"></div>
+  <p class="eyebrow">More in English</p>
+  <ul class="plain">
+    <li><a href="/en/">All English pages</a></li>
+  </ul>
+</div>
+</main>
+
+<footer class="site"><div class="wrap">
+  <span>© 2026 Koshin Studio</span>
+  <div class="sns-row"></div>
+  <nav><a href="/en/">English</a><a href="/" hreflang="ja" lang="ja">日本語</a><a href="/privacy/" hreflang="ja" lang="ja">Privacy (Japanese)</a></nav>
+</div></footer>
+<script src="/motion.js?v=1e7447ec" defer></script>
+</body>
+</html>

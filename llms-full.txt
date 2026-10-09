@@ -218,6 +218,8 @@ URL: https://koshinstudio.com/notes/itms-91064/
 
 # ITMS-91064「無効なバイナリ」：NSPrivacyTracking が true なのに NSPrivacyTrackingDomains が空だった
 
+  English version (https://koshinstudio.com/en/notes/itms-91064/)
+
   トレカダッシュ 開発の記録 ／ 2026年10月
 
   iOS アプリ「トレカダッシュ」をアップロードしたところ、Apple 側の自動審査で、ビルド 877 が「無効なバイナリ」として却下されました。エラーコードは ITMS-91064。原因は、プライバシーマニフェスト（PrivacyInfo.xcprivacy）の、二つの項目の組み合わせでした。コミットの記録で、何が起きて、どう直したかを書きます。

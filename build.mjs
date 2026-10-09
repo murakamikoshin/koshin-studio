@@ -91,7 +91,7 @@ const foot = `
 <footer class="site"><div class="wrap">
   <span>© 2026 Koshin Studio</span>
   <div class="sns-row">${socialHtml}</div>
-  <nav><a href="/about/">About</a><a href="/privacy/">あつかい</a></nav>
+  <nav><a href="/about/">About</a><a href="/privacy/">あつかい</a><a href="/en/" hreflang="en" lang="en">English</a></nav>
 </div></footer>
 <script src="/motion.js" defer></script>
 </body>
@@ -557,6 +557,13 @@ const urlOf = (f) => {
 const workBySlug = Object.fromEntries(works.map((w) => [w.slug, w]));
 const noteBySlug = Object.fromEntries(notes.map((n) => [n.slug, n]));
 
+/* 英語版。data/en.json に「日本語のページ ⇄ 英語のページ」の対を書く。
+   対になったページには、お互いを指す hreflang と、言語の切り替えのリンクが入る。
+   英語版は /en/ の下に、手で書く（機械翻訳のままは出さない） */
+const enPairs = existsSync(here + '/data/en.json') ? read('/data/en.json') : [];
+const enByPath = Object.fromEntries(enPairs.map((p) => [p.en, p]));
+const jaToEn = Object.fromEntries(enPairs.map((p) => [p.ja, p]));
+
 /* 本名は書かない。確かめようのないことを構造化データに入れると、
    検索側にも読む人にも嘘をつくことになる。
    代わりに、footer に出しているのと同じ公開の持ち場だけを繋ぐ */
@@ -635,6 +642,19 @@ function ldFor(file, url) {
       }] : []),
     ];
   }
+  const em = rel.match(/^\/en\/notes\/([^/]+)\/index\.html$/);
+  if (em && enByPath['/en/notes/' + em[1] + '/']) {
+    const p = enByPath['/en/notes/' + em[1] + '/'];
+    return [
+      { '@type': 'BlogPosting', headline: p.title, url: SITE + p.en, description: p.blurb,
+        datePublished: p.date, dateModified: p.updated || p.date, inLanguage: 'ja',
+        image: ogFor(p.ja + 'index.html'),
+        author: { '@id': SITE + '#studio' }, publisher: { '@id': SITE + '#studio' },
+        mainEntityOfPage: SITE + p.en },
+      crumbs([['Koshin Studio', '/en/'], [p.title, p.en]]),
+    ];
+  }
+  if (rel === '/en/index.html') return [page('Koshin Studio — English'), crumbs([['Koshin Studio', '/en/']])];
   const nm = rel.match(/^\/notes\/([^/]+)\/index\.html$/);
   if (nm && noteBySlug[nm[1]]) {
     const nn = noteBySlug[nm[1]];
@@ -729,7 +749,9 @@ for (const file of pages) {
   html = html.replace(/<header class="site"><div class="wrap">\s*<a class="logo" href="\/">Koshin Studio<\/a>\s*<nav>[\s\S]*?<\/nav>/,
     '<header class="site"><div class="wrap">\n  <a class="logo" href="/"><img class="logo-mark" src="/favicon.svg" alt="" width="28" height="28">Koshin Studio</a>\n  <nav><a href="/works/">Works</a><a href="/notes/">Notes</a><a href="/picks/">Picks</a><a href="/calc/">Tools</a><a href="/about/">About</a></nav>');
   html = html.replace(/(<footer class="site"><div class="wrap">[\s\S]*?)<nav>[\s\S]*?<\/nav>(\s*<\/div><\/footer>)/,
-    '$1<nav><a href="/picks/">Picks</a><a href="/calc/">Tools</a><a href="/about/">About</a><a href="/privacy/">あつかい</a></nav>$2');
+    '$1' + (rel.startsWith('/en/')
+      ? '<nav><a href="/en/">English</a><a href="/" hreflang="ja" lang="ja">日本語</a><a href="/privacy/" hreflang="ja" lang="ja">Privacy (Japanese)</a></nav>'
+      : '<nav><a href="/picks/">Picks</a><a href="/calc/">Tools</a><a href="/about/">About</a><a href="/privacy/">あつかい</a><a href="/en/" hreflang="en" lang="en">English</a></nav>') + '$2');
   html = html.replace(/<div class="sns-row">[\s\S]*?<\/div>/g, `<div class="sns-row">${socialHtml}</div>`);
   if (!/class="sns-row"/.test(html)) {
     html = html.replace('<footer class="site"><div class="wrap">\n  <span>© 2026 Koshin Studio</span>',
@@ -786,8 +808,9 @@ for (const file of pages) {
   }
   /* 属性付きも消えるようにする（class="crumbs" だけを見ると一致せず、
      組み直すたびに増え続けていた） */
-  html = html.replace(/\s*<nav class="crumbs"[^>]*>[\s\S]*?<\/nav>/g, '');
-  if (trail) {
+  const isEn = rel.startsWith('/en/');
+  if (!isEn) html = html.replace(/\s*<nav class="crumbs"[^>]*>[\s\S]*?<\/nav>/g, '');
+  if (trail && !isEn) {
     const items = [['Koshin Studio', '/']].concat(trail);
     const cr = '<nav class="crumbs" aria-label="現在地">' + items.map((t, i) =>
       i === items.length - 1
@@ -822,18 +845,36 @@ for (const file of pages) {
              .replace(/\n?\s*<meta name="twitter:card"[^>]*>/g, '')
              .replace(/\n?\s*<meta property="og:site_name"[^>]*>/g, '')
              .replace(/\n?\s*<meta property="og:locale"[^>]*>/g, '')
+             .replace(/\n?\s*<link rel="alternate" hreflang="[^"]*"[^>]*>/g, '')
              .replace(/\n?\s*<link rel="alternate" type="application\/rss\+xml"[^>]*>/g, '')
              .replace(/\n?\s*<script type="application\/ld\+json">[\s\S]*?<\/script>/g, '');
   const ld = ldFor(file, url);
+  html = html.replace(/<html lang="[^"]*">/, `<html lang="${isEn ? 'en' : 'ja'}">`);
+  const relUrl = url.slice(SITE.length);
+  const pair = enByPath[relUrl] || jaToEn[relUrl];
+  const hreflangs = pair ? [
+    `<link rel="alternate" hreflang="ja" href="${SITE + pair.ja}">`,
+    `<link rel="alternate" hreflang="en" href="${SITE + pair.en}">`,
+    `<link rel="alternate" hreflang="x-default" href="${SITE + pair.ja}">`,
+  ] : [];
+  /* 言語の切り替え。印の間は組むたびに作り直す */
+  html = html.replace(/\n?<!--lang-->[\s\S]*?<!--\/lang-->\n?/g, '');
+  if (pair) {
+    const link = isEn
+      ? `<a href="${pair.ja}" hreflang="ja" lang="ja">日本語版</a>`
+      : `<a href="${pair.en}" hreflang="en" lang="en">English version</a>`;
+    html = html.replace('<div class="rule"></div>', `<div class="rule"></div>\n<!--lang-->\n  <p class="note">${link}</p>\n<!--/lang-->`);
+  }
   const head = [
     `<link rel="canonical" href="${url}">`,
     `<meta property="og:url" content="${url}">`,
     `<meta property="og:site_name" content="Koshin Studio">`,
-    `<meta property="og:locale" content="ja_JP">`,
+    `<meta property="og:locale" content="${isEn ? 'en_US' : 'ja_JP'}">`,
+    ...hreflangs,
     `<meta name="twitter:card" content="summary_large_image">`,
     `<link rel="alternate" type="application/rss+xml" title="Koshin Studio — Notes" href="${SITE}/feed.xml">`,
     ld ? `<script type="application/ld+json">${JSON.stringify(
-      { '@context': 'https://schema.org', '@graph': ld })}</script>` : '',
+      { '@context': 'https://schema.org', '@graph': ld }).replace(/"inLanguage":"ja"/g, `"inLanguage":"${isEn ? 'en' : 'ja'}"`)}</script>` : '',
   ].filter(Boolean).join('\n');
   html = html.replace('</head>', head + '\n</head>');
   /* ヘッダーのロゴ画像も、ファビコンと同じ印を付ける（絵を替えたら別の URL に） */
@@ -883,7 +924,8 @@ for (const file of pages) {
     return `<a${rest} data-play="${slug}" href="${w.play}">`;
   });
 
-  const ogPath = ogFor(rel);      /* 構造化データと同じ絵を指す */
+  /* 英語のページは、対になった日本語のページの絵を使う */
+  const ogPath = ogFor(enByPath[rel.replace(/index\.html$/, '')] ? enByPath[rel.replace(/index\.html$/, '')].ja + 'index.html' : rel);      /* 構造化データと同じ絵を指す */
   html = html.replace(/\n?\s*<meta property="og:image"[^>]*>/g, '')
              .replace(/\n?\s*<meta property="og:image:width"[^>]*>/g, '')
              .replace(/\n?\s*<meta property="og:image:height"[^>]*>/g, '');
