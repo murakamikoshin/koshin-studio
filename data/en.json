@@ -5,5 +5,26 @@
     "title": "ITMS-91064 “Invalid Binary”: NSPrivacyTracking was true but NSPrivacyTrackingDomains was empty",
     "date": "2026-10-08",
     "blurb": "An iOS build was rejected by Apple's automated review with ITMS-91064. NSPrivacyTracking was true while NSPrivacyTrackingDomains was an empty array. How it was fixed, and what was not verified."
+  },
+  {
+    "ja": "/notes/review-info-needed/",
+    "en": "/en/notes/review-info-needed/",
+    "title": "App Store review sent “Guideline 2.1 Information Needed”: the six things Apple asked for",
+    "date": "2026-10-09",
+    "blurb": "My first App Store submission did not get a rejection but a request for more information (Guideline 2.1). The six things Apple asked for, and how they connect to what I had already fixed."
+  },
+  {
+    "ja": "/notes/xcode152-sdk/",
+    "en": "/en/notes/xcode152-sdk/",
+    "title": "Firebase 12 does not work with Xcode 15.2 (Swift 6.0 required): why I pinned Firebase 11.4.0 and AdMob 11.5.0",
+    "date": "2026-10-09",
+    "blurb": "On an old Mac stuck on Xcode 15.2, newer Firebase and AdMob SDKs fail to build. Which versions break, which versions I pinned, and what to do about AdMob class names. Notes from July 2026."
+  },
+  {
+    "ja": "/notes/torecadash-watchdog/",
+    "en": "/en/notes/torecadash-watchdog/",
+    "title": "iOS app freezes and is killed (0x8BADF00D): a SwiftUI computed property ran on every redraw",
+    "date": "2026-10-09",
+    "blurb": "An iOS app was force-quit by the watchdog (0x8BADF00D). A SwiftUI computed property re-filtered and re-sorted 951 articles on the main thread on every body evaluation. How I found it and changed it, and what is not verified."
   }
 ]

@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Firebase 12 does not work with Xcode 15.2 (Swift 6.0 required): why I pinned Firebase 11.4.0 and AdMob 11.5.0 — Koshin Studio</title>
+<meta name="description" content="On an old Mac stuck on Xcode 15.2, newer Firebase and AdMob SDKs fail to build. Which versions break, which versions I pinned, and what to do about AdMob class names. Notes from July 2026.">
+<meta property="og:title" content="Firebase 12 does not work with Xcode 15.2 (Swift 6.0 required): why I pinned Firebase 11.4.0 and AdMob 11.5.0">
+<meta property="og:description" content="On an old Mac stuck on Xcode 15.2, newer Firebase and AdMob SDKs fail to build. Which versions break, which versions I pinned, and what to do about AdMob class names. Notes from July 2026.">
+<meta property="og:type" content="article">
+<meta name="theme-color" content="#fbfaf7">
+<link rel="icon" href="/favicon.ico?v=1697d589" sizes="48x48">
+<link rel="icon" href="/favicon.svg?v=b9d7922f" type="image/svg+xml" sizes="any">
+<link rel="icon" href="/assets/icon/icon-192.png?v=e2566235" type="image/png" sizes="192x192">
+<link rel="apple-touch-icon" href="/assets/icon/icon-180.png?v=84e7f0e6">
+<link rel="manifest" href="/site.webmanifest">
+<script>document.documentElement.className+=" js"</script>
+<link rel="stylesheet" href="/style.css?v=7001672f">
+<meta name="google-adsense-account" content="ca-pub-3863314847163872">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3863314847163872" crossorigin="anonymous"></script>
+<link rel="canonical" href="https://koshinstudio.com/en/notes/xcode152-sdk/">
+<meta property="og:url" content="https://koshinstudio.com/en/notes/xcode152-sdk/">
+<meta property="og:site_name" content="Koshin Studio">
+<meta property="og:locale" content="en_US">
+<link rel="alternate" hreflang="ja" href="https://koshinstudio.com/notes/xcode152-sdk/">
+<link rel="alternate" hreflang="en" href="https://koshinstudio.com/en/notes/xcode152-sdk/">
+<link rel="alternate" hreflang="x-default" href="https://koshinstudio.com/notes/xcode152-sdk/">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="alternate" type="application/rss+xml" title="Koshin Studio — Notes" href="https://koshinstudio.com/feed.xml">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BlogPosting","headline":"Firebase 12 does not work with Xcode 15.2 (Swift 6.0 required): why I pinned Firebase 11.4.0 and AdMob 11.5.0","url":"https://koshinstudio.com/en/notes/xcode152-sdk/","description":"On an old Mac stuck on Xcode 15.2, newer Firebase and AdMob SDKs fail to build. Which versions break, which versions I pinned, and what to do about AdMob class names. Notes from July 2026.","datePublished":"2026-10-09","dateModified":"2026-10-09","inLanguage":"en","image":"https://koshinstudio.com/assets/og/og_notes_xcode152-sdk.jpg","author":{"@id":"https://koshinstudio.com#studio"},"publisher":{"@id":"https://koshinstudio.com#studio"},"mainEntityOfPage":"https://koshinstudio.com/en/notes/xcode152-sdk/"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Koshin Studio","item":"https://koshinstudio.com/en/"},{"@type":"ListItem","position":2,"name":"Firebase 12 does not work with Xcode 15.2 (Swift 6.0 required): why I pinned Firebase 11.4.0 and AdMob 11.5.0","item":"https://koshinstudio.com/en/notes/xcode152-sdk/"}]}]}</script>
+<meta property="og:image" content="https://koshinstudio.com/assets/og/og_notes_xcode152-sdk.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
+</head>
+<body>
+<canvas id="motes"></canvas>
+
+<header class="site"><div class="wrap">
+  <a class="logo" href="/"><img class="logo-mark" src="/favicon.svg?v=b9d7922f" alt="" width="28" height="28">Koshin Studio</a>
+  <nav><a href="/works/">Works</a><a href="/notes/">Notes</a><a href="/picks/">Picks</a><a href="/calc/">Tools</a><a href="/about/">About</a></nav>
+</div></header>
+
+<main><div class="wrap">
+  <nav class="crumbs" aria-label="You are here"><a href="/en/">Koshin Studio</a><i aria-hidden="true">›</i><span aria-current="page">Firebase 12 and Xcode 15.2</span></nav>
+  <h1>Firebase 12 does not work with Xcode 15.2 (Swift 6.0 required): why I pinned Firebase 11.4.0 and AdMob 11.5.0</h1>
+  <div class="rule"></div>
+<!--lang-->
+  <p class="note"><a href="/notes/xcode152-sdk/" hreflang="ja" lang="ja">日本語版</a></p>
+<!--/lang-->
+  <p class="lead">Development log of Torecadash / October 2026</p>
+
+  <p>I build my iOS app, Torecadash, on a 2017 Mac with Xcode 15.2. In this environment, <strong>newer versions of the Firebase iOS SDK and the AdMob (Google Mobile Ads) SDK do not build</strong>. This is which version breaks and which version I pinned, written from my hand-over notes (July 2026).</p>
+  <p class="note">The version numbers are as of July 2026. The situation may be different with the latest versions today.</p>
+
+  <h2 class="rv" id="s1">The environment</h2>
+  <ul>
+    <li>Mac: MacBook Pro 13-inch (2017). macOS tops out at Ventura (13.7.8) and cannot go higher.</li>
+    <li>Xcode: 15.2, the latest that runs on Ventura. It officially supports up to iOS 17.2.</li>
+    <li>My iPhone runs iOS 26, so <strong>I cannot install onto the device from the local Xcode with a cable</strong>. The only way to test on the device is to build with Xcode Cloud and distribute through TestFlight.</li>
+    <li>Locally I only check that <code>xcodebuild</code> compiles. SwiftUI previews almost never render on this Mac.</li>
+  </ul>
+
+  <h2 class="rv" id="s2">Firebase: pinned to 11.4.0</h2>
+  <p>The newer the Firebase iOS SDK, the newer the Xcode it requires. My notes recorded this:</p>
+  <div class="scroll rv"><table>
+    <tr><th>Firebase version</th><th>What happens</th></tr>
+    <tr><td>12.0.0 and later</td><td>Requires a Swift 6.0 toolchain (Xcode 16.2 or later)</td></tr>
+    <tr><td>11.12.0 and later</td><td>Also requires Xcode 16.2</td></tr>
+    <tr><td>11.5.0 onward</td><td>A bug in <code>FirebaseDataEncoder.swift</code> (Firebase issue #15029)</td></tr>
+    <tr><td><strong>11.4.0</strong></td><td><strong>Confirmed to work reliably</strong></td></tr>
+  </table></div>
+  <p>So I set the Swift Package Manager rule to <strong>Exact Version 11.4.0</strong>. Xcode keeps suggesting the latest version, and I do not follow it.</p>
+  <p>One point is easy to get confused about. Xcode Cloud (the cloud build) runs the latest Xcode, but <strong>the pinned setting is kept as it is</strong>, so cloud builds succeed without trouble. If you pin to suit the old local Xcode, the same version also builds on the newer Xcode in the cloud.</p>
+
+  <h2 class="rv" id="s3">AdMob: pinned to 11.5.0</h2>
+  <p>For the same reason, I <strong>pinned the AdMob SDK</strong> (<code>swift-package-manager-google-mobile-ads</code>) <strong>to 11.5.0</strong> (July 22, 2026).</p>
+  <ul>
+    <li><strong>11.6.0 and later:</strong> The SDK depends on Apple's <code>MarketplaceKit</code>, which <strong>requires Xcode 15.3 or later</strong>. On Xcode 15.2 the build fails at link time with <code>Undefined symbols</code> errors related to MarketplaceKit.</li>
+    <li><strong>A caveat for 11.5.0:</strong> This version does not yet have the new Swift-style class names (<code>BannerView</code>, <code>RewardedAd</code>, and so on). You have to use the old names with the <code>GAD</code> prefix (<code>GADBannerView</code>, <code>GADRewardedAd</code>, <code>GADRequest</code>, <code>GADMobileAds</code>, <code>GADFullScreenContentDelegate</code>, and so on).</li>
+  </ul>
+  <p>When I upgrade Xcode and raise the version later, <strong>I will need to rewrite the class names, not only change the version number</strong>. I left that in my notes.</p>
+
+  <h2 class="rv" id="s4">What I would tell someone in the same situation</h2>
+  <ol>
+    <li><strong>Pin with “Exact Version.”</strong> With an “up to next” rule, Xcode picks a newer version you cannot use.</li>
+    <li><strong>Write down “from which version it breaks,” with version numbers.</strong> A few months later, when you have forgotten why you pinned, the reason is still there.</li>
+    <li><strong>The limits of your local environment can be relaxed in the cloud.</strong> You can keep testing on a real device through Xcode Cloud and TestFlight even with an old Mac. (The free tier has a monthly limit, though. See <a href="/notes/torecadash-ci/" hreflang="ja" lang="ja">builds not arriving in TestFlight</a>, in Japanese.)</li>
+  </ol>
+
+  <h2 class="rv" id="s5">What I have not verified</h2>
+  <p>The version numbers in this article come from my July 2026 notes. I have not checked what the Xcode 15.2 constraints look like with versions released since. The “breaks from this version” boundaries are <strong>the build results at that time</strong>.</p>
+
+  <p class="note">This is the English version of <a href="/notes/xcode152-sdk/" hreflang="ja" lang="ja">the original Japanese article</a>.</p>
+
+  <div class="rule" style="margin:40px 0 22px"></div>
+  <p class="eyebrow">More in English</p>
+  <ul class="plain">
+    <li><a href="/en/">All English pages</a></li>
+  </ul>
+</div>
+</main>
+
+<footer class="site"><div class="wrap"></div></footer>
+<script src="/motion.js?v=1e7447ec" defer></script>
+</body>
+</html>

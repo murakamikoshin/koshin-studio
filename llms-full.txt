@@ -149,6 +149,8 @@ URL: https://koshinstudio.com/notes/xcode152-sdk/
 
 # Xcode 15.2 で Firebase 12 が使えない（Swift 6.0 必須）：Firebase 11.4.0 と AdMob 11.5.0 に固定した理由
 
+  English version (https://koshinstudio.com/en/notes/xcode152-sdk/)
+
   トレカダッシュ 開発の記録 ／ 2026年10月
 
   iOS アプリ「トレカダッシュ」は、2017 年の古い Mac で、Xcode 15.2 を使って作っています。この環境では、Firebase の iOS SDK と、AdMob（Google Mobile Ads）の SDK を、新しい版にすると、ビルドできません。どの版から使えなくなって、どの版に固定したのか。開発の引き継ぎ記録（2026年7月）に残っている内容で書きます。
@@ -1516,6 +1518,8 @@ URL: https://koshinstudio.com/notes/review-info-needed/
 
 # App Store 審査で「Guideline 2.1 Information Needed」が届いた：求められた6つ
 
+  English version (https://koshinstudio.com/en/notes/review-info-needed/)
+
   トレカダッシュ 開発の記録 ／ 2026年10月
 
   iOS アプリ「トレカダッシュ」を、初めて App Store の審査に出しました。提出は10月6日（米太平洋時間の朝4時24分）です。そのあと届いたのは、不合格の通知ではなく、「追加の情報が必要です」というメールでした。何を求められたのかを、まとめておきます。
@@ -1770,6 +1774,8 @@ URL: https://koshinstudio.com/notes/torecadash-9set/
 URL: https://koshinstudio.com/notes/torecadash-watchdog/
 
 # iOS アプリが固まって強制終了される（0x8BADF00D）：SwiftUI の計算プロパティが毎回走っていた
+
+  English version (https://koshinstudio.com/en/notes/torecadash-watchdog/)
 
   トレカダッシュ 開発の記録 ／ 2026年10月
 

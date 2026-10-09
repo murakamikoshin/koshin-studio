@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>iOS app freezes and is killed (0x8BADF00D): a SwiftUI computed property ran on every redraw — Koshin Studio</title>
+<meta name="description" content="An iOS app was force-quit by the watchdog (0x8BADF00D). A SwiftUI computed property re-filtered and re-sorted 951 articles on the main thread on every body evaluation. How I found it and changed it, and what is not verified.">
+<meta property="og:title" content="iOS app freezes and is killed (0x8BADF00D): a SwiftUI computed property ran on every redraw">
+<meta property="og:description" content="An iOS app was force-quit by the watchdog (0x8BADF00D). A SwiftUI computed property re-filtered and re-sorted 951 articles on the main thread on every body evaluation. How I found it and changed it, and what is not verified.">
+<meta property="og:type" content="article">
+<meta name="theme-color" content="#fbfaf7">
+<link rel="icon" href="/favicon.ico?v=1697d589" sizes="48x48">
+<link rel="icon" href="/favicon.svg?v=b9d7922f" type="image/svg+xml" sizes="any">
+<link rel="icon" href="/assets/icon/icon-192.png?v=e2566235" type="image/png" sizes="192x192">
+<link rel="apple-touch-icon" href="/assets/icon/icon-180.png?v=84e7f0e6">
+<link rel="manifest" href="/site.webmanifest">
+<script>document.documentElement.className+=" js"</script>
+<link rel="stylesheet" href="/style.css?v=7001672f">
+<meta name="google-adsense-account" content="ca-pub-3863314847163872">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3863314847163872" crossorigin="anonymous"></script>
+<link rel="canonical" href="https://koshinstudio.com/en/notes/torecadash-watchdog/">
+<meta property="og:url" content="https://koshinstudio.com/en/notes/torecadash-watchdog/">
+<meta property="og:site_name" content="Koshin Studio">
+<meta property="og:locale" content="en_US">
+<link rel="alternate" hreflang="ja" href="https://koshinstudio.com/notes/torecadash-watchdog/">
+<link rel="alternate" hreflang="en" href="https://koshinstudio.com/en/notes/torecadash-watchdog/">
+<link rel="alternate" hreflang="x-default" href="https://koshinstudio.com/notes/torecadash-watchdog/">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="alternate" type="application/rss+xml" title="Koshin Studio — Notes" href="https://koshinstudio.com/feed.xml">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BlogPosting","headline":"iOS app freezes and is killed (0x8BADF00D): a SwiftUI computed property ran on every redraw","url":"https://koshinstudio.com/en/notes/torecadash-watchdog/","description":"An iOS app was force-quit by the watchdog (0x8BADF00D). A SwiftUI computed property re-filtered and re-sorted 951 articles on the main thread on every body evaluation. How I found it and changed it, and what is not verified.","datePublished":"2026-10-09","dateModified":"2026-10-09","inLanguage":"en","image":"https://koshinstudio.com/assets/og/og_notes_torecadash-watchdog.jpg","author":{"@id":"https://koshinstudio.com#studio"},"publisher":{"@id":"https://koshinstudio.com#studio"},"mainEntityOfPage":"https://koshinstudio.com/en/notes/torecadash-watchdog/"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Koshin Studio","item":"https://koshinstudio.com/en/"},{"@type":"ListItem","position":2,"name":"iOS app freezes and is killed (0x8BADF00D): a SwiftUI computed property ran on every redraw","item":"https://koshinstudio.com/en/notes/torecadash-watchdog/"}]}]}</script>
+<meta property="og:image" content="https://koshinstudio.com/assets/og/og_notes_torecadash-watchdog.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
+</head>
+<body>
+<canvas id="motes"></canvas>
+
+<header class="site"><div class="wrap">
+  <a class="logo" href="/"><img class="logo-mark" src="/favicon.svg?v=b9d7922f" alt="" width="28" height="28">Koshin Studio</a>
+  <nav><a href="/works/">Works</a><a href="/notes/">Notes</a><a href="/picks/">Picks</a><a href="/calc/">Tools</a><a href="/about/">About</a></nav>
+</div></header>
+
+<main><div class="wrap">
+  <nav class="crumbs" aria-label="You are here"><a href="/en/">Koshin Studio</a><i aria-hidden="true">›</i><span aria-current="page">0x8BADF00D in SwiftUI</span></nav>
+  <h1>iOS app freezes and is killed (0x8BADF00D): a SwiftUI computed property ran on every redraw</h1>
+  <div class="rule"></div>
+<!--lang-->
+  <p class="note"><a href="/notes/torecadash-watchdog/" hreflang="ja" lang="ja">日本語版</a></p>
+<!--/lang-->
+  <p class="lead">Development log of Torecadash / October 2026</p>
+
+  <p>For my iOS app, Torecadash, I received a report: “the app crashes a lot.” Reading the device log, I found that <strong>the app froze and was force-quit by the OS</strong>. The cause was that it recounted 951 articles every time the screen was redrawn. This is written from my commit history.</p>
+
+  <h2 class="rv" id="s1">What the log showed</h2>
+  <p>The hang log from the device had the exit code <code>0x8BADF00D</code> and the line <code>Failed to terminate gracefully after 5.0s</code>. It means <strong>the OS (the watchdog) killed an app that did not respond within 5 seconds</strong>. The main thread was stuck in processing that went through <code>NSKeyedArchiver</code>. The device was also hot (Thermal State: serious), so work that normally finishes instantly took more than 5 seconds.</p>
+
+  <h2 class="rv" id="s2">The real cause</h2>
+  <p>What froze was the list of product articles in the “Following” tab, in a case with 951 articles.</p>
+  <p>The article list (<code>articles</code>) was <strong>just a computed property</strong>. SwiftUI evaluates the view (<code>body</code>) many times, even when the article data has not changed. Each time, <strong>it redid four filters, a transformation and a sort over 951 articles on the main thread</strong>.</p>
+  <p>Normally this finishes instantly, so you do not notice. Only when the device slows down from heat does it exceed 5 seconds and get killed.</p>
+
+  <h2 class="rv" id="s3">The fix</h2>
+  <p>I changed it to recompute on a background thread <strong>only when something actually changes</strong>: the article data, the receive mode, or the sort option. The result goes into a state for display (<code>displayArticles</code>, <code>@State</code>), so the main thread is no longer blocked.</p>
+  <pre><code>// (Illustration only. Not the actual code.)
+// Before: every time body is evaluated
+var articles: [Article] { fetched.filter…filter…map…sorted }
+
+// After: compute in the background only on change, and keep the result
+@State var displayArticles: [Article] = []
+// recompute when fetchedArticles / receiveMode / sortOption change</code></pre>
+
+  <h2 class="rv" id="s4">What I have not verified</h2>
+  <p>The only verification recorded in the commit is that <code>xcodebuild</code> succeeded (BUILD SUCCEEDED). <strong>There is no record that the freeze is gone on a real device.</strong> A hot device is hard to reproduce, so it is not easy to check. In this article I write “I identified the cause and changed the approach,” not “I fixed it.”</p>
+
+  <h2 class="rv" id="s5">What I learned</h2>
+  <blockquote>Work that is instant on a normal day stops the app on a slow day.</blockquote>
+  <p>Computed properties are easy to write. But if you put one where it runs on every redraw, it gets slower in proportion to the amount of data. 951 items is not a small number. The obvious lesson, “decide where to put things by how often they are called,” came from a real device log.</p>
+  <p class="note">This article was written from the commit record (October 5, 2026).</p>
+
+  <p class="note">This is the English version of <a href="/notes/torecadash-watchdog/" hreflang="ja" lang="ja">the original Japanese article</a>.</p>
+
+  <div class="rule" style="margin:40px 0 22px"></div>
+  <p class="eyebrow">More in English</p>
+  <ul class="plain">
+    <li><a href="/en/">All English pages</a></li>
+  </ul>
+</div>
+</main>
+
+<footer class="site"><div class="wrap"></div></footer>
+<script src="/motion.js?v=1e7447ec" defer></script>
+</body>
+</html>
