@@ -4,7 +4,7 @@ from importlib import import_module
 mk = import_module('make-en-note'.replace('-', '_')) if False else None
 exec(open('tools/make-en-note.py', encoding='utf8').read())
 pairs = json.load(open('data/en.json', encoding='utf8'))
-pairs = [p for p in pairs if p['ja'] == '/notes/itms-91064/']   # 手で書いた1本は残す
+pairs = [p for p in pairs if p['ja'] == '/notes/itms-91064/' or not p['ja'].startswith('/notes/')]   # 手で書いた1本と、記事以外の対は残す
 
 pairs.append(make('review-info-needed',
  'App Store review sent “Guideline 2.1 Information Needed”: the six things Apple asked for',

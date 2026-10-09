@@ -90,7 +90,7 @@ for code, L in langs.items():
     langlinks = ' · '.join(f'<a href="{l["path"]}" hreflang="{l["lang"]}" lang="{l["lang"]}">{e(l["label"])}</a>' for l in langs.values()) + ' · <a href="/" hreflang="ja" lang="ja">日本語</a>'
     play = f'''  <ul class="plain">
     <li><a href="/play/sushitsumu/">{e(t["sushi"][0])}</a> — {e(t["sushi"][1])}</li>
-    <li><a href="/play/negaeri-shogi/">{e(t["nega"][0])}</a> — {e(t["nega"][1])}</li>
+    <li><a href="/play/negaeri-shogi/">{e(t["nega"][0])}</a> — {e(t["nega"][1])} <a href="/en/works/negaeri-shogi/" hreflang="en" lang="en">(rules, English)</a></li>
     <li><a href="/play/stopwatch10/">{e(t["stop"][0])}</a> — {e(t["stop"][1])}</li>
   </ul>'''
     logs = f'''  <h2 class="rv">{e(t["h_log"])}</h2>

@@ -3634,6 +3634,8 @@ URL: https://koshinstudio.com/works/negaeri-shogi/
 
 # 寝返り将棋
 
+  English version (https://koshinstudio.com/en/works/negaeri-shogi/)
+
   挟まれた駒は、敵に寝返る。
 寝返った駒は、出世する。
 

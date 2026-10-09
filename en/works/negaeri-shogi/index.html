@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Negaeri Shogi — a free 6×6 board game where sandwiched pieces defect — Koshin Studio</title>
+<meta name="description" content="Negaeri Shogi is a free browser board game on a 6×6 board. Drop a piece to sandwich your opponent’s pieces: they defect to your side and get promoted, and chains flip many at once. Play locally, vs AI, or online with ratings.">
+<meta property="og:title" content="Negaeri Shogi">
+<meta property="og:description" content="Sandwiched pieces defect to your side and get promoted. A free 6×6 board game for your browser.">
+<meta property="og:type" content="article">
+<meta name="theme-color" content="#fbfaf7">
+<link rel="icon" href="/favicon.ico?v=1697d589" sizes="48x48">
+<link rel="icon" href="/favicon.svg?v=b9d7922f" type="image/svg+xml" sizes="any">
+<link rel="icon" href="/assets/icon/icon-192.png?v=e2566235" type="image/png" sizes="192x192">
+<link rel="apple-touch-icon" href="/assets/icon/icon-180.png?v=84e7f0e6">
+<link rel="manifest" href="/site.webmanifest">
+<script>document.documentElement.className+=" js"</script>
+<link rel="stylesheet" href="/style.css?v=7001672f">
+<meta name="google-adsense-account" content="ca-pub-3863314847163872">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3863314847163872" crossorigin="anonymous"></script>
+<link rel="canonical" href="https://koshinstudio.com/en/works/negaeri-shogi/">
+<meta property="og:url" content="https://koshinstudio.com/en/works/negaeri-shogi/">
+<meta property="og:site_name" content="Koshin Studio">
+<meta property="og:locale" content="en_US">
+<link rel="alternate" hreflang="ja" href="https://koshinstudio.com/works/negaeri-shogi/">
+<link rel="alternate" hreflang="en" href="https://koshinstudio.com/en/works/negaeri-shogi/">
+<link rel="alternate" hreflang="x-default" href="https://koshinstudio.com/en/works/negaeri-shogi/">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="alternate" type="application/rss+xml" title="Koshin Studio — Notes" href="https://koshinstudio.com/feed.xml">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebPage","name":"Negaeri Shogi — a free 6×6 board game where sandwiched pieces defect","url":"https://koshinstudio.com/en/works/negaeri-shogi/","inLanguage":"en","isPartOf":{"@id":"https://koshinstudio.com#studio"},"primaryImageOfPage":"https://koshinstudio.com/assets/sushitsumu-wide.jpg"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Koshin Studio","item":"https://koshinstudio.com/en/"},{"@type":"ListItem","position":2,"name":"Negaeri Shogi — a free 6×6 board game where sandwiched pieces defect","item":"https://koshinstudio.com/en/works/negaeri-shogi/"}]}]}</script>
+<meta property="og:image" content="https://koshinstudio.com/assets/sushitsumu-wide.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
+</head>
+<body>
+<canvas id="motes"></canvas>
+
+<header class="site"><div class="wrap">
+  <a class="logo" href="/"><img class="logo-mark" src="/favicon.svg?v=b9d7922f" alt="" width="28" height="28">Koshin Studio</a>
+  <nav><a href="/works/">Works</a><a href="/notes/">Notes</a><a href="/picks/">Picks</a><a href="/calc/">Tools</a><a href="/about/">About</a></nav>
+</div></header>
+
+<main><div class="wrap">
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/en/">Koshin Studio</a><i aria-hidden="true">›</i><span aria-current="page">Negaeri Shogi</span></nav>
+  <h1>Negaeri Shogi</h1>
+  <div class="rule"></div>
+<!--lang-->
+  <p class="note"><a href="/works/negaeri-shogi/" hreflang="ja" lang="ja">日本語版</a></p>
+<!--/lang-->
+  <p class="lead">Sandwiched pieces defect to your side.<br>Defected pieces get promoted.</p>
+
+  <p><a class="btn" data-play="negaeri-shogi" href="/play/negaeri-shogi/">Play now</a></p>
+  <p class="note">Free. Runs in your browser, no install or sign-up. The game is available in English and Japanese.</p>
+
+  <div class="shots rv">
+    <figure>
+      <picture>
+        <source srcset="/assets/shots/negaeri-initial.webp" type="image/webp">
+        <img src="/assets/shots/negaeri-initial.jpg" alt="The starting position: a 6×6 board with king, rook, bishop and pawns facing each other" width="560" height="1019" loading="lazy" decoding="async">
+      </picture>
+      <figcaption>The starting position</figcaption>
+    </figure>
+    <figure>
+      <picture>
+        <source srcset="/assets/shots/negaeri-ai.webp" type="image/webp">
+        <img src="/assets/shots/negaeri-ai.jpg" alt="Mid-game against the AI: a rook has advanced to the middle of the board" width="560" height="1019" loading="lazy" decoding="async">
+      </picture>
+      <figcaption>Mid-game against the AI</figcaption>
+    </figure>
+  </div>
+
+  <h2 class="rv">What it is</h2>
+  <p>A small 6×6 board and shogi pieces, played like Reversi: drop a piece from your hand so that it sandwiches your opponent’s pieces in a line, and the sandwiched pieces flip to your side. Every piece that flips is also <strong>promoted</strong> (pawn to tokin, rook to dragon, bishop to horse). A promoted piece moves in new ways, so it can create new sandwiches, and the flips <strong>chain</strong>. A single move can change the whole board.</p>
+
+  <h2 class="rv">Rules in short</h2>
+  <ul>
+    <li>Four kinds of pieces: king, pawn, rook and bishop. They move as in shogi.</li>
+    <li>On your turn you either <strong>drop</strong> a piece from your hand (this is when sandwiching happens) or <strong>move</strong> a piece on the board (no flipping).</li>
+    <li>Sandwiching works in all 8 directions. <strong>The edge of the board also counts as an end</strong>, so pieces pushed against the edge can flip together.</li>
+    <li><strong>Kings never flip.</strong> Pieces next to your own king do not flip either, so the squares around the king are safe.</li>
+    <li>Capture the opponent’s king to win. If neither side can move, the player with more pieces wins.</li>
+    <li>Online games have 3 minutes per player, plus 5 seconds per move.</li>
+  </ul>
+
+  <h2 class="rv">Ways to play</h2>
+  <ul>
+    <li><strong>Two players</strong> on one device.</li>
+    <li><strong>Against the AI</strong> at three levels (weak, medium, strong). The AI runs in your browser.</li>
+    <li><strong>Online</strong> against another player, with an Elo-style rating and a ranking. A name is stored, and no sign-up is needed.</li>
+  </ul>
+
+  <h2 class="rv">About the balance</h2>
+  <p>The numbers (how many pieces each side holds, the king’s protection) were tuned by AI self-play. Balance in human-versus-human games has not been verified yet. If one side feels too strong, please tell me.</p>
+
+  <p style="margin-top:40px"><a class="btn" data-play="negaeri-shogi" href="/play/negaeri-shogi/">Play now</a></p>
+
+  <p class="note">This is the English version of <a href="/works/negaeri-shogi/" hreflang="ja" lang="ja">the Japanese page</a>. Online play stores your name, rating and results (see the <a href="/privacy/" hreflang="ja" lang="ja">privacy page</a>, in Japanese).</p>
+</div>
+</main>
+
+<footer class="site"><div class="wrap"></div></footer>
+<script src="/motion.js?v=1e7447ec" defer></script>
+</body>
+</html>

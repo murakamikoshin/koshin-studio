@@ -26,5 +26,12 @@
     "title": "iOS app freezes and is killed (0x8BADF00D): a SwiftUI computed property ran on every redraw",
     "date": "2026-10-09",
     "blurb": "An iOS app was force-quit by the watchdog (0x8BADF00D). A SwiftUI computed property re-filtered and re-sorted 951 articles on the main thread on every body evaluation. How I found it and changed it, and what is not verified."
+  },
+  {
+    "ja": "/works/negaeri-shogi/",
+    "en": "/en/works/negaeri-shogi/",
+    "title": "Negaeri Shogi — a free 6×6 board game where sandwiched pieces defect",
+    "date": "2026-10-09",
+    "blurb": "Negaeri Shogi is a free browser board game on a 6×6 board. Drop a piece to sandwich your opponent’s pieces: they defect to your side and get promoted, and chains flip many at once. Play locally, vs AI, or online with ratings."
   }
 ]

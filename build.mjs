@@ -658,6 +658,8 @@ function ldFor(file, url) {
       crumbs([['Koshin Studio', '/en/'], [p.title, p.en]]),
     ];
   }
+  const ep = enByPath[rel.replace(/index\.html$/, '')];
+  if (ep && !em) return [page(ep.title), crumbs([['Koshin Studio', '/en/'], [ep.title, ep.en]])];
   const cl = rel.match(/^\/([a-z]{2})\/calc\/(gacha|gacha-rate)\/index\.html$/);
   if (cl && I18N[cl[1]]) {
     const h1 = (readFileSync(file, 'utf8').match(/<h1>(.*?)<\/h1>/) || [, ''])[1];
