@@ -28,7 +28,7 @@
   <url><loc>https://koshinstudio.com/en/notes/deploy-gotchas/</loc><lastmod>2026-10-10</lastmod><priority>0.5</priority></url>
   <url><loc>https://koshinstudio.com/en/notes/dup-zero/</loc><lastmod>2026-10-10</lastmod><priority>0.5</priority></url>
   <url><loc>https://koshinstudio.com/en/notes/fail-open/</loc><lastmod>2026-10-10</lastmod><priority>0.5</priority></url>
-  <url><loc>https://koshinstudio.com/en/notes/fake-products/</loc><priority>0.5</priority></url>
+  <url><loc>https://koshinstudio.com/en/notes/fake-products/</loc><lastmod>2026-10-10</lastmod><priority>0.5</priority></url>
   <url><loc>https://koshinstudio.com/en/notes/first-visit/</loc><lastmod>2026-10-10</lastmod><priority>0.5</priority></url>
   <url><loc>https://koshinstudio.com/en/notes/gemini-migration/</loc><lastmod>2026-10-10</lastmod><priority>0.5</priority></url>
   <url><loc>https://koshinstudio.com/en/notes/hosting-compare/</loc><lastmod>2026-10-10</lastmod><priority>0.5</priority></url>
@@ -36,7 +36,7 @@
   <url><loc>https://koshinstudio.com/en/notes/itms-91064/</loc><lastmod>2026-10-09</lastmod><priority>0.5</priority></url>
   <url><loc>https://koshinstudio.com/en/notes/logo-pop/</loc><lastmod>2026-10-10</lastmod><priority>0.5</priority></url>
   <url><loc>https://koshinstudio.com/en/notes/match-percent/</loc><lastmod>2026-10-10</lastmod><priority>0.5</priority></url>
-  <url><loc>https://koshinstudio.com/en/notes/qiita-post-interval/</loc><priority>0.5</priority></url>
+  <url><loc>https://koshinstudio.com/en/notes/qiita-post-interval/</loc><lastmod>2026-10-10</lastmod><priority>0.5</priority></url>
   <url><loc>https://koshinstudio.com/en/notes/ranking-free-tier/</loc><lastmod>2026-10-10</lastmod><priority>0.5</priority></url>
   <url><loc>https://koshinstudio.com/en/notes/result-screen/</loc><lastmod>2026-10-10</lastmod><priority>0.5</priority></url>
   <url><loc>https://koshinstudio.com/en/notes/review-info-needed/</loc><lastmod>2026-10-10</lastmod><priority>0.5</priority></url>
@@ -88,7 +88,7 @@
   <url><loc>https://koshinstudio.com/notes/ditto-charm/</loc><lastmod>2026-10-09</lastmod><priority>0.8</priority></url>
   <url><loc>https://koshinstudio.com/notes/dup-zero/</loc><lastmod>2026-10-10</lastmod><priority>0.8</priority></url>
   <url><loc>https://koshinstudio.com/notes/fail-open/</loc><lastmod>2026-10-10</lastmod><priority>0.8</priority></url>
-  <url><loc>https://koshinstudio.com/notes/fake-products/</loc><lastmod>2026-10-09</lastmod><priority>0.8</priority></url>
+  <url><loc>https://koshinstudio.com/notes/fake-products/</loc><lastmod>2026-10-10</lastmod><priority>0.8</priority></url>
   <url><loc>https://koshinstudio.com/notes/first-visit/</loc><lastmod>2026-10-10</lastmod><priority>0.8</priority></url>
   <url><loc>https://koshinstudio.com/notes/gemini-migration/</loc><lastmod>2026-10-10</lastmod><priority>0.8</priority></url>
   <url><loc>https://koshinstudio.com/notes/hosting-compare/</loc><lastmod>2026-10-10</lastmod><priority>0.8</priority></url>
@@ -97,7 +97,7 @@
   <url><loc>https://koshinstudio.com/notes/itms-91064/</loc><lastmod>2026-10-09</lastmod><priority>0.8</priority></url>
   <url><loc>https://koshinstudio.com/notes/logo-pop/</loc><lastmod>2026-10-10</lastmod><priority>0.8</priority></url>
   <url><loc>https://koshinstudio.com/notes/match-percent/</loc><lastmod>2026-10-10</lastmod><priority>0.8</priority></url>
-  <url><loc>https://koshinstudio.com/notes/qiita-post-interval/</loc><lastmod>2026-10-09</lastmod><priority>0.8</priority></url>
+  <url><loc>https://koshinstudio.com/notes/qiita-post-interval/</loc><lastmod>2026-10-10</lastmod><priority>0.8</priority></url>
   <url><loc>https://koshinstudio.com/notes/ranking-free-tier/</loc><lastmod>2026-10-10</lastmod><priority>0.8</priority></url>
   <url><loc>https://koshinstudio.com/notes/result-screen/</loc><lastmod>2026-10-10</lastmod><priority>0.8</priority></url>
   <url><loc>https://koshinstudio.com/notes/review-info-needed/</loc><lastmod>2026-10-09</lastmod><priority>0.8</priority></url>
