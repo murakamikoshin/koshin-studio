@@ -61,5 +61,34 @@
     "title": "No builds arriving in TestFlight: I had used up the 25 free Xcode Cloud hours (my first diagnosis was wrong)",
     "date": "2026-10-09",
     "blurb": "New builds stopped appearing in TestFlight. My first diagnosis, “[ci skip] is blocking builds,” was wrong; the real cause was a workflow that built the iOS app on every commit and burned the free 25 hours a month. The numbers and the fix."
+  },
+  {
+    "ja": "/works/torecadash/",
+    "en": "/en/works/torecadash/",
+    "title": "Toreca Dash — Japan TCG lottery, pre-order & restock alerts (iPhone app)",
+    "date": "2026-10-10",
+    "blurb": "An iPhone app that gathers lottery, pre-order and first-come sales of trading cards from stores across Japan, with a deadline calendar and alerts. Store information is mostly in Japanese.",
+    "app": "https://apps.apple.com/jp/app/id6788758920",
+    "cover": "/assets/torecadash-square@2x.jpg",
+    "alt": {
+      "zh-Hans": {
+        "path": "/zh/works/torecadash/",
+        "locale": "zh_CN",
+        "title": "トレカダッシュ（Toreca Dash）— 日本卡牌抽签·预约·补货通知（iPhone 应用）",
+        "blurb": "汇总日本各地店铺的卡牌抽签、预约和先到先得销售信息，并提供截止日历与通知的 iPhone 应用。店铺信息以日语为主。"
+      },
+      "zh-Hant": {
+        "path": "/zh-hant/works/torecadash/",
+        "locale": "zh_TW",
+        "title": "トレカダッシュ（Toreca Dash）— 日本卡牌抽選・預約・補貨通知（iPhone App）",
+        "blurb": "彙整日本各地店鋪的卡牌抽選、預約與先搶先贏販售資訊，並提供截止日曆與通知的 iPhone App。店鋪資訊以日文為主。"
+      },
+      "vi": {
+        "path": "/vi/works/torecadash/",
+        "locale": "vi_VN",
+        "title": "トレカダッシュ (Toreca Dash) — Thông báo bốc thăm, đặt trước, hàng về thẻ bài Nhật (ứng dụng iPhone)",
+        "blurb": "Ứng dụng iPhone tổng hợp thông tin bốc thăm, đặt trước và bán theo thứ tự đến trước của thẻ bài từ các cửa hàng khắp Nhật Bản, kèm lịch hạn chót và thông báo. Thông tin cửa hàng chủ yếu bằng tiếng Nhật."
+      }
+    }
   }
 ]

@@ -567,6 +567,21 @@ const enByPath = Object.fromEntries(enPairs.map((p) => [p.en, p]));
 const I18N = existsSync(here + '/data/langs.json') ? read('/data/langs.json') : {};
 const hubPaths = Object.fromEntries(Object.values(I18N).map((l) => [l.path, true]));
 const jaToEn = Object.fromEntries(enPairs.map((p) => [p.ja, p]));
+/* 日本語・英語のほかに、同じ作品の別言語のページがある場合（data/en.json の alt）。
+   全部のページを hreflang で結び、<html lang> と og:locale を正しく出す。
+   alt の各項目: { "path", "locale", "title", "blurb" }。app があれば構造化データに配信先を入れる */
+const altPageMeta = {};
+const altGroupByPath = {};
+for (const p of enPairs) {
+  if (!p.alt) continue;
+  const members = [['ja', p.ja], ['en', p.en]];
+  altPageMeta[p.en] = { lang: 'en', locale: 'en_US', title: p.title, blurb: p.blurb, app: p.app, cover: p.cover };
+  for (const [lang, a] of Object.entries(p.alt)) {
+    members.push([lang, a.path]);
+    altPageMeta[a.path] = { lang, locale: a.locale, title: a.title, blurb: a.blurb, app: p.app, cover: p.cover };
+  }
+  for (const m of members) altGroupByPath[m[1]] = { members, xdefault: p.en };
+}
 
 /* 本名は書かない。確かめようのないことを構造化データに入れると、
    検索側にも読む人にも嘘をつくことになる。
@@ -659,6 +674,19 @@ function ldFor(file, url) {
         author: { '@id': SITE + '#studio' }, publisher: { '@id': SITE + '#studio' },
         mainEntityOfPage: SITE + p.en },
       crumbs([['Koshin Studio', '/en/'], [p.title, p.en]]),
+    ];
+  }
+  const am = altPageMeta[rel.replace(/index\.html$/, '')];
+  if (am && am.app) {
+    const amPath = rel.replace(/index\.html$/, '');
+    return [
+      { '@type': 'SoftwareApplication', name: am.title, url: url, description: am.blurb, inLanguage: am.lang,
+        operatingSystem: 'iOS', applicationCategory: 'UtilitiesApplication',
+        downloadUrl: am.app, installUrl: am.app,
+        ...(am.cover ? { image: SITE + am.cover } : {}),
+        author: { '@id': SITE + '#studio' }, publisher: { '@id': SITE + '#studio' },
+        offers: { '@type': 'Offer', price: '0', priceCurrency: 'JPY' } },
+      crumbs([['Koshin Studio', '/en/'], [am.title, amPath]]),
     ];
   }
   const ep = enByPath[rel.replace(/index\.html$/, '')];
@@ -830,7 +858,7 @@ for (const file of pages) {
   /* 属性付きも消えるようにする（class="crumbs" だけを見ると一致せず、
      組み直すたびに増え続けていた） */
   const L = I18N[rel.split('/')[1]] || null;
-  const isEn = !!L;
+  const isEn = !!L || !!altPageMeta[rel.replace(/index\.html$/, '')];
   if (!isEn) html = html.replace(/\s*<nav class="crumbs"[^>]*>[\s\S]*?<\/nav>/g, '');
   if (trail && !isEn) {
     const items = [['Koshin Studio', '/']].concat(trail);
@@ -871,7 +899,10 @@ for (const file of pages) {
              .replace(/\n?\s*<link rel="alternate" type="application\/rss\+xml"[^>]*>/g, '')
              .replace(/\n?\s*<script type="application\/ld\+json">[\s\S]*?<\/script>/g, '');
   const ld = ldFor(file, url);
-  html = html.replace(/<html lang="[^"]*">/, `<html lang="${L ? L.lang : 'ja'}">`);
+  const pageMeta = altPageMeta[url.slice(SITE.length)] || null;
+  const pageLang = pageMeta ? pageMeta.lang : (L ? L.lang : 'ja');
+  const pageLocale = pageMeta ? pageMeta.locale : (L ? L.locale : 'ja_JP');
+  html = html.replace(/<html lang="[^"]*">/, `<html lang="${pageLang}">`);
   const relUrl = url.slice(SITE.length);
   const pair = enByPath[relUrl] || jaToEn[relUrl];
   const hubSet = (relUrl === '/' || hubPaths[relUrl])
@@ -881,7 +912,10 @@ for (const file of pages) {
   const calcSet = calcM && (!calcM[1] || I18N[calcM[1]])
     ? [['ja', '/calc/' + calcM[2] + '/']].concat(Object.values(I18N).map((l) => [l.lang, l.path + 'calc/' + calcM[2] + '/'])) : null;
   const grp = hubSet || calcSet;
-  const hreflangs = grp ? grp.map(([c, p]) => `<link rel="alternate" hreflang="${c}" href="${SITE + p}">`)
+  const altGrp = altGroupByPath[relUrl] || null;
+  const hreflangs = altGrp ? altGrp.members.map(([c, p]) => `<link rel="alternate" hreflang="${c}" href="${SITE + p}">`)
+      .concat(`<link rel="alternate" hreflang="x-default" href="${SITE + altGrp.xdefault}">`)
+    : grp ? grp.map(([c, p]) => `<link rel="alternate" hreflang="${c}" href="${SITE + p}">`)
       .concat(`<link rel="alternate" hreflang="x-default" href="${SITE + (hubSet ? '/en/' : '/en/calc/' + calcM[2] + '/')}">`)
     : pair ? [
     `<link rel="alternate" hreflang="ja" href="${SITE + pair.ja}">`,
@@ -900,12 +934,12 @@ for (const file of pages) {
     `<link rel="canonical" href="${url}">`,
     `<meta property="og:url" content="${url}">`,
     `<meta property="og:site_name" content="Koshin Studio">`,
-    `<meta property="og:locale" content="${L ? L.locale : 'ja_JP'}">`,
+    `<meta property="og:locale" content="${pageLocale}">`,
     ...hreflangs,
     `<meta name="twitter:card" content="summary_large_image">`,
     `<link rel="alternate" type="application/rss+xml" title="Koshin Studio — Notes" href="${SITE}/feed.xml">`,
     ld ? `<script type="application/ld+json">${JSON.stringify(
-      { '@context': 'https://schema.org', '@graph': ld }).replace(/"inLanguage":"ja"/g, `"inLanguage":"${L ? L.lang : 'ja'}"`)}</script>` : '',
+      { '@context': 'https://schema.org', '@graph': ld }).replace(/"inLanguage":"ja"/g, `"inLanguage":"${pageLang}"`)}</script>` : '',
   ].filter(Boolean).join('\n');
   html = html.replace('</head>', head + '\n</head>');
   /* ヘッダーのロゴ画像も、ファビコンと同じ印を付ける（絵を替えたら別の URL に） */
