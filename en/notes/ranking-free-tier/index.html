@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Making a ranking server use only half of the free tier: from 5 calls to 2 — Koshin Studio</title>
+<meta name="description" content="Sushi Stack’s online ranking runs on Cloudflare Workers and D1 within the free tier. I halved its use: calls per play went from 5 to 2 and rows read from 421 to 221. How rank is counted and how the preflight call was removed.">
+<meta property="og:title" content="Making a ranking server use only half of the free tier: from 5 calls to 2">
+<meta property="og:description" content="Sushi Stack’s online ranking runs on Cloudflare Workers and D1 within the free tier. I halved its use: calls per play went from 5 to 2 and rows read from 421 to 221. How rank is counted and how the preflight call was removed.">
+<meta property="og:type" content="article">
+<meta name="theme-color" content="#fbfaf7">
+<link rel="icon" href="/favicon.ico?v=1697d589" sizes="48x48">
+<link rel="icon" href="/favicon.svg?v=b9d7922f" type="image/svg+xml" sizes="any">
+<link rel="icon" href="/assets/icon/icon-192.png?v=e2566235" type="image/png" sizes="192x192">
+<link rel="apple-touch-icon" href="/assets/icon/icon-180.png?v=84e7f0e6">
+<link rel="manifest" href="/site.webmanifest">
+<script>document.documentElement.className+=" js"</script>
+<link rel="stylesheet" href="/style.css?v=7001672f">
+<meta name="google-adsense-account" content="ca-pub-3863314847163872">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3863314847163872" crossorigin="anonymous"></script>
+<link rel="canonical" href="https://koshinstudio.com/en/notes/ranking-free-tier/">
+<meta property="og:url" content="https://koshinstudio.com/en/notes/ranking-free-tier/">
+<meta property="og:site_name" content="Koshin Studio">
+<meta property="og:locale" content="en_US">
+<link rel="alternate" hreflang="ja" href="https://koshinstudio.com/notes/ranking-free-tier/">
+<link rel="alternate" hreflang="en" href="https://koshinstudio.com/en/notes/ranking-free-tier/">
+<link rel="alternate" hreflang="x-default" href="https://koshinstudio.com/en/notes/ranking-free-tier/">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="alternate" type="application/rss+xml" title="Koshin Studio — Notes" href="https://koshinstudio.com/feed.xml">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BlogPosting","headline":"Making a ranking server use only half of the free tier: from 5 calls to 2","url":"https://koshinstudio.com/en/notes/ranking-free-tier/","description":"Sushi Stack’s online ranking runs on Cloudflare Workers and D1 within the free tier. I halved its use: calls per play went from 5 to 2 and rows read from 421 to 221. How rank is counted and how the preflight call was removed.","datePublished":"2026-10-09","dateModified":"2026-10-09","inLanguage":"en","image":"https://koshinstudio.com/assets/og/og_notes_ranking-free-tier.jpg","author":{"@id":"https://koshinstudio.com#studio"},"publisher":{"@id":"https://koshinstudio.com#studio"},"mainEntityOfPage":"https://koshinstudio.com/en/notes/ranking-free-tier/"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Koshin Studio","item":"https://koshinstudio.com/en/"},{"@type":"ListItem","position":2,"name":"Making a ranking server use only half of the free tier: from 5 calls to 2","item":"https://koshinstudio.com/en/notes/ranking-free-tier/"}]}]}</script>
+<meta property="og:image" content="https://koshinstudio.com/assets/og/og_notes_ranking-free-tier.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
+</head>
+<body>
+<canvas id="motes"></canvas>
+
+<header class="site"><div class="wrap">
+  <a class="logo" href="/"><img class="logo-mark" src="/favicon.svg?v=b9d7922f" alt="" width="28" height="28">Koshin Studio</a>
+  <nav><a href="/works/">Works</a><a href="/notes/">Notes</a><a href="/picks/">Picks</a><a href="/calc/">Tools</a><a href="/about/">About</a></nav>
+</div></header>
+
+<main><div class="wrap">
+  <nav class="crumbs" aria-label="You are here"><a href="/en/">Koshin Studio</a><i aria-hidden="true">›</i><span aria-current="page">Halving free-tier usage</span></nav>
+  <h1>Making a ranking server use only half of the free tier: from 5 calls to 2</h1>
+  <div class="rule"></div>
+<!--lang-->
+  <p class="note"><a href="/notes/ranking-free-tier/" hreflang="ja" lang="ja">日本語版</a></p>
+<!--/lang-->
+  <p class="lead">Development log of Sushi Stack / October 2026</p>
+
+  <p><a href="/en/works/" hreflang="en" lang="en">Sushi Stack</a> has an online ranking. It runs on Cloudflare Workers and D1 (a database), within the free tier. I <strong>halved</strong> how much of the free tier this ranking server uses. What I counted and what I changed are written with the measured values in my commits.</p>
+
+  <h2 class="rv" id="s1">The free tier is shared</h2>
+  <p>Cloudflare’s free tier is per account. All Workers and D1 databases in the account share it. If other projects live there too, it is best to keep the ranking thin. My commit also says that <strong>from September 1, 2026, D1 really refuses queries at this limit</strong>. The limit is on “rows read,” 5 million a day.</p>
+
+  <h2 class="rv" id="s2">What happens when one person plays</h2>
+  <p>For the most ordinary flow, “one person plays once, submits a score, and views the ranking once,” I counted calls to the server and rows read. I counted by actually running the Worker with <code>node:sqlite</code> in place of D1.</p>
+  <div class="scroll rv"><table>
+    <tr><th></th><th class="n">Before</th><th class="n">After</th></tr>
+    <tr><td>Calls</td><td class="n">5</td><td class="n">2</td></tr>
+    <tr><td>Rows read</td><td class="n">421</td><td class="n">221</td></tr>
+    <tr><td>Rows written</td><td class="n">1</td><td class="n">1</td></tr>
+  </table></div>
+  <p>The ceiling is rows read. Dividing 5 million rows by the rows per person gives how many people can play within the free tier. Before: 5,000,000 ÷ 421 ≈ 11,876 people (the commit says “about 11,000,” a little off from the division). After: 5,000,000 ÷ 221 ≈ <strong>22,624 people (about 22,000 in the commit)</strong>. By either count, the daily ceiling roughly <strong>doubled</strong>.</p>
+
+  <h2 class="rv" id="s3">Two changes</h2>
+  <h3>1. Count the rank on the server</h3>
+  <p>Before, the game <strong>fetched the top-100 list twice</strong> and looked for itself in it. I changed it so the server counts the rank and returns it. The counting is a <code>COUNT</code> that cuts off after a fixed number of top rows (<code>SCAN</code>). The higher you are, the fewer rows are read.</p>
+  <h3>2. Remove the preflight call</h3>
+  <p>I made <code>/submit</code>, which sends the score, accept <code>text/plain</code>. The content is still JSON. But when sent with this type, the browser does not send the preflight check call (<code>OPTIONS</code>). One call is gone.</p>
+  <p>The shared database on the artifact side has no mechanism to count rank. That side still counts in the game as before. Only when <code>submit</code> returns <code>null</code> does it fetch the list.</p>
+
+  <h2 class="rv" id="s4">What I verified</h2>
+  <ul>
+    <li>Submitting two people to an empty ranking gives 1st and 2nd.</li>
+    <li>In a ranking of 500 people, the server-counted rank (including “outside the top 100”) comes out correctly.</li>
+    <li>Tampered score submissions are still rejected as before, in both Japanese and English.</li>
+  </ul>
+
+  <h2 class="rv" id="s5">What I learned</h2>
+  <blockquote>What you count is not money but calls and rows.</blockquote>
+  <ul>
+    <li><strong>A free-tier limit is the one that runs out first.</strong> Here it was rows read, not the number of calls.</li>
+    <li><strong>Measure one “ordinary play.”</strong> I could say “half” because I fixed one flow of a person playing and counted it.</li>
+    <li>The same free-tier story is in <a href="/notes/stopwatch-rank/" hreflang="ja" lang="ja">the 10-second stopwatch ranking article</a> (in Japanese). There it was the number of writes (1,000 a day on KV).</li>
+  </ul>
+  <p class="note">The numbers in this article come from my commit record (September 7, 2026). The free-tier limits (such as 5 million rows a day) are as stated in the commit.</p>
+
+  <p class="note">This is the English version of <a href="/notes/ranking-free-tier/" hreflang="ja" lang="ja">the original Japanese article</a>.</p>
+
+  <div class="rule" style="margin:40px 0 22px"></div>
+  <p class="eyebrow">More in English</p>
+  <ul class="plain">
+    <li><a href="/en/">All English pages</a></li>
+  </ul>
+</div>
+</main>
+
+<footer class="site"><div class="wrap"></div></footer>
+<script src="/motion.js?v=1e7447ec" defer></script>
+</body>
+</html>

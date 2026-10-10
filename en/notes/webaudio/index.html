@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>I could not listen, so I measured the waveform: building Japanese instruments with WebAudio for Sushi Stack — Koshin Studio</title>
+<meta name="description" content="Sushi Stack uses no audio files. The koto, taiko, hyoshigi and kane are synthesized in the browser. Because I could not listen while building, I set volumes by measuring waveform peaks, and re-set the rank thresholds from measured auto-play.">
+<meta property="og:title" content="I could not listen, so I measured the waveform: building Japanese instruments with WebAudio for Sushi Stack">
+<meta property="og:description" content="Sushi Stack uses no audio files. The koto, taiko, hyoshigi and kane are synthesized in the browser. Because I could not listen while building, I set volumes by measuring waveform peaks, and re-set the rank thresholds from measured auto-play.">
+<meta property="og:type" content="article">
+<meta name="theme-color" content="#fbfaf7">
+<link rel="icon" href="/favicon.ico?v=1697d589" sizes="48x48">
+<link rel="icon" href="/favicon.svg?v=b9d7922f" type="image/svg+xml" sizes="any">
+<link rel="icon" href="/assets/icon/icon-192.png?v=e2566235" type="image/png" sizes="192x192">
+<link rel="apple-touch-icon" href="/assets/icon/icon-180.png?v=84e7f0e6">
+<link rel="manifest" href="/site.webmanifest">
+<script>document.documentElement.className+=" js"</script>
+<link rel="stylesheet" href="/style.css?v=7001672f">
+<meta name="google-adsense-account" content="ca-pub-3863314847163872">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3863314847163872" crossorigin="anonymous"></script>
+<link rel="canonical" href="https://koshinstudio.com/en/notes/webaudio/">
+<meta property="og:url" content="https://koshinstudio.com/en/notes/webaudio/">
+<meta property="og:site_name" content="Koshin Studio">
+<meta property="og:locale" content="en_US">
+<link rel="alternate" hreflang="ja" href="https://koshinstudio.com/notes/webaudio/">
+<link rel="alternate" hreflang="en" href="https://koshinstudio.com/en/notes/webaudio/">
+<link rel="alternate" hreflang="x-default" href="https://koshinstudio.com/en/notes/webaudio/">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="alternate" type="application/rss+xml" title="Koshin Studio — Notes" href="https://koshinstudio.com/feed.xml">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BlogPosting","headline":"I could not listen, so I measured the waveform: building Japanese instruments with WebAudio for Sushi Stack","url":"https://koshinstudio.com/en/notes/webaudio/","description":"Sushi Stack uses no audio files. The koto, taiko, hyoshigi and kane are synthesized in the browser. Because I could not listen while building, I set volumes by measuring waveform peaks, and re-set the rank thresholds from measured auto-play.","datePublished":"2026-10-09","dateModified":"2026-10-09","inLanguage":"en","image":"https://koshinstudio.com/assets/og/og_notes_webaudio.jpg","author":{"@id":"https://koshinstudio.com#studio"},"publisher":{"@id":"https://koshinstudio.com#studio"},"mainEntityOfPage":"https://koshinstudio.com/en/notes/webaudio/"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Koshin Studio","item":"https://koshinstudio.com/en/"},{"@type":"ListItem","position":2,"name":"I could not listen, so I measured the waveform: building Japanese instruments with WebAudio for Sushi Stack","item":"https://koshinstudio.com/en/notes/webaudio/"}]}]}</script>
+<meta property="og:image" content="https://koshinstudio.com/assets/og/og_notes_webaudio.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
+</head>
+<body>
+<canvas id="motes"></canvas>
+
+<header class="site"><div class="wrap">
+  <a class="logo" href="/"><img class="logo-mark" src="/favicon.svg?v=b9d7922f" alt="" width="28" height="28">Koshin Studio</a>
+  <nav><a href="/works/">Works</a><a href="/notes/">Notes</a><a href="/picks/">Picks</a><a href="/calc/">Tools</a><a href="/about/">About</a></nav>
+</div></header>
+
+<main><div class="wrap">
+  <nav class="crumbs" aria-label="You are here"><a href="/en/">Koshin Studio</a><i aria-hidden="true">›</i><span aria-current="page">Measuring audio with WebAudio</span></nav>
+  <h1>I could not listen, so I measured the waveform: building Japanese instruments with WebAudio for Sushi Stack</h1>
+  <div class="rule"></div>
+<!--lang-->
+  <p class="note"><a href="/notes/webaudio/" hreflang="ja" lang="ja">日本語版</a></p>
+<!--/lang-->
+  <p class="lead">Development log of Sushi Stack / October 2026</p>
+
+  <p>The sound of <a href="/en/works/" hreflang="en" lang="en">Sushi Stack</a> uses not a single audio file. <strong>Japanese instruments are synthesized on the spot with the browser’s audio feature (WebAudio)</strong>. The problem was that I had no way to listen while I was building it. So I <strong>measured the waveform and adjusted the volume</strong>. This is written with the numbers left in my commits.</p>
+
+  <h2 class="rv" id="s1">Why no audio files</h2>
+  <p>Using external libraries or audio files would break the form where the game is delivered as one file (and works offline). So I synthesized the koto (plucked), taiko, hyoshigi (wooden clappers) and kane (gong) from WebAudio parts and composed the music in the yo scale (a Japanese scale).</p>
+  <ul>
+    <li><strong>BGM:</strong> played by a look-ahead scheduler built on eighth notes. Its thickness changes in <strong>four steps</strong> with how full the tub is; the more dangerous it gets, the more taiko drums are added.</li>
+    <li><strong>Sound effects:</strong> the number and weight of sounds stack up in this order: merge, chain, otoro, spiny lobster / golden, golden with golden.</li>
+    <li>I added a celebratory phrase for ranking up and for beating a personal best. There is a sound on/off button, and the setting stays on the device.</li>
+  </ul>
+
+  <h2 class="rv" id="s2">I cannot listen, so I measure the waveform</h2>
+  <p>The balance of volume is something you would normally decide by ear. But in this work I could not listen. So I swapped the same synthesis functions onto a render-only audio part (<code>OfflineAudioContext</code>), <strong>wrote the sound out as a waveform, and measured the maximum amplitude (peak)</strong>.</p>
+  <p>The initial state was this:</p>
+  <ul>
+    <li>The jackpot sound peaked at <strong>1.18</strong>. Above 1.0 the sound clips and distorts.</li>
+    <li>The merge sound was <strong>0.072</strong>. It was buried in the BGM and could not be heard.</li>
+  </ul>
+  <p>After adjusting, the sound effects lined up like stairs below the BGM peak of <strong>0.179</strong>.</p>
+  <div class="scroll rv"><table>
+    <tr><th>Sound</th><th class="n">Peak</th></tr>
+    <tr><td>BGM (reference)</td><td class="n">0.179</td></tr>
+    <tr><td>Merge</td><td class="n">0.16</td></tr>
+    <tr><td>3-chain</td><td class="n">0.48</td></tr>
+    <tr><td>Otoro</td><td class="n">0.49</td></tr>
+    <tr><td>Golden</td><td class="n">0.85</td></tr>
+    <tr><td>Jackpot</td><td class="n">0.81</td></tr>
+  </table></div>
+  <p>The distortion is gone, and I can confirm with numbers the order “the more rewarding the sound, the louder.” But whether it <strong>sounds pleasant to the ear</strong> cannot be told by this method.</p>
+
+  <h2 class="rv" id="s3">I re-drew the ranks from measurements, too</h2>
+  <p>The same day I reviewed the rank thresholds. I ran auto-play 12 times and took the score distribution:</p>
+  <div class="scroll rv"><table>
+    <tr><th>Mode</th><th class="n">Score range</th><th class="n">Moves placed</th></tr>
+    <tr><td>Omakase</td><td class="n">12,532 to 22,413</td><td class="n">172 to 267</td></tr>
+    <tr><td>Menu</td><td class="n">20,992 to 46,395</td><td class="n">171 to 306</td></tr>
+  </table></div>
+  <p>With the earlier criterion (legend = 30,000 points), <strong>an auto-play with no strategy reached the top rank</strong>. So I moved the thresholds above that (0 / 4,000 / 10,000 / 18,000 / 30,000 / 50,000 / 85,000). Menu scores come out about 1.8 times higher, so I stretched them by the same ratio. Both auto-plays now stop at “journeyman,” and <strong>from head chef up, it depends on skill</strong>.</p>
+  <p>The next day I ran 120 games and measured the distribution (apprentice 6%, journeyman 32%, head chef 40%, master 14%, legend 8%). Auto-play is better than people, so it does not fall into the bottom two ranks. Those two are a layout meant to matter when humans play.</p>
+
+  <h2 class="rv" id="s4">I also changed how chains are shown</h2>
+  <ul>
+    <li>I added the chain bonus to Omakase as well. Under the same conditions, the score nearly doubles.</li>
+    <li>A 3-chain happened more than 20 times in a game and had no value. I now show the center-screen notice <strong>from 4-chain</strong> (2- and 3-chains only get floating text and sound).</li>
+  </ul>
+
+  <h2 class="rv" id="s5">What I learned</h2>
+  <blockquote>Even if you cannot listen, you can measure.</blockquote>
+  <ul>
+    <li><strong>Decide with numbers what you cannot decide by feel.</strong> Both the audio balance and the ranks were built on measurements.</li>
+    <li><strong>Being measurable is different from being verified.</strong> A waveform tells me whether there is distortion and the order of loudness. It does not tell me whether it is pleasant.</li>
+    <li><strong>Test a “criterion” against something that should break it.</strong> A criterion that let a strategy-less auto-play reach the top rank was not working as a criterion.</li>
+  </ul>
+  <p class="note">The numbers in this article come from my commit record (September 7 and 8, 2026). The sizes of the pieces changed after those days (<a href="/notes/anago/" hreflang="ja" lang="ja">the conger eel article</a>, in Japanese), so the current score ranges and thresholds differ from what is written here.</p>
+
+  <p class="note">This is the English version of <a href="/notes/webaudio/" hreflang="ja" lang="ja">the original Japanese article</a>.</p>
+
+  <div class="rule" style="margin:40px 0 22px"></div>
+  <p class="eyebrow">More in English</p>
+  <ul class="plain">
+    <li><a href="/en/">All English pages</a></li>
+  </ul>
+</div>
+</main>
+
+<footer class="site"><div class="wrap"></div></footer>
+<script src="/motion.js?v=1e7447ec" defer></script>
+</body>
+</html>
