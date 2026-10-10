@@ -1017,6 +1017,8 @@ URL: https://koshinstudio.com/notes/typo-catalog/
 
 # 一度だけ生まれた誤字が、店ごとに増えていった：「30th SEREBRATION」の件
 
+  English version (https://koshinstudio.com/en/notes/typo-catalog/)
+
   トレカダッシュ 開発の記録 ／ 2026年10月
 
   iOS アプリ「トレカダッシュ」で、利用者から、「この記事、別の記事と重複しているよ。それに、商品名がおかしい」という報告が来ました。調べると、一度だけ生まれた誤字の商品が、店ごとの記事が来るたびに、再利用されて増えていたことが分かりました。原因と、直し方と、直し方の限界まで、コミットの記録で書きます。
@@ -1736,6 +1738,8 @@ URL: https://koshinstudio.com/notes/torecadash-9set/
 
 # 「9種セット」の正体は御三家9商品だった：同じ商品なのに、決して一致しなかった
 
+  English version (https://koshinstudio.com/en/notes/torecadash-9set/)
+
   トレカダッシュ 開発の記録 ／ 2026年10月
 
   iOS アプリ「トレカダッシュ」は、トレカの抽選・先着情報を集めて通知します。集めた情報に抜けがないか調べるため、他のまとめサイト（抽選図鑑、ポケチュー）の掲載と、自分のアプリの記事を突き合わせて数えています。10月7日に測ったところ、抜けの多くは、同じ商品なのに、決して一致しないという、小さな食い違いが原因でした。HANDOFF とコミットの記録で書きます。
@@ -2432,6 +2436,8 @@ URL: https://koshinstudio.com/notes/shindan12/
 URL: https://koshinstudio.com/notes/anago/
 
 # 穴子がデカすぎた話
+
+  English version (https://koshinstudio.com/en/notes/anago/)
 
   すし積む 開発の記録 ／ 2026年9月
 
@@ -5734,6 +5740,339 @@ URL: https://koshinstudio.com/en/notes/sushi-measure/
 
 ---
 
+URL: https://koshinstudio.com/en/notes/anago/
+
+# The conger eel was too big: finding why a merge puzzle’s last piece was out of reach
+
+  日本語版 (https://koshinstudio.com/notes/anago/)
+
+  Development log of Sushi Stack / September 2026
+
+  Added on October 8, 2026. The numbers in this article are from the September 8 version. On September 10 I changed the sizes and the falling pieces once more (see “Afterward” at the bottom).
+
+  After finishing Sushi Stack (https://koshinstudio.com/works/sushitsumu/), one thing bothered me: I could never reach the last piece, the golden sushi tub.
+
+  However many times I played, I rarely even saw the spiny lobster before it. My feeling was “the conger eel is too big.” But if you tweak sizes by feel, something else usually breaks. I decided to measure first.
+
+## Building a way to measure
+
+  The game is a single HTML file, and time is driven by requestAnimationFrame. As it is, a game takes minutes, so I swapped in my own clock. I intercept requestAnimationFrame and setTimeout and advance them at any speed I like. If I also empty the drawing code, a game finishes in about 2 seconds.
+
+  After that I wrote a bot of modest skill — merge first, and wait until the pile settles before placing — and let it run.
+
+## What a hundred games showed
+
+  First, a hundred games as it was.
+
+  score   min 12,337 / median 21,664 / max 44,622
+best piece reached   otoro 43 games  anago 52  spiny lobster 4  golden tub 0
+  Zero for the golden tub. So where does it get stuck? Lining up the yield for moving up one tier (the share of times two of the lower piece became one of the next) made it clear.
+
+    Merge | Yield
+
+    Salmon → tuna | 94.0%
+
+    Tuna → ikura gunkan | 91.9%
+
+    Ikura gunkan → uni gunkan | 86.9%
+
+    Uni gunkan → otoro | 71.4%
+
+    Otoro → anago | 55.2%
+
+    Anago → spiny lobster | 13.1%
+
+    Spiny lobster → golden tub | 0.0%
+
+  It falls gently and then there is a cliff at the anago. Of the 61 anago made, 53 (87%) were still sitting on the final board. Only 8 made it to a merge.
+
+## The conger eel really was off
+
+  Lining up the dimensions made it obvious at a glance. The inner width of the tub is 336.
+
+    Piece | Width | Height | Width / inner | Growth from previous
+
+    Otoro | 149 | 83 | 44% | ×1.34
+
+    Anago | 247 | 71 | 74% | ×1.66
+
+    Spiny lobster | 230 | 107 | 68% | ×0.93
+
+    Golden tub | 210 | 210 | 62% | ×0.91
+
+  The anago was the widest piece in the game. Wider than the spiny lobster after it, and wider than the final golden tub. Its width growth is 1.66 where other tiers are 1.0 to 1.34.
+
+  As a result, when one anago lies down, the gap left beside it is 336 − 247 = 89. Only up to salmon (width 85) fits there; neither uni nor otoro. The anago spanned the tub and blocked the road ahead.
+
+  By the way, the ladder of areas was clean. Every tier was a constant “0.70 to 0.71 times the two pieces below.” Only the order of widths was broken.
+
+## Fix it, but measure first
+
+  I made only the width 4/5 (247 → 198) and ran another hundred games.
+
+     | Median | Max | Anago | Spiny lobster | Anago → lobster yield
+
+    247 × 71 (original) | 21,664 | 44,622 | 61 | 4 | 13.1%
+
+    198 × 71 | 24,858 | 47,392 | 79 | 12 | 30.4%
+
+    205 × 85 (keep the area) | 25,149 | 36,350 | 33 | 1 | 6.1%
+
+  The third row was interesting. The version that got thinner while keeping its area made the late game not move at all. What mattered was not “thin” itself but that the anago no longer spanned the tub and big pieces could sit beside it.
+
+## Still, the golden tub is out of reach
+
+  Spiny lobsters appeared three times as often. But the golden tub was still zero. Here another wall showed up.
+
+  The falling pieces were only three kinds: shari, tamago and shrimp. After subtracting gari, each drop is only 2.217 shari-equivalents. Meanwhile:
+
+    To make | In shari | Drops needed with zero waste
+
+    1 anago | 256 | 115
+
+    1 spiny lobster | 512 | 231
+
+    1 golden tub | 1,024 | 462
+
+  The measured number of drops was a median of 280 and 426 at most. Even with zero waste, there were not enough moves. 231 drops for a spiny lobster is right at the border, which matches the measured 12 in a hundred.
+
+## The real cause: the sushi was too big
+
+  In Suika Game some people make “twin watermelons.” That works because the last fruit is small enough compared with the box. What about mine?
+
+  With one golden tub in place, I must make a second spiny lobster
+  golden tub 210 + lobster 107 + lobster 107 = 424px  >  usable height 302px
+  side by side: lobster 230 × 2 = 460px               >  inner width 336px
+  It fits neither vertically nor horizontally. This is not a matter of luck or skill: there is no gap for it to fit in.
+
+  So I tried scaling all the pieces by 0.8 across the board. The diameter of the golden tub goes from 210 to 168, exactly half of the tub’s inner width of 336.
+
+     | Median | Max | Reach golden tub | Reach lobster | One game
+
+    Original size | 24,858 | 47,392 | 0 / 100 games | 12% | 3.7 min
+
+    0.8x | 58,741 | 103,630 | 7% | 65% | 7.7 min
+
+  At last the road was open. The spiny lobster is reached nearly every game, and the golden tub appears once in a dozen or so. The twin never appeared in sixty games, which is not a failure; it is probably the right state. It became a legend within reach.
+
+## I redrew the ranks too
+
+  Scores came out 2.4 times higher, so I had to redo all the rank thresholds. For the top rank, matching the fact that games reaching the golden tub all scored 86,000 or more, I set 85,000. The number is the same as before but its meaning changed. Before, it was a decoration nobody could reach; now it is “make the golden tub and you are a legend.”
+
+## I measured again after release
+
+  With the fixed version, using the same contents as what is published, I ran three hundred games again. The shape I saw at 100 games continues.
+
+    Measured | 300 games
+
+    Median score | 59,305
+
+    Highest score | 163,426
+
+    Reached grilled anago | 99%
+
+    Reached spiny lobster | 73%
+
+    Reached golden sushi tub | 10% (31 games)
+
+    Two golden tubs in one game | 0
+
+    Length of one game (median) | 7.7 min
+
+    Pieces placed (median) | 589
+
+    Longest chain | 10
+
+  The bot is tools/sim/bot.js. It merges first and waits for the pile to settle before placing. A human can play better or worse, but it was enough to compare before and after with the same yardstick.
+
+## What I learned
+
+> My feeling was right. But the cause was not where I thought.
+  The feeling that “the anago is too big” was correct. But thinning only the anago did not move the late game, and the real cause was that all of the sushi was too big for the tub. If I had suspected and fixed one place, I probably would never have gotten there.
+
+  Collecting statistics from three hundred games took about ten minutes in total. It was much faster and more reliable than tweaking by feel three times and checking.
+
+## Afterward (September 10): I changed it again
+
+  After this article, I submitted the game to CrazyGames and was rejected (details in another article (https://koshinstudio.com/en/notes/crazygames/)). What I reconsidered was that tension in the tub did not happen even once in the few minutes of review. The commit says: measured with auto-play, one game is a median of 594 moves, 7.5 minutes. 30 minutes for a human. The tub never fills, and dangerous moments never come.
+
+  I left each tier’s dimensions and area ratios alone and changed only places where I could fix without losing the feeling of “growing as you merge.” I chose them by measuring with auto-play.
+
+- Falling pieces from 3 kinds to 5. I added salmon and tuna to shari, tamago and shrimp (weights 1:1:2:3:2). More piles up per move and the median went from 594 to 279 moves. The rate of reaching higher tiers also went up.
+
+- The shape of the tub. Rim from 320 to 250, height from 308 to 378. The play area went from 45% to 62% of the screen.
+
+- Spiny lobster and golden tub scaled another 0.89x. The area ratio from anago to spiny lobster alone had jumped to 1.76 and is now 1.40, in line. The leftover when two golden tubs sit side by side went from 0 px to 36 px, and a double golden tub (golden tubs merging) became possible in real play. The logic had been there before but never happened once in 300 games.
+
+  With a game half as long, scores also fell by about 20% (auto-play median from 59,305 to 46,529). I re-took the rank thresholds from quantiles of 60 games and restored the same distribution as before (apprentice 7%, journeyman 28%, head chef 40%, master 17%, legend 8%). I also raised the double-golden-tub reward from 8,000 to 25,000, because merges up to making one golden tub already give about 34,000 points.
+
+  The moves needed for a double golden tub are 275 even with zero waste. Auto-play makes one golden tub in about 2.0 times the ideal, so auto-play cannot reach it (0 in 40 games). It is set up so that only a person who tidies the pile and plays well can reach it.
+
+  The numbers in the “0.8x” table above (median 58,741, 7.7 minutes a game and so on) are from the September 8 version. They differ from the current numbers.
+
+  Related
+
+- Sushi Stack (work page, Japanese) (https://koshinstudio.com/works/sushitsumu/)
+
+  Play (https://koshinstudio.com/play/sushitsumu/)
+
+  This is the English version of the original Japanese article (https://koshinstudio.com/notes/anago/).
+
+  More in English
+
+- All English pages (https://koshinstudio.com/en/)
+
+
+---
+
+URL: https://koshinstudio.com/en/notes/typo-catalog/
+
+# A typo born once multiplied across shops: the “30th SEREBRATION” incident
+
+  日本語版 (https://koshinstudio.com/notes/typo-catalog/)
+
+  Development log of Torecadash / October 2026
+
+  In my iOS app Torecadash, a user reported: “this article duplicates another one, and the product name is odd.” When I looked, a misspelled product created just once was being reused every time an article from a shop arrived, and it kept multiplying. The cause, the fix, and the limits of the fix are written from my commit record.
+
+  This is a development log of the app.
+
+## What was reported
+
+  Articles for the Pokémon Card product “30th CELEBRATION” were appearing at several shops under the product name “30th SEREBRATION” (a misspelling of CELEBRATION). They also duplicated the articles with the correct name for the same product.
+
+## Root cause: a short heading did not match the official name
+
+  Summaries posted by roundup sites have short headings like “‘30th CELEBRATION’.” The official name in the app’s catalog is “Expansion Pack ‘30th CELEBRATION’.” The short heading is shorter than the official name, so a one-direction check of “does the article title contain the official name” did not match.
+
+  When there was no match, it went to AI matching. Along that path, just once, a misspelled product “30th SEREBRATION” was created. My commit guesses it came from a mistake when converting another spelling in the catalog (“30th セレブレーション” in katakana) to the Latin alphabet.
+
+  The real trouble came next. Once a misspelled product is created, it is reused repeatedly as an “existing product.” Each time a new article arrived from a shop, the same typo and the same duplicate were mass-produced.
+
+## First, fix the data
+
+  I checked all shops. At three shops including Bic Camera, Sanyodo Shoten and Game Plaza, it duplicated an article with the correct name, so I hid one of each. The other 10 articles only needed their product reassigned. 13 articles in total. I deleted the misspelled product.
+
+  I left one thing alone on purpose. The existing tool for merging products judged “SEREBRATION” and “CELEBRATION” as different products and refused. That gate is intentionally strict, so I did not loosen it. I fixed these by hand, one by one.
+
+## The real prevention: pick up short headings by “exact match”
+
+  Fixing the data alone would let it happen again. So I fixed the matching with the official catalog. I strip one generic form word (such as “Expansion Pack”) from the front of the official name, and treat it as the same product only when what remains exactly matches the article title.
+
+  I chose “exact match” instead of “contains” so as not to pick up more specific, different products such as “30th CELEBRATION Card Set X.” Now it matches the official catalog correctly from the start, and never reaches the AI matching path where the typo was born. The results I confirmed:
+
+- “30th CELEBRATION” matches the official product correctly.
+
+- The misspelled “30th SEREBRATION” does not match (it is not wrongly treated as official).
+
+- Existing exact matches, other genres and unrelated set names behave as before.
+
+## Safety net: an edit-distance check, and its limits
+
+  As a precaution, I also added a check at the point just before a product is created: “a candidate with a small edit distance from the official catalog is strongly suspected to be a typo, so reject it.” But this check alone cannot catch “30th SEREBRATION” against “Expansion Pack ‘30th CELEBRATION’.” The difference in length is too large, so the edit distance is far (I confirmed this).
+
+  So the safety net does not work for this case. What works is the main fix above. I kept the safety net to catch other typos of the same length (for example, Weiss Schwarz names missing a “/”). I also built a read-only audit that finds catalog entries suspected of typos. At the time of the commit it found 21 suspects of the same shape.
+
+## What I learned
+
+> A mistake born once becomes “existing,” and multiplies.
+
+- Wrong data multiplies by itself. What was created becomes the thing reused next time. Fixing the data is not enough; you have to fix the path by which it is born.
+
+- “Exact match” over “contains.” Picking up widely drags in other products.
+
+- Check the limits of a safety net and write them down. Instead of assuming “this check prevents it,” I checked first that it does not work for this typo.
+
+- Do not loosen a strict gate. What the merge tool rejected was the correct behavior.
+
+  This article is written from my commit record (September 28, 2026). How the typo was born is the commit’s guess.
+
+  This is the English version of the original Japanese article (https://koshinstudio.com/notes/typo-catalog/).
+
+  More in English
+
+- All English pages (https://koshinstudio.com/en/)
+
+
+---
+
+URL: https://koshinstudio.com/en/notes/torecadash-9set/
+
+# The “9-pack set” was nine different products: the same product that never matched
+
+  日本語版 (https://koshinstudio.com/notes/torecadash-9set/)
+
+  Development log of Torecadash / October 2026
+
+  My iOS app Torecadash collects lottery and first-come sale information for trading cards and notifies users. To check for gaps, I match and count listings on other roundup sites (Chusen Zukan, Pokechu) against the articles in my own app. When I measured on October 7, most gaps came from a small discrepancy: the same product that never matched. This is from my hand-over notes and commit record.
+
+  This is a development log of the app.
+
+## What I measured
+
+  With read-only access, I checked “are all lotteries introduced by the roundup sites shown in the app?”
+
+- Chusen Zukan: of 90 open lotteries, 49 (54%) were displayed in the app. 12 had an article but were hidden, and 29 were not in the feed.
+
+- Pokechu: 18 of 21 (86%).
+
+- X roundup posts: 606 posts in 72 hours. Only 9 linked to an article.
+
+## Of the 12 hidden, 7 were because the row was wrong
+
+  Looking at the 12 hidden, in 7 the roundup site’s row named a different product from the application page. Four shops of one chain said “energy card set,” and three others said “expansion pack.” The application page (the lottery form) and the shop’s X account showed it was actually a “card set, 9-pack set, 10,800 yen.”
+
+  The app’s “price gate” (which rejects items whose listing price does not match the product’s list price) was correctly rejecting them. What was wrong was not the gate but the product mix-up. I reassigned the products and restored them to visible.
+
+## What the “9-pack set” really was
+
+  This “9-pack set” is a card set of Pokémon Card 30th CELEBRATION, which is 9 products, each a set of the starter trio from nine generations. The catalog had these 9 products registered correctly from the beginning. But each time a marketplace listing or X monitoring created a new article, a bug registered it as another product named after only one of the three, in several of the 9 products. For example, a product with only “Hinoarashi.”
+
+## The same product, never matching
+
+  The matching has a process that makes a “key” for comparing product names. It had a left-right asymmetry.
+
+- On the other side, “card set 9-pack” has the trailing “9-pack” dropped before comparing.
+
+- On the catalog side, “card set 9-kinds set” is not dropped.
+
+  The same product never matched. As a result, the other side’s name was wrongly resolved to a different product such as “energy card set” or “expansion pack.” That was where the mix-up came from. I applied the same rule to both sides (drop “N packs,” “N kinds” and “set”), and also made names that carry a number specification not be settled to one by partial match. I confirmed that there are 0 key collisions across the whole catalog.
+
+## Another hole: the previous article blocked the next round
+
+  The main cause of “not in the feed” was elsewhere. The article ID was made from “roundup URL + shop + product,” and it did not include the lottery round. The expired article from the previous round stopped the new round’s article for the same shop and product from being created (“the same article ID already exists”). If the new round’s deadline is more than 1 day later than the previous one, it now creates an article with a different ID that adds the date.
+
+## Result
+
+    Coverage | Before | After
+
+    Chusen Zukan (90 open) | 54% (49) | 91% (82)
+
+    Pokechu | 86% | 90%
+
+  The remainder are cases where the application page only says “various products” so the product cannot be identified, where the page has no clue to the shop name, and so on. They include ones I decided not to adopt for safety. The misses did not become zero.
+
+## What I learned
+
+> A gate that rejected correctly and wrong data are different problems.
+
+- Before doubting what was rejected, look at why it was rejected. The price gate worked correctly; what was wrong was the product mix-up.
+
+- The cause of “does not match” can be a left-right asymmetry in how you compare. The same product never matching was a mismatch of rules, not dirty data.
+
+- You do not see gaps unless you count coverage. Only when the number 54% came out did I know where to fix.
+
+  The numbers in this article come from my hand-over notes (§272, §281) and commit record (October 7, 2026).
+
+  This is the English version of the original Japanese article (https://koshinstudio.com/notes/torecadash-9set/).
+
+  More in English
+
+- All English pages (https://koshinstudio.com/en/)
+
+
+---
+
 URL: https://koshinstudio.com/en/notes/crazygames/
 
 # Rejected by CrazyGames with no reason given: I recorded the game and found four problems
@@ -7257,6 +7596,12 @@ URL: https://koshinstudio.com/en/
 - The streaming buttons were shown even for titles you could not watch: making the quiz result screen true (https://koshinstudio.com/en/notes/result-screen/)
 
 - “The pile settles at 89%” was wrong: my measurement was what was wrong (https://koshinstudio.com/en/notes/sushi-measure/)
+
+- The conger eel was too big: finding why a merge puzzle’s last piece was out of reach (https://koshinstudio.com/en/notes/anago/)
+
+- The “9-pack set” was nine different products: the same product that never matched (https://koshinstudio.com/en/notes/torecadash-9set/)
+
+- A typo born once multiplied across shops: the “30th SEREBRATION” incident (https://koshinstudio.com/en/notes/typo-catalog/)
 
 ## Languages
 

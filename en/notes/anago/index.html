@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The conger eel was too big: measuring a merge puzzle</title>
+<meta name="description" content="I could never reach my puzzle’s last piece. Statistics from hundreds of auto-played games showed the real cause: everything was too big for the tub.">
+<meta property="og:title" content="The conger eel was too big: measuring a merge puzzle">
+<meta property="og:description" content="I could never reach my puzzle’s last piece. Statistics from hundreds of auto-played games showed the real cause: everything was too big for the tub.">
+<meta property="og:type" content="article">
+<meta name="theme-color" content="#fbfaf7">
+<link rel="icon" href="/favicon.ico?v=1697d589" sizes="48x48">
+<link rel="icon" href="/favicon.svg?v=b9d7922f" type="image/svg+xml" sizes="any">
+<link rel="icon" href="/assets/icon/icon-192.png?v=e2566235" type="image/png" sizes="192x192">
+<link rel="apple-touch-icon" href="/assets/icon/icon-180.png?v=84e7f0e6">
+<link rel="manifest" href="/site.webmanifest">
+<script>document.documentElement.className+=" js"</script>
+<link rel="stylesheet" href="/style.css?v=7001672f">
+<meta name="google-adsense-account" content="ca-pub-3863314847163872">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3863314847163872" crossorigin="anonymous"></script>
+<link rel="canonical" href="https://koshinstudio.com/en/notes/anago/">
+<meta property="og:url" content="https://koshinstudio.com/en/notes/anago/">
+<meta property="og:site_name" content="Koshin Studio">
+<meta property="og:locale" content="en_US">
+<link rel="alternate" hreflang="ja" href="https://koshinstudio.com/notes/anago/">
+<link rel="alternate" hreflang="en" href="https://koshinstudio.com/en/notes/anago/">
+<link rel="alternate" hreflang="x-default" href="https://koshinstudio.com/en/notes/anago/">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="alternate" type="application/rss+xml" title="Koshin Studio — Notes" href="https://koshinstudio.com/feed.xml">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BlogPosting","headline":"The conger eel was too big: finding why a merge puzzle’s last piece was out of reach","url":"https://koshinstudio.com/en/notes/anago/","description":"I could never reach my puzzle’s last piece. Statistics from hundreds of auto-played games showed the real cause: everything was too big for the tub.","datePublished":"2026-10-09","dateModified":"2026-10-09","inLanguage":"en","image":"https://koshinstudio.com/assets/og/og_notes_anago.jpg","author":{"@id":"https://koshinstudio.com#studio"},"publisher":{"@id":"https://koshinstudio.com#studio"},"mainEntityOfPage":"https://koshinstudio.com/en/notes/anago/"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Koshin Studio","item":"https://koshinstudio.com/en/"},{"@type":"ListItem","position":2,"name":"The conger eel was too big: finding why a merge puzzle’s last piece was out of reach","item":"https://koshinstudio.com/en/notes/anago/"}]}]}</script>
+<meta property="og:image" content="https://koshinstudio.com/assets/og/og_notes_anago.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
+</head>
+<body>
+<canvas id="motes"></canvas>
+
+<header class="site"><div class="wrap">
+  <a class="logo" href="/"><img class="logo-mark" src="/favicon.svg?v=b9d7922f" alt="" width="28" height="28">Koshin Studio</a>
+  <nav><a href="/works/">Works</a><a href="/notes/">Notes</a><a href="/picks/">Picks</a><a href="/calc/">Tools</a><a href="/about/">About</a></nav>
+</div></header>
+
+<main><div class="wrap">
+  <nav class="crumbs" aria-label="You are here"><a href="/en/">Koshin Studio</a><i aria-hidden="true">›</i><span aria-current="page">The conger eel was too big</span></nav>
+  <h1>The conger eel was too big: finding why a merge puzzle’s last piece was out of reach</h1>
+  <div class="rule"></div>
+<!--lang-->
+  <p class="note"><a href="/notes/anago/" hreflang="ja" lang="ja">日本語版</a></p>
+<!--/lang-->
+  <p class="lead">Development log of Sushi Stack / September 2026</p>
+
+  <p class="note">Added on October 8, 2026. The numbers in this article are from <strong>the September 8 version</strong>. On September 10 I changed the sizes and the falling pieces once more (see “Afterward” at the bottom).</p>
+  <p>After finishing <a href="/works/sushitsumu/" hreflang="ja" lang="ja">Sushi Stack</a>, one thing bothered me: <strong>I could never reach the last piece, the golden sushi tub.</strong></p>
+  <p>However many times I played, I rarely even saw the spiny lobster before it. My feeling was “the conger eel is too big.” But if you tweak sizes by feel, something else usually breaks. I decided to measure first.</p>
+
+  <h2 class="rv" id="s1">Building a way to measure</h2>
+  <p>The game is a single HTML file, and time is driven by <code>requestAnimationFrame</code>. As it is, a game takes minutes, so <strong>I swapped in my own clock</strong>. I intercept <code>requestAnimationFrame</code> and <code>setTimeout</code> and advance them at any speed I like. If I also empty the drawing code, <strong>a game finishes in about 2 seconds</strong>.</p>
+  <p>After that I wrote a bot of modest skill — merge first, and wait until the pile settles before placing — and let it run.</p>
+
+  <h2 class="rv" id="s2">What a hundred games showed</h2>
+  <p>First, a hundred games as it was.</p>
+  <pre><code>score   min 12,337 / median 21,664 / max 44,622
+best piece reached   otoro 43 games  anago 52  spiny lobster 4  golden tub 0</code></pre>
+  <p>Zero for the golden tub. So where does it get stuck? Lining up <strong>the yield for moving up one tier</strong> (the share of times two of the lower piece became one of the next) made it clear.</p>
+  <div class="scroll rv"><table>
+    <tr><th>Merge</th><th class="n">Yield</th></tr>
+    <tr><td>Salmon → tuna</td><td class="n">94.0%</td></tr>
+    <tr><td>Tuna → ikura gunkan</td><td class="n">91.9%</td></tr>
+    <tr><td>Ikura gunkan → uni gunkan</td><td class="n">86.9%</td></tr>
+    <tr><td>Uni gunkan → otoro</td><td class="n">71.4%</td></tr>
+    <tr><td>Otoro → anago</td><td class="n">55.2%</td></tr>
+    <tr><td><strong>Anago → spiny lobster</strong></td><td class="n"><strong>13.1%</strong></td></tr>
+    <tr><td>Spiny lobster → golden tub</td><td class="n">0.0%</td></tr>
+  </table></div>
+  <p>It falls gently and then there is a cliff at the anago. Of the 61 anago made, <strong>53 (87%) were still sitting on the final board</strong>. Only 8 made it to a merge.</p>
+
+  <h2 class="rv" id="s3">The conger eel really was off</h2>
+  <p>Lining up the dimensions made it obvious at a glance. The inner width of the tub is 336.</p>
+  <div class="scroll rv"><table>
+    <tr><th>Piece</th><th class="n">Width</th><th class="n">Height</th><th class="n">Width / inner</th><th class="n">Growth from previous</th></tr>
+    <tr><td>Otoro</td><td class="n">149</td><td class="n">83</td><td class="n">44%</td><td class="n">×1.34</td></tr>
+    <tr><td><strong>Anago</strong></td><td class="n"><strong>247</strong></td><td class="n">71</td><td class="n"><strong>74%</strong></td><td class="n"><strong>×1.66</strong></td></tr>
+    <tr><td>Spiny lobster</td><td class="n">230</td><td class="n">107</td><td class="n">68%</td><td class="n">×0.93</td></tr>
+    <tr><td>Golden tub</td><td class="n">210</td><td class="n">210</td><td class="n">62%</td><td class="n">×0.91</td></tr>
+  </table></div>
+  <p><strong>The anago was the widest piece in the game.</strong> Wider than the spiny lobster after it, and wider than the final golden tub. Its width growth is 1.66 where other tiers are 1.0 to 1.34.</p>
+  <p>As a result, when one anago lies down, the gap left beside it is <strong>336 − 247 = 89</strong>. Only up to salmon (width 85) fits there; neither uni nor otoro. <strong>The anago spanned the tub and blocked the road ahead.</strong></p>
+  <p>By the way, the ladder of areas was clean. Every tier was a constant “0.70 to 0.71 times the two pieces below.” Only the order of widths was broken.</p>
+
+  <h2 class="rv" id="s4">Fix it, but measure first</h2>
+  <p>I made only the width 4/5 (247 → 198) and ran another hundred games.</p>
+  <div class="scroll rv"><table>
+    <tr><th></th><th class="n">Median</th><th class="n">Max</th><th class="n">Anago</th><th class="n">Spiny lobster</th><th class="n">Anago → lobster yield</th></tr>
+    <tr><td>247 × 71 (original)</td><td class="n">21,664</td><td class="n">44,622</td><td class="n">61</td><td class="n">4</td><td class="n">13.1%</td></tr>
+    <tr><td><strong>198 × 71</strong></td><td class="n"><strong>24,858</strong></td><td class="n"><strong>47,392</strong></td><td class="n">79</td><td class="n"><strong>12</strong></td><td class="n"><strong>30.4%</strong></td></tr>
+    <tr><td>205 × 85 (keep the area)</td><td class="n">25,149</td><td class="n">36,350</td><td class="n">33</td><td class="n">1</td><td class="n">6.1%</td></tr>
+  </table></div>
+  <p>The third row was interesting. <strong>The version that got thinner while keeping its area made the late game not move at all.</strong> What mattered was not “thin” itself but that the anago no longer spanned the tub and big pieces could sit beside it.</p>
+
+  <h2 class="rv" id="s5">Still, the golden tub is out of reach</h2>
+  <p>Spiny lobsters appeared three times as often. But the golden tub was still zero. Here another wall showed up.</p>
+  <p>The falling pieces were only three kinds: shari, tamago and shrimp. After subtracting gari, each drop is only <strong>2.217 shari-equivalents</strong>. Meanwhile:</p>
+  <div class="scroll rv"><table>
+    <tr><th>To make</th><th class="n">In shari</th><th class="n">Drops needed with zero waste</th></tr>
+    <tr><td>1 anago</td><td class="n">256</td><td class="n">115</td></tr>
+    <tr><td>1 spiny lobster</td><td class="n">512</td><td class="n">231</td></tr>
+    <tr><td><strong>1 golden tub</strong></td><td class="n"><strong>1,024</strong></td><td class="n"><strong>462</strong></td></tr>
+  </table></div>
+  <p>The measured number of drops was a median of 280 and 426 at most. <strong>Even with zero waste, there were not enough moves.</strong> 231 drops for a spiny lobster is right at the border, which matches the measured 12 in a hundred.</p>
+
+  <h2 class="rv" id="s6">The real cause: the sushi was too big</h2>
+  <p>In Suika Game some people make “twin watermelons.” That works because the last fruit is small enough compared with the box. What about mine?</p>
+  <pre><code>With one golden tub in place, I must make a second spiny lobster
+  golden tub 210 + lobster 107 + lobster 107 = 424px  >  usable height 302px
+  side by side: lobster 230 × 2 = 460px               >  inner width 336px</code></pre>
+  <p>It fits neither vertically nor horizontally. This is not a matter of luck or skill: <strong>there is no gap for it to fit in</strong>.</p>
+  <p>So I tried scaling all the pieces by <strong>0.8 across the board</strong>. The diameter of the golden tub goes from 210 to 168, exactly half of the tub’s inner width of 336.</p>
+  <div class="scroll rv"><table>
+    <tr><th></th><th class="n">Median</th><th class="n">Max</th><th class="n">Reach golden tub</th><th class="n">Reach lobster</th><th class="n">One game</th></tr>
+    <tr><td>Original size</td><td class="n">24,858</td><td class="n">47,392</td><td class="n">0 / 100 games</td><td class="n">12%</td><td class="n">3.7 min</td></tr>
+    <tr><td><strong>0.8x</strong></td><td class="n"><strong>58,741</strong></td><td class="n"><strong>103,630</strong></td><td class="n"><strong>7%</strong></td><td class="n"><strong>65%</strong></td><td class="n">7.7 min</td></tr>
+  </table></div>
+  <p>At last the road was open. The spiny lobster is reached nearly every game, and the golden tub appears once in a dozen or so. <strong>The twin never appeared in sixty games</strong>, which is not a failure; it is probably the right state. It became a legend within reach.</p>
+
+  <h2 class="rv" id="s7">I redrew the ranks too</h2>
+  <p>Scores came out 2.4 times higher, so I had to redo all the rank thresholds. For the top rank, matching the fact that games reaching the golden tub all scored 86,000 or more, I set <strong>85,000</strong>. The number is the same as before but its meaning changed. Before, it was a decoration nobody could reach; now it is “<strong>make the golden tub and you are a legend</strong>.”</p>
+
+  <h2 class="rv" id="s8">I measured again after release</h2>
+  <p>With the fixed version, using the same contents as what is published, I ran <strong>three hundred games</strong> again. The shape I saw at 100 games continues.</p>
+  <div class="scroll rv"><table>
+    <tr><th>Measured</th><th class="n">300 games</th></tr>
+    <tr><td>Median score</td><td class="n">59,305</td></tr>
+    <tr><td>Highest score</td><td class="n">163,426</td></tr>
+    <tr><td>Reached grilled anago</td><td class="n">99%</td></tr>
+    <tr><td>Reached spiny lobster</td><td class="n">73%</td></tr>
+    <tr><td>Reached golden sushi tub</td><td class="n">10% (31 games)</td></tr>
+    <tr><td>Two golden tubs in one game</td><td class="n">0</td></tr>
+    <tr><td>Length of one game (median)</td><td class="n">7.7 min</td></tr>
+    <tr><td>Pieces placed (median)</td><td class="n">589</td></tr>
+    <tr><td>Longest chain</td><td class="n">10</td></tr>
+  </table></div>
+  <p class="note">The bot is <code>tools/sim/bot.js</code>. It merges first and waits for the pile to settle before placing. A human can play better or worse, but it was enough to compare before and after with the same yardstick.</p>
+
+  <h2 class="rv" id="s9">What I learned</h2>
+  <blockquote>My feeling was right. But the cause was not where I thought.</blockquote>
+  <p>The feeling that “the anago is too big” was correct. But thinning only the anago did not move the late game, and the real cause was <strong>that all of the sushi was too big for the tub</strong>. If I had suspected and fixed one place, I probably would never have gotten there.</p>
+  <p>Collecting statistics from three hundred games took about ten minutes in total. It was much faster and more reliable than tweaking by feel three times and checking.</p>
+
+  <h2 class="rv" id="s10">Afterward (September 10): I changed it again</h2>
+  <p>After this article, I submitted the game to CrazyGames and was rejected (details in <a href="/en/notes/crazygames/" hreflang="en" lang="en">another article</a>). What I reconsidered was that tension in the tub did not happen even once in the few minutes of review. The commit says: measured with auto-play, one game is a median of 594 moves, 7.5 minutes. <strong>30 minutes for a human.</strong> The tub never fills, and dangerous moments never come.</p>
+  <p>I left each tier’s dimensions and area ratios alone and changed only places where I could fix without losing the feeling of “growing as you merge.” I chose them by measuring with auto-play.</p>
+  <ul>
+    <li><strong>Falling pieces from 3 kinds to 5.</strong> I added salmon and tuna to shari, tamago and shrimp (weights 1:1:2:3:2). More piles up per move and the median went from 594 to 279 moves. The rate of reaching higher tiers also went up.</li>
+    <li><strong>The shape of the tub.</strong> Rim from 320 to 250, height from 308 to 378. The play area went from 45% to 62% of the screen.</li>
+    <li><strong>Spiny lobster and golden tub scaled another 0.89x.</strong> The area ratio from anago to spiny lobster alone had jumped to 1.76 and is now 1.40, in line. The leftover when two golden tubs sit side by side went from 0 px to 36 px, and a <strong>double golden tub</strong> (golden tubs merging) became possible in real play. The logic had been there before but never happened once in 300 games.</li>
+  </ul>
+  <p>With a game half as long, scores also fell by about 20% (auto-play median from 59,305 to 46,529). I re-took the rank thresholds from quantiles of 60 games and restored the same distribution as before (apprentice 7%, journeyman 28%, head chef 40%, master 17%, legend 8%). I also raised the double-golden-tub reward from 8,000 to 25,000, because merges up to making one golden tub already give about 34,000 points.</p>
+  <p>The moves needed for a double golden tub are 275 even with zero waste. Auto-play makes one golden tub in about 2.0 times the ideal, so auto-play cannot reach it (0 in 40 games). It is set up so that <strong>only a person who tidies the pile and plays well can reach it</strong>.</p>
+  <p class="note">The numbers in the “0.8x” table above (median 58,741, 7.7 minutes a game and so on) are from the September 8 version. They differ from the current numbers.</p>
+
+  <div class="rule" style="margin:40px 0 22px"></div>
+  <p class="eyebrow">Related</p>
+  <ul class="plain">
+    <li><a href="/works/sushitsumu/" hreflang="ja" lang="ja">Sushi Stack (work page, Japanese)</a></li>
+  </ul>
+  <p style="margin-top:32px"><a class="btn" data-play="sushitsumu" href="/play/sushitsumu/">Play</a></p>
+
+  <p class="note">This is the English version of <a href="/notes/anago/" hreflang="ja" lang="ja">the original Japanese article</a>.</p>
+
+  <div class="rule" style="margin:40px 0 22px"></div>
+  <p class="eyebrow">More in English</p>
+  <ul class="plain">
+    <li><a href="/en/">All English pages</a></li>
+  </ul>
+</div>
+</main>
+
+<footer class="site"><div class="wrap"></div></footer>
+<script src="/motion.js?v=1e7447ec" defer></script>
+</body>
+</html>

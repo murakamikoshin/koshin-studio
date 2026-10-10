@@ -223,6 +223,27 @@
     "blurb": "Rebalancing a merge puzzle, I found my measurement had counted falling pieces. Three causes: a backward size ladder, a pit-shaped tub, and pieces tunneling the floor."
   },
   {
+    "ja": "/notes/anago/",
+    "en": "/en/notes/anago/",
+    "title": "The conger eel was too big: finding why a merge puzzle’s last piece was out of reach",
+    "date": "2026-10-09",
+    "blurb": "I could never reach my puzzle’s last piece. Statistics from hundreds of auto-played games showed the real cause: everything was too big for the tub."
+  },
+  {
+    "ja": "/notes/typo-catalog/",
+    "en": "/en/notes/typo-catalog/",
+    "title": "A typo born once multiplied across shops: the “30th SEREBRATION” incident",
+    "date": "2026-10-09",
+    "blurb": "A misspelled product created once was reused as an existing product for every shop. Fixing 13 articles, exact-match prevention, and the limits of a safety net."
+  },
+  {
+    "ja": "/notes/torecadash-9set/",
+    "en": "/en/notes/torecadash-9set/",
+    "title": "The “9-pack set” was nine different products: the same product that never matched",
+    "date": "2026-10-09",
+    "blurb": "Matching my app against roundup sites showed 54% of lotteries displayed: a product mix-up, an asymmetric name key and an article ID that blocked new rounds."
+  },
+  {
     "ja": "/notes/crazygames/",
     "en": "/en/notes/crazygames/",
     "title": "Rejected by CrazyGames with no reason given: I recorded the game and found four problems",

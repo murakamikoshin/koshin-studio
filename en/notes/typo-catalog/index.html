@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>One typo multiplied across shops: SEREBRATION</title>
+<meta name="description" content="A misspelled product created once was reused as an existing product for every shop. Fixing 13 articles, exact-match prevention, and the limits of a safety net.">
+<meta property="og:title" content="One typo multiplied across shops: SEREBRATION">
+<meta property="og:description" content="A misspelled product created once was reused as an existing product for every shop. Fixing 13 articles, exact-match prevention, and the limits of a safety net.">
+<meta property="og:type" content="article">
+<meta name="theme-color" content="#fbfaf7">
+<link rel="icon" href="/favicon.ico?v=1697d589" sizes="48x48">
+<link rel="icon" href="/favicon.svg?v=b9d7922f" type="image/svg+xml" sizes="any">
+<link rel="icon" href="/assets/icon/icon-192.png?v=e2566235" type="image/png" sizes="192x192">
+<link rel="apple-touch-icon" href="/assets/icon/icon-180.png?v=84e7f0e6">
+<link rel="manifest" href="/site.webmanifest">
+<script>document.documentElement.className+=" js"</script>
+<link rel="stylesheet" href="/style.css?v=7001672f">
+<meta name="google-adsense-account" content="ca-pub-3863314847163872">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3863314847163872" crossorigin="anonymous"></script>
+<link rel="canonical" href="https://koshinstudio.com/en/notes/typo-catalog/">
+<meta property="og:url" content="https://koshinstudio.com/en/notes/typo-catalog/">
+<meta property="og:site_name" content="Koshin Studio">
+<meta property="og:locale" content="en_US">
+<link rel="alternate" hreflang="ja" href="https://koshinstudio.com/notes/typo-catalog/">
+<link rel="alternate" hreflang="en" href="https://koshinstudio.com/en/notes/typo-catalog/">
+<link rel="alternate" hreflang="x-default" href="https://koshinstudio.com/en/notes/typo-catalog/">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="alternate" type="application/rss+xml" title="Koshin Studio — Notes" href="https://koshinstudio.com/feed.xml">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BlogPosting","headline":"A typo born once multiplied across shops: the “30th SEREBRATION” incident","url":"https://koshinstudio.com/en/notes/typo-catalog/","description":"A misspelled product created once was reused as an existing product for every shop. Fixing 13 articles, exact-match prevention, and the limits of a safety net.","datePublished":"2026-10-09","dateModified":"2026-10-09","inLanguage":"en","image":"https://koshinstudio.com/assets/og/og_notes_typo-catalog.jpg","author":{"@id":"https://koshinstudio.com#studio"},"publisher":{"@id":"https://koshinstudio.com#studio"},"mainEntityOfPage":"https://koshinstudio.com/en/notes/typo-catalog/"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Koshin Studio","item":"https://koshinstudio.com/en/"},{"@type":"ListItem","position":2,"name":"A typo born once multiplied across shops: the “30th SEREBRATION” incident","item":"https://koshinstudio.com/en/notes/typo-catalog/"}]}]}</script>
+<meta property="og:image" content="https://koshinstudio.com/assets/og/og_notes_typo-catalog.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
+</head>
+<body>
+<canvas id="motes"></canvas>
+
+<header class="site"><div class="wrap">
+  <a class="logo" href="/"><img class="logo-mark" src="/favicon.svg?v=b9d7922f" alt="" width="28" height="28">Koshin Studio</a>
+  <nav><a href="/works/">Works</a><a href="/notes/">Notes</a><a href="/picks/">Picks</a><a href="/calc/">Tools</a><a href="/about/">About</a></nav>
+</div></header>
+
+<main><div class="wrap">
+  <nav class="crumbs" aria-label="You are here"><a href="/en/">Koshin Studio</a><i aria-hidden="true">›</i><span aria-current="page">The SEREBRATION typo</span></nav>
+  <h1>A typo born once multiplied across shops: the “30th SEREBRATION” incident</h1>
+  <div class="rule"></div>
+<!--lang-->
+  <p class="note"><a href="/notes/typo-catalog/" hreflang="ja" lang="ja">日本語版</a></p>
+<!--/lang-->
+  <p class="lead">Development log of Torecadash / October 2026</p>
+
+  <p>In my iOS app Torecadash, a user reported: “this article duplicates another one, and the product name is odd.” When I looked, <strong>a misspelled product created just once was being reused every time an article from a shop arrived, and it kept multiplying</strong>. The cause, the fix, and the limits of the fix are written from my commit record.</p>
+  <p class="note">This is a development log of the app.</p>
+
+  <h2 class="rv" id="s1">What was reported</h2>
+  <p>Articles for the Pokémon Card product “30th CELEBRATION” were appearing at several shops under the product name <strong>“30th SEREBRATION”</strong> (a misspelling of CELEBRATION). They also duplicated the articles with the correct name for the same product.</p>
+
+  <h2 class="rv" id="s2">Root cause: a short heading did not match the official name</h2>
+  <p>Summaries posted by roundup sites have <strong>short headings</strong> like “‘30th CELEBRATION’.” The official name in the app’s catalog is “Expansion Pack ‘30th CELEBRATION’.” The short heading is shorter than the official name, so a one-direction check of “does the article title contain the official name” did not match.</p>
+  <p>When there was no match, it went to AI matching. Along that path, <strong>just once</strong>, a misspelled product “30th SEREBRATION” was created. My commit guesses it came from a mistake when converting another spelling in the catalog (“30th セレブレーション” in katakana) to the Latin alphabet.</p>
+  <p>The real trouble came next. Once a misspelled product is created, <strong>it is reused repeatedly as an “existing product.”</strong> Each time a new article arrived from a shop, the same typo and the same duplicate were mass-produced.</p>
+
+  <h2 class="rv" id="s3">First, fix the data</h2>
+  <p>I checked all shops. At three shops including Bic Camera, Sanyodo Shoten and Game Plaza, it duplicated an article with the correct name, so I hid one of each. The other 10 articles only needed their product reassigned. <strong>13 articles in total.</strong> I deleted the misspelled product.</p>
+  <p>I left one thing alone on purpose. The existing tool for merging products judged “SEREBRATION” and “CELEBRATION” as different products and refused. That gate is intentionally strict, so <strong>I did not loosen it</strong>. I fixed these by hand, one by one.</p>
+
+  <h2 class="rv" id="s4">The real prevention: pick up short headings by “exact match”</h2>
+  <p>Fixing the data alone would let it happen again. So I fixed the matching with the official catalog. I strip one <strong>generic form word</strong> (such as “Expansion Pack”) from the front of the official name, and treat it as the same product only when what remains <strong>exactly matches</strong> the article title.</p>
+  <p>I chose “exact match” instead of “contains” so as <strong>not to pick up more specific, different products</strong> such as “30th CELEBRATION Card Set X.” Now it matches the official catalog correctly from the start, and never reaches the AI matching path where the typo was born. The results I confirmed:</p>
+  <ul>
+    <li>“30th CELEBRATION” matches the official product correctly.</li>
+    <li>The misspelled “30th SEREBRATION” does not match (it is not wrongly treated as official).</li>
+    <li>Existing exact matches, other genres and unrelated set names behave as before.</li>
+  </ul>
+
+  <h2 class="rv" id="s5">Safety net: an edit-distance check, and its limits</h2>
+  <p>As a precaution, I also added a check at the point just before a product is created: “a candidate with a small edit distance from the official catalog is strongly suspected to be a typo, so reject it.” But this check alone <strong>cannot catch “30th SEREBRATION” against “Expansion Pack ‘30th CELEBRATION’.”</strong> The difference in length is too large, so the edit distance is far (I confirmed this).</p>
+  <p>So the safety net does not work for this case. What works is the main fix above. I kept the safety net to catch <strong>other typos of the same length</strong> (for example, Weiss Schwarz names missing a “/”). I also built a read-only audit that finds catalog entries suspected of typos. At the time of the commit it found 21 suspects of the same shape.</p>
+
+  <h2 class="rv" id="s6">What I learned</h2>
+  <blockquote>A mistake born once becomes “existing,” and multiplies.</blockquote>
+  <ul>
+    <li><strong>Wrong data multiplies by itself.</strong> What was created becomes the thing reused next time. Fixing the data is not enough; you have to fix <strong>the path by which it is born</strong>.</li>
+    <li><strong>“Exact match” over “contains.”</strong> Picking up widely drags in other products.</li>
+    <li><strong>Check the limits of a safety net and write them down.</strong> Instead of assuming “this check prevents it,” I checked first that it does not work for this typo.</li>
+    <li><strong>Do not loosen a strict gate.</strong> What the merge tool rejected was the correct behavior.</li>
+  </ul>
+  <p class="note">This article is written from my commit record (September 28, 2026). How the typo was born is the commit’s guess.</p>
+
+  <p class="note">This is the English version of <a href="/notes/typo-catalog/" hreflang="ja" lang="ja">the original Japanese article</a>.</p>
+
+  <div class="rule" style="margin:40px 0 22px"></div>
+  <p class="eyebrow">More in English</p>
+  <ul class="plain">
+    <li><a href="/en/">All English pages</a></li>
+  </ul>
+</div>
+</main>
+
+<footer class="site"><div class="wrap"></div></footer>
+<script src="/motion.js?v=1e7447ec" defer></script>
+</body>
+</html>
