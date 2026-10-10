@@ -654,6 +654,8 @@ URL: https://koshinstudio.com/notes/logo-pop/
 
 # Retina で canvas が2倍の大きさになる：inset:0 では広がらない（押すと弾けるロゴの不具合）
 
+  English version (https://koshinstudio.com/en/notes/logo-pop/)
+
   Koshin Studio 開発の記録 ／ 2026年10月
 
   このサイトのトップには、大きなロゴがあります。字を押すと、その字がぽんと弾けて、粒が散ります。ロゴを、自分で作った書体「恒紳ポップ」で作り直したあと、この動きについて、「粒が、字ではない変なところから出る」「まだ、右に寄っている」と指摘を受けました。直すまでに三段階かかったので、何が原因で、どう見つけたのかを、測った数字で書きます。
@@ -730,6 +732,8 @@ URL: https://koshinstudio.com/notes/logo-pop/
 URL: https://koshinstudio.com/notes/apple-signin/
 
 # Firebase Auth：アプリを完全に終了すると、匿名アカウントが量産された（currentUser の復元待ち）
+
+  English version (https://koshinstudio.com/en/notes/apple-signin/)
 
   トレカダッシュ 開発の記録 ／ 2026年10月
 
@@ -4087,7 +4091,7 @@ URL: https://koshinstudio.com/privacy/
 
 ## 預からないもの
 
-  それ以外は何も集めません。会員登録も、個人を追いかける仕組みも入っていません。広告はまだ表示していません（下の「広告について」を読んでください）。メールアドレスも、電話番号も、位置情報も、一切受け取っていません。
+  それ以外は何も集めません。会員登録も、個人を追いかける仕組みも入っていません。広告を表示することがあります（下の「広告について」を読んでください）。メールアドレスも、電話番号も、位置情報も、一切受け取っていません。
 
   ただし、このサイトを置いている Cloudflare の、アクセスの集計（Cloudflare Web Analytics）が動いています。ページが何回開かれたか、どのページがよく読まれているか、といった数を数えるためのもので、個人を追いかけたり、広告に使ったりはしていません。
 
@@ -4111,7 +4115,11 @@ URL: https://koshinstudio.com/privacy/
 
 ## 広告について
 
-  ゲームを他のサイト（ゲームポータル）に出しているときは、そのサイトの広告の仕組みが働くことがあります。その場合は、それぞれのサイトの方針に従います。このサイトでは、Google AdSense の審査のために、Google の広告用スクリプトを読み込んでいます。審査を通るまで広告は表示しません。広告を表示するようになったときは、使う仕組み（Cookie など）とその止め方を、ここに追記します。
+  ゲームを他のサイト（ゲームポータル）に出しているときは、そのサイトの広告の仕組みが働くことがあります。その場合は、それぞれのサイトの方針に従います。
+
+  このサイトは、Google AdSense で広告を表示します。Google を含む第三者配信事業者は、Cookie などを使って、このサイトや他のサイトへの過去のアクセス情報に基づいて広告を配信することがあります。表示される広告の内容やその仕組みは、Google の広告に関するポリシー (https://policies.google.com/technologies/ads?hl=ja)に説明があります。
+
+  パーソナライズ広告は、Google の広告設定 (https://adssettings.google.com/)でいつでも無効にできます。第三者配信事業者の Cookie は、aboutads.info (https://www.aboutads.info/choices/) からも無効にできます。欧州経済領域（EEA）・英国からのアクセスでは、Google が用意する同意の画面が先に出ます。広告に使うこと以外の目的で、こちらが Cookie の情報を受け取ることはありません。
 
 ## 子どもについて
 
@@ -4286,7 +4294,11 @@ Last updated October 2026
 
 ## About advertising
 
-  When our games are published on other sites (game portals), that site’s own advertising systems may apply, under that site’s policy. This site loads Google’s advertising script for Google AdSense review. No ads are shown until review is passed. When ads are shown, this page will describe what is used (such as cookies) and how to turn it off.
+  When our games are published on other sites (game portals), that site’s own advertising systems may apply, under that site’s policy.
+
+  This site shows ads through Google AdSense. Google and other third-party vendors may use cookies to serve ads based on a user’s previous visits to this site or other sites. Details are in Google’s advertising policies (https://policies.google.com/technologies/ads).
+
+  You can turn off personalized advertising at any time in Google Ad Settings (https://adssettings.google.com/), or opt out of third-party vendors’ cookies at aboutads.info (https://www.aboutads.info/choices/). Visitors in the European Economic Area and the UK first see a consent prompt provided by Google. We do not receive cookie information for any purpose other than ads.
 
 ## Children
 
@@ -4347,6 +4359,96 @@ Your anime type, and the one anime that fits you right now.
   Start the quiz (free, about 1 minute) (https://koshinstudio.com/app/shindananime/en/)
 
   This is the English version of the Japanese page (https://koshinstudio.com/works/shindananime/). The quiz’s questions and result texts are in English at the link above; the Japanese version is at /app/shindananime/ (https://koshinstudio.com/app/shindananime/).
+
+
+---
+
+URL: https://koshinstudio.com/en/works/torecadash/
+
+# Toreca Dash (トレカダッシュ)
+
+  日本語版 (https://koshinstudio.com/works/torecadash/)
+
+  Other languages: 日本語 (https://koshinstudio.com/works/torecadash/) / 简体中文 (https://koshinstudio.com/zh/works/torecadash/) / 繁體中文 (https://koshinstudio.com/zh-hant/works/torecadash/) / Tiếng Việt (https://koshinstudio.com/vi/works/torecadash/)
+
+  Lotteries, pre-orders, first-come sales.
+The Japanese card drops that are hard to keep up with, in one place, with alerts.
+
+  Open in the App Store (https://apps.apple.com/jp/app/id6788758920)
+
+  Free to download. Pro is an optional paid upgrade.
+
+## What it is
+
+  Sales of trading cards in Japan are announced one store at a time, on store sites and on X. By the time you notice, the deadline has passed. Toreca Dash collects announcements from stores and online shops across Japan and takes you straight to the page where you can apply or buy.
+
+## Main features
+
+### Feed
+
+  See open lotteries, pre-orders and first-come sales, filtered by game and sale type.
+
+### Alerts
+
+  Get notified as soon as something new appears for a product or game you follow.
+
+### Deadline calendar
+
+  Lottery deadlines and result dates, day by day, so you do not miss an entry.
+
+### Entry tracker
+
+  Record the lotteries you entered, and the results and purchases.
+
+### Map
+
+  Share in-store stock and lottery information with other users.
+
+## Supported games
+
+  Pokémon Card Game, Yu-Gi-Oh!, ONE PIECE Card Game, Union Arena, Lorcana, Duel Masters, Dragon Ball, Gundam, Magic: The Gathering, Weiss Schwarz, Detective Conan, hololive, Digimon, Haikyu!! Babo-ca!!, Palworld (15 in total).
+
+## Toreca Dash Pro (optional, paid)
+
+- Unlimited product follows, keyword alerts and excluded keywords.
+
+- The fastest alerts for first-come and surprise sales (the free version is about 15 minutes behind).
+
+- Filter to stores near your location.
+
+- Full notification history, entry statistics, calendar export and CSV export.
+
+- Track the value and profit/loss of your collection from purchase records.
+
+- No ads.
+
+## Good to know before you use it
+
+- Store information is mostly in Japanese. Store names, announcements and product names are shown as published in Japan.
+
+- Many Japanese stores require a Japanese address, phone number or store membership to enter a lottery. Check the conditions on each store’s own page before you apply.
+
+- The app shows the information and sends you to the store. It does not buy or enter lotteries for you.
+
+- Screens are available in Japanese and English. More languages are being added.
+
+## FAQ
+
+### Is it free?
+
+  Yes. The main features are free. Pro is an optional paid plan.
+
+### Do I need an account?
+
+  No. The feed, alerts and calendar work without signing in. Sign in with Apple is only used for map posts and the daily fortune.
+
+### Is it an official app?
+
+  No. It is an unofficial app made by an individual, and is not affiliated with any card game publisher or store. Information comes from stores’ public announcements; always confirm the latest details on the store’s official page before you apply or buy.
+
+  Open in the App Store (https://apps.apple.com/jp/app/id6788758920)
+
+  Support (https://cardalerthub.web.app/support.html) / Terms (https://cardalerthub.web.app/terms.html) / Privacy (https://cardalerthub.web.app/privacy.html)
 
 
 ---
@@ -4677,92 +4779,156 @@ URL: https://koshinstudio.com/en/notes/torecadash-ci/
 
 ---
 
-URL: https://koshinstudio.com/en/works/torecadash/
+URL: https://koshinstudio.com/en/notes/apple-signin/
 
-# Toreca Dash (トレカダッシュ)
+# Firebase Auth: force-quitting the app created anonymous accounts in bulk (waiting for currentUser to restore)
 
-  日本語版 (https://koshinstudio.com/works/torecadash/)
+  日本語版 (https://koshinstudio.com/notes/apple-signin/)
 
-  Other languages: 日本語 (https://koshinstudio.com/works/torecadash/) / 简体中文 (https://koshinstudio.com/zh/works/torecadash/) / 繁體中文 (https://koshinstudio.com/zh-hant/works/torecadash/) / Tiếng Việt (https://koshinstudio.com/vi/works/torecadash/)
+  Development log of Torecadash / October 2026
 
-  Lotteries, pre-orders, first-come sales.
-The Japanese card drops that are hard to keep up with, in one place, with alerts.
+  In my iOS app, Torecadash, a user reported: “once I kill the app, it asks me to sign in with Apple again.” When I looked, 17 of the 19 users were anonymous accounts that had been created and thrown away. The cause was how I checked, with a single line, right after launch. This is from my hand-over notes and the commit record (August 14, 2026).
 
-  Open in the App Store (https://apps.apple.com/jp/app/id6788758920)
+## The symptom
 
-  Free to download. Pro is an optional paid upgrade.
+  It only happened when the app was fully quit by swiping it away and then launched again. Leaving to the home screen and coming back did not trigger it.
 
-## What it is
+## Looking at the real data
 
-  Sales of trading cards in Japan are announced one store at a time, on store sites and on X. By the time you notice, the deadline has passed. Toreca Dash collects announcements from stores and online shops across Japan and takes you straight to the page where you can apply or buy.
+  I opened the Authentication user list in the Firebase console:
 
-## Main features
+    Users | Count
 
-### Feed
+    Total | 19
 
-  See open lotteries, pre-orders and first-come sales, filtered by game and sale type.
+    Signed in with Apple | 2
 
-### Alerts
+    Throwaway anonymous accounts (created and last signed in on the same day) | 17
 
-  Get notified as soon as something new appears for a product or game you follow.
+  Ten of the 17 were from August 13 alone. A new anonymous account was being created every time the app started again.
 
-### Deadline calendar
+## Cause: reading something that had not been restored yet, synchronously
 
-  Lottery deadlines and result dates, day by day, so you do not miss an entry.
+  Right after launch, the app checked Auth.auth().currentUser on the spot. If nobody was signed in, it created a new anonymous account.
 
-### Entry tracker
+  But as Firebase’s own documentation says, currentUser is not guaranteed to be restored from the Keychain yet right after launch. If restoration is late, it looks as if nobody is signed in. Then, just before the existing Apple sign-in state is restored, the app creates a new anonymous account. It is a race condition.
 
-  Record the lotteries you entered, and the results and purchases.
+  The race only happens on a cold start. When the app returns from the background, Firebase is not initialized again, so it does not happen. That matches the report exactly.
 
-### Map
+## The fix
 
-  Share in-store stock and lottery information with other users.
+- Stop checking synchronously. The moment restoration is known to be finished is the first call of the state listener (addStateDidChangeListener). I made the decision only at that point.
 
-## Supported games
+- Add one safety net. At launch, the account-management side (AccountStore) now compares against the real server-side state with reload(), corrects any mismatch with its local record, and leaves a diagnostic log.
 
-  Pokémon Card Game, Yu-Gi-Oh!, ONE PIECE Card Game, Union Arena, Lorcana, Duel Masters, Dragon Ball, Gundam, Magic: The Gathering, Weiss Schwarz, Detective Conan, hololive, Digimon, Haikyu!! Babo-ca!!, Palworld (15 in total).
+## One more thing I found
 
-## Toreca Dash Pro (optional, paid)
+  During the investigation I learned that Sign in with Apple had never succeeded on a real device since I implemented it on August 7.
 
-- Unlimited product follows, keyword alerts and excluded keywords.
+- The first error was that the sign-in provider configuration could not be found. The Apple provider had never been enabled in the Firebase console.
 
-- The fastest alerts for first-come and surprise sales (the free version is about 15 minutes behind).
+- After I enabled it, a new error said the credential was already linked. An attempt made before enabling had actually gone halfway through, and the Apple ID was already linked to this device’s anonymous account. The app showed this as an error, but in effect the user was signed in. I changed it to treat it as success.
 
-- Filter to stores near your location.
+## What I have not verified
 
-- Full notification history, entry statistics, calendar export and CSV export.
+  This is an iOS-side change, so I cannot confirm the effect on a real device until it reaches TestFlight. My notes say the top priority is to check that the Apple link survives repeated force-quits and relaunches. There is no result in the record at the time of writing.
 
-- Track the value and profit/loss of your collection from purchase records.
+## What I learned
 
-- No ads.
+> The state right after launch is not settled yet.
 
-## Good to know before you use it
+- “Not restored yet” is different from “none.” If you decide “none” without waiting, you create a new one.
 
-- Store information is mostly in Japanese. Store names, announcements and product names are shown as published in Japan.
+- Symptoms show up in real data. Opening the console showed 17 throwaway accounts. I would have had a hard time finding this by reproducing “the sign-in disappears” on my own device.
 
-- Many Japanese stores require a Japanese address, phone number or store membership to enter a lottery. Check the conditions on each store’s own page before you apply.
+- “Never succeeded” shows up as a missing success record. The clue was that none of the registered accounts had any Apple information.
 
-- The app shows the information and sends you to the store. It does not buy or enter lotteries for you.
+  This article summarizes my hand-over notes and the commit record (August 14, 2026).
 
-- Screens are available in Japanese and English. More languages are being added.
+  This is the English version of the original Japanese article (https://koshinstudio.com/notes/apple-signin/).
 
-## FAQ
+  More in English
 
-### Is it free?
+- All English pages (https://koshinstudio.com/en/)
 
-  Yes. The main features are free. Pro is an optional paid plan.
 
-### Do I need an account?
+---
 
-  No. The feed, alerts and calendar work without signing in. Sign in with Apple is only used for map posts and the daily fortune.
+URL: https://koshinstudio.com/en/notes/logo-pop/
 
-### Is it an official app?
+# A canvas becomes twice as large on Retina: inset:0 does not stretch it (a bug in a logo that bursts when you tap it)
 
-  No. It is an unofficial app made by an individual, and is not affiliated with any card game publisher or store. Information comes from stores’ public announcements; always confirm the latest details on the store’s official page before you apply or buy.
+  日本語版 (https://koshinstudio.com/notes/logo-pop/)
 
-  Open in the App Store (https://apps.apple.com/jp/app/id6788758920)
+  Development log of Koshin Studio / October 2026
 
-  Support (https://cardalerthub.web.app/support.html) / Terms (https://cardalerthub.web.app/terms.html) / Privacy (https://cardalerthub.web.app/privacy.html)
+  The top of this site has a large logo. When you tap a letter, it pops and particles scatter. After I rebuilt the logo with my own typeface, I was told “the particles come out of a strange place, not from the letter” and “it is still shifted to the right.” It took three stages to fix. Here are the cause and how I found it, with measured numbers.
+
+## Rebuilding the logo with my own typeface
+
+  The old logo was set in Latin letters built on a Mincho skeleton. I replaced it with my own typeface, Koshin Pop (rounded Latin letterforms drawn from scratch). The font is under the SIL Open Font License 1.1, which allows use in a logo.
+
+  I extract the outlines of the nine letters K O S H I N T U D from the font file and turn them into SVG paths (tools/logotype_pop.py). The logo is delivered as a picture, so the site does not ship the font file. The font has several shapes for the same letter (base, pop1, pop2), so I lined up three combinations and picked the one with the best rhythm.
+
+## Stage 1: after a tap, the letter did not return to its place
+
+  I recorded positions over time after a tap. The letters did not return to where they started.
+
+    Letter | Center before | 2 s after
+
+    K (top left) | (327, 306) | (320, 313)
+
+    S (bottom left) | (331, 442) | (323, 435)
+
+  That is about 7 px off. A matrix(1, 0, 0, 1, -46, -42) was left over: the scale was back to 1 but the position offset stayed.
+
+  Cause: the animation library (GSAP) rewrote the position that was already set on the letter’s SVG <g> (transform="translate(x,0)") using its own calculation, and part of that correction remained afterward.
+
+  Fix: I split the element into a layer that holds the position (outer <g transform>) and a layer that moves (inner <g class="ks-ch">), and switched the motion to the browser’s Web Animations (when it ends, the effect disappears and the original state returns). I checked all 12 letters: the centers did not move, and the transform after the animation went back to none.
+
+## Stage 2: “it is still to the right”
+
+  After that fix I was still told the animation sat to the right. My measurement said particles started within 2 to 13 px of the letter’s center. What I measured and what was seen disagreed.
+
+  I had measured on a 1x display, counting particle positions in screen coordinates. When I measured on 2x (Retina) and 3x (phone) displays, the CSS size of the particle canvas (#burst) was wrong.
+
+    Display | Viewport width | Canvas width (before) | (after)
+
+    1280 px, 1x | 1280 | 1280 | 1280
+
+    1440 px, 2x | 1440 | 2880 | 1440
+
+    390 px, 3x (phone) | 390 | 780 | 390
+
+  Cause: I positioned the canvas with inset:0 in CSS, but a replaced element such as a canvas does not stretch to fill with inset:0 alone. It keeps its intrinsic size (its pixel count). On a 2x display the pixel count is doubled, so the CSS size doubled too, and particles appeared at twice the coordinates (toward the lower right). On a 1x display the sizes are equal, so you cannot notice.
+
+  Fix: set width and height to 100% explicitly. After the fix, the canvas matched the viewport on every pixel ratio.
+
+## Stage 3: emit from the letter itself
+
+  Finally I was asked whether particles could come from the letter itself. Until then they came from the center of the letter’s box, so for a letter with an empty middle like “O” they seemed to come from nowhere.
+
+  I now pick points along the outline of the letter’s path (getPointAtLength), take their on-screen positions, and send particles outward from the letter’s center with some scatter. The bottom row is drawn as “letter = mask”, so I look up the path inside the mask that the rect refers to. In the captures, “O” emits from around its ring and “U” along its shape.
+
+## What I learned
+
+> When measured numbers and what people see disagree, suspect the conditions of the measurement.
+
+- The viewer’s screen is not yours. I measured only on a 1x display and judged “the offset is small.” On a 2x display the particles came out at twice the position.
+
+- Measure in the space people look at. I counted logical coordinates, so the on-screen offset was never visible to me.
+
+- Measure the state after an animation ends, too. That letters did not return was invisible while I only watched the motion.
+
+- Keep position and motion on different layers. If one element holds both, one overwrites the other.
+
+  The numbers come from operating this site’s top page in a real browser (Chrome) on October 8, 2026. I have not confirmed the fix on an actual Retina device; I reproduced 2x and 3x pixel ratios with browser settings.
+
+  This is the English version of the original Japanese article (https://koshinstudio.com/notes/logo-pop/).
+
+  More in English
+
+- All English pages (https://koshinstudio.com/en/)
 
 
 ---

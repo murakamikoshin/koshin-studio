@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Firebase Auth: force-quitting the app created anonymous accounts in bulk (waiting for currentUser to restore) — Koshin Studio</title>
+<meta name="description" content="Users said the app asked for Sign in with Apple again after being killed. 17 of 19 Firebase users were throwaway anonymous accounts. Cause: checking currentUser synchronously at launch. Fix: addStateDidChangeListener.">
+<meta property="og:title" content="Firebase Auth: force-quitting the app created anonymous accounts in bulk (waiting for currentUser to restore)">
+<meta property="og:description" content="Users said the app asked for Sign in with Apple again after being killed. 17 of 19 Firebase users were throwaway anonymous accounts. Cause: checking currentUser synchronously at launch. Fix: addStateDidChangeListener.">
+<meta property="og:type" content="article">
+<meta name="theme-color" content="#fbfaf7">
+<link rel="icon" href="/favicon.ico?v=1697d589" sizes="48x48">
+<link rel="icon" href="/favicon.svg?v=b9d7922f" type="image/svg+xml" sizes="any">
+<link rel="icon" href="/assets/icon/icon-192.png?v=e2566235" type="image/png" sizes="192x192">
+<link rel="apple-touch-icon" href="/assets/icon/icon-180.png?v=84e7f0e6">
+<link rel="manifest" href="/site.webmanifest">
+<script>document.documentElement.className+=" js"</script>
+<link rel="stylesheet" href="/style.css?v=7001672f">
+<meta name="google-adsense-account" content="ca-pub-3863314847163872">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3863314847163872" crossorigin="anonymous"></script>
+<link rel="canonical" href="https://koshinstudio.com/en/notes/apple-signin/">
+<meta property="og:url" content="https://koshinstudio.com/en/notes/apple-signin/">
+<meta property="og:site_name" content="Koshin Studio">
+<meta property="og:locale" content="en_US">
+<link rel="alternate" hreflang="ja" href="https://koshinstudio.com/notes/apple-signin/">
+<link rel="alternate" hreflang="en" href="https://koshinstudio.com/en/notes/apple-signin/">
+<link rel="alternate" hreflang="x-default" href="https://koshinstudio.com/en/notes/apple-signin/">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="alternate" type="application/rss+xml" title="Koshin Studio — Notes" href="https://koshinstudio.com/feed.xml">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BlogPosting","headline":"Firebase Auth: force-quitting the app created anonymous accounts in bulk (waiting for currentUser to restore)","url":"https://koshinstudio.com/en/notes/apple-signin/","description":"Users said the app asked for Sign in with Apple again after being killed. 17 of 19 Firebase users were throwaway anonymous accounts. Cause: checking currentUser synchronously at launch. Fix: addStateDidChangeListener.","datePublished":"2026-10-09","dateModified":"2026-10-09","inLanguage":"en","image":"https://koshinstudio.com/assets/og/og_notes_apple-signin.jpg","author":{"@id":"https://koshinstudio.com#studio"},"publisher":{"@id":"https://koshinstudio.com#studio"},"mainEntityOfPage":"https://koshinstudio.com/en/notes/apple-signin/"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Koshin Studio","item":"https://koshinstudio.com/en/"},{"@type":"ListItem","position":2,"name":"Firebase Auth: force-quitting the app created anonymous accounts in bulk (waiting for currentUser to restore)","item":"https://koshinstudio.com/en/notes/apple-signin/"}]}]}</script>
+<meta property="og:image" content="https://koshinstudio.com/assets/og/og_notes_apple-signin.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
+</head>
+<body>
+<canvas id="motes"></canvas>
+
+<header class="site"><div class="wrap">
+  <a class="logo" href="/"><img class="logo-mark" src="/favicon.svg?v=b9d7922f" alt="" width="28" height="28">Koshin Studio</a>
+  <nav><a href="/works/">Works</a><a href="/notes/">Notes</a><a href="/picks/">Picks</a><a href="/calc/">Tools</a><a href="/about/">About</a></nav>
+</div></header>
+
+<main><div class="wrap">
+  <nav class="crumbs" aria-label="You are here"><a href="/en/">Koshin Studio</a><i aria-hidden="true">›</i><span aria-current="page">Firebase Auth anonymous accounts</span></nav>
+  <h1>Firebase Auth: force-quitting the app created anonymous accounts in bulk (waiting for currentUser to restore)</h1>
+  <div class="rule"></div>
+<!--lang-->
+  <p class="note"><a href="/notes/apple-signin/" hreflang="ja" lang="ja">日本語版</a></p>
+<!--/lang-->
+  <p class="lead">Development log of Torecadash / October 2026</p>
+
+  <p>In my iOS app, Torecadash, a user reported: “once I kill the app, it asks me to sign in with Apple again.” When I looked, <strong>17 of the 19 users were anonymous accounts that had been created and thrown away</strong>. The cause was how I checked, with a single line, right after launch. This is from my hand-over notes and the commit record (August 14, 2026).</p>
+
+  <h2 class="rv" id="s1">The symptom</h2>
+  <p>It only happened when the app was <strong>fully quit by swiping it away and then launched again</strong>. Leaving to the home screen and coming back did not trigger it.</p>
+
+  <h2 class="rv" id="s2">Looking at the real data</h2>
+  <p>I opened the Authentication user list in the Firebase console:</p>
+  <div class="scroll rv"><table>
+    <tr><th>Users</th><th class="n">Count</th></tr>
+    <tr><td>Total</td><td class="n">19</td></tr>
+    <tr><td>Signed in with Apple</td><td class="n">2</td></tr>
+    <tr><td>Throwaway anonymous accounts (created and last signed in on the same day)</td><td class="n">17</td></tr>
+  </table></div>
+  <p>Ten of the 17 were from August 13 alone. A new anonymous account was being created every time the app started again.</p>
+
+  <h2 class="rv" id="s3">Cause: reading something that had not been restored yet, synchronously</h2>
+  <p>Right after launch, the app checked <code>Auth.auth().currentUser</code> on the spot. If nobody was signed in, it created a new anonymous account.</p>
+  <p>But as Firebase’s own documentation says, <code>currentUser</code> is <strong>not guaranteed to be restored from the Keychain yet</strong> right after launch. If restoration is late, it looks as if nobody is signed in. Then, just before the existing Apple sign-in state is restored, <strong>the app creates a new anonymous account</strong>. It is a race condition.</p>
+  <p>The race only happens on a cold start. When the app returns from the background, Firebase is not initialized again, so it does not happen. That matches the report exactly.</p>
+
+  <h2 class="rv" id="s4">The fix</h2>
+  <ul>
+    <li><strong>Stop checking synchronously.</strong> The moment restoration is known to be finished is the <strong>first call</strong> of the state listener (<code>addStateDidChangeListener</code>). I made the decision only at that point.</li>
+    <li><strong>Add one safety net.</strong> At launch, the account-management side (<code>AccountStore</code>) now compares against the real server-side state with <code>reload()</code>, corrects any mismatch with its local record, and leaves a diagnostic log.</li>
+  </ul>
+
+  <h2 class="rv" id="s5">One more thing I found</h2>
+  <p>During the investigation I learned that Sign in with Apple <strong>had never succeeded on a real device</strong> since I implemented it on August 7.</p>
+  <ul>
+    <li>The first error was that the sign-in provider configuration could not be found. The Apple provider had never been enabled in the Firebase console.</li>
+    <li>After I enabled it, a new error said the credential was already linked. An attempt made before enabling had actually gone halfway through, and the Apple ID was already linked to this device’s anonymous account. The app showed this as an error, but in effect the user was signed in. I changed it to <strong>treat it as success</strong>.</li>
+  </ul>
+
+  <h2 class="rv" id="s6">What I have not verified</h2>
+  <p>This is an iOS-side change, so I cannot confirm the effect on a real device until it reaches TestFlight. My notes say the top priority is to check that the Apple link survives repeated force-quits and relaunches. There is no result in the record at the time of writing.</p>
+
+  <h2 class="rv" id="s7">What I learned</h2>
+  <blockquote>The state right after launch is not settled yet.</blockquote>
+  <ul>
+    <li><strong>“Not restored yet” is different from “none.”</strong> If you decide “none” without waiting, you create a new one.</li>
+    <li><strong>Symptoms show up in real data.</strong> Opening the console showed 17 throwaway accounts. I would have had a hard time finding this by reproducing “the sign-in disappears” on my own device.</li>
+    <li><strong>“Never succeeded” shows up as a missing success record.</strong> The clue was that none of the registered accounts had any Apple information.</li>
+  </ul>
+  <p class="note">This article summarizes my hand-over notes and the commit record (August 14, 2026).</p>
+
+  <p class="note">This is the English version of <a href="/notes/apple-signin/" hreflang="ja" lang="ja">the original Japanese article</a>.</p>
+
+  <div class="rule" style="margin:40px 0 22px"></div>
+  <p class="eyebrow">More in English</p>
+  <ul class="plain">
+    <li><a href="/en/">All English pages</a></li>
+  </ul>
+</div>
+</main>
+
+<footer class="site"><div class="wrap"></div></footer>
+<script src="/motion.js?v=1e7447ec" defer></script>
+</body>
+</html>

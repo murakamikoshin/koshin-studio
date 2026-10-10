@@ -13,7 +13,7 @@
       "footer": ""
     },
     "gameHint": "60s",
-    "note": "verify を true にすると、広告は出さずに審査用の script とメタタグだけ全ページに入る。AdSense に通ったら enabled を true にして client を埋める。client だけで、遊ぶ頁の区切り広告（H5 Games Ads）が入る。記事の枠を出すには slots も埋める。gameHint は広告の間隔の目安。"
+    "note": "AdSense 側で自動広告をオン済み（2026-10-10、koshinstudio.com 全体）。全ページに script が入っているので、審査が通れば何もしなくても配信される。以下は手動の枠を足すとき用。verify を true にすると、広告は出さずに審査用の script とメタタグだけ全ページに入る。AdSense に通ったら enabled を true にして client を埋める。client だけで、遊ぶ頁の区切り広告（H5 Games Ads）が入る。記事の枠を出すには slots も埋める。gameHint は広告の間隔の目安。"
   },
   "contact": {
     "email": "koshinstudio88@gmail.com",

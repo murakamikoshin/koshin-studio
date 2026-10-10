@@ -216,5 +216,106 @@ pairs.append(make('torecadash-ci',
   <p class="note">The numbers in this article come from my hand-over notes and the commit record (September 2, 2026).</p>
 '''))
 
+
+pairs.append(make('apple-signin',
+ 'Firebase Auth: force-quitting the app created anonymous accounts in bulk (waiting for currentUser to restore)',
+ 'Users said the app asked for Sign in with Apple again after being killed. 17 of 19 Firebase users were throwaway anonymous accounts. Cause: checking currentUser synchronously at launch. Fix: addStateDidChangeListener.',
+ 'Firebase Auth anonymous accounts',
+ 'Development log of Torecadash / October 2026',
+ '''  <p>In my iOS app, Torecadash, a user reported: “once I kill the app, it asks me to sign in with Apple again.” When I looked, <strong>17 of the 19 users were anonymous accounts that had been created and thrown away</strong>. The cause was how I checked, with a single line, right after launch. This is from my hand-over notes and the commit record (August 14, 2026).</p>
+
+  <h2 class="rv" id="s1">The symptom</h2>
+  <p>It only happened when the app was <strong>fully quit by swiping it away and then launched again</strong>. Leaving to the home screen and coming back did not trigger it.</p>
+
+  <h2 class="rv" id="s2">Looking at the real data</h2>
+  <p>I opened the Authentication user list in the Firebase console:</p>
+  <div class="scroll rv"><table>
+    <tr><th>Users</th><th class="n">Count</th></tr>
+    <tr><td>Total</td><td class="n">19</td></tr>
+    <tr><td>Signed in with Apple</td><td class="n">2</td></tr>
+    <tr><td>Throwaway anonymous accounts (created and last signed in on the same day)</td><td class="n">17</td></tr>
+  </table></div>
+  <p>Ten of the 17 were from August 13 alone. A new anonymous account was being created every time the app started again.</p>
+
+  <h2 class="rv" id="s3">Cause: reading something that had not been restored yet, synchronously</h2>
+  <p>Right after launch, the app checked <code>Auth.auth().currentUser</code> on the spot. If nobody was signed in, it created a new anonymous account.</p>
+  <p>But as Firebase’s own documentation says, <code>currentUser</code> is <strong>not guaranteed to be restored from the Keychain yet</strong> right after launch. If restoration is late, it looks as if nobody is signed in. Then, just before the existing Apple sign-in state is restored, <strong>the app creates a new anonymous account</strong>. It is a race condition.</p>
+  <p>The race only happens on a cold start. When the app returns from the background, Firebase is not initialized again, so it does not happen. That matches the report exactly.</p>
+
+  <h2 class="rv" id="s4">The fix</h2>
+  <ul>
+    <li><strong>Stop checking synchronously.</strong> The moment restoration is known to be finished is the <strong>first call</strong> of the state listener (<code>addStateDidChangeListener</code>). I made the decision only at that point.</li>
+    <li><strong>Add one safety net.</strong> At launch, the account-management side (<code>AccountStore</code>) now compares against the real server-side state with <code>reload()</code>, corrects any mismatch with its local record, and leaves a diagnostic log.</li>
+  </ul>
+
+  <h2 class="rv" id="s5">One more thing I found</h2>
+  <p>During the investigation I learned that Sign in with Apple <strong>had never succeeded on a real device</strong> since I implemented it on August 7.</p>
+  <ul>
+    <li>The first error was that the sign-in provider configuration could not be found. The Apple provider had never been enabled in the Firebase console.</li>
+    <li>After I enabled it, a new error said the credential was already linked. An attempt made before enabling had actually gone halfway through, and the Apple ID was already linked to this device’s anonymous account. The app showed this as an error, but in effect the user was signed in. I changed it to <strong>treat it as success</strong>.</li>
+  </ul>
+
+  <h2 class="rv" id="s6">What I have not verified</h2>
+  <p>This is an iOS-side change, so I cannot confirm the effect on a real device until it reaches TestFlight. My notes say the top priority is to check that the Apple link survives repeated force-quits and relaunches. There is no result in the record at the time of writing.</p>
+
+  <h2 class="rv" id="s7">What I learned</h2>
+  <blockquote>The state right after launch is not settled yet.</blockquote>
+  <ul>
+    <li><strong>“Not restored yet” is different from “none.”</strong> If you decide “none” without waiting, you create a new one.</li>
+    <li><strong>Symptoms show up in real data.</strong> Opening the console showed 17 throwaway accounts. I would have had a hard time finding this by reproducing “the sign-in disappears” on my own device.</li>
+    <li><strong>“Never succeeded” shows up as a missing success record.</strong> The clue was that none of the registered accounts had any Apple information.</li>
+  </ul>
+  <p class="note">This article summarizes my hand-over notes and the commit record (August 14, 2026).</p>
+'''))
+
+pairs.append(make('logo-pop',
+ 'A canvas becomes twice as large on Retina: inset:0 does not stretch it (a bug in a logo that bursts when you tap it)',
+ 'Burst particles came out of the wrong place on high-DPI screens. A canvas with only inset:0 keeps its pixel size, so on a 2x display it was 2x larger in CSS. Measured numbers at 1x, 2x and 3x, and the fix.',
+ 'Canvas size on Retina',
+ 'Development log of Koshin Studio / October 2026',
+ '''  <p>The top of this site has a large logo. When you tap a letter, it pops and particles scatter. After I rebuilt the logo with my own typeface, I was told “the particles come out of a strange place, not from the letter” and “it is still shifted to the right.” It took <strong>three stages</strong> to fix. Here are the cause and how I found it, with measured numbers.</p>
+
+  <h2 class="rv" id="s1">Rebuilding the logo with my own typeface</h2>
+  <p>The old logo was set in Latin letters built on a Mincho skeleton. I replaced it with my own typeface, Koshin Pop (rounded Latin letterforms drawn from scratch). The font is under the SIL Open Font License 1.1, which allows use in a logo.</p>
+  <p>I extract the outlines of the <strong>nine letters K O S H I N T U D</strong> from the font file and turn them into SVG paths (<code>tools/logotype_pop.py</code>). The logo is delivered as a picture, so the site does not ship the font file. The font has several shapes for the same letter (base, pop1, pop2), so I lined up three combinations and picked the one with the best rhythm.</p>
+
+  <h2 class="rv" id="s2">Stage 1: after a tap, the letter did not return to its place</h2>
+  <p>I recorded positions over time after a tap. The letters <strong>did not return to where they started</strong>.</p>
+  <div class="scroll rv"><table>
+    <tr><th>Letter</th><th>Center before</th><th>2 s after</th></tr>
+    <tr><td>K (top left)</td><td>(327, 306)</td><td>(320, 313)</td></tr>
+    <tr><td>S (bottom left)</td><td>(331, 442)</td><td>(323, 435)</td></tr>
+  </table></div>
+  <p>That is about 7 px off. A <code>matrix(1, 0, 0, 1, -46, -42)</code> was left over: the scale was back to 1 but the position offset stayed.</p>
+  <p><strong>Cause:</strong> the animation library (GSAP) rewrote the position that was already set on the letter’s SVG <code>&lt;g&gt;</code> (<code>transform="translate(x,0)"</code>) using its own calculation, and part of that correction remained afterward.</p>
+  <p><strong>Fix:</strong> I split the element into a layer that holds the position (outer <code>&lt;g transform&gt;</code>) and a layer that moves (inner <code>&lt;g class="ks-ch"&gt;</code>), and switched the motion to the browser’s Web Animations (when it ends, the effect disappears and the original state returns). I checked all 12 letters: the centers did not move, and the transform after the animation went back to <code>none</code>.</p>
+
+  <h2 class="rv" id="s3">Stage 2: “it is still to the right”</h2>
+  <p>After that fix I was still told the animation sat to the right. My measurement said particles started within 2 to 13 px of the letter’s center. <strong>What I measured and what was seen disagreed.</strong></p>
+  <p>I had measured on a <strong>1x display</strong>, counting particle positions in screen coordinates. When I measured on 2x (Retina) and 3x (phone) displays, the CSS size of the particle canvas (<code>#burst</code>) was wrong.</p>
+  <div class="scroll rv"><table>
+    <tr><th>Display</th><th class="n">Viewport width</th><th class="n">Canvas width (before)</th><th class="n">(after)</th></tr>
+    <tr><td>1280 px, 1x</td><td class="n">1280</td><td class="n">1280</td><td class="n">1280</td></tr>
+    <tr><td>1440 px, 2x</td><td class="n">1440</td><td class="n"><strong>2880</strong></td><td class="n">1440</td></tr>
+    <tr><td>390 px, 3x (phone)</td><td class="n">390</td><td class="n"><strong>780</strong></td><td class="n">390</td></tr>
+  </table></div>
+  <p><strong>Cause:</strong> I positioned the canvas with <code>inset:0</code> in CSS, but <strong>a replaced element such as a canvas does not stretch to fill with <code>inset:0</code> alone</strong>. It keeps its intrinsic size (its pixel count). On a 2x display the pixel count is doubled, so the CSS size doubled too, and particles appeared at twice the coordinates (toward the lower right). On a 1x display the sizes are equal, so you cannot notice.</p>
+  <p><strong>Fix:</strong> set width and height to <code>100%</code> explicitly. After the fix, the canvas matched the viewport on every pixel ratio.</p>
+
+  <h2 class="rv" id="s4">Stage 3: emit from the letter itself</h2>
+  <p>Finally I was asked whether particles could come from the letter itself. Until then they came from the <strong>center</strong> of the letter’s box, so for a letter with an empty middle like “O” they seemed to come from nowhere.</p>
+  <p>I now pick points <strong>along the outline</strong> of the letter’s path (<code>getPointAtLength</code>), take their on-screen positions, and send particles outward from the letter’s center with some scatter. The bottom row is drawn as “letter = mask”, so I look up the path inside the mask that the rect refers to. In the captures, “O” emits from around its ring and “U” along its shape.</p>
+
+  <h2 class="rv" id="s5">What I learned</h2>
+  <blockquote>When measured numbers and what people see disagree, suspect the conditions of the measurement.</blockquote>
+  <ul>
+    <li><strong>The viewer’s screen is not yours.</strong> I measured only on a 1x display and judged “the offset is small.” On a 2x display the particles came out at twice the position.</li>
+    <li><strong>Measure in the space people look at.</strong> I counted logical coordinates, so the on-screen offset was never visible to me.</li>
+    <li><strong>Measure the state after an animation ends, too.</strong> That letters did not return was invisible while I only watched the motion.</li>
+    <li><strong>Keep position and motion on different layers.</strong> If one element holds both, one overwrites the other.</li>
+  </ul>
+  <p class="note">The numbers come from operating this site’s top page in a real browser (Chrome) on October 8, 2026. I have not confirmed the fix on an actual Retina device; I reproduced 2x and 3x pixel ratios with browser settings.</p>
+'''))
+
 json.dump(pairs, open('data/en.json', 'w', encoding='utf8'), ensure_ascii=False, indent=2)
 print(len(pairs))
