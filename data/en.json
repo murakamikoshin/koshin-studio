@@ -132,5 +132,12 @@
     "title": "Works on my machine, breaks when deployed: four incidents shipping a static site to Cloudflare Pages",
     "date": "2026-10-09",
     "blurb": "Stale cache, breadcrumbs that multiplied on every build, a symlink pointing into my own environment, and images that existed only locally. Four deploy incidents, each found only after I added a check."
+  },
+  {
+    "ja": "/notes/hosting-compare/",
+    "en": "/en/notes/hosting-compare/",
+    "title": "Comparing static site hosts by their official terms: Cloudflare Pages, Netlify, Vercel, GitHub Pages and Firebase Hosting",
+    "date": "2026-10-09",
+    "blurb": "Static hosting compared using only the official pages as of October 8, 2026: whether ads are allowed on free plans, free-tier limits, file limits, redirect and header config, and what I could not confirm."
   }
 ]
