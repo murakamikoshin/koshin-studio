@@ -249,5 +249,26 @@
     "title": "Making a ranking server use only half of the free tier: from 5 calls to 2",
     "date": "2026-10-09",
     "blurb": "A game ranking on Workers and D1: calls per play from 5 to 2, rows read from 421 to 221. Server-side rank counting and removing the preflight call."
+  },
+  {
+    "ja": "/notes/torecadash-review/",
+    "en": "/en/notes/torecadash-review/",
+    "title": "Four things that stopped my iOS app before App Review: iPad screenshots, ITMS-91064, account deletion, reporting posts",
+    "date": "2026-10-09",
+    "blurb": "Before submitting an iOS app, four things stopped me: iPad screenshots, ITMS-91064, account deletion (5.1.1(v)) and user-content reporting (1.2), and how I fixed each."
+  },
+  {
+    "ja": "/notes/scrape-cost/",
+    "en": "/en/notes/scrape-cost/",
+    "title": "I re-measured a “nothing can be done” assumption and scraping cost dropped to one eighth",
+    "date": "2026-10-09",
+    "blurb": "I believed two sites could not be fetched more often because of cost. Comparing three Scrape.do settings showed rendering was wasted: 3x faster, 1/8 the credits."
+  },
+  {
+    "ja": "/notes/bulk-accident/",
+    "en": "/en/notes/bulk-accident/",
+    "title": "A bulk update hit “all articles”: count before you write, and break your tests to prove they work",
+    "date": "2026-10-09",
+    "blurb": "A bulk job hit every article and wrongly restored 18 items. How I reverted them from status history and proved new tests work by breaking rules one at a time."
   }
 ]

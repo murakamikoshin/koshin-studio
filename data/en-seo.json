@@ -82,5 +82,17 @@
  "ranking-free-tier": {
   "title": "Halving Cloudflare D1 free-tier use: 5 calls to 2",
   "desc": "A game ranking on Workers and D1: calls per play from 5 to 2, rows read from 421 to 221. Server-side rank counting and removing the preflight call."
+ },
+ "torecadash-review": {
+  "title": "Four things before App Review: ITMS-91064 and more",
+  "desc": "Before submitting an iOS app, four things stopped me: iPad screenshots, ITMS-91064, account deletion (5.1.1(v)) and user-content reporting (1.2), and how I fixed each."
+ },
+ "scrape-cost": {
+  "title": "Re-measuring scraper cost: 1/8 of the credits",
+  "desc": "I believed two sites could not be fetched more often because of cost. Comparing three Scrape.do settings showed rendering was wasted: 3x faster, 1/8 the credits."
+ },
+ "bulk-accident": {
+  "title": "A bulk update hit all articles: count, then write",
+  "desc": "A bulk job hit every article and wrongly restored 18 items. How I reverted them from status history and proved new tests work by breaking rules one at a time."
  }
 }

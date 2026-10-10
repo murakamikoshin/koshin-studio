@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>A bulk update hit all articles: count, then write</title>
+<meta name="description" content="A bulk job hit every article and wrongly restored 18 items. How I reverted them from status history and proved new tests work by breaking rules one at a time.">
+<meta property="og:title" content="A bulk update hit all articles: count, then write">
+<meta property="og:description" content="A bulk job hit every article and wrongly restored 18 items. How I reverted them from status history and proved new tests work by breaking rules one at a time.">
+<meta property="og:type" content="article">
+<meta name="theme-color" content="#fbfaf7">
+<link rel="icon" href="/favicon.ico?v=1697d589" sizes="48x48">
+<link rel="icon" href="/favicon.svg?v=b9d7922f" type="image/svg+xml" sizes="any">
+<link rel="icon" href="/assets/icon/icon-192.png?v=e2566235" type="image/png" sizes="192x192">
+<link rel="apple-touch-icon" href="/assets/icon/icon-180.png?v=84e7f0e6">
+<link rel="manifest" href="/site.webmanifest">
+<script>document.documentElement.className+=" js"</script>
+<link rel="stylesheet" href="/style.css?v=7001672f">
+<meta name="google-adsense-account" content="ca-pub-3863314847163872">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3863314847163872" crossorigin="anonymous"></script>
+<link rel="canonical" href="https://koshinstudio.com/en/notes/bulk-accident/">
+<meta property="og:url" content="https://koshinstudio.com/en/notes/bulk-accident/">
+<meta property="og:site_name" content="Koshin Studio">
+<meta property="og:locale" content="en_US">
+<link rel="alternate" hreflang="ja" href="https://koshinstudio.com/notes/bulk-accident/">
+<link rel="alternate" hreflang="en" href="https://koshinstudio.com/en/notes/bulk-accident/">
+<link rel="alternate" hreflang="x-default" href="https://koshinstudio.com/en/notes/bulk-accident/">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="alternate" type="application/rss+xml" title="Koshin Studio — Notes" href="https://koshinstudio.com/feed.xml">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BlogPosting","headline":"A bulk update hit “all articles”: count before you write, and break your tests to prove they work","url":"https://koshinstudio.com/en/notes/bulk-accident/","description":"A bulk job hit every article and wrongly restored 18 items. How I reverted them from status history and proved new tests work by breaking rules one at a time.","datePublished":"2026-10-09","dateModified":"2026-10-09","inLanguage":"en","image":"https://koshinstudio.com/assets/og/og_notes_bulk-accident.jpg","author":{"@id":"https://koshinstudio.com#studio"},"publisher":{"@id":"https://koshinstudio.com#studio"},"mainEntityOfPage":"https://koshinstudio.com/en/notes/bulk-accident/"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Koshin Studio","item":"https://koshinstudio.com/en/"},{"@type":"ListItem","position":2,"name":"A bulk update hit “all articles”: count before you write, and break your tests to prove they work","item":"https://koshinstudio.com/en/notes/bulk-accident/"}]}]}</script>
+<meta property="og:image" content="https://koshinstudio.com/assets/og/og_notes_bulk-accident.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
+</head>
+<body>
+<canvas id="motes"></canvas>
+
+<header class="site"><div class="wrap">
+  <a class="logo" href="/"><img class="logo-mark" src="/favicon.svg?v=b9d7922f" alt="" width="28" height="28">Koshin Studio</a>
+  <nav><a href="/works/">Works</a><a href="/notes/">Notes</a><a href="/picks/">Picks</a><a href="/calc/">Tools</a><a href="/about/">About</a></nav>
+</div></header>
+
+<main><div class="wrap">
+  <nav class="crumbs" aria-label="You are here"><a href="/en/">Koshin Studio</a><i aria-hidden="true">›</i><span aria-current="page">Bulk update accident</span></nav>
+  <h1>A bulk update hit “all articles”: count before you write, and break your tests to prove they work</h1>
+  <div class="rule"></div>
+<!--lang-->
+  <p class="note"><a href="/notes/bulk-accident/" hreflang="ja" lang="ja">日本語版</a></p>
+<!--/lang-->
+  <p class="lead">Development log of Torecadash / October 2026</p>
+
+  <p>In my iOS app Torecadash, a new job that fixes article status in bulk <strong>hit every article, including ones I never meant to target</strong>, the first time I ran it. 18 items from other sites were wrongly restored to visible. This is how I fixed the accident, and how I checked that the test I built afterward to close the same hole <em>actually works</em>, from my hand-over notes.</p>
+  <p class="note">This is a development log of the app.</p>
+
+  <h2 class="rv" id="s1">What the job was for</h2>
+  <p>The app has a “price gate” that checks whether a listing’s price is reasonable (I wrote about it in <a href="/en/notes/fail-open/" hreflang="en" lang="en">another article</a>). Among articles hidden by this gate only because of price, I added a job that restores <strong>those that were actually correct and had been hidden because of a product mix-up</strong>. The condition for restoring is “the correct product’s list price matches the listing price.”</p>
+
+  <h2 class="rv" id="s2">The accident: it hit all articles</h2>
+  <p>At first this job hit <strong>all articles without distinguishing the source</strong>. As a result, 18 articles from other sites (Amazon, Card Labo, Ministop and others) were restored to visible. They should have stayed hidden.</p>
+  <p>There were two fixes.</p>
+  <ul>
+    <li><strong>Narrow the scope.</strong> I limited the job to articles from that source only (those whose site identifier starts with that source).</li>
+    <li><strong>Put back what I had restored.</strong> I identified the 18 wrongly restored articles from the status history (<code>statusHistory</code>) and put them back to their original state (hidden, rejected by price).</li>
+  </ul>
+  <p>But there was something I could not get back for these 18. The job had <strong>overwritten the original list-price field with the listing price</strong>. The value stays as the listing price.</p>
+  <p><strong>The cause was that I had not counted the target range before writing.</strong> My notes say so: “count the target range before a bulk write.”</p>
+
+  <h2 class="rv" id="s3">Building tests to close the same hole</h2>
+  <p>To make sure the problems found in that day’s inspection (wrong splitting of 9-pack sets, single cards slipping in, non-card products slipping in) never happen again, I built tests: 66 cases in <code>catalog-guards.test.js</code>, and all six test files together can be run in one procedure (<code>run-all.sh</code>).</p>
+  <p>I also added warnings to my daily operations notice: when the miss rate of matching falls below the criteria (Chusen Zukan 80%, Pokechu 75%, X roundup 75%), when nothing has run for 30 hours, and when single cards or non-card names appear in the product list. The judgments are <strong>pure functions with no side effects</strong>, so once things are fixed, the warning disappears by itself on the next run.</p>
+
+  <h2 class="rv" id="s4">Breaking it to check that the tests work</h2>
+  <p>You cannot tell whether a test works just by writing it. A test that always passes may protect nothing. So I took a copy of the production code and <strong>removed its rules one at a time</strong> to confirm the tests fail.</p>
+  <ul>
+    <li>Remove one rule (break it).</li>
+    <li>Run the tests.</li>
+    <li>If they fail, the test is protecting that rule.</li>
+  </ul>
+  <p>With this procedure, <strong>I tried 6 kinds of modification, and the tests failed for all 6</strong> (all were detected).</p>
+  <p>I also wrote down an operating rule: if I touch <code>functions/index.js</code>, I always run all the tests before deploying.</p>
+
+  <h2 class="rv" id="s5">What I learned</h2>
+  <blockquote>Count before a bulk write. Break the test to prove it.</blockquote>
+  <ul>
+    <li><strong>Before writing, count “how many it will hit.”</strong> If you run it without a preview, you notice the range was wrong only after it has finished writing.</li>
+    <li><strong>Write in a form you can undo.</strong> I could restore the 18 because I could identify them from the history. The overwritten field, though, cannot be restored.</li>
+    <li><strong>Prefer a test that fails when broken to a test that passes.</strong> Only after removing a rule and seeing it fail can I trust the test.</li>
+  </ul>
+  <p class="note">This article is written from my hand-over notes (§272) (October 7, 2026). The counts are as written in the notes.</p>
+
+  <p class="note">This is the English version of <a href="/notes/bulk-accident/" hreflang="ja" lang="ja">the original Japanese article</a>.</p>
+
+  <div class="rule" style="margin:40px 0 22px"></div>
+  <p class="eyebrow">More in English</p>
+  <ul class="plain">
+    <li><a href="/en/">All English pages</a></li>
+  </ul>
+</div>
+</main>
+
+<footer class="site"><div class="wrap"></div></footer>
+<script src="/motion.js?v=1e7447ec" defer></script>
+</body>
+</html>

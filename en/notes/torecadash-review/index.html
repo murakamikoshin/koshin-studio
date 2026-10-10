@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Four things before App Review: ITMS-91064 and more</title>
+<meta name="description" content="Before submitting an iOS app, four things stopped me: iPad screenshots, ITMS-91064, account deletion (5.1.1(v)) and user-content reporting (1.2), and how I fixed each.">
+<meta property="og:title" content="Four things before App Review: ITMS-91064 and more">
+<meta property="og:description" content="Before submitting an iOS app, four things stopped me: iPad screenshots, ITMS-91064, account deletion (5.1.1(v)) and user-content reporting (1.2), and how I fixed each.">
+<meta property="og:type" content="article">
+<meta name="theme-color" content="#fbfaf7">
+<link rel="icon" href="/favicon.ico?v=1697d589" sizes="48x48">
+<link rel="icon" href="/favicon.svg?v=b9d7922f" type="image/svg+xml" sizes="any">
+<link rel="icon" href="/assets/icon/icon-192.png?v=e2566235" type="image/png" sizes="192x192">
+<link rel="apple-touch-icon" href="/assets/icon/icon-180.png?v=84e7f0e6">
+<link rel="manifest" href="/site.webmanifest">
+<script>document.documentElement.className+=" js"</script>
+<link rel="stylesheet" href="/style.css?v=7001672f">
+<meta name="google-adsense-account" content="ca-pub-3863314847163872">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3863314847163872" crossorigin="anonymous"></script>
+<link rel="canonical" href="https://koshinstudio.com/en/notes/torecadash-review/">
+<meta property="og:url" content="https://koshinstudio.com/en/notes/torecadash-review/">
+<meta property="og:site_name" content="Koshin Studio">
+<meta property="og:locale" content="en_US">
+<link rel="alternate" hreflang="ja" href="https://koshinstudio.com/notes/torecadash-review/">
+<link rel="alternate" hreflang="en" href="https://koshinstudio.com/en/notes/torecadash-review/">
+<link rel="alternate" hreflang="x-default" href="https://koshinstudio.com/en/notes/torecadash-review/">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="alternate" type="application/rss+xml" title="Koshin Studio — Notes" href="https://koshinstudio.com/feed.xml">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BlogPosting","headline":"Four things that stopped my iOS app before App Review: iPad screenshots, ITMS-91064, account deletion, reporting posts","url":"https://koshinstudio.com/en/notes/torecadash-review/","description":"Before submitting an iOS app, four things stopped me: iPad screenshots, ITMS-91064, account deletion (5.1.1(v)) and user-content reporting (1.2), and how I fixed each.","datePublished":"2026-10-09","dateModified":"2026-10-09","inLanguage":"en","image":"https://koshinstudio.com/assets/og/og_notes_torecadash-review.jpg","author":{"@id":"https://koshinstudio.com#studio"},"publisher":{"@id":"https://koshinstudio.com#studio"},"mainEntityOfPage":"https://koshinstudio.com/en/notes/torecadash-review/"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Koshin Studio","item":"https://koshinstudio.com/en/"},{"@type":"ListItem","position":2,"name":"Four things that stopped my iOS app before App Review: iPad screenshots, ITMS-91064, account deletion, reporting posts","item":"https://koshinstudio.com/en/notes/torecadash-review/"}]}]}</script>
+<meta property="og:image" content="https://koshinstudio.com/assets/og/og_notes_torecadash-review.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
+</head>
+<body>
+<canvas id="motes"></canvas>
+
+<header class="site"><div class="wrap">
+  <a class="logo" href="/"><img class="logo-mark" src="/favicon.svg?v=b9d7922f" alt="" width="28" height="28">Koshin Studio</a>
+  <nav><a href="/works/">Works</a><a href="/notes/">Notes</a><a href="/picks/">Picks</a><a href="/calc/">Tools</a><a href="/about/">About</a></nav>
+</div></header>
+
+<main><div class="wrap">
+  <nav class="crumbs" aria-label="You are here"><a href="/en/">Koshin Studio</a><i aria-hidden="true">›</i><span aria-current="page">Four things before App Review</span></nav>
+  <h1>Four things that stopped my iOS app before App Review: iPad screenshots, ITMS-91064, account deletion, reporting posts</h1>
+  <div class="rule"></div>
+<!--lang-->
+  <p class="note"><a href="/notes/torecadash-review/" hreflang="ja" lang="ja">日本語版</a></p>
+<!--/lang-->
+  <p class="lead">Development log of Torecadash / October 2026</p>
+
+  <p>When I tried to submit my iOS app Torecadash to App Review, <strong>I was stopped before submitting several times</strong>: things caught by Apple’s automated checks, things caught on the submission screen, and things I found by checking against the guidelines. From my commit record, here are four.</p>
+  <p class="note">The result of review is not included in this article.</p>
+
+  <h2 class="rv" id="s1">1. I was asked for iPad screenshots</h2>
+  <p>When I tried to submit for review in App Store Connect, it stopped me with “You must upload a screenshot for 13-inch iPad displays.” The project settings had been iPhone and iPad (1,2) from the beginning.</p>
+  <p>But there was no sign that I had built it with iPad in mind. Device checks and layout adjustments were all on iPhone. <strong>Submitting it unverified as “iPad supported” was a risk</strong>, so I changed it to iPhone only (1).</p>
+
+  <h2 class="rv" id="s2">2. “Invalid Binary” in the automated check (ITMS-91064)</h2>
+  <p>Build 877 was rejected by Apple’s automated review as an “invalid binary.” The cause was in the privacy manifest (<code>PrivacyInfo.xcprivacy</code>): <strong>I had written that it tracks (<code>NSPrivacyTracking=true</code>), but the list of tracking domains (<code>NSPrivacyTrackingDomains</code>) was empty</strong>. Apple’s check rejects this combination as a contradiction.</p>
+  <p>The app shows AdMob ads (banner, native, app-open) personalized after ATT consent. It does track, so “true” was correct. What needed fixing was the empty domain list. But Google does not publish an official list of domains for AdMob. So I added widely used ad-serving domains (<code>googlesyndication.com</code>, <code>googleadservices.com</code>, <code>doubleclick.net</code>, <code>google.com</code>). I confirmed that a Release build passes.</p>
+
+  <h2 class="rv" id="s3">3. Account deletion (Guideline 5.1.1(v))</h2>
+  <p>An app that lets you create an account must let you delete it from within the app. The deletion also removes the user’s map posts (sighting reports) and their related data (owner, reports, flags, thanks). For people signed in with Apple, the app re-authenticates with Apple, then deletes on the server and revokes the token. I also matched the explanation in the settings screen and the privacy policy to the real behavior.</p>
+  <p>In addition, <strong>deleting the account does not cancel a subscription</strong>. I added this to the settings text and to the deletion confirmation screen (as a review requirement).</p>
+
+  <h2 class="rv" id="s4">4. User-generated posts (Guideline 1.2)</h2>
+  <p>Map posts can be written freely by users. Until then there were only format checks such as length and coordinate range, and nothing that rejected by content. So I added a simple banned-word check to three free-text fields (shop name, product name, note). If it matches, the post is created but starts in a pending-review state.</p>
+  <p>One more thing. Reports of posts would go unnoticed unless I myself remembered the admin screen’s URL and opened it. I added the count of items pending review to my daily operations notice so they are not overlooked.</p>
+
+  <h2 class="rv" id="s5">What I learned</h2>
+  <blockquote>Review is not something you fail after submitting; half of it is found by checking before you submit.</blockquote>
+  <ul>
+    <li>Of the four, two (iPad, ITMS-91064) were stopped by a machine. The other two (deletion, posts) I found by reading the guidelines and checking myself.</li>
+    <li>“Do not submit what is unverified” was faster and safer than “support everything” (the iPad case).</li>
+  </ul>
+  <p class="note">This article is written from my commit record (September 16 to October 6, 2026).</p>
+
+  <p class="note">This is the English version of <a href="/notes/torecadash-review/" hreflang="ja" lang="ja">the original Japanese article</a>.</p>
+
+  <div class="rule" style="margin:40px 0 22px"></div>
+  <p class="eyebrow">More in English</p>
+  <ul class="plain">
+    <li><a href="/en/">All English pages</a></li>
+  </ul>
+</div>
+</main>
+
+<footer class="site"><div class="wrap"></div></footer>
+<script src="/motion.js?v=1e7447ec" defer></script>
+</body>
+</html>
