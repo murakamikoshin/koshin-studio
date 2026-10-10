@@ -7910,6 +7910,8 @@ URL: https://koshinstudio.com/en/
 
 - Anime Type Quiz (https://koshinstudio.com/app/shindananime/en/) — 12 questions, 6 axes: your anime type and the one anime that fits you right now. Free, nothing is sent anywhere. In English.
 
+- トレカダッシュ (Toreca Dash) (https://koshinstudio.com/en/works/torecadash/) — Lottery, pre-order and restock alerts for trading cards sold in Japan.
+
 ## Tools
 
 - Gacha completion calculator (https://koshinstudio.com/en/calc/gacha/) — How many pulls, and how much money, to collect every type?

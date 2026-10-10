@@ -6,6 +6,10 @@
      10秒ピッタリ … 日本語のみ"""
 import json, re, html as H
 langs = json.load(open('data/langs.json', encoding='utf8'))
+# トレカダッシュの一行説明（data/torecadash-pages.json の og を使う）。入口の言語コード→文面のキー
+_td = json.load(open('data/torecadash-pages.json', encoding='utf8'))
+_tdkey = {'zh': 'zh-Hans', 'pt': 'pt-BR'}
+TORECADASH = {c: _td[_tdkey.get(c, c)]['og'] for c in langs if _tdkey.get(c, c) in _td}
 src = open('en/notes/itms-91064/index.html', encoding='utf8').read()
 head0 = src[:src.index('<main>')]
 foot0 = src[src.index('</main>') + len('</main>'):]
@@ -107,6 +111,7 @@ for code, L in langs.items():
     <li><a href="/play/negaeri-shogi/">{e(t["nega"][0])}</a> — {e(t["nega"][1])} <a href="/en/works/negaeri-shogi/" hreflang="en" lang="en">(rules, English)</a></li>
     <li><a href="/play/stopwatch10/">{e(t["stop"][0])}</a> — {e(t["stop"][1])} <a href="/en/works/stopwatch10/" hreflang="en" lang="en">(About, English)</a></li>
     <li><a href="/app/shindananime/en/" hreflang="en" lang="en">Anime Type Quiz</a> — {e(QUIZ[code])}</li>
+    <li><a href="/{code}/works/torecadash/" hreflang="{code}" lang="{code}">トレカダッシュ (Toreca Dash)</a> — {e(TORECADASH[code])}</li>
   </ul>'''
     logs = f'''  <h2 class="rv">{e(t["h_log"])}</h2>
   <p>{e(t["log"])}</p>
