@@ -4971,6 +4971,10 @@ URL: https://koshinstudio.com/en/
 
 - Python splitlines() breaks JSONL: the culprit was U+2028 (https://koshinstudio.com/en/notes/u2028/)
 
+- Firebase Auth: force-quitting the app created anonymous accounts in bulk (https://koshinstudio.com/en/notes/apple-signin/)
+
+- A canvas becomes twice as large on Retina: inset:0 does not stretch it (https://koshinstudio.com/en/notes/logo-pop/)
+
 - No builds arriving in TestFlight: I had used up the 25 free Xcode Cloud hours (https://koshinstudio.com/en/notes/torecadash-ci/)
 
 ## Languages
