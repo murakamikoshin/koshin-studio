@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>It let things through when it could not check: how “fail-open” brought in resale items — Koshin Studio</title>
+<meta name="description" content="A price gate that “lets items pass when the list price cannot be confirmed” had a blind spot: the daily cap on web searches. How I told “did not know” apart from “could not look up,” and fixed it.">
+<meta property="og:title" content="It let things through when it could not check: how “fail-open” brought in resale items">
+<meta property="og:description" content="A price gate that “lets items pass when the list price cannot be confirmed” had a blind spot: the daily cap on web searches. How I told “did not know” apart from “could not look up,” and fixed it.">
+<meta property="og:type" content="article">
+<meta name="theme-color" content="#fbfaf7">
+<link rel="icon" href="/favicon.ico?v=1697d589" sizes="48x48">
+<link rel="icon" href="/favicon.svg?v=b9d7922f" type="image/svg+xml" sizes="any">
+<link rel="icon" href="/assets/icon/icon-192.png?v=e2566235" type="image/png" sizes="192x192">
+<link rel="apple-touch-icon" href="/assets/icon/icon-180.png?v=84e7f0e6">
+<link rel="manifest" href="/site.webmanifest">
+<script>document.documentElement.className+=" js"</script>
+<link rel="stylesheet" href="/style.css?v=7001672f">
+<meta name="google-adsense-account" content="ca-pub-3863314847163872">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3863314847163872" crossorigin="anonymous"></script>
+<link rel="canonical" href="https://koshinstudio.com/en/notes/fail-open/">
+<meta property="og:url" content="https://koshinstudio.com/en/notes/fail-open/">
+<meta property="og:site_name" content="Koshin Studio">
+<meta property="og:locale" content="en_US">
+<link rel="alternate" hreflang="ja" href="https://koshinstudio.com/notes/fail-open/">
+<link rel="alternate" hreflang="en" href="https://koshinstudio.com/en/notes/fail-open/">
+<link rel="alternate" hreflang="x-default" href="https://koshinstudio.com/en/notes/fail-open/">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="alternate" type="application/rss+xml" title="Koshin Studio — Notes" href="https://koshinstudio.com/feed.xml">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BlogPosting","headline":"It let things through when it could not check: how “fail-open” brought in resale items","url":"https://koshinstudio.com/en/notes/fail-open/","description":"A price gate that “lets items pass when the list price cannot be confirmed” had a blind spot: the daily cap on web searches. How I told “did not know” apart from “could not look up,” and fixed it.","datePublished":"2026-10-09","dateModified":"2026-10-09","inLanguage":"en","image":"https://koshinstudio.com/assets/og/og_notes_fail-open.jpg","author":{"@id":"https://koshinstudio.com#studio"},"publisher":{"@id":"https://koshinstudio.com#studio"},"mainEntityOfPage":"https://koshinstudio.com/en/notes/fail-open/"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Koshin Studio","item":"https://koshinstudio.com/en/"},{"@type":"ListItem","position":2,"name":"It let things through when it could not check: how “fail-open” brought in resale items","item":"https://koshinstudio.com/en/notes/fail-open/"}]}]}</script>
+<meta property="og:image" content="https://koshinstudio.com/assets/og/og_notes_fail-open.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
+</head>
+<body>
+<canvas id="motes"></canvas>
+
+<header class="site"><div class="wrap">
+  <a class="logo" href="/"><img class="logo-mark" src="/favicon.svg?v=b9d7922f" alt="" width="28" height="28">Koshin Studio</a>
+  <nav><a href="/works/">Works</a><a href="/notes/">Notes</a><a href="/picks/">Picks</a><a href="/calc/">Tools</a><a href="/about/">About</a></nav>
+</div></header>
+
+<main><div class="wrap">
+  <nav class="crumbs" aria-label="You are here"><a href="/en/">Koshin Studio</a><i aria-hidden="true">›</i><span aria-current="page">Fail-open price gate</span></nav>
+  <h1>It let things through when it could not check: how “fail-open” brought in resale items</h1>
+  <div class="rule"></div>
+<!--lang-->
+  <p class="note"><a href="/notes/fail-open/" hreflang="ja" lang="ja">日本語版</a></p>
+<!--/lang-->
+  <p class="lead">Development log of Torecadash / October 2026</p>
+
+  <p>In my iOS app Torecadash, three in-app bug reports said “lots of resale prices are coming in from Amazon.” One was an obvious resale item at ¥79,800. The cause was <strong>a blind spot in a design I had put in on purpose: “if it cannot be confirmed, let it pass.”</strong> This is from my hand-over notes and the commit record (July 30, 2026).</p>
+  <p class="note">This is a development log of the app.</p>
+
+  <h2 class="rv" id="s1">The price gate, and the “let it pass” design</h2>
+  <p>The app picks up listings from online shops (Rakuten, Yahoo! Shopping, Amazon and others) and shows them in a feed. There is a “price gate” that checks <strong>whether a listing’s price is reasonable against the product’s list price</strong>. It has an AI (with web search) look up the list price, and rejects extremely expensive resale items.</p>
+  <p>The gate had a behavior: <strong>“if the list price could not be confirmed, let it pass without review.”</strong> That was intended. If you exclude products whose list price the AI genuinely does not know just because you cannot confirm it, you also erase genuine listings. This is so-called <strong>fail-open</strong> (open on failure, meaning let it pass).</p>
+
+  <h2 class="rv" id="s2">The blind spot: hitting the search cap took the same path</h2>
+  <p>The AI’s web search has a cap of 300 calls a day (a circuit breaker to prevent unexpected cost). But the gate <strong>did not distinguish the reason</strong> the list price could not be confirmed.</p>
+  <ul>
+    <li>The AI answered “I do not know the list price of this product.”</li>
+    <li>The daily cap was reached, so <strong>the check itself could not be done</strong>.</li>
+  </ul>
+  <p>Both went down the same “price unknown → let it pass” path. The first is as intended. The second is just “the road was closed before looking,” yet <strong>the gate became wide open</strong>.</p>
+
+  <h2 class="rv" id="s3">Why the hole did real damage</h2>
+  <p>The hole surfaced because of a previous change (the one that widened Amazon’s scope). Widening the scope suddenly increased the number of products whose price had to be newly checked. As a result, the daily cap was reached often. While it was reached, the gate was open and resale items mixed in in large numbers.</p>
+  <p>There was secondary damage too. A result of “list price unknown” was designed to be <strong>cached for 24 hours</strong> regardless of reason. So a product that once hit the cap stayed <strong>open for up to 24 hours even after the cap was released</strong>.</p>
+
+  <h2 class="rv" id="s4">The fix: distinguish the reason</h2>
+  <p>I created a dedicated marker (<code>QUOTA_EXCEEDED</code>) so the two could be told apart.</p>
+  <div class="scroll rv"><table>
+    <tr><th>Situation</th><th>What the gate does</th></tr>
+    <tr><td>The AI genuinely did not know the list price (null)</td><td>Let it pass as before (still fail-open)</td></tr>
+    <tr><td>The daily cap meant the check itself could not be done (QUOTA_EXCEEDED)</td><td><strong>Exclude</strong> (fail-close)</td></tr>
+  </table></div>
+  <p>The latter is not put into the 24-hour cache either. It tries to confirm again the next time it is called. This gate is shared by <strong>every feature that uses price review</strong>: Rakuten, Yahoo! Shopping, Amazon, AI listing discovery, first-come Rakuten Books and so on, so one fix reaches widely (the commit record says 18 functions were deployed).</p>
+  <p>I hid the three reported items by hand. After that, the re-review batch that runs every 5 minutes is expected to pick up the same misses again.</p>
+  <p><strong>What I have not verified:</strong> my notes say “check in the next session whether resale-price reports stopped after the cap reset.” There is no result for that in the record at the time of writing.</p>
+
+  <h2 class="rv" id="s5">Is the same hole in other decisions?</h2>
+  <p>In a later check (July 30, 2026), I looked at the other AI decisions such as deciding sales format and matching products. All of them are designed to fall to the safe side (exclude, or null) on failure, and <strong>I found no new fail-open hole</strong>.</p>
+
+  <h2 class="rv" id="s6">What I learned</h2>
+  <blockquote>“Could not confirm” comes in two kinds: did not know, and could not look.</blockquote>
+  <ul>
+    <li><strong>Before using a let-it-pass design, make clear the reason it is fine to let through.</strong> “Let it through because I do not know” and “let it through because I cannot look” are different things.</li>
+    <li><strong>Do not cache the result of a failure regardless of its reason.</strong> I froze a temporary failure for 24 hours.</li>
+    <li><strong>One change can turn a hole elsewhere into real damage.</strong> Widening Amazon’s scope brought the cap’s hole to the surface.</li>
+  </ul>
+  <p class="note">This article is written from my hand-over notes (session 182) and the commit record (July 30, 2026).</p>
+
+  <p class="note">This is the English version of <a href="/notes/fail-open/" hreflang="ja" lang="ja">the original Japanese article</a>.</p>
+
+  <div class="rule" style="margin:40px 0 22px"></div>
+  <p class="eyebrow">More in English</p>
+  <ul class="plain">
+    <li><a href="/en/">All English pages</a></li>
+  </ul>
+</div>
+</main>
+
+<footer class="site"><div class="wrap"></div></footer>
+<script src="/motion.js?v=1e7447ec" defer></script>
+</body>
+</html>

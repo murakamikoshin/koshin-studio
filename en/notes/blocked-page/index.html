@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>What I read as “fetched” was just a notice page: three days of zero products — Koshin Studio</title>
+<meta name="description" content="A scraper reported success for three days while returning zero products, because a cheap setting returned a 2,410-byte “enable JavaScript” page that I counted as a success. How I centralized the check.">
+<meta property="og:title" content="What I read as “fetched” was just a notice page: three days of zero products">
+<meta property="og:description" content="A scraper reported success for three days while returning zero products, because a cheap setting returned a 2,410-byte “enable JavaScript” page that I counted as a success. How I centralized the check.">
+<meta property="og:type" content="article">
+<meta name="theme-color" content="#fbfaf7">
+<link rel="icon" href="/favicon.ico?v=1697d589" sizes="48x48">
+<link rel="icon" href="/favicon.svg?v=b9d7922f" type="image/svg+xml" sizes="any">
+<link rel="icon" href="/assets/icon/icon-192.png?v=e2566235" type="image/png" sizes="192x192">
+<link rel="apple-touch-icon" href="/assets/icon/icon-180.png?v=84e7f0e6">
+<link rel="manifest" href="/site.webmanifest">
+<script>document.documentElement.className+=" js"</script>
+<link rel="stylesheet" href="/style.css?v=7001672f">
+<meta name="google-adsense-account" content="ca-pub-3863314847163872">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3863314847163872" crossorigin="anonymous"></script>
+<link rel="canonical" href="https://koshinstudio.com/en/notes/blocked-page/">
+<meta property="og:url" content="https://koshinstudio.com/en/notes/blocked-page/">
+<meta property="og:site_name" content="Koshin Studio">
+<meta property="og:locale" content="en_US">
+<link rel="alternate" hreflang="ja" href="https://koshinstudio.com/notes/blocked-page/">
+<link rel="alternate" hreflang="en" href="https://koshinstudio.com/en/notes/blocked-page/">
+<link rel="alternate" hreflang="x-default" href="https://koshinstudio.com/en/notes/blocked-page/">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="alternate" type="application/rss+xml" title="Koshin Studio — Notes" href="https://koshinstudio.com/feed.xml">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BlogPosting","headline":"What I read as “fetched” was just a notice page: three days of zero products","url":"https://koshinstudio.com/en/notes/blocked-page/","description":"A scraper reported success for three days while returning zero products, because a cheap setting returned a 2,410-byte “enable JavaScript” page that I counted as a success. How I centralized the check.","datePublished":"2026-10-09","dateModified":"2026-10-09","inLanguage":"en","image":"https://koshinstudio.com/assets/og/og_notes_blocked-page.jpg","author":{"@id":"https://koshinstudio.com#studio"},"publisher":{"@id":"https://koshinstudio.com#studio"},"mainEntityOfPage":"https://koshinstudio.com/en/notes/blocked-page/"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Koshin Studio","item":"https://koshinstudio.com/en/"},{"@type":"ListItem","position":2,"name":"What I read as “fetched” was just a notice page: three days of zero products","item":"https://koshinstudio.com/en/notes/blocked-page/"}]}]}</script>
+<meta property="og:image" content="https://koshinstudio.com/assets/og/og_notes_blocked-page.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
+</head>
+<body>
+<canvas id="motes"></canvas>
+
+<header class="site"><div class="wrap">
+  <a class="logo" href="/"><img class="logo-mark" src="/favicon.svg?v=b9d7922f" alt="" width="28" height="28">Koshin Studio</a>
+  <nav><a href="/works/">Works</a><a href="/notes/">Notes</a><a href="/picks/">Picks</a><a href="/calc/">Tools</a><a href="/about/">About</a></nav>
+</div></header>
+
+<main><div class="wrap">
+  <nav class="crumbs" aria-label="You are here"><a href="/en/">Koshin Studio</a><i aria-hidden="true">›</i><span aria-current="page">A notice page read as success</span></nav>
+  <h1>What I read as “fetched” was just a notice page: three days of zero products</h1>
+  <div class="rule"></div>
+<!--lang-->
+  <p class="note"><a href="/notes/blocked-page/" hreflang="ja" lang="ja">日本語版</a></p>
+<!--/lang-->
+  <p class="lead">Development log of Torecadash / October 2026</p>
+
+  <p>My iOS app Torecadash regularly visits the sales pages of online shops to collect lottery and first-come sale information. One day I found that fetching from Pokémon Center Online had been returning <strong>zero products for three days straight</strong>. There were no errors, because each fetch was judged “fetched.” What was happening is written from my commit record.</p>
+  <p class="note">This is a development log of the app.</p>
+
+  <h2 class="rv" id="s1">My “fetched” check was too lenient</h2>
+  <p>Pages are fetched through an external service (Scrape.do). Fetch settings range from cheap to expensive, and the design is that <strong>if the cheap setting fails, it escalates to a stronger one</strong> (the same mechanism as in <a href="/notes/scrape-cost/" hreflang="ja" lang="ja">my article on scraping cost</a>, in Japanese).</p>
+  <p>The problem was the judgment of “did it fetch.” When the Pokémon Center page was fetched with the cheap setting, what came back was <strong>a 2,410-byte page saying “Please enable JavaScript”</strong>. It was not a product list, just a notice. But I <strong>read this as “fetched” and treated it as a success</strong>. If it is a success, there is no escalation to the stronger setting either.</p>
+  <p>So from September 4, for three days, fetches kept “succeeding” while products stayed at zero.</p>
+
+  <h2 class="rv" id="s2">The fix</h2>
+  <ul>
+    <li><strong>Gather the “fetched” check in one place.</strong> The check had been scattered over several places. I made one function that looks at whether a page is a blocked page (<code>scrapeDoResultLooksBlocked</code>) and made everything use it.</li>
+    <li><strong>Remember the setting that worked.</strong> It remembers a setting that succeeded once and tries from there next time. This cut the credits used per fetch from 36 to 25.</li>
+  </ul>
+
+  <h2 class="rv" id="s3">Another bit of dirt found the same day</h2>
+  <p>The same inspection found another problem. The logic that decides a mismatch between alternative spellings of a product name was <strong>written separately at the entrance of matching and in the cleanup side</strong>. Only the cleanup side lacked a check for “the product forms differ.” As a result, an alternative spelling of a trial deck stayed attached to a booster pack product, <strong>and kept triggering wrong matches every day</strong>. I made the check a shared function and removed 46 entries across 27 products.</p>
+  <p>I also resolved the “no document to update” error (64 in 7 days). Now products are re-read when their cache is old, and articles that have disappeared are skipped so the remaining dedupe processing continues.</p>
+
+  <h2 class="rv" id="s4">What I learned</h2>
+  <blockquote>“Success” and “the contents were fetched” are different things.</blockquote>
+  <ul>
+    <li><strong>Judge success by the contents.</strong> That the communication went through and that what you wanted was fetched are different. If “zero items fetched” continues, that itself must be watched as an anomaly.</li>
+    <li><strong>Keep a judgment in one place.</strong> If the same judgment exists in two places, one of them goes stale, like the matching entrance and the cleanup.</li>
+    <li><strong>No errors is not evidence that things are going well.</strong></li>
+  </ul>
+  <p class="note">This article is written from my commit record (September 7, 2026). How I noticed the three days of zero is not written in the commit.</p>
+
+  <p class="note">This is the English version of <a href="/notes/blocked-page/" hreflang="ja" lang="ja">the original Japanese article</a>.</p>
+
+  <div class="rule" style="margin:40px 0 22px"></div>
+  <p class="eyebrow">More in English</p>
+  <ul class="plain">
+    <li><a href="/en/">All English pages</a></li>
+  </ul>
+</div>
+</main>
+
+<footer class="site"><div class="wrap"></div></footer>
+<script src="/motion.js?v=1e7447ec" defer></script>
+</body>
+</html>

@@ -221,5 +221,19 @@
     "title": "Migrating from the Claude API to the Gemini API (gemini-3.1-flash-lite): 16 call sites into one function",
     "date": "2026-10-09",
     "blurb": "I moved an iOS app’s backend from Claude Haiku 4.5 to Gemini 3.1 Flash-Lite after an unplanned charge. How I chose the model by deprecation date, unified 16 calls, added a circuit breaker for web search, and a kill switch."
+  },
+  {
+    "ja": "/notes/fail-open/",
+    "en": "/en/notes/fail-open/",
+    "title": "It let things through when it could not check: how “fail-open” brought in resale items",
+    "date": "2026-10-09",
+    "blurb": "A price gate that “lets items pass when the list price cannot be confirmed” had a blind spot: the daily cap on web searches. How I told “did not know” apart from “could not look up,” and fixed it."
+  },
+  {
+    "ja": "/notes/blocked-page/",
+    "en": "/en/notes/blocked-page/",
+    "title": "What I read as “fetched” was just a notice page: three days of zero products",
+    "date": "2026-10-09",
+    "blurb": "A scraper reported success for three days while returning zero products, because a cheap setting returned a 2,410-byte “enable JavaScript” page that I counted as a success. How I centralized the check."
   }
 ]
