@@ -603,6 +603,12 @@ const ogFor = (rel) => {
     : SITE + '/assets/sushitsumu-wide.jpg';
 };
 
+/* 英語ページの共有カード：自分の絵があればそれ、無ければ日本語側の絵 */
+const ogForPair = (relEn, relJa) => {
+  const own = ogFor(relEn);
+  return /\/og_en_|\/og_[a-z]{2}_/.test(own) ? own : ogFor(relJa);
+};
+
 function ldFor(file, url) {
   const rel = file.slice(here.length);
   const page = (name) => ({ '@type': 'WebPage', name: name, url: url,
@@ -670,7 +676,7 @@ function ldFor(file, url) {
     return [
       { '@type': 'BlogPosting', headline: p.title, url: SITE + p.en, description: p.blurb,
         datePublished: p.date, dateModified: p.updated || p.date, inLanguage: 'en',
-        image: ogFor(p.ja + 'index.html'),
+        image: ogForPair(rel, p.ja + 'index.html'),
         author: { '@id': SITE + '#studio' }, publisher: { '@id': SITE + '#studio' },
         mainEntityOfPage: SITE + p.en },
       crumbs([['Koshin Studio', '/en/'], [p.title, p.en]]),
@@ -696,7 +702,7 @@ function ldFor(file, url) {
     const wj = (ep.ja.match(/^\/works\/([^/]+)\/$/) || [])[1];
     const w = wj && workBySlug[wj];
     if (w) {
-      const wImage = w.image ? SITE + w.image : w.cover ? SITE + w.cover + '@2x.jpg' : ogFor(ep.ja + 'index.html');
+      const wImage = w.image ? SITE + w.image : w.cover ? SITE + w.cover + '@2x.jpg' : ogForPair(rel, ep.ja + 'index.html');
       return [
         { '@type': w.kind === 'game' ? 'VideoGame' : 'SoftwareApplication', name: ep.title, url: url, description: ep.blurb,
           inLanguage: 'en', image: wImage,
@@ -1011,7 +1017,7 @@ for (const file of pages) {
   });
 
   /* 英語のページは、対になった日本語のページの絵を使う */
-  const ogPath = ogFor(enByPath[rel.replace(/index\.html$/, '')] ? enByPath[rel.replace(/index\.html$/, '')].ja + 'index.html' : rel);      /* 構造化データと同じ絵を指す */
+  const ogPath = enByPath[rel.replace(/index\.html$/, '')] ? ogForPair(rel, enByPath[rel.replace(/index\.html$/, '')].ja + 'index.html') : ogFor(rel);      /* 構造化データと同じ絵を指す */
   html = html.replace(/\n?\s*<meta property="og:image"[^>]*>/g, '')
              .replace(/\n?\s*<meta property="og:image:width"[^>]*>/g, '')
              .replace(/\n?\s*<meta property="og:image:height"[^>]*>/g, '');

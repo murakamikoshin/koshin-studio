@@ -44,6 +44,7 @@ for (const f of pages()) {
   const name = 'og' + (home ? '_home'
     : rel.replace(/\/index\.html$/, '').replace(/\.html$/, '').replace(/\//g, '_')) + '.jpg';
 
+  if (!process.env.FORCE && existsSync(OUT + '/' + name)) continue;   /* 既にあるものは作り直さない（FORCE=1 で全部） */
   await p.setContent(`<style>${css}
     html,body{margin:0;width:1200px;height:630px;overflow:hidden}
     .card{width:1200px;height:630px;position:relative;display:flex;flex-direction:column;
