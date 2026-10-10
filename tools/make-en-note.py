@@ -3,13 +3,15 @@
 import re, json, html as H
 
 def make(ja_slug, title, desc, crumb, lead, body):
+    seo = json.load(open('data/en-seo.json', encoding='utf8')).get(ja_slug, {})
+    ttl = seo.get('title'); desc = seo.get('desc', desc)
     src = open(f'notes/{ja_slug}/index.html', encoding='utf8').read()
     head = src[:src.index('<main>')]
     foot = src[src.index('</main>') + len('</main>'):]
     e = H.escape
-    head = re.sub(r'<title>.*?</title>', f'<title>{e(title, quote=False)} — Koshin Studio</title>', head, flags=re.S)
+    head = re.sub(r'<title>.*?</title>', f'<title>{e(ttl, quote=False) if ttl else e(title, quote=False) + " — Koshin Studio"}</title>', head, flags=re.S)
     head = re.sub(r'<meta name="description" content="[^"]*">', f'<meta name="description" content="{e(desc)}">', head)
-    head = re.sub(r'<meta property="og:title" content="[^"]*">', f'<meta property="og:title" content="{e(title)}">', head)
+    head = re.sub(r'<meta property="og:title" content="[^"]*">', f'<meta property="og:title" content="{e(ttl or title)}">', head)
     head = re.sub(r'<meta property="og:description" content="[^"]*">', f'<meta property="og:description" content="{e(desc)}">', head)
     head = head.replace('<html lang="ja">', '<html lang="en">')
     foot = re.sub(r'<footer class="site">.*?</footer>', '<footer class="site"><div class="wrap"></div></footer>', foot, flags=re.S)

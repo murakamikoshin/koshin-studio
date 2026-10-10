@@ -1,0 +1,86 @@
+{
+ "itms-91064": {
+  "title": "ITMS-91064 Invalid Binary: NSPrivacyTracking fix",
+  "desc": "Apple’s automated review rejected an iOS build with ITMS-91064: NSPrivacyTracking was true while NSPrivacyTrackingDomains was empty. How it was fixed, and what is not verified."
+ },
+ "review-info-needed": {
+  "title": "App Store Guideline 2.1 Information Needed: 6 items",
+  "desc": "My first App Store submission got a request for more information (Guideline 2.1), not a rejection. The six things Apple asked for and how they connect to earlier fixes."
+ },
+ "xcode152-sdk": {
+  "title": "Firebase 12 on Xcode 15.2: why I pinned 11.4.0",
+  "desc": "On an old Mac stuck on Xcode 15.2, newer Firebase and AdMob SDKs fail to build. Which versions break, which I pinned (Firebase 11.4.0, AdMob 11.5.0), and why."
+ },
+ "torecadash-watchdog": {
+  "title": "iOS app killed by watchdog 0x8BADF00D: SwiftUI fix",
+  "desc": "An iOS app was force-quit by the watchdog (0x8BADF00D). A SwiftUI computed property re-filtered and re-sorted 951 articles on the main thread every body evaluation."
+ },
+ "u2028": {
+  "title": "Python splitlines() breaks JSONL: U+2028 culprit",
+  "desc": "Python splitlines() broke a JSONL file because 2 of 7,247 records contained U+2028 (LINE SEPARATOR). Why it happens and the one-line fix: split on the newline only."
+ },
+ "torecadash-ci": {
+  "title": "No TestFlight builds: Xcode Cloud 25 free hours",
+  "desc": "New builds stopped appearing in TestFlight. My first diagnosis (“[ci skip] is blocking builds”) was wrong; the workflow built the iOS app on every commit."
+ },
+ "apple-signin": {
+  "title": "Firebase Auth creates anonymous accounts on relaunch",
+  "desc": "Force-quitting the app made Firebase create a new anonymous account each launch: 17 of 19 users were throwaway. Cause: reading currentUser too early."
+ },
+ "logo-pop": {
+  "title": "Canvas 2x too large on Retina: inset:0 won’t stretch",
+  "desc": "Burst particles appeared in the wrong place on high-DPI screens. A canvas with only inset:0 keeps its pixel size, so it was 2x larger in CSS on Retina."
+ },
+ "crazygames": {
+  "title": "Rejected by CrazyGames with no reason: 4 causes",
+  "desc": "A game portal rejected my game with only “overall quality below expectations.” I recorded what the reviewer saw, found four causes and fixed them by measuring."
+ },
+ "adgap": {
+  "title": "Ad interval by time, not by plays",
+  "desc": "Why I replaced “one ad every 5 plays” with “7 minutes since the last ad” in a browser game, how it behaves, and what I still do not know."
+ },
+ "ascii-text": {
+  "title": "Garbled Japanese in CrazyGames preview: ASCII fix",
+  "desc": "One character broke in a game portal’s preview though the file bytes were correct. How I made the game immune without finding the cause."
+ },
+ "deploy-gotchas": {
+  "title": "Works locally, breaks deployed: 4 static-site bugs",
+  "desc": "Stale cache, breadcrumbs that multiplied each build, a symlink into my own environment, and local-only images: four deploy incidents on Cloudflare Pages."
+ },
+ "hosting-compare": {
+  "title": "Static hosting compared: Cloudflare, Netlify, Vercel",
+  "desc": "Cloudflare Pages, Netlify, Vercel, GitHub Pages and Firebase Hosting compared by official terms (Oct 2026): ads allowed, free limits, file limits, config."
+ },
+ "comment-services": {
+  "title": "Comment systems compared: giscus, Disqus, Remark42",
+  "desc": "giscus, utterances, Disqus, Remark42, Cusdis, Staticman and Commento compared by official pages (Oct 2026): storage, ads and tracking, maintenance status."
+ },
+ "ios-sdk-compare": {
+  "title": "iOS ad SDKs compared: AdMob, AppLovin, LevelPlay",
+  "desc": "AdMob, AppLovin MAX, LevelPlay, Firebase and Supabase compared by official pages (Oct 2026): payouts, privacy manifests, minimum Xcode, free tiers."
+ },
+ "claude-vs-gemini-api": {
+  "title": "Claude API vs Gemini API: official numbers compared",
+  "desc": "Claude and Gemini API compared by official pages (Oct 2026): small-model prices, web search cost and caps, spend limits, deprecation notice."
+ },
+ "gemini-migration": {
+  "title": "Claude to Gemini API migration: 16 calls, 1 function",
+  "desc": "Moving an iOS app backend from Claude Haiku 4.5 to Gemini 3.1 Flash-Lite: choosing by deprecation date, one wrapper, a search cap breaker, a kill switch."
+ },
+ "fail-open": {
+  "title": "Fail-open let resale items through: the fix",
+  "desc": "A gate that let items pass when the list price could not be confirmed had a blind spot: a daily search cap. Telling “did not know” from “could not look.”"
+ },
+ "blocked-page": {
+  "title": "A scraper read a notice page as success: 0 products",
+  "desc": "A scraper returned zero products for three days because a 2,410-byte “enable JavaScript” page counted as success. How I centralized the check."
+ },
+ "webaudio": {
+  "title": "Measuring WebAudio waveforms to set game volume",
+  "desc": "A browser game with no audio files: koto, taiko and gong synthesized with WebAudio. I could not listen, so I set volume by measuring waveform peaks."
+ },
+ "ranking-free-tier": {
+  "title": "Halving Cloudflare D1 free-tier use: 5 calls to 2",
+  "desc": "A game ranking on Workers and D1: calls per play from 5 to 2, rows read from 421 to 221. Server-side rank counting and removing the preflight call."
+ }
+}

@@ -3,10 +3,10 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Python splitlines() breaks JSONL: the culprit was U+2028, an invisible line separator — Koshin Studio</title>
-<meta name="description" content="A JSONL file read with Python splitlines() broke because two of 7,247 records contained U+2028 (LINE SEPARATOR). Why it happens, the numbers, and the one-line fix: split on the newline character only.">
-<meta property="og:title" content="Python splitlines() breaks JSONL: the culprit was U+2028, an invisible line separator">
-<meta property="og:description" content="A JSONL file read with Python splitlines() broke because two of 7,247 records contained U+2028 (LINE SEPARATOR). Why it happens, the numbers, and the one-line fix: split on the newline character only.">
+<title>Python splitlines() breaks JSONL: U+2028 culprit</title>
+<meta name="description" content="Python splitlines() broke a JSONL file because 2 of 7,247 records contained U+2028 (LINE SEPARATOR). Why it happens and the one-line fix: split on the newline only.">
+<meta property="og:title" content="Python splitlines() breaks JSONL: U+2028 culprit">
+<meta property="og:description" content="Python splitlines() broke a JSONL file because 2 of 7,247 records contained U+2028 (LINE SEPARATOR). Why it happens and the one-line fix: split on the newline only.">
 <meta property="og:type" content="article">
 <meta name="theme-color" content="#fbfaf7">
 <link rel="icon" href="/favicon.ico?v=1697d589" sizes="48x48">
@@ -27,7 +27,7 @@
 <link rel="alternate" hreflang="x-default" href="https://koshinstudio.com/en/notes/u2028/">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="alternate" type="application/rss+xml" title="Koshin Studio — Notes" href="https://koshinstudio.com/feed.xml">
-<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BlogPosting","headline":"Python splitlines() breaks JSONL: the culprit was U+2028, an invisible line separator","url":"https://koshinstudio.com/en/notes/u2028/","description":"A JSONL file read with Python splitlines() broke because two of 7,247 records contained U+2028 (LINE SEPARATOR). Why it happens, the numbers, and the one-line fix: split on the newline character only.","datePublished":"2026-10-09","dateModified":"2026-10-09","inLanguage":"en","image":"https://koshinstudio.com/assets/og/og_notes_u2028.jpg","author":{"@id":"https://koshinstudio.com#studio"},"publisher":{"@id":"https://koshinstudio.com#studio"},"mainEntityOfPage":"https://koshinstudio.com/en/notes/u2028/"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Koshin Studio","item":"https://koshinstudio.com/en/"},{"@type":"ListItem","position":2,"name":"Python splitlines() breaks JSONL: the culprit was U+2028, an invisible line separator","item":"https://koshinstudio.com/en/notes/u2028/"}]}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BlogPosting","headline":"Python splitlines() breaks JSONL: the culprit was U+2028, an invisible line separator","url":"https://koshinstudio.com/en/notes/u2028/","description":"Python splitlines() broke a JSONL file because 2 of 7,247 records contained U+2028 (LINE SEPARATOR). Why it happens and the one-line fix: split on the newline only.","datePublished":"2026-10-09","dateModified":"2026-10-09","inLanguage":"en","image":"https://koshinstudio.com/assets/og/og_notes_u2028.jpg","author":{"@id":"https://koshinstudio.com#studio"},"publisher":{"@id":"https://koshinstudio.com#studio"},"mainEntityOfPage":"https://koshinstudio.com/en/notes/u2028/"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Koshin Studio","item":"https://koshinstudio.com/en/"},{"@type":"ListItem","position":2,"name":"Python splitlines() breaks JSONL: the culprit was U+2028, an invisible line separator","item":"https://koshinstudio.com/en/notes/u2028/"}]}]}</script>
 <meta property="og:image" content="https://koshinstudio.com/assets/og/og_notes_u2028.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">

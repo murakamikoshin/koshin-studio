@@ -3,10 +3,10 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Migrating from the Claude API to the Gemini API (gemini-3.1-flash-lite): 16 call sites into one function — Koshin Studio</title>
-<meta name="description" content="I moved an iOS app’s backend from Claude Haiku 4.5 to Gemini 3.1 Flash-Lite after an unplanned charge. How I chose the model by deprecation date, unified 16 calls, added a circuit breaker for web search, and a kill switch.">
-<meta property="og:title" content="Migrating from the Claude API to the Gemini API (gemini-3.1-flash-lite): 16 call sites into one function">
-<meta property="og:description" content="I moved an iOS app’s backend from Claude Haiku 4.5 to Gemini 3.1 Flash-Lite after an unplanned charge. How I chose the model by deprecation date, unified 16 calls, added a circuit breaker for web search, and a kill switch.">
+<title>Claude to Gemini API migration: 16 calls, 1 function</title>
+<meta name="description" content="Moving an iOS app backend from Claude Haiku 4.5 to Gemini 3.1 Flash-Lite: choosing by deprecation date, one wrapper, a search cap breaker, a kill switch.">
+<meta property="og:title" content="Claude to Gemini API migration: 16 calls, 1 function">
+<meta property="og:description" content="Moving an iOS app backend from Claude Haiku 4.5 to Gemini 3.1 Flash-Lite: choosing by deprecation date, one wrapper, a search cap breaker, a kill switch.">
 <meta property="og:type" content="article">
 <meta name="theme-color" content="#fbfaf7">
 <link rel="icon" href="/favicon.ico?v=1697d589" sizes="48x48">
@@ -27,7 +27,7 @@
 <link rel="alternate" hreflang="x-default" href="https://koshinstudio.com/en/notes/gemini-migration/">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="alternate" type="application/rss+xml" title="Koshin Studio — Notes" href="https://koshinstudio.com/feed.xml">
-<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BlogPosting","headline":"Migrating from the Claude API to the Gemini API (gemini-3.1-flash-lite): 16 call sites into one function","url":"https://koshinstudio.com/en/notes/gemini-migration/","description":"I moved an iOS app’s backend from Claude Haiku 4.5 to Gemini 3.1 Flash-Lite after an unplanned charge. How I chose the model by deprecation date, unified 16 calls, added a circuit breaker for web search, and a kill switch.","datePublished":"2026-10-09","dateModified":"2026-10-09","inLanguage":"en","image":"https://koshinstudio.com/assets/og/og_notes_gemini-migration.jpg","author":{"@id":"https://koshinstudio.com#studio"},"publisher":{"@id":"https://koshinstudio.com#studio"},"mainEntityOfPage":"https://koshinstudio.com/en/notes/gemini-migration/"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Koshin Studio","item":"https://koshinstudio.com/en/"},{"@type":"ListItem","position":2,"name":"Migrating from the Claude API to the Gemini API (gemini-3.1-flash-lite): 16 call sites into one function","item":"https://koshinstudio.com/en/notes/gemini-migration/"}]}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BlogPosting","headline":"Migrating from the Claude API to the Gemini API (gemini-3.1-flash-lite): 16 call sites into one function","url":"https://koshinstudio.com/en/notes/gemini-migration/","description":"Moving an iOS app backend from Claude Haiku 4.5 to Gemini 3.1 Flash-Lite: choosing by deprecation date, one wrapper, a search cap breaker, a kill switch.","datePublished":"2026-10-09","dateModified":"2026-10-09","inLanguage":"en","image":"https://koshinstudio.com/assets/og/og_notes_gemini-migration.jpg","author":{"@id":"https://koshinstudio.com#studio"},"publisher":{"@id":"https://koshinstudio.com#studio"},"mainEntityOfPage":"https://koshinstudio.com/en/notes/gemini-migration/"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Koshin Studio","item":"https://koshinstudio.com/en/"},{"@type":"ListItem","position":2,"name":"Migrating from the Claude API to the Gemini API (gemini-3.1-flash-lite): 16 call sites into one function","item":"https://koshinstudio.com/en/notes/gemini-migration/"}]}]}</script>
 <meta property="og:image" content="https://koshinstudio.com/assets/og/og_notes_gemini-migration.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">

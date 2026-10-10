@@ -115,139 +115,139 @@
     "en": "/en/notes/review-info-needed/",
     "title": "App Store review sent “Guideline 2.1 Information Needed”: the six things Apple asked for",
     "date": "2026-10-09",
-    "blurb": "My first App Store submission did not get a rejection but a request for more information (Guideline 2.1). The six things Apple asked for, and how they connect to what I had already fixed."
+    "blurb": "My first App Store submission got a request for more information (Guideline 2.1), not a rejection. The six things Apple asked for and how they connect to earlier fixes."
   },
   {
     "ja": "/notes/xcode152-sdk/",
     "en": "/en/notes/xcode152-sdk/",
     "title": "Firebase 12 does not work with Xcode 15.2 (Swift 6.0 required): why I pinned Firebase 11.4.0 and AdMob 11.5.0",
     "date": "2026-10-09",
-    "blurb": "On an old Mac stuck on Xcode 15.2, newer Firebase and AdMob SDKs fail to build. Which versions break, which versions I pinned, and what to do about AdMob class names. Notes from July 2026."
+    "blurb": "On an old Mac stuck on Xcode 15.2, newer Firebase and AdMob SDKs fail to build. Which versions break, which I pinned (Firebase 11.4.0, AdMob 11.5.0), and why."
   },
   {
     "ja": "/notes/torecadash-watchdog/",
     "en": "/en/notes/torecadash-watchdog/",
     "title": "iOS app freezes and is killed (0x8BADF00D): a SwiftUI computed property ran on every redraw",
     "date": "2026-10-09",
-    "blurb": "An iOS app was force-quit by the watchdog (0x8BADF00D). A SwiftUI computed property re-filtered and re-sorted 951 articles on the main thread on every body evaluation. How I found it and changed it, and what is not verified."
+    "blurb": "An iOS app was force-quit by the watchdog (0x8BADF00D). A SwiftUI computed property re-filtered and re-sorted 951 articles on the main thread every body evaluation."
   },
   {
     "ja": "/notes/u2028/",
     "en": "/en/notes/u2028/",
     "title": "Python splitlines() breaks JSONL: the culprit was U+2028, an invisible line separator",
     "date": "2026-10-09",
-    "blurb": "A JSONL file read with Python splitlines() broke because two of 7,247 records contained U+2028 (LINE SEPARATOR). Why it happens, the numbers, and the one-line fix: split on the newline character only."
+    "blurb": "Python splitlines() broke a JSONL file because 2 of 7,247 records contained U+2028 (LINE SEPARATOR). Why it happens and the one-line fix: split on the newline only."
   },
   {
     "ja": "/notes/torecadash-ci/",
     "en": "/en/notes/torecadash-ci/",
     "title": "No builds arriving in TestFlight: I had used up the 25 free Xcode Cloud hours (my first diagnosis was wrong)",
     "date": "2026-10-09",
-    "blurb": "New builds stopped appearing in TestFlight. My first diagnosis, “[ci skip] is blocking builds,” was wrong; the real cause was a workflow that built the iOS app on every commit and burned the free 25 hours a month. The numbers and the fix."
+    "blurb": "New builds stopped appearing in TestFlight. My first diagnosis (“[ci skip] is blocking builds”) was wrong; the workflow built the iOS app on every commit."
   },
   {
     "ja": "/notes/apple-signin/",
     "en": "/en/notes/apple-signin/",
     "title": "Firebase Auth: force-quitting the app created anonymous accounts in bulk (waiting for currentUser to restore)",
     "date": "2026-10-09",
-    "blurb": "Users said the app asked for Sign in with Apple again after being killed. 17 of 19 Firebase users were throwaway anonymous accounts. Cause: checking currentUser synchronously at launch. Fix: addStateDidChangeListener."
+    "blurb": "Force-quitting the app made Firebase create a new anonymous account each launch: 17 of 19 users were throwaway. Cause: reading currentUser too early."
   },
   {
     "ja": "/notes/logo-pop/",
     "en": "/en/notes/logo-pop/",
     "title": "A canvas becomes twice as large on Retina: inset:0 does not stretch it (a bug in a logo that bursts when you tap it)",
     "date": "2026-10-09",
-    "blurb": "Burst particles came out of the wrong place on high-DPI screens. A canvas with only inset:0 keeps its pixel size, so on a 2x display it was 2x larger in CSS. Measured numbers at 1x, 2x and 3x, and the fix."
+    "blurb": "Burst particles appeared in the wrong place on high-DPI screens. A canvas with only inset:0 keeps its pixel size, so it was 2x larger in CSS on Retina."
   },
   {
     "ja": "/notes/crazygames/",
     "en": "/en/notes/crazygames/",
     "title": "Rejected by CrazyGames with no reason given: I recorded the game and found four problems",
     "date": "2026-10-09",
-    "blurb": "A browser-game portal rejected my game with only “overall quality below expectations.” I captured what the reviewer would have seen and found four separate causes, then fixed them by measuring first."
+    "blurb": "A game portal rejected my game with only “overall quality below expectations.” I recorded what the reviewer saw, found four causes and fixed them by measuring."
   },
   {
     "ja": "/notes/adgap/",
     "en": "/en/notes/adgap/",
     "title": "Measuring the gap between ads in time, not in plays",
     "date": "2026-10-09",
-    "blurb": "Why I replaced “one ad every 5 plays” with “only when 7 minutes have passed since the last ad,” how it behaves, and what I noticed while writing: I do not know how long a game takes a person."
+    "blurb": "Why I replaced “one ad every 5 plays” with “7 minutes since the last ad” in a browser game, how it behaves, and what I still do not know."
   },
   {
     "ja": "/notes/ascii-text/",
     "en": "/en/notes/ascii-text/",
     "title": "Japanese text garbled in the CrazyGames preview: the file was correct, the cause was never found, so I escaped to ASCII",
     "date": "2026-10-09",
-    "blurb": "One character of “大連鎖！” rendered broken in a game portal preview even though the file bytes were correct. How I made the game immune without finding the cause, plus a check of 14 languages for overflow."
+    "blurb": "One character broke in a game portal’s preview though the file bytes were correct. How I made the game immune without finding the cause."
   },
   {
     "ja": "/notes/deploy-gotchas/",
     "en": "/en/notes/deploy-gotchas/",
     "title": "Works on my machine, breaks when deployed: four incidents shipping a static site to Cloudflare Pages",
     "date": "2026-10-09",
-    "blurb": "Stale cache, breadcrumbs that multiplied on every build, a symlink pointing into my own environment, and images that existed only locally. Four deploy incidents, each found only after I added a check."
+    "blurb": "Stale cache, breadcrumbs that multiplied each build, a symlink into my own environment, and local-only images: four deploy incidents on Cloudflare Pages."
   },
   {
     "ja": "/notes/hosting-compare/",
     "en": "/en/notes/hosting-compare/",
     "title": "Comparing static site hosts by their official terms: Cloudflare Pages, Netlify, Vercel, GitHub Pages and Firebase Hosting",
     "date": "2026-10-09",
-    "blurb": "Static hosting compared using only the official pages as of October 8, 2026: whether ads are allowed on free plans, free-tier limits, file limits, redirect and header config, and what I could not confirm."
+    "blurb": "Cloudflare Pages, Netlify, Vercel, GitHub Pages and Firebase Hosting compared by official terms (Oct 2026): ads allowed, free limits, file limits, config."
   },
   {
     "ja": "/notes/comment-services/",
     "en": "/en/notes/comment-services/",
     "title": "Comparing comment systems for static sites by their official information: giscus, utterances, Disqus, Remark42 and more",
     "date": "2026-10-09",
-    "blurb": "Comment systems for static sites (giscus, utterances, Disqus, Remark42, Cusdis, Staticman, Commento) compared using only official pages and repositories as of October 8, 2026: storage, ads and tracking, maintenance status, and what I could not confirm."
+    "blurb": "giscus, utterances, Disqus, Remark42, Cusdis, Staticman and Commento compared by official pages (Oct 2026): storage, ads and tracking, maintenance status."
   },
   {
     "ja": "/notes/ios-sdk-compare/",
     "en": "/en/notes/ios-sdk-compare/",
     "title": "Comparing iOS ad SDKs and Firebase by their official information: AdMob, AppLovin MAX, LevelPlay and Supabase",
     "date": "2026-10-09",
-    "blurb": "iOS ad SDKs (AdMob, AppLovin MAX, LevelPlay) plus Firebase and Supabase compared using only official pages as of October 8, 2026: payouts, privacy requirements, minimum Xcode and iOS, free tiers, and what I could not confirm."
+    "blurb": "AdMob, AppLovin MAX, LevelPlay, Firebase and Supabase compared by official pages (Oct 2026): payouts, privacy manifests, minimum Xcode, free tiers."
   },
   {
     "ja": "/notes/claude-vs-gemini-api/",
     "en": "/en/notes/claude-vs-gemini-api/",
     "title": "Claude API vs Gemini API by official numbers: small-model prices, web search, spend limits and deprecation",
     "date": "2026-10-09",
-    "blurb": "The Claude API and Gemini API compared using only official pages as of October 8, 2026: small-model pricing, web search cost and call limits, spend limits and how they stop, deprecation notice, and what I could not confirm."
+    "blurb": "Claude and Gemini API compared by official pages (Oct 2026): small-model prices, web search cost and caps, spend limits, deprecation notice."
   },
   {
     "ja": "/notes/gemini-migration/",
     "en": "/en/notes/gemini-migration/",
     "title": "Migrating from the Claude API to the Gemini API (gemini-3.1-flash-lite): 16 call sites into one function",
     "date": "2026-10-09",
-    "blurb": "I moved an iOS app’s backend from Claude Haiku 4.5 to Gemini 3.1 Flash-Lite after an unplanned charge. How I chose the model by deprecation date, unified 16 calls, added a circuit breaker for web search, and a kill switch."
+    "blurb": "Moving an iOS app backend from Claude Haiku 4.5 to Gemini 3.1 Flash-Lite: choosing by deprecation date, one wrapper, a search cap breaker, a kill switch."
   },
   {
     "ja": "/notes/fail-open/",
     "en": "/en/notes/fail-open/",
     "title": "It let things through when it could not check: how “fail-open” brought in resale items",
     "date": "2026-10-09",
-    "blurb": "A price gate that “lets items pass when the list price cannot be confirmed” had a blind spot: the daily cap on web searches. How I told “did not know” apart from “could not look up,” and fixed it."
+    "blurb": "A gate that let items pass when the list price could not be confirmed had a blind spot: a daily search cap. Telling “did not know” from “could not look.”"
   },
   {
     "ja": "/notes/blocked-page/",
     "en": "/en/notes/blocked-page/",
     "title": "What I read as “fetched” was just a notice page: three days of zero products",
     "date": "2026-10-09",
-    "blurb": "A scraper reported success for three days while returning zero products, because a cheap setting returned a 2,410-byte “enable JavaScript” page that I counted as a success. How I centralized the check."
+    "blurb": "A scraper returned zero products for three days because a 2,410-byte “enable JavaScript” page counted as success. How I centralized the check."
   },
   {
     "ja": "/notes/webaudio/",
     "en": "/en/notes/webaudio/",
     "title": "I could not listen, so I measured the waveform: building Japanese instruments with WebAudio for Sushi Stack",
     "date": "2026-10-09",
-    "blurb": "Sushi Stack uses no audio files. The koto, taiko, hyoshigi and kane are synthesized in the browser. Because I could not listen while building, I set volumes by measuring waveform peaks, and re-set the rank thresholds from measured auto-play."
+    "blurb": "A browser game with no audio files: koto, taiko and gong synthesized with WebAudio. I could not listen, so I set volume by measuring waveform peaks."
   },
   {
     "ja": "/notes/ranking-free-tier/",
     "en": "/en/notes/ranking-free-tier/",
     "title": "Making a ranking server use only half of the free tier: from 5 calls to 2",
     "date": "2026-10-09",
-    "blurb": "Sushi Stack’s online ranking runs on Cloudflare Workers and D1 within the free tier. I halved its use: calls per play went from 5 to 2 and rows read from 421 to 221. How rank is counted and how the preflight call was removed."
+    "blurb": "A game ranking on Workers and D1: calls per play from 5 to 2, rows read from 421 to 221. Server-side rank counting and removing the preflight call."
   }
 ]
