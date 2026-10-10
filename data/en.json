@@ -202,6 +202,27 @@
     "blurb": "A 50-question anime quiz now gives a result after 12. Measured with 1,000 synthetic respondents: the type mostly matches, but the single recommended title changes a lot."
   },
   {
+    "ja": "/notes/result-screen/",
+    "en": "/en/notes/result-screen/",
+    "title": "The streaming buttons were shown even for titles you could not watch: making the quiz result screen true",
+    "date": "2026-10-09",
+    "blurb": "The anime quiz showed the same two streaming buttons for every title; about 29% were wrong. How I narrowed buttons by availability and fixed image problems."
+  },
+  {
+    "ja": "/notes/first-visit/",
+    "en": "/en/notes/first-visit/",
+    "title": "Cutting six buttons to one: first-time players did not know what to press",
+    "date": "2026-10-09",
+    "blurb": "A browser game title screen had six things to press. I made the first step one button, and fixed saves vanishing inside an iframe and play continuing in a hidden tab."
+  },
+  {
+    "ja": "/notes/sushi-measure/",
+    "en": "/en/notes/sushi-measure/",
+    "title": "“The pile settles at 89%” was wrong: my measurement was what was wrong",
+    "date": "2026-10-09",
+    "blurb": "Rebalancing a merge puzzle, I found my measurement had counted falling pieces. Three causes: a backward size ladder, a pit-shaped tub, and pieces tunneling the floor."
+  },
+  {
     "ja": "/notes/crazygames/",
     "en": "/en/notes/crazygames/",
     "title": "Rejected by CrazyGames with no reason given: I recorded the game and found four problems",

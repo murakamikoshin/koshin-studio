@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>“The pile settles at 89%” was wrong: a bad measurement</title>
+<meta name="description" content="Rebalancing a merge puzzle, I found my measurement had counted falling pieces. Three causes: a backward size ladder, a pit-shaped tub, and pieces tunneling the floor.">
+<meta property="og:title" content="“The pile settles at 89%” was wrong: a bad measurement">
+<meta property="og:description" content="Rebalancing a merge puzzle, I found my measurement had counted falling pieces. Three causes: a backward size ladder, a pit-shaped tub, and pieces tunneling the floor.">
+<meta property="og:type" content="article">
+<meta name="theme-color" content="#fbfaf7">
+<link rel="icon" href="/favicon.ico?v=1697d589" sizes="48x48">
+<link rel="icon" href="/favicon.svg?v=b9d7922f" type="image/svg+xml" sizes="any">
+<link rel="icon" href="/assets/icon/icon-192.png?v=e2566235" type="image/png" sizes="192x192">
+<link rel="apple-touch-icon" href="/assets/icon/icon-180.png?v=84e7f0e6">
+<link rel="manifest" href="/site.webmanifest">
+<script>document.documentElement.className+=" js"</script>
+<link rel="stylesheet" href="/style.css?v=7001672f">
+<meta name="google-adsense-account" content="ca-pub-3863314847163872">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3863314847163872" crossorigin="anonymous"></script>
+<link rel="canonical" href="https://koshinstudio.com/en/notes/sushi-measure/">
+<meta property="og:url" content="https://koshinstudio.com/en/notes/sushi-measure/">
+<meta property="og:site_name" content="Koshin Studio">
+<meta property="og:locale" content="en_US">
+<link rel="alternate" hreflang="ja" href="https://koshinstudio.com/notes/sushi-measure/">
+<link rel="alternate" hreflang="en" href="https://koshinstudio.com/en/notes/sushi-measure/">
+<link rel="alternate" hreflang="x-default" href="https://koshinstudio.com/en/notes/sushi-measure/">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="alternate" type="application/rss+xml" title="Koshin Studio — Notes" href="https://koshinstudio.com/feed.xml">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BlogPosting","headline":"“The pile settles at 89%” was wrong: my measurement was what was wrong","url":"https://koshinstudio.com/en/notes/sushi-measure/","description":"Rebalancing a merge puzzle, I found my measurement had counted falling pieces. Three causes: a backward size ladder, a pit-shaped tub, and pieces tunneling the floor.","datePublished":"2026-10-09","dateModified":"2026-10-09","inLanguage":"en","image":"https://koshinstudio.com/assets/og/og_notes_sushi-measure.jpg","author":{"@id":"https://koshinstudio.com#studio"},"publisher":{"@id":"https://koshinstudio.com#studio"},"mainEntityOfPage":"https://koshinstudio.com/en/notes/sushi-measure/"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Koshin Studio","item":"https://koshinstudio.com/en/"},{"@type":"ListItem","position":2,"name":"“The pile settles at 89%” was wrong: my measurement was what was wrong","item":"https://koshinstudio.com/en/notes/sushi-measure/"}]}]}</script>
+<meta property="og:image" content="https://koshinstudio.com/assets/og/og_notes_sushi-measure.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
+</head>
+<body>
+<canvas id="motes"></canvas>
+
+<header class="site"><div class="wrap">
+  <a class="logo" href="/"><img class="logo-mark" src="/favicon.svg?v=b9d7922f" alt="" width="28" height="28">Koshin Studio</a>
+  <nav><a href="/works/">Works</a><a href="/notes/">Notes</a><a href="/picks/">Picks</a><a href="/calc/">Tools</a><a href="/about/">About</a></nav>
+</div></header>
+
+<main><div class="wrap">
+  <nav class="crumbs" aria-label="You are here"><a href="/en/">Koshin Studio</a><i aria-hidden="true">›</i><span aria-current="page">My measurement was wrong</span></nav>
+  <h1>“The pile settles at 89%” was wrong: my measurement was what was wrong</h1>
+  <div class="rule"></div>
+<!--lang-->
+  <p class="note"><a href="/notes/sushi-measure/" hreflang="ja" lang="ja">日本語版</a></p>
+<!--/lang-->
+  <p class="lead">Development log of Sushi Stack / October 2026</p>
+
+  <p><a href="/en/works/" hreflang="en" lang="en">Sushi Stack</a> is a falling-block puzzle where you bump the same toppings together to merge them and grow them until the tub is full. While adjusting balance, I realized <strong>my own measurement result had been wrong</strong>. What was wrong, how I found it, and how I fixed it are written with the numbers in my commits.</p>
+  <p class="note">The numbers in this article are as of September 7, 2026. After this, the sizes of the pieces were scaled by 0.8 across the board, and changed again on September 10 (the kinds of falling pieces and the shape of the tub) (written in <a href="/notes/anago/" hreflang="ja" lang="ja">the conger eel article</a>, in Japanese). They differ from today’s numbers.</p>
+
+  <h2 class="rv" id="s1">“It settles at 89%” was wrong</h2>
+  <p>My first measurement said “the pile settles at 89% of the tub’s height.” That would mean you can stack without overflowing and never lose.</p>
+  <p>When I measured again, this was <strong>an illusion from counting the falling piece</strong>. The real pile kept rising. But it rose so slowly that <strong>even after dropping 240 pieces, only a third of the tub was filled</strong>. “A game you cannot lose” did not mean safe. It meant <strong>the pile does not grow enough to lose</strong>.</p>
+
+  <h2 class="rv" id="s2">Three causes</h2>
+  <p>The commit splits the causes into three. Each was confirmed by measurement before I removed it.</p>
+  <h3>1. The size ladder went backward in three places</h3>
+  <p>When I lined up the sizes by the radius of a circle of the same area (equivalent radius), in three places the merged piece was smaller than the one before.</p>
+  <ul>
+    <li>Tamago was smaller than shari</li>
+    <li>Otoro was smaller than uni</li>
+    <li>Anago was smaller than otoro</li>
+  </ul>
+  <p>Merging produced a smaller piece than before. On the busiest path, “shari → tamago,” <strong>more than half of what I dropped vanished on the spot</strong>. So I rebuilt it as <strong>a monotonically increasing ladder</strong> with a size ratio of 1.19.</p>
+  <h3>2. The pieces were too small for the tub</h3>
+  <p>I had used the 9:16 portrait tub directly as the drop area, so it was <strong>a vertical pit</strong> rather than a real sushi tub. I made the tub shallow enough to fit in the lower half of the screen, and drew a noren curtain (with the game name) and a plank wall in the empty space above. The deadline (past it, you lose) became the rim of the tub itself.</p>
+  <h3>3. Big pieces fell through the floor</h3>
+  <p>The physical thickness of the walls and floor was only 12, the same as how it looked, so heavier pieces <strong>tunneled</strong> through the single plank and fell out of the tub. I made the thickness 80, and also rounded the position for pieces born from a merge that sink into a wall. I also added a cleanup for spilled pieces (<code>sweepStrays</code>).</p>
+
+  <h2 class="rv" id="s3">The numbers after the fix</h2>
+  <div class="scroll rv"><table>
+    <tr><th>What I measured</th><th class="n">Before</th><th class="n">After</th></tr>
+    <tr><td>How full the tub is after dropping 240</td><td class="n">about a third</td><td class="n">—</td></tr>
+    <tr><td>Drops until game over</td><td class="n">not reached</td><td class="n">385 (rank: journeyman)</td></tr>
+    <tr><td>Score (same conditions)</td><td class="n">7,298</td><td class="n">10,658</td></tr>
+  </table></div>
+  <p>The pile moves up and down in front of the rim and opens up at once with a big merge. The tension this kind of game should have appeared. The score rose because the pieces that had been falling through and vanishing came back. I verified that 9:16 holds from iPhone SE to 15 Pro Max, in landscape and on desktop, that there is no overflow or errors, and that 60 fps holds with a full tub.</p>
+
+  <h2 class="rv" id="s4">What I learned</h2>
+  <blockquote>What you measure is not necessarily what you want to know.</blockquote>
+  <p>The first “89%” counted the falling piece, so it was not measuring “the height of the pile.” I want to record that <strong>when a measurement looks too good</strong>, it is better to doubt what is being counted than the number itself. After the fix, I measured the numbers again with the same method as <a href="/notes/anago/" hreflang="ja" lang="ja">the conger eel article</a> (hundreds of auto-played games).</p>
+  <p class="note">The numbers in this article come from my commit record (September 7, 2026).</p>
+
+  <p class="note">This is the English version of <a href="/notes/sushi-measure/" hreflang="ja" lang="ja">the original Japanese article</a>.</p>
+
+  <div class="rule" style="margin:40px 0 22px"></div>
+  <p class="eyebrow">More in English</p>
+  <ul class="plain">
+    <li><a href="/en/">All English pages</a></li>
+  </ul>
+</div>
+</main>
+
+<footer class="site"><div class="wrap"></div></footer>
+<script src="/motion.js?v=1e7447ec" defer></script>
+</body>
+</html>

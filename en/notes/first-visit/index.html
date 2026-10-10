@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Six buttons to one: a first-time player screen</title>
+<meta name="description" content="A browser game title screen had six things to press. I made the first step one button, and fixed saves vanishing inside an iframe and play continuing in a hidden tab.">
+<meta property="og:title" content="Six buttons to one: a first-time player screen">
+<meta property="og:description" content="A browser game title screen had six things to press. I made the first step one button, and fixed saves vanishing inside an iframe and play continuing in a hidden tab.">
+<meta property="og:type" content="article">
+<meta name="theme-color" content="#fbfaf7">
+<link rel="icon" href="/favicon.ico?v=1697d589" sizes="48x48">
+<link rel="icon" href="/favicon.svg?v=b9d7922f" type="image/svg+xml" sizes="any">
+<link rel="icon" href="/assets/icon/icon-192.png?v=e2566235" type="image/png" sizes="192x192">
+<link rel="apple-touch-icon" href="/assets/icon/icon-180.png?v=84e7f0e6">
+<link rel="manifest" href="/site.webmanifest">
+<script>document.documentElement.className+=" js"</script>
+<link rel="stylesheet" href="/style.css?v=7001672f">
+<meta name="google-adsense-account" content="ca-pub-3863314847163872">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3863314847163872" crossorigin="anonymous"></script>
+<link rel="canonical" href="https://koshinstudio.com/en/notes/first-visit/">
+<meta property="og:url" content="https://koshinstudio.com/en/notes/first-visit/">
+<meta property="og:site_name" content="Koshin Studio">
+<meta property="og:locale" content="en_US">
+<link rel="alternate" hreflang="ja" href="https://koshinstudio.com/notes/first-visit/">
+<link rel="alternate" hreflang="en" href="https://koshinstudio.com/en/notes/first-visit/">
+<link rel="alternate" hreflang="x-default" href="https://koshinstudio.com/en/notes/first-visit/">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="alternate" type="application/rss+xml" title="Koshin Studio — Notes" href="https://koshinstudio.com/feed.xml">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BlogPosting","headline":"Cutting six buttons to one: first-time players did not know what to press","url":"https://koshinstudio.com/en/notes/first-visit/","description":"A browser game title screen had six things to press. I made the first step one button, and fixed saves vanishing inside an iframe and play continuing in a hidden tab.","datePublished":"2026-10-09","dateModified":"2026-10-09","inLanguage":"en","image":"https://koshinstudio.com/assets/og/og_notes_first-visit.jpg","author":{"@id":"https://koshinstudio.com#studio"},"publisher":{"@id":"https://koshinstudio.com#studio"},"mainEntityOfPage":"https://koshinstudio.com/en/notes/first-visit/"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Koshin Studio","item":"https://koshinstudio.com/en/"},{"@type":"ListItem","position":2,"name":"Cutting six buttons to one: first-time players did not know what to press","item":"https://koshinstudio.com/en/notes/first-visit/"}]}]}</script>
+<meta property="og:image" content="https://koshinstudio.com/assets/og/og_notes_first-visit.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
+</head>
+<body>
+<canvas id="motes"></canvas>
+
+<header class="site"><div class="wrap">
+  <a class="logo" href="/"><img class="logo-mark" src="/favicon.svg?v=b9d7922f" alt="" width="28" height="28">Koshin Studio</a>
+  <nav><a href="/works/">Works</a><a href="/notes/">Notes</a><a href="/picks/">Picks</a><a href="/calc/">Tools</a><a href="/about/">About</a></nav>
+</div></header>
+
+<main><div class="wrap">
+  <nav class="crumbs" aria-label="You are here"><a href="/en/">Koshin Studio</a><i aria-hidden="true">›</i><span aria-current="page">Six buttons to one</span></nav>
+  <h1>Cutting six buttons to one: first-time players did not know what to press</h1>
+  <div class="rule"></div>
+<!--lang-->
+  <p class="note"><a href="/notes/first-visit/" hreflang="ja" lang="ja">日本語版</a></p>
+<!--/lang-->
+  <p class="lead">Development log of Sushi Stack / October 2026</p>
+
+  <p>The title screen of <a href="/en/works/" hreflang="en" lang="en">Sushi Stack</a> had <strong>six</strong> things you could press. Someone opening it for the first time did not know which to press. For the game portal launch, I narrowed “what a first-time player presses first” to one. I also wrote down, from my commits, two problems I fixed at the same time: saves vanishing, and what happens when you leave the screen.</p>
+
+  <h2 class="rv" id="s1">What a portal measures you by</h2>
+  <p>According to the commit, the portal I decided to submit to (CrazyGames) first has a trial stage (Basic Launch) shown to a limited audience for two weeks. Whether you move up to the next stage (Full Launch) is decided by these three things during that time.</p>
+  <ul>
+    <li>The share of people who start playing</li>
+    <li>Average time played</li>
+    <li>The share of people who come back</li>
+  </ul>
+  <p>Ads are disabled during this trial, so these are all that matters now. In other words, I had to improve two things by design: <strong>“people who open it start playing” and “they come back.”</strong></p>
+
+  <h2 class="rv" id="s2">I narrowed it to one thing to press</h2>
+  <p>The title had six: Play, Menu, Ranking, Encyclopedia, Words and Info. To a first-timer, they all look equally heavy. So I rearranged it:</p>
+  <ul>
+    <li>One large “<strong>Play</strong>.”</li>
+    <li>“Menu” as a thin second option.</li>
+    <li>Ranking, Encyclopedia, Words and Info are folded into a thin row below.</li>
+  </ul>
+  <p>The ranking and the encyclopedia are “reasons to come back,” but <strong>they are not the first step the first time</strong>. That was my judgment.</p>
+
+  <h2 class="rv" id="s3">From the second visit, show that there is more</h2>
+  <p>The title shows the high score and how much of the encyclopedia is filled. But <strong>not to first-timers</strong>, because showing 0 points and 0 kinds means nothing.</p>
+
+  <h2 class="rv" id="s4">Inside the portal, saves vanish</h2>
+  <p>The portal runs the game in an <code>iframe</code> on a different domain. In some browsers, saving to the device (<code>localStorage</code>) is blocked inside it, and <strong>high scores and the encyclopedia vanish every time</strong>.</p>
+  <p>If the portal provides a storage shelf (CrazyGames’ Data Module), I save there; if not, I keep it on the device as before. The portal’s part arrives later, so it keeps looking until it is found.</p>
+  <p>The way I verified it was to plug in a fake storage shelf. When the shelf exists, it writes there and not to the device. Even in an environment where saving to the device throws an error, it starts and can be played.</p>
+
+  <h2 class="rv" id="s5">Leave the screen and it stops</h2>
+  <p>Until then, when you moved to another tab, <strong>only the deadline kept advancing</strong>, and it was already over when you came back. Now, when sent to the background, it pauses and the sound stops too. I actually fired the event for the screen being hidden (<code>visibilitychange</code>) and confirmed that it stops, that the score does not move after 1.5 seconds, and that it resumes.</p>
+
+  <h2 class="rv" id="s6">What I verified</h2>
+  <ul>
+    <li>In all 14 languages, it fits on an iPhone SE screen.</li>
+    <li>Across 7 screens × 3 languages, the 9:16 aspect ratio does not break.</li>
+    <li>Two full playthroughs (163 moves in Japanese, 263 in English) at 60 fps with 0 errors.</li>
+  </ul>
+
+  <h2 class="rv" id="s7">What I learned</h2>
+  <blockquote>What a first-timer needs is not choices but a first step.</blockquote>
+  <ul>
+    <li><strong>“A reason to come back” and “the first step” are different things.</strong> The ranking and the encyclopedia have value, but they are not what a first-timer presses first.</li>
+    <li><strong>Saving may be unavailable depending on where it runs.</strong> That it worked on my machine does not guarantee it works inside a frame.</li>
+    <li><strong>Design what happens when someone leaves the screen.</strong> It is easy to build assuming people are watching all the time.</li>
+  </ul>
+  <p class="note">This article is written from my commit record (September 7, 2026). The portal’s review conditions are as stated in the commit. After this, the game was rejected in review (<a href="/en/notes/crazygames/" hreflang="en" lang="en">Rejected by CrazyGames</a>).</p>
+
+  <p class="note">This is the English version of <a href="/notes/first-visit/" hreflang="ja" lang="ja">the original Japanese article</a>.</p>
+
+  <div class="rule" style="margin:40px 0 22px"></div>
+  <p class="eyebrow">More in English</p>
+  <ul class="plain">
+    <li><a href="/en/">All English pages</a></li>
+  </ul>
+</div>
+</main>
+
+<footer class="site"><div class="wrap"></div></footer>
+<script src="/motion.js?v=1e7447ec" defer></script>
+</body>
+</html>

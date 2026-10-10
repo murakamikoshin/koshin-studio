@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Fixing an anime quiz result screen: 29% wrong links</title>
+<meta name="description" content="The anime quiz showed the same two streaming buttons for every title; about 29% were wrong. How I narrowed buttons by availability and fixed image problems.">
+<meta property="og:title" content="Fixing an anime quiz result screen: 29% wrong links">
+<meta property="og:description" content="The anime quiz showed the same two streaming buttons for every title; about 29% were wrong. How I narrowed buttons by availability and fixed image problems.">
+<meta property="og:type" content="article">
+<meta name="theme-color" content="#fbfaf7">
+<link rel="icon" href="/favicon.ico?v=1697d589" sizes="48x48">
+<link rel="icon" href="/favicon.svg?v=b9d7922f" type="image/svg+xml" sizes="any">
+<link rel="icon" href="/assets/icon/icon-192.png?v=e2566235" type="image/png" sizes="192x192">
+<link rel="apple-touch-icon" href="/assets/icon/icon-180.png?v=84e7f0e6">
+<link rel="manifest" href="/site.webmanifest">
+<script>document.documentElement.className+=" js"</script>
+<link rel="stylesheet" href="/style.css?v=7001672f">
+<meta name="google-adsense-account" content="ca-pub-3863314847163872">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3863314847163872" crossorigin="anonymous"></script>
+<link rel="canonical" href="https://koshinstudio.com/en/notes/result-screen/">
+<meta property="og:url" content="https://koshinstudio.com/en/notes/result-screen/">
+<meta property="og:site_name" content="Koshin Studio">
+<meta property="og:locale" content="en_US">
+<link rel="alternate" hreflang="ja" href="https://koshinstudio.com/notes/result-screen/">
+<link rel="alternate" hreflang="en" href="https://koshinstudio.com/en/notes/result-screen/">
+<link rel="alternate" hreflang="x-default" href="https://koshinstudio.com/en/notes/result-screen/">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="alternate" type="application/rss+xml" title="Koshin Studio — Notes" href="https://koshinstudio.com/feed.xml">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BlogPosting","headline":"The streaming buttons were shown even for titles you could not watch: making the quiz result screen true","url":"https://koshinstudio.com/en/notes/result-screen/","description":"The anime quiz showed the same two streaming buttons for every title; about 29% were wrong. How I narrowed buttons by availability and fixed image problems.","datePublished":"2026-10-09","dateModified":"2026-10-09","inLanguage":"en","image":"https://koshinstudio.com/assets/og/og_notes_result-screen.jpg","author":{"@id":"https://koshinstudio.com#studio"},"publisher":{"@id":"https://koshinstudio.com#studio"},"mainEntityOfPage":"https://koshinstudio.com/en/notes/result-screen/"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Koshin Studio","item":"https://koshinstudio.com/en/"},{"@type":"ListItem","position":2,"name":"The streaming buttons were shown even for titles you could not watch: making the quiz result screen true","item":"https://koshinstudio.com/en/notes/result-screen/"}]}]}</script>
+<meta property="og:image" content="https://koshinstudio.com/assets/og/og_notes_result-screen.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
+</head>
+<body>
+<canvas id="motes"></canvas>
+
+<header class="site"><div class="wrap">
+  <a class="logo" href="/"><img class="logo-mark" src="/favicon.svg?v=b9d7922f" alt="" width="28" height="28">Koshin Studio</a>
+  <nav><a href="/works/">Works</a><a href="/notes/">Notes</a><a href="/picks/">Picks</a><a href="/calc/">Tools</a><a href="/about/">About</a></nav>
+</div></header>
+
+<main><div class="wrap">
+  <nav class="crumbs" aria-label="You are here"><a href="/en/">Koshin Studio</a><i aria-hidden="true">›</i><span aria-current="page">Making the result screen true</span></nav>
+  <h1>The streaming buttons were shown even for titles you could not watch: making the quiz result screen true</h1>
+  <div class="rule"></div>
+<!--lang-->
+  <p class="note"><a href="/notes/result-screen/" hreflang="ja" lang="ja">日本語版</a></p>
+<!--/lang-->
+  <p class="lead">Development log of the Anime Type Diagnosis / October 2026</p>
+
+  <p>The result screen of the <a href="/en/works/shindananime/" hreflang="en" lang="en">Hardcore Anime Type Diagnosis</a> shows the cover of your title of fate and “where to watch” buttons. When I first built it, both the buttons and the images <strong>showed things that differed from reality</strong>. I recounted with my own data how large the difference was, and I am writing it down.</p>
+
+  <h2 class="rv" id="s1">The streaming buttons were the same two for every title</h2>
+  <p>In the first version, the streaming buttons on the result screen were <strong>only DMM TV and U-NEXT</strong>, the same two for any title. Pressing a button goes to that service’s search page. But the title is not necessarily available there.</p>
+  <p>The quiz data includes, for each title, “which services stream it” (Filmarks streaming information). Of 6,091 titles, <strong>4,489 (73.7%)</strong> have this. Counting whether the two buttons of that time really pointed to a place where you can watch, for these 4,489:</p>
+  <div class="scroll rv"><table>
+    <tr><th>The two buttons of that time</th><th class="n">Titles</th><th class="n">Share</th></tr>
+    <tr><td>Both point to a place you can watch</td><td class="n">3,192</td><td class="n">71.1%</td></tr>
+    <tr><td>At least one points to a place you cannot watch</td><td class="n">1,297</td><td class="n">28.9%</td></tr>
+    <tr><td>&nbsp;&nbsp;of which both are places you cannot watch</td><td class="n">295</td><td class="n">6.6%</td></tr>
+  </table></div>
+  <p>For one title in three or four, pressing the button did not find the title. It ended in “page not found.”</p>
+
+  <h2 class="rv" id="s2">The fix: narrow by real availability</h2>
+  <ul>
+    <li>I <strong>increased the services from 2 to 12</strong> (Netflix, Prime Video, Disney+, U-NEXT, Hulu, DMM TV, ABEMA, d Anime Store, FOD, TELASA, Lemino, Bandai Channel). I opened the search URLs in a browser to check them.</li>
+    <li>Buttons are made <strong>only for services in that title’s availability</strong>.</li>
+    <li>But showing all of them would stretch the result card too tall. I sort by major services first (priority Netflix, Prime Video, Disney+, U-NEXT, Hulu) and show <strong>only the top 3</strong>.</li>
+    <li>For titles with unknown availability (the remaining 26.3%), there is no way to check, so I show the top 3 by popularity as before.</li>
+  </ul>
+  <p>Along the way I noticed that DMM TV’s search URL returned 404 (I changed <code>/vod/search/</code> to <code>/vod/list/</code>).</p>
+  <p class="note">Availability is as of the time the data was collected. Streaming changes, so a title may not still be there when you press the button.</p>
+
+  <h2 class="rv" id="s3">The same thing was happening with images</h2>
+  <p>Some cover images were wrong or did not appear.</p>
+  <ul>
+    <li><strong>http images do not appear.</strong> The quiz is served over https. If an image URL is <code>http://</code>, the browser blocks it as mixed content. (One official site had no certificate at all.) I treat http images as “none” and fill from an https image that comes later.</li>
+    <li><strong>Placeholder pictures were shown as real.</strong> “No image” placeholders and generic images shared by an official site are not the actual art. I now reject them.</li>
+    <li><strong>Logos got mixed in.</strong> Filmarks’ sharing image is a 240×240 square, and if the poster is not square, the company’s logo is put in the margin. I changed it to prefer another image embedded in the page (260×364, kept in the poster ratio). After re-fetching all 7,247 entries, the number using a poster-ratio image rose to 4,477 (89 are still in the old shape).</li>
+    <li><strong>No image at all.</strong> Most of the cause was that Annict and Filmarks split titles differently, so matching titles failed. By filling from images of the same series, the share with an image went <strong>from 77% to 86%</strong>.</li>
+  </ul>
+  <p>In the end, <strong>92.5%</strong> of the 6,091 titles used by the quiz have an image.</p>
+
+  <h2 class="rv" id="s4">What I learned</h2>
+  <blockquote>On a result screen, trust is decided less by looks than by “what happens when I press it.”</blockquote>
+  <ul>
+    <li><strong>Showing the same thing to everyone is easy, but wrong nearly 3 times in 10.</strong> Look at the real situation (availability) and narrow.</li>
+    <li><strong>Decide what to show when you “don’t know.”</strong> For the 26.3% with unknown availability, I fell back to the normal top 3.</li>
+    <li><strong>Reject what is not the real thing.</strong> Placeholders, generic images and images with a logo are worse than a blank, I decided.</li>
+  </ul>
+  <p class="note">The shares in this article were counted on the quiz data (6,091 titles) as of October 8, 2026. The image counts come from the commit record (September 25, 2026).</p>
+
+  <p class="note">This is the English version of <a href="/notes/result-screen/" hreflang="ja" lang="ja">the original Japanese article</a>.</p>
+
+  <div class="rule" style="margin:40px 0 22px"></div>
+  <p class="eyebrow">More in English</p>
+  <ul class="plain">
+    <li><a href="/en/">All English pages</a></li>
+  </ul>
+</div>
+</main>
+
+<footer class="site"><div class="wrap"></div></footer>
+<script src="/motion.js?v=1e7447ec" defer></script>
+</body>
+</html>

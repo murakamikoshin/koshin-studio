@@ -118,5 +118,17 @@
  "shindan12": {
   "title": "Anime quiz: 12 questions vs 50, how much changes",
   "desc": "A 50-question anime quiz now gives a result after 12. Measured with 1,000 synthetic respondents: the type mostly matches, but the single recommended title changes a lot."
+ },
+ "result-screen": {
+  "title": "Fixing an anime quiz result screen: 29% wrong links",
+  "desc": "The anime quiz showed the same two streaming buttons for every title; about 29% were wrong. How I narrowed buttons by availability and fixed image problems."
+ },
+ "first-visit": {
+  "title": "Six buttons to one: a first-time player screen",
+  "desc": "A browser game title screen had six things to press. I made the first step one button, and fixed saves vanishing inside an iframe and play continuing in a hidden tab."
+ },
+ "sushi-measure": {
+  "title": "“The pile settles at 89%” was wrong: a bad measurement",
+  "desc": "Rebalancing a merge puzzle, I found my measurement had counted falling pieces. Three causes: a backward size ladder, a pit-shaped tub, and pieces tunneling the floor."
  }
 }

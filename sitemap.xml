@@ -16,7 +16,7 @@
   <url><loc>https://koshinstudio.com/en/calc/gacha/</loc><lastmod>2026-10-09</lastmod><priority>0.5</priority></url>
   <url><loc>https://koshinstudio.com/en/</loc><lastmod>2026-10-10</lastmod><priority>0.5</priority></url>
   <url><loc>https://koshinstudio.com/en/notes/adgap/</loc><lastmod>2026-10-10</lastmod><priority>0.5</priority></url>
-  <url><loc>https://koshinstudio.com/en/notes/anime-db/</loc><priority>0.5</priority></url>
+  <url><loc>https://koshinstudio.com/en/notes/anime-db/</loc><lastmod>2026-10-10</lastmod><priority>0.5</priority></url>
   <url><loc>https://koshinstudio.com/en/notes/apple-signin/</loc><lastmod>2026-10-10</lastmod><priority>0.5</priority></url>
   <url><loc>https://koshinstudio.com/en/notes/ascii-text/</loc><lastmod>2026-10-10</lastmod><priority>0.5</priority></url>
   <url><loc>https://koshinstudio.com/en/notes/blocked-page/</loc><lastmod>2026-10-10</lastmod><priority>0.5</priority></url>
@@ -27,17 +27,20 @@
   <url><loc>https://koshinstudio.com/en/notes/deploy-gotchas/</loc><lastmod>2026-10-10</lastmod><priority>0.5</priority></url>
   <url><loc>https://koshinstudio.com/en/notes/dup-zero/</loc><lastmod>2026-10-10</lastmod><priority>0.5</priority></url>
   <url><loc>https://koshinstudio.com/en/notes/fail-open/</loc><lastmod>2026-10-10</lastmod><priority>0.5</priority></url>
+  <url><loc>https://koshinstudio.com/en/notes/first-visit/</loc><priority>0.5</priority></url>
   <url><loc>https://koshinstudio.com/en/notes/gemini-migration/</loc><lastmod>2026-10-10</lastmod><priority>0.5</priority></url>
   <url><loc>https://koshinstudio.com/en/notes/hosting-compare/</loc><lastmod>2026-10-10</lastmod><priority>0.5</priority></url>
   <url><loc>https://koshinstudio.com/en/notes/ios-sdk-compare/</loc><lastmod>2026-10-10</lastmod><priority>0.5</priority></url>
   <url><loc>https://koshinstudio.com/en/notes/itms-91064/</loc><lastmod>2026-10-09</lastmod><priority>0.5</priority></url>
   <url><loc>https://koshinstudio.com/en/notes/logo-pop/</loc><lastmod>2026-10-10</lastmod><priority>0.5</priority></url>
-  <url><loc>https://koshinstudio.com/en/notes/match-percent/</loc><priority>0.5</priority></url>
+  <url><loc>https://koshinstudio.com/en/notes/match-percent/</loc><lastmod>2026-10-10</lastmod><priority>0.5</priority></url>
   <url><loc>https://koshinstudio.com/en/notes/ranking-free-tier/</loc><lastmod>2026-10-10</lastmod><priority>0.5</priority></url>
+  <url><loc>https://koshinstudio.com/en/notes/result-screen/</loc><priority>0.5</priority></url>
   <url><loc>https://koshinstudio.com/en/notes/review-info-needed/</loc><lastmod>2026-10-10</lastmod><priority>0.5</priority></url>
   <url><loc>https://koshinstudio.com/en/notes/scrape-cost/</loc><lastmod>2026-10-10</lastmod><priority>0.5</priority></url>
-  <url><loc>https://koshinstudio.com/en/notes/shindan12/</loc><priority>0.5</priority></url>
+  <url><loc>https://koshinstudio.com/en/notes/shindan12/</loc><lastmod>2026-10-10</lastmod><priority>0.5</priority></url>
   <url><loc>https://koshinstudio.com/en/notes/stopwatch-rank/</loc><lastmod>2026-10-10</lastmod><priority>0.5</priority></url>
+  <url><loc>https://koshinstudio.com/en/notes/sushi-measure/</loc><priority>0.5</priority></url>
   <url><loc>https://koshinstudio.com/en/notes/torecadash-ai/</loc><lastmod>2026-10-10</lastmod><priority>0.5</priority></url>
   <url><loc>https://koshinstudio.com/en/notes/torecadash-ci/</loc><lastmod>2026-10-10</lastmod><priority>0.5</priority></url>
   <url><loc>https://koshinstudio.com/en/notes/torecadash-review/</loc><lastmod>2026-10-10</lastmod><priority>0.5</priority></url>
@@ -68,7 +71,7 @@
   <url><loc>https://koshinstudio.com/ko/works/torecadash/</loc><lastmod>2026-10-10</lastmod><priority>0.5</priority></url>
   <url><loc>https://koshinstudio.com/notes/adgap/</loc><lastmod>2026-10-10</lastmod><priority>0.8</priority></url>
   <url><loc>https://koshinstudio.com/notes/anago/</loc><lastmod>2026-10-09</lastmod><priority>0.8</priority></url>
-  <url><loc>https://koshinstudio.com/notes/anime-db/</loc><lastmod>2026-10-09</lastmod><priority>0.8</priority></url>
+  <url><loc>https://koshinstudio.com/notes/anime-db/</loc><lastmod>2026-10-10</lastmod><priority>0.8</priority></url>
   <url><loc>https://koshinstudio.com/notes/apple-signin/</loc><lastmod>2026-10-10</lastmod><priority>0.8</priority></url>
   <url><loc>https://koshinstudio.com/notes/ascii-text/</loc><lastmod>2026-10-10</lastmod><priority>0.8</priority></url>
   <url><loc>https://koshinstudio.com/notes/blocked-page/</loc><lastmod>2026-10-10</lastmod><priority>0.8</priority></url>
@@ -88,13 +91,13 @@
   <url><loc>https://koshinstudio.com/notes/ios-sdk-compare/</loc><lastmod>2026-10-10</lastmod><priority>0.8</priority></url>
   <url><loc>https://koshinstudio.com/notes/itms-91064/</loc><lastmod>2026-10-09</lastmod><priority>0.8</priority></url>
   <url><loc>https://koshinstudio.com/notes/logo-pop/</loc><lastmod>2026-10-10</lastmod><priority>0.8</priority></url>
-  <url><loc>https://koshinstudio.com/notes/match-percent/</loc><lastmod>2026-10-09</lastmod><priority>0.8</priority></url>
+  <url><loc>https://koshinstudio.com/notes/match-percent/</loc><lastmod>2026-10-10</lastmod><priority>0.8</priority></url>
   <url><loc>https://koshinstudio.com/notes/qiita-post-interval/</loc><lastmod>2026-10-09</lastmod><priority>0.8</priority></url>
   <url><loc>https://koshinstudio.com/notes/ranking-free-tier/</loc><lastmod>2026-10-10</lastmod><priority>0.8</priority></url>
   <url><loc>https://koshinstudio.com/notes/result-screen/</loc><lastmod>2026-10-09</lastmod><priority>0.8</priority></url>
   <url><loc>https://koshinstudio.com/notes/review-info-needed/</loc><lastmod>2026-10-09</lastmod><priority>0.8</priority></url>
   <url><loc>https://koshinstudio.com/notes/scrape-cost/</loc><lastmod>2026-10-10</lastmod><priority>0.8</priority></url>
-  <url><loc>https://koshinstudio.com/notes/shindan12/</loc><lastmod>2026-10-09</lastmod><priority>0.8</priority></url>
+  <url><loc>https://koshinstudio.com/notes/shindan12/</loc><lastmod>2026-10-10</lastmod><priority>0.8</priority></url>
   <url><loc>https://koshinstudio.com/notes/stopwatch-rank/</loc><lastmod>2026-10-10</lastmod><priority>0.8</priority></url>
   <url><loc>https://koshinstudio.com/notes/sushi-measure/</loc><lastmod>2026-10-09</lastmod><priority>0.8</priority></url>
   <url><loc>https://koshinstudio.com/notes/torecadash-9set/</loc><lastmod>2026-10-09</lastmod><priority>0.8</priority></url>

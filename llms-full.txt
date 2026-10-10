@@ -431,6 +431,8 @@ URL: https://koshinstudio.com/notes/first-visit/
 
 # 押すものを六つから一つに絞った：初めての人は、どれを押せばいいか分からなかった
 
+  English version (https://koshinstudio.com/en/notes/first-visit/)
+
   すし積む 開発の記録 ／ 2026年10月
 
   すし積む (https://koshinstudio.com/works/sushitsumu/)のタイトル画面には、押せるものが、六つ並んでいました。初めて開いた人は、どれを押せばいいか、分からない状態です。ゲームポータルに出すにあたって、「初めての人が、まず何を押すか」を、一つに絞りました。そのときに一緒に直した、保存が消える問題と、画面を離れたときの問題も、コミットの記録で書きます。
@@ -1253,6 +1255,8 @@ URL: https://koshinstudio.com/notes/result-screen/
 
 # 配信ボタンは、見られない作品にも出ていた：診断の結果画面を「本当」に寄せる
 
+  English version (https://koshinstudio.com/en/notes/result-screen/)
+
   ガチアニメ診断 開発の記録 ／ 2026年10月
 
   ガチアニメ診断 (https://koshinstudio.com/works/shindananime/)の結果画面には、運命の1作の表紙と、「見られるところ」のボタンが並びます。作ったばかりのとき、このボタンも画像も、実際とは違うものを出していました。どれくらい違っていたのかを、手元のデータで数え直して、書き残します。
@@ -1995,6 +1999,8 @@ URL: https://koshinstudio.com/notes/crazygames/
 URL: https://koshinstudio.com/notes/sushi-measure/
 
 # 「山は89%で落ち着く」は誤りだった：測定のほうが間違っていた話
+
+  English version (https://koshinstudio.com/en/notes/sushi-measure/)
 
   すし積む 開発の記録 ／ 2026年10月
 
@@ -5504,6 +5510,230 @@ URL: https://koshinstudio.com/en/notes/shindan12/
 
 ---
 
+URL: https://koshinstudio.com/en/notes/result-screen/
+
+# The streaming buttons were shown even for titles you could not watch: making the quiz result screen true
+
+  日本語版 (https://koshinstudio.com/notes/result-screen/)
+
+  Development log of the Anime Type Diagnosis / October 2026
+
+  The result screen of the Hardcore Anime Type Diagnosis (https://koshinstudio.com/en/works/shindananime/) shows the cover of your title of fate and “where to watch” buttons. When I first built it, both the buttons and the images showed things that differed from reality. I recounted with my own data how large the difference was, and I am writing it down.
+
+## The streaming buttons were the same two for every title
+
+  In the first version, the streaming buttons on the result screen were only DMM TV and U-NEXT, the same two for any title. Pressing a button goes to that service’s search page. But the title is not necessarily available there.
+
+  The quiz data includes, for each title, “which services stream it” (Filmarks streaming information). Of 6,091 titles, 4,489 (73.7%) have this. Counting whether the two buttons of that time really pointed to a place where you can watch, for these 4,489:
+
+    The two buttons of that time | Titles | Share
+
+    Both point to a place you can watch | 3,192 | 71.1%
+
+    At least one points to a place you cannot watch | 1,297 | 28.9%
+
+      of which both are places you cannot watch | 295 | 6.6%
+
+  For one title in three or four, pressing the button did not find the title. It ended in “page not found.”
+
+## The fix: narrow by real availability
+
+- I increased the services from 2 to 12 (Netflix, Prime Video, Disney+, U-NEXT, Hulu, DMM TV, ABEMA, d Anime Store, FOD, TELASA, Lemino, Bandai Channel). I opened the search URLs in a browser to check them.
+
+- Buttons are made only for services in that title’s availability.
+
+- But showing all of them would stretch the result card too tall. I sort by major services first (priority Netflix, Prime Video, Disney+, U-NEXT, Hulu) and show only the top 3.
+
+- For titles with unknown availability (the remaining 26.3%), there is no way to check, so I show the top 3 by popularity as before.
+
+  Along the way I noticed that DMM TV’s search URL returned 404 (I changed /vod/search/ to /vod/list/).
+
+  Availability is as of the time the data was collected. Streaming changes, so a title may not still be there when you press the button.
+
+## The same thing was happening with images
+
+  Some cover images were wrong or did not appear.
+
+- http images do not appear. The quiz is served over https. If an image URL is http://, the browser blocks it as mixed content. (One official site had no certificate at all.) I treat http images as “none” and fill from an https image that comes later.
+
+- Placeholder pictures were shown as real. “No image” placeholders and generic images shared by an official site are not the actual art. I now reject them.
+
+- Logos got mixed in. Filmarks’ sharing image is a 240×240 square, and if the poster is not square, the company’s logo is put in the margin. I changed it to prefer another image embedded in the page (260×364, kept in the poster ratio). After re-fetching all 7,247 entries, the number using a poster-ratio image rose to 4,477 (89 are still in the old shape).
+
+- No image at all. Most of the cause was that Annict and Filmarks split titles differently, so matching titles failed. By filling from images of the same series, the share with an image went from 77% to 86%.
+
+  In the end, 92.5% of the 6,091 titles used by the quiz have an image.
+
+## What I learned
+
+> On a result screen, trust is decided less by looks than by “what happens when I press it.”
+
+- Showing the same thing to everyone is easy, but wrong nearly 3 times in 10. Look at the real situation (availability) and narrow.
+
+- Decide what to show when you “don’t know.” For the 26.3% with unknown availability, I fell back to the normal top 3.
+
+- Reject what is not the real thing. Placeholders, generic images and images with a logo are worse than a blank, I decided.
+
+  The shares in this article were counted on the quiz data (6,091 titles) as of October 8, 2026. The image counts come from the commit record (September 25, 2026).
+
+  This is the English version of the original Japanese article (https://koshinstudio.com/notes/result-screen/).
+
+  More in English
+
+- All English pages (https://koshinstudio.com/en/)
+
+
+---
+
+URL: https://koshinstudio.com/en/notes/first-visit/
+
+# Cutting six buttons to one: first-time players did not know what to press
+
+  日本語版 (https://koshinstudio.com/notes/first-visit/)
+
+  Development log of Sushi Stack / October 2026
+
+  The title screen of Sushi Stack (https://koshinstudio.com/en/works/) had six things you could press. Someone opening it for the first time did not know which to press. For the game portal launch, I narrowed “what a first-time player presses first” to one. I also wrote down, from my commits, two problems I fixed at the same time: saves vanishing, and what happens when you leave the screen.
+
+## What a portal measures you by
+
+  According to the commit, the portal I decided to submit to (CrazyGames) first has a trial stage (Basic Launch) shown to a limited audience for two weeks. Whether you move up to the next stage (Full Launch) is decided by these three things during that time.
+
+- The share of people who start playing
+
+- Average time played
+
+- The share of people who come back
+
+  Ads are disabled during this trial, so these are all that matters now. In other words, I had to improve two things by design: “people who open it start playing” and “they come back.”
+
+## I narrowed it to one thing to press
+
+  The title had six: Play, Menu, Ranking, Encyclopedia, Words and Info. To a first-timer, they all look equally heavy. So I rearranged it:
+
+- One large “Play.”
+
+- “Menu” as a thin second option.
+
+- Ranking, Encyclopedia, Words and Info are folded into a thin row below.
+
+  The ranking and the encyclopedia are “reasons to come back,” but they are not the first step the first time. That was my judgment.
+
+## From the second visit, show that there is more
+
+  The title shows the high score and how much of the encyclopedia is filled. But not to first-timers, because showing 0 points and 0 kinds means nothing.
+
+## Inside the portal, saves vanish
+
+  The portal runs the game in an iframe on a different domain. In some browsers, saving to the device (localStorage) is blocked inside it, and high scores and the encyclopedia vanish every time.
+
+  If the portal provides a storage shelf (CrazyGames’ Data Module), I save there; if not, I keep it on the device as before. The portal’s part arrives later, so it keeps looking until it is found.
+
+  The way I verified it was to plug in a fake storage shelf. When the shelf exists, it writes there and not to the device. Even in an environment where saving to the device throws an error, it starts and can be played.
+
+## Leave the screen and it stops
+
+  Until then, when you moved to another tab, only the deadline kept advancing, and it was already over when you came back. Now, when sent to the background, it pauses and the sound stops too. I actually fired the event for the screen being hidden (visibilitychange) and confirmed that it stops, that the score does not move after 1.5 seconds, and that it resumes.
+
+## What I verified
+
+- In all 14 languages, it fits on an iPhone SE screen.
+
+- Across 7 screens × 3 languages, the 9:16 aspect ratio does not break.
+
+- Two full playthroughs (163 moves in Japanese, 263 in English) at 60 fps with 0 errors.
+
+## What I learned
+
+> What a first-timer needs is not choices but a first step.
+
+- “A reason to come back” and “the first step” are different things. The ranking and the encyclopedia have value, but they are not what a first-timer presses first.
+
+- Saving may be unavailable depending on where it runs. That it worked on my machine does not guarantee it works inside a frame.
+
+- Design what happens when someone leaves the screen. It is easy to build assuming people are watching all the time.
+
+  This article is written from my commit record (September 7, 2026). The portal’s review conditions are as stated in the commit. After this, the game was rejected in review (Rejected by CrazyGames (https://koshinstudio.com/en/notes/crazygames/)).
+
+  This is the English version of the original Japanese article (https://koshinstudio.com/notes/first-visit/).
+
+  More in English
+
+- All English pages (https://koshinstudio.com/en/)
+
+
+---
+
+URL: https://koshinstudio.com/en/notes/sushi-measure/
+
+# “The pile settles at 89%” was wrong: my measurement was what was wrong
+
+  日本語版 (https://koshinstudio.com/notes/sushi-measure/)
+
+  Development log of Sushi Stack / October 2026
+
+  Sushi Stack (https://koshinstudio.com/en/works/) is a falling-block puzzle where you bump the same toppings together to merge them and grow them until the tub is full. While adjusting balance, I realized my own measurement result had been wrong. What was wrong, how I found it, and how I fixed it are written with the numbers in my commits.
+
+  The numbers in this article are as of September 7, 2026. After this, the sizes of the pieces were scaled by 0.8 across the board, and changed again on September 10 (the kinds of falling pieces and the shape of the tub) (written in the conger eel article (https://koshinstudio.com/notes/anago/), in Japanese). They differ from today’s numbers.
+
+## “It settles at 89%” was wrong
+
+  My first measurement said “the pile settles at 89% of the tub’s height.” That would mean you can stack without overflowing and never lose.
+
+  When I measured again, this was an illusion from counting the falling piece. The real pile kept rising. But it rose so slowly that even after dropping 240 pieces, only a third of the tub was filled. “A game you cannot lose” did not mean safe. It meant the pile does not grow enough to lose.
+
+## Three causes
+
+  The commit splits the causes into three. Each was confirmed by measurement before I removed it.
+
+### 1. The size ladder went backward in three places
+
+  When I lined up the sizes by the radius of a circle of the same area (equivalent radius), in three places the merged piece was smaller than the one before.
+
+- Tamago was smaller than shari
+
+- Otoro was smaller than uni
+
+- Anago was smaller than otoro
+
+  Merging produced a smaller piece than before. On the busiest path, “shari → tamago,” more than half of what I dropped vanished on the spot. So I rebuilt it as a monotonically increasing ladder with a size ratio of 1.19.
+
+### 2. The pieces were too small for the tub
+
+  I had used the 9:16 portrait tub directly as the drop area, so it was a vertical pit rather than a real sushi tub. I made the tub shallow enough to fit in the lower half of the screen, and drew a noren curtain (with the game name) and a plank wall in the empty space above. The deadline (past it, you lose) became the rim of the tub itself.
+
+### 3. Big pieces fell through the floor
+
+  The physical thickness of the walls and floor was only 12, the same as how it looked, so heavier pieces tunneled through the single plank and fell out of the tub. I made the thickness 80, and also rounded the position for pieces born from a merge that sink into a wall. I also added a cleanup for spilled pieces (sweepStrays).
+
+## The numbers after the fix
+
+    What I measured | Before | After
+
+    How full the tub is after dropping 240 | about a third | —
+
+    Drops until game over | not reached | 385 (rank: journeyman)
+
+    Score (same conditions) | 7,298 | 10,658
+
+  The pile moves up and down in front of the rim and opens up at once with a big merge. The tension this kind of game should have appeared. The score rose because the pieces that had been falling through and vanishing came back. I verified that 9:16 holds from iPhone SE to 15 Pro Max, in landscape and on desktop, that there is no overflow or errors, and that 60 fps holds with a full tub.
+
+## What I learned
+
+> What you measure is not necessarily what you want to know.
+  The first “89%” counted the falling piece, so it was not measuring “the height of the pile.” I want to record that when a measurement looks too good, it is better to doubt what is being counted than the number itself. After the fix, I measured the numbers again with the same method as the conger eel article (https://koshinstudio.com/notes/anago/) (hundreds of auto-played games).
+
+  The numbers in this article come from my commit record (September 7, 2026).
+
+  This is the English version of the original Japanese article (https://koshinstudio.com/notes/sushi-measure/).
+
+  More in English
+
+- All English pages (https://koshinstudio.com/en/)
+
+
+---
+
 URL: https://koshinstudio.com/en/notes/crazygames/
 
 # Rejected by CrazyGames with no reason given: I recorded the game and found four problems
@@ -7021,6 +7251,12 @@ URL: https://koshinstudio.com/en/
 - “80% was chosen over 82%”: the quiz’s match percentage disagreed with its ranking (https://koshinstudio.com/en/notes/match-percent/)
 
 - What changes when an anime quiz goes from 50 questions to 12? (https://koshinstudio.com/en/notes/shindan12/)
+
+- Cutting six buttons to one: first-time players did not know what to press (https://koshinstudio.com/en/notes/first-visit/)
+
+- The streaming buttons were shown even for titles you could not watch: making the quiz result screen true (https://koshinstudio.com/en/notes/result-screen/)
+
+- “The pile settles at 89%” was wrong: my measurement was what was wrong (https://koshinstudio.com/en/notes/sushi-measure/)
 
 ## Languages
 
