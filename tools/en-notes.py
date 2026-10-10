@@ -317,5 +317,9 @@ pairs.append(make('logo-pop',
   <p class="note">The numbers come from operating this site’s top page in a real browser (Chrome) on October 8, 2026. I have not confirmed the fix on an actual Retina device; I reproduced 2x and 3x pixel ratios with browser settings.</p>
 '''))
 
+import glob
+for _f in sorted(glob.glob('tools/en/batch*.py')):
+    exec(open(_f, encoding='utf8').read())
+
 json.dump(pairs, open('data/en.json', 'w', encoding='utf8'), ensure_ascii=False, indent=2)
 print(len(pairs))

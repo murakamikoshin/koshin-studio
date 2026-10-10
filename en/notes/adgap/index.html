@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Measuring the gap between ads in time, not in plays — Koshin Studio</title>
+<meta name="description" content="Why I replaced “one ad every 5 plays” with “only when 7 minutes have passed since the last ad,” how it behaves, and what I noticed while writing: I do not know how long a game takes a person.">
+<meta property="og:title" content="Measuring the gap between ads in time, not in plays">
+<meta property="og:description" content="Why I replaced “one ad every 5 plays” with “only when 7 minutes have passed since the last ad,” how it behaves, and what I noticed while writing: I do not know how long a game takes a person.">
+<meta property="og:type" content="article">
+<meta name="theme-color" content="#fbfaf7">
+<link rel="icon" href="/favicon.ico?v=1697d589" sizes="48x48">
+<link rel="icon" href="/favicon.svg?v=b9d7922f" type="image/svg+xml" sizes="any">
+<link rel="icon" href="/assets/icon/icon-192.png?v=e2566235" type="image/png" sizes="192x192">
+<link rel="apple-touch-icon" href="/assets/icon/icon-180.png?v=84e7f0e6">
+<link rel="manifest" href="/site.webmanifest">
+<script>document.documentElement.className+=" js"</script>
+<link rel="stylesheet" href="/style.css?v=7001672f">
+<meta name="google-adsense-account" content="ca-pub-3863314847163872">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3863314847163872" crossorigin="anonymous"></script>
+<link rel="canonical" href="https://koshinstudio.com/en/notes/adgap/">
+<meta property="og:url" content="https://koshinstudio.com/en/notes/adgap/">
+<meta property="og:site_name" content="Koshin Studio">
+<meta property="og:locale" content="en_US">
+<link rel="alternate" hreflang="ja" href="https://koshinstudio.com/notes/adgap/">
+<link rel="alternate" hreflang="en" href="https://koshinstudio.com/en/notes/adgap/">
+<link rel="alternate" hreflang="x-default" href="https://koshinstudio.com/en/notes/adgap/">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="alternate" type="application/rss+xml" title="Koshin Studio — Notes" href="https://koshinstudio.com/feed.xml">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BlogPosting","headline":"Measuring the gap between ads in time, not in plays","url":"https://koshinstudio.com/en/notes/adgap/","description":"Why I replaced “one ad every 5 plays” with “only when 7 minutes have passed since the last ad,” how it behaves, and what I noticed while writing: I do not know how long a game takes a person.","datePublished":"2026-10-09","dateModified":"2026-10-09","inLanguage":"en","image":"https://koshinstudio.com/assets/og/og_notes_adgap.jpg","author":{"@id":"https://koshinstudio.com#studio"},"publisher":{"@id":"https://koshinstudio.com#studio"},"mainEntityOfPage":"https://koshinstudio.com/en/notes/adgap/"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Koshin Studio","item":"https://koshinstudio.com/en/"},{"@type":"ListItem","position":2,"name":"Measuring the gap between ads in time, not in plays","item":"https://koshinstudio.com/en/notes/adgap/"}]}]}</script>
+<meta property="og:image" content="https://koshinstudio.com/assets/og/og_notes_adgap.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
+</head>
+<body>
+<canvas id="motes"></canvas>
+
+<header class="site"><div class="wrap">
+  <a class="logo" href="/"><img class="logo-mark" src="/favicon.svg?v=b9d7922f" alt="" width="28" height="28">Koshin Studio</a>
+  <nav><a href="/works/">Works</a><a href="/notes/">Notes</a><a href="/picks/">Picks</a><a href="/calc/">Tools</a><a href="/about/">About</a></nav>
+</div></header>
+
+<main><div class="wrap">
+  <nav class="crumbs" aria-label="You are here"><a href="/en/">Koshin Studio</a><i aria-hidden="true">›</i><span aria-current="page">Ad interval by time</span></nav>
+  <h1>Measuring the gap between ads in time, not in plays</h1>
+  <div class="rule"></div>
+<!--lang-->
+  <p class="note"><a href="/notes/adgap/" hreflang="ja" lang="ja">日本語版</a></p>
+<!--/lang-->
+  <p class="lead">Development log of Sushi Stack / October 2026</p>
+
+  <p>Sushi Stack has a mechanism that can insert one ad at the break between one game and the next. At first I set it to “one ad per 5 plays,” and the next day I changed it to <strong>count time, not plays</strong>. This is the reason and a record of how it behaves.</p>
+  <p class="note">This site does not show ads yet (the ad loader is left empty). This is about a mechanism I built ahead of time for when ads are turned on.</p>
+
+  <h2 class="rv" id="s1">The first rule: one ad per 5 plays</h2>
+  <p>In the first version on September 7, an ad was inserted before “one more game” every 5 plays, and never on the first play. The idea was to skip the first game to protect the first impression. The game detects which of CrazyGames, Poki or Google it runs on, uses that SDK if there is one, and passes through if there is none.</p>
+
+  <h2 class="rv" id="s2">Why it did not fit</h2>
+  <p>The next day, September 8, I dropped this counting. The commit gives two reasons.</p>
+  <ul>
+    <li><strong>If one game is long, ads never appear.</strong> A game can last 30 minutes, so the 5th play comes 2.5 hours later. Almost nobody plays that long.</li>
+    <li><strong>If games end quickly, ads appear one after another.</strong> After several quick losses, several ads show up within minutes.</li>
+  </ul>
+  <p>Both come from counting plays. What bothers a player is not the number of ads but <strong>the time between ads</strong>. So I changed what I count to time.</p>
+
+  <h2 class="rv" id="s3">The rule after the change</h2>
+  <ul>
+    <li>No ad on the first game (as before).</li>
+    <li>For someone who has not seen an ad yet, one ad at the break after the second game.</li>
+    <li>After that, <strong>only when at least 7 minutes have passed since the last ad</strong>, one ad at the next break.</li>
+  </ul>
+  <p>The time of the last ad is remembered in the browser (<code>localStorage</code>). Nothing is sent to a server. The behavior I checked:</p>
+  <div class="scroll rv"><table>
+    <tr><th>Situation</th><th class="n">Ad</th></tr>
+    <tr><td>First play</td><td class="n">None</td></tr>
+    <tr><td>Second play (no ad shown yet)</td><td class="n">Shown</td></tr>
+    <tr><td>1 minute / 6 minutes since the last ad</td><td class="n">None</td></tr>
+    <tr><td>8 minutes since the last ad</td><td class="n">Shown</td></tr>
+    <tr><td>After a long game (40 minutes)</td><td class="n">Shown</td></tr>
+  </table></div>
+  <p>For the earlier version (one ad per 5 plays), I ran 7 games with a fake CrazyGames SDK and confirmed that “an ad appears once after the 5th game” and that “with no SDK, none appears and there are zero errors.” For the time-based version too, I checked that the screen always returns after an ad ends.</p>
+
+  <h2 class="rv" id="s4">What I noticed while writing</h2>
+  <p>How I chose “7 minutes” is not in the commit. I will be honest: the reason is not recorded.</p>
+  <p>What bothers me most is the length of a game. The commit’s “a game can take 30 minutes” was later, in the September 10 commit, written as <strong>“median 7.5 minutes in auto-play, 30 minutes for a human.”</strong> So 30 minutes is a guess, <strong>not a measured number</strong>. The 7.5 minutes of auto-play (7.7 minutes in <a href="/notes/anago/" hreflang="ja" lang="ja">the conger eel article</a>, in Japanese) is the measured one.</p>
+  <p>And on September 10 a game became <strong>half as long</strong>, so the earlier table is out of date. Recalculating (I put an auto-play game at half of 7.7 minutes, about 3.8 minutes):</p>
+  <div class="scroll rv"><table>
+    <tr><th>Length of one game</th><th class="n">One per 5 plays (old)</th><th class="n">One per 7 minutes (new)</th></tr>
+    <tr><td>About 3.8 min (auto-play, after halving)</td><td class="n">One per about 19 min</td><td class="n">About one per 2 games</td></tr>
+    <tr><td>About 15 min (half of “30 for a human”)</td><td class="n">One per about 75 min</td><td class="n">Every game</td></tr>
+  </table></div>
+  <p>I still have not measured how long a game takes a person. Whether 7 minutes is long or short cannot be decided without that. <strong>Measuring the length of a game comes before turning ads on.</strong></p>
+
+  <h2 class="rv" id="s5">What I learned</h2>
+  <blockquote>Counting plays makes ad frequency swing with how people play. Counting time does not.</blockquote>
+  <p>But changing to time did not make the frequency <em>right</em>. My current conclusion is that whether 7 minutes is long or short cannot be decided until I know how long a game takes a person. When I am ready to turn ads on, I will measure that first.</p>
+
+  <p class="note">This is the English version of <a href="/notes/adgap/" hreflang="ja" lang="ja">the original Japanese article</a>.</p>
+
+  <div class="rule" style="margin:40px 0 22px"></div>
+  <p class="eyebrow">More in English</p>
+  <ul class="plain">
+    <li><a href="/en/">All English pages</a></li>
+  </ul>
+</div>
+</main>
+
+<footer class="site"><div class="wrap"></div></footer>
+<script src="/motion.js?v=1e7447ec" defer></script>
+</body>
+</html>

@@ -595,6 +595,8 @@ URL: https://koshinstudio.com/notes/ascii-text/
 
 # CrazyGames のプレビューで日本語が文字化け：ファイルは正しかった。原因は特定できず、ASCII 表記に逃がした
 
+  English version (https://koshinstudio.com/en/notes/ascii-text/)
+
   すし積む 開発の記録 ／ 2026年10月
 
   すし積む (https://koshinstudio.com/works/sushitsumu/)を、ゲームポータルのプレビューで開いたとき、「大連鎖！」の「連」の字だけが、壊れて出る、という報告がありました。ファイルを調べると、文字は、ちゃんと正しく入っていました。原因が分からないまま、「壊れても困らない形」にして、先に進んだ経緯を、コミットの記録で書きます。
@@ -1898,6 +1900,8 @@ URL: https://koshinstudio.com/notes/crazygames/
 
 # CrazyGames に落ちた：理由は書かれていなかったので、撮って探した
 
+  English version (https://koshinstudio.com/en/notes/crazygames/)
+
   すし積む 開発の記録 ／ 2026年10月
 
   すし積む (https://koshinstudio.com/works/sushitsumu/)を、ブラウザゲームのポータル CrazyGames に出したところ、審査に落ちました。理由は、「全体の品質が期待に達していない」としか書かれていません。そこで、自分で撮って、探しました。見つかったのは、四つです。コミットに残っている記録で書きます。
@@ -2117,6 +2121,8 @@ URL: https://koshinstudio.com/notes/torecadash-ai/
 URL: https://koshinstudio.com/notes/adgap/
 
 # 広告の間隔を、回数ではなく時間で測る
+
+  English version (https://koshinstudio.com/en/notes/adgap/)
 
   すし積む 開発の記録 ／ 2026年10月
 
@@ -4933,6 +4939,213 @@ URL: https://koshinstudio.com/en/notes/logo-pop/
 
 ---
 
+URL: https://koshinstudio.com/en/notes/crazygames/
+
+# Rejected by CrazyGames with no reason given: I recorded the game and found four problems
+
+  日本語版 (https://koshinstudio.com/notes/crazygames/)
+
+  Development log of Sushi Stack / October 2026
+
+  I submitted Sushi Stack (https://koshinstudio.com/en/works/), my merge puzzle game, to the browser-game portal CrazyGames, and it was rejected. The only reason given was that “overall quality does not meet expectations.” So I captured the game myself and looked for the problem. I found four. This is written from my commit record.
+
+## When no reason is given
+
+  “Quality” does not tell me what is wrong. The commit notes say that once I actually recorded the game, I recognized the problems. A reviewer plays for a few minutes and judges from what is on the screen. So I decided to look at the same screen the reviewer saw.
+
+## The four I found
+
+### 1. A black line across the screen
+
+  The darkening effect for the background left the edge where the wall meets the floor, so a black straight line ran across the screen and a vertical seam showed at the rim of the tub. It looked broken. I blended the boundary and changed the edge fade from a straight cut to a curve.
+
+### 2. On a wide screen, the play area was only 30%
+
+  On a wide screen the play area took 30% of the screen and the rest was just dark. I put the evolution chain (what merges into what) on the left. In a merge game it is the first thing players look for, and I had hidden it inside the encyclopedia.
+
+### 3. The silhouettes of unlocked tiers were invisible
+
+  Tiers not yet reached are shown as silhouettes. But I drew dark brown silhouettes on a dark background, so they could not be seen. I made it possible to pass a lighter silhouette.
+
+### 4. Tension never happened
+
+  The fourth was heavier than looks. Measured with auto-play, one game was a median of 594 moves, about 7.5 minutes, and my commit says “30 minutes for a human.” The tub never filled up, so the dangerous moments never came. In the few minutes a reviewer spends, tension never occurred even once.
+
+## The fix: measure, then choose
+
+  I decided not to touch the size or area ratio of each tier, since that would damage the feeling of merging into something bigger. I used auto-play to find places I could change without losing that feeling. I also gave my balance-testing tool a way to swap sizes and the spawn distribution from outside, and ran candidates in bulk to compare.
+
+    What changed | Before | After
+
+    Items that fall | 3 kinds | 5 kinds (added salmon and tuna)
+
+    Moves per game (auto-play median) | 594 | 279
+
+    Tub rim / height | 320 / 308 | 250 / 378
+
+    Share of screen used by the play area | 45% | 62%
+
+    Area ratio, conger eel to spiny lobster | 1.76 | 1.40
+
+    Leftover width when two gold tubs sit side by side | 0 px | 36 px
+
+  Now two gold tubs fit side by side, so a gold-tub merge (merging gold tubs together) works in real play. The logic had been there before, but it never happened once in 300 games. A game is half as long, so scores also dropped by about 20% (auto-play median from 59,305 to 46,529). I recalculated the ranking thresholds.
+
+## What I learned
+
+> “Low quality” was four separate problems.
+  Two were about appearance, one about where information was placed, and one about the substance of play. When no reason is given, the first thing to do is look at the screen the other person saw. For someone who plays for a few minutes, tension that builds over 30 minutes does not exist.
+
+  This article is written from my commit record (September 10, 2026). The result of a re-review is not included.
+
+  This is the English version of the original Japanese article (https://koshinstudio.com/notes/crazygames/).
+
+  More in English
+
+- All English pages (https://koshinstudio.com/en/)
+
+
+---
+
+URL: https://koshinstudio.com/en/notes/adgap/
+
+# Measuring the gap between ads in time, not in plays
+
+  日本語版 (https://koshinstudio.com/notes/adgap/)
+
+  Development log of Sushi Stack / October 2026
+
+  Sushi Stack has a mechanism that can insert one ad at the break between one game and the next. At first I set it to “one ad per 5 plays,” and the next day I changed it to count time, not plays. This is the reason and a record of how it behaves.
+
+  This site does not show ads yet (the ad loader is left empty). This is about a mechanism I built ahead of time for when ads are turned on.
+
+## The first rule: one ad per 5 plays
+
+  In the first version on September 7, an ad was inserted before “one more game” every 5 plays, and never on the first play. The idea was to skip the first game to protect the first impression. The game detects which of CrazyGames, Poki or Google it runs on, uses that SDK if there is one, and passes through if there is none.
+
+## Why it did not fit
+
+  The next day, September 8, I dropped this counting. The commit gives two reasons.
+
+- If one game is long, ads never appear. A game can last 30 minutes, so the 5th play comes 2.5 hours later. Almost nobody plays that long.
+
+- If games end quickly, ads appear one after another. After several quick losses, several ads show up within minutes.
+
+  Both come from counting plays. What bothers a player is not the number of ads but the time between ads. So I changed what I count to time.
+
+## The rule after the change
+
+- No ad on the first game (as before).
+
+- For someone who has not seen an ad yet, one ad at the break after the second game.
+
+- After that, only when at least 7 minutes have passed since the last ad, one ad at the next break.
+
+  The time of the last ad is remembered in the browser (localStorage). Nothing is sent to a server. The behavior I checked:
+
+    Situation | Ad
+
+    First play | None
+
+    Second play (no ad shown yet) | Shown
+
+    1 minute / 6 minutes since the last ad | None
+
+    8 minutes since the last ad | Shown
+
+    After a long game (40 minutes) | Shown
+
+  For the earlier version (one ad per 5 plays), I ran 7 games with a fake CrazyGames SDK and confirmed that “an ad appears once after the 5th game” and that “with no SDK, none appears and there are zero errors.” For the time-based version too, I checked that the screen always returns after an ad ends.
+
+## What I noticed while writing
+
+  How I chose “7 minutes” is not in the commit. I will be honest: the reason is not recorded.
+
+  What bothers me most is the length of a game. The commit’s “a game can take 30 minutes” was later, in the September 10 commit, written as “median 7.5 minutes in auto-play, 30 minutes for a human.” So 30 minutes is a guess, not a measured number. The 7.5 minutes of auto-play (7.7 minutes in the conger eel article (https://koshinstudio.com/notes/anago/), in Japanese) is the measured one.
+
+  And on September 10 a game became half as long, so the earlier table is out of date. Recalculating (I put an auto-play game at half of 7.7 minutes, about 3.8 minutes):
+
+    Length of one game | One per 5 plays (old) | One per 7 minutes (new)
+
+    About 3.8 min (auto-play, after halving) | One per about 19 min | About one per 2 games
+
+    About 15 min (half of “30 for a human”) | One per about 75 min | Every game
+
+  I still have not measured how long a game takes a person. Whether 7 minutes is long or short cannot be decided without that. Measuring the length of a game comes before turning ads on.
+
+## What I learned
+
+> Counting plays makes ad frequency swing with how people play. Counting time does not.
+  But changing to time did not make the frequency right. My current conclusion is that whether 7 minutes is long or short cannot be decided until I know how long a game takes a person. When I am ready to turn ads on, I will measure that first.
+
+  This is the English version of the original Japanese article (https://koshinstudio.com/notes/adgap/).
+
+  More in English
+
+- All English pages (https://koshinstudio.com/en/)
+
+
+---
+
+URL: https://koshinstudio.com/en/notes/ascii-text/
+
+# Japanese text garbled in the CrazyGames preview: the file was correct, the cause was never found, so I escaped to ASCII
+
+  日本語版 (https://koshinstudio.com/notes/ascii-text/)
+
+  Development log of Sushi Stack / October 2026
+
+  When I opened Sushi Stack (https://koshinstudio.com/en/works/) in a game portal’s preview, a report said that only the character 連 in “大連鎖！” (Big Chain!) appeared broken. I checked the file and the character was stored correctly. This is how I moved on, without knowing the cause, by making it a form that does not matter if it breaks, from my commit record.
+
+## Only one character breaks
+
+  The report came from the CrazyGames preview. When a chain happens in the game, “大連鎖！” appears on screen. That one character, 連, was rendered broken. The other characters were fine.
+
+  I first checked the game file itself. The byte sequence was correct. So the file on my side was not broken. It had to break somewhere in the hand-off before it reached the portal, or somewhere in how the portal read it. The commit does not say where. I have not identified the cause.
+
+## How to fix something whose cause you cannot find
+
+  If the cause is outside my hands, I decided to make a form that does not matter wherever it breaks.
+
+- Replace displayed text with ASCII-only notation. Do not write Japanese characters directly in the file. In scripts use \uXXXX, in HTML text and attributes use &#xXXXX;. Even if multi-byte characters get corrupted midway, ASCII has nothing to corrupt.
+
+- Leave the replacement to a tool (tools/asciify.mjs). I write in Japanese, then run the tool. It gives the same result no matter how many times I run it. Comments stay in Japanese so they stay readable (they never appear on screen).
+
+- Add a font that has the kanji to the end of the font stack. That also closes the path where a font lacks the character and it does not show.
+
+## Two other problems found in the same check
+
+- Emoji do not show on some devices. The globe and mobile-phone emoji are missing on some devices. I redrew them as SVG shapes.
+
+- Floating text during a chain overlaps and cannot be read. Text that appears at nearby positions now moves upward to avoid overlap.
+
+## The next day: do 14 languages fit in their boxes?
+
+  The game supports 14 languages. Translations are often longer than the Japanese and overflow easily in the side column on PC (192 px wide) and inside cards. I added a tool that switches through the languages in turn and counts anything that sticks out of its parent box or scrolls sideways.
+
+  The result: no overflow in 14 languages × 2 screen sizes. As with broken characters, “nothing overflows” is more reliable counted than eyeballed.
+
+## What I learned
+
+> When you do not know the cause, stop depending on the place where the cause is.
+
+- A correct file does not mean a correct screen. The hand-off and the portal’s reading are things I cannot fix.
+
+- Write down what you do not know. I still do not know why 連 broke. ASCII escaping did not fix the cause. It only made the game unaffected by it.
+
+- Have a machine count visual breakage. Checking 14 languages by eye is not realistic.
+
+  This article is written from my commit record (September 7 and 8, 2026). The cause of the broken character is not in the record, so it is not written here.
+
+  This is the English version of the original Japanese article (https://koshinstudio.com/notes/ascii-text/).
+
+  More in English
+
+- All English pages (https://koshinstudio.com/en/)
+
+
+---
+
 URL: https://koshinstudio.com/en/
 
 # Koshin Studio
@@ -4976,6 +5189,12 @@ URL: https://koshinstudio.com/en/
 - A canvas becomes twice as large on Retina: inset:0 does not stretch it (https://koshinstudio.com/en/notes/logo-pop/)
 
 - No builds arriving in TestFlight: I had used up the 25 free Xcode Cloud hours (https://koshinstudio.com/en/notes/torecadash-ci/)
+
+- Measuring the gap between ads in time, not in plays (https://koshinstudio.com/en/notes/adgap/)
+
+- Japanese text garbled in the CrazyGames preview: the file was correct, the cause was never found, so I escaped to ASCII (https://koshinstudio.com/en/notes/ascii-text/)
+
+- Rejected by CrazyGames with no reason given: I recorded the game and found four problems (https://koshinstudio.com/en/notes/crazygames/)
 
 ## Languages
 

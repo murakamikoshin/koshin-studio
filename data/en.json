@@ -104,5 +104,26 @@
     "title": "A canvas becomes twice as large on Retina: inset:0 does not stretch it (a bug in a logo that bursts when you tap it)",
     "date": "2026-10-09",
     "blurb": "Burst particles came out of the wrong place on high-DPI screens. A canvas with only inset:0 keeps its pixel size, so on a 2x display it was 2x larger in CSS. Measured numbers at 1x, 2x and 3x, and the fix."
+  },
+  {
+    "ja": "/notes/crazygames/",
+    "en": "/en/notes/crazygames/",
+    "title": "Rejected by CrazyGames with no reason given: I recorded the game and found four problems",
+    "date": "2026-10-09",
+    "blurb": "A browser-game portal rejected my game with only “overall quality below expectations.” I captured what the reviewer would have seen and found four separate causes, then fixed them by measuring first."
+  },
+  {
+    "ja": "/notes/adgap/",
+    "en": "/en/notes/adgap/",
+    "title": "Measuring the gap between ads in time, not in plays",
+    "date": "2026-10-09",
+    "blurb": "Why I replaced “one ad every 5 plays” with “only when 7 minutes have passed since the last ad,” how it behaves, and what I noticed while writing: I do not know how long a game takes a person."
+  },
+  {
+    "ja": "/notes/ascii-text/",
+    "en": "/en/notes/ascii-text/",
+    "title": "Japanese text garbled in the CrazyGames preview: the file was correct, the cause was never found, so I escaped to ASCII",
+    "date": "2026-10-09",
+    "blurb": "One character of “大連鎖！” rendered broken in a game portal preview even though the file bytes were correct. How I made the game immune without finding the cause, plus a check of 14 languages for overflow."
   }
 ]

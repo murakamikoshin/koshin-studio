@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Japanese text garbled in the CrazyGames preview: the file was correct, the cause was never found, so I escaped to ASCII — Koshin Studio</title>
+<meta name="description" content="One character of “大連鎖！” rendered broken in a game portal preview even though the file bytes were correct. How I made the game immune without finding the cause, plus a check of 14 languages for overflow.">
+<meta property="og:title" content="Japanese text garbled in the CrazyGames preview: the file was correct, the cause was never found, so I escaped to ASCII">
+<meta property="og:description" content="One character of “大連鎖！” rendered broken in a game portal preview even though the file bytes were correct. How I made the game immune without finding the cause, plus a check of 14 languages for overflow.">
+<meta property="og:type" content="article">
+<meta name="theme-color" content="#fbfaf7">
+<link rel="icon" href="/favicon.ico?v=1697d589" sizes="48x48">
+<link rel="icon" href="/favicon.svg?v=b9d7922f" type="image/svg+xml" sizes="any">
+<link rel="icon" href="/assets/icon/icon-192.png?v=e2566235" type="image/png" sizes="192x192">
+<link rel="apple-touch-icon" href="/assets/icon/icon-180.png?v=84e7f0e6">
+<link rel="manifest" href="/site.webmanifest">
+<script>document.documentElement.className+=" js"</script>
+<link rel="stylesheet" href="/style.css?v=7001672f">
+<meta name="google-adsense-account" content="ca-pub-3863314847163872">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3863314847163872" crossorigin="anonymous"></script>
+<link rel="canonical" href="https://koshinstudio.com/en/notes/ascii-text/">
+<meta property="og:url" content="https://koshinstudio.com/en/notes/ascii-text/">
+<meta property="og:site_name" content="Koshin Studio">
+<meta property="og:locale" content="en_US">
+<link rel="alternate" hreflang="ja" href="https://koshinstudio.com/notes/ascii-text/">
+<link rel="alternate" hreflang="en" href="https://koshinstudio.com/en/notes/ascii-text/">
+<link rel="alternate" hreflang="x-default" href="https://koshinstudio.com/en/notes/ascii-text/">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="alternate" type="application/rss+xml" title="Koshin Studio — Notes" href="https://koshinstudio.com/feed.xml">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BlogPosting","headline":"Japanese text garbled in the CrazyGames preview: the file was correct, the cause was never found, so I escaped to ASCII","url":"https://koshinstudio.com/en/notes/ascii-text/","description":"One character of “大連鎖！” rendered broken in a game portal preview even though the file bytes were correct. How I made the game immune without finding the cause, plus a check of 14 languages for overflow.","datePublished":"2026-10-09","dateModified":"2026-10-09","inLanguage":"en","image":"https://koshinstudio.com/assets/og/og_notes_ascii-text.jpg","author":{"@id":"https://koshinstudio.com#studio"},"publisher":{"@id":"https://koshinstudio.com#studio"},"mainEntityOfPage":"https://koshinstudio.com/en/notes/ascii-text/"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Koshin Studio","item":"https://koshinstudio.com/en/"},{"@type":"ListItem","position":2,"name":"Japanese text garbled in the CrazyGames preview: the file was correct, the cause was never found, so I escaped to ASCII","item":"https://koshinstudio.com/en/notes/ascii-text/"}]}]}</script>
+<meta property="og:image" content="https://koshinstudio.com/assets/og/og_notes_ascii-text.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
+</head>
+<body>
+<canvas id="motes"></canvas>
+
+<header class="site"><div class="wrap">
+  <a class="logo" href="/"><img class="logo-mark" src="/favicon.svg?v=b9d7922f" alt="" width="28" height="28">Koshin Studio</a>
+  <nav><a href="/works/">Works</a><a href="/notes/">Notes</a><a href="/picks/">Picks</a><a href="/calc/">Tools</a><a href="/about/">About</a></nav>
+</div></header>
+
+<main><div class="wrap">
+  <nav class="crumbs" aria-label="You are here"><a href="/en/">Koshin Studio</a><i aria-hidden="true">›</i><span aria-current="page">Garbled text in the CrazyGames preview</span></nav>
+  <h1>Japanese text garbled in the CrazyGames preview: the file was correct, the cause was never found, so I escaped to ASCII</h1>
+  <div class="rule"></div>
+<!--lang-->
+  <p class="note"><a href="/notes/ascii-text/" hreflang="ja" lang="ja">日本語版</a></p>
+<!--/lang-->
+  <p class="lead">Development log of Sushi Stack / October 2026</p>
+
+  <p>When I opened <a href="/en/works/" hreflang="en" lang="en">Sushi Stack</a> in a game portal’s preview, a report said that only the character 連 in “大連鎖！” (Big Chain!) appeared broken. I checked the file and <strong>the character was stored correctly</strong>. This is how I moved on, without knowing the cause, by making it a form that does not matter if it breaks, from my commit record.</p>
+
+  <h2 class="rv" id="s1">Only one character breaks</h2>
+  <p>The report came from the CrazyGames preview. When a chain happens in the game, “大連鎖！” appears on screen. That one character, 連, was rendered broken. The other characters were fine.</p>
+  <p>I first checked the game file itself. <strong>The byte sequence was correct.</strong> So the file on my side was not broken. It had to break somewhere <strong>in the hand-off</strong> before it reached the portal, or somewhere in how the portal read it. The commit does not say where. <strong>I have not identified the cause.</strong></p>
+
+  <h2 class="rv" id="s2">How to fix something whose cause you cannot find</h2>
+  <p>If the cause is outside my hands, I decided to make a form <strong>that does not matter wherever it breaks</strong>.</p>
+  <ul>
+    <li><strong>Replace displayed text with ASCII-only notation.</strong> Do not write Japanese characters directly in the file. In scripts use <code>\uXXXX</code>, in HTML text and attributes use <code>&amp;#xXXXX;</code>. Even if multi-byte characters get corrupted midway, ASCII has nothing to corrupt.</li>
+    <li><strong>Leave the replacement to a tool (<code>tools/asciify.mjs</code>).</strong> I write in Japanese, then run the tool. It gives the same result no matter how many times I run it. Comments stay in Japanese so they stay readable (they never appear on screen).</li>
+    <li><strong>Add a font that has the kanji to the end of the font stack.</strong> That also closes the path where a font lacks the character and it does not show.</li>
+  </ul>
+
+  <h2 class="rv" id="s3">Two other problems found in the same check</h2>
+  <ul>
+    <li><strong>Emoji do not show on some devices.</strong> The globe and mobile-phone emoji are missing on some devices. I redrew them as SVG shapes.</li>
+    <li><strong>Floating text during a chain overlaps and cannot be read.</strong> Text that appears at nearby positions now moves upward to avoid overlap.</li>
+  </ul>
+
+  <h2 class="rv" id="s4">The next day: do 14 languages fit in their boxes?</h2>
+  <p>The game supports 14 languages. Translations are often longer than the Japanese and overflow easily in the side column on PC (192 px wide) and inside cards. I added a tool that switches through the languages in turn and <strong>counts anything that sticks out of its parent box or scrolls sideways</strong>.</p>
+  <p>The result: <strong>no overflow in 14 languages × 2 screen sizes</strong>. As with broken characters, “nothing overflows” is more reliable counted than eyeballed.</p>
+
+  <h2 class="rv" id="s5">What I learned</h2>
+  <blockquote>When you do not know the cause, stop depending on the place where the cause is.</blockquote>
+  <ul>
+    <li><strong>A correct file does not mean a correct screen.</strong> The hand-off and the portal’s reading are things I cannot fix.</li>
+    <li><strong>Write down what you do not know.</strong> I still do not know why 連 broke. ASCII escaping did not fix the cause. It only <strong>made the game unaffected by it</strong>.</li>
+    <li><strong>Have a machine count visual breakage.</strong> Checking 14 languages by eye is not realistic.</li>
+  </ul>
+  <p class="note">This article is written from my commit record (September 7 and 8, 2026). The cause of the broken character is not in the record, so it is not written here.</p>
+
+  <p class="note">This is the English version of <a href="/notes/ascii-text/" hreflang="ja" lang="ja">the original Japanese article</a>.</p>
+
+  <div class="rule" style="margin:40px 0 22px"></div>
+  <p class="eyebrow">More in English</p>
+  <ul class="plain">
+    <li><a href="/en/">All English pages</a></li>
+  </ul>
+</div>
+</main>
+
+<footer class="site"><div class="wrap"></div></footer>
+<script src="/motion.js?v=1e7447ec" defer></script>
+</body>
+</html>
