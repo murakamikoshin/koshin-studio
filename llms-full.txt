@@ -3565,7 +3565,7 @@ URL: https://koshinstudio.com/works/torecadash/
   抽選、予約、先着。
 追いかけるのが大変な販売情報を、まとめて通知する。
 
-  Other languages: English (https://koshinstudio.com/en/works/torecadash/) / 简体中文 (https://koshinstudio.com/zh/works/torecadash/) / 繁體中文 (https://koshinstudio.com/zh-hant/works/torecadash/) / Tiếng Việt (https://koshinstudio.com/vi/works/torecadash/)
+  Other languages: English (https://koshinstudio.com/en/works/torecadash/) / 简体中文 (https://koshinstudio.com/zh/works/torecadash/) / 繁體中文 (https://koshinstudio.com/zh-hant/works/torecadash/) / Tiếng Việt (https://koshinstudio.com/vi/works/torecadash/) / 한국어 (https://koshinstudio.com/ko/works/torecadash/) / ไทย (https://koshinstudio.com/th/works/torecadash/) / Bahasa Indonesia (https://koshinstudio.com/id/works/torecadash/) / Español (https://koshinstudio.com/es/works/torecadash/) / Português (https://koshinstudio.com/pt/works/torecadash/) / Français (https://koshinstudio.com/fr/works/torecadash/) / Deutsch (https://koshinstudio.com/de/works/torecadash/) / Русский (https://koshinstudio.com/ru/works/torecadash/) / Türkçe (https://koshinstudio.com/tr/works/torecadash/)
 
   iPhone のアプリです。App Store で配信中です（無料。Pro は有料）。
 
@@ -4373,96 +4373,6 @@ Your anime type, and the one anime that fits you right now.
   Start the quiz (free, about 1 minute) (https://koshinstudio.com/app/shindananime/en/)
 
   This is the English version of the Japanese page (https://koshinstudio.com/works/shindananime/). The quiz’s questions and result texts are in English at the link above; the Japanese version is at /app/shindananime/ (https://koshinstudio.com/app/shindananime/).
-
-
----
-
-URL: https://koshinstudio.com/en/works/torecadash/
-
-# Toreca Dash (トレカダッシュ)
-
-  日本語版 (https://koshinstudio.com/works/torecadash/)
-
-  Other languages: 日本語 (https://koshinstudio.com/works/torecadash/) / 简体中文 (https://koshinstudio.com/zh/works/torecadash/) / 繁體中文 (https://koshinstudio.com/zh-hant/works/torecadash/) / Tiếng Việt (https://koshinstudio.com/vi/works/torecadash/)
-
-  Lotteries, pre-orders, first-come sales.
-The Japanese card drops that are hard to keep up with, in one place, with alerts.
-
-  Open in the App Store (https://apps.apple.com/jp/app/id6788758920)
-
-  Free to download. Pro is an optional paid upgrade.
-
-## What it is
-
-  Sales of trading cards in Japan are announced one store at a time, on store sites and on X. By the time you notice, the deadline has passed. Toreca Dash collects announcements from stores and online shops across Japan and takes you straight to the page where you can apply or buy.
-
-## Main features
-
-### Feed
-
-  See open lotteries, pre-orders and first-come sales, filtered by game and sale type.
-
-### Alerts
-
-  Get notified as soon as something new appears for a product or game you follow.
-
-### Deadline calendar
-
-  Lottery deadlines and result dates, day by day, so you do not miss an entry.
-
-### Entry tracker
-
-  Record the lotteries you entered, and the results and purchases.
-
-### Map
-
-  Share in-store stock and lottery information with other users.
-
-## Supported games
-
-  Pokémon Card Game, Yu-Gi-Oh!, ONE PIECE Card Game, Union Arena, Lorcana, Duel Masters, Dragon Ball, Gundam, Magic: The Gathering, Weiss Schwarz, Detective Conan, hololive, Digimon, Haikyu!! Babo-ca!!, Palworld (15 in total).
-
-## Toreca Dash Pro (optional, paid)
-
-- Unlimited product follows, keyword alerts and excluded keywords.
-
-- The fastest alerts for first-come and surprise sales (the free version is about 15 minutes behind).
-
-- Filter to stores near your location.
-
-- Full notification history, entry statistics, calendar export and CSV export.
-
-- Track the value and profit/loss of your collection from purchase records.
-
-- No ads.
-
-## Good to know before you use it
-
-- Store information is mostly in Japanese. Store names, announcements and product names are shown as published in Japan.
-
-- Many Japanese stores require a Japanese address, phone number or store membership to enter a lottery. Check the conditions on each store’s own page before you apply.
-
-- The app shows the information and sends you to the store. It does not buy or enter lotteries for you.
-
-- Screens are available in Japanese and English. More languages are being added.
-
-## FAQ
-
-### Is it free?
-
-  Yes. The main features are free. Pro is an optional paid plan.
-
-### Do I need an account?
-
-  No. The feed, alerts and calendar work without signing in. Sign in with Apple is only used for map posts and the daily fortune.
-
-### Is it an official app?
-
-  No. It is an unofficial app made by an individual, and is not affiliated with any card game publisher or store. Information comes from stores’ public announcements; always confirm the latest details on the store’s official page before you apply or buy.
-
-  Open in the App Store (https://apps.apple.com/jp/app/id6788758920)
-
-  Support (https://cardalerthub.web.app/support.html) / Terms (https://cardalerthub.web.app/terms.html) / Privacy (https://cardalerthub.web.app/privacy.html)
 
 
 ---
@@ -5654,6 +5564,98 @@ URL: https://koshinstudio.com/en/notes/ios-sdk-compare/
   More in English
 
 - All English pages (https://koshinstudio.com/en/)
+
+
+---
+
+URL: https://koshinstudio.com/en/works/torecadash/
+
+# Toreca Dash (トレカダッシュ)
+
+  日本語版 (https://koshinstudio.com/works/torecadash/)
+
+  日本語版 (https://koshinstudio.com/works/torecadash/)
+
+  Other languages: 日本語 (https://koshinstudio.com/works/torecadash/) / 简体中文 (https://koshinstudio.com/zh/works/torecadash/) / 繁體中文 (https://koshinstudio.com/zh-hant/works/torecadash/) / Tiếng Việt (https://koshinstudio.com/vi/works/torecadash/) / 한국어 (https://koshinstudio.com/ko/works/torecadash/) / ไทย (https://koshinstudio.com/th/works/torecadash/) / Bahasa Indonesia (https://koshinstudio.com/id/works/torecadash/) / Español (https://koshinstudio.com/es/works/torecadash/) / Português (https://koshinstudio.com/pt/works/torecadash/) / Français (https://koshinstudio.com/fr/works/torecadash/) / Deutsch (https://koshinstudio.com/de/works/torecadash/) / Русский (https://koshinstudio.com/ru/works/torecadash/) / Türkçe (https://koshinstudio.com/tr/works/torecadash/)
+
+  Lotteries, pre-orders, first-come sales.
+The Japanese card drops that are hard to keep up with, in one place, with alerts.
+
+  Open in the App Store (https://apps.apple.com/jp/app/id6788758920)
+
+  Free to download. Pro is an optional paid upgrade.
+
+## What it is
+
+  Sales of trading cards in Japan are announced one store at a time, on store sites and on X. By the time you notice, the deadline has passed. Toreca Dash collects announcements from stores and online shops across Japan and takes you straight to the page where you can apply or buy.
+
+## Main features
+
+### Feed
+
+  See open lotteries, pre-orders and first-come sales, filtered by game and sale type.
+
+### Alerts
+
+  Get notified as soon as something new appears for a product or game you follow.
+
+### Deadline calendar
+
+  Lottery deadlines and result dates, day by day, so you do not miss an entry.
+
+### Entry tracker
+
+  Record the lotteries you entered, and the results and purchases.
+
+### Map
+
+  Share in-store stock and lottery information with other users.
+
+## Supported games
+
+  Pokémon Card Game, Yu-Gi-Oh!, ONE PIECE Card Game, Union Arena, Lorcana, Duel Masters, Dragon Ball, Gundam, Magic: The Gathering, Weiss Schwarz, Detective Conan, hololive, Digimon, Haikyu!! Babo-ca!!, Palworld (15 in total).
+
+## Toreca Dash Pro (optional, paid)
+
+- Unlimited product follows, keyword alerts and excluded keywords.
+
+- The fastest alerts for first-come and surprise sales (the free version is about 15 minutes behind).
+
+- Filter to stores near your location.
+
+- Full notification history, entry statistics, calendar export and CSV export.
+
+- Track the value and profit/loss of your collection from purchase records.
+
+- No ads.
+
+## Good to know before you use it
+
+- Store information is mostly in Japanese. Store names, announcements and product names are shown as published in Japan.
+
+- Many Japanese stores require a Japanese address, phone number or store membership to enter a lottery. Check the conditions on each store’s own page before you apply.
+
+- The app shows the information and sends you to the store. It does not buy or enter lotteries for you.
+
+- Screens are available in Japanese and English. More languages are being added.
+
+## FAQ
+
+### Is it free?
+
+  Yes. The main features are free. Pro is an optional paid plan.
+
+### Do I need an account?
+
+  No. The feed, alerts and calendar work without signing in. Sign in with Apple is only used for map posts and the daily fortune.
+
+### Is it an official app?
+
+  No. It is an unofficial app made by an individual, and is not affiliated with any card game publisher or store. Information comes from stores’ public announcements; always confirm the latest details on the store’s official page before you apply or buy.
+
+  Open in the App Store (https://apps.apple.com/jp/app/id6788758920)
+
+  Support (https://cardalerthub.web.app/support.html) / Terms (https://cardalerthub.web.app/terms.html) / Privacy (https://cardalerthub.web.app/privacy.html)
 
 
 ---
