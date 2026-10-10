@@ -1,7 +1,7 @@
 {
  "itms-91064": {
   "title": "ITMS-91064 Invalid Binary: NSPrivacyTracking fix",
-  "desc": "Apple’s automated review rejected an iOS build with ITMS-91064: NSPrivacyTracking was true while NSPrivacyTrackingDomains was empty. How it was fixed, and what is not verified."
+  "desc": "An iOS build was rejected with ITMS-91064: NSPrivacyTracking was true while NSPrivacyTrackingDomains was empty. How it was fixed, and what is not verified."
  },
  "review-info-needed": {
   "title": "App Store Guideline 2.1 Information Needed: 6 items",
