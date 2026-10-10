@@ -669,7 +669,7 @@ function ldFor(file, url) {
     const p = enByPath['/en/notes/' + em[1] + '/'];
     return [
       { '@type': 'BlogPosting', headline: p.title, url: SITE + p.en, description: p.blurb,
-        datePublished: p.date, dateModified: p.updated || p.date, inLanguage: 'ja',
+        datePublished: p.date, dateModified: p.updated || p.date, inLanguage: 'en',
         image: ogFor(p.ja + 'index.html'),
         author: { '@id': SITE + '#studio' }, publisher: { '@id': SITE + '#studio' },
         mainEntityOfPage: SITE + p.en },
@@ -690,7 +690,28 @@ function ldFor(file, url) {
     ];
   }
   const ep = enByPath[rel.replace(/index\.html$/, '')];
-  if (ep && !em) return [page(ep.title), crumbs([['Koshin Studio', '/en/'], [ep.title, ep.en]])];
+  if (ep && !em) {
+    /* 英語の作品ページは、日本語側の作品データ（種別・絵・年）を借りて、
+       VideoGame / SoftwareApplication として書く。言語は en */
+    const wj = (ep.ja.match(/^\/works\/([^/]+)\/$/) || [])[1];
+    const w = wj && workBySlug[wj];
+    if (w) {
+      const wImage = w.image ? SITE + w.image : w.cover ? SITE + w.cover + '@2x.jpg' : ogFor(ep.ja + 'index.html');
+      return [
+        { '@type': w.kind === 'game' ? 'VideoGame' : 'SoftwareApplication', name: ep.title, url: url, description: ep.blurb,
+          inLanguage: 'en', image: wImage,
+          applicationCategory: w.category || (w.kind === 'game' ? 'GameApplication' : 'UtilitiesApplication'),
+          operatingSystem: w.os || 'Web', ...(w.status === '公開中' ? { datePublished: w.year } : {}),
+          ...(w.appStoreUrl ? { downloadUrl: w.appStoreUrl, installUrl: w.appStoreUrl } : {}),
+          ...(w.kind === 'game' ? { gamePlatform: 'Web browser', playMode: 'SinglePlayer' } : {}),
+          author: { '@id': SITE + '#studio' }, publisher: { '@id': SITE + '#studio' },
+          offers: { '@type': 'Offer', price: '0', priceCurrency: 'JPY' } },
+        crumbs([['Koshin Studio', '/en/'], [ep.title, ep.en]]),
+      ];
+    }
+    const pg = page(ep.title); pg.inLanguage = 'en';
+    return [pg, crumbs([['Koshin Studio', '/en/'], [ep.title, ep.en]])];
+  }
   const cl = rel.match(/^\/([a-z]{2})\/calc\/(gacha|gacha-rate)\/index\.html$/);
   if (cl && I18N[cl[1]]) {
     const h1 = (readFileSync(file, 'utf8').match(/<h1>(.*?)<\/h1>/) || [, ''])[1];
