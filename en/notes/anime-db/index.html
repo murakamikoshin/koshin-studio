@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>16,177 titles to 6,091: building an anime database</title>
+<meta name="description" content="An anime quiz picks from about 6,000 titles. Where they came from, the criterion that cut 62.3% of 16,177, what remains, and the biases of the method.">
+<meta property="og:title" content="16,177 titles to 6,091: building an anime database">
+<meta property="og:description" content="An anime quiz picks from about 6,000 titles. Where they came from, the criterion that cut 62.3% of 16,177, what remains, and the biases of the method.">
+<meta property="og:type" content="article">
+<meta name="theme-color" content="#fbfaf7">
+<link rel="icon" href="/favicon.ico?v=1697d589" sizes="48x48">
+<link rel="icon" href="/favicon.svg?v=b9d7922f" type="image/svg+xml" sizes="any">
+<link rel="icon" href="/assets/icon/icon-192.png?v=e2566235" type="image/png" sizes="192x192">
+<link rel="apple-touch-icon" href="/assets/icon/icon-180.png?v=84e7f0e6">
+<link rel="manifest" href="/site.webmanifest">
+<script>document.documentElement.className+=" js"</script>
+<link rel="stylesheet" href="/style.css?v=7001672f">
+<meta name="google-adsense-account" content="ca-pub-3863314847163872">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3863314847163872" crossorigin="anonymous"></script>
+<link rel="canonical" href="https://koshinstudio.com/en/notes/anime-db/">
+<meta property="og:url" content="https://koshinstudio.com/en/notes/anime-db/">
+<meta property="og:site_name" content="Koshin Studio">
+<meta property="og:locale" content="en_US">
+<link rel="alternate" hreflang="ja" href="https://koshinstudio.com/notes/anime-db/">
+<link rel="alternate" hreflang="en" href="https://koshinstudio.com/en/notes/anime-db/">
+<link rel="alternate" hreflang="x-default" href="https://koshinstudio.com/en/notes/anime-db/">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="alternate" type="application/rss+xml" title="Koshin Studio — Notes" href="https://koshinstudio.com/feed.xml">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BlogPosting","headline":"From 16,177 titles to 6,091: how the anime quiz database was built by dropping over 60%","url":"https://koshinstudio.com/en/notes/anime-db/","description":"An anime quiz picks from about 6,000 titles. Where they came from, the criterion that cut 62.3% of 16,177, what remains, and the biases of the method.","datePublished":"2026-10-09","dateModified":"2026-10-09","inLanguage":"en","image":"https://koshinstudio.com/assets/og/og_notes_anime-db.jpg","author":{"@id":"https://koshinstudio.com#studio"},"publisher":{"@id":"https://koshinstudio.com#studio"},"mainEntityOfPage":"https://koshinstudio.com/en/notes/anime-db/"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Koshin Studio","item":"https://koshinstudio.com/en/"},{"@type":"ListItem","position":2,"name":"From 16,177 titles to 6,091: how the anime quiz database was built by dropping over 60%","item":"https://koshinstudio.com/en/notes/anime-db/"}]}]}</script>
+<meta property="og:image" content="https://koshinstudio.com/assets/og/og_notes_anime-db.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
+</head>
+<body>
+<canvas id="motes"></canvas>
+
+<header class="site"><div class="wrap">
+  <a class="logo" href="/"><img class="logo-mark" src="/favicon.svg?v=b9d7922f" alt="" width="28" height="28">Koshin Studio</a>
+  <nav><a href="/works/">Works</a><a href="/notes/">Notes</a><a href="/picks/">Picks</a><a href="/calc/">Tools</a><a href="/about/">About</a></nav>
+</div></header>
+
+<main><div class="wrap">
+  <nav class="crumbs" aria-label="You are here"><a href="/en/">Koshin Studio</a><i aria-hidden="true">›</i><span aria-current="page">Building the anime database</span></nav>
+  <h1>From 16,177 titles to 6,091: how the anime quiz database was built by dropping over 60%</h1>
+  <div class="rule"></div>
+<!--lang-->
+  <p class="note"><a href="/notes/anime-db/" hreflang="ja" lang="ja">日本語版</a></p>
+<!--/lang-->
+  <p class="lead">Development log of the Anime Type Diagnosis / October 2026</p>
+
+  <p>The <a href="/en/works/shindananime/" hreflang="en" lang="en">Hardcore Anime Type Diagnosis</a> picks your “one anime of fate” from <strong>a database of more than 6,000 titles</strong>. Where did these 6,000 come from, and how were they narrowed down? This is how the quiz’s data was built, from the repository’s commits and the current real numbers.</p>
+
+  <h2 class="rv" id="s1">Three sources</h2>
+  <ul>
+    <li>The title list of <strong>Annict</strong> (an anime tracking service): 15,971 entries.</li>
+    <li>Anime on <strong>Filmarks</strong> (a movie and anime review service): 7,247 entries.</li>
+    <li><strong>My own list of classics</strong>: about 500 titles.</li>
+  </ul>
+  <p>The same title is merged into one. After merging there are <strong>16,177 entries</strong>. From these I keep only what is usable for the quiz.</p>
+
+  <h2 class="rv" id="s2">The criterion for keeping: “clues to place it on the axes”</h2>
+  <p>The quiz describes each title on 6 axes (worldview, aftertaste, structure, subtaste, visuals, viewing style) and picks by closeness to your answers. So each title needs enough “clues to place it on the axes.”</p>
+  <p>The clues are estimated from the number of words that appear in reviews (the review text itself is not kept; only the number of words is counted). Disparaging phrasing and negations such as “the animation collapsed” or “I did not cry” are not counted. A phrase like “god-tier animation” is not double counted. This “richness of clues” is given as a number from 0 to 1, and <strong>titles below 0.25 are dropped</strong>.</p>
+  <p>Also, by default I exclude continuations of TV series and spin-off theatrical films (such as Doraemon or Conan movies). Standalone original films are kept.</p>
+  <div class="scroll rv"><table>
+    <tr><th></th><th class="n">Count</th><th class="n">Share</th></tr>
+    <tr><td>Titles after merging</td><td class="n">16,177</td><td class="n">100%</td></tr>
+    <tr><td>Dropped for too few clues</td><td class="n">10,086</td><td class="n">62.3%</td></tr>
+    <tr><td>Kept (the database)</td><td class="n">6,091</td><td class="n">37.7%</td></tr>
+  </table></div>
+  <p><strong>More than 60% of titles were dropped because they lacked clues.</strong> The quiz also does not use titles whose values on every axis are close to neutral (absolute value 0.15 or less). That removes 17 more, so the quiz actually uses <strong>6,074 titles</strong>.</p>
+
+  <h2 class="rv" id="s3">What the remaining 6,091 look like</h2>
+  <p>The data was made on September 25, 2026, and I counted it again on October 8.</p>
+  <div class="scroll rv"><table>
+    <tr><th>Source</th><th class="n">Titles</th></tr>
+    <tr><td>Listed on both Annict and Filmarks</td><td class="n">4,354</td></tr>
+    <tr><td>Filmarks only</td><td class="n">1,077</td></tr>
+    <tr><td>Annict only</td><td class="n">619</td></tr>
+    <tr><td>My classics list only</td><td class="n">41</td></tr>
+  </table></div>
+  <div class="scroll rv"><table>
+    <tr><th>Richness of clues</th><th class="n">Titles</th><th class="n">Share</th></tr>
+    <tr><td>0.8 or more (plenty)</td><td class="n">3,388</td><td class="n">55.6%</td></tr>
+    <tr><td>0.6 to 0.8</td><td class="n">639</td><td class="n">10.5%</td></tr>
+    <tr><td>0.4 to 0.6</td><td class="n">1,148</td><td class="n">18.8%</td></tr>
+    <tr><td>0.25 to 0.4 (barely)</td><td class="n">916</td><td class="n">15.0%</td></tr>
+  </table></div>
+  <p>The median richness is 0.92. But 15% passed only barely. The axis values for these titles are less certain than for the others.</p>
+  <div class="scroll rv"><table>
+    <tr><th>Decade of broadcast</th><th class="n">Titles</th></tr>
+    <tr><td>2020s</td><td class="n">2,591</td></tr>
+    <tr><td>2010s</td><td class="n">1,996</td></tr>
+    <tr><td>2000s</td><td class="n">926</td></tr>
+    <tr><td>1990s</td><td class="n">291</td></tr>
+    <tr><td>1980s</td><td class="n">166</td></tr>
+    <tr><td>1970s</td><td class="n">83</td></tr>
+    <tr><td>1960s</td><td class="n">20</td></tr>
+  </table></div>
+  <p>Titles from 2000 onward make up <strong>90.5%</strong>. I think older titles tend to have fewer words in reviews and find it harder to meet the criterion (this is a guess, not confirmed). Titles with an image number 5,632 (92.5%).</p>
+
+  <h2 class="rv" id="s4">Weak points of this method</h2>
+  <ul>
+    <li><strong>It is biased toward new and much-discussed titles.</strong> The more words in reviews, the more likely a title stays. Older titles and those rarely discussed are likely to drop. The quiz has a decade question that decides how much to downweight older titles, but the pool itself already leans toward newer ones.</li>
+    <li><strong>The number of clues is “how much was said,” not “taste.”</strong> Estimating 6 axes from word counts is a rough approximation.</li>
+    <li><strong>The data is as of when it was made.</strong> New titles have to be added every season.</li>
+  </ul>
+
+  <h2 class="rv" id="s5">What I learned</h2>
+  <blockquote>Most of the “6,000 titles” turned out to be “what was left of 16,000 after keeping those with clues.”</blockquote>
+  <p>It is tempting to say “covers all anime,” but in fact more than 60% were dropped for lack of clues. I think writing down how many I dropped and the criterion for keeping is what makes the quiz honest.</p>
+  <p class="note">The numbers in this article come from the quiz’s data (made on September 25, 2026 and recounted on October 8). Titles, review contents and rating scores are not included.</p>
+
+  <p class="note">This is the English version of <a href="/notes/anime-db/" hreflang="ja" lang="ja">the original Japanese article</a>.</p>
+
+  <div class="rule" style="margin:40px 0 22px"></div>
+  <p class="eyebrow">More in English</p>
+  <ul class="plain">
+    <li><a href="/en/">All English pages</a></li>
+  </ul>
+</div>
+</main>
+
+<footer class="site"><div class="wrap"></div></footer>
+<script src="/motion.js?v=1e7447ec" defer></script>
+</body>
+</html>

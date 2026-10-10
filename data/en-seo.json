@@ -106,5 +106,17 @@
  "stopwatch-rank": {
   "title": "A fair 10-second stopwatch ranking: decimals and ties",
   "desc": "Why I truncate to three decimals so coarse clocks get no advantage, how ties (a 1/333 chance) are broken, and how I counted KV writes on the free tier."
+ },
+ "anime-db": {
+  "title": "16,177 titles to 6,091: building an anime database",
+  "desc": "An anime quiz picks from about 6,000 titles. Where they came from, the criterion that cut 62.3% of 16,177, what remains, and the biases of the method."
+ },
+ "match-percent": {
+  "title": "Quiz match % disagreed with the ranking: 35-40%",
+  "desc": "An anime quiz’s match percentage used a different yardstick from its ranking. With the old display, 35 to 40% of 1,000 synthetic respondents saw a reversed top 3."
+ },
+ "shindan12": {
+  "title": "Anime quiz: 12 questions vs 50, how much changes",
+  "desc": "A 50-question anime quiz now gives a result after 12. Measured with 1,000 synthetic respondents: the type mostly matches, but the single recommended title changes a lot."
  }
 }

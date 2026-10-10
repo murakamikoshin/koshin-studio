@@ -181,6 +181,27 @@
     "blurb": "Why I truncate to three decimals so coarse clocks get no advantage, how ties (a 1/333 chance) are broken, and how I counted KV writes on the free tier."
   },
   {
+    "ja": "/notes/anime-db/",
+    "en": "/en/notes/anime-db/",
+    "title": "From 16,177 titles to 6,091: how the anime quiz database was built by dropping over 60%",
+    "date": "2026-10-09",
+    "blurb": "An anime quiz picks from about 6,000 titles. Where they came from, the criterion that cut 62.3% of 16,177, what remains, and the biases of the method."
+  },
+  {
+    "ja": "/notes/match-percent/",
+    "en": "/en/notes/match-percent/",
+    "title": "“80% was chosen over 82%”: the quiz’s match percentage disagreed with its ranking",
+    "date": "2026-10-09",
+    "blurb": "An anime quiz’s match percentage used a different yardstick from its ranking. With the old display, 35 to 40% of 1,000 synthetic respondents saw a reversed top 3."
+  },
+  {
+    "ja": "/notes/shindan12/",
+    "en": "/en/notes/shindan12/",
+    "title": "What changes when an anime quiz goes from 50 questions to 12?",
+    "date": "2026-10-09",
+    "blurb": "A 50-question anime quiz now gives a result after 12. Measured with 1,000 synthetic respondents: the type mostly matches, but the single recommended title changes a lot."
+  },
+  {
     "ja": "/notes/crazygames/",
     "en": "/en/notes/crazygames/",
     "title": "Rejected by CrazyGames with no reason given: I recorded the game and found four problems",

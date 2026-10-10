@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Anime quiz: 12 questions vs 50, how much changes</title>
+<meta name="description" content="A 50-question anime quiz now gives a result after 12. Measured with 1,000 synthetic respondents: the type mostly matches, but the single recommended title changes a lot.">
+<meta property="og:title" content="Anime quiz: 12 questions vs 50, how much changes">
+<meta property="og:description" content="A 50-question anime quiz now gives a result after 12. Measured with 1,000 synthetic respondents: the type mostly matches, but the single recommended title changes a lot.">
+<meta property="og:type" content="article">
+<meta name="theme-color" content="#fbfaf7">
+<link rel="icon" href="/favicon.ico?v=1697d589" sizes="48x48">
+<link rel="icon" href="/favicon.svg?v=b9d7922f" type="image/svg+xml" sizes="any">
+<link rel="icon" href="/assets/icon/icon-192.png?v=e2566235" type="image/png" sizes="192x192">
+<link rel="apple-touch-icon" href="/assets/icon/icon-180.png?v=84e7f0e6">
+<link rel="manifest" href="/site.webmanifest">
+<script>document.documentElement.className+=" js"</script>
+<link rel="stylesheet" href="/style.css?v=7001672f">
+<meta name="google-adsense-account" content="ca-pub-3863314847163872">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3863314847163872" crossorigin="anonymous"></script>
+<link rel="canonical" href="https://koshinstudio.com/en/notes/shindan12/">
+<meta property="og:url" content="https://koshinstudio.com/en/notes/shindan12/">
+<meta property="og:site_name" content="Koshin Studio">
+<meta property="og:locale" content="en_US">
+<link rel="alternate" hreflang="ja" href="https://koshinstudio.com/notes/shindan12/">
+<link rel="alternate" hreflang="en" href="https://koshinstudio.com/en/notes/shindan12/">
+<link rel="alternate" hreflang="x-default" href="https://koshinstudio.com/en/notes/shindan12/">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="alternate" type="application/rss+xml" title="Koshin Studio — Notes" href="https://koshinstudio.com/feed.xml">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BlogPosting","headline":"What changes when an anime quiz goes from 50 questions to 12?","url":"https://koshinstudio.com/en/notes/shindan12/","description":"A 50-question anime quiz now gives a result after 12. Measured with 1,000 synthetic respondents: the type mostly matches, but the single recommended title changes a lot.","datePublished":"2026-10-09","dateModified":"2026-10-09","inLanguage":"en","image":"https://koshinstudio.com/assets/og/og_notes_shindan12.jpg","author":{"@id":"https://koshinstudio.com#studio"},"publisher":{"@id":"https://koshinstudio.com#studio"},"mainEntityOfPage":"https://koshinstudio.com/en/notes/shindan12/"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Koshin Studio","item":"https://koshinstudio.com/en/"},{"@type":"ListItem","position":2,"name":"What changes when an anime quiz goes from 50 questions to 12?","item":"https://koshinstudio.com/en/notes/shindan12/"}]}]}</script>
+<meta property="og:image" content="https://koshinstudio.com/assets/og/og_notes_shindan12.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
+</head>
+<body>
+<canvas id="motes"></canvas>
+
+<header class="site"><div class="wrap">
+  <a class="logo" href="/"><img class="logo-mark" src="/favicon.svg?v=b9d7922f" alt="" width="28" height="28">Koshin Studio</a>
+  <nav><a href="/works/">Works</a><a href="/notes/">Notes</a><a href="/picks/">Picks</a><a href="/calc/">Tools</a><a href="/about/">About</a></nav>
+</div></header>
+
+<main><div class="wrap">
+  <nav class="crumbs" aria-label="You are here"><a href="/en/">Koshin Studio</a><i aria-hidden="true">›</i><span aria-current="page">Quiz: 12 vs 50 questions</span></nav>
+  <h1>What changes when an anime quiz goes from 50 questions to 12?</h1>
+  <div class="rule"></div>
+<!--lang-->
+  <p class="note"><a href="/notes/shindan12/" hreflang="ja" lang="ja">日本語版</a></p>
+<!--/lang-->
+  <p class="lead">Development log of the Anime Type Diagnosis / October 2026</p>
+
+  <p>The <a href="/en/works/shindananime/" hreflang="en" lang="en">Hardcore Anime Type Diagnosis</a> has 50 questions in total. People said it was long, so I made it possible to <strong>get a result from just the first 12 questions</strong>. The remaining 38 are for those who want to answer them.</p>
+  <p>But the result must change a bit by being shorter. I wanted to know <strong>how much</strong> with numbers, not feelings.</p>
+
+  <h2 class="rv" id="s1">How the 12 were chosen</h2>
+  <p>The quiz measures taste on 6 axes (worldview, aftertaste, structure, subtaste, visuals, viewing style). The 12-question version takes <strong>2 questions from each axis, 12 in total</strong>. The calculation that produces the result is the same as with 50; unanswered questions are simply not counted.</p>
+  <p>The 50 questions are 18 on the 6 axes, 2 on image quality and era, and 30 on taste elements (romance, horror, robots and so on). The 12-question version does not ask the last two (era and taste elements), so they do not affect the ordering of titles.</p>
+
+  <h2 class="rv" id="s2">How I measured: 1,000 synthetic respondents</h2>
+  <p>I cannot quickly have real people answer both 12 and 50 questions. So I used <strong>synthetic respondents</strong>. I say this up front: the numbers below are not the results of real people.</p>
+  <ol>
+    <li>For each respondent, I draw a “true taste” as a random number from −1 to +1 for the 6 axes, era, and 30 taste elements.</li>
+    <li>Each answer is that “true taste” plus noise, rounded to 5 levels (leans A, slightly A, neither, slightly B, leans B).</li>
+    <li>These answers are run through the same calculation as the real app (<code>logic.js</code>), once using only 12 questions and once using all 50.</li>
+  </ol>
+  <p>I do not know the size of the noise. People’s answers wobble even in the same mood, so I measured with three values: <strong>small (0.3), medium (0.5) and large (0.8)</strong>. The titles used are the 6,074 with enough clues on the axes.</p>
+
+  <h2 class="rv" id="s3">The type mostly matches even with 12</h2>
+  <p>First, whether the type code (6 letters) is the same with 12 and 50 questions.</p>
+  <div class="scroll rv"><table>
+    <tr><th>Answer noise</th><th class="n">All 6 letters match</th><th class="n">Match per letter</th></tr>
+    <tr><td>Small (0.3)</td><td class="n">75.6%</td><td class="n">94.7 to 96.1%</td></tr>
+    <tr><td>Medium (0.5)</td><td class="n">60.8%</td><td class="n">90.9 to 93.7%</td></tr>
+    <tr><td>Large (0.8)</td><td class="n">43.2%</td><td class="n">85.5 to 87.6%</td></tr>
+  </table></div>
+  <p>Looking letter by letter, even with medium noise more than 90% fall on the same side. Matching <strong>all</strong> 6 letters gets harder because you have to be right six times in a row. Even with 90% per letter, six in a row is a little over half.</p>
+
+  <h2 class="rv" id="s4">The single “title of fate” changes a lot</h2>
+  <p>Next, the <strong>“title of fate”</strong> the quiz shows at the end. It is one pick out of 6,074 titles, so the situation is different.</p>
+  <div class="scroll rv"><table>
+    <tr><th>Answer noise</th><th class="n">Same single title</th><th class="n">Any of the top 3 in common</th></tr>
+    <tr><td>Small (0.3)</td><td class="n">21.7%</td><td class="n">63.4%</td></tr>
+    <tr><td>Medium (0.5)</td><td class="n">15.7%</td><td class="n">52.7%</td></tr>
+    <tr><td>Large (0.8)</td><td class="n">12.4%</td><td class="n">39.9%</td></tr>
+  </table></div>
+  <p><strong>The title shown with 12 questions comes first with 50 questions for about 1 person in 5 to 8.</strong> With medium noise, about half have something in common in the top 3.</p>
+
+  <h2 class="rv" id="s5">At which stage does it change?</h2>
+  <p>I checked whether the reason is only “the 30 taste-element questions.” Between 12 and 50, I inserted <strong>18 questions on the 6 axes only</strong> (no taste elements or era) and compared the single title (medium noise, 600 respondents).</p>
+  <div class="scroll rv"><table>
+    <tr><th>Compared</th><th class="n">Same single title</th></tr>
+    <tr><td>12 and 18 (axes only)</td><td class="n">33.8%</td></tr>
+    <tr><td>18 and 50</td><td class="n">27.5%</td></tr>
+    <tr><td>12 and 50</td><td class="n">15.0%</td></tr>
+  </table></div>
+  <p>Even just <strong>adding 6 axis questions before adding taste elements changes the single title for 2 in 3 people</strong>. When choosing one out of 6,000, a small difference in input reshuffles the order. It was not that “taste elements are doing harm.”</p>
+
+  <h2 class="rv" id="s6">Is 50 questions really closer to the right answer?</h2>
+  <p>In this setup I know the “true taste,” so the one title chosen from it can be treated as the <strong>correct answer</strong>. Do 12 and 50 get closer to it (medium noise)?</p>
+  <div class="scroll rv"><table>
+    <tr><th></th><th class="n">Same as the correct title</th><th class="n">In the correct top 3</th></tr>
+    <tr><td>12 questions</td><td class="n">8.2%</td><td class="n">14.9%</td></tr>
+    <tr><td>50 questions</td><td class="n">14.3%</td><td class="n">28.5%</td></tr>
+  </table></div>
+  <p>50 questions is <strong>about 1.7 to 1.9 times</strong> closer to the correct answer. With small noise, the difference is 17.9% to 29.0% (single title) and 29.0% to 52.6% (top 3). The remaining 38 questions were not wasted. But even with 50, hitting the exact single title is a little over one in ten.</p>
+
+  <h2 class="rv" id="s7">Weak points of this measurement</h2>
+  <ul>
+    <li><strong>The respondents are synthetic.</strong> Real people’s tastes are not scattered like random numbers, and they are noisy in different ways.</li>
+    <li><strong>The noise size is a placeholder.</strong> That is why I measured with three values; I do not know the true one.</li>
+    <li><strong>The “correct answer” is correct on the quiz’s own yardstick.</strong> Whether it is something a person would really love is not measured.</li>
+    <li>What I measured is “is it the same,” not “is it fun.”</li>
+  </ul>
+
+  <h2 class="rv" id="s8">What I learned</h2>
+  <blockquote>The type is set even when short. The single title of fate wobbles each time you add questions.</blockquote>
+  <p>The current design of giving a result at 12 questions and making the rest optional does not contradict these numbers. <strong>If you only want to know your type, 12 questions are enough, and only those who want a more accurate single title need continue.</strong> I think the result screen should say it that way.</p>
+  <p>What I really want to check is real people’s answers: showing the same person the 12-question and the 50-question result and asking which feels right. If I get that far, I will write it in the next record.</p>
+  <p class="note">The measuring script is in the quiz’s repository (random numbers are fixed, so the same numbers can be reproduced).</p>
+  <p style="margin-top:32px"><a class="btn" href="/app/shindananime/en/">Take the quiz</a><a class="btn ghost" href="/en/works/shindananime/">About the quiz</a></p>
+
+  <p class="note">This is the English version of <a href="/notes/shindan12/" hreflang="ja" lang="ja">the original Japanese article</a>.</p>
+
+  <div class="rule" style="margin:40px 0 22px"></div>
+  <p class="eyebrow">More in English</p>
+  <ul class="plain">
+    <li><a href="/en/">All English pages</a></li>
+  </ul>
+</div>
+</main>
+
+<footer class="site"><div class="wrap"></div></footer>
+<script src="/motion.js?v=1e7447ec" defer></script>
+</body>
+</html>

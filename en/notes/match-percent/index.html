@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Quiz match % disagreed with the ranking: 35-40%</title>
+<meta name="description" content="An anime quiz’s match percentage used a different yardstick from its ranking. With the old display, 35 to 40% of 1,000 synthetic respondents saw a reversed top 3.">
+<meta property="og:title" content="Quiz match % disagreed with the ranking: 35-40%">
+<meta property="og:description" content="An anime quiz’s match percentage used a different yardstick from its ranking. With the old display, 35 to 40% of 1,000 synthetic respondents saw a reversed top 3.">
+<meta property="og:type" content="article">
+<meta name="theme-color" content="#fbfaf7">
+<link rel="icon" href="/favicon.ico?v=1697d589" sizes="48x48">
+<link rel="icon" href="/favicon.svg?v=b9d7922f" type="image/svg+xml" sizes="any">
+<link rel="icon" href="/assets/icon/icon-192.png?v=e2566235" type="image/png" sizes="192x192">
+<link rel="apple-touch-icon" href="/assets/icon/icon-180.png?v=84e7f0e6">
+<link rel="manifest" href="/site.webmanifest">
+<script>document.documentElement.className+=" js"</script>
+<link rel="stylesheet" href="/style.css?v=7001672f">
+<meta name="google-adsense-account" content="ca-pub-3863314847163872">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3863314847163872" crossorigin="anonymous"></script>
+<link rel="canonical" href="https://koshinstudio.com/en/notes/match-percent/">
+<meta property="og:url" content="https://koshinstudio.com/en/notes/match-percent/">
+<meta property="og:site_name" content="Koshin Studio">
+<meta property="og:locale" content="en_US">
+<link rel="alternate" hreflang="ja" href="https://koshinstudio.com/notes/match-percent/">
+<link rel="alternate" hreflang="en" href="https://koshinstudio.com/en/notes/match-percent/">
+<link rel="alternate" hreflang="x-default" href="https://koshinstudio.com/en/notes/match-percent/">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="alternate" type="application/rss+xml" title="Koshin Studio — Notes" href="https://koshinstudio.com/feed.xml">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BlogPosting","headline":"“80% was chosen over 82%”: the quiz’s match percentage disagreed with its ranking","url":"https://koshinstudio.com/en/notes/match-percent/","description":"An anime quiz’s match percentage used a different yardstick from its ranking. With the old display, 35 to 40% of 1,000 synthetic respondents saw a reversed top 3.","datePublished":"2026-10-09","dateModified":"2026-10-09","inLanguage":"en","image":"https://koshinstudio.com/assets/og/og_notes_match-percent.jpg","author":{"@id":"https://koshinstudio.com#studio"},"publisher":{"@id":"https://koshinstudio.com#studio"},"mainEntityOfPage":"https://koshinstudio.com/en/notes/match-percent/"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Koshin Studio","item":"https://koshinstudio.com/en/"},{"@type":"ListItem","position":2,"name":"“80% was chosen over 82%”: the quiz’s match percentage disagreed with its ranking","item":"https://koshinstudio.com/en/notes/match-percent/"}]}]}</script>
+<meta property="og:image" content="https://koshinstudio.com/assets/og/og_notes_match-percent.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
+</head>
+<body>
+<canvas id="motes"></canvas>
+
+<header class="site"><div class="wrap">
+  <a class="logo" href="/"><img class="logo-mark" src="/favicon.svg?v=b9d7922f" alt="" width="28" height="28">Koshin Studio</a>
+  <nav><a href="/works/">Works</a><a href="/notes/">Notes</a><a href="/picks/">Picks</a><a href="/calc/">Tools</a><a href="/about/">About</a></nav>
+</div></header>
+
+<main><div class="wrap">
+  <nav class="crumbs" aria-label="You are here"><a href="/en/">Koshin Studio</a><i aria-hidden="true">›</i><span aria-current="page">Match percent vs ranking</span></nav>
+  <h1>“80% was chosen over 82%”: the quiz’s match percentage disagreed with its ranking</h1>
+  <div class="rule"></div>
+<!--lang-->
+  <p class="note"><a href="/notes/match-percent/" hreflang="ja" lang="ja">日本語版</a></p>
+<!--/lang-->
+  <p class="lead">Development log of the Anime Type Diagnosis / October 2026</p>
+
+  <p>At the end, the <a href="/en/works/shindananime/" hreflang="en" lang="en">Hardcore Anime Type Diagnosis</a> shows “the one anime of fate” and two runners-up. Each has a number like “match 82%.” At one point this number <strong>disagreed with the ranking</strong>: “a title at 80% was chosen over a title at 82%.” I have re-measured how large the disagreement was, and I am writing it down.</p>
+
+  <h2 class="rv" id="s1">The number and the ranking used different yardsticks</h2>
+  <p>The quiz measures taste on 6 axes and computes a “closeness” (cosine similarity) for each title. But the final order is not decided by closeness alone. It is ordered by <strong>closeness × 0.82 plus the title’s rating (stars), popularity, era and taste elements (<code>total</code>)</strong>.</p>
+  <p>However, the match percentage on screen was built from <strong>closeness alone</strong>. The order was by the total and the display by closeness: two yardsticks. A title could rank first by total but have a lower closeness than second place. Then the screen showed “1st 80%, 2nd 82%.”</p>
+
+  <h2 class="rv" id="s2">The fix</h2>
+  <p>I changed it so the percentage comes from the same <code>total</code> as the order (September 25, 2026). The same day I fixed another contradiction in the display. Even when an axis bar’s value was exactly 0, it showed “leans X 50%.” It said it leaned when it did not. I made the minimum 51%.</p>
+
+  <h2 class="rv" id="s3">How big was the disagreement? Measure it</h2>
+  <p>The commit of the time does not keep the proportion. So I measured with the same <strong>1,000 synthetic respondents</strong> (answering all 50 questions) as in <a href="/notes/shindan12/" hreflang="ja" lang="ja">the 12-question article</a> (in Japanese). For the top 3 titles, I compare how the screen display would look in three ways.</p>
+  <ul>
+    <li><strong>Old:</strong> integer % computed from closeness.</li>
+    <li><strong>Middle:</strong> integer % computed from <code>total</code>.</li>
+    <li><strong>Now:</strong> % to one decimal place computed from <code>total</code>.</li>
+  </ul>
+  <p>I counted two things. “<strong>Reversal</strong>” is when the 1st place % is lower than the 2nd or 3rd place %. “<strong>Tie</strong>” is when 1st and 2nd look like the same %. Answer noise is small (0.3), medium (0.5) and large (0.8).</p>
+  <div class="scroll rv"><table>
+    <tr><th>Display</th><th>Answer noise</th><th class="n">Reversal</th><th class="n">1st and 2nd tied</th></tr>
+    <tr><td rowspan="3">Old (closeness, integer)</td><td>Small</td><td class="n">40.3%</td><td class="n">14.1%</td></tr>
+    <tr><td>Medium</td><td class="n">37.7%</td><td class="n">15.3%</td></tr>
+    <tr><td>Large</td><td class="n">35.1%</td><td class="n">15.3%</td></tr>
+    <tr><td rowspan="3">Middle (total, integer)</td><td>Small</td><td class="n">0.0%</td><td class="n">31.7%</td></tr>
+    <tr><td>Medium</td><td class="n">0.0%</td><td class="n">30.1%</td></tr>
+    <tr><td>Large</td><td class="n">0.0%</td><td class="n">27.7%</td></tr>
+    <tr><td rowspan="3">Now (total, one decimal)</td><td>Small</td><td class="n">0.0%</td><td class="n">3.6%</td></tr>
+    <tr><td>Medium</td><td class="n">0.0%</td><td class="n">3.9%</td></tr>
+    <tr><td>Large</td><td class="n">0.0%</td><td class="n">3.8%</td></tr>
+  </table></div>
+  <p><strong>With the old display, the top three were shown in reversed order for 35 to 40% of respondents.</strong> By this calculation about 2 in 5 people saw “the chosen first place is lower than the runner-up.”</p>
+
+  <h2 class="rv" id="s4">Fixing it produced another problem</h2>
+  <p>Computing from the total made reversals 0%. But with integer percentages, <strong>1st and 2nd looking like the same %</strong> rose to around 30%. The top has titles with close totals. Rounding to integers erases the difference and they gather on the same number.</p>
+  <p>So I changed the display to <strong>one decimal place</strong> (like 99.6%). Ties dropped to about 4%. It does not reach 0% because sometimes the totals really differ by less than 0.1%.</p>
+
+  <h2 class="rv" id="s5">Weak points of this measurement</h2>
+  <ul>
+    <li><strong>The respondents are synthetic.</strong> Real people answer differently.</li>
+    <li><strong>“Old” is a reconstruction: today’s ordering with the old display method applied.</strong> I did not run the code of that time. At the time, ratings and taste boosts had no cap, and the results may have differed.</li>
+    <li>What I measured is only “does the display agree with the ranking,” not “is the ranking right for that person.”</li>
+  </ul>
+
+  <h2 class="rv" id="s6">What I learned</h2>
+  <blockquote>Make the number you show from the same yardstick you used to sort.</blockquote>
+  <p>It sounds obvious, but as calculations were added, only the order changed and the displayed number was left behind. Another point: <strong>rounding can erase a difference in rank</strong>. Where differences are small, just adding one digit brings back the visible order.</p>
+  <p class="note">The numbers in this article were measured on October 8, 2026 with 1,000 synthetic respondents (random numbers fixed). The commit record of that time is September 25, 2026.</p>
+
+  <p class="note">This is the English version of <a href="/notes/match-percent/" hreflang="ja" lang="ja">the original Japanese article</a>.</p>
+
+  <div class="rule" style="margin:40px 0 22px"></div>
+  <p class="eyebrow">More in English</p>
+  <ul class="plain">
+    <li><a href="/en/">All English pages</a></li>
+  </ul>
+</div>
+</main>
+
+<footer class="site"><div class="wrap"></div></footer>
+<script src="/motion.js?v=1e7447ec" defer></script>
+</body>
+</html>
