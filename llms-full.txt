@@ -3545,7 +3545,9 @@ URL: https://koshinstudio.com/works/torecadash/
   抽選、予約、先着。
 追いかけるのが大変な販売情報を、まとめて通知する。
 
-  iPhone のアプリです。いま、App Store の審査を受けています。公開したら、ここにリンクを置きます。
+  iPhone のアプリです。App Store で配信中です（無料。Pro は有料）。
+
+  App Store で開く (https://apps.apple.com/jp/app/id6788758920)
 
     15ジャンルに対応
     3つの販売形式
@@ -3611,7 +3613,7 @@ URL: https://koshinstudio.com/works/torecadash/
 
 ### どこで手に入りますか？
 
-  iPhone 向けのアプリで、いま App Store の審査を受けています。公開したら、このページにリンクを置きます。
+  App Store で配信している iPhone 向けのアプリです。このページの「App Store で開く」から入れます。
 
 ### ログインは必要ですか？
 

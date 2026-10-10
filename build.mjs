@@ -628,6 +628,9 @@ function ldFor(file, url) {
            あればそちらを使う。無ければ今まで通りの決め打ち */
         applicationCategory: w.category || (w.kind === 'game' ? 'GameApplication' : 'UtilitiesApplication'),
         operatingSystem: w.os || 'Web', ...(w.status === '公開中' ? { datePublished: w.year } : {}),
+        /* App Store に出しているアプリは、配信先を構造化データに入れる
+           （works.json の appStoreUrl。無い作品には何も足さない） */
+        ...(w.appStoreUrl ? { downloadUrl: w.appStoreUrl, installUrl: w.appStoreUrl } : {}),
         ...(w.kind === 'game'
           ? { gamePlatform: 'Web browser', playMode: 'SinglePlayer',
               ...(w.genre && w.genre.length ? { genre: w.genre } : {}) }

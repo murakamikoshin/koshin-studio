@@ -116,10 +116,10 @@
     "kind": "app",
     "category": "UtilitiesApplication",
     "year": "2026",
-    "status": "審査中",
+    "status": "公開中",
     "url": "/works/torecadash/",
     "cover": "/assets/torecadash-square",
-    "blurb": "トレカの抽選・予約・先着販売の情報を、店舗やジャンルごとにまとめて通知する iPhone アプリ。締切カレンダーと応募の記録つき。App Store の審査を受けています。",
+    "blurb": "トレカの抽選・予約・先着販売の情報を、店舗やジャンルごとにまとめて通知する iPhone アプリ。締切カレンダーと応募の記録つき。App Store で配信中です。",
     "tags": [
       "iOS",
       "通知",
@@ -144,7 +144,7 @@
     "faq": [
       {
         "q": "どこで手に入りますか？",
-        "a": "iPhone 向けのアプリで、いま App Store の審査を受けています。公開したら、このページにリンクを置きます。"
+        "a": "App Store で配信している iPhone 向けのアプリです。このページの「App Store で開く」から入れます。"
       },
       {
         "q": "ログインは必要ですか？",
@@ -159,7 +159,8 @@
         "a": "基本機能は無料です。商品フォローの数や通知の速さなどを広げる、有料の Pro もあります。"
       }
     ],
-    "os": "iOS"
+    "os": "iOS",
+    "appStoreUrl": "https://apps.apple.com/jp/app/id6788758920"
   },
   {
     "slug": "negaeri-shogi",
