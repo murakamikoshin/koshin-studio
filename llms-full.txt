@@ -2580,6 +2580,8 @@ URL: https://koshinstudio.com/notes/comment-services/
 
 # 静的サイトのコメント欄を、公式の情報で比べる：giscus・utterances・Disqus・Remark42 ほか
 
+  English version (https://koshinstudio.com/en/notes/comment-services/)
+
   比べたもの ／ 2026年10月
 
   このサイトのコメント欄は、giscus です。「コメントを開く」を押すまで、外部のサイトに接続しない形にしてあります。そのほかの選択肢は、どうなっているのか。公式の説明と、公式のリポジトリだけを読んで、並べました。実際に使って比べたのは、giscus だけです。
@@ -2716,6 +2718,8 @@ URL: https://koshinstudio.com/notes/comment-services/
 URL: https://koshinstudio.com/notes/ios-sdk-compare/
 
 # iOS アプリの広告 SDK と Firebase を、公式の情報で比べる：AdMob・AppLovin MAX・LevelPlay・Supabase
+
+  English version (https://koshinstudio.com/en/notes/ios-sdk-compare/)
 
   比べたもの ／ 2026年10月
 
@@ -5366,6 +5370,294 @@ URL: https://koshinstudio.com/en/notes/hosting-compare/
 
 ---
 
+URL: https://koshinstudio.com/en/notes/comment-services/
+
+# Comparing comment systems for static sites by their official information: giscus, utterances, Disqus, Remark42 and more
+
+  日本語版 (https://koshinstudio.com/notes/comment-services/)
+
+  A comparison / October 2026
+
+  The comment box on this site is giscus. It is set up so that nothing connects to an outside site until you press “Open comments.” What are the other options like? I read only the official descriptions and official repositories and lined them up. I have actually used only giscus.
+
+  This is what I confirmed on October 8, 2026. The state of services changes. Check the sources before you use one.
+
+## Quick table: look up what you want to know
+
+  The answers first. Details and sources are in the sections below.
+
+    What you want to know | What the official pages say
+
+    I do not want ads or tracking | giscus, utterances, Cusdis and Remark42 say officially that there is no tracking or advertising. The free version of Disqus is run on ads.
+
+    I do not want to run a server | giscus (GitHub Discussions) and utterances (GitHub Issues) store on GitHub. Both need a GitHub account to write.
+
+    I want people to write without logging in | Cusdis needs no login but has ended. Remark42 can allow anonymous posts by configuration (you need your own server).
+
+    I only want ones that are still maintained | Recent updates were confirmed for giscus (2026-05-26) and Remark42 (2026-09-14). utterances, Staticman and Commento are suspected stopped; Cusdis has ended.
+
+    I want a Japanese UI | giscus and Remark42 have Japanese translation files. I could not confirm for the others.
+
+  The contents of the table were confirmed on official pages and repositories on October 8, 2026. “Suspected stopped” is not an official announcement of closure.
+
+## Where it is stored and who can write
+
+    Service | Storage | What you need to post | Cost
+
+    giscus | GitHub Discussions | A GitHub account | Free (MIT)
+
+    utterances | GitHub Issues | A GitHub account | Free (MIT)
+
+    Disqus | Disqus’s servers (I could not confirm an explicit statement on storage) | Could not confirm | The free version has ads. Paid Plus is $12 to $35 a month depending on monthly pageviews ($12 up to 100,000, $20 up to 350,000, $35 up to 900,000; official help, 2025-04-30 version).
+
+    Remark42 | A server you run yourself (built-in data store) | Various logins (Google, GitHub and so on), email; anonymous by configuration | Free (MIT). Server cost is yours.
+
+    Cusdis | A server you run yourself (PostgreSQL and others) | No login needed | OSS (GPL-3.0)
+
+    Staticman | Saved as files in a GitHub or GitLab repository | Could not confirm | OSS (MIT). You run it yourself.
+
+    Commento | A server you run yourself (PostgreSQL) | Supports login and SSO. I could not confirm anonymous posting. | The self-hosted version is free software. The README says the cloud version is not offered for free.
+
+## What the official pages say about ads and tracking
+
+- giscus and utterances: Both state officially that there is no tracking and no ads. Note that opening giscus comments connects to GitHub, and how GitHub handles that is a separate matter.
+
+- Disqus: The free version is run on ads. The official help describes cookies recording visits to advertisers’ sites, cookie IDs being shared with advertising partners and affiliates, and wording such as “sold or shared.” Adopting it seems to carry the heaviest burden for consent management and ad-related notices (I did not look into how this is treated under its official policy).
+
+- Cusdis: The README says it uses no cookies at all.
+
+- Remark42 and Commento: The official pages say they do not track users and have no ads.
+
+## Is it still maintained?
+
+  You use a comment system for a long time once it is in. Whether it has stopped matters.
+
+    Service | What I confirmed on the official repository or page | Assessment
+
+    giscus | No formal release numbers; it states “rolling-release.” The latest change was 2026-05-26. A warning that features may break because of changes on the GitHub side. | Active
+
+    Remark42 | Latest is v1.17.1 (2026-09-14). | Active
+
+    utterances | The last commit was 2022-02-12. No releases. Not archived. | Suspected stopped (no announcement of closure)
+
+    Staticman | The last commit was 2020-07-06. The only release is v1.0.0 from 2016. | Suspected stopped (I could not confirm an official announcement)
+
+    Commento | The last tag is v1.8.0 (2020-04) and the last commit 2021-02-28. The cloud site and its description pages all return 404. | Suspected stopped (I could not confirm an official notice)
+
+    Cusdis | The repository was archived on 2026-07-17. The README says “deprecated.” | Ended, it is fair to say
+
+    Disqus | The service is running (the pricing help article is dated 2025-04-30). | Running
+
+## Japanese, spam protection and weight
+
+- Japanese UI: giscus and Remark42 have Japanese translation files. I could not confirm for the others.
+
+- Spam protection: giscus only says comments can be moderated on GitHub, with no spam protection described. Disqus has a spam filter even in the basic free version. With Cusdis, the admin approves before display.
+
+- Weight: Only Cusdis gave a number (about 5 kb gzipped). giscus has an option to delay loading comments. utterances says it is “lightweight” but gives no number.
+
+## What I paid attention to with giscus on this site
+
+  The giscus documentation says there is no tracking or ads. Even so, on this site nothing connects to giscus or GitHub until you press “Open comments.” That is so people who only read generate no extra traffic and the page loads lighter. The conditions for connecting are written on the privacy page (https://koshinstudio.com/en/privacy/).
+
+## What I learned
+
+> More than a feature table, ask “is it still going?”
+
+- More services have stopped than I expected. Of the 7 I looked at, 4 (Cusdis, Staticman, Commento and utterances) had ended or were suspected stopped.
+
+- Free services sometimes make you pay with ads or tracking. The free version of Disqus is an example.
+
+- Systems that need a GitHub account to write (giscus, utterances) narrow your readers to people close to development. Depending on who reads your articles, that may not fit.
+
+## What I could not confirm
+
+- Disqus: the official pricing page (its body is drawn by JavaScript and could not be read; the prices are from the help article), requirements for commenters’ accounts, a Japanese UI, an explicit statement on storage, load weight.
+
+- utterances: a Japanese UI, spam protection.
+
+- Cusdis: cloud-version pricing, the list of supported languages.
+
+- Staticman: requirements for commenters, spam protection such as Akismet, statements on ads or tracking, an official announcement of closure.
+
+- Commento: the state and price of the cloud version, a Japanese UI, an official notice of closure.
+
+- How a comment section is treated under AdSense’s official policy (I did not look into it).
+
+## Sources (all checked on October 8, 2026)
+
+- giscus: repository (https://github.com/giscus/giscus)
+
+- giscus: official configuration page (https://giscus.app/ja)
+
+- utterances: repository (https://github.com/utterance/utterances)
+
+- Disqus: pricing and plans (help) (https://help.disqus.com/en/articles/1717110-comments-pricing-and-plans)
+
+- Disqus: privacy FAQ (https://help.disqus.com/en/articles/1717103-disqus-privacy-faq)
+
+- Remark42: repository (https://github.com/umputun/remark42)
+
+- Cusdis: repository (https://github.com/djyde/cusdis)
+
+- Staticman: repository (https://github.com/eduardoboucas/staticman)
+
+- Commento: repository (GitLab) (https://gitlab.com/commento/commento)
+
+  I read some of the official pages through summaries. The Disqus prices were checked against the original text of the official help article (2025-04-30 version) on 2026-10-08. Disqus’s own pricing page is drawn by JavaScript and could not be read, so please check current prices there.
+
+  This is the English version of the original Japanese article (https://koshinstudio.com/notes/comment-services/).
+
+  More in English
+
+- All English pages (https://koshinstudio.com/en/)
+
+
+---
+
+URL: https://koshinstudio.com/en/notes/ios-sdk-compare/
+
+# Comparing iOS ad SDKs and Firebase by their official information: AdMob, AppLovin MAX, LevelPlay and Supabase
+
+  日本語版 (https://koshinstudio.com/notes/ios-sdk-compare/)
+
+  A comparison / October 2026
+
+  For my iOS app Torecadash, I pinned Firebase to 11.4.0 and AdMob to 11.5.0 to suit Xcode 15.2 on an old Mac (that article (https://koshinstudio.com/en/notes/xcode152-sdk/)). The app was also rejected once for ITMS-91064 (that article (https://koshinstudio.com/en/notes/itms-91064/)). Here I line up the surrounding options I could not look into at the time, using official pages only. I have actually used only AdMob and Firebase. I have not used the others.
+
+  This is what I confirmed on October 8, 2026. SDK versions and requirements change quickly. Check the sources before you use them.
+
+## Quick table: look up what you want to know
+
+  The answers first. The numbers and sources are in the sections below.
+
+    What you want to know | What the official pages say
+
+    Which versions work on an old Xcode | AdMob 11.6.0 and later needs Xcode 15.3 or later. Firebase 11.12.0 and later needs Xcode 16.2, and 12.0.0 and later needs Swift 6.0 (official release notes).
+
+    Minimum payout | AdMob: at least $100 in USD (official table). AppLovin: no amount in the official FAQ; payment is for the previous month on the 15th of the next. LevelPlay and Meta: could not confirm.
+
+    I want to use several ad networks | AdMob, AppLovin MAX and LevelPlay have mediation. The AdMob integration guide lists 24 networks.
+
+    I want to keep using Firebase with CocoaPods | Firebase states that in October 2026 it stops publishing new versions to CocoaPods. SPM is recommended.
+
+    I want server-side processing for free | On Firebase Spark, Cloud Functions is not available (Blaze only). On Supabase’s free plan, a project pauses after one week without activity.
+
+  The contents of the table were confirmed on official pages on October 8, 2026. SDK requirements can disagree between pages, so check with your own build as well.
+
+## Ad SDKs: how they work and payments
+
+    SDK | How it works | Minimum payout
+
+    Google AdMob | Has mediation (serving from several ad networks). The iOS integration guide lists 24 networks including AppLovin, ironSource, Meta Audience Network and Unity Ads. | Payments in USD have a minimum of $100 (official table). The value differs by currency.
+
+    AppLovin MAX | A mediation platform. | No specific amount in the official FAQ (you check it on the dashboard). Payment is for the previous month on the 15th of the next (NET15).
+
+    Unity LevelPlay (ironSource) | LevelPlay ads and mediation. Adapters are separate packages. | Could not confirm.
+
+    Meta Audience Network | A standalone ad network. Listed as a mediation target in AdMob. | Could not confirm.
+
+  For Meta Audience Network, I could not confirm either an official announcement of closure or a statement that it continues. Whether you can newly adopt it now cannot be settled from official primary sources.
+
+## iOS privacy requirements
+
+- Apple’s rule (common to all): if NSPrivacyTracking is true, NSPrivacyTrackingDomains needs a list of domains. If the user has not allowed ATT (tracking permission), connections to those domains fail and the app receives an error, according to Apple’s documentation. This matches what happened in the ITMS-91064 article.
+
+- AdMob: asks for ATT before loading ads (SDK 7.64.0 and later). Privacy manifest support is from 11.2.0 (2024-03-14). I could not find an official list of tracking domains on AdMob’s pages (I cannot say it does not exist).
+
+- AppLovin MAX: 12.4.1 and later supports privacy manifests. Each connected network also has a required version (AdMob 11.2.0 or later, Meta 6.15.0 or later, Unity Ads 4.10.0 or later).
+
+- Meta: the Audience Network SDK has an iOS privacy manifest and recommends updating to 6.15.0. The domains are pre-filled and it does not recommend adding them by hand.
+
+- LevelPlay: I could not confirm any description of ATT or privacy manifests on the integration pages I read.
+
+## Minimum Xcode and iOS, and how to install
+
+    SDK | Minimum requirements | Installation
+
+    AdMob | Latest is 13.11.0 (2026-09-29). The release notes say a minimum of Xcode 26.2 (from 13.4.0). But the quick start says “Xcode 16.0 or later” and “iOS 13.0 or later,” so pages disagree. | SPM (recommended), CocoaPods, manual
+
+    Firebase | Latest is 13.0.0 (2026-10-07). Minimum Xcode 26.2, iOS 15.0. Xcode 16.2 is required from 11.12.0, and Swift 6.0 from 12.0.0. | SPM is recommended. It states that in October 2026 it stops publishing new versions to CocoaPods.
+
+    AppLovin MAX | iOS 12.0 or later, Xcode 15 or later (integration page). | CocoaPods, SPM, manual. With SPM, use SPM for the SDK and all adapters (mixing causes version conflicts).
+
+    LevelPlay | The integration page says iOS 12+ and Xcode 15.4+. Another page (for Unity) says iOS 13+ and Xcode 16+ (from a search summary). Pages disagree. | CocoaPods, SPM (9.3.0 or later), manual
+
+  This table also confirms why Torecadash pinned its versions. The official release notes say AdMob 11.6.0 depends on MarketplaceKit and needs Xcode 15.3 or later, and Firebase 11.12.0 and later needs Xcode 16.2. This matched my article.
+
+## Analytics and backend: Firebase and Supabase free tiers
+
+    Service | What the official pages say
+
+    Firebase (Spark) | Firestore: 1 GiB storage, 50,000 reads a day, 20,000 writes a day, 20,000 deletes a day. Authentication: 50,000 monthly active users (phone auth not available). Cloud Functions: not available on Spark (paid Blaze only). Analytics and Cloud Messaging: no numeric limit (free).
+
+    Supabase (free) | 50,000 monthly active users, 500 MB database, 1 GB file storage, 5 GB egress. Up to 2 active projects. Free projects pause after one week without activity.
+
+## What I learned
+
+> In an environment that cannot keep up with the latest version, the “minimum requirements” table matters most.
+
+- SDK requirements can disagree between pages. Both AdMob and LevelPlay had different numbers in the release notes and the setup guides. You have to look at both and confirm with your own build.
+
+- Privacy settings happen outside the SDK. If you set NSPrivacyTracking to true, you also write the domains. That is Apple’s rule, not a difference between SDKs.
+
+- Look at how a free tier stops first. Supabase pauses with no activity. Firebase Spark cannot use Functions.
+
+## What I could not confirm
+
+- Minimum payouts for LevelPlay and Meta Audience Network.
+
+- Meta Audience Network’s availability (closed or continuing), minimum Xcode and iOS, SPM support, and current version.
+
+- AppLovin’s specific minimum payout amount, and the latest MAX SDK version (the release-notes URL would not open).
+
+- An official list of tracking domains for AdMob, within what I could access.
+
+- The FirebaseDataEncoder bug from Firebase 11.5.0 (as my article says, I confirmed it with my own build and could not find an official record).
+
+- The contents of supabase-swift’s privacy manifest.
+
+- Comparisons of accuracy or revenue (I did not do them, because there are no official numbers).
+
+## Sources (all checked on October 8, 2026)
+
+- AdMob: iOS release notes (https://developers.google.com/admob/ios/rel-notes)
+
+- AdMob: iOS quick start (https://developers.google.com/admob/ios/quick-start)
+
+- AdMob: mediation (https://developers.google.com/admob/ios/mediation)
+
+- AdMob: privacy (https://developers.google.com/admob/ios/privacy)
+
+- AdMob: payment thresholds (https://support.google.com/admob/answer/2772208?hl=en)
+
+- Firebase: iOS release notes (https://firebase.google.com/support/release-notes/ios)
+
+- Firebase: installation methods (https://firebase.google.com/docs/ios/installation-methods)
+
+- Firebase: pricing (https://firebase.google.com/pricing)
+
+- AppLovin: integration (iOS) (https://support.applovin.com/en/max/ios/overview/integration)
+
+- AppLovin: privacy manifests (https://support.applovin.com/en/max/ios/overview/privacy-manifests)
+
+- Unity LevelPlay: iOS SDK integration (https://docs.unity.com/en-us/grow/levelplay/sdk/ios/sdk-integration)
+
+- Apple: privacy manifest files (https://developer.apple.com/documentation/bundleresources/privacy-manifest-files)
+
+- Supabase: pricing (https://supabase.com/pricing)
+
+  I read some of the official pages through summaries (the numbers have not been checked against the originals character by character). Please review the original text before relying on them.
+
+  This is the English version of the original Japanese article (https://koshinstudio.com/notes/ios-sdk-compare/).
+
+  More in English
+
+- All English pages (https://koshinstudio.com/en/)
+
+
+---
+
 URL: https://koshinstudio.com/en/
 
 # Koshin Studio
@@ -5419,6 +5711,10 @@ URL: https://koshinstudio.com/en/
 - Works on my machine, breaks when deployed: four incidents shipping a static site to Cloudflare Pages (https://koshinstudio.com/en/notes/deploy-gotchas/)
 
 - Comparing static site hosts by their official terms: Cloudflare Pages, Netlify, Vercel, GitHub Pages and Firebase Hosting (https://koshinstudio.com/en/notes/hosting-compare/)
+
+- Comparing comment systems for static sites by their official information: giscus, utterances, Disqus, Remark42 and more (https://koshinstudio.com/en/notes/comment-services/)
+
+- Comparing iOS ad SDKs and Firebase by their official information: AdMob, AppLovin MAX, LevelPlay and Supabase (https://koshinstudio.com/en/notes/ios-sdk-compare/)
 
 ## Languages
 

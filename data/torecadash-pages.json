@@ -1,0 +1,886 @@
+{
+ "en": {
+  "title": "Toreca Dash (トレカダッシュ) — Japan TCG lottery, pre-order & restock alerts",
+  "desc": "An iPhone app that gathers lottery, pre-order and first-come sales of trading cards from stores across Japan, with a deadline calendar and alerts. Store information is mostly in Japanese.",
+  "og": "Lottery, pre-order and restock alerts for trading cards sold in Japan.",
+  "h1": "Toreca Dash (トレカダッシュ)",
+  "lead": "Lotteries, pre-orders, first-come sales.<br>The Japanese card drops that are hard to keep up with, in one place, with alerts.",
+  "btn": "Open in the App Store",
+  "free": "Free to download. Pro is an optional paid upgrade.",
+  "s_what": "What it is",
+  "s_feat": "Main features",
+  "s_games": "Supported games",
+  "s_pro": "Toreca Dash Pro (optional, paid)",
+  "s_know": "Good to know before you use it",
+  "s_faq": "FAQ",
+  "p_what": "Sales of trading cards in Japan are announced one store at a time, on store sites and on X. By the time you notice, the deadline has passed. Toreca Dash collects announcements from stores and online shops across Japan and takes you straight to the page where you can apply or buy.",
+  "feats": [
+   [
+    "Feed",
+    "See open lotteries, pre-orders and first-come sales, filtered by game and sale type."
+   ],
+   [
+    "Alerts",
+    "Get notified as soon as something new appears for a product or game you follow."
+   ],
+   [
+    "Deadline calendar",
+    "Lottery deadlines and result dates, day by day, so you do not miss an entry."
+   ],
+   [
+    "Entry tracker",
+    "Record the lotteries you entered, and the results and purchases."
+   ],
+   [
+    "Map",
+    "Share in-store stock and lottery information with other users."
+   ]
+  ],
+  "p_games": "Pokémon Card Game, Yu-Gi-Oh!, ONE PIECE Card Game, Union Arena, Lorcana, Duel Masters, Dragon Ball, Gundam, Magic: The Gathering, Weiss Schwarz, Detective Conan, hololive, Digimon, Haikyu!! Babo-ca!!, Palworld (15 in total).",
+  "pro": [
+   "Unlimited product follows, keyword alerts and excluded keywords.",
+   "The fastest alerts for first-come and surprise sales (the free version is about 15 minutes behind).",
+   "Filter to stores near your location.",
+   "Full notification history, entry statistics, calendar export and CSV export.",
+   "Track the value and profit/loss of your collection from purchase records.",
+   "No ads."
+  ],
+  "know": [
+   "<strong>Store information is mostly in Japanese.</strong> Store names, announcements and product names are shown as published in Japan.",
+   "Many Japanese stores require a Japanese address, phone number or store membership to enter a lottery. Check the conditions on each store’s own page before you apply.",
+   "The app shows the information and sends you to the store. It does not buy or enter lotteries for you.",
+   "Screens are available in Japanese and English. More languages are being added."
+  ],
+  "faq": [
+   [
+    "Is it free?",
+    "Yes. The main features are free. Pro is an optional paid plan."
+   ],
+   [
+    "Do I need an account?",
+    "No. The feed, alerts and calendar work without signing in. Sign in with Apple is only used for map posts and the daily fortune."
+   ],
+   [
+    "Is it an official app?",
+    "No. It is an unofficial app made by an individual, and is not affiliated with any card game publisher or store. Information comes from stores’ public announcements; always confirm the latest details on the store’s official page before you apply or buy."
+   ]
+  ],
+  "other": "<a href=\"/works/torecadash/\" hreflang=\"ja\" lang=\"ja\">日本語版</a></p>\n<!--/lang-->  <p class=\"note\">Other languages"
+ },
+ "zh-Hans": {
+  "title": "トレカダッシュ（Toreca Dash）— 日本卡牌抽签·预约·补货通知（iPhone 应用）",
+  "desc": "汇总日本各地店铺的卡牌抽签、预约和先到先得销售信息，并提供截止日历与通知的 iPhone 应用。店铺信息以日语为主。",
+  "og": "日本卡牌的抽签、预约和补货通知。",
+  "h1": "トレカダッシュ（Toreca Dash）",
+  "lead": "抽签、预约、先到先得。<br>难以追踪的日本卡牌销售信息，集中在一处，并及时通知。",
+  "btn": "在 App Store 中打开",
+  "free": "免费下载。Pro 为可选的付费升级。",
+  "s_what": "这是什么应用",
+  "s_feat": "主要功能",
+  "s_games": "支持的游戏",
+  "s_pro": "トレカダッシュ Pro（可选，付费）",
+  "s_know": "使用前请了解",
+  "s_faq": "常见问题",
+  "p_what": "日本卡牌的销售信息分散在各家店铺的公告和 X 上。等你注意到时，截止日期往往已经过了。トレカダッシュ会汇总日本各地店铺和网店的公告，并让你直接跳转到可以报名或购买的页面。",
+  "feats": [
+   [
+    "信息流",
+    "按游戏和销售形式筛选，查看正在受理的抽签、预约和先到先得销售。"
+   ],
+   [
+    "通知",
+    "你关注的商品或游戏一有新信息，立刻通知你。"
+   ],
+   [
+    "截止日历",
+    "按日期查看抽签截止日和结果公布日，避免错过报名。"
+   ],
+   [
+    "报名管理",
+    "记录已报名的抽签、结果和购买情况。"
+   ],
+   [
+    "地图",
+    "与其他用户分享店内到货和抽签信息。"
+   ]
+  ],
+  "p_games": "宝可梦卡牌、游戏王、海贼王卡牌、Union Arena、Lorcana、决斗大师、七龙珠、高达、万智牌、Weiss Schwarz、名侦探柯南、hololive、数码宝贝、排球少年!! Babo-ca!!、幻兽帕鲁，共 15 种。",
+  "pro": [
+   "商品关注、关键词提醒和排除关键词不限数量。",
+   "最快收到先到先得和突击销售的通知（免费版约晚 15 分钟）。",
+   "按当前位置筛选附近的店铺。",
+   "查看全部通知历史、报名统计、日历导出和 CSV 导出。",
+   "根据购买记录管理藏品的估值和盈亏。",
+   "不显示广告。"
+  ],
+  "know": [
+   "<strong>店铺信息以日语为主。</strong>店铺名称、公告和商品名称按日本当地发布的内容显示。",
+   "许多日本店铺要求日本地址、电话号码或店铺会员才能参加抽签。报名前请在各店铺自己的页面确认条件。",
+   "本应用只展示信息并带你前往店铺，不会代你购买或报名抽签。",
+   "界面目前支持日语和英语，更多语言正在添加中。"
+  ],
+  "faq": [
+   [
+    "免费吗？",
+    "是的。主要功能免费，Pro 为可选的付费方案。"
+   ],
+   [
+    "需要账号吗？",
+    "不需要。信息流、通知和日历无需登录即可使用。仅在地图投稿和“今日运势”中使用 Apple 登录。"
+   ],
+   [
+    "是官方应用吗？",
+    "不是。这是个人开发的非官方应用，与任何卡牌游戏的权利方或店铺无关。信息来自各店铺的公开公告，报名或购买前请务必在店铺官方页面确认最新内容。"
+   ]
+  ],
+  "other": "其他语言"
+ },
+ "zh-Hant": {
+  "title": "トレカダッシュ（Toreca Dash）— 日本卡牌抽選・預約・補貨通知（iPhone App）",
+  "desc": "彙整日本各地店鋪的卡牌抽選、預約與先搶先贏販售資訊，並提供截止日曆與通知的 iPhone App。店鋪資訊以日文為主。",
+  "og": "日本卡牌的抽選、預約與補貨通知。",
+  "h1": "トレカダッシュ（Toreca Dash）",
+  "lead": "抽選、預約、先搶先贏。<br>難以追蹤的日本卡牌販售資訊，集中在一處，並即時通知。",
+  "btn": "在 App Store 開啟",
+  "free": "免費下載。Pro 為可選的付費升級。",
+  "s_what": "這是什麼 App",
+  "s_feat": "主要功能",
+  "s_games": "支援的遊戲",
+  "s_pro": "トレカダッシュ Pro（可選，付費）",
+  "s_know": "使用前請先了解",
+  "s_faq": "常見問題",
+  "p_what": "日本卡牌的販售資訊分散在各家店鋪的公告與 X 上。等你注意到時，截止日期常常已經過了。トレカダッシュ 會彙整日本各地店鋪與網路商店的公告，讓你直接前往可以報名或購買的頁面。",
+  "feats": [
+   [
+    "動態",
+    "依遊戲與販售形式篩選，查看受理中的抽選、預約與先搶先贏販售。"
+   ],
+   [
+    "通知",
+    "你追蹤的商品或遊戲一有新資訊，立刻通知你。"
+   ],
+   [
+    "截止日曆",
+    "依日期查看抽選截止日與結果公布日，避免錯過報名。"
+   ],
+   [
+    "報名管理",
+    "記錄已報名的抽選、結果與購買情況。"
+   ],
+   [
+    "地圖",
+    "與其他使用者分享店內到貨與抽選資訊。"
+   ]
+  ],
+  "p_games": "寶可夢卡牌、遊戲王、航海王卡牌、Union Arena、Lorcana、決鬥大師、七龍珠、鋼彈、魔法風雲會、Weiss Schwarz、名偵探柯南、hololive、數碼寶貝、排球少年!! Babo-ca!!、幻獸帕魯，共 15 種。",
+  "pro": [
+   "商品追蹤、關鍵字提醒與排除關鍵字不限數量。",
+   "最快收到先搶先贏與突襲販售的通知（免費版約晚 15 分鐘）。",
+   "依目前位置篩選附近的店鋪。",
+   "查看完整通知紀錄、報名統計、日曆匯出與 CSV 匯出。",
+   "依購買紀錄管理收藏品的估值與損益。",
+   "不顯示廣告。"
+  ],
+  "know": [
+   "<strong>店鋪資訊以日文為主。</strong>店鋪名稱、公告與商品名稱依日本當地發布的內容顯示。",
+   "許多日本店鋪要求日本地址、電話號碼或店鋪會員才能參加抽選。報名前請在各店鋪自己的頁面確認條件。",
+   "本 App 只顯示資訊並帶你前往店鋪，不會代你購買或報名抽選。",
+   "介面目前支援日文與英文，更多語言正在新增中。"
+  ],
+  "faq": [
+   [
+    "免費嗎？",
+    "是的。主要功能免費，Pro 為可選的付費方案。"
+   ],
+   [
+    "需要帳號嗎？",
+    "不需要。動態、通知與日曆無需登入即可使用。只有地圖投稿與「今日運勢」會使用 Apple 登入。"
+   ],
+   [
+    "是官方 App 嗎？",
+    "不是。這是個人開發的非官方 App，與任何卡牌遊戲的權利方或店鋪無關。資訊來自各店鋪的公開公告，報名或購買前請務必在店鋪官方頁面確認最新內容。"
+   ]
+  ],
+  "other": "其他語言"
+ },
+ "vi": {
+  "title": "トレカダッシュ (Toreca Dash) — Thông báo bốc thăm, đặt trước, hàng về thẻ bài Nhật (ứng dụng iPhone)",
+  "desc": "Ứng dụng iPhone tổng hợp thông tin bốc thăm, đặt trước và bán theo thứ tự đến trước của thẻ bài từ các cửa hàng khắp Nhật Bản, kèm lịch hạn chót và thông báo. Thông tin cửa hàng chủ yếu bằng tiếng Nhật.",
+  "og": "Thông báo bốc thăm, đặt trước và hàng về cho thẻ bài bán tại Nhật.",
+  "h1": "トレカダッシュ (Toreca Dash)",
+  "lead": "Bốc thăm, đặt trước, bán theo thứ tự đến trước.<br>Những đợt bán thẻ bài Nhật khó theo dõi, gom về một nơi, kèm thông báo.",
+  "btn": "Mở trong App Store",
+  "free": "Tải miễn phí. Pro là gói trả phí tùy chọn.",
+  "s_what": "Đây là ứng dụng gì",
+  "s_feat": "Tính năng chính",
+  "s_games": "Trò chơi được hỗ trợ",
+  "s_pro": "トレカダッシュ Pro (tùy chọn, trả phí)",
+  "s_know": "Cần biết trước khi dùng",
+  "s_faq": "Câu hỏi thường gặp",
+  "p_what": "Thông tin bán thẻ bài ở Nhật nằm rải rác theo từng cửa hàng, trên trang của cửa hàng và trên X. Khi bạn để ý thì hạn chót đã qua. トレカダッシュ gom thông báo từ các cửa hàng và shop online khắp Nhật Bản, rồi đưa bạn thẳng đến trang để đăng ký hoặc mua.",
+  "feats": [
+   [
+    "Bảng tin",
+    "Xem các đợt bốc thăm, đặt trước và bán theo thứ tự đến trước đang mở, lọc theo trò chơi và hình thức bán."
+   ],
+   [
+    "Thông báo",
+    "Nhận thông báo ngay khi có thông tin mới về sản phẩm hoặc trò chơi bạn theo dõi."
+   ],
+   [
+    "Lịch hạn chót",
+    "Xem hạn chót bốc thăm và ngày công bố kết quả theo từng ngày để không bỏ lỡ."
+   ],
+   [
+    "Quản lý đăng ký",
+    "Ghi lại các đợt bốc thăm đã đăng ký, kết quả và việc mua hàng."
+   ],
+   [
+    "Bản đồ",
+    "Chia sẻ thông tin hàng về và bốc thăm tại cửa hàng với người dùng khác."
+   ]
+  ],
+  "p_games": "Pokémon Card Game, Yu-Gi-Oh!, ONE PIECE Card Game, Union Arena, Lorcana, Duel Masters, Dragon Ball, Gundam, Magic: The Gathering, Weiss Schwarz, Thám tử lừng danh Conan, hololive, Digimon, Haikyu!! Babo-ca!!, Palworld (tổng cộng 15).",
+  "pro": [
+   "Không giới hạn số sản phẩm theo dõi, cảnh báo từ khóa và từ khóa loại trừ.",
+   "Nhận thông báo nhanh nhất cho đợt bán đến trước và bán bất ngờ (bản miễn phí chậm khoảng 15 phút).",
+   "Lọc các cửa hàng gần vị trí của bạn.",
+   "Xem toàn bộ lịch sử thông báo, thống kê đăng ký, xuất lịch và xuất CSV.",
+   "Quản lý giá trị và lãi lỗ của bộ sưu tập từ lịch sử mua.",
+   "Không hiển thị quảng cáo."
+  ],
+  "know": [
+   "<strong>Thông tin cửa hàng chủ yếu bằng tiếng Nhật.</strong> Tên cửa hàng, thông báo và tên sản phẩm được hiển thị đúng như công bố tại Nhật.",
+   "Nhiều cửa hàng Nhật yêu cầu địa chỉ, số điện thoại hoặc thẻ thành viên của cửa hàng ở Nhật để tham gia bốc thăm. Hãy kiểm tra điều kiện trên trang của từng cửa hàng trước khi đăng ký.",
+   "Ứng dụng chỉ hiển thị thông tin và đưa bạn đến cửa hàng. Ứng dụng không mua hàng hay đăng ký bốc thăm thay bạn.",
+   "Giao diện hiện có tiếng Nhật và tiếng Anh. Các ngôn ngữ khác đang được bổ sung."
+  ],
+  "faq": [
+   [
+    "Có miễn phí không?",
+    "Có. Các tính năng chính miễn phí. Pro là gói trả phí tùy chọn."
+   ],
+   [
+    "Có cần tài khoản không?",
+    "Không. Bảng tin, thông báo và lịch dùng được mà không cần đăng nhập. Đăng nhập bằng Apple chỉ dùng cho đăng bài lên bản đồ và “vận may hôm nay”."
+   ],
+   [
+    "Đây có phải ứng dụng chính thức không?",
+    "Không. Đây là ứng dụng không chính thức do một cá nhân phát triển, không liên quan đến nhà phát hành trò chơi thẻ bài hay cửa hàng nào. Thông tin lấy từ thông báo công khai của cửa hàng; hãy luôn xác nhận nội dung mới nhất trên trang chính thức của cửa hàng trước khi đăng ký hoặc mua."
+   ]
+  ],
+  "other": "Ngôn ngữ khác"
+ },
+ "ko": {
+  "title": "Toreca Dash(トレカダッシュ) - 일본 카드 추첨·예약·재입고 알림 앱",
+  "h1": "Toreca Dash (トレカダッシュ)",
+  "desc": "일본 전역 매장의 트레이딩 카드 추첨, 예약, 선착순 판매 정보를 모아 마감 캘린더와 알림으로 알려주는 iPhone 앱. 매장 정보는 대부분 일본어입니다.",
+  "og": "일본에서 판매되는 트레이딩 카드의 추첨·예약·재입고 알림.",
+  "lead": "추첨, 예약, 선착순 판매.<br>따라가기 어려운 일본 카드 판매 소식을 한곳에 모아 알림으로 알려드립니다.",
+  "btn": "App Store에서 열기",
+  "free": "무료로 다운로드할 수 있습니다. Pro는 선택형 유료 업그레이드입니다.",
+  "s_what": "어떤 앱인가요",
+  "p_what": "일본의 트레이딩 카드 판매는 매장 사이트나 X를 통해 매장별로 따로 공지됩니다. 알아차렸을 때는 이미 마감된 경우가 많습니다. Toreca Dash는 일본 전역의 매장과 온라인 숍의 공지를 모아, 응모나 구매가 가능한 페이지로 바로 연결해 줍니다.",
+  "s_feat": "주요 기능",
+  "feats": [
+   [
+    "피드",
+    "접수 중인 추첨, 예약, 선착순 판매를 게임과 판매 유형별로 걸러서 볼 수 있습니다."
+   ],
+   [
+    "알림",
+    "팔로우한 상품이나 게임에 새 소식이 올라오면 바로 알려줍니다."
+   ],
+   [
+    "마감 캘린더",
+    "추첨 마감일과 결과 발표일을 날짜별로 보여 주어 응모를 놓치지 않게 합니다."
+   ],
+   [
+    "응모 기록",
+    "응모한 추첨과 당첨 결과, 구매 내역을 기록할 수 있습니다."
+   ],
+   [
+    "지도",
+    "매장 재고와 추첨 정보를 다른 이용자와 공유합니다."
+   ]
+  ],
+  "s_games": "지원 게임",
+  "p_games": "Pokémon Card Game, Yu-Gi-Oh!, ONE PIECE Card Game, Union Arena, Lorcana, Duel Masters, Dragon Ball, Gundam, Magic: The Gathering, Weiss Schwarz, Detective Conan, hololive, Digimon, Haikyu!! Babo-ca!!, Palworld (총 15종).",
+  "s_pro": "Toreca Dash Pro (선택형 유료)",
+  "pro": [
+   "상품 팔로우 무제한, 키워드 알림, 제외 키워드.",
+   "선착순·긴급 판매에 가장 빠른 알림(무료 버전은 약 15분 늦게 도착).",
+   "현재 위치 근처 매장만 보기.",
+   "알림 전체 기록, 응모 통계, 캘린더 내보내기, CSV 내보내기.",
+   "구매 기록을 바탕으로 컬렉션의 가치와 손익 확인.",
+   "광고 없음."
+  ],
+  "s_know": "이용 전에 알아 두세요",
+  "know": [
+   "<strong>매장 정보는 대부분 일본어입니다.</strong> 매장 이름, 공지, 상품명은 일본에서 게시된 그대로 표시됩니다.",
+   "일본 매장 중에는 추첨 응모에 일본 주소, 전화번호 또는 매장 회원 가입이 필요한 곳이 많습니다. 응모 전에 각 매장 페이지에서 조건을 확인하세요.",
+   "이 앱은 정보를 보여 주고 매장으로 안내할 뿐, 구매나 추첨 응모를 대신해 주지 않습니다.",
+   "화면은 일본어와 영어를 지원하며, 다른 언어는 추가 중입니다."
+  ],
+  "s_faq": "자주 묻는 질문",
+  "faq": [
+   [
+    "무료인가요?",
+    "네. 주요 기능은 무료이며, Pro는 선택형 유료 플랜입니다."
+   ],
+   [
+    "계정이 필요한가요?",
+    "아니요. 피드, 알림, 캘린더는 로그인 없이 쓸 수 있습니다. Sign in with Apple은 지도 게시와 오늘의 운세에만 사용됩니다."
+   ],
+   [
+    "공식 앱인가요?",
+    "아니요. 개인이 만든 비공식 앱이며, 카드 게임 제작사나 매장과 관련이 없습니다. 정보는 매장의 공개 공지를 바탕으로 하므로, 응모나 구매 전에 반드시 매장의 공식 페이지에서 최신 내용을 확인하세요."
+   ]
+  ],
+  "other": "다른 언어"
+ },
+ "th": {
+  "title": "Toreca Dash (トレカダッシュ) แอปแจ้งเตือนจับฉลาก พรีออเดอร์การ์ดญี่ปุ่น",
+  "h1": "Toreca Dash (トレカダッシュ)",
+  "desc": "แอป iPhone รวมข้อมูลจับฉลาก พรีออเดอร์ และขายตามลำดับก่อนหลังของการ์ดเกมจากร้านทั่วญี่ปุ่น พร้อมปฏิทินวันปิดรับและการแจ้งเตือน ข้อมูลร้านส่วนใหญ่เป็นภาษาญี่ปุ่น",
+  "og": "แจ้งเตือนจับฉลาก พรีออเดอร์ และสินค้ากลับเข้าสต็อกของการ์ดเกมที่ขายในญี่ปุ่น",
+  "lead": "จับฉลาก พรีออเดอร์ ขายตามลำดับก่อนหลัง<br>ข่าวการ์ดญี่ปุ่นที่ตามยาก รวมไว้ที่เดียว พร้อมแจ้งเตือน",
+  "btn": "เปิดใน App Store",
+  "free": "ดาวน์โหลดฟรี Pro เป็นการอัปเกรดแบบเสียเงินที่เลือกได้",
+  "s_what": "แอปนี้คืออะไร",
+  "p_what": "การขายการ์ดเกมในญี่ปุ่นประกาศแยกกันทีละร้าน ทั้งบนเว็บไซต์ร้านและบน X กว่าจะรู้ตัวก็หมดเขตไปแล้ว Toreca Dash รวบรวมประกาศจากร้านและร้านค้าออนไลน์ทั่วญี่ปุ่น แล้วพาคุณไปยังหน้าที่สมัครหรือสั่งซื้อได้โดยตรง",
+  "s_feat": "ฟีเจอร์หลัก",
+  "feats": [
+   [
+    "ฟีด",
+    "ดูการจับฉลาก พรีออเดอร์ และการขายตามลำดับก่อนหลังที่เปิดอยู่ กรองตามเกมและประเภทการขายได้"
+   ],
+   [
+    "การแจ้งเตือน",
+    "รับแจ้งทันทีเมื่อมีข่าวใหม่ของสินค้าหรือเกมที่คุณติดตาม"
+   ],
+   [
+    "ปฏิทินวันปิดรับ",
+    "ดูวันปิดรับสมัครจับฉลากและวันประกาศผลเป็นรายวัน จะได้ไม่พลาดการสมัคร"
+   ],
+   [
+    "บันทึกการสมัคร",
+    "บันทึกการจับฉลากที่สมัครไป รวมถึงผลและการซื้อ"
+   ],
+   [
+    "แผนที่",
+    "แชร์ข้อมูลสต็อกและการจับฉลากหน้าร้านกับผู้ใช้คนอื่น"
+   ]
+  ],
+  "s_games": "เกมที่รองรับ",
+  "p_games": "Pokémon Card Game, Yu-Gi-Oh!, ONE PIECE Card Game, Union Arena, Lorcana, Duel Masters, Dragon Ball, Gundam, Magic: The Gathering, Weiss Schwarz, Detective Conan, hololive, Digimon, Haikyu!! Babo-ca!!, Palworld (รวม 15 เกม).",
+  "s_pro": "Toreca Dash Pro (เสียเงิน เลือกใช้ได้)",
+  "pro": [
+   "ติดตามสินค้าได้ไม่จำกัด แจ้งเตือนตามคำค้น และคำที่ไม่ต้องการ",
+   "แจ้งเตือนเร็วที่สุดสำหรับการขายตามลำดับก่อนหลังและการขายแบบกะทันหัน (เวอร์ชันฟรีช้ากว่าราว 15 นาที)",
+   "กรองเฉพาะร้านใกล้ตำแหน่งของคุณ",
+   "ประวัติการแจ้งเตือนทั้งหมด สถิติการสมัคร ส่งออกปฏิทิน และส่งออก CSV",
+   "ดูมูลค่าและกำไรขาดทุนของคอลเลกชันจากบันทึกการซื้อ",
+   "ไม่มีโฆษณา"
+  ],
+  "s_know": "สิ่งที่ควรรู้ก่อนใช้งาน",
+  "know": [
+   "<strong>ข้อมูลร้านส่วนใหญ่เป็นภาษาญี่ปุ่น</strong> ชื่อร้าน ประกาศ และชื่อสินค้าจะแสดงตามที่เผยแพร่ในญี่ปุ่น",
+   "ร้านในญี่ปุ่นจำนวนมากกำหนดให้ผู้สมัครจับฉลากต้องมีที่อยู่ เบอร์โทรศัพท์ หรือสมาชิกร้านในญี่ปุ่น โปรดตรวจเงื่อนไขในหน้าของแต่ละร้านก่อนสมัคร",
+   "แอปเพียงแสดงข้อมูลและพาคุณไปยังร้าน ไม่ได้ซื้อสินค้าหรือสมัครจับฉลากแทนคุณ",
+   "หน้าจอรองรับภาษาญี่ปุ่นและภาษาอังกฤษ กำลังเพิ่มภาษาอื่นเรื่อยๆ"
+  ],
+  "s_faq": "คำถามที่พบบ่อย",
+  "faq": [
+   [
+    "ใช้ฟรีไหม",
+    "ฟรี ฟีเจอร์หลักใช้ได้ฟรี ส่วน Pro เป็นแพ็กเกจเสียเงินที่เลือกได้"
+   ],
+   [
+    "ต้องมีบัญชีไหม",
+    "ไม่ต้อง ฟีด การแจ้งเตือน และปฏิทินใช้ได้โดยไม่ต้องล็อกอิน Sign in with Apple ใช้เฉพาะการโพสต์บนแผนที่และดวงประจำวัน"
+   ],
+   [
+    "เป็นแอปทางการไหม",
+    "ไม่ใช่ เป็นแอปไม่เป็นทางการที่สร้างโดยบุคคลคนเดียว ไม่มีส่วนเกี่ยวข้องกับผู้ผลิตเกมการ์ดหรือร้านค้าใดๆ ข้อมูลมาจากประกาศสาธารณะของร้าน โปรดตรวจสอบรายละเอียดล่าสุดจากหน้าทางการของร้านก่อนสมัครหรือซื้อเสมอ"
+   ]
+  ],
+  "other": "ภาษาอื่น"
+ },
+ "id": {
+  "title": "Toreca Dash (トレカダッシュ) - Info undian & pre-order kartu Jepang",
+  "h1": "Toreca Dash (トレカダッシュ)",
+  "desc": "Aplikasi iPhone yang mengumpulkan undian, pre-order, dan penjualan kartu koleksi dari toko di Jepang, dengan kalender dan notifikasi. Info toko umumnya berbahasa Jepang.",
+  "og": "Notifikasi undian, pre-order, dan restock kartu koleksi yang dijual di Jepang.",
+  "lead": "Undian, pre-order, penjualan siapa cepat dapat.<br>Rilis kartu Jepang yang sulit diikuti, terkumpul di satu tempat dengan notifikasi.",
+  "btn": "Buka di App Store",
+  "free": "Gratis diunduh. Pro adalah peningkatan berbayar yang bersifat opsional.",
+  "s_what": "Apa ini",
+  "p_what": "Penjualan kartu koleksi di Jepang diumumkan satu per satu oleh tiap toko, di situs toko dan di X. Saat Anda sadar, batas waktunya sudah lewat. Toreca Dash mengumpulkan pengumuman dari toko dan toko online di seluruh Jepang, lalu langsung mengarahkan Anda ke halaman untuk ikut serta atau membeli.",
+  "s_feat": "Fitur utama",
+  "feats": [
+   [
+    "Feed",
+    "Lihat undian, pre-order, dan penjualan siapa cepat dapat yang sedang dibuka, bisa difilter menurut game dan jenis penjualan."
+   ],
+   [
+    "Notifikasi",
+    "Dapatkan pemberitahuan begitu ada kabar baru untuk produk atau game yang Anda ikuti."
+   ],
+   [
+    "Kalender batas waktu",
+    "Batas waktu undian dan tanggal pengumuman hasil per hari, agar Anda tidak ketinggalan."
+   ],
+   [
+    "Catatan keikutsertaan",
+    "Catat undian yang Anda ikuti, hasilnya, dan pembelian Anda."
+   ],
+   [
+    "Peta",
+    "Bagikan info stok di toko dan undian dengan pengguna lain."
+   ]
+  ],
+  "s_games": "Game yang didukung",
+  "p_games": "Pokémon Card Game, Yu-Gi-Oh!, ONE PIECE Card Game, Union Arena, Lorcana, Duel Masters, Dragon Ball, Gundam, Magic: The Gathering, Weiss Schwarz, Detective Conan, hololive, Digimon, Haikyu!! Babo-ca!!, Palworld (total 15).",
+  "s_pro": "Toreca Dash Pro (opsional, berbayar)",
+  "pro": [
+   "Ikuti produk tanpa batas, notifikasi kata kunci, dan kata kunci yang dikecualikan.",
+   "Notifikasi tercepat untuk penjualan siapa cepat dapat dan penjualan dadakan (versi gratis terlambat sekitar 15 menit).",
+   "Filter ke toko di dekat lokasi Anda.",
+   "Riwayat notifikasi lengkap, statistik keikutsertaan, ekspor kalender, dan ekspor CSV.",
+   "Pantau nilai dan untung/rugi koleksi Anda dari catatan pembelian.",
+   "Tanpa iklan."
+  ],
+  "s_know": "Hal yang perlu diketahui sebelum memakai",
+  "know": [
+   "<strong>Informasi toko sebagian besar berbahasa Jepang.</strong> Nama toko, pengumuman, dan nama produk ditampilkan sebagaimana dipublikasikan di Jepang.",
+   "Banyak toko di Jepang mensyaratkan alamat, nomor telepon, atau keanggotaan toko di Jepang untuk ikut undian. Periksa syaratnya di halaman masing-masing toko sebelum mendaftar.",
+   "Aplikasi ini menampilkan informasi dan mengarahkan Anda ke toko. Aplikasi tidak membelikan atau mendaftarkan undian untuk Anda.",
+   "Tampilan tersedia dalam bahasa Jepang dan Inggris. Bahasa lain sedang ditambahkan."
+  ],
+  "s_faq": "FAQ",
+  "faq": [
+   [
+    "Apakah gratis?",
+    "Ya. Fitur utamanya gratis. Pro adalah paket berbayar yang opsional."
+   ],
+   [
+    "Apakah perlu akun?",
+    "Tidak. Feed, notifikasi, dan kalender bisa dipakai tanpa masuk. Sign in with Apple hanya dipakai untuk posting di peta dan ramalan harian."
+   ],
+   [
+    "Apakah ini aplikasi resmi?",
+    "Bukan. Ini aplikasi tidak resmi buatan perorangan dan tidak berafiliasi dengan penerbit game kartu maupun toko mana pun. Informasi berasal dari pengumuman publik toko; selalu pastikan detail terbaru di halaman resmi toko sebelum mendaftar atau membeli."
+   ]
+  ],
+  "other": "Bahasa lain"
+ },
+ "es": {
+  "title": "Toreca Dash (トレカダッシュ): sorteos y reservas de cartas en Japón",
+  "h1": "Toreca Dash (トレカダッシュ)",
+  "desc": "App para iPhone con sorteos, reservas y ventas por orden de llegada de cartas de tiendas de Japón, con calendario y avisos. Información de tiendas casi toda en japonés.",
+  "og": "Avisos de sorteos, reservas y reposiciones de cartas coleccionables vendidas en Japón.",
+  "lead": "Sorteos, reservas, ventas por orden de llegada.<br>Los lanzamientos de cartas japonesas, difíciles de seguir, en un solo lugar y con avisos.",
+  "btn": "Abrir en el App Store",
+  "free": "Descarga gratuita. Pro es una mejora de pago opcional.",
+  "s_what": "Qué es",
+  "p_what": "Las ventas de cartas coleccionables en Japón se anuncian tienda por tienda, en sus webs y en X. Cuando te das cuenta, el plazo ya ha pasado. Toreca Dash reúne los anuncios de tiendas y tiendas online de todo Japón y te lleva directamente a la página donde puedes participar o comprar.",
+  "s_feat": "Funciones principales",
+  "feats": [
+   [
+    "Feed",
+    "Consulta los sorteos, reservas y ventas por orden de llegada abiertos, filtrados por juego y tipo de venta."
+   ],
+   [
+    "Avisos",
+    "Recibe una notificación en cuanto aparezca algo nuevo de un producto o juego que sigues."
+   ],
+   [
+    "Calendario de fechas límite",
+    "Plazos de sorteos y fechas de resultados, día a día, para que no se te pase ninguna inscripción."
+   ],
+   [
+    "Registro de participaciones",
+    "Anota los sorteos en los que participaste, sus resultados y tus compras."
+   ],
+   [
+    "Mapa",
+    "Comparte con otros usuarios el stock y los sorteos de las tiendas."
+   ]
+  ],
+  "s_games": "Juegos compatibles",
+  "p_games": "Pokémon Card Game, Yu-Gi-Oh!, ONE PIECE Card Game, Union Arena, Lorcana, Duel Masters, Dragon Ball, Gundam, Magic: The Gathering, Weiss Schwarz, Detective Conan, hololive, Digimon, Haikyu!! Babo-ca!!, Palworld (15 en total).",
+  "s_pro": "Toreca Dash Pro (opcional, de pago)",
+  "pro": [
+   "Seguimiento ilimitado de productos, avisos por palabras clave y palabras excluidas.",
+   "Los avisos más rápidos para ventas por orden de llegada y ventas sorpresa (la versión gratuita llega unos 15 minutos después).",
+   "Filtro de tiendas cercanas a tu ubicación.",
+   "Historial completo de notificaciones, estadísticas de participaciones, exportación del calendario y exportación a CSV.",
+   "Seguimiento del valor y de las ganancias o pérdidas de tu colección a partir de tus compras.",
+   "Sin anuncios."
+  ],
+  "s_know": "Qué conviene saber antes de usarla",
+  "know": [
+   "<strong>La información de las tiendas está casi toda en japonés.</strong> Los nombres de tiendas, anuncios y productos se muestran tal como se publican en Japón.",
+   "Muchas tiendas japonesas exigen una dirección, un teléfono o una membresía de la tienda en Japón para participar en un sorteo. Revisa las condiciones en la página de cada tienda antes de inscribirte.",
+   "La app muestra la información y te lleva a la tienda. No compra ni se inscribe en sorteos por ti.",
+   "Las pantallas están disponibles en japonés e inglés. Se están añadiendo más idiomas."
+  ],
+  "s_faq": "Preguntas frecuentes",
+  "faq": [
+   [
+    "¿Es gratis?",
+    "Sí. Las funciones principales son gratuitas. Pro es un plan de pago opcional."
+   ],
+   [
+    "¿Necesito una cuenta?",
+    "No. El feed, los avisos y el calendario funcionan sin iniciar sesión. Iniciar sesión con Apple solo se usa para las publicaciones del mapa y el horóscopo diario."
+   ],
+   [
+    "¿Es una app oficial?",
+    "No. Es una app no oficial creada por una persona y no está afiliada a ningún editor de juegos de cartas ni a ninguna tienda. La información proviene de los anuncios públicos de las tiendas; confirma siempre los detalles más recientes en la página oficial de la tienda antes de inscribirte o comprar."
+   ]
+  ],
+  "other": "Otros idiomas"
+ },
+ "pt-BR": {
+  "title": "Toreca Dash (トレカダッシュ): sorteios e pré-vendas de cards no Japão",
+  "h1": "Toreca Dash (トレカダッシュ)",
+  "desc": "App para iPhone que reúne sorteios, pré-vendas e vendas por ordem de chegada de cards de lojas do Japão, com calendário e alertas. Informações das lojas quase todas em japonês.",
+  "og": "Alertas de sorteios, pré-vendas e reposições de cards vendidos no Japão.",
+  "lead": "Sorteios, pré-vendas, vendas por ordem de chegada.<br>Os lançamentos de cards japoneses, difíceis de acompanhar, em um só lugar e com alertas.",
+  "btn": "Abrir na App Store",
+  "free": "Download gratuito. O Pro é uma assinatura paga opcional.",
+  "s_what": "O que é",
+  "p_what": "As vendas de cards colecionáveis no Japão são anunciadas loja por loja, nos sites das lojas e no X. Quando você percebe, o prazo já acabou. O Toreca Dash reúne os anúncios de lojas e lojas online de todo o Japão e leva você direto à página onde é possível participar ou comprar.",
+  "s_feat": "Principais recursos",
+  "feats": [
+   [
+    "Feed",
+    "Veja os sorteios, pré-vendas e vendas por ordem de chegada abertos, filtrados por jogo e tipo de venda."
+   ],
+   [
+    "Alertas",
+    "Receba uma notificação assim que surgir novidade de um produto ou jogo que você segue."
+   ],
+   [
+    "Calendário de prazos",
+    "Prazos de sorteios e datas de resultado, dia a dia, para você não perder nenhuma inscrição."
+   ],
+   [
+    "Registro de participações",
+    "Anote os sorteios em que você entrou, os resultados e as compras."
+   ],
+   [
+    "Mapa",
+    "Compartilhe com outros usuários o estoque e os sorteios das lojas."
+   ]
+  ],
+  "s_games": "Jogos compatíveis",
+  "p_games": "Pokémon Card Game, Yu-Gi-Oh!, ONE PIECE Card Game, Union Arena, Lorcana, Duel Masters, Dragon Ball, Gundam, Magic: The Gathering, Weiss Schwarz, Detective Conan, hololive, Digimon, Haikyu!! Babo-ca!!, Palworld (15 no total).",
+  "s_pro": "Toreca Dash Pro (opcional, pago)",
+  "pro": [
+   "Acompanhamento ilimitado de produtos, alertas por palavra-chave e palavras excluídas.",
+   "Os alertas mais rápidos para vendas por ordem de chegada e vendas-surpresa (a versão gratuita chega cerca de 15 minutos depois).",
+   "Filtro de lojas perto da sua localização.",
+   "Histórico completo de notificações, estatísticas de participação, exportação do calendário e exportação em CSV.",
+   "Acompanhe o valor e o lucro/prejuízo da sua coleção a partir dos registros de compra.",
+   "Sem anúncios."
+  ],
+  "s_know": "O que vale saber antes de usar",
+  "know": [
+   "<strong>As informações das lojas estão quase todas em japonês.</strong> Nomes de lojas, anúncios e produtos aparecem como foram publicados no Japão.",
+   "Muitas lojas japonesas exigem endereço, telefone ou cadastro de membro da loja no Japão para participar de um sorteio. Confira as condições na página de cada loja antes de se inscrever.",
+   "O app mostra as informações e leva você até a loja. Ele não compra nem se inscreve em sorteios por você.",
+   "As telas estão disponíveis em japonês e inglês. Mais idiomas estão sendo adicionados."
+  ],
+  "s_faq": "Perguntas frequentes",
+  "faq": [
+   [
+    "É grátis?",
+    "Sim. Os recursos principais são gratuitos. O Pro é um plano pago opcional."
+   ],
+   [
+    "Preciso de uma conta?",
+    "Não. O feed, os alertas e o calendário funcionam sem login. O Sign in with Apple só é usado para postagens no mapa e para a sorte do dia."
+   ],
+   [
+    "É um app oficial?",
+    "Não. É um app não oficial feito por uma pessoa e não tem vínculo com nenhuma editora de card games nem com lojas. As informações vêm de anúncios públicos das lojas; sempre confirme os detalhes mais recentes na página oficial da loja antes de se inscrever ou comprar."
+   ]
+  ],
+  "other": "Outros idiomas"
+ },
+ "fr": {
+  "title": "Toreca Dash (トレカダッシュ) : tirages et précommandes au Japon",
+  "h1": "Toreca Dash (トレカダッシュ)",
+  "desc": "Application iPhone qui réunit tirages au sort, précommandes et ventes premier arrivé de cartes des boutiques japonaises, avec calendrier et alertes. Infos surtout en japonais.",
+  "og": "Alertes de tirages, précommandes et réassorts de cartes à collectionner vendues au Japon.",
+  "lead": "Tirages au sort, précommandes, ventes premier arrivé, premier servi.<br>Les sorties de cartes japonaises, difficiles à suivre, réunies au même endroit avec des alertes.",
+  "btn": "Ouvrir dans l’App Store",
+  "free": "Téléchargement gratuit. Pro est une mise à niveau payante facultative.",
+  "s_what": "De quoi s’agit-il",
+  "p_what": "Au Japon, les ventes de cartes à collectionner sont annoncées boutique par boutique, sur les sites des magasins et sur X. Quand on s’en aperçoit, la date limite est déjà passée. Toreca Dash rassemble les annonces des boutiques et des sites marchands de tout le Japon et vous mène directement à la page où participer ou acheter.",
+  "s_feat": "Fonctions principales",
+  "feats": [
+   [
+    "Fil d’actualité",
+    "Consultez les tirages, précommandes et ventes premier arrivé, premier servi en cours, filtrés par jeu et par type de vente."
+   ],
+   [
+    "Alertes",
+    "Soyez prévenu dès qu’une nouveauté apparaît pour un produit ou un jeu que vous suivez."
+   ],
+   [
+    "Calendrier des échéances",
+    "Dates limites des tirages et dates de résultats, jour par jour, pour ne manquer aucune participation."
+   ],
+   [
+    "Suivi des participations",
+    "Notez les tirages auxquels vous avez participé, les résultats et vos achats."
+   ],
+   [
+    "Carte",
+    "Partagez avec les autres utilisateurs les stocks et tirages en magasin."
+   ]
+  ],
+  "s_games": "Jeux pris en charge",
+  "p_games": "Pokémon Card Game, Yu-Gi-Oh!, ONE PIECE Card Game, Union Arena, Lorcana, Duel Masters, Dragon Ball, Gundam, Magic: The Gathering, Weiss Schwarz, Detective Conan, hololive, Digimon, Haikyu!! Babo-ca!!, Palworld (15 au total).",
+  "s_pro": "Toreca Dash Pro (facultatif, payant)",
+  "pro": [
+   "Suivi illimité de produits, alertes par mot-clé et mots exclus.",
+   "Les alertes les plus rapides pour les ventes premier arrivé, premier servi et les ventes surprises (la version gratuite a environ 15 minutes de retard).",
+   "Filtre des boutiques proches de votre position.",
+   "Historique complet des notifications, statistiques de participation, export du calendrier et export CSV.",
+   "Suivi de la valeur et des gains ou pertes de votre collection à partir de vos achats.",
+   "Sans publicité."
+  ],
+  "s_know": "À savoir avant de l’utiliser",
+  "know": [
+   "<strong>Les infos des boutiques sont surtout en japonais.</strong> Les noms de boutiques, les annonces et les noms de produits sont affichés tels qu’ils sont publiés au Japon.",
+   "De nombreuses boutiques japonaises exigent une adresse, un numéro de téléphone ou une carte de membre de la boutique au Japon pour participer à un tirage. Vérifiez les conditions sur la page de chaque boutique avant de participer.",
+   "L’application affiche les informations et vous renvoie vers la boutique. Elle n’achète rien et ne participe pas aux tirages à votre place.",
+   "Les écrans sont disponibles en japonais et en anglais. D’autres langues sont en cours d’ajout."
+  ],
+  "s_faq": "FAQ",
+  "faq": [
+   [
+    "Est-ce gratuit ?",
+    "Oui. Les fonctions principales sont gratuites. Pro est une formule payante facultative."
+   ],
+   [
+    "Faut-il un compte ?",
+    "Non. Le fil, les alertes et le calendrier fonctionnent sans connexion. Sign in with Apple ne sert que pour les publications sur la carte et l’horoscope du jour."
+   ],
+   [
+    "Est-ce une application officielle ?",
+    "Non. C’est une application non officielle créée par un particulier, sans lien avec un éditeur de jeux de cartes ni avec une boutique. Les informations proviennent des annonces publiques des boutiques ; vérifiez toujours les derniers détails sur la page officielle de la boutique avant de participer ou d’acheter."
+   ]
+  ],
+  "other": "Autres langues"
+ },
+ "de": {
+  "title": "Toreca Dash (トレカダッシュ): Karten-Verlosungen & Vorbestellungen Japan",
+  "h1": "Toreca Dash (トレカダッシュ)",
+  "desc": "iPhone-App mit Verlosungen, Vorbestellungen und First-come-Verkäufen von Sammelkarten aus Japan, mit Fristenkalender und Alerts. Shop-Infos meist auf Japanisch.",
+  "og": "Benachrichtigungen zu Verlosungen, Vorbestellungen und Nachschub bei in Japan verkauften Sammelkarten.",
+  "lead": "Verlosungen, Vorbestellungen, First-come-Verkäufe.<br>Japanische Kartenverkäufe, die schwer im Blick zu behalten sind, an einem Ort und mit Benachrichtigungen.",
+  "btn": "Im App Store öffnen",
+  "free": "Kostenloser Download. Pro ist ein optionales kostenpflichtiges Upgrade.",
+  "s_what": "Worum es geht",
+  "p_what": "Verkäufe von Sammelkarten in Japan werden Laden für Laden angekündigt, auf den Seiten der Shops und auf X. Bis man es bemerkt, ist die Frist abgelaufen. Toreca Dash sammelt die Ankündigungen von Läden und Onlineshops in ganz Japan und führt Sie direkt zur Seite, auf der Sie teilnehmen oder kaufen können.",
+  "s_feat": "Hauptfunktionen",
+  "feats": [
+   [
+    "Feed",
+    "Offene Verlosungen, Vorbestellungen und First-come-Verkäufe, filterbar nach Spiel und Verkaufsart."
+   ],
+   [
+    "Benachrichtigungen",
+    "Werden Sie sofort informiert, wenn es Neues zu einem Produkt oder Spiel gibt, dem Sie folgen."
+   ],
+   [
+    "Fristenkalender",
+    "Verlosungsfristen und Ergebnistermine Tag für Tag, damit Sie keine Teilnahme verpassen."
+   ],
+   [
+    "Teilnahmeprotokoll",
+    "Halten Sie fest, an welchen Verlosungen Sie teilgenommen haben, mit Ergebnissen und Käufen."
+   ],
+   [
+    "Karte",
+    "Teilen Sie Lagerbestände und Verlosungen vor Ort mit anderen Nutzern."
+   ]
+  ],
+  "s_games": "Unterstützte Spiele",
+  "p_games": "Pokémon Card Game, Yu-Gi-Oh!, ONE PIECE Card Game, Union Arena, Lorcana, Duel Masters, Dragon Ball, Gundam, Magic: The Gathering, Weiss Schwarz, Detective Conan, hololive, Digimon, Haikyu!! Babo-ca!!, Palworld (insgesamt 15).",
+  "s_pro": "Toreca Dash Pro (optional, kostenpflichtig)",
+  "pro": [
+   "Unbegrenzt Produkten folgen, Stichwort-Benachrichtigungen und ausgeschlossene Stichwörter.",
+   "Die schnellsten Benachrichtigungen bei First-come- und Überraschungsverkäufen (die kostenlose Version kommt etwa 15 Minuten später).",
+   "Filter auf Läden in Ihrer Nähe.",
+   "Vollständiger Benachrichtigungsverlauf, Teilnahmestatistik, Kalenderexport und CSV-Export.",
+   "Wert und Gewinn/Verlust Ihrer Sammlung anhand der Kaufbelege verfolgen.",
+   "Keine Werbung."
+  ],
+  "s_know": "Gut zu wissen vor der Nutzung",
+  "know": [
+   "<strong>Die Infos der Shops sind überwiegend auf Japanisch.</strong> Ladennamen, Ankündigungen und Produktnamen werden so angezeigt, wie sie in Japan veröffentlicht wurden.",
+   "Viele japanische Läden verlangen für die Teilnahme an einer Verlosung eine japanische Adresse, Telefonnummer oder Mitgliedschaft im Laden. Prüfen Sie die Bedingungen auf der Seite des jeweiligen Shops, bevor Sie teilnehmen.",
+   "Die App zeigt Informationen an und leitet Sie zum Shop weiter. Sie kauft nichts und nimmt nicht an Verlosungen für Sie teil.",
+   "Die Oberfläche gibt es auf Japanisch und Englisch. Weitere Sprachen werden ergänzt."
+  ],
+  "s_faq": "FAQ",
+  "faq": [
+   [
+    "Ist die App kostenlos?",
+    "Ja. Die Hauptfunktionen sind kostenlos. Pro ist ein optionaler kostenpflichtiger Tarif."
+   ],
+   [
+    "Brauche ich ein Konto?",
+    "Nein. Feed, Benachrichtigungen und Kalender funktionieren ohne Anmeldung. Mit Apple anmelden wird nur für Kartenbeiträge und das Tageshoroskop verwendet."
+   ],
+   [
+    "Ist das eine offizielle App?",
+    "Nein. Es ist eine inoffizielle App einer Privatperson und steht in keiner Verbindung zu Kartenspiel-Herausgebern oder Läden. Die Informationen stammen aus den öffentlichen Ankündigungen der Läden; prüfen Sie vor der Teilnahme oder dem Kauf immer die aktuellen Details auf der offiziellen Seite des Shops."
+   ]
+  ],
+  "other": "Weitere Sprachen"
+ },
+ "ru": {
+  "title": "Toreca Dash (トレカダッシュ): розыгрыши и предзаказы карт в Японии",
+  "h1": "Toreca Dash (トレカダッシュ)",
+  "desc": "Приложение для iPhone: розыгрыши, предзаказы и продажи «кто успел» на карты из магазинов Японии, календарь сроков и уведомления. Информация магазинов в основном на японском.",
+  "og": "Уведомления о розыгрышах, предзаказах и поступлениях коллекционных карт в Японии.",
+  "lead": "Розыгрыши, предзаказы, продажи «кто успел».<br>Японские релизы карт, за которыми трудно уследить, в одном месте и с уведомлениями.",
+  "btn": "Открыть в App Store",
+  "free": "Скачивание бесплатное. Pro — необязательное платное расширение.",
+  "s_what": "Что это такое",
+  "p_what": "Продажи коллекционных карт в Японии объявляются отдельно каждым магазином: на сайтах магазинов и в X. Пока заметишь, срок уже истёк. Toreca Dash собирает объявления магазинов и интернет-магазинов по всей Японии и сразу ведёт на страницу, где можно участвовать или купить.",
+  "s_feat": "Основные функции",
+  "feats": [
+   [
+    "Лента",
+    "Открытые розыгрыши, предзаказы и продажи «кто успел» с фильтром по игре и типу продажи."
+   ],
+   [
+    "Уведомления",
+    "Сообщим сразу, как только появится новость о товаре или игре, на которые вы подписаны."
+   ],
+   [
+    "Календарь сроков",
+    "Сроки розыгрышей и даты результатов по дням, чтобы не пропустить участие."
+   ],
+   [
+    "Журнал участий",
+    "Записывайте розыгрыши, в которых участвовали, их результаты и покупки."
+   ],
+   [
+    "Карта",
+    "Делитесь с другими пользователями информацией о наличии и розыгрышах в магазинах."
+   ]
+  ],
+  "s_games": "Поддерживаемые игры",
+  "p_games": "Pokémon Card Game, Yu-Gi-Oh!, ONE PIECE Card Game, Union Arena, Lorcana, Duel Masters, Dragon Ball, Gundam, Magic: The Gathering, Weiss Schwarz, Detective Conan, hololive, Digimon, Haikyu!! Babo-ca!!, Palworld (всего 15).",
+  "s_pro": "Toreca Dash Pro (необязательно, платно)",
+  "pro": [
+   "Неограниченная подписка на товары, уведомления по ключевым словам и слова-исключения.",
+   "Самые быстрые уведомления о продажах «кто успел» и внезапных продажах (в бесплатной версии — примерно на 15 минут позже).",
+   "Фильтр по магазинам рядом с вами.",
+   "Полная история уведомлений, статистика участий, экспорт календаря и экспорт в CSV.",
+   "Учёт стоимости коллекции и прибыли/убытка по записям о покупках.",
+   "Без рекламы."
+  ],
+  "s_know": "Что полезно знать перед использованием",
+  "know": [
+   "<strong>Информация магазинов в основном на японском.</strong> Названия магазинов, объявления и названия товаров показываются так, как они опубликованы в Японии.",
+   "Во многие японские магазины для участия в розыгрыше нужен японский адрес, номер телефона или членство в магазине. Перед участием проверьте условия на странице каждого магазина.",
+   "Приложение показывает информацию и перенаправляет вас в магазин. Оно не покупает товары и не участвует в розыгрышах за вас.",
+   "Интерфейс доступен на японском и английском. Другие языки добавляются."
+  ],
+  "s_faq": "Вопросы и ответы",
+  "faq": [
+   [
+    "Это бесплатно?",
+    "Да. Основные функции бесплатны. Pro — необязательный платный тариф."
+   ],
+   [
+    "Нужна ли учётная запись?",
+    "Нет. Лента, уведомления и календарь работают без входа. Вход через Apple нужен только для публикаций на карте и ежедневного гороскопа."
+   ],
+   [
+    "Это официальное приложение?",
+    "Нет. Это неофициальное приложение, созданное частным лицом, не связанное ни с издателями карточных игр, ни с магазинами. Информация берётся из публичных объявлений магазинов; перед участием или покупкой всегда сверяйтесь с актуальными данными на официальной странице магазина."
+   ]
+  ],
+  "other": "Другие языки"
+ },
+ "tr": {
+  "title": "Toreca Dash (トレカダッシュ): Japonya kart çekiliş bildirimleri",
+  "h1": "Toreca Dash (トレカダッシュ)",
+  "desc": "Japonya'daki mağazaların kart çekiliş, ön sipariş ve ilk gelen alır satışlarını toplayan iPhone uygulaması; takvim ve bildirim sunar. Mağaza bilgileri çoğunlukla Japonca.",
+  "og": "Japonya'da satılan koleksiyon kartları için çekiliş, ön sipariş ve stok bildirimleri.",
+  "lead": "Çekilişler, ön siparişler, ilk gelen alır satışlar.<br>Takip etmesi zor Japon kart satışları tek yerde, bildirimlerle.",
+  "btn": "App Store'da aç",
+  "free": "İndirmek ücretsizdir. Pro, isteğe bağlı ücretli bir yükseltmedir.",
+  "s_what": "Nedir",
+  "p_what": "Japonya'da koleksiyon kartı satışları mağaza mağaza, mağaza sitelerinde ve X'te duyurulur. Fark ettiğinizde son tarih geçmiş olur. Toreca Dash, Japonya genelindeki mağaza ve online mağazaların duyurularını toplar ve sizi başvurabileceğiniz ya da satın alabileceğiniz sayfaya doğrudan götürür.",
+  "s_feat": "Ana özellikler",
+  "feats": [
+   [
+    "Akış",
+    "Açık çekilişleri, ön siparişleri ve ilk gelen alır satışları oyuna ve satış türüne göre filtreleyerek görün."
+   ],
+   [
+    "Bildirimler",
+    "Takip ettiğiniz ürün veya oyunla ilgili yeni bir gelişme olur olmaz haberiniz olsun."
+   ],
+   [
+    "Son tarih takvimi",
+    "Çekiliş son tarihleri ve sonuç günleri gün gün listelenir, hiçbir başvuruyu kaçırmazsınız."
+   ],
+   [
+    "Başvuru kaydı",
+    "Katıldığınız çekilişleri, sonuçları ve satın alımlarınızı kaydedin."
+   ],
+   [
+    "Harita",
+    "Mağazalardaki stok ve çekiliş bilgilerini diğer kullanıcılarla paylaşın."
+   ]
+  ],
+  "s_games": "Desteklenen oyunlar",
+  "p_games": "Pokémon Card Game, Yu-Gi-Oh!, ONE PIECE Card Game, Union Arena, Lorcana, Duel Masters, Dragon Ball, Gundam, Magic: The Gathering, Weiss Schwarz, Detective Conan, hololive, Digimon, Haikyu!! Babo-ca!!, Palworld (toplam 15).",
+  "s_pro": "Toreca Dash Pro (isteğe bağlı, ücretli)",
+  "pro": [
+   "Sınırsız ürün takibi, anahtar kelime bildirimleri ve hariç tutulan kelimeler.",
+   "İlk gelen alır ve sürpriz satışlar için en hızlı bildirimler (ücretsiz sürüm yaklaşık 15 dakika geriden gelir).",
+   "Konumunuza yakın mağazalara göre filtreleme.",
+   "Tüm bildirim geçmişi, başvuru istatistikleri, takvim dışa aktarma ve CSV dışa aktarma.",
+   "Satın alma kayıtlarından koleksiyonunuzun değerini ve kâr/zararını takip edin.",
+   "Reklamsız."
+  ],
+  "s_know": "Kullanmadan önce bilmekte fayda var",
+  "know": [
+   "<strong>Mağaza bilgileri çoğunlukla Japoncadır.</strong> Mağaza adları, duyurular ve ürün adları Japonya'da yayımlandığı haliyle gösterilir.",
+   "Birçok Japon mağazası çekilişe katılmak için Japonya'da bir adres, telefon numarası veya mağaza üyeliği ister. Başvurmadan önce koşulları her mağazanın kendi sayfasında kontrol edin.",
+   "Uygulama bilgileri gösterir ve sizi mağazaya yönlendirir. Sizin yerinize satın alma yapmaz veya çekilişe katılmaz.",
+   "Ekranlar Japonca ve İngilizce olarak kullanılabilir. Daha fazla dil ekleniyor."
+  ],
+  "s_faq": "SSS",
+  "faq": [
+   [
+    "Ücretsiz mi?",
+    "Evet. Ana özellikler ücretsizdir. Pro, isteğe bağlı ücretli bir plandır."
+   ],
+   [
+    "Hesap gerekir mi?",
+    "Hayır. Akış, bildirimler ve takvim giriş yapmadan çalışır. Apple ile Giriş yalnızca harita gönderileri ve günlük fal için kullanılır."
+   ],
+   [
+    "Resmî bir uygulama mı?",
+    "Hayır. Bir birey tarafından yapılmış resmî olmayan bir uygulamadır ve hiçbir kart oyunu yayıncısı veya mağazayla bağlantısı yoktur. Bilgiler mağazaların herkese açık duyurularından gelir; başvurmadan veya satın almadan önce en güncel ayrıntıları her zaman mağazanın resmî sayfasından doğrulayın."
+   ]
+  ],
+  "other": "Diğer diller"
+ }
+}

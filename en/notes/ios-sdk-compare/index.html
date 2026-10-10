@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Comparing iOS ad SDKs and Firebase by their official information: AdMob, AppLovin MAX, LevelPlay and Supabase — Koshin Studio</title>
+<meta name="description" content="iOS ad SDKs (AdMob, AppLovin MAX, LevelPlay) plus Firebase and Supabase compared using only official pages as of October 8, 2026: payouts, privacy requirements, minimum Xcode and iOS, free tiers, and what I could not confirm.">
+<meta property="og:title" content="Comparing iOS ad SDKs and Firebase by their official information: AdMob, AppLovin MAX, LevelPlay and Supabase">
+<meta property="og:description" content="iOS ad SDKs (AdMob, AppLovin MAX, LevelPlay) plus Firebase and Supabase compared using only official pages as of October 8, 2026: payouts, privacy requirements, minimum Xcode and iOS, free tiers, and what I could not confirm.">
+<meta property="og:type" content="article">
+<meta name="theme-color" content="#fbfaf7">
+<link rel="icon" href="/favicon.ico?v=1697d589" sizes="48x48">
+<link rel="icon" href="/favicon.svg?v=b9d7922f" type="image/svg+xml" sizes="any">
+<link rel="icon" href="/assets/icon/icon-192.png?v=e2566235" type="image/png" sizes="192x192">
+<link rel="apple-touch-icon" href="/assets/icon/icon-180.png?v=84e7f0e6">
+<link rel="manifest" href="/site.webmanifest">
+<script>document.documentElement.className+=" js"</script>
+<link rel="stylesheet" href="/style.css?v=7001672f">
+<meta name="google-adsense-account" content="ca-pub-3863314847163872">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3863314847163872" crossorigin="anonymous"></script>
+<link rel="canonical" href="https://koshinstudio.com/en/notes/ios-sdk-compare/">
+<meta property="og:url" content="https://koshinstudio.com/en/notes/ios-sdk-compare/">
+<meta property="og:site_name" content="Koshin Studio">
+<meta property="og:locale" content="en_US">
+<link rel="alternate" hreflang="ja" href="https://koshinstudio.com/notes/ios-sdk-compare/">
+<link rel="alternate" hreflang="en" href="https://koshinstudio.com/en/notes/ios-sdk-compare/">
+<link rel="alternate" hreflang="x-default" href="https://koshinstudio.com/en/notes/ios-sdk-compare/">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="alternate" type="application/rss+xml" title="Koshin Studio — Notes" href="https://koshinstudio.com/feed.xml">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BlogPosting","headline":"Comparing iOS ad SDKs and Firebase by their official information: AdMob, AppLovin MAX, LevelPlay and Supabase","url":"https://koshinstudio.com/en/notes/ios-sdk-compare/","description":"iOS ad SDKs (AdMob, AppLovin MAX, LevelPlay) plus Firebase and Supabase compared using only official pages as of October 8, 2026: payouts, privacy requirements, minimum Xcode and iOS, free tiers, and what I could not confirm.","datePublished":"2026-10-09","dateModified":"2026-10-09","inLanguage":"en","image":"https://koshinstudio.com/assets/og/og_notes_ios-sdk-compare.jpg","author":{"@id":"https://koshinstudio.com#studio"},"publisher":{"@id":"https://koshinstudio.com#studio"},"mainEntityOfPage":"https://koshinstudio.com/en/notes/ios-sdk-compare/"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Koshin Studio","item":"https://koshinstudio.com/en/"},{"@type":"ListItem","position":2,"name":"Comparing iOS ad SDKs and Firebase by their official information: AdMob, AppLovin MAX, LevelPlay and Supabase","item":"https://koshinstudio.com/en/notes/ios-sdk-compare/"}]}]}</script>
+<meta property="og:image" content="https://koshinstudio.com/assets/og/og_notes_ios-sdk-compare.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
+</head>
+<body>
+<canvas id="motes"></canvas>
+
+<header class="site"><div class="wrap">
+  <a class="logo" href="/"><img class="logo-mark" src="/favicon.svg?v=b9d7922f" alt="" width="28" height="28">Koshin Studio</a>
+  <nav><a href="/works/">Works</a><a href="/notes/">Notes</a><a href="/picks/">Picks</a><a href="/calc/">Tools</a><a href="/about/">About</a></nav>
+</div></header>
+
+<main><div class="wrap">
+  <nav class="crumbs" aria-label="You are here"><a href="/en/">Koshin Studio</a><i aria-hidden="true">›</i><span aria-current="page">iOS ad SDKs compared</span></nav>
+  <h1>Comparing iOS ad SDKs and Firebase by their official information: AdMob, AppLovin MAX, LevelPlay and Supabase</h1>
+  <div class="rule"></div>
+<!--lang-->
+  <p class="note"><a href="/notes/ios-sdk-compare/" hreflang="ja" lang="ja">日本語版</a></p>
+<!--/lang-->
+  <p class="lead">A comparison / October 2026</p>
+
+  <p>For my iOS app Torecadash, I pinned Firebase to 11.4.0 and AdMob to 11.5.0 to suit Xcode 15.2 on an old Mac (<a href="/en/notes/xcode152-sdk/" hreflang="en" lang="en">that article</a>). The app was also rejected once for ITMS-91064 (<a href="/en/notes/itms-91064/" hreflang="en" lang="en">that article</a>). Here I line up the surrounding options I could not look into at the time, using <strong>official pages only</strong>. I have actually used only AdMob and Firebase. I have not used the others.</p>
+  <p class="note">This is what I confirmed on October 8, 2026. SDK versions and requirements change quickly. Check the sources before you use them.</p>
+
+  <h2 class="rv" id="s1">Quick table: look up what you want to know</h2>
+  <p>The answers first. The numbers and sources are in the sections below.</p>
+  <div class="scroll rv"><table>
+    <tr><th>What you want to know</th><th>What the official pages say</th></tr>
+    <tr><td>Which versions work on an old Xcode</td><td>AdMob 11.6.0 and later needs Xcode 15.3 or later. Firebase 11.12.0 and later needs Xcode 16.2, and 12.0.0 and later needs Swift 6.0 (official release notes).</td></tr>
+    <tr><td>Minimum payout</td><td>AdMob: at least $100 in USD (official table). AppLovin: no amount in the official FAQ; payment is for the previous month on the 15th of the next. LevelPlay and Meta: could not confirm.</td></tr>
+    <tr><td>I want to use several ad networks</td><td>AdMob, AppLovin MAX and LevelPlay have mediation. The AdMob integration guide lists 24 networks.</td></tr>
+    <tr><td>I want to keep using Firebase with CocoaPods</td><td>Firebase states that in October 2026 it stops publishing new versions to CocoaPods. SPM is recommended.</td></tr>
+    <tr><td>I want server-side processing for free</td><td>On Firebase Spark, Cloud Functions is not available (Blaze only). On Supabase’s free plan, a project pauses after one week without activity.</td></tr>
+  </table></div>
+  <p class="note">The contents of the table were confirmed on official pages on October 8, 2026. SDK requirements can disagree between pages, so check with your own build as well.</p>
+
+  <h2 class="rv" id="s2">Ad SDKs: how they work and payments</h2>
+  <div class="scroll rv"><table>
+    <tr><th>SDK</th><th>How it works</th><th>Minimum payout</th></tr>
+    <tr><td>Google AdMob</td><td>Has mediation (serving from several ad networks). The iOS integration guide lists 24 networks including AppLovin, ironSource, Meta Audience Network and Unity Ads.</td><td>Payments in USD have a <strong>minimum of $100</strong> (official table). The value differs by currency.</td></tr>
+    <tr><td>AppLovin MAX</td><td>A mediation platform.</td><td>No specific amount in the official FAQ (you check it on the dashboard). Payment is for the previous month on the 15th of the next (NET15).</td></tr>
+    <tr><td>Unity LevelPlay (ironSource)</td><td>LevelPlay ads and mediation. Adapters are separate packages.</td><td>Could not confirm.</td></tr>
+    <tr><td>Meta Audience Network</td><td>A standalone ad network. Listed as a mediation target in AdMob.</td><td>Could not confirm.</td></tr>
+  </table></div>
+  <p><strong>For Meta Audience Network, I could not confirm either an official announcement of closure or a statement that it continues.</strong> Whether you can newly adopt it now cannot be settled from official primary sources.</p>
+
+  <h2 class="rv" id="s3">iOS privacy requirements</h2>
+  <ul>
+    <li><strong>Apple’s rule (common to all):</strong> if <code>NSPrivacyTracking</code> is true, <code>NSPrivacyTrackingDomains</code> needs a list of domains. If the user has not allowed ATT (tracking permission), connections to those domains <strong>fail and the app receives an error</strong>, according to Apple’s documentation. This matches what happened in the ITMS-91064 article.</li>
+    <li><strong>AdMob:</strong> asks for ATT before loading ads (SDK 7.64.0 and later). Privacy manifest support is from 11.2.0 (2024-03-14). <strong>I could not find an official list of tracking domains on AdMob’s pages</strong> (I cannot say it does not exist).</li>
+    <li><strong>AppLovin MAX:</strong> 12.4.1 and later supports privacy manifests. Each connected network also has a required version (AdMob 11.2.0 or later, Meta 6.15.0 or later, Unity Ads 4.10.0 or later).</li>
+    <li><strong>Meta:</strong> the Audience Network SDK has an iOS privacy manifest and recommends updating to 6.15.0. The domains are pre-filled and it does not recommend adding them by hand.</li>
+    <li><strong>LevelPlay:</strong> I could not confirm any description of ATT or privacy manifests on the integration pages I read.</li>
+  </ul>
+
+  <h2 class="rv" id="s4">Minimum Xcode and iOS, and how to install</h2>
+  <div class="scroll rv"><table>
+    <tr><th>SDK</th><th>Minimum requirements</th><th>Installation</th></tr>
+    <tr><td>AdMob</td><td>Latest is 13.11.0 (2026-09-29). The release notes say a minimum of Xcode 26.2 (from 13.4.0). <strong>But the quick start says “Xcode 16.0 or later” and “iOS 13.0 or later,” so pages disagree.</strong></td><td>SPM (recommended), CocoaPods, manual</td></tr>
+    <tr><td>Firebase</td><td>Latest is 13.0.0 (2026-10-07). Minimum Xcode 26.2, iOS 15.0. Xcode 16.2 is required from 11.12.0, and Swift 6.0 from 12.0.0.</td><td>SPM is recommended. <strong>It states that in October 2026 it stops publishing new versions to CocoaPods.</strong></td></tr>
+    <tr><td>AppLovin MAX</td><td>iOS 12.0 or later, Xcode 15 or later (integration page).</td><td>CocoaPods, SPM, manual. With SPM, use SPM for the SDK and all adapters (mixing causes version conflicts).</td></tr>
+    <tr><td>LevelPlay</td><td>The integration page says iOS 12+ and Xcode 15.4+. Another page (for Unity) says iOS 13+ and Xcode 16+ (from a search summary). Pages disagree.</td><td>CocoaPods, SPM (9.3.0 or later), manual</td></tr>
+  </table></div>
+  <p>This table also confirms why Torecadash pinned its versions. The official release notes say AdMob 11.6.0 depends on MarketplaceKit and needs Xcode 15.3 or later, and Firebase 11.12.0 and later needs Xcode 16.2. This matched my article.</p>
+
+  <h2 class="rv" id="s5">Analytics and backend: Firebase and Supabase free tiers</h2>
+  <div class="scroll rv"><table>
+    <tr><th>Service</th><th>What the official pages say</th></tr>
+    <tr><td>Firebase (Spark)</td><td>Firestore: 1 GiB storage, 50,000 reads a day, 20,000 writes a day, 20,000 deletes a day. Authentication: 50,000 monthly active users (phone auth not available). Cloud Functions: not available on Spark (paid Blaze only). Analytics and Cloud Messaging: no numeric limit (free).</td></tr>
+    <tr><td>Supabase (free)</td><td>50,000 monthly active users, 500 MB database, 1 GB file storage, 5 GB egress. Up to 2 active projects. <strong>Free projects pause after one week without activity.</strong></td></tr>
+  </table></div>
+
+  <h2 class="rv" id="s6">What I learned</h2>
+  <blockquote>In an environment that cannot keep up with the latest version, the “minimum requirements” table matters most.</blockquote>
+  <ul>
+    <li><strong>SDK requirements can disagree between pages.</strong> Both AdMob and LevelPlay had different numbers in the release notes and the setup guides. You have to look at both and confirm with your own build.</li>
+    <li><strong>Privacy settings happen outside the SDK.</strong> If you set <code>NSPrivacyTracking</code> to true, you also write the domains. That is Apple’s rule, not a difference between SDKs.</li>
+    <li><strong>Look at how a free tier stops first.</strong> Supabase pauses with no activity. Firebase Spark cannot use Functions.</li>
+  </ul>
+
+  <h2 class="rv" id="s7">What I could not confirm</h2>
+  <ul>
+    <li>Minimum payouts for LevelPlay and Meta Audience Network.</li>
+    <li>Meta Audience Network’s availability (closed or continuing), minimum Xcode and iOS, SPM support, and current version.</li>
+    <li>AppLovin’s specific minimum payout amount, and the latest MAX SDK version (the release-notes URL would not open).</li>
+    <li>An official list of tracking domains for AdMob, within what I could access.</li>
+    <li>The <code>FirebaseDataEncoder</code> bug from Firebase 11.5.0 (as my article says, I confirmed it with my own build and could not find an official record).</li>
+    <li>The contents of supabase-swift’s privacy manifest.</li>
+    <li>Comparisons of accuracy or revenue (I did not do them, because there are no official numbers).</li>
+  </ul>
+
+  <h2 class="rv" id="s8">Sources (all checked on October 8, 2026)</h2>
+  <ul class="plain">
+    <li><a href="https://developers.google.com/admob/ios/rel-notes" rel="noopener" target="_blank">AdMob: iOS release notes</a></li>
+    <li><a href="https://developers.google.com/admob/ios/quick-start" rel="noopener" target="_blank">AdMob: iOS quick start</a></li>
+    <li><a href="https://developers.google.com/admob/ios/mediation" rel="noopener" target="_blank">AdMob: mediation</a></li>
+    <li><a href="https://developers.google.com/admob/ios/privacy" rel="noopener" target="_blank">AdMob: privacy</a></li>
+    <li><a href="https://support.google.com/admob/answer/2772208?hl=en" rel="noopener" target="_blank">AdMob: payment thresholds</a></li>
+    <li><a href="https://firebase.google.com/support/release-notes/ios" rel="noopener" target="_blank">Firebase: iOS release notes</a></li>
+    <li><a href="https://firebase.google.com/docs/ios/installation-methods" rel="noopener" target="_blank">Firebase: installation methods</a></li>
+    <li><a href="https://firebase.google.com/pricing" rel="noopener" target="_blank">Firebase: pricing</a></li>
+    <li><a href="https://support.applovin.com/en/max/ios/overview/integration" rel="noopener" target="_blank">AppLovin: integration (iOS)</a></li>
+    <li><a href="https://support.applovin.com/en/max/ios/overview/privacy-manifests" rel="noopener" target="_blank">AppLovin: privacy manifests</a></li>
+    <li><a href="https://docs.unity.com/en-us/grow/levelplay/sdk/ios/sdk-integration" rel="noopener" target="_blank">Unity LevelPlay: iOS SDK integration</a></li>
+    <li><a href="https://developer.apple.com/documentation/bundleresources/privacy-manifest-files" rel="noopener" target="_blank">Apple: privacy manifest files</a></li>
+    <li><a href="https://supabase.com/pricing" rel="noopener" target="_blank">Supabase: pricing</a></li>
+  </ul>
+  <p class="note">I read some of the official pages through summaries (the numbers have not been checked against the originals character by character). Please review the original text before relying on them.</p>
+
+  <p class="note">This is the English version of <a href="/notes/ios-sdk-compare/" hreflang="ja" lang="ja">the original Japanese article</a>.</p>
+
+  <div class="rule" style="margin:40px 0 22px"></div>
+  <p class="eyebrow">More in English</p>
+  <ul class="plain">
+    <li><a href="/en/">All English pages</a></li>
+  </ul>
+</div>
+</main>
+
+<footer class="site"><div class="wrap"></div></footer>
+<script src="/motion.js?v=1e7447ec" defer></script>
+</body>
+</html>

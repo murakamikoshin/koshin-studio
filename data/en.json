@@ -139,5 +139,19 @@
     "title": "Comparing static site hosts by their official terms: Cloudflare Pages, Netlify, Vercel, GitHub Pages and Firebase Hosting",
     "date": "2026-10-09",
     "blurb": "Static hosting compared using only the official pages as of October 8, 2026: whether ads are allowed on free plans, free-tier limits, file limits, redirect and header config, and what I could not confirm."
+  },
+  {
+    "ja": "/notes/comment-services/",
+    "en": "/en/notes/comment-services/",
+    "title": "Comparing comment systems for static sites by their official information: giscus, utterances, Disqus, Remark42 and more",
+    "date": "2026-10-09",
+    "blurb": "Comment systems for static sites (giscus, utterances, Disqus, Remark42, Cusdis, Staticman, Commento) compared using only official pages and repositories as of October 8, 2026: storage, ads and tracking, maintenance status, and what I could not confirm."
+  },
+  {
+    "ja": "/notes/ios-sdk-compare/",
+    "en": "/en/notes/ios-sdk-compare/",
+    "title": "Comparing iOS ad SDKs and Firebase by their official information: AdMob, AppLovin MAX, LevelPlay and Supabase",
+    "date": "2026-10-09",
+    "blurb": "iOS ad SDKs (AdMob, AppLovin MAX, LevelPlay) plus Firebase and Supabase compared using only official pages as of October 8, 2026: payouts, privacy requirements, minimum Xcode and iOS, free tiers, and what I could not confirm."
   }
 ]
