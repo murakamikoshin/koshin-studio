@@ -131,6 +131,7 @@ for code, L in langs.items():
 {logs}
   <h2 class="rv">{e(t["h_lang"])}</h2>
   <p>{langlinks}</p>
+  <p><a href="/en/about/" hreflang="en" lang="en">About</a> · <a href="/en/privacy/" hreflang="en" lang="en">Privacy</a></p>
 </div>
 </main>'''
     page = h.replace('<html lang="en">', f'<html lang="{L["lang"]}">')

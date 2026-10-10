@@ -1,7 +1,11 @@
 """英語の紹介ページ（作品）。すし積む、10秒ピッタリ。"""
 import json, re, html as H, os
-def page(ja_slug, title, desc, og_title, og_desc, crumb, main, date):
-    src = open(f'works/{ja_slug}/index.html', encoding='utf8').read()
+def page(ja_slug, title, desc, og_title, og_desc, crumb, main, date, base='works'):
+    jaDir = f'{base}/{ja_slug}' if base != '.' else ja_slug
+    enDir = f'en/{base}/{ja_slug}' if base != '.' else f'en/{ja_slug}'
+    jaUrl = f'/{base}/{ja_slug}/' if base != '.' else f'/{ja_slug}/'
+    enUrl = '/' + enDir + '/'
+    src = open(f'{jaDir}/index.html', encoding='utf8').read()
     head = src[:src.index('<main>')]; foot = src[src.index('</main>') + 7:]
     foot = re.sub(r'<footer class="site">.*?</footer>', '<footer class="site"><div class="wrap"></div></footer>', foot, flags=re.S)
     head = re.sub(r'<title>.*?</title>', f'<title>{H.escape(title, quote=False)}</title>', head, flags=re.S)
@@ -9,11 +13,11 @@ def page(ja_slug, title, desc, og_title, og_desc, crumb, main, date):
     head = re.sub(r'<meta property="og:title" content="[^"]*">', f'<meta property="og:title" content="{H.escape(og_title)}">', head)
     head = re.sub(r'<meta property="og:description" content="[^"]*">', f'<meta property="og:description" content="{H.escape(og_desc)}">', head)
     head = head.replace('<html lang="ja">', '<html lang="en">')
-    os.makedirs(f'en/works/{ja_slug}', exist_ok=True)
-    open(f'en/works/{ja_slug}/index.html', 'w', encoding='utf8').write(head + main + foot)
+    os.makedirs(enDir, exist_ok=True)
+    open(f'{enDir}/index.html', 'w', encoding='utf8').write(head + main + foot)
     pairs = json.load(open('data/en.json', encoding='utf8'))
-    pairs = [p for p in pairs if p['ja'] != f'/works/{ja_slug}/']
-    pairs.append({"ja": f"/works/{ja_slug}/", "en": f"/en/works/{ja_slug}/", "title": og_title, "date": date, "blurb": desc})
+    pairs = [p for p in pairs if p['ja'] != jaUrl]
+    pairs.append({"ja": jaUrl, "en": enUrl, "title": og_title, "date": date, "blurb": desc})
     json.dump(pairs, open('data/en.json', 'w', encoding='utf8'), ensure_ascii=False, indent=2)
 
 def fig(n, alt, cap, w=560, h=1212):
@@ -158,3 +162,55 @@ page('stopwatch10',
  'A free browser game: press start and count ten seconds in your head, with no numbers or sound on screen. Three modes, millisecond precision, and a fair daily ranking.',
  'Stop at exactly 10 seconds!', 'Count ten seconds in your head and stop. No numbers, no ticks, nothing moves. A free browser game with a fair ranking.',
  'Stop at exactly 10 seconds!', main, '2026-10-10')
+
+# ---- About ----
+src = open('about/index.html', encoding='utf8').read()
+main = '''<main><div class="wrap">
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/en/">Koshin Studio</a><i aria-hidden="true">›</i><span aria-current="page">About</span></nav>
+  <h1>About</h1>
+  <div class="rule"></div>
+  <p class="lead">Koshin Studio is a place for taking on anything, alone.<br>Make, try, write. Games, a quiz app and more, with records of how they were made and verified.</p>
+
+  <h2 class="rv">What you can do here</h2>
+  <ul class="rv">
+    <li><a href="/en/">English hub</a> — games, tools and development logs in English</li>
+    <li><a href="/en/works/sushitsumu/" hreflang="en" lang="en">Sushi Stack</a>, <a href="/en/works/negaeri-shogi/" hreflang="en" lang="en">Negaeri Shogi</a>, <a href="/en/works/stopwatch10/" hreflang="en" lang="en">Stop at exactly 10 seconds!</a> — free browser games</li>
+    <li><a href="/en/works/shindananime/" hreflang="en" lang="en">Hardcore Anime Type Diagnosis</a> — an anime quiz with 64 types and 6 axes</li>
+    <li><a href="/en/calc/gacha/" hreflang="en" lang="en">Gacha calculators</a> — rate and pity calculators</li>
+  </ul>
+
+  <h2 class="rv">How I work</h2>
+  <p class="rv">Mostly alone, running things on my own machine as I go. Because I do everything from design to art to sound, I can fix what needs fixing on the spot.</p>
+  <p class="rv" data-delay="60">For balance, <strong>I always prepare a way to measure</strong>. For a game, I let it play itself hundreds of times and look at where it gets stuck in numbers. It is much faster and more reliable than tweaking by feel three times and checking. The process is in <a href="/en/notes/anago/" hreflang="en" lang="en">a development log</a>.</p>
+  <blockquote class="rv" data-delay="120">My feeling was right.<br>But the cause was not where I thought.</blockquote>
+  <p class="rv" data-delay="160">No install and no sign-up. It starts right away when you open it in a browser. That is the one thing I try not to break.</p>
+
+  <h2 class="rv">How the articles are written, and corrections</h2>
+  <p class="rv">The articles in the development logs are written from real commits (work records) and measured numbers. I follow three rules.</p>
+  <ul class="rv">
+    <li><strong>I write where the numbers come from.</strong> At the end of an article I say which record it was written from and when it was measured.</li>
+    <li><strong>I write “not verified” when I have not verified.</strong> Causes I never found and things I did not confirm on a real device are written as they are.</li>
+    <li><strong>I fix mistakes, and say I fixed them.</strong> When I learn something later, I add it to the article and change the update date (for example, <a href="/en/notes/anago/" hreflang="en" lang="en">the conger eel article</a> got an addendum with the numbers after sizes changed).</li>
+  </ul>
+  <p class="rv">If you notice a mistake in an article, please tell me using the contact below.</p>
+
+  <h2 class="rv">Tools I use</h2>
+  <ul class="rv">
+    <li><strong>Languages:</strong> JavaScript (the main one: games and the site), Python (fonts, image conversion, statistics tools), Swift (iOS apps), plain HTML and CSS written by hand.</li>
+    <li><strong>Games:</strong> Matter.js for physics, Canvas 2D for drawing every frame instead of using images, Web Audio for synthesized sound.</li>
+    <li><strong>The site:</strong> GSAP and ScrollTrigger, Lenis, and SVG (I even drew the logo letters myself).</li>
+    <li><strong>Hosting:</strong> Cloudflare Pages, Workers and D1 for this site and the ranking server, and Firebase for app backends.</li>
+    <li><strong>Tooling:</strong> Git and GitHub, Playwright (to let games play themselves and to walk the whole site), fontTools, Pillow and Xcode.</li>
+  </ul>
+  <p class="rv">I add a framework only when I need it. This site added GSAP only when it came to thickening the motion. It does not connect to outside CDNs; everything it uses is on my own server, which is fast and unaffected when others go down. Fonts are trimmed to the characters needed instead of pasting a stock font.</p>
+
+  <h2 class="rv">Contact</h2>
+  <p class="rv">Corrections, impressions and questions are welcome. I may not be able to reply to everything, but I read them.</p>
+  <div class="contact-box rv"><a class="ct-main" href="mailto:koshinstudio88@gmail.com?subject=Koshin%20Studio">koshinstudio88@gmail.com<span>Send an email</span></a></div>
+  <p class="note rv">How personal information and quiz answers are handled is written on the <a href="/en/privacy/" hreflang="en" lang="en">privacy page</a>. This is the English version of <a href="/about/" hreflang="ja" lang="ja">the Japanese page</a>.</p>
+</div>
+</main>'''
+page('about', 'About Koshin Studio, a one-person studio | Koshin Studio',
+ 'Koshin Studio is a one-person studio making free browser games and small apps, and writing down what it measures. How I work, how articles are written, the tools I use, and how to contact me.',
+ 'About Koshin Studio', 'A one-person studio making free browser games and apps, and writing down what it measures.',
+ 'About', main, '2026-10-10', base='.')

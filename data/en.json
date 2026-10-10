@@ -111,6 +111,27 @@
     }
   },
   {
+    "ja": "/works/sushitsumu/",
+    "en": "/en/works/sushitsumu/",
+    "title": "Sushi Stack",
+    "date": "2026-10-10",
+    "blurb": "Sushi Stack is a free browser merge puzzle. Drop rice, merge matching toppings up 11 tiers to reach the golden sushi tub. Online ranking, 14 languages, no install or sign-up."
+  },
+  {
+    "ja": "/works/stopwatch10/",
+    "en": "/en/works/stopwatch10/",
+    "title": "Stop at exactly 10 seconds!",
+    "date": "2026-10-10",
+    "blurb": "A free browser game: press start and count ten seconds in your head, with no numbers or sound on screen. Three modes, millisecond precision, and a fair daily ranking."
+  },
+  {
+    "ja": "/about/",
+    "en": "/en/about/",
+    "title": "About Koshin Studio",
+    "date": "2026-10-10",
+    "blurb": "Koshin Studio is a one-person studio making free browser games and small apps, and writing down what it measures. How I work, how articles are written, the tools I use, and how to contact me."
+  },
+  {
     "ja": "/notes/review-info-needed/",
     "en": "/en/notes/review-info-needed/",
     "title": "App Store review sent “Guideline 2.1 Information Needed”: the six things Apple asked for",
@@ -368,19 +389,5 @@
     "title": "A bulk update hit “all articles”: count before you write, and break your tests to prove they work",
     "date": "2026-10-09",
     "blurb": "A bulk job hit every article and wrongly restored 18 items. How I reverted them from status history and proved new tests work by breaking rules one at a time."
-  },
-  {
-    "ja": "/works/sushitsumu/",
-    "en": "/en/works/sushitsumu/",
-    "title": "Sushi Stack",
-    "date": "2026-10-10",
-    "blurb": "Sushi Stack is a free browser merge puzzle. Drop rice, merge matching toppings up 11 tiers to reach the golden sushi tub. Online ranking, 14 languages, no install or sign-up."
-  },
-  {
-    "ja": "/works/stopwatch10/",
-    "en": "/en/works/stopwatch10/",
-    "title": "Stop at exactly 10 seconds!",
-    "date": "2026-10-10",
-    "blurb": "A free browser game: press start and count ten seconds in your head, with no numbers or sound on screen. Three modes, millisecond precision, and a fair daily ranking."
   }
 ]
