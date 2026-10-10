@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Migrating from the Claude API to the Gemini API (gemini-3.1-flash-lite): 16 call sites into one function — Koshin Studio</title>
+<meta name="description" content="I moved an iOS app’s backend from Claude Haiku 4.5 to Gemini 3.1 Flash-Lite after an unplanned charge. How I chose the model by deprecation date, unified 16 calls, added a circuit breaker for web search, and a kill switch.">
+<meta property="og:title" content="Migrating from the Claude API to the Gemini API (gemini-3.1-flash-lite): 16 call sites into one function">
+<meta property="og:description" content="I moved an iOS app’s backend from Claude Haiku 4.5 to Gemini 3.1 Flash-Lite after an unplanned charge. How I chose the model by deprecation date, unified 16 calls, added a circuit breaker for web search, and a kill switch.">
+<meta property="og:type" content="article">
+<meta name="theme-color" content="#fbfaf7">
+<link rel="icon" href="/favicon.ico?v=1697d589" sizes="48x48">
+<link rel="icon" href="/favicon.svg?v=b9d7922f" type="image/svg+xml" sizes="any">
+<link rel="icon" href="/assets/icon/icon-192.png?v=e2566235" type="image/png" sizes="192x192">
+<link rel="apple-touch-icon" href="/assets/icon/icon-180.png?v=84e7f0e6">
+<link rel="manifest" href="/site.webmanifest">
+<script>document.documentElement.className+=" js"</script>
+<link rel="stylesheet" href="/style.css?v=7001672f">
+<meta name="google-adsense-account" content="ca-pub-3863314847163872">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3863314847163872" crossorigin="anonymous"></script>
+<link rel="canonical" href="https://koshinstudio.com/en/notes/gemini-migration/">
+<meta property="og:url" content="https://koshinstudio.com/en/notes/gemini-migration/">
+<meta property="og:site_name" content="Koshin Studio">
+<meta property="og:locale" content="en_US">
+<link rel="alternate" hreflang="ja" href="https://koshinstudio.com/notes/gemini-migration/">
+<link rel="alternate" hreflang="en" href="https://koshinstudio.com/en/notes/gemini-migration/">
+<link rel="alternate" hreflang="x-default" href="https://koshinstudio.com/en/notes/gemini-migration/">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="alternate" type="application/rss+xml" title="Koshin Studio — Notes" href="https://koshinstudio.com/feed.xml">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BlogPosting","headline":"Migrating from the Claude API to the Gemini API (gemini-3.1-flash-lite): 16 call sites into one function","url":"https://koshinstudio.com/en/notes/gemini-migration/","description":"I moved an iOS app’s backend from Claude Haiku 4.5 to Gemini 3.1 Flash-Lite after an unplanned charge. How I chose the model by deprecation date, unified 16 calls, added a circuit breaker for web search, and a kill switch.","datePublished":"2026-10-09","dateModified":"2026-10-09","inLanguage":"en","image":"https://koshinstudio.com/assets/og/og_notes_gemini-migration.jpg","author":{"@id":"https://koshinstudio.com#studio"},"publisher":{"@id":"https://koshinstudio.com#studio"},"mainEntityOfPage":"https://koshinstudio.com/en/notes/gemini-migration/"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Koshin Studio","item":"https://koshinstudio.com/en/"},{"@type":"ListItem","position":2,"name":"Migrating from the Claude API to the Gemini API (gemini-3.1-flash-lite): 16 call sites into one function","item":"https://koshinstudio.com/en/notes/gemini-migration/"}]}]}</script>
+<meta property="og:image" content="https://koshinstudio.com/assets/og/og_notes_gemini-migration.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
+</head>
+<body>
+<canvas id="motes"></canvas>
+
+<header class="site"><div class="wrap">
+  <a class="logo" href="/"><img class="logo-mark" src="/favicon.svg?v=b9d7922f" alt="" width="28" height="28">Koshin Studio</a>
+  <nav><a href="/works/">Works</a><a href="/notes/">Notes</a><a href="/picks/">Picks</a><a href="/calc/">Tools</a><a href="/about/">About</a></nav>
+</div></header>
+
+<main><div class="wrap">
+  <nav class="crumbs" aria-label="You are here"><a href="/en/">Koshin Studio</a><i aria-hidden="true">›</i><span aria-current="page">Claude to Gemini migration</span></nav>
+  <h1>Migrating from the Claude API to the Gemini API (gemini-3.1-flash-lite): 16 call sites into one function</h1>
+  <div class="rule"></div>
+<!--lang-->
+  <p class="note"><a href="/notes/gemini-migration/" hreflang="ja" lang="ja">日本語版</a></p>
+<!--/lang-->
+  <p class="lead">Development log of Torecadash / October 2026</p>
+
+  <p>On the server side of my iOS app Torecadash, AI is used for things like deciding “which product an article is about.” On July 25, 2026, I <strong>fully migrated this AI from Anthropic’s Claude (Haiku 4.5) to Google’s Gemini (<code>gemini-3.1-flash-lite</code>)</strong>. What I decided, how I unified the calls, and what I added after the migration are written from my hand-over notes.</p>
+  <p class="note">This site has a page for Torecadash (<a href="/en/works/" hreflang="en" lang="en">Works</a>). This is a development log. I do not write amounts of money.</p>
+
+  <h2 class="rv" id="s1">What triggered it</h2>
+  <p>According to my notes, the reason was that <strong>I reached Anthropic’s API usage limit and got an unplanned charge</strong>. Since then only Gemini has run, and I removed the Anthropic SDK and key from the code and from the secret store (Secret Manager). In a check on July 30, I confirmed there are 0 mentions of Anthropic in the code.</p>
+
+  <h2 class="rv" id="s2">How I chose the model</h2>
+  <p>I chose <code>gemini-3.1-flash-lite</code>. My notes also keep the reason for what I did not choose.</p>
+  <ul>
+    <li>Gemini 2.5 Flash-Lite, which is cheaper, was <strong>scheduled to be shut down on October 16, 2026</strong>, so I passed on it (according to my notes. When I reviewed the official deprecation list on October 8, 2026, this model showed “no shutdown date announced.” I have not confirmed whether the entry changed later).</li>
+    <li>The shutdown date of the one I chose, <code>gemini-3.1-flash-lite</code>, is May 7, 2027. At the time of migration (July 25) that was still about nine and a half months away.</li>
+  </ul>
+  <p>If you choose only by price, it will be shut down soon and you migrate again. I added “when will it be shut down” to the selection criteria.</p>
+
+  <h2 class="rv" id="s3">16 call sites into one function</h2>
+  <p>There were 16 places that call AI (deciding the sales format, matching products, discovering listings and so on). I unified them to go through <strong>one function (<code>createGeminiInteraction</code>)</strong> at the top of <code>functions/index.js</code>. Inside it calls <code>client.interactions.create()</code> from <code>@google/genai</code>.</p>
+  <p>Callers pass arguments close to the original Anthropic form (<code>system_instruction</code>, <code>max_output_tokens</code> in <code>generation_config</code>, <code>input</code>) as they are. What comes back is text (<code>output_text</code>). I made it a form where <strong>only the inside is swapped, with almost no rewriting of callers</strong>.</p>
+
+  <h2 class="rv" id="s4">Web search had no “call count cap” setting</h2>
+  <p>In four places (discovering listings, discovering sellers, a Rakuten Books lookup and a list-price lookup), the AI does a web search. With Gemini I use <code>tools: [{type: "google_search"}]</code> (grounding with Google Search).</p>
+  <p>Here was a pitfall. Anthropic’s web search had <code>max_uses</code> (a cap on the number of searches), but <strong>Gemini has no equivalent setting</strong>, and the model searches as many times as it thinks necessary. My notes say: “the absence of this setting can itself be a cause of unexpected cost.”</p>
+  <p>So the day after migration (July 26), I added <strong>a circuit breaker with a daily counter</strong> inside <code>createGeminiInteraction</code> (up to 300 calls a day). When the limit is reached, it returns an error to the caller. In price review, I designed this error to be excluded and kept distinct from “could not find the list price” (I wrote about that in <a href="/notes/fail-open/" hreflang="ja" lang="ja">another article</a>, in Japanese).</p>
+
+  <h2 class="rv" id="s5">A switch to stop it</h2>
+  <p>I added one more thing: <code>AI_CALLS_PAUSED</code>, <strong>a switch that stops all AI calls from one place</strong>. My notes include a reflection from July 25: “I thought I had stopped the calls, but they had not actually stopped, and the automatic job running every 10 minutes kept producing errors.” I decided that when the budget is about to be exceeded, I first set this to <code>true</code> and stop right away.</p>
+
+  <h2 class="rv" id="s6">A note when adding new processing</h2>
+  <p>Functions that call AI (Cloud Functions) must always have <code>secrets: ["GEMINI_API_KEY"]</code>. If you forget it, deployment succeeds and then it fails with a permission error.</p>
+
+  <h2 class="rv" id="s7">What I have not verified</h2>
+  <p>This article is written from the AI section of my hand-over notes. A before-and-after accuracy comparison of decisions is not part of the material. So I do not judge here whether Gemini is better or worse.</p>
+
+  <h2 class="rv" id="s8">What I learned</h2>
+  <blockquote>If you gather calls in one place, the place to stop them is one place too.</blockquote>
+  <ul>
+    <li><strong>Pass every call through one function.</strong> The migration, the safety limit and the stop switch can all live in that one place.</li>
+    <li><strong>Count “there is no setting” as a risk.</strong> When you move to a service with no cap on call count, build the cap on your own side.</li>
+    <li><strong>Check that the stop switch really stops.</strong> Thinking you stopped but not having stopped is the most expensive case.</li>
+  </ul>
+  <p class="note">This article is written from my hand-over notes (AI API information, July 25 and 26, 2026).</p>
+
+  <p class="note">This is the English version of <a href="/notes/gemini-migration/" hreflang="ja" lang="ja">the original Japanese article</a>.</p>
+
+  <div class="rule" style="margin:40px 0 22px"></div>
+  <p class="eyebrow">More in English</p>
+  <ul class="plain">
+    <li><a href="/en/">All English pages</a></li>
+  </ul>
+</div>
+</main>
+
+<footer class="site"><div class="wrap"></div></footer>
+<script src="/motion.js?v=1e7447ec" defer></script>
+</body>
+</html>

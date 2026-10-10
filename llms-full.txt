@@ -78,6 +78,8 @@ URL: https://koshinstudio.com/notes/gemini-migration/
 
 # Claude API から Gemini API（gemini-3.1-flash-lite）へ移行した：16 か所の呼び出しを 1 つの関数にまとめた
 
+  English version (https://koshinstudio.com/en/notes/gemini-migration/)
+
   トレカダッシュ 開発の記録 ／ 2026年10月
 
   iOS アプリ「トレカダッシュ」のサーバー側では、記事が「どの商品の話か」を判定するなどに、AI を使っています。2026 年 7 月 25 日に、この AI を、Anthropic の Claude（Haiku 4.5）から、Google の Gemini（gemini-3.1-flash-lite）へ、全面的に移行しました。何を決めて、どう一本化して、移行のあとに何を足したのか。開発の引き継ぎ記録で書きます。
@@ -3005,6 +3007,8 @@ URL: https://koshinstudio.com/notes/claude-vs-gemini-api/
 
 # Claude API と Gemini API を、公式の数字で比べる：小さいモデルの値段・Web検索・上限・廃止予定
 
+  English version (https://koshinstudio.com/en/notes/claude-vs-gemini-api/)
+
   比べたもの ／ 2026年10月
 
   トレカダッシュは、Claude API から Gemini API へ移行しました（経緯は移行の記事 (https://koshinstudio.com/notes/gemini-migration/)）。あのとき書かなかった公式の数字を、ここで並べます。公式のページに書いてあることだけを使います。精度や速さの比較は、公式の数字が無いので、していません。
@@ -4377,6 +4381,98 @@ Your anime type, and the one anime that fits you right now.
 
 ---
 
+URL: https://koshinstudio.com/en/works/torecadash/
+
+# Toreca Dash (トレカダッシュ)
+
+  日本語版 (https://koshinstudio.com/works/torecadash/)
+
+  日本語版 (https://koshinstudio.com/works/torecadash/)
+
+  Other languages: 日本語 (https://koshinstudio.com/works/torecadash/) / 简体中文 (https://koshinstudio.com/zh/works/torecadash/) / 繁體中文 (https://koshinstudio.com/zh-hant/works/torecadash/) / Tiếng Việt (https://koshinstudio.com/vi/works/torecadash/) / 한국어 (https://koshinstudio.com/ko/works/torecadash/) / ไทย (https://koshinstudio.com/th/works/torecadash/) / Bahasa Indonesia (https://koshinstudio.com/id/works/torecadash/) / Español (https://koshinstudio.com/es/works/torecadash/) / Português (https://koshinstudio.com/pt/works/torecadash/) / Français (https://koshinstudio.com/fr/works/torecadash/) / Deutsch (https://koshinstudio.com/de/works/torecadash/) / Русский (https://koshinstudio.com/ru/works/torecadash/) / Türkçe (https://koshinstudio.com/tr/works/torecadash/)
+
+  Lotteries, pre-orders, first-come sales.
+The Japanese card drops that are hard to keep up with, in one place, with alerts.
+
+  Open in the App Store (https://apps.apple.com/jp/app/id6788758920)
+
+  Free to download. Pro is an optional paid upgrade.
+
+## What it is
+
+  Sales of trading cards in Japan are announced one store at a time, on store sites and on X. By the time you notice, the deadline has passed. Toreca Dash collects announcements from stores and online shops across Japan and takes you straight to the page where you can apply or buy.
+
+## Main features
+
+### Feed
+
+  See open lotteries, pre-orders and first-come sales, filtered by game and sale type.
+
+### Alerts
+
+  Get notified as soon as something new appears for a product or game you follow.
+
+### Deadline calendar
+
+  Lottery deadlines and result dates, day by day, so you do not miss an entry.
+
+### Entry tracker
+
+  Record the lotteries you entered, and the results and purchases.
+
+### Map
+
+  Share in-store stock and lottery information with other users.
+
+## Supported games
+
+  Pokémon Card Game, Yu-Gi-Oh!, ONE PIECE Card Game, Union Arena, Lorcana, Duel Masters, Dragon Ball, Gundam, Magic: The Gathering, Weiss Schwarz, Detective Conan, hololive, Digimon, Haikyu!! Babo-ca!!, Palworld (15 in total).
+
+## Toreca Dash Pro (optional, paid)
+
+- Unlimited product follows, keyword alerts and excluded keywords.
+
+- The fastest alerts for first-come and surprise sales (the free version is about 15 minutes behind).
+
+- Filter to stores near your location.
+
+- Full notification history, entry statistics, calendar export and CSV export.
+
+- Track the value and profit/loss of your collection from purchase records.
+
+- No ads.
+
+## Good to know before you use it
+
+- Store information is mostly in Japanese. Store names, announcements and product names are shown as published in Japan.
+
+- Many Japanese stores require a Japanese address, phone number or store membership to enter a lottery. Check the conditions on each store’s own page before you apply.
+
+- The app shows the information and sends you to the store. It does not buy or enter lotteries for you.
+
+- Screens are available in Japanese and English. More languages are being added.
+
+## FAQ
+
+### Is it free?
+
+  Yes. The main features are free. Pro is an optional paid plan.
+
+### Do I need an account?
+
+  No. The feed, alerts and calendar work without signing in. Sign in with Apple is only used for map posts and the daily fortune.
+
+### Is it an official app?
+
+  No. It is an unofficial app made by an individual, and is not affiliated with any card game publisher or store. Information comes from stores’ public announcements; always confirm the latest details on the store’s official page before you apply or buy.
+
+  Open in the App Store (https://apps.apple.com/jp/app/id6788758920)
+
+  Support (https://cardalerthub.web.app/support.html) / Terms (https://cardalerthub.web.app/terms.html) / Privacy (https://cardalerthub.web.app/privacy.html)
+
+
+---
+
 URL: https://koshinstudio.com/en/notes/review-info-needed/
 
 # App Store review sent “Guideline 2.1 Information Needed”: the six things Apple asked for
@@ -5568,94 +5664,248 @@ URL: https://koshinstudio.com/en/notes/ios-sdk-compare/
 
 ---
 
-URL: https://koshinstudio.com/en/works/torecadash/
+URL: https://koshinstudio.com/en/notes/claude-vs-gemini-api/
 
-# Toreca Dash (トレカダッシュ)
+# Claude API vs Gemini API by official numbers: small-model prices, web search, spend limits and deprecation
 
-  日本語版 (https://koshinstudio.com/works/torecadash/)
+  日本語版 (https://koshinstudio.com/notes/claude-vs-gemini-api/)
 
-  日本語版 (https://koshinstudio.com/works/torecadash/)
+  A comparison / October 2026
 
-  Other languages: 日本語 (https://koshinstudio.com/works/torecadash/) / 简体中文 (https://koshinstudio.com/zh/works/torecadash/) / 繁體中文 (https://koshinstudio.com/zh-hant/works/torecadash/) / Tiếng Việt (https://koshinstudio.com/vi/works/torecadash/) / 한국어 (https://koshinstudio.com/ko/works/torecadash/) / ไทย (https://koshinstudio.com/th/works/torecadash/) / Bahasa Indonesia (https://koshinstudio.com/id/works/torecadash/) / Español (https://koshinstudio.com/es/works/torecadash/) / Português (https://koshinstudio.com/pt/works/torecadash/) / Français (https://koshinstudio.com/fr/works/torecadash/) / Deutsch (https://koshinstudio.com/de/works/torecadash/) / Русский (https://koshinstudio.com/ru/works/torecadash/) / Türkçe (https://koshinstudio.com/tr/works/torecadash/)
+  Torecadash moved from the Claude API to the Gemini API (the story is in the migration article (https://koshinstudio.com/en/notes/gemini-migration/)). Here I line up the official numbers I did not write down then. I use only what the official pages say. I did not compare accuracy or speed, because there are no official numbers for them.
 
-  Lotteries, pre-orders, first-come sales.
-The Japanese card drops that are hard to keep up with, in one place, with alerts.
+  All numbers were seen on official pages on October 8, 2026. Prices and limits change. Check each item’s source again before you use it. What the official pages did not say is written as “could not confirm,” not as “does not exist.”
 
-  Open in the App Store (https://apps.apple.com/jp/app/id6788758920)
+## Quick table: look up what you want to know
 
-  Free to download. Pro is an optional paid upgrade.
+  The answers first. Details and sources are in the sections below.
 
-## What it is
+    What you want to know | What the official pages say
 
-  Sales of trading cards in Japan are announced one store at a time, on store sites and on X. By the time you notice, the deadline has passed. Toreca Dash collects announcements from stores and online shops across Japan and takes you straight to the page where you can apply or buy.
+    Which is cheapest? | In the current official tables, Claude Haiku 5.5 (input $0.10, output $0.50) and Gemini 2.5 Flash-Lite ($0.10, $0.40) are in a similar range. Gemini 3.1 Flash-Lite is $0.25 and $1.50.
 
-## Main features
+    I want a setting to cap the number of searches | Claude has max_uses. For Gemini, I did not find a setting for the number of searches on the official pages.
 
-### Feed
+    I want to use search for free | Gemini’s paid tier includes up to 5,000 requests a month free. But on the free tier, search is not available for 3.1 Flash-Lite. Claude is $10 per 1,000 searches.
 
-  See open lotteries, pre-orders and first-come sales, filtered by game and sale type.
+    I want a spend cap that stops me | Both have a monthly spend limit and stop until the 1st of next month when reached (Claude from Start at $500, Gemini from Tier 1 at $250).
 
-### Alerts
+    I want a promise about deprecation notice | Claude states “at least 60 days before retirement.” For Gemini I could not confirm a promise of days; the date in the table is the “earliest shutdown date.”
 
-  Get notified as soon as something new appears for a product or game you follow.
+    I want official numbers for Japanese | Claude’s multilingual page has them (93.5% of English for Haiku 4.5). For Gemini I could not confirm.
 
-### Deadline calendar
+  The numbers in the table were confirmed on official pages on October 8, 2026. This is not a conclusion about which to choose; it is an organization of “what is officially written.”
 
-  Lottery deadlines and result dates, day by day, so you do not miss an entry.
+## Prices of small models
 
-### Entry tracker
+  US dollars per million tokens. The model I used before the migration was Claude Haiku 4.5.
 
-  Record the lotteries you entered, and the results and purchases.
+    Model | Input | Output
 
-### Map
+    Claude Haiku 4.5 | $1 | $5
 
-  Share in-store stock and lottery information with other users.
+    Claude Haiku 5.5 | $0.10 (prompts up to 100,000 tokens) / $0.50 (beyond that) | $0.50 (up to 100,000) / $2.50 (beyond that)
 
-## Supported games
+    Gemini 3.1 Flash-Lite (where I moved) | $0.25 (text, image, video) / $0.50 (audio) | $1.50
 
-  Pokémon Card Game, Yu-Gi-Oh!, ONE PIECE Card Game, Union Arena, Lorcana, Duel Masters, Dragon Ball, Gundam, Magic: The Gathering, Weiss Schwarz, Detective Conan, hololive, Digimon, Haikyu!! Babo-ca!!, Palworld (15 in total).
+    Gemini 3.5 Flash-Lite | $0.30 | $2.50
 
-## Toreca Dash Pro (optional, paid)
+    Gemini 2.5 Flash-Lite | $0.10 | $0.40
 
-- Unlimited product follows, keyword alerts and excluded keywords.
+- In the current official price tables, Haiku 5.5 is cheaper than Gemini 3.1 Flash-Lite. What I compared against when migrating was Haiku 4.5, and I have not checked whether Haiku 5.5 was available then.
 
-- The fastest alerts for first-come and surprise sales (the free version is about 15 minutes behind).
+- Claude has batch (50% discount) and a cheap rate for cache reads. I could not confirm Gemini’s batch discount rate.
 
-- Filter to stores near your location.
+- The official pages say that from Claude 4.7 onward, a new tokenizer makes the same text about 30% more tokens. I could not confirm whether this applies to Haiku 5.5.
 
-- Full notification history, entry statistics, calendar export and CSV export.
+## How web search works and what it costs
 
-- Track the value and profit/loss of your collection from purchase records.
+     | Claude | Gemini
 
-- No ads.
+    Price | $10 / 1,000 searches (plus normal token cost for the results) | Paid tier: up to 5,000 requests a month free, then $14 / 1,000 requests. On the free tier, search is not available for 3.1 Flash-Lite.
 
-## Good to know before you use it
+    How it is counted | Per search. Not charged on error. | For Gemini 3 models, per search query the model runs (multiple queries mean multiple charges).
 
-- Store information is mostly in Japanese. Store names, announcements and product names are shown as published in Japan.
+    A setting to cap the count | Yes (max_uses). Beyond it, the search result is a max_uses_exceeded error. | I did not find a setting to cap the count on the search page (I cannot say it does not exist).
 
-- Many Japanese stores require a Japanese address, phone number or store membership to enter a lottery. Check the conditions on each store’s own page before you apply.
+    Domain restrictions | Allowed and blocked domains can be specified. | Could not confirm.
 
-- The app shows the information and sends you to the store. It does not buy or enter lotteries for you.
+  The problem I wrote about in the migration article, “web search has no cap on the number of calls,” reads the same within what the official pages say. Nothing equivalent to Claude’s max_uses was written on Gemini’s search page. It is still possible that I just did not find it.
 
-- Screens are available in Japanese and English. More languages are being added.
+## Limits and how they stop
 
-## FAQ
+  This is close to my reason for migrating.
 
-### Is it free?
+     | Claude | Gemini
 
-  Yes. The main features are free. Pro is an optional paid plan.
+    Monthly spend limit | Start $500 / Build $1,000 / Scale $200,000 | From Tier 1 $250 / Tier 2 $2,000 / Tier 3 $20,000
 
-### Do I need an account?
+    When the limit is reached | HTTP 429 (enforced_spend_limit_reached). Stopped until 00:00 UTC on the 1st of next month. | All projects in the billing account stop until the 1st of next month.
 
-  No. The feed, alerts and calendar work without signing in. Sign in with Apple is only used for map posts and the daily fortune.
+    A limit you set lower yourself | Can be set (HTTP 400 when reached). | Can be set per project in AI Studio (an experimental feature; billing is reflected with a delay of about 10 minutes, so you can overshoot).
 
-### Is it an official app?
+    Free tier | A small free credit for new accounts. I did not find a continuing free allowance. | Yes. 3.1 Flash-Lite tokens are free. But caching and search grounding are not available on the free tier.
 
-  No. It is an unofficial app made by an individual, and is not affiliated with any card game publisher or store. Information comes from stores’ public announcements; always confirm the latest details on the store’s official page before you apply or buy.
+    Per-minute limits for small models | Start: Haiku 4.5 / 5.5 both 1,000 requests per minute, 2 million input and 400,000 output tokens per minute. | No specific numbers in the documentation (you check in AI Studio).
 
-  Open in the App Store (https://apps.apple.com/jp/app/id6788758920)
+  The migration article gives the reason as “I hit Anthropic’s usage limit and got an unplanned charge.” However, Claude’s official pages say it stops when the limit is reached, and I could not explain from the official pages how an unplanned charge arises. The account in that article comes from my own records, not backed by official documents.
 
-  Support (https://cardalerthub.web.app/support.html) / Terms (https://cardalerthub.web.app/terms.html) / Privacy (https://cardalerthub.web.app/privacy.html)
+## How deprecation is announced
+
+     | Claude | Gemini
+
+    Notice promise | For released models, notice at least 60 days before retirement (by email and documentation). | It says “the exact shutdown date will be announced in advance,” but I could not confirm a promise of days. The date in the table is the “earliest shutdown date.”
+
+    How it is written | “Not sooner than X” (it will not retire earlier than X). | A table of release date, shutdown date and recommended replacement.
+
+    Examples | Haiku 3.5: about 2 months from announcement (2025-12-19) to retirement (2026-02-19). Haiku 4.5: not retired sooner than 2026-10-15. | 3.1 Flash-Lite: released 2026-05-07, shutdown 2027-05-07 (12 months after release). 2.0 Flash: shutdown 2026-06-01.
+
+  The shutdown date of gemini-3.1-flash-lite, which I chose, is also May 7, 2027 in the official table. It matches the migration article. On the other hand, the migration article’s “2.5 Flash-Lite is scheduled to be shut down on October 16” disagrees with the current official table (“no shutdown date announced”). I added a correction to that article.
+
+## Structured output, tool calling and Japanese
+
+- Output in a specified JSON shape: Both support it. Claude says it “guarantees conformance to the schema.” Gemini says it supports “only some JSON schema features” and that “the meaning of values needs validation.”
+
+- Tool calling: Both support it. Using structured output together with tools such as search works only on Gemini 3 models and is described as a “preview feature.”
+
+- Japanese: Claude’s multilingual page has a relative score for Japanese with English as 100% (Haiku 4.5 is 93.5%). On the Gemini 3.1 Flash-Lite page I could not find an official statement on supported languages. That does not mean “Gemini’s Japanese is weak”; it means I could not compare using official numbers.
+
+## What I learned
+
+> You cannot choose from a price table alone.
+
+- Prices flip over time. The side that was cheaper at migration can be more expensive now.
+
+- Whether safety devices exist is outside the table. Caps on search calls, spend limits and how things stop (does it stop, or does billing continue) do not appear in a unit price table.
+
+- How deprecation is announced differs in whether there is a promise. Planning a switch is different when one side promises days and the other only shows the earliest date.
+
+## What I could not confirm
+
+- Specific per-minute and per-day limit numbers for Gemini’s free tier and each tier (the documentation has no numbers).
+
+- Gemini’s batch discount rate.
+
+- Whether Gemini’s search has a setting to cap the count (I only did not find it on the page, so I cannot say it does not exist).
+
+- How many days before shutdown Gemini notifies, at minimum.
+
+- An official statement on Gemini’s Japanese and a numeric comparison.
+
+- An explicit statement that Claude Haiku 4.5 / 5.5 support the web search tool (the official pages tell you to check supported models with the API).
+
+- Accuracy and speed comparisons (not obtainable from official primary sources, so I did not do them).
+
+## Sources (all checked on October 8, 2026)
+
+- Claude: pricing (https://platform.claude.com/docs/en/about-claude/pricing)
+
+- Claude: rate limits and spend limits (https://platform.claude.com/docs/en/api/rate-limits)
+
+- Claude: web search tool (https://platform.claude.com/docs/en/agents-and-tools/tool-use/web-search-tool)
+
+- Claude: model deprecations (https://platform.claude.com/docs/en/about-claude/model-deprecations)
+
+- Claude: structured outputs (https://platform.claude.com/docs/en/build-with-claude/structured-outputs)
+
+- Claude: multilingual support (https://platform.claude.com/docs/en/build-with-claude/multilingual-support)
+
+- Gemini: pricing (https://ai.google.dev/gemini-api/docs/pricing)
+
+- Gemini: rate limits (https://ai.google.dev/gemini-api/docs/rate-limits)
+
+- Gemini: billing (https://ai.google.dev/gemini-api/docs/billing)
+
+- Gemini: grounding with Google Search (https://ai.google.dev/gemini-api/docs/google-search)
+
+- Gemini: model deprecations (https://ai.google.dev/gemini-api/docs/deprecations)
+
+- Gemini: structured output (https://ai.google.dev/gemini-api/docs/structured-output)
+
+- Gemini: function calling (https://ai.google.dev/gemini-api/docs/function-calling)
+
+- Gemini: 3.1 Flash-Lite (https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite)
+
+  I read some of the official pages through summaries (the numbers have not been checked against the originals character by character). Always check the original text of the sources before deciding.
+
+  This is the English version of the original Japanese article (https://koshinstudio.com/notes/claude-vs-gemini-api/).
+
+  More in English
+
+- All English pages (https://koshinstudio.com/en/)
+
+
+---
+
+URL: https://koshinstudio.com/en/notes/gemini-migration/
+
+# Migrating from the Claude API to the Gemini API (gemini-3.1-flash-lite): 16 call sites into one function
+
+  日本語版 (https://koshinstudio.com/notes/gemini-migration/)
+
+  Development log of Torecadash / October 2026
+
+  On the server side of my iOS app Torecadash, AI is used for things like deciding “which product an article is about.” On July 25, 2026, I fully migrated this AI from Anthropic’s Claude (Haiku 4.5) to Google’s Gemini (gemini-3.1-flash-lite). What I decided, how I unified the calls, and what I added after the migration are written from my hand-over notes.
+
+  This site has a page for Torecadash (Works (https://koshinstudio.com/en/works/)). This is a development log. I do not write amounts of money.
+
+## What triggered it
+
+  According to my notes, the reason was that I reached Anthropic’s API usage limit and got an unplanned charge. Since then only Gemini has run, and I removed the Anthropic SDK and key from the code and from the secret store (Secret Manager). In a check on July 30, I confirmed there are 0 mentions of Anthropic in the code.
+
+## How I chose the model
+
+  I chose gemini-3.1-flash-lite. My notes also keep the reason for what I did not choose.
+
+- Gemini 2.5 Flash-Lite, which is cheaper, was scheduled to be shut down on October 16, 2026, so I passed on it (according to my notes. When I reviewed the official deprecation list on October 8, 2026, this model showed “no shutdown date announced.” I have not confirmed whether the entry changed later).
+
+- The shutdown date of the one I chose, gemini-3.1-flash-lite, is May 7, 2027. At the time of migration (July 25) that was still about nine and a half months away.
+
+  If you choose only by price, it will be shut down soon and you migrate again. I added “when will it be shut down” to the selection criteria.
+
+## 16 call sites into one function
+
+  There were 16 places that call AI (deciding the sales format, matching products, discovering listings and so on). I unified them to go through one function (createGeminiInteraction) at the top of functions/index.js. Inside it calls client.interactions.create() from @google/genai.
+
+  Callers pass arguments close to the original Anthropic form (system_instruction, max_output_tokens in generation_config, input) as they are. What comes back is text (output_text). I made it a form where only the inside is swapped, with almost no rewriting of callers.
+
+## Web search had no “call count cap” setting
+
+  In four places (discovering listings, discovering sellers, a Rakuten Books lookup and a list-price lookup), the AI does a web search. With Gemini I use tools: [{type: "google_search"}] (grounding with Google Search).
+
+  Here was a pitfall. Anthropic’s web search had max_uses (a cap on the number of searches), but Gemini has no equivalent setting, and the model searches as many times as it thinks necessary. My notes say: “the absence of this setting can itself be a cause of unexpected cost.”
+
+  So the day after migration (July 26), I added a circuit breaker with a daily counter inside createGeminiInteraction (up to 300 calls a day). When the limit is reached, it returns an error to the caller. In price review, I designed this error to be excluded and kept distinct from “could not find the list price” (I wrote about that in another article (https://koshinstudio.com/notes/fail-open/), in Japanese).
+
+## A switch to stop it
+
+  I added one more thing: AI_CALLS_PAUSED, a switch that stops all AI calls from one place. My notes include a reflection from July 25: “I thought I had stopped the calls, but they had not actually stopped, and the automatic job running every 10 minutes kept producing errors.” I decided that when the budget is about to be exceeded, I first set this to true and stop right away.
+
+## A note when adding new processing
+
+  Functions that call AI (Cloud Functions) must always have secrets: ["GEMINI_API_KEY"]. If you forget it, deployment succeeds and then it fails with a permission error.
+
+## What I have not verified
+
+  This article is written from the AI section of my hand-over notes. A before-and-after accuracy comparison of decisions is not part of the material. So I do not judge here whether Gemini is better or worse.
+
+## What I learned
+
+> If you gather calls in one place, the place to stop them is one place too.
+
+- Pass every call through one function. The migration, the safety limit and the stop switch can all live in that one place.
+
+- Count “there is no setting” as a risk. When you move to a service with no cap on call count, build the cap on your own side.
+
+- Check that the stop switch really stops. Thinking you stopped but not having stopped is the most expensive case.
+
+  This article is written from my hand-over notes (AI API information, July 25 and 26, 2026).
+
+  This is the English version of the original Japanese article (https://koshinstudio.com/notes/gemini-migration/).
+
+  More in English
+
+- All English pages (https://koshinstudio.com/en/)
 
 
 ---
@@ -5717,6 +5967,10 @@ URL: https://koshinstudio.com/en/
 - Comparing comment systems for static sites by their official information: giscus, utterances, Disqus, Remark42 and more (https://koshinstudio.com/en/notes/comment-services/)
 
 - Comparing iOS ad SDKs and Firebase by their official information: AdMob, AppLovin MAX, LevelPlay and Supabase (https://koshinstudio.com/en/notes/ios-sdk-compare/)
+
+- Claude API vs Gemini API by official numbers: small-model prices, web search, spend limits and deprecation (https://koshinstudio.com/en/notes/claude-vs-gemini-api/)
+
+- Migrating from the Claude API to the Gemini API (gemini-3.1-flash-lite): 16 call sites into one function (https://koshinstudio.com/en/notes/gemini-migration/)
 
 ## Languages
 

@@ -28,6 +28,89 @@
     "blurb": "A free anime quiz. Answer 12 questions (up to 50), get your anime type from 6 axes (like RDCP-VM) and a nickname, and see your destined anime plus two runners-up chosen from over 6,000 real titles."
   },
   {
+    "ja": "/works/torecadash/",
+    "en": "/en/works/torecadash/",
+    "title": "Toreca Dash (トレカダッシュ) — Japan TCG lottery, pre-order & restock alerts",
+    "date": "2026-10-10",
+    "blurb": "An iPhone app that gathers lottery, pre-order and first-come sales of trading cards from stores across Japan, with a deadline calendar and alerts. Store information is mostly in Japanese.",
+    "app": "https://apps.apple.com/jp/app/id6788758920",
+    "cover": "/assets/torecadash-square@2x.jpg",
+    "alt": {
+      "zh-Hans": {
+        "path": "/zh/works/torecadash/",
+        "locale": "zh_CN",
+        "title": "トレカダッシュ（Toreca Dash）— 日本卡牌抽签·预约·补货通知（iPhone 应用）",
+        "blurb": "汇总日本各地店铺的卡牌抽签、预约和先到先得销售信息，并提供截止日历与通知的 iPhone 应用。店铺信息以日语为主。"
+      },
+      "zh-Hant": {
+        "path": "/zh-hant/works/torecadash/",
+        "locale": "zh_TW",
+        "title": "トレカダッシュ（Toreca Dash）— 日本卡牌抽選・預約・補貨通知（iPhone App）",
+        "blurb": "彙整日本各地店鋪的卡牌抽選、預約與先搶先贏販售資訊，並提供截止日曆與通知的 iPhone App。店鋪資訊以日文為主。"
+      },
+      "vi": {
+        "path": "/vi/works/torecadash/",
+        "locale": "vi_VN",
+        "title": "トレカダッシュ (Toreca Dash) — Thông báo bốc thăm, đặt trước, hàng về thẻ bài Nhật (ứng dụng iPhone)",
+        "blurb": "Ứng dụng iPhone tổng hợp thông tin bốc thăm, đặt trước và bán theo thứ tự đến trước của thẻ bài từ các cửa hàng khắp Nhật Bản, kèm lịch hạn chót và thông báo. Thông tin cửa hàng chủ yếu bằng tiếng Nhật."
+      },
+      "ko": {
+        "path": "/ko/works/torecadash/",
+        "locale": "ko_KR",
+        "title": "Toreca Dash(トレカダッシュ) - 일본 카드 추첨·예약·재입고 알림 앱",
+        "blurb": "일본 전역 매장의 트레이딩 카드 추첨, 예약, 선착순 판매 정보를 모아 마감 캘린더와 알림으로 알려주는 iPhone 앱. 매장 정보는 대부분 일본어입니다."
+      },
+      "th": {
+        "path": "/th/works/torecadash/",
+        "locale": "th_TH",
+        "title": "Toreca Dash (トレカダッシュ) แอปแจ้งเตือนจับฉลาก พรีออเดอร์การ์ดญี่ปุ่น",
+        "blurb": "แอป iPhone รวมข้อมูลจับฉลาก พรีออเดอร์ และขายตามลำดับก่อนหลังของการ์ดเกมจากร้านทั่วญี่ปุ่น พร้อมปฏิทินวันปิดรับและการแจ้งเตือน ข้อมูลร้านส่วนใหญ่เป็นภาษาญี่ปุ่น"
+      },
+      "id": {
+        "path": "/id/works/torecadash/",
+        "locale": "id_ID",
+        "title": "Toreca Dash (トレカダッシュ) - Info undian & pre-order kartu Jepang",
+        "blurb": "Aplikasi iPhone yang mengumpulkan undian, pre-order, dan penjualan kartu koleksi dari toko di Jepang, dengan kalender dan notifikasi. Info toko umumnya berbahasa Jepang."
+      },
+      "es": {
+        "path": "/es/works/torecadash/",
+        "locale": "es_ES",
+        "title": "Toreca Dash (トレカダッシュ): sorteos y reservas de cartas en Japón",
+        "blurb": "App para iPhone con sorteos, reservas y ventas por orden de llegada de cartas de tiendas de Japón, con calendario y avisos. Información de tiendas casi toda en japonés."
+      },
+      "pt-BR": {
+        "path": "/pt/works/torecadash/",
+        "locale": "pt_BR",
+        "title": "Toreca Dash (トレカダッシュ): sorteios e pré-vendas de cards no Japão",
+        "blurb": "App para iPhone que reúne sorteios, pré-vendas e vendas por ordem de chegada de cards de lojas do Japão, com calendário e alertas. Informações das lojas quase todas em japonês."
+      },
+      "fr": {
+        "path": "/fr/works/torecadash/",
+        "locale": "fr_FR",
+        "title": "Toreca Dash (トレカダッシュ) : tirages et précommandes au Japon",
+        "blurb": "Application iPhone qui réunit tirages au sort, précommandes et ventes premier arrivé de cartes des boutiques japonaises, avec calendrier et alertes. Infos surtout en japonais."
+      },
+      "de": {
+        "path": "/de/works/torecadash/",
+        "locale": "de_DE",
+        "title": "Toreca Dash (トレカダッシュ): Karten-Verlosungen & Vorbestellungen Japan",
+        "blurb": "iPhone-App mit Verlosungen, Vorbestellungen und First-come-Verkäufen von Sammelkarten aus Japan, mit Fristenkalender und Alerts. Shop-Infos meist auf Japanisch."
+      },
+      "ru": {
+        "path": "/ru/works/torecadash/",
+        "locale": "ru_RU",
+        "title": "Toreca Dash (トレカダッシュ): розыгрыши и предзаказы карт в Японии",
+        "blurb": "Приложение для iPhone: розыгрыши, предзаказы и продажи «кто успел» на карты из магазинов Японии, календарь сроков и уведомления. Информация магазинов в основном на японском."
+      },
+      "tr": {
+        "path": "/tr/works/torecadash/",
+        "locale": "tr_TR",
+        "title": "Toreca Dash (トレカダッシュ): Japonya kart çekiliş bildirimleri",
+        "blurb": "Japonya'daki mağazaların kart çekiliş, ön sipariş ve ilk gelen alır satışlarını toplayan iPhone uygulaması; takvim ve bildirim sunar. Mağaza bilgileri çoğunlukla Japonca."
+      }
+    }
+  },
+  {
     "ja": "/notes/review-info-needed/",
     "en": "/en/notes/review-info-needed/",
     "title": "App Store review sent “Guideline 2.1 Information Needed”: the six things Apple asked for",
@@ -126,86 +209,17 @@
     "blurb": "iOS ad SDKs (AdMob, AppLovin MAX, LevelPlay) plus Firebase and Supabase compared using only official pages as of October 8, 2026: payouts, privacy requirements, minimum Xcode and iOS, free tiers, and what I could not confirm."
   },
   {
-    "ja": "/works/torecadash/",
-    "en": "/en/works/torecadash/",
-    "title": "Toreca Dash (トレカダッシュ) — Japan TCG lottery, pre-order & restock alerts",
-    "date": "2026-10-10",
-    "blurb": "An iPhone app that gathers lottery, pre-order and first-come sales of trading cards from stores across Japan, with a deadline calendar and alerts. Store information is mostly in Japanese.",
-    "app": "https://apps.apple.com/jp/app/id6788758920",
-    "cover": "/assets/torecadash-square@2x.jpg",
-    "alt": {
-      "zh-Hans": {
-        "path": "/zh/works/torecadash/",
-        "locale": "zh_CN",
-        "title": "トレカダッシュ（Toreca Dash）— 日本卡牌抽签·预约·补货通知（iPhone 应用）",
-        "blurb": "汇总日本各地店铺的卡牌抽签、预约和先到先得销售信息，并提供截止日历与通知的 iPhone 应用。店铺信息以日语为主。"
-      },
-      "zh-Hant": {
-        "path": "/zh-hant/works/torecadash/",
-        "locale": "zh_TW",
-        "title": "トレカダッシュ（Toreca Dash）— 日本卡牌抽選・預約・補貨通知（iPhone App）",
-        "blurb": "彙整日本各地店鋪的卡牌抽選、預約與先搶先贏販售資訊，並提供截止日曆與通知的 iPhone App。店鋪資訊以日文為主。"
-      },
-      "vi": {
-        "path": "/vi/works/torecadash/",
-        "locale": "vi_VN",
-        "title": "トレカダッシュ (Toreca Dash) — Thông báo bốc thăm, đặt trước, hàng về thẻ bài Nhật (ứng dụng iPhone)",
-        "blurb": "Ứng dụng iPhone tổng hợp thông tin bốc thăm, đặt trước và bán theo thứ tự đến trước của thẻ bài từ các cửa hàng khắp Nhật Bản, kèm lịch hạn chót và thông báo. Thông tin cửa hàng chủ yếu bằng tiếng Nhật."
-      },
-      "ko": {
-        "path": "/ko/works/torecadash/",
-        "locale": "ko_KR",
-        "title": "Toreca Dash(トレカダッシュ) - 일본 카드 추첨·예약·재입고 알림 앱",
-        "blurb": "일본 전역 매장의 트레이딩 카드 추첨, 예약, 선착순 판매 정보를 모아 마감 캘린더와 알림으로 알려주는 iPhone 앱. 매장 정보는 대부분 일본어입니다."
-      },
-      "th": {
-        "path": "/th/works/torecadash/",
-        "locale": "th_TH",
-        "title": "Toreca Dash (トレカダッシュ) แอปแจ้งเตือนจับฉลาก พรีออเดอร์การ์ดญี่ปุ่น",
-        "blurb": "แอป iPhone รวมข้อมูลจับฉลาก พรีออเดอร์ และขายตามลำดับก่อนหลังของการ์ดเกมจากร้านทั่วญี่ปุ่น พร้อมปฏิทินวันปิดรับและการแจ้งเตือน ข้อมูลร้านส่วนใหญ่เป็นภาษาญี่ปุ่น"
-      },
-      "id": {
-        "path": "/id/works/torecadash/",
-        "locale": "id_ID",
-        "title": "Toreca Dash (トレカダッシュ) - Info undian & pre-order kartu Jepang",
-        "blurb": "Aplikasi iPhone yang mengumpulkan undian, pre-order, dan penjualan kartu koleksi dari toko di Jepang, dengan kalender dan notifikasi. Info toko umumnya berbahasa Jepang."
-      },
-      "es": {
-        "path": "/es/works/torecadash/",
-        "locale": "es_ES",
-        "title": "Toreca Dash (トレカダッシュ): sorteos y reservas de cartas en Japón",
-        "blurb": "App para iPhone con sorteos, reservas y ventas por orden de llegada de cartas de tiendas de Japón, con calendario y avisos. Información de tiendas casi toda en japonés."
-      },
-      "pt-BR": {
-        "path": "/pt/works/torecadash/",
-        "locale": "pt_BR",
-        "title": "Toreca Dash (トレカダッシュ): sorteios e pré-vendas de cards no Japão",
-        "blurb": "App para iPhone que reúne sorteios, pré-vendas e vendas por ordem de chegada de cards de lojas do Japão, com calendário e alertas. Informações das lojas quase todas em japonês."
-      },
-      "fr": {
-        "path": "/fr/works/torecadash/",
-        "locale": "fr_FR",
-        "title": "Toreca Dash (トレカダッシュ) : tirages et précommandes au Japon",
-        "blurb": "Application iPhone qui réunit tirages au sort, précommandes et ventes premier arrivé de cartes des boutiques japonaises, avec calendrier et alertes. Infos surtout en japonais."
-      },
-      "de": {
-        "path": "/de/works/torecadash/",
-        "locale": "de_DE",
-        "title": "Toreca Dash (トレカダッシュ): Karten-Verlosungen & Vorbestellungen Japan",
-        "blurb": "iPhone-App mit Verlosungen, Vorbestellungen und First-come-Verkäufen von Sammelkarten aus Japan, mit Fristenkalender und Alerts. Shop-Infos meist auf Japanisch."
-      },
-      "ru": {
-        "path": "/ru/works/torecadash/",
-        "locale": "ru_RU",
-        "title": "Toreca Dash (トレカダッシュ): розыгрыши и предзаказы карт в Японии",
-        "blurb": "Приложение для iPhone: розыгрыши, предзаказы и продажи «кто успел» на карты из магазинов Японии, календарь сроков и уведомления. Информация магазинов в основном на японском."
-      },
-      "tr": {
-        "path": "/tr/works/torecadash/",
-        "locale": "tr_TR",
-        "title": "Toreca Dash (トレカダッシュ): Japonya kart çekiliş bildirimleri",
-        "blurb": "Japonya'daki mağazaların kart çekiliş, ön sipariş ve ilk gelen alır satışlarını toplayan iPhone uygulaması; takvim ve bildirim sunar. Mağaza bilgileri çoğunlukla Japonca."
-      }
-    }
+    "ja": "/notes/claude-vs-gemini-api/",
+    "en": "/en/notes/claude-vs-gemini-api/",
+    "title": "Claude API vs Gemini API by official numbers: small-model prices, web search, spend limits and deprecation",
+    "date": "2026-10-09",
+    "blurb": "The Claude API and Gemini API compared using only official pages as of October 8, 2026: small-model pricing, web search cost and call limits, spend limits and how they stop, deprecation notice, and what I could not confirm."
+  },
+  {
+    "ja": "/notes/gemini-migration/",
+    "en": "/en/notes/gemini-migration/",
+    "title": "Migrating from the Claude API to the Gemini API (gemini-3.1-flash-lite): 16 call sites into one function",
+    "date": "2026-10-09",
+    "blurb": "I moved an iOS app’s backend from Claude Haiku 4.5 to Gemini 3.1 Flash-Lite after an unplanned charge. How I chose the model by deprecation date, unified 16 calls, added a circuit breaker for web search, and a kill switch."
   }
 ]
