@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cutting AI calls: 45% became 4.5%, batching ran 0 times</title>
+<meta name="description" content="Reducing calls to an AI in a trading-card app: a predicted 45% cut was 4.5%, and batching ran zero times after deploy. What I found by recounting, with numbers.">
+<meta property="og:title" content="Cutting AI calls: 45% became 4.5%, batching ran 0 times">
+<meta property="og:description" content="Reducing calls to an AI in a trading-card app: a predicted 45% cut was 4.5%, and batching ran zero times after deploy. What I found by recounting, with numbers.">
+<meta property="og:type" content="article">
+<meta name="theme-color" content="#fbfaf7">
+<link rel="icon" href="/favicon.ico?v=1697d589" sizes="48x48">
+<link rel="icon" href="/favicon.svg?v=b9d7922f" type="image/svg+xml" sizes="any">
+<link rel="icon" href="/assets/icon/icon-192.png?v=e2566235" type="image/png" sizes="192x192">
+<link rel="apple-touch-icon" href="/assets/icon/icon-180.png?v=84e7f0e6">
+<link rel="manifest" href="/site.webmanifest">
+<script>document.documentElement.className+=" js"</script>
+<link rel="stylesheet" href="/style.css?v=7001672f">
+<meta name="google-adsense-account" content="ca-pub-3863314847163872">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3863314847163872" crossorigin="anonymous"></script>
+<link rel="canonical" href="https://koshinstudio.com/en/notes/torecadash-ai/">
+<meta property="og:url" content="https://koshinstudio.com/en/notes/torecadash-ai/">
+<meta property="og:site_name" content="Koshin Studio">
+<meta property="og:locale" content="en_US">
+<link rel="alternate" hreflang="ja" href="https://koshinstudio.com/notes/torecadash-ai/">
+<link rel="alternate" hreflang="en" href="https://koshinstudio.com/en/notes/torecadash-ai/">
+<link rel="alternate" hreflang="x-default" href="https://koshinstudio.com/en/notes/torecadash-ai/">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="alternate" type="application/rss+xml" title="Koshin Studio — Notes" href="https://koshinstudio.com/feed.xml">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BlogPosting","headline":"“It should shrink” was wrong twice: cutting AI calls and what I measured afterward","url":"https://koshinstudio.com/en/notes/torecadash-ai/","description":"Reducing calls to an AI in a trading-card app: a predicted 45% cut was 4.5%, and batching ran zero times after deploy. What I found by recounting, with numbers.","datePublished":"2026-10-09","dateModified":"2026-10-09","inLanguage":"en","image":"https://koshinstudio.com/assets/og/og_notes_torecadash-ai.jpg","author":{"@id":"https://koshinstudio.com#studio"},"publisher":{"@id":"https://koshinstudio.com#studio"},"mainEntityOfPage":"https://koshinstudio.com/en/notes/torecadash-ai/"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Koshin Studio","item":"https://koshinstudio.com/en/"},{"@type":"ListItem","position":2,"name":"“It should shrink” was wrong twice: cutting AI calls and what I measured afterward","item":"https://koshinstudio.com/en/notes/torecadash-ai/"}]}]}</script>
+<meta property="og:image" content="https://koshinstudio.com/assets/og/og_notes_torecadash-ai.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
+</head>
+<body>
+<canvas id="motes"></canvas>
+
+<header class="site"><div class="wrap">
+  <a class="logo" href="/"><img class="logo-mark" src="/favicon.svg?v=b9d7922f" alt="" width="28" height="28">Koshin Studio</a>
+  <nav><a href="/works/">Works</a><a href="/notes/">Notes</a><a href="/picks/">Picks</a><a href="/calc/">Tools</a><a href="/about/">About</a></nav>
+</div></header>
+
+<main><div class="wrap">
+  <nav class="crumbs" aria-label="You are here"><a href="/en/">Koshin Studio</a><i aria-hidden="true">›</i><span aria-current="page">Cutting AI calls</span></nav>
+  <h1>“It should shrink” was wrong twice: cutting AI calls and what I measured afterward</h1>
+  <div class="rule"></div>
+<!--lang-->
+  <p class="note"><a href="/notes/torecadash-ai/" hreflang="ja" lang="ja">日本語版</a></p>
+<!--/lang-->
+  <p class="lead">Development log of Torecadash / October 2026</p>
+
+  <p>My iOS app Torecadash collects information on reservations, lotteries and first-come sales of trading cards (Pokémon, Yu-Gi-Oh!, One Piece) and notifies users. It uses an AI (Gemini) to decide “which product an article is about.” While trying to reduce calls to that AI, <strong>things I had written down as “it should shrink” were wrong twice</strong>. In order, with the numbers left in my commits:</p>
+  <p class="note">This is a development log of the app.</p>
+
+  <h2 class="rv" id="s1">What I ask the AI</h2>
+  <p>The article title (for example “30th CELEBRATION Premium Deck Set Espeon”) is matched against a list of recent product candidates (the latest 60), and <strong>the AI answers which product it is</strong>. One call is about 3,083 tokens, of which about 1,800 were the same fixed instruction text every time.</p>
+
+  <h2 class="rv" id="s2">First: if the title is exactly a product name, no need to ask</h2>
+  <p>If a title matches a known product name exactly, there is no need to ask the AI. When I added this “short circuit,” <strong>43% of X monitoring</strong> matched in real data. There were 0 disagreements (the short circuit’s answer differing from the AI’s). So I recorded that it should <strong>cut about 45%</strong>.</p>
+  <p>But 90 minutes after deployment, the short circuit had <strong>not fired even once</strong>. Recounting, it looked like this:</p>
+  <div class="scroll rv"><table>
+    <tr><th>Source</th><th class="n">Could short-circuit</th><th class="n">Already free before</th><th class="n">Newly saved</th></tr>
+    <tr><td>X monitoring</td><td class="n">813</td><td class="n">768</td><td class="n">45 (2%)</td></tr>
+    <tr><td>Others</td><td class="n">419</td><td class="n">188</td><td class="n">231 (32%)</td></tr>
+  </table></div>
+  <p>Before this step, there was <strong>an already free path</strong> that checks against the official catalog. Most articles that could be short-circuited were already settled there. Adding up what is newly saved, it is <strong>about 39 calls a day, about 4.5% of the total</strong>. Not 45%, but 4.5%.</p>
+  <blockquote>The share a rule applies to and the calls it actually removes are different things.</blockquote>
+  <p>If there is a free path before it, you have to count the difference. That is what the lessons field in my commit says. The logic itself was correct and safe, so I kept it. But as an AI reduction, it was small.</p>
+
+  <h2 class="rv" id="s3">Second: ask in batches</h2>
+  <p>The next main idea was to <strong>combine several articles into one call</strong>, because the fixed instruction text is then paid only once. Articles of the same genre share “the latest 60,” so the merged candidate list barely grows.</p>
+  <p>In the design I took care of two things.</p>
+  <ul>
+    <li><strong>Do not add waiting time.</strong> In measurement, a short window of a few hundred milliseconds could not batch anything (only 12 times in 24 hours did articles arrive in the same second). But waiting a few minutes would slow X monitoring’s rounds by 5 times. So I chose to “send the moment every still-running article has come to wait.” The safety cap is 20 seconds.</li>
+    <li><strong>Do not lose accuracy.</strong> When batched, the candidate list becomes the union for everyone, so an article can see other articles’ candidates. So the answer is returned as a real product ID, and I always verify that it is among that article’s own candidates. If not, I do not accept it. For an article with a missing reply, I ask again for that one alone.</li>
+  </ul>
+  <p>I measured the effect by reconstructing candidate lists from the real articles of the last two days (characters sent).</p>
+  <div class="scroll rv"><table>
+    <tr><th>Batch size</th><th class="n">One by one</th><th class="n">Batched</th><th class="n">Reduction</th></tr>
+    <tr><td>2</td><td class="n">21,762</td><td class="n">13,427</td><td class="n">−38%</td></tr>
+    <tr><td>3</td><td class="n">32,673</td><td class="n">14,964</td><td class="n">−54%</td></tr>
+    <tr><td>4</td><td class="n">43,571</td><td class="n">16,192</td><td class="n">−63%</td></tr>
+    <tr><td>6</td><td class="n">65,000</td><td class="n">17,729</td><td class="n">−73%</td></tr>
+  </table></div>
+
+  <h2 class="rv" id="s4">Third: deployed, and it never batched once</h2>
+  <p>Six hours after deployment, there were 47 product-matching calls and <strong>0 batches</strong>. Although 2 to 7 calls came in the same minute, each was asked one at a time.</p>
+  <p>The cause was the “send condition.” I had checked “number waiting ≥ number of unfinished jobs (pending),” but <strong>jobs that had come to wait were also counted in pending</strong>. X monitoring runs 32 accounts at once. If 31 had already finished, pending was 1. The moment the last one came to wait, the condition held and <strong>it was sent immediately as a single item</strong>.</p>
+  <p>The fix was to check “are there zero jobs that have not even come to wait yet.” When the number completely finished plus the number now waiting reaches the total, send. I also shortened the safety cap from 20 seconds to 6 seconds. If only one item comes, waiting 20 seconds every time would be longer than one X monitoring run (17.8 seconds measured) and delay the rounds.</p>
+  <p>During this check, the first short circuit was also reviewed. <strong>In 6 hours, 28 of 47 calls (60%)</strong> were handled without calling the AI. The short circuit was working correctly.</p>
+
+  <h2 class="rv" id="s5">What I learned</h2>
+  <ul>
+    <li><strong>Do not write the “share it applies to” as the amount saved.</strong> If there is a free path before it, only the difference is saved.</li>
+    <li><strong>Deploying does not mean it ran.</strong> “0 batches” was found because I recounted. If I had decided in advance that a log should say “batched,” I would have noticed sooner.</li>
+    <li>The three numbers (4.5%, −38 to 73%, 60%) are all <strong>not what I first estimated</strong>. They are numbers re-measured on real data after deployment.</li>
+  </ul>
+  <p class="note">The numbers in this article come from my commit record (September 4 and 5, 2026). I do not write amounts of money.</p>
+
+  <p class="note">This is the English version of <a href="/notes/torecadash-ai/" hreflang="ja" lang="ja">the original Japanese article</a>.</p>
+
+  <div class="rule" style="margin:40px 0 22px"></div>
+  <p class="eyebrow">More in English</p>
+  <ul class="plain">
+    <li><a href="/en/">All English pages</a></li>
+  </ul>
+</div>
+</main>
+
+<footer class="site"><div class="wrap"></div></footer>
+<script src="/motion.js?v=1e7447ec" defer></script>
+</body>
+</html>

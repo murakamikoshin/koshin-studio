@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>A fair 10-second stopwatch ranking: decimals and ties</title>
+<meta name="description" content="Why I truncate to three decimals so coarse clocks get no advantage, how ties (a 1/333 chance) are broken, and how I counted KV writes on the free tier.">
+<meta property="og:title" content="A fair 10-second stopwatch ranking: decimals and ties">
+<meta property="og:description" content="Why I truncate to three decimals so coarse clocks get no advantage, how ties (a 1/333 chance) are broken, and how I counted KV writes on the free tier.">
+<meta property="og:type" content="article">
+<meta name="theme-color" content="#fbfaf7">
+<link rel="icon" href="/favicon.ico?v=1697d589" sizes="48x48">
+<link rel="icon" href="/favicon.svg?v=b9d7922f" type="image/svg+xml" sizes="any">
+<link rel="icon" href="/assets/icon/icon-192.png?v=e2566235" type="image/png" sizes="192x192">
+<link rel="apple-touch-icon" href="/assets/icon/icon-180.png?v=84e7f0e6">
+<link rel="manifest" href="/site.webmanifest">
+<script>document.documentElement.className+=" js"</script>
+<link rel="stylesheet" href="/style.css?v=7001672f">
+<meta name="google-adsense-account" content="ca-pub-3863314847163872">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3863314847163872" crossorigin="anonymous"></script>
+<link rel="canonical" href="https://koshinstudio.com/en/notes/stopwatch-rank/">
+<meta property="og:url" content="https://koshinstudio.com/en/notes/stopwatch-rank/">
+<meta property="og:site_name" content="Koshin Studio">
+<meta property="og:locale" content="en_US">
+<link rel="alternate" hreflang="ja" href="https://koshinstudio.com/notes/stopwatch-rank/">
+<link rel="alternate" hreflang="en" href="https://koshinstudio.com/en/notes/stopwatch-rank/">
+<link rel="alternate" hreflang="x-default" href="https://koshinstudio.com/en/notes/stopwatch-rank/">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="alternate" type="application/rss+xml" title="Koshin Studio — Notes" href="https://koshinstudio.com/feed.xml">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BlogPosting","headline":"Making a 10-second stopwatch ranking fair: 3 decimals, ties and write counts","url":"https://koshinstudio.com/en/notes/stopwatch-rank/","description":"Why I truncate to three decimals so coarse clocks get no advantage, how ties (a 1/333 chance) are broken, and how I counted KV writes on the free tier.","datePublished":"2026-10-09","dateModified":"2026-10-09","inLanguage":"en","image":"https://koshinstudio.com/assets/og/og_notes_stopwatch-rank.jpg","author":{"@id":"https://koshinstudio.com#studio"},"publisher":{"@id":"https://koshinstudio.com#studio"},"mainEntityOfPage":"https://koshinstudio.com/en/notes/stopwatch-rank/"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Koshin Studio","item":"https://koshinstudio.com/en/"},{"@type":"ListItem","position":2,"name":"Making a 10-second stopwatch ranking fair: 3 decimals, ties and write counts","item":"https://koshinstudio.com/en/notes/stopwatch-rank/"}]}]}</script>
+<meta property="og:image" content="https://koshinstudio.com/assets/og/og_notes_stopwatch-rank.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
+</head>
+<body>
+<canvas id="motes"></canvas>
+
+<header class="site"><div class="wrap">
+  <a class="logo" href="/"><img class="logo-mark" src="/favicon.svg?v=b9d7922f" alt="" width="28" height="28">Koshin Studio</a>
+  <nav><a href="/works/">Works</a><a href="/notes/">Notes</a><a href="/picks/">Picks</a><a href="/calc/">Tools</a><a href="/about/">About</a></nav>
+</div></header>
+
+<main><div class="wrap">
+  <nav class="crumbs" aria-label="You are here"><a href="/en/">Koshin Studio</a><i aria-hidden="true">›</i><span aria-current="page">Fair stopwatch ranking</span></nav>
+  <h1>Making a 10-second stopwatch ranking fair: 3 decimals, ties and write counts</h1>
+  <div class="rule"></div>
+<!--lang-->
+  <p class="note"><a href="/notes/stopwatch-rank/" hreflang="ja" lang="ja">日本語版</a></p>
+<!--/lang-->
+  <p class="lead">Development log of the 10-second stopwatch / October 2026</p>
+
+  <p><a href="/en/works/" hreflang="en" lang="en">Stop at exactly 10 seconds!</a> is a game where you count ten seconds in your head and stop. It is three rounds and the smaller your error, the better. When I added a ranking to it, I had to decide “what is fair” in three places. This is written from the README and code comments in the repository.</p>
+
+  <h2 class="rv" id="s1">Display down to three decimals</h2>
+  <p>Error is measured with the browser’s <code>performance.now()</code>. According to the README, this clock is deliberately made less precise as a security measure (Spectre). Chrome is in 5-microsecond steps, Safari and Firefox in 1 millisecond.</p>
+  <p>What would happen if error were shown to 6 decimal places? A device with a coarser clock more easily ends in <code>000</code> and <strong>gets an advantage</strong>. The README’s guess is that iPhones would take the top ranks. So I decided to <strong>cut to 3 decimals and align all devices</strong>. For the start of measurement, I use <code>event.timeStamp</code> of <code>pointerdown</code> rather than <code>click</code>, because <code>click</code> adds extra delay.</p>
+
+  <h2 class="rv" id="s2">Ties happen more than you think</h2>
+  <p>With 3 decimals, an exact 0.000 comes up with probability 1/1000 per attempt. The chance that any one of three attempts is 0.000 is about <strong>1/333</strong>. If you build a “best of three” board, <strong>ties at 0.000 will pile up</strong>.</p>
+  <p>So for a tie, <strong>the one with the smaller total error in the other two attempts ranks higher</strong>. If that is equal too, whoever submitted first. Someone who hit 0.000 and also did well on the other two ranks above, so they can be told apart from someone with one lucky attempt.</p>
+  <p>The “total” and “average” rankings have exactly the same order (it is just division by 3), so they are one board. Separately I placed a “best single attempt” board. The idea is that the average is skill and the best single is luck.</p>
+
+  <h2 class="rv" id="s3">Counting writes</h2>
+  <p>The ranking is built on Cloudflare Workers and KV (a key-value store). According to the code comments, KV writes are 1,000 a day on the free tier. To stay within that, I decided the following.</p>
+  <ul>
+    <li>The board for each mode is stored under <strong>one key</strong>. One submission writes at most twice (today’s and all-time).</li>
+    <li>Submissions that do not make the ranking, and submissions with the same name that are worse than before, are <strong>not written at all</strong>.</li>
+    <li>Only one row is kept per name. One person cannot fill the board.</li>
+  </ul>
+  <p>Also, since scores are reported by the client, cheating cannot be prevented. The README says so. So I operate on the assumption that <strong>it is reset every day</strong>. Days are cut in Japan time, and today’s board disappears in 3 days.</p>
+
+  <h2 class="rv" id="s4">What I fixed around the launch</h2>
+  <ul>
+    <li><strong>The range of accepted error.</strong> I accept up to the slowest result the screen can show (99.999 seconds in 10-second mode). Even terrible results are accepted, since they will not stay on the board anyway.</li>
+    <li><strong>Do not cache the read before a write.</strong> If KV reads have a short cache, a new value is written over a stale one and <strong>submissions that came in between disappear</strong>. Only the read before a write has no cache. View-only reads stay cached.</li>
+    <li><strong>Retry when it could not connect.</strong> At first, if the game could not reach the ranking when it opened, it did not show the ranking box and never tried again. Even if the ranking backend came up while playing, there was no way back. When three attempts are done and the box is still hidden, it now reads once more.</li>
+    <li><strong>Stay quiet.</strong> Until it connects, the ranking box is not shown at all and there is no apology message. I decided that being silent is better than showing an empty box or red text.</li>
+  </ul>
+
+  <h2 class="rv" id="s5">A stumble on launch day</h2>
+  <p>When I first deployed to Cloudflare Pages, I did not pass <code>--branch</code>. The name of the working branch I happened to be on was <strong>registered as the production branch</strong> of Pages. After that, deploying with <code>--branch main</code> only went to a preview, and the public URL did not change. <strong>I did not notice for an hour.</strong></p>
+  <p>I fixed the production branch to main in the dashboard. One more thing I had confused: the branch name shown on the “Production” row of the deployment list is <strong>the name at the time that deployment was made</strong> and is not rewritten when you change the setting. To see the setting, look at the “Production branch” column in the project list.</p>
+
+  <h2 class="rv" id="s6">What I learned</h2>
+  <blockquote>Fairness is made of digits, ties and write counts.</blockquote>
+  <p>None of them looks like what makes a game fun. But <strong>cutting to three decimals</strong> and <strong>deciding tie-breaking in advance</strong> directly affect how convincing the ranking feels to players.</p>
+  <p class="note">This article is written from the repository’s README, code comments and the commit record (September 8 to 12, 2026). The clock precision per browser is as stated in the README.</p>
+
+  <p class="note">This is the English version of <a href="/notes/stopwatch-rank/" hreflang="ja" lang="ja">the original Japanese article</a>.</p>
+
+  <div class="rule" style="margin:40px 0 22px"></div>
+  <p class="eyebrow">More in English</p>
+  <ul class="plain">
+    <li><a href="/en/">All English pages</a></li>
+  </ul>
+</div>
+</main>
+
+<footer class="site"><div class="wrap"></div></footer>
+<script src="/motion.js?v=1e7447ec" defer></script>
+</body>
+</html>

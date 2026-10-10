@@ -94,5 +94,17 @@
  "bulk-accident": {
   "title": "A bulk update hit all articles: count, then write",
   "desc": "A bulk job hit every article and wrongly restored 18 items. How I reverted them from status history and proved new tests work by breaking rules one at a time."
+ },
+ "dup-zero": {
+  "title": "I counted zero duplicates; the audit found 112 pairs",
+  "desc": "A nightly merge job timed out partway through the first genre, so later genres were never reached. My count of zero saw only that genre. Fixed with a rotating budget."
+ },
+ "torecadash-ai": {
+  "title": "Cutting AI calls: 45% became 4.5%, batching ran 0 times",
+  "desc": "Reducing calls to an AI in a trading-card app: a predicted 45% cut was 4.5%, and batching ran zero times after deploy. What I found by recounting, with numbers."
+ },
+ "stopwatch-rank": {
+  "title": "A fair 10-second stopwatch ranking: decimals and ties",
+  "desc": "Why I truncate to three decimals so coarse clocks get no advantage, how ties (a 1/333 chance) are broken, and how I counted KV writes on the free tier."
  }
 }

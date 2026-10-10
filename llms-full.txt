@@ -818,6 +818,8 @@ URL: https://koshinstudio.com/notes/dup-zero/
 
 # 「重複は実質ゼロ」と数えたのに、監査は112組を出していた
 
+  English version (https://koshinstudio.com/en/notes/dup-zero/)
+
   トレカダッシュ 開発の記録 ／ 2026年10月
 
   iOS アプリ「トレカダッシュ」には、同じ商品が複数の商品として登録されてしまう「重複」を、毎晩、統合する処理があります。ある日、自分で数えて、「重複は実質ゼロ」と記録しました。ところが、リポジトリの監査は、112 組を出していました。自分の測り方が、間違っていたのです。コミットの記録で、経緯を書きます。
@@ -1601,6 +1603,8 @@ URL: https://koshinstudio.com/notes/stopwatch-rank/
 
 # 10秒ピッタリのランキングを、公平にする：小数3桁・同着・書き込み回数
 
+  English version (https://koshinstudio.com/en/notes/stopwatch-rank/)
+
   10秒ピッタリ 開発の記録 ／ 2026年10月
 
   10秒ピッタリで止めろ！ (https://koshinstudio.com/works/stopwatch10/)は、頭の中で10秒を数えて止めるだけのゲームです。3回勝負で、誤差が小さいほど強い。これにランキングをつけるとき、「公平とは何か」を、三つの場所で決める必要がありました。リポジトリの README とコードの注記に残っている理由で書きます。
@@ -2057,6 +2061,8 @@ URL: https://koshinstudio.com/notes/sushi-measure/
 URL: https://koshinstudio.com/notes/torecadash-ai/
 
 # 「減るはず」が、二度外れた：AIへの問い合わせを削る話
+
+  English version (https://koshinstudio.com/en/notes/torecadash-ai/)
 
   トレカダッシュ 開発の記録 ／ 2026年10月
 
@@ -4967,6 +4973,227 @@ URL: https://koshinstudio.com/en/notes/logo-pop/
 
 ---
 
+URL: https://koshinstudio.com/en/notes/dup-zero/
+
+# I counted “duplicates are practically zero,” but the audit reported 112 pairs
+
+  日本語版 (https://koshinstudio.com/notes/dup-zero/)
+
+  Development log of Torecadash / October 2026
+
+  My iOS app Torecadash has a job that merges “duplicates,” where one product is registered as several products, every night. One day I counted by myself and recorded “duplicates are practically zero.” But the repository audit reported 112 pairs. My way of measuring was wrong. This is the story from my commit record.
+
+  This is a development log of the app.
+
+## I counted zero, and 112 pairs appeared
+
+  Looking at the 112 pairs, for example one trading-card booster pack was registered split into 7 entries, even though the merge job was supposed to run every night.
+
+## Cause: it timed out partway through, every night
+
+  Running the merge over all genres takes about 15 minutes. But the time budget I had given the nightly scheduled run was 480 seconds (8 minutes). The order always starts from the same genre (Pokémon). So every night it timed out in the middle of Pokémon, and the later genres were never reached.
+
+  My count was “zero” because only the range I was looking at (the first genre) was clean.
+
+## The fix
+
+- Rotate. Start from the genre after where the last run stopped, and stop when the time budget (6 minutes) is used up. The next night continues from where it stopped.
+
+- First, run it to completion by hand. Running all genres to the end by hand took duplicates from 112 pairs to 0 and products from 2,753 to 2,570.
+
+## What I already knew: one pass is not enough
+
+  Two days earlier (September 5), I had learned something else about merging. When A is merged into B, B’s name can become the same as another C. Then one pass is not enough. In real data:
+
+    Pass | Merged | Result
+
+    1st | 138 | 53 new same-name pairs appeared
+
+    2nd | 54 | 0 same-name duplicates
+
+  Products went from 2,935 to 2,713. So the daily slot now repeats until nothing is merged (up to 3 times). This “timeout” problem sat even before that repetition.
+
+## Three more things the same day
+
+- Six open lotteries had disappeared because of another product’s list price. A 7,200 yen lottery (the official 360 yen × 20 packs) had been compared with another product’s list price of 27,500 yen left on the article and rejected by price. I added a condition: “fix only when it can be proven.” Across all real data, 10 matched the condition and all were sales at a normal price. I restored 11 to visible.
+
+- False alarms in matching. Of 17 “article exists but hidden,” 9 had a replacement article visible under a different spelling of the same shop (like two different kanji spellings of the same store name). If the replacement is visible, it now counts as covered, which moved coverage from 87% to 90% and hidden items from 17 to 4.
+
+- The audit itself had stopped. The reader part for audits misread a regular expression right after => as a division, and four audits were failing with ReferenceError. I changed it so that names it could not cut out are reported with a reason instead of being skipped silently.
+
+## What I learned
+
+> When you count “zero,” first doubt what you counted.
+
+- The range you looked at is not necessarily everything. Only the first genre was processed every night, so counting only the first genre looks clean.
+
+- For time-limited jobs, check whether it finished. Running and reaching the end are different.
+
+- The tool that counts also breaks. When an audit has stopped, the result looks like “0 items.” You need a way to notice that it stopped.
+
+  This article is written from my commit record (September 5 and 7, 2026).
+
+  This is the English version of the original Japanese article (https://koshinstudio.com/notes/dup-zero/).
+
+  More in English
+
+- All English pages (https://koshinstudio.com/en/)
+
+
+---
+
+URL: https://koshinstudio.com/en/notes/torecadash-ai/
+
+# “It should shrink” was wrong twice: cutting AI calls and what I measured afterward
+
+  日本語版 (https://koshinstudio.com/notes/torecadash-ai/)
+
+  Development log of Torecadash / October 2026
+
+  My iOS app Torecadash collects information on reservations, lotteries and first-come sales of trading cards (Pokémon, Yu-Gi-Oh!, One Piece) and notifies users. It uses an AI (Gemini) to decide “which product an article is about.” While trying to reduce calls to that AI, things I had written down as “it should shrink” were wrong twice. In order, with the numbers left in my commits:
+
+  This is a development log of the app.
+
+## What I ask the AI
+
+  The article title (for example “30th CELEBRATION Premium Deck Set Espeon”) is matched against a list of recent product candidates (the latest 60), and the AI answers which product it is. One call is about 3,083 tokens, of which about 1,800 were the same fixed instruction text every time.
+
+## First: if the title is exactly a product name, no need to ask
+
+  If a title matches a known product name exactly, there is no need to ask the AI. When I added this “short circuit,” 43% of X monitoring matched in real data. There were 0 disagreements (the short circuit’s answer differing from the AI’s). So I recorded that it should cut about 45%.
+
+  But 90 minutes after deployment, the short circuit had not fired even once. Recounting, it looked like this:
+
+    Source | Could short-circuit | Already free before | Newly saved
+
+    X monitoring | 813 | 768 | 45 (2%)
+
+    Others | 419 | 188 | 231 (32%)
+
+  Before this step, there was an already free path that checks against the official catalog. Most articles that could be short-circuited were already settled there. Adding up what is newly saved, it is about 39 calls a day, about 4.5% of the total. Not 45%, but 4.5%.
+
+> The share a rule applies to and the calls it actually removes are different things.
+  If there is a free path before it, you have to count the difference. That is what the lessons field in my commit says. The logic itself was correct and safe, so I kept it. But as an AI reduction, it was small.
+
+## Second: ask in batches
+
+  The next main idea was to combine several articles into one call, because the fixed instruction text is then paid only once. Articles of the same genre share “the latest 60,” so the merged candidate list barely grows.
+
+  In the design I took care of two things.
+
+- Do not add waiting time. In measurement, a short window of a few hundred milliseconds could not batch anything (only 12 times in 24 hours did articles arrive in the same second). But waiting a few minutes would slow X monitoring’s rounds by 5 times. So I chose to “send the moment every still-running article has come to wait.” The safety cap is 20 seconds.
+
+- Do not lose accuracy. When batched, the candidate list becomes the union for everyone, so an article can see other articles’ candidates. So the answer is returned as a real product ID, and I always verify that it is among that article’s own candidates. If not, I do not accept it. For an article with a missing reply, I ask again for that one alone.
+
+  I measured the effect by reconstructing candidate lists from the real articles of the last two days (characters sent).
+
+    Batch size | One by one | Batched | Reduction
+
+    2 | 21,762 | 13,427 | −38%
+
+    3 | 32,673 | 14,964 | −54%
+
+    4 | 43,571 | 16,192 | −63%
+
+    6 | 65,000 | 17,729 | −73%
+
+## Third: deployed, and it never batched once
+
+  Six hours after deployment, there were 47 product-matching calls and 0 batches. Although 2 to 7 calls came in the same minute, each was asked one at a time.
+
+  The cause was the “send condition.” I had checked “number waiting ≥ number of unfinished jobs (pending),” but jobs that had come to wait were also counted in pending. X monitoring runs 32 accounts at once. If 31 had already finished, pending was 1. The moment the last one came to wait, the condition held and it was sent immediately as a single item.
+
+  The fix was to check “are there zero jobs that have not even come to wait yet.” When the number completely finished plus the number now waiting reaches the total, send. I also shortened the safety cap from 20 seconds to 6 seconds. If only one item comes, waiting 20 seconds every time would be longer than one X monitoring run (17.8 seconds measured) and delay the rounds.
+
+  During this check, the first short circuit was also reviewed. In 6 hours, 28 of 47 calls (60%) were handled without calling the AI. The short circuit was working correctly.
+
+## What I learned
+
+- Do not write the “share it applies to” as the amount saved. If there is a free path before it, only the difference is saved.
+
+- Deploying does not mean it ran. “0 batches” was found because I recounted. If I had decided in advance that a log should say “batched,” I would have noticed sooner.
+
+- The three numbers (4.5%, −38 to 73%, 60%) are all not what I first estimated. They are numbers re-measured on real data after deployment.
+
+  The numbers in this article come from my commit record (September 4 and 5, 2026). I do not write amounts of money.
+
+  This is the English version of the original Japanese article (https://koshinstudio.com/notes/torecadash-ai/).
+
+  More in English
+
+- All English pages (https://koshinstudio.com/en/)
+
+
+---
+
+URL: https://koshinstudio.com/en/notes/stopwatch-rank/
+
+# Making a 10-second stopwatch ranking fair: 3 decimals, ties and write counts
+
+  日本語版 (https://koshinstudio.com/notes/stopwatch-rank/)
+
+  Development log of the 10-second stopwatch / October 2026
+
+  Stop at exactly 10 seconds! (https://koshinstudio.com/en/works/) is a game where you count ten seconds in your head and stop. It is three rounds and the smaller your error, the better. When I added a ranking to it, I had to decide “what is fair” in three places. This is written from the README and code comments in the repository.
+
+## Display down to three decimals
+
+  Error is measured with the browser’s performance.now(). According to the README, this clock is deliberately made less precise as a security measure (Spectre). Chrome is in 5-microsecond steps, Safari and Firefox in 1 millisecond.
+
+  What would happen if error were shown to 6 decimal places? A device with a coarser clock more easily ends in 000 and gets an advantage. The README’s guess is that iPhones would take the top ranks. So I decided to cut to 3 decimals and align all devices. For the start of measurement, I use event.timeStamp of pointerdown rather than click, because click adds extra delay.
+
+## Ties happen more than you think
+
+  With 3 decimals, an exact 0.000 comes up with probability 1/1000 per attempt. The chance that any one of three attempts is 0.000 is about 1/333. If you build a “best of three” board, ties at 0.000 will pile up.
+
+  So for a tie, the one with the smaller total error in the other two attempts ranks higher. If that is equal too, whoever submitted first. Someone who hit 0.000 and also did well on the other two ranks above, so they can be told apart from someone with one lucky attempt.
+
+  The “total” and “average” rankings have exactly the same order (it is just division by 3), so they are one board. Separately I placed a “best single attempt” board. The idea is that the average is skill and the best single is luck.
+
+## Counting writes
+
+  The ranking is built on Cloudflare Workers and KV (a key-value store). According to the code comments, KV writes are 1,000 a day on the free tier. To stay within that, I decided the following.
+
+- The board for each mode is stored under one key. One submission writes at most twice (today’s and all-time).
+
+- Submissions that do not make the ranking, and submissions with the same name that are worse than before, are not written at all.
+
+- Only one row is kept per name. One person cannot fill the board.
+
+  Also, since scores are reported by the client, cheating cannot be prevented. The README says so. So I operate on the assumption that it is reset every day. Days are cut in Japan time, and today’s board disappears in 3 days.
+
+## What I fixed around the launch
+
+- The range of accepted error. I accept up to the slowest result the screen can show (99.999 seconds in 10-second mode). Even terrible results are accepted, since they will not stay on the board anyway.
+
+- Do not cache the read before a write. If KV reads have a short cache, a new value is written over a stale one and submissions that came in between disappear. Only the read before a write has no cache. View-only reads stay cached.
+
+- Retry when it could not connect. At first, if the game could not reach the ranking when it opened, it did not show the ranking box and never tried again. Even if the ranking backend came up while playing, there was no way back. When three attempts are done and the box is still hidden, it now reads once more.
+
+- Stay quiet. Until it connects, the ranking box is not shown at all and there is no apology message. I decided that being silent is better than showing an empty box or red text.
+
+## A stumble on launch day
+
+  When I first deployed to Cloudflare Pages, I did not pass --branch. The name of the working branch I happened to be on was registered as the production branch of Pages. After that, deploying with --branch main only went to a preview, and the public URL did not change. I did not notice for an hour.
+
+  I fixed the production branch to main in the dashboard. One more thing I had confused: the branch name shown on the “Production” row of the deployment list is the name at the time that deployment was made and is not rewritten when you change the setting. To see the setting, look at the “Production branch” column in the project list.
+
+## What I learned
+
+> Fairness is made of digits, ties and write counts.
+  None of them looks like what makes a game fun. But cutting to three decimals and deciding tie-breaking in advance directly affect how convincing the ranking feels to players.
+
+  This article is written from the repository’s README, code comments and the commit record (September 8 to 12, 2026). The clock precision per browser is as stated in the README.
+
+  This is the English version of the original Japanese article (https://koshinstudio.com/notes/stopwatch-rank/).
+
+  More in English
+
+- All English pages (https://koshinstudio.com/en/)
+
+
+---
+
 URL: https://koshinstudio.com/en/notes/crazygames/
 
 # Rejected by CrazyGames with no reason given: I recorded the game and found four problems
@@ -6472,6 +6699,12 @@ URL: https://koshinstudio.com/en/
 - I re-measured a “nothing can be done” assumption and scraping cost dropped to one eighth (https://koshinstudio.com/en/notes/scrape-cost/)
 
 - Four things that stopped my iOS app before App Review: iPad screenshots, ITMS-91064, account deletion, reporting posts (https://koshinstudio.com/en/notes/torecadash-review/)
+
+- I counted “duplicates are practically zero,” but the audit reported 112 pairs (https://koshinstudio.com/en/notes/dup-zero/)
+
+- Making a 10-second stopwatch ranking fair: 3 decimals, ties and write counts (https://koshinstudio.com/en/notes/stopwatch-rank/)
+
+- “It should shrink” was wrong twice: cutting AI calls and what I measured afterward (https://koshinstudio.com/en/notes/torecadash-ai/)
 
 ## Languages
 

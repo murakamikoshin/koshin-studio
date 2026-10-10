@@ -160,6 +160,27 @@
     "blurb": "Burst particles appeared in the wrong place on high-DPI screens. A canvas with only inset:0 keeps its pixel size, so it was 2x larger in CSS on Retina."
   },
   {
+    "ja": "/notes/dup-zero/",
+    "en": "/en/notes/dup-zero/",
+    "title": "I counted “duplicates are practically zero,” but the audit reported 112 pairs",
+    "date": "2026-10-09",
+    "blurb": "A nightly merge job timed out partway through the first genre, so later genres were never reached. My count of zero saw only that genre. Fixed with a rotating budget."
+  },
+  {
+    "ja": "/notes/torecadash-ai/",
+    "en": "/en/notes/torecadash-ai/",
+    "title": "“It should shrink” was wrong twice: cutting AI calls and what I measured afterward",
+    "date": "2026-10-09",
+    "blurb": "Reducing calls to an AI in a trading-card app: a predicted 45% cut was 4.5%, and batching ran zero times after deploy. What I found by recounting, with numbers."
+  },
+  {
+    "ja": "/notes/stopwatch-rank/",
+    "en": "/en/notes/stopwatch-rank/",
+    "title": "Making a 10-second stopwatch ranking fair: 3 decimals, ties and write counts",
+    "date": "2026-10-09",
+    "blurb": "Why I truncate to three decimals so coarse clocks get no advantage, how ties (a 1/333 chance) are broken, and how I counted KV writes on the free tier."
+  },
+  {
     "ja": "/notes/crazygames/",
     "en": "/en/notes/crazygames/",
     "title": "Rejected by CrazyGames with no reason given: I recorded the game and found four problems",
