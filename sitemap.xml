@@ -56,8 +56,8 @@
   <url><loc>https://koshinstudio.com/en/privacy/</loc><lastmod>2026-10-10</lastmod><priority>0.5</priority></url>
   <url><loc>https://koshinstudio.com/en/works/negaeri-shogi/</loc><lastmod>2026-10-09</lastmod><priority>0.5</priority></url>
   <url><loc>https://koshinstudio.com/en/works/shindananime/</loc><lastmod>2026-10-09</lastmod><priority>0.5</priority></url>
-  <url><loc>https://koshinstudio.com/en/works/stopwatch10/</loc><priority>0.5</priority></url>
-  <url><loc>https://koshinstudio.com/en/works/sushitsumu/</loc><priority>0.5</priority></url>
+  <url><loc>https://koshinstudio.com/en/works/stopwatch10/</loc><lastmod>2026-10-10</lastmod><priority>0.5</priority></url>
+  <url><loc>https://koshinstudio.com/en/works/sushitsumu/</loc><lastmod>2026-10-10</lastmod><priority>0.5</priority></url>
   <url><loc>https://koshinstudio.com/en/works/torecadash/</loc><lastmod>2026-10-10</lastmod><priority>0.5</priority></url>
   <url><loc>https://koshinstudio.com/es/calc/gacha-rate/</loc><lastmod>2026-10-09</lastmod><priority>0.5</priority></url>
   <url><loc>https://koshinstudio.com/es/calc/gacha/</loc><lastmod>2026-10-09</lastmod><priority>0.5</priority></url>
@@ -135,9 +135,9 @@
   <url><loc>https://koshinstudio.com/works/</loc><lastmod>2026-10-10</lastmod><priority>0.9</priority></url>
   <url><loc>https://koshinstudio.com/works/negaeri-shogi/</loc><lastmod>2026-10-09</lastmod><priority>0.8</priority></url>
   <url><loc>https://koshinstudio.com/works/shindananime/</loc><lastmod>2026-10-09</lastmod><priority>0.8</priority></url>
-  <url><loc>https://koshinstudio.com/works/stopwatch10/</loc><lastmod>2026-10-09</lastmod><priority>0.8</priority></url>
+  <url><loc>https://koshinstudio.com/works/stopwatch10/</loc><lastmod>2026-10-10</lastmod><priority>0.8</priority></url>
   <url><loc>https://koshinstudio.com/works/sushitsumu/guide</loc><lastmod>2026-10-09</lastmod><priority>0.5</priority></url>
-  <url><loc>https://koshinstudio.com/works/sushitsumu/</loc><lastmod>2026-10-09</lastmod><priority>0.8</priority></url>
+  <url><loc>https://koshinstudio.com/works/sushitsumu/</loc><lastmod>2026-10-10</lastmod><priority>0.8</priority></url>
   <url><loc>https://koshinstudio.com/works/torecadash/</loc><lastmod>2026-10-10</lastmod><priority>0.8</priority></url>
   <url><loc>https://koshinstudio.com/zh-hant/works/torecadash/</loc><lastmod>2026-10-10</lastmod><priority>0.5</priority></url>
   <url><loc>https://koshinstudio.com/zh/calc/gacha-rate/</loc><lastmod>2026-10-09</lastmod><priority>0.5</priority></url>

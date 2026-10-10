@@ -7835,11 +7835,11 @@ URL: https://koshinstudio.com/en/
 
 ## Play
 
-- Sushi Stack (https://koshinstudio.com/play/sushitsumu/) — A falling-block puzzle: collide matching sushi toppings to grow them, all the way up to the golden sushi tub. Available in 14 languages, opens in your browser language. About the game (https://koshinstudio.com/en/works/sushitsumu/).
+- Sushi Stack (https://koshinstudio.com/play/sushitsumu/) — A falling-block puzzle: collide matching sushi toppings to grow them, all the way up to the golden sushi tub. Available in 14 languages, opens in your browser language. (About, English) (https://koshinstudio.com/en/works/sushitsumu/)
 
 - Negaeri Shogi (https://koshinstudio.com/play/negaeri-shogi/) — A 6×6 board game. Pieces you sandwich defect to your side and get promoted, and chains flip many at once. Local, vs AI, and online with ratings. The game is in English and Japanese. (rules, English) (https://koshinstudio.com/en/works/negaeri-shogi/)
 
-- Stop at 10 seconds (https://koshinstudio.com/play/stopwatch10/) — Count ten seconds in your head and stop. Best of three; the smaller the error, the stronger you are. No setup, no sign-up. The interface is in Japanese. About the game (https://koshinstudio.com/en/works/stopwatch10/).
+- Stop at 10 seconds (https://koshinstudio.com/play/stopwatch10/) — Count ten seconds in your head and stop. Best of three; the smaller the error, the stronger you are. No setup, no sign-up. The interface is in Japanese. (About, English) (https://koshinstudio.com/en/works/stopwatch10/)
 
 - Anime Type Quiz (https://koshinstudio.com/app/shindananime/en/) — 12 questions, 6 axes: your anime type and the one anime that fits you right now. Free, nothing is sent anywhere. In English.
 
@@ -7853,81 +7853,81 @@ URL: https://koshinstudio.com/en/
 
   Measured results and fixes, written up with numbers. These articles are in English and Japanese.
 
-- ITMS-91064 “Invalid Binary”: NSPrivacyTracking was true but NSPrivacyTrackingDomains was empty (https://koshinstudio.com/en/notes/itms-91064/)
-
-- App Store review sent “Guideline 2.1 Information Needed”: the six things Apple asked for (https://koshinstudio.com/en/notes/review-info-needed/)
-
-- Firebase 12 does not work with Xcode 15.2: why I pinned Firebase 11.4.0 and AdMob 11.5.0 (https://koshinstudio.com/en/notes/xcode152-sdk/)
-
-- iOS app freezes and is killed (0x8BADF00D) (https://koshinstudio.com/en/notes/torecadash-watchdog/)
-
-- Python splitlines() breaks JSONL: the culprit was U+2028 (https://koshinstudio.com/en/notes/u2028/)
-
-- Firebase Auth: force-quitting the app created anonymous accounts in bulk (https://koshinstudio.com/en/notes/apple-signin/)
-
-- A canvas becomes twice as large on Retina: inset:0 does not stretch it (https://koshinstudio.com/en/notes/logo-pop/)
-
-- No builds arriving in TestFlight: I had used up the 25 free Xcode Cloud hours (https://koshinstudio.com/en/notes/torecadash-ci/)
-
 - Measuring the gap between ads in time, not in plays (https://koshinstudio.com/en/notes/adgap/)
 
+- The conger eel was too big: finding why a merge puzzle’s last piece was out of reach (https://koshinstudio.com/en/notes/anago/)
+
+- From 16,177 titles to 6,091: how the anime quiz database was built by dropping over 60% (https://koshinstudio.com/en/notes/anime-db/)
+
+- Firebase Auth: force-quitting the app created anonymous accounts in bulk (waiting for currentUser to restore) (https://koshinstudio.com/en/notes/apple-signin/)
+
 - Japanese text garbled in the CrazyGames preview: the file was correct, the cause was never found, so I escaped to ASCII (https://koshinstudio.com/en/notes/ascii-text/)
+
+- What I read as “fetched” was just a notice page: three days of zero products (https://koshinstudio.com/en/notes/blocked-page/)
+
+- A bulk update hit “all articles”: count before you write, and break your tests to prove they work (https://koshinstudio.com/en/notes/bulk-accident/)
+
+- Claude API vs Gemini API by official numbers: small-model prices, web search, spend limits and deprecation (https://koshinstudio.com/en/notes/claude-vs-gemini-api/)
+
+- Comparing comment systems for static sites by their official information: giscus, utterances, Disqus, Remark42 and more (https://koshinstudio.com/en/notes/comment-services/)
 
 - Rejected by CrazyGames with no reason given: I recorded the game and found four problems (https://koshinstudio.com/en/notes/crazygames/)
 
 - Works on my machine, breaks when deployed: four incidents shipping a static site to Cloudflare Pages (https://koshinstudio.com/en/notes/deploy-gotchas/)
 
-- Comparing static site hosts by their official terms: Cloudflare Pages, Netlify, Vercel, GitHub Pages and Firebase Hosting (https://koshinstudio.com/en/notes/hosting-compare/)
-
-- Comparing comment systems for static sites by their official information: giscus, utterances, Disqus, Remark42 and more (https://koshinstudio.com/en/notes/comment-services/)
-
-- Comparing iOS ad SDKs and Firebase by their official information: AdMob, AppLovin MAX, LevelPlay and Supabase (https://koshinstudio.com/en/notes/ios-sdk-compare/)
-
-- Claude API vs Gemini API by official numbers: small-model prices, web search, spend limits and deprecation (https://koshinstudio.com/en/notes/claude-vs-gemini-api/)
-
-- Migrating from the Claude API to the Gemini API (gemini-3.1-flash-lite): 16 call sites into one function (https://koshinstudio.com/en/notes/gemini-migration/)
-
-- What I read as “fetched” was just a notice page: three days of zero products (https://koshinstudio.com/en/notes/blocked-page/)
+- I counted “duplicates are practically zero,” but the audit reported 112 pairs (https://koshinstudio.com/en/notes/dup-zero/)
 
 - It let things through when it could not check: how “fail-open” brought in resale items (https://koshinstudio.com/en/notes/fail-open/)
 
-- Making a ranking server use only half of the free tier: from 5 calls to 2 (https://koshinstudio.com/en/notes/ranking-free-tier/)
-
-- I could not listen, so I measured the waveform: building Japanese instruments with WebAudio for Sushi Stack (https://koshinstudio.com/en/notes/webaudio/)
-
-- A bulk update hit “all articles”: count before you write, and break your tests to prove they work (https://koshinstudio.com/en/notes/bulk-accident/)
-
-- I re-measured a “nothing can be done” assumption and scraping cost dropped to one eighth (https://koshinstudio.com/en/notes/scrape-cost/)
-
-- Four things that stopped my iOS app before App Review: iPad screenshots, ITMS-91064, account deletion, reporting posts (https://koshinstudio.com/en/notes/torecadash-review/)
-
-- I counted “duplicates are practically zero,” but the audit reported 112 pairs (https://koshinstudio.com/en/notes/dup-zero/)
-
-- Making a 10-second stopwatch ranking fair: 3 decimals, ties and write counts (https://koshinstudio.com/en/notes/stopwatch-rank/)
-
-- “It should shrink” was wrong twice: cutting AI calls and what I measured afterward (https://koshinstudio.com/en/notes/torecadash-ai/)
-
-- From 16,177 titles to 6,091: how the anime quiz database was built by dropping over 60% (https://koshinstudio.com/en/notes/anime-db/)
-
-- “80% was chosen over 82%”: the quiz’s match percentage disagreed with its ranking (https://koshinstudio.com/en/notes/match-percent/)
-
-- What changes when an anime quiz goes from 50 questions to 12? (https://koshinstudio.com/en/notes/shindan12/)
+- Splitting a “9-pack set” by contents created 80 fake products (https://koshinstudio.com/en/notes/fake-products/)
 
 - Cutting six buttons to one: first-time players did not know what to press (https://koshinstudio.com/en/notes/first-visit/)
 
+- Migrating from the Claude API to the Gemini API (gemini-3.1-flash-lite): 16 call sites into one function (https://koshinstudio.com/en/notes/gemini-migration/)
+
+- Comparing static site hosts by their official terms: Cloudflare Pages, Netlify, Vercel, GitHub Pages and Firebase Hosting (https://koshinstudio.com/en/notes/hosting-compare/)
+
+- Comparing iOS ad SDKs and Firebase by their official information: AdMob, AppLovin MAX, LevelPlay and Supabase (https://koshinstudio.com/en/notes/ios-sdk-compare/)
+
+- ITMS-91064 “Invalid Binary”: NSPrivacyTracking was true but NSPrivacyTrackingDomains was empty (https://koshinstudio.com/en/notes/itms-91064/)
+
+- A canvas becomes twice as large on Retina: inset:0 does not stretch it (a bug in a logo that bursts when you tap it) (https://koshinstudio.com/en/notes/logo-pop/)
+
+- “80% was chosen over 82%”: the quiz’s match percentage disagreed with its ranking (https://koshinstudio.com/en/notes/match-percent/)
+
+- Measuring Qiita’s “posting too frequently” limit: a new account could not create another article for about 30 minutes (https://koshinstudio.com/en/notes/qiita-post-interval/)
+
+- Making a ranking server use only half of the free tier: from 5 calls to 2 (https://koshinstudio.com/en/notes/ranking-free-tier/)
+
 - The streaming buttons were shown even for titles you could not watch: making the quiz result screen true (https://koshinstudio.com/en/notes/result-screen/)
+
+- App Store review sent “Guideline 2.1 Information Needed”: the six things Apple asked for (https://koshinstudio.com/en/notes/review-info-needed/)
+
+- I re-measured a “nothing can be done” assumption and scraping cost dropped to one eighth (https://koshinstudio.com/en/notes/scrape-cost/)
+
+- What changes when an anime quiz goes from 50 questions to 12? (https://koshinstudio.com/en/notes/shindan12/)
+
+- Making a 10-second stopwatch ranking fair: 3 decimals, ties and write counts (https://koshinstudio.com/en/notes/stopwatch-rank/)
 
 - “The pile settles at 89%” was wrong: my measurement was what was wrong (https://koshinstudio.com/en/notes/sushi-measure/)
 
-- The conger eel was too big: finding why a merge puzzle’s last piece was out of reach (https://koshinstudio.com/en/notes/anago/)
-
 - The “9-pack set” was nine different products: the same product that never matched (https://koshinstudio.com/en/notes/torecadash-9set/)
+
+- “It should shrink” was wrong twice: cutting AI calls and what I measured afterward (https://koshinstudio.com/en/notes/torecadash-ai/)
+
+- No builds arriving in TestFlight: I had used up the 25 free Xcode Cloud hours (my first diagnosis was wrong) (https://koshinstudio.com/en/notes/torecadash-ci/)
+
+- Four things that stopped my iOS app before App Review: iPad screenshots, ITMS-91064, account deletion, reporting posts (https://koshinstudio.com/en/notes/torecadash-review/)
+
+- iOS app freezes and is killed (0x8BADF00D): a SwiftUI computed property ran on every redraw (https://koshinstudio.com/en/notes/torecadash-watchdog/)
 
 - A typo born once multiplied across shops: the “30th SEREBRATION” incident (https://koshinstudio.com/en/notes/typo-catalog/)
 
-- Splitting a “9-pack set” by contents created 80 fake products (https://koshinstudio.com/en/notes/fake-products/)
+- Python splitlines() breaks JSONL: the culprit was U+2028, an invisible line separator (https://koshinstudio.com/en/notes/u2028/)
 
-- Measuring Qiita’s “posting too frequently” limit: a new account could not create another article for about 30 minutes (https://koshinstudio.com/en/notes/qiita-post-interval/)
+- I could not listen, so I measured the waveform: building Japanese instruments with WebAudio for Sushi Stack (https://koshinstudio.com/en/notes/webaudio/)
+
+- Firebase 12 does not work with Xcode 15.2 (Swift 6.0 required): why I pinned Firebase 11.4.0 and AdMob 11.5.0 (https://koshinstudio.com/en/notes/xcode152-sdk/)
 
 ## Languages
 

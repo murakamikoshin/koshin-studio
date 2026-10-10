@@ -86,12 +86,12 @@ QUIZ = dict(
  ko='12개 질문, 6개 축: 나의 애니 타입과 지금 가장 잘 맞는 애니 한 편. 무료이며 아무것도 전송하지 않습니다. 영어로 제공됩니다.',
  tr='12 soru, 6 eksen: anime tipiniz ve şu an size en çok uyan anime. Ücretsiz, hiçbir şey gönderilmez. İngilizce.',
 )
-LOGS = [('/en/notes/itms-91064/', 'ITMS-91064 “Invalid Binary”: NSPrivacyTracking was true but NSPrivacyTrackingDomains was empty'),
- ('/en/notes/review-info-needed/', 'App Store review sent “Guideline 2.1 Information Needed”: the six things Apple asked for'),
- ('/en/notes/xcode152-sdk/', 'Firebase 12 does not work with Xcode 15.2: why I pinned Firebase 11.4.0 and AdMob 11.5.0'),
- ('/en/notes/torecadash-watchdog/', 'iOS app freezes and is killed (0x8BADF00D)'),
- ('/en/notes/u2028/', 'Python splitlines() breaks JSONL: the culprit was U+2028'),
- ('/en/notes/torecadash-ci/', 'No builds arriving in TestFlight: I had used up the 25 free Xcode Cloud hours')]
+import glob as _g
+LOGS = []
+for _f in sorted(_g.glob('en/notes/*/index.html')):
+    _t = open(_f, encoding='utf8').read()
+    _h = re.search(r'<h1>(.*?)</h1>', _t, re.S).group(1)
+    LOGS.append((_f[:-len('index.html')].replace('en/notes', '/en/notes'), H.unescape(_h)))
 e = lambda x: H.escape(x, quote=True)
 exec(open('tools/calc-pages-data.py', encoding='utf8').read())
 TOOLS_H = dict(en='Tools', zh='工具', es='Herramientas', pt='Ferramentas', fr='Outils', de='Werkzeuge', ru='Инструменты', id='Alat', ko='도구', tr='Araçlar')
@@ -103,9 +103,9 @@ for code, L in langs.items():
     h = re.sub(r'<meta property="og:description" content="[^"]*">', f'<meta property="og:description" content="{e(t["desc"])}">', h)
     langlinks = ' · '.join(f'<a href="{l["path"]}" hreflang="{l["lang"]}" lang="{l["lang"]}">{e(l["label"])}</a>' for l in langs.values()) + ' · <a href="/" hreflang="ja" lang="ja">日本語</a>'
     play = f'''  <ul class="plain">
-    <li><a href="/play/sushitsumu/">{e(t["sushi"][0])}</a> — {e(t["sushi"][1])}</li>
+    <li><a href="/play/sushitsumu/">{e(t["sushi"][0])}</a> — {e(t["sushi"][1])} <a href="/en/works/sushitsumu/" hreflang="en" lang="en">(About, English)</a></li>
     <li><a href="/play/negaeri-shogi/">{e(t["nega"][0])}</a> — {e(t["nega"][1])} <a href="/en/works/negaeri-shogi/" hreflang="en" lang="en">(rules, English)</a></li>
-    <li><a href="/play/stopwatch10/">{e(t["stop"][0])}</a> — {e(t["stop"][1])}</li>
+    <li><a href="/play/stopwatch10/">{e(t["stop"][0])}</a> — {e(t["stop"][1])} <a href="/en/works/stopwatch10/" hreflang="en" lang="en">(About, English)</a></li>
     <li><a href="/app/shindananime/en/" hreflang="en" lang="en">Anime Type Quiz</a> — {e(QUIZ[code])}</li>
   </ul>'''
     logs = f'''  <h2 class="rv">{e(t["h_log"])}</h2>
