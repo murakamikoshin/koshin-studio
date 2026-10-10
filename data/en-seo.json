@@ -142,5 +142,13 @@
  "torecadash-9set": {
   "title": "A 9-pack set that never matched: coverage 54% to 91%",
   "desc": "Matching my app against roundup sites showed 54% of lotteries displayed: a product mix-up, an asymmetric name key and an article ID that blocked new rounds."
+ },
+ "fake-products": {
+  "title": "Splitting a 9-pack set created 80 fake products",
+  "desc": "One real product was split by its contents, creating 80 products that do not exist. Stopping the entry, restoring 22 parents, detaching 190 children and an audit."
+ },
+ "qiita-post-interval": {
+  "title": "Qiita “posting too frequently”: measured, ~30 minutes",
+  "desc": "After publishing, a new Qiita account could not create the next article. Checking the editor every 5 minutes, two measurements gave about 30 minutes; one was lost."
  }
 }

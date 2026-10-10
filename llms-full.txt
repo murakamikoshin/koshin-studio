@@ -9,6 +9,8 @@ URL: https://koshinstudio.com/notes/qiita-post-interval/
 
 # Qiita の「投稿頻度が高過ぎます」を測った：新しいアカウントは、投稿から約 30 分、次の記事を作れなかった
 
+  English version (https://koshinstudio.com/en/notes/qiita-post-interval/)
+
   このサイト ／ 2026年10月
 
   このサイトの記事の要約を、Qiita に出しました。ところが、1 本目の直後に 2 本目を作ろうとすると、新規作成の画面が開かず、「投稿頻度が高過ぎます」と出ました。どれくらい待てば出せるのか、公式には書かれていないようだったので、実際に測りました。
@@ -361,6 +363,8 @@ URL: https://koshinstudio.com/notes/bulk-accident/
 URL: https://koshinstudio.com/notes/fake-products/
 
 # 「9種セット」を中身ごとに分けて、偽の商品が80個できていた
+
+  English version (https://koshinstudio.com/en/notes/fake-products/)
 
   トレカダッシュ 開発の記録 ／ 2026年10月
 
@@ -6073,6 +6077,160 @@ URL: https://koshinstudio.com/en/notes/torecadash-9set/
 
 ---
 
+URL: https://koshinstudio.com/en/notes/fake-products/
+
+# Splitting a “9-pack set” by contents created 80 fake products
+
+  日本語版 (https://koshinstudio.com/notes/fake-products/)
+
+  Development log of Torecadash / October 2026
+
+  While inspecting the product list of my iOS app Torecadash, I found 80 products that do not exist around the Pokémon Card “30th CELEBRATION Card Set.” There are only 9 official products. The other 80 were fake products created as a result of splitting a “9-pack set” by its contents. What happened and how I fixed it are written from my hand-over notes.
+
+  This is a development log of the app.
+
+## The 9-pack set was “one product”
+
+  The lottery for a “card set (9-pack set)” that a shop offers is one product. In the catalog it is registered as a “9-kinds set” (10,800 yen). But the app’s product matching (the step that splits an article mentioning several products into one per product) split this title by contents. Names of the nine contents, such as “Mega Mewtwo X” and “Nyabby,” were each treated as a separate product.
+
+  As a result, this is what it looked like:
+
+    State | Count
+
+    Original articles that had been split (parents) were hidden | 22
+
+    Articles created by splitting (children) | 190 (63 visible)
+
+    Fake products created for the children | 80
+
+  On screen, one lottery appeared as if it were separate lotteries for each content item.
+
+## The fix: stop the entry, then put things back
+
+- Do not split at the entry. A title of the form “card set” + “N kinds” is not split.
+
+- Restore the parents. I put the 22 hidden parents back onto the “9-kinds set” product. How I restored each differed (5 back to visible, 3 treated as duplicates because the same shop already had a visible 9-pack set, 13 whose deadline had passed, and 1 with no deadline).
+
+- Detach the children. I marked the 190 children with a “wrong split” flag (hiddenByWrongSplit), hid them, and removed their link to a product.
+
+- Delete the fake products. I deleted the 80. Before deleting, I confirmed that nothing referenced them and saved the original contents as a backup.
+
+  There is an exception. A listing like “Starter Set ex Nyaoha / Hogator / Quaxly 3-kinds set,” where the title spells out all the product names, is still split as before. What I learned this time is that an “N-kinds set” is sold as one product.
+
+## Other fake products found in the same inspection
+
+- Things that are not cards. Products for apparel, figures, tournaments and music CDs had been created between September 3 and October 3. I added a gate at the entry for names that are not cards (looksLikeNonCardMerchOrEventName) and confirmed 0 false hits across the whole catalog. I deleted 25.
+
+- Single cards. I deleted a total of 30 single-card products that came from Snkrdunk listings. Some of those single cards had a “list price.” Having a list price turned out not to be proof of an official cross-check. The proof is imageIsOfficial.
+
+- A product combining three packs. I deleted one unofficial product that lined up several set names. Its 49 linked articles were all expired.
+
+  To watch for these, I added an audit (audit_catalog_clean.js). Each time it counts five things: single-card products, products with several set names, mismatches between an application page’s title and the product, drift of list prices copied from products, and products with non-card names.
+
+## What I learned
+
+> A “split” process needs a “do not split” condition.
+
+- Splitting one product into several multiplies fake products. Splitting should happen only after checking “is it really several products.”
+
+- Count references before deleting. I deleted only after confirming zero references and a saved backup.
+
+- Stop fake products at both the entry and the contents. An entry gate alone leaves what already exists. An audit counts what remains.
+
+  This article is written from my hand-over notes (§272) (October 7, 2026). The counts are as written in the notes.
+
+  Related
+
+- The “9-pack set” was nine different products (https://koshinstudio.com/en/notes/torecadash-9set/) — the matching record for the same product
+
+- I counted duplicates as zero, but the audit found 112 pairs (https://koshinstudio.com/en/notes/dup-zero/) — another record from the same day
+
+  This is the English version of the original Japanese article (https://koshinstudio.com/notes/fake-products/).
+
+  More in English
+
+- All English pages (https://koshinstudio.com/en/)
+
+
+---
+
+URL: https://koshinstudio.com/en/notes/qiita-post-interval/
+
+# Measuring Qiita’s “posting too frequently” limit: a new account could not create another article for about 30 minutes
+
+  日本語版 (https://koshinstudio.com/notes/qiita-post-interval/)
+
+  This site / October 2026
+
+  I published summaries of this site’s articles on Qiita. But when I tried to create a second one right after the first, the new-article screen would not open and said “posting too frequently.” How long you have to wait did not seem to be written officially, so I measured it.
+
+  I measured only this one new account (registered on October 8, 2026). This does not mean it is a general specification of Qiita.
+
+## How I measured
+
+- I record the time an article was published (for the first one, “14:19” from Qiita’s notification, which is only to the minute).
+
+- Then about every 5 minutes, I open the “new article” screen in a logged-in browser. If it opens it is “allowed”; if I am redirected to the trend page it is “blocked.” I record this with the time.
+
+- When it opens, I publish the next article right away and take the same record again.
+
+- I did not do anything like slipping past the limit by posting. I only checked whether the screen opens.
+
+## Results
+
+    Interval | Previous article published at | Last blocked check | First allowed check | Publish until it opens
+
+    1st → 2nd | 14:19 | 14:46:34 (blocked) | 14:51:50 (allowed) | about 27.6 to 32.8 min
+
+    2nd → 3rd | 14:52:36 | 15:19:03 (blocked) | 15:24:18 (allowed) | about 26.5 to 31.7 min
+
+    3rd → 4th | 15:24:59 | 15:30:29 (blocked) | 16:10:02 (allowed) | 5.5 to 45.1 min (unknown)
+
+- The first and second were both around 30 minutes. The range exists because I only checked every 5 minutes. “It opened” somewhere between the last block and the first allow.
+
+- The third is unusable data. The next check after 15:30:29 is not in the record until 16:10:02. The checks were not running for about 40 minutes (I have not confirmed why; the computer may have been asleep). The opening time is somewhere in there, and the interval is unknown.
+
+- The wording “posting too frequently” could not be captured by the automatic check (I was only sent back to the trend page, and no message appeared). It is the wording I saw on my own screen.
+
+## What I know and what I do not
+
+> On this new account, I could not create the next article for about 30 minutes after publishing.
+
+- Two measurements agreed at about 30 minutes. But it is only two. It is not a number that lets me say “exactly 30 minutes.”
+
+- A personal blog from 2018 reported “you cannot post or edit for about 30 minutes after posting.” It is close to this measurement. But it is another person’s report from another time, and I do not know whether it is the same mechanism.
+
+- I do not know whether it is a limit only for newly registered accounts or applies to ordinary ones too. I measured only one account.
+
+- I also do not know whether the limit changes with the number of posts (from which post it gets longer), because the third was lost.
+
+## Reflections on the measurement
+
+- The check interval was 5 minutes. A 5-minute range was left each time. Checking every minute would shrink it.
+
+- I did not notice that the checks had stopped. I needed a mechanism to warn me when there is no check record for a set time.
+
+- The first publish time was only to the minute. I could take seconds only from the second onward, where I recorded the time myself.
+
+## What I could not confirm
+
+- Qiita’s official rule on posting interval (I looked, but found no public description).
+
+- The interval for the third (the record is missing).
+
+- The same measurement on other accounts.
+
+- Whether the limit changes with the age of the account or the number of posts.
+
+  This is the English version of the original Japanese article (https://koshinstudio.com/notes/qiita-post-interval/).
+
+  More in English
+
+- All English pages (https://koshinstudio.com/en/)
+
+
+---
+
 URL: https://koshinstudio.com/en/notes/crazygames/
 
 # Rejected by CrazyGames with no reason given: I recorded the game and found four problems
@@ -7602,6 +7760,10 @@ URL: https://koshinstudio.com/en/
 - The “9-pack set” was nine different products: the same product that never matched (https://koshinstudio.com/en/notes/torecadash-9set/)
 
 - A typo born once multiplied across shops: the “30th SEREBRATION” incident (https://koshinstudio.com/en/notes/typo-catalog/)
+
+- Splitting a “9-pack set” by contents created 80 fake products (https://koshinstudio.com/en/notes/fake-products/)
+
+- Measuring Qiita’s “posting too frequently” limit: a new account could not create another article for about 30 minutes (https://koshinstudio.com/en/notes/qiita-post-interval/)
 
 ## Languages
 

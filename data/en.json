@@ -244,6 +244,20 @@
     "blurb": "Matching my app against roundup sites showed 54% of lotteries displayed: a product mix-up, an asymmetric name key and an article ID that blocked new rounds."
   },
   {
+    "ja": "/notes/fake-products/",
+    "en": "/en/notes/fake-products/",
+    "title": "Splitting a “9-pack set” by contents created 80 fake products",
+    "date": "2026-10-09",
+    "blurb": "One real product was split by its contents, creating 80 products that do not exist. Stopping the entry, restoring 22 parents, detaching 190 children and an audit."
+  },
+  {
+    "ja": "/notes/qiita-post-interval/",
+    "en": "/en/notes/qiita-post-interval/",
+    "title": "Measuring Qiita’s “posting too frequently” limit: a new account could not create another article for about 30 minutes",
+    "date": "2026-10-09",
+    "blurb": "After publishing, a new Qiita account could not create the next article. Checking the editor every 5 minutes, two measurements gave about 30 minutes; one was lost."
+  },
+  {
     "ja": "/notes/crazygames/",
     "en": "/en/notes/crazygames/",
     "title": "Rejected by CrazyGames with no reason given: I recorded the game and found four problems",
