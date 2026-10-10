@@ -14,10 +14,11 @@
   <url><loc>https://koshinstudio.com/en/calc/gacha-rate/</loc><lastmod>2026-10-09</lastmod><priority>0.5</priority></url>
   <url><loc>https://koshinstudio.com/en/calc/gacha/</loc><lastmod>2026-10-09</lastmod><priority>0.5</priority></url>
   <url><loc>https://koshinstudio.com/en/</loc><lastmod>2026-10-10</lastmod><priority>0.5</priority></url>
-  <url><loc>https://koshinstudio.com/en/notes/adgap/</loc><priority>0.5</priority></url>
+  <url><loc>https://koshinstudio.com/en/notes/adgap/</loc><lastmod>2026-10-10</lastmod><priority>0.5</priority></url>
   <url><loc>https://koshinstudio.com/en/notes/apple-signin/</loc><lastmod>2026-10-10</lastmod><priority>0.5</priority></url>
-  <url><loc>https://koshinstudio.com/en/notes/ascii-text/</loc><priority>0.5</priority></url>
-  <url><loc>https://koshinstudio.com/en/notes/crazygames/</loc><priority>0.5</priority></url>
+  <url><loc>https://koshinstudio.com/en/notes/ascii-text/</loc><lastmod>2026-10-10</lastmod><priority>0.5</priority></url>
+  <url><loc>https://koshinstudio.com/en/notes/crazygames/</loc><lastmod>2026-10-10</lastmod><priority>0.5</priority></url>
+  <url><loc>https://koshinstudio.com/en/notes/deploy-gotchas/</loc><priority>0.5</priority></url>
   <url><loc>https://koshinstudio.com/en/notes/itms-91064/</loc><lastmod>2026-10-09</lastmod><priority>0.5</priority></url>
   <url><loc>https://koshinstudio.com/en/notes/logo-pop/</loc><lastmod>2026-10-10</lastmod><priority>0.5</priority></url>
   <url><loc>https://koshinstudio.com/en/notes/review-info-needed/</loc><lastmod>2026-10-10</lastmod><priority>0.5</priority></url>
@@ -42,16 +43,16 @@
   <url><loc>https://koshinstudio.com/ko/calc/gacha-rate/</loc><lastmod>2026-10-09</lastmod><priority>0.5</priority></url>
   <url><loc>https://koshinstudio.com/ko/calc/gacha/</loc><lastmod>2026-10-09</lastmod><priority>0.5</priority></url>
   <url><loc>https://koshinstudio.com/ko/</loc><lastmod>2026-10-09</lastmod><priority>0.5</priority></url>
-  <url><loc>https://koshinstudio.com/notes/adgap/</loc><lastmod>2026-10-09</lastmod><priority>0.8</priority></url>
+  <url><loc>https://koshinstudio.com/notes/adgap/</loc><lastmod>2026-10-10</lastmod><priority>0.8</priority></url>
   <url><loc>https://koshinstudio.com/notes/anago/</loc><lastmod>2026-10-09</lastmod><priority>0.8</priority></url>
   <url><loc>https://koshinstudio.com/notes/anime-db/</loc><lastmod>2026-10-09</lastmod><priority>0.8</priority></url>
   <url><loc>https://koshinstudio.com/notes/apple-signin/</loc><lastmod>2026-10-10</lastmod><priority>0.8</priority></url>
-  <url><loc>https://koshinstudio.com/notes/ascii-text/</loc><lastmod>2026-10-09</lastmod><priority>0.8</priority></url>
+  <url><loc>https://koshinstudio.com/notes/ascii-text/</loc><lastmod>2026-10-10</lastmod><priority>0.8</priority></url>
   <url><loc>https://koshinstudio.com/notes/blocked-page/</loc><lastmod>2026-10-09</lastmod><priority>0.8</priority></url>
   <url><loc>https://koshinstudio.com/notes/bulk-accident/</loc><lastmod>2026-10-09</lastmod><priority>0.8</priority></url>
   <url><loc>https://koshinstudio.com/notes/claude-vs-gemini-api/</loc><lastmod>2026-10-09</lastmod><priority>0.8</priority></url>
   <url><loc>https://koshinstudio.com/notes/comment-services/</loc><lastmod>2026-10-09</lastmod><priority>0.8</priority></url>
-  <url><loc>https://koshinstudio.com/notes/crazygames/</loc><lastmod>2026-10-09</lastmod><priority>0.8</priority></url>
+  <url><loc>https://koshinstudio.com/notes/crazygames/</loc><lastmod>2026-10-10</lastmod><priority>0.8</priority></url>
   <url><loc>https://koshinstudio.com/notes/deploy-gotchas/</loc><lastmod>2026-10-09</lastmod><priority>0.8</priority></url>
   <url><loc>https://koshinstudio.com/notes/ditto-charm/</loc><lastmod>2026-10-09</lastmod><priority>0.8</priority></url>
   <url><loc>https://koshinstudio.com/notes/dup-zero/</loc><lastmod>2026-10-09</lastmod><priority>0.8</priority></url>
