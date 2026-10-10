@@ -108,6 +108,8 @@
 - [Four things that stopped my iOS app before App Review: iPad screenshots, ITMS-91064, account deletion, reporting posts](https://koshinstudio.com/en/notes/torecadash-review/): Before submitting an iOS app, four things stopped me: iPad screenshots, ITMS-91064, account deletion (5.1.1(v)) and user-content reporting (1.2), and how I fixed each.
 - [I re-measured a “nothing can be done” assumption and scraping cost dropped to one eighth](https://koshinstudio.com/en/notes/scrape-cost/): I believed two sites could not be fetched more often because of cost. Comparing three Scrape.do settings showed rendering was wasted: 3x faster, 1/8 the credits.
 - [A bulk update hit “all articles”: count before you write, and break your tests to prove they work](https://koshinstudio.com/en/notes/bulk-accident/): A bulk job hit every article and wrongly restored 18 items. How I reverted them from status history and proved new tests work by breaking rules one at a time.
+- [Sushi Stack](https://koshinstudio.com/en/works/sushitsumu/): Sushi Stack is a free browser merge puzzle. Drop rice, merge matching toppings up 11 tiers to reach the golden sushi tub. Online ranking, 14 languages, no install or sign-up.
+- [Stop at exactly 10 seconds!](https://koshinstudio.com/en/works/stopwatch10/): A free browser game: press start and count ten seconds in your head, with no numbers or sound on screen. Three modes, millisecond precision, and a fair daily ranking.
 - [English hub](https://koshinstudio.com/en/): Games, tools and development logs in English
 - [简体中文](https://koshinstudio.com/zh/): Games and tools in this language
 - [Español](https://koshinstudio.com/es/): Games and tools in this language

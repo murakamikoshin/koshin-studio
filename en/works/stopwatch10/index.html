@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Stop at exactly 10 seconds! A free stopwatch game | Koshin Studio</title>
+<meta name="description" content="A free browser game: press start and count ten seconds in your head, with no numbers or sound on screen. Three modes, millisecond precision, and a fair daily ranking.">
+<meta property="og:title" content="Stop at exactly 10 seconds!">
+<meta property="og:description" content="Count ten seconds in your head and stop. No numbers, no ticks, nothing moves. A free browser game with a fair ranking.">
+<meta property="og:type" content="article">
+<meta name="theme-color" content="#fbfaf7">
+<link rel="icon" href="/favicon.ico?v=1697d589" sizes="48x48">
+<link rel="icon" href="/favicon.svg?v=b9d7922f" type="image/svg+xml" sizes="any">
+<link rel="icon" href="/assets/icon/icon-192.png?v=e2566235" type="image/png" sizes="192x192">
+<link rel="apple-touch-icon" href="/assets/icon/icon-180.png?v=84e7f0e6">
+<link rel="manifest" href="/site.webmanifest">
+<script>document.documentElement.className+=" js"</script>
+<link rel="stylesheet" href="/style.css?v=7001672f">
+<meta name="google-adsense-account" content="ca-pub-3863314847163872">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3863314847163872" crossorigin="anonymous"></script>
+<link rel="canonical" href="https://koshinstudio.com/en/works/stopwatch10/">
+<meta property="og:url" content="https://koshinstudio.com/en/works/stopwatch10/">
+<meta property="og:site_name" content="Koshin Studio">
+<meta property="og:locale" content="en_US">
+<link rel="alternate" hreflang="ja" href="https://koshinstudio.com/works/stopwatch10/">
+<link rel="alternate" hreflang="en" href="https://koshinstudio.com/en/works/stopwatch10/">
+<link rel="alternate" hreflang="x-default" href="https://koshinstudio.com/en/works/stopwatch10/">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="alternate" type="application/rss+xml" title="Koshin Studio — Notes" href="https://koshinstudio.com/feed.xml">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebPage","name":"Stop at exactly 10 seconds!","url":"https://koshinstudio.com/en/works/stopwatch10/","inLanguage":"en","isPartOf":{"@id":"https://koshinstudio.com#studio"},"primaryImageOfPage":"https://koshinstudio.com/assets/sushitsumu-wide.jpg"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Koshin Studio","item":"https://koshinstudio.com/en/"},{"@type":"ListItem","position":2,"name":"Stop at exactly 10 seconds!","item":"https://koshinstudio.com/en/works/stopwatch10/"}]}]}</script>
+<meta property="og:image" content="https://koshinstudio.com/assets/og/og_works_stopwatch10.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
+</head>
+<body>
+<canvas id="motes"></canvas>
+
+<header class="site"><div class="wrap">
+  <a class="logo" href="/"><img class="logo-mark" src="/favicon.svg?v=b9d7922f" alt="" width="28" height="28">Koshin Studio</a>
+  <nav><a href="/works/">Works</a><a href="/notes/">Notes</a><a href="/picks/">Picks</a><a href="/calc/">Tools</a><a href="/about/">About</a></nav>
+</div></header>
+
+<main><div class="wrap">
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/en/">Koshin Studio</a><i aria-hidden="true">›</i><span aria-current="page">Stop at exactly 10 seconds!</span></nav>
+  <h1>Stop at exactly 10 seconds!</h1>
+  <div class="rule"></div>
+<!--lang-->
+  <p class="note"><a href="/works/stopwatch10/" hreflang="ja" lang="ja">日本語版</a></p>
+<!--/lang-->
+  <p class="lead">Press start and count ten seconds in your head.<br>When you think it is time, stop.</p>
+
+  <p><a class="btn" data-play="stopwatch10" href="/play/stopwatch10/">Play now</a></p>
+  <p class="note">Free. Runs in your browser, no install or sign-up. The screen text is in Japanese, but the game is just a start button and numbers.</p>
+
+  <div class="shots rv">
+    <figure>
+      <picture>
+        <source srcset="/assets/shots/sw10-ready.webp" type="image/webp">
+        <img src="/assets/shots/sw10-ready.jpg" alt="The screen before starting: the orange seven-segment display is off and a large start button is below" width="560" height="1212" loading="lazy" decoding="async">
+      </picture>
+      <figcaption>Before starting</figcaption>
+    </figure>
+    <figure>
+      <picture>
+        <source srcset="/assets/shots/sw10-run.webp" type="image/webp">
+        <img src="/assets/shots/sw10-run.jpg" alt="The screen while counting: completely dark, with no numbers or ticks" width="560" height="1212" loading="lazy" decoding="async">
+      </picture>
+      <figcaption>While counting. Nothing moves</figcaption>
+    </figure>
+    <figure>
+      <picture>
+        <source srcset="/assets/shots/sw10-done.webp" type="image/webp">
+        <img src="/assets/shots/sw10-done.jpg" alt="The screen after three attempts showing 10.134 and an error of 0.084 seconds per attempt" width="560" height="1212" loading="lazy" decoding="async">
+      </picture>
+      <figcaption>After three attempts</figcaption>
+    </figure>
+  </div>
+
+  <div class="stats rv">
+    <div><b data-count="3">3</b><span>attempts per game</span></div>
+    <div><b data-count="3">3</b><span>modes</span></div>
+    <div><b data-count="1000">1,000</b><span>one-thousandth of a second</span></div>
+  </div>
+
+  <h2 class="rv">What it is</h2>
+  <p>The screen shows no numbers, no ticks and no sound. Between pressing and stopping, nothing moves. All you can rely on is the second hand inside you.</p>
+  <p>You stop three times and see your <strong>error</strong> from the target. Some people are off by 0.5 seconds, and some stop within 0.02. It is shown per attempt rather than as a total, because that makes your skill easier to feel. The best single attempt of the three is also kept. The average is skill; the best single is luck of the day.</p>
+
+  <h2 class="rv">Three modes</h2>
+  <h3>10 seconds, no hint</h3>
+  <p>The basic way to play: three attempts. There is no clue at all.</p>
+  <h3>10 seconds, with a hint</h3>
+  <p>A clock is shown for the first 3 seconds only. Match your own beat to it and do the rest by yourself. The moment 3 seconds pass, the display disappears completely.</p>
+  <h3>100 seconds, one shot</h3>
+  <p>One attempt only. While you count the 100 seconds there is nothing to do. If you leave the screen (switch tabs or the screen turns off), that attempt becomes invalid.</p>
+
+  <h2 class="rv">Why three decimals</h2>
+  <p>Browser clocks differ in coarseness by device. <code>performance.now()</code> is deliberately made less precise as a Spectre countermeasure: Chrome in 5 µs steps, Safari and Firefox in 1 ms steps.</p>
+  <p>If six decimals were shown, <strong>a device with a coarser clock would more often end in 000 and gain an advantage</strong>. In a game about being “exact,” the luck of your device would decide the ranking. So I cut at three decimals to put every device on the same ground.</p>
+
+  <h2 class="rv">Nothing moving</h2>
+  <p>While building it, I once put a blinking lamp somewhere in the display. It became <strong>a stand-in metronome</strong>. If something flashes at 1 Hz in your sight, people can count along with it, and a game about counting by yourself vanishes entirely.</p>
+  <p>Now there is nothing that moves periodically during measurement: no pulsing buttons, no blinking, no animation. From the moment you press until you stop, the screen is completely still.</p>
+
+  <h2 class="rv">How it is made</h2>
+  <p>The whole thing is <strong>one HTML file</strong> with zero external libraries. The digits are drawn as SVG polygons in a seven-segment shape, so it depends on no font either. The sound effects use no audio files and are generated on the spot.</p>
+  <p>The stop time is taken from <code>event.timeStamp</code> of <code>pointerdown</code>, because waiting for <code>click</code> adds extra delay. Your records stay in your device, per mode.</p>
+
+  <p style="margin-top:40px"><a class="btn" data-play="stopwatch10" href="/play/stopwatch10/">Play now</a></p>
+
+  <div class="rule" style="margin:40px 0 22px"></div>
+  <p class="eyebrow">Development log for this game</p>
+  <ul class="plain">
+    <li><a href="/en/notes/stopwatch-rank/" hreflang="en" lang="en">Making a 10-second stopwatch ranking fair: 3 decimals, ties and write counts</a></li>
+  </ul>
+
+  <p class="note">This is the English version of <a href="/works/stopwatch10/" hreflang="ja" lang="ja">the Japanese page</a>.</p>
+</div>
+</main>
+
+<footer class="site"><div class="wrap"></div></footer>
+<script src="/vendor/gsap.min.js?v=9396f256" defer></script>
+<script src="/vendor/ScrollTrigger.min.js?v=05ca5ad8" defer></script>
+<script src="/motion.js?v=1e7447ec" defer></script>
+</body>
+</html>
