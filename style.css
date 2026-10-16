@@ -819,3 +819,6 @@ body.article .eyebrow{font-size:15px;font-weight:700;letter-spacing:.04em}
 }
 /* About・あつかい：先頭の lead は一言のラベルではなく本文なので、太字・青にしない */
 body.article.doc .lead{font-size:17px;font-weight:400;letter-spacing:.01em;color:var(--text);margin-bottom:24px}
+/* ボタンの字まで青くしない（リンク色の上書きで、青い地に青い字になっていた） */
+body.article a.btn,body.article a.btn:hover{color:#fff;text-decoration:none}
+body.article a.btn.ghost,body.article a.btn.ghost:hover{color:var(--blue)}
