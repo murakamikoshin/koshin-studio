@@ -695,6 +695,22 @@ function ldFor(file, url) {
       crumbs([['Koshin Studio', '/en/'], [am.title, amPath]]),
     ];
   }
+  /* 記事（notes）の各言語版：英語版と同じ BlogPosting を、その言語の inLanguage で出す */
+  if (am && !am.app && /^\/[^/]+\/notes\//.test(rel)) {
+    const amPath = rel.replace(/index\.html$/, '');
+    const pair = enPairs.find((q) => q.alt && Object.values(q.alt).some((x) => x.path === amPath));
+    if (pair) {
+      return [
+        { '@type': 'BlogPosting', headline: am.title, url: url, description: am.blurb,
+          datePublished: pair.date, dateModified: pair.updated || pair.date, inLanguage: am.lang,
+          image: ogFor(rel),
+          author: { '@id': SITE + '#studio' }, publisher: { '@id': SITE + '#studio' },
+          mainEntityOfPage: url,
+          translationOfWork: { '@type': 'BlogPosting', url: SITE + pair.ja, inLanguage: 'ja' } },
+        crumbs([['Koshin Studio', '/en/'], [am.title, amPath]]),
+      ];
+    }
+  }
   const ep = enByPath[rel.replace(/index\.html$/, '')];
   if (ep && !em) {
     /* 英語の作品ページは、日本語側の作品データ（種別・絵・年）を借りて、
