@@ -753,3 +753,67 @@ h2[id]{scroll-margin-top:78px}
 .calc-main p{margin:0;color:var(--muted)}
 .calc-main .big{font-family:var(--mincho);font-size:40px;color:var(--text);line-height:1.3}
 @media(min-width:640px){.calc{grid-template-columns:1fr 1fr}}
+
+/* ============================================================
+   記事（notes の各言語版）— body.article
+   ⚠️2026-10-16【報告「記事が見づらい。見出しと本文で文字の大きさ・太さの差が小さい」】
+   本文 16px・見出し 20px（明朝600・字間広い）・小見出し 15.5px（本文より小さい）で、
+   階層が付いていなかった。大手の読み物（Zenn・Qiita・note・新聞社の記事）に共通する組み方に揃える：
+     ・本文 17px／行間 1.9／字間は詰め気味（ゴシック）
+     ・h1 32px 太字／h2 26px 太字＋下線／h3 20px 太字＋左線 → 一段ごとに 1.2〜1.3 倍＋太さ
+     ・注記は薄い地の囲みにして、本文と見分けがつくように（字は 14px 以上）
+     ・表は見出し行に地を付け、字を 15px に
+   トップ・作品・計算機など、記事以外には当てない。
+   ============================================================ */
+body.article{font-size:17px;line-height:1.9;letter-spacing:.01em;color:#16202e}
+body.article .wrap{max-width:720px}
+body.article h1{font-family:var(--gothic);font-weight:700;font-size:clamp(26px,6.4vw,34px);
+  letter-spacing:.01em;line-height:1.45;margin:6px 0 10px}
+body.article .rule{width:56px;height:3px;margin:18px 0 20px}
+body.article .lead{font-size:14px;font-weight:700;letter-spacing:.04em;color:var(--blue);margin-bottom:26px}
+body.article h2{display:block;font-family:var(--gothic);font-weight:700;font-size:clamp(22px,5.4vw,27px);
+  letter-spacing:.01em;line-height:1.4;margin:60px 0 22px;padding:0 0 10px;
+  border-bottom:3px solid var(--blue);color:#0f1a2b}
+body.article h2::after{display:none}
+body.article h3{font-family:var(--gothic);font-weight:700;font-size:clamp(18px,4.8vw,21px);
+  letter-spacing:.01em;line-height:1.45;margin:38px 0 12px;padding:2px 0 2px 12px;
+  border-left:4px solid var(--sky);color:#0f1a2b}
+body.article p{margin:0 0 22px}
+body.article strong{color:#0f1a2b;font-weight:700;background:linear-gradient(transparent 62%,rgba(126,200,227,.38) 62%)}
+body.article a{color:var(--blue);text-decoration:underline;text-underline-offset:3px;text-decoration-thickness:1px}
+body.article a:hover{color:var(--blue-d)}
+body.article .btn,body.article .crumbs a,body.article .toc a,body.article header.site a,
+body.article footer.site a{text-decoration:none}
+body.article .crumbs{font-size:13px;margin-bottom:18px}
+body.article ul,body.article ol{padding-left:1.4em;margin:0 0 24px}
+body.article li{margin-bottom:10px}
+body.article li::marker{color:var(--blue)}
+body.article ul.plain{padding-left:0}
+body.article ul.plain li{color:var(--text)}
+body.article .note{font-size:14px;line-height:1.8;letter-spacing:.01em;color:#33425a;
+  background:#f1efe9;border-left:4px solid #b7c4d6;border-radius:4px;padding:12px 16px;margin:0 0 24px}
+body.article .note a{color:var(--blue)}
+body.article .picks-note{background:#fff7e0;border-left-color:#e0a82e}
+body.article .toc{margin:8px 0 38px;padding:18px 22px 16px;background:#f6f8fb;border:1px solid #d5deea;border-radius:8px}
+body.article .toc p{font-size:15px;font-weight:700;letter-spacing:.04em;color:#0f1a2b;margin:0 0 8px}
+body.article .toc ol{font-size:15.5px;line-height:1.85;margin:0;padding-left:1.6em}
+body.article .toc li{margin-bottom:2px}
+body.article .toc a{color:var(--text)}
+body.article .toc a:hover{color:var(--blue)}
+body.article .scroll{margin:0 0 28px}
+body.article table{font-size:15px;line-height:1.7;border:1px solid #cfd9e6}
+body.article th,body.article td{padding:12px 14px;border:1px solid #d9e1ec;vertical-align:top}
+body.article th{background:#eef2f8;color:#0f1a2b;font-size:14px;font-weight:700;letter-spacing:.02em;white-space:nowrap}
+body.article td:first-child{font-weight:700;color:#0f1a2b}
+body.article blockquote{font-family:var(--gothic);font-size:19px;font-weight:700;line-height:1.7;letter-spacing:.01em;
+  margin:30px 0;padding:14px 20px;border-left:5px solid var(--blue);background:#f1f5fb;color:#0f1a2b}
+body.article pre{font-size:14px;line-height:1.7}
+body.article .picks{margin:44px 0 0;padding:20px 22px;border:1px solid #d9e1ec;border-radius:8px;background:#fbfaf7}
+body.article .picks h2{font-size:21px;margin:0 0 14px;border-bottom-width:2px}
+body.article .eyebrow{font-size:15px;font-weight:700;letter-spacing:.04em}
+@media(max-width:540px){
+  body.article{font-size:16.5px;line-height:1.88}
+  body.article h2{margin:50px 0 18px}
+  body.article th,body.article td{padding:10px 11px}
+  body.article table{font-size:14.5px}
+}
