@@ -20,6 +20,9 @@ const ROUTES = {
   },
   app: {
     shindananime: 'https://shindananime.pages.dev',
+    /* トレカダッシュの Web版（受付中の抽選・予約まとめ）。
+       中身は cardalerthub の functions/web/ が VPS で毎時組んで出す */
+    torecadash: 'https://torecadash-web.pages.dev',
   },
 };
 

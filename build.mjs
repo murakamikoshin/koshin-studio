@@ -1200,7 +1200,10 @@ writeFileSync(here + '/robots.txt',
       'PerplexityBot', 'Perplexity-User', 'Google-Extended', 'Applebot-Extended', 'Bingbot', 'Googlebot']
       .map((ua) => 'User-agent: ' + ua).concat(['User-agent: *']),
     'Allow: /', 'Disallow: /submit', 'Disallow: /top', '',
-    'Sitemap: ' + SITE + '/sitemap.xml', ''].join('\n'));
+    'Sitemap: ' + SITE + '/sitemap.xml',
+    /* トレカダッシュ Web版（/app/torecadash/、別の Pages から worker が中継）は
+       ページが毎時入れ替わるので、sitemap も向こうが自分で書き出す */
+    'Sitemap: ' + SITE + '/app/torecadash/sitemap.xml', ''].join('\n'));
 
 
 /* ---- llms.txt / llms-full.txt（AI が、このサイトを読み取りやすくする） ----

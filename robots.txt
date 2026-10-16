@@ -18,3 +18,4 @@ Disallow: /submit
 Disallow: /top
 
 Sitemap: https://koshinstudio.com/sitemap.xml
+Sitemap: https://koshinstudio.com/app/torecadash/sitemap.xml

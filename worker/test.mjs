@@ -51,5 +51,8 @@ await check('/play/stopwatch10/', { status: 200, asked: 'https://stopwatch10.pag
 await check('/app/', { status: 302, loc: 'https://koshinstudio.com/works/' });
 await check('/app/nope/', { status: 404 });
 await check('/app/shindananime/', { status: 200, asked: 'https://shindananime.pages.dev/' });
+await check('/app/torecadash/', { status: 200, asked: 'https://torecadash-web.pages.dev/' });
+await check('/app/torecadash/g/pokemon/', { status: 200, asked: 'https://torecadash-web.pages.dev/g/pokemon/' });
+await check('/app/torecadash', { status: 301, loc: 'https://koshinstudio.com/app/torecadash/' });
 console.log(bad ? '\n合わないところがあります' : '\n判定はすべて狙いどおり。');
 process.exit(bad);
