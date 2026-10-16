@@ -123,6 +123,9 @@
 - [Bahasa Indonesia](https://koshinstudio.com/id/): Games and tools in this language
 - [한국어](https://koshinstudio.com/ko/): Games and tools in this language
 - [Türkçe](https://koshinstudio.com/tr/): Games and tools in this language
+- [繁體中文](https://koshinstudio.com/zh-hant/): Games and tools in this language
+- [Tiếng Việt](https://koshinstudio.com/vi/): Games and tools in this language
+- [ไทย](https://koshinstudio.com/th/): Games and tools in this language
 
 ## そのほか
 - [About](https://koshinstudio.com/about/): 運営者・連絡先・記事の書き方と訂正について

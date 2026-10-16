@@ -58,5 +58,23 @@
     "lang": "tr",
     "locale": "tr_TR",
     "label": "Türkçe"
+  },
+  "zh-hant": {
+    "path": "/zh-hant/",
+    "lang": "zh-Hant",
+    "locale": "zh_TW",
+    "label": "繁體中文"
+  },
+  "vi": {
+    "path": "/vi/",
+    "lang": "vi",
+    "locale": "vi_VN",
+    "label": "Tiếng Việt"
+  },
+  "th": {
+    "path": "/th/",
+    "lang": "th",
+    "locale": "th_TH",
+    "label": "ไทย"
   }
 }

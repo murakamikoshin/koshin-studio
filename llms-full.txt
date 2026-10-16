@@ -9800,6 +9800,6 @@ URL: https://koshinstudio.com/en/
 
 ## Languages
 
-  English (https://koshinstudio.com/en/) · 简体中文 (https://koshinstudio.com/zh/) · Español (https://koshinstudio.com/es/) · Português (https://koshinstudio.com/pt/) · Français (https://koshinstudio.com/fr/) · Deutsch (https://koshinstudio.com/de/) · Русский (https://koshinstudio.com/ru/) · Bahasa Indonesia (https://koshinstudio.com/id/) · 한국어 (https://koshinstudio.com/ko/) · Türkçe (https://koshinstudio.com/tr/) · 日本語 (https://koshinstudio.com/)
+  English (https://koshinstudio.com/en/) · 简体中文 (https://koshinstudio.com/zh/) · Español (https://koshinstudio.com/es/) · Português (https://koshinstudio.com/pt/) · Français (https://koshinstudio.com/fr/) · Deutsch (https://koshinstudio.com/de/) · Русский (https://koshinstudio.com/ru/) · Bahasa Indonesia (https://koshinstudio.com/id/) · 한국어 (https://koshinstudio.com/ko/) · Türkçe (https://koshinstudio.com/tr/) · 繁體中文 (https://koshinstudio.com/zh-hant/) · Tiếng Việt (https://koshinstudio.com/vi/) · ไทย (https://koshinstudio.com/th/) · 日本語 (https://koshinstudio.com/)
 
   About (https://koshinstudio.com/en/about/) · Privacy (https://koshinstudio.com/en/privacy/)

@@ -8,7 +8,7 @@ import json, re, html as H
 langs = json.load(open('data/langs.json', encoding='utf8'))
 # トレカダッシュの一行説明（data/torecadash-pages.json の og を使う）。入口の言語コード→文面のキー
 _td = json.load(open('data/torecadash-pages.json', encoding='utf8'))
-_tdkey = {'zh': 'zh-Hans', 'pt': 'pt-BR'}
+_tdkey = {'zh': 'zh-Hans', 'pt': 'pt-BR', 'zh-hant': 'zh-Hant'}
 TORECADASH = {c: _td[_tdkey.get(c, c)]['og'] for c in langs if _tdkey.get(c, c) in _td}
 src = open('en/notes/itms-91064/index.html', encoding='utf8').read()
 head0 = src[:src.index('<main>')]
@@ -77,6 +77,24 @@ T = {
   nega=('Negaeri Shogi (寝返り将棋)', '6×6 tahta oyunu. Sıkıştırdığın taşlar senin tarafına geçip terfi eder, zincirler bir anda çok taşı çevirir. Yerel, yapay zekâya karşı ve puanlı çevrimiçi. Oyun İngilizce ve Japonca.'),
   stop=('10 saniyede dur (10秒ピッタリ)', 'Aklından on saniye say ve dur. Üç tur; hata ne kadar küçükse o kadar iyi. Ayar ve üyelik yok. Arayüz Japonca.'),
   h_log='Geliştirme kayıtları', log='Ölçülen sonuçlar ve düzeltmeler, rakamlarla. Bu yazılar İngilizce ve Japonca.', logs=True, h_lang='Diller', free='Ücretsiz. Kurulum ve üyelik yok.'),
+ 'zh-hant': dict(title='Koshin Studio — 免費網頁遊戲與小工具', desc='Koshin Studio 是一人工作室，製作免費的網頁遊戲和小工具，並記錄實測結果。不必安裝、不必註冊，用瀏覽器就能玩。',
+  lead='一人工作室。我製作網頁遊戲和小應用，並把實測的數據記錄下來。', h_play='開始遊玩',
+  sushi=('壽司堆疊（すし積む）', '把相同的壽司料撞在一起讓它們成長，最終堆成金色壽司桶的落下式益智遊戲。支援14種語言，會依瀏覽器語言開啟。'),
+  nega=('倒戈將棋（寝返り将棋）', '6×6 棋盤遊戲。被夾住的棋子會倒戈到你這一方並升變，連鎖時一次翻轉多枚。支援本機、對戰 AI 與有評分的線上對戰。遊戲介面為英語和日語。'),
+  stop=('10秒整停下（10秒ピッタリ）', '在心裡數10秒，然後停下。三局兩勝，誤差越小越強。不必設定，不必註冊。介面為日語。'),
+  h_log='開發紀錄', log='實測結果與修正，附上數字。這些文章為英語和日語。', logs=True, h_lang='語言', free='免費。不必安裝，不必註冊。'),
+ 'vi': dict(title='Koshin Studio — trò chơi trình duyệt miễn phí và công cụ nhỏ', desc='Koshin Studio là studio một người, làm trò chơi trình duyệt miễn phí và công cụ nhỏ, đồng thời ghi lại những gì đã đo được. Không cần cài đặt hay đăng ký.',
+  lead='Một studio một người. Tôi làm trò chơi trình duyệt và ứng dụng nhỏ, rồi ghi lại những gì mình đo được.', h_play='Chơi',
+  sushi=('Sushi Stack (すし積む)', 'Trò xếp hình rơi: cho các loại sushi giống nhau chạm nhau để lớn lên, cho đến thùng sushi vàng. Có 14 ngôn ngữ, tự mở theo ngôn ngữ trình duyệt.'),
+  nega=('Negaeri Shogi (寝返り将棋)', 'Trò chơi bàn cờ 6×6. Quân bị kẹp sẽ chuyển sang phía bạn và được thăng cấp, chuỗi có thể lật nhiều quân cùng lúc. Chơi cục bộ, với AI và trực tuyến có xếp hạng. Trò chơi bằng tiếng Anh và tiếng Nhật.'),
+  stop=('Dừng đúng 10 giây (10秒ピッタリ)', 'Đếm mười giây trong đầu rồi dừng. Ba lượt; sai số càng nhỏ càng giỏi. Không cần thiết lập hay đăng ký. Giao diện tiếng Nhật.'),
+  h_log='Nhật ký phát triển', log='Kết quả đo và các lần sửa, kèm số liệu. Các bài này bằng tiếng Anh và tiếng Nhật.', logs=True, h_lang='Ngôn ngữ', free='Miễn phí. Không cần cài đặt hay đăng ký.'),
+ 'th': dict(title='Koshin Studio — เกมบนเบราว์เซอร์ฟรีและเครื่องมือเล็ก ๆ', desc='Koshin Studio เป็นสตูดิโอคนเดียว ทำเกมบนเบราว์เซอร์ฟรีและเครื่องมือเล็ก ๆ พร้อมจดบันทึกสิ่งที่วัดได้ ไม่ต้องติดตั้งและไม่ต้องสมัคร',
+  lead='สตูดิโอคนเดียว ฉันทำเกมบนเบราว์เซอร์และแอปเล็ก ๆ แล้วจดบันทึกสิ่งที่วัดได้', h_play='เล่น',
+  sushi=('Sushi Stack (すし積む)', 'เกมปริศนาบล็อกตก ชนซูชิชนิดเดียวกันให้โตขึ้น จนถึงถังซูชิสีทอง มี 14 ภาษา เปิดตามภาษาของเบราว์เซอร์'),
+  nega=('Negaeri Shogi (寝返り将棋)', 'เกมกระดาน 6×6 หมากที่ถูกหนีบจะเปลี่ยนมาอยู่ฝั่งคุณและเลื่อนขั้น การต่อเนื่องพลิกได้หลายตัวพร้อมกัน เล่นในเครื่อง ต่อสู้กับ AI และออนไลน์แบบมีคะแนน เกมเป็นภาษาอังกฤษและญี่ปุ่น'),
+  stop=('หยุดให้ตรง 10 วินาที (10秒ピッタリ)', 'นับสิบวินาทีในใจแล้วหยุด สามรอบ ยิ่งคลาดเคลื่อนน้อยยิ่งเก่ง ไม่ต้องตั้งค่าหรือสมัคร หน้าจอเป็นภาษาญี่ปุ่น'),
+  h_log='บันทึกการพัฒนา', log='ผลที่วัดได้และการแก้ไข พร้อมตัวเลข บทความเหล่านี้เป็นภาษาอังกฤษและญี่ปุ่น', logs=True, h_lang='ภาษา', free='ฟรี ไม่ต้องติดตั้งและไม่ต้องสมัคร'),
 }
 QUIZ = dict(
  en='12 questions, 6 axes: your anime type and the one anime that fits you right now. Free, nothing is sent anywhere. In English.',
@@ -88,8 +106,12 @@ QUIZ = dict(
  ru='12 вопросов, 6 осей: ваш тип аниме и то аниме, которое сейчас подходит вам лучше всего. Бесплатно, ничего не отправляется. На английском.',
  id='12 pertanyaan, 6 sumbu: tipe anime Anda dan anime yang paling cocok untuk Anda sekarang. Gratis, tidak ada data yang dikirim. Dalam bahasa Inggris.',
  ko='12개 질문, 6개 축: 나의 애니 타입과 지금 가장 잘 맞는 애니 한 편. 무료이며 아무것도 전송하지 않습니다. 영어로 제공됩니다.',
+ zh_hant='12 個問題、6 條軸：得出你的動畫類型和此刻最適合你的一部動畫。免費，不會傳送任何資料。英語介面。',
+ vi='12 câu hỏi, 6 trục: kiểu anime của bạn và bộ anime hợp với bạn nhất lúc này. Miễn phí, không gửi dữ liệu đi đâu. Bằng tiếng Anh.',
+ th='12 คำถาม 6 แกน: ประเภทอนิเมะของคุณและอนิเมะที่เหมาะกับคุณที่สุดตอนนี้ ฟรี ไม่ส่งข้อมูลไปที่ไหน เป็นภาษาอังกฤษ',
  tr='12 soru, 6 eksen: anime tipiniz ve şu an size en çok uyan anime. Ücretsiz, hiçbir şey gönderilmez. İngilizce.',
 )
+QUIZ['zh-hant'] = QUIZ.pop('zh_hant')
 import glob as _g
 LOGS = []
 for _f in sorted(_g.glob('en/notes/*/index.html')):
@@ -117,7 +139,7 @@ for code, L in langs.items():
   <p>{e(t["log"])}</p>
   <ul class="plain">
 ''' + '\n'.join(f'    <li><a href="{u}" hreflang="en" lang="en">{e(n)}</a></li>' for u, n in LOGS) + '\n  </ul>\n'
-    tools = f'''  <h2 class="rv">{e(TOOLS_H[code])}</h2>
+    tools = '' if code not in PG else f'''  <h2 class="rv">{e(TOOLS_H[code])}</h2>
   <ul class="plain">
     <li><a href="{L["path"]}calc/gacha/">{e(PG[code]["g"]["h1"])}</a> — {e(PG[code]["g"]["lead"])}</li>
     <li><a href="{L["path"]}calc/gacha-rate/">{e(PG[code]["r"]["h1"])}</a> — {e(PG[code]["r"]["lead"])}</li>
