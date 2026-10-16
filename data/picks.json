@@ -6,28 +6,52 @@
       "name": "トレカのスリーブ（Amazonで探す）",
       "service": "Amazon",
       "url": "https://www.amazon.co.jp/s?k=%E3%83%88%E3%83%AC%E3%82%AB+%E3%82%B9%E3%83%AA%E3%83%BC%E3%83%96+100%E6%9E%9A+%E3%83%9D%E3%82%B1%E3%82%AB&tag=torecadash-22",
-      "comment": "「標準サイズ」用かを確認してから選ぶ。"
+      "comment": "「標準サイズ」用かを確認してから選ぶ。",
+      "rk": {
+        "type": "ichiba",
+        "keyword": "トレカ スリーブ 100枚 ポケカ",
+        "must": "スリーブ|ローダー",
+        "mustnot": "業販|犬|ペット|マスク|スマートウォッチ|雑誌|Blu-ray|DVD|キーホルダー|遺毛|レディース|メンズ|小さめ"
+      }
     },
     {
       "id": "amz-loader",
       "name": "マグネットローダー（Amazonで探す）",
       "service": "Amazon",
       "url": "https://www.amazon.co.jp/s?k=%E3%83%9E%E3%82%B0%E3%83%8D%E3%83%83%E3%83%88%E3%83%AD%E3%83%BC%E3%83%80%E3%83%BC+%E3%83%88%E3%83%AC%E3%82%AB&tag=torecadash-22",
-      "comment": "「35pt」と、スリーブごと入るかを確認。"
+      "comment": "「35pt」と、スリーブごと入るかを確認。",
+      "rk": {
+        "type": "ichiba",
+        "keyword": "マグネットローダー トレカ",
+        "must": "ローダー",
+        "mustnot": "業販|犬|ペット|マスク|スマートウォッチ|雑誌|Blu-ray|DVD|キーホルダー|遺毛|レディース|メンズ|小さめ"
+      }
     },
     {
       "id": "amz-deckcase",
       "name": "デッキケース（Amazonで探す）",
       "service": "Amazon",
       "url": "https://www.amazon.co.jp/s?k=%E3%83%87%E3%83%83%E3%82%AD%E3%82%B1%E3%83%BC%E3%82%B9+%E3%83%88%E3%83%AC%E3%82%AB&tag=torecadash-22",
-      "comment": "スリーブ入りで何枚入るかを確認。"
+      "comment": "スリーブ入りで何枚入るかを確認。",
+      "rk": {
+        "type": "ichiba",
+        "keyword": "デッキケース トレカ",
+        "must": "デッキケース|カードケース",
+        "mustnot": "業販|犬|ペット|マスク|スマートウォッチ|雑誌|Blu-ray|DVD|キーホルダー|遺毛|レディース|メンズ|小さめ"
+      }
     },
     {
       "id": "amz-file",
       "name": "カードファイル（Amazonで探す）",
       "service": "Amazon",
       "url": "https://www.amazon.co.jp/s?k=%E3%82%AB%E3%83%BC%E3%83%89%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB+9%E3%83%9D%E3%82%B1%E3%83%83%E3%83%88+%E3%83%88%E3%83%AC%E3%82%AB&tag=torecadash-22",
-      "comment": "ポケット数と、スリーブごと入るかを確認。"
+      "comment": "ポケット数と、スリーブごと入るかを確認。",
+      "rk": {
+        "type": "ichiba",
+        "keyword": "カードファイル 9ポケット トレカ",
+        "must": "ファイル|ポケット",
+        "mustnot": "業販|犬|ペット|マスク|スマートウォッチ|雑誌|Blu-ray|DVD|キーホルダー|遺毛|レディース|メンズ|小さめ"
+      }
     },
     {
       "id": "bk-swiftui",
@@ -36,7 +60,13 @@
       "service": "Amazon",
       "url": "https://www.amazon.co.jp/s?k=SwiftUI+%E5%85%A5%E9%96%80+iOS%E3%82%A2%E3%83%97%E3%83%AA%E9%96%8B%E7%99%BA&tag=torecadash-22",
       "comment": "この記事の題材（iOSアプリ）を学ぶ入口として。",
-      "comment_en": "A starting point for the iOS topic in this article."
+      "comment_en": "A starting point for the iOS topic in this article.",
+      "rk": {
+        "type": "books",
+        "keyword": "SwiftUI 入門",
+        "must": "SwiftUI",
+        "mustnot": "Blu-ray|DVD|雑誌|犬|マスク"
+      }
     },
     {
       "id": "bk-indie-ios",
@@ -45,7 +75,13 @@
       "service": "Amazon",
       "url": "https://www.amazon.co.jp/s?k=iOS%E3%82%A2%E3%83%97%E3%83%AA+%E5%80%8B%E4%BA%BA%E9%96%8B%E7%99%BA+App+Store+%E5%85%AC%E9%96%8B&tag=torecadash-22",
       "comment": "審査・公開まわりを通して読める本を探す。",
-      "comment_en": "Look for books that walk through review and release."
+      "comment_en": "Look for books that walk through review and release.",
+      "rk": {
+        "type": "books",
+        "keyword": "iOSアプリ 個人開発",
+        "must": "iOS|iPhone|アプリ開発",
+        "mustnot": "Blu-ray|DVD|雑誌|犬|マスク"
+      }
     },
     {
       "id": "bk-firebase",
@@ -54,7 +90,13 @@
       "service": "Amazon",
       "url": "https://www.amazon.co.jp/s?k=Firebase+%E5%85%A5%E9%96%80+%E3%82%A2%E3%83%97%E3%83%AA%E9%96%8B%E7%99%BA&tag=torecadash-22",
       "comment": "認証・Firestoreなど、この記事で出てくる仕組みの入門書。",
-      "comment_en": "Introductions to the parts of Firebase mentioned here."
+      "comment_en": "Introductions to the parts of Firebase mentioned here.",
+      "rk": {
+        "type": "books",
+        "keyword": "Firebase 入門",
+        "must": "Firebase",
+        "mustnot": "Blu-ray|DVD|雑誌|犬|マスク"
+      }
     },
     {
       "id": "bk-genai",
@@ -63,7 +105,13 @@
       "service": "Amazon",
       "url": "https://www.amazon.co.jp/s?k=%E7%94%9F%E6%88%90AI+%E3%82%A2%E3%83%97%E3%83%AA%E9%96%8B%E7%99%BA+LLM+API+%E5%85%A5%E9%96%80&tag=torecadash-22",
       "comment": "APIを使ったアプリ作りの入門書を探す。",
-      "comment_en": "Introductions to building apps on top of an LLM API."
+      "comment_en": "Introductions to building apps on top of an LLM API.",
+      "rk": {
+        "type": "books",
+        "keyword": "生成AI アプリ開発 入門",
+        "must": "生成AI|LLM|ChatGPT|Claude|Gemini|プロンプト",
+        "mustnot": "Blu-ray|DVD|雑誌|犬|マスク"
+      }
     },
     {
       "id": "bk-web",
@@ -72,7 +120,13 @@
       "service": "Amazon",
       "url": "https://www.amazon.co.jp/s?k=Web%E5%88%B6%E4%BD%9C+HTML+CSS+%E5%85%A5%E9%96%80&tag=torecadash-22",
       "comment": "サイト作りの基本を押さえる本。",
-      "comment_en": "Basics of building a website."
+      "comment_en": "Basics of building a website.",
+      "rk": {
+        "type": "books",
+        "keyword": "HTML CSS 入門",
+        "must": "HTML",
+        "mustnot": "Blu-ray|DVD|雑誌|犬|マスク"
+      }
     },
     {
       "id": "bk-static",
@@ -81,7 +135,13 @@
       "service": "Amazon",
       "url": "https://www.amazon.co.jp/s?k=%E9%9D%99%E7%9A%84%E3%82%B5%E3%82%A4%E3%83%88+Jamstack+Web%E9%96%8B%E7%99%BA&tag=torecadash-22",
       "comment": "静的サイトの作り方・運用を扱う本を探す。",
-      "comment_en": "Books on building and running static sites."
+      "comment_en": "Books on building and running static sites.",
+      "rk": {
+        "type": "books",
+        "keyword": "Web開発 静的サイト",
+        "must": "静的|Jamstack|Web制作|Web開発",
+        "mustnot": "Blu-ray|DVD|雑誌|犬|マスク"
+      }
     },
     {
       "id": "bk-python",
@@ -90,7 +150,13 @@
       "service": "Amazon",
       "url": "https://www.amazon.co.jp/s?k=Python+%E3%83%87%E3%83%BC%E3%82%BF%E5%87%A6%E7%90%86+%E5%85%A5%E9%96%80&tag=torecadash-22",
       "comment": "文字列・JSONなどデータの扱いを学ぶ入口。",
-      "comment_en": "An entry point to handling strings, JSON and other data."
+      "comment_en": "An entry point to handling strings, JSON and other data.",
+      "rk": {
+        "type": "books",
+        "keyword": "Python データ処理",
+        "must": "Python",
+        "mustnot": "Blu-ray|DVD|雑誌|犬|マスク"
+      }
     },
     {
       "id": "bk-test",
@@ -99,7 +165,13 @@
       "service": "Amazon",
       "url": "https://www.amazon.co.jp/s?k=%E3%82%BD%E3%83%95%E3%83%88%E3%82%A6%E3%82%A7%E3%82%A2%E3%83%86%E3%82%B9%E3%83%88+%E5%85%A5%E9%96%80+%E5%93%81%E8%B3%AA&tag=torecadash-22",
       "comment": "「書く前に数える」「壊して確かめる」を体系的に学ぶ。",
-      "comment_en": "A systematic take on counting first and testing by breaking."
+      "comment_en": "A systematic take on counting first and testing by breaking.",
+      "rk": {
+        "type": "books",
+        "keyword": "ソフトウェアテスト 入門",
+        "must": "テスト",
+        "mustnot": "Blu-ray|DVD|雑誌|犬|マスク"
+      }
     },
     {
       "id": "bk-data",
@@ -108,7 +180,13 @@
       "service": "Amazon",
       "url": "https://www.amazon.co.jp/s?k=%E3%83%87%E3%83%BC%E3%82%BF%E3%82%AF%E3%83%AC%E3%83%B3%E3%82%B8%E3%83%B3%E3%82%B0+%E3%83%87%E3%83%BC%E3%82%BF%E5%93%81%E8%B3%AA+%E9%87%8D%E8%A4%87&tag=torecadash-22",
       "comment": "表記ゆれ・重複を扱う考え方の本を探す。",
-      "comment_en": "Books on spelling variants and duplicates."
+      "comment_en": "Books on spelling variants and duplicates.",
+      "rk": {
+        "type": "books",
+        "keyword": "データクレンジング",
+        "must": "クレンジング|データ品質|前処理|データ整備",
+        "mustnot": "Blu-ray|DVD|雑誌|犬|マスク"
+      }
     },
     {
       "id": "bk-gamedev",
@@ -117,7 +195,13 @@
       "service": "Amazon",
       "url": "https://www.amazon.co.jp/s?k=%E3%82%B2%E3%83%BC%E3%83%A0%E9%96%8B%E7%99%BA+JavaScript+%E5%85%A5%E9%96%80&tag=torecadash-22",
       "comment": "ブラウザゲームを作る入門書。",
-      "comment_en": "Introductions to making browser games."
+      "comment_en": "Introductions to making browser games.",
+      "rk": {
+        "type": "books",
+        "keyword": "JavaScript ゲーム 開発",
+        "must": "ゲーム",
+        "mustnot": "Blu-ray|DVD|雑誌|犬|マスク"
+      }
     },
     {
       "id": "bk-gamedesign",
@@ -126,7 +210,13 @@
       "service": "Amazon",
       "url": "https://www.amazon.co.jp/s?k=%E3%82%B2%E3%83%BC%E3%83%A0%E3%83%87%E3%82%B6%E3%82%A4%E3%83%B3+%E5%85%A5%E9%96%80&tag=torecadash-22",
       "comment": "遊びの設計を学べる本を探す。",
-      "comment_en": "Books on designing how a game plays."
+      "comment_en": "Books on designing how a game plays.",
+      "rk": {
+        "type": "books",
+        "keyword": "ゲームデザイン 入門",
+        "must": "ゲームデザイン|ゲーム.{0,6}設計",
+        "mustnot": "Blu-ray|DVD|雑誌|犬|マスク"
+      }
     },
     {
       "id": "bk-audio",
@@ -135,7 +225,13 @@
       "service": "Amazon",
       "url": "https://www.amazon.co.jp/s?k=Web+Audio+API+%E9%9F%B3+%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0&tag=torecadash-22",
       "comment": "波形を作って鳴らす仕組みを学ぶ。",
-      "comment_en": "Learn how sounds are generated and played."
+      "comment_en": "Learn how sounds are generated and played.",
+      "rk": {
+        "type": "books",
+        "keyword": "Web Audio API",
+        "must": "Audio|音響|サウンド",
+        "mustnot": "Blu-ray|DVD|雑誌|犬|マスク"
+      }
     },
     {
       "id": "bk-stats",
@@ -144,7 +240,13 @@
       "service": "Amazon",
       "url": "https://www.amazon.co.jp/s?k=%E7%B5%B1%E8%A8%88%E5%AD%A6+%E5%85%A5%E9%96%80+%E3%83%87%E3%83%BC%E3%82%BF%E5%88%86%E6%9E%90&tag=torecadash-22",
       "comment": "割合・測定・ばらつきの考え方を学ぶ。",
-      "comment_en": "Learn how to reason about rates, measurements and spread."
+      "comment_en": "Learn how to reason about rates, measurements and spread.",
+      "rk": {
+        "type": "books",
+        "keyword": "統計学 入門",
+        "must": "統計",
+        "mustnot": "Blu-ray|DVD|雑誌|犬|マスク"
+      }
     },
     {
       "id": "bk-anime",
@@ -153,7 +255,13 @@
       "service": "Amazon",
       "url": "https://www.amazon.co.jp/s?k=%E3%82%A2%E3%83%8B%E3%83%A1+%E5%90%8D%E4%BD%9C+%E3%82%AC%E3%82%A4%E3%83%89&tag=torecadash-22",
       "comment": "アニメ作品を知る入口として。",
-      "comment_en": "A way into the world of anime."
+      "comment_en": "A way into the world of anime.",
+      "rk": {
+        "type": "books",
+        "keyword": "アニメ 名作 ガイド",
+        "must": "アニメ",
+        "mustnot": "Blu-ray|DVD|雑誌|犬|マスク"
+      }
     },
     {
       "id": "bk-anime-db",
@@ -162,7 +270,13 @@
       "service": "Amazon",
       "url": "https://www.amazon.co.jp/s?k=%E3%82%A2%E3%83%8B%E3%83%A1+%E5%B9%B4%E9%91%91+%E4%BD%9C%E5%93%81+%E3%83%87%E3%83%BC%E3%82%BF&tag=torecadash-22",
       "comment": "作品を調べるための資料。",
-      "comment_en": "Reference material for looking up titles."
+      "comment_en": "Reference material for looking up titles.",
+      "rk": {
+        "type": "books",
+        "keyword": "アニメ 年鑑",
+        "must": "アニメ",
+        "mustnot": "Blu-ray|DVD|雑誌|犬|マスク"
+      }
     },
     {
       "id": "bk-ai-cost",
@@ -171,7 +285,13 @@
       "service": "Amazon",
       "url": "https://www.amazon.co.jp/s?k=LLM+API+%E3%82%B3%E3%82%B9%E3%83%88+%E6%9C%80%E9%81%A9%E5%8C%96&tag=torecadash-22",
       "comment": "費用と精度の取り合いを考える本を探す。",
-      "comment_en": "Books on trading cost against accuracy."
+      "comment_en": "Books on trading cost against accuracy.",
+      "rk": {
+        "type": "books",
+        "keyword": "LLM アプリ 運用",
+        "must": "LLM|生成AI",
+        "mustnot": "Blu-ray|DVD|雑誌|犬|マスク"
+      }
     },
     {
       "id": "it-charm",
@@ -180,7 +300,13 @@
       "service": "Amazon",
       "url": "https://www.amazon.co.jp/s?k=%E3%83%9D%E3%82%B1%E3%83%A2%E3%83%B3+%E3%83%81%E3%83%A3%E3%83%BC%E3%83%A0+%E3%82%AC%E3%83%81%E3%83%A3&tag=torecadash-22",
       "comment": "同じシリーズのチャームを探す。",
-      "comment_en": "Look for charms from the same line."
+      "comment_en": "Look for charms from the same line.",
+      "rk": {
+        "type": "ichiba",
+        "keyword": "ポケモン チャーム",
+        "must": "チャーム",
+        "mustnot": "業販|犬|ペット|マスク|スマートウォッチ|雑誌|Blu-ray|DVD|キーホルダー|遺毛|レディース|メンズ|小さめ"
+      }
     },
     {
       "id": "it-capsule",
@@ -189,7 +315,13 @@
       "service": "Amazon",
       "url": "https://www.amazon.co.jp/s?k=%E3%82%AB%E3%83%97%E3%82%BB%E3%83%AB%E3%83%88%E3%82%A4+%E3%82%B1%E3%83%BC%E3%82%B9+%E3%82%B3%E3%83%AC%E3%82%AF%E3%82%B7%E3%83%A7%E3%83%B3&tag=torecadash-22",
       "comment": "集めたものを保管する用品。",
-      "comment_en": "Supplies for storing what you collect."
+      "comment_en": "Supplies for storing what you collect.",
+      "rk": {
+        "type": "ichiba",
+        "keyword": "カプセルトイ ケース",
+        "must": "ケース|カプセル",
+        "mustnot": "業販|犬|ペット|マスク|スマートウォッチ|雑誌|Blu-ray|DVD|キーホルダー|遺毛|レディース|メンズ|小さめ"
+      }
     },
     {
       "id": "it-stopwatch",
@@ -198,7 +330,13 @@
       "service": "Amazon",
       "url": "https://www.amazon.co.jp/s?k=%E3%82%B9%E3%83%88%E3%83%83%E3%83%97%E3%82%A6%E3%82%A9%E3%83%83%E3%83%81+%E3%82%B9%E3%83%9D%E3%83%BC%E3%83%84+%E8%A8%88%E6%99%82&tag=torecadash-22",
       "comment": "10秒を測る道具を探す。",
-      "comment_en": "A tool for timing ten seconds."
+      "comment_en": "A tool for timing ten seconds.",
+      "rk": {
+        "type": "ichiba",
+        "keyword": "ストップウォッチ",
+        "must": "ストップウォッチ",
+        "mustnot": "業販|犬|ペット|マスク|スマートウォッチ|雑誌|Blu-ray|DVD|キーホルダー|遺毛|レディース|メンズ|小さめ"
+      }
     },
     {
       "id": "bk-shogi",
@@ -207,7 +345,13 @@
       "service": "Amazon",
       "url": "https://www.amazon.co.jp/s?k=%E5%B0%86%E6%A3%8B+%E5%85%A5%E9%96%80+%E5%88%9D%E5%BF%83%E8%80%85&tag=torecadash-22",
       "comment": "将棋のルールと考え方を学ぶ。",
-      "comment_en": "Learn the rules and ideas of shogi."
+      "comment_en": "Learn the rules and ideas of shogi.",
+      "rk": {
+        "type": "books",
+        "keyword": "将棋 入門 初心者",
+        "must": "将棋",
+        "mustnot": "Blu-ray|DVD|雑誌|犬|マスク"
+      }
     },
     {
       "id": "it-shogi",
@@ -216,7 +360,13 @@
       "service": "Amazon",
       "url": "https://www.amazon.co.jp/s?k=%E5%B0%86%E6%A3%8B%E7%9B%A4+%E9%A7%92+%E3%82%BB%E3%83%83%E3%83%88&tag=torecadash-22",
       "comment": "実際に指す道具を探す。",
-      "comment_en": "Tools for playing a real game."
+      "comment_en": "Tools for playing a real game.",
+      "rk": {
+        "type": "ichiba",
+        "keyword": "将棋盤 駒 セット",
+        "must": "将棋",
+        "mustnot": "業販|犬|ペット|マスク|スマートウォッチ|雑誌|Blu-ray|DVD|キーホルダー|遺毛|レディース|メンズ|小さめ"
+      }
     },
     {
       "id": "bk-dev-misc",
@@ -225,7 +375,13 @@
       "service": "Amazon",
       "url": "https://www.amazon.co.jp/s?k=%E5%80%8B%E4%BA%BA%E9%96%8B%E7%99%BA+%E4%BD%9C%E3%82%8A%E6%96%B9+%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0&tag=torecadash-22",
       "comment": "作って測って直す、の進め方の本を探す。",
-      "comment_en": "Books on building, measuring and fixing."
+      "comment_en": "Books on building, measuring and fixing.",
+      "rk": {
+        "type": "books",
+        "keyword": "個人開発 プログラミング",
+        "must": "個人開発|プログラミング",
+        "mustnot": "Blu-ray|DVD|雑誌|犬|マスク"
+      }
     }
   ]
 }

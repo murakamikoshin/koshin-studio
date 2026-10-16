@@ -41,6 +41,8 @@ const isPick = (n) => PICK_WORKS.has(n.work);
 const records = notes.filter((n) => !isPick(n));
 const picks = notes.filter(isPick);
 const pickById = Object.fromEntries((read('/data/picks.json').items || []).map((x) => [x.id, x]));
+/* 楽天の商品API（tools/rakuten-picks.mjs）で選んだ「画像つきの1点」。無ければ文字のリンクだけ */
+const pickRk = existsSync(here + '/data/picks-rakuten.json') ? read('/data/picks-rakuten.json') : {};
 const kinds = read('/data/kinds.json');
 const conf  = existsSync(here + '/data/site.json') ? read('/data/site.json') : { social: [], ads: {} };
 const stack = existsSync(here + '/data/stack.json') ? read('/data/stack.json') : { groups: [] };
@@ -1105,9 +1107,25 @@ for (const file of pages) {
   <section class="picks" id="picks">
     <h2 id="picks-h">${head}</h2>
     <p class="note">${esc(disc)}</p>
-    <ul class="plain">${items.map((x) => `
-      <li><a href="${esc(x.url)}" rel="sponsored noopener" target="_blank">${esc(pEn ? (x.name_en || x.name) : x.name)}</a>${x.service && !String(x.name).includes(x.service) ? ` (${esc(x.service)})` : ''} — ${esc(pEn ? (x.comment_en || x.comment || '') : (x.comment || ''))}</li>`).join('')}
+    ${items.some((x) => pickRk[x.id]) ? `<p class="note">${pEn ? 'Cards with a photo are picked automatically from Rakuten\u2019s best sellers and reviews. I have not used them.' : '写真つきのカードは、楽天の売れ筋とレビューから機械的に選んだものです（使って選んだものではありません）。'}</p>` : ''}
+    <ul class="plain pick-list">${items.map((x) => {
+      const rk = pickRk[x.id];
+      const aLink = `<a href="${esc(x.url)}" rel="sponsored noopener" target="_blank">${esc(pEn ? (x.name_en || x.name) : x.name)}</a>`;
+      if (!rk) return `
+      <li>${aLink}${x.service && !String(x.name).includes(x.service) ? ` (${esc(x.service)})` : ''} \u2014 ${esc(pEn ? (x.comment_en || x.comment || '') : (x.comment || ''))}</li>`;
+      const stars = rk.reviewCount ? ` \u2605${rk.reviewAverage.toFixed(1)} (${rk.reviewCount})` : '';
+      return `
+      <li class="pick-card">
+        <a class="pick-img" href="${esc(rk.url)}" rel="sponsored noopener" target="_blank"><img src="${esc(rk.image)}" alt="" width="100" height="100" loading="lazy" referrerpolicy="no-referrer"></a>
+        <div class="pick-body">
+          <a class="pick-title" href="${esc(rk.url)}" rel="sponsored noopener" target="_blank">${esc(rk.title)}</a>
+          <div class="pick-meta">\u00a5${rk.price.toLocaleString('ja-JP')}${stars} \u00b7 ${esc(pEn ? (rk.shop === '楽天ブックス' ? 'Rakuten Books' : 'Rakuten Ichiba') : rk.shop)}</div>
+          <div class="pick-links"><a class="btn pick-btn" href="${esc(rk.url)}" rel="sponsored noopener" target="_blank">${pEn ? 'View on Rakuten' : '楽天で見る'}</a> ${aLink}</div>
+        </div>
+      </li>`;
+    }).join('')}
     </ul>
+    ${items.some((x) => pickRk[x.id]) ? '<p class="note"><a href="https://webservice.rakuten.co.jp/" target="_blank" rel="noopener">Supported by Rakuten Developers</a></p>' : ''}
   </section>
 <!--/picks-->\n`;
       html = html.replace(/<\/div>\s*<\/main>/, (m) => box + m);
