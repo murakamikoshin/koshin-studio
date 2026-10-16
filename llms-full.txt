@@ -8172,6 +8172,8 @@ URL: https://koshinstudio.com/en/
 
 - A bulk update hit “all articles”: count before you write, and break your tests to prove they work (https://koshinstudio.com/en/notes/bulk-accident/)
 
+- Pokémon card sleeves and loaders: sizes and what “pt” means (https://koshinstudio.com/en/notes/card-supplies-guide/)
+
 - Claude API vs Gemini API by official numbers: small-model prices, web search, spend limits and deprecation (https://koshinstudio.com/en/notes/claude-vs-gemini-api/)
 
 - Comparing comment systems for static sites by their official information: giscus, utterances, Disqus, Remark42 and more (https://koshinstudio.com/en/notes/comment-services/)
