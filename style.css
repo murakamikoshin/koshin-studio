@@ -817,3 +817,5 @@ body.article .eyebrow{font-size:15px;font-weight:700;letter-spacing:.04em}
   body.article th,body.article td{padding:10px 11px}
   body.article table{font-size:14.5px}
 }
+/* About・あつかい：先頭の lead は一言のラベルではなく本文なので、太字・青にしない */
+body.article.doc .lead{font-size:17px;font-weight:400;letter-spacing:.01em;color:var(--text);margin-bottom:24px}

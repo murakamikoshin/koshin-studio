@@ -1089,7 +1089,7 @@ for (const file of pages) {
              .replace(/\n?<!--picks-note-->[\s\S]*?<!--\/picks-note-->\n?/g, '');
   /* 記事（notes の各言語版）は、読みやすさのために専用の組み方にする（style.css の body.article）。
      組み直しても増えないよう、class が無い <body> にだけ付ける */
-  if (/^\/(?:[^/]+\/)?notes\/[^/]+\/index\.html$/.test(rel)) html = html.replace('<body>', '<body class="article">');
+  if (/^\/(?:[^/]+\/)?(?:notes\/[^/]+|about|privacy)\/index\.html$/.test(rel)) html = html.replace('<body>', /\/(?:about|privacy)\//.test(rel) ? '<body class="article doc">' : '<body class="article">');
   const af = conf.affiliate || {};
   const pn = rel.match(/^\/notes\/([^/]+)\/index\.html$/);
   if (af.enabled && pn && noteBySlug[pn[1]] && (noteBySlug[pn[1]].picks || []).length) {
