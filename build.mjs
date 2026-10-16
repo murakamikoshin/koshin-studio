@@ -1091,21 +1091,27 @@ for (const file of pages) {
      組み直しても増えないよう、class が無い <body> にだけ付ける */
   if (/^\/(?:[^/]+\/)?(?:notes\/[^/]+|about|privacy|works\/[^/]+)\/index\.html$/.test(rel)) html = html.replace(/<body(?: class="article(?: doc)?")?>/, /\/(?:about|privacy|works)\//.test(rel) ? '<body class="article doc">' : '<body class="article">');
   const af = conf.affiliate || {};
-  const pn = rel.match(/^\/notes\/([^/]+)\/index\.html$/);
-  if (af.enabled && pn && noteBySlug[pn[1]] && (noteBySlug[pn[1]].picks || []).length) {
-    const items = noteBySlug[pn[1]].picks.map((id) => pickById[id]).filter((x) => x && x.url);
+  /* 紹介の枠の対象：日本語・英語の記事（notes）と作品ページ（works）。
+     ⚠️手で書いた枠（class="note picks-note" が印の外にある頁。スリーブ記事の各言語版）には重ねない */
+  const pm = rel.match(/^\/(en\/)?(notes|works)\/([^/]+)\/index\.html$/);
+  const pEntry = pm ? (pm[2] === 'notes' ? noteBySlug[pm[3]] : workBySlug[pm[3]]) : null;
+  const pEn = !!(pm && pm[1]);
+  if (af.enabled && pEntry && (pEntry.picks || []).length && !html.includes('picks-note')) {
+    const items = pEntry.picks.map((id) => pickById[id]).filter((x) => x && x.url);
     if (items.length) {
+      const disc = pEn ? (af.disclosure_en || af.disclosure || '') : (af.disclosure || '');
+      const head = pEn ? 'Related items' : (pm[2] === 'works' ? '関連するもの' : 'この記事で紹介したもの');
       const box = `\n<!--picks-->
   <section class="picks" id="picks">
-    <h2 id="picks-h">この記事で紹介したもの</h2>
-    <p class="note">${esc(af.disclosure || '')}</p>
+    <h2 id="picks-h">${head}</h2>
+    <p class="note">${esc(disc)}</p>
     <ul class="plain">${items.map((x) => `
-      <li><a href="${esc(x.url)}" rel="sponsored noopener" target="_blank">${esc(x.name)}</a>${x.service ? `（${esc(x.service)}）` : ''} — ${esc(x.comment || '')}</li>`).join('')}
+      <li><a href="${esc(x.url)}" rel="sponsored noopener" target="_blank">${esc(pEn ? (x.name_en || x.name) : x.name)}</a>${x.service && !String(x.name).includes(x.service) ? ` (${esc(x.service)})` : ''} — ${esc(pEn ? (x.comment_en || x.comment || '') : (x.comment || ''))}</li>`).join('')}
     </ul>
   </section>
 <!--/picks-->\n`;
       html = html.replace(/<\/div>\s*<\/main>/, (m) => box + m);
-      html = html.replace(/(<\/h1>)/, `$1\n<!--picks-note--><p class="note picks-note">${esc(af.disclosure || '')}</p><!--/picks-note-->`);
+      html = html.replace(/(<\/h1>)/, `$1\n<!--picks-note--><p class="note picks-note">${esc(disc)}</p><!--/picks-note-->`);
     }
   }
   /* コメント欄（記事だけ。giscus ＝ GitHub Discussions）。site.json の comments.categoryId が

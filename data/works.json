@@ -35,6 +35,10 @@
     "genre": [
       "パズル",
       "落ち物パズル"
+    ],
+    "picks": [
+      "bk-gamedev",
+      "bk-gamedesign"
     ]
   },
   {
@@ -57,6 +61,9 @@
     "genre": [
       "カジュアル",
       "タイミング"
+    ],
+    "picks": [
+      "it-stopwatch"
     ]
   },
   {
@@ -108,6 +115,10 @@
         "q": "アプリのインストールは要りますか？",
         "a": "要りません。ブラウザが動けば、スマートフォンでもパソコンでもそのまま使えます。"
       }
+    ],
+    "picks": [
+      "bk-anime",
+      "bk-anime-db"
     ]
   },
   {
@@ -160,7 +171,13 @@
       }
     ],
     "os": "iOS",
-    "appStoreUrl": "https://apps.apple.com/jp/app/id6788758920"
+    "appStoreUrl": "https://apps.apple.com/jp/app/id6788758920",
+    "picks": [
+      "amz-sleeve",
+      "amz-loader",
+      "amz-deckcase",
+      "amz-file"
+    ]
   },
   {
     "slug": "negaeri-shogi",
@@ -182,6 +199,10 @@
     "genre": [
       "ボードゲーム",
       "対戦"
+    ],
+    "picks": [
+      "bk-shogi",
+      "it-shogi"
     ]
   }
 ]

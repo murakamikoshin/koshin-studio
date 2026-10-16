@@ -28,6 +28,204 @@
       "service": "Amazon",
       "url": "https://www.amazon.co.jp/s?k=%E3%82%AB%E3%83%BC%E3%83%89%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB+9%E3%83%9D%E3%82%B1%E3%83%83%E3%83%88+%E3%83%88%E3%83%AC%E3%82%AB&tag=torecadash-22",
       "comment": "ポケット数と、スリーブごと入るかを確認。"
+    },
+    {
+      "id": "bk-swiftui",
+      "name": "SwiftUI・iOSアプリ開発の本（Amazonで探す）",
+      "name_en": "Books on SwiftUI and iOS app development (search on Amazon.co.jp)",
+      "service": "Amazon",
+      "url": "https://www.amazon.co.jp/s?k=SwiftUI+%E5%85%A5%E9%96%80+iOS%E3%82%A2%E3%83%97%E3%83%AA%E9%96%8B%E7%99%BA&tag=torecadash-22",
+      "comment": "この記事の題材（iOSアプリ）を学ぶ入口として。",
+      "comment_en": "A starting point for the iOS topic in this article."
+    },
+    {
+      "id": "bk-indie-ios",
+      "name": "個人でiOSアプリを出す本（Amazonで探す）",
+      "name_en": "Books on publishing an iOS app as a solo developer (search on Amazon.co.jp)",
+      "service": "Amazon",
+      "url": "https://www.amazon.co.jp/s?k=iOS%E3%82%A2%E3%83%97%E3%83%AA+%E5%80%8B%E4%BA%BA%E9%96%8B%E7%99%BA+App+Store+%E5%85%AC%E9%96%8B&tag=torecadash-22",
+      "comment": "審査・公開まわりを通して読める本を探す。",
+      "comment_en": "Look for books that walk through review and release."
+    },
+    {
+      "id": "bk-firebase",
+      "name": "Firebaseの本（Amazonで探す）",
+      "name_en": "Books on Firebase (search on Amazon.co.jp)",
+      "service": "Amazon",
+      "url": "https://www.amazon.co.jp/s?k=Firebase+%E5%85%A5%E9%96%80+%E3%82%A2%E3%83%97%E3%83%AA%E9%96%8B%E7%99%BA&tag=torecadash-22",
+      "comment": "認証・Firestoreなど、この記事で出てくる仕組みの入門書。",
+      "comment_en": "Introductions to the parts of Firebase mentioned here."
+    },
+    {
+      "id": "bk-genai",
+      "name": "生成AI・LLMアプリ開発の本（Amazonで探す）",
+      "name_en": "Books on building apps with LLMs (search on Amazon.co.jp)",
+      "service": "Amazon",
+      "url": "https://www.amazon.co.jp/s?k=%E7%94%9F%E6%88%90AI+%E3%82%A2%E3%83%97%E3%83%AA%E9%96%8B%E7%99%BA+LLM+API+%E5%85%A5%E9%96%80&tag=torecadash-22",
+      "comment": "APIを使ったアプリ作りの入門書を探す。",
+      "comment_en": "Introductions to building apps on top of an LLM API."
+    },
+    {
+      "id": "bk-web",
+      "name": "Web制作（HTML・CSS）の本（Amazonで探す）",
+      "name_en": "Books on web building (HTML and CSS) (search on Amazon.co.jp)",
+      "service": "Amazon",
+      "url": "https://www.amazon.co.jp/s?k=Web%E5%88%B6%E4%BD%9C+HTML+CSS+%E5%85%A5%E9%96%80&tag=torecadash-22",
+      "comment": "サイト作りの基本を押さえる本。",
+      "comment_en": "Basics of building a website."
+    },
+    {
+      "id": "bk-static",
+      "name": "静的サイト・Web開発の本（Amazonで探す）",
+      "name_en": "Books on static sites and web development (search on Amazon.co.jp)",
+      "service": "Amazon",
+      "url": "https://www.amazon.co.jp/s?k=%E9%9D%99%E7%9A%84%E3%82%B5%E3%82%A4%E3%83%88+Jamstack+Web%E9%96%8B%E7%99%BA&tag=torecadash-22",
+      "comment": "静的サイトの作り方・運用を扱う本を探す。",
+      "comment_en": "Books on building and running static sites."
+    },
+    {
+      "id": "bk-python",
+      "name": "Pythonデータ処理の本（Amazonで探す）",
+      "name_en": "Books on data handling in Python (search on Amazon.co.jp)",
+      "service": "Amazon",
+      "url": "https://www.amazon.co.jp/s?k=Python+%E3%83%87%E3%83%BC%E3%82%BF%E5%87%A6%E7%90%86+%E5%85%A5%E9%96%80&tag=torecadash-22",
+      "comment": "文字列・JSONなどデータの扱いを学ぶ入口。",
+      "comment_en": "An entry point to handling strings, JSON and other data."
+    },
+    {
+      "id": "bk-test",
+      "name": "ソフトウェアテスト・品質の本（Amazonで探す）",
+      "name_en": "Books on software testing and quality (search on Amazon.co.jp)",
+      "service": "Amazon",
+      "url": "https://www.amazon.co.jp/s?k=%E3%82%BD%E3%83%95%E3%83%88%E3%82%A6%E3%82%A7%E3%82%A2%E3%83%86%E3%82%B9%E3%83%88+%E5%85%A5%E9%96%80+%E5%93%81%E8%B3%AA&tag=torecadash-22",
+      "comment": "「書く前に数える」「壊して確かめる」を体系的に学ぶ。",
+      "comment_en": "A systematic take on counting first and testing by breaking."
+    },
+    {
+      "id": "bk-data",
+      "name": "データ品質・重複排除の本（Amazonで探す）",
+      "name_en": "Books on data quality and de-duplication (search on Amazon.co.jp)",
+      "service": "Amazon",
+      "url": "https://www.amazon.co.jp/s?k=%E3%83%87%E3%83%BC%E3%82%BF%E3%82%AF%E3%83%AC%E3%83%B3%E3%82%B8%E3%83%B3%E3%82%B0+%E3%83%87%E3%83%BC%E3%82%BF%E5%93%81%E8%B3%AA+%E9%87%8D%E8%A4%87&tag=torecadash-22",
+      "comment": "表記ゆれ・重複を扱う考え方の本を探す。",
+      "comment_en": "Books on spelling variants and duplicates."
+    },
+    {
+      "id": "bk-gamedev",
+      "name": "ゲーム開発（JavaScript）の本（Amazonで探す）",
+      "name_en": "Books on game development in JavaScript (search on Amazon.co.jp)",
+      "service": "Amazon",
+      "url": "https://www.amazon.co.jp/s?k=%E3%82%B2%E3%83%BC%E3%83%A0%E9%96%8B%E7%99%BA+JavaScript+%E5%85%A5%E9%96%80&tag=torecadash-22",
+      "comment": "ブラウザゲームを作る入門書。",
+      "comment_en": "Introductions to making browser games."
+    },
+    {
+      "id": "bk-gamedesign",
+      "name": "ゲームデザインの本（Amazonで探す）",
+      "name_en": "Books on game design (search on Amazon.co.jp)",
+      "service": "Amazon",
+      "url": "https://www.amazon.co.jp/s?k=%E3%82%B2%E3%83%BC%E3%83%A0%E3%83%87%E3%82%B6%E3%82%A4%E3%83%B3+%E5%85%A5%E9%96%80&tag=torecadash-22",
+      "comment": "遊びの設計を学べる本を探す。",
+      "comment_en": "Books on designing how a game plays."
+    },
+    {
+      "id": "bk-audio",
+      "name": "Web Audio・音のプログラミングの本（Amazonで探す）",
+      "name_en": "Books on Web Audio and sound programming (search on Amazon.co.jp)",
+      "service": "Amazon",
+      "url": "https://www.amazon.co.jp/s?k=Web+Audio+API+%E9%9F%B3+%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0&tag=torecadash-22",
+      "comment": "波形を作って鳴らす仕組みを学ぶ。",
+      "comment_en": "Learn how sounds are generated and played."
+    },
+    {
+      "id": "bk-stats",
+      "name": "統計・データ分析の本（Amazonで探す）",
+      "name_en": "Books on statistics and data analysis (search on Amazon.co.jp)",
+      "service": "Amazon",
+      "url": "https://www.amazon.co.jp/s?k=%E7%B5%B1%E8%A8%88%E5%AD%A6+%E5%85%A5%E9%96%80+%E3%83%87%E3%83%BC%E3%82%BF%E5%88%86%E6%9E%90&tag=torecadash-22",
+      "comment": "割合・測定・ばらつきの考え方を学ぶ。",
+      "comment_en": "Learn how to reason about rates, measurements and spread."
+    },
+    {
+      "id": "bk-anime",
+      "name": "アニメのガイド本（Amazonで探す）",
+      "name_en": "Anime guidebooks (search on Amazon.co.jp)",
+      "service": "Amazon",
+      "url": "https://www.amazon.co.jp/s?k=%E3%82%A2%E3%83%8B%E3%83%A1+%E5%90%8D%E4%BD%9C+%E3%82%AC%E3%82%A4%E3%83%89&tag=torecadash-22",
+      "comment": "アニメ作品を知る入口として。",
+      "comment_en": "A way into the world of anime."
+    },
+    {
+      "id": "bk-anime-db",
+      "name": "アニメの年鑑・作品データの本（Amazonで探す）",
+      "name_en": "Anime yearbooks and reference books (search on Amazon.co.jp)",
+      "service": "Amazon",
+      "url": "https://www.amazon.co.jp/s?k=%E3%82%A2%E3%83%8B%E3%83%A1+%E5%B9%B4%E9%91%91+%E4%BD%9C%E5%93%81+%E3%83%87%E3%83%BC%E3%82%BF&tag=torecadash-22",
+      "comment": "作品を調べるための資料。",
+      "comment_en": "Reference material for looking up titles."
+    },
+    {
+      "id": "bk-ai-cost",
+      "name": "LLMの運用・コストの本（Amazonで探す）",
+      "name_en": "Books on running LLM apps and their costs (search on Amazon.co.jp)",
+      "service": "Amazon",
+      "url": "https://www.amazon.co.jp/s?k=LLM+API+%E3%82%B3%E3%82%B9%E3%83%88+%E6%9C%80%E9%81%A9%E5%8C%96&tag=torecadash-22",
+      "comment": "費用と精度の取り合いを考える本を探す。",
+      "comment_en": "Books on trading cost against accuracy."
+    },
+    {
+      "id": "it-charm",
+      "name": "ポケモンのチャーム（Amazonで探す）",
+      "name_en": "Pokémon charms (search on Amazon.co.jp)",
+      "service": "Amazon",
+      "url": "https://www.amazon.co.jp/s?k=%E3%83%9D%E3%82%B1%E3%83%A2%E3%83%B3+%E3%83%81%E3%83%A3%E3%83%BC%E3%83%A0+%E3%82%AC%E3%83%81%E3%83%A3&tag=torecadash-22",
+      "comment": "同じシリーズのチャームを探す。",
+      "comment_en": "Look for charms from the same line."
+    },
+    {
+      "id": "it-capsule",
+      "name": "カプセルトイのコレクション用品（Amazonで探す）",
+      "name_en": "Capsule-toy collection supplies (search on Amazon.co.jp)",
+      "service": "Amazon",
+      "url": "https://www.amazon.co.jp/s?k=%E3%82%AB%E3%83%97%E3%82%BB%E3%83%AB%E3%83%88%E3%82%A4+%E3%82%B1%E3%83%BC%E3%82%B9+%E3%82%B3%E3%83%AC%E3%82%AF%E3%82%B7%E3%83%A7%E3%83%B3&tag=torecadash-22",
+      "comment": "集めたものを保管する用品。",
+      "comment_en": "Supplies for storing what you collect."
+    },
+    {
+      "id": "it-stopwatch",
+      "name": "ストップウォッチ（Amazonで探す）",
+      "name_en": "Stopwatches (search on Amazon.co.jp)",
+      "service": "Amazon",
+      "url": "https://www.amazon.co.jp/s?k=%E3%82%B9%E3%83%88%E3%83%83%E3%83%97%E3%82%A6%E3%82%A9%E3%83%83%E3%83%81+%E3%82%B9%E3%83%9D%E3%83%BC%E3%83%84+%E8%A8%88%E6%99%82&tag=torecadash-22",
+      "comment": "10秒を測る道具を探す。",
+      "comment_en": "A tool for timing ten seconds."
+    },
+    {
+      "id": "bk-shogi",
+      "name": "将棋入門の本（Amazonで探す）",
+      "name_en": "Books for beginners in shogi (search on Amazon.co.jp)",
+      "service": "Amazon",
+      "url": "https://www.amazon.co.jp/s?k=%E5%B0%86%E6%A3%8B+%E5%85%A5%E9%96%80+%E5%88%9D%E5%BF%83%E8%80%85&tag=torecadash-22",
+      "comment": "将棋のルールと考え方を学ぶ。",
+      "comment_en": "Learn the rules and ideas of shogi."
+    },
+    {
+      "id": "it-shogi",
+      "name": "将棋盤・駒のセット（Amazonで探す）",
+      "name_en": "Shogi boards and piece sets (search on Amazon.co.jp)",
+      "service": "Amazon",
+      "url": "https://www.amazon.co.jp/s?k=%E5%B0%86%E6%A3%8B%E7%9B%A4+%E9%A7%92+%E3%82%BB%E3%83%83%E3%83%88&tag=torecadash-22",
+      "comment": "実際に指す道具を探す。",
+      "comment_en": "Tools for playing a real game."
+    },
+    {
+      "id": "bk-dev-misc",
+      "name": "個人開発・プログラミングの本（Amazonで探す）",
+      "name_en": "Books on solo development and programming (search on Amazon.co.jp)",
+      "service": "Amazon",
+      "url": "https://www.amazon.co.jp/s?k=%E5%80%8B%E4%BA%BA%E9%96%8B%E7%99%BA+%E4%BD%9C%E3%82%8A%E6%96%B9+%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0&tag=torecadash-22",
+      "comment": "作って測って直す、の進め方の本を探す。",
+      "comment_en": "Books on building, measuring and fixing."
     }
   ]
 }

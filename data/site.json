@@ -30,6 +30,7 @@
   "affiliate": {
     "enabled": true,
     "disclosure": "このページには、広告・アフィリエイトのリンクが含まれます。リンク先で買われると、このサイトに報酬が入ることがあります。Amazonのアソシエイトとして、適格販売により収入を得ています。",
-    "note": "審査の結果が出てから enabled を true にする。data/picks.json の items に url（アフィリエイトのリンク）を入れ、data/notes.json の記事に \"picks\": [\"id\"] を足すと、その記事の終わりに紹介の枠と、冒頭に開示の一文が出る。url が空の項目は出ない。"
+    "note": "審査の結果が出てから enabled を true にする。data/picks.json の items に url（アフィリエイトのリンク）を入れ、data/notes.json の記事に \"picks\": [\"id\"] を足すと、その記事の終わりに紹介の枠と、冒頭に開示の一文が出る。url が空の項目は出ない。",
+    "disclosure_en": "This page contains advertising and affiliate links. If you buy through them, this site may earn a commission. As an Amazon Associate I earn from qualifying purchases."
   }
 }

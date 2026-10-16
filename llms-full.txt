@@ -9,6 +9,8 @@ URL: https://koshinstudio.com/notes/qiita-post-interval/
 
 # Qiita の「投稿頻度が高過ぎます」を測った：新しいアカウントは、投稿から約 30 分、次の記事を作れなかった
 
+このページには、広告・アフィリエイトのリンクが含まれます。リンク先で買われると、このサイトに報酬が入ることがあります。Amazonのアソシエイトとして、適格販売により収入を得ています。
+
   English version (https://koshinstudio.com/en/notes/qiita-post-interval/)
 
   このサイト ／ 2026年10月
@@ -73,12 +75,22 @@ URL: https://koshinstudio.com/notes/qiita-post-interval/
 
 - 制限が、アカウントの経過日数や、投稿の数で、変わるのか
 
+## この記事で紹介したもの
+
+    このページには、広告・アフィリエイトのリンクが含まれます。リンク先で買われると、このサイトに報酬が入ることがあります。Amazonのアソシエイトとして、適格販売により収入を得ています。
+
+- 個人開発・プログラミングの本（Amazonで探す） (https://www.amazon.co.jp/s?k=%E5%80%8B%E4%BA%BA%E9%96%8B%E7%99%BA+%E4%BD%9C%E3%82%8A%E6%96%B9+%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0&tag=torecadash-22) — 作って測って直す、の進め方の本を探す。
+
+- Web制作（HTML・CSS）の本（Amazonで探す） (https://www.amazon.co.jp/s?k=Web%E5%88%B6%E4%BD%9C+HTML+CSS+%E5%85%A5%E9%96%80&tag=torecadash-22) — サイト作りの基本を押さえる本。
+
 
 ---
 
 URL: https://koshinstudio.com/notes/gemini-migration/
 
 # Claude API から Gemini API（gemini-3.1-flash-lite）へ移行した：16 か所の呼び出しを 1 つの関数にまとめた
+
+このページには、広告・アフィリエイトのリンクが含まれます。リンク先で買われると、このサイトに報酬が入ることがあります。Amazonのアソシエイトとして、適格販売により収入を得ています。
 
   English version (https://koshinstudio.com/en/notes/gemini-migration/)
 
@@ -146,12 +158,22 @@ URL: https://koshinstudio.com/notes/gemini-migration/
 
 - 確認できなかったときに、通していた (https://koshinstudio.com/notes/fail-open/) — 検索の上限が引き起こした、別の記録
 
+## この記事で紹介したもの
+
+    このページには、広告・アフィリエイトのリンクが含まれます。リンク先で買われると、このサイトに報酬が入ることがあります。Amazonのアソシエイトとして、適格販売により収入を得ています。
+
+- 生成AI・LLMアプリ開発の本（Amazonで探す） (https://www.amazon.co.jp/s?k=%E7%94%9F%E6%88%90AI+%E3%82%A2%E3%83%97%E3%83%AA%E9%96%8B%E7%99%BA+LLM+API+%E5%85%A5%E9%96%80&tag=torecadash-22) — APIを使ったアプリ作りの入門書を探す。
+
+- LLMの運用・コストの本（Amazonで探す） (https://www.amazon.co.jp/s?k=LLM+API+%E3%82%B3%E3%82%B9%E3%83%88+%E6%9C%80%E9%81%A9%E5%8C%96&tag=torecadash-22) — 費用と精度の取り合いを考える本を探す。
+
 
 ---
 
 URL: https://koshinstudio.com/notes/xcode152-sdk/
 
 # Xcode 15.2 で Firebase 12 が使えない（Swift 6.0 必須）：Firebase 11.4.0 と AdMob 11.5.0 に固定した理由
+
+このページには、広告・アフィリエイトのリンクが含まれます。リンク先で買われると、このサイトに報酬が入ることがあります。Amazonのアソシエイトとして、適格販売により収入を得ています。
 
   English version (https://koshinstudio.com/en/notes/xcode152-sdk/)
 
@@ -217,12 +239,22 @@ URL: https://koshinstudio.com/notes/xcode152-sdk/
 
 - ITMS-91064「無効なバイナリ」 (https://koshinstudio.com/notes/itms-91064/) — AdMob まわりの、別の記録
 
+## この記事で紹介したもの
+
+    このページには、広告・アフィリエイトのリンクが含まれます。リンク先で買われると、このサイトに報酬が入ることがあります。Amazonのアソシエイトとして、適格販売により収入を得ています。
+
+- SwiftUI・iOSアプリ開発の本（Amazonで探す） (https://www.amazon.co.jp/s?k=SwiftUI+%E5%85%A5%E9%96%80+iOS%E3%82%A2%E3%83%97%E3%83%AA%E9%96%8B%E7%99%BA&tag=torecadash-22) — この記事の題材（iOSアプリ）を学ぶ入口として。
+
+- Firebaseの本（Amazonで探す） (https://www.amazon.co.jp/s?k=Firebase+%E5%85%A5%E9%96%80+%E3%82%A2%E3%83%97%E3%83%AA%E9%96%8B%E7%99%BA&tag=torecadash-22) — 認証・Firestoreなど、この記事で出てくる仕組みの入門書。
+
 
 ---
 
 URL: https://koshinstudio.com/notes/itms-91064/
 
 # ITMS-91064「無効なバイナリ」：NSPrivacyTracking が true なのに NSPrivacyTrackingDomains が空だった
+
+このページには、広告・アフィリエイトのリンクが含まれます。リンク先で買われると、このサイトに報酬が入ることがあります。Amazonのアソシエイトとして、適格販売により収入を得ています。
 
   English version (https://koshinstudio.com/en/notes/itms-91064/)
 
@@ -286,12 +318,22 @@ URL: https://koshinstudio.com/notes/itms-91064/
 
 - App Store 審査で「Guideline 2.1 Information Needed」が届いた (https://koshinstudio.com/notes/review-info-needed/) — このあとの記録
 
+## この記事で紹介したもの
+
+    このページには、広告・アフィリエイトのリンクが含まれます。リンク先で買われると、このサイトに報酬が入ることがあります。Amazonのアソシエイトとして、適格販売により収入を得ています。
+
+- 個人でiOSアプリを出す本（Amazonで探す） (https://www.amazon.co.jp/s?k=iOS%E3%82%A2%E3%83%97%E3%83%AA+%E5%80%8B%E4%BA%BA%E9%96%8B%E7%99%BA+App+Store+%E5%85%AC%E9%96%8B&tag=torecadash-22) — 審査・公開まわりを通して読める本を探す。
+
+- SwiftUI・iOSアプリ開発の本（Amazonで探す） (https://www.amazon.co.jp/s?k=SwiftUI+%E5%85%A5%E9%96%80+iOS%E3%82%A2%E3%83%97%E3%83%AA%E9%96%8B%E7%99%BA&tag=torecadash-22) — この記事の題材（iOSアプリ）を学ぶ入口として。
+
 
 ---
 
 URL: https://koshinstudio.com/notes/bulk-accident/
 
 # 一括処理が「全記事」に当たった：書く前に数える、テストは壊して確かめる
+
+このページには、広告・アフィリエイトのリンクが含まれます。リンク先で買われると、このサイトに報酬が入ることがあります。Amazonのアソシエイトとして、適格販売により収入を得ています。
 
   English version (https://koshinstudio.com/en/notes/bulk-accident/)
 
@@ -357,12 +399,22 @@ URL: https://koshinstudio.com/notes/bulk-accident/
 
 - 「重複は実質ゼロ」と数えたのに、監査は112組を出していた (https://koshinstudio.com/notes/dup-zero/) — 数え方を疑った、別の記録
 
+## この記事で紹介したもの
+
+    このページには、広告・アフィリエイトのリンクが含まれます。リンク先で買われると、このサイトに報酬が入ることがあります。Amazonのアソシエイトとして、適格販売により収入を得ています。
+
+- ソフトウェアテスト・品質の本（Amazonで探す） (https://www.amazon.co.jp/s?k=%E3%82%BD%E3%83%95%E3%83%88%E3%82%A6%E3%82%A7%E3%82%A2%E3%83%86%E3%82%B9%E3%83%88+%E5%85%A5%E9%96%80+%E5%93%81%E8%B3%AA&tag=torecadash-22) — 「書く前に数える」「壊して確かめる」を体系的に学ぶ。
+
+- データ品質・重複排除の本（Amazonで探す） (https://www.amazon.co.jp/s?k=%E3%83%87%E3%83%BC%E3%82%BF%E3%82%AF%E3%83%AC%E3%83%B3%E3%82%B8%E3%83%B3%E3%82%B0+%E3%83%87%E3%83%BC%E3%82%BF%E5%93%81%E8%B3%AA+%E9%87%8D%E8%A4%87&tag=torecadash-22) — 表記ゆれ・重複を扱う考え方の本を探す。
+
 
 ---
 
 URL: https://koshinstudio.com/notes/fake-products/
 
 # 「9種セット」を中身ごとに分けて、偽の商品が80個できていた
+
+このページには、広告・アフィリエイトのリンクが含まれます。リンク先で買われると、このサイトに報酬が入ることがあります。Amazonのアソシエイトとして、適格販売により収入を得ています。
 
   English version (https://koshinstudio.com/en/notes/fake-products/)
 
@@ -428,12 +480,22 @@ URL: https://koshinstudio.com/notes/fake-products/
 
 - 「重複は実質ゼロ」と数えたのに、監査は112組を出していた (https://koshinstudio.com/notes/dup-zero/) — 同じ日の、別の記録
 
+## この記事で紹介したもの
+
+    このページには、広告・アフィリエイトのリンクが含まれます。リンク先で買われると、このサイトに報酬が入ることがあります。Amazonのアソシエイトとして、適格販売により収入を得ています。
+
+- データ品質・重複排除の本（Amazonで探す） (https://www.amazon.co.jp/s?k=%E3%83%87%E3%83%BC%E3%82%BF%E3%82%AF%E3%83%AC%E3%83%B3%E3%82%B8%E3%83%B3%E3%82%B0+%E3%83%87%E3%83%BC%E3%82%BF%E5%93%81%E8%B3%AA+%E9%87%8D%E8%A4%87&tag=torecadash-22) — 表記ゆれ・重複を扱う考え方の本を探す。
+
+- Pythonデータ処理の本（Amazonで探す） (https://www.amazon.co.jp/s?k=Python+%E3%83%87%E3%83%BC%E3%82%BF%E5%87%A6%E7%90%86+%E5%85%A5%E9%96%80&tag=torecadash-22) — 文字列・JSONなどデータの扱いを学ぶ入口。
+
 
 ---
 
 URL: https://koshinstudio.com/notes/first-visit/
 
 # 押すものを六つから一つに絞った：初めての人は、どれを押せばいいか分からなかった
+
+このページには、広告・アフィリエイトのリンクが含まれます。リンク先で買われると、このサイトに報酬が入ることがあります。Amazonのアソシエイトとして、適格販売により収入を得ています。
 
   English version (https://koshinstudio.com/en/notes/first-visit/)
 
@@ -509,12 +571,22 @@ URL: https://koshinstudio.com/notes/first-visit/
 
   遊ぶ (https://koshinstudio.com/play/sushitsumu/)作品ページへ (https://koshinstudio.com/works/sushitsumu/)
 
+## この記事で紹介したもの
+
+    このページには、広告・アフィリエイトのリンクが含まれます。リンク先で買われると、このサイトに報酬が入ることがあります。Amazonのアソシエイトとして、適格販売により収入を得ています。
+
+- ゲームデザインの本（Amazonで探す） (https://www.amazon.co.jp/s?k=%E3%82%B2%E3%83%BC%E3%83%A0%E3%83%87%E3%82%B6%E3%82%A4%E3%83%B3+%E5%85%A5%E9%96%80&tag=torecadash-22) — 遊びの設計を学べる本を探す。
+
+- ゲーム開発（JavaScript）の本（Amazonで探す） (https://www.amazon.co.jp/s?k=%E3%82%B2%E3%83%BC%E3%83%A0%E9%96%8B%E7%99%BA+JavaScript+%E5%85%A5%E9%96%80&tag=torecadash-22) — ブラウザゲームを作る入門書。
+
 
 ---
 
 URL: https://koshinstudio.com/notes/webaudio/
 
 # 音は聴けないので、波形を測った：すし積むの和楽器を、WebAudioで作る
+
+このページには、広告・アフィリエイトのリンクが含まれます。リンク先で買われると、このサイトに報酬が入ることがあります。Amazonのアソシエイトとして、適格販売により収入を得ています。
 
   English version (https://koshinstudio.com/en/notes/webaudio/)
 
@@ -600,12 +672,22 @@ URL: https://koshinstudio.com/notes/webaudio/
 
   遊ぶ (https://koshinstudio.com/play/sushitsumu/)作品ページへ (https://koshinstudio.com/works/sushitsumu/)
 
+## この記事で紹介したもの
+
+    このページには、広告・アフィリエイトのリンクが含まれます。リンク先で買われると、このサイトに報酬が入ることがあります。Amazonのアソシエイトとして、適格販売により収入を得ています。
+
+- Web Audio・音のプログラミングの本（Amazonで探す） (https://www.amazon.co.jp/s?k=Web+Audio+API+%E9%9F%B3+%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0&tag=torecadash-22) — 波形を作って鳴らす仕組みを学ぶ。
+
+- ゲーム開発（JavaScript）の本（Amazonで探す） (https://www.amazon.co.jp/s?k=%E3%82%B2%E3%83%BC%E3%83%A0%E9%96%8B%E7%99%BA+JavaScript+%E5%85%A5%E9%96%80&tag=torecadash-22) — ブラウザゲームを作る入門書。
+
 
 ---
 
 URL: https://koshinstudio.com/notes/ascii-text/
 
 # CrazyGames のプレビューで日本語が文字化け：ファイルは正しかった。原因は特定できず、ASCII 表記に逃がした
+
+このページには、広告・アフィリエイトのリンクが含まれます。リンク先で買われると、このサイトに報酬が入ることがあります。Amazonのアソシエイトとして、適格販売により収入を得ています。
 
   English version (https://koshinstudio.com/en/notes/ascii-text/)
 
@@ -661,12 +743,22 @@ URL: https://koshinstudio.com/notes/ascii-text/
 
   遊ぶ (https://koshinstudio.com/play/sushitsumu/)作品ページへ (https://koshinstudio.com/works/sushitsumu/)
 
+## この記事で紹介したもの
+
+    このページには、広告・アフィリエイトのリンクが含まれます。リンク先で買われると、このサイトに報酬が入ることがあります。Amazonのアソシエイトとして、適格販売により収入を得ています。
+
+- Web制作（HTML・CSS）の本（Amazonで探す） (https://www.amazon.co.jp/s?k=Web%E5%88%B6%E4%BD%9C+HTML+CSS+%E5%85%A5%E9%96%80&tag=torecadash-22) — サイト作りの基本を押さえる本。
+
+- ゲーム開発（JavaScript）の本（Amazonで探す） (https://www.amazon.co.jp/s?k=%E3%82%B2%E3%83%BC%E3%83%A0%E9%96%8B%E7%99%BA+JavaScript+%E5%85%A5%E9%96%80&tag=torecadash-22) — ブラウザゲームを作る入門書。
+
 
 ---
 
 URL: https://koshinstudio.com/notes/logo-pop/
 
 # Retina で canvas が2倍の大きさになる：inset:0 では広がらない（押すと弾けるロゴの不具合）
+
+このページには、広告・アフィリエイトのリンクが含まれます。リンク先で買われると、このサイトに報酬が入ることがあります。Amazonのアソシエイトとして、適格販売により収入を得ています。
 
   English version (https://koshinstudio.com/en/notes/logo-pop/)
 
@@ -740,12 +832,22 @@ URL: https://koshinstudio.com/notes/logo-pop/
 
 - アプリを完全に終了すると、サインインが消えた (https://koshinstudio.com/notes/apple-signin/) — 「終わったあとの状態」に出る問題の、別の記録
 
+## この記事で紹介したもの
+
+    このページには、広告・アフィリエイトのリンクが含まれます。リンク先で買われると、このサイトに報酬が入ることがあります。Amazonのアソシエイトとして、適格販売により収入を得ています。
+
+- Web制作（HTML・CSS）の本（Amazonで探す） (https://www.amazon.co.jp/s?k=Web%E5%88%B6%E4%BD%9C+HTML+CSS+%E5%85%A5%E9%96%80&tag=torecadash-22) — サイト作りの基本を押さえる本。
+
+- ゲーム開発（JavaScript）の本（Amazonで探す） (https://www.amazon.co.jp/s?k=%E3%82%B2%E3%83%BC%E3%83%A0%E9%96%8B%E7%99%BA+JavaScript+%E5%85%A5%E9%96%80&tag=torecadash-22) — ブラウザゲームを作る入門書。
+
 
 ---
 
 URL: https://koshinstudio.com/notes/apple-signin/
 
 # Firebase Auth：アプリを完全に終了すると、匿名アカウントが量産された（currentUser の復元待ち）
+
+このページには、広告・アフィリエイトのリンクが含まれます。リンク先で買われると、このサイトに報酬が入ることがあります。Amazonのアソシエイトとして、適格販売により収入を得ています。
 
   English version (https://koshinstudio.com/en/notes/apple-signin/)
 
@@ -817,12 +919,22 @@ URL: https://koshinstudio.com/notes/apple-signin/
 
 - 「取れた」と読んでいたのは、ただの案内ページだった (https://koshinstudio.com/notes/blocked-page/) — 同じアプリの、別の記録
 
+## この記事で紹介したもの
+
+    このページには、広告・アフィリエイトのリンクが含まれます。リンク先で買われると、このサイトに報酬が入ることがあります。Amazonのアソシエイトとして、適格販売により収入を得ています。
+
+- Firebaseの本（Amazonで探す） (https://www.amazon.co.jp/s?k=Firebase+%E5%85%A5%E9%96%80+%E3%82%A2%E3%83%97%E3%83%AA%E9%96%8B%E7%99%BA&tag=torecadash-22) — 認証・Firestoreなど、この記事で出てくる仕組みの入門書。
+
+- SwiftUI・iOSアプリ開発の本（Amazonで探す） (https://www.amazon.co.jp/s?k=SwiftUI+%E5%85%A5%E9%96%80+iOS%E3%82%A2%E3%83%97%E3%83%AA%E9%96%8B%E7%99%BA&tag=torecadash-22) — この記事の題材（iOSアプリ）を学ぶ入口として。
+
 
 ---
 
 URL: https://koshinstudio.com/notes/dup-zero/
 
 # 「重複は実質ゼロ」と数えたのに、監査は112組を出していた
+
+このページには、広告・アフィリエイトのリンクが含まれます。リンク先で買われると、このサイトに報酬が入ることがあります。Amazonのアソシエイトとして、適格販売により収入を得ています。
 
   English version (https://koshinstudio.com/en/notes/dup-zero/)
 
@@ -886,12 +998,22 @@ URL: https://koshinstudio.com/notes/dup-zero/
 
 - 「9種セット」の正体は御三家9商品だった (https://koshinstudio.com/notes/torecadash-9set/) — 同じアプリの、突き合わせの記録
 
+## この記事で紹介したもの
+
+    このページには、広告・アフィリエイトのリンクが含まれます。リンク先で買われると、このサイトに報酬が入ることがあります。Amazonのアソシエイトとして、適格販売により収入を得ています。
+
+- データ品質・重複排除の本（Amazonで探す） (https://www.amazon.co.jp/s?k=%E3%83%87%E3%83%BC%E3%82%BF%E3%82%AF%E3%83%AC%E3%83%B3%E3%82%B8%E3%83%B3%E3%82%B0+%E3%83%87%E3%83%BC%E3%82%BF%E5%93%81%E8%B3%AA+%E9%87%8D%E8%A4%87&tag=torecadash-22) — 表記ゆれ・重複を扱う考え方の本を探す。
+
+- ソフトウェアテスト・品質の本（Amazonで探す） (https://www.amazon.co.jp/s?k=%E3%82%BD%E3%83%95%E3%83%88%E3%82%A6%E3%82%A7%E3%82%A2%E3%83%86%E3%82%B9%E3%83%88+%E5%85%A5%E9%96%80+%E5%93%81%E8%B3%AA&tag=torecadash-22) — 「書く前に数える」「壊して確かめる」を体系的に学ぶ。
+
 
 ---
 
 URL: https://koshinstudio.com/notes/blocked-page/
 
 # 「取れた」と読んでいたのは、ただの案内ページだった：3日間、商品が0件
+
+このページには、広告・アフィリエイトのリンクが含まれます。リンク先で買われると、このサイトに報酬が入ることがあります。Amazonのアソシエイトとして、適格販売により収入を得ています。
 
   English version (https://koshinstudio.com/en/notes/blocked-page/)
 
@@ -939,12 +1061,22 @@ URL: https://koshinstudio.com/notes/blocked-page/
 
 - 確認できなかったときに、通していた (https://koshinstudio.com/notes/fail-open/) — 同じアプリの、別の記録
 
+## この記事で紹介したもの
+
+    このページには、広告・アフィリエイトのリンクが含まれます。リンク先で買われると、このサイトに報酬が入ることがあります。Amazonのアソシエイトとして、適格販売により収入を得ています。
+
+- Pythonデータ処理の本（Amazonで探す） (https://www.amazon.co.jp/s?k=Python+%E3%83%87%E3%83%BC%E3%82%BF%E5%87%A6%E7%90%86+%E5%85%A5%E9%96%80&tag=torecadash-22) — 文字列・JSONなどデータの扱いを学ぶ入口。
+
+- ソフトウェアテスト・品質の本（Amazonで探す） (https://www.amazon.co.jp/s?k=%E3%82%BD%E3%83%95%E3%83%88%E3%82%A6%E3%82%A7%E3%82%A2%E3%83%86%E3%82%B9%E3%83%88+%E5%85%A5%E9%96%80+%E5%93%81%E8%B3%AA&tag=torecadash-22) — 「書く前に数える」「壊して確かめる」を体系的に学ぶ。
+
 
 ---
 
 URL: https://koshinstudio.com/notes/fail-open/
 
 # 確認できなかったときに、通していた：「fail-open」が転売品を招いた話
+
+このページには、広告・アフィリエイトのリンクが含まれます。リンク先で買われると、このサイトに報酬が入ることがあります。Amazonのアソシエイトとして、適格販売により収入を得ています。
 
   English version (https://koshinstudio.com/en/notes/fail-open/)
 
@@ -1014,12 +1146,22 @@ URL: https://koshinstudio.com/notes/fail-open/
 
 - 「減るはず」が、二度外れた (https://koshinstudio.com/notes/torecadash-ai/) — 同じアプリの、AI 呼び出しの記録
 
+## この記事で紹介したもの
+
+    このページには、広告・アフィリエイトのリンクが含まれます。リンク先で買われると、このサイトに報酬が入ることがあります。Amazonのアソシエイトとして、適格販売により収入を得ています。
+
+- ソフトウェアテスト・品質の本（Amazonで探す） (https://www.amazon.co.jp/s?k=%E3%82%BD%E3%83%95%E3%83%88%E3%82%A6%E3%82%A7%E3%82%A2%E3%83%86%E3%82%B9%E3%83%88+%E5%85%A5%E9%96%80+%E5%93%81%E8%B3%AA&tag=torecadash-22) — 「書く前に数える」「壊して確かめる」を体系的に学ぶ。
+
+- 個人開発・プログラミングの本（Amazonで探す） (https://www.amazon.co.jp/s?k=%E5%80%8B%E4%BA%BA%E9%96%8B%E7%99%BA+%E4%BD%9C%E3%82%8A%E6%96%B9+%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0&tag=torecadash-22) — 作って測って直す、の進め方の本を探す。
+
 
 ---
 
 URL: https://koshinstudio.com/notes/typo-catalog/
 
 # 一度だけ生まれた誤字が、店ごとに増えていった：「30th SEREBRATION」の件
+
+このページには、広告・アフィリエイトのリンクが含まれます。リンク先で買われると、このサイトに報酬が入ることがあります。Amazonのアソシエイトとして、適格販売により収入を得ています。
 
   English version (https://koshinstudio.com/en/notes/typo-catalog/)
 
@@ -1085,12 +1227,22 @@ URL: https://koshinstudio.com/notes/typo-catalog/
 
 - 「減るはず」が、二度外れた (https://koshinstudio.com/notes/torecadash-ai/) — 同じアプリの、AI 照合の記録
 
+## この記事で紹介したもの
+
+    このページには、広告・アフィリエイトのリンクが含まれます。リンク先で買われると、このサイトに報酬が入ることがあります。Amazonのアソシエイトとして、適格販売により収入を得ています。
+
+- データ品質・重複排除の本（Amazonで探す） (https://www.amazon.co.jp/s?k=%E3%83%87%E3%83%BC%E3%82%BF%E3%82%AF%E3%83%AC%E3%83%B3%E3%82%B8%E3%83%B3%E3%82%B0+%E3%83%87%E3%83%BC%E3%82%BF%E5%93%81%E8%B3%AA+%E9%87%8D%E8%A4%87&tag=torecadash-22) — 表記ゆれ・重複を扱う考え方の本を探す。
+
+- Pythonデータ処理の本（Amazonで探す） (https://www.amazon.co.jp/s?k=Python+%E3%83%87%E3%83%BC%E3%82%BF%E5%87%A6%E7%90%86+%E5%85%A5%E9%96%80&tag=torecadash-22) — 文字列・JSONなどデータの扱いを学ぶ入口。
+
 
 ---
 
 URL: https://koshinstudio.com/notes/scrape-cost/
 
 # 「しょうがない」を測り直したら、取得の費用は8分の1だった
+
+このページには、広告・アフィリエイトのリンクが含まれます。リンク先で買われると、このサイトに報酬が入ることがあります。Amazonのアソシエイトとして、適格販売により収入を得ています。
 
   English version (https://koshinstudio.com/en/notes/scrape-cost/)
 
@@ -1146,12 +1298,22 @@ URL: https://koshinstudio.com/notes/scrape-cost/
 
 - 「9種セット」の正体は御三家9商品だった (https://koshinstudio.com/notes/torecadash-9set/) — 同じアプリの、突き合わせの記録
 
+## この記事で紹介したもの
+
+    このページには、広告・アフィリエイトのリンクが含まれます。リンク先で買われると、このサイトに報酬が入ることがあります。Amazonのアソシエイトとして、適格販売により収入を得ています。
+
+- Pythonデータ処理の本（Amazonで探す） (https://www.amazon.co.jp/s?k=Python+%E3%83%87%E3%83%BC%E3%82%BF%E5%87%A6%E7%90%86+%E5%85%A5%E9%96%80&tag=torecadash-22) — 文字列・JSONなどデータの扱いを学ぶ入口。
+
+- 統計・データ分析の本（Amazonで探す） (https://www.amazon.co.jp/s?k=%E7%B5%B1%E8%A8%88%E5%AD%A6+%E5%85%A5%E9%96%80+%E3%83%87%E3%83%BC%E3%82%BF%E5%88%86%E6%9E%90&tag=torecadash-22) — 割合・測定・ばらつきの考え方を学ぶ。
+
 
 ---
 
 URL: https://koshinstudio.com/notes/anime-db/
 
 # 16,177作から6,091作へ：診断のデータベースは、6割以上を落として作った
+
+このページには、広告・アフィリエイトのリンクが含まれます。リンク先で買われると、このサイトに報酬が入ることがあります。Amazonのアソシエイトとして、適格販売により収入を得ています。
 
   English version (https://koshinstudio.com/en/notes/anime-db/)
 
@@ -1254,12 +1416,22 @@ URL: https://koshinstudio.com/notes/anime-db/
 
   診断する (https://koshinstudio.com/app/shindananime/)作品ページへ (https://koshinstudio.com/works/shindananime/)
 
+## この記事で紹介したもの
+
+    このページには、広告・アフィリエイトのリンクが含まれます。リンク先で買われると、このサイトに報酬が入ることがあります。Amazonのアソシエイトとして、適格販売により収入を得ています。
+
+- アニメの年鑑・作品データの本（Amazonで探す） (https://www.amazon.co.jp/s?k=%E3%82%A2%E3%83%8B%E3%83%A1+%E5%B9%B4%E9%91%91+%E4%BD%9C%E5%93%81+%E3%83%87%E3%83%BC%E3%82%BF&tag=torecadash-22) — 作品を調べるための資料。
+
+- Pythonデータ処理の本（Amazonで探す） (https://www.amazon.co.jp/s?k=Python+%E3%83%87%E3%83%BC%E3%82%BF%E5%87%A6%E7%90%86+%E5%85%A5%E9%96%80&tag=torecadash-22) — 文字列・JSONなどデータの扱いを学ぶ入口。
+
 
 ---
 
 URL: https://koshinstudio.com/notes/result-screen/
 
 # 配信ボタンは、見られない作品にも出ていた：診断の結果画面を「本当」に寄せる
+
+このページには、広告・アフィリエイトのリンクが含まれます。リンク先で買われると、このサイトに報酬が入ることがあります。Amazonのアソシエイトとして、適格販売により収入を得ています。
 
   English version (https://koshinstudio.com/en/notes/result-screen/)
 
@@ -1331,12 +1503,22 @@ URL: https://koshinstudio.com/notes/result-screen/
 
   診断する (https://koshinstudio.com/app/shindananime/)作品ページへ (https://koshinstudio.com/works/shindananime/)
 
+## この記事で紹介したもの
+
+    このページには、広告・アフィリエイトのリンクが含まれます。リンク先で買われると、このサイトに報酬が入ることがあります。Amazonのアソシエイトとして、適格販売により収入を得ています。
+
+- アニメのガイド本（Amazonで探す） (https://www.amazon.co.jp/s?k=%E3%82%A2%E3%83%8B%E3%83%A1+%E5%90%8D%E4%BD%9C+%E3%82%AC%E3%82%A4%E3%83%89&tag=torecadash-22) — アニメ作品を知る入口として。
+
+- ゲームデザインの本（Amazonで探す） (https://www.amazon.co.jp/s?k=%E3%82%B2%E3%83%BC%E3%83%A0%E3%83%87%E3%82%B6%E3%82%A4%E3%83%B3+%E5%85%A5%E9%96%80&tag=torecadash-22) — 遊びの設計を学べる本を探す。
+
 
 ---
 
 URL: https://koshinstudio.com/notes/ranking-free-tier/
 
 # 無料枠を半分しか使わない番付にした：呼び出し5回を2回に
+
+このページには、広告・アフィリエイトのリンクが含まれます。リンク先で買われると、このサイトに報酬が入ることがあります。Amazonのアソシエイトとして、適格販売により収入を得ています。
 
   English version (https://koshinstudio.com/en/notes/ranking-free-tier/)
 
@@ -1402,12 +1584,22 @@ URL: https://koshinstudio.com/notes/ranking-free-tier/
 
   遊ぶ (https://koshinstudio.com/play/sushitsumu/)作品ページへ (https://koshinstudio.com/works/sushitsumu/)
 
+## この記事で紹介したもの
+
+    このページには、広告・アフィリエイトのリンクが含まれます。リンク先で買われると、このサイトに報酬が入ることがあります。Amazonのアソシエイトとして、適格販売により収入を得ています。
+
+- Firebaseの本（Amazonで探す） (https://www.amazon.co.jp/s?k=Firebase+%E5%85%A5%E9%96%80+%E3%82%A2%E3%83%97%E3%83%AA%E9%96%8B%E7%99%BA&tag=torecadash-22) — 認証・Firestoreなど、この記事で出てくる仕組みの入門書。
+
+- 統計・データ分析の本（Amazonで探す） (https://www.amazon.co.jp/s?k=%E7%B5%B1%E8%A8%88%E5%AD%A6+%E5%85%A5%E9%96%80+%E3%83%87%E3%83%BC%E3%82%BF%E5%88%86%E6%9E%90&tag=torecadash-22) — 割合・測定・ばらつきの考え方を学ぶ。
+
 
 ---
 
 URL: https://koshinstudio.com/notes/match-percent/
 
 # 「82%より80%が選ばれる」：診断の適合度%が、並び順と食い違っていた
+
+このページには、広告・アフィリエイトのリンクが含まれます。リンク先で買われると、このサイトに報酬が入ることがあります。Amazonのアソシエイトとして、適格販売により収入を得ています。
 
   English version (https://koshinstudio.com/en/notes/match-percent/)
 
@@ -1488,12 +1680,22 @@ URL: https://koshinstudio.com/notes/match-percent/
 
   診断する (https://koshinstudio.com/app/shindananime/)作品ページへ (https://koshinstudio.com/works/shindananime/)
 
+## この記事で紹介したもの
+
+    このページには、広告・アフィリエイトのリンクが含まれます。リンク先で買われると、このサイトに報酬が入ることがあります。Amazonのアソシエイトとして、適格販売により収入を得ています。
+
+- 統計・データ分析の本（Amazonで探す） (https://www.amazon.co.jp/s?k=%E7%B5%B1%E8%A8%88%E5%AD%A6+%E5%85%A5%E9%96%80+%E3%83%87%E3%83%BC%E3%82%BF%E5%88%86%E6%9E%90&tag=torecadash-22) — 割合・測定・ばらつきの考え方を学ぶ。
+
+- アニメのガイド本（Amazonで探す） (https://www.amazon.co.jp/s?k=%E3%82%A2%E3%83%8B%E3%83%A1+%E5%90%8D%E4%BD%9C+%E3%82%AC%E3%82%A4%E3%83%89&tag=torecadash-22) — アニメ作品を知る入口として。
+
 
 ---
 
 URL: https://koshinstudio.com/notes/deploy-gotchas/
 
 # 手元では動くのに、配ると壊れる：このサイトで起きた四つの事故
+
+このページには、広告・アフィリエイトのリンクが含まれます。リンク先で買われると、このサイトに報酬が入ることがあります。Amazonのアソシエイトとして、適格販売により収入を得ています。
 
   English version (https://koshinstudio.com/en/notes/deploy-gotchas/)
 
@@ -1549,12 +1751,22 @@ URL: https://koshinstudio.com/notes/deploy-gotchas/
 
 - 10秒ピッタリのランキングを、公平にする (https://koshinstudio.com/notes/stopwatch-rank/) — 公開した日のつまずきも書いた、別の記録
 
+## この記事で紹介したもの
+
+    このページには、広告・アフィリエイトのリンクが含まれます。リンク先で買われると、このサイトに報酬が入ることがあります。Amazonのアソシエイトとして、適格販売により収入を得ています。
+
+- Web制作（HTML・CSS）の本（Amazonで探す） (https://www.amazon.co.jp/s?k=Web%E5%88%B6%E4%BD%9C+HTML+CSS+%E5%85%A5%E9%96%80&tag=torecadash-22) — サイト作りの基本を押さえる本。
+
+- ソフトウェアテスト・品質の本（Amazonで探す） (https://www.amazon.co.jp/s?k=%E3%82%BD%E3%83%95%E3%83%88%E3%82%A6%E3%82%A7%E3%82%A2%E3%83%86%E3%82%B9%E3%83%88+%E5%85%A5%E9%96%80+%E5%93%81%E8%B3%AA&tag=torecadash-22) — 「書く前に数える」「壊して確かめる」を体系的に学ぶ。
+
 
 ---
 
 URL: https://koshinstudio.com/notes/review-info-needed/
 
 # App Store 審査で「Guideline 2.1 Information Needed」が届いた：求められた6つ
+
+このページには、広告・アフィリエイトのリンクが含まれます。リンク先で買われると、このサイトに報酬が入ることがあります。Amazonのアソシエイトとして、適格販売により収入を得ています。
 
   English version (https://koshinstudio.com/en/notes/review-info-needed/)
 
@@ -1610,12 +1822,22 @@ URL: https://koshinstudio.com/notes/review-info-needed/
 
 - 「9種セット」の正体は御三家9商品だった (https://koshinstudio.com/notes/torecadash-9set/) — 同じアプリの、別の記録
 
+## この記事で紹介したもの
+
+    このページには、広告・アフィリエイトのリンクが含まれます。リンク先で買われると、このサイトに報酬が入ることがあります。Amazonのアソシエイトとして、適格販売により収入を得ています。
+
+- 個人でiOSアプリを出す本（Amazonで探す） (https://www.amazon.co.jp/s?k=iOS%E3%82%A2%E3%83%97%E3%83%AA+%E5%80%8B%E4%BA%BA%E9%96%8B%E7%99%BA+App+Store+%E5%85%AC%E9%96%8B&tag=torecadash-22) — 審査・公開まわりを通して読める本を探す。
+
+- SwiftUI・iOSアプリ開発の本（Amazonで探す） (https://www.amazon.co.jp/s?k=SwiftUI+%E5%85%A5%E9%96%80+iOS%E3%82%A2%E3%83%97%E3%83%AA%E9%96%8B%E7%99%BA&tag=torecadash-22) — この記事の題材（iOSアプリ）を学ぶ入口として。
+
 
 ---
 
 URL: https://koshinstudio.com/notes/stopwatch-rank/
 
 # 10秒ピッタリのランキングを、公平にする：小数3桁・同着・書き込み回数
+
+このページには、広告・アフィリエイトのリンクが含まれます。リンク先で買われると、このサイトに報酬が入ることがあります。Amazonのアソシエイトとして、適格販売により収入を得ています。
 
   English version (https://koshinstudio.com/en/notes/stopwatch-rank/)
 
@@ -1680,12 +1902,22 @@ URL: https://koshinstudio.com/notes/stopwatch-rank/
 
   遊ぶ (https://koshinstudio.com/play/stopwatch10/)作品ページへ (https://koshinstudio.com/works/stopwatch10/)
 
+## この記事で紹介したもの
+
+    このページには、広告・アフィリエイトのリンクが含まれます。リンク先で買われると、このサイトに報酬が入ることがあります。Amazonのアソシエイトとして、適格販売により収入を得ています。
+
+- ストップウォッチ（Amazonで探す） (https://www.amazon.co.jp/s?k=%E3%82%B9%E3%83%88%E3%83%83%E3%83%97%E3%82%A6%E3%82%A9%E3%83%83%E3%83%81+%E3%82%B9%E3%83%9D%E3%83%BC%E3%83%84+%E8%A8%88%E6%99%82&tag=torecadash-22) — 10秒を測る道具を探す。
+
+- 統計・データ分析の本（Amazonで探す） (https://www.amazon.co.jp/s?k=%E7%B5%B1%E8%A8%88%E5%AD%A6+%E5%85%A5%E9%96%80+%E3%83%87%E3%83%BC%E3%82%BF%E5%88%86%E6%9E%90&tag=torecadash-22) — 割合・測定・ばらつきの考え方を学ぶ。
+
 
 ---
 
 URL: https://koshinstudio.com/notes/torecadash-review/
 
 # App Store の審査で止まった四つ：iPad のスクショ、ITMS-91064、アカウント削除、投稿の通報
+
+このページには、広告・アフィリエイトのリンクが含まれます。リンク先で買われると、このサイトに報酬が入ることがあります。Amazonのアソシエイトとして、適格販売により収入を得ています。
 
   English version (https://koshinstudio.com/en/notes/torecadash-review/)
 
@@ -1735,12 +1967,22 @@ URL: https://koshinstudio.com/notes/torecadash-review/
 
 - 「めっちゃクラッシュする」の原因は… (https://koshinstudio.com/notes/torecadash-watchdog/) — 同じアプリの、実機ログの記録
 
+## この記事で紹介したもの
+
+    このページには、広告・アフィリエイトのリンクが含まれます。リンク先で買われると、このサイトに報酬が入ることがあります。Amazonのアソシエイトとして、適格販売により収入を得ています。
+
+- 個人でiOSアプリを出す本（Amazonで探す） (https://www.amazon.co.jp/s?k=iOS%E3%82%A2%E3%83%97%E3%83%AA+%E5%80%8B%E4%BA%BA%E9%96%8B%E7%99%BA+App+Store+%E5%85%AC%E9%96%8B&tag=torecadash-22) — 審査・公開まわりを通して読める本を探す。
+
+- SwiftUI・iOSアプリ開発の本（Amazonで探す） (https://www.amazon.co.jp/s?k=SwiftUI+%E5%85%A5%E9%96%80+iOS%E3%82%A2%E3%83%97%E3%83%AA%E9%96%8B%E7%99%BA&tag=torecadash-22) — この記事の題材（iOSアプリ）を学ぶ入口として。
+
 
 ---
 
 URL: https://koshinstudio.com/notes/torecadash-9set/
 
 # 「9種セット」の正体は御三家9商品だった：同じ商品なのに、決して一致しなかった
+
+このページには、広告・アフィリエイトのリンクが含まれます。リンク先で買われると、このサイトに報酬が入ることがあります。Amazonのアソシエイトとして、適格販売により収入を得ています。
 
   English version (https://koshinstudio.com/en/notes/torecadash-9set/)
 
@@ -1812,12 +2054,22 @@ URL: https://koshinstudio.com/notes/torecadash-9set/
 
 - JSONLを読んだら壊れた (https://koshinstudio.com/notes/u2028/) — 見た目では分からない食い違いの、別の記録
 
+## この記事で紹介したもの
+
+    このページには、広告・アフィリエイトのリンクが含まれます。リンク先で買われると、このサイトに報酬が入ることがあります。Amazonのアソシエイトとして、適格販売により収入を得ています。
+
+- データ品質・重複排除の本（Amazonで探す） (https://www.amazon.co.jp/s?k=%E3%83%87%E3%83%BC%E3%82%BF%E3%82%AF%E3%83%AC%E3%83%B3%E3%82%B8%E3%83%B3%E3%82%B0+%E3%83%87%E3%83%BC%E3%82%BF%E5%93%81%E8%B3%AA+%E9%87%8D%E8%A4%87&tag=torecadash-22) — 表記ゆれ・重複を扱う考え方の本を探す。
+
+- Pythonデータ処理の本（Amazonで探す） (https://www.amazon.co.jp/s?k=Python+%E3%83%87%E3%83%BC%E3%82%BF%E5%87%A6%E7%90%86+%E5%85%A5%E9%96%80&tag=torecadash-22) — 文字列・JSONなどデータの扱いを学ぶ入口。
+
 
 ---
 
 URL: https://koshinstudio.com/notes/torecadash-watchdog/
 
 # iOS アプリが固まって強制終了される（0x8BADF00D）：SwiftUI の計算プロパティが毎回走っていた
+
+このページには、広告・アフィリエイトのリンクが含まれます。リンク先で買われると、このサイトに報酬が入ることがあります。Amazonのアソシエイトとして、適格販売により収入を得ています。
 
   English version (https://koshinstudio.com/en/notes/torecadash-watchdog/)
 
@@ -1868,12 +2120,22 @@ var articles: [Article] { fetched.filter…filter…map…sorted }
 
 - TestFlight にビルドが来ない原因を、一度間違えた (https://koshinstudio.com/notes/torecadash-ci/) — 同じアプリの、別の記録
 
+## この記事で紹介したもの
+
+    このページには、広告・アフィリエイトのリンクが含まれます。リンク先で買われると、このサイトに報酬が入ることがあります。Amazonのアソシエイトとして、適格販売により収入を得ています。
+
+- SwiftUI・iOSアプリ開発の本（Amazonで探す） (https://www.amazon.co.jp/s?k=SwiftUI+%E5%85%A5%E9%96%80+iOS%E3%82%A2%E3%83%97%E3%83%AA%E9%96%8B%E7%99%BA&tag=torecadash-22) — この記事の題材（iOSアプリ）を学ぶ入口として。
+
+- 個人でiOSアプリを出す本（Amazonで探す） (https://www.amazon.co.jp/s?k=iOS%E3%82%A2%E3%83%97%E3%83%AA+%E5%80%8B%E4%BA%BA%E9%96%8B%E7%99%BA+App+Store+%E5%85%AC%E9%96%8B&tag=torecadash-22) — 審査・公開まわりを通して読める本を探す。
+
 
 ---
 
 URL: https://koshinstudio.com/notes/torecadash-ci/
 
 # TestFlight にビルドが来ない：Xcode Cloud の月25時間を使い切っていた（最初の診断は誤りだった）
+
+このページには、広告・アフィリエイトのリンクが含まれます。リンク先で買われると、このサイトに報酬が入ることがあります。Amazonのアソシエイトとして、適格販売により収入を得ています。
 
   English version (https://koshinstudio.com/en/notes/torecadash-ci/)
 
@@ -1931,12 +2193,22 @@ URL: https://koshinstudio.com/notes/torecadash-ci/
 
 - 「山は89%で落ち着く」は誤りだった (https://koshinstudio.com/notes/sushi-measure/) — 自分の測定が間違っていた、別の記録
 
+## この記事で紹介したもの
+
+    このページには、広告・アフィリエイトのリンクが含まれます。リンク先で買われると、このサイトに報酬が入ることがあります。Amazonのアソシエイトとして、適格販売により収入を得ています。
+
+- SwiftUI・iOSアプリ開発の本（Amazonで探す） (https://www.amazon.co.jp/s?k=SwiftUI+%E5%85%A5%E9%96%80+iOS%E3%82%A2%E3%83%97%E3%83%AA%E9%96%8B%E7%99%BA&tag=torecadash-22) — この記事の題材（iOSアプリ）を学ぶ入口として。
+
+- 個人でiOSアプリを出す本（Amazonで探す） (https://www.amazon.co.jp/s?k=iOS%E3%82%A2%E3%83%97%E3%83%AA+%E5%80%8B%E4%BA%BA%E9%96%8B%E7%99%BA+App+Store+%E5%85%AC%E9%96%8B&tag=torecadash-22) — 審査・公開まわりを通して読める本を探す。
+
 
 ---
 
 URL: https://koshinstudio.com/notes/crazygames/
 
 # CrazyGames に落ちた：理由は書かれていなかったので、撮って探した
+
+このページには、広告・アフィリエイトのリンクが含まれます。リンク先で買われると、このサイトに報酬が入ることがあります。Amazonのアソシエイトとして、適格販売により収入を得ています。
 
   English version (https://koshinstudio.com/en/notes/crazygames/)
 
@@ -2001,12 +2273,22 @@ URL: https://koshinstudio.com/notes/crazygames/
 
   遊ぶ (https://koshinstudio.com/play/sushitsumu/)作品ページへ (https://koshinstudio.com/works/sushitsumu/)
 
+## この記事で紹介したもの
+
+    このページには、広告・アフィリエイトのリンクが含まれます。リンク先で買われると、このサイトに報酬が入ることがあります。Amazonのアソシエイトとして、適格販売により収入を得ています。
+
+- ゲーム開発（JavaScript）の本（Amazonで探す） (https://www.amazon.co.jp/s?k=%E3%82%B2%E3%83%BC%E3%83%A0%E9%96%8B%E7%99%BA+JavaScript+%E5%85%A5%E9%96%80&tag=torecadash-22) — ブラウザゲームを作る入門書。
+
+- ゲームデザインの本（Amazonで探す） (https://www.amazon.co.jp/s?k=%E3%82%B2%E3%83%BC%E3%83%A0%E3%83%87%E3%82%B6%E3%82%A4%E3%83%B3+%E5%85%A5%E9%96%80&tag=torecadash-22) — 遊びの設計を学べる本を探す。
+
 
 ---
 
 URL: https://koshinstudio.com/notes/sushi-measure/
 
 # 「山は89%で落ち着く」は誤りだった：測定のほうが間違っていた話
+
+このページには、広告・アフィリエイトのリンクが含まれます。リンク先で買われると、このサイトに報酬が入ることがあります。Amazonのアソシエイトとして、適格販売により収入を得ています。
 
   English version (https://koshinstudio.com/en/notes/sushi-measure/)
 
@@ -2073,12 +2355,22 @@ URL: https://koshinstudio.com/notes/sushi-measure/
 
   遊ぶ (https://koshinstudio.com/play/sushitsumu/)作品ページへ (https://koshinstudio.com/works/sushitsumu/)
 
+## この記事で紹介したもの
+
+    このページには、広告・アフィリエイトのリンクが含まれます。リンク先で買われると、このサイトに報酬が入ることがあります。Amazonのアソシエイトとして、適格販売により収入を得ています。
+
+- 統計・データ分析の本（Amazonで探す） (https://www.amazon.co.jp/s?k=%E7%B5%B1%E8%A8%88%E5%AD%A6+%E5%85%A5%E9%96%80+%E3%83%87%E3%83%BC%E3%82%BF%E5%88%86%E6%9E%90&tag=torecadash-22) — 割合・測定・ばらつきの考え方を学ぶ。
+
+- ゲーム開発（JavaScript）の本（Amazonで探す） (https://www.amazon.co.jp/s?k=%E3%82%B2%E3%83%BC%E3%83%A0%E9%96%8B%E7%99%BA+JavaScript+%E5%85%A5%E9%96%80&tag=torecadash-22) — ブラウザゲームを作る入門書。
+
 
 ---
 
 URL: https://koshinstudio.com/notes/torecadash-ai/
 
 # 「減るはず」が、二度外れた：AIへの問い合わせを削る話
+
+このページには、広告・アフィリエイトのリンクが含まれます。リンク先で買われると、このサイトに報酬が入ることがあります。Amazonのアソシエイトとして、適格販売により収入を得ています。
 
   English version (https://koshinstudio.com/en/notes/torecadash-ai/)
 
@@ -2157,12 +2449,22 @@ URL: https://koshinstudio.com/notes/torecadash-ai/
 
 - JSONLを読んだら壊れた (https://koshinstudio.com/notes/u2028/) — 数え直して原因が見つかった、別の記録
 
+## この記事で紹介したもの
+
+    このページには、広告・アフィリエイトのリンクが含まれます。リンク先で買われると、このサイトに報酬が入ることがあります。Amazonのアソシエイトとして、適格販売により収入を得ています。
+
+- 生成AI・LLMアプリ開発の本（Amazonで探す） (https://www.amazon.co.jp/s?k=%E7%94%9F%E6%88%90AI+%E3%82%A2%E3%83%97%E3%83%AA%E9%96%8B%E7%99%BA+LLM+API+%E5%85%A5%E9%96%80&tag=torecadash-22) — APIを使ったアプリ作りの入門書を探す。
+
+- LLMの運用・コストの本（Amazonで探す） (https://www.amazon.co.jp/s?k=LLM+API+%E3%82%B3%E3%82%B9%E3%83%88+%E6%9C%80%E9%81%A9%E5%8C%96&tag=torecadash-22) — 費用と精度の取り合いを考える本を探す。
+
 
 ---
 
 URL: https://koshinstudio.com/notes/adgap/
 
 # 広告の間隔を、回数ではなく時間で測る
+
+このページには、広告・アフィリエイトのリンクが含まれます。リンク先で買われると、このサイトに報酬が入ることがあります。Amazonのアソシエイトとして、適格販売により収入を得ています。
 
   English version (https://koshinstudio.com/en/notes/adgap/)
 
@@ -2239,12 +2541,22 @@ URL: https://koshinstudio.com/notes/adgap/
 
   作品ページへ (https://koshinstudio.com/works/sushitsumu/)
 
+## この記事で紹介したもの
+
+    このページには、広告・アフィリエイトのリンクが含まれます。リンク先で買われると、このサイトに報酬が入ることがあります。Amazonのアソシエイトとして、適格販売により収入を得ています。
+
+- ゲーム開発（JavaScript）の本（Amazonで探す） (https://www.amazon.co.jp/s?k=%E3%82%B2%E3%83%BC%E3%83%A0%E9%96%8B%E7%99%BA+JavaScript+%E5%85%A5%E9%96%80&tag=torecadash-22) — ブラウザゲームを作る入門書。
+
+- 統計・データ分析の本（Amazonで探す） (https://www.amazon.co.jp/s?k=%E7%B5%B1%E8%A8%88%E5%AD%A6+%E5%85%A5%E9%96%80+%E3%83%87%E3%83%BC%E3%82%BF%E5%88%86%E6%9E%90&tag=torecadash-22) — 割合・測定・ばらつきの考え方を学ぶ。
+
 
 ---
 
 URL: https://koshinstudio.com/notes/u2028/
 
 # Python の splitlines() で JSONL が壊れる：犯人は U+2028（見えない改行文字）
+
+このページには、広告・アフィリエイトのリンクが含まれます。リンク先で買われると、このサイトに報酬が入ることがあります。Amazonのアソシエイトとして、適格販売により収入を得ています。
 
   English version (https://koshinstudio.com/en/notes/u2028/)
 
@@ -2320,12 +2632,22 @@ len(s.split('\n'))    # 1
 
   診断する (https://koshinstudio.com/app/shindananime/)作品ページへ (https://koshinstudio.com/works/shindananime/)
 
+## この記事で紹介したもの
+
+    このページには、広告・アフィリエイトのリンクが含まれます。リンク先で買われると、このサイトに報酬が入ることがあります。Amazonのアソシエイトとして、適格販売により収入を得ています。
+
+- Pythonデータ処理の本（Amazonで探す） (https://www.amazon.co.jp/s?k=Python+%E3%83%87%E3%83%BC%E3%82%BF%E5%87%A6%E7%90%86+%E5%85%A5%E9%96%80&tag=torecadash-22) — 文字列・JSONなどデータの扱いを学ぶ入口。
+
+- ソフトウェアテスト・品質の本（Amazonで探す） (https://www.amazon.co.jp/s?k=%E3%82%BD%E3%83%95%E3%83%88%E3%82%A6%E3%82%A7%E3%82%A2%E3%83%86%E3%82%B9%E3%83%88+%E5%85%A5%E9%96%80+%E5%93%81%E8%B3%AA&tag=torecadash-22) — 「書く前に数える」「壊して確かめる」を体系的に学ぶ。
+
 
 ---
 
 URL: https://koshinstudio.com/notes/shindan12/
 
 # 診断を12問にしたら、結果はどこまで変わるのか
+
+このページには、広告・アフィリエイトのリンクが含まれます。リンク先で買われると、このサイトに報酬が入ることがあります。Amazonのアソシエイトとして、適格販売により収入を得ています。
 
   English version (https://koshinstudio.com/en/notes/shindan12/)
 
@@ -2434,12 +2756,22 @@ URL: https://koshinstudio.com/notes/shindan12/
 
   診断する (https://koshinstudio.com/app/shindananime/)作品ページへ (https://koshinstudio.com/works/shindananime/)
 
+## この記事で紹介したもの
+
+    このページには、広告・アフィリエイトのリンクが含まれます。リンク先で買われると、このサイトに報酬が入ることがあります。Amazonのアソシエイトとして、適格販売により収入を得ています。
+
+- 統計・データ分析の本（Amazonで探す） (https://www.amazon.co.jp/s?k=%E7%B5%B1%E8%A8%88%E5%AD%A6+%E5%85%A5%E9%96%80+%E3%83%87%E3%83%BC%E3%82%BF%E5%88%86%E6%9E%90&tag=torecadash-22) — 割合・測定・ばらつきの考え方を学ぶ。
+
+- アニメのガイド本（Amazonで探す） (https://www.amazon.co.jp/s?k=%E3%82%A2%E3%83%8B%E3%83%A1+%E5%90%8D%E4%BD%9C+%E3%82%AC%E3%82%A4%E3%83%89&tag=torecadash-22) — アニメ作品を知る入口として。
+
 
 ---
 
 URL: https://koshinstudio.com/notes/anago/
 
 # 穴子がデカすぎた話
+
+このページには、広告・アフィリエイトのリンクが含まれます。リンク先で買われると、このサイトに報酬が入ることがあります。Amazonのアソシエイトとして、適格販売により収入を得ています。
 
   English version (https://koshinstudio.com/en/notes/anago/)
 
@@ -2617,6 +2949,14 @@ URL: https://koshinstudio.com/notes/anago/
 
   遊ぶ (https://koshinstudio.com/play/sushitsumu/)作品ページへ (https://koshinstudio.com/works/sushitsumu/)
 
+## この記事で紹介したもの
+
+    このページには、広告・アフィリエイトのリンクが含まれます。リンク先で買われると、このサイトに報酬が入ることがあります。Amazonのアソシエイトとして、適格販売により収入を得ています。
+
+- ゲームデザインの本（Amazonで探す） (https://www.amazon.co.jp/s?k=%E3%82%B2%E3%83%BC%E3%83%A0%E3%83%87%E3%82%B6%E3%82%A4%E3%83%B3+%E5%85%A5%E9%96%80&tag=torecadash-22) — 遊びの設計を学べる本を探す。
+
+- ゲーム開発（JavaScript）の本（Amazonで探す） (https://www.amazon.co.jp/s?k=%E3%82%B2%E3%83%BC%E3%83%A0%E9%96%8B%E7%99%BA+JavaScript+%E5%85%A5%E9%96%80&tag=torecadash-22) — ブラウザゲームを作る入門書。
+
 
 ---
 
@@ -2722,13 +3062,13 @@ URL: https://koshinstudio.com/notes/card-supplies-guide/
 
     このページには、広告・アフィリエイトのリンクが含まれます。リンク先で買われると、このサイトに報酬が入ることがあります。Amazonのアソシエイトとして、適格販売により収入を得ています。
 
-- トレカのスリーブ（Amazonで探す） (https://www.amazon.co.jp/s?k=%E3%83%88%E3%83%AC%E3%82%AB+%E3%82%B9%E3%83%AA%E3%83%BC%E3%83%96+100%E6%9E%9A+%E3%83%9D%E3%82%B1%E3%82%AB&tag=torecadash-22)（Amazon） — 「標準サイズ」用かを確認してから選ぶ。
+- トレカのスリーブ（Amazonで探す） (https://www.amazon.co.jp/s?k=%E3%83%88%E3%83%AC%E3%82%AB+%E3%82%B9%E3%83%AA%E3%83%BC%E3%83%96+100%E6%9E%9A+%E3%83%9D%E3%82%B1%E3%82%AB&tag=torecadash-22) — 「標準サイズ」用かを確認してから選ぶ。
 
-- マグネットローダー（Amazonで探す） (https://www.amazon.co.jp/s?k=%E3%83%9E%E3%82%B0%E3%83%8D%E3%83%83%E3%83%88%E3%83%AD%E3%83%BC%E3%83%80%E3%83%BC+%E3%83%88%E3%83%AC%E3%82%AB&tag=torecadash-22)（Amazon） — 「35pt」と、スリーブごと入るかを確認。
+- マグネットローダー（Amazonで探す） (https://www.amazon.co.jp/s?k=%E3%83%9E%E3%82%B0%E3%83%8D%E3%83%83%E3%83%88%E3%83%AD%E3%83%BC%E3%83%80%E3%83%BC+%E3%83%88%E3%83%AC%E3%82%AB&tag=torecadash-22) — 「35pt」と、スリーブごと入るかを確認。
 
-- デッキケース（Amazonで探す） (https://www.amazon.co.jp/s?k=%E3%83%87%E3%83%83%E3%82%AD%E3%82%B1%E3%83%BC%E3%82%B9+%E3%83%88%E3%83%AC%E3%82%AB&tag=torecadash-22)（Amazon） — スリーブ入りで何枚入るかを確認。
+- デッキケース（Amazonで探す） (https://www.amazon.co.jp/s?k=%E3%83%87%E3%83%83%E3%82%AD%E3%82%B1%E3%83%BC%E3%82%B9+%E3%83%88%E3%83%AC%E3%82%AB&tag=torecadash-22) — スリーブ入りで何枚入るかを確認。
 
-- カードファイル（Amazonで探す） (https://www.amazon.co.jp/s?k=%E3%82%AB%E3%83%BC%E3%83%89%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB+9%E3%83%9D%E3%82%B1%E3%83%83%E3%83%88+%E3%83%88%E3%83%AC%E3%82%AB&tag=torecadash-22)（Amazon） — ポケット数と、スリーブごと入るかを確認。
+- カードファイル（Amazonで探す） (https://www.amazon.co.jp/s?k=%E3%82%AB%E3%83%BC%E3%83%89%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB+9%E3%83%9D%E3%82%B1%E3%83%83%E3%83%88+%E3%83%88%E3%83%AC%E3%82%AB&tag=torecadash-22) — ポケット数と、スリーブごと入るかを確認。
 
 
 ---
@@ -2736,6 +3076,8 @@ URL: https://koshinstudio.com/notes/card-supplies-guide/
 URL: https://koshinstudio.com/notes/comment-services/
 
 # 静的サイトのコメント欄を、公式の情報で比べる：giscus・utterances・Disqus・Remark42 ほか
+
+このページには、広告・アフィリエイトのリンクが含まれます。リンク先で買われると、このサイトに報酬が入ることがあります。Amazonのアソシエイトとして、適格販売により収入を得ています。
 
   English version (https://koshinstudio.com/en/notes/comment-services/)
 
@@ -2869,12 +3211,22 @@ URL: https://koshinstudio.com/notes/comment-services/
 
   公式ページは、要約を通して読んだ箇所があります。Disqus の価格は、公式ヘルプの記事（2025-04-30 版）の原文で、2026-10-08 に確かめました。Disqus 自身の料金ページは、本文が JavaScript で描かれていて読めなかったので、現行の価格は、そちらで確かめてください。
 
+## この記事で紹介したもの
+
+    このページには、広告・アフィリエイトのリンクが含まれます。リンク先で買われると、このサイトに報酬が入ることがあります。Amazonのアソシエイトとして、適格販売により収入を得ています。
+
+- 静的サイト・Web開発の本（Amazonで探す） (https://www.amazon.co.jp/s?k=%E9%9D%99%E7%9A%84%E3%82%B5%E3%82%A4%E3%83%88+Jamstack+Web%E9%96%8B%E7%99%BA&tag=torecadash-22) — 静的サイトの作り方・運用を扱う本を探す。
+
+- Web制作（HTML・CSS）の本（Amazonで探す） (https://www.amazon.co.jp/s?k=Web%E5%88%B6%E4%BD%9C+HTML+CSS+%E5%85%A5%E9%96%80&tag=torecadash-22) — サイト作りの基本を押さえる本。
+
 
 ---
 
 URL: https://koshinstudio.com/notes/ios-sdk-compare/
 
 # iOS アプリの広告 SDK と Firebase を、公式の情報で比べる：AdMob・AppLovin MAX・LevelPlay・Supabase
+
+このページには、広告・アフィリエイトのリンクが含まれます。リンク先で買われると、このサイトに報酬が入ることがあります。Amazonのアソシエイトとして、適格販売により収入を得ています。
 
   English version (https://koshinstudio.com/en/notes/ios-sdk-compare/)
 
@@ -3006,12 +3358,24 @@ URL: https://koshinstudio.com/notes/ios-sdk-compare/
 
   公式ページは、要約を通して読んだ箇所があります（数字は、原文と一字ずつ照らし合わせたものではありません）。載せる前に、原文を見直すことを前提にしてください。
 
+## この記事で紹介したもの
+
+    このページには、広告・アフィリエイトのリンクが含まれます。リンク先で買われると、このサイトに報酬が入ることがあります。Amazonのアソシエイトとして、適格販売により収入を得ています。
+
+- SwiftUI・iOSアプリ開発の本（Amazonで探す） (https://www.amazon.co.jp/s?k=SwiftUI+%E5%85%A5%E9%96%80+iOS%E3%82%A2%E3%83%97%E3%83%AA%E9%96%8B%E7%99%BA&tag=torecadash-22) — この記事の題材（iOSアプリ）を学ぶ入口として。
+
+- Firebaseの本（Amazonで探す） (https://www.amazon.co.jp/s?k=Firebase+%E5%85%A5%E9%96%80+%E3%82%A2%E3%83%97%E3%83%AA%E9%96%8B%E7%99%BA&tag=torecadash-22) — 認証・Firestoreなど、この記事で出てくる仕組みの入門書。
+
+- 個人でiOSアプリを出す本（Amazonで探す） (https://www.amazon.co.jp/s?k=iOS%E3%82%A2%E3%83%97%E3%83%AA+%E5%80%8B%E4%BA%BA%E9%96%8B%E7%99%BA+App+Store+%E5%85%AC%E9%96%8B&tag=torecadash-22) — 審査・公開まわりを通して読める本を探す。
+
 
 ---
 
 URL: https://koshinstudio.com/notes/hosting-compare/
 
 # 静的サイトを置く場所を、公式の規約で比べる：Cloudflare Pages・Netlify・Vercel・GitHub Pages・Firebase Hosting
+
+このページには、広告・アフィリエイトのリンクが含まれます。リンク先で買われると、このサイトに報酬が入ることがあります。Amazonのアソシエイトとして、適格販売により収入を得ています。
 
   English version (https://koshinstudio.com/en/notes/hosting-compare/)
 
@@ -3155,12 +3519,22 @@ URL: https://koshinstudio.com/notes/hosting-compare/
 
   公式ページは、要約を通して読んだ箇所があります（数字は、原文と一字ずつ照らし合わせたものではありません）。特に Netlify のクレジットと Vercel の上限は、原文で確かめてください。
 
+## この記事で紹介したもの
+
+    このページには、広告・アフィリエイトのリンクが含まれます。リンク先で買われると、このサイトに報酬が入ることがあります。Amazonのアソシエイトとして、適格販売により収入を得ています。
+
+- 静的サイト・Web開発の本（Amazonで探す） (https://www.amazon.co.jp/s?k=%E9%9D%99%E7%9A%84%E3%82%B5%E3%82%A4%E3%83%88+Jamstack+Web%E9%96%8B%E7%99%BA&tag=torecadash-22) — 静的サイトの作り方・運用を扱う本を探す。
+
+- Web制作（HTML・CSS）の本（Amazonで探す） (https://www.amazon.co.jp/s?k=Web%E5%88%B6%E4%BD%9C+HTML+CSS+%E5%85%A5%E9%96%80&tag=torecadash-22) — サイト作りの基本を押さえる本。
+
 
 ---
 
 URL: https://koshinstudio.com/notes/claude-vs-gemini-api/
 
 # Claude API と Gemini API を、公式の数字で比べる：小さいモデルの値段・Web検索・上限・廃止予定
+
+このページには、広告・アフィリエイトのリンクが含まれます。リンク先で買われると、このサイトに報酬が入ることがあります。Amazonのアソシエイトとして、適格販売により収入を得ています。
 
   English version (https://koshinstudio.com/en/notes/claude-vs-gemini-api/)
 
@@ -3322,12 +3696,22 @@ URL: https://koshinstudio.com/notes/claude-vs-gemini-api/
 
   公式ページは、要約を通して読んだ箇所があります（数字は、原文と一字ずつ照らし合わせたものではありません）。決める前には、必ず出典の原文で確かめてください。
 
+## この記事で紹介したもの
+
+    このページには、広告・アフィリエイトのリンクが含まれます。リンク先で買われると、このサイトに報酬が入ることがあります。Amazonのアソシエイトとして、適格販売により収入を得ています。
+
+- 生成AI・LLMアプリ開発の本（Amazonで探す） (https://www.amazon.co.jp/s?k=%E7%94%9F%E6%88%90AI+%E3%82%A2%E3%83%97%E3%83%AA%E9%96%8B%E7%99%BA+LLM+API+%E5%85%A5%E9%96%80&tag=torecadash-22) — APIを使ったアプリ作りの入門書を探す。
+
+- LLMの運用・コストの本（Amazonで探す） (https://www.amazon.co.jp/s?k=LLM+API+%E3%82%B3%E3%82%B9%E3%83%88+%E6%9C%80%E9%81%A9%E5%8C%96&tag=torecadash-22) — 費用と精度の取り合いを考える本を探す。
+
 
 ---
 
 URL: https://koshinstudio.com/notes/ditto-charm/
 
 # ポケモン「へんしんが苦手なメタモン!」のチャームを買ったら、質感がまるでおはじきだった
+
+このページには、広告・アフィリエイトのリンクが含まれます。リンク先で買われると、このサイトに報酬が入ることがあります。Amazonのアソシエイトとして、適格販売により収入を得ています。
 
   買ったもの ／ 2026年10月
 
@@ -3346,6 +3730,14 @@ URL: https://koshinstudio.com/notes/ditto-charm/
   ガチャで全種を揃えるには、何回・何円かかるのか。種類数を入れると計算できるガチャのコンプリート計算機 (https://koshinstudio.com/calc/gacha/)を作りました。この 5 種を 1 回 300 円で集めると、平均で約 11.4 回（約 3,425 円）です。
 
   コンプリートセットで買ったので、何回回したか、重複が何個出たか、といった数字はありません。買った場所と日付も、覚えていないので書いていません。写真もありません（公式ページの画像は「開発中のもの」と注記されていて、実物とは一部異なる場合があります）。
+
+## この記事で紹介したもの
+
+    このページには、広告・アフィリエイトのリンクが含まれます。リンク先で買われると、このサイトに報酬が入ることがあります。Amazonのアソシエイトとして、適格販売により収入を得ています。
+
+- ポケモンのチャーム（Amazonで探す） (https://www.amazon.co.jp/s?k=%E3%83%9D%E3%82%B1%E3%83%A2%E3%83%B3+%E3%83%81%E3%83%A3%E3%83%BC%E3%83%A0+%E3%82%AC%E3%83%81%E3%83%A3&tag=torecadash-22) — 同じシリーズのチャームを探す。
+
+- カプセルトイのコレクション用品（Amazonで探す） (https://www.amazon.co.jp/s?k=%E3%82%AB%E3%83%97%E3%82%BB%E3%83%AB%E3%83%88%E3%82%A4+%E3%82%B1%E3%83%BC%E3%82%B9+%E3%82%B3%E3%83%AC%E3%82%AF%E3%82%B7%E3%83%A7%E3%83%B3&tag=torecadash-22) — 集めたものを保管する用品。
 
 
 ---
@@ -3518,6 +3910,8 @@ URL: https://koshinstudio.com/works/sushitsumu/
 
 # すし積む
 
+このページには、広告・アフィリエイトのリンクが含まれます。リンク先で買われると、このサイトに報酬が入ることがあります。Amazonのアソシエイトとして、適格販売により収入を得ています。
+
   English version (https://koshinstudio.com/en/works/sushitsumu/)
 
   シャリから始めて、同じネタ同士をぶつけて育てる落ち物パズル。
@@ -3578,12 +3972,22 @@ URL: https://koshinstudio.com/works/sushitsumu/
     遊ぶ (https://koshinstudio.com/play/sushitsumu/)
     遊び方をくわしく (https://koshinstudio.com/works/sushitsumu/guide)
 
+## 関連するもの
+
+    このページには、広告・アフィリエイトのリンクが含まれます。リンク先で買われると、このサイトに報酬が入ることがあります。Amazonのアソシエイトとして、適格販売により収入を得ています。
+
+- ゲーム開発（JavaScript）の本（Amazonで探す） (https://www.amazon.co.jp/s?k=%E3%82%B2%E3%83%BC%E3%83%A0%E9%96%8B%E7%99%BA+JavaScript+%E5%85%A5%E9%96%80&tag=torecadash-22) — ブラウザゲームを作る入門書。
+
+- ゲームデザインの本（Amazonで探す） (https://www.amazon.co.jp/s?k=%E3%82%B2%E3%83%BC%E3%83%A0%E3%83%87%E3%82%B6%E3%82%A4%E3%83%B3+%E5%85%A5%E9%96%80&tag=torecadash-22) — 遊びの設計を学べる本を探す。
+
 
 ---
 
 URL: https://koshinstudio.com/works/stopwatch10/
 
 # 10秒ピッタリで止めろ！
+
+このページには、広告・アフィリエイトのリンクが含まれます。リンク先で買われると、このサイトに報酬が入ることがあります。Amazonのアソシエイトとして、適格販売により収入を得ています。
 
   English version (https://koshinstudio.com/en/works/stopwatch10/)
 
@@ -3642,12 +4046,20 @@ URL: https://koshinstudio.com/works/stopwatch10/
 
     遊ぶ (https://koshinstudio.com/play/stopwatch10/)
 
+## 関連するもの
+
+    このページには、広告・アフィリエイトのリンクが含まれます。リンク先で買われると、このサイトに報酬が入ることがあります。Amazonのアソシエイトとして、適格販売により収入を得ています。
+
+- ストップウォッチ（Amazonで探す） (https://www.amazon.co.jp/s?k=%E3%82%B9%E3%83%88%E3%83%83%E3%83%97%E3%82%A6%E3%82%A9%E3%83%83%E3%83%81+%E3%82%B9%E3%83%9D%E3%83%BC%E3%83%84+%E8%A8%88%E6%99%82&tag=torecadash-22) — 10秒を測る道具を探す。
+
 
 ---
 
 URL: https://koshinstudio.com/works/shindananime/
 
 # ガチアニメ診断
+
+このページには、広告・アフィリエイトのリンクが含まれます。リンク先で買われると、このサイトに報酬が入ることがあります。Amazonのアソシエイトとして、適格販売により収入を得ています。
 
   English version (https://koshinstudio.com/en/works/shindananime/)
 
@@ -3716,12 +4128,22 @@ URL: https://koshinstudio.com/works/shindananime/
 
 - 64タイプの一覧 (https://koshinstudio.com/anime/types/) — 二つ名とタイプコード
 
+## 関連するもの
+
+    このページには、広告・アフィリエイトのリンクが含まれます。リンク先で買われると、このサイトに報酬が入ることがあります。Amazonのアソシエイトとして、適格販売により収入を得ています。
+
+- アニメのガイド本（Amazonで探す） (https://www.amazon.co.jp/s?k=%E3%82%A2%E3%83%8B%E3%83%A1+%E5%90%8D%E4%BD%9C+%E3%82%AC%E3%82%A4%E3%83%89&tag=torecadash-22) — アニメ作品を知る入口として。
+
+- アニメの年鑑・作品データの本（Amazonで探す） (https://www.amazon.co.jp/s?k=%E3%82%A2%E3%83%8B%E3%83%A1+%E5%B9%B4%E9%91%91+%E4%BD%9C%E5%93%81+%E3%83%87%E3%83%BC%E3%82%BF&tag=torecadash-22) — 作品を調べるための資料。
+
 
 ---
 
 URL: https://koshinstudio.com/works/torecadash/
 
 # トレカダッシュ
+
+このページには、広告・アフィリエイトのリンクが含まれます。リンク先で買われると、このサイトに報酬が入ることがあります。Amazonのアソシエイトとして、適格販売により収入を得ています。
 
   English version (https://koshinstudio.com/en/works/torecadash/)
 
@@ -3820,12 +4242,26 @@ URL: https://koshinstudio.com/works/torecadash/
 
   アプリのサポート・利用規約・プライバシーポリシー：サポート (https://cardalerthub.web.app/support.html) ／ 利用規約 (https://cardalerthub.web.app/terms.html) ／ プライバシーポリシー (https://cardalerthub.web.app/privacy.html)（アプリ専用のページです）
 
+## 関連するもの
+
+    このページには、広告・アフィリエイトのリンクが含まれます。リンク先で買われると、このサイトに報酬が入ることがあります。Amazonのアソシエイトとして、適格販売により収入を得ています。
+
+- トレカのスリーブ（Amazonで探す） (https://www.amazon.co.jp/s?k=%E3%83%88%E3%83%AC%E3%82%AB+%E3%82%B9%E3%83%AA%E3%83%BC%E3%83%96+100%E6%9E%9A+%E3%83%9D%E3%82%B1%E3%82%AB&tag=torecadash-22) — 「標準サイズ」用かを確認してから選ぶ。
+
+- マグネットローダー（Amazonで探す） (https://www.amazon.co.jp/s?k=%E3%83%9E%E3%82%B0%E3%83%8D%E3%83%83%E3%83%88%E3%83%AD%E3%83%BC%E3%83%80%E3%83%BC+%E3%83%88%E3%83%AC%E3%82%AB&tag=torecadash-22) — 「35pt」と、スリーブごと入るかを確認。
+
+- デッキケース（Amazonで探す） (https://www.amazon.co.jp/s?k=%E3%83%87%E3%83%83%E3%82%AD%E3%82%B1%E3%83%BC%E3%82%B9+%E3%83%88%E3%83%AC%E3%82%AB&tag=torecadash-22) — スリーブ入りで何枚入るかを確認。
+
+- カードファイル（Amazonで探す） (https://www.amazon.co.jp/s?k=%E3%82%AB%E3%83%BC%E3%83%89%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB+9%E3%83%9D%E3%82%B1%E3%83%83%E3%83%88+%E3%83%88%E3%83%AC%E3%82%AB&tag=torecadash-22) — ポケット数と、スリーブごと入るかを確認。
+
 
 ---
 
 URL: https://koshinstudio.com/works/negaeri-shogi/
 
 # 寝返り将棋
+
+このページには、広告・アフィリエイトのリンクが含まれます。リンク先で買われると、このサイトに報酬が入ることがあります。Amazonのアソシエイトとして、適格販売により収入を得ています。
 
   English version (https://koshinstudio.com/en/works/negaeri-shogi/)
 
@@ -3889,6 +4325,14 @@ URL: https://koshinstudio.com/works/negaeri-shogi/
   オンライン対戦を遊ぶと、名前（既定は「名無し」）、レーティング、勝敗の数、対局の記録を、こちらのサーバーに預かります。登録の画面はなく、端末に作られる ID で本人を見分けます。くわしくはあつかい (https://koshinstudio.com/privacy/)に書いています。AI 対戦と2人対戦は、何も預かりません。
 
     遊ぶ (https://koshinstudio.com/play/negaeri-shogi/)
+
+## 関連するもの
+
+    このページには、広告・アフィリエイトのリンクが含まれます。リンク先で買われると、このサイトに報酬が入ることがあります。Amazonのアソシエイトとして、適格販売により収入を得ています。
+
+- 将棋入門の本（Amazonで探す） (https://www.amazon.co.jp/s?k=%E5%B0%86%E6%A3%8B+%E5%85%A5%E9%96%80+%E5%88%9D%E5%BF%83%E8%80%85&tag=torecadash-22) — 将棋のルールと考え方を学ぶ。
+
+- 将棋盤・駒のセット（Amazonで探す） (https://www.amazon.co.jp/s?k=%E5%B0%86%E6%A3%8B%E7%9B%A4+%E9%A7%92+%E3%82%BB%E3%83%83%E3%83%88&tag=torecadash-22) — 実際に指す道具を探す。
 
 
 ---
@@ -4313,6 +4757,8 @@ URL: https://koshinstudio.com/en/notes/itms-91064/
 
 # ITMS-91064 “Invalid Binary”: NSPrivacyTracking was true but NSPrivacyTrackingDomains was empty
 
+This page contains advertising and affiliate links. If you buy through them, this site may earn a commission. As an Amazon Associate I earn from qualifying purchases.
+
   日本語版 (https://koshinstudio.com/notes/itms-91064/)
 
   Development log of Torecadash / October 2026
@@ -4371,12 +4817,22 @@ URL: https://koshinstudio.com/en/notes/itms-91064/
 
 - All English pages (https://koshinstudio.com/en/)
 
+## Related items
+
+    This page contains advertising and affiliate links. If you buy through them, this site may earn a commission. As an Amazon Associate I earn from qualifying purchases.
+
+- Books on publishing an iOS app as a solo developer (search on Amazon.co.jp) (https://www.amazon.co.jp/s?k=iOS%E3%82%A2%E3%83%97%E3%83%AA+%E5%80%8B%E4%BA%BA%E9%96%8B%E7%99%BA+App+Store+%E5%85%AC%E9%96%8B&tag=torecadash-22) — Look for books that walk through review and release.
+
+- Books on SwiftUI and iOS app development (search on Amazon.co.jp) (https://www.amazon.co.jp/s?k=SwiftUI+%E5%85%A5%E9%96%80+iOS%E3%82%A2%E3%83%97%E3%83%AA%E9%96%8B%E7%99%BA&tag=torecadash-22) — A starting point for the iOS topic in this article.
+
 
 ---
 
 URL: https://koshinstudio.com/en/works/negaeri-shogi/
 
 # Negaeri Shogi
+
+This page contains advertising and affiliate links. If you buy through them, this site may earn a commission. As an Amazon Associate I earn from qualifying purchases.
 
   日本語版 (https://koshinstudio.com/works/negaeri-shogi/)
 
@@ -4424,6 +4880,14 @@ Defected pieces get promoted.
   Play now (https://koshinstudio.com/play/negaeri-shogi/)
 
   This is the English version of the Japanese page (https://koshinstudio.com/works/negaeri-shogi/). Online play stores your name, rating and results (see the privacy page (https://koshinstudio.com/privacy/), in Japanese).
+
+## Related items
+
+    This page contains advertising and affiliate links. If you buy through them, this site may earn a commission. As an Amazon Associate I earn from qualifying purchases.
+
+- Books for beginners in shogi (search on Amazon.co.jp) (https://www.amazon.co.jp/s?k=%E5%B0%86%E6%A3%8B+%E5%85%A5%E9%96%80+%E5%88%9D%E5%BF%83%E8%80%85&tag=torecadash-22) — Learn the rules and ideas of shogi.
+
+- Shogi boards and piece sets (search on Amazon.co.jp) (https://www.amazon.co.jp/s?k=%E5%B0%86%E6%A3%8B%E7%9B%A4+%E9%A7%92+%E3%82%BB%E3%83%83%E3%83%88&tag=torecadash-22) — Tools for playing a real game.
 
 
 ---
@@ -4494,6 +4958,8 @@ URL: https://koshinstudio.com/en/works/shindananime/
 
 # Anime Type Quiz
 
+This page contains advertising and affiliate links. If you buy through them, this site may earn a commission. As an Amazon Associate I earn from qualifying purchases.
+
   日本語版 (https://koshinstudio.com/works/shindananime/)
 
   12 questions, 6 axes.
@@ -4541,12 +5007,22 @@ Your anime type, and the one anime that fits you right now.
 
   This is the English version of the Japanese page (https://koshinstudio.com/works/shindananime/). The quiz’s questions and result texts are in English at the link above; the Japanese version is at /app/shindananime/ (https://koshinstudio.com/app/shindananime/).
 
+## Related items
+
+    This page contains advertising and affiliate links. If you buy through them, this site may earn a commission. As an Amazon Associate I earn from qualifying purchases.
+
+- Anime guidebooks (search on Amazon.co.jp) (https://www.amazon.co.jp/s?k=%E3%82%A2%E3%83%8B%E3%83%A1+%E5%90%8D%E4%BD%9C+%E3%82%AC%E3%82%A4%E3%83%89&tag=torecadash-22) — A way into the world of anime.
+
+- Anime yearbooks and reference books (search on Amazon.co.jp) (https://www.amazon.co.jp/s?k=%E3%82%A2%E3%83%8B%E3%83%A1+%E5%B9%B4%E9%91%91+%E4%BD%9C%E5%93%81+%E3%83%87%E3%83%BC%E3%82%BF&tag=torecadash-22) — Reference material for looking up titles.
+
 
 ---
 
 URL: https://koshinstudio.com/en/works/torecadash/
 
 # Toreca Dash (トレカダッシュ)
+
+This page contains advertising and affiliate links. If you buy through them, this site may earn a commission. As an Amazon Associate I earn from qualifying purchases.
 
   日本語版 (https://koshinstudio.com/works/torecadash/)
 
@@ -4633,12 +5109,26 @@ The Japanese card drops that are hard to keep up with, in one place, with alerts
 
   Support (https://cardalerthub.web.app/support.html) / Terms (https://cardalerthub.web.app/terms.html) / Privacy (https://cardalerthub.web.app/privacy.html)
 
+## Related items
+
+    This page contains advertising and affiliate links. If you buy through them, this site may earn a commission. As an Amazon Associate I earn from qualifying purchases.
+
+- トレカのスリーブ（Amazonで探す） (https://www.amazon.co.jp/s?k=%E3%83%88%E3%83%AC%E3%82%AB+%E3%82%B9%E3%83%AA%E3%83%BC%E3%83%96+100%E6%9E%9A+%E3%83%9D%E3%82%B1%E3%82%AB&tag=torecadash-22) — 「標準サイズ」用かを確認してから選ぶ。
+
+- マグネットローダー（Amazonで探す） (https://www.amazon.co.jp/s?k=%E3%83%9E%E3%82%B0%E3%83%8D%E3%83%83%E3%83%88%E3%83%AD%E3%83%BC%E3%83%80%E3%83%BC+%E3%83%88%E3%83%AC%E3%82%AB&tag=torecadash-22) — 「35pt」と、スリーブごと入るかを確認。
+
+- デッキケース（Amazonで探す） (https://www.amazon.co.jp/s?k=%E3%83%87%E3%83%83%E3%82%AD%E3%82%B1%E3%83%BC%E3%82%B9+%E3%83%88%E3%83%AC%E3%82%AB&tag=torecadash-22) — スリーブ入りで何枚入るかを確認。
+
+- カードファイル（Amazonで探す） (https://www.amazon.co.jp/s?k=%E3%82%AB%E3%83%BC%E3%83%89%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB+9%E3%83%9D%E3%82%B1%E3%83%83%E3%83%88+%E3%83%88%E3%83%AC%E3%82%AB&tag=torecadash-22) — ポケット数と、スリーブごと入るかを確認。
+
 
 ---
 
 URL: https://koshinstudio.com/en/works/sushitsumu/
 
 # Sushi Stack
+
+This page contains advertising and affiliate links. If you buy through them, this site may earn a commission. As an Amazon Associate I earn from qualifying purchases.
 
   日本語版 (https://koshinstudio.com/works/sushitsumu/)
 
@@ -4721,12 +5211,22 @@ The final piece is the golden sushi tub.
 
   This is the English version of the Japanese page (https://koshinstudio.com/works/sushitsumu/). The ranking stores the name you enter and your results (see the privacy page (https://koshinstudio.com/en/privacy/)).
 
+## Related items
+
+    This page contains advertising and affiliate links. If you buy through them, this site may earn a commission. As an Amazon Associate I earn from qualifying purchases.
+
+- Books on game development in JavaScript (search on Amazon.co.jp) (https://www.amazon.co.jp/s?k=%E3%82%B2%E3%83%BC%E3%83%A0%E9%96%8B%E7%99%BA+JavaScript+%E5%85%A5%E9%96%80&tag=torecadash-22) — Introductions to making browser games.
+
+- Books on game design (search on Amazon.co.jp) (https://www.amazon.co.jp/s?k=%E3%82%B2%E3%83%BC%E3%83%A0%E3%83%87%E3%82%B6%E3%82%A4%E3%83%B3+%E5%85%A5%E9%96%80&tag=torecadash-22) — Books on designing how a game plays.
+
 
 ---
 
 URL: https://koshinstudio.com/en/works/stopwatch10/
 
 # Stop at exactly 10 seconds!
+
+This page contains advertising and affiliate links. If you buy through them, this site may earn a commission. As an Amazon Associate I earn from qualifying purchases.
 
   日本語版 (https://koshinstudio.com/works/stopwatch10/)
 
@@ -4792,6 +5292,12 @@ When you think it is time, stop.
 - Making a 10-second stopwatch ranking fair: 3 decimals, ties and write counts (https://koshinstudio.com/en/notes/stopwatch-rank/)
 
   This is the English version of the Japanese page (https://koshinstudio.com/works/stopwatch10/).
+
+## Related items
+
+    This page contains advertising and affiliate links. If you buy through them, this site may earn a commission. As an Amazon Associate I earn from qualifying purchases.
+
+- Stopwatches (search on Amazon.co.jp) (https://www.amazon.co.jp/s?k=%E3%82%B9%E3%83%88%E3%83%83%E3%83%97%E3%82%A6%E3%82%A9%E3%83%83%E3%83%81+%E3%82%B9%E3%83%9D%E3%83%BC%E3%83%84+%E8%A8%88%E6%99%82&tag=torecadash-22) — A tool for timing ten seconds.
 
 
 ---
@@ -4865,6 +5371,8 @@ URL: https://koshinstudio.com/en/notes/review-info-needed/
 
 # App Store review sent “Guideline 2.1 Information Needed”: the six things Apple asked for
 
+This page contains advertising and affiliate links. If you buy through them, this site may earn a commission. As an Amazon Associate I earn from qualifying purchases.
+
   日本語版 (https://koshinstudio.com/notes/review-info-needed/)
 
   Development log of Torecadash / October 2026
@@ -4919,12 +5427,22 @@ URL: https://koshinstudio.com/en/notes/review-info-needed/
 
 - All English pages (https://koshinstudio.com/en/)
 
+## Related items
+
+    This page contains advertising and affiliate links. If you buy through them, this site may earn a commission. As an Amazon Associate I earn from qualifying purchases.
+
+- Books on publishing an iOS app as a solo developer (search on Amazon.co.jp) (https://www.amazon.co.jp/s?k=iOS%E3%82%A2%E3%83%97%E3%83%AA+%E5%80%8B%E4%BA%BA%E9%96%8B%E7%99%BA+App+Store+%E5%85%AC%E9%96%8B&tag=torecadash-22) — Look for books that walk through review and release.
+
+- Books on SwiftUI and iOS app development (search on Amazon.co.jp) (https://www.amazon.co.jp/s?k=SwiftUI+%E5%85%A5%E9%96%80+iOS%E3%82%A2%E3%83%97%E3%83%AA%E9%96%8B%E7%99%BA&tag=torecadash-22) — A starting point for the iOS topic in this article.
+
 
 ---
 
 URL: https://koshinstudio.com/en/notes/xcode152-sdk/
 
 # Firebase 12 does not work with Xcode 15.2 (Swift 6.0 required): why I pinned Firebase 11.4.0 and AdMob 11.5.0
+
+This page contains advertising and affiliate links. If you buy through them, this site may earn a commission. As an Amazon Associate I earn from qualifying purchases.
 
   日本語版 (https://koshinstudio.com/notes/xcode152-sdk/)
 
@@ -4990,12 +5508,22 @@ URL: https://koshinstudio.com/en/notes/xcode152-sdk/
 
 - All English pages (https://koshinstudio.com/en/)
 
+## Related items
+
+    This page contains advertising and affiliate links. If you buy through them, this site may earn a commission. As an Amazon Associate I earn from qualifying purchases.
+
+- Books on SwiftUI and iOS app development (search on Amazon.co.jp) (https://www.amazon.co.jp/s?k=SwiftUI+%E5%85%A5%E9%96%80+iOS%E3%82%A2%E3%83%97%E3%83%AA%E9%96%8B%E7%99%BA&tag=torecadash-22) — A starting point for the iOS topic in this article.
+
+- Books on Firebase (search on Amazon.co.jp) (https://www.amazon.co.jp/s?k=Firebase+%E5%85%A5%E9%96%80+%E3%82%A2%E3%83%97%E3%83%AA%E9%96%8B%E7%99%BA&tag=torecadash-22) — Introductions to the parts of Firebase mentioned here.
+
 
 ---
 
 URL: https://koshinstudio.com/en/notes/torecadash-watchdog/
 
 # iOS app freezes and is killed (0x8BADF00D): a SwiftUI computed property ran on every redraw
+
+This page contains advertising and affiliate links. If you buy through them, this site may earn a commission. As an Amazon Associate I earn from qualifying purchases.
 
   日本語版 (https://koshinstudio.com/notes/torecadash-watchdog/)
 
@@ -5044,12 +5572,22 @@ var articles: [Article] { fetched.filter…filter…map…sorted }
 
 - All English pages (https://koshinstudio.com/en/)
 
+## Related items
+
+    This page contains advertising and affiliate links. If you buy through them, this site may earn a commission. As an Amazon Associate I earn from qualifying purchases.
+
+- Books on SwiftUI and iOS app development (search on Amazon.co.jp) (https://www.amazon.co.jp/s?k=SwiftUI+%E5%85%A5%E9%96%80+iOS%E3%82%A2%E3%83%97%E3%83%AA%E9%96%8B%E7%99%BA&tag=torecadash-22) — A starting point for the iOS topic in this article.
+
+- Books on publishing an iOS app as a solo developer (search on Amazon.co.jp) (https://www.amazon.co.jp/s?k=iOS%E3%82%A2%E3%83%97%E3%83%AA+%E5%80%8B%E4%BA%BA%E9%96%8B%E7%99%BA+App+Store+%E5%85%AC%E9%96%8B&tag=torecadash-22) — Look for books that walk through review and release.
+
 
 ---
 
 URL: https://koshinstudio.com/en/notes/u2028/
 
 # Python splitlines() breaks JSONL: the culprit was U+2028, an invisible line separator
+
+This page contains advertising and affiliate links. If you buy through them, this site may earn a commission. As an Amazon Associate I earn from qualifying purchases.
 
   日本語版 (https://koshinstudio.com/notes/u2028/)
 
@@ -5123,12 +5661,22 @@ len(s.split('\n'))    # 1
 
 - All English pages (https://koshinstudio.com/en/)
 
+## Related items
+
+    This page contains advertising and affiliate links. If you buy through them, this site may earn a commission. As an Amazon Associate I earn from qualifying purchases.
+
+- Books on data handling in Python (search on Amazon.co.jp) (https://www.amazon.co.jp/s?k=Python+%E3%83%87%E3%83%BC%E3%82%BF%E5%87%A6%E7%90%86+%E5%85%A5%E9%96%80&tag=torecadash-22) — An entry point to handling strings, JSON and other data.
+
+- Books on software testing and quality (search on Amazon.co.jp) (https://www.amazon.co.jp/s?k=%E3%82%BD%E3%83%95%E3%83%88%E3%82%A6%E3%82%A7%E3%82%A2%E3%83%86%E3%82%B9%E3%83%88+%E5%85%A5%E9%96%80+%E5%93%81%E8%B3%AA&tag=torecadash-22) — A systematic take on counting first and testing by breaking.
+
 
 ---
 
 URL: https://koshinstudio.com/en/notes/torecadash-ci/
 
 # No builds arriving in TestFlight: I had used up the 25 free Xcode Cloud hours (my first diagnosis was wrong)
+
+This page contains advertising and affiliate links. If you buy through them, this site may earn a commission. As an Amazon Associate I earn from qualifying purchases.
 
   日本語版 (https://koshinstudio.com/notes/torecadash-ci/)
 
@@ -5184,12 +5732,22 @@ URL: https://koshinstudio.com/en/notes/torecadash-ci/
 
 - All English pages (https://koshinstudio.com/en/)
 
+## Related items
+
+    This page contains advertising and affiliate links. If you buy through them, this site may earn a commission. As an Amazon Associate I earn from qualifying purchases.
+
+- Books on SwiftUI and iOS app development (search on Amazon.co.jp) (https://www.amazon.co.jp/s?k=SwiftUI+%E5%85%A5%E9%96%80+iOS%E3%82%A2%E3%83%97%E3%83%AA%E9%96%8B%E7%99%BA&tag=torecadash-22) — A starting point for the iOS topic in this article.
+
+- Books on publishing an iOS app as a solo developer (search on Amazon.co.jp) (https://www.amazon.co.jp/s?k=iOS%E3%82%A2%E3%83%97%E3%83%AA+%E5%80%8B%E4%BA%BA%E9%96%8B%E7%99%BA+App+Store+%E5%85%AC%E9%96%8B&tag=torecadash-22) — Look for books that walk through review and release.
+
 
 ---
 
 URL: https://koshinstudio.com/en/notes/apple-signin/
 
 # Firebase Auth: force-quitting the app created anonymous accounts in bulk (waiting for currentUser to restore)
+
+This page contains advertising and affiliate links. If you buy through them, this site may earn a commission. As an Amazon Associate I earn from qualifying purchases.
 
   日本語版 (https://koshinstudio.com/notes/apple-signin/)
 
@@ -5259,12 +5817,22 @@ URL: https://koshinstudio.com/en/notes/apple-signin/
 
 - All English pages (https://koshinstudio.com/en/)
 
+## Related items
+
+    This page contains advertising and affiliate links. If you buy through them, this site may earn a commission. As an Amazon Associate I earn from qualifying purchases.
+
+- Books on Firebase (search on Amazon.co.jp) (https://www.amazon.co.jp/s?k=Firebase+%E5%85%A5%E9%96%80+%E3%82%A2%E3%83%97%E3%83%AA%E9%96%8B%E7%99%BA&tag=torecadash-22) — Introductions to the parts of Firebase mentioned here.
+
+- Books on SwiftUI and iOS app development (search on Amazon.co.jp) (https://www.amazon.co.jp/s?k=SwiftUI+%E5%85%A5%E9%96%80+iOS%E3%82%A2%E3%83%97%E3%83%AA%E9%96%8B%E7%99%BA&tag=torecadash-22) — A starting point for the iOS topic in this article.
+
 
 ---
 
 URL: https://koshinstudio.com/en/notes/logo-pop/
 
 # A canvas becomes twice as large on Retina: inset:0 does not stretch it (a bug in a logo that bursts when you tap it)
+
+This page contains advertising and affiliate links. If you buy through them, this site may earn a commission. As an Amazon Associate I earn from qualifying purchases.
 
   日本語版 (https://koshinstudio.com/notes/logo-pop/)
 
@@ -5338,12 +5906,22 @@ URL: https://koshinstudio.com/en/notes/logo-pop/
 
 - All English pages (https://koshinstudio.com/en/)
 
+## Related items
+
+    This page contains advertising and affiliate links. If you buy through them, this site may earn a commission. As an Amazon Associate I earn from qualifying purchases.
+
+- Books on web building (HTML and CSS) (search on Amazon.co.jp) (https://www.amazon.co.jp/s?k=Web%E5%88%B6%E4%BD%9C+HTML+CSS+%E5%85%A5%E9%96%80&tag=torecadash-22) — Basics of building a website.
+
+- Books on game development in JavaScript (search on Amazon.co.jp) (https://www.amazon.co.jp/s?k=%E3%82%B2%E3%83%BC%E3%83%A0%E9%96%8B%E7%99%BA+JavaScript+%E5%85%A5%E9%96%80&tag=torecadash-22) — Introductions to making browser games.
+
 
 ---
 
 URL: https://koshinstudio.com/en/notes/dup-zero/
 
 # I counted “duplicates are practically zero,” but the audit reported 112 pairs
+
+This page contains advertising and affiliate links. If you buy through them, this site may earn a commission. As an Amazon Associate I earn from qualifying purchases.
 
   日本語版 (https://koshinstudio.com/notes/dup-zero/)
 
@@ -5407,12 +5985,22 @@ URL: https://koshinstudio.com/en/notes/dup-zero/
 
 - All English pages (https://koshinstudio.com/en/)
 
+## Related items
+
+    This page contains advertising and affiliate links. If you buy through them, this site may earn a commission. As an Amazon Associate I earn from qualifying purchases.
+
+- Books on data quality and de-duplication (search on Amazon.co.jp) (https://www.amazon.co.jp/s?k=%E3%83%87%E3%83%BC%E3%82%BF%E3%82%AF%E3%83%AC%E3%83%B3%E3%82%B8%E3%83%B3%E3%82%B0+%E3%83%87%E3%83%BC%E3%82%BF%E5%93%81%E8%B3%AA+%E9%87%8D%E8%A4%87&tag=torecadash-22) — Books on spelling variants and duplicates.
+
+- Books on software testing and quality (search on Amazon.co.jp) (https://www.amazon.co.jp/s?k=%E3%82%BD%E3%83%95%E3%83%88%E3%82%A6%E3%82%A7%E3%82%A2%E3%83%86%E3%82%B9%E3%83%88+%E5%85%A5%E9%96%80+%E5%93%81%E8%B3%AA&tag=torecadash-22) — A systematic take on counting first and testing by breaking.
+
 
 ---
 
 URL: https://koshinstudio.com/en/notes/torecadash-ai/
 
 # “It should shrink” was wrong twice: cutting AI calls and what I measured afterward
+
+This page contains advertising and affiliate links. If you buy through them, this site may earn a commission. As an Amazon Associate I earn from qualifying purchases.
 
   日本語版 (https://koshinstudio.com/notes/torecadash-ai/)
 
@@ -5491,12 +6079,22 @@ URL: https://koshinstudio.com/en/notes/torecadash-ai/
 
 - All English pages (https://koshinstudio.com/en/)
 
+## Related items
+
+    This page contains advertising and affiliate links. If you buy through them, this site may earn a commission. As an Amazon Associate I earn from qualifying purchases.
+
+- Books on building apps with LLMs (search on Amazon.co.jp) (https://www.amazon.co.jp/s?k=%E7%94%9F%E6%88%90AI+%E3%82%A2%E3%83%97%E3%83%AA%E9%96%8B%E7%99%BA+LLM+API+%E5%85%A5%E9%96%80&tag=torecadash-22) — Introductions to building apps on top of an LLM API.
+
+- Books on running LLM apps and their costs (search on Amazon.co.jp) (https://www.amazon.co.jp/s?k=LLM+API+%E3%82%B3%E3%82%B9%E3%83%88+%E6%9C%80%E9%81%A9%E5%8C%96&tag=torecadash-22) — Books on trading cost against accuracy.
+
 
 ---
 
 URL: https://koshinstudio.com/en/notes/stopwatch-rank/
 
 # Making a 10-second stopwatch ranking fair: 3 decimals, ties and write counts
+
+This page contains advertising and affiliate links. If you buy through them, this site may earn a commission. As an Amazon Associate I earn from qualifying purchases.
 
   日本語版 (https://koshinstudio.com/notes/stopwatch-rank/)
 
@@ -5559,12 +6157,22 @@ URL: https://koshinstudio.com/en/notes/stopwatch-rank/
 
 - All English pages (https://koshinstudio.com/en/)
 
+## Related items
+
+    This page contains advertising and affiliate links. If you buy through them, this site may earn a commission. As an Amazon Associate I earn from qualifying purchases.
+
+- Stopwatches (search on Amazon.co.jp) (https://www.amazon.co.jp/s?k=%E3%82%B9%E3%83%88%E3%83%83%E3%83%97%E3%82%A6%E3%82%A9%E3%83%83%E3%83%81+%E3%82%B9%E3%83%9D%E3%83%BC%E3%83%84+%E8%A8%88%E6%99%82&tag=torecadash-22) — A tool for timing ten seconds.
+
+- Books on statistics and data analysis (search on Amazon.co.jp) (https://www.amazon.co.jp/s?k=%E7%B5%B1%E8%A8%88%E5%AD%A6+%E5%85%A5%E9%96%80+%E3%83%87%E3%83%BC%E3%82%BF%E5%88%86%E6%9E%90&tag=torecadash-22) — Learn how to reason about rates, measurements and spread.
+
 
 ---
 
 URL: https://koshinstudio.com/en/notes/anime-db/
 
 # From 16,177 titles to 6,091: how the anime quiz database was built by dropping over 60%
+
+This page contains advertising and affiliate links. If you buy through them, this site may earn a commission. As an Amazon Associate I earn from qualifying purchases.
 
   日本語版 (https://koshinstudio.com/notes/anime-db/)
 
@@ -5665,12 +6273,22 @@ URL: https://koshinstudio.com/en/notes/anime-db/
 
 - All English pages (https://koshinstudio.com/en/)
 
+## Related items
+
+    This page contains advertising and affiliate links. If you buy through them, this site may earn a commission. As an Amazon Associate I earn from qualifying purchases.
+
+- Anime yearbooks and reference books (search on Amazon.co.jp) (https://www.amazon.co.jp/s?k=%E3%82%A2%E3%83%8B%E3%83%A1+%E5%B9%B4%E9%91%91+%E4%BD%9C%E5%93%81+%E3%83%87%E3%83%BC%E3%82%BF&tag=torecadash-22) — Reference material for looking up titles.
+
+- Books on data handling in Python (search on Amazon.co.jp) (https://www.amazon.co.jp/s?k=Python+%E3%83%87%E3%83%BC%E3%82%BF%E5%87%A6%E7%90%86+%E5%85%A5%E9%96%80&tag=torecadash-22) — An entry point to handling strings, JSON and other data.
+
 
 ---
 
 URL: https://koshinstudio.com/en/notes/match-percent/
 
 # “80% was chosen over 82%”: the quiz’s match percentage disagreed with its ranking
+
+This page contains advertising and affiliate links. If you buy through them, this site may earn a commission. As an Amazon Associate I earn from qualifying purchases.
 
   日本語版 (https://koshinstudio.com/notes/match-percent/)
 
@@ -5749,12 +6367,22 @@ URL: https://koshinstudio.com/en/notes/match-percent/
 
 - All English pages (https://koshinstudio.com/en/)
 
+## Related items
+
+    This page contains advertising and affiliate links. If you buy through them, this site may earn a commission. As an Amazon Associate I earn from qualifying purchases.
+
+- Books on statistics and data analysis (search on Amazon.co.jp) (https://www.amazon.co.jp/s?k=%E7%B5%B1%E8%A8%88%E5%AD%A6+%E5%85%A5%E9%96%80+%E3%83%87%E3%83%BC%E3%82%BF%E5%88%86%E6%9E%90&tag=torecadash-22) — Learn how to reason about rates, measurements and spread.
+
+- Anime guidebooks (search on Amazon.co.jp) (https://www.amazon.co.jp/s?k=%E3%82%A2%E3%83%8B%E3%83%A1+%E5%90%8D%E4%BD%9C+%E3%82%AC%E3%82%A4%E3%83%89&tag=torecadash-22) — A way into the world of anime.
+
 
 ---
 
 URL: https://koshinstudio.com/en/notes/shindan12/
 
 # What changes when an anime quiz goes from 50 questions to 12?
+
+This page contains advertising and affiliate links. If you buy through them, this site may earn a commission. As an Amazon Associate I earn from qualifying purchases.
 
   日本語版 (https://koshinstudio.com/notes/shindan12/)
 
@@ -5863,12 +6491,22 @@ URL: https://koshinstudio.com/en/notes/shindan12/
 
 - All English pages (https://koshinstudio.com/en/)
 
+## Related items
+
+    This page contains advertising and affiliate links. If you buy through them, this site may earn a commission. As an Amazon Associate I earn from qualifying purchases.
+
+- Books on statistics and data analysis (search on Amazon.co.jp) (https://www.amazon.co.jp/s?k=%E7%B5%B1%E8%A8%88%E5%AD%A6+%E5%85%A5%E9%96%80+%E3%83%87%E3%83%BC%E3%82%BF%E5%88%86%E6%9E%90&tag=torecadash-22) — Learn how to reason about rates, measurements and spread.
+
+- Anime guidebooks (search on Amazon.co.jp) (https://www.amazon.co.jp/s?k=%E3%82%A2%E3%83%8B%E3%83%A1+%E5%90%8D%E4%BD%9C+%E3%82%AC%E3%82%A4%E3%83%89&tag=torecadash-22) — A way into the world of anime.
+
 
 ---
 
 URL: https://koshinstudio.com/en/notes/result-screen/
 
 # The streaming buttons were shown even for titles you could not watch: making the quiz result screen true
+
+This page contains advertising and affiliate links. If you buy through them, this site may earn a commission. As an Amazon Associate I earn from qualifying purchases.
 
   日本語版 (https://koshinstudio.com/notes/result-screen/)
 
@@ -5938,12 +6576,22 @@ URL: https://koshinstudio.com/en/notes/result-screen/
 
 - All English pages (https://koshinstudio.com/en/)
 
+## Related items
+
+    This page contains advertising and affiliate links. If you buy through them, this site may earn a commission. As an Amazon Associate I earn from qualifying purchases.
+
+- Anime guidebooks (search on Amazon.co.jp) (https://www.amazon.co.jp/s?k=%E3%82%A2%E3%83%8B%E3%83%A1+%E5%90%8D%E4%BD%9C+%E3%82%AC%E3%82%A4%E3%83%89&tag=torecadash-22) — A way into the world of anime.
+
+- Books on game design (search on Amazon.co.jp) (https://www.amazon.co.jp/s?k=%E3%82%B2%E3%83%BC%E3%83%A0%E3%83%87%E3%82%B6%E3%82%A4%E3%83%B3+%E5%85%A5%E9%96%80&tag=torecadash-22) — Books on designing how a game plays.
+
 
 ---
 
 URL: https://koshinstudio.com/en/notes/first-visit/
 
 # Cutting six buttons to one: first-time players did not know what to press
+
+This page contains advertising and affiliate links. If you buy through them, this site may earn a commission. As an Amazon Associate I earn from qualifying purchases.
 
   日本語版 (https://koshinstudio.com/notes/first-visit/)
 
@@ -6017,12 +6665,22 @@ URL: https://koshinstudio.com/en/notes/first-visit/
 
 - All English pages (https://koshinstudio.com/en/)
 
+## Related items
+
+    This page contains advertising and affiliate links. If you buy through them, this site may earn a commission. As an Amazon Associate I earn from qualifying purchases.
+
+- Books on game design (search on Amazon.co.jp) (https://www.amazon.co.jp/s?k=%E3%82%B2%E3%83%BC%E3%83%A0%E3%83%87%E3%82%B6%E3%82%A4%E3%83%B3+%E5%85%A5%E9%96%80&tag=torecadash-22) — Books on designing how a game plays.
+
+- Books on game development in JavaScript (search on Amazon.co.jp) (https://www.amazon.co.jp/s?k=%E3%82%B2%E3%83%BC%E3%83%A0%E9%96%8B%E7%99%BA+JavaScript+%E5%85%A5%E9%96%80&tag=torecadash-22) — Introductions to making browser games.
+
 
 ---
 
 URL: https://koshinstudio.com/en/notes/sushi-measure/
 
 # “The pile settles at 89%” was wrong: my measurement was what was wrong
+
+This page contains advertising and affiliate links. If you buy through them, this site may earn a commission. As an Amazon Associate I earn from qualifying purchases.
 
   日本語版 (https://koshinstudio.com/notes/sushi-measure/)
 
@@ -6087,12 +6745,22 @@ URL: https://koshinstudio.com/en/notes/sushi-measure/
 
 - All English pages (https://koshinstudio.com/en/)
 
+## Related items
+
+    This page contains advertising and affiliate links. If you buy through them, this site may earn a commission. As an Amazon Associate I earn from qualifying purchases.
+
+- Books on statistics and data analysis (search on Amazon.co.jp) (https://www.amazon.co.jp/s?k=%E7%B5%B1%E8%A8%88%E5%AD%A6+%E5%85%A5%E9%96%80+%E3%83%87%E3%83%BC%E3%82%BF%E5%88%86%E6%9E%90&tag=torecadash-22) — Learn how to reason about rates, measurements and spread.
+
+- Books on game development in JavaScript (search on Amazon.co.jp) (https://www.amazon.co.jp/s?k=%E3%82%B2%E3%83%BC%E3%83%A0%E9%96%8B%E7%99%BA+JavaScript+%E5%85%A5%E9%96%80&tag=torecadash-22) — Introductions to making browser games.
+
 
 ---
 
 URL: https://koshinstudio.com/en/notes/anago/
 
 # The conger eel was too big: finding why a merge puzzle’s last piece was out of reach
+
+This page contains advertising and affiliate links. If you buy through them, this site may earn a commission. As an Amazon Associate I earn from qualifying purchases.
 
   日本語版 (https://koshinstudio.com/notes/anago/)
 
@@ -6272,12 +6940,22 @@ best piece reached   otoro 43 games  anago 52  spiny lobster 4  golden tub 0
 
 - All English pages (https://koshinstudio.com/en/)
 
+## Related items
+
+    This page contains advertising and affiliate links. If you buy through them, this site may earn a commission. As an Amazon Associate I earn from qualifying purchases.
+
+- Books on game design (search on Amazon.co.jp) (https://www.amazon.co.jp/s?k=%E3%82%B2%E3%83%BC%E3%83%A0%E3%83%87%E3%82%B6%E3%82%A4%E3%83%B3+%E5%85%A5%E9%96%80&tag=torecadash-22) — Books on designing how a game plays.
+
+- Books on game development in JavaScript (search on Amazon.co.jp) (https://www.amazon.co.jp/s?k=%E3%82%B2%E3%83%BC%E3%83%A0%E9%96%8B%E7%99%BA+JavaScript+%E5%85%A5%E9%96%80&tag=torecadash-22) — Introductions to making browser games.
+
 
 ---
 
 URL: https://koshinstudio.com/en/notes/typo-catalog/
 
 # A typo born once multiplied across shops: the “30th SEREBRATION” incident
+
+This page contains advertising and affiliate links. If you buy through them, this site may earn a commission. As an Amazon Associate I earn from qualifying purchases.
 
   日本語版 (https://koshinstudio.com/notes/typo-catalog/)
 
@@ -6343,12 +7021,22 @@ URL: https://koshinstudio.com/en/notes/typo-catalog/
 
 - All English pages (https://koshinstudio.com/en/)
 
+## Related items
+
+    This page contains advertising and affiliate links. If you buy through them, this site may earn a commission. As an Amazon Associate I earn from qualifying purchases.
+
+- Books on data quality and de-duplication (search on Amazon.co.jp) (https://www.amazon.co.jp/s?k=%E3%83%87%E3%83%BC%E3%82%BF%E3%82%AF%E3%83%AC%E3%83%B3%E3%82%B8%E3%83%B3%E3%82%B0+%E3%83%87%E3%83%BC%E3%82%BF%E5%93%81%E8%B3%AA+%E9%87%8D%E8%A4%87&tag=torecadash-22) — Books on spelling variants and duplicates.
+
+- Books on data handling in Python (search on Amazon.co.jp) (https://www.amazon.co.jp/s?k=Python+%E3%83%87%E3%83%BC%E3%82%BF%E5%87%A6%E7%90%86+%E5%85%A5%E9%96%80&tag=torecadash-22) — An entry point to handling strings, JSON and other data.
+
 
 ---
 
 URL: https://koshinstudio.com/en/notes/torecadash-9set/
 
 # The “9-pack set” was nine different products: the same product that never matched
+
+This page contains advertising and affiliate links. If you buy through them, this site may earn a commission. As an Amazon Associate I earn from qualifying purchases.
 
   日本語版 (https://koshinstudio.com/notes/torecadash-9set/)
 
@@ -6420,12 +7108,22 @@ URL: https://koshinstudio.com/en/notes/torecadash-9set/
 
 - All English pages (https://koshinstudio.com/en/)
 
+## Related items
+
+    This page contains advertising and affiliate links. If you buy through them, this site may earn a commission. As an Amazon Associate I earn from qualifying purchases.
+
+- Books on data quality and de-duplication (search on Amazon.co.jp) (https://www.amazon.co.jp/s?k=%E3%83%87%E3%83%BC%E3%82%BF%E3%82%AF%E3%83%AC%E3%83%B3%E3%82%B8%E3%83%B3%E3%82%B0+%E3%83%87%E3%83%BC%E3%82%BF%E5%93%81%E8%B3%AA+%E9%87%8D%E8%A4%87&tag=torecadash-22) — Books on spelling variants and duplicates.
+
+- Books on data handling in Python (search on Amazon.co.jp) (https://www.amazon.co.jp/s?k=Python+%E3%83%87%E3%83%BC%E3%82%BF%E5%87%A6%E7%90%86+%E5%85%A5%E9%96%80&tag=torecadash-22) — An entry point to handling strings, JSON and other data.
+
 
 ---
 
 URL: https://koshinstudio.com/en/notes/fake-products/
 
 # Splitting a “9-pack set” by contents created 80 fake products
+
+This page contains advertising and affiliate links. If you buy through them, this site may earn a commission. As an Amazon Associate I earn from qualifying purchases.
 
   日本語版 (https://koshinstudio.com/notes/fake-products/)
 
@@ -6497,12 +7195,22 @@ URL: https://koshinstudio.com/en/notes/fake-products/
 
 - All English pages (https://koshinstudio.com/en/)
 
+## Related items
+
+    This page contains advertising and affiliate links. If you buy through them, this site may earn a commission. As an Amazon Associate I earn from qualifying purchases.
+
+- Books on data quality and de-duplication (search on Amazon.co.jp) (https://www.amazon.co.jp/s?k=%E3%83%87%E3%83%BC%E3%82%BF%E3%82%AF%E3%83%AC%E3%83%B3%E3%82%B8%E3%83%B3%E3%82%B0+%E3%83%87%E3%83%BC%E3%82%BF%E5%93%81%E8%B3%AA+%E9%87%8D%E8%A4%87&tag=torecadash-22) — Books on spelling variants and duplicates.
+
+- Books on data handling in Python (search on Amazon.co.jp) (https://www.amazon.co.jp/s?k=Python+%E3%83%87%E3%83%BC%E3%82%BF%E5%87%A6%E7%90%86+%E5%85%A5%E9%96%80&tag=torecadash-22) — An entry point to handling strings, JSON and other data.
+
 
 ---
 
 URL: https://koshinstudio.com/en/notes/qiita-post-interval/
 
 # Measuring Qiita’s “posting too frequently” limit: a new account could not create another article for about 30 minutes
+
+This page contains advertising and affiliate links. If you buy through them, this site may earn a commission. As an Amazon Associate I earn from qualifying purchases.
 
   日本語版 (https://koshinstudio.com/notes/qiita-post-interval/)
 
@@ -6574,12 +7282,22 @@ URL: https://koshinstudio.com/en/notes/qiita-post-interval/
 
 - All English pages (https://koshinstudio.com/en/)
 
+## Related items
+
+    This page contains advertising and affiliate links. If you buy through them, this site may earn a commission. As an Amazon Associate I earn from qualifying purchases.
+
+- Books on solo development and programming (search on Amazon.co.jp) (https://www.amazon.co.jp/s?k=%E5%80%8B%E4%BA%BA%E9%96%8B%E7%99%BA+%E4%BD%9C%E3%82%8A%E6%96%B9+%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0&tag=torecadash-22) — Books on building, measuring and fixing.
+
+- Books on web building (HTML and CSS) (search on Amazon.co.jp) (https://www.amazon.co.jp/s?k=Web%E5%88%B6%E4%BD%9C+HTML+CSS+%E5%85%A5%E9%96%80&tag=torecadash-22) — Basics of building a website.
+
 
 ---
 
 URL: https://koshinstudio.com/en/notes/crazygames/
 
 # Rejected by CrazyGames with no reason given: I recorded the game and found four problems
+
+This page contains advertising and affiliate links. If you buy through them, this site may earn a commission. As an Amazon Associate I earn from qualifying purchases.
 
   日本語版 (https://koshinstudio.com/notes/crazygames/)
 
@@ -6642,12 +7360,22 @@ URL: https://koshinstudio.com/en/notes/crazygames/
 
 - All English pages (https://koshinstudio.com/en/)
 
+## Related items
+
+    This page contains advertising and affiliate links. If you buy through them, this site may earn a commission. As an Amazon Associate I earn from qualifying purchases.
+
+- Books on game development in JavaScript (search on Amazon.co.jp) (https://www.amazon.co.jp/s?k=%E3%82%B2%E3%83%BC%E3%83%A0%E9%96%8B%E7%99%BA+JavaScript+%E5%85%A5%E9%96%80&tag=torecadash-22) — Introductions to making browser games.
+
+- Books on game design (search on Amazon.co.jp) (https://www.amazon.co.jp/s?k=%E3%82%B2%E3%83%BC%E3%83%A0%E3%83%87%E3%82%B6%E3%82%A4%E3%83%B3+%E5%85%A5%E9%96%80&tag=torecadash-22) — Books on designing how a game plays.
+
 
 ---
 
 URL: https://koshinstudio.com/en/notes/adgap/
 
 # Measuring the gap between ads in time, not in plays
+
+This page contains advertising and affiliate links. If you buy through them, this site may earn a commission. As an Amazon Associate I earn from qualifying purchases.
 
   日本語版 (https://koshinstudio.com/notes/adgap/)
 
@@ -6722,12 +7450,22 @@ URL: https://koshinstudio.com/en/notes/adgap/
 
 - All English pages (https://koshinstudio.com/en/)
 
+## Related items
+
+    This page contains advertising and affiliate links. If you buy through them, this site may earn a commission. As an Amazon Associate I earn from qualifying purchases.
+
+- Books on game development in JavaScript (search on Amazon.co.jp) (https://www.amazon.co.jp/s?k=%E3%82%B2%E3%83%BC%E3%83%A0%E9%96%8B%E7%99%BA+JavaScript+%E5%85%A5%E9%96%80&tag=torecadash-22) — Introductions to making browser games.
+
+- Books on statistics and data analysis (search on Amazon.co.jp) (https://www.amazon.co.jp/s?k=%E7%B5%B1%E8%A8%88%E5%AD%A6+%E5%85%A5%E9%96%80+%E3%83%87%E3%83%BC%E3%82%BF%E5%88%86%E6%9E%90&tag=torecadash-22) — Learn how to reason about rates, measurements and spread.
+
 
 ---
 
 URL: https://koshinstudio.com/en/notes/ascii-text/
 
 # Japanese text garbled in the CrazyGames preview: the file was correct, the cause was never found, so I escaped to ASCII
+
+This page contains advertising and affiliate links. If you buy through them, this site may earn a commission. As an Amazon Associate I earn from qualifying purchases.
 
   日本語版 (https://koshinstudio.com/notes/ascii-text/)
 
@@ -6781,12 +7519,22 @@ URL: https://koshinstudio.com/en/notes/ascii-text/
 
 - All English pages (https://koshinstudio.com/en/)
 
+## Related items
+
+    This page contains advertising and affiliate links. If you buy through them, this site may earn a commission. As an Amazon Associate I earn from qualifying purchases.
+
+- Books on web building (HTML and CSS) (search on Amazon.co.jp) (https://www.amazon.co.jp/s?k=Web%E5%88%B6%E4%BD%9C+HTML+CSS+%E5%85%A5%E9%96%80&tag=torecadash-22) — Basics of building a website.
+
+- Books on game development in JavaScript (search on Amazon.co.jp) (https://www.amazon.co.jp/s?k=%E3%82%B2%E3%83%BC%E3%83%A0%E9%96%8B%E7%99%BA+JavaScript+%E5%85%A5%E9%96%80&tag=torecadash-22) — Introductions to making browser games.
+
 
 ---
 
 URL: https://koshinstudio.com/en/notes/deploy-gotchas/
 
 # Works on my machine, breaks when deployed: four incidents shipping a static site to Cloudflare Pages
+
+This page contains advertising and affiliate links. If you buy through them, this site may earn a commission. As an Amazon Associate I earn from qualifying purchases.
 
   日本語版 (https://koshinstudio.com/notes/deploy-gotchas/)
 
@@ -6842,12 +7590,22 @@ URL: https://koshinstudio.com/en/notes/deploy-gotchas/
 
 - All English pages (https://koshinstudio.com/en/)
 
+## Related items
+
+    This page contains advertising and affiliate links. If you buy through them, this site may earn a commission. As an Amazon Associate I earn from qualifying purchases.
+
+- Books on web building (HTML and CSS) (search on Amazon.co.jp) (https://www.amazon.co.jp/s?k=Web%E5%88%B6%E4%BD%9C+HTML+CSS+%E5%85%A5%E9%96%80&tag=torecadash-22) — Basics of building a website.
+
+- Books on software testing and quality (search on Amazon.co.jp) (https://www.amazon.co.jp/s?k=%E3%82%BD%E3%83%95%E3%83%88%E3%82%A6%E3%82%A7%E3%82%A2%E3%83%86%E3%82%B9%E3%83%88+%E5%85%A5%E9%96%80+%E5%93%81%E8%B3%AA&tag=torecadash-22) — A systematic take on counting first and testing by breaking.
+
 
 ---
 
 URL: https://koshinstudio.com/en/notes/hosting-compare/
 
 # Comparing static site hosts by their official terms: Cloudflare Pages, Netlify, Vercel, GitHub Pages and Firebase Hosting
+
+This page contains advertising and affiliate links. If you buy through them, this site may earn a commission. As an Amazon Associate I earn from qualifying purchases.
 
   日本語版 (https://koshinstudio.com/notes/hosting-compare/)
 
@@ -6997,12 +7755,22 @@ URL: https://koshinstudio.com/en/notes/hosting-compare/
 
 - All English pages (https://koshinstudio.com/en/)
 
+## Related items
+
+    This page contains advertising and affiliate links. If you buy through them, this site may earn a commission. As an Amazon Associate I earn from qualifying purchases.
+
+- Books on static sites and web development (search on Amazon.co.jp) (https://www.amazon.co.jp/s?k=%E9%9D%99%E7%9A%84%E3%82%B5%E3%82%A4%E3%83%88+Jamstack+Web%E9%96%8B%E7%99%BA&tag=torecadash-22) — Books on building and running static sites.
+
+- Books on web building (HTML and CSS) (search on Amazon.co.jp) (https://www.amazon.co.jp/s?k=Web%E5%88%B6%E4%BD%9C+HTML+CSS+%E5%85%A5%E9%96%80&tag=torecadash-22) — Basics of building a website.
+
 
 ---
 
 URL: https://koshinstudio.com/en/notes/comment-services/
 
 # Comparing comment systems for static sites by their official information: giscus, utterances, Disqus, Remark42 and more
+
+This page contains advertising and affiliate links. If you buy through them, this site may earn a commission. As an Amazon Associate I earn from qualifying purchases.
 
   日本語版 (https://koshinstudio.com/notes/comment-services/)
 
@@ -7142,12 +7910,22 @@ URL: https://koshinstudio.com/en/notes/comment-services/
 
 - All English pages (https://koshinstudio.com/en/)
 
+## Related items
+
+    This page contains advertising and affiliate links. If you buy through them, this site may earn a commission. As an Amazon Associate I earn from qualifying purchases.
+
+- Books on static sites and web development (search on Amazon.co.jp) (https://www.amazon.co.jp/s?k=%E9%9D%99%E7%9A%84%E3%82%B5%E3%82%A4%E3%83%88+Jamstack+Web%E9%96%8B%E7%99%BA&tag=torecadash-22) — Books on building and running static sites.
+
+- Books on web building (HTML and CSS) (search on Amazon.co.jp) (https://www.amazon.co.jp/s?k=Web%E5%88%B6%E4%BD%9C+HTML+CSS+%E5%85%A5%E9%96%80&tag=torecadash-22) — Basics of building a website.
+
 
 ---
 
 URL: https://koshinstudio.com/en/notes/ios-sdk-compare/
 
 # Comparing iOS ad SDKs and Firebase by their official information: AdMob, AppLovin MAX, LevelPlay and Supabase
+
+This page contains advertising and affiliate links. If you buy through them, this site may earn a commission. As an Amazon Associate I earn from qualifying purchases.
 
   日本語版 (https://koshinstudio.com/notes/ios-sdk-compare/)
 
@@ -7285,12 +8063,24 @@ URL: https://koshinstudio.com/en/notes/ios-sdk-compare/
 
 - All English pages (https://koshinstudio.com/en/)
 
+## Related items
+
+    This page contains advertising and affiliate links. If you buy through them, this site may earn a commission. As an Amazon Associate I earn from qualifying purchases.
+
+- Books on SwiftUI and iOS app development (search on Amazon.co.jp) (https://www.amazon.co.jp/s?k=SwiftUI+%E5%85%A5%E9%96%80+iOS%E3%82%A2%E3%83%97%E3%83%AA%E9%96%8B%E7%99%BA&tag=torecadash-22) — A starting point for the iOS topic in this article.
+
+- Books on Firebase (search on Amazon.co.jp) (https://www.amazon.co.jp/s?k=Firebase+%E5%85%A5%E9%96%80+%E3%82%A2%E3%83%97%E3%83%AA%E9%96%8B%E7%99%BA&tag=torecadash-22) — Introductions to the parts of Firebase mentioned here.
+
+- Books on publishing an iOS app as a solo developer (search on Amazon.co.jp) (https://www.amazon.co.jp/s?k=iOS%E3%82%A2%E3%83%97%E3%83%AA+%E5%80%8B%E4%BA%BA%E9%96%8B%E7%99%BA+App+Store+%E5%85%AC%E9%96%8B&tag=torecadash-22) — Look for books that walk through review and release.
+
 
 ---
 
 URL: https://koshinstudio.com/en/notes/claude-vs-gemini-api/
 
 # Claude API vs Gemini API by official numbers: small-model prices, web search, spend limits and deprecation
+
+This page contains advertising and affiliate links. If you buy through them, this site may earn a commission. As an Amazon Associate I earn from qualifying purchases.
 
   日本語版 (https://koshinstudio.com/notes/claude-vs-gemini-api/)
 
@@ -7458,12 +8248,22 @@ URL: https://koshinstudio.com/en/notes/claude-vs-gemini-api/
 
 - All English pages (https://koshinstudio.com/en/)
 
+## Related items
+
+    This page contains advertising and affiliate links. If you buy through them, this site may earn a commission. As an Amazon Associate I earn from qualifying purchases.
+
+- Books on building apps with LLMs (search on Amazon.co.jp) (https://www.amazon.co.jp/s?k=%E7%94%9F%E6%88%90AI+%E3%82%A2%E3%83%97%E3%83%AA%E9%96%8B%E7%99%BA+LLM+API+%E5%85%A5%E9%96%80&tag=torecadash-22) — Introductions to building apps on top of an LLM API.
+
+- Books on running LLM apps and their costs (search on Amazon.co.jp) (https://www.amazon.co.jp/s?k=LLM+API+%E3%82%B3%E3%82%B9%E3%83%88+%E6%9C%80%E9%81%A9%E5%8C%96&tag=torecadash-22) — Books on trading cost against accuracy.
+
 
 ---
 
 URL: https://koshinstudio.com/en/notes/gemini-migration/
 
 # Migrating from the Claude API to the Gemini API (gemini-3.1-flash-lite): 16 call sites into one function
+
+This page contains advertising and affiliate links. If you buy through them, this site may earn a commission. As an Amazon Associate I earn from qualifying purchases.
 
   日本語版 (https://koshinstudio.com/notes/gemini-migration/)
 
@@ -7531,12 +8331,22 @@ URL: https://koshinstudio.com/en/notes/gemini-migration/
 
 - All English pages (https://koshinstudio.com/en/)
 
+## Related items
+
+    This page contains advertising and affiliate links. If you buy through them, this site may earn a commission. As an Amazon Associate I earn from qualifying purchases.
+
+- Books on building apps with LLMs (search on Amazon.co.jp) (https://www.amazon.co.jp/s?k=%E7%94%9F%E6%88%90AI+%E3%82%A2%E3%83%97%E3%83%AA%E9%96%8B%E7%99%BA+LLM+API+%E5%85%A5%E9%96%80&tag=torecadash-22) — Introductions to building apps on top of an LLM API.
+
+- Books on running LLM apps and their costs (search on Amazon.co.jp) (https://www.amazon.co.jp/s?k=LLM+API+%E3%82%B3%E3%82%B9%E3%83%88+%E6%9C%80%E9%81%A9%E5%8C%96&tag=torecadash-22) — Books on trading cost against accuracy.
+
 
 ---
 
 URL: https://koshinstudio.com/en/notes/fail-open/
 
 # It let things through when it could not check: how “fail-open” brought in resale items
+
+This page contains advertising and affiliate links. If you buy through them, this site may earn a commission. As an Amazon Associate I earn from qualifying purchases.
 
   日本語版 (https://koshinstudio.com/notes/fail-open/)
 
@@ -7606,12 +8416,22 @@ URL: https://koshinstudio.com/en/notes/fail-open/
 
 - All English pages (https://koshinstudio.com/en/)
 
+## Related items
+
+    This page contains advertising and affiliate links. If you buy through them, this site may earn a commission. As an Amazon Associate I earn from qualifying purchases.
+
+- Books on software testing and quality (search on Amazon.co.jp) (https://www.amazon.co.jp/s?k=%E3%82%BD%E3%83%95%E3%83%88%E3%82%A6%E3%82%A7%E3%82%A2%E3%83%86%E3%82%B9%E3%83%88+%E5%85%A5%E9%96%80+%E5%93%81%E8%B3%AA&tag=torecadash-22) — A systematic take on counting first and testing by breaking.
+
+- Books on solo development and programming (search on Amazon.co.jp) (https://www.amazon.co.jp/s?k=%E5%80%8B%E4%BA%BA%E9%96%8B%E7%99%BA+%E4%BD%9C%E3%82%8A%E6%96%B9+%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0&tag=torecadash-22) — Books on building, measuring and fixing.
+
 
 ---
 
 URL: https://koshinstudio.com/en/notes/blocked-page/
 
 # What I read as “fetched” was just a notice page: three days of zero products
+
+This page contains advertising and affiliate links. If you buy through them, this site may earn a commission. As an Amazon Associate I earn from qualifying purchases.
 
   日本語版 (https://koshinstudio.com/notes/blocked-page/)
 
@@ -7659,12 +8479,22 @@ URL: https://koshinstudio.com/en/notes/blocked-page/
 
 - All English pages (https://koshinstudio.com/en/)
 
+## Related items
+
+    This page contains advertising and affiliate links. If you buy through them, this site may earn a commission. As an Amazon Associate I earn from qualifying purchases.
+
+- Books on data handling in Python (search on Amazon.co.jp) (https://www.amazon.co.jp/s?k=Python+%E3%83%87%E3%83%BC%E3%82%BF%E5%87%A6%E7%90%86+%E5%85%A5%E9%96%80&tag=torecadash-22) — An entry point to handling strings, JSON and other data.
+
+- Books on software testing and quality (search on Amazon.co.jp) (https://www.amazon.co.jp/s?k=%E3%82%BD%E3%83%95%E3%83%88%E3%82%A6%E3%82%A7%E3%82%A2%E3%83%86%E3%82%B9%E3%83%88+%E5%85%A5%E9%96%80+%E5%93%81%E8%B3%AA&tag=torecadash-22) — A systematic take on counting first and testing by breaking.
+
 
 ---
 
 URL: https://koshinstudio.com/en/notes/webaudio/
 
 # I could not listen, so I measured the waveform: building Japanese instruments with WebAudio for Sushi Stack
+
+This page contains advertising and affiliate links. If you buy through them, this site may earn a commission. As an Amazon Associate I earn from qualifying purchases.
 
   日本語版 (https://koshinstudio.com/notes/webaudio/)
 
@@ -7748,12 +8578,22 @@ URL: https://koshinstudio.com/en/notes/webaudio/
 
 - All English pages (https://koshinstudio.com/en/)
 
+## Related items
+
+    This page contains advertising and affiliate links. If you buy through them, this site may earn a commission. As an Amazon Associate I earn from qualifying purchases.
+
+- Books on Web Audio and sound programming (search on Amazon.co.jp) (https://www.amazon.co.jp/s?k=Web+Audio+API+%E9%9F%B3+%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0&tag=torecadash-22) — Learn how sounds are generated and played.
+
+- Books on game development in JavaScript (search on Amazon.co.jp) (https://www.amazon.co.jp/s?k=%E3%82%B2%E3%83%BC%E3%83%A0%E9%96%8B%E7%99%BA+JavaScript+%E5%85%A5%E9%96%80&tag=torecadash-22) — Introductions to making browser games.
+
 
 ---
 
 URL: https://koshinstudio.com/en/notes/ranking-free-tier/
 
 # Making a ranking server use only half of the free tier: from 5 calls to 2
+
+This page contains advertising and affiliate links. If you buy through them, this site may earn a commission. As an Amazon Associate I earn from qualifying purchases.
 
   日本語版 (https://koshinstudio.com/notes/ranking-free-tier/)
 
@@ -7817,12 +8657,22 @@ URL: https://koshinstudio.com/en/notes/ranking-free-tier/
 
 - All English pages (https://koshinstudio.com/en/)
 
+## Related items
+
+    This page contains advertising and affiliate links. If you buy through them, this site may earn a commission. As an Amazon Associate I earn from qualifying purchases.
+
+- Books on Firebase (search on Amazon.co.jp) (https://www.amazon.co.jp/s?k=Firebase+%E5%85%A5%E9%96%80+%E3%82%A2%E3%83%97%E3%83%AA%E9%96%8B%E7%99%BA&tag=torecadash-22) — Introductions to the parts of Firebase mentioned here.
+
+- Books on statistics and data analysis (search on Amazon.co.jp) (https://www.amazon.co.jp/s?k=%E7%B5%B1%E8%A8%88%E5%AD%A6+%E5%85%A5%E9%96%80+%E3%83%87%E3%83%BC%E3%82%BF%E5%88%86%E6%9E%90&tag=torecadash-22) — Learn how to reason about rates, measurements and spread.
+
 
 ---
 
 URL: https://koshinstudio.com/en/notes/torecadash-review/
 
 # Four things that stopped my iOS app before App Review: iPad screenshots, ITMS-91064, account deletion, reporting posts
+
+This page contains advertising and affiliate links. If you buy through them, this site may earn a commission. As an Amazon Associate I earn from qualifying purchases.
 
   日本語版 (https://koshinstudio.com/notes/torecadash-review/)
 
@@ -7872,12 +8722,22 @@ URL: https://koshinstudio.com/en/notes/torecadash-review/
 
 - All English pages (https://koshinstudio.com/en/)
 
+## Related items
+
+    This page contains advertising and affiliate links. If you buy through them, this site may earn a commission. As an Amazon Associate I earn from qualifying purchases.
+
+- Books on publishing an iOS app as a solo developer (search on Amazon.co.jp) (https://www.amazon.co.jp/s?k=iOS%E3%82%A2%E3%83%97%E3%83%AA+%E5%80%8B%E4%BA%BA%E9%96%8B%E7%99%BA+App+Store+%E5%85%AC%E9%96%8B&tag=torecadash-22) — Look for books that walk through review and release.
+
+- Books on SwiftUI and iOS app development (search on Amazon.co.jp) (https://www.amazon.co.jp/s?k=SwiftUI+%E5%85%A5%E9%96%80+iOS%E3%82%A2%E3%83%97%E3%83%AA%E9%96%8B%E7%99%BA&tag=torecadash-22) — A starting point for the iOS topic in this article.
+
 
 ---
 
 URL: https://koshinstudio.com/en/notes/scrape-cost/
 
 # I re-measured a “nothing can be done” assumption and scraping cost dropped to one eighth
+
+This page contains advertising and affiliate links. If you buy through them, this site may earn a commission. As an Amazon Associate I earn from qualifying purchases.
 
   日本語版 (https://koshinstudio.com/notes/scrape-cost/)
 
@@ -7933,12 +8793,22 @@ URL: https://koshinstudio.com/en/notes/scrape-cost/
 
 - All English pages (https://koshinstudio.com/en/)
 
+## Related items
+
+    This page contains advertising and affiliate links. If you buy through them, this site may earn a commission. As an Amazon Associate I earn from qualifying purchases.
+
+- Books on data handling in Python (search on Amazon.co.jp) (https://www.amazon.co.jp/s?k=Python+%E3%83%87%E3%83%BC%E3%82%BF%E5%87%A6%E7%90%86+%E5%85%A5%E9%96%80&tag=torecadash-22) — An entry point to handling strings, JSON and other data.
+
+- Books on statistics and data analysis (search on Amazon.co.jp) (https://www.amazon.co.jp/s?k=%E7%B5%B1%E8%A8%88%E5%AD%A6+%E5%85%A5%E9%96%80+%E3%83%87%E3%83%BC%E3%82%BF%E5%88%86%E6%9E%90&tag=torecadash-22) — Learn how to reason about rates, measurements and spread.
+
 
 ---
 
 URL: https://koshinstudio.com/en/notes/bulk-accident/
 
 # A bulk update hit “all articles”: count before you write, and break your tests to prove they work
+
+This page contains advertising and affiliate links. If you buy through them, this site may earn a commission. As an Amazon Associate I earn from qualifying purchases.
 
   日本語版 (https://koshinstudio.com/notes/bulk-accident/)
 
@@ -8003,6 +8873,14 @@ URL: https://koshinstudio.com/en/notes/bulk-accident/
   More in English
 
 - All English pages (https://koshinstudio.com/en/)
+
+## Related items
+
+    This page contains advertising and affiliate links. If you buy through them, this site may earn a commission. As an Amazon Associate I earn from qualifying purchases.
+
+- Books on software testing and quality (search on Amazon.co.jp) (https://www.amazon.co.jp/s?k=%E3%82%BD%E3%83%95%E3%83%88%E3%82%A6%E3%82%A7%E3%82%A2%E3%83%86%E3%82%B9%E3%83%88+%E5%85%A5%E9%96%80+%E5%93%81%E8%B3%AA&tag=torecadash-22) — A systematic take on counting first and testing by breaking.
+
+- Books on data quality and de-duplication (search on Amazon.co.jp) (https://www.amazon.co.jp/s?k=%E3%83%87%E3%83%BC%E3%82%BF%E3%82%AF%E3%83%AC%E3%83%B3%E3%82%B8%E3%83%B3%E3%82%B0+%E3%83%87%E3%83%BC%E3%82%BF%E5%93%81%E8%B3%AA+%E9%87%8D%E8%A4%87&tag=torecadash-22) — Books on spelling variants and duplicates.
 
 
 ---
