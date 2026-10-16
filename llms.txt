@@ -42,6 +42,7 @@
 - [穴子がデカすぎた話](https://koshinstudio.com/notes/anago/): 落ち物パズルの最後の一手に、どうしても届かない。勘で直す前に、自動プレイで三百戦以上の統計を取って原因を突き止めた記録。
 
 ## Picks（比べたもの・買ったもの）
+- [ポケカのスリーブとローダーの選び方：サイズと「pt」の意味](https://koshinstudio.com/notes/card-supplies-guide/): ポケカのスリーブ・ローダーを買う前に確かめること。標準サイズとスモールサイズ、ローダーの35ptの意味。使って比べた記事ではなく、確認できなかったことも書いた。
 - [静的サイトのコメント欄を、公式の情報で比べる：giscus・utterances・Disqus・Remark42 ほか](https://koshinstudio.com/notes/comment-services/): 静的サイトのコメント欄を公式の情報で比較。調べた7つのうち4つは終了か更新停止の疑い。無料のDisqusは広告で払う。確認できなかったことも書いた。
 - [iOS アプリの広告 SDK と Firebase を、公式の情報で比べる：AdMob・AppLovin MAX・LevelPlay・Supabase](https://koshinstudio.com/notes/ios-sdk-compare/): iOSの広告SDKとFirebase・Supabaseを公式の情報で比較。SDKの要件はページの間で食い違うことがある。確認できなかったことも書いた。
 - [静的サイトを置く場所を、公式の規約で比べる：Cloudflare Pages・Netlify・Vercel・GitHub Pages・Firebase Hosting](https://koshinstudio.com/notes/hosting-compare/): 静的サイトの置き場を公式の規約で比較。広告を載せていいかが一番の分かれ目で、Vercel Hobby は非商用のみ。確認できなかったことも書いた。
@@ -111,6 +112,7 @@
 - [Four things that stopped my iOS app before App Review: iPad screenshots, ITMS-91064, account deletion, reporting posts](https://koshinstudio.com/en/notes/torecadash-review/): Before submitting an iOS app, four things stopped me: iPad screenshots, ITMS-91064, account deletion (5.1.1(v)) and user-content reporting (1.2), and how I fixed each.
 - [I re-measured a “nothing can be done” assumption and scraping cost dropped to one eighth](https://koshinstudio.com/en/notes/scrape-cost/): I believed two sites could not be fetched more often because of cost. Comparing three Scrape.do settings showed rendering was wasted: 3x faster, 1/8 the credits.
 - [A bulk update hit “all articles”: count before you write, and break your tests to prove they work](https://koshinstudio.com/en/notes/bulk-accident/): A bulk job hit every article and wrongly restored 18 items. How I reverted them from status history and proved new tests work by breaking rules one at a time.
+- [Pokémon card sleeves and loaders: sizes and what “pt” means](https://koshinstudio.com/en/notes/card-supplies-guide/): What to check before buying Pokémon card sleeves, toploaders and deck boxes: standard vs small size, what 35pt means, and a buying checklist. Not a hands-on review; unverified points are listed.
 - [English hub](https://koshinstudio.com/en/): Games, tools and development logs in English
 - [简体中文](https://koshinstudio.com/zh/): Games and tools in this language
 - [Español](https://koshinstudio.com/es/): Games and tools in this language

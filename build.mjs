@@ -1078,7 +1078,7 @@ for (const file of pages) {
     if (items.length) {
       const box = `\n<!--picks-->
   <section class="picks" id="picks">
-    <h2 id="picks-h">この記事で使ったもの</h2>
+    <h2 id="picks-h">この記事で紹介したもの</h2>
     <p class="note">${esc(af.disclosure || '')}</p>
     <ul class="plain">${items.map((x) => `
       <li><a href="${esc(x.url)}" rel="sponsored noopener" target="_blank">${esc(x.name)}</a>${x.service ? `（${esc(x.service)}）` : ''} — ${esc(x.comment || '')}</li>`).join('')}

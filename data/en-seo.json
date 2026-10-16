@@ -150,5 +150,9 @@
  "qiita-post-interval": {
   "title": "Qiita “posting too frequently”: measured, ~30 minutes",
   "desc": "After publishing, a new Qiita account could not create the next article. Checking the editor every 5 minutes, two measurements gave about 30 minutes; one was lost."
+ },
+ "card-supplies-guide": {
+  "title": "Pokémon card sleeves and loaders: sizes and what “pt” means",
+  "desc": "What to check before buying Pokémon card sleeves, toploaders and deck boxes: standard vs small size, what 35pt means, and a buying checklist. Not a hands-on review; unverified points are listed."
  }
 }

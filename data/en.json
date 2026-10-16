@@ -389,5 +389,12 @@
     "title": "A bulk update hit “all articles”: count before you write, and break your tests to prove they work",
     "date": "2026-10-09",
     "blurb": "A bulk job hit every article and wrongly restored 18 items. How I reverted them from status history and proved new tests work by breaking rules one at a time."
+  },
+  {
+    "ja": "/notes/card-supplies-guide/",
+    "en": "/en/notes/card-supplies-guide/",
+    "title": "Pokémon card sleeves and loaders: sizes and what “pt” means",
+    "date": "2026-10-16",
+    "blurb": "What to check before buying Pokémon card sleeves, toploaders and deck boxes: standard vs small size, what 35pt means, and a buying checklist. Not a hands-on review; unverified points are listed."
   }
 ]

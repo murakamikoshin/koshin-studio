@@ -1,5 +1,19 @@
 [
   {
+    "slug": "card-supplies-guide",
+    "title": "ポケカのスリーブとローダーの選び方：サイズと「pt」の意味",
+    "date": "2026-10-16",
+    "work": "比べたもの",
+    "url": "/notes/card-supplies-guide/",
+    "blurb": "ポケカのスリーブ・ローダーを買う前に確かめること。標準サイズとスモールサイズ、ローダーの35ptの意味。使って比べた記事ではなく、確認できなかったことも書いた。",
+    "picks": [
+      "amz-sleeve",
+      "amz-loader",
+      "amz-deckcase",
+      "amz-file"
+    ]
+  },
+  {
     "slug": "qiita-post-interval",
     "title": "Qiita の「投稿頻度が高過ぎます」を測った：新しいアカウントは、投稿から約 30 分、次の記事を作れなかった",
     "date": "2026-10-08",

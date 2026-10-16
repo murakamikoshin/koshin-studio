@@ -28,8 +28,8 @@
     "note": "GitHub の Discussions を有効にして、giscus アプリを入れ、giscus.app でカテゴリー『Announcements』（最初からある）を選んで出る category-id（DIC_ で始まる文字列）を categoryId に入れると、各記事の終わりにコメント欄が出ます。空の間は何も出ません。"
   },
   "affiliate": {
-    "enabled": false,
-    "disclosure": "この記事には、広告・アフィリエイトのリンクが含まれます。リンク先で買われると、このサイトに報酬が入ることがあります。載せているのは、実際に使ったものだけです。",
+    "enabled": true,
+    "disclosure": "このページには、広告・アフィリエイトのリンクが含まれます。リンク先で買われると、このサイトに報酬が入ることがあります。Amazonのアソシエイトとして、適格販売により収入を得ています。",
     "note": "審査の結果が出てから enabled を true にする。data/picks.json の items に url（アフィリエイトのリンク）を入れ、data/notes.json の記事に \"picks\": [\"id\"] を足すと、その記事の終わりに紹介の枠と、冒頭に開示の一文が出る。url が空の項目は出ない。"
   }
 }

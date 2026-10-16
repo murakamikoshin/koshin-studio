@@ -2620,6 +2620,115 @@ URL: https://koshinstudio.com/notes/anago/
 
 ---
 
+URL: https://koshinstudio.com/notes/card-supplies-guide/
+
+# ポケカのスリーブとローダーの選び方：サイズと「pt」の意味
+
+このページには、広告・アフィリエイトのリンクが含まれます。リンク先で買われると、このサイトに報酬が入ることがあります。Amazonのアソシエイトとして、適格販売により収入を得ています。
+
+  English version (https://koshinstudio.com/en/notes/card-supplies-guide/)
+
+  比べたもの ／ 2026年10月
+
+  ポケモンカードを守る道具は、スリーブ・ローダー・デッキケース・ファイルなど、たくさんあります。買ってから「入らない」とならないために、買う前に確かめることを、順に書きました。
+
+  先に書いておきます。この記事は、商品を使って比べたものではありません。メーカーの公式な寸法表は見つけられなかったので、数字は販売ページや解説記事に書かれている「一般的な値」です。確認できたことと、できなかったことを分けて書いています。具体的な商品名は、おすすめしていません。
+
+## 先に結論：買う前に見る三つ
+
+    見るもの | どう見るか
+
+    カードの大きさ | ポケモンカードは「標準サイズ」。一般に約 63 × 88mm と言われる。遊戯王などの「スモールサイズ」（約 59 × 86mm）用のスリーブには入らないことがある
+
+    スリーブの大きさ | 「標準サイズ用」と書かれたものを選ぶ。外寸は 66 × 91mm 前後と書かれていることが多い。商品ページの「対応サイズ」を読む
+
+    ローダーの「pt」 | カードの厚さの規格。数字が大きいほど、厚いカードが入る。普通のカードは 35pt が目安と書かれている
+
+## サイズ：標準とスモール
+
+- 標準サイズ：ポケモンカードやマジック：ザ・ギャザリングなど。一般に約 63 × 88mm。
+
+- スモールサイズ：遊戯王、デュエル・マスターズ、ヴァイスシュヴァルツなど。一般に約 59 × 86mm。
+
+  スモールサイズ用のスリーブに標準サイズのカードは入りません。逆に、スモール用のカードを標準用のスリーブに入れると、ゆるくなります。商品名に「ポケカ用」「標準サイズ」と書いてあるかを、まず見てください。
+
+  この寸法は、複数の解説記事で一致していましたが、ポケモンカードの公式ページでは数字を確認できませんでした。
+
+## スリーブ：入れ方で選ぶ
+
+- 遊ぶ用：デッキの全部のカードを同じスリーブにそろえる。裏の模様や色が違うと、大会などで見分けがつくと言われる（ルールは大会ごとに違うので、出る大会の規定を確認）。
+
+- しまう用：カードを傷つけないために入れる。値段のあるカードは、スリーブを二重にする人もいる（インナースリーブ＋オーバースリーブ）。
+
+- 数：100 枚前後の袋が多い。デッキは 60 枚なので、1 袋で足ります。
+
+## ローダー：「35pt」とは
+
+  「pt」は、カードの厚さを表す単位です。1pt は 1000 分の 1 インチ（約 0.0254mm）。つまり 35pt は約 0.89mm で、普通のカード 1 枚が入る厚さの目安です。
+
+- 35pt のマグネットローダー：販売ページには、外寸 73 × 110 × 8mm、内寸 64 × 90mm、対応する厚さ約 1mm と書かれたものがありました。
+
+- スリーブに入れたまま入れるか：入るローダーと入らないローダーがあります。「スリーブごと入れたい」なら、その商品に「スリーブごとOK」と書かれているかを確認します。
+
+- 厚いカード用：厚さが 55pt、75pt、100pt などのローダーもあります。厚いカードや、スリーブごと入れる用に使われます。
+
+  上の寸法は、メーカーの公式な値ではなく、販売ページの記載です。商品によって違います。
+
+## そのほか：デッキケース・ファイル・BOX 保護
+
+- デッキケース：60 枚をスリーブごと入れる箱。「スリーブ入りで何枚入るか」を見る。
+
+- カードファイル：1 ページのポケットの数（9 ポケットなど）と、スリーブごと入れられるかを見る。
+
+- BOX の保護ケース：未開封の BOX を傷や潰れから守る箱。BOX の大きさに合うか（箱の寸法）を見る。
+
+## 買う前の手順
+
+- 入れるものを決める（遊ぶデッキ／しまうカード／BOX）。
+
+- 「標準サイズ」か「スモールサイズ」かを確認する。
+
+- 商品ページの「対応サイズ」と「枚数」を読む。
+
+- ローダーなら「pt」と、スリーブごと入れられるかを見る。
+
+- レビューで「入らなかった」という声がないか見る。
+
+## 確認できなかったこと
+
+- ポケモンカード公式ページでの、カードの寸法の記載
+
+- メーカーの公式な、スリーブの内寸・ローダーの内寸の表（販売ページの記載だけを見た）
+
+- 商品ごとの、スリーブごと入るかどうか（実際には試していません）
+
+- 各商品の品質や耐久性（使って比べていません）
+
+  寸法は 2026 年 10 月 16 日に調べた内容です。商品は入れ替わるので、買う前に、商品ページで確かめてください。
+
+## 出典と調べた範囲
+
+- トレカマップ：ポケモンカードのスリーブサイズ (https://torecamap.co.jp/column/pokemoncard-sleeve-size/)（解説記事）
+
+- トレカマップ：トレーディングカードのサイズ (https://torecamap.co.jp/column/tradingcard-size/)（解説記事）
+
+- 35pt のマグネットローダーの寸法は、複数の販売ページの記載（メーカーの公式な値ではありません）
+
+## この記事で紹介したもの
+
+    このページには、広告・アフィリエイトのリンクが含まれます。リンク先で買われると、このサイトに報酬が入ることがあります。Amazonのアソシエイトとして、適格販売により収入を得ています。
+
+- トレカのスリーブ（Amazonで探す） (https://www.amazon.co.jp/s?k=%E3%83%88%E3%83%AC%E3%82%AB+%E3%82%B9%E3%83%AA%E3%83%BC%E3%83%96+100%E6%9E%9A+%E3%83%9D%E3%82%B1%E3%82%AB&tag=torecadash-22)（Amazon） — 「標準サイズ」用かを確認してから選ぶ。
+
+- マグネットローダー（Amazonで探す） (https://www.amazon.co.jp/s?k=%E3%83%9E%E3%82%B0%E3%83%8D%E3%83%83%E3%83%88%E3%83%AD%E3%83%BC%E3%83%80%E3%83%BC+%E3%83%88%E3%83%AC%E3%82%AB&tag=torecadash-22)（Amazon） — 「35pt」と、スリーブごと入るかを確認。
+
+- デッキケース（Amazonで探す） (https://www.amazon.co.jp/s?k=%E3%83%87%E3%83%83%E3%82%AD%E3%82%B1%E3%83%BC%E3%82%B9+%E3%83%88%E3%83%AC%E3%82%AB&tag=torecadash-22)（Amazon） — スリーブ入りで何枚入るかを確認。
+
+- カードファイル（Amazonで探す） (https://www.amazon.co.jp/s?k=%E3%82%AB%E3%83%BC%E3%83%89%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB+9%E3%83%9D%E3%82%B1%E3%83%83%E3%83%88+%E3%83%88%E3%83%AC%E3%82%AB&tag=torecadash-22)（Amazon） — ポケット数と、スリーブごと入るかを確認。
+
+
+---
+
 URL: https://koshinstudio.com/notes/comment-services/
 
 # 静的サイトのコメント欄を、公式の情報で比べる：giscus・utterances・Disqus・Remark42 ほか
@@ -4184,6 +4293,8 @@ URL: https://koshinstudio.com/privacy/
   ゲームを他のサイト（ゲームポータル）に出しているときは、そのサイトの広告の仕組みが働くことがあります。その場合は、それぞれのサイトの方針に従います。
 
   このサイトは、Google AdSense で広告を表示します。Google を含む第三者配信事業者は、Cookie などを使って、このサイトや他のサイトへの過去のアクセス情報に基づいて広告を配信することがあります。表示される広告の内容やその仕組みは、Google の広告に関するポリシー (https://policies.google.com/technologies/ads?hl=ja)に説明があります。
+
+  このサイトの一部の記事には、アフィリエイトのリンクがあります。Amazonのアソシエイトとして、適格販売により収入を得ています。リンクを付けた記事には、記事の冒頭にその旨を書いています。リンク先で買われたとき、Amazon側で購入の記録が取られますが、こちらが個人を特定できる情報を受け取ることはありません。
 
   パーソナライズ広告は、Google の広告設定 (https://adssettings.google.com/)でいつでも無効にできます。第三者配信事業者の Cookie は、aboutads.info (https://www.aboutads.info/choices/) からも無効にできます。欧州経済領域（EEA）・英国からのアクセスでは、Google が用意する同意の画面が先に出ます。広告に使うこと以外の目的で、こちらが Cookie の情報を受け取ることはありません。
 
@@ -7884,6 +7995,123 @@ URL: https://koshinstudio.com/en/notes/bulk-accident/
   This article is written from my hand-over notes (§272) (October 7, 2026). The counts are as written in the notes.
 
   This is the English version of the original Japanese article (https://koshinstudio.com/notes/bulk-accident/).
+
+  More in English
+
+- All English pages (https://koshinstudio.com/en/)
+
+
+---
+
+URL: https://koshinstudio.com/en/notes/card-supplies-guide/
+
+# Pokémon card sleeves and loaders: sizes and what “pt” means
+
+  日本語版 (https://koshinstudio.com/notes/card-supplies-guide/)
+
+  A buying guide / October 2026
+
+  This page contains advertising and affiliate links. If you buy through them, this site may earn a commission. As an Amazon Associate I earn from qualifying purchases.
+
+  There are many ways to protect Pokémon cards: sleeves, loaders, deck boxes, binders. This guide lists what to check before you buy, so that what you order actually fits.
+
+  One thing first: this is not a hands-on comparison. I could not find an official size table from the manufacturers, so the numbers are the “commonly stated” ones from shop pages and explainer articles. I separate what I could confirm from what I could not, and I do not recommend a specific product.
+
+## The short version: three things to check
+
+    Check | How
+
+    Card size | Pokémon cards are “standard size”, commonly stated as about 63 × 88mm. Sleeves made for “small size” cards (about 59 × 86mm, for example Yu-Gi-Oh!) may not fit.
+
+    Sleeve size | Choose sleeves labeled for standard-size cards. Outer size is often listed as around 66 × 91mm. Read the product page’s “compatible size.”
+
+    Loader “pt” | A thickness grade. A bigger number takes a thicker card. 35pt is the usual rule of thumb for an ordinary card.
+
+## Sizes: standard and small
+
+- Standard: Pokémon, Magic: The Gathering and others. Commonly about 63 × 88mm.
+
+- Small: Yu-Gi-Oh!, Duel Masters, Weiß Schwarz and others. Commonly about 59 × 86mm.
+
+  A standard card does not fit in a sleeve made for small cards. A small card in a standard sleeve is loose. Look for “for Pokémon cards” or “standard size” in the product name first.
+
+  Several explainer articles agreed on these numbers, but I could not confirm them on an official Pokémon Card Game page.
+
+## Sleeves: choose by use
+
+- For play: use the same sleeve for every card in the deck. Differences in back pattern or color can show which cards are which (tournament rules differ, so check the rules of the event you enter).
+
+- For storage: sleeves protect the surface. Some people double-sleeve valuable cards (inner sleeve plus outer sleeve).
+
+- Count: bags of about 100 are common. A deck is 60 cards, so one bag is enough.
+
+## Loaders: what “35pt” means
+
+  “pt” is a unit of card thickness. 1pt is one thousandth of an inch (about 0.0254mm), so 35pt is about 0.89mm: roughly the thickness of one ordinary card.
+
+- 35pt magnetic loaders: some shop pages list an outer size of 73 × 110 × 8mm, an inner size of 64 × 90mm and a compatible thickness of about 1mm.
+
+- With the sleeve on: some loaders take a sleeved card, some do not. If you want to load a sleeved card, check that the product says so.
+
+- Thicker cards: loaders of 55pt, 75pt, 100pt and more also exist, used for thick cards or sleeved cards.
+
+  The sizes above come from shop pages, not from a manufacturer’s official figures. They differ by product.
+
+## Other items: deck boxes, binders, box protectors
+
+- Deck boxes: check how many sleeved cards it holds.
+
+- Binders: check pockets per page (9-pocket and so on) and whether sleeved cards fit.
+
+- Booster box protectors: check the box dimensions so it matches the sealed box you own.
+
+## Buying checklist
+
+- Decide what it is for (a deck you play, cards you store, a sealed box).
+
+- Confirm standard size or small size.
+
+- Read the product page’s compatible size and count.
+
+- For loaders, check the pt and whether sleeved cards fit.
+
+- Scan the reviews for “did not fit.”
+
+## Where to look (Amazon.co.jp)
+
+  These are search pages on Amazon.co.jp for each kind of item. They are not recommendations of a particular product.
+
+- Sleeves (search on Amazon.co.jp) (https://www.amazon.co.jp/s?k=%E3%83%88%E3%83%AC%E3%82%AB+%E3%82%B9%E3%83%AA%E3%83%BC%E3%83%96+100%E6%9E%9A+%E3%83%9D%E3%82%B1%E3%82%AB&tag=torecadash-22)
+
+- Magnetic loaders (search on Amazon.co.jp) (https://www.amazon.co.jp/s?k=%E3%83%9E%E3%82%B0%E3%83%8D%E3%83%83%E3%83%88%E3%83%AD%E3%83%BC%E3%83%80%E3%83%BC+%E3%83%88%E3%83%AC%E3%82%AB&tag=torecadash-22)
+
+- Deck boxes (search on Amazon.co.jp) (https://www.amazon.co.jp/s?k=%E3%83%87%E3%83%83%E3%82%AD%E3%82%B1%E3%83%BC%E3%82%B9+%E3%83%88%E3%83%AC%E3%82%AB&tag=torecadash-22)
+
+- Binders (search on Amazon.co.jp) (https://www.amazon.co.jp/s?k=%E3%82%AB%E3%83%BC%E3%83%89%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB+9%E3%83%9D%E3%82%B1%E3%83%83%E3%83%88+%E3%83%88%E3%83%AC%E3%82%AB&tag=torecadash-22)
+
+  These links go to Amazon.co.jp, the Japanese store. I did not check whether each item ships to your country, or what shipping and import duties would be. Check at checkout. Some items are sold in Japanese only.
+
+## What I could not confirm
+
+- The card size on an official Pokémon Card Game page
+
+- Official inner-size tables for sleeves and loaders from manufacturers (I only saw shop-page figures)
+
+- Whether a given product takes a sleeved card (I did not test)
+
+- Quality or durability of any product (this is not a hands-on comparison)
+
+  Checked on October 16, 2026. Products change; check the product page before you buy.
+
+## Sources
+
+- Torecamap: Pokémon card sleeve sizes (https://torecamap.co.jp/column/pokemoncard-sleeve-size/) (explainer, in Japanese)
+
+- Torecamap: trading card sizes (https://torecamap.co.jp/column/tradingcard-size/) (explainer, in Japanese)
+
+- 35pt loader sizes: several shop pages (not the manufacturer’s official figures)
+
+  This is the English version of the original Japanese article (https://koshinstudio.com/notes/card-supplies-guide/).
 
   More in English
 
