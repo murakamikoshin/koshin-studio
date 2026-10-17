@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Firestore の費用を円で出したら、読み取りの 91% が 1 か所だった：キャッシュを入れても効かなかった理由 — Koshin Studio</title>
+<meta name="description" content="Firestore を初めて円で見たら、月 1.3 万円で Gemini とほぼ同額だった。読み取りの 91% は商品一覧の読み直し。60 秒キャッシュが効かなかったのは、32 件が同時に動いていたから。「読み込み中の約束」を覚えて直した記録。">
+<meta property="og:title" content="Firestore の費用を円で出したら、読み取りの 91% が 1 か所だった：キャッシュを入れても効かなかった理由">
+<meta property="og:description" content="Firestore を初めて円で見たら、月 1.3 万円で Gemini とほぼ同額だった。読み取りの 91% は商品一覧の読み直し。60 秒キャッシュが効かなかったのは、32 件が同時に動いていたから。「読み込み中の約束」を覚えて直した記録。">
+<meta property="og:type" content="article">
+<meta name="theme-color" content="#fbfaf7">
+<link rel="icon" href="/favicon.ico?v=1697d589" sizes="48x48">
+<link rel="icon" href="/favicon.svg?v=b9d7922f" type="image/svg+xml" sizes="any">
+<link rel="icon" href="/assets/icon/icon-192.png?v=e2566235" type="image/png" sizes="192x192">
+<link rel="apple-touch-icon" href="/assets/icon/icon-180.png?v=84e7f0e6">
+<link rel="manifest" href="/site.webmanifest">
+<script>document.documentElement.className+=" js"</script>
+<link rel="stylesheet" href="/style.css?v=dd51310c">
+<meta name="google-adsense-account" content="ca-pub-3863314847163872">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3863314847163872" crossorigin="anonymous"></script>
+<link rel="canonical" href="https://koshinstudio.com/notes/firestore-91/">
+<meta property="og:url" content="https://koshinstudio.com/notes/firestore-91/">
+<meta property="og:site_name" content="Koshin Studio">
+<meta property="og:locale" content="ja_JP">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="alternate" type="application/rss+xml" title="Koshin Studio — Notes" href="https://koshinstudio.com/feed.xml">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BlogPosting","headline":"Firestore の費用を円で出したら、読み取りの 91% が 1 か所だった：キャッシュを入れても効かなかった理由","url":"https://koshinstudio.com/notes/firestore-91/","description":"Firestore を初めて円で見たら、月 1.3 万円で Gemini とほぼ同額だった。読み取りの 91% は商品一覧の読み直し。60 秒キャッシュが効かなかったのは、32 件が同時に動いていたから。「読み込み中の約束」を覚えて直した記録。","datePublished":"2026-10-17","dateModified":"2026-10-17","inLanguage":"ja","image":"https://koshinstudio.com/assets/og/og_notes_firestore-91.jpg","author":{"@id":"https://koshinstudio.com#studio"},"publisher":{"@id":"https://koshinstudio.com#studio"},"mainEntityOfPage":"https://koshinstudio.com/notes/firestore-91/"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Koshin Studio","item":"https://koshinstudio.com/"},{"@type":"ListItem","position":2,"name":"Notes","item":"https://koshinstudio.com/notes/"},{"@type":"ListItem","position":3,"name":"Firestore の費用を円で出したら、読み取りの 91% が 1 か所だった：キャッシュを入れても効かなかった理由","item":"https://koshinstudio.com/notes/firestore-91/"}]}]}</script>
+<meta property="og:image" content="https://koshinstudio.com/assets/og/og_notes_firestore-91.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
+</head>
+<body class="article">
+<canvas id="motes"></canvas>
+
+<header class="site"><div class="wrap">
+  <a class="logo" href="/"><img class="logo-mark" src="/favicon.svg?v=b9d7922f" alt="" width="28" height="28">Koshin Studio</a>
+  <nav><a href="/works/">Works</a><a href="/notes/">Notes</a><a href="/picks/">Picks</a><a href="/calc/">Tools</a><a href="/about/">About</a></nav>
+</div></header>
+
+<main><div class="wrap">
+  <nav class="crumbs" aria-label="現在地"><a href="/">Koshin Studio</a><i aria-hidden="true">›</i><a href="/notes/">Notes</a><i aria-hidden="true">›</i><span aria-current="page">Firestore の費用を円で出したら、読み取りの 91% が 1 か所だった：キャッシュを入れても効かなかった理由</span></nav>
+  <h1>Firestore の費用を円で出したら、読み取りの 91% が 1 か所だった：キャッシュを入れても効かなかった理由</h1>  <div class="rule"></div>
+  <p class="lead">トレカダッシュ 開発の記録 ／ 2026年9月</p>
+
+  <p>iOS アプリ「<a href="/works/torecadash/">トレカダッシュ</a>」の裏側は、Firebase の Firestore（データベース）と、定期的に動く処理でできています。費用は、Gemini（AI）と取得サービスの分は、毎日、円で出して見ていました。ところが、<strong>Firestore の費用は、レポートに載せていませんでした</strong>。</p>
+  <p>9 月 4 日の深夜に、はじめて円で出してみました。結果は、Gemini とほぼ同額でした。この記事は、そこから読み取りの 91% が 1 か所に集中していると分かり、キャッシュを入れても効かず、直し直した記録です。</p>
+  <p class="note">数字は、2026 年 9 月 4 日の作業の記録から書いています。価格は、東京リージョンの実際の単価です。</p>
+<!--toc-->
+  <nav class="toc" aria-label="目次"><p>目次</p><ol><li><a href="#s1">円で出したら、誰も見ていなかった費用が出てきた</a></li><li><a href="#s2">計器を入れたら、3 分で分かった</a></li><li><a href="#s3">最初のキャッシュは、ほとんど効かなかった</a></li><li><a href="#s4">もう 1 つ：5 分おきに 3,085 件読んで、使うのは 146 件だった</a></li><li><a href="#s5">分かったこと</a></li></ol></nav>
+<!--/toc-->
+  <h2 class="rv" id="s1">円で出したら、誰も見ていなかった費用が出てきた</h2>
+  <p>Firestore の読み取りを、日ごとに円にしました。</p>
+  <div class="scroll rv"><table>
+    <thead><tr><th>日</th><th>読み取り</th><th>書き込み</th><th>1 日の費用</th></tr></thead>
+    <tbody>
+      <tr><td>8 月 28 日</td><td>218 万件</td><td>12 万件</td><td>226 円（月 6,777 円）</td></tr>
+      <tr><td>9 月 1 日</td><td>366 万件</td><td>13.4 万件</td><td>368 円（月 11,028 円）</td></tr>
+      <tr><td>9 月 3 日</td><td><strong>421 万件</strong></td><td>16.2 万件</td><td><strong>427 円（月 12,810 円）</strong></td></tr>
+    </tbody>
+  </table></div>
+  <p>無料の枠は、1 日 5 万件の読み取りまでです。その<strong>84 倍</strong>を読んでいました。しかも、1 週間で 89% 増えていて、記事が増えるほど増える形でした。</p>
+  <p>円で出していない費用は、ないのと同じでした。月に約 1 万 3 千円かかっていたのに、レポートに載っていないというだけで、誰も気にしていませんでした。</p>
+
+  <h2 class="rv" id="s2">計器を入れたら、3 分で分かった</h2>
+  <p>どこで読んでいるのかを知るために、「どの処理が、どのコレクション（データの置き場）を、どれだけ読んだか」を数える計器を入れました。入れたその場で、答えが出ました。</p>
+  <pre><code>8,725 件  X 監視 | products（商品）    ← 測定した 9,593 件の 91%
+  197 件  X 監視 | news_items（記事）</code></pre>
+  <p>X の監視は、記事を 1 件処理するたびに、AI に「どの商品の話か」を聞きます。その候補を作るために、<strong>ジャンルの商品を、毎回、全部読み直していました</strong>。ポケモンのジャンルは商品が 693 件あります。記事 1 件の照合が、693 件の読み取りです。</p>
+  <p>コードを読んで探していたら、もっと時間がかかったはずです。<strong>探す前に、数える</strong>。計器を 1 つ足しただけで、読み取りの 91% が 1 か所だと分かりました。</p>
+
+  <h2 class="rv" id="s3">最初のキャッシュは、ほとんど効かなかった</h2>
+  <p>直し方は単純です。商品の一覧を、一度読んだら覚えておく（キャッシュ）。最初は 60 秒覚えさせました。ところが、<strong>ほとんど効きませんでした</strong>。</p>
+  <p>理由は、X の監視が、最大 32 アカウントを<strong>同時に</strong>処理していることでした（<code>Promise.all</code>）。コードは、こう動いていました。</p>
+  <ol>
+    <li>1 件目が、「キャッシュに無い」と判断して、読みに行く。</li>
+    <li>読み終わる前に、残りの 31 件も、同じ「キャッシュに無い」を見る。</li>
+    <li>全員が、同じ 693 件を、同時に読みに行く。</li>
+  </ol>
+  <p>実測では、23 秒に 1 回、読み直していました。キャッシュは「読み終わった結果」を覚えるもので、<strong>読んでいる最中の人は、まだ何も覚えていない</strong>のです。</p>
+  <p>直し方は、<strong>結果ではなく、「読み込み中」という約束（Promise）そのものを覚える</strong>ことでした。1 件目が読み始めたら、その約束を置いておく。残りの 31 件は、新しく読みに行かず、同じ約束を待つ。同時に呼ばれても、読み込みは 1 本になります。</p>
+  <pre><code>// 考え方を書いた例です。結果ではなく、読み込み中の約束を覚える
+cache.set(genre, { at: Date.now(), promise: loadProducts(genre) });
+// 呼び出しは、いつも cache.get(genre).promise を待つ</code></pre>
+  <p>これに合わせて、3 つのことも決めました。</p>
+  <ul>
+    <li><strong>商品を作ったときと消したときは、その場でキャッシュを捨てる。</strong>捨てないと、もう無い商品を候補に見せたり、同じ商品をもう 1 件作ってしまったりします。</li>
+    <li><strong>同じ相手を読む処理が、もう 1 つあった。</strong>別の関数が、同じ条件で商品を読んでいました。キャッシュを一本化して、片方だけ効かない状態を避けました。</li>
+    <li>覚える時間は、ジャンルごとに 10 分にしました。</li>
+  </ul>
+  <p>静かな時間帯で測ると、1 日に換算して、<strong>507 万件が 27.7 万件</strong>になりました。</p>
+
+  <h2 class="rv" id="s4">もう 1 つ：5 分おきに 3,085 件読んで、使うのは 146 件だった</h2>
+  <p>商品のキャッシュを入れたあと、計器の一番上に出てきたのが、別の処理でした。楽天ブックスの在庫を確かめ直す処理が、<strong>5 分おき</strong>に、こういう問い合わせをしていました。</p>
+  <pre><code>news_items where saleType in ["reservation", "guerrilla"]</code></pre>
+  <p>返ってきた 3,085 件を、プログラムの側で「楽天ブックスのものだけ」に絞っていました。実際の対象は 146 件で、<strong>95% が無駄</strong>です。1 日 288 回なので、約 88.8 万件、月に約 2,400 円でした。</p>
+  <p>直し方は、2 つです。</p>
+  <ul>
+    <li>対象の一覧（参照と ISBN だけ）を、2 時間覚えておく。</li>
+    <li>ただし、<strong>判断に使う中身は、毎回読み直す</strong>。古い値で書き換える事故を作らないためです。読むのは 146 件だけなので、安く済みます。</li>
+  </ul>
+  <p>読み取りは、1 日 88.8 万件から約 7.9 万件へ、91% 減りました。</p>
+
+  <h2 class="rv" id="s5">分かったこと</h2>
+  <blockquote>円で出していない費用は、存在しないのと同じ。</blockquote>
+  <ul>
+    <li><strong>まず、計器を直す。</strong>見ていない費用は、増え続けても気づけません。</li>
+    <li><strong>探す前に数える。</strong>「ジョブ × コレクション」の集計を 1 つ足しただけで、91% の所在が 3 分で分かりました。</li>
+    <li><strong>同時に動く処理に、キャッシュを付けるなら、「読み込み中の約束」を覚える。</strong>結果だけを覚えるキャッシュは、同時に来た全員を素通りさせます。</li>
+    <li><strong>絞り込みは、読む前にする。</strong>全部読んでから 5% に絞るのは、95% を捨てるために読んでいるのと同じです。</li>
+    <li><strong>確定した数字は、翌日の記録で見る。</strong>この日の「507 万件が 27.7 万件」は、静かな時間帯の測定でした。</li>
+  </ul>
+
+
+  <div class="ad-slot" data-slot="footer" hidden></div>
+<!--/ad-->
+
+  <div class="rule" style="margin:40px 0 22px"></div>
+  <p class="eyebrow">この話に出てくるもの</p>
+  <ul class="plain">
+    <li><a href="/works/torecadash/">トレカダッシュ</a> — トレカの抽選・予約・先着の情報を集める iPhone アプリ</li>
+    <li><a href="/notes/scrape-cost/">「しょうがない」を測り直したら、取得の費用は8分の1だった</a> — 同じアプリの、別の費用の記録</li>
+    <li><a href="/notes/torecadash-ai/">「減るはず」が、二度外れた</a> — AI への問い合わせを減らそうとして、数え直した記録</li>
+  </ul>
+
+<!--related-->
+  <div class="rule" style="margin:40px 0 22px"></div>
+  <p class="eyebrow">ほかの記録</p>
+  <ul class="plain">
+    <li><a href="/notes/tco-relay/">「確認済み」の印が付いていたのに、リンク先を一度も読めていなかった：t.co の中継ページ</a> — X の告知の応募リンクを、ブラウザの名乗りを付けて開くと、t.co は転送せず中継ページを返した。表示中の 220 件が全部読めておらず、9 件は閉じたフォームだった。直し方と、誤った「確認済み」の印の外し方の記録。</li>
+    <li><a href="/notes/gemini-migration/">Claude API から Gemini API（gemini-3.1-flash-lite）へ移行した：16 か所の呼び出しを 1 つの関数にまとめた</a> — Anthropic の利用上限で予定外の課金が出たため Gemini へ移行。モデルの選び方（廃止予定日）、呼び出しの一本化、Web 検索の回数上限が無い問題への回路遮断器、止めるスイッチの記録。</li>
+    <li><a href="/notes/xcode152-sdk/">Xcode 15.2 で Firebase 12 が使えない（Swift 6.0 必須）：Firebase 11.4.0 と AdMob 11.5.0 に固定した理由</a> — 古い Mac の Xcode 15.2 では、Firebase 12 以降と 11.12.0 以降は Xcode 16.2 が必須、AdMob 11.6.0 以降は MarketplaceKit で Xcode 15.3 が必須。Exact Version で固定した記録。</li>
+  </ul>
+<!--/related-->
+
+<!--comments-->
+  <section class="comments" id="comments" data-repo="murakamikoshin/koshin-studio" data-repo-id="R_kgDOURc3ew"
+    data-category="Announcements" data-category-id="DIC_kwDOURc3e84DHTVr">
+    <h2 id="comments-h">コメント</h2>
+    <p>感想や、記事の間違いの指摘は、ここへ。書くには、GitHub のアカウントが要ります。</p>
+    <p><button type="button" class="btn ghost" id="load-comments">コメントを開く</button></p>
+    <p class="note">押すと、giscus（giscus.app）と GitHub に接続します。押さなければ、接続しません。詳しくは<a href="/privacy/">あつかい</a>に書いています。</p>
+    <div id="giscus-box"></div>
+  </section>
+<!--/comments-->
+</div>
+</main>
+
+<footer class="site"><div class="wrap">
+  <span>© 2026 Koshin Studio</span>
+  <div class="sns-row"></div>
+  <nav><a href="/picks/">Picks</a><a href="/calc/">Tools</a><a href="/about/">About</a><a href="/privacy/">あつかい</a><a href="/en/" hreflang="en" lang="en">English</a></nav>
+</div></footer>
+<script src="/motion.js?v=1e7447ec" defer></script>
+</body>
+</html>
