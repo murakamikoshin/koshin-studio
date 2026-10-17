@@ -92,6 +92,8 @@ URL: https://koshinstudio.com/notes/geocode-shizuoka/
 
 # あいまいな店名で地図を引くと、日本の真ん中の静岡が返る：チェーン名を並べず、Google 自身の答えで判定した
 
+  English version (https://koshinstudio.com/en/notes/geocode-shizuoka/)
+
   トレカダッシュ 開発の記録 ／ 2026年8月
 
   iOS アプリ「トレカダッシュ (https://koshinstudio.com/works/torecadash/)」には、店の位置を地図に出して、近い順に並べる機能があります。「位置情報が、静岡になる」という報告が来ました。店の位置は、店の名前を Google の地図の検索（Places API）に渡して、座標を取っています。
@@ -469,6 +471,8 @@ URL: https://koshinstudio.com/notes/swallowed-failure/
 
 # 失敗を捨てると、画面は嘘をつく：「○件登録しました」と出て 1 件も入っていなかったカレンダー、固まる文字認識、店名を積み忘れた通知
 
+  English version (https://koshinstudio.com/en/notes/swallowed-failure/)
+
   トレカダッシュ 開発の記録 ／ 2026年8月
 
   iOS アプリ「トレカダッシュ (https://koshinstudio.com/works/torecadash/)」で、「失敗を、握りつぶしたせいで、嘘の成功を表示していた」という不具合が、続けて見つかりました。この記事は、そのうちの 3 つの記録です。
@@ -537,6 +541,8 @@ URL: https://koshinstudio.com/notes/swallowed-failure/
 URL: https://koshinstudio.com/notes/truncated-answer/
 
 # 候補は見つかっていたのに、答えを読む所で毎回落ちていた：200 トークンで切れた URL と、ハイフンで 400 になる検索
+
+  English version (https://koshinstudio.com/en/notes/truncated-answer/)
 
   トレカダッシュ 開発の記録 ／ 2026年8月
 
@@ -621,6 +627,8 @@ URL: https://koshinstudio.com/notes/truncated-answer/
 URL: https://koshinstudio.com/notes/icloud-overwrite/
 
 # 「iCloud が新しければ取り込む」の関数が、何も比べていなかった：応募の記録が 20 件から 1 件になりうる
+
+  English version (https://koshinstudio.com/en/notes/icloud-overwrite/)
 
   トレカダッシュ 開発の記録 ／ 2026年8月
 
@@ -7847,6 +7855,303 @@ URL: https://koshinstudio.com/privacy/
 
 ---
 
+URL: https://koshinstudio.com/en/notes/geocode-shizuoka/
+
+# Looking up an ambiguous store name returns Shizuoka, the middle of Japan: I judged by Google’s own answer, not a list of chains
+
+  日本語版 (https://koshinstudio.com/notes/geocode-shizuoka/)
+
+  Development log of the Toreca Dash app / August 2026
+
+  My app Toreca Dash shows store locations on a map and sorts by distance. A report said “the location shows Shizuoka”. Store locations come from passing the store name to Google’s place search (Places API).
+
+  The cause: when you query with an ambiguous store name, Google returns the middle of Japan (Shizuoka and Aichi). This article records the measurement and the fix of not listing chain names.
+
+  Written from my work log of 25 August 2026.
+
+## Measured: the answer to an ambiguous name is Shizuoka or Aichi
+
+  I pass a rectangle covering all of Japan as a location hint (locationbias). With an ambiguous name and nothing to decide by, Google returns the middle of that rectangle, which is Shizuoka and Aichi. I measured it with the API.
+
+    Query | Google’s answer
+
+      Yamada Denki | Yamada Denki Tecc Land Hamamatsu (Shizuoka)
+
+      San-A | San-A Kaken, Kakegawa Factory (Shizuoka)
+
+      Hobby Station | Toreca Station Toyohashi (Aichi)
+
+      Book Off | BOOKOFF Kakegawa (Shizuoka)
+
+      Hareruya | Hareruya Shizuoka (Shizuoka)
+
+      Omusubi | a rice-ball shop in Hamamatsu (Shizuoka)
+
+  “San-A” meant a retail chain, but the answer was a different company’s factory with a similar name.
+
+## The fix: judge by Google’s own answer, not a list of chain names
+
+  I did not make a “list of ambiguous chain names”. It would recur whenever a new chain appears. Instead I wrote a function (geocodeMatchIsTrustworthy) that judges from Google’s own answer.
+
+- If the queried name is only the head of the returned name and the rest is a branch name, reject. (Yamada Denki → …Tecc Land Hamamatsu.) If only “store” was added, it is the same shop.
+
+- If the name has a branch hint (“… store”, hall, mall…), accept as before.
+
+- If the returned name equals the queried name or is a part of it, accept. Do not accept the reverse. (San-A ⊂ San-A Kaken is a different company.)
+
+- Otherwise, judge by whether the name and address share 2 or more characters. (Stores with Ikebukuro, Totsuka, Sapporo or Takadanobaba in the name pass here.)
+
+  On 25 real patterns, all 9 wrong ones were rejected and all 16 correct ones accepted. The only miss was one written in Roman letters.
+
+  I cleared the 30 articles with a wrong location baked in and 22 store cache entries, and resolved them again. Clearing the cache costs one API call per store.
+
+## A similar story the same day: the notification’s store name was “LivePocket”
+
+  A report said “the notification’s store name is LivePocket”. When no store name could be found, the category (“LivePocket”) was used as the last fallback. LivePocket is a place that takes applications, not a store. So when unknown, return null. The caller uses the article title if there is no store name. LivePocket titles begin with the store name, like “Kiddy Land LaLaport Fujimi store …”, which says it more correctly.
+
+## What I learned
+
+> Check an external answer for trustworthiness using the answer itself.
+
+- With nothing to decide by, an external service returns a plausible answer. The middle of Japan: Shizuoka and Aichi.
+
+- Do not make a list of chain names. It recurs when a new chain appears.
+
+- Do not accept the reverse containment. San-A is not part of San-A Kaken.
+
+- Clear baked-in values and resolve again. The cache too.
+
+- When unknown, null. No name is better than a wrong one.
+
+  This is the English version of the original Japanese article (https://koshinstudio.com/notes/geocode-shizuoka/).
+
+  More in English
+
+- All English pages (https://koshinstudio.com/en/)
+
+- Toreca Dash (https://koshinstudio.com/en/works/torecadash/)
+
+
+---
+
+URL: https://koshinstudio.com/en/notes/swallowed-failure/
+
+# If you throw failure away, the screen lies: a calendar that said “registered” with none added, a frozen OCR, a notification without a store name
+
+  日本語版 (https://koshinstudio.com/notes/swallowed-failure/)
+
+  Development log of the Toreca Dash app / August 2026
+
+  In developing my app Toreca Dash, bugs of one kind appeared in a row: failures I had swallowed made the app show a false success. This article records three.
+
+  Written from my work log of 25 August 2026.
+
+## 1. “Registered N events” while none reached the calendar
+
+  The app can export lottery deadlines to the iPhone calendar. A build warning (result of 'try?' is unused) led me to review it. try? is a Swift way of discarding a failure. The feature called save with try? store.save(...) and try? store.commit(), throwing failures away.
+
+  As a result:
+
+- Nothing reached the calendar, yet it said “Registered N events”.
+
+- Only the “exported” record remained.
+
+- Pressing again said “no new items to register”, so they could never be registered.
+
+  The fix: return failures to the caller and count only successes. Devices with no default calendar are detected first and told. The messages are split by cause; before, every failure said “access is not allowed”.
+
+## 2. When text recognition fails, the screen freezes
+
+  The feature that reads text from an application image (OCR) also discarded failure with try? handler.perform([request]). If recognition failed, the callback was never called. The “reading…” spinner never stopped, and the only way out was to close the screen.
+
+  The fix: on failure too, return to a “finished recognising (found nothing)” state.
+
+  The build warning result of 'try?' is unused is a sign of swallowing. Run the build and read the warnings regularly.
+
+## 3. A notification without the store name: forgotten in the buffer
+
+  A different story with the same shape. A report said “the notification has no store name”. The article had the store name (sellerName) correctly. The notification did not show it.
+
+  Lottery and reservation notifications are put in a buffer and sent in batches (to hold them in quiet hours and to limit the rate). But the store name was not carried into the buffer. When sending, looking for the store name found no information, and only the category (“LivePocket”) remained.
+
+  This was partly surfaced by the earlier fix. When I fixed “the notification arrives under the name LivePocket”, I made it return null when the store name is unknown. That forgotten carry-over changed its symptom from “wrong store name” to “no store name”.
+
+  The same gap existed in both buffers (by genre and by product), so I fixed both. For the 5 already buffered I filled in the store name from the article and confirmed it appears when sent.
+
+  The same gap had happened on 17 August with another field (product names). The lesson: when putting something in a buffer, carry every field that will be used at send time. The other two buffers, which store the finished wording as is, do not have this problem.
+
+## What I learned
+
+> If you throw failure away, the screen lies.
+
+- Return failures to the caller. Discarding them makes the display differ from reality.
+
+- On failure too, return to a “finished” state. If a callback is never called, the screen freezes.
+
+- Record success only on success. If it stays after a failure, you cannot retry.
+
+- Read the build warnings. A try? warning is a sign of swallowing.
+
+- Put every field used at send time into the buffer. The same gap shows up later in another field.
+
+  This is the English version of the original Japanese article (https://koshinstudio.com/notes/swallowed-failure/).
+
+  More in English
+
+- All English pages (https://koshinstudio.com/en/)
+
+- Toreca Dash (https://koshinstudio.com/en/works/torecadash/)
+
+
+---
+
+URL: https://koshinstudio.com/en/notes/truncated-answer/
+
+# Candidates were found, yet reading the answer failed every time: a URL cut at 200 tokens, and a search that returned 400 on hyphens
+
+  日本語版 (https://koshinstudio.com/notes/truncated-answer/)
+
+  Development log of the Toreca Dash app / August 2026
+
+  In my app Toreca Dash, aggregator-derived articles get their links replaced with the store’s official announcement page. But developer-mode reports kept coming, seven in a row: “the correct announcement URL is this one; do it properly”.
+
+  Looking into it, candidates were being found, and the step that reads the answer failed every time. This article records the real cause and a very similar case from the same period.
+
+  Numbers come from my work logs of 23 and 24 August 2026.
+
+## The real cause: the AI’s reply was cut off at 200 tokens
+
+  The step that chooses the official announcement page asks an AI at the end: “which candidate is that store’s announcement?” I had set the reply’s length limit (max_output_tokens) to 200.
+
+  But the reply contains a long URL with Japanese percent-encoded, which exceeds 200 characters on its own. The reply was cut off, could not be read as JSON, and raised Unterminated string in JSON.
+
+  WARN [application link] official page judgement failed [shop / …]: Unterminated st…
+→ all 10 targets: "not found"
+  Candidates had been found. It fell over every time at reading the answer. I raised the limit to 800, and added a rescue that, if it is still cut, does not discard everything but re-extracts just the "url": "… part.
+
+## Still 0 adopted after the fix: the AI was obeying my instruction
+
+  Even after fixing the JSON, 0 were adopted. The log showed candidates but “none adopted”. The cause: the AI was following the instruction faithfully. Store announcements read like this:
+
+  "[App members only] Reprint / Pokémon Card Game, 4 types, about the lottery sale"
+  They name no individual product. My instruction said “do not choose it if the product differs”, so the AI refused.
+
+  I fixed two things:
+
+- In addition to the search by product name, always also search site:store-domain lottery and merge the candidates. (“Only when the search came up empty” never triggered, because one unrelated page was always returned.)
+
+- Add to the instruction: “if the store’s own announcement page covers several products and gives no individual names, you may choose it”. Other stores and aggregator sites are never chosen, even if they cover several products.
+
+  The result: 3 of 10 were replaced with the store’s official announcement page.
+
+  I also made a list of app-only stores (stores that give lottery information only in their app), so the app can say “please check in the app”. Only stores known to have an app; I do not add by guess.
+
+## A similar case: Rakuten’s keyword search failed on hyphens (24 August)
+
+  The log kept showing “Rakuten Ichiba per-set search failed”, for Yu-Gi-Oh! alone for 8+ sets. Rakuten’s API failed the whole request with 400 wrong_parameter depending on how hyphens are used in the keyword.
+
+    Keyword shape | Result
+
+      "A - B" (spaces around the hyphen) | 400
+
+      "A B " (trailing space only) | 400
+
+      "A B-" (ends with a hyphen) | 400
+
+      "AB-" (a word with no space, trailing hyphen) | 200 (OK)
+
+  Yu-Gi-Oh! product names often put a subtitle between hyphens, as in “LIMIT OVER COLLECTION - THE RIVALS -”. Sets of that form had never once been found by the per-set search.
+
+  The fix has two steps: (1) remove spaces right after a hyphen, (2) drop trailing hyphens and spaces. “LIMIT OVER COLLECTION - THE RIVALS -” became “LIMIT OVER COLLECTION -THE RIVALS” and returned 200. I confirmed the same problem happens with the Rakuten Books API, and applied the same sanitising to the four functions that pass keywords.
+
+## What I learned
+
+> When candidates were found but the result is 0, suspect the place that reads the answer.
+
+- Set a reply length limit from what is returned. A percent-encoded URL is long.
+
+- Do not throw away a failure; salvage it. You can pull the needed part out of cut-off JSON.
+
+- An AI is faithful to instructions. If the instruction does not fit how things are really written, it correctly refuses.
+
+- Separate an external API’s quirks by measuring. 400 and 200 split on the hyphen position.
+
+- The same quirk exists wherever the same API is used. It happened on Rakuten Books too.
+
+  This is the English version of the original Japanese article (https://koshinstudio.com/notes/truncated-answer/).
+
+  More in English
+
+- All English pages (https://koshinstudio.com/en/)
+
+- Toreca Dash (https://koshinstudio.com/en/works/torecadash/)
+
+
+---
+
+URL: https://koshinstudio.com/en/notes/icloud-overwrite/
+
+# A function named “load from iCloud if newer” compared nothing: a 20-record history could become 1
+
+  日本語版 (https://koshinstudio.com/notes/icloud-overwrite/)
+
+  Development log of the Toreca Dash app / August 2026
+
+  My iPhone app Toreca Dash has a record of applications that users build up themselves: which lotteries they entered and how they turned out. It is a personal record built by hand, and once lost it cannot be recovered.
+
+  On 23 August 2026 I read a file I had not yet reviewed (1,076 lines) and found a path where this record could vanish entirely. It began with trusting a function’s name.
+
+  Written from my work log of 23 August 2026.
+
+## The name says “if newer”; the body compares nothing
+
+  The function that syncs with iCloud was named loadFromICloudIfNewer: “load from iCloud if it is newer”. But the body never checked whether anything was newer; whenever iCloud changed, it replaced everything with that content.
+
+  What can happen:
+
+- Device A has 20 records (and so does iCloud).
+
+- Device B is installed fresh. iCloud’s first sync is asynchronous, so just after launch the records may be empty.
+
+- On device B, one record is added, and saving overwrites iCloud with [1 record].
+
+- Device A receives the change notice and goes from 20 records to 1 (19 lost).
+
+  The code had an export/import feature, described as being “to prevent all data vanishing when you change phones”. The author knew this area was fragile.
+
+## The fix: compare update times, and never overwrite with empty
+
+- Store an update time (entriesUpdatedAt) on both device and iCloud, and import only when the other side is newer, so the function does what its name says.
+
+- Even for old data with no time yet, always prevent overwriting with empty content.
+
+- On the first restore on a new device, inherit iCloud’s time.
+
+## What I learned
+
+> A function’s name may state the spec, but the body may not match.
+
+- Do not trust names; read the body. “IfNewer” compared nothing.
+
+- Be extra suspicious of writes to data that cannot be recovered. A record built by hand does not come back.
+
+- “Empty” is a dangerous value. Make “never overwrite with empty” the last line of defence.
+
+- First sync is asynchronous. Empty right after launch does not mean no data.
+
+- Read the unreviewed files. Large, old files hide the most.
+
+  This is the English version of the original Japanese article (https://koshinstudio.com/notes/icloud-overwrite/).
+
+  More in English
+
+- All English pages (https://koshinstudio.com/en/)
+
+- Toreca Dash (https://koshinstudio.com/en/works/torecadash/)
+
+
+---
+
 URL: https://koshinstudio.com/en/notes/test-ads/
 
 # With no ads, 25 real-device checks were blocked: test ads in developer mode only, and no hard-coded prize names
@@ -14525,6 +14830,14 @@ URL: https://koshinstudio.com/en/
 - With no ads, 25 real-device checks were blocked: test ads in developer mode only, and no hard-coded prize names (https://koshinstudio.com/en/notes/test-ads/)
 
 - I fixed a timeout three times and it did not stop: the culprit was a second process under the same lock (https://koshinstudio.com/en/notes/timeout-third-fix/)
+
+- Looking up an ambiguous store name returns Shizuoka, the middle of Japan: I judged by Google’s own answer, not a list of chains (https://koshinstudio.com/en/notes/geocode-shizuoka/)
+
+- A function named “load from iCloud if newer” compared nothing: a 20-record history could become 1 (https://koshinstudio.com/en/notes/icloud-overwrite/)
+
+- If you throw failure away, the screen lies: a calendar that said “registered” with none added, a frozen OCR, a notification without a store name (https://koshinstudio.com/en/notes/swallowed-failure/)
+
+- Candidates were found, yet reading the answer failed every time: a URL cut at 200 tokens, and a search that returned 400 on hyphens (https://koshinstudio.com/en/notes/truncated-answer/)
 
 ## Languages
 

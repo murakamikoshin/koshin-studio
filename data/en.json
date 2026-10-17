@@ -1,5 +1,33 @@
 [
   {
+    "ja": "/notes/geocode-shizuoka/",
+    "en": "/en/notes/geocode-shizuoka/",
+    "title": "Looking up an ambiguous store name returns Shizuoka, the middle of Japan: I judged by Google’s own answer, not a list of chains",
+    "date": "2026-10-17",
+    "blurb": "Passing a store name to Google’s place search with a rectangle covering Japan returned its middle (Shizuoka/Aichi) for ambiguous names. Instead of a list of chain names I judged trust from the answer itself with four rules."
+  },
+  {
+    "ja": "/notes/swallowed-failure/",
+    "en": "/en/notes/swallowed-failure/",
+    "title": "If you throw failure away, the screen lies: a calendar that said “registered” with none added, a frozen OCR, a notification without a store name",
+    "date": "2026-10-17",
+    "blurb": "try? discarded failures, so the calendar showed “registered N events” with 0 added and could never register again, OCR failure froze the screen, and the notification buffer forgot the store name."
+  },
+  {
+    "ja": "/notes/truncated-answer/",
+    "en": "/en/notes/truncated-answer/",
+    "title": "Candidates were found, yet reading the answer failed every time: a URL cut at 200 tokens, and a search that returned 400 on hyphens",
+    "date": "2026-10-17",
+    "blurb": "An AI reply choosing an official announcement page was cut at 200 tokens and failed every time. The result stayed 0 because store announcements name no product and the AI obeyed my instruction. Rakuten’s search returned 400 depending on hyphen position."
+  },
+  {
+    "ja": "/notes/icloud-overwrite/",
+    "en": "/en/notes/icloud-overwrite/",
+    "title": "A function named “load from iCloud if newer” compared nothing: a 20-record history could become 1",
+    "date": "2026-10-17",
+    "blurb": "The iCloud sync function never checked whether data was newer and replaced everything. A fresh device with an empty state could overwrite another device’s 20 records with 1. I added update-time comparison and never overwrite with empty."
+  },
+  {
     "ja": "/notes/test-ads/",
     "en": "/en/notes/test-ads/",
     "title": "With no ads, 25 real-device checks were blocked: test ads in developer mode only, and no hard-coded prize names",

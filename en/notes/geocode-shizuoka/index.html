@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Looking up an ambiguous store name returns Shizuoka, the middle of Japan: I judged by Google’s own answer, not a list of chains — Koshin Studio</title>
+<meta name="description" content="Passing a store name to Google’s place search with a rectangle covering Japan returned its middle (Shizuoka/Aichi) for ambiguous names. Instead of a list of chain names I judged trust from the answer itself with four rules.">
+<meta property="og:title" content="Looking up an ambiguous store name returns Shizuoka, the middle of Japan: I judged by Google’s own answer, not a list of chains">
+<meta property="og:description" content="Passing a store name to Google’s place search with a rectangle covering Japan returned its middle (Shizuoka/Aichi) for ambiguous names. Instead of a list of chain names I judged trust from the answer itself with four rules.">
+<meta property="og:type" content="article">
+<meta name="theme-color" content="#fbfaf7">
+<link rel="icon" href="/favicon.ico?v=1697d589" sizes="48x48">
+<link rel="icon" href="/favicon.svg?v=b9d7922f" type="image/svg+xml" sizes="any">
+<link rel="icon" href="/assets/icon/icon-192.png?v=e2566235" type="image/png" sizes="192x192">
+<link rel="apple-touch-icon" href="/assets/icon/icon-180.png?v=84e7f0e6">
+<link rel="manifest" href="/site.webmanifest">
+<script>document.documentElement.className+=" js"</script>
+<link rel="stylesheet" href="/style.css?v=dd51310c">
+<meta name="google-adsense-account" content="ca-pub-3863314847163872">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3863314847163872" crossorigin="anonymous"></script>
+<link rel="canonical" href="https://koshinstudio.com/en/notes/geocode-shizuoka/">
+<meta property="og:url" content="https://koshinstudio.com/en/notes/geocode-shizuoka/">
+<meta property="og:site_name" content="Koshin Studio">
+<meta property="og:locale" content="en_US">
+<link rel="alternate" hreflang="ja" href="https://koshinstudio.com/notes/geocode-shizuoka/">
+<link rel="alternate" hreflang="en" href="https://koshinstudio.com/en/notes/geocode-shizuoka/">
+<link rel="alternate" hreflang="x-default" href="https://koshinstudio.com/en/notes/geocode-shizuoka/">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="alternate" type="application/rss+xml" title="Koshin Studio — Notes" href="https://koshinstudio.com/feed.xml">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BlogPosting","headline":"Looking up an ambiguous store name returns Shizuoka, the middle of Japan: I judged by Google’s own answer, not a list of chains","url":"https://koshinstudio.com/en/notes/geocode-shizuoka/","description":"Passing a store name to Google’s place search with a rectangle covering Japan returned its middle (Shizuoka/Aichi) for ambiguous names. Instead of a list of chain names I judged trust from the answer itself with four rules.","datePublished":"2026-10-17","dateModified":"2026-10-17","inLanguage":"en","image":"https://koshinstudio.com/assets/og/og_en_notes_geocode-shizuoka.jpg","author":{"@id":"https://koshinstudio.com#studio"},"publisher":{"@id":"https://koshinstudio.com#studio"},"mainEntityOfPage":"https://koshinstudio.com/en/notes/geocode-shizuoka/"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Koshin Studio","item":"https://koshinstudio.com/en/"},{"@type":"ListItem","position":2,"name":"Looking up an ambiguous store name returns Shizuoka, the middle of Japan: I judged by Google’s own answer, not a list of chains","item":"https://koshinstudio.com/en/notes/geocode-shizuoka/"}]}]}</script>
+<meta property="og:image" content="https://koshinstudio.com/assets/og/og_en_notes_geocode-shizuoka.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
+</head>
+<body class="article">
+<canvas id="motes"></canvas>
+
+<header class="site"><div class="wrap">
+  <a class="logo" href="/"><img class="logo-mark" src="/favicon.svg?v=b9d7922f" alt="" width="28" height="28">Koshin Studio</a>
+  <nav><a href="/works/">Works</a><a href="/notes/">Notes</a><a href="/picks/">Picks</a><a href="/calc/">Tools</a><a href="/about/">About</a></nav>
+</div></header>
+
+<main><div class="wrap">
+  <nav class="crumbs" aria-label="You are here"><a href="/en/">Koshin Studio</a><i aria-hidden="true">›</i><span aria-current="page">Geocoding to Shizuoka</span></nav>
+  <h1>Looking up an ambiguous store name returns Shizuoka, the middle of Japan: I judged by Google’s own answer, not a list of chains</h1>  <div class="rule"></div>
+<!--lang-->
+  <p class="note"><a href="/notes/geocode-shizuoka/" hreflang="ja" lang="ja">日本語版</a></p>
+<!--/lang-->  <p class="lead">Development log of the Toreca Dash app / August 2026</p>
+
+  <p>My app Toreca Dash shows store locations on a map and sorts by distance. A report said “the location shows Shizuoka”. Store locations come from passing the store name to Google’s place search (Places API).</p>
+  <p>The cause: <strong>when you query with an ambiguous store name, Google returns the middle of Japan (Shizuoka and Aichi)</strong>. This article records the measurement and the fix of not listing chain names.</p>
+  <p class="note">Written from my work log of 25 August 2026.</p>  <h2 class="rv" id="s1">Measured: the answer to an ambiguous name is Shizuoka or Aichi</h2>
+  <p>I pass a rectangle covering all of Japan as a location hint (<code>locationbias</code>). With an ambiguous name and nothing to decide by, Google returns the middle of that rectangle, which is Shizuoka and Aichi. I measured it with the API.</p>
+  <div class="scroll rv"><table>
+    <thead><tr><th>Query</th><th>Google’s answer</th></tr></thead>
+    <tbody>
+      <tr><td>Yamada Denki</td><td>Yamada Denki Tecc Land Hamamatsu (Shizuoka)</td></tr>
+      <tr><td>San-A</td><td>San-A Kaken, Kakegawa Factory (Shizuoka)</td></tr>
+      <tr><td>Hobby Station</td><td>Toreca Station Toyohashi (Aichi)</td></tr>
+      <tr><td>Book Off</td><td>BOOKOFF Kakegawa (Shizuoka)</td></tr>
+      <tr><td>Hareruya</td><td>Hareruya Shizuoka (Shizuoka)</td></tr>
+      <tr><td>Omusubi</td><td>a rice-ball shop in Hamamatsu (Shizuoka)</td></tr>
+    </tbody>
+  </table></div>
+  <p>“San-A” meant a retail chain, but the answer was a different company’s factory with a similar name.</p>
+
+  <h2 class="rv" id="s2">The fix: judge by Google’s own answer, not a list of chain names</h2>
+  <p>I did not make a “list of ambiguous chain names”. It would recur whenever a new chain appears. Instead I wrote a function (<code>geocodeMatchIsTrustworthy</code>) that judges from <strong>Google’s own answer</strong>.</p>
+  <ol>
+    <li>If the queried name is <strong>only the head</strong> of the returned name and the rest is a branch name, <strong>reject</strong>. (Yamada Denki → …Tecc Land Hamamatsu.) If only “store” was added, it is the same shop.</li>
+    <li>If the name has a branch hint (“… store”, hall, mall…), <strong>accept</strong> as before.</li>
+    <li>If the returned name equals the queried name or is a part of it, <strong>accept</strong>. <strong>Do not accept the reverse.</strong> (San-A ⊂ San-A Kaken is a different company.)</li>
+    <li>Otherwise, judge by <strong>whether the name and address share 2 or more characters</strong>. (Stores with Ikebukuro, Totsuka, Sapporo or Takadanobaba in the name pass here.)</li>
+  </ol>
+  <p>On 25 real patterns, <strong>all 9 wrong ones were rejected and all 16 correct ones accepted</strong>. The only miss was one written in Roman letters.</p>
+  <p>I cleared the 30 articles with a wrong location baked in and 22 store cache entries, and resolved them again. Clearing the cache costs one API call per store.</p>
+
+  <h2 class="rv" id="s3">A similar story the same day: the notification’s store name was “LivePocket”</h2>
+  <p>A report said “the notification’s store name is LivePocket”. When no store name could be found, the category (“LivePocket”) was used as the last fallback. LivePocket is <strong>a place that takes applications, not a store</strong>. So <strong>when unknown, return null</strong>. The caller uses the article title if there is no store name. LivePocket titles begin with the store name, like “Kiddy Land LaLaport Fujimi store …”, which says it more correctly.</p>
+
+  <h2 class="rv" id="s4">What I learned</h2>
+  <blockquote>Check an external answer for trustworthiness using the answer itself.</blockquote>
+  <ul>
+    <li><strong>With nothing to decide by, an external service returns a plausible answer.</strong> The middle of Japan: Shizuoka and Aichi.</li>
+    <li><strong>Do not make a list of chain names.</strong> It recurs when a new chain appears.</li>
+    <li><strong>Do not accept the reverse containment.</strong> San-A is not part of San-A Kaken.</li>
+    <li><strong>Clear baked-in values and resolve again.</strong> The cache too.</li>
+    <li><strong>When unknown, null.</strong> No name is better than a wrong one.</li>
+  </ul>
+
+  <p class="note">This is the English version of <a href="/notes/geocode-shizuoka/" hreflang="ja" lang="ja">the original Japanese article</a>.</p>
+
+  <div class="rule" style="margin:40px 0 22px"></div>
+  <p class="eyebrow">More in English</p>
+  <ul class="plain">
+    <li><a href="/en/">All English pages</a></li>
+    <li><a href="/en/works/torecadash/">Toreca Dash</a></li>
+  </ul>
+</div>
+</main>
+
+<footer class="site"><div class="wrap"></div></footer>
+<script src="/motion.js?v=1e7447ec" defer></script>
+</body>
+</html>

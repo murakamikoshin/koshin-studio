@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>A function named “load from iCloud if newer” compared nothing: a 20-record history could become 1 — Koshin Studio</title>
+<meta name="description" content="The iCloud sync function never checked whether data was newer and replaced everything. A fresh device with an empty state could overwrite another device’s 20 records with 1. I added update-time comparison and never overwrite with empty.">
+<meta property="og:title" content="A function named “load from iCloud if newer” compared nothing: a 20-record history could become 1">
+<meta property="og:description" content="The iCloud sync function never checked whether data was newer and replaced everything. A fresh device with an empty state could overwrite another device’s 20 records with 1. I added update-time comparison and never overwrite with empty.">
+<meta property="og:type" content="article">
+<meta name="theme-color" content="#fbfaf7">
+<link rel="icon" href="/favicon.ico?v=1697d589" sizes="48x48">
+<link rel="icon" href="/favicon.svg?v=b9d7922f" type="image/svg+xml" sizes="any">
+<link rel="icon" href="/assets/icon/icon-192.png?v=e2566235" type="image/png" sizes="192x192">
+<link rel="apple-touch-icon" href="/assets/icon/icon-180.png?v=84e7f0e6">
+<link rel="manifest" href="/site.webmanifest">
+<script>document.documentElement.className+=" js"</script>
+<link rel="stylesheet" href="/style.css?v=dd51310c">
+<meta name="google-adsense-account" content="ca-pub-3863314847163872">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3863314847163872" crossorigin="anonymous"></script>
+<link rel="canonical" href="https://koshinstudio.com/en/notes/icloud-overwrite/">
+<meta property="og:url" content="https://koshinstudio.com/en/notes/icloud-overwrite/">
+<meta property="og:site_name" content="Koshin Studio">
+<meta property="og:locale" content="en_US">
+<link rel="alternate" hreflang="ja" href="https://koshinstudio.com/notes/icloud-overwrite/">
+<link rel="alternate" hreflang="en" href="https://koshinstudio.com/en/notes/icloud-overwrite/">
+<link rel="alternate" hreflang="x-default" href="https://koshinstudio.com/en/notes/icloud-overwrite/">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="alternate" type="application/rss+xml" title="Koshin Studio — Notes" href="https://koshinstudio.com/feed.xml">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BlogPosting","headline":"A function named “load from iCloud if newer” compared nothing: a 20-record history could become 1","url":"https://koshinstudio.com/en/notes/icloud-overwrite/","description":"The iCloud sync function never checked whether data was newer and replaced everything. A fresh device with an empty state could overwrite another device’s 20 records with 1. I added update-time comparison and never overwrite with empty.","datePublished":"2026-10-17","dateModified":"2026-10-17","inLanguage":"en","image":"https://koshinstudio.com/assets/og/og_en_notes_icloud-overwrite.jpg","author":{"@id":"https://koshinstudio.com#studio"},"publisher":{"@id":"https://koshinstudio.com#studio"},"mainEntityOfPage":"https://koshinstudio.com/en/notes/icloud-overwrite/"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Koshin Studio","item":"https://koshinstudio.com/en/"},{"@type":"ListItem","position":2,"name":"A function named “load from iCloud if newer” compared nothing: a 20-record history could become 1","item":"https://koshinstudio.com/en/notes/icloud-overwrite/"}]}]}</script>
+<meta property="og:image" content="https://koshinstudio.com/assets/og/og_en_notes_icloud-overwrite.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
+</head>
+<body class="article">
+<canvas id="motes"></canvas>
+
+<header class="site"><div class="wrap">
+  <a class="logo" href="/"><img class="logo-mark" src="/favicon.svg?v=b9d7922f" alt="" width="28" height="28">Koshin Studio</a>
+  <nav><a href="/works/">Works</a><a href="/notes/">Notes</a><a href="/picks/">Picks</a><a href="/calc/">Tools</a><a href="/about/">About</a></nav>
+</div></header>
+
+<main><div class="wrap">
+  <nav class="crumbs" aria-label="You are here"><a href="/en/">Koshin Studio</a><i aria-hidden="true">›</i><span aria-current="page">iCloud overwrite</span></nav>
+  <h1>A function named “load from iCloud if newer” compared nothing: a 20-record history could become 1</h1>  <div class="rule"></div>
+<!--lang-->
+  <p class="note"><a href="/notes/icloud-overwrite/" hreflang="ja" lang="ja">日本語版</a></p>
+<!--/lang-->  <p class="lead">Development log of the Toreca Dash app / August 2026</p>
+
+  <p>My iPhone app Toreca Dash has a <strong>record of applications</strong> that users build up themselves: which lotteries they entered and how they turned out. It is a personal record built by hand, and once lost it cannot be recovered.</p>
+  <p>On 23 August 2026 I read a file I had not yet reviewed (1,076 lines) and found <strong>a path where this record could vanish entirely</strong>. It began with trusting a function’s name.</p>
+  <p class="note">Written from my work log of 23 August 2026.</p>  <h2 class="rv" id="s1">The name says “if newer”; the body compares nothing</h2>
+  <p>The function that syncs with iCloud was named <code>loadFromICloudIfNewer</code>: “load from iCloud if it is newer”. But the body <strong>never checked whether anything was newer</strong>; whenever iCloud changed, it <strong>replaced everything with that content</strong>.</p>
+  <p>What can happen:</p>
+  <ol>
+    <li>Device A has 20 records (and so does iCloud).</li>
+    <li>Device B is installed fresh. iCloud’s first sync is asynchronous, so just after launch the records may be empty.</li>
+    <li>On device B, one record is added, and saving <strong>overwrites iCloud with [1 record]</strong>.</li>
+    <li>Device A receives the change notice and <strong>goes from 20 records to 1</strong> (19 lost).</li>
+  </ol>
+  <p>The code had an export/import feature, described as being “to prevent all data vanishing when you change phones”. The author knew this area was fragile.</p>
+
+  <h2 class="rv" id="s2">The fix: compare update times, and never overwrite with empty</h2>
+  <ul>
+    <li>Store an update time (<code>entriesUpdatedAt</code>) on both device and iCloud, and import <strong>only when the other side is newer</strong>, so the function does what its name says.</li>
+    <li>Even for old data with no time yet, <strong>always prevent overwriting with empty content</strong>.</li>
+    <li>On the first restore on a new device, inherit iCloud’s time.</li>
+  </ul>
+
+  <h2 class="rv" id="s3">What I learned</h2>
+  <blockquote>A function’s name may state the spec, but the body may not match.</blockquote>
+  <ul>
+    <li><strong>Do not trust names; read the body.</strong> “IfNewer” compared nothing.</li>
+    <li><strong>Be extra suspicious of writes to data that cannot be recovered.</strong> A record built by hand does not come back.</li>
+    <li><strong>“Empty” is a dangerous value.</strong> Make “never overwrite with empty” the last line of defence.</li>
+    <li><strong>First sync is asynchronous.</strong> Empty right after launch does not mean no data.</li>
+    <li><strong>Read the unreviewed files.</strong> Large, old files hide the most.</li>
+  </ul>
+
+  <p class="note">This is the English version of <a href="/notes/icloud-overwrite/" hreflang="ja" lang="ja">the original Japanese article</a>.</p>
+
+  <div class="rule" style="margin:40px 0 22px"></div>
+  <p class="eyebrow">More in English</p>
+  <ul class="plain">
+    <li><a href="/en/">All English pages</a></li>
+    <li><a href="/en/works/torecadash/">Toreca Dash</a></li>
+  </ul>
+</div>
+</main>
+
+<footer class="site"><div class="wrap"></div></footer>
+<script src="/motion.js?v=1e7447ec" defer></script>
+</body>
+</html>

@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>If you throw failure away, the screen lies: a calendar that said “registered” with none added, a frozen OCR, a notification without a store name — Koshin Studio</title>
+<meta name="description" content="try? discarded failures, so the calendar showed “registered N events” with 0 added and could never register again, OCR failure froze the screen, and the notification buffer forgot the store name.">
+<meta property="og:title" content="If you throw failure away, the screen lies: a calendar that said “registered” with none added, a frozen OCR, a notification without a store name">
+<meta property="og:description" content="try? discarded failures, so the calendar showed “registered N events” with 0 added and could never register again, OCR failure froze the screen, and the notification buffer forgot the store name.">
+<meta property="og:type" content="article">
+<meta name="theme-color" content="#fbfaf7">
+<link rel="icon" href="/favicon.ico?v=1697d589" sizes="48x48">
+<link rel="icon" href="/favicon.svg?v=b9d7922f" type="image/svg+xml" sizes="any">
+<link rel="icon" href="/assets/icon/icon-192.png?v=e2566235" type="image/png" sizes="192x192">
+<link rel="apple-touch-icon" href="/assets/icon/icon-180.png?v=84e7f0e6">
+<link rel="manifest" href="/site.webmanifest">
+<script>document.documentElement.className+=" js"</script>
+<link rel="stylesheet" href="/style.css?v=dd51310c">
+<meta name="google-adsense-account" content="ca-pub-3863314847163872">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3863314847163872" crossorigin="anonymous"></script>
+<link rel="canonical" href="https://koshinstudio.com/en/notes/swallowed-failure/">
+<meta property="og:url" content="https://koshinstudio.com/en/notes/swallowed-failure/">
+<meta property="og:site_name" content="Koshin Studio">
+<meta property="og:locale" content="en_US">
+<link rel="alternate" hreflang="ja" href="https://koshinstudio.com/notes/swallowed-failure/">
+<link rel="alternate" hreflang="en" href="https://koshinstudio.com/en/notes/swallowed-failure/">
+<link rel="alternate" hreflang="x-default" href="https://koshinstudio.com/en/notes/swallowed-failure/">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="alternate" type="application/rss+xml" title="Koshin Studio — Notes" href="https://koshinstudio.com/feed.xml">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BlogPosting","headline":"If you throw failure away, the screen lies: a calendar that said “registered” with none added, a frozen OCR, a notification without a store name","url":"https://koshinstudio.com/en/notes/swallowed-failure/","description":"try? discarded failures, so the calendar showed “registered N events” with 0 added and could never register again, OCR failure froze the screen, and the notification buffer forgot the store name.","datePublished":"2026-10-17","dateModified":"2026-10-17","inLanguage":"en","image":"https://koshinstudio.com/assets/og/og_en_notes_swallowed-failure.jpg","author":{"@id":"https://koshinstudio.com#studio"},"publisher":{"@id":"https://koshinstudio.com#studio"},"mainEntityOfPage":"https://koshinstudio.com/en/notes/swallowed-failure/"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Koshin Studio","item":"https://koshinstudio.com/en/"},{"@type":"ListItem","position":2,"name":"If you throw failure away, the screen lies: a calendar that said “registered” with none added, a frozen OCR, a notification without a store name","item":"https://koshinstudio.com/en/notes/swallowed-failure/"}]}]}</script>
+<meta property="og:image" content="https://koshinstudio.com/assets/og/og_en_notes_swallowed-failure.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
+</head>
+<body class="article">
+<canvas id="motes"></canvas>
+
+<header class="site"><div class="wrap">
+  <a class="logo" href="/"><img class="logo-mark" src="/favicon.svg?v=b9d7922f" alt="" width="28" height="28">Koshin Studio</a>
+  <nav><a href="/works/">Works</a><a href="/notes/">Notes</a><a href="/picks/">Picks</a><a href="/calc/">Tools</a><a href="/about/">About</a></nav>
+</div></header>
+
+<main><div class="wrap">
+  <nav class="crumbs" aria-label="You are here"><a href="/en/">Koshin Studio</a><i aria-hidden="true">›</i><span aria-current="page">Swallowed failure</span></nav>
+  <h1>If you throw failure away, the screen lies: a calendar that said “registered” with none added, a frozen OCR, a notification without a store name</h1>  <div class="rule"></div>
+<!--lang-->
+  <p class="note"><a href="/notes/swallowed-failure/" hreflang="ja" lang="ja">日本語版</a></p>
+<!--/lang-->  <p class="lead">Development log of the Toreca Dash app / August 2026</p>
+
+  <p>In developing my app Toreca Dash, bugs of one kind appeared in a row: <strong>failures I had swallowed made the app show a false success</strong>. This article records three.</p>
+  <p class="note">Written from my work log of 25 August 2026.</p>  <h2 class="rv" id="s1">1. “Registered N events” while none reached the calendar</h2>
+  <p>The app can export lottery deadlines to the iPhone calendar. A build warning (<code>result of 'try?' is unused</code>) led me to review it. <code>try?</code> is a Swift way of discarding a failure. The feature called save with <code>try? store.save(...)</code> and <code>try? store.commit()</code>, <strong>throwing failures away</strong>.</p>
+  <p>As a result:</p>
+  <ul>
+    <li>Nothing reached the calendar, yet it said “Registered N events”.</li>
+    <li>Only the “exported” record remained.</li>
+    <li>Pressing again said “no new items to register”, so <strong>they could never be registered</strong>.</li>
+  </ul>
+  <p>The fix: return failures to the caller and <strong>count only successes</strong>. Devices with no default calendar are detected first and told. The messages are split by cause; before, every failure said “access is not allowed”.</p>
+
+  <h2 class="rv" id="s2">2. When text recognition fails, the screen freezes</h2>
+  <p>The feature that reads text from an application image (OCR) also discarded failure with <code>try? handler.perform([request])</code>. If recognition failed, <strong>the callback was never called</strong>. The “reading…” spinner never stopped, and the only way out was to close the screen.</p>
+  <p>The fix: on failure too, return to a “finished recognising (found nothing)” state.</p>
+  <p>The build warning <code>result of 'try?' is unused</code> is a sign of swallowing. Run the build and read the warnings regularly.</p>
+
+  <h2 class="rv" id="s3">3. A notification without the store name: forgotten in the buffer</h2>
+  <p>A different story with the same shape. A report said “the notification has no store name”. The article had the store name (<code>sellerName</code>) correctly. The notification did not show it.</p>
+  <p>Lottery and reservation notifications are <strong>put in a buffer and sent in batches</strong> (to hold them in quiet hours and to limit the rate). But <strong>the store name was not carried into the buffer</strong>. When sending, looking for the store name found no information, and only the category (“LivePocket”) remained.</p>
+  <p>This was partly surfaced by the earlier fix. When I fixed “the notification arrives under the name LivePocket”, I made it <strong>return null</strong> when the store name is unknown. That forgotten carry-over changed its symptom from “wrong store name” to “no store name”.</p>
+  <p>The same gap existed in <strong>both</strong> buffers (by genre and by product), so I fixed both. For the 5 already buffered I filled in the store name from the article and confirmed it appears when sent.</p>
+  <p>The same gap had happened on 17 August with another field (product names). The lesson: <strong>when putting something in a buffer, carry every field that will be used at send time.</strong> The other two buffers, which store the finished wording as is, do not have this problem.</p>
+
+  <h2 class="rv" id="s4">What I learned</h2>
+  <blockquote>If you throw failure away, the screen lies.</blockquote>
+  <ul>
+    <li><strong>Return failures to the caller.</strong> Discarding them makes the display differ from reality.</li>
+    <li><strong>On failure too, return to a “finished” state.</strong> If a callback is never called, the screen freezes.</li>
+    <li><strong>Record success only on success.</strong> If it stays after a failure, you cannot retry.</li>
+    <li><strong>Read the build warnings.</strong> A <code>try?</code> warning is a sign of swallowing.</li>
+    <li><strong>Put every field used at send time into the buffer.</strong> The same gap shows up later in another field.</li>
+  </ul>
+
+  <p class="note">This is the English version of <a href="/notes/swallowed-failure/" hreflang="ja" lang="ja">the original Japanese article</a>.</p>
+
+  <div class="rule" style="margin:40px 0 22px"></div>
+  <p class="eyebrow">More in English</p>
+  <ul class="plain">
+    <li><a href="/en/">All English pages</a></li>
+    <li><a href="/en/works/torecadash/">Toreca Dash</a></li>
+  </ul>
+</div>
+</main>
+
+<footer class="site"><div class="wrap"></div></footer>
+<script src="/motion.js?v=1e7447ec" defer></script>
+</body>
+</html>
