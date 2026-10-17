@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Setting the rules of Negaeri Shogi by playing AI against AI: one change that worked, six that broke — Koshin Studio</title>
+<meta name="description" content="A 6×6 board game where sandwiched pieces defect. Instead of guessing the numbers, I ran 40 to 100 AI-vs-AI games per rule. Flips per move went from 2% to 81%, removing the king guard ended games in 17 moves, and the first-move edge is still unsolved.">
+<meta property="og:title" content="Setting the rules of Negaeri Shogi by playing AI against AI: one change that worked, six that broke">
+<meta property="og:description" content="A 6×6 board game where sandwiched pieces defect. Instead of guessing the numbers, I ran 40 to 100 AI-vs-AI games per rule. Flips per move went from 2% to 81%, removing the king guard ended games in 17 moves, and the first-move edge is still unsolved.">
+<meta property="og:type" content="article">
+<meta name="theme-color" content="#fbfaf7">
+<link rel="icon" href="/favicon.ico?v=1697d589" sizes="48x48">
+<link rel="icon" href="/favicon.svg?v=b9d7922f" type="image/svg+xml" sizes="any">
+<link rel="icon" href="/assets/icon/icon-192.png?v=e2566235" type="image/png" sizes="192x192">
+<link rel="apple-touch-icon" href="/assets/icon/icon-180.png?v=84e7f0e6">
+<link rel="manifest" href="/site.webmanifest">
+<script>document.documentElement.className+=" js"</script>
+<link rel="stylesheet" href="/style.css?v=dd51310c">
+<meta name="google-adsense-account" content="ca-pub-3863314847163872">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3863314847163872" crossorigin="anonymous"></script>
+<link rel="canonical" href="https://koshinstudio.com/en/notes/negaeri-balance/">
+<meta property="og:url" content="https://koshinstudio.com/en/notes/negaeri-balance/">
+<meta property="og:site_name" content="Koshin Studio">
+<meta property="og:locale" content="en_US">
+<link rel="alternate" hreflang="ja" href="https://koshinstudio.com/notes/negaeri-balance/">
+<link rel="alternate" hreflang="en" href="https://koshinstudio.com/en/notes/negaeri-balance/">
+<link rel="alternate" hreflang="x-default" href="https://koshinstudio.com/en/notes/negaeri-balance/">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="alternate" type="application/rss+xml" title="Koshin Studio — Notes" href="https://koshinstudio.com/feed.xml">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BlogPosting","headline":"Setting the rules of Negaeri Shogi by playing AI against AI: one change that worked, six that broke","url":"https://koshinstudio.com/en/notes/negaeri-balance/","description":"A 6×6 board game where sandwiched pieces defect. Instead of guessing the numbers, I ran 40 to 100 AI-vs-AI games per rule. Flips per move went from 2% to 81%, removing the king guard ended games in 17 moves, and the first-move edge is still unsolved.","datePublished":"2026-10-17","dateModified":"2026-10-17","inLanguage":"en","image":"https://koshinstudio.com/assets/og/og_en_notes_negaeri-balance.jpg","author":{"@id":"https://koshinstudio.com#studio"},"publisher":{"@id":"https://koshinstudio.com#studio"},"mainEntityOfPage":"https://koshinstudio.com/en/notes/negaeri-balance/"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Koshin Studio","item":"https://koshinstudio.com/en/"},{"@type":"ListItem","position":2,"name":"Setting the rules of Negaeri Shogi by playing AI against AI: one change that worked, six that broke","item":"https://koshinstudio.com/en/notes/negaeri-balance/"}]}]}</script>
+<meta property="og:image" content="https://koshinstudio.com/assets/og/og_en_notes_negaeri-balance.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
+</head>
+<body class="article">
+<canvas id="motes"></canvas>
+
+<header class="site"><div class="wrap">
+  <a class="logo" href="/"><img class="logo-mark" src="/favicon.svg?v=b9d7922f" alt="" width="28" height="28">Koshin Studio</a>
+  <nav><a href="/works/">Works</a><a href="/notes/">Notes</a><a href="/picks/">Picks</a><a href="/calc/">Tools</a><a href="/about/">About</a></nav>
+</div></header>
+
+<main><div class="wrap">
+  <nav class="crumbs" aria-label="You are here"><a href="/en/">Koshin Studio</a><i aria-hidden="true">›</i><span aria-current="page">Negaeri Shogi rules, tested</span></nav>
+  <h1>Setting the rules of Negaeri Shogi by playing AI against AI: one change that worked, six that broke</h1>  <div class="rule"></div>
+<!--lang-->
+  <p class="note"><a href="/notes/negaeri-balance/" hreflang="ja" lang="ja">日本語版</a></p>
+<!--/lang-->  <p class="lead">Development log of Negaeri Shogi / September 2026</p>
+
+  <p><a href="/en/works/negaeri-shogi/">Negaeri Shogi</a> is a shogi-style game on a 6×6 board played a bit like Othello. Pieces you sandwich defect to your side and are promoted at the same time. If the new moves of a promoted piece create another sandwich, the flips continue. That is a <strong>chain</strong>.</p>
+  <p>The rules come down to about ten numbers. I did not set them by feel. I <strong>ran dozens of AI-vs-AI games per candidate and measured</strong>. Only one change really worked; most of the others broke the game. I keep the ways they broke here.</p>
+  <p class="note">The numbers come from the measurement log in the game’s README (as of 13 September 2026). They are AI-vs-AI results. Balance between human players has not been verified enough yet.</p>  <h2 class="rv" id="s1">What I measured, and how</h2>
+  <p>The AI is a home-made alpha-beta search. I made depth-3 AIs play each other and counted:</p>
+  <ul>
+    <li><strong>Share of drops that cause a flip.</strong> If low, most moves do nothing.</li>
+    <li><strong>Average game length.</strong> Too short means a one-sided game.</li>
+    <li><strong>First player’s win rate.</strong> Closer to 50% is fairer.</li>
+    <li><strong>Share of games with a chain of 3 or more.</strong> Chains are the point of the game.</li>
+    <li><strong>Lead changes.</strong> Too few: whoever is ahead early wins. Too many: it flips every move and feels random.</li>
+  </ul>
+  <p>Candidates were compared at 40 games each; final numbers use 100 games. Anyone can re-run it with the README commands (<code>npm run report</code>, <code>npm run sweep</code>).</p>
+
+  <h2 class="rv" id="s2">The first rules barely did anything</h2>
+  <p>At first a sandwich only worked along the directions a piece can move in shogi. In AI-vs-AI games, <strong>only 2% of drops caused a flip</strong>. Games lasted 16 moves and the first player won 71%. A flipping game where almost nothing flipped.</p>
+  <div class="scroll rv"><table>
+    <thead><tr><th>Stage</th><th>Drops that flip</th><th>Avg. moves</th><th>First player wins</th></tr></thead>
+    <tbody>
+      <tr><td>Start (move directions only, empty board)</td><td>2%</td><td>16</td><td>71%</td></tr>
+      <tr><td>All 8 directions</td><td>8%</td><td>—</td><td>—</td></tr>
+      <tr><td>Formation start position</td><td>—</td><td>29</td><td>—</td></tr>
+      <tr><td>Pieces next to the king are safe</td><td>42%</td><td>51</td><td>33%</td></tr>
+      <tr><td>One extra pawn in hand for the first player</td><td>42%</td><td>61</td><td>47%</td></tr>
+      <tr><td><strong>Board edge counts as the end of a sandwich</strong></td><td><strong>81%</strong></td><td>53</td><td>59%</td></tr>
+    </tbody>
+  </table></div>
+  <p>The first player’s win rate jumps 71%, 33%, 47%, 59% because each rule change moved the advantage somewhere else. Every change needed a fresh measurement.</p>
+
+  <h2 class="rv" id="s3">The change that mattered: the edge is an anchor</h2>
+  <p>If a run of enemy pieces ends at the edge of the board, it counts as sandwiched. Pieces pushed against the edge defect together. This took flipping drops from 42% to <strong>81%</strong>. Compared with other ideas at 40 games each:</p>
+  <div class="scroll rv"><table>
+    <thead><tr><th>Idea</th><th>Flips per move</th><th>Games with a 3+ chain</th><th>Lead changes</th></tr></thead>
+    <tbody>
+      <tr><td>Before</td><td>0.76</td><td>15%</td><td>7.0</td></tr>
+      <tr><td><strong>Edge as anchor</strong></td><td><strong>2.51</strong></td><td><strong>85%</strong></td><td>7.4</td></tr>
+      <tr><td>+ dropped piece is promoted too</td><td>3.06</td><td>80%</td><td>9.9</td></tr>
+      <tr><td>Dropped piece promoted, alone</td><td>0.72</td><td>13%</td><td>5.0</td></tr>
+      <tr><td>Chain limit of 3</td><td>0.71</td><td>8%</td><td>5.8</td></tr>
+      <tr><td>Piece-count result at 60 moves</td><td>0.69</td><td>3%</td><td>4.8</td></tr>
+    </tbody>
+  </table></div>
+  <p>Promoting the dropped piece too adds flips, but lead changes rise to 9.9 and the lead flips nearly every move, which thins out the shogi side of the game. I left it out (one setting turns it on).</p>
+
+  <h2 class="rv" id="s4">What I tried and dropped</h2>
+  <div class="scroll rv"><table>
+    <thead><tr><th>Idea</th><th>What happened</th></tr></thead>
+    <tbody>
+      <tr><td>Off-direction sandwiches reach only 1 square</td><td>Games with a 3+ chain fell from 95% to <strong>13%</strong>. The reach of a sandwich was the engine of chains.</td></tr>
+      <tr><td>5×5 board</td><td>Flips per move rose from 2.88 to 5.99, but the first player won <strong>70%</strong>. Games were short (35 moves).</td></tr>
+      <tr><td>Remove the king guard</td><td>Games ended in <strong>17 moves</strong> on average and the first player won <strong>95%</strong>. Guards defect at once and the king is left bare.</td></tr>
+      <tr><td>Chain limit of 8</td><td>Almost identical (2.86 vs 2.88 flips per move). The limit of 5 hardly mattered.</td></tr>
+      <tr><td>Dropped piece promoted by a big flip</td><td>More flips, but 9.9 lead changes: it flips every move.</td></tr>
+      <tr><td>Piece-count result at 60 moves</td><td>Games with a 3+ chain fell to <strong>3%</strong>.</td></tr>
+    </tbody>
+  </table></div>
+  <p>The most useful row was <strong>“a limit of 8 changes nothing.”</strong> Raising the limit sounds like it should add chains. Measured, the result barely moved, so the limit of 5 was not doing much. I was about to tune a number that did not matter.</p>
+
+  <h2 class="rv" id="s5">Pieces next to your king never defect</h2>
+  <p>In this game <strong>a piece next to your own king does not defect</strong>. Removing that rule is the third row above: 17 moves on average and a 95% first-player win. Guards defected in a single move and the king was taken early. It is one plain sentence in the rules, and the game does not work without it.</p>
+
+  <h2 class="rv" id="s6">Current numbers (100 AI-vs-AI games, depth 3)</h2>
+  <div class="scroll rv"><table>
+    <thead><tr><th>Measure</th><th>Value</th></tr></thead>
+    <tbody>
+      <tr><td>Average length</td><td>52.7 moves</td></tr>
+      <tr><td>Board fill</td><td>61%</td></tr>
+      <tr><td>Drops that flip</td><td>81%</td></tr>
+      <tr><td>Flips per move</td><td>3.08</td></tr>
+      <tr><td>Games with a 3+ chain</td><td>87%</td></tr>
+      <tr><td>Games with a 4+ chain</td><td>38%</td></tr>
+      <tr><td>Average lead changes</td><td>10.4</td></tr>
+      <tr><td>Games with no lead change</td><td>0%</td></tr>
+      <tr><td>Games where the loser led at some point</td><td>98%</td></tr>
+      <tr><td>Point at which the result is decided</td><td>81% of the way through</td></tr>
+      <tr><td>First player’s win rate</td><td>61%</td></tr>
+    </tbody>
+  </table></div>
+  <p>The board changes hands again and again and stays close to the end, yet it is not luck: <strong>a depth-3 AI beat a depth-2 AI in 20 of 24 games</strong> (as first or second player). 98% of games end by taking the king, so sandwiching stays a means and the shogi goal stays the goal.</p>
+
+  <h2 class="rv" id="s7">Still unsolved: the first player’s edge</h2>
+  <p>In the final measurement the first player won 61% (59% in an earlier, separate measurement). That is 11 points from 50%. I tried five handicap setups and found none clearly better.</p>
+  <div class="scroll rv"><table>
+    <thead><tr><th>Handicap</th><th>First player wins</th></tr></thead>
+    <tbody>
+      <tr><td>None</td><td>33%</td></tr>
+      <tr><td>One extra pawn in the first player’s hand (current)</td><td><strong>61%</strong></td></tr>
+      <tr><td>One extra pawn on the first player’s side of the board</td><td>38%</td></tr>
+      <tr><td>Move one of the first player’s board pawns into hand</td><td>64%</td></tr>
+      <tr><td>Extra pawn in hand for the first player and extra pawn on the board for the second</td><td>27%</td></tr>
+    </tbody>
+  </table></div>
+  <p>Pieces come in whole units, and <strong>the same “one pawn” is worth very different amounts depending on where it is placed</strong>: a point-symmetric addition moved the result by +5 points in one case and −34 in the other. Adding up small pieces cannot tune it to 50%.</p>
+  <p>In online play, matchmaking gives the first move to the lower-rated player, which partly cancels the gap. That is not a fix. Games between humans are still to be checked.</p>
+
+  <h2 class="rv" id="s8">What I learned</h2>
+  <blockquote>Half the changes that felt like good ideas broke the game when I measured them.</blockquote>
+  <ul>
+    <li><strong>Build the measuring tool first.</strong> Being able to run AI-vs-AI games automatically is what let me compare six ideas under the same conditions.</li>
+    <li><strong>Some numbers do nothing.</strong> The chain limit gave the same result at 5 and at 8.</li>
+    <li><strong>Ideas that break the point of the game only show up in measurement.</strong> “Reach one square” looked like it would restore each piece’s character; it cut chains from 95% to 13%.</li>
+    <li><strong>Say what is not fixed.</strong> The first-player gap is still 61%.</li>
+  </ul>
+  <p class="note">This is the English version of <a href="/notes/negaeri-balance/" hreflang="ja" lang="ja">the original Japanese article</a>. Numbers come from the README measurement log (13 September 2026). <a href="/en/works/negaeri-shogi/">Negaeri Shogi</a> is free to play in the browser.</p>
+
+  <div class="rule" style="margin:40px 0 22px"></div>
+  <p class="eyebrow">More in English</p>
+  <ul class="plain">
+    <li><a href="/en/">All English pages</a></li>
+    <li><a href="/en/works/negaeri-shogi/">Negaeri Shogi</a></li>
+  </ul>
+</div>
+</main>
+
+<footer class="site"><div class="wrap"></div></footer>
+<script src="/motion.js?v=1e7447ec" defer></script>
+</body>
+</html>

@@ -78,6 +78,7 @@
 - [64 タイプ一覧](https://koshinstudio.com/anime/types/)
 
 ## English (en)
+- [Setting the rules of Negaeri Shogi by playing AI against AI: one change that worked, six that broke](https://koshinstudio.com/en/notes/negaeri-balance/): A 6×6 board game where sandwiched pieces defect. Instead of guessing the numbers, I ran 40 to 100 AI-vs-AI games per rule. Flips per move went from 2% to 81%, removing the king guard ended games in 17 moves, and the first-move edge is still unsolved.
 - [ITMS-91064 “Invalid Binary”: NSPrivacyTracking was true but NSPrivacyTrackingDomains was empty](https://koshinstudio.com/en/notes/itms-91064/): An iOS build was rejected by Apple's automated review with ITMS-91064. NSPrivacyTracking was true while NSPrivacyTrackingDomains was an empty array. How it was fixed, and what was not verified.
 - [Negaeri Shogi — a free 6×6 board game where sandwiched pieces defect](https://koshinstudio.com/en/works/negaeri-shogi/): Negaeri Shogi is a free browser board game on a 6×6 board. Drop a piece to sandwich your opponent’s pieces: they defect to your side and get promoted, and chains flip many at once. Play locally, vs AI, or online with ratings.
 - [Privacy: what this site keeps and what it does not](https://koshinstudio.com/en/privacy/): What Koshin Studio stores (names and results you submit to rankings, online game ratings), what it does not collect, how comments and analytics work, and how to ask for deletion.

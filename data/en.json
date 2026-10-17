@@ -1,5 +1,12 @@
 [
   {
+    "ja": "/notes/negaeri-balance/",
+    "en": "/en/notes/negaeri-balance/",
+    "title": "Setting the rules of Negaeri Shogi by playing AI against AI: one change that worked, six that broke",
+    "date": "2026-10-17",
+    "blurb": "A 6×6 board game where sandwiched pieces defect. Instead of guessing the numbers, I ran 40 to 100 AI-vs-AI games per rule. Flips per move went from 2% to 81%, removing the king guard ended games in 17 moves, and the first-move edge is still unsolved."
+  },
+  {
     "ja": "/notes/itms-91064/",
     "en": "/en/notes/itms-91064/",
     "title": "ITMS-91064 “Invalid Binary”: NSPrivacyTracking was true but NSPrivacyTrackingDomains was empty",
