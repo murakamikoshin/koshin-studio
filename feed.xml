@@ -7,6 +7,13 @@
   <language>ja</language>
   <atom:link href="https://koshinstudio.com/feed.xml" rel="self" type="application/rss+xml"/>
   <item>
+    <title>寝返り将棋のルールを、AI 同士の対局で決めた：効いた 1 つの変更と、壊れた 6 つの案</title>
+    <link>https://koshinstudio.com/notes/negaeri-balance/</link>
+    <guid isPermaLink="true">https://koshinstudio.com/notes/negaeri-balance/</guid>
+    <pubDate>Fri, 16 Oct 2026 15:00:00 GMT</pubDate>
+    <description>6×6 の盤で挟んで裏返す将棋。ルールの数値を勘で決めず、AI 同士の対局を 40〜100 局ずつ回して測った。反転が 2% から 81% に増えた変更、玉の守りを外すと 17 手で終わった実験、直せていない先後の差まで。</description>
+  </item>
+  <item>
     <title>ポケカのスリーブとローダーの選び方：サイズと「pt」の意味</title>
     <link>https://koshinstudio.com/notes/card-supplies-guide/</link>
     <guid isPermaLink="true">https://koshinstudio.com/notes/card-supplies-guide/</guid>

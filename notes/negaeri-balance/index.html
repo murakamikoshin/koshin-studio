@@ -1,0 +1,199 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>寝返り将棋のルールを、AI 同士の対局で決めた：効いた 1 つの変更と、壊れた 6 つの案 — Koshin Studio</title>
+<meta name="description" content="6×6 の盤で挟んで裏返す将棋。ルールの数値を勘で決めず、AI 同士の対局を 40〜100 局ずつ回して測った。反転が 2% から 81% に増えた変更、玉の守りを外すと 17 手で終わった実験、直せていない先後の差まで。">
+<meta property="og:title" content="寝返り将棋のルールを、AI 同士の対局で決めた：効いた 1 つの変更と、壊れた 6 つの案">
+<meta property="og:description" content="6×6 の盤で挟んで裏返す将棋。ルールの数値を勘で決めず、AI 同士の対局を 40〜100 局ずつ回して測った。反転が 2% から 81% に増えた変更、玉の守りを外すと 17 手で終わった実験、直せていない先後の差まで。">
+<meta property="og:type" content="article">
+<meta name="theme-color" content="#fbfaf7">
+<link rel="icon" href="/favicon.ico?v=1697d589" sizes="48x48">
+<link rel="icon" href="/favicon.svg?v=b9d7922f" type="image/svg+xml" sizes="any">
+<link rel="icon" href="/assets/icon/icon-192.png?v=e2566235" type="image/png" sizes="192x192">
+<link rel="apple-touch-icon" href="/assets/icon/icon-180.png?v=84e7f0e6">
+<link rel="manifest" href="/site.webmanifest">
+<script>document.documentElement.className+=" js"</script>
+<link rel="stylesheet" href="/style.css?v=dd51310c">
+<meta name="google-adsense-account" content="ca-pub-3863314847163872">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3863314847163872" crossorigin="anonymous"></script>
+<link rel="canonical" href="https://koshinstudio.com/notes/negaeri-balance/">
+<meta property="og:url" content="https://koshinstudio.com/notes/negaeri-balance/">
+<meta property="og:site_name" content="Koshin Studio">
+<meta property="og:locale" content="ja_JP">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="alternate" type="application/rss+xml" title="Koshin Studio — Notes" href="https://koshinstudio.com/feed.xml">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BlogPosting","headline":"寝返り将棋のルールを、AI 同士の対局で決めた：効いた 1 つの変更と、壊れた 6 つの案","url":"https://koshinstudio.com/notes/negaeri-balance/","description":"6×6 の盤で挟んで裏返す将棋。ルールの数値を勘で決めず、AI 同士の対局を 40〜100 局ずつ回して測った。反転が 2% から 81% に増えた変更、玉の守りを外すと 17 手で終わった実験、直せていない先後の差まで。","datePublished":"2026-10-17","dateModified":"2026-10-17","inLanguage":"ja","image":"https://koshinstudio.com/assets/og/og_notes_negaeri-balance.jpg","author":{"@id":"https://koshinstudio.com#studio"},"publisher":{"@id":"https://koshinstudio.com#studio"},"mainEntityOfPage":"https://koshinstudio.com/notes/negaeri-balance/"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Koshin Studio","item":"https://koshinstudio.com/"},{"@type":"ListItem","position":2,"name":"Notes","item":"https://koshinstudio.com/notes/"},{"@type":"ListItem","position":3,"name":"寝返り将棋のルールを、AI 同士の対局で決めた：効いた 1 つの変更と、壊れた 6 つの案","item":"https://koshinstudio.com/notes/negaeri-balance/"}]}]}</script>
+<meta property="og:image" content="https://koshinstudio.com/assets/og/og_notes_negaeri-balance.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
+</head>
+<body class="article">
+<canvas id="motes"></canvas>
+
+<header class="site"><div class="wrap">
+  <a class="logo" href="/"><img class="logo-mark" src="/favicon.svg?v=b9d7922f" alt="" width="28" height="28">Koshin Studio</a>
+  <nav><a href="/works/">Works</a><a href="/notes/">Notes</a><a href="/picks/">Picks</a><a href="/calc/">Tools</a><a href="/about/">About</a></nav>
+</div></header>
+
+<main><div class="wrap">
+  <nav class="crumbs" aria-label="現在地"><a href="/">Koshin Studio</a><i aria-hidden="true">›</i><a href="/notes/">Notes</a><i aria-hidden="true">›</i><span aria-current="page">寝返り将棋のルールを、AI 同士の対局で決めた：効いた 1 つの変更と、壊れた 6 つの案</span></nav>
+  <h1>寝返り将棋のルールを、AI 同士の対局で決めた：効いた 1 つの変更と、壊れた 6 つの案</h1>  <div class="rule"></div>
+  <p class="lead">寝返り将棋 制作の記録 ／ 2026年9月</p>
+
+  <p><a href="/works/negaeri-shogi/">寝返り将棋</a>は、6×6 の盤で、将棋の駒を使って、オセロのように挟んで裏返すゲームです。挟まれた駒は敵に寝返り、同時に成ります。成った駒の新しい動きで、さらに挟みが成り立てば、続けて裏返ります。これが<strong>連鎖</strong>です。</p>
+  <p>ルールを決める数字は、十個ほどあります。盤の広さ、持ち駒の数、どの方向で挟めるか、連鎖は何段まで、など。これを<strong>勘で決めず、AI 同士の対局を何十局も回して、数字で測って</strong>決めました。この記事は、その記録です。うまくいった変更は 1 つだけで、残りの案は、ほとんど壊れました。壊れ方も、残しておきます。</p>
+  <p class="note">数字は、ゲームのリポジトリの README に残した測定の記録（2026 年 9 月 13 日時点）から書いています。AI 同士の対局で測ったもので、人間同士の対局での釣り合いは、まだ十分には確かめられていません。</p>
+<!--toc-->
+  <nav class="toc" aria-label="目次"><p>目次</p><ol><li><a href="#s1">何を、どう測ったか</a></li><li><a href="#s2">最初のルールでは、ほとんど何も起きなかった</a></li><li><a href="#s3">いちばん効いたのは、「盤の端も、挟みの終わり」</a></li><li><a href="#s4">試して、やめた案</a></li><li><a href="#s5">玉のまわりを守るルールは、外せない</a></li><li><a href="#s6">いまの数字（AI 同士 100 局、深さ 3）</a></li><li><a href="#s7">まだ解決していないこと：先手と後手の差</a></li><li><a href="#s8">分かったこと</a></li></ol></nav>
+<!--/toc-->
+  <h2 class="rv" id="s1">何を、どう測ったか</h2>
+  <p>AI は、先読みの探索（アルファベータ探索）で動く自作のものです。深さ 3 の AI 同士を戦わせて、次の数字を数えました。</p>
+  <ul>
+    <li><strong>打つ手のうち、反転が起きる割合。</strong>低いと、挟んでも何も起きない手ばかりになります。</li>
+    <li><strong>平均の手数。</strong>短すぎると、ほぼ一方的に終わっています。</li>
+    <li><strong>先手の勝率。</strong>50% に近いほど公平です。</li>
+    <li><strong>3 連鎖以上が出た対局の割合。</strong>連鎖が、このゲームの目玉だからです。</li>
+    <li><strong>リードの入れ替わり回数。</strong>少なければ、先に有利になった側がそのまま勝っています。多すぎれば、毎手ひっくり返る運のゲームです。</li>
+  </ul>
+  <p>案を並べて比べるときは、1 案あたり 40 局。最終の数字は、100 局で出しています。同じ測定は、README の手順（<code>npm run report</code>、<code>npm run sweep</code>）で、誰でも回し直せます。</p>
+
+  <h2 class="rv" id="s2">最初のルールでは、ほとんど何も起きなかった</h2>
+  <p>最初は、駒の「利き」（将棋で動ける方向）の向きだけで、挟めるかどうかを判定していました。AI 同士で回すと、<strong>反転が起きた打ち手は 2% だけ</strong>。平均 16 手で終わり、先手が 71% 勝ちました。裏返すゲームなのに、ほとんど裏返らなかったのです。</p>
+  <p>そこから 1 つずつ、ルールを変えて測り直しました。</p>
+  <div class="scroll rv"><table>
+    <thead><tr><th>段階</th><th>反転が起きた打ち手</th><th>平均手数</th><th>先手勝率</th></tr></thead>
+    <tbody>
+      <tr><td>当初（利きの方向のみ・空の盤から）</td><td>2%</td><td>16 手</td><td>71%</td></tr>
+      <tr><td>縦横斜めの全 8 方向にした</td><td>8%</td><td>—</td><td>—</td></tr>
+      <tr><td>初期配置を、陣形にした</td><td>—</td><td>29 手</td><td>—</td></tr>
+      <tr><td>玉の隣を、守るようにした</td><td>42%</td><td>51 手</td><td>33%</td></tr>
+      <tr><td>先手に、歩 1 枚のハンデ</td><td>42%</td><td>61 手</td><td>47%</td></tr>
+      <tr><td><strong>盤の端を、挟みの終わりにした</strong></td><td><strong>81%</strong></td><td>53 手</td><td>59%</td></tr>
+    </tbody>
+  </table></div>
+  <p>先手勝率が、71% から 33% に、47% に、59% に動いているのは、ルールを変えるたびに、有利不利が入れ替わったからです。1 つの変更が、別の部分の釣り合いを崩すので、1 つ直すたびに測り直す必要がありました。</p>
+
+  <h2 class="rv" id="s3">いちばん効いたのは、「盤の端も、挟みの終わり」</h2>
+  <p>相手の駒が続いた先が盤の外なら、それも「挟んだ」と数えます。端に追い込まれた駒は、まとめて寝返ります。この変更で、反転が起きた打ち手は 42% から<strong>81%</strong> に増えました。</p>
+  <p>この案と、ほかの案を、同じ条件（各 40 局）で並べて比べたのが、次の表です。</p>
+  <div class="scroll rv"><table>
+    <thead><tr><th>案</th><th>1 手の反転枚数</th><th>3 連鎖以上が出た対局</th><th>リード交代</th></tr></thead>
+    <tbody>
+      <tr><td>変更前</td><td>0.76</td><td>15%</td><td>7.0 回</td></tr>
+      <tr><td><strong>盤の端を、挟みの終わりに</strong></td><td><strong>2.51</strong></td><td><strong>85%</strong></td><td>7.4 回</td></tr>
+      <tr><td>＋打った駒も出世</td><td>3.06</td><td>80%</td><td>9.9 回</td></tr>
+      <tr><td>打った駒も出世、だけ</td><td>0.72</td><td>13%</td><td>5.0 回</td></tr>
+      <tr><td>連鎖の上限を 3 に</td><td>0.71</td><td>8%</td><td>5.8 回</td></tr>
+      <tr><td>60 手で駒数決着</td><td>0.69</td><td>3%</td><td>4.8 回</td></tr>
+    </tbody>
+  </table></div>
+  <p>「打った駒も出世」を足すと、反転はさらに増えます。ただ、リード交代が 9.9 回まで上がって、毎手ひっくり返る展開になりました。それでは将棋側の戦略性が薄れるので、入れていません（設定の値を 1 つ変えれば、いつでも試せるようにしてあります）。</p>
+
+  <h2 class="rv" id="s4">試して、やめた案</h2>
+  <p>同じやり方で測って、いまの設定より悪かったものを、同じ失敗を繰り返さないために残してあります。</p>
+  <div class="scroll rv"><table>
+    <thead><tr><th>案</th><th>何が起きたか</th></tr></thead>
+    <tbody>
+      <tr><td>駒の本来の利き以外は、1 マスだけ挟める</td><td>3 連鎖以上が出る対局が 95% から <strong>13%</strong> に激減。<strong>挟める距離そのものが、連鎖のエンジン</strong>だった。</td></tr>
+      <tr><td>5×5 の盤</td><td>1 手の反転は 2.88 枚から 5.99 枚と派手になったが、先手勝率が <strong>70%</strong> で崩れた。手数も 35 手と短い。</td></tr>
+      <tr><td>玉のまわりを守るルールを外す</td><td>平均 <strong>17 手</strong>で終わり、先手勝率 <strong>95%</strong>。守りの駒が一斉に寝返って、玉が裸になる。</td></tr>
+      <tr><td>連鎖の上限を 8 に</td><td>現状とほぼ同じ（1 手の反転 2.86 枚と 2.88 枚）。上限 5 は、ほとんど効いていなかった。</td></tr>
+      <tr><td>打った駒も、大量の寝返りで成る</td><td>反転は増えるが、リード交代が 9.9 回に上がり、毎手ひっくり返る。</td></tr>
+      <tr><td>60 手で駒数決着</td><td>3 連鎖以上が出る対局が <strong>3%</strong> に激減。</td></tr>
+    </tbody>
+  </table></div>
+  <p>この表で、いちばん学びが大きかったのは、<strong>「連鎖の上限を 8 にしても変わらない」</strong>でした。上限を上げれば連鎖が増えそうに思えます。測ってみると、結果はほとんど変わらず、上限の 5 は、ほとんど効いていませんでした。実際には効いていない数字を、いじるところでした。</p>
+
+  <h2 class="rv" id="s5">玉のまわりを守るルールは、外せない</h2>
+  <p>このゲームでは、<strong>自分の玉に隣り合う駒は、寝返りません</strong>。玉のまわりが、安定した守りの場所になります。このルールを外した実験が、上の表の 3 行目です。平均 17 手、先手の 95% 勝ち。守りの駒が一手で全部寝返って、序盤で一方的に玉が取られました。</p>
+  <p>ルールの説明では、地味な一文です。しかし、これが無いと、ゲームが成り立ちません。</p>
+
+  <h2 class="rv" id="s6">いまの数字（AI 同士 100 局、深さ 3）</h2>
+  <div class="scroll rv"><table>
+    <thead><tr><th>指標</th><th>値</th></tr></thead>
+    <tbody>
+      <tr><td>平均手数</td><td>52.7 手</td></tr>
+      <tr><td>盤の埋まり率</td><td>61%</td></tr>
+      <tr><td>打つ手のうち、反転が起きる割合</td><td>81%</td></tr>
+      <tr><td>1 手あたりの反転枚数</td><td>3.08 枚</td></tr>
+      <tr><td>3 連鎖以上が出た対局</td><td>87%</td></tr>
+      <tr><td>4 連鎖以上が出た対局</td><td>38%</td></tr>
+      <tr><td>リード交代の平均回数</td><td>10.4 回</td></tr>
+      <tr><td>一度もリードが入れ替わらない対局</td><td>0%</td></tr>
+      <tr><td>負けた側も、一度はリードしていた対局</td><td>98%</td></tr>
+      <tr><td>勝負が決まった時点（手数のうち）</td><td>81% の地点</td></tr>
+      <tr><td>先手の勝率</td><td>61%</td></tr>
+    </tbody>
+  </table></div>
+  <p>盤の色が何度も入れ替わって、最後までもつれます。それでいて、運だけのゲームにはなっていません。<strong>深さ 3 の AI は、深さ 2 の AI に、24 局中 20 局勝ちました</strong>（先手でも後手でも）。先を読めば勝てる、ということです。決着の 98% は玉を取ったもので、「挟むのは手段、将棋の勝ち方が目的」という関係も保たれています。</p>
+
+  <h2 class="rv" id="s7">まだ解決していないこと：先手と後手の差</h2>
+  <p>最終の測定で、先手の勝率は 61% でした（途中の測定では 59% でした。別の測定なので、数字が少し違います）。50% から 11 ポイントずれています。ハンデの付け方を 5 通り測りましたが、これより明確に良いものは、見つかっていません。</p>
+  <div class="scroll rv"><table>
+    <thead><tr><th>ハンデ</th><th>先手の勝率</th></tr></thead>
+    <tbody>
+      <tr><td>無し</td><td>33%</td></tr>
+      <tr><td>先手の持ち駒に、歩 +1（現行）</td><td><strong>61%</strong></td></tr>
+      <tr><td>先手の盤上に、歩 +1</td><td>38%</td></tr>
+      <tr><td>先手の盤上の歩 1 枚を、持ち駒に移す</td><td>64%</td></tr>
+      <tr><td>先手の持ち駒に歩 +1、かつ、後手の盤上に歩 +1</td><td>27%</td></tr>
+    </tbody>
+  </table></div>
+  <p>詰められない理由は、駒が 1 枚単位でしか置けないことに加えて、<strong>同じ「歩 1 枚」でも、置く場所で価値が全く違う</strong>ことです。点対称な位置への同じ追加が、一方では +5 ポイント、もう一方では −34 ポイントになりました。細かい足し算では、50% に寄せられません。</p>
+  <p>実戦では、対戦相手を決めるときに、レーティングの低い側を先手にしています。弱い側が、有利な先手を持つので、差は部分的に埋め合わされます。それでも、解決とは言えません。人間同士の対局での確認も、これからです。</p>
+
+  <h2 class="rv" id="s8">分かったこと</h2>
+  <blockquote>感覚で「面白そう」と思った変更は、測ると、半分は壊れていた。</blockquote>
+  <ul>
+    <li><strong>数字を決めるなら、測る手を先に作る。</strong>AI 同士の対局を自動で回す道具があったから、6 つの案を同じ条件で比べられました。</li>
+    <li><strong>効いていない数字がある。</strong>連鎖の上限は、5 でも 8 でも変わりませんでした。</li>
+    <li><strong>ゲームの目玉を壊す案は、測って初めて分かる。</strong>「1 マスだけ挟める」は、駒の個性が戻る良い案に見えて、連鎖を 95% から 13% に壊しました。</li>
+    <li><strong>直せていないことは、直せていないと書く。</strong>先後の差は、61% のままです。</li>
+  </ul>
+  <p>同じ「測る手を用意する」考え方で、すし積むの寸法を調整した記録は、<a href="/notes/anago/">穴子の記事</a>に書いています。</p>
+  <p class="note">この記事の数字は、寝返り将棋のリポジトリの README にある、2026 年 9 月 13 日時点の測定記録から書きました。遊べるのは<a href="/play/negaeri-shogi/">こちら</a>、紹介は<a href="/works/negaeri-shogi/">作品のページ</a>です。</p>
+
+  <div class="ad-slot" data-slot="footer" hidden></div>
+<!--/ad-->
+
+  <div class="rule" style="margin:40px 0 22px"></div>
+  <p class="eyebrow">この話に出てくるもの</p>
+  <ul class="plain">
+    <li><a href="/works/negaeri-shogi/">寝返り将棋</a> — 6×6 の盤で、挟まれた駒が敵に寝返り、出世する将棋</li>
+    <li><a href="/notes/anago/">穴子の記事</a> — 同じ、「測る手を用意する」考え方の記録</li>
+  </ul>
+
+<!--related-->
+  <div class="rule" style="margin:40px 0 22px"></div>
+  <p class="eyebrow">ほかの記録</p>
+  <ul class="plain">
+    <li><a href="/notes/qiita-post-interval/">Qiita の「投稿頻度が高過ぎます」を測った：新しいアカウントは、投稿から約 30 分、次の記事を作れなかった</a> — Qiita の投稿頻度の制限を、5 分おきの記録で測った。新しいアカウントでは、2 回とも、投稿から約 30 分。3 回目は記録が欠けた。</li>
+    <li><a href="/notes/gemini-migration/">Claude API から Gemini API（gemini-3.1-flash-lite）へ移行した：16 か所の呼び出しを 1 つの関数にまとめた</a> — Anthropic の利用上限で予定外の課金が出たため Gemini へ移行。モデルの選び方（廃止予定日）、呼び出しの一本化、Web 検索の回数上限が無い問題への回路遮断器、止めるスイッチの記録。</li>
+    <li><a href="/notes/xcode152-sdk/">Xcode 15.2 で Firebase 12 が使えない（Swift 6.0 必須）：Firebase 11.4.0 と AdMob 11.5.0 に固定した理由</a> — 古い Mac の Xcode 15.2 では、Firebase 12 以降と 11.12.0 以降は Xcode 16.2 が必須、AdMob 11.6.0 以降は MarketplaceKit で Xcode 15.3 が必須。Exact Version で固定した記録。</li>
+  </ul>
+<!--/related-->
+
+<!--comments-->
+  <section class="comments" id="comments" data-repo="murakamikoshin/koshin-studio" data-repo-id="R_kgDOURc3ew"
+    data-category="Announcements" data-category-id="DIC_kwDOURc3e84DHTVr">
+    <h2 id="comments-h">コメント</h2>
+    <p>感想や、記事の間違いの指摘は、ここへ。書くには、GitHub のアカウントが要ります。</p>
+    <p><button type="button" class="btn ghost" id="load-comments">コメントを開く</button></p>
+    <p class="note">押すと、giscus（giscus.app）と GitHub に接続します。押さなければ、接続しません。詳しくは<a href="/privacy/">あつかい</a>に書いています。</p>
+    <div id="giscus-box"></div>
+  </section>
+<!--/comments-->
+</div>
+</main>
+
+<footer class="site"><div class="wrap">
+  <span>© 2026 Koshin Studio</span>
+  <div class="sns-row"></div>
+  <nav><a href="/picks/">Picks</a><a href="/calc/">Tools</a><a href="/about/">About</a><a href="/privacy/">あつかい</a><a href="/en/" hreflang="en" lang="en">English</a></nav>
+</div></footer>
+<script src="/motion.js?v=1e7447ec" defer></script>
+</body>
+</html>
