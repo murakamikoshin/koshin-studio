@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>“One page = one case” was false: articles of a shop taking 6 products on one form were hidden just for sharing a link — Koshin Studio</title>
+<meta name="description" content="A job that decided duplicates by link alone hid 5 of 6 articles of a shop taking 6 products on one Google Form. I changed it to link + product. I also found the server’s “entry tiers” were never read by the app.">
+<meta property="og:title" content="“One page = one case” was false: articles of a shop taking 6 products on one form were hidden just for sharing a link">
+<meta property="og:description" content="A job that decided duplicates by link alone hid 5 of 6 articles of a shop taking 6 products on one Google Form. I changed it to link + product. I also found the server’s “entry tiers” were never read by the app.">
+<meta property="og:type" content="article">
+<meta name="theme-color" content="#fbfaf7">
+<link rel="icon" href="/favicon.ico?v=1697d589" sizes="48x48">
+<link rel="icon" href="/favicon.svg?v=b9d7922f" type="image/svg+xml" sizes="any">
+<link rel="icon" href="/assets/icon/icon-192.png?v=e2566235" type="image/png" sizes="192x192">
+<link rel="apple-touch-icon" href="/assets/icon/icon-180.png?v=84e7f0e6">
+<link rel="manifest" href="/site.webmanifest">
+<script>document.documentElement.className+=" js"</script>
+<link rel="stylesheet" href="/style.css?v=dd51310c">
+<meta name="google-adsense-account" content="ca-pub-3863314847163872">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3863314847163872" crossorigin="anonymous"></script>
+<link rel="canonical" href="https://koshinstudio.com/en/notes/one-page-many-cases/">
+<meta property="og:url" content="https://koshinstudio.com/en/notes/one-page-many-cases/">
+<meta property="og:site_name" content="Koshin Studio">
+<meta property="og:locale" content="en_US">
+<link rel="alternate" hreflang="ja" href="https://koshinstudio.com/notes/one-page-many-cases/">
+<link rel="alternate" hreflang="en" href="https://koshinstudio.com/en/notes/one-page-many-cases/">
+<link rel="alternate" hreflang="x-default" href="https://koshinstudio.com/en/notes/one-page-many-cases/">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="alternate" type="application/rss+xml" title="Koshin Studio — Notes" href="https://koshinstudio.com/feed.xml">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BlogPosting","headline":"“One page = one case” was false: articles of a shop taking 6 products on one form were hidden just for sharing a link","url":"https://koshinstudio.com/en/notes/one-page-many-cases/","description":"A job that decided duplicates by link alone hid 5 of 6 articles of a shop taking 6 products on one Google Form. I changed it to link + product. I also found the server’s “entry tiers” were never read by the app.","datePublished":"2026-10-17","dateModified":"2026-10-17","inLanguage":"en","image":"https://koshinstudio.com/assets/og/og_en_notes_one-page-many-cases.jpg","author":{"@id":"https://koshinstudio.com#studio"},"publisher":{"@id":"https://koshinstudio.com#studio"},"mainEntityOfPage":"https://koshinstudio.com/en/notes/one-page-many-cases/"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Koshin Studio","item":"https://koshinstudio.com/en/"},{"@type":"ListItem","position":2,"name":"“One page = one case” was false: articles of a shop taking 6 products on one form were hidden just for sharing a link","item":"https://koshinstudio.com/en/notes/one-page-many-cases/"}]}]}</script>
+<meta property="og:image" content="https://koshinstudio.com/assets/og/og_en_notes_one-page-many-cases.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
+</head>
+<body class="article">
+<canvas id="motes"></canvas>
+
+<header class="site"><div class="wrap">
+  <a class="logo" href="/"><img class="logo-mark" src="/favicon.svg?v=b9d7922f" alt="" width="28" height="28">Koshin Studio</a>
+  <nav><a href="/works/">Works</a><a href="/notes/">Notes</a><a href="/picks/">Picks</a><a href="/calc/">Tools</a><a href="/about/">About</a></nav>
+</div></header>
+
+<main><div class="wrap">
+  <nav class="crumbs" aria-label="You are here"><a href="/en/">Koshin Studio</a><i aria-hidden="true">›</i><span aria-current="page">One page, many cases</span></nav>
+  <h1>“One page = one case” was false: articles of a shop taking 6 products on one form were hidden just for sharing a link</h1>  <div class="rule"></div>
+<!--lang-->
+  <p class="note"><a href="/notes/one-page-many-cases/" hreflang="ja" lang="ja">日本語版</a></p>
+<!--/lang-->  <p class="lead">Development log of the Toreca Dash app / August 2026</p>
+
+  <p>My app Toreca Dash twice received the report “<strong>several products are accepted, yet there is only one article</strong>”. I thought I fixed it the first time, but the second report came.</p>
+  <p>This article records the real cause, and a story from the same period: <strong>a field I created that the app never read</strong>.</p>
+  <p class="note">Written from my work log of 25 August 2026.</p>  <h2 class="rv" id="s1">The real cause: duplicates decided by link alone</h2>
+  <p>After the first report I had fixed it as far as “they are treated as duplicates because the link is the same”. But <strong>existing articles stayed hidden</strong>, so I got the same complaint again.</p>
+  <p>The culprit was <code>runHideDuplicateLinkArticles</code>, a job that <strong>judges duplicates by link alone</strong>.</p>
+  <p>The real data: one mail-order shop takes lotteries for <strong>6 products on a single Google Form</strong>. All 6 articles have the same URL. The job hid 5 of them as “duplicates”, so users saw only one product.</p>
+  <p>The fix: change the grouping unit from <strong>link</strong> to <strong>link + product</strong>. The same link with a different product is a different case. For articles whose product is unknown, there is nothing to tell them apart, so they are treated as duplicates by link alone as before.</p>
+  <p>“One page = one case” does not hold for card lotteries. Stores that accept several products on one form or one announcement page are common.</p>
+  <p>I restored the articles that had been hidden as link-only duplicates, only those <strong>whose product or title differs</strong> from a displayed article with the same link (7 articles): 5 from the mail-order shop (all 6 products now show), 1 from a large game store and 1 from another chain.</p>
+
+  <h2 class="rv" id="s2">The server created “entry tiers”, and the app never read them</h2>
+  <p>Since 23 August the server had been reading entry conditions with an AI and extracting <strong>entry tiers</strong> (<code>entryTiers</code>): “Players Club: identity-verified tier versus unverified tier”, “Group A and Group B”, “Bic Camera Suica card members only”. They were in the real data.</p>
+  <p>But <strong>the iOS app never read this field</strong>. I was paying for the AI and users could not see it. I added the field to the app and show it in the detail screen as “Entry tiers”.</p>
+  <p>You can find such server/app mismatches mechanically: extract the fields the app reads from the source (<code>grep</code>) and compare them with Firestore’s real data.</p>
+
+  <h2 class="rv" id="s3">Announcement text had got into the product list</h2>
+  <p>Event notices such as “ONE PIECE Card Game corner [advance entry / lottery] Monday 31 August, JUMP SHOP Tokyo Station” had been registered as products.</p>
+  <p>A list of phrases cannot keep up, so I rejected them with a general rule: <strong>a concrete date</strong>. A trading-card product name does not contain a calendar date like “31 August”. “Vol.3”, “Set 2” and “2025 issue 19” are not dates and are unaffected. I tested 10 patterns with 0 mismatches and deleted the 6 existing ones.</p>
+
+  <h2 class="rv" id="s4">What I learned</h2>
+  <blockquote>Doubt the premise. Check that what you built is used.</blockquote>
+  <ul>
+    <li><strong>Do not assume “one page = one case”.</strong> Stores accepting several products on one form are common.</li>
+    <li><strong>After fixing, look at existing articles.</strong> Fixing the entrance does not bring hidden articles back.</li>
+    <li><strong>Cross-check the fields the server makes and the app reads.</strong> You can pay the cost and users still see nothing.</li>
+    <li><strong>A general rule beats a list of phrases.</strong> “A concrete date means it is not a product name.”</li>
+  </ul>
+
+  <p class="note">This is the English version of <a href="/notes/one-page-many-cases/" hreflang="ja" lang="ja">the original Japanese article</a>.</p>
+
+  <div class="rule" style="margin:40px 0 22px"></div>
+  <p class="eyebrow">More in English</p>
+  <ul class="plain">
+    <li><a href="/en/">All English pages</a></li>
+    <li><a href="/en/works/torecadash/">Toreca Dash</a></li>
+  </ul>
+</div>
+</main>
+
+<footer class="site"><div class="wrap"></div></footer>
+<script src="/motion.js?v=1e7447ec" defer></script>
+</body>
+</html>

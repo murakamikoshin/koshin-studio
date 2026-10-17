@@ -9,6 +9,8 @@ URL: https://koshinstudio.com/notes/store-name-variants/
 
 # 「ヤマダ電機」と「ヤマダデンキ」：表記ゆれと重複の原因は 3 つ重なっていた（包含だけの比較・59 秒の差・手動専用のジョブ）
 
+  English version (https://koshinstudio.com/en/notes/store-name-variants/)
+
   トレカダッシュ 開発の記録 ／ 2026年8月
 
   iOS アプリ「トレカダッシュ (https://koshinstudio.com/works/torecadash/)」の記事では、同じ店の名前が、「ヤマダ電機」と「ヤマダデンキ」のように、書き方がバラバラでした。報告は、2 つ来ました。「表記揺れしている」「同じ理由で、記事が重複している」。指示は、「他の店でも同じことが起きないように、徹底的に」でした。
@@ -173,6 +175,8 @@ URL: https://koshinstudio.com/notes/one-page-many-cases/
 
 # 「1 ページ ＝ 1 案件」ではなかった：1 つのフォームで 6 商品を受け付ける店の記事が、リンクが同じというだけで消されていた
 
+  English version (https://koshinstudio.com/en/notes/one-page-many-cases/)
+
   トレカダッシュ 開発の記録 ／ 2026年8月
 
   iOS アプリ「トレカダッシュ (https://koshinstudio.com/works/torecadash/)」で、「複数の商品を受け付けている抽選なのに、1 件しか記事が無い」という報告が、2 回、来ました。1 回目に直したつもりでしたが、2 回目が来ました。
@@ -237,6 +241,8 @@ URL: https://koshinstudio.com/notes/one-page-many-cases/
 URL: https://koshinstudio.com/notes/transliteration-gate/
 
 # 英語表記とカタカナ表記は、1 文字も重ならない：正しい照合 42 件を、指紋の関門が却下していた
+
+  English version (https://koshinstudio.com/en/notes/transliteration-gate/)
 
   トレカダッシュ 開発の記録 ／ 2026年8月
 
@@ -7855,6 +7861,243 @@ URL: https://koshinstudio.com/privacy/
 
 ---
 
+URL: https://koshinstudio.com/en/notes/store-name-variants/
+
+# “ヤマダ電機” versus “ヤマダデンキ”: spelling variants and duplicates had three overlapping causes
+
+  日本語版 (https://koshinstudio.com/notes/store-name-variants/)
+
+  Development log of the Toreca Dash app / August 2026
+
+  In my app Toreca Dash, the same store’s name was written differently, such as “ヤマダ電機” and “ヤマダデンキ” (both Yamada Denki). Two reports came: “spellings vary” and “articles are duplicated for the same reason”. The instruction was: “make sure it does not happen for other stores either, thoroughly”.
+
+  This article records that three causes overlapped, and the process of fixing with a general rule instead of a synonym table.
+
+  Written from my work log of 25 August 2026.
+
+## Three causes overlapped
+
+- Store names were compared only by “contains”. The two Yamada spellings contain neither one another, so they were different stores.
+
+- Deadlines were compared to the millisecond. The same “until 26 Aug” was 23:59:00 from the aggregator and 23:59:59 from X, a 59-second difference that stopped them being seen as duplicates. Four real products were like this.
+
+- The dedupe job was manual-only and had never run automatically. Even if I make it as a “one-off repair”, articles arrive daily, so duplicates are born daily.
+
+## The fix: no synonym table
+
+  I made a comparison key (storeNameComparisonKey). It drops corporate forms, symbols, spaces and full/half-width, turns katakana into hiragana, and unifies “電機 / 電器 / でんき”.
+
+  I do not make a table of store-name synonyms. It would recur whenever a new store appears. I made a general rule that unifies different writings that sound the same.
+
+- Deadlines are compared as dates (Japan-time dates) and I require the same sale type instead. Even on the same day, first-come and lottery are different cases.
+
+- Articles that have no store name (sellerName) and only a store name in the category are included. Aggregator and official-site articles are mostly like that, and I had overlooked them wholesale.
+
+- When hiding as a duplicate, always set the hidden mark (hiddenByDuplicate).
+
+- I added an hourly scheduled run.
+
+- The spelling itself is also pulled to the majority of real data. I keep no list of correct spellings. On a tie, katakana wins, then string order, so the answer does not change at each run and cause a rewrite war.
+
+## Two dangers found in testing
+
+  Both found by tests after the fix.
+
+- If you key only on the part before “＠”, a store whose name itself contains ＠ gets an extremely short key. “Card Shop ＠ Home. Kagoshima” would become a key like “card shop” and be equated with other stores. The comparison key does not cut at ＠. (Names with an advertising tail are caught by the contains test.)
+
+- If “one is the beginning of the other means the same name”, branch names disappear. “Yellow Submarine” and “Yellow Submarine Akihabara” would merge and lose the branch. I treat them as the same only when the addition begins with a note marker such as “＠”, “【” or “（”.
+
+  I checked 17 real patterns and found 0 mismatches.
+
+## Result
+
+     | Before | After
+
+      Store-name spelling variants | 2 | 0
+
+      Duplicates with same product, deadline and store | 7 groups | 0 groups
+
+  As a bonus, 23 store names with an advertising tail like “○○ ＠ staff wanted” were unified too. When there are duplicates, the one kept is the one with a price and a result-announcement date.
+
+## What I learned
+
+> Fix with a general rule, not a list; and run the fixing job automatically.
+
+- Do not compare only by “contains”. Different writings do not contain each other.
+
+- Do not compare to the millisecond. Compare by date and sale type.
+
+- A “one-off repair” is not enough for what is born daily. Run it automatically, regularly.
+
+- A synonym table recurs with new stores. Use a general rule for same-sounding writings.
+
+- Merge only notes. Never erase a branch name.
+
+  This is the English version of the original Japanese article (https://koshinstudio.com/notes/store-name-variants/).
+
+  More in English
+
+- All English pages (https://koshinstudio.com/en/)
+
+- Toreca Dash (https://koshinstudio.com/en/works/torecadash/)
+
+
+---
+
+URL: https://koshinstudio.com/en/notes/one-page-many-cases/
+
+# “One page = one case” was false: articles of a shop taking 6 products on one form were hidden just for sharing a link
+
+  日本語版 (https://koshinstudio.com/notes/one-page-many-cases/)
+
+  Development log of the Toreca Dash app / August 2026
+
+  My app Toreca Dash twice received the report “several products are accepted, yet there is only one article”. I thought I fixed it the first time, but the second report came.
+
+  This article records the real cause, and a story from the same period: a field I created that the app never read.
+
+  Written from my work log of 25 August 2026.
+
+## The real cause: duplicates decided by link alone
+
+  After the first report I had fixed it as far as “they are treated as duplicates because the link is the same”. But existing articles stayed hidden, so I got the same complaint again.
+
+  The culprit was runHideDuplicateLinkArticles, a job that judges duplicates by link alone.
+
+  The real data: one mail-order shop takes lotteries for 6 products on a single Google Form. All 6 articles have the same URL. The job hid 5 of them as “duplicates”, so users saw only one product.
+
+  The fix: change the grouping unit from link to link + product. The same link with a different product is a different case. For articles whose product is unknown, there is nothing to tell them apart, so they are treated as duplicates by link alone as before.
+
+  “One page = one case” does not hold for card lotteries. Stores that accept several products on one form or one announcement page are common.
+
+  I restored the articles that had been hidden as link-only duplicates, only those whose product or title differs from a displayed article with the same link (7 articles): 5 from the mail-order shop (all 6 products now show), 1 from a large game store and 1 from another chain.
+
+## The server created “entry tiers”, and the app never read them
+
+  Since 23 August the server had been reading entry conditions with an AI and extracting entry tiers (entryTiers): “Players Club: identity-verified tier versus unverified tier”, “Group A and Group B”, “Bic Camera Suica card members only”. They were in the real data.
+
+  But the iOS app never read this field. I was paying for the AI and users could not see it. I added the field to the app and show it in the detail screen as “Entry tiers”.
+
+  You can find such server/app mismatches mechanically: extract the fields the app reads from the source (grep) and compare them with Firestore’s real data.
+
+## Announcement text had got into the product list
+
+  Event notices such as “ONE PIECE Card Game corner [advance entry / lottery] Monday 31 August, JUMP SHOP Tokyo Station” had been registered as products.
+
+  A list of phrases cannot keep up, so I rejected them with a general rule: a concrete date. A trading-card product name does not contain a calendar date like “31 August”. “Vol.3”, “Set 2” and “2025 issue 19” are not dates and are unaffected. I tested 10 patterns with 0 mismatches and deleted the 6 existing ones.
+
+## What I learned
+
+> Doubt the premise. Check that what you built is used.
+
+- Do not assume “one page = one case”. Stores accepting several products on one form are common.
+
+- After fixing, look at existing articles. Fixing the entrance does not bring hidden articles back.
+
+- Cross-check the fields the server makes and the app reads. You can pay the cost and users still see nothing.
+
+- A general rule beats a list of phrases. “A concrete date means it is not a product name.”
+
+  This is the English version of the original Japanese article (https://koshinstudio.com/notes/one-page-many-cases/).
+
+  More in English
+
+- All English pages (https://koshinstudio.com/en/)
+
+- Toreca Dash (https://koshinstudio.com/en/works/torecadash/)
+
+
+---
+
+URL: https://koshinstudio.com/en/notes/transliteration-gate/
+
+# English and katakana names share no characters: a fingerprint gate rejected 42 correct matches
+
+  日本語版 (https://koshinstudio.com/notes/transliteration-gate/)
+
+  Development log of the Toreca Dash app / August 2026
+
+  My app Toreca Dash fetches each product’s market price from a site with real trading records and shows it next to the official price. But the health check said:
+
+  Market-price link rate dropped: 177 / 449 (39%)
+  I could have written it off as “new sets are not on that site yet”. But when I searched that site, the products were there. This is the real reason and the fix.
+
+  Written from my work log of 24 August 2026.
+
+## The products were on the market-price site
+
+  Mine     Expansion Pack "30th CELEBRATION"
+Market   Pokémon Card Game MEGA Expansion Pack "30th Anniversary Celebration" Box (exists)
+
+Mine     QUARTER CENTURY TRINITY BOX
+Market   Yu-Gi-Oh! OCG Duel Monsters Quarter Century Trinity Box (in katakana; exists)
+
+Mine     Start Deck Blue Kuzan [ST-33]
+Market   One Piece Card Game Start Deck "Blue Kuzan" (exists)
+
+## The cause: a fingerprint check that structurally cannot match
+
+  This match re-checks the AI’s chosen candidate in code too, with whether the products’ proper-name tokens really overlap (a fingerprint check, productNamesShareFingerprint). I had added it on 8 August as a defence against the data corruption of merging unrelated products, and it is itself correct.
+
+  But for this market-price match alone, the comparison structurally cannot succeed. My product names are the maker’s official English names, and the market site’s are often in katakana, so no character is shared.
+
+  In the real log (26 hours), 42 candidates were rejected as “fingerprint mismatch”. Looking inside, most were correct matches.
+
+    Mine | Market site
+
+      PHOTON HYPERNOVA | Photon Hypernova Box (katakana)
+
+      CHAOS IMPACT | Chaos Impact Box (katakana)
+
+      ROMANCE DAWN [OP-01] | Booster Pack Romance Dawn Box (katakana)
+
+      RAGE OF THE ABYSS | Rage of the Abyss Box (katakana)
+
+      Expansion Pack “30th CELEBRATION” | Expansion Pack “30th Anniversary Celebration” Box
+
+  And one of those 42 was the very product from report [111] “the market price is too cheap, suspicious” (30th CELEBRATION). I had earlier fixed “lottery prices mixed into the market price”, but a deeper cause remained: it had never been linked to the real market price at all.
+
+## The fix: do not weaken the fingerprint; add a second, narrow judgement for this match only
+
+  Loosening the fingerprint check would loosen its other uses too (registering aliases, merging duplicates) and the original corruption would return. I never weaken it.
+
+  Instead, only for candidates the market match rejected on fingerprint, I added a second judgement on one point: “is this the English and katakana forms of the same proper name?” (snkrdunkNamesAreTransliterationMatch).
+
+- Candidates with conflicting product codes are rejected without asking the AI. (OP-01 vs OP-17, however similar they sound.)
+
+- The AI answers only “do they correspond in sound?”, and if unsure, always false. A language difference such as “English version” counts as a different product.
+
+- Everything passed is logged (“confirmed as an English/katakana spelling variant”) so it can be checked later on real data.
+
+## Check on real data: dry run first
+
+  A “not found” verdict has a 7-day cooldown. Only for the 148 products with displayed articles, I lifted the wait and had them judged again. It is a bulk rewrite, so I checked the count with a dry run before running it.
+
+## What I learned
+
+> A correct gate can structurally reject correct matches. Do not weaken the gate; add a narrow second judgement.
+
+- Do not write it off as “can’t be helped”; actually look. The products were there.
+
+- Count a gate’s rejections and read them. Most of 42 were correct matches.
+
+- Do not weaken the gate. Its other defences would fall too.
+
+- Add a narrow second judgement. Reject code conflicts without the AI; allow the AI to say false when unsure.
+
+- Log what passes. You can verify it later on real data.
+
+  This is the English version of the original Japanese article (https://koshinstudio.com/notes/transliteration-gate/).
+
+  More in English
+
+- All English pages (https://koshinstudio.com/en/)
+
+- Toreca Dash (https://koshinstudio.com/en/works/torecadash/)
+
+
+---
+
 URL: https://koshinstudio.com/en/notes/geocode-shizuoka/
 
 # Looking up an ambiguous store name returns Shizuoka, the middle of Japan: I judged by Google’s own answer, not a list of chains
@@ -14838,6 +15081,12 @@ URL: https://koshinstudio.com/en/
 - If you throw failure away, the screen lies: a calendar that said “registered” with none added, a frozen OCR, a notification without a store name (https://koshinstudio.com/en/notes/swallowed-failure/)
 
 - Candidates were found, yet reading the answer failed every time: a URL cut at 200 tokens, and a search that returned 400 on hyphens (https://koshinstudio.com/en/notes/truncated-answer/)
+
+- “One page = one case” was false: articles of a shop taking 6 products on one form were hidden just for sharing a link (https://koshinstudio.com/en/notes/one-page-many-cases/)
+
+- “ヤマダ電機” versus “ヤマダデンキ”: spelling variants and duplicates had three overlapping causes (https://koshinstudio.com/en/notes/store-name-variants/)
+
+- English and katakana names share no characters: a fingerprint gate rejected 42 correct matches (https://koshinstudio.com/en/notes/transliteration-gate/)
 
 ## Languages
 

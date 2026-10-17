@@ -46,8 +46,7 @@
   <h1>あいまいな店名で地図を引くと、日本の真ん中の静岡が返る：チェーン名を並べず、Google 自身の答えで判定した</h1>  <div class="rule"></div>
 <!--lang-->
   <p class="note"><a href="/en/notes/geocode-shizuoka/" hreflang="en" lang="en">English version</a></p>
-<!--/lang-->
-  <p class="lead">トレカダッシュ 開発の記録 ／ 2026年8月</p>
+<!--/lang-->  <p class="lead">トレカダッシュ 開発の記録 ／ 2026年8月</p>
 
   <p>iOS アプリ「<a href="/works/torecadash/">トレカダッシュ</a>」には、店の位置を地図に出して、近い順に並べる機能があります。「位置情報が、静岡になる」という報告が来ました。店の位置は、店の名前を Google の地図の検索（Places API）に渡して、座標を取っています。</p>
   <p>原因は、<strong>あいまいな店名で問い合わせると、Google が、日本全体の真ん中（静岡と愛知）を返す</strong>ことでした。この記事は、その実測と、「チェーン名を並べない」直し方の記録です。</p>

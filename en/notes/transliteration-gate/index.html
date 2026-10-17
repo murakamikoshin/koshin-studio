@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>English and katakana names share no characters: a fingerprint gate rejected 42 correct matches — Koshin Studio</title>
+<meta name="description" content="The market-price link rate fell to 39%. The products existed on the market site, but my English names and its katakana names share no characters, so 42 matches were rejected in 26 hours. I kept the gate and added a narrow second judgement for this match only.">
+<meta property="og:title" content="English and katakana names share no characters: a fingerprint gate rejected 42 correct matches">
+<meta property="og:description" content="The market-price link rate fell to 39%. The products existed on the market site, but my English names and its katakana names share no characters, so 42 matches were rejected in 26 hours. I kept the gate and added a narrow second judgement for this match only.">
+<meta property="og:type" content="article">
+<meta name="theme-color" content="#fbfaf7">
+<link rel="icon" href="/favicon.ico?v=1697d589" sizes="48x48">
+<link rel="icon" href="/favicon.svg?v=b9d7922f" type="image/svg+xml" sizes="any">
+<link rel="icon" href="/assets/icon/icon-192.png?v=e2566235" type="image/png" sizes="192x192">
+<link rel="apple-touch-icon" href="/assets/icon/icon-180.png?v=84e7f0e6">
+<link rel="manifest" href="/site.webmanifest">
+<script>document.documentElement.className+=" js"</script>
+<link rel="stylesheet" href="/style.css?v=dd51310c">
+<meta name="google-adsense-account" content="ca-pub-3863314847163872">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3863314847163872" crossorigin="anonymous"></script>
+<link rel="canonical" href="https://koshinstudio.com/en/notes/transliteration-gate/">
+<meta property="og:url" content="https://koshinstudio.com/en/notes/transliteration-gate/">
+<meta property="og:site_name" content="Koshin Studio">
+<meta property="og:locale" content="en_US">
+<link rel="alternate" hreflang="ja" href="https://koshinstudio.com/notes/transliteration-gate/">
+<link rel="alternate" hreflang="en" href="https://koshinstudio.com/en/notes/transliteration-gate/">
+<link rel="alternate" hreflang="x-default" href="https://koshinstudio.com/en/notes/transliteration-gate/">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="alternate" type="application/rss+xml" title="Koshin Studio — Notes" href="https://koshinstudio.com/feed.xml">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BlogPosting","headline":"English and katakana names share no characters: a fingerprint gate rejected 42 correct matches","url":"https://koshinstudio.com/en/notes/transliteration-gate/","description":"The market-price link rate fell to 39%. The products existed on the market site, but my English names and its katakana names share no characters, so 42 matches were rejected in 26 hours. I kept the gate and added a narrow second judgement for this match only.","datePublished":"2026-10-17","dateModified":"2026-10-17","inLanguage":"en","image":"https://koshinstudio.com/assets/og/og_en_notes_transliteration-gate.jpg","author":{"@id":"https://koshinstudio.com#studio"},"publisher":{"@id":"https://koshinstudio.com#studio"},"mainEntityOfPage":"https://koshinstudio.com/en/notes/transliteration-gate/"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Koshin Studio","item":"https://koshinstudio.com/en/"},{"@type":"ListItem","position":2,"name":"English and katakana names share no characters: a fingerprint gate rejected 42 correct matches","item":"https://koshinstudio.com/en/notes/transliteration-gate/"}]}]}</script>
+<meta property="og:image" content="https://koshinstudio.com/assets/og/og_en_notes_transliteration-gate.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
+</head>
+<body class="article">
+<canvas id="motes"></canvas>
+
+<header class="site"><div class="wrap">
+  <a class="logo" href="/"><img class="logo-mark" src="/favicon.svg?v=b9d7922f" alt="" width="28" height="28">Koshin Studio</a>
+  <nav><a href="/works/">Works</a><a href="/notes/">Notes</a><a href="/picks/">Picks</a><a href="/calc/">Tools</a><a href="/about/">About</a></nav>
+</div></header>
+
+<main><div class="wrap">
+  <nav class="crumbs" aria-label="You are here"><a href="/en/">Koshin Studio</a><i aria-hidden="true">›</i><span aria-current="page">Transliteration gate</span></nav>
+  <h1>English and katakana names share no characters: a fingerprint gate rejected 42 correct matches</h1>  <div class="rule"></div>
+<!--lang-->
+  <p class="note"><a href="/notes/transliteration-gate/" hreflang="ja" lang="ja">日本語版</a></p>
+<!--/lang-->  <p class="lead">Development log of the Toreca Dash app / August 2026</p>
+
+  <p>My app Toreca Dash fetches each product’s <strong>market price</strong> from a site with real trading records and shows it next to the official price. But the health check said:</p>
+  <pre><code>Market-price link rate dropped: 177 / 449 (39%)</code></pre>
+  <p>I could have written it off as “new sets are not on that site yet”. But when I searched that site, <strong>the products were there</strong>. This is the real reason and the fix.</p>
+  <p class="note">Written from my work log of 24 August 2026.</p>  <h2 class="rv" id="s1">The products were on the market-price site</h2>
+  <pre><code>Mine     Expansion Pack "30th CELEBRATION"
+Market   Pokémon Card Game MEGA Expansion Pack "30th Anniversary Celebration" Box (exists)
+
+Mine     QUARTER CENTURY TRINITY BOX
+Market   Yu-Gi-Oh! OCG Duel Monsters Quarter Century Trinity Box (in katakana; exists)
+
+Mine     Start Deck Blue Kuzan [ST-33]
+Market   One Piece Card Game Start Deck "Blue Kuzan" (exists)</code></pre>
+
+  <h2 class="rv" id="s2">The cause: a fingerprint check that structurally cannot match</h2>
+  <p>This match re-checks the AI’s chosen candidate in code too, with <strong>whether the products’ proper-name tokens really overlap</strong> (a fingerprint check, <code>productNamesShareFingerprint</code>). I had added it on 8 August as a defence against the data corruption of merging unrelated products, and <strong>it is itself correct</strong>.</p>
+  <p>But for this market-price match alone, the comparison structurally cannot succeed. My product names are the maker’s official <strong>English</strong> names, and the market site’s are often in <strong>katakana</strong>, so <strong>no character is shared</strong>.</p>
+  <p>In the real log (26 hours), <strong>42</strong> candidates were rejected as “fingerprint mismatch”. Looking inside, <strong>most were correct matches</strong>.</p>
+  <div class="scroll rv"><table>
+    <thead><tr><th>Mine</th><th>Market site</th></tr></thead>
+    <tbody>
+      <tr><td>PHOTON HYPERNOVA</td><td>Photon Hypernova Box (katakana)</td></tr>
+      <tr><td>CHAOS IMPACT</td><td>Chaos Impact Box (katakana)</td></tr>
+      <tr><td>ROMANCE DAWN [OP-01]</td><td>Booster Pack Romance Dawn Box (katakana)</td></tr>
+      <tr><td>RAGE OF THE ABYSS</td><td>Rage of the Abyss Box (katakana)</td></tr>
+      <tr><td>Expansion Pack “30th CELEBRATION”</td><td>Expansion Pack “30th Anniversary Celebration” Box</td></tr>
+    </tbody>
+  </table></div>
+  <p>And one of those 42 was the very product from report [111] “the market price is too cheap, suspicious” (30th CELEBRATION). I had earlier fixed “lottery prices mixed into the market price”, but a deeper cause remained: <strong>it had never been linked to the real market price at all</strong>.</p>
+
+  <h2 class="rv" id="s3">The fix: do not weaken the fingerprint; add a second, narrow judgement for this match only</h2>
+  <p>Loosening the fingerprint check would loosen its other uses too (registering aliases, merging duplicates) and the original corruption would return. <strong>I never weaken it.</strong></p>
+  <p>Instead, only for candidates the market match rejected on fingerprint, I added <strong>a second judgement on one point</strong>: “is this the English and katakana forms of the same proper name?” (<code>snkrdunkNamesAreTransliterationMatch</code>).</p>
+  <ul>
+    <li><strong>Candidates with conflicting product codes are rejected without asking the AI.</strong> (OP-01 vs OP-17, however similar they sound.)</li>
+    <li>The AI answers only “do they correspond in sound?”, and if unsure, always false. A language difference such as “English version” counts as a different product.</li>
+    <li>Everything passed is logged (“confirmed as an English/katakana spelling variant”) so it can be checked later on real data.</li>
+  </ul>
+
+  <h2 class="rv" id="s4">Check on real data: dry run first</h2>
+  <p>A “not found” verdict has a 7-day cooldown. Only for the 148 products with displayed articles, I lifted the wait and had them judged again. It is a bulk rewrite, so I <strong>checked the count with a dry run before running it</strong>.</p>
+
+  <h2 class="rv" id="s5">What I learned</h2>
+  <blockquote>A correct gate can structurally reject correct matches. Do not weaken the gate; add a narrow second judgement.</blockquote>
+  <ul>
+    <li><strong>Do not write it off as “can’t be helped”; actually look.</strong> The products were there.</li>
+    <li><strong>Count a gate’s rejections and read them.</strong> Most of 42 were correct matches.</li>
+    <li><strong>Do not weaken the gate.</strong> Its other defences would fall too.</li>
+    <li><strong>Add a narrow second judgement.</strong> Reject code conflicts without the AI; allow the AI to say false when unsure.</li>
+    <li><strong>Log what passes.</strong> You can verify it later on real data.</li>
+  </ul>
+
+  <p class="note">This is the English version of <a href="/notes/transliteration-gate/" hreflang="ja" lang="ja">the original Japanese article</a>.</p>
+
+  <div class="rule" style="margin:40px 0 22px"></div>
+  <p class="eyebrow">More in English</p>
+  <ul class="plain">
+    <li><a href="/en/">All English pages</a></li>
+    <li><a href="/en/works/torecadash/">Toreca Dash</a></li>
+  </ul>
+</div>
+</main>
+
+<footer class="site"><div class="wrap"></div></footer>
+<script src="/motion.js?v=1e7447ec" defer></script>
+</body>
+</html>

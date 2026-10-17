@@ -43,10 +43,10 @@
   <url><loc>https://koshinstudio.com/en/notes/gemini-meter/</loc><lastmod>2026-10-17</lastmod><priority>0.5</priority></url>
   <url><loc>https://koshinstudio.com/en/notes/gemini-migration/</loc><lastmod>2026-10-17</lastmod><priority>0.5</priority></url>
   <url><loc>https://koshinstudio.com/en/notes/genre-from-catalog/</loc><lastmod>2026-10-17</lastmod><priority>0.5</priority></url>
-  <url><loc>https://koshinstudio.com/en/notes/geocode-shizuoka/</loc><priority>0.5</priority></url>
+  <url><loc>https://koshinstudio.com/en/notes/geocode-shizuoka/</loc><lastmod>2026-10-17</lastmod><priority>0.5</priority></url>
   <url><loc>https://koshinstudio.com/en/notes/hosting-compare/</loc><lastmod>2026-10-17</lastmod><priority>0.5</priority></url>
   <url><loc>https://koshinstudio.com/en/notes/hot-lane/</loc><lastmod>2026-10-17</lastmod><priority>0.5</priority></url>
-  <url><loc>https://koshinstudio.com/en/notes/icloud-overwrite/</loc><priority>0.5</priority></url>
+  <url><loc>https://koshinstudio.com/en/notes/icloud-overwrite/</loc><lastmod>2026-10-17</lastmod><priority>0.5</priority></url>
   <url><loc>https://koshinstudio.com/en/notes/interval-vs-delivery/</loc><lastmod>2026-10-17</lastmod><priority>0.5</priority></url>
   <url><loc>https://koshinstudio.com/en/notes/ios-sdk-compare/</loc><lastmod>2026-10-17</lastmod><priority>0.5</priority></url>
   <url><loc>https://koshinstudio.com/en/notes/itms-91064/</loc><lastmod>2026-10-17</lastmod><priority>0.5</priority></url>
@@ -56,6 +56,7 @@
   <url><loc>https://koshinstudio.com/en/notes/negaeri-balance/</loc><lastmod>2026-10-17</lastmod><priority>0.5</priority></url>
   <url><loc>https://koshinstudio.com/en/notes/negaeri-online/</loc><lastmod>2026-10-17</lastmod><priority>0.5</priority></url>
   <url><loc>https://koshinstudio.com/en/notes/notify-gate/</loc><lastmod>2026-10-17</lastmod><priority>0.5</priority></url>
+  <url><loc>https://koshinstudio.com/en/notes/one-page-many-cases/</loc><priority>0.5</priority></url>
   <url><loc>https://koshinstudio.com/en/notes/qiita-post-interval/</loc><lastmod>2026-10-17</lastmod><priority>0.5</priority></url>
   <url><loc>https://koshinstudio.com/en/notes/ranking-free-tier/</loc><lastmod>2026-10-17</lastmod><priority>0.5</priority></url>
   <url><loc>https://koshinstudio.com/en/notes/rerun-on-deploy/</loc><lastmod>2026-10-17</lastmod><priority>0.5</priority></url>
@@ -69,8 +70,9 @@
   <url><loc>https://koshinstudio.com/en/notes/silent-discard/</loc><lastmod>2026-10-17</lastmod><priority>0.5</priority></url>
   <url><loc>https://koshinstudio.com/en/notes/split-mixups/</loc><lastmod>2026-10-17</lastmod><priority>0.5</priority></url>
   <url><loc>https://koshinstudio.com/en/notes/stopwatch-rank/</loc><lastmod>2026-10-17</lastmod><priority>0.5</priority></url>
+  <url><loc>https://koshinstudio.com/en/notes/store-name-variants/</loc><priority>0.5</priority></url>
   <url><loc>https://koshinstudio.com/en/notes/sushi-measure/</loc><lastmod>2026-10-17</lastmod><priority>0.5</priority></url>
-  <url><loc>https://koshinstudio.com/en/notes/swallowed-failure/</loc><priority>0.5</priority></url>
+  <url><loc>https://koshinstudio.com/en/notes/swallowed-failure/</loc><lastmod>2026-10-17</lastmod><priority>0.5</priority></url>
   <url><loc>https://koshinstudio.com/en/notes/tco-relay/</loc><lastmod>2026-10-17</lastmod><priority>0.5</priority></url>
   <url><loc>https://koshinstudio.com/en/notes/test-ads/</loc><lastmod>2026-10-17</lastmod><priority>0.5</priority></url>
   <url><loc>https://koshinstudio.com/en/notes/timeout-third-fix/</loc><lastmod>2026-10-17</lastmod><priority>0.5</priority></url>
@@ -79,7 +81,8 @@
   <url><loc>https://koshinstudio.com/en/notes/torecadash-ci/</loc><lastmod>2026-10-17</lastmod><priority>0.5</priority></url>
   <url><loc>https://koshinstudio.com/en/notes/torecadash-review/</loc><lastmod>2026-10-17</lastmod><priority>0.5</priority></url>
   <url><loc>https://koshinstudio.com/en/notes/torecadash-watchdog/</loc><lastmod>2026-10-17</lastmod><priority>0.5</priority></url>
-  <url><loc>https://koshinstudio.com/en/notes/truncated-answer/</loc><priority>0.5</priority></url>
+  <url><loc>https://koshinstudio.com/en/notes/transliteration-gate/</loc><priority>0.5</priority></url>
+  <url><loc>https://koshinstudio.com/en/notes/truncated-answer/</loc><lastmod>2026-10-17</lastmod><priority>0.5</priority></url>
   <url><loc>https://koshinstudio.com/en/notes/typo-catalog/</loc><lastmod>2026-10-17</lastmod><priority>0.5</priority></url>
   <url><loc>https://koshinstudio.com/en/notes/u2028/</loc><lastmod>2026-10-17</lastmod><priority>0.5</priority></url>
   <url><loc>https://koshinstudio.com/en/notes/vps-migration/</loc><lastmod>2026-10-17</lastmod><priority>0.5</priority></url>

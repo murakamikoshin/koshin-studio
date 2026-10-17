@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>“ヤマダ電機” versus “ヤマダデンキ”: spelling variants and duplicates had three overlapping causes — Koshin Studio</title>
+<meta name="description" content="Store names compared only by “contains”, deadlines differing by 59 seconds, and a manual-only dedupe job. I used a general comparison key instead of a synonym table, ran it hourly, and found two dangers in testing.">
+<meta property="og:title" content="“ヤマダ電機” versus “ヤマダデンキ”: spelling variants and duplicates had three overlapping causes">
+<meta property="og:description" content="Store names compared only by “contains”, deadlines differing by 59 seconds, and a manual-only dedupe job. I used a general comparison key instead of a synonym table, ran it hourly, and found two dangers in testing.">
+<meta property="og:type" content="article">
+<meta name="theme-color" content="#fbfaf7">
+<link rel="icon" href="/favicon.ico?v=1697d589" sizes="48x48">
+<link rel="icon" href="/favicon.svg?v=b9d7922f" type="image/svg+xml" sizes="any">
+<link rel="icon" href="/assets/icon/icon-192.png?v=e2566235" type="image/png" sizes="192x192">
+<link rel="apple-touch-icon" href="/assets/icon/icon-180.png?v=84e7f0e6">
+<link rel="manifest" href="/site.webmanifest">
+<script>document.documentElement.className+=" js"</script>
+<link rel="stylesheet" href="/style.css?v=dd51310c">
+<meta name="google-adsense-account" content="ca-pub-3863314847163872">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3863314847163872" crossorigin="anonymous"></script>
+<link rel="canonical" href="https://koshinstudio.com/en/notes/store-name-variants/">
+<meta property="og:url" content="https://koshinstudio.com/en/notes/store-name-variants/">
+<meta property="og:site_name" content="Koshin Studio">
+<meta property="og:locale" content="en_US">
+<link rel="alternate" hreflang="ja" href="https://koshinstudio.com/notes/store-name-variants/">
+<link rel="alternate" hreflang="en" href="https://koshinstudio.com/en/notes/store-name-variants/">
+<link rel="alternate" hreflang="x-default" href="https://koshinstudio.com/en/notes/store-name-variants/">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="alternate" type="application/rss+xml" title="Koshin Studio — Notes" href="https://koshinstudio.com/feed.xml">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BlogPosting","headline":"“ヤマダ電機” versus “ヤマダデンキ”: spelling variants and duplicates had three overlapping causes","url":"https://koshinstudio.com/en/notes/store-name-variants/","description":"Store names compared only by “contains”, deadlines differing by 59 seconds, and a manual-only dedupe job. I used a general comparison key instead of a synonym table, ran it hourly, and found two dangers in testing.","datePublished":"2026-10-17","dateModified":"2026-10-17","inLanguage":"en","image":"https://koshinstudio.com/assets/og/og_en_notes_store-name-variants.jpg","author":{"@id":"https://koshinstudio.com#studio"},"publisher":{"@id":"https://koshinstudio.com#studio"},"mainEntityOfPage":"https://koshinstudio.com/en/notes/store-name-variants/"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Koshin Studio","item":"https://koshinstudio.com/en/"},{"@type":"ListItem","position":2,"name":"“ヤマダ電機” versus “ヤマダデンキ”: spelling variants and duplicates had three overlapping causes","item":"https://koshinstudio.com/en/notes/store-name-variants/"}]}]}</script>
+<meta property="og:image" content="https://koshinstudio.com/assets/og/og_en_notes_store-name-variants.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
+</head>
+<body class="article">
+<canvas id="motes"></canvas>
+
+<header class="site"><div class="wrap">
+  <a class="logo" href="/"><img class="logo-mark" src="/favicon.svg?v=b9d7922f" alt="" width="28" height="28">Koshin Studio</a>
+  <nav><a href="/works/">Works</a><a href="/notes/">Notes</a><a href="/picks/">Picks</a><a href="/calc/">Tools</a><a href="/about/">About</a></nav>
+</div></header>
+
+<main><div class="wrap">
+  <nav class="crumbs" aria-label="You are here"><a href="/en/">Koshin Studio</a><i aria-hidden="true">›</i><span aria-current="page">Store name variants</span></nav>
+  <h1>“ヤマダ電機” versus “ヤマダデンキ”: spelling variants and duplicates had three overlapping causes</h1>  <div class="rule"></div>
+<!--lang-->
+  <p class="note"><a href="/notes/store-name-variants/" hreflang="ja" lang="ja">日本語版</a></p>
+<!--/lang-->  <p class="lead">Development log of the Toreca Dash app / August 2026</p>
+
+  <p>In my app Toreca Dash, the same store’s name was written differently, such as “ヤマダ電機” and “ヤマダデンキ” (both Yamada Denki). Two reports came: “spellings vary” and “articles are duplicated for the same reason”. The instruction was: “make sure it does not happen for other stores either, thoroughly”.</p>
+  <p>This article records that three causes overlapped, and the process of fixing with a general rule instead of a synonym table.</p>
+  <p class="note">Written from my work log of 25 August 2026.</p>  <h2 class="rv" id="s1">Three causes overlapped</h2>
+  <ol>
+    <li><strong>Store names were compared only by “contains”.</strong> The two Yamada spellings contain neither one another, so they were different stores.</li>
+    <li><strong>Deadlines were compared to the millisecond.</strong> The same “until 26 Aug” was 23:59:00 from the aggregator and 23:59:59 from X, a <strong>59-second difference</strong> that stopped them being seen as duplicates. Four real products were like this.</li>
+    <li><strong>The dedupe job was manual-only and had never run automatically.</strong> Even if I make it as a “one-off repair”, articles arrive daily, so duplicates are born daily.</li>
+  </ol>
+
+  <h2 class="rv" id="s2">The fix: no synonym table</h2>
+  <p>I made a comparison key (<code>storeNameComparisonKey</code>). It drops corporate forms, symbols, spaces and full/half-width, turns katakana into hiragana, and unifies “電機 / 電器 / でんき”.</p>
+  <p><strong>I do not make a table of store-name synonyms.</strong> It would recur whenever a new store appears. I made a general rule that unifies different writings that sound the same.</p>
+  <ul>
+    <li>Deadlines are compared <strong>as dates</strong> (Japan-time dates) and I require <strong>the same sale type</strong> instead. Even on the same day, first-come and lottery are different cases.</li>
+    <li>Articles that have no store name (<code>sellerName</code>) and only a store name in the category are included. Aggregator and official-site articles are mostly like that, and I had overlooked them wholesale.</li>
+    <li>When hiding as a duplicate, always set the hidden mark (<code>hiddenByDuplicate</code>).</li>
+    <li>I added <strong>an hourly scheduled run</strong>.</li>
+    <li>The spelling itself is also <strong>pulled to the majority of real data</strong>. I keep no list of correct spellings. On a tie, katakana wins, then string order, so the answer does not change at each run and cause a rewrite war.</li>
+  </ul>
+
+  <h2 class="rv" id="s3">Two dangers found in testing</h2>
+  <p>Both found by tests after the fix.</p>
+  <ul>
+    <li><strong>If you key only on the part before “＠”, a store whose name itself contains ＠ gets an extremely short key.</strong> “Card Shop ＠ Home. Kagoshima” would become a key like “card shop” and be equated with other stores. The comparison key does not cut at ＠. (Names with an advertising tail are caught by the contains test.)</li>
+    <li><strong>If “one is the beginning of the other means the same name”, branch names disappear.</strong> “Yellow Submarine” and “Yellow Submarine Akihabara” would merge and lose the branch. I treat them as the same only when the addition begins with a <strong>note</strong> marker such as “＠”, “【” or “（”.</li>
+  </ul>
+  <p>I checked 17 real patterns and found 0 mismatches.</p>
+
+  <h2 class="rv" id="s4">Result</h2>
+  <div class="scroll rv"><table>
+    <thead><tr><th></th><th>Before</th><th>After</th></tr></thead>
+    <tbody>
+      <tr><td>Store-name spelling variants</td><td>2</td><td><strong>0</strong></td></tr>
+      <tr><td>Duplicates with same product, deadline and store</td><td>7 groups</td><td><strong>0 groups</strong></td></tr>
+    </tbody>
+  </table></div>
+  <p>As a bonus, 23 store names with an advertising tail like “○○ ＠ staff wanted” were unified too. When there are duplicates, the one kept is the one with a price and a result-announcement date.</p>
+
+  <h2 class="rv" id="s5">What I learned</h2>
+  <blockquote>Fix with a general rule, not a list; and run the fixing job automatically.</blockquote>
+  <ul>
+    <li><strong>Do not compare only by “contains”.</strong> Different writings do not contain each other.</li>
+    <li><strong>Do not compare to the millisecond.</strong> Compare by date and sale type.</li>
+    <li><strong>A “one-off repair” is not enough for what is born daily.</strong> Run it automatically, regularly.</li>
+    <li><strong>A synonym table recurs with new stores.</strong> Use a general rule for same-sounding writings.</li>
+    <li><strong>Merge only notes.</strong> Never erase a branch name.</li>
+  </ul>
+
+  <p class="note">This is the English version of <a href="/notes/store-name-variants/" hreflang="ja" lang="ja">the original Japanese article</a>.</p>
+
+  <div class="rule" style="margin:40px 0 22px"></div>
+  <p class="eyebrow">More in English</p>
+  <ul class="plain">
+    <li><a href="/en/">All English pages</a></li>
+    <li><a href="/en/works/torecadash/">Toreca Dash</a></li>
+  </ul>
+</div>
+</main>
+
+<footer class="site"><div class="wrap"></div></footer>
+<script src="/motion.js?v=1e7447ec" defer></script>
+</body>
+</html>

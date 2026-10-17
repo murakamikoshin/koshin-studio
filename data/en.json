@@ -1,5 +1,26 @@
 [
   {
+    "ja": "/notes/store-name-variants/",
+    "en": "/en/notes/store-name-variants/",
+    "title": "“ヤマダ電機” versus “ヤマダデンキ”: spelling variants and duplicates had three overlapping causes",
+    "date": "2026-10-17",
+    "blurb": "Store names compared only by “contains”, deadlines differing by 59 seconds, and a manual-only dedupe job. I used a general comparison key instead of a synonym table, ran it hourly, and found two dangers in testing."
+  },
+  {
+    "ja": "/notes/one-page-many-cases/",
+    "en": "/en/notes/one-page-many-cases/",
+    "title": "“One page = one case” was false: articles of a shop taking 6 products on one form were hidden just for sharing a link",
+    "date": "2026-10-17",
+    "blurb": "A job that decided duplicates by link alone hid 5 of 6 articles of a shop taking 6 products on one Google Form. I changed it to link + product. I also found the server’s “entry tiers” were never read by the app."
+  },
+  {
+    "ja": "/notes/transliteration-gate/",
+    "en": "/en/notes/transliteration-gate/",
+    "title": "English and katakana names share no characters: a fingerprint gate rejected 42 correct matches",
+    "date": "2026-10-17",
+    "blurb": "The market-price link rate fell to 39%. The products existed on the market site, but my English names and its katakana names share no characters, so 42 matches were rejected in 26 hours. I kept the gate and added a narrow second judgement for this match only."
+  },
+  {
     "ja": "/notes/geocode-shizuoka/",
     "en": "/en/notes/geocode-shizuoka/",
     "title": "Looking up an ambiguous store name returns Shizuoka, the middle of Japan: I judged by Google’s own answer, not a list of chains",
