@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>A “1-minute” monitor checked each item once per 10 minutes: before speeding up, count the revisit interval and what was delivered — Koshin Studio</title>
+<meta name="description" content="A first-come monitor watched 63 items but checked 4–9 per run, so each item once per 10 minutes, and caught 3 sales in 7 days. Shortening other intervals slowed it further, and “not screened” meant 45% of first-come listings got no notification.">
+<meta property="og:title" content="A “1-minute” monitor checked each item once per 10 minutes: before speeding up, count the revisit interval and what was delivered">
+<meta property="og:description" content="A first-come monitor watched 63 items but checked 4–9 per run, so each item once per 10 minutes, and caught 3 sales in 7 days. Shortening other intervals slowed it further, and “not screened” meant 45% of first-come listings got no notification.">
+<meta property="og:type" content="article">
+<meta name="theme-color" content="#fbfaf7">
+<link rel="icon" href="/favicon.ico?v=1697d589" sizes="48x48">
+<link rel="icon" href="/favicon.svg?v=b9d7922f" type="image/svg+xml" sizes="any">
+<link rel="icon" href="/assets/icon/icon-192.png?v=e2566235" type="image/png" sizes="192x192">
+<link rel="apple-touch-icon" href="/assets/icon/icon-180.png?v=84e7f0e6">
+<link rel="manifest" href="/site.webmanifest">
+<script>document.documentElement.className+=" js"</script>
+<link rel="stylesheet" href="/style.css?v=dd51310c">
+<meta name="google-adsense-account" content="ca-pub-3863314847163872">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3863314847163872" crossorigin="anonymous"></script>
+<link rel="canonical" href="https://koshinstudio.com/en/notes/interval-vs-delivery/">
+<meta property="og:url" content="https://koshinstudio.com/en/notes/interval-vs-delivery/">
+<meta property="og:site_name" content="Koshin Studio">
+<meta property="og:locale" content="en_US">
+<link rel="alternate" hreflang="ja" href="https://koshinstudio.com/notes/interval-vs-delivery/">
+<link rel="alternate" hreflang="en" href="https://koshinstudio.com/en/notes/interval-vs-delivery/">
+<link rel="alternate" hreflang="x-default" href="https://koshinstudio.com/en/notes/interval-vs-delivery/">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="alternate" type="application/rss+xml" title="Koshin Studio — Notes" href="https://koshinstudio.com/feed.xml">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BlogPosting","headline":"A “1-minute” monitor checked each item once per 10 minutes: before speeding up, count the revisit interval and what was delivered","url":"https://koshinstudio.com/en/notes/interval-vs-delivery/","description":"A first-come monitor watched 63 items but checked 4–9 per run, so each item once per 10 minutes, and caught 3 sales in 7 days. Shortening other intervals slowed it further, and “not screened” meant 45% of first-come listings got no notification.","datePublished":"2026-10-17","dateModified":"2026-10-17","inLanguage":"en","image":"https://koshinstudio.com/assets/og/og_en_notes_interval-vs-delivery.jpg","author":{"@id":"https://koshinstudio.com#studio"},"publisher":{"@id":"https://koshinstudio.com#studio"},"mainEntityOfPage":"https://koshinstudio.com/en/notes/interval-vs-delivery/"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Koshin Studio","item":"https://koshinstudio.com/en/"},{"@type":"ListItem","position":2,"name":"A “1-minute” monitor checked each item once per 10 minutes: before speeding up, count the revisit interval and what was delivered","item":"https://koshinstudio.com/en/notes/interval-vs-delivery/"}]}]}</script>
+<meta property="og:image" content="https://koshinstudio.com/assets/og/og_en_notes_interval-vs-delivery.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
+</head>
+<body class="article">
+<canvas id="motes"></canvas>
+
+<header class="site"><div class="wrap">
+  <a class="logo" href="/"><img class="logo-mark" src="/favicon.svg?v=b9d7922f" alt="" width="28" height="28">Koshin Studio</a>
+  <nav><a href="/works/">Works</a><a href="/notes/">Notes</a><a href="/picks/">Picks</a><a href="/calc/">Tools</a><a href="/about/">About</a></nav>
+</div></header>
+
+<main><div class="wrap">
+  <nav class="crumbs" aria-label="You are here"><a href="/en/">Koshin Studio</a><i aria-hidden="true">›</i><span aria-current="page">1-minute monitor</span></nav>
+  <h1>A “1-minute” monitor checked each item once per 10 minutes: before speeding up, count the revisit interval and what was delivered</h1>  <div class="rule"></div>
+<!--lang-->
+  <p class="note"><a href="/notes/interval-vs-delivery/" hreflang="ja" lang="ja">日本語版</a></p>
+<!--/lang-->  <p class="lead">Development log of the Toreca Dash app / September 2026</p>
+
+  <p>For first-come sales (stock gone in minutes), speed is everything. So the first-come monitor in my app Toreca Dash was built to “run every minute”.</p>
+  <p>On 7 September 2026 I measured its real reaction speed. It was <strong>about 10× off from what I had designed</strong>. And when I sped things up, something else got slower.</p>
+  <p class="note">Numbers come from my measurement log of 7 September 2026.</p>  <h2 class="rv" id="s1">“Every minute” was once per 10 minutes per item</h2>
+  <div class="scroll rv"><table>
+    <thead><tr><th>What I measured</th><th>Value</th></tr></thead>
+    <tbody>
+      <tr><td>Job interval</td><td>about 61 seconds (as designed)</td></tr>
+      <tr><td>Items watched</td><td>63</td></tr>
+      <tr><td>Items checked per run</td><td>4 to 9 (48 of 53 runs hit the time budget)</td></tr>
+      <tr><td><strong>Revisit interval per item</strong></td><td><strong>about once per 10 minutes</strong></td></tr>
+      <tr><td>First-come sales caught in 7 days</td><td><strong>3</strong> (8,648 empty runs)</td></tr>
+    </tbody>
+  </table></div>
+  <p>“Runs every minute” feels fast. What users feel is <strong>how often each item is checked</strong>. If you can only check 4 to 9 of 63 per run, one pass takes about 10 minutes. The formula is <strong>items ÷ items per run × interval</strong>. I had never computed it, so “running but never winning” went on.</p>
+
+  <h2 class="rv" id="s2">Cause: equal sharing of a shared external API</h2>
+  <p>The Rakuten API I use to check stock allows <strong>one call per 1.5 seconds</strong>. Five jobs shared it equally, so the most urgent monitor got only <strong>13%</strong>.</p>
+  <p>The fix: while the urgent job runs, the batch jobs do not take slots. One trap:</p>
+  <ul>
+    <li>If the “yield” flag is raised and lowered around each call, <strong>it is taken back between calls</strong>. In one measurement, 13 of 20 runs were still stuck at “4 items”.</li>
+    <li>Holding the flag <strong>for the whole patrol</strong> gave 30 to 33 items per run.</li>
+    <li>Always put a wait limit on the yielding side, or it starves.</li>
+  </ul>
+
+  <h2 class="rv" id="s3">Speeding things up slowed down the one I cared about</h2>
+  <p>The same day I shortened the intervals of several jobs. When I set the Amazon check to 5 minutes, <strong>the Rakuten Books instant-sellout monitor got slower</strong>.</p>
+  <div class="scroll rv"><table>
+    <thead><tr><th></th><th>Before</th><th>After shortening</th><th>After reverting</th></tr></thead>
+    <tbody>
+      <tr><td>Rakuten Books monitor completion interval</td><td>60–80 s</td><td><strong>2 min 41 s / 3 min 52 s</strong></td><td>60–110 s</td></tr>
+      <tr><td>Skips of that monitor (per 10 min)</td><td>0</td><td><strong>6</strong></td><td>0</td></tr>
+      <tr><td>Jobs waiting in the queue</td><td>0</td><td><strong>17–29</strong></td><td>0</td></tr>
+    </tbody>
+  </table></div>
+  <p>The Amazon check takes 5 to 8 minutes per run, yet I set a 5-minute interval. When <strong>a run takes at least as long as its interval</strong>, the job occupies one of the concurrency slots (8) permanently, and other jobs wait. Reverting restored it.</p>
+
+  <h2 class="rv" id="s4">One more: “not screened” means “not notified”</h2>
+  <p>Before a first-come notification, listings are screened by price against the official price to catch resale. When units did not match, the screen returned <strong>“not screened”</strong>. A comment called it “safe, no guessing”.</p>
+  <p>But an unscreened listing gets a “price unverified” mark, and <strong>notifications stop</strong>. Counting 148 first-come listings over 7 days:</p>
+  <div class="scroll rv"><table>
+    <thead><tr><th>Result</th><th>Listings</th></tr></thead>
+    <tbody>
+      <tr><td>Notified</td><td>41</td></tr>
+      <tr><td>Skipped (official price unverified)</td><td><strong>25</strong></td></tr>
+    </tbody>
+  </table></div>
+  <p>Of 55 displayed, <strong>45% never got a notification</strong>. The article still shows in the feed, so audits do not see it and nobody complains. Making detection faster, from 10 minutes to 80 seconds, did not help while half of them silently fell out afterwards.</p>
+  <p>And “cannot compare” was an assumption. The catalogue price of 5,280 yen divided by 12 packs per box is 440 yen, a normal single-pack price. <strong>That amount was already the price of one box</strong>. I could have compared it directly.</p>
+
+  <h2 class="rv" id="s5">What I learned</h2>
+  <blockquote>The answer to “make it faster” is usually not “faster” but “find what is dropping out on the way”.</blockquote>
+  <ul>
+    <li><strong>Measure the revisit interval per item, not the job interval.</strong> items ÷ per run × interval.</li>
+    <li><strong>Count what arrived.</strong> Not articles created, but notifications delivered.</li>
+    <li><strong>Write down which way a gate falls when it cannot decide.</strong> If it falls to “users get nothing”, that is not the safe side.</li>
+    <li><strong>Faster can make something else slower.</strong> Concurrency slots are limited.</li>
+    <li><strong>Revisit what is marked “cannot compare”.</strong> Once units were aligned, it could be compared.</li>
+  </ul>
+
+  <p class="note">This is the English version of <a href="/notes/interval-vs-delivery/" hreflang="ja" lang="ja">the original Japanese article</a>.</p>
+
+  <div class="rule" style="margin:40px 0 22px"></div>
+  <p class="eyebrow">More in English</p>
+  <ul class="plain">
+    <li><a href="/en/">All English pages</a></li>
+    <li><a href="/en/works/torecadash/">Toreca Dash</a></li>
+  </ul>
+</div>
+</main>
+
+<footer class="site"><div class="wrap"></div></footer>
+<script src="/motion.js?v=1e7447ec" defer></script>
+</body>
+</html>

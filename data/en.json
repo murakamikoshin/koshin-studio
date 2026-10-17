@@ -1,5 +1,26 @@
 [
   {
+    "ja": "/notes/interval-vs-delivery/",
+    "en": "/en/notes/interval-vs-delivery/",
+    "title": "A “1-minute” monitor checked each item once per 10 minutes: before speeding up, count the revisit interval and what was delivered",
+    "date": "2026-10-17",
+    "blurb": "A first-come monitor watched 63 items but checked 4–9 per run, so each item once per 10 minutes, and caught 3 sales in 7 days. Shortening other intervals slowed it further, and “not screened” meant 45% of first-come listings got no notification."
+  },
+  {
+    "ja": "/notes/silent-discard/",
+    "en": "/en/notes/silent-discard/",
+    "title": "Four real lotteries silently thrown away: a regex, dates without a year, batched answers and null",
+    "date": "2026-10-17",
+    "blurb": "“x.com” matched “e-starbox.com” so application links were never used; a date with no year was read as 2020 so no Pokémon items were imported; batched answers got out of step; “cannot decide” was read as “none” and nearly hid 129 lotteries."
+  },
+  {
+    "ja": "/notes/tco-relay/",
+    "en": "/en/notes/tco-relay/",
+    "title": "“Checked” marks on articles that had never been read: the t.co relay page",
+    "date": "2026-10-17",
+    "blurb": "Opened with a browser User-Agent, t.co returned a relay page instead of redirecting. All 220 displayed articles were unread and 9 were closed forms. How I fixed it and how I removed the wrong “checked” marks."
+  },
+  {
     "ja": "/notes/gemini-meter/",
     "en": "/en/notes/gemini-meter/",
     "title": "Before cutting Gemini cost, I doubted the meter: price, breakdown and cache were all wrong, and the cache threshold changed when I re-measured",

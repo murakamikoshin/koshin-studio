@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>“Checked” marks on articles that had never been read: the t.co relay page — Koshin Studio</title>
+<meta name="description" content="Opened with a browser User-Agent, t.co returned a relay page instead of redirecting. All 220 displayed articles were unread and 9 were closed forms. How I fixed it and how I removed the wrong “checked” marks.">
+<meta property="og:title" content="“Checked” marks on articles that had never been read: the t.co relay page">
+<meta property="og:description" content="Opened with a browser User-Agent, t.co returned a relay page instead of redirecting. All 220 displayed articles were unread and 9 were closed forms. How I fixed it and how I removed the wrong “checked” marks.">
+<meta property="og:type" content="article">
+<meta name="theme-color" content="#fbfaf7">
+<link rel="icon" href="/favicon.ico?v=1697d589" sizes="48x48">
+<link rel="icon" href="/favicon.svg?v=b9d7922f" type="image/svg+xml" sizes="any">
+<link rel="icon" href="/assets/icon/icon-192.png?v=e2566235" type="image/png" sizes="192x192">
+<link rel="apple-touch-icon" href="/assets/icon/icon-180.png?v=84e7f0e6">
+<link rel="manifest" href="/site.webmanifest">
+<script>document.documentElement.className+=" js"</script>
+<link rel="stylesheet" href="/style.css?v=dd51310c">
+<meta name="google-adsense-account" content="ca-pub-3863314847163872">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3863314847163872" crossorigin="anonymous"></script>
+<link rel="canonical" href="https://koshinstudio.com/en/notes/tco-relay/">
+<meta property="og:url" content="https://koshinstudio.com/en/notes/tco-relay/">
+<meta property="og:site_name" content="Koshin Studio">
+<meta property="og:locale" content="en_US">
+<link rel="alternate" hreflang="ja" href="https://koshinstudio.com/notes/tco-relay/">
+<link rel="alternate" hreflang="en" href="https://koshinstudio.com/en/notes/tco-relay/">
+<link rel="alternate" hreflang="x-default" href="https://koshinstudio.com/en/notes/tco-relay/">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="alternate" type="application/rss+xml" title="Koshin Studio — Notes" href="https://koshinstudio.com/feed.xml">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BlogPosting","headline":"“Checked” marks on articles that had never been read: the t.co relay page","url":"https://koshinstudio.com/en/notes/tco-relay/","description":"Opened with a browser User-Agent, t.co returned a relay page instead of redirecting. All 220 displayed articles were unread and 9 were closed forms. How I fixed it and how I removed the wrong “checked” marks.","datePublished":"2026-10-17","dateModified":"2026-10-17","inLanguage":"en","image":"https://koshinstudio.com/assets/og/og_en_notes_tco-relay.jpg","author":{"@id":"https://koshinstudio.com#studio"},"publisher":{"@id":"https://koshinstudio.com#studio"},"mainEntityOfPage":"https://koshinstudio.com/en/notes/tco-relay/"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Koshin Studio","item":"https://koshinstudio.com/en/"},{"@type":"ListItem","position":2,"name":"“Checked” marks on articles that had never been read: the t.co relay page","item":"https://koshinstudio.com/en/notes/tco-relay/"}]}]}</script>
+<meta property="og:image" content="https://koshinstudio.com/assets/og/og_en_notes_tco-relay.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
+</head>
+<body class="article">
+<canvas id="motes"></canvas>
+
+<header class="site"><div class="wrap">
+  <a class="logo" href="/"><img class="logo-mark" src="/favicon.svg?v=b9d7922f" alt="" width="28" height="28">Koshin Studio</a>
+  <nav><a href="/works/">Works</a><a href="/notes/">Notes</a><a href="/picks/">Picks</a><a href="/calc/">Tools</a><a href="/about/">About</a></nav>
+</div></header>
+
+<main><div class="wrap">
+  <nav class="crumbs" aria-label="You are here"><a href="/en/">Koshin Studio</a><i aria-hidden="true">›</i><span aria-current="page">t.co relay page</span></nav>
+  <h1>“Checked” marks on articles that had never been read: the t.co relay page</h1>  <div class="rule"></div>
+<!--lang-->
+  <p class="note"><a href="/notes/tco-relay/" hreflang="ja" lang="ja">日本語版</a></p>
+<!--/lang-->  <p class="lead">Development log of the Toreca Dash app / October 2026</p>
+
+  <p>My iPhone app Toreca Dash collects trading-card lottery information from store posts on X (Twitter). Each post links to an application form. The app also opens that link to check <strong>the deadline and whether entries have already closed</strong>.</p>
+  <p>A report came in: “the deadline is wrong”. It turned out to be worse than a wrong deadline: <strong>the app had never read the linked page at all</strong>, and yet the article carried a “checked” mark.</p>
+  <p class="note">This is written from my work log of 16 October 2026 (the investigation and its numbers).</p>  <h2 class="rv" id="s1">The symptom: a closed form still shown as open</h2>
+  <p>The reported lottery was a game shop’s “30th CELEBRATION card set, 9 types” announcement on X. The Google Form it linked to said <strong>“Responses are no longer accepted”</strong>. In the app, the lottery was still shown, with an empty deadline.</p>
+  <p>The odd part: the article had a <strong>“checked whether it has closed” timestamp</strong>. It had been “checked” and nobody noticed it had closed, so the check was not looking at the page.</p>
+
+  <h2 class="rv" id="s2">The cause: t.co returns a different page if you pretend to be a browser</h2>
+  <p>Links in X posts go through the short URL <code>t.co</code>. Normally it redirects to the real page (HTTP 301).</p>
+  <p>But if you open it <strong>with a browser User-Agent</strong>, it does not redirect. It returns a <strong>roughly 500-byte page that redirects with JavaScript</strong>. Both of my reading functions opened t.co with a browser User-Agent and “follow redirects”. So:</p>
+  <ul>
+    <li>No redirect happened, so the final URL was still <code>t.co</code>.</li>
+    <li>The text I read was the <strong>relay page’s HTML</strong>, not the form.</li>
+    <li>I had <strong>never read the form at all</strong>.</li>
+  </ul>
+  <p>I had added the browser User-Agent on 6 August. This bug was a side effect of that change.</p>
+
+  <h2 class="rv" id="s3">How widespread was it?</h2>
+  <p>To check whether this was one case, I looked at every displayed X lottery or reservation article with a <code>t.co</code> link.</p>
+  <div class="scroll rv"><table>
+    <thead><tr><th>What I checked</th><th>Result</th></tr></thead>
+    <tbody>
+      <tr><td>Displayed articles with a <code>t.co</code> link</td><td>220</td></tr>
+      <tr><td>Of those, relay page returned</td><td><strong>220 (all)</strong></td></tr>
+      <tr><td>Of those, actually a closed form but still displayed</td><td><strong>9</strong></td></tr>
+    </tbody>
+  </table></div>
+  <p>The 9 were spread over several stores, so it was a systemic problem.</p>
+  <p>One more clue I could not ignore: a daily job that fixes empty deadlines had been reporting <strong>“126 targets, 0 updated” every day</strong>. Not “nothing to fix” but “could not read, so could not fix”.</p>
+
+  <h2 class="rv" id="s4">The fix</h2>
+  <p>I put the redirect lookup into one function, <code>fetchTcoTarget</code>:</p>
+  <ol>
+    <li>Open <code>t.co</code> <strong>without a User-Agent</strong>, and <strong>do not follow</strong> redirects (<code>redirect: "manual"</code>). Take only the first target.</li>
+    <li>If a target comes back, use it.</li>
+    <li>If a relay page comes back, read the <strong>meta refresh</strong> tag inside it to get the real target.</li>
+    <li>Then open that target <strong>with the browser User-Agent</strong>.</li>
+  </ol>
+  <p>Whether you send a User-Agent changes what comes back, so I split the uses: resolving a short URL uses none; reading the real page uses the browser one. I added a regression test.</p>
+
+  <h2 class="rv" id="s5">What to do with the wrong “checked” marks</h2>
+  <p>Fixing the code is not enough. <strong>The wrong marks stay on the articles.</strong> An article with the mark counts as “already checked” and is skipped.</p>
+  <p>I removed the mark from 195 articles (X lottery/reservation posts that link to a post and have a <code>t.co</code> link), then ran the closed-entry check and the deadline re-extraction by hand.</p>
+  <div class="scroll rv"><table>
+    <thead><tr><th>Job</th><th>Before</th><th>After</th></tr></thead>
+    <tbody>
+      <tr><td>Deadline re-extraction (targets / updated)</td><td>126 targets, <strong>0 updated</strong> (every day)</td><td>123 targets, <strong>14 updated</strong></td></tr>
+    </tbody>
+  </table></div>
+  <p>The same day I also changed the closed-entry check: articles with no deadline every 6 hours (with a deadline, every 24), 80 articles per run instead of 40, 7 minutes at most. Now that <code>t.co</code> can be read, a closed form should not stay up for a whole day.</p>
+
+  <h2 class="rv" id="s6">What I learned</h2>
+  <blockquote>Write “checked” only when you could actually read it.</blockquote>
+  <ul>
+    <li><strong>Write the mark only on success.</strong> If you mark an unreadable page as checked, it is never looked at again, even after the fix.</li>
+    <li><strong>After fetching an external page, check it is the page you meant.</strong> Is the final URL still the short URL? Is the text the right kind of page?</li>
+    <li><strong>“0 updated” every day can be a symptom.</strong> Tell “nothing to do” from “could not do”.</li>
+    <li><strong>When you change a network setting, review everything that uses it.</strong> A User-Agent added in August broke t.co reading two months later.</li>
+  </ul>
+
+  <p class="note">This is the English version of <a href="/notes/tco-relay/" hreflang="ja" lang="ja">the original Japanese article</a>.</p>
+
+  <div class="rule" style="margin:40px 0 22px"></div>
+  <p class="eyebrow">More in English</p>
+  <ul class="plain">
+    <li><a href="/en/">All English pages</a></li>
+    <li><a href="/en/works/torecadash/">Toreca Dash</a></li>
+  </ul>
+</div>
+</main>
+
+<footer class="site"><div class="wrap"></div></footer>
+<script src="/motion.js?v=1e7447ec" defer></script>
+</body>
+</html>

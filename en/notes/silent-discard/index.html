@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Four real lotteries silently thrown away: a regex, dates without a year, batched answers and null — Koshin Studio</title>
+<meta name="description" content="“x.com” matched “e-starbox.com” so application links were never used; a date with no year was read as 2020 so no Pokémon items were imported; batched answers got out of step; “cannot decide” was read as “none” and nearly hid 129 lotteries.">
+<meta property="og:title" content="Four real lotteries silently thrown away: a regex, dates without a year, batched answers and null">
+<meta property="og:description" content="“x.com” matched “e-starbox.com” so application links were never used; a date with no year was read as 2020 so no Pokémon items were imported; batched answers got out of step; “cannot decide” was read as “none” and nearly hid 129 lotteries.">
+<meta property="og:type" content="article">
+<meta name="theme-color" content="#fbfaf7">
+<link rel="icon" href="/favicon.ico?v=1697d589" sizes="48x48">
+<link rel="icon" href="/favicon.svg?v=b9d7922f" type="image/svg+xml" sizes="any">
+<link rel="icon" href="/assets/icon/icon-192.png?v=e2566235" type="image/png" sizes="192x192">
+<link rel="apple-touch-icon" href="/assets/icon/icon-180.png?v=84e7f0e6">
+<link rel="manifest" href="/site.webmanifest">
+<script>document.documentElement.className+=" js"</script>
+<link rel="stylesheet" href="/style.css?v=dd51310c">
+<meta name="google-adsense-account" content="ca-pub-3863314847163872">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3863314847163872" crossorigin="anonymous"></script>
+<link rel="canonical" href="https://koshinstudio.com/en/notes/silent-discard/">
+<meta property="og:url" content="https://koshinstudio.com/en/notes/silent-discard/">
+<meta property="og:site_name" content="Koshin Studio">
+<meta property="og:locale" content="en_US">
+<link rel="alternate" hreflang="ja" href="https://koshinstudio.com/notes/silent-discard/">
+<link rel="alternate" hreflang="en" href="https://koshinstudio.com/en/notes/silent-discard/">
+<link rel="alternate" hreflang="x-default" href="https://koshinstudio.com/en/notes/silent-discard/">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="alternate" type="application/rss+xml" title="Koshin Studio — Notes" href="https://koshinstudio.com/feed.xml">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BlogPosting","headline":"Four real lotteries silently thrown away: a regex, dates without a year, batched answers and null","url":"https://koshinstudio.com/en/notes/silent-discard/","description":"“x.com” matched “e-starbox.com” so application links were never used; a date with no year was read as 2020 so no Pokémon items were imported; batched answers got out of step; “cannot decide” was read as “none” and nearly hid 129 lotteries.","datePublished":"2026-10-17","dateModified":"2026-10-17","inLanguage":"en","image":"https://koshinstudio.com/assets/og/og_en_notes_silent-discard.jpg","author":{"@id":"https://koshinstudio.com#studio"},"publisher":{"@id":"https://koshinstudio.com#studio"},"mainEntityOfPage":"https://koshinstudio.com/en/notes/silent-discard/"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Koshin Studio","item":"https://koshinstudio.com/en/"},{"@type":"ListItem","position":2,"name":"Four real lotteries silently thrown away: a regex, dates without a year, batched answers and null","item":"https://koshinstudio.com/en/notes/silent-discard/"}]}]}</script>
+<meta property="og:image" content="https://koshinstudio.com/assets/og/og_en_notes_silent-discard.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
+</head>
+<body class="article">
+<canvas id="motes"></canvas>
+
+<header class="site"><div class="wrap">
+  <a class="logo" href="/"><img class="logo-mark" src="/favicon.svg?v=b9d7922f" alt="" width="28" height="28">Koshin Studio</a>
+  <nav><a href="/works/">Works</a><a href="/notes/">Notes</a><a href="/picks/">Picks</a><a href="/calc/">Tools</a><a href="/about/">About</a></nav>
+</div></header>
+
+<main><div class="wrap">
+  <nav class="crumbs" aria-label="You are here"><a href="/en/">Koshin Studio</a><i aria-hidden="true">›</i><span aria-current="page">Silent discards</span></nav>
+  <h1>Four real lotteries silently thrown away: a regex, dates without a year, batched answers and null</h1>  <div class="rule"></div>
+<!--lang-->
+  <p class="note"><a href="/notes/silent-discard/" hreflang="ja" lang="ja">日本語版</a></p>
+<!--/lang-->  <p class="lead">Development log of the Toreca Dash app / August–September 2026</p>
+
+  <p>My iPhone app Toreca Dash has many places that decide “this is out of scope” and <strong>throw an item away</strong>. Throwing away looks like the safe side: if it is wrong, only some junk is missing from the screen.</p>
+  <p>But mistakes of this kind <strong>give you no reason to notice them</strong>. A real lottery can be thrown away and nothing shows. This article describes four cases where I silently dropped, or nearly dropped, real lotteries.</p>
+  <p class="note">Numbers and dates come from my work logs between 28 August and 20 September 2026.</p>  <h2 class="rv" id="s1">1. “x.com” matched “e-starbox.com” (31 August)</h2>
+  <p>If a link is a social-media link it is not a store page, so I do not use it. I listed the sites to exclude and joined them into one regular expression.</p>
+  <pre><code>new RegExp(["x\\.com", "note\\.com", ...].join("|"))</code></pre>
+  <p>That also matches <strong>inside other host names</strong>. <code>x\.com</code> matches the end of <code>e-starbo<strong>x.com</strong></code>, and <code>note\.com</code> matches <code>mynote.com</code>.</p>
+  <p>The real damage was on the lottery service “Lottery Rotobox” (<code>shoplottery.e-starbox.com</code>). Its application links were judged “social media, not a store link” and <strong>never adopted once</strong>.</p>
+  <p>The fix: host-only entries match only right after <code>//</code> or a dot (<code>(?:^|//|\.)</code> in front). I tested 13 examples, <strong>both URLs that should pass and URLs that should be blocked</strong>. An exclusion list looks like the safe side, so nobody doubts it.</p>
+
+  <h2 class="rv" id="s2">2. A date with no year was read as six years ago (28 August)</h2>
+  <p>Store and aggregator posts write dates like “30 August (Sun)” <strong>without a year</strong>. I had an AI read the text to extract deadlines.</p>
+  <p>For one aggregator, Pokémon card items came back as <strong>30 August 2020</strong>, six years ago. A past deadline is rejected at the entrance gate, so <strong>all Pokémon card items from that source were never imported</strong>. One Piece and Dragon Ball happened to be read as 2026, which hid the problem.</p>
+  <p>The fix was to put <strong>today’s date</strong> in the prompt and “do not fill in a year before today”. Readable items went <strong>from 0 to 46</strong>. “A year consistent with the post date” is not enough, because when the post date is unknown the year is undetermined.</p>
+
+  <h2 class="rv" id="s3">3. The number of batched answers did not match (19 September)</h2>
+  <p>Sending one AI request per post costs one request each. So I batched several posts into one call to classify their sale type. I joined multi-line post bodies as “1. text”, “2. text”, separated by newlines.</p>
+  <p>The AI cannot tell a newline inside a post from the boundary between posts. On the day X monitoring resumed, <strong>the number of answers did not match 8 times</strong>. On a mismatch the code marked the whole group “out of scope”, so real lotteries in those groups were dropped together.</p>
+  <p>Worse, even when the count matched, <strong>some answers belonged to different posts</strong>. A Yu-Gi-Oh! lottery was thrown out as out of scope.</p>
+  <p>The fix: pass a <strong>JSON array</strong> (<code>[{no, text}]</code>) or headings that cannot appear in the text (“[Article N]”), make the reply include numbers, and on a mismatch <strong>ask one by one</strong> instead of falling back to “out of scope”.</p>
+
+  <h2 class="rv" id="s4">4. “Cannot decide” read as “none” (20 September)</h2>
+  <p>One function guesses the card genre from a post. When two or more genres appear, <strong>it returns <code>null</code> (“cannot decide”)</strong>.</p>
+  <p>Another job used it to detect “no card words (a toy-only announcement)” as <code>!fn(text)</code>. There, <strong><code>null</code> was read as “none”</strong>.</p>
+  <p>A roundup post that lists Pokémon, One Piece, Yu-Gi-Oh!, Dragon Ball and Gundam model kits has several genres, so it returns <code>null</code>. That was read as “zero card words”, and because “Gundam” was found, as <strong>a toy announcement</strong>.</p>
+  <p>Left alone, the daily bulk job at 05:15 would have hidden <strong>129 real, displayed lotteries</strong> (for 9 products such as 30th CELEBRATION). I stopped it because I ran a <strong>count-only dry run</strong> before the real run. The dry run said 129, and that is how I noticed.</p>
+  <p>The fix: to detect “none”, use the function that returns <strong>all</strong> matched genres and check that its length is 0.</p>
+
+  <h2 class="rv" id="s5">What I learned</h2>
+  <blockquote>Mistakes in what you throw away raise no complaints, so count them yourself.</blockquote>
+  <ul>
+    <li><strong>Exclusion lists are wrong too.</strong> The safer something looks, the less it is doubted.</li>
+    <li><strong>Test what should pass, too.</strong> Testing only what should be blocked can hide a block on what should pass (case 1 used 13 examples of both).</li>
+    <li><strong>Give the AI every premise.</strong> Today’s date, separators. If you do not, it silently uses another premise.</li>
+    <li><strong>Do not default to “out of scope” on a count mismatch.</strong> If the fallback is “discard”, real items vanish together.</li>
+    <li><strong>“None” and “cannot decide” are different answers.</strong> Do not blindly negate <code>null</code>.</li>
+    <li><strong>Count before a daily bulk job.</strong> The 129 was known in advance.</li>
+  </ul>
+
+  <p class="note">This is the English version of <a href="/notes/silent-discard/" hreflang="ja" lang="ja">the original Japanese article</a>.</p>
+
+  <div class="rule" style="margin:40px 0 22px"></div>
+  <p class="eyebrow">More in English</p>
+  <ul class="plain">
+    <li><a href="/en/">All English pages</a></li>
+    <li><a href="/en/works/torecadash/">Toreca Dash</a></li>
+  </ul>
+</div>
+</main>
+
+<footer class="site"><div class="wrap"></div></footer>
+<script src="/motion.js?v=1e7447ec" defer></script>
+</body>
+</html>

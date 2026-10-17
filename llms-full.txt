@@ -1154,6 +1154,8 @@ URL: https://koshinstudio.com/notes/interval-vs-delivery/
 
 # 「1 分おき」の監視は、1 件あたり 10 分に 1 回だった：速くする前に、見直しの間隔と、通知が届いた数を数えた
 
+  English version (https://koshinstudio.com/en/notes/interval-vs-delivery/)
+
   トレカダッシュ 開発の記録 ／ 2026年9月
 
   iOS アプリ「トレカダッシュ (https://koshinstudio.com/works/torecadash/)」の中でも、先着販売（在庫が数分で消える販売）の通知は、速さが勝負です。そこで、先着の監視は、「1 分おきに動く」ように作りました。
@@ -1327,6 +1329,8 @@ URL: https://koshinstudio.com/notes/split-mixups/
 URL: https://koshinstudio.com/notes/silent-discard/
 
 # 本物の抽選を、静かに捨てていた 4 つの実例：正規表現・年のない日付・まとめて聞く・null
+
+  English version (https://koshinstudio.com/en/notes/silent-discard/)
 
   トレカダッシュ 開発の記録 ／ 2026年8月〜9月
 
@@ -1779,6 +1783,8 @@ cache.set(genre, { at: Date.now(), promise: loadProducts(genre) });
 URL: https://koshinstudio.com/notes/tco-relay/
 
 # 「確認済み」の印が付いていたのに、リンク先を一度も読めていなかった：t.co の中継ページ
+
+  English version (https://koshinstudio.com/en/notes/tco-relay/)
 
   トレカダッシュ 開発の記録 ／ 2026年10月
 
@@ -6700,6 +6706,284 @@ URL: https://koshinstudio.com/privacy/
 
 ---
 
+URL: https://koshinstudio.com/en/notes/interval-vs-delivery/
+
+# A “1-minute” monitor checked each item once per 10 minutes: before speeding up, count the revisit interval and what was delivered
+
+  日本語版 (https://koshinstudio.com/notes/interval-vs-delivery/)
+
+  Development log of the Toreca Dash app / September 2026
+
+  For first-come sales (stock gone in minutes), speed is everything. So the first-come monitor in my app Toreca Dash was built to “run every minute”.
+
+  On 7 September 2026 I measured its real reaction speed. It was about 10× off from what I had designed. And when I sped things up, something else got slower.
+
+  Numbers come from my measurement log of 7 September 2026.
+
+## “Every minute” was once per 10 minutes per item
+
+    What I measured | Value
+
+      Job interval | about 61 seconds (as designed)
+
+      Items watched | 63
+
+      Items checked per run | 4 to 9 (48 of 53 runs hit the time budget)
+
+      Revisit interval per item | about once per 10 minutes
+
+      First-come sales caught in 7 days | 3 (8,648 empty runs)
+
+  “Runs every minute” feels fast. What users feel is how often each item is checked. If you can only check 4 to 9 of 63 per run, one pass takes about 10 minutes. The formula is items ÷ items per run × interval. I had never computed it, so “running but never winning” went on.
+
+## Cause: equal sharing of a shared external API
+
+  The Rakuten API I use to check stock allows one call per 1.5 seconds. Five jobs shared it equally, so the most urgent monitor got only 13%.
+
+  The fix: while the urgent job runs, the batch jobs do not take slots. One trap:
+
+- If the “yield” flag is raised and lowered around each call, it is taken back between calls. In one measurement, 13 of 20 runs were still stuck at “4 items”.
+
+- Holding the flag for the whole patrol gave 30 to 33 items per run.
+
+- Always put a wait limit on the yielding side, or it starves.
+
+## Speeding things up slowed down the one I cared about
+
+  The same day I shortened the intervals of several jobs. When I set the Amazon check to 5 minutes, the Rakuten Books instant-sellout monitor got slower.
+
+     | Before | After shortening | After reverting
+
+      Rakuten Books monitor completion interval | 60–80 s | 2 min 41 s / 3 min 52 s | 60–110 s
+
+      Skips of that monitor (per 10 min) | 0 | 6 | 0
+
+      Jobs waiting in the queue | 0 | 17–29 | 0
+
+  The Amazon check takes 5 to 8 minutes per run, yet I set a 5-minute interval. When a run takes at least as long as its interval, the job occupies one of the concurrency slots (8) permanently, and other jobs wait. Reverting restored it.
+
+## One more: “not screened” means “not notified”
+
+  Before a first-come notification, listings are screened by price against the official price to catch resale. When units did not match, the screen returned “not screened”. A comment called it “safe, no guessing”.
+
+  But an unscreened listing gets a “price unverified” mark, and notifications stop. Counting 148 first-come listings over 7 days:
+
+    Result | Listings
+
+      Notified | 41
+
+      Skipped (official price unverified) | 25
+
+  Of 55 displayed, 45% never got a notification. The article still shows in the feed, so audits do not see it and nobody complains. Making detection faster, from 10 minutes to 80 seconds, did not help while half of them silently fell out afterwards.
+
+  And “cannot compare” was an assumption. The catalogue price of 5,280 yen divided by 12 packs per box is 440 yen, a normal single-pack price. That amount was already the price of one box. I could have compared it directly.
+
+## What I learned
+
+> The answer to “make it faster” is usually not “faster” but “find what is dropping out on the way”.
+
+- Measure the revisit interval per item, not the job interval. items ÷ per run × interval.
+
+- Count what arrived. Not articles created, but notifications delivered.
+
+- Write down which way a gate falls when it cannot decide. If it falls to “users get nothing”, that is not the safe side.
+
+- Faster can make something else slower. Concurrency slots are limited.
+
+- Revisit what is marked “cannot compare”. Once units were aligned, it could be compared.
+
+  This is the English version of the original Japanese article (https://koshinstudio.com/notes/interval-vs-delivery/).
+
+  More in English
+
+- All English pages (https://koshinstudio.com/en/)
+
+- Toreca Dash (https://koshinstudio.com/en/works/torecadash/)
+
+
+---
+
+URL: https://koshinstudio.com/en/notes/silent-discard/
+
+# Four real lotteries silently thrown away: a regex, dates without a year, batched answers and null
+
+  日本語版 (https://koshinstudio.com/notes/silent-discard/)
+
+  Development log of the Toreca Dash app / August–September 2026
+
+  My iPhone app Toreca Dash has many places that decide “this is out of scope” and throw an item away. Throwing away looks like the safe side: if it is wrong, only some junk is missing from the screen.
+
+  But mistakes of this kind give you no reason to notice them. A real lottery can be thrown away and nothing shows. This article describes four cases where I silently dropped, or nearly dropped, real lotteries.
+
+  Numbers and dates come from my work logs between 28 August and 20 September 2026.
+
+## 1. “x.com” matched “e-starbox.com” (31 August)
+
+  If a link is a social-media link it is not a store page, so I do not use it. I listed the sites to exclude and joined them into one regular expression.
+
+  new RegExp(["x\\.com", "note\\.com", ...].join("|"))
+  That also matches inside other host names. x\.com matches the end of e-starbox.com, and note\.com matches mynote.com.
+
+  The real damage was on the lottery service “Lottery Rotobox” (shoplottery.e-starbox.com). Its application links were judged “social media, not a store link” and never adopted once.
+
+  The fix: host-only entries match only right after // or a dot ((?:^|//|\.) in front). I tested 13 examples, both URLs that should pass and URLs that should be blocked. An exclusion list looks like the safe side, so nobody doubts it.
+
+## 2. A date with no year was read as six years ago (28 August)
+
+  Store and aggregator posts write dates like “30 August (Sun)” without a year. I had an AI read the text to extract deadlines.
+
+  For one aggregator, Pokémon card items came back as 30 August 2020, six years ago. A past deadline is rejected at the entrance gate, so all Pokémon card items from that source were never imported. One Piece and Dragon Ball happened to be read as 2026, which hid the problem.
+
+  The fix was to put today’s date in the prompt and “do not fill in a year before today”. Readable items went from 0 to 46. “A year consistent with the post date” is not enough, because when the post date is unknown the year is undetermined.
+
+## 3. The number of batched answers did not match (19 September)
+
+  Sending one AI request per post costs one request each. So I batched several posts into one call to classify their sale type. I joined multi-line post bodies as “1. text”, “2. text”, separated by newlines.
+
+  The AI cannot tell a newline inside a post from the boundary between posts. On the day X monitoring resumed, the number of answers did not match 8 times. On a mismatch the code marked the whole group “out of scope”, so real lotteries in those groups were dropped together.
+
+  Worse, even when the count matched, some answers belonged to different posts. A Yu-Gi-Oh! lottery was thrown out as out of scope.
+
+  The fix: pass a JSON array ([{no, text}]) or headings that cannot appear in the text (“[Article N]”), make the reply include numbers, and on a mismatch ask one by one instead of falling back to “out of scope”.
+
+## 4. “Cannot decide” read as “none” (20 September)
+
+  One function guesses the card genre from a post. When two or more genres appear, it returns null (“cannot decide”).
+
+  Another job used it to detect “no card words (a toy-only announcement)” as !fn(text). There, null was read as “none”.
+
+  A roundup post that lists Pokémon, One Piece, Yu-Gi-Oh!, Dragon Ball and Gundam model kits has several genres, so it returns null. That was read as “zero card words”, and because “Gundam” was found, as a toy announcement.
+
+  Left alone, the daily bulk job at 05:15 would have hidden 129 real, displayed lotteries (for 9 products such as 30th CELEBRATION). I stopped it because I ran a count-only dry run before the real run. The dry run said 129, and that is how I noticed.
+
+  The fix: to detect “none”, use the function that returns all matched genres and check that its length is 0.
+
+## What I learned
+
+> Mistakes in what you throw away raise no complaints, so count them yourself.
+
+- Exclusion lists are wrong too. The safer something looks, the less it is doubted.
+
+- Test what should pass, too. Testing only what should be blocked can hide a block on what should pass (case 1 used 13 examples of both).
+
+- Give the AI every premise. Today’s date, separators. If you do not, it silently uses another premise.
+
+- Do not default to “out of scope” on a count mismatch. If the fallback is “discard”, real items vanish together.
+
+- “None” and “cannot decide” are different answers. Do not blindly negate null.
+
+- Count before a daily bulk job. The 129 was known in advance.
+
+  This is the English version of the original Japanese article (https://koshinstudio.com/notes/silent-discard/).
+
+  More in English
+
+- All English pages (https://koshinstudio.com/en/)
+
+- Toreca Dash (https://koshinstudio.com/en/works/torecadash/)
+
+
+---
+
+URL: https://koshinstudio.com/en/notes/tco-relay/
+
+# “Checked” marks on articles that had never been read: the t.co relay page
+
+  日本語版 (https://koshinstudio.com/notes/tco-relay/)
+
+  Development log of the Toreca Dash app / October 2026
+
+  My iPhone app Toreca Dash collects trading-card lottery information from store posts on X (Twitter). Each post links to an application form. The app also opens that link to check the deadline and whether entries have already closed.
+
+  A report came in: “the deadline is wrong”. It turned out to be worse than a wrong deadline: the app had never read the linked page at all, and yet the article carried a “checked” mark.
+
+  This is written from my work log of 16 October 2026 (the investigation and its numbers).
+
+## The symptom: a closed form still shown as open
+
+  The reported lottery was a game shop’s “30th CELEBRATION card set, 9 types” announcement on X. The Google Form it linked to said “Responses are no longer accepted”. In the app, the lottery was still shown, with an empty deadline.
+
+  The odd part: the article had a “checked whether it has closed” timestamp. It had been “checked” and nobody noticed it had closed, so the check was not looking at the page.
+
+## The cause: t.co returns a different page if you pretend to be a browser
+
+  Links in X posts go through the short URL t.co. Normally it redirects to the real page (HTTP 301).
+
+  But if you open it with a browser User-Agent, it does not redirect. It returns a roughly 500-byte page that redirects with JavaScript. Both of my reading functions opened t.co with a browser User-Agent and “follow redirects”. So:
+
+- No redirect happened, so the final URL was still t.co.
+
+- The text I read was the relay page’s HTML, not the form.
+
+- I had never read the form at all.
+
+  I had added the browser User-Agent on 6 August. This bug was a side effect of that change.
+
+## How widespread was it?
+
+  To check whether this was one case, I looked at every displayed X lottery or reservation article with a t.co link.
+
+    What I checked | Result
+
+      Displayed articles with a t.co link | 220
+
+      Of those, relay page returned | 220 (all)
+
+      Of those, actually a closed form but still displayed | 9
+
+  The 9 were spread over several stores, so it was a systemic problem.
+
+  One more clue I could not ignore: a daily job that fixes empty deadlines had been reporting “126 targets, 0 updated” every day. Not “nothing to fix” but “could not read, so could not fix”.
+
+## The fix
+
+  I put the redirect lookup into one function, fetchTcoTarget:
+
+- Open t.co without a User-Agent, and do not follow redirects (redirect: "manual"). Take only the first target.
+
+- If a target comes back, use it.
+
+- If a relay page comes back, read the meta refresh tag inside it to get the real target.
+
+- Then open that target with the browser User-Agent.
+
+  Whether you send a User-Agent changes what comes back, so I split the uses: resolving a short URL uses none; reading the real page uses the browser one. I added a regression test.
+
+## What to do with the wrong “checked” marks
+
+  Fixing the code is not enough. The wrong marks stay on the articles. An article with the mark counts as “already checked” and is skipped.
+
+  I removed the mark from 195 articles (X lottery/reservation posts that link to a post and have a t.co link), then ran the closed-entry check and the deadline re-extraction by hand.
+
+    Job | Before | After
+
+      Deadline re-extraction (targets / updated) | 126 targets, 0 updated (every day) | 123 targets, 14 updated
+
+  The same day I also changed the closed-entry check: articles with no deadline every 6 hours (with a deadline, every 24), 80 articles per run instead of 40, 7 minutes at most. Now that t.co can be read, a closed form should not stay up for a whole day.
+
+## What I learned
+
+> Write “checked” only when you could actually read it.
+
+- Write the mark only on success. If you mark an unreadable page as checked, it is never looked at again, even after the fix.
+
+- After fetching an external page, check it is the page you meant. Is the final URL still the short URL? Is the text the right kind of page?
+
+- “0 updated” every day can be a symptom. Tell “nothing to do” from “could not do”.
+
+- When you change a network setting, review everything that uses it. A User-Agent added in August broke t.co reading two months later.
+
+  This is the English version of the original Japanese article (https://koshinstudio.com/notes/tco-relay/).
+
+  More in English
+
+- All English pages (https://koshinstudio.com/en/)
+
+- Toreca Dash (https://koshinstudio.com/en/works/torecadash/)
+
+
+---
+
 URL: https://koshinstudio.com/en/notes/gemini-meter/
 
 # Before cutting Gemini cost, I doubted the meter: price, breakdown and cache were all wrong, and the cache threshold changed when I re-measured
@@ -10985,6 +11269,12 @@ URL: https://koshinstudio.com/en/
 - Before cutting Gemini cost, I doubted the meter: price, breakdown and cache were all wrong, and the cache threshold changed when I re-measured (https://koshinstudio.com/en/notes/gemini-meter/)
 
 - Setting the rules of Negaeri Shogi by playing AI against AI: one change that worked, six that broke (https://koshinstudio.com/en/notes/negaeri-balance/)
+
+- A “1-minute” monitor checked each item once per 10 minutes: before speeding up, count the revisit interval and what was delivered (https://koshinstudio.com/en/notes/interval-vs-delivery/)
+
+- Four real lotteries silently thrown away: a regex, dates without a year, batched answers and null (https://koshinstudio.com/en/notes/silent-discard/)
+
+- “Checked” marks on articles that had never been read: the t.co relay page (https://koshinstudio.com/en/notes/tco-relay/)
 
 ## Languages
 
