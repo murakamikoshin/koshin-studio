@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lottery win chance calculator — how many entries until you win? — Koshin Studio</title>
+<meta name="description" content="Work out the chance of winning at least one lottery from the odds and the number of entries. Works when each store has different odds. Includes how to think about trading-card lottery sales.">
+<meta property="og:title" content="Lottery win chance calculator">
+<meta property="og:description" content="From the odds and the number of entries, the chance you win at least once. Different odds per store are fine.">
+<meta property="og:type" content="article">
+<meta name="theme-color" content="#fbfaf7">
+<link rel="icon" href="/favicon.ico?v=1697d589" sizes="48x48">
+<link rel="icon" href="/favicon.svg?v=b9d7922f" type="image/svg+xml" sizes="any">
+<link rel="icon" href="/assets/icon/icon-192.png?v=e2566235" type="image/png" sizes="192x192">
+<link rel="apple-touch-icon" href="/assets/icon/icon-180.png?v=84e7f0e6">
+<link rel="manifest" href="/site.webmanifest">
+<script>document.documentElement.className+=" js"</script>
+<link rel="stylesheet" href="/style.css?v=dd51310c">
+<meta name="google-adsense-account" content="ca-pub-3863314847163872">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3863314847163872" crossorigin="anonymous"></script>
+<link rel="canonical" href="https://koshinstudio.com/en/calc/lottery/">
+<meta property="og:url" content="https://koshinstudio.com/en/calc/lottery/">
+<meta property="og:site_name" content="Koshin Studio">
+<meta property="og:locale" content="en_US">
+<link rel="alternate" hreflang="ja" href="https://koshinstudio.com/calc/lottery/">
+<link rel="alternate" hreflang="en" href="https://koshinstudio.com/en/calc/lottery/">
+<link rel="alternate" hreflang="x-default" href="https://koshinstudio.com/en/calc/lottery/">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="alternate" type="application/rss+xml" title="Koshin Studio — Notes" href="https://koshinstudio.com/feed.xml">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebApplication","name":"Lottery win chance calculator","url":"https://koshinstudio.com/en/calc/lottery/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any (browser)","inLanguage":"en","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"JPY"},"author":{"@id":"https://koshinstudio.com#studio"},"publisher":{"@id":"https://koshinstudio.com#studio"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Koshin Studio","item":"https://koshinstudio.com/en/"},{"@type":"ListItem","position":2,"name":"Lottery win chance calculator","item":"https://koshinstudio.com/en/calc/lottery/"}]}]}</script>
+<meta property="og:image" content="https://koshinstudio.com/assets/og/og_en_calc_lottery.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
+</head>
+<body>
+<canvas id="motes"></canvas>
+
+<header class="site"><div class="wrap">
+  <a class="logo" href="/"><img class="logo-mark" src="/favicon.svg?v=b9d7922f" alt="" width="28" height="28">Koshin Studio</a>
+  <nav><a href="/works/">Works</a><a href="/notes/">Notes</a><a href="/picks/">Picks</a><a href="/calc/">Tools</a><a href="/about/">About</a></nav>
+</div></header>
+
+<main><div class="wrap">
+  <nav class="crumbs" aria-label="You are here"><a href="/en/">Koshin Studio</a><i aria-hidden="true">›</i><span aria-current="page">Lottery win chance calculator</span></nav>
+  <h1>Lottery win chance calculator</h1>
+  <div class="rule"></div>  <p class="lead">How many entries until you win?</p>
+
+  <p>If you enter several lotteries, what is the chance that you win <strong>at least one</strong>? Enter the odds (for example “1 in 5”) or the win chance (%). If each lottery has different odds, list them in “Win chance per entry” separated by commas and the calculator combines them. Trading-card stores in Japan often sell hot items by lottery, which is why this exists; it works for any lottery.</p>
+
+  <form class="calc" id="calc" onsubmit="return false">
+    <label>Odds: applicants ÷ prizes (optional)<input type="number" id="mult" min="1" step="any" placeholder="e.g. 5" inputmode="decimal"></label>
+    <label>Win chance (%)<input type="number" id="p" min="0.001" max="100" step="any" value="20" inputmode="decimal"></label>
+    <label>Number of entries<input type="number" id="n" min="1" max="200" value="5" inputmode="numeric"></label>
+    <label>Wins you want (at least)<input type="number" id="k" min="1" max="200" value="1" inputmode="numeric"></label>
+    <label>Win chance per entry (%, optional)<input type="text" id="list" placeholder="e.g. 10, 30, 5, 50" inputmode="text"></label>
+  </form>
+  <p class="note">If you enter odds, they take priority over the win chance field (chance = 100 ÷ odds). If you fill in “Win chance per entry”, the odds, chance and entries fields are ignored.</p>
+
+  <div class="calc-out" id="out" aria-live="polite"></div>
+  <noscript><p class="note">This calculator needs JavaScript.</p></noscript>
+
+  <h2 class="rv">Example: five lotteries at 1 in 5</h2>
+  <ul>
+    <li>Each entry has a 20% chance (1 ÷ 5). The chance that all five lose is 0.8 to the 5th power, <strong>32.8%</strong>. So the chance of at least one win is <strong>67.2%</strong>.</li>
+    <li>The average number of wins is 5 × 20% = <strong>1.0</strong>. But <strong>exactly 1 win happens only 41.0% of the time</strong>; 2 or more is 26.3% and 3 or more is 5.8%.</li>
+    <li>“I entered five 1-in-5 lotteries, so I should win one” is not true. <strong>About one person in three loses all five.</strong></li>
+  </ul>
+
+  <h2 class="rv">Quick table: chance of at least one win</h2>
+  <p>Same odds on every entry, each result independent of the others.</p>
+  <div class="scroll rv"><table>
+    <thead><tr><th>Odds (win chance)</th><th>1 entry</th><th>3</th><th>5</th><th>10</th><th>20</th></tr></thead>
+    <tbody>
+      <tr><td>1 in 2 (50%)</td><td>50.0%</td><td>87.5%</td><td>96.9%</td><td>99.9%</td><td>99.99%+</td></tr>
+      <tr><td>1 in 3 (33.3%)</td><td>33.3%</td><td>70.4%</td><td>86.8%</td><td>98.3%</td><td>99.97%</td></tr>
+      <tr><td>1 in 5 (20%)</td><td>20.0%</td><td>48.8%</td><td>67.2%</td><td>89.3%</td><td>98.8%</td></tr>
+      <tr><td>1 in 10 (10%)</td><td>10.0%</td><td>27.1%</td><td>41.0%</td><td>65.1%</td><td>87.8%</td></tr>
+      <tr><td>1 in 20 (5%)</td><td>5.0%</td><td>14.3%</td><td>22.6%</td><td>40.1%</td><td>64.2%</td></tr>
+      <tr><td>1 in 50 (2%)</td><td>2.0%</td><td>5.9%</td><td>9.6%</td><td>18.3%</td><td>33.2%</td></tr>
+    </tbody>
+  </table></div>
+  <p>Ten entries at 1 in 10 give <strong>65.1%</strong> for at least one win, so about one person in three (34.9%) wins nothing. Doubling the entries does not double the chance (1 in 10: 41.0% with 5 entries, 65.1% with 10).</p>
+
+  <h2 class="rv">Quick table: entries needed</h2>
+  <div class="scroll rv"><table>
+    <thead><tr><th>Odds (win chance)</th><th>Half win</th><th>90% win</th><th>99% win</th></tr></thead>
+    <tbody>
+      <tr><td>1 in 2 (50%)</td><td>1 entry</td><td>4 entries</td><td>7 entries</td></tr>
+      <tr><td>1 in 3 (33.3%)</td><td>2 entries</td><td>6 entries</td><td>12 entries</td></tr>
+      <tr><td>1 in 5 (20%)</td><td>4 entries</td><td>11 entries</td><td>21 entries</td></tr>
+      <tr><td>1 in 10 (10%)</td><td>7 entries</td><td>22 entries</td><td>44 entries</td></tr>
+      <tr><td>1 in 20 (5%)</td><td>14 entries</td><td>45 entries</td><td>90 entries</td></tr>
+      <tr><td>1 in 50 (2%)</td><td>35 entries</td><td>114 entries</td><td>228 entries</td></tr>
+    </tbody>
+  </table></div>
+  <p>The entries needed for 90% grow roughly in proportion to the odds (22 at 1 in 10, 45 at 1 in 20).</p>
+
+  <h2 class="rv">How it works</h2>
+  <ul>
+    <li><strong>No win at all:</strong> multiply the chance of losing (1 − win chance) for every entry. At least one win is 1 minus that. With equal chances it is <em>1 − (1 − p)<sup>n</sup></em>.</li>
+    <li><strong>Distribution of wins:</strong> entries are added one at a time, updating “exactly j wins” (a Poisson binomial distribution). It works when chances differ per entry.</li>
+    <li><strong>Entries needed:</strong> the smallest <em>n</em> with <em>n ≥ ln(1 − q) ÷ ln(1 − p)</em>.</li>
+  </ul>
+  <p>I checked the maths a second way. For equal chances (20% five times, 8% ten times) and for different chances (10%, 30%, 5%, 50%), I simulated 200,000 runs each and compared “exactly j wins” with this calculator. Every value was within 0.2 percentage points, which is the noise of 200,000 trials.</p>
+
+  <h2 class="rv">When this does not apply</h2>
+  <ul>
+    <li><strong>You supply the win chance.</strong> Stores rarely publish the number of applicants, so “odds” are an estimate. The calculator cannot tell if your number is right.</li>
+    <li><strong>Each entry is independent.</strong> If a lottery bans duplicate entries, or favours members or past buyers, the real chance differs from these numbers.</li>
+    <li><strong>You meet the entry rules.</strong> One entry per person, ID checks, purchase limits and pickup locations are set by each store. Entering under multiple names or accounts is often against the rules.</li>
+    <li>This is probability, not a promise. Do not buy things you do not want just to raise your number of entries.</li>
+  </ul>
+
+  <p class="note">For gacha, see the <a href="/en/calc/gacha-rate/">gacha rate and pity calculator</a> and the <a href="/en/calc/gacha/">complete-the-set calculator</a>.</p>
+
+  <script src="/calc/lottery/lottery.js" defer></script>
+  <script src="/calc/lottery/page.js" defer></script>
+</div>
+</main>
+
+<footer class="site"><div class="wrap"></div></footer>
+<script src="/motion.js?v=1e7447ec" defer></script>
+</body>
+</html>

@@ -753,7 +753,7 @@ function ldFor(file, url) {
     const pg = page(ep.title); pg.inLanguage = 'en';
     return [pg, crumbs([['Koshin Studio', '/en/'], [ep.title, ep.en]])];
   }
-  const cl = rel.match(/^\/([a-z]{2})\/calc\/(gacha|gacha-rate)\/index\.html$/);
+  const cl = rel.match(/^\/([a-z]{2})\/calc\/(gacha|gacha-rate|lottery)\/index\.html$/);
   if (cl && I18N[cl[1]]) {
     const h1 = (readFileSync(file, 'utf8').match(/<h1>(.*?)<\/h1>/) || [, ''])[1];
     return [
@@ -971,7 +971,7 @@ for (const file of pages) {
   const hubSet = (relUrl === '/' || hubPaths[relUrl])
     ? [['ja', '/']].concat(Object.values(I18N).map((l) => [l.lang, l.path])) : null;
   /* 計算機は、日本語と各言語のページを、同じ組にする */
-  const calcM = relUrl.match(/^(?:\/([a-z]{2}))?\/calc\/(gacha|gacha-rate)\/$/);
+  const calcM = relUrl.match(/^(?:\/([a-z]{2}))?\/calc\/(gacha|gacha-rate|lottery)\/$/);
   const calcSet = calcM && (!calcM[1] || I18N[calcM[1]])
     ? [['ja', '/calc/' + calcM[2] + '/']].concat(Object.values(I18N).map((l) => [l.lang, l.path + 'calc/' + calcM[2] + '/'])) : null;
   const grp = hubSet || calcSet;

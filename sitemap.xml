@@ -12,6 +12,7 @@
   <url><loc>https://koshinstudio.com/en/about/</loc><lastmod>2026-10-16</lastmod><priority>0.5</priority></url>
   <url><loc>https://koshinstudio.com/en/calc/gacha-rate/</loc><lastmod>2026-10-17</lastmod><priority>0.5</priority></url>
   <url><loc>https://koshinstudio.com/en/calc/gacha/</loc><lastmod>2026-10-17</lastmod><priority>0.5</priority></url>
+  <url><loc>https://koshinstudio.com/en/calc/lottery/</loc><priority>0.5</priority></url>
   <url><loc>https://koshinstudio.com/en/</loc><lastmod>2026-10-17</lastmod><priority>0.5</priority></url>
   <url><loc>https://koshinstudio.com/en/notes/adgap/</loc><lastmod>2026-10-17</lastmod><priority>0.5</priority></url>
   <url><loc>https://koshinstudio.com/en/notes/anago/</loc><lastmod>2026-10-17</lastmod><priority>0.5</priority></url>
@@ -35,7 +36,7 @@
   <url><loc>https://koshinstudio.com/en/notes/itms-91064/</loc><lastmod>2026-10-17</lastmod><priority>0.5</priority></url>
   <url><loc>https://koshinstudio.com/en/notes/logo-pop/</loc><lastmod>2026-10-17</lastmod><priority>0.5</priority></url>
   <url><loc>https://koshinstudio.com/en/notes/match-percent/</loc><lastmod>2026-10-17</lastmod><priority>0.5</priority></url>
-  <url><loc>https://koshinstudio.com/en/notes/negaeri-balance/</loc><priority>0.5</priority></url>
+  <url><loc>https://koshinstudio.com/en/notes/negaeri-balance/</loc><lastmod>2026-10-17</lastmod><priority>0.5</priority></url>
   <url><loc>https://koshinstudio.com/en/notes/qiita-post-interval/</loc><lastmod>2026-10-17</lastmod><priority>0.5</priority></url>
   <url><loc>https://koshinstudio.com/en/notes/ranking-free-tier/</loc><lastmod>2026-10-17</lastmod><priority>0.5</priority></url>
   <url><loc>https://koshinstudio.com/en/notes/result-screen/</loc><lastmod>2026-10-17</lastmod><priority>0.5</priority></url>
