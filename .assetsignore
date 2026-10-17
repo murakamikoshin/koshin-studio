@@ -24,3 +24,7 @@ assets/shots/raw
 
 # 他サイトに出す要約の下書き（配らない）
 drafts
+
+# 公開しない（運営用の下書き・確認用の一覧）
+REVIEW.md
+drafts
