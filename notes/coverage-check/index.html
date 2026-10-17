@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>競合サイトと突き合わせて、取りこぼしを数えた：最初の「カバー率 23%」は測り方の間違いで、本当は 49% だった — Koshin Studio</title>
+<meta name="description" content="他のサイトが出している抽選を、こちらが出せているかを数えた。最初の 23% は、商品名の書き方の違いと期限切れの記事で歪んでいた。直して 49%、穴埋めの 5 つの問題を直して 90% に。規約で自動取得が禁止のサイトは取り込まなかった。">
+<meta property="og:title" content="競合サイトと突き合わせて、取りこぼしを数えた：最初の「カバー率 23%」は測り方の間違いで、本当は 49% だった">
+<meta property="og:description" content="他のサイトが出している抽選を、こちらが出せているかを数えた。最初の 23% は、商品名の書き方の違いと期限切れの記事で歪んでいた。直して 49%、穴埋めの 5 つの問題を直して 90% に。規約で自動取得が禁止のサイトは取り込まなかった。">
+<meta property="og:type" content="article">
+<meta name="theme-color" content="#fbfaf7">
+<link rel="icon" href="/favicon.ico?v=1697d589" sizes="48x48">
+<link rel="icon" href="/favicon.svg?v=b9d7922f" type="image/svg+xml" sizes="any">
+<link rel="icon" href="/assets/icon/icon-192.png?v=e2566235" type="image/png" sizes="192x192">
+<link rel="apple-touch-icon" href="/assets/icon/icon-180.png?v=84e7f0e6">
+<link rel="manifest" href="/site.webmanifest">
+<script>document.documentElement.className+=" js"</script>
+<link rel="stylesheet" href="/style.css?v=dd51310c">
+<meta name="google-adsense-account" content="ca-pub-3863314847163872">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3863314847163872" crossorigin="anonymous"></script>
+<link rel="canonical" href="https://koshinstudio.com/notes/coverage-check/">
+<meta property="og:url" content="https://koshinstudio.com/notes/coverage-check/">
+<meta property="og:site_name" content="Koshin Studio">
+<meta property="og:locale" content="ja_JP">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="alternate" type="application/rss+xml" title="Koshin Studio — Notes" href="https://koshinstudio.com/feed.xml">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BlogPosting","headline":"競合サイトと突き合わせて、取りこぼしを数えた：最初の「カバー率 23%」は測り方の間違いで、本当は 49% だった","url":"https://koshinstudio.com/notes/coverage-check/","description":"他のサイトが出している抽選を、こちらが出せているかを数えた。最初の 23% は、商品名の書き方の違いと期限切れの記事で歪んでいた。直して 49%、穴埋めの 5 つの問題を直して 90% に。規約で自動取得が禁止のサイトは取り込まなかった。","datePublished":"2026-10-17","dateModified":"2026-10-17","inLanguage":"ja","image":"https://koshinstudio.com/assets/og/og_notes_coverage-check.jpg","author":{"@id":"https://koshinstudio.com#studio"},"publisher":{"@id":"https://koshinstudio.com#studio"},"mainEntityOfPage":"https://koshinstudio.com/notes/coverage-check/"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Koshin Studio","item":"https://koshinstudio.com/"},{"@type":"ListItem","position":2,"name":"Notes","item":"https://koshinstudio.com/notes/"},{"@type":"ListItem","position":3,"name":"競合サイトと突き合わせて、取りこぼしを数えた：最初の「カバー率 23%」は測り方の間違いで、本当は 49% だった","item":"https://koshinstudio.com/notes/coverage-check/"}]}]}</script>
+<meta property="og:image" content="https://koshinstudio.com/assets/og/og_notes_coverage-check.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
+</head>
+<body class="article">
+<canvas id="motes"></canvas>
+
+<header class="site"><div class="wrap">
+  <a class="logo" href="/"><img class="logo-mark" src="/favicon.svg?v=b9d7922f" alt="" width="28" height="28">Koshin Studio</a>
+  <nav><a href="/works/">Works</a><a href="/notes/">Notes</a><a href="/picks/">Picks</a><a href="/calc/">Tools</a><a href="/about/">About</a></nav>
+</div></header>
+
+<main><div class="wrap">
+  <nav class="crumbs" aria-label="現在地"><a href="/">Koshin Studio</a><i aria-hidden="true">›</i><a href="/notes/">Notes</a><i aria-hidden="true">›</i><span aria-current="page">競合サイトと突き合わせて、取りこぼしを数えた：最初の「カバー率 23%」は測り方の間違いで、本当は 49% だった</span></nav>
+  <h1>競合サイトと突き合わせて、取りこぼしを数えた：最初の「カバー率 23%」は測り方の間違いで、本当は 49% だった</h1>  <div class="rule"></div>
+  <p class="lead">トレカダッシュ 開発の記録 ／ 2026年8月</p>
+
+  <p>iOS アプリ「<a href="/works/torecadash/">トレカダッシュ</a>」の目標の 1 つは、抽選販売の情報を<strong>もれなく</strong>出すことです。もれがあるかどうかを確かめるには、同じ情報を出している他のサイトと突き合わせて、「あちらにあって、こちらに無いもの」を数えるのが一番です。</p>
+  <p>2026 年 8 月 29 日の未明に、これをしました。最初に出た数字は「カバー率 23%」。ところが、それは<strong>測り方の間違い</strong>でした。この記事は、数字が 23% から 49%、そして 90% になるまでに見つけた、5 つの問題の記録です。</p>
+  <p class="note">数字は、2026 年 8 月 29 日の作業の記録から書いています。他のサイトの名前は、出しません。</p>
+<!--toc-->
+  <nav class="toc" aria-label="目次"><p>目次</p><ol><li><a href="#s1">まず、全部の競合を調べた</a></li><li><a href="#s2">突き合わせの相手は、こちらより細かかった</a></li><li><a href="#s3">問題 1：商品名の書き方が違うだけで、「取りこぼし」と数えていた</a></li><li><a href="#s4">問題 2：期限切れの記事を、「カバー済み」と数えていた</a></li><li><a href="#s5">問題 3：穴埋めで作った記事が、別の商品になっていた</a></li><li><a href="#s6">問題 4：応募リンクが、t.co 以外だと、必ず捨てられていた</a></li><li><a href="#s7">問題 5：「締切が無い」で隠した記事に、戻す道がなかった</a></li><li><a href="#s8">結果</a></li><li><a href="#s9">分かったこと</a></li></ol></nav>
+<!--/toc-->
+  <h2 class="rv" id="s1">まず、全部の競合を調べた</h2>
+  <p>「競合が出しているのに、このアプリが出していない記事を、無くしてほしい」という依頼でした。最初に、競合になりうるサイトを全部調べました。取り込めるかどうかは、<strong>robots.txt（機械による取得のお願い）と、利用規約を全部読んで</strong>決めました。</p>
+  <div class="scroll rv"><table>
+    <thead><tr><th>見つかったもの</th><th>数</th><th>扱い</th></tr></thead>
+    <tbody>
+      <tr><td>すでに取り込んでいたサイト</td><td>3</td><td>そのまま</td></tr>
+      <tr><td>今回、取り込みを追加したサイト（A サイト）</td><td>1</td><td>案件の単位で、応募リンク付き</td></tr>
+      <tr><td>規約に禁止の条項がなく、取り込めるサイト</td><td>2</td><td>今回は、手作業で突き合わせ</td></tr>
+      <tr><td>解説記事型で、店ごとの受付一覧を持たないサイト</td><td>複数</td><td>差分がほぼ無いので対象外</td></tr>
+      <tr><td><strong>robots.txt と規約で、自動取得を禁止しているサイト</strong></td><td>2</td><td><strong>取り込まない。</strong>応募先のリンクにも出さない</td></tr>
+      <tr><td>ドメインが消滅していたサイト</td><td>1</td><td>一覧から外す</td></tr>
+    </tbody>
+  </table></div>
+  <p>1 つのサイトは、robots.txt の冒頭に、日本語で禁止が書かれていました。機械的に取れるからといって、取って良いわけではありません。</p>
+
+  <h2 class="rv" id="s2">突き合わせの相手は、こちらより細かかった</h2>
+  <p>今回追加した相手（以下、A サイト）は、「店 × 商品 × 締切 × 応募リンク」を、<strong>1 つのページに 90 件</strong>並べていました。こちらの取り込み元は記事の単位でしたが、A サイトは案件の単位で、しかも応募のリンクが、外部の応募フォームそのもの（Google フォーム、LivePocket、抽選ロトボックス、店の公式 X）でした。数えるにも、埋めるにも、条件の良い相手でした。</p>
+
+  <h2 class="rv" id="s3">問題 1：商品名の書き方が違うだけで、「取りこぼし」と数えていた</h2>
+  <p>最初の数字は<strong>カバー率 23%</strong> でした。理由の 1 つ目は、商品名の書き方です。</p>
+  <pre><code>相手   30th CELEBRATION BOX
+こちら 拡張パック「30th CELEBRATION」</code></pre>
+  <p>どちらも、もう一方を含んでいないので、素朴な「含んでいるか」では、永久に一致しません。60 件が、これで「取りこぼし」と数えられていました。</p>
+  <p>ここで、「含んでいれば同じ」にしては、いけません。「30th CELEBRATION」という名前は、「30th CELEBRATION プレミアムデッキセット」にも<strong>含まれます</strong>。別の商品を出しているのに「出せている」と数える方向の間違いです。穴が見えなくなる方向に間違えます。</p>
+  <p>直し方は、弾の呼び方（拡張パック、ハイクラスパック）と、数量の言い方（BOX、n 個セット、n 種）を落としたうえで、<strong>商品カタログの ID に結び付ける</strong>ことでした。決める順番は、「完全一致」、「相手の名前に含まれるカタログ名のうち、最も長いもの」、「逆向きで、1 件だけのとき」です。</p>
+
+  <h2 class="rv" id="s4">問題 2：期限切れの記事を、「カバー済み」と数えていた</h2>
+  <p>理由の 2 つ目は、5 件でした。ある店の、7 月 29 日が締切の記事を、相手の 8 月 30 日が締切の案件と<strong>対にして</strong>、「記事はあるのに非表示」と報告していました。前の回の別の抽選です。この 2 つの直しで、正しい数字は<strong>49%</strong> でした。</p>
+
+  <h2 class="rv" id="s5">問題 3：穴埋めで作った記事が、別の商品になっていた</h2>
+  <p>見つかった穴は、記事を作って埋めます。ところが、その記事を作るときに、相手の商品名を、そのまま AI に渡していました。AI は、「30th CELEBRATION BOX」を、<strong>定価 27,500 円の「30th CELEBRATION FUTURISTIC BOX」</strong>に結び付けました。10 件が、別の商品の記事になりました。</p>
+  <p>数える側は、すでにカタログの商品を 1 つに絞れていました。作る側にも、<strong>こちらのカタログの名前を渡す</strong>のが正しい直し方でした。「数える判断」と「作る判断」を、1 本にします。</p>
+  <p>この修復のときに、私自身がもう 1 つ間違えました。商品の ID を、<strong>先頭 10 文字に切り詰めた値</strong>で書いてしまい、存在しない ID の記事を 10 件作りました。点検の出力を、見やすいように <code>slice(0, 10)</code> で切っていて、その短い値を、そのまま処理に使ったのです。すぐ直しましたが、<strong>表示のために短くした ID を、処理に使わない</strong>、が決まりごとになりました。</p>
+
+  <h2 class="rv" id="s6">問題 4：応募リンクが、t.co 以外だと、必ず捨てられていた</h2>
+  <p>まとめ由来の記事に、応募のリンクを付ける処理は、店ごとの URL を、リンクを展開する関数に通していました。この関数は、<strong>t.co（X の短縮 URL）しか見ません</strong>。X の投稿のリンクは、必ず短縮されるからです。X 以外の取り込み元は、応募の URL を、短縮されていない普通の形で持っています。それを通すと、<strong>必ず 0 件</strong>になり、ウェブ検索に落ちていました。</p>
+  <p>A サイトから作った 32 件のうち、<strong>17 件が、応募先ではなく、取り込み元のサイトのページ</strong>を指していました。取り込み元のサイトへ利用者を飛ばすのは、禁止にしていた状態です。</p>
+  <p>直し方は、短縮されていない普通の URL は、そのまま候補にする（採用するかの検査は、従来の検査を通す）ことでした。すでにできていた記事は、作り直せないので、突き合わせのたびに応募リンクを張り替える処理を入れ、16 件を張り替えました。</p>
+
+  <h2 class="rv" id="s7">問題 5：「締切が無い」で隠した記事に、戻す道がなかった</h2>
+  <p>締切が分からない、まとめ由来の記事を隠す処理がありました。この処理は隠すだけで、<strong>締切があとから分かっても、永久に隠れたまま</strong>でした。直っても鳴り続ける警告と、同じ形の失敗です。相手が締切を書いている案件は、締切を入れて、表示に戻すようにしました（別の理由でも隠れている記事は、戻しません）。2 件を戻しました。</p>
+  <p>このとき、締切の時刻の扱いも直しました。読み取った日付を、「日本時間ずらし」の値のまま返していて、そのまま保存すると、<strong>9 時間ずれた締切</strong>になるところでした。日本時間の 23:59 は、協定世界時の 14:59 です。本当の時刻を返すようにしました。</p>
+
+  <h2 class="rv" id="s8">結果</h2>
+  <div class="scroll rv"><table>
+    <thead><tr><th></th><th>件数</th></tr></thead>
+    <tbody>
+      <tr><td>A サイトが出している、受付中の案件</td><td>86</td></tr>
+      <tr><td>こちらで、表示中</td><td><strong>77（カバー率 90%）</strong></td></tr>
+      <tr><td>フィードに無い</td><td><strong>0</strong></td></tr>
+      <tr><td>記事はあるのに、非表示</td><td>2</td></tr>
+      <tr><td>相手が商品を特定していないので、作れない</td><td>7</td></tr>
+    </tbody>
+  </table></div>
+  <p>この作業で、記事を 32 件作り、応募リンクを 16 件張り替え、締切を入れて戻したものが 2 件ありました。</p>
+  <p>残った 9 件は、全部、理由が分かっています。</p>
+  <ul>
+    <li>ある店のプレミアムデッキセットは、応募ページに「対象は拡張パック 1 BOX」とだけ書いてあるので、<strong>意図して除外</strong>しています。この場合は、相手が間違っている側です。</li>
+    <li>「スターターセット ex 3 種」の 7 件は、相手も<strong>どの 3 種か書いていません</strong>。推測で 3 件作ると、別の商品の記事を並べることになるので、作りません。</li>
+    <li>残りは、最近見ていないために隠れている記事 1 件です。これにも「戻す道」が要るかもしれない、と課題に残しました。</li>
+  </ul>
+
+  <h2 class="rv" id="s9">分かったこと</h2>
+  <blockquote>数える道具の間違いは、数字を悪く見せるのではなく、穴を見えなくする。</blockquote>
+  <ul>
+    <li><strong>カバー率は、測り方を疑う。</strong>最初の 23% は、実際は 49% で、直して 90% でした。</li>
+    <li><strong>「含んでいれば同じ」にしない。</strong>別の商品を、「出せている」と数えます。</li>
+    <li><strong>相手の記事は、正しいとは限らない。</strong>相手が間違っている場合が、残りの中に 1 件ありました。</li>
+    <li><strong>「数える判断」と「作る判断」は、1 本にする。</strong>別々だと、数えた商品と、作った商品が違います。</li>
+    <li><strong>表示用に短くした値を、処理に使わない。</strong></li>
+    <li><strong>隠す処理には、戻す道を、一緒に作る。</strong></li>
+    <li><strong>取り込む前に、規約を読む。</strong>取れることと、取って良いことは、別です。</li>
+  </ul>
+
+
+  <div class="ad-slot" data-slot="footer" hidden></div>
+<!--/ad-->
+
+  <div class="rule" style="margin:40px 0 22px"></div>
+  <p class="eyebrow">この話に出てくるもの</p>
+  <ul class="plain">
+    <li><a href="/works/torecadash/">トレカダッシュ</a> — トレカの抽選・予約・先着の情報を集める iPhone アプリ</li>
+    <li><a href="/notes/typo-catalog/">一度だけ生まれた誤字が、店ごとに増えていった</a> — 商品名の取り違えの、別の経路</li>
+    <li><a href="/notes/split-mixups/">1 つの記事を商品ごとに分ける処理で起きた 3 つの取り違え</a> — 名前の取り違えの、別の実例</li>
+    <li><a href="/notes/self-inflicted/">自分で作った仕組みが、自分を傷つけた 4 つの記録</a> — 自分の作業で起きた失敗</li>
+  </ul>
+
+<!--related-->
+  <div class="rule" style="margin:40px 0 22px"></div>
+  <p class="eyebrow">ほかの記録</p>
+  <ul class="plain">
+    <li><a href="/notes/self-inflicted/">自分で作った仕組みが、自分を傷つけた 4 つの記録：要約が条件を捨て、1 つの未定義が保存を止め、点検が本番の IP を閉め出された</a> — 「15 文字程度」の指示で応募の条件が 671 件の点検で抜けていた、undefined が 1 つで保存が全部失敗し 1 日の消費の 41% を溶かした、点検の 6 並列で本番と同じ IP が拒否された、直っても鳴り続ける警告を作った。</li>
+    <li><a href="/notes/x-monitoring-gaps/">X 監視の漏れ 4 つ：検索に出ない投稿、持ち主が変わるアカウント、店を探せない検索、止まった後の取り戻し</a> — 店の X 投稿を巡回する監視で、4 店の告知が検索に 751 件取っても出なかった、登録した店が個人になっていた、店の発掘が 63 店中 11 店だった、6 日止まった後 2 時間で 2,866 件中 185 件しか読めなかった。直し方と、費用の見積もり。</li>
+    <li><a href="/notes/interval-vs-delivery/">「1 分おき」の監視は、1 件あたり 10 分に 1 回だった：速くする前に、見直しの間隔と、通知が届いた数を数えた</a> — 先着の監視は 63 件を 1 回に 4〜9 件しか見られず、1 件あたり約 10 分に 1 回。7 日間で捕まえたのは 3 回。間隔を詰めると別の監視が遅くなり、「審査しない」ことで先着の 45% に通知が飛んでいなかった。</li>
+  </ul>
+<!--/related-->
+
+<!--comments-->
+  <section class="comments" id="comments" data-repo="murakamikoshin/koshin-studio" data-repo-id="R_kgDOURc3ew"
+    data-category="Announcements" data-category-id="DIC_kwDOURc3e84DHTVr">
+    <h2 id="comments-h">コメント</h2>
+    <p>感想や、記事の間違いの指摘は、ここへ。書くには、GitHub のアカウントが要ります。</p>
+    <p><button type="button" class="btn ghost" id="load-comments">コメントを開く</button></p>
+    <p class="note">押すと、giscus（giscus.app）と GitHub に接続します。押さなければ、接続しません。詳しくは<a href="/privacy/">あつかい</a>に書いています。</p>
+    <div id="giscus-box"></div>
+  </section>
+<!--/comments-->
+</div>
+</main>
+
+<footer class="site"><div class="wrap">
+  <span>© 2026 Koshin Studio</span>
+  <div class="sns-row"></div>
+  <nav><a href="/picks/">Picks</a><a href="/calc/">Tools</a><a href="/about/">About</a><a href="/privacy/">あつかい</a><a href="/en/" hreflang="en" lang="en">English</a></nav>
+</div></footer>
+<script src="/motion.js?v=1e7447ec" defer></script>
+</body>
+</html>

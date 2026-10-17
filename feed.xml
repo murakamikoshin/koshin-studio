@@ -7,6 +7,13 @@
   <language>ja</language>
   <atom:link href="https://koshinstudio.com/feed.xml" rel="self" type="application/rss+xml"/>
   <item>
+    <title>競合サイトと突き合わせて、取りこぼしを数えた：最初の「カバー率 23%」は測り方の間違いで、本当は 49% だった</title>
+    <link>https://koshinstudio.com/notes/coverage-check/</link>
+    <guid isPermaLink="true">https://koshinstudio.com/notes/coverage-check/</guid>
+    <pubDate>Fri, 16 Oct 2026 15:00:00 GMT</pubDate>
+    <description>他のサイトが出している抽選を、こちらが出せているかを数えた。最初の 23% は、商品名の書き方の違いと期限切れの記事で歪んでいた。直して 49%、穴埋めの 5 つの問題を直して 90% に。規約で自動取得が禁止のサイトは取り込まなかった。</description>
+  </item>
+  <item>
     <title>自分で作った仕組みが、自分を傷つけた 4 つの記録：要約が条件を捨て、1 つの未定義が保存を止め、点検が本番の IP を閉め出された</title>
     <link>https://koshinstudio.com/notes/self-inflicted/</link>
     <guid isPermaLink="true">https://koshinstudio.com/notes/self-inflicted/</guid>
