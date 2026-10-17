@@ -67,7 +67,7 @@ URL: https://koshinstudio.com/notes/waiting-room/
 
 - トレカダッシュ (https://koshinstudio.com/works/torecadash/) — トレカの抽選・予約・先着の情報を集める iPhone アプリ
 
-- 「取れた」と読んでいたのは、ただの案内ページだった (https://koshinstudio.com/notes/blocked-page/) — 前日に直した、同じ種類の穴
+- 「取れた」と読んでいたのは、ただの案内ページだった (https://koshinstudio.com/notes/blocked-page/) — 同じ日の先に直した、同じ種類の穴
 
 - 同時実行の枠を増やす前に見るもの (https://koshinstudio.com/notes/concurrency-slots/) — 同じ日の、枠の話
 
