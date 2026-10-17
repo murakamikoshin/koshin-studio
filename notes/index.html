@@ -43,6 +43,66 @@
   <div class="rule"></div>
   <p class="lead">作りながら考えたことの記録。<br>勘で直す前に、まず測る——という話が多いです。</p>
   <p class="rv">実際の作業の記録（コミットと、手元で測った数字）から書いています。作品ごとに、まとめました。</p>
+  <h2 class="rv" id="themes">テーマ別に読む</h2>
+  <p class="rv">本数が多いので、はじめての方は、次のテーマから選ぶと読みやすいです。</p>
+  <h3 class="rv">数えて、直した</h3>
+  <p class="rv">勘で直す前に、まず数える。費用と監査の数字を疑って、測り直した記録。</p>
+  <ul class="plain">
+    <li><a href="/notes/firestore-91/">Firestore の費用を円で出したら、読み取りの 91% が 1 か所だった：キャッシュを入れても効かなかった理由</a></li>
+    <li><a href="/notes/gemini-meter/">Gemini の費用を削る前に、計器を疑った：単価・内訳・キャッシュの 3 つが壊れていて、キャッシュの条件は測り直すと変わっていた</a></li>
+    <li><a href="/notes/scrape-cost/">「しょうがない」を測り直したら、取得の費用は8分の1だった</a></li>
+    <li><a href="/notes/dup-zero/">「重複は実質ゼロ」と数えたのに、監査は112組を出していた</a></li>
+    <li><a href="/notes/audit-sweep-61/">監査 61 本を総点検して見つけた 4 つ：朝 4 時に 51 本が固まり、鍵の期限は 55 秒で、定価の補完は「入れない」と決めた</a></li>
+    <li><a href="/notes/torecadash-ai/">「減るはず」が、二度外れた：AIへの問い合わせを削る話</a></li>
+  </ul>
+  <h3 class="rv">静かに壊れていた</h3>
+  <p class="rv">エラーが出ないまま、本物が消えていた、または読めていなかった失敗の記録。</p>
+  <ul class="plain">
+    <li><a href="/notes/blocked-page/">「取れた」と読んでいたのは、ただの案内ページだった：3日間、商品が0件</a></li>
+    <li><a href="/notes/tco-relay/">「確認済み」の印が付いていたのに、リンク先を一度も読めていなかった：t.co の中継ページ</a></li>
+    <li><a href="/notes/silent-discard/">本物の抽選を、静かに捨てていた 4 つの実例：正規表現・年のない日付・まとめて聞く・null</a></li>
+    <li><a href="/notes/waiting-room/">先着が始まった瞬間、サイトが順番待ちのページになる：8,000 バイトの関門を、15KB の案内ページがすり抜けた</a></li>
+    <li><a href="/notes/notify-gate/">通知は取り消せない：直近 72 時間の通知の 19% が誤通知で、関門が通知の「後」に効いていた</a></li>
+    <li><a href="/notes/destination-check/">表示中の記事のリンク先を、実際に開いて確かめた：約 60 件の間違いと、最初の点検が間違えた 3 つのこと</a></li>
+  </ul>
+  <h3 class="rv">名前と商品の取り違え</h3>
+  <p class="rv">同じ名前、同じリンクが、別のものを指していた。商品と店の取り違えの記録。</p>
+  <ul class="plain">
+    <li><a href="/notes/split-mixups/">1 つの記事を商品ごとに分ける処理で起きた 3 つの取り違え：子が親になり、共有リンクが別の店を指し、名前が 2 つの商品のものだった</a></li>
+    <li><a href="/notes/same-page-not-same-store/">「同じ応募ページ」なら「同じ店」と決めつけていた：店名が別の店になった記事 52 件</a></li>
+    <li><a href="/notes/catalog-seed-393/">公式の一覧から、「作品名だけの商品」が 393 件できていた：商品名の欄に、商品の形は入っていなかった</a></li>
+    <li><a href="/notes/genre-from-catalog/">商品のジャンルを、公式カタログで直した：下見を 3 回やって、13 件から 4 件に絞った</a></li>
+    <li><a href="/notes/typo-catalog/">一度だけ生まれた誤字が、店ごとに増えていった：「30th SEREBRATION」の件</a></li>
+    <li><a href="/notes/fake-products/">「9種セット」を中身ごとに分けて、偽の商品が80個できていた</a></li>
+  </ul>
+  <h3 class="rv">監視と定期処理</h3>
+  <p class="rv">先着の監視、同時実行の枠、配備と再実行。動き続ける処理の設計の記録。</p>
+  <ul class="plain">
+    <li><a href="/notes/interval-vs-delivery/">「1 分おき」の監視は、1 件あたり 10 分に 1 回だった：速くする前に、見直しの間隔と、通知が届いた数を数えた</a></li>
+    <li><a href="/notes/concurrency-slots/">同時実行の枠を増やす前に見るもの：2 コアのサーバーで、枠を 8 から 14 にした判断と、半分間違っていた前の結論</a></li>
+    <li><a href="/notes/rerun-on-deploy/">配備のたびに、日次の処理が丸ごと走り直していた：48 時間で 477 回、その日の Gemini 費用の 46.6%</a></li>
+    <li><a href="/notes/x-monitoring-gaps/">X 監視の漏れ 4 つ：検索に出ない投稿、持ち主が変わるアカウント、店を探せない検索、止まった後の取り戻し</a></li>
+    <li><a href="/notes/coverage-check/">競合サイトと突き合わせて、取りこぼしを数えた：最初の「カバー率 23%」は測り方の間違いで、本当は 49% だった</a></li>
+    <li><a href="/notes/self-inflicted/">自分で作った仕組みが、自分を傷つけた 4 つの記録：要約が条件を捨て、1 つの未定義が保存を止め、点検が本番の IP を閉め出された</a></li>
+  </ul>
+  <h3 class="rv">ゲームの設計と測定</h3>
+  <p class="rv">釣り合いを、AI 同士の対局や自動の試行で測って決めた記録。</p>
+  <ul class="plain">
+    <li><a href="/notes/negaeri-balance/">寝返り将棋のルールを、AI 同士の対局で決めた：効いた 1 つの変更と、壊れた 6 つの案</a></li>
+    <li><a href="/notes/negaeri-online/">オンライン対戦は、端末の言うことを何も信用しない：手・持ち時間・勝敗を、サーバーが決める設計</a></li>
+    <li><a href="/notes/anago/">穴子がデカすぎた話</a></li>
+    <li><a href="/notes/sushi-measure/">「山は89%で落ち着く」は誤りだった：測定のほうが間違っていた話</a></li>
+    <li><a href="/notes/stopwatch-rank/">10秒ピッタリのランキングを、公平にする：小数3桁・同着・書き込み回数</a></li>
+    <li><a href="/notes/shindan12/">診断を12問にしたら、結果はどこまで変わるのか</a></li>
+  </ul>
+  <h3 class="rv">公式の情報で比べた</h3>
+  <p class="rv">値段・規約・上限を、公式の情報だけで比べた記事。確認できなかったことも書いてあります。</p>
+  <ul class="plain">
+    <li><a href="/notes/hosting-compare/">静的サイトを置く場所を、公式の規約で比べる：Cloudflare Pages・Netlify・Vercel・GitHub Pages・Firebase Hosting</a></li>
+    <li><a href="/notes/claude-vs-gemini-api/">Claude API と Gemini API を、公式の数字で比べる：小さいモデルの値段・Web検索・上限・廃止予定</a></li>
+    <li><a href="/notes/ios-sdk-compare/">iOS アプリの広告 SDK と Firebase を、公式の情報で比べる：AdMob・AppLovin MAX・LevelPlay・Supabase</a></li>
+    <li><a href="/notes/comment-services/">静的サイトのコメント欄を、公式の情報で比べる：giscus・utterances・Disqus・Remark42 ほか</a></li>
+  </ul>
   <nav class="toc rv" aria-label="作品ごとの目次"><p>作品ごとに読む</p><ol><li><a href="#g1">トレカダッシュ</a>（35本）</li><li><a href="#g2">寝返り将棋</a>（2本）</li><li><a href="#g3">このサイト</a>（1本）</li><li><a href="#g4">すし積む</a>（8本）</li><li><a href="#g5">Koshin Studio</a>（2本）</li><li><a href="#g6">ガチアニメ診断</a>（5本）</li><li><a href="#g7">10秒ピッタリで止めろ！</a>（1本）</li></ol></nav>
 
   <h2 class="rv" id="g1">トレカダッシュ<span class="group-n">35本</span></h2>

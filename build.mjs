@@ -416,6 +416,23 @@ const noteRow = (n, i) => `    <li class="rv" data-delay="${i * 70}"><a class="n
       <div class="tags"><span class="tag">${esc(n.work)}</span></div></div>
     </a></li>`;
 
+/* テーマ別の案内（記事の数が増えたので、はじめての方向けに） */
+const themeNoteBySlug = Object.fromEntries(notes.map((n) => [n.slug, n]));
+const noteThemes = [
+  { title: '数えて、直した', lead: '勘で直す前に、まず数える。費用と監査の数字を疑って、測り直した記録。',
+    slugs: ['firestore-91', 'gemini-meter', 'scrape-cost', 'dup-zero', 'audit-sweep-61', 'torecadash-ai'] },
+  { title: '静かに壊れていた', lead: 'エラーが出ないまま、本物が消えていた、または読めていなかった失敗の記録。',
+    slugs: ['blocked-page', 'tco-relay', 'silent-discard', 'waiting-room', 'notify-gate', 'destination-check'] },
+  { title: '名前と商品の取り違え', lead: '同じ名前、同じリンクが、別のものを指していた。商品と店の取り違えの記録。',
+    slugs: ['split-mixups', 'same-page-not-same-store', 'catalog-seed-393', 'genre-from-catalog', 'typo-catalog', 'fake-products'] },
+  { title: '監視と定期処理', lead: '先着の監視、同時実行の枠、配備と再実行。動き続ける処理の設計の記録。',
+    slugs: ['interval-vs-delivery', 'concurrency-slots', 'rerun-on-deploy', 'x-monitoring-gaps', 'coverage-check', 'self-inflicted'] },
+  { title: 'ゲームの設計と測定', lead: '釣り合いを、AI 同士の対局や自動の試行で測って決めた記録。',
+    slugs: ['negaeri-balance', 'negaeri-online', 'anago', 'sushi-measure', 'stopwatch-rank', 'shindan12'] },
+  { title: '公式の情報で比べた', lead: '値段・規約・上限を、公式の情報だけで比べた記事。確認できなかったことも書いてあります。',
+    slugs: ['hosting-compare', 'claude-vs-gemini-api', 'ios-sdk-compare', 'comment-services'] },
+];
+
 /* 記事を作品ごとにまとめる（新しい記事が先に来る順を保つ）。作品ページがあれば、そこへのリンクも */
 const noteGroups = [];
 for (const n of records) {
@@ -431,6 +448,13 @@ writeFileSync(here + '/notes/index.html',
   <div class="rule"></div>
   <p class="lead">作りながら考えたことの記録。<br>勘で直す前に、まず測る——という話が多いです。</p>
   <p class="rv">実際の作業の記録（コミットと、手元で測った数字）から書いています。作品ごとに、まとめました。</p>
+  <h2 class="rv" id="themes">テーマ別に読む</h2>
+  <p class="rv">本数が多いので、はじめての方は、次のテーマから選ぶと読みやすいです。</p>
+${noteThemes.map((t) => `  <h3 class="rv">${esc(t.title)}</h3>
+  <p class="rv">${esc(t.lead)}</p>
+  <ul class="plain">
+${t.slugs.map((sl) => themeNoteBySlug[sl]).filter(Boolean).map((n) => `    <li><a href="${n.url}">${esc(n.title)}</a></li>`).join('\n')}
+  </ul>`).join('\n')}
   <nav class="toc rv" aria-label="作品ごとの目次"><p>作品ごとに読む</p><ol>${noteGroups.map((g, i) =>
     `<li><a href="#g${i + 1}">${esc(g.work)}</a>（${g.list.length}本）</li>`).join('')}</ol></nav>
 ${noteGroups.map((g, i) => `
