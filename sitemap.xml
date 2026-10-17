@@ -26,7 +26,7 @@
   <url><loc>https://koshinstudio.com/en/notes/card-supplies-guide/</loc><lastmod>2026-10-17</lastmod><priority>0.5</priority></url>
   <url><loc>https://koshinstudio.com/en/notes/catalog-seed-393/</loc><lastmod>2026-10-17</lastmod><priority>0.5</priority></url>
   <url><loc>https://koshinstudio.com/en/notes/claude-vs-gemini-api/</loc><lastmod>2026-10-17</lastmod><priority>0.5</priority></url>
-  <url><loc>https://koshinstudio.com/en/notes/cleanup-hides-entrance/</loc><priority>0.5</priority></url>
+  <url><loc>https://koshinstudio.com/en/notes/cleanup-hides-entrance/</loc><lastmod>2026-10-17</lastmod><priority>0.5</priority></url>
   <url><loc>https://koshinstudio.com/en/notes/comment-services/</loc><lastmod>2026-10-17</lastmod><priority>0.5</priority></url>
   <url><loc>https://koshinstudio.com/en/notes/concurrency-slots/</loc><lastmod>2026-10-17</lastmod><priority>0.5</priority></url>
   <url><loc>https://koshinstudio.com/en/notes/coverage-check/</loc><lastmod>2026-10-17</lastmod><priority>0.5</priority></url>
@@ -59,7 +59,7 @@
   <url><loc>https://koshinstudio.com/en/notes/review-info-needed/</loc><lastmod>2026-10-17</lastmod><priority>0.5</priority></url>
   <url><loc>https://koshinstudio.com/en/notes/same-page-not-same-store/</loc><lastmod>2026-10-17</lastmod><priority>0.5</priority></url>
   <url><loc>https://koshinstudio.com/en/notes/scrape-cost/</loc><lastmod>2026-10-17</lastmod><priority>0.5</priority></url>
-  <url><loc>https://koshinstudio.com/en/notes/secret-in-logs/</loc><priority>0.5</priority></url>
+  <url><loc>https://koshinstudio.com/en/notes/secret-in-logs/</loc><lastmod>2026-10-17</lastmod><priority>0.5</priority></url>
   <url><loc>https://koshinstudio.com/en/notes/self-inflicted/</loc><lastmod>2026-10-17</lastmod><priority>0.5</priority></url>
   <url><loc>https://koshinstudio.com/en/notes/shindan12/</loc><lastmod>2026-10-17</lastmod><priority>0.5</priority></url>
   <url><loc>https://koshinstudio.com/en/notes/silent-discard/</loc><lastmod>2026-10-17</lastmod><priority>0.5</priority></url>
@@ -74,7 +74,7 @@
   <url><loc>https://koshinstudio.com/en/notes/torecadash-watchdog/</loc><lastmod>2026-10-17</lastmod><priority>0.5</priority></url>
   <url><loc>https://koshinstudio.com/en/notes/typo-catalog/</loc><lastmod>2026-10-17</lastmod><priority>0.5</priority></url>
   <url><loc>https://koshinstudio.com/en/notes/u2028/</loc><lastmod>2026-10-17</lastmod><priority>0.5</priority></url>
-  <url><loc>https://koshinstudio.com/en/notes/vps-migration/</loc><priority>0.5</priority></url>
+  <url><loc>https://koshinstudio.com/en/notes/vps-migration/</loc><lastmod>2026-10-17</lastmod><priority>0.5</priority></url>
   <url><loc>https://koshinstudio.com/en/notes/waiting-room/</loc><lastmod>2026-10-17</lastmod><priority>0.5</priority></url>
   <url><loc>https://koshinstudio.com/en/notes/webaudio/</loc><lastmod>2026-10-17</lastmod><priority>0.5</priority></url>
   <url><loc>https://koshinstudio.com/en/notes/x-monitoring-gaps/</loc><lastmod>2026-10-17</lastmod><priority>0.5</priority></url>
@@ -145,6 +145,7 @@
   <url><loc>https://koshinstudio.com/notes/swallowed-failure/</loc><lastmod>2026-10-17</lastmod><priority>0.8</priority></url>
   <url><loc>https://koshinstudio.com/notes/tco-relay/</loc><lastmod>2026-10-17</lastmod><priority>0.8</priority></url>
   <url><loc>https://koshinstudio.com/notes/test-ads/</loc><lastmod>2026-10-17</lastmod><priority>0.8</priority></url>
+  <url><loc>https://koshinstudio.com/notes/timeout-third-fix/</loc><priority>0.8</priority></url>
   <url><loc>https://koshinstudio.com/notes/torecadash-9set/</loc><lastmod>2026-10-17</lastmod><priority>0.8</priority></url>
   <url><loc>https://koshinstudio.com/notes/torecadash-ai/</loc><lastmod>2026-10-17</lastmod><priority>0.8</priority></url>
   <url><loc>https://koshinstudio.com/notes/torecadash-ci/</loc><lastmod>2026-10-17</lastmod><priority>0.8</priority></url>
