@@ -7,6 +7,27 @@
   <language>ja</language>
   <atom:link href="https://koshinstudio.com/feed.xml" rel="self" type="application/rss+xml"/>
   <item>
+    <title>広告が出ないと、実機チェックの 25 項目が止まった：開発者モードだけテスト広告を使い、賞品名を直書きしない</title>
+    <link>https://koshinstudio.com/notes/test-ads/</link>
+    <guid isPermaLink="true">https://koshinstudio.com/notes/test-ads/</guid>
+    <pubDate>Fri, 16 Oct 2026 15:00:00 GMT</pubDate>
+    <description>配信前は広告の在庫が無く、実機チェックリスト 163 項目のうち 25 項目が確認できなかった。開発者モードのときだけ、Google のテスト用の広告枠に切り替えた。賞品名は 1 つの設定から読み、チェックリストにも直書きしない。</description>
+  </item>
+  <item>
+    <title>「これベイブレードじゃん」が、関門を入れても戻ってきた：弾いた値が、別の形で漏れた</title>
+    <link>https://koshinstudio.com/notes/leaked-value/</link>
+    <guid isPermaLink="true">https://koshinstudio.com/notes/leaked-value/</guid>
+    <pubDate>Fri, 16 Oct 2026 15:00:00 GMT</pubDate>
+    <description>「商品名に玩具の名前があれば作らない」関門を入れても、AI が返す商品名から玩具の名前が消えて、すり抜けた。判定を告知の本文に移し、「カードゲームの語が 1 つも無いときだけ」弾く条件にした。</description>
+  </item>
+  <item>
+    <title>「次回へ」と出続けていた 25 本の点検は、一度も走っていなかった：3 つの時間予算を、同じ開始時刻から数えていた</title>
+    <link>https://koshinstudio.com/notes/budget-starved/</link>
+    <guid isPermaLink="true">https://koshinstudio.com/notes/budget-starved/</guid>
+    <pubDate>Fri, 16 Oct 2026 15:00:00 GMT</pubDate>
+    <description>点検の処理は 3 段構えで、予算が同じ開始時刻から数えられていたため、持ち回りの 25 本は毎回 0 本だった。ログの「18 件を次回へ」は全部の意味だった。制限時間から割り付ける形に直し、各ステップの所要時間をログに出した。</description>
+  </item>
+  <item>
     <title>関門を直しても、すでにあるデータは直らない：「もう試した」印・URL の目印・対応表の 3 つの実例</title>
     <link>https://koshinstudio.com/notes/fix-the-existing-data/</link>
     <guid isPermaLink="true">https://koshinstudio.com/notes/fix-the-existing-data/</guid>

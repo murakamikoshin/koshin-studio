@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>「次回へ」と出続けていた 25 本の点検は、一度も走っていなかった：3 つの時間予算を、同じ開始時刻から数えていた — Koshin Studio</title>
+<meta name="description" content="点検の処理は 3 段構えで、予算が同じ開始時刻から数えられていたため、持ち回りの 25 本は毎回 0 本だった。ログの「18 件を次回へ」は全部の意味だった。制限時間から割り付ける形に直し、各ステップの所要時間をログに出した。">
+<meta property="og:title" content="「次回へ」と出続けていた 25 本の点検は、一度も走っていなかった：3 つの時間予算を、同じ開始時刻から数えていた">
+<meta property="og:description" content="点検の処理は 3 段構えで、予算が同じ開始時刻から数えられていたため、持ち回りの 25 本は毎回 0 本だった。ログの「18 件を次回へ」は全部の意味だった。制限時間から割り付ける形に直し、各ステップの所要時間をログに出した。">
+<meta property="og:type" content="article">
+<meta name="theme-color" content="#fbfaf7">
+<link rel="icon" href="/favicon.ico?v=1697d589" sizes="48x48">
+<link rel="icon" href="/favicon.svg?v=b9d7922f" type="image/svg+xml" sizes="any">
+<link rel="icon" href="/assets/icon/icon-192.png?v=e2566235" type="image/png" sizes="192x192">
+<link rel="apple-touch-icon" href="/assets/icon/icon-180.png?v=84e7f0e6">
+<link rel="manifest" href="/site.webmanifest">
+<script>document.documentElement.className+=" js"</script>
+<link rel="stylesheet" href="/style.css?v=dd51310c">
+<meta name="google-adsense-account" content="ca-pub-3863314847163872">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3863314847163872" crossorigin="anonymous"></script>
+<link rel="canonical" href="https://koshinstudio.com/notes/budget-starved/">
+<meta property="og:url" content="https://koshinstudio.com/notes/budget-starved/">
+<meta property="og:site_name" content="Koshin Studio">
+<meta property="og:locale" content="ja_JP">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="alternate" type="application/rss+xml" title="Koshin Studio — Notes" href="https://koshinstudio.com/feed.xml">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BlogPosting","headline":"「次回へ」と出続けていた 25 本の点検は、一度も走っていなかった：3 つの時間予算を、同じ開始時刻から数えていた","url":"https://koshinstudio.com/notes/budget-starved/","description":"点検の処理は 3 段構えで、予算が同じ開始時刻から数えられていたため、持ち回りの 25 本は毎回 0 本だった。ログの「18 件を次回へ」は全部の意味だった。制限時間から割り付ける形に直し、各ステップの所要時間をログに出した。","datePublished":"2026-10-17","dateModified":"2026-10-17","inLanguage":"ja","image":"https://koshinstudio.com/assets/og/og_notes_budget-starved.jpg","author":{"@id":"https://koshinstudio.com#studio"},"publisher":{"@id":"https://koshinstudio.com#studio"},"mainEntityOfPage":"https://koshinstudio.com/notes/budget-starved/"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Koshin Studio","item":"https://koshinstudio.com/"},{"@type":"ListItem","position":2,"name":"Notes","item":"https://koshinstudio.com/notes/"},{"@type":"ListItem","position":3,"name":"「次回へ」と出続けていた 25 本の点検は、一度も走っていなかった：3 つの時間予算を、同じ開始時刻から数えていた","item":"https://koshinstudio.com/notes/budget-starved/"}]}]}</script>
+<meta property="og:image" content="https://koshinstudio.com/assets/og/og_notes_budget-starved.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
+</head>
+<body class="article">
+<canvas id="motes"></canvas>
+
+<header class="site"><div class="wrap">
+  <a class="logo" href="/"><img class="logo-mark" src="/favicon.svg?v=b9d7922f" alt="" width="28" height="28">Koshin Studio</a>
+  <nav><a href="/works/">Works</a><a href="/notes/">Notes</a><a href="/picks/">Picks</a><a href="/calc/">Tools</a><a href="/about/">About</a></nav>
+</div></header>
+
+<main><div class="wrap">
+  <nav class="crumbs" aria-label="現在地"><a href="/">Koshin Studio</a><i aria-hidden="true">›</i><a href="/notes/">Notes</a><i aria-hidden="true">›</i><span aria-current="page">「次回へ」と出続けていた 25 本の点検は、一度も走っていなかった：3 つの時間予算を、同じ開始時刻から数えていた</span></nav>
+  <h1>「次回へ」と出続けていた 25 本の点検は、一度も走っていなかった：3 つの時間予算を、同じ開始時刻から数えていた</h1>  <div class="rule"></div>
+  <p class="lead">トレカダッシュ 開発の記録 ／ 2026年9月</p>
+
+  <p>iOS アプリ「<a href="/works/torecadash/">トレカダッシュ</a>」の裏側には、記事の「販売の形式」を点検して直す処理があります。この処理の中に、「持ち回りで 25 本の点検を順に走らせる」部分がありました。</p>
+  <p>2026 年 9 月 11 日に、処理の各段の所要時間を測る計器をつけると、<strong>その 25 本は、一度も走っていなかった</strong>ことが分かりました。ログには、「時間予算のため 18 件を次回へ」と出続けていました。この「18 件」は、一部ではなく、<strong>全部</strong>という意味でした。</p>
+  <p class="note">数字は、2026 年 9 月 11 日の作業の記録から書いています。</p>
+<!--toc-->
+  <nav class="toc" aria-label="目次"><p>目次</p><ol><li><a href="#s1">3 つの予算が、同じ開始時刻から数えられていた</a></li><li><a href="#s2">直し方：勘で広げず、制限時間から割り付ける</a></li><li><a href="#s3">計器を足す：どの段が重いか、見えていなかった</a></li><li><a href="#s4">分かったこと</a></li></ol></nav>
+<!--/toc-->
+  <h2 class="rv" id="s1">3 つの予算が、同じ開始時刻から数えられていた</h2>
+  <p>この処理は、3 段構えでした。それぞれに、時間の予算があります。</p>
+  <div class="scroll rv"><table>
+    <thead><tr><th>段</th><th>予算</th><th>実測</th></tr></thead>
+    <tbody>
+      <tr><td>① 本体のループ</td><td>420 秒</td><td><strong>425 秒を使い切る</strong></td></tr>
+      <tr><td>② 毎回走る枠</td><td>780 秒（通算）</td><td>実際に使えるのは 360 秒。861 秒で終了</td></tr>
+      <tr><td>③ 持ち回りの 25 本</td><td>700 秒（通算）</td><td>②が 700 秒を超えるので、<strong>毎回 0 本</strong></td></tr>
+    </tbody>
+  </table></div>
+  <p>3 つの予算は、<strong>同じ開始時刻から数えられて</strong>いました。①が 420 秒、②は通算で 780 秒、③は通算で 700 秒。一見、段ごとに余裕があるように見えます。しかし、②は「通算 780 秒」のうち、①が 425 秒を使ったあとの 360 秒しか使えません。そして、②が終わった時点（861 秒）で、③の「通算 700 秒」は、とうに過ぎています。③は、毎回、始まる前に、「予算切れ」と判断されて、<strong>0 本</strong>でした。</p>
+  <p>ログの「時間予算のため 18 件を次回へ」は、毎回、<strong>全部を次回へ回して</strong>いました。「次回」は、永久に来ません。</p>
+
+  <h2 class="rv" id="s2">直し方：勘で広げず、制限時間から割り付ける</h2>
+  <p>予算の数字を、勘で広げるのは、やめました。代わりに、<strong>ジョブそのものの制限時間から、割り付ける</strong>形にしました。制限時間は 1 か所（<code>REPAIR_SALE_TYPES_TIMEOUT_SEC</code>）にだけ書き、各段の締め切りは、それに割合を掛けて出します。</p>
+  <div class="scroll rv"><table>
+    <thead><tr><th>段</th><th>締め切り（制限時間に対する割合）</th></tr></thead>
+    <tbody>
+      <tr><td>① 本体</td><td>23%</td></tr>
+      <tr><td>② 毎回走る枠</td><td>67%</td></tr>
+      <tr><td>③ 持ち回り</td><td>93%</td></tr>
+    </tbody>
+  </table></div>
+  <p>制限時間は、1,800 秒にしました。段の締め切りは、前の段の続きでなく、全体に対する割合なので、前の段が使い切っても、後ろの段の予算は残ります。</p>
+
+  <h2 class="rv" id="s3">計器を足す：どの段が重いか、見えていなかった</h2>
+  <p>もう 1 つの原因は、<strong>「12 本のうち、どれが重いのか」が分からないまま、上限だけを広げていた</strong>ことです。そこで、1 ステップごとの所要秒数を、ログに出すようにしました。実測の、重い順です。</p>
+  <div class="scroll rv"><table>
+    <thead><tr><th>ステップ</th><th>所要</th></tr></thead>
+    <tbody>
+      <tr><td>通知済みの非表示記事に、代わりの記事を付ける</td><td>119 秒</td></tr>
+      <tr><td>告知画像の QR から、応募先を探す</td><td>102 秒</td></tr>
+      <tr><td>定価の目安の、単位を直す</td><td>48 秒</td></tr>
+      <tr><td>定価の目安を、写す</td><td>46 秒</td></tr>
+      <tr><td>応募先も応募方法も無い記事を直す</td><td>41 秒</td></tr>
+    </tbody>
+  </table></div>
+
+  <h2 class="rv" id="s4">分かったこと</h2>
+  <blockquote>「次回へ」は、次回が来ると決まっているときだけ、意味がある。</blockquote>
+  <ul>
+    <li><strong>予算を、同じ開始時刻から数えると、後ろの段が飢える。</strong>前の段が使い切れば、後ろは 0 です。</li>
+    <li><strong>「次回へ」のログを数える。</strong>毎回、全部が「次回へ」なら、それは「一度も走っていない」です。</li>
+    <li><strong>上限は、勘で広げず、全体の制限時間から割り付ける。</strong></li>
+    <li><strong>まず、各段の所要時間を測る。</strong>どれが重いか分からないまま、上限だけ広げても、直りません。</li>
+  </ul>
+
+
+  <div class="ad-slot" data-slot="footer" hidden></div>
+<!--/ad-->
+
+  <div class="rule" style="margin:40px 0 22px"></div>
+  <p class="eyebrow">この話に出てくるもの</p>
+  <ul class="plain">
+    <li><a href="/works/torecadash/">トレカダッシュ</a> — トレカの抽選・予約・先着の情報を集める iPhone アプリ</li>
+    <li><a href="/notes/audit-sweep-61/">監査 61 本を総点検して見つけた 4 つ</a> — 同じ「持ち回りに届かない」話</li>
+    <li><a href="/notes/fix-the-existing-data/">関門を直しても、すでにあるデータは直らない</a> — 直す処理に順番が回らない話</li>
+    <li><a href="/notes/gemini-meter/">Gemini の費用を削る前に、計器を疑った</a> — 先に計器を直す話</li>
+  </ul>
+
+<!--related-->
+  <div class="rule" style="margin:40px 0 22px"></div>
+  <p class="eyebrow">ほかの記録</p>
+  <ul class="plain">
+    <li><a href="/notes/fix-the-existing-data/">関門を直しても、すでにあるデータは直らない：「もう試した」印・URL の目印・対応表の 3 つの実例</a> — 判定を直したのに既存の 32 件のうち 12 件が直らなかった（印が 7 日残る）、URL に載せた目印が張り替えで失われて 111 件が再分割された、対応表から外しても書かれた値が残った。同じ形の報告が 5 件だった監査の記録。</li>
+    <li><a href="/notes/hot-lane/">全部を速く見られないとき、何を速くするか：427 弾のうち人気の 128 弾を速く回し、予算を超えたら自分から譲る</a> — 先着や予約の監視で、全 427 弾の一巡は 4〜24 時間。人気 3 ジャンルの直近 2 年 128 弾を別枠で速く回し、人気商品は 1 分おきに見た。まとめて回すと別の監視が止まる、短い窓で測ると費用を見誤る、などの記録。</li>
+    <li><a href="/notes/destination-check/">表示中の記事のリンク先を、実際に開いて確かめた：約 60 件の間違いと、最初の点検が間違えた 3 つのこと</a> — 表示中の記事のリンク先 1,000 件超を開いて、記事と突き合わせた。Amazon の招待リクエストが先着になっていた、休店中・売り切れが表示中、リンク先が別の店・別の商品、応募リンクがサイトのトップへ転送。最初の点検自体も 3 つ間違えていた。</li>
+  </ul>
+<!--/related-->
+
+<!--comments-->
+  <section class="comments" id="comments" data-repo="murakamikoshin/koshin-studio" data-repo-id="R_kgDOURc3ew"
+    data-category="Announcements" data-category-id="DIC_kwDOURc3e84DHTVr">
+    <h2 id="comments-h">コメント</h2>
+    <p>感想や、記事の間違いの指摘は、ここへ。書くには、GitHub のアカウントが要ります。</p>
+    <p><button type="button" class="btn ghost" id="load-comments">コメントを開く</button></p>
+    <p class="note">押すと、giscus（giscus.app）と GitHub に接続します。押さなければ、接続しません。詳しくは<a href="/privacy/">あつかい</a>に書いています。</p>
+    <div id="giscus-box"></div>
+  </section>
+<!--/comments-->
+</div>
+</main>
+
+<footer class="site"><div class="wrap">
+  <span>© 2026 Koshin Studio</span>
+  <div class="sns-row"></div>
+  <nav><a href="/picks/">Picks</a><a href="/calc/">Tools</a><a href="/about/">About</a><a href="/privacy/">あつかい</a><a href="/en/" hreflang="en" lang="en">English</a></nav>
+</div></footer>
+<script src="/motion.js?v=1e7447ec" defer></script>
+</body>
+</html>

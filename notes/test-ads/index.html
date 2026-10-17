@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>広告が出ないと、実機チェックの 25 項目が止まった：開発者モードだけテスト広告を使い、賞品名を直書きしない — Koshin Studio</title>
+<meta name="description" content="配信前は広告の在庫が無く、実機チェックリスト 163 項目のうち 25 項目が確認できなかった。開発者モードのときだけ、Google のテスト用の広告枠に切り替えた。賞品名は 1 つの設定から読み、チェックリストにも直書きしない。">
+<meta property="og:title" content="広告が出ないと、実機チェックの 25 項目が止まった：開発者モードだけテスト広告を使い、賞品名を直書きしない">
+<meta property="og:description" content="配信前は広告の在庫が無く、実機チェックリスト 163 項目のうち 25 項目が確認できなかった。開発者モードのときだけ、Google のテスト用の広告枠に切り替えた。賞品名は 1 つの設定から読み、チェックリストにも直書きしない。">
+<meta property="og:type" content="article">
+<meta name="theme-color" content="#fbfaf7">
+<link rel="icon" href="/favicon.ico?v=1697d589" sizes="48x48">
+<link rel="icon" href="/favicon.svg?v=b9d7922f" type="image/svg+xml" sizes="any">
+<link rel="icon" href="/assets/icon/icon-192.png?v=e2566235" type="image/png" sizes="192x192">
+<link rel="apple-touch-icon" href="/assets/icon/icon-180.png?v=84e7f0e6">
+<link rel="manifest" href="/site.webmanifest">
+<script>document.documentElement.className+=" js"</script>
+<link rel="stylesheet" href="/style.css?v=dd51310c">
+<meta name="google-adsense-account" content="ca-pub-3863314847163872">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3863314847163872" crossorigin="anonymous"></script>
+<link rel="canonical" href="https://koshinstudio.com/notes/test-ads/">
+<meta property="og:url" content="https://koshinstudio.com/notes/test-ads/">
+<meta property="og:site_name" content="Koshin Studio">
+<meta property="og:locale" content="ja_JP">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="alternate" type="application/rss+xml" title="Koshin Studio — Notes" href="https://koshinstudio.com/feed.xml">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BlogPosting","headline":"広告が出ないと、実機チェックの 25 項目が止まった：開発者モードだけテスト広告を使い、賞品名を直書きしない","url":"https://koshinstudio.com/notes/test-ads/","description":"配信前は広告の在庫が無く、実機チェックリスト 163 項目のうち 25 項目が確認できなかった。開発者モードのときだけ、Google のテスト用の広告枠に切り替えた。賞品名は 1 つの設定から読み、チェックリストにも直書きしない。","datePublished":"2026-10-17","dateModified":"2026-10-17","inLanguage":"ja","image":"https://koshinstudio.com/assets/og/og_notes_test-ads.jpg","author":{"@id":"https://koshinstudio.com#studio"},"publisher":{"@id":"https://koshinstudio.com#studio"},"mainEntityOfPage":"https://koshinstudio.com/notes/test-ads/"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Koshin Studio","item":"https://koshinstudio.com/"},{"@type":"ListItem","position":2,"name":"Notes","item":"https://koshinstudio.com/notes/"},{"@type":"ListItem","position":3,"name":"広告が出ないと、実機チェックの 25 項目が止まった：開発者モードだけテスト広告を使い、賞品名を直書きしない","item":"https://koshinstudio.com/notes/test-ads/"}]}]}</script>
+<meta property="og:image" content="https://koshinstudio.com/assets/og/og_notes_test-ads.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
+</head>
+<body class="article">
+<canvas id="motes"></canvas>
+
+<header class="site"><div class="wrap">
+  <a class="logo" href="/"><img class="logo-mark" src="/favicon.svg?v=b9d7922f" alt="" width="28" height="28">Koshin Studio</a>
+  <nav><a href="/works/">Works</a><a href="/notes/">Notes</a><a href="/picks/">Picks</a><a href="/calc/">Tools</a><a href="/about/">About</a></nav>
+</div></header>
+
+<main><div class="wrap">
+  <nav class="crumbs" aria-label="現在地"><a href="/">Koshin Studio</a><i aria-hidden="true">›</i><a href="/notes/">Notes</a><i aria-hidden="true">›</i><span aria-current="page">広告が出ないと、実機チェックの 25 項目が止まった：開発者モードだけテスト広告を使い、賞品名を直書きしない</span></nav>
+  <h1>広告が出ないと、実機チェックの 25 項目が止まった：開発者モードだけテスト広告を使い、賞品名を直書きしない</h1>  <div class="rule"></div>
+  <p class="lead">トレカダッシュ 開発の記録 ／ 2026年9月</p>
+
+  <p>iOS アプリ「<a href="/works/torecadash/">トレカダッシュ</a>」には、毎日 1 回、おみくじ（抽選）を引ける機能があります。「動画を見て挑戦する」と、動画の広告のあとに、抽選の演出が始まります。</p>
+  <p>2026 年 9 月 11 日、実機での確認のチェックリストを見直すと、問題が見つかりました。<strong>広告がまだ配信されていないので、チェックリストの 163 項目のうち 25 項目が、確認できない</strong>のです。</p>
+  <p class="note">数字は、2026 年 9 月 11 日の作業の記録から書いています。</p>
+<!--toc-->
+  <nav class="toc" aria-label="目次"><p>目次</p><ol><li><a href="#s1">広告が出ないと、その先が確かめられない</a></li><li><a href="#s2">開発者モードのときだけ、テスト用の広告を使う</a></li><li><a href="#s3">賞品の名前を、どこにも直書きしない</a></li><li><a href="#s4">分かったこと</a></li></ol></nav>
+<!--/toc-->
+  <h2 class="rv" id="s1">広告が出ないと、その先が確かめられない</h2>
+  <p>審査の前、配信が始まる前は、自分の広告の枠に、まだ在庫がありません。おみくじの「動画を見て挑戦する」が、<strong>「広告を準備中です…」のまま押せません</strong>。その先の、抽選、演出、賞の反映、配送先の入力までが、丸ごと確かめられません。実機テストのチェックリスト 163 項目のうち、<strong>25 項目（15%）</strong>が止まっていました。</p>
+
+  <h2 class="rv" id="s2">開発者モードのときだけ、テスト用の広告を使う</h2>
+  <p>Google が公開している<strong>テスト用の広告の枠</strong>を使います。テスト広告は、必ず在庫があります。開発者モードのときだけ、これに切り替えると、本番と同じ道で、最後まで確かめられます。</p>
+  <div class="scroll rv"><table>
+    <thead><tr><th></th><th>本番</th><th>開発者モード</th></tr></thead>
+    <tbody>
+      <tr><td>バナー</td><td>自分の広告の枠</td><td>Google のテスト用の枠</td></tr>
+      <tr><td>リワード（動画）</td><td>自分の広告の枠</td><td>Google のテスト用の枠</td></tr>
+      <tr><td>ネイティブ</td><td>自分の広告の枠</td><td>Google のテスト用の枠</td></tr>
+      <tr><td>アプリ起動</td><td>自分の広告の枠</td><td>Google のテスト用の枠</td></tr>
+    </tbody>
+  </table></div>
+  <p>開発者モードは、<strong>「バージョンを 7 回タップ」かつ「同じ端末の ID のときだけ」</strong>有効になります。利用者に出ることは、ありません。広告の規約では、テスト広告は、自分の端末だけで使います。この条件を、満たしています。</p>
+
+  <h2 class="rv" id="s3">賞品の名前を、どこにも直書きしない</h2>
+  <p>もう 1 つ、似た話があります。おみくじの賞品を変えたあと、「テキストが、前のままになっているところもある」という指摘を受けました。賞品は、これからも、そのたびに変えます。</p>
+  <p>調べると、表示側は正しい状態でした。</p>
+  <ul>
+    <li>賞品の一覧、応募の規約、結果のカードは、全部<strong>同じ 1 つの設定</strong>（<code>lotteryConfig/publicStatus</code>）を読む。</li>
+    <li>賞品を変える処理は、「いまの設定」と「公開用の設定」を、<strong>同じトランザクションで、両方書く</strong>。ずれる余地が無い。</li>
+    <li>Pro 機能の一時解放は、賞品の名前でなく、別の項目（<code>perk</code>）で判断する。</li>
+  </ul>
+  <p>古いままだったのは、<strong>賞品の名前を直書きしていた 2 か所</strong>でした。</p>
+  <ol>
+    <li>実機テストのチェックリスト（アプリ内に出る）の 3 項目。「中吉『24 時間、広告が非表示になります』と出ている」のような書き方。</li>
+    <li>設定が届いていないときの予備の文。</li>
+  </ol>
+  <p>チェックリストは、<strong>賞品の名前を書かない言い方</strong>（「いま管理画面で設定している賞品名が、そのまま出ている」）に直しました。予備の文は、「賞品は準備中です」にしました。「賞品を変えた直後に、賞品一覧、応募規約、結果カードの 3 か所が、全部新しい賞品になっている」という項目も足しました（164 項目）。変えるのは毎回のことなので、その都度見る場所を、1 項目にまとめたのです。</p>
+  <p>ただ、サーバー側の「設定が 1 つも無いときの既定値」には、昔の文言が残しています。そこは、<strong>文言と効果が、対になっている</strong>（広告非表示の文言と、広告非表示の解放）からです。片方だけ中立にすると、「解放は付くのに、説明が無い」というちぐはぐになります。</p>
+
+  <h2 class="rv" id="s4">分かったこと</h2>
+  <blockquote>確かめられないものは、確かめる道を作る。変わるものは、直書きしない。</blockquote>
+  <ul>
+    <li><strong>広告のように、外から来るものは、テスト用の道を用意する。</strong>本番の在庫に頼ると、その先が確かめられません。</li>
+    <li><strong>テスト用の道は、開発者だけに。</strong>7 回タップと端末の ID の、2 つの条件で守ります。</li>
+    <li><strong>毎回変わる文言は、どこにも直書きしない。</strong>1 つの設定から読み、書くときは同じトランザクションで。</li>
+    <li><strong>対になっているものは、片方だけ直さない。</strong>文言と効果は、一緒に直します。</li>
+  </ul>
+
+
+  <div class="ad-slot" data-slot="footer" hidden></div>
+<!--/ad-->
+
+  <div class="rule" style="margin:40px 0 22px"></div>
+  <p class="eyebrow">この話に出てくるもの</p>
+  <ul class="plain">
+    <li><a href="/works/torecadash/">トレカダッシュ</a> — トレカの抽選・予約・先着の情報を集める iPhone アプリ</li>
+    <li><a href="/notes/review-info-needed/">App Store 審査で「Guideline 2.1 Information Needed」が届いた</a> — 審査に関する別の記録</li>
+    <li><a href="/notes/torecadash-review/">App Store の審査で止まった四つ</a> — 審査の記録</li>
+    <li><a href="/notes/adgap/">広告の間隔を、回数ではなく時間で測る</a> — 広告の別の話</li>
+  </ul>
+
+<!--related-->
+  <div class="rule" style="margin:40px 0 22px"></div>
+  <p class="eyebrow">ほかの記録</p>
+  <ul class="plain">
+    <li><a href="/notes/leaked-value/">「これベイブレードじゃん」が、関門を入れても戻ってきた：弾いた値が、別の形で漏れた</a> — 「商品名に玩具の名前があれば作らない」関門を入れても、AI が返す商品名から玩具の名前が消えて、すり抜けた。判定を告知の本文に移し、「カードゲームの語が 1 つも無いときだけ」弾く条件にした。</li>
+    <li><a href="/notes/budget-starved/">「次回へ」と出続けていた 25 本の点検は、一度も走っていなかった：3 つの時間予算を、同じ開始時刻から数えていた</a> — 点検の処理は 3 段構えで、予算が同じ開始時刻から数えられていたため、持ち回りの 25 本は毎回 0 本だった。ログの「18 件を次回へ」は全部の意味だった。制限時間から割り付ける形に直し、各ステップの所要時間をログに出した。</li>
+    <li><a href="/notes/fix-the-existing-data/">関門を直しても、すでにあるデータは直らない：「もう試した」印・URL の目印・対応表の 3 つの実例</a> — 判定を直したのに既存の 32 件のうち 12 件が直らなかった（印が 7 日残る）、URL に載せた目印が張り替えで失われて 111 件が再分割された、対応表から外しても書かれた値が残った。同じ形の報告が 5 件だった監査の記録。</li>
+  </ul>
+<!--/related-->
+
+<!--comments-->
+  <section class="comments" id="comments" data-repo="murakamikoshin/koshin-studio" data-repo-id="R_kgDOURc3ew"
+    data-category="Announcements" data-category-id="DIC_kwDOURc3e84DHTVr">
+    <h2 id="comments-h">コメント</h2>
+    <p>感想や、記事の間違いの指摘は、ここへ。書くには、GitHub のアカウントが要ります。</p>
+    <p><button type="button" class="btn ghost" id="load-comments">コメントを開く</button></p>
+    <p class="note">押すと、giscus（giscus.app）と GitHub に接続します。押さなければ、接続しません。詳しくは<a href="/privacy/">あつかい</a>に書いています。</p>
+    <div id="giscus-box"></div>
+  </section>
+<!--/comments-->
+</div>
+</main>
+
+<footer class="site"><div class="wrap">
+  <span>© 2026 Koshin Studio</span>
+  <div class="sns-row"></div>
+  <nav><a href="/picks/">Picks</a><a href="/calc/">Tools</a><a href="/about/">About</a><a href="/privacy/">あつかい</a><a href="/en/" hreflang="en" lang="en">English</a></nav>
+</div></footer>
+<script src="/motion.js?v=1e7447ec" defer></script>
+</body>
+</html>
