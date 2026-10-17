@@ -632,8 +632,10 @@ for (const p of enPairs) {
 /* 本名は書かない。確かめようのないことを構造化データに入れると、
    検索側にも読む人にも嘘をつくことになる。
    代わりに、footer に出しているのと同じ公開の持ち場だけを繋ぐ */
+const KOSHIN = { '@type': 'Person', '@id': SITE + '#koshin', name: 'Koshin', jobTitle: 'Webエンジニア・アプリエンジニア',
+  url: SITE + '/about/', worksFor: { '@id': SITE + '#studio' } };
 const PERSON = {
-  '@type': 'Organization', '@id': SITE + '#studio', name: 'Koshin Studio', alternateName: ['KoshinStudio'],
+  '@type': 'Organization', '@id': SITE + '#studio', name: 'Koshin Studio', alternateName: ['KoshinStudio'], founder: { '@id': SITE + '#koshin' },
   url: SITE, description: 'なんでも、ひとりで挑戦して、作って、試して、書いています。ゲームや診断アプリなどを作り、作り方と検証の記録を公開しています。',
   logo: SITE + '/assets/og/og_home.jpg',
   sameAs: (conf.social || []).map((x) => x.url),
@@ -828,7 +830,7 @@ function ldFor(file, url) {
   if (rel === '/about/index.html') {
     const tools = [].concat(...(stack.groups || []).map((g) => g.items || []));
     return [
-      PERSON,
+      PERSON, KOSHIN,
       { '@type': 'AboutPage', name: 'About', url: url, inLanguage: 'ja',
         isPartOf: { '@id': SITE + '#studio' } },
       { '@type': 'ItemList', name: '使っている道具',

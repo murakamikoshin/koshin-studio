@@ -8191,7 +8191,7 @@ URL: https://koshinstudio.com/about/
 
 ## 運営者について
 
-  Koshin Studio は、個人で運営しています。ブラウザで遊べるゲーム、診断、iPhone のアプリ（App Store で配信している「トレカダッシュ (https://koshinstudio.com/works/torecadash/)」など）を、自分で作って、公開しています。このサイトに載せているのは、作ったものの紹介と、作る途中で測った数字、起きた不具合と直し方の記録です。
+  Koshin Studio は、Koshin（ニックネーム）が、個人で運営しています。Web エンジニア、アプリエンジニアとして活動していて、なんでも作っています。ブラウザで遊べるゲーム、診断、iPhone のアプリ（App Store で配信している「トレカダッシュ (https://koshinstudio.com/works/torecadash/)」など）を、自分で作って、公開しています。このサイトに載せているのは、作ったものの紹介と、作る途中で測った数字、起きた不具合と直し方の記録です。
 
   記事の数字は、自分のアプリのログ、データ、ソースコード、公式のページで確かめたものです。確かめられなかったことは、確かめられなかったと書きます。ご意見、記事の間違いの指摘、取材やお仕事のご相談は、下の連絡先へお願いします。
 
@@ -12601,7 +12601,7 @@ But the cause was not where I thought.
 
 ## About the operator
 
-  Koshin Studio is run by one person. I make and publish browser games, a quiz, and iPhone apps (such as Toreca Dash (https://koshinstudio.com/en/works/torecadash/), available on the App Store). This site carries introductions to what I made, numbers I measured while making it, and records of bugs and how I fixed them.
+  Koshin Studio is run by Koshin (a nickname), alone. I work as a web engineer and an app engineer, and I make all sorts of things. I make and publish browser games, a quiz, and iPhone apps (such as Toreca Dash (https://koshinstudio.com/en/works/torecadash/), available on the App Store). This site carries introductions to what I made, numbers I measured while making it, and records of bugs and how I fixed them.
 
   The numbers in articles are ones I checked against my own app’s logs, data and source code, or official pages. What I could not confirm, I say I could not confirm. For feedback, corrections, interviews or work enquiries, please use the contact section below.
 
