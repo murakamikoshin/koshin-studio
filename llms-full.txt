@@ -8189,6 +8189,16 @@ URL: https://koshinstudio.com/about/
 でも、原因は思っていたところになかった。
   導入も登録も要らないこと。ブラウザで開いたらすぐ始まること。それだけは崩さないようにしています。
 
+## 運営者について
+
+  Koshin Studio は、個人で運営しています。ブラウザで遊べるゲーム、診断、iPhone のアプリ（App Store で配信している「トレカダッシュ (https://koshinstudio.com/works/torecadash/)」など）を、自分で作って、公開しています。このサイトに載せているのは、作ったものの紹介と、作る途中で測った数字、起きた不具合と直し方の記録です。
+
+  記事の数字は、自分のアプリのログ、データ、ソースコード、公式のページで確かめたものです。確かめられなかったことは、確かめられなかったと書きます。ご意見、記事の間違いの指摘、取材やお仕事のご相談は、下の連絡先へお願いします。
+
+## 文章の作り方について
+
+  記事の文章は、開発の記録（作業の記録、ログ、ソースコード）をもとに、AI（Claude）の支援を受けて書いていることがあります。公開する前に、数字や固有名詞を、元の記録と照らし合わせています。誤りに気づいたときは、直して、直したと書きます。
+
 ## 記事の書き方と、訂正について
 
   Notes (https://koshinstudio.com/notes/) の記事は、実際のコミット（作業の記録）と、実測の数字をもとに書いています。決めている方針は、三つです。
@@ -12588,6 +12598,16 @@ Make, try, write. Games, a quiz app and more, with records of how they were made
 > My feeling was right.
 But the cause was not where I thought.
   No install and no sign-up. It starts right away when you open it in a browser. That is the one thing I try not to break.
+
+## About the operator
+
+  Koshin Studio is run by one person. I make and publish browser games, a quiz, and iPhone apps (such as Toreca Dash (https://koshinstudio.com/en/works/torecadash/), available on the App Store). This site carries introductions to what I made, numbers I measured while making it, and records of bugs and how I fixed them.
+
+  The numbers in articles are ones I checked against my own app’s logs, data and source code, or official pages. What I could not confirm, I say I could not confirm. For feedback, corrections, interviews or work enquiries, please use the contact section below.
+
+## How the text is written
+
+  Article text is sometimes written with the help of AI (Claude), based on development records (work logs, logs, source code). Before publishing, I check numbers and proper names against the original records. When I find a mistake, I fix it and say so.
 
 ## How the articles are written, and corrections
 

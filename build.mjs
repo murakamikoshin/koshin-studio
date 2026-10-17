@@ -127,7 +127,7 @@ writeFileSync(here + '/works/index.html',
 `<main><div class="wrap">
   <h1>Works</h1>
   <div class="rule"></div>
-  <p class="lead">作ったものの一覧です。増えたらここに並びます。</p>
+  <p class="lead">作ったものの一覧です。</p>
   <p class="rv">ブラウザですぐ遊べるゲームが 3 つ、診断アプリが 1 つ、iPhone のアプリが 1 つあります。どれも、登録なしで始められます（iPhone のアプリは、App Store から入れます）。それぞれのページに、<strong>遊び方、仕組み、預かる情報、まだ確かめていないこと</strong>を書いています。</p>
   <ul class="rv">
     <li><strong>すし積む</strong> — 寿司のネタを落として、同じものを合体させる、物理演算のパズル。</li>
@@ -144,7 +144,6 @@ writeFileSync(here + '/works/index.html',
 ${works.map(workCard).join('\n')}
   </ul>
   <p class="soon rv" id="empty" hidden>この種類はまだありません</p>
-  <p class="soon rv" style="margin-top:22px">次の作品を用意しています</p>
 </div></main>` + foot);
 
 /* ---- 使っている道具 ---- */
@@ -887,10 +886,13 @@ for (const file of pages) {
   /* 脚の SNS 欄と、広告の枠を差し替える（data/site.json が元） */
   html = html.replace(/<header class="site"><div class="wrap">\s*<a class="logo" href="\/">Koshin Studio<\/a>\s*<nav>[\s\S]*?<\/nav>/,
     '<header class="site"><div class="wrap">\n  <a class="logo" href="/"><img class="logo-mark" src="/favicon.svg" alt="" width="28" height="28">Koshin Studio</a>\n  <nav><a href="/works/">Works</a><a href="/notes/">Notes</a><a href="/picks/">Picks</a><a href="/calc/">Tools</a><a href="/about/">About</a></nav>');
+  /* 英語の頁は、脚が空のまま作られていた（プライバシーも連絡先も、たどれなかった）。入れる */
+  html = html.replace('<footer class="site"><div class="wrap"></div></footer>',
+    '<footer class="site"><div class="wrap">\n  <span>© 2026 Koshin Studio</span>\n  <nav><a href="/en/" hreflang="en" lang="en">English</a><a href="/en/works/" hreflang="en" lang="en">Works</a><a href="/en/about/" hreflang="en" lang="en">About</a><a href="/en/about/#contact" hreflang="en" lang="en">Contact</a><a href="/en/privacy/" hreflang="en" lang="en">Privacy</a><a href="/" hreflang="ja" lang="ja">日本語</a></nav>\n</div></footer>');
   html = html.replace(/(<footer class="site"><div class="wrap">[\s\S]*?)<nav>[\s\S]*?<\/nav>(\s*<\/div><\/footer>)/,
     '$1' + (I18N[rel.split('/')[1]]
-      ? '<nav><a href="/en/" hreflang="en" lang="en">English</a><a href="/" hreflang="ja" lang="ja">日本語</a><a href="/en/privacy/" hreflang="en" lang="en">Privacy</a></nav>'
-      : '<nav><a href="/picks/">Picks</a><a href="/calc/">Tools</a><a href="/about/">About</a><a href="/privacy/">あつかい</a><a href="/en/" hreflang="en" lang="en">English</a></nav>') + '$2');
+      ? '<nav><a href="/en/" hreflang="en" lang="en">English</a><a href="/" hreflang="ja" lang="ja">日本語</a><a href="/en/about/#contact" hreflang="en" lang="en">Contact</a><a href="/en/privacy/" hreflang="en" lang="en">Privacy</a></nav>'
+      : '<nav><a href="/picks/">Picks</a><a href="/calc/">Tools</a><a href="/about/">About</a><a href="/about/#contact">お問い合わせ</a><a href="/privacy/">あつかい</a><a href="/en/" hreflang="en" lang="en">English</a></nav>') + '$2');
   html = html.replace(/<div class="sns-row">[\s\S]*?<\/div>/g, `<div class="sns-row">${socialHtml}</div>`);
   if (!/class="sns-row"/.test(html)) {
     html = html.replace('<footer class="site"><div class="wrap">\n  <span>© 2026 Koshin Studio</span>',
@@ -977,9 +979,19 @@ for (const file of pages) {
   html = html.replace(/\n?\s*<meta name="google-adsense-account"[^>]*>/g, '');
   const live = ads.enabled && ads.client && /<ins class="adsbygoogle"/.test(html);
   /* 審査中は枠が無くても、サイトの確認用に script とメタタグだけ入れる（広告は出ない） */
+  /* 広告の script は、中身のある頁（記事・作品・計算機・解説）にだけ入れる。
+     Google の方針では、案内・ナビゲーションだけの画面、内容の薄い画面、
+     自動で並べただけの画面には広告を出せない（一覧・タイプ別・404・あつかいは除く）。
+     サイトの確認用のメタタグは、全頁に残す */
+  const adPath = rel.replace(/index\.html$/, '');
+  const isContentPage = /^\/(en\/)?(notes|works|calc)\/[^/]+\//.test(adPath) ||
+    /^\/anime\/(guide|axes)\//.test(adPath) || /^\/works\/[^/]+\/guide\.html$/.test(rel);
   if (live || (ads.verify && ads.client)) {
     html = html.replace('</head>',
-      `<meta name="google-adsense-account" content="${ads.client}">\n<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${ads.client}" crossorigin="anonymous"></script>\n</head>`);
+      `<meta name="google-adsense-account" content="${ads.client}">\n` +
+      (live || isContentPage
+        ? `<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${ads.client}" crossorigin="anonymous"></script>\n` : '') +
+      '</head>');
   }
   const url = urlOf(file);
   html = html.replace(/\n?\s*<link rel="canonical"[^>]*>/g, '')
