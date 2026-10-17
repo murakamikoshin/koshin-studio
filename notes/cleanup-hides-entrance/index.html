@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>「後から掃除するから大丈夫」が、入口の不具合を隠していた：商品が毎日 400 件そっくり作り直されていた — Koshin Studio</title>
+<meta name="description" content="カタログからの商品登録が名前の完全一致でしか探さず、括弧・空白・全角の違いで毎日そっくりな商品を作り直し、この日だけで 437 件（410 件は記事なし）。統合の掃除が後から片付けていたため気づけなかった。">
+<meta property="og:title" content="「後から掃除するから大丈夫」が、入口の不具合を隠していた：商品が毎日 400 件そっくり作り直されていた">
+<meta property="og:description" content="カタログからの商品登録が名前の完全一致でしか探さず、括弧・空白・全角の違いで毎日そっくりな商品を作り直し、この日だけで 437 件（410 件は記事なし）。統合の掃除が後から片付けていたため気づけなかった。">
+<meta property="og:type" content="article">
+<meta name="theme-color" content="#fbfaf7">
+<link rel="icon" href="/favicon.ico?v=1697d589" sizes="48x48">
+<link rel="icon" href="/favicon.svg?v=b9d7922f" type="image/svg+xml" sizes="any">
+<link rel="icon" href="/assets/icon/icon-192.png?v=e2566235" type="image/png" sizes="192x192">
+<link rel="apple-touch-icon" href="/assets/icon/icon-180.png?v=84e7f0e6">
+<link rel="manifest" href="/site.webmanifest">
+<script>document.documentElement.className+=" js"</script>
+<link rel="stylesheet" href="/style.css?v=dd51310c">
+<meta name="google-adsense-account" content="ca-pub-3863314847163872">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3863314847163872" crossorigin="anonymous"></script>
+<link rel="canonical" href="https://koshinstudio.com/notes/cleanup-hides-entrance/">
+<meta property="og:url" content="https://koshinstudio.com/notes/cleanup-hides-entrance/">
+<meta property="og:site_name" content="Koshin Studio">
+<meta property="og:locale" content="ja_JP">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="alternate" type="application/rss+xml" title="Koshin Studio — Notes" href="https://koshinstudio.com/feed.xml">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BlogPosting","headline":"「後から掃除するから大丈夫」が、入口の不具合を隠していた：商品が毎日 400 件そっくり作り直されていた","url":"https://koshinstudio.com/notes/cleanup-hides-entrance/","description":"カタログからの商品登録が名前の完全一致でしか探さず、括弧・空白・全角の違いで毎日そっくりな商品を作り直し、この日だけで 437 件（410 件は記事なし）。統合の掃除が後から片付けていたため気づけなかった。","datePublished":"2026-10-17","dateModified":"2026-10-17","inLanguage":"ja","image":"https://koshinstudio.com/assets/og/og_notes_cleanup-hides-entrance.jpg","author":{"@id":"https://koshinstudio.com#studio"},"publisher":{"@id":"https://koshinstudio.com#studio"},"mainEntityOfPage":"https://koshinstudio.com/notes/cleanup-hides-entrance/"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Koshin Studio","item":"https://koshinstudio.com/"},{"@type":"ListItem","position":2,"name":"Notes","item":"https://koshinstudio.com/notes/"},{"@type":"ListItem","position":3,"name":"「後から掃除するから大丈夫」が、入口の不具合を隠していた：商品が毎日 400 件そっくり作り直されていた","item":"https://koshinstudio.com/notes/cleanup-hides-entrance/"}]}]}</script>
+<meta property="og:image" content="https://koshinstudio.com/assets/og/og_notes_cleanup-hides-entrance.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
+</head>
+<body class="article">
+<canvas id="motes"></canvas>
+
+<header class="site"><div class="wrap">
+  <a class="logo" href="/"><img class="logo-mark" src="/favicon.svg?v=b9d7922f" alt="" width="28" height="28">Koshin Studio</a>
+  <nav><a href="/works/">Works</a><a href="/notes/">Notes</a><a href="/picks/">Picks</a><a href="/calc/">Tools</a><a href="/about/">About</a></nav>
+</div></header>
+
+<main><div class="wrap">
+  <nav class="crumbs" aria-label="現在地"><a href="/">Koshin Studio</a><i aria-hidden="true">›</i><a href="/notes/">Notes</a><i aria-hidden="true">›</i><span aria-current="page">「後から掃除するから大丈夫」が、入口の不具合を隠していた：商品が毎日 400 件そっくり作り直されていた</span></nav>
+  <h1>「後から掃除するから大丈夫」が、入口の不具合を隠していた：商品が毎日 400 件そっくり作り直されていた</h1>  <div class="rule"></div>
+  <p class="lead">トレカダッシュ 開発の記録 ／ 2026年8月</p>
+
+  <p>iOS アプリ「<a href="/works/torecadash/">トレカダッシュ</a>」の商品のデータには、毎日夜に、重複した商品をまとめる掃除の処理があります。「後から掃除するから、大丈夫」。そう思っていた場所に、<strong>毎日、そっくりな商品が作り直されている</strong>入口の不具合が、隠れていました。</p>
+  <p>2026 年 8 月 27 日の総点検で、「この日だけで商品が 437 件、作られていて、そのうち 410 件は、記事が 1 件も付いていない」と分かりました。</p>
+  <p class="note">数字は、2026 年 8 月 27 日の作業の記録から書いています。</p>
+<!--toc-->
+  <nav class="toc" aria-label="目次"><p>目次</p><ol><li><a href="#s1">原因：「名前の完全一致」でしか、探していなかった</a></li><li><a href="#s2">もう 1 つ：6 つの商品が、1 つに吸い込まれていた</a></li><li><a href="#s3">自分の修復で、先着に締切を付けてしまった</a></li><li><a href="#s4">分かったこと</a></li></ol></nav>
+<!--/toc-->
+  <h2 class="rv" id="s1">原因：「名前の完全一致」でしか、探していなかった</h2>
+  <p>公式のカタログから、商品を登録する処理は、「同じ商品が、すでにあるか」を、<strong>名前の完全一致だけ</strong>で判定していました。</p>
+  <pre><code>既存「拡張パック「古代の咆哮」」  ↔  カタログ「拡張パック 古代の咆哮」
+既存「Vスタートデッキ草（全角空白）フシギバナ」  ↔  カタログ「Vスタートデッキ草 フシギバナ」</code></pre>
+  <p>括弧、空白、全角と半角の違いだけで、「まだ無い」と判定され、<strong>毎日、そっくりな商品が作り直されて</strong>いました。</p>
+  <p>作られた重複は、後から、週 1 回と毎日の統合の処理が片付けていました。だから、気づけませんでした。ただ、その間は、利用者に同じ商品が 2 つ見え、記事の紐付け先も割れます。</p>
+  <p>直し方は、統合の処理が使っているのと<strong>同じ正規化</strong>（括弧、空白、全角と半角を吸収する）で比べることでした。カタログ側にも、表記ゆれの重複があるので、同じ実行の中では、同じキーを 1 つに絞ります。</p>
+  <p>教訓は、<strong>「後から掃除するジョブがある」仕組みは、入口の不具合を隠してしまう</strong>ことです。掃除の件数が、毎回同じくらい出ているなら、片付いているのではなく、<strong>毎日、作られ続けています</strong>。</p>
+
+  <h2 class="rv" id="s2">もう 1 つ：6 つの商品が、1 つに吸い込まれていた</h2>
+  <p>マジック：ザ・ギャザリングの「FINAL FANTASY」の統率者デッキ 6 種（サイオンズ・スペル、リミットブレイク、カウンター・ブリッツ、トランス・リアニメイト、ほか）が、<strong>すべて 1 つの商品に吸い込まれて</strong>いました。</p>
+  <ul>
+    <li>商品の別表記に、ほかの弾の名前が入る。</li>
+    <li>それが、AI の候補に出る。</li>
+    <li>次の誤った照合を呼ぶ。</li>
+  </ul>
+  <p>という、<strong>自己増殖</strong>の形でした。別表記を掃除するだけでは、直りませんでした。AI が、同じ商品を選び続けるからです。そこで、<strong>括弧の中の固有名が違う商品を、照合の候補から外す</strong>判定（<code>namesDifferentQuotedVariant</code>）を、候補のフィルタにも入れました。候補から消えると、AI は「新しい商品」と答えられるので、正しい商品が作られます。</p>
+  <p>誤検知を潰すために、括弧の中が、総称、地名、店名、数量、状態のときは、固有名として扱いません。実データで確かめると、この条件を入れる前は、<strong>12 件のうち 6 件が誤検知</strong>でした。</p>
+  <p>また、<strong>採用しなかった案</strong>もあります。「商品名の固有名が、別表記に含まれないなら、消す」という強い規則も試しました。43 件のうち 6 件が誤検知（型番が同じ別の弾、「＋（プラス）」の付く名前など）だったので、見送りました。</p>
+
+  <h2 class="rv" id="s3">自分の修復で、先着に締切を付けてしまった</h2>
+  <p>同じ告知のページの記事から、日付を引き継ぐ修復の処理（<code>inheritDatesFromSameAnnouncement</code>）を流しました。すると、<strong>先着（無くなり次第終了）の記事に、同じページの抽選記事の締切を、渡してしまいました</strong>。先着には、締切という概念がありません。利用者に、「その日まで買える」という嘘の期限を見せることになります。</p>
+  <p>引き継ぐ側の 2 か所（保存のときの処理と、修復の処理）の両方で、先着には、締切を渡さないようにしました。付けてしまった 1 件は、消しました。</p>
+  <p>教訓は、修復の処理を流したら、<strong>流す前と流した後で、監査を比べる</strong>ことです。「直った件数」だけを見ていると、自分が増やした異常に、気づけません。</p>
+
+  <h2 class="rv" id="s4">分かったこと</h2>
+  <blockquote>後から掃除する仕組みは、入口の不具合を隠す。</blockquote>
+  <ul>
+    <li><strong>掃除の件数が毎回同じなら、毎日作られている。</strong>片付いているのではありません。</li>
+    <li><strong>入口と掃除で、同じ正規化を使う。</strong>入口が厳しいと、掃除が肩代わりします。</li>
+    <li><strong>別表記の掃除だけでは、自己増殖は止まらない。</strong>AI の候補から外す必要があります。</li>
+    <li><strong>強い規則は、誤検知を数えてから。</strong>43 件で 6 件の誤検知なら、見送ります。</li>
+    <li><strong>修復の前後で、監査を比べる。</strong>自分が増やした異常を見つけるためです。</li>
+  </ul>
+
+
+  <div class="ad-slot" data-slot="footer" hidden></div>
+<!--/ad-->
+
+  <div class="rule" style="margin:40px 0 22px"></div>
+  <p class="eyebrow">この話に出てくるもの</p>
+  <ul class="plain">
+    <li><a href="/works/torecadash/">トレカダッシュ</a> — トレカの抽選・予約・先着の情報を集める iPhone アプリ</li>
+    <li><a href="/notes/dup-zero/">「重複は実質ゼロ」と数えたのに、監査は 112 組を出していた</a> — 重複統合の別の失敗</li>
+    <li><a href="/notes/catalog-seed-393/">公式の一覧から、「作品名だけの商品」が 393 件できていた</a> — 同じカタログ投入の別の失敗</li>
+    <li><a href="/notes/typo-catalog/">一度だけ生まれた誤字が、店ごとに増えていった</a> — 自己増殖の別の例</li>
+  </ul>
+
+<!--related-->
+  <div class="rule" style="margin:40px 0 22px"></div>
+  <p class="eyebrow">ほかの記録</p>
+  <ul class="plain">
+    <li><a href="/notes/vps-migration/">Cloud Functions から月 4,300 円のサーバーへ移した：1 日 3,700 円の課金、EEA で全滅した Yahoo!、移行で踏んだ 5 つの罠</a> — 無料のお試しが終わると 1 日約 3,700 円（月約 10.6 万円）かかった。待ち時間にも課金される構造が原因で、コードをほぼ書き換えずにシンガポールの VPS（月約 4,300 円）へ移した。ヘルシンキでは Yahoo! が全滅、秘密の値は 5 本でなく 15 本だった。</li>
+    <li><a href="/notes/test-ads/">広告が出ないと、実機チェックの 25 項目が止まった：開発者モードだけテスト広告を使い、賞品名を直書きしない</a> — 配信前は広告の在庫が無く、実機チェックリスト 163 項目のうち 25 項目が確認できなかった。開発者モードのときだけ、Google のテスト用の広告枠に切り替えた。賞品名は 1 つの設定から読み、チェックリストにも直書きしない。</li>
+    <li><a href="/notes/leaked-value/">「これベイブレードじゃん」が、関門を入れても戻ってきた：弾いた値が、別の形で漏れた</a> — 「商品名に玩具の名前があれば作らない」関門を入れても、AI が返す商品名から玩具の名前が消えて、すり抜けた。判定を告知の本文に移し、「カードゲームの語が 1 つも無いときだけ」弾く条件にした。</li>
+  </ul>
+<!--/related-->
+
+<!--comments-->
+  <section class="comments" id="comments" data-repo="murakamikoshin/koshin-studio" data-repo-id="R_kgDOURc3ew"
+    data-category="Announcements" data-category-id="DIC_kwDOURc3e84DHTVr">
+    <h2 id="comments-h">コメント</h2>
+    <p>感想や、記事の間違いの指摘は、ここへ。書くには、GitHub のアカウントが要ります。</p>
+    <p><button type="button" class="btn ghost" id="load-comments">コメントを開く</button></p>
+    <p class="note">押すと、giscus（giscus.app）と GitHub に接続します。押さなければ、接続しません。詳しくは<a href="/privacy/">あつかい</a>に書いています。</p>
+    <div id="giscus-box"></div>
+  </section>
+<!--/comments-->
+</div>
+</main>
+
+<footer class="site"><div class="wrap">
+  <span>© 2026 Koshin Studio</span>
+  <div class="sns-row"></div>
+  <nav><a href="/picks/">Picks</a><a href="/calc/">Tools</a><a href="/about/">About</a><a href="/privacy/">あつかい</a><a href="/en/" hreflang="en" lang="en">English</a></nav>
+</div></footer>
+<script src="/motion.js?v=1e7447ec" defer></script>
+</body>
+</html>

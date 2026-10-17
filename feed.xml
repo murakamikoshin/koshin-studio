@@ -7,6 +7,13 @@
   <language>ja</language>
   <atom:link href="https://koshinstudio.com/feed.xml" rel="self" type="application/rss+xml"/>
   <item>
+    <title>「後から掃除するから大丈夫」が、入口の不具合を隠していた：商品が毎日 400 件そっくり作り直されていた</title>
+    <link>https://koshinstudio.com/notes/cleanup-hides-entrance/</link>
+    <guid isPermaLink="true">https://koshinstudio.com/notes/cleanup-hides-entrance/</guid>
+    <pubDate>Fri, 16 Oct 2026 15:00:00 GMT</pubDate>
+    <description>カタログからの商品登録が名前の完全一致でしか探さず、括弧・空白・全角の違いで毎日そっくりな商品を作り直し、この日だけで 437 件（410 件は記事なし）。統合の掃除が後から片付けていたため気づけなかった。</description>
+  </item>
+  <item>
     <title>Cloud Functions から月 4,300 円のサーバーへ移した：1 日 3,700 円の課金、EEA で全滅した Yahoo!、移行で踏んだ 5 つの罠</title>
     <link>https://koshinstudio.com/notes/vps-migration/</link>
     <guid isPermaLink="true">https://koshinstudio.com/notes/vps-migration/</guid>
