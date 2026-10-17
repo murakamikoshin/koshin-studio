@@ -453,6 +453,7 @@ ${picks.map(noteRow).join('\n')}
 const tools = [
   { url: '/calc/gacha/', title: 'ガチャのコンプリート計算機', blurb: '全種類をそろえるのに、何回・何円かかるか。平均と、9 割の人が揃う回数、コンプリートセットとの損得まで。' },
   { url: '/calc/gacha-rate/', title: 'ガチャの当たり確率・天井計算機', blurb: '排出率から、何回で当たるか。欲しい個数と天井（○回で確定）にも対応。' },
+  { url: '/calc/lottery/', title: '抽選の当選確率計算機', blurb: '倍率と応募の回数から、ひとつ以上当たる確率を出す。応募先ごとに確率が違っても使える。トレカの抽選販売の考え方つき。' },
 ];
 mkdirSync(here + '/calc', { recursive: true });
 writeFileSync(here + '/calc/index.html',
@@ -462,6 +463,13 @@ writeFileSync(here + '/calc/index.html',
   <div class="rule"></div>
   <p class="lead">計算機</p>
   <p class="rv">ブラウザの中だけで動く計算機です。入れた数字は、どこにも送りません。計算が合っているかは、コンピューターで 20 万人ぶんを実際に引かせた結果と照らして、確かめています。</p>
+  <p class="rv">どれも、「平均は何回か」だけでなく、<strong>運の悪い人はどれくらいかかるか</strong>（9 割の人・99% の人が当たるまでの回数）を出します。平均だけを見ると、「それくらいで当たるはず」と思い込みやすいからです。使い方に迷ったら、次のように選んでください。</p>
+  <ul class="rv">
+    <li><strong>全種類を集めたい</strong>（ガチャポン、ランダム封入のコレクション）→ コンプリート計算機。種類の数と、もう持っている数から、平均と、運の悪い人の回数を出します。</li>
+    <li><strong>ある 1 つを当てたい</strong>（排出率が決まっているガチャ、天井つき）→ 当たり確率・天井計算機。</li>
+    <li><strong>抽選販売に何か所か応募する</strong>（倍率が分かる、または見積もれる）→ 抽選の当選確率計算機。応募先ごとに倍率が違っても組み合わせられます。</li>
+  </ul>
+  <p class="rv note">どの計算機も、確率の計算です。必ず当たる、という意味ではありません。前提が当てはまらない場合（確率が途中で変わるゲーム、重複応募が禁止の抽選など）は、各ページの「この計算が当てはまらないとき」に書いています。</p>
   <ul class="notes">
 ${tools.map((t, i) => `    <li class="rv" data-delay="${i * 70}"><a class="note-row" href="${t.url}">
       <time>計算機</time>
@@ -773,7 +781,7 @@ function ldFor(file, url) {
     { '@type': 'CollectionPage', name: 'Picks', url: url, inLanguage: 'ja', isPartOf: { '@id': SITE + '#studio' } },
     { '@type': 'ItemList', name: '比べたもの・買ったもの',
       itemListElement: picks.map((n, i) => ({ '@type': 'ListItem', position: i + 1, url: SITE + n.url, name: n.title })) }];
-  const tool = { '/calc/gacha/index.html': ['ガチャのコンプリート計算機', '/calc/gacha/'], '/calc/gacha-rate/index.html': ['ガチャの当たり確率・天井計算機', '/calc/gacha-rate/'] }[rel];
+  const tool = { '/calc/gacha/index.html': ['ガチャのコンプリート計算機', '/calc/gacha/'], '/calc/gacha-rate/index.html': ['ガチャの当たり確率・天井計算機', '/calc/gacha-rate/'], '/calc/lottery/index.html': ['抽選の当選確率計算機', '/calc/lottery/'] }[rel];
   if (tool) return [crumbs([['Koshin Studio', '/'], ['Tools', '/calc/'], [tool[0], tool[1]]]),
     { '@type': 'WebApplication', name: tool[0], url: SITE + tool[1], applicationCategory: 'UtilitiesApplication',
       operatingSystem: 'Any (ブラウザ)', inLanguage: 'ja', isAccessibleForFree: true,
@@ -884,6 +892,7 @@ for (const file of pages) {
     '/calc/index.html': [['Tools', '/calc/']],
     '/calc/gacha/index.html': [['Tools', '/calc/'], ['ガチャのコンプリート計算機', '/calc/gacha/']],
     '/calc/gacha-rate/index.html': [['Tools', '/calc/'], ['ガチャの当たり確率・天井計算機', '/calc/gacha-rate/']],
+    '/calc/lottery/index.html': [['Tools', '/calc/'], ['抽選の当選確率計算機', '/calc/lottery/']],
   };
   let trail = TRAIL[rel];
   const wm2 = rel.match(/^\/works\/([^/]+)\//);

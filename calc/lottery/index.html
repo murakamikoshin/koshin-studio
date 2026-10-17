@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>抽選の当選確率計算機 — 何回応募すれば、当たる？ — Koshin Studio</title>
+<meta name="description" content="抽選に何回応募すると、どれくらいの確率で当たるかを計算します。倍率か当選確率、応募の回数、応募先ごとに確率が違う場合にも対応。トレカの抽選販売の考え方つき。">
+<meta property="og:title" content="抽選の当選確率計算機">
+<meta property="og:description" content="倍率と応募回数から、当たる確率を計算。応募先ごとの確率が違っても使えます。">
+<meta property="og:type" content="article">
+<meta name="theme-color" content="#fbfaf7">
+<link rel="icon" href="/favicon.ico?v=1697d589" sizes="48x48">
+<link rel="icon" href="/favicon.svg?v=b9d7922f" type="image/svg+xml" sizes="any">
+<link rel="icon" href="/assets/icon/icon-192.png?v=e2566235" type="image/png" sizes="192x192">
+<link rel="apple-touch-icon" href="/assets/icon/icon-180.png?v=84e7f0e6">
+<link rel="manifest" href="/site.webmanifest">
+<script>document.documentElement.className+=" js"</script>
+<link rel="stylesheet" href="/style.css?v=dd51310c">
+<meta name="google-adsense-account" content="ca-pub-3863314847163872">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3863314847163872" crossorigin="anonymous"></script>
+<link rel="canonical" href="https://koshinstudio.com/calc/lottery/">
+<meta property="og:url" content="https://koshinstudio.com/calc/lottery/">
+<meta property="og:site_name" content="Koshin Studio">
+<meta property="og:locale" content="ja_JP">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="alternate" type="application/rss+xml" title="Koshin Studio — Notes" href="https://koshinstudio.com/feed.xml">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Koshin Studio","item":"https://koshinstudio.com/"},{"@type":"ListItem","position":2,"name":"Tools","item":"https://koshinstudio.com/calc/"},{"@type":"ListItem","position":3,"name":"抽選の当選確率計算機","item":"https://koshinstudio.com/calc/lottery/"}]},{"@type":"WebApplication","name":"抽選の当選確率計算機","url":"https://koshinstudio.com/calc/lottery/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any (ブラウザ)","inLanguage":"ja","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"JPY"},"author":{"@id":"https://koshinstudio.com#studio"},"publisher":{"@id":"https://koshinstudio.com#studio"}}]}</script>
+<meta property="og:image" content="https://koshinstudio.com/assets/sushitsumu-wide.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
+</head>
+<body>
+<canvas id="motes"></canvas>
+
+<header class="site"><div class="wrap">
+  <a class="logo" href="/"><img class="logo-mark" src="/favicon.svg?v=b9d7922f" alt="" width="28" height="28">Koshin Studio</a>
+  <nav><a href="/works/">Works</a><a href="/notes/">Notes</a><a href="/picks/">Picks</a><a href="/calc/">Tools</a><a href="/about/">About</a></nav>
+</div></header>
+
+<main><div class="wrap">
+  <nav class="crumbs" aria-label="現在地"><a href="/">Koshin Studio</a><i aria-hidden="true">›</i><a href="/calc/">Tools</a><i aria-hidden="true">›</i><span aria-current="page">抽選の当選確率計算機</span></nav>
+  <h1>抽選の当選確率計算機</h1>
+  <div class="rule"></div>
+  <p class="lead">何回応募すれば、当たる？</p>
+
+  <p>抽選販売に何回か応募したとき、<strong>ひとつでも当たる確率</strong>を計算します。「倍率 5 倍」のような数字か、当選確率（％）を入れてください。応募先ごとに確率が違うときは、下の「応募先ごとの当選確率」にカンマで並べて入れると、それぞれを組み合わせて計算します。</p>
+
+  <form class="calc" id="calc" onsubmit="return false">
+    <label>倍率（応募者 ÷ 当選枠・任意）<input type="number" id="mult" min="1" step="any" placeholder="例 5" inputmode="decimal"></label>
+    <label>当選確率（％）<input type="number" id="p" min="0.001" max="100" step="any" value="20" inputmode="decimal"></label>
+    <label>応募する回数<input type="number" id="n" min="1" max="200" value="5" inputmode="numeric"></label>
+    <label>何個以上、欲しいか<input type="number" id="k" min="1" max="200" value="1" inputmode="numeric"></label>
+    <label>応募先ごとの当選確率（％・任意）<input type="text" id="list" placeholder="例 10, 30, 5, 50" inputmode="text"></label>
+  </form>
+  <p class="note">倍率を入れると、当選確率の欄より、倍率が優先されます（確率 = 100 ÷ 倍率）。「応募先ごとの当選確率」を入れると、倍率・確率・回数の欄は使いません。</p>
+
+  <div class="calc-out" id="out" aria-live="polite"></div>
+  <noscript><p class="note">この計算機は、JavaScript で動きます。</p></noscript>
+
+  <h2 class="rv">例：倍率 5 倍の抽選に、5 か所で応募する</h2>
+  <ul>
+    <li>1 か所あたりの当選確率は 20%（1 ÷ 5）。5 か所すべてで外れる確率は、0.8 の 5 乗で <strong>32.8%</strong>。つまり、ひとつ以上当たる確率は <strong>67.2%</strong> です。</li>
+    <li>当たる数の平均は、5 × 20% で <strong>1.0 個</strong>。ただし平均が 1 個でも、<strong>ちょうど 1 個になるのは 41.0%</strong>、2 個以上になるのは 26.3%、3 個以上は 5.8% です。</li>
+    <li>「倍率 5 倍の抽選に 5 回応募したから、1 回は当たるはず」とは、言えません。<strong>3 人に 1 人は、5 回全部、外れます。</strong></li>
+  </ul>
+
+  <h2 class="rv">早見表：倍率と応募の回数で、ひとつ以上当たる確率</h2>
+  <p>すべての応募先で、同じ倍率のとき。1 か所ずつ、ほかの結果とは関係なく決まる前提です。</p>
+  <div class="scroll rv"><table>
+    <thead><tr><th>倍率（当選確率）</th><th>1 回</th><th>3 回</th><th>5 回</th><th>10 回</th><th>20 回</th></tr></thead>
+    <tbody>
+      <tr><td>2 倍（50%）</td><td>50.0%</td><td>87.5%</td><td>96.9%</td><td>99.9%</td><td>99.99% 超</td></tr>
+      <tr><td>3 倍（33.3%）</td><td>33.3%</td><td>70.4%</td><td>86.8%</td><td>98.3%</td><td>99.97%</td></tr>
+      <tr><td>5 倍（20%）</td><td>20.0%</td><td>48.8%</td><td>67.2%</td><td>89.3%</td><td>98.8%</td></tr>
+      <tr><td>10 倍（10%）</td><td>10.0%</td><td>27.1%</td><td>41.0%</td><td>65.1%</td><td>87.8%</td></tr>
+      <tr><td>20 倍（5%）</td><td>5.0%</td><td>14.3%</td><td>22.6%</td><td>40.1%</td><td>64.2%</td></tr>
+      <tr><td>50 倍（2%）</td><td>2.0%</td><td>5.9%</td><td>9.6%</td><td>18.3%</td><td>33.2%</td></tr>
+    </tbody>
+  </table></div>
+  <p>倍率 10 倍の抽選に 10 か所応募しても、ひとつ以上当たる確率は <strong>65.1%</strong> です。ひとつも当たらない人が、約 3 人に 1 人（34.9%）います。応募の回数を 2 倍にしても、確率は 2 倍にはなりません（10 倍で 5 回なら 41.0%、10 回なら 65.1%）。</p>
+
+  <h2 class="rv">早見表：何回応募すれば、何割の人が当たるか</h2>
+  <div class="scroll rv"><table>
+    <thead><tr><th>倍率（当選確率）</th><th>半分の人が当たる</th><th>9 割の人が当たる</th><th>99% の人が当たる</th></tr></thead>
+    <tbody>
+      <tr><td>2 倍（50%）</td><td>1 回</td><td>4 回</td><td>7 回</td></tr>
+      <tr><td>3 倍（33.3%）</td><td>2 回</td><td>6 回</td><td>12 回</td></tr>
+      <tr><td>5 倍（20%）</td><td>4 回</td><td>11 回</td><td>21 回</td></tr>
+      <tr><td>10 倍（10%）</td><td>7 回</td><td>22 回</td><td>44 回</td></tr>
+      <tr><td>20 倍（5%）</td><td>14 回</td><td>45 回</td><td>90 回</td></tr>
+      <tr><td>50 倍（2%）</td><td>35 回</td><td>114 回</td><td>228 回</td></tr>
+    </tbody>
+  </table></div>
+  <p>「9 割の人が当たる」までの応募数は、倍率にほぼ比例して増えます（10 倍で 22 回、20 倍で 45 回）。倍率が 2 倍になると、必要な応募数も、おおよそ 2 倍です。</p>
+
+  <h2 class="rv">しくみ</h2>
+  <ul>
+    <li><strong>ひとつも当たらない確率：</strong>応募先ごとの「外れる確率（1 − 当選確率）」を、全部かけ合わせます。ひとつ以上当たる確率は、1 からそれを引いたものです。確率が同じなら、<em>1 − (1 − p)<sup>n</sup></em> になります。</li>
+    <li><strong>当たる数の分布：</strong>応募先を 1 つずつ足しながら、「ちょうど j 個当たる確率」を更新しています（ポアソン二項分布）。確率が応募先ごとに違っても、同じやり方で出せます。</li>
+    <li><strong>必要な応募数：</strong>ひとつ以上当たる確率が <em>q</em> 以上になる、最小の回数 <em>n</em> です。<em>n ≥ ln(1 − q) ÷ ln(1 − p)</em>。</li>
+  </ul>
+  <p>計算の正しさは、別の方法でも確かめました。確率が同じ場合（20% を 5 回、8% を 10 回）と、応募先ごとに確率が違う場合（10%・30%・5%・50%）を、コンピューターで 20 万通りずつ実際に引かせて、「ちょうど j 個当たる確率」を、この計算機と照らしました。どの値も、差は 0.2 ポイント以内でした（20 万回の試行のばらつきの範囲です）。</p>
+
+  <h2 class="rv">この計算が当てはまらないとき</h2>
+  <ul>
+    <li><strong>当選確率は、自分で見積もった数字を入れる</strong>前提です。お店は、応募者の数を公表しないことが多く、「倍率」は、あくまで推定です。この計算機は、その数字が正しいかどうかを知りません。</li>
+    <li><strong>1 か所ごとに、別々に決まる</strong>前提です。同じお店への重複応募を禁止していたり、過去の購入実績や会員の条件で当選しやすさが変わる抽選では、実際の確率は、ここで出る数字と違います。</li>
+    <li><strong>応募の条件を満たす</strong>前提です。1 人 1 口、本人確認、購入の上限、受け取りの店舗などの条件は、応募先のページで確認してください。複数の口座や名義で応募する方法は、規約で禁止されていることがあります。</li>
+    <li>これは、確率の計算です。必ず当たる、という意味ではありません。応募の回数を増やすために、無理のある買い方をしないでください。</li>
+  </ul>
+
+  <p class="note">ガチャの計算は、<a href="/calc/gacha-rate/">ガチャの当たり確率・天井計算機</a>と<a href="/calc/gacha/">コンプリート計算機</a>にあります。</p>
+
+  <script src="/calc/lottery/lottery.js" defer></script>
+  <script src="/calc/lottery/page.js" defer></script>
+</div>
+</main>
+
+<footer class="site"><div class="wrap">
+  <span>© 2026 Koshin Studio</span>
+  <div class="sns-row"></div>
+  <nav><a href="/picks/">Picks</a><a href="/calc/">Tools</a><a href="/about/">About</a><a href="/privacy/">あつかい</a><a href="/en/" hreflang="en" lang="en">English</a></nav>
+</div></footer>
+<script src="/motion.js?v=1e7447ec" defer></script>
+</body>
+</html>
