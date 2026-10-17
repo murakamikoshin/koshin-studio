@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>同時実行の枠を増やす前に見るもの：2 コアのサーバーで、枠を 8 から 14 にした判断と、半分間違っていた前の結論 — Koshin Studio</title>
+<meta name="description" content="先着の監視を速くしようと間隔を詰めると、1 分おきの瞬殺監視が枠の順番待ちで遅くなった。枠を 8、11、14 と変えて測った。上限の正体は CPU ではなく、楽天 API の 1.5 秒待ちで枠を握る処理だった。">
+<meta property="og:title" content="同時実行の枠を増やす前に見るもの：2 コアのサーバーで、枠を 8 から 14 にした判断と、半分間違っていた前の結論">
+<meta property="og:description" content="先着の監視を速くしようと間隔を詰めると、1 分おきの瞬殺監視が枠の順番待ちで遅くなった。枠を 8、11、14 と変えて測った。上限の正体は CPU ではなく、楽天 API の 1.5 秒待ちで枠を握る処理だった。">
+<meta property="og:type" content="article">
+<meta name="theme-color" content="#fbfaf7">
+<link rel="icon" href="/favicon.ico?v=1697d589" sizes="48x48">
+<link rel="icon" href="/favicon.svg?v=b9d7922f" type="image/svg+xml" sizes="any">
+<link rel="icon" href="/assets/icon/icon-192.png?v=e2566235" type="image/png" sizes="192x192">
+<link rel="apple-touch-icon" href="/assets/icon/icon-180.png?v=84e7f0e6">
+<link rel="manifest" href="/site.webmanifest">
+<script>document.documentElement.className+=" js"</script>
+<link rel="stylesheet" href="/style.css?v=dd51310c">
+<meta name="google-adsense-account" content="ca-pub-3863314847163872">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3863314847163872" crossorigin="anonymous"></script>
+<link rel="canonical" href="https://koshinstudio.com/notes/concurrency-slots/">
+<meta property="og:url" content="https://koshinstudio.com/notes/concurrency-slots/">
+<meta property="og:site_name" content="Koshin Studio">
+<meta property="og:locale" content="ja_JP">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="alternate" type="application/rss+xml" title="Koshin Studio — Notes" href="https://koshinstudio.com/feed.xml">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BlogPosting","headline":"同時実行の枠を増やす前に見るもの：2 コアのサーバーで、枠を 8 から 14 にした判断と、半分間違っていた前の結論","url":"https://koshinstudio.com/notes/concurrency-slots/","description":"先着の監視を速くしようと間隔を詰めると、1 分おきの瞬殺監視が枠の順番待ちで遅くなった。枠を 8、11、14 と変えて測った。上限の正体は CPU ではなく、楽天 API の 1.5 秒待ちで枠を握る処理だった。","datePublished":"2026-10-17","dateModified":"2026-10-17","inLanguage":"ja","image":"https://koshinstudio.com/assets/og/og_notes_concurrency-slots.jpg","author":{"@id":"https://koshinstudio.com#studio"},"publisher":{"@id":"https://koshinstudio.com#studio"},"mainEntityOfPage":"https://koshinstudio.com/notes/concurrency-slots/"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Koshin Studio","item":"https://koshinstudio.com/"},{"@type":"ListItem","position":2,"name":"Notes","item":"https://koshinstudio.com/notes/"},{"@type":"ListItem","position":3,"name":"同時実行の枠を増やす前に見るもの：2 コアのサーバーで、枠を 8 から 14 にした判断と、半分間違っていた前の結論","item":"https://koshinstudio.com/notes/concurrency-slots/"}]}]}</script>
+<meta property="og:image" content="https://koshinstudio.com/assets/og/og_notes_concurrency-slots.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
+</head>
+<body class="article">
+<canvas id="motes"></canvas>
+
+<header class="site"><div class="wrap">
+  <a class="logo" href="/"><img class="logo-mark" src="/favicon.svg?v=b9d7922f" alt="" width="28" height="28">Koshin Studio</a>
+  <nav><a href="/works/">Works</a><a href="/notes/">Notes</a><a href="/picks/">Picks</a><a href="/calc/">Tools</a><a href="/about/">About</a></nav>
+</div></header>
+
+<main><div class="wrap">
+  <nav class="crumbs" aria-label="現在地"><a href="/">Koshin Studio</a><i aria-hidden="true">›</i><a href="/notes/">Notes</a><i aria-hidden="true">›</i><span aria-current="page">同時実行の枠を増やす前に見るもの：2 コアのサーバーで、枠を 8 から 14 にした判断と、半分間違っていた前の結論</span></nav>
+  <h1>同時実行の枠を増やす前に見るもの：2 コアのサーバーで、枠を 8 から 14 にした判断と、半分間違っていた前の結論</h1>  <div class="rule"></div>
+  <p class="lead">トレカダッシュ 開発の記録 ／ 2026年9月</p>
+
+  <p>iOS アプリ「<a href="/works/torecadash/">トレカダッシュ</a>」の裏側は、1 台の小さなサーバー（2 コア、メモリ 3.8GB）で、200 を超える定期処理を動かしています。同時に走れる処理の数には、上限があります（<strong>同時実行の枠</strong>）。</p>
+  <p>2026 年 9 月 7 日、先着の監視を速くしようとして、処理の間隔を詰めたところ、<strong>いちばん速く見たい監視が、枠の順番待ちで遅くなりました</strong>。そこで枠を 8 から 11、さらに 14 に増やしました。この記事は、その判断と、判断を分けた「見るもの」の記録です。</p>
+  <p class="note">数字は、2026 年 9 月 7 日の作業の記録から書いています。</p>
+<!--toc-->
+  <nav class="toc" aria-label="目次"><p>目次</p><ol><li><a href="#s1">枠が 8 では、足りなかった</a></li><li><a href="#s2">「2 コアだから、これ以上は無理」は、半分間違いだった</a></li><li><a href="#s3">判断を分けるのは、「CPU を使うか、待っているか」</a></li><li><a href="#s4">分かったこと</a></li></ol></nav>
+<!--/toc-->
+  <h2 class="rv" id="s1">枠が 8 では、足りなかった</h2>
+  <p>先着の反応を上げるために、いくつかの処理の間隔を詰めました。すると、1 分おきの「瞬殺監視」（在庫が数分で消える先着を見る処理）が、見送られるようになりました。同時実行の枠 8 が、いっぱいになったからです。</p>
+  <div class="scroll rv"><table>
+    <thead><tr><th></th><th>枠 8（詰めた後）</th><th>枠 11</th></tr></thead>
+    <tbody>
+      <tr><td>順番待ちの数</td><td>17〜29</td><td><strong>0</strong></td></tr>
+      <tr><td>同時に走っている数</td><td>8 で張り付き</td><td><strong>6 / 11（余裕あり）</strong></td></tr>
+      <tr><td>瞬殺監視の見送り</td><td>6 回 / 10 分</td><td><strong>1 回 / 10 分</strong></td></tr>
+      <tr><td>負荷（load average）</td><td>1.62</td><td><strong>1.24</strong></td></tr>
+      <tr><td>メモリの使用</td><td>1,161MB</td><td><strong>667MB</strong></td></tr>
+    </tbody>
+  </table></div>
+  <p>枠を 11 に増やすと、待ちは 0 になり、負荷もメモリも、むしろ下がりました。処理のほとんどは、通信の返事を待っているだけで、CPU を使っていません。<strong>上限は、CPU ではなく、枠だった</strong>のです。</p>
+  <p>ここで、枠の値は、サーバーの設定ファイル（<code>runner.env</code>）にだけ書かれていて、<strong>git（コードの履歴）には入りません</strong>。配備用のスクリプトが、このファイルを送らないからです。リポジトリを見ても、この変更は分かりません。作り直すときに忘れないよう、記録に残し、元の値の控えも作りました。</p>
+
+  <h2 class="rv" id="s2">「2 コアだから、これ以上は無理」は、半分間違いだった</h2>
+  <p>その後、人気の弾を速く回す枠と、最速で見る枠を足しました。すると、同時実行は 11 で張り付き、待ちが 15 件まで伸びて、瞬殺監視が 2 回見送られました（実質の間隔が 1.0 分から 1.4 分）。</p>
+  <p>調べると、こうでした。</p>
+  <ul>
+    <li>CPU は 2 コア。負荷は 1.66 で、2 コアの 83%。</li>
+    <li>楽天系の長い処理は、<strong>楽天の API の「1.5 秒待ち」で、枠を握ったまま眠っている</strong>。在庫の再検証 240 秒、楽天市場 181 秒、新規出品 110 秒、在庫 104 秒。</li>
+    <li>CPU は使っていないのに、枠だけを消費する。いちばん見えにくい犯人でした。</li>
+  </ul>
+  <p>このときは、「2 コアだから、枠を広げても全部が遅くなるだけ」と判断して、楽天の人気枠の頻度を減らしました。</p>
+  <div class="scroll rv"><table>
+    <thead><tr><th></th><th>足した後</th><th>減らした後</th></tr></thead>
+    <tbody>
+      <tr><td>同時実行</td><td>11 に張り付き</td><td>9〜11</td></tr>
+      <tr><td>順番待ち</td><td>最大 15</td><td>0〜1</td></tr>
+      <tr><td>瞬殺監視の見送り</td><td>2 回 / 10 分</td><td><strong>0 回</strong></td></tr>
+      <tr><td>瞬殺監視の実質の間隔</td><td>1.4 分</td><td><strong>1.0 分</strong></td></tr>
+      <tr><td>負荷</td><td>1.66</td><td>1.25</td></tr>
+    </tbody>
+  </table></div>
+  <p>ところが、その後、この判断が<strong>半分間違い</strong>だったと分かりました。枠を握っている楽天系の処理は、API の 1.5 秒待ちで眠っているだけで、CPU を使っていません。枠を増やしても、「同時に眠れる数」が増えるだけで、CPU の取り合いにはなりません。枠を 11 から 14 にして測り直しました。</p>
+  <div class="scroll rv"><table>
+    <thead><tr><th></th><th>枠 11</th><th>枠 14</th></tr></thead>
+    <tbody>
+      <tr><td>瞬殺監視の見送り</td><td>1 回 / 5 分</td><td><strong>0 回 / 6.7 分</strong></td></tr>
+      <tr><td>瞬殺監視の実質の間隔</td><td>1.3 分</td><td><strong>1.0 分</strong></td></tr>
+      <tr><td>負荷</td><td>1.25</td><td><strong>1.25（変わらず）</strong></td></tr>
+    </tbody>
+  </table></div>
+
+  <h2 class="rv" id="s3">判断を分けるのは、「CPU を使うか、待っているか」</h2>
+  <p>枠を増やしてよいかは、処理が<strong>CPU を使うのか、待っているのか</strong>で決まります。</p>
+  <ul>
+    <li>待っている処理が枠を握っているなら、枠を増やしてよい。負荷（<code>uptime</code>）が上がらないことを確かめる。</li>
+    <li>CPU を使う処理が枠を握っているなら、増やすと全部が遅くなる。</li>
+  </ul>
+  <p>見る場所は 2 つです。<strong>順番待ちの数</strong>（ヘルスチェックの <code>queued</code>）が、いつも 1 以上なら、空きがありません。もう 1 つは、処理ごとの<strong>平均の所要秒数</strong>を、長い順に並べることです。楽天の API を使う長い処理が上位に並んでいたら、それが枠を握って眠っている犯人です。</p>
+  <p>この日だけで、同じ形の回帰を<strong>4 回</strong>出しました。Amazon の 5 分おき、あみあみの 5 分おき、楽天の人気枠のまとめ回し、楽天の人気枠の 10 分おき。速くしたつもりが、枠を食って、いちばん速く見たいものを遅くしました。</p>
+
+  <h2 class="rv" id="s4">分かったこと</h2>
+  <blockquote>枠は、数を数えるのではなく、握っているものを見る。</blockquote>
+  <ul>
+    <li><strong>「1 回の所要時間 ≧ 間隔」の処理は、枠を占有する。</strong>速くするほど、ほかが待ちます。</li>
+    <li><strong>上限の正体を、測る。</strong>CPU なのか、枠なのか。負荷とメモリを見ます。</li>
+    <li><strong>前の結論が、半分間違っていることがある。</strong>「2 コアだから無理」は、待ちの処理には当てはまりませんでした。</li>
+    <li><strong>gitに入らない設定は、記録に残す。</strong>サーバーにだけある値は、リポジトリを見ても分かりません。</li>
+    <li><strong>速くするなら、何かを遅くする。</strong>どれを守るかを、先に決めます。</li>
+  </ul>
+
+
+  <div class="ad-slot" data-slot="footer" hidden></div>
+<!--/ad-->
+
+  <div class="rule" style="margin:40px 0 22px"></div>
+  <p class="eyebrow">この話に出てくるもの</p>
+  <ul class="plain">
+    <li><a href="/works/torecadash/">トレカダッシュ</a> — トレカの抽選・予約・先着の情報を集める iPhone アプリ</li>
+    <li><a href="/notes/interval-vs-delivery/">「1 分おき」の監視は、1 件あたり 10 分に 1 回だった</a> — 同じ日の、見直しの間隔の話</li>
+    <li><a href="/notes/rerun-on-deploy/">配備のたびに、日次の処理が丸ごと走り直していた</a> — 同じ「定期処理」の別の失敗</li>
+  </ul>
+
+<!--related-->
+  <div class="rule" style="margin:40px 0 22px"></div>
+  <p class="eyebrow">ほかの記録</p>
+  <ul class="plain">
+    <li><a href="/notes/coverage-check/">競合サイトと突き合わせて、取りこぼしを数えた：最初の「カバー率 23%」は測り方の間違いで、本当は 49% だった</a> — 他のサイトが出している抽選を、こちらが出せているかを数えた。最初の 23% は、商品名の書き方の違いと期限切れの記事で歪んでいた。直して 49%、穴埋めの 5 つの問題を直して 90% に。規約で自動取得が禁止のサイトは取り込まなかった。</li>
+    <li><a href="/notes/self-inflicted/">自分で作った仕組みが、自分を傷つけた 4 つの記録：要約が条件を捨て、1 つの未定義が保存を止め、点検が本番の IP を閉め出された</a> — 「15 文字程度」の指示で応募の条件が 671 件の点検で抜けていた、undefined が 1 つで保存が全部失敗し 1 日の消費の 41% を溶かした、点検の 6 並列で本番と同じ IP が拒否された、直っても鳴り続ける警告を作った。</li>
+    <li><a href="/notes/x-monitoring-gaps/">X 監視の漏れ 4 つ：検索に出ない投稿、持ち主が変わるアカウント、店を探せない検索、止まった後の取り戻し</a> — 店の X 投稿を巡回する監視で、4 店の告知が検索に 751 件取っても出なかった、登録した店が個人になっていた、店の発掘が 63 店中 11 店だった、6 日止まった後 2 時間で 2,866 件中 185 件しか読めなかった。直し方と、費用の見積もり。</li>
+  </ul>
+<!--/related-->
+
+<!--comments-->
+  <section class="comments" id="comments" data-repo="murakamikoshin/koshin-studio" data-repo-id="R_kgDOURc3ew"
+    data-category="Announcements" data-category-id="DIC_kwDOURc3e84DHTVr">
+    <h2 id="comments-h">コメント</h2>
+    <p>感想や、記事の間違いの指摘は、ここへ。書くには、GitHub のアカウントが要ります。</p>
+    <p><button type="button" class="btn ghost" id="load-comments">コメントを開く</button></p>
+    <p class="note">押すと、giscus（giscus.app）と GitHub に接続します。押さなければ、接続しません。詳しくは<a href="/privacy/">あつかい</a>に書いています。</p>
+    <div id="giscus-box"></div>
+  </section>
+<!--/comments-->
+</div>
+</main>
+
+<footer class="site"><div class="wrap">
+  <span>© 2026 Koshin Studio</span>
+  <div class="sns-row"></div>
+  <nav><a href="/picks/">Picks</a><a href="/calc/">Tools</a><a href="/about/">About</a><a href="/privacy/">あつかい</a><a href="/en/" hreflang="en" lang="en">English</a></nav>
+</div></footer>
+<script src="/motion.js?v=1e7447ec" defer></script>
+</body>
+</html>

@@ -7,6 +7,20 @@
   <language>ja</language>
   <atom:link href="https://koshinstudio.com/feed.xml" rel="self" type="application/rss+xml"/>
   <item>
+    <title>先着が始まった瞬間、サイトが順番待ちのページになる：8,000 バイトの関門を、15KB の案内ページがすり抜けた</title>
+    <link>https://koshinstudio.com/notes/waiting-room/</link>
+    <guid isPermaLink="true">https://koshinstudio.com/notes/waiting-room/</guid>
+    <pubDate>Fri, 16 Oct 2026 15:00:00 GMT</pubDate>
+    <description>イオンスタイルオンラインで先着が始まると、全体が「アクセス集中」の 15KB のページになった。同じ日の先に入れた 8,000 バイト未満の関門をすり抜け、「成功・商品 0 件」と読まれていた。題名で見る関門に直し、Amazon の 13 分が直列の AI 審査だったことも分かった。</description>
+  </item>
+  <item>
+    <title>同時実行の枠を増やす前に見るもの：2 コアのサーバーで、枠を 8 から 14 にした判断と、半分間違っていた前の結論</title>
+    <link>https://koshinstudio.com/notes/concurrency-slots/</link>
+    <guid isPermaLink="true">https://koshinstudio.com/notes/concurrency-slots/</guid>
+    <pubDate>Fri, 16 Oct 2026 15:00:00 GMT</pubDate>
+    <description>先着の監視を速くしようと間隔を詰めると、1 分おきの瞬殺監視が枠の順番待ちで遅くなった。枠を 8、11、14 と変えて測った。上限の正体は CPU ではなく、楽天 API の 1.5 秒待ちで枠を握る処理だった。</description>
+  </item>
+  <item>
     <title>競合サイトと突き合わせて、取りこぼしを数えた：最初の「カバー率 23%」は測り方の間違いで、本当は 49% だった</title>
     <link>https://koshinstudio.com/notes/coverage-check/</link>
     <guid isPermaLink="true">https://koshinstudio.com/notes/coverage-check/</guid>

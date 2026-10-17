@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>先着が始まった瞬間、サイトが順番待ちのページになる：8,000 バイトの関門を、15KB の案内ページがすり抜けた — Koshin Studio</title>
+<meta name="description" content="イオンスタイルオンラインで先着が始まると、全体が「アクセス集中」の 15KB のページになった。前日に入れた 8,000 バイト未満の関門をすり抜け、「成功・商品 0 件」と読まれていた。題名で見る関門に直し、Amazon の 13 分が直列の AI 審査だったことも分かった。">
+<meta property="og:title" content="先着が始まった瞬間、サイトが順番待ちのページになる：8,000 バイトの関門を、15KB の案内ページがすり抜けた">
+<meta property="og:description" content="イオンスタイルオンラインで先着が始まると、全体が「アクセス集中」の 15KB のページになった。前日に入れた 8,000 バイト未満の関門をすり抜け、「成功・商品 0 件」と読まれていた。題名で見る関門に直し、Amazon の 13 分が直列の AI 審査だったことも分かった。">
+<meta property="og:type" content="article">
+<meta name="theme-color" content="#fbfaf7">
+<link rel="icon" href="/favicon.ico?v=1697d589" sizes="48x48">
+<link rel="icon" href="/favicon.svg?v=b9d7922f" type="image/svg+xml" sizes="any">
+<link rel="icon" href="/assets/icon/icon-192.png?v=e2566235" type="image/png" sizes="192x192">
+<link rel="apple-touch-icon" href="/assets/icon/icon-180.png?v=84e7f0e6">
+<link rel="manifest" href="/site.webmanifest">
+<script>document.documentElement.className+=" js"</script>
+<link rel="stylesheet" href="/style.css?v=dd51310c">
+<meta name="google-adsense-account" content="ca-pub-3863314847163872">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3863314847163872" crossorigin="anonymous"></script>
+<link rel="canonical" href="https://koshinstudio.com/notes/waiting-room/">
+<meta property="og:url" content="https://koshinstudio.com/notes/waiting-room/">
+<meta property="og:site_name" content="Koshin Studio">
+<meta property="og:locale" content="ja_JP">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="alternate" type="application/rss+xml" title="Koshin Studio — Notes" href="https://koshinstudio.com/feed.xml">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BlogPosting","headline":"先着が始まった瞬間、サイトが順番待ちのページになる：8,000 バイトの関門を、15KB の案内ページがすり抜けた","url":"https://koshinstudio.com/notes/waiting-room/","description":"イオンスタイルオンラインで先着が始まると、全体が「アクセス集中」の 15KB のページになった。同じ日の先に入れた 8,000 バイト未満の関門をすり抜け、「成功・商品 0 件」と読まれていた。題名で見る関門に直し、Amazon の 13 分が直列の AI 審査だったことも分かった。","datePublished":"2026-10-17","dateModified":"2026-10-17","inLanguage":"ja","image":"https://koshinstudio.com/assets/og/og_notes_waiting-room.jpg","author":{"@id":"https://koshinstudio.com#studio"},"publisher":{"@id":"https://koshinstudio.com#studio"},"mainEntityOfPage":"https://koshinstudio.com/notes/waiting-room/"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Koshin Studio","item":"https://koshinstudio.com/"},{"@type":"ListItem","position":2,"name":"Notes","item":"https://koshinstudio.com/notes/"},{"@type":"ListItem","position":3,"name":"先着が始まった瞬間、サイトが順番待ちのページになる：8,000 バイトの関門を、15KB の案内ページがすり抜けた","item":"https://koshinstudio.com/notes/waiting-room/"}]}]}</script>
+<meta property="og:image" content="https://koshinstudio.com/assets/og/og_notes_waiting-room.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
+</head>
+<body class="article">
+<canvas id="motes"></canvas>
+
+<header class="site"><div class="wrap">
+  <a class="logo" href="/"><img class="logo-mark" src="/favicon.svg?v=b9d7922f" alt="" width="28" height="28">Koshin Studio</a>
+  <nav><a href="/works/">Works</a><a href="/notes/">Notes</a><a href="/picks/">Picks</a><a href="/calc/">Tools</a><a href="/about/">About</a></nav>
+</div></header>
+
+<main><div class="wrap">
+  <nav class="crumbs" aria-label="現在地"><a href="/">Koshin Studio</a><i aria-hidden="true">›</i><a href="/notes/">Notes</a><i aria-hidden="true">›</i><span aria-current="page">先着が始まった瞬間、サイトが順番待ちのページになる：8,000 バイトの関門を、15KB の案内ページがすり抜けた</span></nav>
+  <h1>先着が始まった瞬間、サイトが順番待ちのページになる：8,000 バイトの関門を、15KB の案内ページがすり抜けた</h1>  <div class="rule"></div>
+  <p class="lead">トレカダッシュ 開発の記録 ／ 2026年9月</p>
+
+  <p>iOS アプリ「<a href="/works/torecadash/">トレカダッシュ</a>」は、通販サイトの販売ページを定期的に読んで、先着や抽選の情報を集めています。<a href="/notes/blocked-page/">前に書いた</a>とおり、「取れた」の判定に穴があり、案内ページを成功と読んでいた事件がありました。その判定を直したのと同じ日（2026 年 9 月 7 日）のうちに、<strong>同じ種類の穴が、別の形でもう 1 つ</strong>見つかりました。</p>
+  <p>しかも、それは、いちばん取りこぼしてはいけない瞬間に起きていました。</p>
+  <p class="note">数字は、2026 年 9 月 7 日の作業の記録から書いています。</p>
+<!--toc-->
+  <nav class="toc" aria-label="目次"><p>目次</p><ol><li><a href="#s1">先着が始まった瞬間に、サイトが順番待ちのページになる</a></li><li><a href="#s2">8,000 バイトの関門を、15KB の案内ページがすり抜けた</a></li><li><a href="#s3">同じ日に見つけた、もう 2 つの「遅さ」</a></li><li><a href="#s4">分かったこと</a></li></ol></nav>
+<!--/toc-->
+  <h2 class="rv" id="s1">先着が始まった瞬間に、サイトが順番待ちのページになる</h2>
+  <p>報告が来ました。「イオンスタイルオンラインにも、先着があるみたいだよ」「14 時ちょうどに、販売が始まったみたい」。そこで、その時刻に、実際に取得を試しました。</p>
+  <div class="scroll rv"><table>
+    <thead><tr><th>取得の方法</th><th>結果</th></tr></thead>
+    <tbody>
+      <tr><td>素のリクエスト</td><td>403（ボット対策で拒否）</td></tr>
+      <tr><td>取得サービスの安い設定</td><td>200、15,188 バイト、題名「アクセス集中によるお知らせ」</td></tr>
+      <tr><td>取得サービスの super</td><td>200、15,188 バイト、同じ</td></tr>
+      <tr><td>取得サービスの super + render</td><td>200、15,459 バイト、同じ</td></tr>
+    </tbody>
+  </table></div>
+  <p>先着が始まった瞬間、サイト全体が、順番待ちのページになります。どの設定で取っても、返ってくるのは、同じ案内ページです。</p>
+
+  <h2 class="rv" id="s2">8,000 バイトの関門を、15KB の案内ページがすり抜けた</h2>
+  <p>この日の先に入れた「取れていない」の判定は、<strong>8,000 バイト未満の短いページ</strong>の中の、JavaScript を求める案内を見るものでした。大きなページには、まっとうなページにも、同じ一文が常に入っているからです。</p>
+  <p>ところが、この順番待ちのページは<strong>約 15KB</strong> あります。関門をすり抜けて、「取得は成功。商品は 0 件」と読まれていました。<strong>いちばん取りこぼしてはいけない瞬間に、静かに取りこぼす</strong>状態です。</p>
+  <p>直し方は、<strong>ページの大きさではなく、題名（title）</strong>を見ることでした。題名に「アクセス集中」や「順番にご案内」が出ているときは、失敗として扱います。本文の一部に、その言葉が出ているだけの、まっとうなページを巻き込まないよう、見る場所を題名に限りました。</p>
+  <p>あわせて、頻度を 3 時間おきから 15 分おきにしました。1 回約 21 クレジットと高めですが、1 日に約 6,000 クレジットで、残量の 92% に収まります。</p>
+
+  <h2 class="rv" id="s3">同じ日に見つけた、もう 2 つの「遅さ」</h2>
+  <p>先着の速さを測っていて、別の原因も見つかりました。</p>
+  <p><strong>Amazon の 13 分は、「取得」ではなく、「AI の審査」だった。</strong>Amazon の監視は 30 分おきで、1 回のスキャンに 13 分かかり、最悪で約 43 分の遅れがありました。計器で見ると、時間の使い道は、新しい出品の AI による審査（1 日 421 回、約 10 円）でした。取得そのものは、1 日 1,047 クレジットで安い。原因は、15 のジャンルを、<strong>1 つずつ直列</strong>に処理していたことでした。ジャンルどうしは独立なので、4 本を並列にして、間隔を 10 分、1 回を 8 分にしました。AI の審査は、新しい出品だけに走るので、巡回の回数が増えても、費用は増えません。</p>
+  <p><strong>速く見つけても、17% は通知していなかった。</strong>見つけることが速くなっても、その先の通知が止まっていれば、意味がありません。通知が届いた数を数えたら、まだ穴がありました（通知の数を数えた話は、<a href="/notes/interval-vs-delivery/">別の記事</a>に書いています）。</p>
+
+  <h2 class="rv" id="s4">分かったこと</h2>
+  <blockquote>判定の穴は、いちばん大事な瞬間に、いちばん広がる。</blockquote>
+  <ul>
+    <li><strong>案内ページの形は、1 つではない。</strong>短い案内も、大きな順番待ちのページもあります。大きさでは、見分けられません。</li>
+    <li><strong>見る場所を変えると、巻き込みが減る。</strong>本文ではなく題名にしたので、まっとうなページを巻き込みません。</li>
+    <li><strong>報告を受けたら、その時刻に、その場で測る。</strong>「14 時に始まった」は、再現できる最後のチャンスでした。</li>
+    <li><strong>遅い理由は、実際の時間の使い道で確かめる。</strong>Amazon の 13 分は、取得ではなく、直列の AI 審査でした。</li>
+  </ul>
+
+
+  <div class="ad-slot" data-slot="footer" hidden></div>
+<!--/ad-->
+
+  <div class="rule" style="margin:40px 0 22px"></div>
+  <p class="eyebrow">この話に出てくるもの</p>
+  <ul class="plain">
+    <li><a href="/works/torecadash/">トレカダッシュ</a> — トレカの抽選・予約・先着の情報を集める iPhone アプリ</li>
+    <li><a href="/notes/blocked-page/">「取れた」と読んでいたのは、ただの案内ページだった</a> — 前日に直した、同じ種類の穴</li>
+    <li><a href="/notes/concurrency-slots/">同時実行の枠を増やす前に見るもの</a> — 同じ日の、枠の話</li>
+    <li><a href="/notes/interval-vs-delivery/">「1 分おき」の監視は、1 件あたり 10 分に 1 回だった</a> — 見直しの間隔と、通知の数</li>
+  </ul>
+
+<!--related-->
+  <div class="rule" style="margin:40px 0 22px"></div>
+  <p class="eyebrow">ほかの記録</p>
+  <ul class="plain">
+    <li><a href="/notes/concurrency-slots/">同時実行の枠を増やす前に見るもの：2 コアのサーバーで、枠を 8 から 14 にした判断と、半分間違っていた前の結論</a> — 先着の監視を速くしようと間隔を詰めると、1 分おきの瞬殺監視が枠の順番待ちで遅くなった。枠を 8、11、14 と変えて測った。上限の正体は CPU ではなく、楽天 API の 1.5 秒待ちで枠を握る処理だった。</li>
+    <li><a href="/notes/coverage-check/">競合サイトと突き合わせて、取りこぼしを数えた：最初の「カバー率 23%」は測り方の間違いで、本当は 49% だった</a> — 他のサイトが出している抽選を、こちらが出せているかを数えた。最初の 23% は、商品名の書き方の違いと期限切れの記事で歪んでいた。直して 49%、穴埋めの 5 つの問題を直して 90% に。規約で自動取得が禁止のサイトは取り込まなかった。</li>
+    <li><a href="/notes/self-inflicted/">自分で作った仕組みが、自分を傷つけた 4 つの記録：要約が条件を捨て、1 つの未定義が保存を止め、点検が本番の IP を閉め出された</a> — 「15 文字程度」の指示で応募の条件が 671 件の点検で抜けていた、undefined が 1 つで保存が全部失敗し 1 日の消費の 41% を溶かした、点検の 6 並列で本番と同じ IP が拒否された、直っても鳴り続ける警告を作った。</li>
+  </ul>
+<!--/related-->
+
+<!--comments-->
+  <section class="comments" id="comments" data-repo="murakamikoshin/koshin-studio" data-repo-id="R_kgDOURc3ew"
+    data-category="Announcements" data-category-id="DIC_kwDOURc3e84DHTVr">
+    <h2 id="comments-h">コメント</h2>
+    <p>感想や、記事の間違いの指摘は、ここへ。書くには、GitHub のアカウントが要ります。</p>
+    <p><button type="button" class="btn ghost" id="load-comments">コメントを開く</button></p>
+    <p class="note">押すと、giscus（giscus.app）と GitHub に接続します。押さなければ、接続しません。詳しくは<a href="/privacy/">あつかい</a>に書いています。</p>
+    <div id="giscus-box"></div>
+  </section>
+<!--/comments-->
+</div>
+</main>
+
+<footer class="site"><div class="wrap">
+  <span>© 2026 Koshin Studio</span>
+  <div class="sns-row"></div>
+  <nav><a href="/picks/">Picks</a><a href="/calc/">Tools</a><a href="/about/">About</a><a href="/privacy/">あつかい</a><a href="/en/" hreflang="en" lang="en">English</a></nav>
+</div></footer>
+<script src="/motion.js?v=1e7447ec" defer></script>
+</body>
+</html>
