@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>「自動化できるものは全部自動化して」：まず数えると、修復処理 66 個が一度も定期実行から呼ばれていなかった。全部は載せず、6 個だけ載せた — Koshin Studio</title>
+<meta name="description" content="HTTP の 319 個と定期実行の 184 個を呼び出しで突き合わせると、66 個が手で叩かないと動かなかった。継続的なものだけを、下見のあとで 6 個載せた。キューに積む処理が順番待ちを見ておらず、待ち行列が伸び続けていたことも直した。">
+<meta property="og:title" content="「自動化できるものは全部自動化して」：まず数えると、修復処理 66 個が一度も定期実行から呼ばれていなかった。全部は載せず、6 個だけ載せた">
+<meta property="og:description" content="HTTP の 319 個と定期実行の 184 個を呼び出しで突き合わせると、66 個が手で叩かないと動かなかった。継続的なものだけを、下見のあとで 6 個載せた。キューに積む処理が順番待ちを見ておらず、待ち行列が伸び続けていたことも直した。">
+<meta property="og:type" content="article">
+<meta name="theme-color" content="#fbfaf7">
+<link rel="icon" href="/favicon.ico?v=1697d589" sizes="48x48">
+<link rel="icon" href="/favicon.svg?v=b9d7922f" type="image/svg+xml" sizes="any">
+<link rel="icon" href="/assets/icon/icon-192.png?v=e2566235" type="image/png" sizes="192x192">
+<link rel="apple-touch-icon" href="/assets/icon/icon-180.png?v=84e7f0e6">
+<link rel="manifest" href="/site.webmanifest">
+<script>document.documentElement.className+=" js"</script>
+<link rel="stylesheet" href="/style.css?v=dd51310c">
+<meta name="google-adsense-account" content="ca-pub-3863314847163872">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3863314847163872" crossorigin="anonymous"></script>
+<link rel="canonical" href="https://koshinstudio.com/notes/automate-sorted/">
+<meta property="og:url" content="https://koshinstudio.com/notes/automate-sorted/">
+<meta property="og:site_name" content="Koshin Studio">
+<meta property="og:locale" content="ja_JP">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="alternate" type="application/rss+xml" title="Koshin Studio — Notes" href="https://koshinstudio.com/feed.xml">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BlogPosting","headline":"「自動化できるものは全部自動化して」：まず数えると、修復処理 66 個が一度も定期実行から呼ばれていなかった。全部は載せず、6 個だけ載せた","url":"https://koshinstudio.com/notes/automate-sorted/","description":"HTTP の 319 個と定期実行の 184 個を呼び出しで突き合わせると、66 個が手で叩かないと動かなかった。継続的なものだけを、下見のあとで 6 個載せた。キューに積む処理が順番待ちを見ておらず、待ち行列が伸び続けていたことも直した。","datePublished":"2026-10-17","dateModified":"2026-10-17","inLanguage":"ja","image":"https://koshinstudio.com/assets/og/og_notes_automate-sorted.jpg","author":{"@id":"https://koshinstudio.com#studio"},"publisher":{"@id":"https://koshinstudio.com#studio"},"mainEntityOfPage":"https://koshinstudio.com/notes/automate-sorted/"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Koshin Studio","item":"https://koshinstudio.com/"},{"@type":"ListItem","position":2,"name":"Notes","item":"https://koshinstudio.com/notes/"},{"@type":"ListItem","position":3,"name":"「自動化できるものは全部自動化して」：まず数えると、修復処理 66 個が一度も定期実行から呼ばれていなかった。全部は載せず、6 個だけ載せた","item":"https://koshinstudio.com/notes/automate-sorted/"}]}]}</script>
+<meta property="og:image" content="https://koshinstudio.com/assets/og/og_notes_automate-sorted.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
+</head>
+<body class="article">
+<canvas id="motes"></canvas>
+
+<header class="site"><div class="wrap">
+  <a class="logo" href="/"><img class="logo-mark" src="/favicon.svg?v=b9d7922f" alt="" width="28" height="28">Koshin Studio</a>
+  <nav><a href="/works/">Works</a><a href="/notes/">Notes</a><a href="/picks/">Picks</a><a href="/calc/">Tools</a><a href="/about/">About</a></nav>
+</div></header>
+
+<main><div class="wrap">
+  <nav class="crumbs" aria-label="現在地"><a href="/">Koshin Studio</a><i aria-hidden="true">›</i><a href="/notes/">Notes</a><i aria-hidden="true">›</i><span aria-current="page">「自動化できるものは全部自動化して」：まず数えると、修復処理 66 個が一度も定期実行から呼ばれていなかった。全部は載せず、6 個だけ載せた</span></nav>
+  <h1>「自動化できるものは全部自動化して」：まず数えると、修復処理 66 個が一度も定期実行から呼ばれていなかった。全部は載せず、6 個だけ載せた</h1>  <div class="rule"></div>
+  <p class="lead">トレカダッシュ 開発の記録 ／ 2026年8月</p>
+
+  <p>iOS アプリ「<a href="/works/torecadash/">トレカダッシュ</a>」の開発で、ユーザーから、「<strong>自動化できるものは、全部自動化して</strong>」という指示がありました。</p>
+  <p>2026 年 8 月 28 日、まず、<strong>数えました</strong>。すると、直すための処理が 66 個、定期実行から一度も呼ばれていませんでした。この記事は、その数え方と、66 個を「全部は載せなかった」理由の記録です。</p>
+  <p class="note">数字は、2026 年 8 月 28 日の作業の記録から書いています。</p>
+<!--toc-->
+  <nav class="toc" aria-label="目次"><p>目次</p><ol><li><a href="#s1">数えた：66 個が、「手で URL を叩かないと動かない」状態だった</a></li><li><a href="#s2">66 個を、一度に定期実行にはしなかった</a></li><li><a href="#s3">載せた 6 個</a></li><li><a href="#s4">商品カタログは、すでに、全自動だった</a></li><li><a href="#s5">待ち行列が、伸び続けていた</a></li><li><a href="#s6">分かったこと</a></li></ol></nav>
+<!--/toc-->
+  <h2 class="rv" id="s1">数えた：66 個が、「手で URL を叩かないと動かない」状態だった</h2>
+  <p>HTTP のエンドポイント 319 個と、定期実行 184 個を、<strong>名前ではなく、関数の呼び出しで</strong>突き合わせました。名前が違っても、定期のジョブから呼ばれていることがあるからです。</p>
+  <p>結果、<strong>66 個が、手で URL を叩かないと動かない</strong>状態でした。人が「そろそろ回すか」と思い出すまで、直せるはずの記事が、直りません。</p>
+
+  <h2 class="rv" id="s2">66 個を、一度に定期実行にはしなかった</h2>
+  <p>66 個は、3 つに分かれました。</p>
+  <ol>
+    <li><strong>継続的に必要なもの</strong>（新しいデータが来るたびに要る）→ 定期実行に載せる。</li>
+    <li><strong>一度きりの移行</strong>（<code>backfill*</code>、<code>reclassify*</code> など）→ 載せない。毎日走らせても無駄で、事故の余地が増えるだけ。</li>
+    <li><strong>破壊的なもの、人の判断が要るもの</strong>（孤立した商品の削除、手動の紐付け直し など）→ 載せない。</li>
+  </ol>
+  <p>新しい定期ジョブは、配備した瞬間に、一度走ります。載せる前に、<strong>全部、書き込まない下見（ドライラン）で、当たりを確かめました</strong>。</p>
+
+  <h2 class="rv" id="s3">載せた 6 個</h2>
+  <div class="scroll rv"><table>
+    <thead><tr><th>処理</th><th>下見の結果</th></tr></thead>
+    <tbody>
+      <tr><td>X の締切が空の記事を直す</td><td>対象 32 件、更新 0 件</td></tr>
+      <tr><td>まとめ由来の店名を直す</td><td>5 件（アカウントの宣伝文が、そのまま販売元になっていた）</td></tr>
+      <tr><td>送料が値段に入っているものを直す</td><td>0 件</td></tr>
+      <tr><td>総称の商品への紐付けを直す</td><td>0 件</td></tr>
+      <tr><td>分割した記事の題名を直す</td><td>新設したもの</td></tr>
+      <tr><td>まとめ由来の締切を直す</td><td>新設したもの</td></tr>
+    </tbody>
+  </table></div>
+  <p>時刻は、ばらしました。同時に走らせると、同時実行の枠を食い合って、待ち行列が伸びるからです。定期実行は、184 個から 190 個になりました。</p>
+  <p>残りの候補（締切の修復、壊れた商品画像の修復、楽天のアフィリエイトリンクの修復）は、実行に 2 分以上かかり、下見が時間内に終わらなかったので、見送りました。<strong>確認せずに、載せません。</strong></p>
+
+  <h2 class="rv" id="s4">商品カタログは、すでに、全自動だった</h2>
+  <p>「商品カタログも、自動にできるよね」という問いへの答えは、「もう、なっている」でした。15 ジャンルすべてに、公式カタログの取り込みがあり、1 時間前に更新されていました。記事と商品の紐付けも自動で、実測 1,415 件中 1,406 件が、紐付け済みでした。残りは、「公式サイトに、まだ載っていない、新しい弾」で、公式が出せば、自動で入ります。</p>
+
+  <h2 class="rv" id="s5">待ち行列が、伸び続けていた</h2>
+  <p>もう 1 つ、数えている途中で、見つけたことがあります。待ち行列が、<strong>81、86、91 と、45 秒で増え続けて</strong>いました。</p>
+  <p>原因は、ジョブを積む処理（<code>enqueue</code>）が、「<strong>実行中か</strong>」しか見ておらず、<strong>キューで順番待ちしている分を、見ていなかった</strong>ことでした。同時実行の上限に達している間に、「1 分おき」のジョブの時刻が、何度も来ると、<strong>同じジョブが、何重にも積まれ</strong>ます。</p>
+  <p>順番待ちの名前も覚えて、<strong>二重に積まない</strong>ようにしました。待ち行列は、0 のままになりました。</p>
+
+  <h2 class="rv" id="s6">分かったこと</h2>
+  <blockquote>自動化は、全部を載せることではない。数えて、仕分けて、確かめて、載せる。</blockquote>
+  <ul>
+    <li><strong>まず、数える。</strong>66 個が、一度も呼ばれていませんでした。名前ではなく、呼び出しで突き合わせます。</li>
+    <li><strong>仕分ける。</strong>継続的なものだけを載せます。一度きりの移行と、破壊的なものは、載せません。</li>
+    <li><strong>載せる前に、下見で当たりを確かめる。</strong>新しい定期ジョブは、載せた瞬間に走ります。</li>
+    <li><strong>時刻を、ばらす。</strong>同時に走らせると、待ち行列が伸びます。</li>
+    <li><strong>キューに積む前は、「待っているか」も見る。</strong>実行中だけを見ると、何重にも積まれます。</li>
+  </ul>
+
+
+  <div class="ad-slot" data-slot="footer" hidden></div>
+<!--/ad-->
+
+  <div class="rule" style="margin:40px 0 22px"></div>
+  <p class="eyebrow">この話に出てくるもの</p>
+  <ul class="plain">
+    <li><a href="/works/torecadash/">トレカダッシュ</a> — トレカの抽選・予約・先着の情報を集める iPhone アプリ</li>
+    <li><a href="/notes/concurrency-slots/">同時実行の枠を増やす前に見るもの</a> — 待ち行列と枠の話</li>
+    <li><a href="/notes/rerun-on-deploy/">配備のたびに、日次の処理が丸ごと走り直していた</a> — 定期処理の別の失敗</li>
+    <li><a href="/notes/audit-sweep-61/">監査 61 本を総点検して見つけた 4 つ</a> — 総点検の別の話</li>
+  </ul>
+
+<!--related-->
+  <div class="rule" style="margin:40px 0 22px"></div>
+  <p class="eyebrow">ほかの記録</p>
+  <ul class="plain">
+    <li><a href="/notes/fill-the-gap/">「気づくだけでなく、そもそも起こさない」：報告だけの監視を、見つけてその場で埋める形に作り替えた</a> — 取りこぼしの監視は報告するだけで、人が気づくまで埋まらなかった。見つけたその場で記事を作る形にし、黙って捨てる分岐にログを入れ、リンクが無い記事も応募方法を出した。カバー率は 92% から 100% に。</li>
+    <li><a href="/notes/swiftui-hit-area/">同じ報告が 3 回目：SwiftUI のボタンが「文字の上でしか」反応しなかった。過去 2 回の「修正」は効いていなかった</a> — 「当選」「落選」ボタンが文字の上しか反応しない報告は 3 回目。過去 2 回は修飾子の順序を直しても効かず、ButtonStyle の中で見た目を組み立てて、6 か所を差し替えた。同じ日の「郵送なのに位置情報」も同じ根っこだった。</li>
+    <li><a href="/notes/store-name-variants/">「ヤマダ電機」と「ヤマダデンキ」：表記ゆれと重複の原因は 3 つ重なっていた（包含だけの比較・59 秒の差・手動専用のジョブ）</a> — 店名を「含んでいるか」だけで比べ、締切を 59 秒の差で別と判定し、重複整理が手動専用だった。言い換えの表は作らず一般則で直し、1 時間おきの定期実行にした。表記ゆれ 2 件、重複 7 組が 0 に。</li>
+  </ul>
+<!--/related-->
+
+<!--comments-->
+  <section class="comments" id="comments" data-repo="murakamikoshin/koshin-studio" data-repo-id="R_kgDOURc3ew"
+    data-category="Announcements" data-category-id="DIC_kwDOURc3e84DHTVr">
+    <h2 id="comments-h">コメント</h2>
+    <p>感想や、記事の間違いの指摘は、ここへ。書くには、GitHub のアカウントが要ります。</p>
+    <p><button type="button" class="btn ghost" id="load-comments">コメントを開く</button></p>
+    <p class="note">押すと、giscus（giscus.app）と GitHub に接続します。押さなければ、接続しません。詳しくは<a href="/privacy/">あつかい</a>に書いています。</p>
+    <div id="giscus-box"></div>
+  </section>
+<!--/comments-->
+</div>
+</main>
+
+<footer class="site"><div class="wrap">
+  <span>© 2026 Koshin Studio</span>
+  <div class="sns-row"></div>
+  <nav><a href="/picks/">Picks</a><a href="/calc/">Tools</a><a href="/about/">About</a><a href="/privacy/">あつかい</a><a href="/en/" hreflang="en" lang="en">English</a></nav>
+</div></footer>
+<script src="/motion.js?v=1e7447ec" defer></script>
+</body>
+</html>
