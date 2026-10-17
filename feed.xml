@@ -7,6 +7,20 @@
   <language>ja</language>
   <atom:link href="https://koshinstudio.com/feed.xml" rel="self" type="application/rss+xml"/>
   <item>
+    <title>まとめサイトの巡回は、一覧の 1 ページ目しか見ていなかった：トレカの記事は 2〜4 ページ目にあり、本文も先頭 6,000 文字で切れていた</title>
+    <link>https://koshinstudio.com/notes/aggregator-pagination/</link>
+    <guid isPermaLink="true">https://koshinstudio.com/notes/aggregator-pagination/</guid>
+    <pubDate>Fri, 16 Oct 2026 15:00:00 GMT</pubDate>
+    <description>入荷情報のまとめサイトの巡回は、一覧の 1 ページ目（ゲーム機中心）しか読まず、ポケカやガンダムは後ろのページにあった。本文も先頭 6,000 文字しか AI に渡さず、後半の店が落ちていた。12 ページまで辿り、重なりつきで全文を読む形に直した。</description>
+  </item>
+  <item>
+    <title>「サーバーが落ちた。こちらからは復旧できない」は、誤りだった：止まっていたのは、SSH の受信だけだった</title>
+    <link>https://koshinstudio.com/notes/misdiagnosis-down/</link>
+    <guid isPermaLink="true">https://koshinstudio.com/notes/misdiagnosis-down/</guid>
+    <pubDate>Fri, 16 Oct 2026 15:00:00 GMT</pubDate>
+    <description>午前 3 時 10 分からサーバーに接続できなくなり、私は「止まった」と判断した。実際は、プロセスは 7 日以上動き続け、定期実行 192 本も正常で、遮断されていたのは SSH の受信だけだった。</description>
+  </item>
+  <item>
     <title>「変な記事がめっちゃ増えてる」：作られた経路ごとに数えて入口を塞いだ。数え方も 2 回、間違えた</title>
     <link>https://koshinstudio.com/notes/weird-articles-by-route/</link>
     <guid isPermaLink="true">https://koshinstudio.com/notes/weird-articles-by-route/</guid>

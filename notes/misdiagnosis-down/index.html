@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>「サーバーが落ちた。こちらからは復旧できない」は、誤りだった：止まっていたのは、SSH の受信だけだった — Koshin Studio</title>
+<meta name="description" content="午前 3 時 10 分からサーバーに接続できなくなり、私は「止まった」と判断した。実際は、プロセスは 7 日以上動き続け、定期実行 192 本も正常で、遮断されていたのは SSH の受信だけだった。">
+<meta property="og:title" content="「サーバーが落ちた。こちらからは復旧できない」は、誤りだった：止まっていたのは、SSH の受信だけだった">
+<meta property="og:description" content="午前 3 時 10 分からサーバーに接続できなくなり、私は「止まった」と判断した。実際は、プロセスは 7 日以上動き続け、定期実行 192 本も正常で、遮断されていたのは SSH の受信だけだった。">
+<meta property="og:type" content="article">
+<meta name="theme-color" content="#fbfaf7">
+<link rel="icon" href="/favicon.ico?v=1697d589" sizes="48x48">
+<link rel="icon" href="/favicon.svg?v=b9d7922f" type="image/svg+xml" sizes="any">
+<link rel="icon" href="/assets/icon/icon-192.png?v=e2566235" type="image/png" sizes="192x192">
+<link rel="apple-touch-icon" href="/assets/icon/icon-180.png?v=84e7f0e6">
+<link rel="manifest" href="/site.webmanifest">
+<script>document.documentElement.className+=" js"</script>
+<link rel="stylesheet" href="/style.css?v=dd51310c">
+<meta name="google-adsense-account" content="ca-pub-3863314847163872">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3863314847163872" crossorigin="anonymous"></script>
+<link rel="canonical" href="https://koshinstudio.com/notes/misdiagnosis-down/">
+<meta property="og:url" content="https://koshinstudio.com/notes/misdiagnosis-down/">
+<meta property="og:site_name" content="Koshin Studio">
+<meta property="og:locale" content="ja_JP">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="alternate" type="application/rss+xml" title="Koshin Studio — Notes" href="https://koshinstudio.com/feed.xml">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BlogPosting","headline":"「サーバーが落ちた。こちらからは復旧できない」は、誤りだった：止まっていたのは、SSH の受信だけだった","url":"https://koshinstudio.com/notes/misdiagnosis-down/","description":"午前 3 時 10 分からサーバーに接続できなくなり、私は「止まった」と判断した。実際は、プロセスは 7 日以上動き続け、定期実行 192 本も正常で、遮断されていたのは SSH の受信だけだった。","datePublished":"2026-10-17","dateModified":"2026-10-17","inLanguage":"ja","image":"https://koshinstudio.com/assets/og/og_notes_misdiagnosis-down.jpg","author":{"@id":"https://koshinstudio.com#studio"},"publisher":{"@id":"https://koshinstudio.com#studio"},"mainEntityOfPage":"https://koshinstudio.com/notes/misdiagnosis-down/"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Koshin Studio","item":"https://koshinstudio.com/"},{"@type":"ListItem","position":2,"name":"Notes","item":"https://koshinstudio.com/notes/"},{"@type":"ListItem","position":3,"name":"「サーバーが落ちた。こちらからは復旧できない」は、誤りだった：止まっていたのは、SSH の受信だけだった","item":"https://koshinstudio.com/notes/misdiagnosis-down/"}]}]}</script>
+<meta property="og:image" content="https://koshinstudio.com/assets/og/og_notes_misdiagnosis-down.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
+</head>
+<body class="article">
+<canvas id="motes"></canvas>
+
+<header class="site"><div class="wrap">
+  <a class="logo" href="/"><img class="logo-mark" src="/favicon.svg?v=b9d7922f" alt="" width="28" height="28">Koshin Studio</a>
+  <nav><a href="/works/">Works</a><a href="/notes/">Notes</a><a href="/picks/">Picks</a><a href="/calc/">Tools</a><a href="/about/">About</a></nav>
+</div></header>
+
+<main><div class="wrap">
+  <nav class="crumbs" aria-label="現在地"><a href="/">Koshin Studio</a><i aria-hidden="true">›</i><a href="/notes/">Notes</a><i aria-hidden="true">›</i><span aria-current="page">「サーバーが落ちた。こちらからは復旧できない」は、誤りだった：止まっていたのは、SSH の受信だけだった</span></nav>
+  <h1>「サーバーが落ちた。こちらからは復旧できない」は、誤りだった：止まっていたのは、SSH の受信だけだった</h1>  <div class="rule"></div>
+  <p class="lead">トレカダッシュ 開発の記録 ／ 2026年8月</p>
+
+  <p>iOS アプリ「<a href="/works/torecadash/">トレカダッシュ</a>」のサーバーに、<strong>午前 3 時 10 分から、つながらなくなりました</strong>。2026 年 8 月 28 日の朝のことです。私は、「サーバーが落ちた。こちらからは、復旧できない」と、記録に書きました。</p>
+  <p>この見立ては、<strong>誤り</strong>でした。10 時 15 分に復旧して、はじめて分かりました。この記事は、なぜ誤ったか、そして、そのときの作業が、何を生んだかの記録です。</p>
+  <p class="note">この記事は、2026 年 8 月 28 日の作業の記録から書いています。</p>
+<!--toc-->
+  <nav class="toc" aria-label="目次"><p>目次</p><ol><li><a href="#s1">私が見たもの、と、私の結論</a></li><li><a href="#s2">実際は：サーバーは、ずっと動いていた</a></li><li><a href="#s3">もう 1 つの誤り：「溜まった修復」は、私が作っていた</a></li><li><a href="#s4">代わりの道：必要な処理だけを、別の場所へ配備した</a></li><li><a href="#s5">分かったこと</a></li></ol></nav>
+<!--/toc-->
+  <h2 class="rv" id="s1">私が見たもの、と、私の結論</h2>
+  <ul>
+    <li>サーバーの、22 番（SSH）、80 番、443 番のポートが、全部、閉じていた。</li>
+    <li>経路を調べると（traceroute）、シンガポールの通信会社の基幹の回線までは届くが、その先で止まる。</li>
+    <li>サーバーの提供元（Hetzner）の、状況のページには、その地域の障害の掲示は、無かった。</li>
+  </ul>
+  <p>これらから、私は、「サーバーが止まった。こちらからは、復旧できない（提供元のコンソールでの再起動が要る）」と結論しました。</p>
+
+  <h2 class="rv" id="s2">実際は：サーバーは、ずっと動いていた</h2>
+  <p>10 時 15 分に、つながるようになって、確かめると、こうでした。</p>
+  <div class="scroll rv"><table>
+    <thead><tr><th>確かめたこと</th><th>結果</th></tr></thead>
+    <tbody>
+      <tr><td>サーバーのプロセス</td><td><strong>ずっと動いていた</strong>（連続稼働 7 日 10 時間）</td></tr>
+      <tr><td>完了したジョブ</td><td>4,100 件</td></tr>
+      <tr><td>定期実行 192 本</td><td>正常に走り続けていた</td></tr>
+      <tr><td>遮断されていたもの</td><td><strong>SSH の受信だけ</strong></td></tr>
+    </tbody>
+  </table></div>
+  <p>サーバーは、止まっていませんでした。<strong>外からの接続（SSH）だけが、遮断されていた</strong>のです。アプリの裏側の処理は、何も止まっていませんでした。</p>
+
+  <h2 class="rv" id="s3">もう 1 つの誤り：「溜まった修復」は、私が作っていた</h2>
+  <p>その間、私は、「毎時のはずの修復が、41 件も溜まっている」ことにも、気づいていました。これも、サーバーのせいだと、思っていました。</p>
+  <p>実際は、<strong>私が、ドライラン（書き込まない下見）を受け付けないエンドポイントを、点検のつもりで叩いた</strong>ことで、生まれたものでした。点検のつもりが、本番の処理を、41 件も、動かしていたのです。</p>
+
+  <h2 class="rv" id="s4">代わりの道：必要な処理だけを、別の場所へ配備した</h2>
+  <p>サーバーに入れなくなったので、必要な点検と修復だけを、<strong>Cloud Functions 側へ、個別に配備</strong>して、作業を進めました（<code>firebase deploy --only functions:名前</code>）。定期実行には、一切、触れていません。サーバーの復旧後も、この HTTP のエンドポイントは残るので、点検に、そのまま使えます。</p>
+  <p>復旧した後の注意も、記録しました。まず、サーバーに、その日の変更を送ること。その日は、定期実行を 8 本足したので、配備の直後に、追い実行されます。どれも、手でドライランから実行まで済ませてあったので、走っても、実害はありません。</p>
+
+  <h2 class="rv" id="s5">分かったこと</h2>
+  <blockquote>「つながらない」は、「止まっている」ではない。</blockquote>
+  <ul>
+    <li><strong>1 つの角度から、断定しない。</strong>ポートが閉じていても、プロセスは動いていることがあります。</li>
+    <li><strong>別の信号を見る。</strong>通知が届いているか、データが更新されているか、アプリ側の状態。サーバーの中に入れなくても、外から見えるものがあります。</li>
+    <li><strong>「復旧できない」と書く前に、「どこまで分かっているか」を書く。</strong>私が分かっていたのは、「SSH がつながらない」だけでした。</li>
+    <li><strong>点検のつもりで、本番を動かさない。</strong>ドライランを受け付けない入口は、下見ができません。</li>
+    <li><strong>入れないときの、別の道を持っておく。</strong>個別に配備できる場所が、役に立ちました。</li>
+  </ul>
+
+
+  <div class="ad-slot" data-slot="footer" hidden></div>
+<!--/ad-->
+
+  <div class="rule" style="margin:40px 0 22px"></div>
+  <p class="eyebrow">この話に出てくるもの</p>
+  <ul class="plain">
+    <li><a href="/works/torecadash/">トレカダッシュ</a> — トレカの抽選・予約・先着の情報を集める iPhone アプリ</li>
+    <li><a href="/notes/vps-migration/">Cloud Functions から月 4,300 円のサーバーへ移した</a> — サーバーの話</li>
+    <li><a href="/notes/self-inflicted/">自分で作った仕組みが、自分を傷つけた 4 つの記録</a> — 点検が本番に影響した別の話</li>
+    <li><a href="/notes/rerun-on-deploy/">配備のたびに、日次の処理が丸ごと走り直していた</a> — 配備の注意</li>
+  </ul>
+
+<!--related-->
+  <div class="rule" style="margin:40px 0 22px"></div>
+  <p class="eyebrow">ほかの記録</p>
+  <ul class="plain">
+    <li><a href="/notes/weird-articles-by-route/">「変な記事がめっちゃ増えてる」：作られた経路ごとに数えて入口を塞いだ。数え方も 2 回、間違えた</a> — 表示中の抽選 252 件を経路ごとに数えた。まとめの表に残る終わった回を毎日取り込んで締切が空になっていた（33 件）ほか、応募リンクが検索結果やトップ、締切が自分の店の行と食い違うものを、入口で塞いだ。</li>
+    <li><a href="/notes/automate-sorted/">「自動化できるものは全部自動化して」：まず数えると、修復処理 66 個が一度も定期実行から呼ばれていなかった。全部は載せず、6 個だけ載せた</a> — HTTP の 319 個と定期実行の 184 個を呼び出しで突き合わせると、66 個が手で叩かないと動かなかった。継続的なものだけを、下見のあとで 6 個載せた。キューに積む処理が順番待ちを見ておらず、待ち行列が伸び続けていたことも直した。</li>
+    <li><a href="/notes/fill-the-gap/">「気づくだけでなく、そもそも起こさない」：報告だけの監視を、見つけてその場で埋める形に作り替えた</a> — 取りこぼしの監視は報告するだけで、人が気づくまで埋まらなかった。見つけたその場で記事を作る形にし、黙って捨てる分岐にログを入れ、リンクが無い記事も応募方法を出した。カバー率は 92% から 100% に。</li>
+  </ul>
+<!--/related-->
+
+<!--comments-->
+  <section class="comments" id="comments" data-repo="murakamikoshin/koshin-studio" data-repo-id="R_kgDOURc3ew"
+    data-category="Announcements" data-category-id="DIC_kwDOURc3e84DHTVr">
+    <h2 id="comments-h">コメント</h2>
+    <p>感想や、記事の間違いの指摘は、ここへ。書くには、GitHub のアカウントが要ります。</p>
+    <p><button type="button" class="btn ghost" id="load-comments">コメントを開く</button></p>
+    <p class="note">押すと、giscus（giscus.app）と GitHub に接続します。押さなければ、接続しません。詳しくは<a href="/privacy/">あつかい</a>に書いています。</p>
+    <div id="giscus-box"></div>
+  </section>
+<!--/comments-->
+</div>
+</main>
+
+<footer class="site"><div class="wrap">
+  <span>© 2026 Koshin Studio</span>
+  <div class="sns-row"></div>
+  <nav><a href="/picks/">Picks</a><a href="/calc/">Tools</a><a href="/about/">About</a><a href="/privacy/">あつかい</a><a href="/en/" hreflang="en" lang="en">English</a></nav>
+</div></footer>
+<script src="/motion.js?v=1e7447ec" defer></script>
+</body>
+</html>
