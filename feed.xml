@@ -7,6 +7,13 @@
   <language>ja</language>
   <atom:link href="https://koshinstudio.com/feed.xml" rel="self" type="application/rss+xml"/>
   <item>
+    <title>Gemini の費用を削る前に、計器を疑った：単価・内訳・キャッシュの 3 つが壊れていて、キャッシュの条件は測り直すと変わっていた</title>
+    <link>https://koshinstudio.com/notes/gemini-meter/</link>
+    <guid isPermaLink="true">https://koshinstudio.com/notes/gemini-meter/</guid>
+    <pubDate>Fri, 16 Oct 2026 15:00:00 GMT</pubDate>
+    <description>Gemini の費用の計測は 3 か所とも壊れていた（単価は 1/2.6 の過小表示、31 の用途が 1 つに潰れ、キャッシュ未計上）。キャッシュが効く条件は 9 月は約 8,000、10 月は約 4,000 トークンと食い違った。指示文を水増しすると判定が 9% ずれた。</description>
+  </item>
+  <item>
     <title>Firestore の費用を円で出したら、読み取りの 91% が 1 か所だった：キャッシュを入れても効かなかった理由</title>
     <link>https://koshinstudio.com/notes/firestore-91/</link>
     <guid isPermaLink="true">https://koshinstudio.com/notes/firestore-91/</guid>

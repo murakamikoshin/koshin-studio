@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Gemini の費用を削る前に、計器を疑った：単価・内訳・キャッシュの 3 つが壊れていて、キャッシュの条件は測り直すと変わっていた — Koshin Studio</title>
+<meta name="description" content="Gemini の費用の計測は 3 か所とも壊れていた（単価は 1/2.6 の過小表示、31 の用途が 1 つに潰れ、キャッシュ未計上）。キャッシュが効く条件は 9 月は約 8,000、10 月は約 4,000 トークンと食い違った。指示文を水増しすると判定が 9% ずれた。">
+<meta property="og:title" content="Gemini の費用を削る前に、計器を疑った：単価・内訳・キャッシュの 3 つが壊れていて、キャッシュの条件は測り直すと変わっていた">
+<meta property="og:description" content="Gemini の費用の計測は 3 か所とも壊れていた（単価は 1/2.6 の過小表示、31 の用途が 1 つに潰れ、キャッシュ未計上）。キャッシュが効く条件は 9 月は約 8,000、10 月は約 4,000 トークンと食い違った。指示文を水増しすると判定が 9% ずれた。">
+<meta property="og:type" content="article">
+<meta name="theme-color" content="#fbfaf7">
+<link rel="icon" href="/favicon.ico?v=1697d589" sizes="48x48">
+<link rel="icon" href="/favicon.svg?v=b9d7922f" type="image/svg+xml" sizes="any">
+<link rel="icon" href="/assets/icon/icon-192.png?v=e2566235" type="image/png" sizes="192x192">
+<link rel="apple-touch-icon" href="/assets/icon/icon-180.png?v=84e7f0e6">
+<link rel="manifest" href="/site.webmanifest">
+<script>document.documentElement.className+=" js"</script>
+<link rel="stylesheet" href="/style.css?v=dd51310c">
+<meta name="google-adsense-account" content="ca-pub-3863314847163872">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3863314847163872" crossorigin="anonymous"></script>
+<link rel="canonical" href="https://koshinstudio.com/notes/gemini-meter/">
+<meta property="og:url" content="https://koshinstudio.com/notes/gemini-meter/">
+<meta property="og:site_name" content="Koshin Studio">
+<meta property="og:locale" content="ja_JP">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="alternate" type="application/rss+xml" title="Koshin Studio — Notes" href="https://koshinstudio.com/feed.xml">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BlogPosting","headline":"Gemini の費用を削る前に、計器を疑った：単価・内訳・キャッシュの 3 つが壊れていて、キャッシュの条件は測り直すと変わっていた","url":"https://koshinstudio.com/notes/gemini-meter/","description":"Gemini の費用の計測は 3 か所とも壊れていた（単価は 1/2.6 の過小表示、31 の用途が 1 つに潰れ、キャッシュ未計上）。キャッシュが効く条件は 9 月は約 8,000、10 月は約 4,000 トークンと食い違った。指示文を水増しすると判定が 9% ずれた。","datePublished":"2026-10-17","dateModified":"2026-10-17","inLanguage":"ja","image":"https://koshinstudio.com/assets/og/og_notes_gemini-meter.jpg","author":{"@id":"https://koshinstudio.com#studio"},"publisher":{"@id":"https://koshinstudio.com#studio"},"mainEntityOfPage":"https://koshinstudio.com/notes/gemini-meter/"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Koshin Studio","item":"https://koshinstudio.com/"},{"@type":"ListItem","position":2,"name":"Notes","item":"https://koshinstudio.com/notes/"},{"@type":"ListItem","position":3,"name":"Gemini の費用を削る前に、計器を疑った：単価・内訳・キャッシュの 3 つが壊れていて、キャッシュの条件は測り直すと変わっていた","item":"https://koshinstudio.com/notes/gemini-meter/"}]}]}</script>
+<meta property="og:image" content="https://koshinstudio.com/assets/og/og_notes_gemini-meter.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
+</head>
+<body class="article">
+<canvas id="motes"></canvas>
+
+<header class="site"><div class="wrap">
+  <a class="logo" href="/"><img class="logo-mark" src="/favicon.svg?v=b9d7922f" alt="" width="28" height="28">Koshin Studio</a>
+  <nav><a href="/works/">Works</a><a href="/notes/">Notes</a><a href="/picks/">Picks</a><a href="/calc/">Tools</a><a href="/about/">About</a></nav>
+</div></header>
+
+<main><div class="wrap">
+  <nav class="crumbs" aria-label="現在地"><a href="/">Koshin Studio</a><i aria-hidden="true">›</i><a href="/notes/">Notes</a><i aria-hidden="true">›</i><span aria-current="page">Gemini の費用を削る前に、計器を疑った：単価・内訳・キャッシュの 3 つが壊れていて、キャッシュの条件は測り直すと変わっていた</span></nav>
+  <h1>Gemini の費用を削る前に、計器を疑った：単価・内訳・キャッシュの 3 つが壊れていて、キャッシュの条件は測り直すと変わっていた</h1>  <div class="rule"></div>
+  <p class="lead">トレカダッシュ 開発の記録 ／ 2026年9月〜10月</p>
+
+  <p>iOS アプリ「<a href="/works/torecadash/">トレカダッシュ</a>」は、記事の判定や商品の照合に、Google の Gemini（AI）を使っています。使った分だけお金がかかるので、費用を減らす作業を何度かしました。この記事は、その中の 2 つの回の記録です。</p>
+  <ul>
+    <li><strong>9 月 4 日：</strong>費用を削る前に計測を点検したら、<strong>3 か所とも壊れていた</strong>。</li>
+    <li><strong>10 月 16 日：</strong>「キャッシュが効く条件」を測り直したら、<strong>9 月の結論と食い違っていた</strong>。</li>
+  </ul>
+  <p class="note">数字は、2026 年 9 月 4 日と 10 月 16 日の作業の記録から書いています。使ったのは gemini-3.1-flash-lite です。</p>
+<!--toc-->
+  <nav class="toc" aria-label="目次"><p>目次</p><ol><li><a href="#s1">計器が、3 か所とも壊れていた</a></li><li><a href="#s2">9 月の測定：キャッシュは約 8,000 トークンを超えてから</a></li><li><a href="#s3">10 月の測り直し：条件は、約 4,000 トークンだった</a></li><li><a href="#s4">指示文を水増ししてみた。判定が 9% ずれた</a></li><li><a href="#s5">いま残っている、いちばん大きい項目</a></li><li><a href="#s6">分かったこと</a></li></ol></nav>
+<!--/toc-->
+  <h2 class="rv" id="s1">計器が、3 か所とも壊れていた</h2>
+  <p>「費用を削って」と言われて、最初にしたのは、削ることではなく、<strong>費用の計測が合っているかの確認</strong>でした。合っていない計器で削ると、効かない場所を削って「なぜ下がらない」となります。実際に、3 つの欠陥が見つかりました。</p>
+  <div class="scroll rv"><table>
+    <thead><tr><th>計器の欠陥</th><th>起きていたこと</th></tr></thead>
+    <tbody>
+      <tr><td>単価が違う</td><td>コード上の単価は、100 万トークンあたり入力 $0.10・出力 $0.40。実際の価格は <strong>入力 $0.25・出力 $1.50</strong>。費用を<strong>約 1/2.6 に、少なく表示</strong>していた。</td></tr>
+      <tr><td>内訳のラベルが潰れていた</td><td>用途別の集計が、実際には存在しない名前のキー（<code>params.system</code>）を見ていた（正しくは <code>system_instruction</code>）。<strong>31 種類の用途が、全部 1 つの塊</strong>になり、どの指示文が高いのか、一度も読めていなかった。</td></tr>
+      <tr><td>キャッシュを数えていない</td><td>入力の 31% はキャッシュの命中で、単価が 1/10 なのに、全部を定価で数えていた。<strong>約 4 割、多く</strong>見積もっていた。</td></tr>
+    </tbody>
+  </table></div>
+  <p>もう 1 つ、見かけ上の「費用 2 位」が、本番の問題ではありませんでした。「ジョブ外」という名前の項目が 1 日 195 円で 2 位でしたが、これは<strong>私自身が、手で実行した分</strong>でした。本番の実力を見るときは、手動で動かした分を、必ず除きます。</p>
+  <p>直した計器で測ると、この時点で、1 日約 606 円（月 18,168 円）。キャッシュの分を引いた実質は、月約 13,200 円でした。費用のほとんどは<strong>入力トークン</strong>で、中身は、毎回送り直す指示文と候補の一覧です。</p>
+
+  <h2 class="rv" id="s2">9 月の測定：キャッシュは約 8,000 トークンを超えてから</h2>
+  <p>Gemini には、同じ長い指示文を繰り返し送ると、2 回目から安くなる仕組み（暗黙のキャッシュ）があります。命中した分の単価は 1/10 です。そこで、同じ指示文を 3 回続けて送って、どこから効くかを測りました。</p>
+  <div class="scroll rv"><table>
+    <thead><tr><th>指示文の長さ（入力トークン）</th><th>キャッシュの命中</th></tr></thead>
+    <tbody>
+      <tr><td>5,209</td><td>0</td></tr>
+      <tr><td>8,490</td><td>4,079</td></tr>
+      <tr><td>17,070</td><td>12,263</td></tr>
+    </tbody>
+  </table></div>
+  <p>当時の結論は、「約 8,000 トークンを超えてから効く」でした。実質のトークンは、<strong>入力 − 0.9 × 命中</strong>で計算できます。</p>
+  <p>ここで、無理に指示文を長くして基準に乗せるのは、<strong>逆に高くつく</strong>、と分かりました。4,200 トークンの指示文を 8,500 に膨らませると、実質は 4,814 トークンで、元より多いのです。キャッシュが得になるのは、元から大きい指示文だけです。</p>
+
+  <h2 class="rv" id="s3">10 月の測り直し：条件は、約 4,000 トークンだった</h2>
+  <p>もう一度、本番のキーで、同じ測定をしました。今度は、interactions API という呼び出し口で測りました。結果は、9 月と違いました。</p>
+  <div class="scroll rv"><table>
+    <thead><tr><th>指示文の長さ（入力トークン）</th><th>キャッシュの命中</th></tr></thead>
+    <tbody>
+      <tr><td>1,770</td><td>0</td></tr>
+      <tr><td>4,093</td><td>2,031（2 回目から）</td></tr>
+      <tr><td>7,017</td><td>4,076</td></tr>
+    </tbody>
+  </table></div>
+  <p>約 4,000 トークンから効き、先頭の<strong>約 2,038 トークン単位</strong>で命中していました。9 月は「8,000 から」、10 月は「4,000 から」。<strong>なぜ食い違うのかは、確かめていません。</strong>測り方の違いや、サービス側の変更が考えられますが、どれが原因かは分かっていません。分かるのは、「キャッシュの条件は、固定の事実ではなく、測り直すもの」ということです。</p>
+  <p>本番の指示文は、1,000〜2,500 トークンでした。先頭の固定部分が基準に届かず、<strong>命中は 1 日中 0</strong> でした。入力トークンが費用のほぼ全部（出力は約 1%）なので、キャッシュが効けば、大きな節約に見えました。</p>
+
+  <h2 class="rv" id="s4">指示文を水増ししてみた。判定が 9% ずれた</h2>
+  <p>「判定に影響しない注記」を足して、指示文を約 2,300 トークンに伸ばし、基準に乗せる案を試しました。実データ 90 件で、元の指示文と答えを比べました。</p>
+  <ul>
+    <li><strong>判定が 8 件（9%）食い違いました。</strong>「その他」「抽選」「ゲリラ販売」のあいだで、答えが変わりました。</li>
+    <li>しかも、約 2,600 トークンでは、<strong>キャッシュに命中しませんでした</strong>。</li>
+  </ul>
+  <p>精度が落ちるのに、命中も取れない。この案は<strong>取り下げ</strong>て、本番には出していません。「影響しない」はずの文章でも、AI の答えは変わります。確かめずに足してはいけません。</p>
+
+  <h2 class="rv" id="s5">いま残っている、いちばん大きい項目</h2>
+  <p>実データで内訳を見ると、最大の単独項目は、商品の照合でした。1 回あたり平均 7,151 入力トークン、1 日 297 回で、約 83 円です。候補の絞り込み、まとめて聞く、AI に聞かずに済ませる、は、すでに入れてあります。これ以上は、<strong>候補を減らす、つまり精度を下げる方向</strong>になるので、見送っています。</p>
+  <p>削るなら、指示文を短くする方向です。その場合は、1 本ずつ、実データで判定が一致するかを確かめます。末尾の水増しで、キャッシュを狙いません。</p>
+
+  <h2 class="rv" id="s6">分かったこと</h2>
+  <blockquote>費用を削る前に、削る道具を疑う。</blockquote>
+  <ul>
+    <li><strong>単価は、記憶で書かない。</strong>公式の価格ページで確かめます。1/2.6 の過小表示は、単価の書き写しの誤りでした。</li>
+    <li><strong>内訳のラベルが、本当に分かれているか、実データを 1 回出して目で見る。</strong>31 種類が 1 つに潰れていても、合計は合っているので、気づきません。</li>
+    <li><strong>自分の作業が、本番の数字に混ざっていないか見る。</strong></li>
+    <li><strong>条件は、測り直す。</strong>9 月の「8,000」は、10 月には「4,000」でした。</li>
+    <li><strong>「影響しない」変更も、実データで確かめる。</strong>90 件で試して、9% ずれました。</li>
+  </ul>
+
+
+  <div class="ad-slot" data-slot="footer" hidden></div>
+<!--/ad-->
+
+  <div class="rule" style="margin:40px 0 22px"></div>
+  <p class="eyebrow">この話に出てくるもの</p>
+  <ul class="plain">
+    <li><a href="/works/torecadash/">トレカダッシュ</a> — トレカの抽選・予約・先着の情報を集める iPhone アプリ</li>
+    <li><a href="/notes/gemini-migration/">Claude API から Gemini API へ移行した</a> — Gemini を使うことになった経緯</li>
+    <li><a href="/notes/claude-vs-gemini-api/">Claude API と Gemini API を、公式の数字で比べる</a> — 値段や上限を公式の情報で比べた記事</li>
+    <li><a href="/notes/firestore-91/">Firestore の費用を円で出したら、読み取りの 91% が 1 か所だった</a> — 同じ「まず計器」の記録</li>
+  </ul>
+
+<!--related-->
+  <div class="rule" style="margin:40px 0 22px"></div>
+  <p class="eyebrow">ほかの記録</p>
+  <ul class="plain">
+    <li><a href="/notes/firestore-91/">Firestore の費用を円で出したら、読み取りの 91% が 1 か所だった：キャッシュを入れても効かなかった理由</a> — Firestore を初めて円で見たら、月 1.3 万円で Gemini とほぼ同額だった。読み取りの 91% は商品一覧の読み直し。60 秒キャッシュが効かなかったのは、32 件が同時に動いていたから。「読み込み中の約束」を覚えて直した記録。</li>
+    <li><a href="/notes/tco-relay/">「確認済み」の印が付いていたのに、リンク先を一度も読めていなかった：t.co の中継ページ</a> — X の告知の応募リンクを、ブラウザの名乗りを付けて開くと、t.co は転送せず中継ページを返した。表示中の 220 件が全部読めておらず、9 件は閉じたフォームだった。直し方と、誤った「確認済み」の印の外し方の記録。</li>
+    <li><a href="/notes/gemini-migration/">Claude API から Gemini API（gemini-3.1-flash-lite）へ移行した：16 か所の呼び出しを 1 つの関数にまとめた</a> — Anthropic の利用上限で予定外の課金が出たため Gemini へ移行。モデルの選び方（廃止予定日）、呼び出しの一本化、Web 検索の回数上限が無い問題への回路遮断器、止めるスイッチの記録。</li>
+  </ul>
+<!--/related-->
+
+<!--comments-->
+  <section class="comments" id="comments" data-repo="murakamikoshin/koshin-studio" data-repo-id="R_kgDOURc3ew"
+    data-category="Announcements" data-category-id="DIC_kwDOURc3e84DHTVr">
+    <h2 id="comments-h">コメント</h2>
+    <p>感想や、記事の間違いの指摘は、ここへ。書くには、GitHub のアカウントが要ります。</p>
+    <p><button type="button" class="btn ghost" id="load-comments">コメントを開く</button></p>
+    <p class="note">押すと、giscus（giscus.app）と GitHub に接続します。押さなければ、接続しません。詳しくは<a href="/privacy/">あつかい</a>に書いています。</p>
+    <div id="giscus-box"></div>
+  </section>
+<!--/comments-->
+</div>
+</main>
+
+<footer class="site"><div class="wrap">
+  <span>© 2026 Koshin Studio</span>
+  <div class="sns-row"></div>
+  <nav><a href="/picks/">Picks</a><a href="/calc/">Tools</a><a href="/about/">About</a><a href="/privacy/">あつかい</a><a href="/en/" hreflang="en" lang="en">English</a></nav>
+</div></footer>
+<script src="/motion.js?v=1e7447ec" defer></script>
+</body>
+</html>
