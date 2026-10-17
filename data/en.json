@@ -1,5 +1,33 @@
 [
   {
+    "ja": "/notes/destination-check/",
+    "en": "/en/notes/destination-check/",
+    "title": "I opened the links of displayed articles and compared them: about 60 mistakes, and three mistakes in my own first check",
+    "date": "2026-10-17",
+    "blurb": "Opening more than 1,000 destination pages and comparing with the articles: Amazon invitation requests shown as first-come, closed or sold-out items displayed, links to other stores or products, application links redirecting to a site’s top page. My first check was wrong in three ways too."
+  },
+  {
+    "ja": "/notes/audit-sweep-61/",
+    "en": "/en/notes/audit-sweep-61/",
+    "title": "Four things from a full sweep of 61 audits: 51 jobs clumped at 4 a.m., a lock that expired in 55 seconds, and a price-filling idea I decided not to add",
+    "date": "2026-10-17",
+    "blurb": "Once-a-day jobs clumped at 27 at 4 o’clock and 24 at 5; a Rakuten patrol took 181–480 s per run with a 55-second lock; I stopped counting anomalies that cannot be fixed; and I measured a way to fill official prices from one store but did not add it."
+  },
+  {
+    "ja": "/notes/coverage-check/",
+    "en": "/en/notes/coverage-check/",
+    "title": "Comparing with other sites to count gaps: the first “23% coverage” was a measuring mistake and the truth was 49%",
+    "date": "2026-10-17",
+    "blurb": "Counting whether I show lotteries other sites list: the first 23% was distorted by product-name spelling and expired articles. After fixing it, 49%; after fixing five gap-filling problems, 90%. Sites whose terms prohibit automated fetching were not imported."
+  },
+  {
+    "ja": "/notes/x-monitoring-gaps/",
+    "en": "/en/notes/x-monitoring-gaps/",
+    "title": "Four gaps in monitoring X: posts missing from search, accounts that change hands, a store-finding query, and catching up after an outage",
+    "date": "2026-10-17",
+    "blurb": "Four stores’ lottery posts did not appear in search even after 751 posts; a registered store had become a person; store-finding found 11 of 63; and after a 6-day outage only 185 of 2,866 were read in 2 hours. Fixes and cost estimates."
+  },
+  {
     "ja": "/notes/hot-lane/",
     "en": "/en/notes/hot-lane/",
     "title": "When you cannot watch everything quickly: popular 128 of 427 sets run fast, and the fastest lane yields to the budget",

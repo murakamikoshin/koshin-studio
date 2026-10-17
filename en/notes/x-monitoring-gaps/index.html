@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Four gaps in monitoring X: posts missing from search, accounts that change hands, a store-finding query, and catching up after an outage — Koshin Studio</title>
+<meta name="description" content="Four stores’ lottery posts did not appear in search even after 751 posts; a registered store had become a person; store-finding found 11 of 63; and after a 6-day outage only 185 of 2,866 were read in 2 hours. Fixes and cost estimates.">
+<meta property="og:title" content="Four gaps in monitoring X: posts missing from search, accounts that change hands, a store-finding query, and catching up after an outage">
+<meta property="og:description" content="Four stores’ lottery posts did not appear in search even after 751 posts; a registered store had become a person; store-finding found 11 of 63; and after a 6-day outage only 185 of 2,866 were read in 2 hours. Fixes and cost estimates.">
+<meta property="og:type" content="article">
+<meta name="theme-color" content="#fbfaf7">
+<link rel="icon" href="/favicon.ico?v=1697d589" sizes="48x48">
+<link rel="icon" href="/favicon.svg?v=b9d7922f" type="image/svg+xml" sizes="any">
+<link rel="icon" href="/assets/icon/icon-192.png?v=e2566235" type="image/png" sizes="192x192">
+<link rel="apple-touch-icon" href="/assets/icon/icon-180.png?v=84e7f0e6">
+<link rel="manifest" href="/site.webmanifest">
+<script>document.documentElement.className+=" js"</script>
+<link rel="stylesheet" href="/style.css?v=dd51310c">
+<meta name="google-adsense-account" content="ca-pub-3863314847163872">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3863314847163872" crossorigin="anonymous"></script>
+<link rel="canonical" href="https://koshinstudio.com/en/notes/x-monitoring-gaps/">
+<meta property="og:url" content="https://koshinstudio.com/en/notes/x-monitoring-gaps/">
+<meta property="og:site_name" content="Koshin Studio">
+<meta property="og:locale" content="en_US">
+<link rel="alternate" hreflang="ja" href="https://koshinstudio.com/notes/x-monitoring-gaps/">
+<link rel="alternate" hreflang="en" href="https://koshinstudio.com/en/notes/x-monitoring-gaps/">
+<link rel="alternate" hreflang="x-default" href="https://koshinstudio.com/en/notes/x-monitoring-gaps/">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="alternate" type="application/rss+xml" title="Koshin Studio — Notes" href="https://koshinstudio.com/feed.xml">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BlogPosting","headline":"Four gaps in monitoring X: posts missing from search, accounts that change hands, a store-finding query, and catching up after an outage","url":"https://koshinstudio.com/en/notes/x-monitoring-gaps/","description":"Four stores’ lottery posts did not appear in search even after 751 posts; a registered store had become a person; store-finding found 11 of 63; and after a 6-day outage only 185 of 2,866 were read in 2 hours. Fixes and cost estimates.","datePublished":"2026-10-17","dateModified":"2026-10-17","inLanguage":"en","image":"https://koshinstudio.com/assets/og/og_en_notes_x-monitoring-gaps.jpg","author":{"@id":"https://koshinstudio.com#studio"},"publisher":{"@id":"https://koshinstudio.com#studio"},"mainEntityOfPage":"https://koshinstudio.com/en/notes/x-monitoring-gaps/"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Koshin Studio","item":"https://koshinstudio.com/en/"},{"@type":"ListItem","position":2,"name":"Four gaps in monitoring X: posts missing from search, accounts that change hands, a store-finding query, and catching up after an outage","item":"https://koshinstudio.com/en/notes/x-monitoring-gaps/"}]}]}</script>
+<meta property="og:image" content="https://koshinstudio.com/assets/og/og_en_notes_x-monitoring-gaps.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
+</head>
+<body class="article">
+<canvas id="motes"></canvas>
+
+<header class="site"><div class="wrap">
+  <a class="logo" href="/"><img class="logo-mark" src="/favicon.svg?v=b9d7922f" alt="" width="28" height="28">Koshin Studio</a>
+  <nav><a href="/works/">Works</a><a href="/notes/">Notes</a><a href="/picks/">Picks</a><a href="/calc/">Tools</a><a href="/about/">About</a></nav>
+</div></header>
+
+<main><div class="wrap">
+  <nav class="crumbs" aria-label="You are here"><a href="/en/">Koshin Studio</a><i aria-hidden="true">›</i><span aria-current="page">X monitoring gaps</span></nav>
+  <h1>Four gaps in monitoring X: posts missing from search, accounts that change hands, a store-finding query, and catching up after an outage</h1>  <div class="rule"></div>
+<!--lang-->
+  <p class="note"><a href="/notes/x-monitoring-gaps/" hreflang="ja" lang="ja">日本語版</a></p>
+<!--/lang-->  <p class="lead">Development log of the Toreca Dash app / September 2026</p>
+
+  <p>Of my app Toreca Dash’s sources, the fastest and the easiest to miss is <strong>stores’ own posts on X (Twitter)</strong>. Stores announce lotteries and first-come sales on X first. The app patrols registered store accounts regularly.</p>
+  <p>On 19 September 2026, four “gaps” in this monitoring turned up in a single day. This is the record.</p>
+  <p class="note">Numbers come from my work logs of 19–20 September 2026. Private individuals’ accounts are not named.</p>  <h2 class="rv" id="s1">1. Some posts do not appear in search</h2>
+  <p>The monitor found posts through X search. But for four stores, lottery announcements did not appear <strong>even after fetching 751 posts without any keyword filter</strong>, nor per store. X search can omit part of a store’s posts.</p>
+  <p>Reading the timeline (the store’s own list of posts) directly (<code>profileTweets</code>) worked.</p>
+  <p>The nasty part: <strong>a store for which no article can ever be created stays “no track record”</strong>. Patrol priority and countermeasures are based on track record, so those stores are never included. What cannot be seen stays unseen (a chicken-and-egg problem).</p>
+  <p>The fix: read store timelines in addition to search. But timeline reads cannot be filtered by words and every item read is billed. So stores with a track record are read daily, stores without it weekly, with a cap per store (10 and 8 items).</p>
+  <div class="scroll rv"><table>
+    <thead><tr><th>Estimate</th><th>Value</th></tr></thead>
+    <tbody>
+      <tr><td>Posts per day, stores with a track record</td><td>13.5</td></tr>
+      <tr><td>Posts per day, randomly chosen stores</td><td>4.5</td></tr>
+      <tr><td>Monthly cost after adding</td><td>about $51 (the plan includes $39)</td></tr>
+    </tbody>
+  </table></div>
+  <p>Cost varies a lot with each store’s posting rate, so always estimate from measurements. It stops automatically once the month passes $62, and an automatic pace check estimates whether all stores can be read daily with the remaining budget, narrowing the stores if not.</p>
+
+  <h2 class="rv" id="s2">2. A registered store had quietly stopped being a store</h2>
+  <p>Two accounts registered as “stores” in the monitoring list were no longer stores. One, registered in August as a branch of a second-hand shop, had become a person’s chatter. The other, registered in May, was an individual info account whose “[PR] lottery sale” posts became articles as if from a store.</p>
+  <p>Articles appear as “store primary information”, so wrong information is notified as is.</p>
+  <p>The list was checked only once, when registered. Nothing noticed when an account’s owner or use changed.</p>
+  <p>The check: match the store name in the list comments against the <strong>display name</strong> on articles from the last 30 days, by a 2-character overlap. Of 828, I reviewed mismatches by eye and found 2 had become personal. Most mismatches were just “unknown” registrations that became official names, so I decided by eye, not by machine.</p>
+
+  <h2 class="rv" id="s3">3. The store-finding search found only 11 of 63 stores</h2>
+  <p>New stores’ X accounts are found by search. The query was “store name genre name lottery site:x.com”, looking at the top 5 results. Out of 63 stores, it found X for <strong>only 11</strong>. Aggregators and customers’ posts ranked first and were rejected by the store-name match.</p>
+  <p>Among 8 stores whose X account was known, the old method found 5 and the “store name site:x.com” query found 7 (all ranked first).</p>
+  <p>But in a dry run right after widening the query, it picked up <strong>personal or unrelated accounts</strong>, because search-result titles contain the whole post and the match fired on the store name in the body. I changed it to extract <strong>only the display-name part</strong> of the title. More hits bring more mistakes at the same time. When you change a query, always run a preview and look at each item it picks up.</p>
+
+  <h2 class="rv" id="s4">4. Catching up after an outage took half a day</h2>
+  <p>The data-fetching service’s (Apify) budget ran out, and X monitoring was down for 6 days. When I resumed, in 2 hours it read <strong>185 of 2,866</strong>.</p>
+  <p>Patrol is a rotation: “stores with a track record every 3 hours, others every 12 hours”. A rotation fits the normal state where everyone is about equally behind. After an outage, lateness is not uniform. Catching up would take more than half a day, and <strong>lotteries closing the next day would end before being read</strong>.</p>
+  <p>For the same reason, newly found accounts joined the middle of the “no track record” list and went unread for up to 12 hours.</p>
+  <p>The fix: add to the rotation a slot that <strong>reads the longest-unread items, oldest first</strong>. Attempt marks are kept separately so items that keep failing do not hog it. I also ran a manual catch-up right after resuming.</p>
+
+  <h2 class="rv" id="s5">Aside: a “this month only” budget stopped everything twice</h2>
+  <p>This catch-up was caused by the budget running out. I used to change the cap month by month, “this month only $44”, “automatically go back to $29 on 6 September”. If the value I went back to was below that month’s usage, <strong>all X monitoring stopped at the cycle start</strong>. It happened twice (28 August and 13 September).</p>
+  <p>The decision on 19 September: <strong>one monthly cap of $70, and the interval not changed by month</strong> (all accounts once per 6 hours). Real monthly cost is about $10 to $18. I do not bring back a month-by-month cap.</p>
+
+  <h2 class="rv" id="s6">What I learned</h2>
+  <blockquote>Posts you cannot see cannot be counted.</blockquote>
+  <ul>
+    <li><strong>Do not rely on search alone.</strong> Search does not return everything, and what is invisible raises no complaints.</li>
+    <li><strong>Registration is not a one-time check.</strong> Owners change. Compare the registered name with the current display name regularly.</li>
+    <li><strong>Preview when you change a query.</strong> More hits means more mistakes.</li>
+    <li><strong>After an outage, catch-up needs its own design.</strong> The normal rotation does not suit it.</li>
+    <li><strong>Do not change a cost cap by month.</strong> Forgetting to restore it, or restoring the wrong value, stops everything.</li>
+  </ul>
+
+  <p class="note">This is the English version of <a href="/notes/x-monitoring-gaps/" hreflang="ja" lang="ja">the original Japanese article</a>.</p>
+
+  <div class="rule" style="margin:40px 0 22px"></div>
+  <p class="eyebrow">More in English</p>
+  <ul class="plain">
+    <li><a href="/en/">All English pages</a></li>
+    <li><a href="/en/works/torecadash/">Toreca Dash</a></li>
+  </ul>
+</div>
+</main>
+
+<footer class="site"><div class="wrap"></div></footer>
+<script src="/motion.js?v=1e7447ec" defer></script>
+</body>
+</html>

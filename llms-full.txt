@@ -193,6 +193,8 @@ URL: https://koshinstudio.com/notes/destination-check/
 
 # 表示中の記事のリンク先を、実際に開いて確かめた：約 60 件の間違いと、最初の点検が間違えた 3 つのこと
 
+  English version (https://koshinstudio.com/en/notes/destination-check/)
+
   トレカダッシュ 開発の記録 ／ 2026年9月
 
   iOS アプリ「トレカダッシュ (https://koshinstudio.com/works/torecadash/)」の記事には、お店や通販サイトのリンク先が付いています。記事の題名や値段が正しくても、リンク先のページが、閉じていたり、別の商品だったりすれば、利用者には役に立ちません。
@@ -379,6 +381,8 @@ dragonball → gundam       「プレミアムカードコレクション02」�
 URL: https://koshinstudio.com/notes/audit-sweep-61/
 
 # 監査 61 本を総点検して見つけた 4 つ：朝 4 時に 51 本が固まり、鍵の期限は 55 秒で、定価の補完は「入れない」と決めた
+
+  English version (https://koshinstudio.com/en/notes/audit-sweep-61/)
 
   トレカダッシュ 開発の記録 ／ 2026年9月
 
@@ -850,6 +854,8 @@ URL: https://koshinstudio.com/notes/coverage-check/
 
 # 競合サイトと突き合わせて、取りこぼしを数えた：最初の「カバー率 23%」は測り方の間違いで、本当は 49% だった
 
+  English version (https://koshinstudio.com/en/notes/coverage-check/)
+
   トレカダッシュ 開発の記録 ／ 2026年8月
 
   iOS アプリ「トレカダッシュ (https://koshinstudio.com/works/torecadash/)」の目標の 1 つは、抽選販売の情報をもれなく出すことです。もれがあるかどうかを確かめるには、同じ情報を出している他のサイトと突き合わせて、「あちらにあって、こちらに無いもの」を数えるのが一番です。
@@ -1078,6 +1084,8 @@ URL: https://koshinstudio.com/notes/self-inflicted/
 URL: https://koshinstudio.com/notes/x-monitoring-gaps/
 
 # X 監視の漏れ 4 つ：検索に出ない投稿、持ち主が変わるアカウント、店を探せない検索、止まった後の取り戻し
+
+  English version (https://koshinstudio.com/en/notes/x-monitoring-gaps/)
 
   トレカダッシュ 開発の記録 ／ 2026年9月
 
@@ -6726,6 +6734,439 @@ URL: https://koshinstudio.com/privacy/
   2026 年 10 月 17 日に、アフィリエイト（紹介リンク）の記述を外しました。現在、このサイトの記事には、紹介リンクはありません。今後、リンクを付けることがあれば、記事の冒頭と、このページに書きます。
 
   このページの内容についてのご質問は、About (https://koshinstudio.com/about/) にある連絡先までお願いします。
+
+
+---
+
+URL: https://koshinstudio.com/en/notes/destination-check/
+
+# I opened the links of displayed articles and compared them: about 60 mistakes, and three mistakes in my own first check
+
+  日本語版 (https://koshinstudio.com/notes/destination-check/)
+
+  Development log of the Toreca Dash app / September 2026
+
+  The articles in my app Toreca Dash link to store and shopping-site pages. Even if an article’s title and price are right, if the linked page is closed or about a different product, it is no use to the user.
+
+  On the night of 15 September 2026, asked to “check the destination content too”, I actually opened the links of displayed articles and compared the content with the article: product, store, whether open, sale type, deadline and price. About 60 mistakes turned up.
+
+  Numbers come from my work log of 15 September 2026. The check itself made no writes; I fixed the findings separately.
+
+## How I checked
+
+- X posts (361): 0 deleted. The text had been compared in earlier checks.
+
+- Non-X (703, excluding Yahoo!): I read the destination directly or via the scraping service (with a Japanese IP) and judged with an AI. Amazon always goes through the scraping service.
+
+  My first version of the check got three things wrong:
+
+- I opened Amazon from Singapore. Prices showed in Singapore dollars and I saw another seller, and judged that “wrong”.
+
+- I read Rakuten as garbled text. I had not detected the character encoding (EUC-JP).
+
+- I opened 501 Yahoo! pages six at a time. The production IP was refused with HTTP 489 (see another article (https://koshinstudio.com/en/notes/self-inflicted/)). I stopped partway through Yahoo!.
+
+  If the checking tool is wrong, the count of “mistakes” inflates. I fixed encoding detection, opening Amazon from Japan, and judging only by stock of “this exact item”, then reran.
+
+## Mistakes found (about 60)
+
+    What | Count | Fix
+
+      Amazon “invitation request” shown as pre-order or first-come | 10 | Make it a lottery
+
+      Amazon “pre-order” shown as first-come | 7 | Make it a reservation
+
+      Rakuten Books “pre-orders open” shown as first-come | 3 | Make it a reservation
+
+      Shops closed temporarily (Yahoo!) | 6 | Hide
+
+      Sold out or closed but still displayed | many | Hide
+
+      Link goes to a different store or an ended lottery | 3 | Go back to the store’s X post
+
+      Link goes to a different product | 2 | Hide
+
+      Price mismatch | about 10 | Correct
+
+      Empty store name | 1 | Fill in
+
+  The most frequent was the wrong sale type. On Amazon there are “invitation requests”, neither first-come nor pre-order. Treating one as first-come means users cannot buy however fast they are. The earlier code only marked the invitation and did not correct the sale type.
+
+  Some sold-out pages did not match my sold-out wording. A Yahoo! sold-out page says “out of stock” on screen, but matched none of the keywords. So I now judge by the stock data embedded in the page for that item ("stock":{"isAvailable":false). The data is more reliable than the wording on screen.
+
+## “Opening the application link goes to the site’s top page”
+
+  Found in another check the same day. The QR code on a store’s lottery image pointed to a URL that, actually opened, redirects to the site’s top page, not an application page.
+
+  I added a check to the single gate that adopts application links. It opens the URL, and if the original URL has a path other than the top but the destination path is empty (or a file name that looks like a top page), it does not adopt it. If it cannot be read (403, timeout), it still adopts, since many stores use bot protection and unreadable is not a sign of badness. The same URL is held for 6 hours.
+
+## What I did not fix, and could not fix
+
+  It matters that I did not count everything found as a “mistake”. There are cases I checked and did not fix.
+
+- Rakuten Ichiba “sold out”: the page data said in stock (a setting hides stock counts). The AI misread it.
+
+- Amazon “See all buying options”: other sellers exist, so it is not necessarily sold out.
+
+- Amazon English titles: auto-translated names; the product was right.
+
+- 85 pages I could not read: Rakuten Ichiba (via ad links), membership sites, LINE, Google Forms and so on.
+
+  I keep results in three groups with reasons: fixed, not fixed, could not read. “Not fixed” needs a reason too.
+
+## What I learned
+
+> Even if title and price match, you cannot know until you open the link.
+
+- Actually open the link. Looking only at the article cannot show that the destination is closed.
+
+- Check the checking tool first. Country, encoding, parallelism: a wrong tool inflates “mistakes”.
+
+- Embedded data beats screen wording. Judge sold-out by stock data, not text.
+
+- Do not make everything found a “mistake”. Keep reasons for what you do not fix.
+
+- Do not treat “could not read” as bad. Bot protection makes unreadable normal.
+
+  This is the English version of the original Japanese article (https://koshinstudio.com/notes/destination-check/).
+
+  More in English
+
+- All English pages (https://koshinstudio.com/en/)
+
+- Toreca Dash (https://koshinstudio.com/en/works/torecadash/)
+
+
+---
+
+URL: https://koshinstudio.com/en/notes/audit-sweep-61/
+
+# Four things from a full sweep of 61 audits: 51 jobs clumped at 4 a.m., a lock that expired in 55 seconds, and a price-filling idea I decided not to add
+
+  日本語版 (https://koshinstudio.com/notes/audit-sweep-61/)
+
+  Development log of the Toreca Dash app / September 2026
+
+  My app Toreca Dash has 61 audits that find anomalies. In the early hours of 8 September 2026 I ran them all and checked every item that was not 0 against real data, one by one.
+
+  This article is four stories from that work. Three are things I fixed; one is a story where I measured, and deliberately did not add it.
+
+  Numbers come from my work log of the evening of 7 to the morning of 8 September 2026.
+
+## 1. 51 once-a-day jobs were clumped at 4 and 5 a.m.
+
+  At 04:53 the measurements were:
+
+- The 14 concurrency slots were full, 8 waiting.
+
+- 6 jobs timed out at the 540-second limit.
+
+- The “instant sell-out monitor” and the “Amazon fastest lane” I wanted to protect were skipped 9 times each per hour.
+
+  The cause was clumping in time. Counting once-a-day jobs: 27 at 4 o’clock and 24 at 5; at 1 o’clock and from 10 to 21, 0.
+
+  The fix was not to edit times one by one, which would not apply to jobs added later. I fixed the mechanism that spreads start times. The spread was a flat 270 seconds; for jobs with an interval of 6 hours or more it now spreads up to 1,800 seconds (30 minutes). 27 jobs over 30 minutes is about one per 67 seconds, so 3 to 5 run at once.
+
+  I kept it to 30 minutes so it does not spill into the next hour’s slot and break time-based order like “check at 2, fill at 3”.
+
+## 2. A patrol meant to be “every minute” took 181 to 480 seconds per run
+
+  The Rakuten Ichiba patrol was meant to run every minute. Measured, one run took 181 to 480 seconds. The harm was threefold:
+
+- It occupied a concurrency slot almost all the time.
+
+- It timed out at the 480-second limit (4 times in 2 hours) and the results were thrown away.
+
+- It held the Rakuten API allowance (one call per 1.5 seconds, shared by all jobs) the whole time, cutting the share of the instant sell-out monitor.
+
+  The effective interval was 3.5 to 6 minutes. And after a timeout it restarts from the same first genre every time, so later genres never get a turn.
+
+  I switched it to the five-genres-at-a-time rotation proven on Rakuten Books.
+
+     | Before | After
+
+      One run | 181–480 s | 50–83 s
+
+      Timeouts | 4 per 2 hours | 0
+
+      Interval per genre | 3.5–6 min | 3 min
+
+  I found one more thing. The lock that means “if the previous run is still going, do not start” (preventing double runs) expired after only 55 seconds. For jobs with a 480-second limit and 181–480 s real runs, a run that slipped past the runner’s skip (a manual run, a catch-up right after restart) could run twice at once, doubling Rakuten API use and hitting first-come monitoring. I set both to 480,000 ms. A lock’s expiry should be at least the job’s timeout.
+
+## 3. Stop counting anomalies you cannot fix
+
+  If you keep counting things that cannot be fixed, real anomalies get buried. I revisited three.
+
+- “Lottery with no deadline: 77” became 0. Scanning the text of all 89 real cases, only 5 contained a date-like value, and those were not application deadlines (“lottery results 9/5”, “pick up by 9/13”). The store simply did not write one, and nothing can be done. Now only items that have both deadline wording and a date in the text count as anomalies.
+
+- “3 stopped scrapers” became 0. What was counted were state records with no run time, not jobs. The main code excludes them, only the audit did not.
+
+- One store’s “0 items for 173 hours” was normal. Fetching its three categories worked (16 and 6 items), and all were “point-exchange only” (0 yen). There was just no lottery or pre-order at the time.
+
+  But “0 items” has two meanings: (a) no product matches (normal), (b) the page layout changed and nothing can be read (broken). If you cannot tell them apart, real breakage is buried (the previous day’s Pokémon Center (https://koshinstudio.com/en/notes/blocked-page/) was exactly this). So I now put the number scanned into the completion message.
+
+## 4. A case I measured and deliberately did not add
+
+  397 products had unknown official prices, which stops first-come notifications. The filling job had, measured, zero results.
+
+  Official price unset: 397
+Has a price at a regular store: 51
+Two or more stores agree: 0
+  The “two or more stores agree” condition had effectively never been satisfied. Accepting one store would fill 51. All were kinds with no catalogue price (imported Magic cards and so on).
+
+  I still did not add it. Regular stores discount. If I record a discounted price as the official price, the price check’s ceiling (official price × 1.08 plus margin) becomes lower than the real price and legitimate listings are removed as resale. At 10% off, the real price is 1.11× and exceeds the ceiling. And over-deletion draws no complaints, so I would not notice.
+
+  I wrote down what to do first if I add it:
+
+- Compare the 51 prices by eye with official sites and the manufacturer’s suggested price (confirm whether they are discounted; do not guess a factor).
+
+- Mark single-store-based prices and add margin to the ceiling only for that mark.
+
+- After adding, count hidden articles before and after.
+
+## What I learned
+
+> Clumping is invisible until counted. Record the decision not to add, too.
+
+- Count clumping in time. 27 at 4 o’clock, 0 from 10 to 21.
+
+- Jobs hold something you cannot see. A lock’s expiry should be at least the timeout.
+
+- Do not count anomalies you cannot fix. If the number does not fit, doubt how you count.
+
+- Distinguish what “0 items” means. Show the number scanned.
+
+- If you decide not to add something, keep the reason and the conditions. Even when measurement shows a gain, if it risks over-deleting, I do not add it.
+
+  This is the English version of the original Japanese article (https://koshinstudio.com/notes/audit-sweep-61/).
+
+  More in English
+
+- All English pages (https://koshinstudio.com/en/)
+
+- Toreca Dash (https://koshinstudio.com/en/works/torecadash/)
+
+
+---
+
+URL: https://koshinstudio.com/en/notes/coverage-check/
+
+# Comparing with other sites to count gaps: the first “23% coverage” was a measuring mistake and the truth was 49%
+
+  日本語版 (https://koshinstudio.com/notes/coverage-check/)
+
+  Development log of the Toreca Dash app / August 2026
+
+  One goal of my app Toreca Dash is to show lottery information without leaving anything out. The best way to find gaps is to compare with other sites that publish the same information and count “what they have and I do not”.
+
+  I did this in the early hours of 29 August 2026. The first number was “23% coverage”. But that was a mistake in how I measured. This article records the five problems found as the number moved from 23% to 49% and then 90%.
+
+  Numbers come from my work log of 29 August 2026. I do not name other sites.
+
+## First, I surveyed every competitor
+
+  The request was: “remove every article competitors publish that this app does not”. First I surveyed every possible competitor. Whether I could import from each was decided by reading the robots.txt (the request to machines) and the terms of use in full.
+
+    What I found | Count | Handling
+
+      Sites I already imported from | 3 | Unchanged
+
+      Site newly added this time (Site A) | 1 | Per-case entries, with application links
+
+      Sites whose terms have no prohibition and can be imported | 2 | Compared by hand this time
+
+      Explainer-style sites with no per-store list | several | Skipped: almost no difference
+
+      Sites whose robots.txt and terms prohibit automated fetching | 2 | Not imported. Not allowed as application links either
+
+      A site whose domain no longer exists | 1 | Removed from the list
+
+  One site states the prohibition in Japanese at the very top of its robots.txt. That a machine can fetch it does not mean it should.
+
+## The comparison site was finer-grained than mine
+
+  The site I added (Site A) lists “store × product × deadline × application link”, 90 entries on a single page. My sources were per-article, A is per-case, and its application links are the external forms themselves (Google Forms, LivePocket, Lottery Rotobox, the store’s official X). It was a good counterpart both for counting and for filling gaps.
+
+## Problem 1: a different way of writing a product name counted as “missed”
+
+  The first number was 23% coverage. Reason one was how product names are written.
+
+  Them  30th CELEBRATION BOX
+Mine  Expansion Pack "30th CELEBRATION"
+  Neither contains the other, so naive “contains” never matches. 60 entries were counted as missed because of this.
+
+  But “same if contained” is not the answer. The name “30th CELEBRATION” is contained in “30th CELEBRATION Premium Deck Set”. That errs in the direction of counting a different product as “covered”, hiding holes.
+
+  The fix: drop set-type words (expansion pack, high-class pack) and quantity words (BOX, n-piece set, n types), then link to a catalogue product ID. The order: exact match, then the longest catalogue name contained in their name, then the reverse only when there is exactly one.
+
+## Problem 2: an expired article counted as “covered”
+
+  Reason two was 5 entries. An article with a 29 July deadline at one store was paired with their 30 August case and reported as “article exists but hidden”. It was a different, earlier lottery. After these two fixes the true number was 49%.
+
+## Problem 3: articles made to fill gaps landed on the wrong product
+
+  Gaps are filled by creating articles. But I passed their product name to an AI as is. The AI linked “30th CELEBRATION BOX” to “30th CELEBRATION FUTURISTIC BOX”, priced at ¥27,500. 10 articles ended up on the wrong product.
+
+  The counting side had already narrowed to one catalogue product. The right fix was to give the creating side my catalogue name: one judgement for counting and creating.
+
+  While repairing, I made another mistake. I wrote product IDs truncated to the first 10 characters and created 10 articles with nonexistent IDs. My check printed IDs with slice(0, 10) to read them, and I used those short values directly. I fixed it at once, and the rule is now: never use an ID shortened for display in processing.
+
+## Problem 4: application links other than t.co were always discarded
+
+  The step that attaches application links to aggregator-derived articles passed each store’s URL through a link-expanding function. That function only looks at t.co (X’s short URL), because links in X posts are always shortened. Other sources hold application URLs in plain form. Through it, they gave 0 results every time and fell back to web search.
+
+  Of 32 articles made from Site A, 17 pointed to the source site’s page rather than the application form. Sending users to the source site was something I had decided to prohibit.
+
+  The fix: use plain, unshortened URLs as candidates directly (the usual check still decides adoption). For articles already made, I added a step that rewrites the application link on every comparison, and rewrote 16.
+
+## Problem 5: articles hidden for “no deadline” had no way back
+
+  A job hid aggregator-derived articles whose deadline was unknown. It only hid; even if the deadline became known later, it stayed hidden forever. It is the same shape as an alert that keeps ringing after the fix. For cases where the other site gives a deadline, I now set it and restore the article (articles hidden for other reasons are not restored). Two were restored.
+
+  I also fixed how deadline times are handled. The parsed date was returned as a “Japan-time shifted” value and, saved as is, would have been a deadline 9 hours off. 23:59 Japan time is 14:59 UTC; I now return the real time.
+
+## Result
+
+     | Count
+
+      Open cases Site A lists | 86
+
+      Shown in my app | 77 (90% coverage)
+
+      Missing from the feed | 0
+
+      Article exists but hidden | 2
+
+      Cannot create because they do not identify the product | 7
+
+  This work created 32 articles, rewrote 16 application links and restored 2 with deadlines.
+
+  The remaining 9 all have known reasons:
+
+- One store’s premium deck set is deliberately excluded, because its application page says only “for one box of the expansion pack”. Here the other side is wrong.
+
+- Seven “Starter Set ex, 3 types” entries: the other side does not say which 3 types either. Guessing three articles would put articles about other products side by side, so I do not create them.
+
+- The last is one article hidden for not being seen recently. It may also need a “way back” and stays on my to-do list.
+
+## What I learned
+
+> A flaw in the counting tool does not make the number look bad; it makes holes invisible.
+
+- Doubt how you measure coverage. The first 23% was really 49%, and I got to 90%.
+
+- Do not use “same if contained”. It counts a different product as covered.
+
+- The other side’s entries can be wrong. Among the remainder was one such case.
+
+- Make one judgement for counting and creating. Otherwise the product counted and the product created differ.
+
+- Never use a value shortened for display in processing.
+
+- A hiding process needs a way back, built together.
+
+- Read the terms before importing. Being able to fetch is not being allowed to.
+
+  This is the English version of the original Japanese article (https://koshinstudio.com/notes/coverage-check/).
+
+  More in English
+
+- All English pages (https://koshinstudio.com/en/)
+
+- Toreca Dash (https://koshinstudio.com/en/works/torecadash/)
+
+
+---
+
+URL: https://koshinstudio.com/en/notes/x-monitoring-gaps/
+
+# Four gaps in monitoring X: posts missing from search, accounts that change hands, a store-finding query, and catching up after an outage
+
+  日本語版 (https://koshinstudio.com/notes/x-monitoring-gaps/)
+
+  Development log of the Toreca Dash app / September 2026
+
+  Of my app Toreca Dash’s sources, the fastest and the easiest to miss is stores’ own posts on X (Twitter). Stores announce lotteries and first-come sales on X first. The app patrols registered store accounts regularly.
+
+  On 19 September 2026, four “gaps” in this monitoring turned up in a single day. This is the record.
+
+  Numbers come from my work logs of 19–20 September 2026. Private individuals’ accounts are not named.
+
+## 1. Some posts do not appear in search
+
+  The monitor found posts through X search. But for four stores, lottery announcements did not appear even after fetching 751 posts without any keyword filter, nor per store. X search can omit part of a store’s posts.
+
+  Reading the timeline (the store’s own list of posts) directly (profileTweets) worked.
+
+  The nasty part: a store for which no article can ever be created stays “no track record”. Patrol priority and countermeasures are based on track record, so those stores are never included. What cannot be seen stays unseen (a chicken-and-egg problem).
+
+  The fix: read store timelines in addition to search. But timeline reads cannot be filtered by words and every item read is billed. So stores with a track record are read daily, stores without it weekly, with a cap per store (10 and 8 items).
+
+    Estimate | Value
+
+      Posts per day, stores with a track record | 13.5
+
+      Posts per day, randomly chosen stores | 4.5
+
+      Monthly cost after adding | about $51 (the plan includes $39)
+
+  Cost varies a lot with each store’s posting rate, so always estimate from measurements. It stops automatically once the month passes $62, and an automatic pace check estimates whether all stores can be read daily with the remaining budget, narrowing the stores if not.
+
+## 2. A registered store had quietly stopped being a store
+
+  Two accounts registered as “stores” in the monitoring list were no longer stores. One, registered in August as a branch of a second-hand shop, had become a person’s chatter. The other, registered in May, was an individual info account whose “[PR] lottery sale” posts became articles as if from a store.
+
+  Articles appear as “store primary information”, so wrong information is notified as is.
+
+  The list was checked only once, when registered. Nothing noticed when an account’s owner or use changed.
+
+  The check: match the store name in the list comments against the display name on articles from the last 30 days, by a 2-character overlap. Of 828, I reviewed mismatches by eye and found 2 had become personal. Most mismatches were just “unknown” registrations that became official names, so I decided by eye, not by machine.
+
+## 3. The store-finding search found only 11 of 63 stores
+
+  New stores’ X accounts are found by search. The query was “store name genre name lottery site:x.com”, looking at the top 5 results. Out of 63 stores, it found X for only 11. Aggregators and customers’ posts ranked first and were rejected by the store-name match.
+
+  Among 8 stores whose X account was known, the old method found 5 and the “store name site:x.com” query found 7 (all ranked first).
+
+  But in a dry run right after widening the query, it picked up personal or unrelated accounts, because search-result titles contain the whole post and the match fired on the store name in the body. I changed it to extract only the display-name part of the title. More hits bring more mistakes at the same time. When you change a query, always run a preview and look at each item it picks up.
+
+## 4. Catching up after an outage took half a day
+
+  The data-fetching service’s (Apify) budget ran out, and X monitoring was down for 6 days. When I resumed, in 2 hours it read 185 of 2,866.
+
+  Patrol is a rotation: “stores with a track record every 3 hours, others every 12 hours”. A rotation fits the normal state where everyone is about equally behind. After an outage, lateness is not uniform. Catching up would take more than half a day, and lotteries closing the next day would end before being read.
+
+  For the same reason, newly found accounts joined the middle of the “no track record” list and went unread for up to 12 hours.
+
+  The fix: add to the rotation a slot that reads the longest-unread items, oldest first. Attempt marks are kept separately so items that keep failing do not hog it. I also ran a manual catch-up right after resuming.
+
+## Aside: a “this month only” budget stopped everything twice
+
+  This catch-up was caused by the budget running out. I used to change the cap month by month, “this month only $44”, “automatically go back to $29 on 6 September”. If the value I went back to was below that month’s usage, all X monitoring stopped at the cycle start. It happened twice (28 August and 13 September).
+
+  The decision on 19 September: one monthly cap of $70, and the interval not changed by month (all accounts once per 6 hours). Real monthly cost is about $10 to $18. I do not bring back a month-by-month cap.
+
+## What I learned
+
+> Posts you cannot see cannot be counted.
+
+- Do not rely on search alone. Search does not return everything, and what is invisible raises no complaints.
+
+- Registration is not a one-time check. Owners change. Compare the registered name with the current display name regularly.
+
+- Preview when you change a query. More hits means more mistakes.
+
+- After an outage, catch-up needs its own design. The normal rotation does not suit it.
+
+- Do not change a cost cap by month. Forgetting to restore it, or restoring the wrong value, stops everything.
+
+  This is the English version of the original Japanese article (https://koshinstudio.com/notes/x-monitoring-gaps/).
+
+  More in English
+
+- All English pages (https://koshinstudio.com/en/)
+
+- Toreca Dash (https://koshinstudio.com/en/works/torecadash/)
 
 
 ---
@@ -12390,6 +12831,14 @@ URL: https://koshinstudio.com/en/
 - When you cannot watch everything quickly: popular 128 of 427 sets run fast, and the fastest lane yields to the budget (https://koshinstudio.com/en/notes/hot-lane/)
 
 - Online play that trusts nothing the client says: the server decides moves, clocks and results (https://koshinstudio.com/en/notes/negaeri-online/)
+
+- Four things from a full sweep of 61 audits: 51 jobs clumped at 4 a.m., a lock that expired in 55 seconds, and a price-filling idea I decided not to add (https://koshinstudio.com/en/notes/audit-sweep-61/)
+
+- Comparing with other sites to count gaps: the first “23% coverage” was a measuring mistake and the truth was 49% (https://koshinstudio.com/en/notes/coverage-check/)
+
+- I opened the links of displayed articles and compared them: about 60 mistakes, and three mistakes in my own first check (https://koshinstudio.com/en/notes/destination-check/)
+
+- Four gaps in monitoring X: posts missing from search, accounts that change hands, a store-finding query, and catching up after an outage (https://koshinstudio.com/en/notes/x-monitoring-gaps/)
 
 ## Languages
 

@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Four things from a full sweep of 61 audits: 51 jobs clumped at 4 a.m., a lock that expired in 55 seconds, and a price-filling idea I decided not to add — Koshin Studio</title>
+<meta name="description" content="Once-a-day jobs clumped at 27 at 4 o’clock and 24 at 5; a Rakuten patrol took 181–480 s per run with a 55-second lock; I stopped counting anomalies that cannot be fixed; and I measured a way to fill official prices from one store but did not add it.">
+<meta property="og:title" content="Four things from a full sweep of 61 audits: 51 jobs clumped at 4 a.m., a lock that expired in 55 seconds, and a price-filling idea I decided not to add">
+<meta property="og:description" content="Once-a-day jobs clumped at 27 at 4 o’clock and 24 at 5; a Rakuten patrol took 181–480 s per run with a 55-second lock; I stopped counting anomalies that cannot be fixed; and I measured a way to fill official prices from one store but did not add it.">
+<meta property="og:type" content="article">
+<meta name="theme-color" content="#fbfaf7">
+<link rel="icon" href="/favicon.ico?v=1697d589" sizes="48x48">
+<link rel="icon" href="/favicon.svg?v=b9d7922f" type="image/svg+xml" sizes="any">
+<link rel="icon" href="/assets/icon/icon-192.png?v=e2566235" type="image/png" sizes="192x192">
+<link rel="apple-touch-icon" href="/assets/icon/icon-180.png?v=84e7f0e6">
+<link rel="manifest" href="/site.webmanifest">
+<script>document.documentElement.className+=" js"</script>
+<link rel="stylesheet" href="/style.css?v=dd51310c">
+<meta name="google-adsense-account" content="ca-pub-3863314847163872">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3863314847163872" crossorigin="anonymous"></script>
+<link rel="canonical" href="https://koshinstudio.com/en/notes/audit-sweep-61/">
+<meta property="og:url" content="https://koshinstudio.com/en/notes/audit-sweep-61/">
+<meta property="og:site_name" content="Koshin Studio">
+<meta property="og:locale" content="en_US">
+<link rel="alternate" hreflang="ja" href="https://koshinstudio.com/notes/audit-sweep-61/">
+<link rel="alternate" hreflang="en" href="https://koshinstudio.com/en/notes/audit-sweep-61/">
+<link rel="alternate" hreflang="x-default" href="https://koshinstudio.com/en/notes/audit-sweep-61/">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="alternate" type="application/rss+xml" title="Koshin Studio — Notes" href="https://koshinstudio.com/feed.xml">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BlogPosting","headline":"Four things from a full sweep of 61 audits: 51 jobs clumped at 4 a.m., a lock that expired in 55 seconds, and a price-filling idea I decided not to add","url":"https://koshinstudio.com/en/notes/audit-sweep-61/","description":"Once-a-day jobs clumped at 27 at 4 o’clock and 24 at 5; a Rakuten patrol took 181–480 s per run with a 55-second lock; I stopped counting anomalies that cannot be fixed; and I measured a way to fill official prices from one store but did not add it.","datePublished":"2026-10-17","dateModified":"2026-10-17","inLanguage":"en","image":"https://koshinstudio.com/assets/og/og_en_notes_audit-sweep-61.jpg","author":{"@id":"https://koshinstudio.com#studio"},"publisher":{"@id":"https://koshinstudio.com#studio"},"mainEntityOfPage":"https://koshinstudio.com/en/notes/audit-sweep-61/"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Koshin Studio","item":"https://koshinstudio.com/en/"},{"@type":"ListItem","position":2,"name":"Four things from a full sweep of 61 audits: 51 jobs clumped at 4 a.m., a lock that expired in 55 seconds, and a price-filling idea I decided not to add","item":"https://koshinstudio.com/en/notes/audit-sweep-61/"}]}]}</script>
+<meta property="og:image" content="https://koshinstudio.com/assets/og/og_en_notes_audit-sweep-61.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
+</head>
+<body class="article">
+<canvas id="motes"></canvas>
+
+<header class="site"><div class="wrap">
+  <a class="logo" href="/"><img class="logo-mark" src="/favicon.svg?v=b9d7922f" alt="" width="28" height="28">Koshin Studio</a>
+  <nav><a href="/works/">Works</a><a href="/notes/">Notes</a><a href="/picks/">Picks</a><a href="/calc/">Tools</a><a href="/about/">About</a></nav>
+</div></header>
+
+<main><div class="wrap">
+  <nav class="crumbs" aria-label="You are here"><a href="/en/">Koshin Studio</a><i aria-hidden="true">›</i><span aria-current="page">Audit sweep</span></nav>
+  <h1>Four things from a full sweep of 61 audits: 51 jobs clumped at 4 a.m., a lock that expired in 55 seconds, and a price-filling idea I decided not to add</h1>  <div class="rule"></div>
+<!--lang-->
+  <p class="note"><a href="/notes/audit-sweep-61/" hreflang="ja" lang="ja">日本語版</a></p>
+<!--/lang-->  <p class="lead">Development log of the Toreca Dash app / September 2026</p>
+
+  <p>My app Toreca Dash has <strong>61 audits</strong> that find anomalies. In the early hours of 8 September 2026 I ran them all and <strong>checked every item that was not 0 against real data, one by one</strong>.</p>
+  <p>This article is four stories from that work. Three are things I fixed; one is a story where I <strong>measured, and deliberately did not add it</strong>.</p>
+  <p class="note">Numbers come from my work log of the evening of 7 to the morning of 8 September 2026.</p>  <h2 class="rv" id="s1">1. 51 once-a-day jobs were clumped at 4 and 5 a.m.</h2>
+  <p>At 04:53 the measurements were:</p>
+  <ul>
+    <li>The 14 concurrency slots were full, 8 waiting.</li>
+    <li>6 jobs timed out at the 540-second limit.</li>
+    <li>The “instant sell-out monitor” and the “Amazon fastest lane” I wanted to protect were skipped 9 times each per hour.</li>
+  </ul>
+  <p>The cause was clumping in time. Counting once-a-day jobs: <strong>27 at 4 o’clock and 24 at 5</strong>; at 1 o’clock and from 10 to 21, <strong>0</strong>.</p>
+  <p>The fix was not to edit times one by one, which would not apply to jobs added later. I fixed <strong>the mechanism that spreads start times</strong>. The spread was a flat 270 seconds; for jobs with an interval of 6 hours or more it now spreads up to 1,800 seconds (30 minutes). 27 jobs over 30 minutes is about one per 67 seconds, so 3 to 5 run at once.</p>
+  <p>I kept it to 30 minutes so it does not spill into the next hour’s slot and break time-based order like “check at 2, fill at 3”.</p>
+
+  <h2 class="rv" id="s2">2. A patrol meant to be “every minute” took 181 to 480 seconds per run</h2>
+  <p>The Rakuten Ichiba patrol was meant to run every minute. Measured, one run took 181 to 480 seconds. The harm was threefold:</p>
+  <ul>
+    <li>It occupied a concurrency slot almost all the time.</li>
+    <li>It timed out at the 480-second limit (4 times in 2 hours) and the results were thrown away.</li>
+    <li>It held the Rakuten API allowance (one call per 1.5 seconds, shared by all jobs) the whole time, cutting the share of the instant sell-out monitor.</li>
+  </ul>
+  <p>The effective interval was 3.5 to 6 minutes. And after a timeout it <strong>restarts from the same first genre every time</strong>, so later genres never get a turn.</p>
+  <p>I switched it to the <strong>five-genres-at-a-time rotation</strong> proven on Rakuten Books.</p>
+  <div class="scroll rv"><table>
+    <thead><tr><th></th><th>Before</th><th>After</th></tr></thead>
+    <tbody>
+      <tr><td>One run</td><td>181–480 s</td><td><strong>50–83 s</strong></td></tr>
+      <tr><td>Timeouts</td><td>4 per 2 hours</td><td><strong>0</strong></td></tr>
+      <tr><td>Interval per genre</td><td>3.5–6 min</td><td><strong>3 min</strong></td></tr>
+    </tbody>
+  </table></div>
+  <p>I found one more thing. The lock that means “if the previous run is still going, do not start” (preventing double runs) <strong>expired after only 55 seconds</strong>. For jobs with a 480-second limit and 181–480 s real runs, a run that slipped past the runner’s skip (a manual run, a catch-up right after restart) could <strong>run twice at once</strong>, doubling Rakuten API use and hitting first-come monitoring. I set both to 480,000 ms. <strong>A lock’s expiry should be at least the job’s timeout.</strong></p>
+
+  <h2 class="rv" id="s3">3. Stop counting anomalies you cannot fix</h2>
+  <p>If you keep counting things that cannot be fixed, real anomalies get buried. I revisited three.</p>
+  <ul>
+    <li><strong>“Lottery with no deadline: 77” became 0.</strong> Scanning the text of all 89 real cases, only 5 contained a date-like value, and those were not application deadlines (“lottery results 9/5”, “pick up by 9/13”). <strong>The store simply did not write one</strong>, and nothing can be done. Now only items that have both deadline wording and a date in the text count as anomalies.</li>
+    <li><strong>“3 stopped scrapers” became 0.</strong> What was counted were state records with no run time, not jobs. The main code excludes them, only the audit did not.</li>
+    <li><strong>One store’s “0 items for 173 hours” was normal.</strong> Fetching its three categories worked (16 and 6 items), and all were “point-exchange only” (0 yen). There was just no lottery or pre-order at the time.</li>
+  </ul>
+  <p>But “0 items” has <strong>two meanings</strong>: (a) no product matches (normal), (b) the page layout changed and nothing can be read (broken). If you cannot tell them apart, real breakage is buried (<a href="/en/notes/blocked-page/">the previous day’s Pokémon Center</a> was exactly this). So I now put the <strong>number scanned</strong> into the completion message.</p>
+
+  <h2 class="rv" id="s4">4. A case I measured and deliberately did not add</h2>
+  <p>397 products had unknown official prices, which stops first-come notifications. The filling job had, measured, <strong>zero results</strong>.</p>
+  <pre><code>Official price unset: 397
+Has a price at a regular store: 51
+Two or more stores agree: 0</code></pre>
+  <p>The “two or more stores agree” condition had effectively never been satisfied. <strong>Accepting one store would fill 51.</strong> All were kinds with no catalogue price (imported Magic cards and so on).</p>
+  <p>I still <strong>did not add it</strong>. Regular stores discount. If I record a discounted price as the official price, the price check’s ceiling (official price × 1.08 plus margin) becomes <strong>lower than the real price</strong> and legitimate listings are removed as resale. At 10% off, the real price is 1.11× and exceeds the ceiling. And over-deletion draws no complaints, so I would not notice.</p>
+  <p>I wrote down what to do first if I add it:</p>
+  <ol>
+    <li><strong>Compare the 51 prices by eye</strong> with official sites and the manufacturer’s suggested price (confirm whether they are discounted; do not guess a factor).</li>
+    <li>Mark single-store-based prices and add margin to the ceiling only for that mark.</li>
+    <li>After adding, <strong>count hidden articles before and after</strong>.</li>
+  </ol>
+
+  <h2 class="rv" id="s5">What I learned</h2>
+  <blockquote>Clumping is invisible until counted. Record the decision not to add, too.</blockquote>
+  <ul>
+    <li><strong>Count clumping in time.</strong> 27 at 4 o’clock, 0 from 10 to 21.</li>
+    <li><strong>Jobs hold something you cannot see.</strong> A lock’s expiry should be at least the timeout.</li>
+    <li><strong>Do not count anomalies you cannot fix.</strong> If the number does not fit, doubt how you count.</li>
+    <li><strong>Distinguish what “0 items” means.</strong> Show the number scanned.</li>
+    <li><strong>If you decide not to add something, keep the reason and the conditions.</strong> Even when measurement shows a gain, if it risks over-deleting, I do not add it.</li>
+  </ul>
+
+  <p class="note">This is the English version of <a href="/notes/audit-sweep-61/" hreflang="ja" lang="ja">the original Japanese article</a>.</p>
+
+  <div class="rule" style="margin:40px 0 22px"></div>
+  <p class="eyebrow">More in English</p>
+  <ul class="plain">
+    <li><a href="/en/">All English pages</a></li>
+    <li><a href="/en/works/torecadash/">Toreca Dash</a></li>
+  </ul>
+</div>
+</main>
+
+<footer class="site"><div class="wrap"></div></footer>
+<script src="/motion.js?v=1e7447ec" defer></script>
+</body>
+</html>

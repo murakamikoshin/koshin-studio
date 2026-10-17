@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>I opened the links of displayed articles and compared them: about 60 mistakes, and three mistakes in my own first check — Koshin Studio</title>
+<meta name="description" content="Opening more than 1,000 destination pages and comparing with the articles: Amazon invitation requests shown as first-come, closed or sold-out items displayed, links to other stores or products, application links redirecting to a site’s top page. My first check was wrong in three ways too.">
+<meta property="og:title" content="I opened the links of displayed articles and compared them: about 60 mistakes, and three mistakes in my own first check">
+<meta property="og:description" content="Opening more than 1,000 destination pages and comparing with the articles: Amazon invitation requests shown as first-come, closed or sold-out items displayed, links to other stores or products, application links redirecting to a site’s top page. My first check was wrong in three ways too.">
+<meta property="og:type" content="article">
+<meta name="theme-color" content="#fbfaf7">
+<link rel="icon" href="/favicon.ico?v=1697d589" sizes="48x48">
+<link rel="icon" href="/favicon.svg?v=b9d7922f" type="image/svg+xml" sizes="any">
+<link rel="icon" href="/assets/icon/icon-192.png?v=e2566235" type="image/png" sizes="192x192">
+<link rel="apple-touch-icon" href="/assets/icon/icon-180.png?v=84e7f0e6">
+<link rel="manifest" href="/site.webmanifest">
+<script>document.documentElement.className+=" js"</script>
+<link rel="stylesheet" href="/style.css?v=dd51310c">
+<meta name="google-adsense-account" content="ca-pub-3863314847163872">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3863314847163872" crossorigin="anonymous"></script>
+<link rel="canonical" href="https://koshinstudio.com/en/notes/destination-check/">
+<meta property="og:url" content="https://koshinstudio.com/en/notes/destination-check/">
+<meta property="og:site_name" content="Koshin Studio">
+<meta property="og:locale" content="en_US">
+<link rel="alternate" hreflang="ja" href="https://koshinstudio.com/notes/destination-check/">
+<link rel="alternate" hreflang="en" href="https://koshinstudio.com/en/notes/destination-check/">
+<link rel="alternate" hreflang="x-default" href="https://koshinstudio.com/en/notes/destination-check/">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="alternate" type="application/rss+xml" title="Koshin Studio — Notes" href="https://koshinstudio.com/feed.xml">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BlogPosting","headline":"I opened the links of displayed articles and compared them: about 60 mistakes, and three mistakes in my own first check","url":"https://koshinstudio.com/en/notes/destination-check/","description":"Opening more than 1,000 destination pages and comparing with the articles: Amazon invitation requests shown as first-come, closed or sold-out items displayed, links to other stores or products, application links redirecting to a site’s top page. My first check was wrong in three ways too.","datePublished":"2026-10-17","dateModified":"2026-10-17","inLanguage":"en","image":"https://koshinstudio.com/assets/og/og_en_notes_destination-check.jpg","author":{"@id":"https://koshinstudio.com#studio"},"publisher":{"@id":"https://koshinstudio.com#studio"},"mainEntityOfPage":"https://koshinstudio.com/en/notes/destination-check/"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Koshin Studio","item":"https://koshinstudio.com/en/"},{"@type":"ListItem","position":2,"name":"I opened the links of displayed articles and compared them: about 60 mistakes, and three mistakes in my own first check","item":"https://koshinstudio.com/en/notes/destination-check/"}]}]}</script>
+<meta property="og:image" content="https://koshinstudio.com/assets/og/og_en_notes_destination-check.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
+</head>
+<body class="article">
+<canvas id="motes"></canvas>
+
+<header class="site"><div class="wrap">
+  <a class="logo" href="/"><img class="logo-mark" src="/favicon.svg?v=b9d7922f" alt="" width="28" height="28">Koshin Studio</a>
+  <nav><a href="/works/">Works</a><a href="/notes/">Notes</a><a href="/picks/">Picks</a><a href="/calc/">Tools</a><a href="/about/">About</a></nav>
+</div></header>
+
+<main><div class="wrap">
+  <nav class="crumbs" aria-label="You are here"><a href="/en/">Koshin Studio</a><i aria-hidden="true">›</i><span aria-current="page">Destination check</span></nav>
+  <h1>I opened the links of displayed articles and compared them: about 60 mistakes, and three mistakes in my own first check</h1>  <div class="rule"></div>
+<!--lang-->
+  <p class="note"><a href="/notes/destination-check/" hreflang="ja" lang="ja">日本語版</a></p>
+<!--/lang-->  <p class="lead">Development log of the Toreca Dash app / September 2026</p>
+
+  <p>The articles in my app Toreca Dash link to store and shopping-site pages. Even if an article’s title and price are right, if the linked page is closed or about a different product, it is no use to the user.</p>
+  <p>On the night of 15 September 2026, asked to “check the destination content too”, I <strong>actually opened the links of displayed articles and compared the content with the article</strong>: product, store, whether open, sale type, deadline and price. About 60 mistakes turned up.</p>
+  <p class="note">Numbers come from my work log of 15 September 2026. The check itself made no writes; I fixed the findings separately.</p>  <h2 class="rv" id="s1">How I checked</h2>
+  <ul>
+    <li><strong>X posts (361):</strong> 0 deleted. The text had been compared in earlier checks.</li>
+    <li><strong>Non-X (703, excluding Yahoo!):</strong> I read the destination directly or via the scraping service (with a Japanese IP) and judged with an AI. Amazon always goes through the scraping service.</li>
+  </ul>
+  <p>My first version of the check got three things wrong:</p>
+  <ul>
+    <li><strong>I opened Amazon from Singapore.</strong> Prices showed in Singapore dollars and I saw another seller, and judged that “wrong”.</li>
+    <li><strong>I read Rakuten as garbled text.</strong> I had not detected the character encoding (EUC-JP).</li>
+    <li><strong>I opened 501 Yahoo! pages six at a time.</strong> The production IP was refused with HTTP 489 (see <a href="/en/notes/self-inflicted/">another article</a>). I stopped partway through Yahoo!.</li>
+  </ul>
+  <p>If the checking tool is wrong, the count of “mistakes” inflates. I fixed encoding detection, opening Amazon from Japan, and judging only by stock of “this exact item”, then reran.</p>
+
+  <h2 class="rv" id="s2">Mistakes found (about 60)</h2>
+  <div class="scroll rv"><table>
+    <thead><tr><th>What</th><th>Count</th><th>Fix</th></tr></thead>
+    <tbody>
+      <tr><td>Amazon “invitation request” shown as pre-order or first-come</td><td>10</td><td>Make it a lottery</td></tr>
+      <tr><td>Amazon “pre-order” shown as first-come</td><td>7</td><td>Make it a reservation</td></tr>
+      <tr><td>Rakuten Books “pre-orders open” shown as first-come</td><td>3</td><td>Make it a reservation</td></tr>
+      <tr><td>Shops closed temporarily (Yahoo!)</td><td>6</td><td>Hide</td></tr>
+      <tr><td>Sold out or closed but still displayed</td><td>many</td><td>Hide</td></tr>
+      <tr><td>Link goes to a different store or an ended lottery</td><td>3</td><td>Go back to the store’s X post</td></tr>
+      <tr><td>Link goes to a different product</td><td>2</td><td>Hide</td></tr>
+      <tr><td>Price mismatch</td><td>about 10</td><td>Correct</td></tr>
+      <tr><td>Empty store name</td><td>1</td><td>Fill in</td></tr>
+    </tbody>
+  </table></div>
+  <p>The most frequent was the <strong>wrong sale type</strong>. On Amazon there are “invitation requests”, neither first-come nor pre-order. Treating one as first-come means users cannot buy however fast they are. The earlier code only marked the invitation and did not correct the sale type.</p>
+  <p>Some sold-out pages did not match my sold-out wording. A Yahoo! sold-out page says “out of stock” on screen, but matched none of the keywords. So I now judge by the <strong>stock data embedded in the page for that item</strong> (<code>"stock":{"isAvailable":false</code>). The data is more reliable than the wording on screen.</p>
+
+  <h2 class="rv" id="s3">“Opening the application link goes to the site’s top page”</h2>
+  <p>Found in another check the same day. The QR code on a store’s lottery image pointed to a URL that, <strong>actually opened, redirects to the site’s top page</strong>, not an application page.</p>
+  <p>I added a check to the single gate that adopts application links. It opens the URL, and if <strong>the original URL has a path other than the top but the destination path is empty</strong> (or a file name that looks like a top page), it does not adopt it. If it cannot be read (403, timeout), it still adopts, since many stores use bot protection and unreadable is not a sign of badness. The same URL is held for 6 hours.</p>
+
+  <h2 class="rv" id="s4">What I did not fix, and could not fix</h2>
+  <p>It matters that I did not count everything found as a “mistake”. There are cases I checked and <strong>did not fix</strong>.</p>
+  <ul>
+    <li>Rakuten Ichiba “sold out”: the page data said in stock (a setting hides stock counts). The AI misread it.</li>
+    <li>Amazon “See all buying options”: other sellers exist, so it is not necessarily sold out.</li>
+    <li>Amazon English titles: auto-translated names; the product was right.</li>
+    <li>85 pages I could not read: Rakuten Ichiba (via ad links), membership sites, LINE, Google Forms and so on.</li>
+  </ul>
+  <p>I keep results in three groups with reasons: <strong>fixed, not fixed, could not read</strong>. “Not fixed” needs a reason too.</p>
+
+  <h2 class="rv" id="s5">What I learned</h2>
+  <blockquote>Even if title and price match, you cannot know until you open the link.</blockquote>
+  <ul>
+    <li><strong>Actually open the link.</strong> Looking only at the article cannot show that the destination is closed.</li>
+    <li><strong>Check the checking tool first.</strong> Country, encoding, parallelism: a wrong tool inflates “mistakes”.</li>
+    <li><strong>Embedded data beats screen wording.</strong> Judge sold-out by stock data, not text.</li>
+    <li><strong>Do not make everything found a “mistake”.</strong> Keep reasons for what you do not fix.</li>
+    <li><strong>Do not treat “could not read” as bad.</strong> Bot protection makes unreadable normal.</li>
+  </ul>
+
+  <p class="note">This is the English version of <a href="/notes/destination-check/" hreflang="ja" lang="ja">the original Japanese article</a>.</p>
+
+  <div class="rule" style="margin:40px 0 22px"></div>
+  <p class="eyebrow">More in English</p>
+  <ul class="plain">
+    <li><a href="/en/">All English pages</a></li>
+    <li><a href="/en/works/torecadash/">Toreca Dash</a></li>
+  </ul>
+</div>
+</main>
+
+<footer class="site"><div class="wrap"></div></footer>
+<script src="/motion.js?v=1e7447ec" defer></script>
+</body>
+</html>
