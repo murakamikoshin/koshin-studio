@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>同じ報告が 3 回目：SwiftUI のボタンが「文字の上でしか」反応しなかった。過去 2 回の「修正」は効いていなかった — Koshin Studio</title>
+<meta name="description" content="「当選」「落選」ボタンが文字の上しか反応しない報告は 3 回目。過去 2 回は修飾子の順序を直しても効かず、ButtonStyle の中で見た目を組み立てて、6 か所を差し替えた。同じ日の「郵送なのに位置情報」も同じ根っこだった。">
+<meta property="og:title" content="同じ報告が 3 回目：SwiftUI のボタンが「文字の上でしか」反応しなかった。過去 2 回の「修正」は効いていなかった">
+<meta property="og:description" content="「当選」「落選」ボタンが文字の上しか反応しない報告は 3 回目。過去 2 回は修飾子の順序を直しても効かず、ButtonStyle の中で見た目を組み立てて、6 か所を差し替えた。同じ日の「郵送なのに位置情報」も同じ根っこだった。">
+<meta property="og:type" content="article">
+<meta name="theme-color" content="#fbfaf7">
+<link rel="icon" href="/favicon.ico?v=1697d589" sizes="48x48">
+<link rel="icon" href="/favicon.svg?v=b9d7922f" type="image/svg+xml" sizes="any">
+<link rel="icon" href="/assets/icon/icon-192.png?v=e2566235" type="image/png" sizes="192x192">
+<link rel="apple-touch-icon" href="/assets/icon/icon-180.png?v=84e7f0e6">
+<link rel="manifest" href="/site.webmanifest">
+<script>document.documentElement.className+=" js"</script>
+<link rel="stylesheet" href="/style.css?v=dd51310c">
+<meta name="google-adsense-account" content="ca-pub-3863314847163872">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3863314847163872" crossorigin="anonymous"></script>
+<link rel="canonical" href="https://koshinstudio.com/notes/swiftui-hit-area/">
+<meta property="og:url" content="https://koshinstudio.com/notes/swiftui-hit-area/">
+<meta property="og:site_name" content="Koshin Studio">
+<meta property="og:locale" content="ja_JP">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="alternate" type="application/rss+xml" title="Koshin Studio — Notes" href="https://koshinstudio.com/feed.xml">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BlogPosting","headline":"同じ報告が 3 回目：SwiftUI のボタンが「文字の上でしか」反応しなかった。過去 2 回の「修正」は効いていなかった","url":"https://koshinstudio.com/notes/swiftui-hit-area/","description":"「当選」「落選」ボタンが文字の上しか反応しない報告は 3 回目。過去 2 回は修飾子の順序を直しても効かず、ButtonStyle の中で見た目を組み立てて、6 か所を差し替えた。同じ日の「郵送なのに位置情報」も同じ根っこだった。","datePublished":"2026-10-17","dateModified":"2026-10-17","inLanguage":"ja","image":"https://koshinstudio.com/assets/og/og_notes_swiftui-hit-area.jpg","author":{"@id":"https://koshinstudio.com#studio"},"publisher":{"@id":"https://koshinstudio.com#studio"},"mainEntityOfPage":"https://koshinstudio.com/notes/swiftui-hit-area/"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Koshin Studio","item":"https://koshinstudio.com/"},{"@type":"ListItem","position":2,"name":"Notes","item":"https://koshinstudio.com/notes/"},{"@type":"ListItem","position":3,"name":"同じ報告が 3 回目：SwiftUI のボタンが「文字の上でしか」反応しなかった。過去 2 回の「修正」は効いていなかった","item":"https://koshinstudio.com/notes/swiftui-hit-area/"}]}]}</script>
+<meta property="og:image" content="https://koshinstudio.com/assets/og/og_notes_swiftui-hit-area.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
+</head>
+<body class="article">
+<canvas id="motes"></canvas>
+
+<header class="site"><div class="wrap">
+  <a class="logo" href="/"><img class="logo-mark" src="/favicon.svg?v=b9d7922f" alt="" width="28" height="28">Koshin Studio</a>
+  <nav><a href="/works/">Works</a><a href="/notes/">Notes</a><a href="/picks/">Picks</a><a href="/calc/">Tools</a><a href="/about/">About</a></nav>
+</div></header>
+
+<main><div class="wrap">
+  <nav class="crumbs" aria-label="現在地"><a href="/">Koshin Studio</a><i aria-hidden="true">›</i><a href="/notes/">Notes</a><i aria-hidden="true">›</i><span aria-current="page">同じ報告が 3 回目：SwiftUI のボタンが「文字の上でしか」反応しなかった。過去 2 回の「修正」は効いていなかった</span></nav>
+  <h1>同じ報告が 3 回目：SwiftUI のボタンが「文字の上でしか」反応しなかった。過去 2 回の「修正」は効いていなかった</h1>  <div class="rule"></div>
+  <p class="lead">トレカダッシュ 開発の記録 ／ 2026年8月</p>
+
+  <p>iOS アプリ「<a href="/works/torecadash/">トレカダッシュ</a>」の応募の記録の画面には、「当選」と「落選」のボタンがあります。「当選と落選の<strong>文字の上しか</strong>判定が無くて、使いづらい」という報告が来ました。</p>
+  <p>この報告は、<strong>3 回目</strong>でした（7 月 20 日、8 月 1 日、そして 8 月 27 日）。過去 2 回も、直したつもりでした。コードには、「修正」と書いてありました。それなのに、<strong>一度も、直っていませんでした</strong>。</p>
+  <p class="note">この記事は、2026 年 8 月 27 日の作業の記録から書いています。</p>
+<!--toc-->
+  <nav class="toc" aria-label="目次"><p>目次</p><ol><li><a href="#s1">過去 2 回の直し方は、効いていなかった</a></li><li><a href="#s2">直し方：ButtonStyle の中で、見た目を組み立てる</a></li><li><a href="#s3">同じ日の、似た 2 件</a></li><li><a href="#s4">分かったこと</a></li></ol></nav>
+<!--/toc-->
+  <h2 class="rv" id="s1">過去 2 回の直し方は、効いていなかった</h2>
+  <p>過去 2 回は、「<code>.contentShape</code> を足す」、「<code>.buttonStyle(.plain)</code> の位置を変える」という直し方をしていました。どちらも、<strong>修飾子の順序</strong>が問題の本質で、その順序を、正しく直せていませんでした。</p>
+  <p>SwiftUI の <code>Button("当選") { … }</code> は、<strong>ラベルが文字だけ</strong>です。その外側に、<code>.frame().padding().background()</code> を足して、見た目の大きさを広げても、<strong>タップに反応するのは、文字の部分だけ</strong>です。見た目と、反応する範囲は、別のものでした。</p>
+
+  <h2 class="rv" id="s2">直し方：ButtonStyle の中で、見た目を組み立てる</h2>
+  <p>ボタンの見た目を、<strong><code>ButtonStyle</code>（ボタンの装飾を決める仕組み）の中で組み立てる</strong>と、その結果が、そのまま、タップの領域になります。外側に足すのではなく、中で作ります。専用の <code>ActionButtonStyle</code> を新設して、6 か所を差し替えました（当選、落選、応募した、発表日を入力、絞り込みの「適用」が 2 か所）。</p>
+
+  <h2 class="rv" id="s3">同じ日の、似た 2 件</h2>
+  <p>同じ日に来た、ほかの報告にも、同じ根っこがありました。</p>
+  <ul>
+    <li><strong>「締切のカレンダーで、ステータスを切り替えたい」。</strong>前に出したバッジを、タップで「応募済み」と「応募前」に切り替えられるようにしました。ところが、<strong>行そのものがボタン</strong>だったので、中にボタンを置いても反応しません。行を、タップの判定（<code>contentShape</code> ＋ <code>onTapGesture</code>）に変えました。また、<strong>当選と落選は「記録」なので、切り替えません</strong>。誤ってタップして消えると、取り返しがつかないからです。</li>
+    <li><strong>「郵送なのに、位置情報がついている」。</strong>楽天ブックス（通販専門）の記事に、静岡県の座標が入っていました。通販かどうかを、<strong>サイトの接頭辞でしか見ていなかった</strong>ので、まとめ経由の記事（接頭辞が別）がすり抜けていました。店名でも判定するようにしました。さらに、配送に直しても、<strong>座標と都道府県を消していなかった</strong>ことも、原因でした。都道府県が残ると、エリアの絞り込みで、ほかの県の利用者に、記事が表示されなくなります（郵送なのに、静岡の人にしか出ない）。</li>
+  </ul>
+
+  <h2 class="rv" id="s4">分かったこと</h2>
+  <blockquote>「直した」と書く前に、同じ形が他にも無いか、探す。</blockquote>
+  <ul>
+    <li><strong>同じ報告が 2 回来たら、直し方を疑う。</strong>コードに「修正」と書いてあっても、効いているとは限りません。</li>
+    <li><strong>見た目の大きさと、反応する範囲は、別のもの。</strong>ButtonStyle の中で組み立てると、一致します。</li>
+    <li><strong>同じ形を、すべての画面で探す。</strong><code>grep</code> で、同じ書き方を全部見つけて、直します。</li>
+    <li><strong>取り返しのつかない記録は、誤タップで消えないようにする。</strong>切り替えは、応募済みだけ。</li>
+    <li><strong>値を直したら、関連する値も直す。</strong>配送に直したら、座標と都道府県も消します。</li>
+  </ul>
+
+
+  <div class="ad-slot" data-slot="footer" hidden></div>
+<!--/ad-->
+
+  <div class="rule" style="margin:40px 0 22px"></div>
+  <p class="eyebrow">この話に出てくるもの</p>
+  <ul class="plain">
+    <li><a href="/works/torecadash/">トレカダッシュ</a> — トレカの抽選・予約・先着の情報を集める iPhone アプリ</li>
+    <li><a href="/notes/torecadash-watchdog/">iOS アプリが固まって強制終了される</a> — アプリの別の不具合</li>
+    <li><a href="/notes/swallowed-failure/">失敗を捨てると、画面は嘘をつく</a> — アプリの別の失敗</li>
+    <li><a href="/notes/fix-the-existing-data/">関門を直しても、すでにあるデータは直らない</a> — 直したのに直っていない話</li>
+  </ul>
+
+<!--related-->
+  <div class="rule" style="margin:40px 0 22px"></div>
+  <p class="eyebrow">ほかの記録</p>
+  <ul class="plain">
+    <li><a href="/notes/store-name-variants/">「ヤマダ電機」と「ヤマダデンキ」：表記ゆれと重複の原因は 3 つ重なっていた（包含だけの比較・59 秒の差・手動専用のジョブ）</a> — 店名を「含んでいるか」だけで比べ、締切を 59 秒の差で別と判定し、重複整理が手動専用だった。言い換えの表は作らず一般則で直し、1 時間おきの定期実行にした。表記ゆれ 2 件、重複 7 組が 0 に。</li>
+    <li><a href="/notes/geocode-shizuoka/">あいまいな店名で地図を引くと、日本の真ん中の静岡が返る：チェーン名を並べず、Google 自身の答えで判定した</a> — 店名を Google の地図検索に渡すと、あいまいな名前では日本全体の矩形の真ん中（静岡・愛知）が返った。ヤマダデンキが浜松、サンエーが掛川の工場に。チェーン名の一覧は作らず、答え自身で信用できるかを 4 つの規則で判定した。</li>
+    <li><a href="/notes/one-page-many-cases/">「1 ページ ＝ 1 案件」ではなかった：1 つのフォームで 6 商品を受け付ける店の記事が、リンクが同じというだけで消されていた</a> — リンクだけで重複と決めるジョブが、1 つの Google フォームで 6 商品を受け付ける店の記事 5 件を消していた。「リンク ＋ 商品」に直した。サーバが作った「応募枠」をアプリが一度も読んでいなかったことも見つかった。</li>
+  </ul>
+<!--/related-->
+
+<!--comments-->
+  <section class="comments" id="comments" data-repo="murakamikoshin/koshin-studio" data-repo-id="R_kgDOURc3ew"
+    data-category="Announcements" data-category-id="DIC_kwDOURc3e84DHTVr">
+    <h2 id="comments-h">コメント</h2>
+    <p>感想や、記事の間違いの指摘は、ここへ。書くには、GitHub のアカウントが要ります。</p>
+    <p><button type="button" class="btn ghost" id="load-comments">コメントを開く</button></p>
+    <p class="note">押すと、giscus（giscus.app）と GitHub に接続します。押さなければ、接続しません。詳しくは<a href="/privacy/">あつかい</a>に書いています。</p>
+    <div id="giscus-box"></div>
+  </section>
+<!--/comments-->
+</div>
+</main>
+
+<footer class="site"><div class="wrap">
+  <span>© 2026 Koshin Studio</span>
+  <div class="sns-row"></div>
+  <nav><a href="/picks/">Picks</a><a href="/calc/">Tools</a><a href="/about/">About</a><a href="/privacy/">あつかい</a><a href="/en/" hreflang="en" lang="en">English</a></nav>
+</div></footer>
+<script src="/motion.js?v=1e7447ec" defer></script>
+</body>
+</html>

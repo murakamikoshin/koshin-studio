@@ -161,19 +161,19 @@
   <section class="band" id="notes-teaser"><div class="wrap">
     <h2 class="sec">制作の記録<span>Notes</span></h2>
     <ul class="notes"><!--notes:start-->
-    <li class="rv" data-delay="0"><a class="note-row" href="/notes/store-name-variants/">
+    <li class="rv" data-delay="0"><a class="note-row" href="/notes/fill-the-gap/">
+      <time datetime="2026-10-17">2026.10.17</time>
+      <div><h3>「気づくだけでなく、そもそも起こさない」：報告だけの監視を、見つけてその場で埋める形に作り替えた</h3><p>取りこぼしの監視は報告するだけで、人が気づくまで埋まらなかった。見つけたその場で記事を作る形にし、黙って捨てる分岐にログを入れ、リンクが無い記事も応募方法を出した。カバー率は 92% から 100% に。</p>
+      <div class="tags"><span class="tag">トレカダッシュ</span></div></div>
+    </a></li>
+    <li class="rv" data-delay="70"><a class="note-row" href="/notes/swiftui-hit-area/">
+      <time datetime="2026-10-17">2026.10.17</time>
+      <div><h3>同じ報告が 3 回目：SwiftUI のボタンが「文字の上でしか」反応しなかった。過去 2 回の「修正」は効いていなかった</h3><p>「当選」「落選」ボタンが文字の上しか反応しない報告は 3 回目。過去 2 回は修飾子の順序を直しても効かず、ButtonStyle の中で見た目を組み立てて、6 か所を差し替えた。同じ日の「郵送なのに位置情報」も同じ根っこだった。</p>
+      <div class="tags"><span class="tag">トレカダッシュ</span></div></div>
+    </a></li>
+    <li class="rv" data-delay="140"><a class="note-row" href="/notes/store-name-variants/">
       <time datetime="2026-10-17">2026.10.17</time>
       <div><h3>「ヤマダ電機」と「ヤマダデンキ」：表記ゆれと重複の原因は 3 つ重なっていた（包含だけの比較・59 秒の差・手動専用のジョブ）</h3><p>店名を「含んでいるか」だけで比べ、締切を 59 秒の差で別と判定し、重複整理が手動専用だった。言い換えの表は作らず一般則で直し、1 時間おきの定期実行にした。表記ゆれ 2 件、重複 7 組が 0 に。</p>
-      <div class="tags"><span class="tag">トレカダッシュ</span></div></div>
-    </a></li>
-    <li class="rv" data-delay="70"><a class="note-row" href="/notes/geocode-shizuoka/">
-      <time datetime="2026-10-17">2026.10.17</time>
-      <div><h3>あいまいな店名で地図を引くと、日本の真ん中の静岡が返る：チェーン名を並べず、Google 自身の答えで判定した</h3><p>店名を Google の地図検索に渡すと、あいまいな名前では日本全体の矩形の真ん中（静岡・愛知）が返った。ヤマダデンキが浜松、サンエーが掛川の工場に。チェーン名の一覧は作らず、答え自身で信用できるかを 4 つの規則で判定した。</p>
-      <div class="tags"><span class="tag">トレカダッシュ</span></div></div>
-    </a></li>
-    <li class="rv" data-delay="140"><a class="note-row" href="/notes/one-page-many-cases/">
-      <time datetime="2026-10-17">2026.10.17</time>
-      <div><h3>「1 ページ ＝ 1 案件」ではなかった：1 つのフォームで 6 商品を受け付ける店の記事が、リンクが同じというだけで消されていた</h3><p>リンクだけで重複と決めるジョブが、1 つの Google フォームで 6 商品を受け付ける店の記事 5 件を消していた。「リンク ＋ 商品」に直した。サーバが作った「応募枠」をアプリが一度も読んでいなかったことも見つかった。</p>
       <div class="tags"><span class="tag">トレカダッシュ</span></div></div>
     </a></li>
     <!--notes:end--></ul>
