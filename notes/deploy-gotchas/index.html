@@ -27,7 +27,7 @@
 <link rel="alternate" hreflang="x-default" href="https://koshinstudio.com/en/notes/deploy-gotchas/">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="alternate" type="application/rss+xml" title="Koshin Studio — Notes" href="https://koshinstudio.com/feed.xml">
-<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BlogPosting","headline":"手元では動くのに、配ると壊れる：このサイトで起きた四つの事故","url":"https://koshinstudio.com/notes/deploy-gotchas/","description":"古いキャッシュ、組むたびに増えるパンくず、環境の中を指す symlink、手元にしか無い絵。サイトを配るときに続いた四つの事故と、検査を足してはじめて見つかった経緯。","datePublished":"2026-10-08","dateModified":"2026-10-08","inLanguage":"ja","image":"https://koshinstudio.com/assets/og/og_notes_deploy-gotchas.jpg","author":{"@id":"https://koshinstudio.com#studio"},"publisher":{"@id":"https://koshinstudio.com#studio"},"mainEntityOfPage":"https://koshinstudio.com/notes/deploy-gotchas/"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Koshin Studio","item":"https://koshinstudio.com/"},{"@type":"ListItem","position":2,"name":"Notes","item":"https://koshinstudio.com/notes/"},{"@type":"ListItem","position":3,"name":"手元では動くのに、配ると壊れる：このサイトで起きた四つの事故","item":"https://koshinstudio.com/notes/deploy-gotchas/"}]}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BlogPosting","headline":"手元では動くのに、配ると壊れる：このサイトで起きた四つの事故","url":"https://koshinstudio.com/notes/deploy-gotchas/","description":"古いキャッシュ、組むたびに増えるパンくず、環境の中を指す symlink、手元にしか無い絵。サイトを配るときに続いた四つの事故と、検査を足してはじめて見つかった経緯。","datePublished":"2026-10-08","dateModified":"2026-10-08","inLanguage":"ja","image":"https://koshinstudio.com/assets/og/og_notes_deploy-gotchas.jpg","author":{"@id":"https://koshinstudio.com#koshin"},"publisher":{"@id":"https://koshinstudio.com#studio"},"mainEntityOfPage":"https://koshinstudio.com/notes/deploy-gotchas/"},{"@type":"Person","@id":"https://koshinstudio.com#koshin","name":"Koshin","jobTitle":"Webエンジニア・アプリエンジニア","url":"https://koshinstudio.com/about/","worksFor":{"@id":"https://koshinstudio.com#studio"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Koshin Studio","item":"https://koshinstudio.com/"},{"@type":"ListItem","position":2,"name":"Notes","item":"https://koshinstudio.com/notes/"},{"@type":"ListItem","position":3,"name":"手元では動くのに、配ると壊れる：このサイトで起きた四つの事故","item":"https://koshinstudio.com/notes/deploy-gotchas/"}]}]}</script>
 <meta property="og:image" content="https://koshinstudio.com/assets/og/og_notes_deploy-gotchas.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
@@ -46,7 +46,7 @@
   <h1>手元では動くのに、配ると壊れる：このサイトで起きた四つの事故</h1>  <div class="rule"></div>
 <!--lang-->
   <p class="note"><a href="/en/notes/deploy-gotchas/" hreflang="en" lang="en">English version</a></p>
-<!--/lang-->  <p class="lead">Koshin Studio 開発の記録 ／ 2026年10月</p>
+<!--/lang--><!--byline--><p class="note byline">書いた人：<a href="/about/#operator">Koshin</a>（Web エンジニア・アプリエンジニア）　公開：2026-10-08</p><!--/byline--><p class="lead">Koshin Studio 開発の記録 ／ 2026年10月</p>
 
   <p>このサイトは、HTML を組み立てて、Cloudflare Pages に配っています。作っていた 9 月の 1 日のうちに、「手元では動くのに、配ると壊れる」という種類の事故が、4 つ続きました。コミットに残っている記録で、順に書きます。</p>
 <!--toc-->

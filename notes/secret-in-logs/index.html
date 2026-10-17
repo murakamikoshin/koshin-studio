@@ -27,7 +27,7 @@
 <link rel="alternate" hreflang="x-default" href="https://koshinstudio.com/en/notes/secret-in-logs/">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="alternate" type="application/rss+xml" title="Koshin Studio — Notes" href="https://koshinstudio.com/feed.xml">
-<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BlogPosting","headline":"ログに秘密のトークンが平文で残っていた：呼び忘れようがない唯一の出口で伏せる","url":"https://koshinstudio.com/notes/secret-in-logs/","description":"通信の部品のエラーメッセージに URL がそのまま入り、取得サービスのトークンがログに出ていた。前に作った伏字の関数は、明示的に呼ぶ場所にしか効かず、呼び元は 50 か所以上。ログの唯一の出口で伏せる形に直した。","datePublished":"2026-10-17","dateModified":"2026-10-17","inLanguage":"ja","image":"https://koshinstudio.com/assets/og/og_notes_secret-in-logs.jpg","author":{"@id":"https://koshinstudio.com#studio"},"publisher":{"@id":"https://koshinstudio.com#studio"},"mainEntityOfPage":"https://koshinstudio.com/notes/secret-in-logs/"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Koshin Studio","item":"https://koshinstudio.com/"},{"@type":"ListItem","position":2,"name":"Notes","item":"https://koshinstudio.com/notes/"},{"@type":"ListItem","position":3,"name":"ログに秘密のトークンが平文で残っていた：呼び忘れようがない唯一の出口で伏せる","item":"https://koshinstudio.com/notes/secret-in-logs/"}]}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BlogPosting","headline":"ログに秘密のトークンが平文で残っていた：呼び忘れようがない唯一の出口で伏せる","url":"https://koshinstudio.com/notes/secret-in-logs/","description":"通信の部品のエラーメッセージに URL がそのまま入り、取得サービスのトークンがログに出ていた。前に作った伏字の関数は、明示的に呼ぶ場所にしか効かず、呼び元は 50 か所以上。ログの唯一の出口で伏せる形に直した。","datePublished":"2026-10-17","dateModified":"2026-10-17","inLanguage":"ja","image":"https://koshinstudio.com/assets/og/og_notes_secret-in-logs.jpg","author":{"@id":"https://koshinstudio.com#koshin"},"publisher":{"@id":"https://koshinstudio.com#studio"},"mainEntityOfPage":"https://koshinstudio.com/notes/secret-in-logs/"},{"@type":"Person","@id":"https://koshinstudio.com#koshin","name":"Koshin","jobTitle":"Webエンジニア・アプリエンジニア","url":"https://koshinstudio.com/about/","worksFor":{"@id":"https://koshinstudio.com#studio"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Koshin Studio","item":"https://koshinstudio.com/"},{"@type":"ListItem","position":2,"name":"Notes","item":"https://koshinstudio.com/notes/"},{"@type":"ListItem","position":3,"name":"ログに秘密のトークンが平文で残っていた：呼び忘れようがない唯一の出口で伏せる","item":"https://koshinstudio.com/notes/secret-in-logs/"}]}]}</script>
 <meta property="og:image" content="https://koshinstudio.com/assets/og/og_notes_secret-in-logs.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
@@ -46,7 +46,7 @@
   <h1>ログに秘密のトークンが平文で残っていた：呼び忘れようがない唯一の出口で伏せる</h1>  <div class="rule"></div>
 <!--lang-->
   <p class="note"><a href="/en/notes/secret-in-logs/" hreflang="en" lang="en">English version</a></p>
-<!--/lang-->  <p class="lead">トレカダッシュ 開発の記録 ／ 2026年8月</p>
+<!--/lang--><!--byline--><p class="note byline">書いた人：<a href="/about/#operator">Koshin</a>（Web エンジニア・アプリエンジニア）　公開：2026-10-17</p><!--/byline--><p class="lead">トレカダッシュ 開発の記録 ／ 2026年8月</p>
 
   <p>iOS アプリ「<a href="/works/torecadash/">トレカダッシュ</a>」の裏側のログを調べていて、<strong>外部サービスの秘密の値（API のトークン）が、そのまま書かれている</strong>のを見つけました。2026 年 8 月 24 日のことです。</p>
   <p>宿題として「期限なし、任意」に置いていた件でした。サーバーの実際のログを確認すると、<strong>実際に漏れていました</strong>。この記事は、原因と、「呼び忘れようがない出口で、伏字にする」直し方の記録です。</p>

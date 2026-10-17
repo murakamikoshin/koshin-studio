@@ -725,8 +725,9 @@ function ldFor(file, url) {
       { '@type': 'BlogPosting', headline: p.title, url: SITE + p.en, description: p.blurb,
         datePublished: p.date, dateModified: p.updated || p.date, inLanguage: 'en',
         image: ogForPair(rel, p.ja + 'index.html'),
-        author: { '@id': SITE + '#studio' }, publisher: { '@id': SITE + '#studio' },
+        author: { '@id': SITE + '#koshin' }, publisher: { '@id': SITE + '#studio' },
         mainEntityOfPage: SITE + p.en },
+      KOSHIN,
       crumbs([['Koshin Studio', '/en/'], [p.title, p.en]]),
     ];
   }
@@ -802,8 +803,9 @@ function ldFor(file, url) {
       { '@type': 'BlogPosting', headline: nn.title, url: SITE + nn.url, description: nn.blurb,
         datePublished: nn.date, dateModified: nn.updated || nn.date, inLanguage: 'ja',
         image: ogFor(rel),
-        author: { '@id': SITE + '#studio' }, publisher: { '@id': SITE + '#studio' },
+        author: { '@id': SITE + '#koshin' }, publisher: { '@id': SITE + '#studio' },
         mainEntityOfPage: SITE + nn.url },
+      KOSHIN,
       crumbs([['Koshin Studio', '/'], isPick(nn) ? ['Picks', '/picks/'] : ['Notes', '/notes/'], [nn.title, nn.url]]),
     ];
   }
@@ -994,6 +996,18 @@ for (const file of pages) {
       (live || isContentPage
         ? `<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${ads.client}" crossorigin="anonymous"></script>\n` : '') +
       '</head>');
+  }
+  /* 記事の「書いた人」を、見える形で出す（E-E-A-T。運営者は About に書いてある） */
+  const bm = rel.match(/^\/(en\/)?notes\/([^/]+)\/index\.html$/);
+  if (bm) {
+    let pubDate = null;
+    if (!bm[1]) pubDate = (noteBySlug[bm[2]] || {}).date;
+    else { const pr = enPairs.find((x) => x.en === `/en/notes/${bm[2]}/`); pubDate = pr && pr.date; }
+    html = html.replace(/\n?[ \t]*<!--byline-->[\s\S]*?<!--\/byline-->/g, '');
+    const by = bm[1]
+      ? `<!--byline--><p class="note byline">Written by <a href="/en/about/#operator">Koshin</a> (web engineer and app engineer)${pubDate ? ' · published ' + pubDate : ''}</p><!--/byline-->`
+      : `<!--byline--><p class="note byline">書いた人：<a href="/about/#operator">Koshin</a>（Web エンジニア・アプリエンジニア）${pubDate ? '　公開：' + pubDate : ''}</p><!--/byline-->`;
+    html = html.replace(/<p class="lead">/, `${by}<p class="lead">`);
   }
   const url = urlOf(file);
   html = html.replace(/\n?\s*<link rel="canonical"[^>]*>/g, '')

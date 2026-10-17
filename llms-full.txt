@@ -11,7 +11,8 @@ URL: https://koshinstudio.com/notes/aggregator-pagination/
 
   English version (https://koshinstudio.com/en/notes/aggregator-pagination/)
 
-  トレカダッシュ 開発の記録 ／ 2026年8月
+書いた人：Koshin (https://koshinstudio.com/about/#operator)（Web エンジニア・アプリエンジニア）　公開：2026-10-17
+トレカダッシュ 開発の記録 ／ 2026年8月
 
   iOS アプリ「トレカダッシュ (https://koshinstudio.com/works/torecadash/)」の情報源の 1 つに、入荷情報のまとめサイトがあります。抽選の記事を、まとめて載せているサイトです。この巡回に、「出るべきものが、出ていない」原因が、2 つ、ありました。
 
@@ -76,7 +77,8 @@ URL: https://koshinstudio.com/notes/misdiagnosis-down/
 
   English version (https://koshinstudio.com/en/notes/misdiagnosis-down/)
 
-  トレカダッシュ 開発の記録 ／ 2026年8月
+書いた人：Koshin (https://koshinstudio.com/about/#operator)（Web エンジニア・アプリエンジニア）　公開：2026-10-17
+トレカダッシュ 開発の記録 ／ 2026年8月
 
   iOS アプリ「トレカダッシュ (https://koshinstudio.com/works/torecadash/)」のサーバーに、午前 3 時 10 分から、つながらなくなりました。2026 年 8 月 28 日の朝のことです。私は、「サーバーが落ちた。こちらからは、復旧できない」と、記録に書きました。
 
@@ -155,7 +157,8 @@ URL: https://koshinstudio.com/notes/weird-articles-by-route/
 
   English version (https://koshinstudio.com/en/notes/weird-articles-by-route/)
 
-  トレカダッシュ 開発の記録 ／ 2026年8月
+書いた人：Koshin (https://koshinstudio.com/about/#operator)（Web エンジニア・アプリエンジニア）　公開：2026-10-17
+トレカダッシュ 開発の記録 ／ 2026年8月
 
   iOS アプリ「トレカダッシュ (https://koshinstudio.com/works/torecadash/)」について、ユーザーから、こういう指示が来ました。「変な記事が、めっちゃ増えてる。締切も入っていないし、おかしい記事ばかり。恒久的に解決して。ほかの経路で作った記事も、徹底的に調べて」。
 
@@ -276,7 +279,8 @@ URL: https://koshinstudio.com/notes/automate-sorted/
 
   English version (https://koshinstudio.com/en/notes/automate-sorted/)
 
-  トレカダッシュ 開発の記録 ／ 2026年8月
+書いた人：Koshin (https://koshinstudio.com/about/#operator)（Web エンジニア・アプリエンジニア）　公開：2026-10-17
+トレカダッシュ 開発の記録 ／ 2026年8月
 
   iOS アプリ「トレカダッシュ (https://koshinstudio.com/works/torecadash/)」の開発で、ユーザーから、「自動化できるものは、全部自動化して」という指示がありました。
 
@@ -367,7 +371,8 @@ URL: https://koshinstudio.com/notes/fill-the-gap/
 
   English version (https://koshinstudio.com/en/notes/fill-the-gap/)
 
-  トレカダッシュ 開発の記録 ／ 2026年8月
+書いた人：Koshin (https://koshinstudio.com/about/#operator)（Web エンジニア・アプリエンジニア）　公開：2026-10-17
+トレカダッシュ 開発の記録 ／ 2026年8月
 
   iOS アプリ「トレカダッシュ (https://koshinstudio.com/works/torecadash/)」の目標は、抽選の情報を、もれなく出すことです。ユーザーからの指示は、「気づくだけじゃなくて、そもそも取りこぼしが起きないようにして」でした。
 
@@ -442,7 +447,8 @@ URL: https://koshinstudio.com/notes/swiftui-hit-area/
 
   English version (https://koshinstudio.com/en/notes/swiftui-hit-area/)
 
-  トレカダッシュ 開発の記録 ／ 2026年8月
+書いた人：Koshin (https://koshinstudio.com/about/#operator)（Web エンジニア・アプリエンジニア）　公開：2026-10-17
+トレカダッシュ 開発の記録 ／ 2026年8月
 
   iOS アプリ「トレカダッシュ (https://koshinstudio.com/works/torecadash/)」の応募の記録の画面には、「当選」と「落選」のボタンがあります。「当選と落選の文字の上しか判定が無くて、使いづらい」という報告が来ました。
 
@@ -501,7 +507,8 @@ URL: https://koshinstudio.com/notes/store-name-variants/
 
   English version (https://koshinstudio.com/en/notes/store-name-variants/)
 
-  トレカダッシュ 開発の記録 ／ 2026年8月
+書いた人：Koshin (https://koshinstudio.com/about/#operator)（Web エンジニア・アプリエンジニア）　公開：2026-10-17
+トレカダッシュ 開発の記録 ／ 2026年8月
 
   iOS アプリ「トレカダッシュ (https://koshinstudio.com/works/torecadash/)」の記事では、同じ店の名前が、「ヤマダ電機」と「ヤマダデンキ」のように、書き方がバラバラでした。報告は、2 つ来ました。「表記揺れしている」「同じ理由で、記事が重複している」。指示は、「他の店でも同じことが起きないように、徹底的に」でした。
 
@@ -586,7 +593,8 @@ URL: https://koshinstudio.com/notes/geocode-shizuoka/
 
   English version (https://koshinstudio.com/en/notes/geocode-shizuoka/)
 
-  トレカダッシュ 開発の記録 ／ 2026年8月
+書いた人：Koshin (https://koshinstudio.com/about/#operator)（Web エンジニア・アプリエンジニア）　公開：2026-10-17
+トレカダッシュ 開発の記録 ／ 2026年8月
 
   iOS アプリ「トレカダッシュ (https://koshinstudio.com/works/torecadash/)」には、店の位置を地図に出して、近い順に並べる機能があります。「位置情報が、静岡になる」という報告が来ました。店の位置は、店の名前を Google の地図の検索（Places API）に渡して、座標を取っています。
 
@@ -667,7 +675,8 @@ URL: https://koshinstudio.com/notes/one-page-many-cases/
 
   English version (https://koshinstudio.com/en/notes/one-page-many-cases/)
 
-  トレカダッシュ 開発の記録 ／ 2026年8月
+書いた人：Koshin (https://koshinstudio.com/about/#operator)（Web エンジニア・アプリエンジニア）　公開：2026-10-17
+トレカダッシュ 開発の記録 ／ 2026年8月
 
   iOS アプリ「トレカダッシュ (https://koshinstudio.com/works/torecadash/)」で、「複数の商品を受け付けている抽選なのに、1 件しか記事が無い」という報告が、2 回、来ました。1 回目に直したつもりでしたが、2 回目が来ました。
 
@@ -734,7 +743,8 @@ URL: https://koshinstudio.com/notes/transliteration-gate/
 
   English version (https://koshinstudio.com/en/notes/transliteration-gate/)
 
-  トレカダッシュ 開発の記録 ／ 2026年8月
+書いた人：Koshin (https://koshinstudio.com/about/#operator)（Web エンジニア・アプリエンジニア）　公開：2026-10-17
+トレカダッシュ 開発の記録 ／ 2026年8月
 
   iOS アプリ「トレカダッシュ (https://koshinstudio.com/works/torecadash/)」は、商品ごとの相場を、売買の実績があるサイトから取ってきて、定価と並べて表示します。ところが、健全性のチェックに、こう出ていました。
 
@@ -825,7 +835,8 @@ URL: https://koshinstudio.com/notes/timeout-third-fix/
 
   English version (https://koshinstudio.com/en/notes/timeout-third-fix/)
 
-  トレカダッシュ 開発の記録 ／ 2026年8月
+書いた人：Koshin (https://koshinstudio.com/about/#operator)（Web エンジニア・アプリエンジニア）　公開：2026-10-17
+トレカダッシュ 開発の記録 ／ 2026年8月
 
   iOS アプリ「トレカダッシュ (https://koshinstudio.com/works/torecadash/)」の、楽天ブックスの在庫を確かめる処理が、1 日に 17 回、タイムアウトしていました。タイムアウトは、処理が時間の上限（480 秒）までに終わらないことです。
 
@@ -902,7 +913,8 @@ URL: https://koshinstudio.com/notes/secret-in-logs/
 
   English version (https://koshinstudio.com/en/notes/secret-in-logs/)
 
-  トレカダッシュ 開発の記録 ／ 2026年8月
+書いた人：Koshin (https://koshinstudio.com/about/#operator)（Web エンジニア・アプリエンジニア）　公開：2026-10-17
+トレカダッシュ 開発の記録 ／ 2026年8月
 
   iOS アプリ「トレカダッシュ (https://koshinstudio.com/works/torecadash/)」の裏側のログを調べていて、外部サービスの秘密の値（API のトークン）が、そのまま書かれているのを見つけました。2026 年 8 月 24 日のことです。
 
@@ -969,7 +981,8 @@ URL: https://koshinstudio.com/notes/swallowed-failure/
 
   English version (https://koshinstudio.com/en/notes/swallowed-failure/)
 
-  トレカダッシュ 開発の記録 ／ 2026年8月
+書いた人：Koshin (https://koshinstudio.com/about/#operator)（Web エンジニア・アプリエンジニア）　公開：2026-10-17
+トレカダッシュ 開発の記録 ／ 2026年8月
 
   iOS アプリ「トレカダッシュ (https://koshinstudio.com/works/torecadash/)」で、「失敗を、握りつぶしたせいで、嘘の成功を表示していた」という不具合が、続けて見つかりました。この記事は、そのうちの 3 つの記録です。
 
@@ -1040,7 +1053,8 @@ URL: https://koshinstudio.com/notes/truncated-answer/
 
   English version (https://koshinstudio.com/en/notes/truncated-answer/)
 
-  トレカダッシュ 開発の記録 ／ 2026年8月
+書いた人：Koshin (https://koshinstudio.com/about/#operator)（Web エンジニア・アプリエンジニア）　公開：2026-10-17
+トレカダッシュ 開発の記録 ／ 2026年8月
 
   iOS アプリ「トレカダッシュ (https://koshinstudio.com/works/torecadash/)」の、まとめサイト由来の記事は、お店の公式の告知のページへ、リンクを張り替えます。ところが、開発者モードの報告が、続けて 7 件、来ました。「正しい告知の URL は、これ。ちゃんとやって」。
 
@@ -1126,7 +1140,8 @@ URL: https://koshinstudio.com/notes/icloud-overwrite/
 
   English version (https://koshinstudio.com/en/notes/icloud-overwrite/)
 
-  トレカダッシュ 開発の記録 ／ 2026年8月
+書いた人：Koshin (https://koshinstudio.com/about/#operator)（Web エンジニア・アプリエンジニア）　公開：2026-10-17
+トレカダッシュ 開発の記録 ／ 2026年8月
 
   iOS アプリ「トレカダッシュ (https://koshinstudio.com/works/torecadash/)」には、利用者が自分で書きためる応募の記録があります。どの抽選に応募したか、結果はどうだったか。手で積み上げた個人の記録なので、失うと取り返せません。
 
@@ -1191,7 +1206,8 @@ URL: https://koshinstudio.com/notes/cleanup-hides-entrance/
 
   English version (https://koshinstudio.com/en/notes/cleanup-hides-entrance/)
 
-  トレカダッシュ 開発の記録 ／ 2026年8月
+書いた人：Koshin (https://koshinstudio.com/about/#operator)（Web エンジニア・アプリエンジニア）　公開：2026-10-17
+トレカダッシュ 開発の記録 ／ 2026年8月
 
   iOS アプリ「トレカダッシュ (https://koshinstudio.com/works/torecadash/)」の商品のデータには、毎日夜に、重複した商品をまとめる掃除の処理があります。「後から掃除するから、大丈夫」。そう思っていた場所に、毎日、そっくりな商品が作り直されている入口の不具合が、隠れていました。
 
@@ -1270,7 +1286,8 @@ URL: https://koshinstudio.com/notes/vps-migration/
 
   English version (https://koshinstudio.com/en/notes/vps-migration/)
 
-  トレカダッシュ 開発の記録 ／ 2026年8月
+書いた人：Koshin (https://koshinstudio.com/about/#operator)（Web エンジニア・アプリエンジニア）　公開：2026-10-17
+トレカダッシュ 開発の記録 ／ 2026年8月
 
   iOS アプリ「トレカダッシュ (https://koshinstudio.com/works/torecadash/)」の裏側は、もともと、Google の Cloud Functions（関数ごとに、動いた時間だけ課金されるサービス）で動いていました。2026 年 8 月 16 日に、無料のお試しの期間が終わると、8 月 17 日から、1 日約 3,700 円（月に直すと約 106,000 円）の実費がかかり始めました。
 
@@ -1388,7 +1405,8 @@ URL: https://koshinstudio.com/notes/test-ads/
 
   English version (https://koshinstudio.com/en/notes/test-ads/)
 
-  トレカダッシュ 開発の記録 ／ 2026年9月
+書いた人：Koshin (https://koshinstudio.com/about/#operator)（Web エンジニア・アプリエンジニア）　公開：2026-10-17
+トレカダッシュ 開発の記録 ／ 2026年9月
 
   iOS アプリ「トレカダッシュ (https://koshinstudio.com/works/torecadash/)」には、毎日 1 回、おみくじ（抽選）を引ける機能があります。「動画を見て挑戦する」と、動画の広告のあとに、抽選の演出が始まります。
 
@@ -1469,7 +1487,8 @@ URL: https://koshinstudio.com/notes/leaked-value/
 
   English version (https://koshinstudio.com/en/notes/leaked-value/)
 
-  トレカダッシュ 開発の記録 ／ 2026年9月
+書いた人：Koshin (https://koshinstudio.com/about/#operator)（Web エンジニア・アプリエンジニア）　公開：2026-10-17
+トレカダッシュ 開発の記録 ／ 2026年9月
 
   iOS アプリ「トレカダッシュ (https://koshinstudio.com/works/torecadash/)」には、「これ、ベイブレードじゃん」という報告が、3 件来ました。トレーディングカードの情報を集めるアプリなのに、玩具のベイブレードが、商品として登録されていました。
 
@@ -1539,7 +1558,8 @@ URL: https://koshinstudio.com/notes/budget-starved/
 
   English version (https://koshinstudio.com/en/notes/budget-starved/)
 
-  トレカダッシュ 開発の記録 ／ 2026年9月
+書いた人：Koshin (https://koshinstudio.com/about/#operator)（Web エンジニア・アプリエンジニア）　公開：2026-10-17
+トレカダッシュ 開発の記録 ／ 2026年9月
 
   iOS アプリ「トレカダッシュ (https://koshinstudio.com/works/torecadash/)」の裏側には、記事の「販売の形式」を点検して直す処理があります。この処理の中に、「持ち回りで 25 本の点検を順に走らせる」部分がありました。
 
@@ -1624,7 +1644,8 @@ URL: https://koshinstudio.com/notes/fix-the-existing-data/
 
   English version (https://koshinstudio.com/en/notes/fix-the-existing-data/)
 
-  トレカダッシュ 開発の記録 ／ 2026年8月〜9月
+書いた人：Koshin (https://koshinstudio.com/about/#operator)（Web エンジニア・アプリエンジニア）　公開：2026-10-17
+トレカダッシュ 開発の記録 ／ 2026年8月〜9月
 
   iOS アプリ「トレカダッシュ (https://koshinstudio.com/works/torecadash/)」の開発では、「直したのに、直っていない」という報告が、何度も、同じ形で来ました。コードを直す。テストも通る。ところが、画面には、まだ間違いが残っている。
 
@@ -1709,7 +1730,8 @@ URL: https://koshinstudio.com/notes/hot-lane/
 
   English version (https://koshinstudio.com/en/notes/hot-lane/)
 
-  トレカダッシュ 開発の記録 ／ 2026年9月
+書いた人：Koshin (https://koshinstudio.com/about/#operator)（Web エンジニア・アプリエンジニア）　公開：2026-10-17
+トレカダッシュ 開発の記録 ／ 2026年9月
 
   iOS アプリ「トレカダッシュ (https://koshinstudio.com/works/torecadash/)」は、通販サイトを、弾（商品の発売の単位）ごとに検索して、先着や予約の情報を集めています。弾の数は全部で 427。これを全部、速く見たいところですが、取得にかかる費用にも、外部サービスの呼び出しの回数にも、上限があります。
 
@@ -1808,7 +1830,8 @@ URL: https://koshinstudio.com/notes/destination-check/
 
   English version (https://koshinstudio.com/en/notes/destination-check/)
 
-  トレカダッシュ 開発の記録 ／ 2026年9月
+書いた人：Koshin (https://koshinstudio.com/about/#operator)（Web エンジニア・アプリエンジニア）　公開：2026-10-17
+トレカダッシュ 開発の記録 ／ 2026年9月
 
   iOS アプリ「トレカダッシュ (https://koshinstudio.com/works/torecadash/)」の記事には、お店や通販サイトのリンク先が付いています。記事の題名や値段が正しくても、リンク先のページが、閉じていたり、別の商品だったりすれば、利用者には役に立ちません。
 
@@ -1911,7 +1934,8 @@ URL: https://koshinstudio.com/notes/genre-from-catalog/
 
   English version (https://koshinstudio.com/en/notes/genre-from-catalog/)
 
-  トレカダッシュ 開発の記録 ／ 2026年9月
+書いた人：Koshin (https://koshinstudio.com/about/#operator)（Web エンジニア・アプリエンジニア）　公開：2026-10-17
+トレカダッシュ 開発の記録 ／ 2026年9月
 
   iOS アプリ「トレカダッシュ (https://koshinstudio.com/works/torecadash/)」には、「この商品が、ポケモンカード扱いなのが、そもそも間違い」という報告が来ました。商品の名前は「勝敵！逆転おこせ鬼の∞ディスペクター！！」。これは、デュエル・マスターズの商品なのに、ポケモンカードの商品として登録され、ポケモンカードのフィードに出ていました。
 
@@ -1997,7 +2021,8 @@ URL: https://koshinstudio.com/notes/audit-sweep-61/
 
   English version (https://koshinstudio.com/en/notes/audit-sweep-61/)
 
-  トレカダッシュ 開発の記録 ／ 2026年9月
+書いた人：Koshin (https://koshinstudio.com/about/#operator)（Web エンジニア・アプリエンジニア）　公開：2026-10-17
+トレカダッシュ 開発の記録 ／ 2026年9月
 
   iOS アプリ「トレカダッシュ (https://koshinstudio.com/works/torecadash/)」の裏側には、異常を見つける監査が 61 本あります。2026 年 9 月 8 日の未明、その全部を流して、0 件ではなかった項目を、1 つずつ実データで確かめる作業をしました。
 
@@ -2109,7 +2134,8 @@ URL: https://koshinstudio.com/notes/catalog-seed-393/
 
   English version (https://koshinstudio.com/en/notes/catalog-seed-393/)
 
-  トレカダッシュ 開発の記録 ／ 2026年9月
+書いた人：Koshin (https://koshinstudio.com/about/#operator)（Web エンジニア・アプリエンジニア）　公開：2026-10-17
+トレカダッシュ 開発の記録 ／ 2026年9月
 
   iOS アプリ「トレカダッシュ (https://koshinstudio.com/works/torecadash/)」の商品リストは、一部を、公式サイトの一覧から取り込んで作っています。ある日、この取り込みで作られた商品を日ごとに数えたら、この日だけで 502 件。ふだんは 1 日に 1〜10 件です。
 
@@ -2196,7 +2222,8 @@ URL: https://koshinstudio.com/notes/same-page-not-same-store/
 
   English version (https://koshinstudio.com/en/notes/same-page-not-same-store/)
 
-  トレカダッシュ 開発の記録 ／ 2026年9月
+書いた人：Koshin (https://koshinstudio.com/about/#operator)（Web エンジニア・アプリエンジニア）　公開：2026-10-17
+トレカダッシュ 開発の記録 ／ 2026年9月
 
   iOS アプリ「トレカダッシュ (https://koshinstudio.com/works/torecadash/)」で、「利用者には、違う店の抽選に見える」という不具合が見つかりました。仙台駅前店の記事が「新宿南口店」と表示され、八王子本店の記事が「能代店」と表示されていました。52 件でした。
 
@@ -2289,7 +2316,8 @@ URL: https://koshinstudio.com/notes/waiting-room/
 
   English version (https://koshinstudio.com/en/notes/waiting-room/)
 
-  トレカダッシュ 開発の記録 ／ 2026年9月
+書いた人：Koshin (https://koshinstudio.com/about/#operator)（Web エンジニア・アプリエンジニア）　公開：2026-10-17
+トレカダッシュ 開発の記録 ／ 2026年9月
 
   iOS アプリ「トレカダッシュ (https://koshinstudio.com/works/torecadash/)」は、通販サイトの販売ページを定期的に読んで、先着や抽選の情報を集めています。前に書いた (https://koshinstudio.com/notes/blocked-page/)とおり、「取れた」の判定に穴があり、案内ページを成功と読んでいた事件がありました。その判定を直したのと同じ日（2026 年 9 月 7 日）のうちに、同じ種類の穴が、別の形でもう 1 つ見つかりました。
 
@@ -2362,7 +2390,8 @@ URL: https://koshinstudio.com/notes/concurrency-slots/
 
   English version (https://koshinstudio.com/en/notes/concurrency-slots/)
 
-  トレカダッシュ 開発の記録 ／ 2026年9月
+書いた人：Koshin (https://koshinstudio.com/about/#operator)（Web エンジニア・アプリエンジニア）　公開：2026-10-17
+トレカダッシュ 開発の記録 ／ 2026年9月
 
   iOS アプリ「トレカダッシュ (https://koshinstudio.com/works/torecadash/)」の裏側は、1 台の小さなサーバー（2 コア、メモリ 3.8GB）で、200 を超える定期処理を動かしています。同時に走れる処理の数には、上限があります（同時実行の枠）。
 
@@ -2469,7 +2498,8 @@ URL: https://koshinstudio.com/notes/coverage-check/
 
   English version (https://koshinstudio.com/en/notes/coverage-check/)
 
-  トレカダッシュ 開発の記録 ／ 2026年8月
+書いた人：Koshin (https://koshinstudio.com/about/#operator)（Web エンジニア・アプリエンジニア）　公開：2026-10-17
+トレカダッシュ 開発の記録 ／ 2026年8月
 
   iOS アプリ「トレカダッシュ (https://koshinstudio.com/works/torecadash/)」の目標の 1 つは、抽選販売の情報をもれなく出すことです。もれがあるかどうかを確かめるには、同じ情報を出している他のサイトと突き合わせて、「あちらにあって、こちらに無いもの」を数えるのが一番です。
 
@@ -2600,7 +2630,8 @@ URL: https://koshinstudio.com/notes/self-inflicted/
 
   English version (https://koshinstudio.com/en/notes/self-inflicted/)
 
-  トレカダッシュ 開発の記録 ／ 2026年8月〜9月
+書いた人：Koshin (https://koshinstudio.com/about/#operator)（Web エンジニア・アプリエンジニア）　公開：2026-10-17
+トレカダッシュ 開発の記録 ／ 2026年8月〜9月
 
   iOS アプリ「トレカダッシュ (https://koshinstudio.com/works/torecadash/)」の開発では、外から来る不具合のほかに、自分で作った仕組みや、自分でした点検が、自分に被害を出したことが何度かありました。この記事は、そのうちの 4 つの記録です。どれも、数字で見えたあとに、直しました。
 
@@ -2700,7 +2731,8 @@ URL: https://koshinstudio.com/notes/x-monitoring-gaps/
 
   English version (https://koshinstudio.com/en/notes/x-monitoring-gaps/)
 
-  トレカダッシュ 開発の記録 ／ 2026年9月
+書いた人：Koshin (https://koshinstudio.com/about/#operator)（Web エンジニア・アプリエンジニア）　公開：2026-10-17
+トレカダッシュ 開発の記録 ／ 2026年9月
 
   iOS アプリ「トレカダッシュ (https://koshinstudio.com/works/torecadash/)」の情報源のうち、いちばん速く、いちばん漏れやすいのが、お店の X（旧 Twitter）の投稿です。お店は、抽選や先着の告知を、まず X に出します。アプリは、登録したお店のアカウントを、定期的に巡回して読んでいます。
 
@@ -2793,7 +2825,8 @@ URL: https://koshinstudio.com/notes/interval-vs-delivery/
 
   English version (https://koshinstudio.com/en/notes/interval-vs-delivery/)
 
-  トレカダッシュ 開発の記録 ／ 2026年9月
+書いた人：Koshin (https://koshinstudio.com/about/#operator)（Web エンジニア・アプリエンジニア）　公開：2026-10-17
+トレカダッシュ 開発の記録 ／ 2026年9月
 
   iOS アプリ「トレカダッシュ (https://koshinstudio.com/works/torecadash/)」の中でも、先着販売（在庫が数分で消える販売）の通知は、速さが勝負です。そこで、先着の監視は、「1 分おきに動く」ように作りました。
 
@@ -2892,7 +2925,8 @@ URL: https://koshinstudio.com/notes/split-mixups/
 
   English version (https://koshinstudio.com/en/notes/split-mixups/)
 
-  トレカダッシュ 開発の記録 ／ 2026年9月
+書いた人：Koshin (https://koshinstudio.com/about/#operator)（Web エンジニア・アプリエンジニア）　公開：2026-10-17
+トレカダッシュ 開発の記録 ／ 2026年9月
 
   iOS アプリ「トレカダッシュ (https://koshinstudio.com/works/torecadash/)」には、お店の告知を、商品ごとの記事に分ける処理があります。1 つの告知に「ポケモンカードの A と B の抽選」と書いてあれば、A の記事と B の記事に分けます。分けた記事を「子」、元の記事を「親」と呼びます。
 
@@ -2971,7 +3005,8 @@ URL: https://koshinstudio.com/notes/silent-discard/
 
   English version (https://koshinstudio.com/en/notes/silent-discard/)
 
-  トレカダッシュ 開発の記録 ／ 2026年8月〜9月
+書いた人：Koshin (https://koshinstudio.com/about/#operator)（Web エンジニア・アプリエンジニア）　公開：2026-10-17
+トレカダッシュ 開発の記録 ／ 2026年8月〜9月
 
   iOS アプリ「トレカダッシュ (https://koshinstudio.com/works/torecadash/)」の集める処理には、「これは対象外」と判断して捨てる場所がたくさんあります。捨てる判定は、安全側に見えます。間違えても、画面にゴミが出ないだけで、誰も困らない、ように見えるからです。
 
@@ -3055,7 +3090,8 @@ URL: https://koshinstudio.com/notes/rerun-on-deploy/
 
   English version (https://koshinstudio.com/en/notes/rerun-on-deploy/)
 
-  トレカダッシュ 開発の記録 ／ 2026年9月
+書いた人：Koshin (https://koshinstudio.com/about/#operator)（Web エンジニア・アプリエンジニア）　公開：2026-10-17
+トレカダッシュ 開発の記録 ／ 2026年9月
 
   iOS アプリ「トレカダッシュ (https://koshinstudio.com/works/torecadash/)」の裏側では、定期的に動く処理がたくさん動いています。その中に、「1 日に 1 回だけ動くはず」の処理がありました。ところが、ある日のログを数えると、その処理が 43 回動いていました。
 
@@ -3128,7 +3164,8 @@ URL: https://koshinstudio.com/notes/notify-gate/
 
   English version (https://koshinstudio.com/en/notes/notify-gate/)
 
-  トレカダッシュ 開発の記録 ／ 2026年9月
+書いた人：Koshin (https://koshinstudio.com/about/#operator)（Web エンジニア・アプリエンジニア）　公開：2026-10-17
+トレカダッシュ 開発の記録 ／ 2026年9月
 
   iOS アプリ「トレカダッシュ (https://koshinstudio.com/works/torecadash/)」は、トレカの抽選販売の情報を集めて、新しい情報が見つかると、利用者のスマートフォンに通知します。集めた記事には、「本当に応募できる抽選か」を確かめる関門（フィルター）があります。当選者の発表、買取の告知、カード以外の商品、などを出さないための仕組みです。
 
@@ -3213,7 +3250,8 @@ URL: https://koshinstudio.com/notes/gemini-meter/
 
   English version (https://koshinstudio.com/en/notes/gemini-meter/)
 
-  トレカダッシュ 開発の記録 ／ 2026年9月〜10月
+書いた人：Koshin (https://koshinstudio.com/about/#operator)（Web エンジニア・アプリエンジニア）　公開：2026-10-17
+トレカダッシュ 開発の記録 ／ 2026年9月〜10月
 
   iOS アプリ「トレカダッシュ (https://koshinstudio.com/works/torecadash/)」は、記事の判定や商品の照合に、Google の Gemini（AI）を使っています。使った分だけお金がかかるので、費用を減らす作業を何度かしました。この記事は、その中の 2 つの回の記録です。
 
@@ -3320,7 +3358,8 @@ URL: https://koshinstudio.com/notes/firestore-91/
 
   English version (https://koshinstudio.com/en/notes/firestore-91/)
 
-  トレカダッシュ 開発の記録 ／ 2026年9月
+書いた人：Koshin (https://koshinstudio.com/about/#operator)（Web エンジニア・アプリエンジニア）　公開：2026-10-17
+トレカダッシュ 開発の記録 ／ 2026年9月
 
   iOS アプリ「トレカダッシュ (https://koshinstudio.com/works/torecadash/)」の裏側は、Firebase の Firestore（データベース）と、定期的に動く処理でできています。費用は、Gemini（AI）と取得サービスの分は、毎日、円で出して見ていました。ところが、Firestore の費用は、レポートに載せていませんでした。
 
@@ -3429,7 +3468,8 @@ URL: https://koshinstudio.com/notes/tco-relay/
 
   English version (https://koshinstudio.com/en/notes/tco-relay/)
 
-  トレカダッシュ 開発の記録 ／ 2026年10月
+書いた人：Koshin (https://koshinstudio.com/about/#operator)（Web エンジニア・アプリエンジニア）　公開：2026-10-17
+トレカダッシュ 開発の記録 ／ 2026年10月
 
   iOS アプリ「トレカダッシュ (https://koshinstudio.com/works/torecadash/)」は、お店の X（旧 Twitter）の告知から、トレカの抽選販売の情報を集めています。告知には、応募用のフォームへのリンクが付いています。アプリは、そのリンク先も読みに行って、締切の日時や、もう受付が終わっていないかを確かめています。
 
@@ -3528,7 +3568,8 @@ URL: https://koshinstudio.com/notes/negaeri-online/
 
   English version (https://koshinstudio.com/en/notes/negaeri-online/)
 
-  寝返り将棋 制作の記録 ／ 2026年9月
+書いた人：Koshin (https://koshinstudio.com/about/#operator)（Web エンジニア・アプリエンジニア）　公開：2026-10-17
+寝返り将棋 制作の記録 ／ 2026年9月
 
   寝返り将棋 (https://koshinstudio.com/works/negaeri-shogi/)には、知らない人と対戦するオンライン対戦があります。登録もログインもありません。ボタンを押すと、同じように待っている人と組まれます。
 
@@ -3654,7 +3695,8 @@ URL: https://koshinstudio.com/notes/negaeri-balance/
 
   English version (https://koshinstudio.com/en/notes/negaeri-balance/)
 
-  寝返り将棋 制作の記録 ／ 2026年9月
+書いた人：Koshin (https://koshinstudio.com/about/#operator)（Web エンジニア・アプリエンジニア）　公開：2026-10-17
+寝返り将棋 制作の記録 ／ 2026年9月
 
   寝返り将棋 (https://koshinstudio.com/works/negaeri-shogi/)は、6×6 の盤で、将棋の駒を使って、オセロのように挟んで裏返すゲームです。挟まれた駒は敵に寝返り、同時に成ります。成った駒の新しい動きで、さらに挟みが成り立てば、続けて裏返ります。これが連鎖です。
 
@@ -3827,7 +3869,8 @@ URL: https://koshinstudio.com/notes/qiita-post-interval/
 
   English version (https://koshinstudio.com/en/notes/qiita-post-interval/)
 
-  このサイト ／ 2026年10月
+書いた人：Koshin (https://koshinstudio.com/about/#operator)（Web エンジニア・アプリエンジニア）　公開：2026-10-08
+このサイト ／ 2026年10月
 
   このサイトの記事の要約を、Qiita に出しました。ところが、1 本目の直後に 2 本目を作ろうとすると、新規作成の画面が開かず、「投稿頻度が高過ぎます」と出ました。どれくらい待てば出せるのか、公式には書かれていないようだったので、実際に測りました。
 
@@ -3898,7 +3941,8 @@ URL: https://koshinstudio.com/notes/gemini-migration/
 
   English version (https://koshinstudio.com/en/notes/gemini-migration/)
 
-  トレカダッシュ 開発の記録 ／ 2026年10月
+書いた人：Koshin (https://koshinstudio.com/about/#operator)（Web エンジニア・アプリエンジニア）　公開：2026-10-08
+トレカダッシュ 開発の記録 ／ 2026年10月
 
   iOS アプリ「トレカダッシュ」のサーバー側では、記事が「どの商品の話か」を判定するなどに、AI を使っています。2026 年 7 月 25 日に、この AI を、Anthropic の Claude（Haiku 4.5）から、Google の Gemini（gemini-3.1-flash-lite）へ、全面的に移行しました。何を決めて、どう一本化して、移行のあとに何を足したのか。開発の引き継ぎ記録で書きます。
 
@@ -3971,7 +4015,8 @@ URL: https://koshinstudio.com/notes/xcode152-sdk/
 
   English version (https://koshinstudio.com/en/notes/xcode152-sdk/)
 
-  トレカダッシュ 開発の記録 ／ 2026年10月
+書いた人：Koshin (https://koshinstudio.com/about/#operator)（Web エンジニア・アプリエンジニア）　公開：2026-10-08
+トレカダッシュ 開発の記録 ／ 2026年10月
 
   iOS アプリ「トレカダッシュ」は、2017 年の古い Mac で、Xcode 15.2 を使って作っています。この環境では、Firebase の iOS SDK と、AdMob（Google Mobile Ads）の SDK を、新しい版にすると、ビルドできません。どの版から使えなくなって、どの版に固定したのか。開発の引き継ぎ記録（2026年7月）に残っている内容で書きます。
 
@@ -4042,7 +4087,8 @@ URL: https://koshinstudio.com/notes/itms-91064/
 
   English version (https://koshinstudio.com/en/notes/itms-91064/)
 
-  トレカダッシュ 開発の記録 ／ 2026年10月
+書いた人：Koshin (https://koshinstudio.com/about/#operator)（Web エンジニア・アプリエンジニア）　公開：2026-10-08
+トレカダッシュ 開発の記録 ／ 2026年10月
 
   iOS アプリ「トレカダッシュ」をアップロードしたところ、Apple 側の自動審査で、ビルド 877 が「無効なバイナリ」として却下されました。エラーコードは ITMS-91064。原因は、プライバシーマニフェスト（PrivacyInfo.xcprivacy）の、二つの項目の組み合わせでした。コミットの記録で、何が起きて、どう直したかを書きます。
 
@@ -4111,7 +4157,8 @@ URL: https://koshinstudio.com/notes/bulk-accident/
 
   English version (https://koshinstudio.com/en/notes/bulk-accident/)
 
-  トレカダッシュ 開発の記録 ／ 2026年10月
+書いた人：Koshin (https://koshinstudio.com/about/#operator)（Web エンジニア・アプリエンジニア）　公開：2026-10-08
+トレカダッシュ 開発の記録 ／ 2026年10月
 
   iOS アプリ「トレカダッシュ」で、記事の状態をまとめて直す新しい処理が、最初に流したとき、対象にするつもりのなかった記事まで、全部に当たりました。別のサイト由来の 18 件が、誤って、表示に戻っていました。事故の直し方と、その後に、同じ穴をふさぐテストを作ったとき、「そのテストが、本当に効くか」を、どう確かめたかを、HANDOFF の記録で書きます。
 
@@ -4182,7 +4229,8 @@ URL: https://koshinstudio.com/notes/fake-products/
 
   English version (https://koshinstudio.com/en/notes/fake-products/)
 
-  トレカダッシュ 開発の記録 ／ 2026年10月
+書いた人：Koshin (https://koshinstudio.com/about/#operator)（Web エンジニア・アプリエンジニア）　公開：2026-10-08
+トレカダッシュ 開発の記録 ／ 2026年10月
 
   iOS アプリ「トレカダッシュ」の商品リストを点検していて、ポケモンカードの「30th CELEBRATION カードセット」の周りに、実在しない商品が 80 個あることが分かりました。公式の商品は、9 つだけです。残りの 80 は、「9 種セット」を、中身ごとに分けてしまった結果、作られた偽の商品でした。HANDOFF の記録で、何が起きて、どう直したかを書きます。
 
@@ -4253,7 +4301,8 @@ URL: https://koshinstudio.com/notes/first-visit/
 
   English version (https://koshinstudio.com/en/notes/first-visit/)
 
-  すし積む 開発の記録 ／ 2026年10月
+書いた人：Koshin (https://koshinstudio.com/about/#operator)（Web エンジニア・アプリエンジニア）　公開：2026-10-08
+すし積む 開発の記録 ／ 2026年10月
 
   すし積む (https://koshinstudio.com/works/sushitsumu/)のタイトル画面には、押せるものが、六つ並んでいました。初めて開いた人は、どれを押せばいいか、分からない状態です。ゲームポータルに出すにあたって、「初めての人が、まず何を押すか」を、一つに絞りました。そのときに一緒に直した、保存が消える問題と、画面を離れたときの問題も、コミットの記録で書きます。
 
@@ -4334,7 +4383,8 @@ URL: https://koshinstudio.com/notes/webaudio/
 
   English version (https://koshinstudio.com/en/notes/webaudio/)
 
-  すし積む 開発の記録 ／ 2026年10月
+書いた人：Koshin (https://koshinstudio.com/about/#operator)（Web エンジニア・アプリエンジニア）　公開：2026-10-08
+すし積む 開発の記録 ／ 2026年10月
 
   すし積む (https://koshinstudio.com/works/sushitsumu/)の音は、音声ファイルを一つも使っていません。ブラウザの音の機能（WebAudio）で、和楽器を、その場で合成しています。問題は、作っている最中、私には、音を聴く手段が無かったことです。そこで、波形を測って、音量を調整しました。コミットに残っている数字で書きます。
 
@@ -4425,7 +4475,8 @@ URL: https://koshinstudio.com/notes/ascii-text/
 
   English version (https://koshinstudio.com/en/notes/ascii-text/)
 
-  すし積む 開発の記録 ／ 2026年10月
+書いた人：Koshin (https://koshinstudio.com/about/#operator)（Web エンジニア・アプリエンジニア）　公開：2026-10-08
+すし積む 開発の記録 ／ 2026年10月
 
   すし積む (https://koshinstudio.com/works/sushitsumu/)を、ゲームポータルのプレビューで開いたとき、「大連鎖！」の「連」の字だけが、壊れて出る、という報告がありました。ファイルを調べると、文字は、ちゃんと正しく入っていました。原因が分からないまま、「壊れても困らない形」にして、先に進んだ経緯を、コミットの記録で書きます。
 
@@ -4486,7 +4537,8 @@ URL: https://koshinstudio.com/notes/logo-pop/
 
   English version (https://koshinstudio.com/en/notes/logo-pop/)
 
-  Koshin Studio 開発の記録 ／ 2026年10月
+書いた人：Koshin (https://koshinstudio.com/about/#operator)（Web エンジニア・アプリエンジニア）　公開：2026-10-08
+Koshin Studio 開発の記録 ／ 2026年10月
 
   このサイトのトップには、大きなロゴがあります。字を押すと、その字がぽんと弾けて、粒が散ります。ロゴを、自分で作った書体「恒紳ポップ」で作り直したあと、この動きについて、「粒が、字ではない変なところから出る」「まだ、右に寄っている」と指摘を受けました。直すまでに三段階かかったので、何が原因で、どう見つけたのかを、測った数字で書きます。
 
@@ -4565,7 +4617,8 @@ URL: https://koshinstudio.com/notes/apple-signin/
 
   English version (https://koshinstudio.com/en/notes/apple-signin/)
 
-  トレカダッシュ 開発の記録 ／ 2026年10月
+書いた人：Koshin (https://koshinstudio.com/about/#operator)（Web エンジニア・アプリエンジニア）　公開：2026-10-08
+トレカダッシュ 開発の記録 ／ 2026年10月
 
   iOS アプリ「トレカダッシュ」で、「アプリを一度落とすと、また Apple のサインインを求められる」という報告がありました。調べると、19 人のうち 17 人が、作られては捨てられた匿名アカウントでした。原因は、アプリを起動した直後の、たった 1 行の確認のしかたでした。HANDOFF とコミット（2026年8月14日）の記録で書きます。
 
@@ -4642,7 +4695,8 @@ URL: https://koshinstudio.com/notes/dup-zero/
 
   English version (https://koshinstudio.com/en/notes/dup-zero/)
 
-  トレカダッシュ 開発の記録 ／ 2026年10月
+書いた人：Koshin (https://koshinstudio.com/about/#operator)（Web エンジニア・アプリエンジニア）　公開：2026-10-08
+トレカダッシュ 開発の記録 ／ 2026年10月
 
   iOS アプリ「トレカダッシュ」には、同じ商品が複数の商品として登録されてしまう「重複」を、毎晩、統合する処理があります。ある日、自分で数えて、「重複は実質ゼロ」と記録しました。ところが、リポジトリの監査は、112 組を出していました。自分の測り方が、間違っていたのです。コミットの記録で、経緯を書きます。
 
@@ -4711,7 +4765,8 @@ URL: https://koshinstudio.com/notes/blocked-page/
 
   English version (https://koshinstudio.com/en/notes/blocked-page/)
 
-  トレカダッシュ 開発の記録 ／ 2026年10月
+書いた人：Koshin (https://koshinstudio.com/about/#operator)（Web エンジニア・アプリエンジニア）　公開：2026-10-08
+トレカダッシュ 開発の記録 ／ 2026年10月
 
   iOS アプリ「トレカダッシュ」は、通販サイトの販売ページを定期的に見に行って、抽選や先着の情報を集めています。ある日、ポケモンセンターオンラインの取得が、3 日間ずっと、商品 0 件になっていたことが分かりました。エラーは出ていません。「取れた」と判定されていたからです。何が起きていたのか、コミットの記録で書きます。
 
@@ -4842,7 +4897,8 @@ URL: https://koshinstudio.com/notes/fail-open/
 
   English version (https://koshinstudio.com/en/notes/fail-open/)
 
-  トレカダッシュ 開発の記録 ／ 2026年10月
+書いた人：Koshin (https://koshinstudio.com/about/#operator)（Web エンジニア・アプリエンジニア）　公開：2026-10-08
+トレカダッシュ 開発の記録 ／ 2026年10月
 
   iOS アプリ「トレカダッシュ」で、「Amazon に転売の価格がたくさん入ってきている」という報告が、アプリ内の不具合報告から 3 件届きました。うち 1 件は、¥79,800 の、明らかな転売品でした。原因は、わざと入れていた「確認できなかったら通す」という設計の、盲点でした。HANDOFF とコミット（2026年7月30日）の記録で書きます。
 
@@ -4917,7 +4973,8 @@ URL: https://koshinstudio.com/notes/typo-catalog/
 
   English version (https://koshinstudio.com/en/notes/typo-catalog/)
 
-  トレカダッシュ 開発の記録 ／ 2026年10月
+書いた人：Koshin (https://koshinstudio.com/about/#operator)（Web エンジニア・アプリエンジニア）　公開：2026-10-08
+トレカダッシュ 開発の記録 ／ 2026年10月
 
   iOS アプリ「トレカダッシュ」で、利用者から、「この記事、別の記事と重複しているよ。それに、商品名がおかしい」という報告が来ました。調べると、一度だけ生まれた誤字の商品が、店ごとの記事が来るたびに、再利用されて増えていたことが分かりました。原因と、直し方と、直し方の限界まで、コミットの記録で書きます。
 
@@ -4988,7 +5045,8 @@ URL: https://koshinstudio.com/notes/scrape-cost/
 
   English version (https://koshinstudio.com/en/notes/scrape-cost/)
 
-  トレカダッシュ 開発の記録 ／ 2026年10月
+書いた人：Koshin (https://koshinstudio.com/about/#operator)（Web エンジニア・アプリエンジニア）　公開：2026-10-08
+トレカダッシュ 開発の記録 ／ 2026年10月
 
   iOS アプリ「トレカダッシュ」は、通販サイトなどの販売ページを定期的に見に行って、抽選や先着の情報を集めています。ページの取得は、外部のサービス（Scrape.do）を通して行っていて、取得の設定ごとに、使うクレジットが違います。あるサイトについて、「これはしょうがない」と思っていたことを、測り直したら、3 倍速く、使う量は 8 分の 1になりました。コミットの記録で書きます。
 
@@ -5049,7 +5107,8 @@ URL: https://koshinstudio.com/notes/anime-db/
 
   English version (https://koshinstudio.com/en/notes/anime-db/)
 
-  ガチアニメ診断 開発の記録 ／ 2026年10月
+書いた人：Koshin (https://koshinstudio.com/about/#operator)（Web エンジニア・アプリエンジニア）　公開：2026-10-08
+ガチアニメ診断 開発の記録 ／ 2026年10月
 
   ガチアニメ診断 (https://koshinstudio.com/works/shindananime/)は、「運命の1作」を、6,000 作を超えるデータベースの中から選びます。この 6,000 作は、どこから来て、どう絞られたのか。診断のデータの作り方を、リポジトリのコミットと、いまのデータの実際の数字で書きます。
 
@@ -5157,7 +5216,8 @@ URL: https://koshinstudio.com/notes/result-screen/
 
   English version (https://koshinstudio.com/en/notes/result-screen/)
 
-  ガチアニメ診断 開発の記録 ／ 2026年10月
+書いた人：Koshin (https://koshinstudio.com/about/#operator)（Web エンジニア・アプリエンジニア）　公開：2026-10-08
+ガチアニメ診断 開発の記録 ／ 2026年10月
 
   ガチアニメ診断 (https://koshinstudio.com/works/shindananime/)の結果画面には、運命の1作の表紙と、「見られるところ」のボタンが並びます。作ったばかりのとき、このボタンも画像も、実際とは違うものを出していました。どれくらい違っていたのかを、手元のデータで数え直して、書き残します。
 
@@ -5234,7 +5294,8 @@ URL: https://koshinstudio.com/notes/ranking-free-tier/
 
   English version (https://koshinstudio.com/en/notes/ranking-free-tier/)
 
-  すし積む 開発の記録 ／ 2026年10月
+書いた人：Koshin (https://koshinstudio.com/about/#operator)（Web エンジニア・アプリエンジニア）　公開：2026-10-08
+すし積む 開発の記録 ／ 2026年10月
 
   すし積む (https://koshinstudio.com/works/sushitsumu/)には、オンラインの番付（ランキング）があります。置き場所は Cloudflare の Workers と D1（データベース）で、無料枠の中で動かしています。この番付サーバーの無料枠の使い方を、半分にしました。何を数えて、何を変えたのか。コミットに残っている実測値で書きます。
 
@@ -5305,7 +5366,8 @@ URL: https://koshinstudio.com/notes/match-percent/
 
   English version (https://koshinstudio.com/en/notes/match-percent/)
 
-  ガチアニメ診断 開発の記録 ／ 2026年10月
+書いた人：Koshin (https://koshinstudio.com/about/#operator)（Web エンジニア・アプリエンジニア）　公開：2026-10-08
+ガチアニメ診断 開発の記録 ／ 2026年10月
 
   ガチアニメ診断 (https://koshinstudio.com/works/shindananime/)は、最後に「運命の1作」と、次点の2作を出します。それぞれに「適合度 82%」のような数字が付きます。この数字が、順位と食い違っていたことがありました。「82% の作品より、80% の作品のほうが選ばれる」。どれくらい食い違っていたのかを、今回あらためて測ったので、書き残します。
 
@@ -5391,7 +5453,8 @@ URL: https://koshinstudio.com/notes/deploy-gotchas/
 
   English version (https://koshinstudio.com/en/notes/deploy-gotchas/)
 
-  Koshin Studio 開発の記録 ／ 2026年10月
+書いた人：Koshin (https://koshinstudio.com/about/#operator)（Web エンジニア・アプリエンジニア）　公開：2026-10-08
+Koshin Studio 開発の記録 ／ 2026年10月
 
   このサイトは、HTML を組み立てて、Cloudflare Pages に配っています。作っていた 9 月の 1 日のうちに、「手元では動くのに、配ると壊れる」という種類の事故が、4 つ続きました。コミットに残っている記録で、順に書きます。
 
@@ -5452,7 +5515,8 @@ URL: https://koshinstudio.com/notes/review-info-needed/
 
   English version (https://koshinstudio.com/en/notes/review-info-needed/)
 
-  トレカダッシュ 開発の記録 ／ 2026年10月
+書いた人：Koshin (https://koshinstudio.com/about/#operator)（Web エンジニア・アプリエンジニア）　公開：2026-10-08
+トレカダッシュ 開発の記録 ／ 2026年10月
 
   iOS アプリ「トレカダッシュ」を、初めて App Store の審査に出しました。提出は10月6日（米太平洋時間の朝4時24分）です。そのあと届いたのは、不合格の通知ではなく、「追加の情報が必要です」というメールでした。何を求められたのかを、まとめておきます。
 
@@ -5513,7 +5577,8 @@ URL: https://koshinstudio.com/notes/stopwatch-rank/
 
   English version (https://koshinstudio.com/en/notes/stopwatch-rank/)
 
-  10秒ピッタリ 開発の記録 ／ 2026年10月
+書いた人：Koshin (https://koshinstudio.com/about/#operator)（Web エンジニア・アプリエンジニア）　公開：2026-10-08
+10秒ピッタリ 開発の記録 ／ 2026年10月
 
   10秒ピッタリで止めろ！ (https://koshinstudio.com/works/stopwatch10/)は、頭の中で10秒を数えて止めるだけのゲームです。3回勝負で、誤差が小さいほど強い。これにランキングをつけるとき、「公平とは何か」を、三つの場所で決める必要がありました。リポジトリの README とコードの注記に残っている理由で書きます。
 
@@ -5583,7 +5648,8 @@ URL: https://koshinstudio.com/notes/torecadash-review/
 
   English version (https://koshinstudio.com/en/notes/torecadash-review/)
 
-  トレカダッシュ 開発の記録 ／ 2026年10月
+書いた人：Koshin (https://koshinstudio.com/about/#operator)（Web エンジニア・アプリエンジニア）　公開：2026-10-08
+トレカダッシュ 開発の記録 ／ 2026年10月
 
   iOS アプリ「トレカダッシュ」を App Store の審査に出そうとして、何度か、出す手前で止まりました。Apple 側の自動検査で止まったもの、提出画面で止まったもの、ガイドラインに照らして点検して見つけたもの。コミットに残っている記録から、四つ書きます。
 
@@ -5638,7 +5704,8 @@ URL: https://koshinstudio.com/notes/torecadash-9set/
 
   English version (https://koshinstudio.com/en/notes/torecadash-9set/)
 
-  トレカダッシュ 開発の記録 ／ 2026年10月
+書いた人：Koshin (https://koshinstudio.com/about/#operator)（Web エンジニア・アプリエンジニア）　公開：2026-10-08
+トレカダッシュ 開発の記録 ／ 2026年10月
 
   iOS アプリ「トレカダッシュ」は、トレカの抽選・先着情報を集めて通知します。集めた情報に抜けがないか調べるため、他のまとめサイト（抽選図鑑、ポケチュー）の掲載と、自分のアプリの記事を突き合わせて数えています。10月7日に測ったところ、抜けの多くは、同じ商品なのに、決して一致しないという、小さな食い違いが原因でした。HANDOFF とコミットの記録で書きます。
 
@@ -5715,7 +5782,8 @@ URL: https://koshinstudio.com/notes/torecadash-watchdog/
 
   English version (https://koshinstudio.com/en/notes/torecadash-watchdog/)
 
-  トレカダッシュ 開発の記録 ／ 2026年10月
+書いた人：Koshin (https://koshinstudio.com/about/#operator)（Web エンジニア・アプリエンジニア）　公開：2026-10-08
+トレカダッシュ 開発の記録 ／ 2026年10月
 
   iOS アプリ「トレカダッシュ」で、「なんかアプリ、めっちゃクラッシュする」という報告がありました。実機のログを読むと、アプリが固まって、OS に強制終了されていたことが分かりました。原因は、画面を描き直すたびに、951件の記事を毎回数え直していたことでした。コミットの記録で書きます。
 
@@ -5771,7 +5839,8 @@ URL: https://koshinstudio.com/notes/torecadash-ci/
 
   English version (https://koshinstudio.com/en/notes/torecadash-ci/)
 
-  トレカダッシュ 開発の記録 ／ 2026年10月
+書いた人：Koshin (https://koshinstudio.com/about/#operator)（Web エンジニア・アプリエンジニア）　公開：2026-10-08
+トレカダッシュ 開発の記録 ／ 2026年10月
 
   iOS アプリ「トレカダッシュ」の開発で、「TestFlight に新しいビルドが来ない」という不具合が起きました。最初に出した原因は間違っていました。どこで間違えて、どう気づいて、本当の原因は何だったのか。HANDOFF（開発の引き継ぎ記録）とコミットに残っている数字で書きます。
 
@@ -5834,7 +5903,8 @@ URL: https://koshinstudio.com/notes/crazygames/
 
   English version (https://koshinstudio.com/en/notes/crazygames/)
 
-  すし積む 開発の記録 ／ 2026年10月
+書いた人：Koshin (https://koshinstudio.com/about/#operator)（Web エンジニア・アプリエンジニア）　公開：2026-10-08
+すし積む 開発の記録 ／ 2026年10月
 
   すし積む (https://koshinstudio.com/works/sushitsumu/)を、ブラウザゲームのポータル CrazyGames に出したところ、審査に落ちました。理由は、「全体の品質が期待に達していない」としか書かれていません。そこで、自分で撮って、探しました。見つかったのは、四つです。コミットに残っている記録で書きます。
 
@@ -5904,7 +5974,8 @@ URL: https://koshinstudio.com/notes/sushi-measure/
 
   English version (https://koshinstudio.com/en/notes/sushi-measure/)
 
-  すし積む 開発の記録 ／ 2026年10月
+書いた人：Koshin (https://koshinstudio.com/about/#operator)（Web エンジニア・アプリエンジニア）　公開：2026-10-07
+すし積む 開発の記録 ／ 2026年10月
 
   すし積む (https://koshinstudio.com/works/sushitsumu/)は、同じネタをぶつけて合体させ、桶いっぱいに育てていく落ち物パズルです。バランスを直していたとき、自分が出した測定結果が、間違っていたことに気づきました。何が間違っていて、どう見つけて、どう直したか。コミットに残っている数字で書きます。
 
@@ -5976,7 +6047,8 @@ URL: https://koshinstudio.com/notes/torecadash-ai/
 
   English version (https://koshinstudio.com/en/notes/torecadash-ai/)
 
-  トレカダッシュ 開発の記録 ／ 2026年10月
+書いた人：Koshin (https://koshinstudio.com/about/#operator)（Web エンジニア・アプリエンジニア）　公開：2026-10-07
+トレカダッシュ 開発の記録 ／ 2026年10月
 
   iOS アプリ「トレカダッシュ」は、トレカ（ポケカ・遊戯王・ワンピース）の予約・抽選・先着販売の情報を集めて、通知するアプリです。集めた記事が「どの商品の話か」を決める処理に、AI（Gemini）を使っています。この AI への問い合わせを減らそうとして、「減るはず」と書いたものが、二度、外れました。コミットに残っている数字で、順に書きます。
 
@@ -6060,7 +6132,8 @@ URL: https://koshinstudio.com/notes/adgap/
 
   English version (https://koshinstudio.com/en/notes/adgap/)
 
-  すし積む 開発の記録 ／ 2026年10月
+書いた人：Koshin (https://koshinstudio.com/about/#operator)（Web エンジニア・アプリエンジニア）　公開：2026-10-07
+すし積む 開発の記録 ／ 2026年10月
 
   すし積む (https://koshinstudio.com/works/sushitsumu/)には、一戦が終わって次の一戦に移る「区切り」で、広告を一本挟める仕組みがあります。最初は「5プレイに一本」にしていましたが、翌日、回数ではなく時間で数えるように変えました。その理由と、変えたあとの動きの記録です。
 
@@ -6142,7 +6215,8 @@ URL: https://koshinstudio.com/notes/u2028/
 
   English version (https://koshinstudio.com/en/notes/u2028/)
 
-  ガチアニメ診断 開発の記録 ／ 2026年10月
+書いた人：Koshin (https://koshinstudio.com/about/#operator)（Web エンジニア・アプリエンジニア）　公開：2026-10-07
+ガチアニメ診断 開発の記録 ／ 2026年10月
 
   ガチアニメ診断 (https://koshinstudio.com/works/shindananime/)の作品データを作る途中で、JSON が壊れるという不具合を直しました。原因は、splitlines() という、ごくふつうの関数でした。
 
@@ -6223,7 +6297,8 @@ URL: https://koshinstudio.com/notes/shindan12/
 
   English version (https://koshinstudio.com/en/notes/shindan12/)
 
-  ガチアニメ診断 開発の記録 ／ 2026年10月
+書いた人：Koshin (https://koshinstudio.com/about/#operator)（Web エンジニア・アプリエンジニア）　公開：2026-10-07
+ガチアニメ診断 開発の記録 ／ 2026年10月
 
   ガチアニメ診断 (https://koshinstudio.com/works/shindananime/)は、全部で50問あります。長い、という声があって、最初の12問だけで結果を出せるようにしました。続きの38問は、答えたい人だけ。
 
@@ -6337,7 +6412,8 @@ URL: https://koshinstudio.com/notes/anago/
 
   English version (https://koshinstudio.com/en/notes/anago/)
 
-  すし積む 開発の記録 ／ 2026年9月
+書いた人：Koshin (https://koshinstudio.com/about/#operator)（Web エンジニア・アプリエンジニア）　公開：2026-09-07
+すし積む 開発の記録 ／ 2026年9月
 
   2026年10月8日に追記しました。この記事の数字は9月8日の版のものです。そのあと、9月10日にもう一度、寸法と降ってくるネタを変えています（いちばん下の「その後」）。
 
@@ -6520,7 +6596,8 @@ URL: https://koshinstudio.com/notes/card-supplies-guide/
 
   English version (https://koshinstudio.com/en/notes/card-supplies-guide/)
 
-  比べたもの ／ 2026年10月
+書いた人：Koshin (https://koshinstudio.com/about/#operator)（Web エンジニア・アプリエンジニア）　公開：2026-10-16
+比べたもの ／ 2026年10月
 
   ポケモンカードを守る道具は、スリーブ・ローダー・デッキケース・ファイルなど、たくさんあります。買ってから「入らない」とならないために、買う前に確かめることを、順に書きました。
 
@@ -6617,7 +6694,8 @@ URL: https://koshinstudio.com/notes/comment-services/
 
   English version (https://koshinstudio.com/en/notes/comment-services/)
 
-  比べたもの ／ 2026年10月
+書いた人：Koshin (https://koshinstudio.com/about/#operator)（Web エンジニア・アプリエンジニア）　公開：2026-10-08
+比べたもの ／ 2026年10月
 
   このサイトのコメント欄は、giscus です。「コメントを開く」を押すまで、外部のサイトに接続しない形にしてあります。そのほかの選択肢は、どうなっているのか。公式の説明と、公式のリポジトリだけを読んで、並べました。実際に使って比べたのは、giscus だけです。
 
@@ -6756,7 +6834,8 @@ URL: https://koshinstudio.com/notes/ios-sdk-compare/
 
   English version (https://koshinstudio.com/en/notes/ios-sdk-compare/)
 
-  比べたもの ／ 2026年10月
+書いた人：Koshin (https://koshinstudio.com/about/#operator)（Web エンジニア・アプリエンジニア）　公開：2026-10-08
+比べたもの ／ 2026年10月
 
   トレカダッシュでは、古い Mac の Xcode 15.2 に合わせて、Firebase 11.4.0 と AdMob 11.5.0 に版を固定しました（その記事 (https://koshinstudio.com/notes/xcode152-sdk/)）。審査では、ITMS-91064 で却下もされています（その記事 (https://koshinstudio.com/notes/itms-91064/)）。そのとき調べきれなかった周りの選択肢を、公式のページだけで並べます。実際に使って比べたのは、AdMob と Firebase だけです。ほかは、使っていません。
 
@@ -6893,7 +6972,8 @@ URL: https://koshinstudio.com/notes/hosting-compare/
 
   English version (https://koshinstudio.com/en/notes/hosting-compare/)
 
-  比べたもの ／ 2026年10月
+書いた人：Koshin (https://koshinstudio.com/about/#operator)（Web エンジニア・アプリエンジニア）　公開：2026-10-08
+比べたもの ／ 2026年10月
 
   このサイトと、トレカダッシュの周りの仕組みは、Cloudflare に置いています（配るときの落とし穴の記事 (https://koshinstudio.com/notes/deploy-gotchas/)と、無料枠の記事 (https://koshinstudio.com/notes/ranking-free-tier/)）。ほかの置き場は、どうなっているのか。公式の料金・上限・規約のページだけを読んで、並べました。ほかの置き場を、実際に使って比べたわけではありません。
 
@@ -7042,7 +7122,8 @@ URL: https://koshinstudio.com/notes/claude-vs-gemini-api/
 
   English version (https://koshinstudio.com/en/notes/claude-vs-gemini-api/)
 
-  比べたもの ／ 2026年10月
+書いた人：Koshin (https://koshinstudio.com/about/#operator)（Web エンジニア・アプリエンジニア）　公開：2026-10-08
+比べたもの ／ 2026年10月
 
   トレカダッシュは、Claude API から Gemini API へ移行しました（経緯は移行の記事 (https://koshinstudio.com/notes/gemini-migration/)）。あのとき書かなかった公式の数字を、ここで並べます。公式のページに書いてあることだけを使います。精度や速さの比較は、公式の数字が無いので、していません。
 
@@ -7206,8 +7287,8 @@ URL: https://koshinstudio.com/notes/claude-vs-gemini-api/
 URL: https://koshinstudio.com/notes/ditto-charm/
 
 # ポケモン「へんしんが苦手なメタモン!」のチャームを買ったら、質感がまるでおはじきだった
-
-  買ったもの ／ 2026年10月
+  書いた人：Koshin (https://koshinstudio.com/about/#operator)（Web エンジニア・アプリエンジニア）　公開：2026-10-08
+買ったもの ／ 2026年10月
 
   タカラトミーアーツの「ポケモン へんしんが苦手なメタモン! つやふるチャームマスコット (https://www.takaratomy-arts.co.jp/items/item.html?n=Y906985)」を、コンプリートセットで買いました。全 5 種（メタモン、ピカチュウ・フシギダネ・ヒトカゲ・ゼニガメにへんしんしたメタモン）で、ガチャでは 1 回 300 円、公式の本体サイズは約 4cm です。
 
@@ -8367,7 +8448,8 @@ URL: https://koshinstudio.com/en/notes/aggregator-pagination/
 
   日本語版 (https://koshinstudio.com/notes/aggregator-pagination/)
 
-  Development log of the Toreca Dash app / August 2026
+Written by Koshin (https://koshinstudio.com/en/about/#operator) (web engineer and app engineer) · published 2026-10-17
+Development log of the Toreca Dash app / August 2026
 
   One of my app Toreca Dash’s sources is an aggregator site for stock information, which lists lottery articles together. This crawl had two causes of “things that should appear but did not”.
 
@@ -8430,7 +8512,8 @@ URL: https://koshinstudio.com/en/notes/fill-the-gap/
 
   日本語版 (https://koshinstudio.com/notes/fill-the-gap/)
 
-  Development log of the Toreca Dash app / August 2026
+Written by Koshin (https://koshinstudio.com/en/about/#operator) (web engineer and app engineer) · published 2026-10-17
+Development log of the Toreca Dash app / August 2026
 
   The goal of my app Toreca Dash is to show lottery information without missing any. The user’s instruction was: “don’t just notice; make sure missing things do not happen in the first place”.
 
@@ -8503,7 +8586,8 @@ URL: https://koshinstudio.com/en/notes/swiftui-hit-area/
 
   日本語版 (https://koshinstudio.com/notes/swiftui-hit-area/)
 
-  Development log of the Toreca Dash app / August 2026
+Written by Koshin (https://koshinstudio.com/en/about/#operator) (web engineer and app engineer) · published 2026-10-17
+Development log of the Toreca Dash app / August 2026
 
   The application-record screen of my app Toreca Dash has “Won” and “Lost” buttons. A report came: “the buttons only respond on the text; hard to use”.
 
@@ -8560,7 +8644,8 @@ URL: https://koshinstudio.com/en/notes/weird-articles-by-route/
 
   日本語版 (https://koshinstudio.com/notes/weird-articles-by-route/)
 
-  Development log of the Toreca Dash app / August 2026
+Written by Koshin (https://koshinstudio.com/en/about/#operator) (web engineer and app engineer) · published 2026-10-17
+Development log of the Toreca Dash app / August 2026
 
   For my app Toreca Dash the instruction came: “weird articles keep multiplying. No deadlines, so many odd articles. Solve it permanently. Investigate the articles made by other routes thoroughly too.”
 
@@ -8679,7 +8764,8 @@ URL: https://koshinstudio.com/en/notes/automate-sorted/
 
   日本語版 (https://koshinstudio.com/notes/automate-sorted/)
 
-  Development log of the Toreca Dash app / August 2026
+Written by Koshin (https://koshinstudio.com/en/about/#operator) (web engineer and app engineer) · published 2026-10-17
+Development log of the Toreca Dash app / August 2026
 
   On my app Toreca Dash the instruction was: “automate everything that can be automated”.
 
@@ -8768,7 +8854,8 @@ URL: https://koshinstudio.com/en/notes/misdiagnosis-down/
 
   日本語版 (https://koshinstudio.com/notes/misdiagnosis-down/)
 
-  Development log of the Toreca Dash app / August 2026
+Written by Koshin (https://koshinstudio.com/en/about/#operator) (web engineer and app engineer) · published 2026-10-17
+Development log of the Toreca Dash app / August 2026
 
   My app Toreca Dash’s server became unreachable from 3:10 a.m. on 28 August 2026. I wrote in my notes: “the server went down; I cannot recover it from here”.
 
@@ -8845,7 +8932,8 @@ URL: https://koshinstudio.com/en/notes/store-name-variants/
 
   日本語版 (https://koshinstudio.com/notes/store-name-variants/)
 
-  Development log of the Toreca Dash app / August 2026
+Written by Koshin (https://koshinstudio.com/en/about/#operator) (web engineer and app engineer) · published 2026-10-17
+Development log of the Toreca Dash app / August 2026
 
   In my app Toreca Dash, the same store’s name was written differently, such as “ヤマダ電機” and “ヤマダデンキ” (both Yamada Denki). Two reports came: “spellings vary” and “articles are duplicated for the same reason”. The instruction was: “make sure it does not happen for other stores either, thoroughly”.
 
@@ -8928,7 +9016,8 @@ URL: https://koshinstudio.com/en/notes/one-page-many-cases/
 
   日本語版 (https://koshinstudio.com/notes/one-page-many-cases/)
 
-  Development log of the Toreca Dash app / August 2026
+Written by Koshin (https://koshinstudio.com/en/about/#operator) (web engineer and app engineer) · published 2026-10-17
+Development log of the Toreca Dash app / August 2026
 
   My app Toreca Dash twice received the report “several products are accepted, yet there is only one article”. I thought I fixed it the first time, but the second report came.
 
@@ -8993,7 +9082,8 @@ URL: https://koshinstudio.com/en/notes/transliteration-gate/
 
   日本語版 (https://koshinstudio.com/notes/transliteration-gate/)
 
-  Development log of the Toreca Dash app / August 2026
+Written by Koshin (https://koshinstudio.com/en/about/#operator) (web engineer and app engineer) · published 2026-10-17
+Development log of the Toreca Dash app / August 2026
 
   My app Toreca Dash fetches each product’s market price from a site with real trading records and shows it next to the official price. But the health check said:
 
@@ -9082,7 +9172,8 @@ URL: https://koshinstudio.com/en/notes/geocode-shizuoka/
 
   日本語版 (https://koshinstudio.com/notes/geocode-shizuoka/)
 
-  Development log of the Toreca Dash app / August 2026
+Written by Koshin (https://koshinstudio.com/en/about/#operator) (web engineer and app engineer) · published 2026-10-17
+Development log of the Toreca Dash app / August 2026
 
   My app Toreca Dash shows store locations on a map and sorts by distance. A report said “the location shows Shizuoka”. Store locations come from passing the store name to Google’s place search (Places API).
 
@@ -9161,7 +9252,8 @@ URL: https://koshinstudio.com/en/notes/swallowed-failure/
 
   日本語版 (https://koshinstudio.com/notes/swallowed-failure/)
 
-  Development log of the Toreca Dash app / August 2026
+Written by Koshin (https://koshinstudio.com/en/about/#operator) (web engineer and app engineer) · published 2026-10-17
+Development log of the Toreca Dash app / August 2026
 
   In developing my app Toreca Dash, bugs of one kind appeared in a row: failures I had swallowed made the app show a false success. This article records three.
 
@@ -9232,7 +9324,8 @@ URL: https://koshinstudio.com/en/notes/truncated-answer/
 
   日本語版 (https://koshinstudio.com/notes/truncated-answer/)
 
-  Development log of the Toreca Dash app / August 2026
+Written by Koshin (https://koshinstudio.com/en/about/#operator) (web engineer and app engineer) · published 2026-10-17
+Development log of the Toreca Dash app / August 2026
 
   In my app Toreca Dash, aggregator-derived articles get their links replaced with the store’s official announcement page. But developer-mode reports kept coming, seven in a row: “the correct announcement URL is this one; do it properly”.
 
@@ -9316,7 +9409,8 @@ URL: https://koshinstudio.com/en/notes/icloud-overwrite/
 
   日本語版 (https://koshinstudio.com/notes/icloud-overwrite/)
 
-  Development log of the Toreca Dash app / August 2026
+Written by Koshin (https://koshinstudio.com/en/about/#operator) (web engineer and app engineer) · published 2026-10-17
+Development log of the Toreca Dash app / August 2026
 
   My iPhone app Toreca Dash has a record of applications that users build up themselves: which lotteries they entered and how they turned out. It is a personal record built by hand, and once lost it cannot be recovered.
 
@@ -9379,7 +9473,8 @@ URL: https://koshinstudio.com/en/notes/test-ads/
 
   日本語版 (https://koshinstudio.com/notes/test-ads/)
 
-  Development log of the Toreca Dash app / September 2026
+Written by Koshin (https://koshinstudio.com/en/about/#operator) (web engineer and app engineer) · published 2026-10-17
+Development log of the Toreca Dash app / September 2026
 
   My app Toreca Dash has a daily lottery (omikuji) feature. “Watch a video to try” starts the draw animation after a video ad.
 
@@ -9458,7 +9553,8 @@ URL: https://koshinstudio.com/en/notes/leaked-value/
 
   日本語版 (https://koshinstudio.com/notes/leaked-value/)
 
-  Development log of the Toreca Dash app / September 2026
+Written by Koshin (https://koshinstudio.com/en/about/#operator) (web engineer and app engineer) · published 2026-10-17
+Development log of the Toreca Dash app / September 2026
 
   My app Toreca Dash received three reports: “this is just a Beyblade”. An app that gathers trading-card information had a toy, Beyblade, registered as a product.
 
@@ -9526,7 +9622,8 @@ URL: https://koshinstudio.com/en/notes/budget-starved/
 
   日本語版 (https://koshinstudio.com/notes/budget-starved/)
 
-  Development log of the Toreca Dash app / September 2026
+Written by Koshin (https://koshinstudio.com/en/about/#operator) (web engineer and app engineer) · published 2026-10-17
+Development log of the Toreca Dash app / September 2026
 
   Behind my app Toreca Dash is a process that checks and fixes articles’ “sale type”. Inside it was a part that ran “25 checks in rotation”.
 
@@ -9609,7 +9706,8 @@ URL: https://koshinstudio.com/en/notes/timeout-third-fix/
 
   日本語版 (https://koshinstudio.com/notes/timeout-third-fix/)
 
-  Development log of the Toreca Dash app / August 2026
+Written by Koshin (https://koshinstudio.com/en/about/#operator) (web engineer and app engineer) · published 2026-10-17
+Development log of the Toreca Dash app / August 2026
 
   The job in my app Toreca Dash that rechecks Rakuten Books stock timed out 17 times a day. A timeout means a run does not finish within its limit (480 seconds).
 
@@ -9684,7 +9782,8 @@ URL: https://koshinstudio.com/en/notes/cleanup-hides-entrance/
 
   日本語版 (https://koshinstudio.com/notes/cleanup-hides-entrance/)
 
-  Development log of the Toreca Dash app / August 2026
+Written by Koshin (https://koshinstudio.com/en/about/#operator) (web engineer and app engineer) · published 2026-10-17
+Development log of the Toreca Dash app / August 2026
 
   My app Toreca Dash has a nightly clean-up job that merges duplicate products. “It will be cleaned up later, so it is fine.” That was the belief, and in that place an entrance bug was re-creating near-identical products every day.
 
@@ -9761,7 +9860,8 @@ URL: https://koshinstudio.com/en/notes/secret-in-logs/
 
   日本語版 (https://koshinstudio.com/notes/secret-in-logs/)
 
-  Development log of the Toreca Dash app / August 2026
+Written by Koshin (https://koshinstudio.com/en/about/#operator) (web engineer and app engineer) · published 2026-10-17
+Development log of the Toreca Dash app / August 2026
 
   While checking the logs behind my app Toreca Dash, I found that an external service’s secret (an API token) was written in plain text. It was 24 August 2026.
 
@@ -9826,7 +9926,8 @@ URL: https://koshinstudio.com/en/notes/vps-migration/
 
   日本語版 (https://koshinstudio.com/notes/vps-migration/)
 
-  Development log of the Toreca Dash app / August 2026
+Written by Koshin (https://koshinstudio.com/en/about/#operator) (web engineer and app engineer) · published 2026-10-17
+Development log of the Toreca Dash app / August 2026
 
   The back end of my iPhone app Toreca Dash originally ran on Google Cloud Functions (billed per function for the time it runs). When the free trial ended on 16 August 2026, from 17 August it cost about ¥3,700 a day (about ¥106,000 a month).
 
@@ -9942,7 +10043,8 @@ URL: https://koshinstudio.com/en/notes/destination-check/
 
   日本語版 (https://koshinstudio.com/notes/destination-check/)
 
-  Development log of the Toreca Dash app / September 2026
+Written by Koshin (https://koshinstudio.com/en/about/#operator) (web engineer and app engineer) · published 2026-10-17
+Development log of the Toreca Dash app / September 2026
 
   The articles in my app Toreca Dash link to store and shopping-site pages. Even if an article’s title and price are right, if the linked page is closed or about a different product, it is no use to the user.
 
@@ -10043,7 +10145,8 @@ URL: https://koshinstudio.com/en/notes/audit-sweep-61/
 
   日本語版 (https://koshinstudio.com/notes/audit-sweep-61/)
 
-  Development log of the Toreca Dash app / September 2026
+Written by Koshin (https://koshinstudio.com/en/about/#operator) (web engineer and app engineer) · published 2026-10-17
+Development log of the Toreca Dash app / September 2026
 
   My app Toreca Dash has 61 audits that find anomalies. In the early hours of 8 September 2026 I ran them all and checked every item that was not 0 against real data, one by one.
 
@@ -10153,7 +10256,8 @@ URL: https://koshinstudio.com/en/notes/coverage-check/
 
   日本語版 (https://koshinstudio.com/notes/coverage-check/)
 
-  Development log of the Toreca Dash app / August 2026
+Written by Koshin (https://koshinstudio.com/en/about/#operator) (web engineer and app engineer) · published 2026-10-17
+Development log of the Toreca Dash app / August 2026
 
   One goal of my app Toreca Dash is to show lottery information without leaving anything out. The best way to find gaps is to compare with other sites that publish the same information and count “what they have and I do not”.
 
@@ -10282,7 +10386,8 @@ URL: https://koshinstudio.com/en/notes/x-monitoring-gaps/
 
   日本語版 (https://koshinstudio.com/notes/x-monitoring-gaps/)
 
-  Development log of the Toreca Dash app / September 2026
+Written by Koshin (https://koshinstudio.com/en/about/#operator) (web engineer and app engineer) · published 2026-10-17
+Development log of the Toreca Dash app / September 2026
 
   Of my app Toreca Dash’s sources, the fastest and the easiest to miss is stores’ own posts on X (Twitter). Stores announce lotteries and first-come sales on X first. The app patrols registered store accounts regularly.
 
@@ -10375,7 +10480,8 @@ URL: https://koshinstudio.com/en/notes/hot-lane/
 
   日本語版 (https://koshinstudio.com/notes/hot-lane/)
 
-  Development log of the Toreca Dash app / September 2026
+Written by Koshin (https://koshinstudio.com/en/about/#operator) (web engineer and app engineer) · published 2026-10-17
+Development log of the Toreca Dash app / September 2026
 
   My app Toreca Dash searches shopping sites by set (a release unit of products) to collect first-come and pre-order information. There are 427 sets in all. I would like to watch them all quickly, but there are limits on scraping cost and on calls to external services.
 
@@ -10472,7 +10578,8 @@ URL: https://koshinstudio.com/en/notes/fix-the-existing-data/
 
   日本語版 (https://koshinstudio.com/notes/fix-the-existing-data/)
 
-  Development log of the Toreca Dash app / August–September 2026
+Written by Koshin (https://koshinstudio.com/en/about/#operator) (web engineer and app engineer) · published 2026-10-17
+Development log of the Toreca Dash app / August–September 2026
 
   While developing my app Toreca Dash, I kept getting the same report in the same shape: “I fixed it, but it is not fixed”. The code is fixed, the tests pass, yet the screen still shows the mistake.
 
@@ -10555,7 +10662,8 @@ URL: https://koshinstudio.com/en/notes/genre-from-catalog/
 
   日本語版 (https://koshinstudio.com/notes/genre-from-catalog/)
 
-  Development log of the Toreca Dash app / September 2026
+Written by Koshin (https://koshinstudio.com/en/about/#operator) (web engineer and app engineer) · published 2026-10-17
+Development log of the Toreca Dash app / September 2026
 
   In my app Toreca Dash a report said: “this product being treated as a Pokémon card is wrong in the first place”. The product was “Winning enemy! Reversal, the Oni’s ∞ Dispectar!!”. It is a Duel Masters product, but had been registered as a Pokémon card product and shown in the Pokémon feed.
 
@@ -10639,7 +10747,8 @@ URL: https://koshinstudio.com/en/notes/catalog-seed-393/
 
   日本語版 (https://koshinstudio.com/notes/catalog-seed-393/)
 
-  Development log of the Toreca Dash app / September 2026
+Written by Koshin (https://koshinstudio.com/en/about/#operator) (web engineer and app engineer) · published 2026-10-17
+Development log of the Toreca Dash app / September 2026
 
   The product list of my app Toreca Dash is partly built from official site lists. Counting products created by that import per day, I saw 502 in one day, against the usual 1 to 10.
 
@@ -10724,7 +10833,8 @@ URL: https://koshinstudio.com/en/notes/negaeri-online/
 
   日本語版 (https://koshinstudio.com/notes/negaeri-online/)
 
-  Development log of Negaeri Shogi / September 2026
+Written by Koshin (https://koshinstudio.com/en/about/#operator) (web engineer and app engineer) · published 2026-10-17
+Development log of Negaeri Shogi / September 2026
 
   Negaeri Shogi (https://koshinstudio.com/en/works/negaeri-shogi/) has online play against strangers, with no sign-up or login. Press a button and you are matched with someone else who is waiting.
 
@@ -10846,7 +10956,8 @@ URL: https://koshinstudio.com/en/notes/same-page-not-same-store/
 
   日本語版 (https://koshinstudio.com/notes/same-page-not-same-store/)
 
-  Development log of the Toreca Dash app / September 2026
+Written by Koshin (https://koshinstudio.com/en/about/#operator) (web engineer and app engineer) · published 2026-10-17
+Development log of the Toreca Dash app / September 2026
 
   In my app Toreca Dash a bug report said: “to users it looks like a different store’s lottery”. An article for a Sendai station store showed as “Shinjuku South Exit store”, and an article for a Hachioji flagship showed as “Noshiro store”. 52 articles were affected.
 
@@ -10939,7 +11050,8 @@ URL: https://koshinstudio.com/en/notes/waiting-room/
 
   日本語版 (https://koshinstudio.com/notes/waiting-room/)
 
-  Development log of the Toreca Dash app / September 2026
+Written by Koshin (https://koshinstudio.com/en/about/#operator) (web engineer and app engineer) · published 2026-10-17
+Development log of the Toreca Dash app / September 2026
 
   My app Toreca Dash reads shopping-site pages to collect first-come and lottery information. As I wrote in an earlier article (https://koshinstudio.com/en/notes/blocked-page/), my “was it fetched?” check had a hole and treated a notice page as success. On the very day I fixed it (7 September 2026), I found another hole of the same kind in a different shape.
 
@@ -11008,7 +11120,8 @@ URL: https://koshinstudio.com/en/notes/concurrency-slots/
 
   日本語版 (https://koshinstudio.com/notes/concurrency-slots/)
 
-  Development log of the Toreca Dash app / September 2026
+Written by Koshin (https://koshinstudio.com/en/about/#operator) (web engineer and app engineer) · published 2026-10-17
+Development log of the Toreca Dash app / September 2026
 
   The back end of my app Toreca Dash runs over 200 scheduled jobs on one small server (2 cores, 3.8 GB of memory). The number of jobs that can run at once is capped: the concurrency slots.
 
@@ -11111,7 +11224,8 @@ URL: https://koshinstudio.com/en/notes/split-mixups/
 
   日本語版 (https://koshinstudio.com/notes/split-mixups/)
 
-  Development log of the Toreca Dash app / September 2026
+Written by Koshin (https://koshinstudio.com/en/about/#operator) (web engineer and app engineer) · published 2026-10-17
+Development log of the Toreca Dash app / September 2026
 
   My app Toreca Dash has a process that splits a store announcement into one article per product. If one announcement says “lotteries for Pokémon card A and B”, it makes an article for A and one for B. I call the split articles children and the original the parent.
 
@@ -11188,7 +11302,8 @@ URL: https://koshinstudio.com/en/notes/self-inflicted/
 
   日本語版 (https://koshinstudio.com/notes/self-inflicted/)
 
-  Development log of the Toreca Dash app / August–September 2026
+Written by Koshin (https://koshinstudio.com/en/about/#operator) (web engineer and app engineer) · published 2026-10-17
+Development log of the Toreca Dash app / August–September 2026
 
   Besides external bugs, my app’s development has had several cases where something I built, or a check I ran, harmed me. These are four of them, each fixed once numbers made it visible.
 
@@ -11286,7 +11401,8 @@ URL: https://koshinstudio.com/en/notes/rerun-on-deploy/
 
   日本語版 (https://koshinstudio.com/notes/rerun-on-deploy/)
 
-  Development log of the Toreca Dash app / September 2026
+Written by Koshin (https://koshinstudio.com/en/about/#operator) (web engineer and app engineer) · published 2026-10-17
+Development log of the Toreca Dash app / September 2026
 
   The back end of my app Toreca Dash runs many scheduled jobs. One of them was supposed to run once a day. Counting the logs for one day, it had run 43 times.
 
@@ -11359,7 +11475,8 @@ URL: https://koshinstudio.com/en/notes/notify-gate/
 
   日本語版 (https://koshinstudio.com/notes/notify-gate/)
 
-  Development log of the Toreca Dash app / September 2026
+Written by Koshin (https://koshinstudio.com/en/about/#operator) (web engineer and app engineer) · published 2026-10-17
+Development log of the Toreca Dash app / September 2026
 
   My iPhone app Toreca Dash collects trading-card lottery information and sends a push notification when something new appears. Collected articles pass a gate (filter) that checks “is this a lottery you can really apply to?”: it keeps out winner announcements, buy-back notices, non-card products and so on.
 
@@ -11442,7 +11559,8 @@ URL: https://koshinstudio.com/en/notes/interval-vs-delivery/
 
   日本語版 (https://koshinstudio.com/notes/interval-vs-delivery/)
 
-  Development log of the Toreca Dash app / September 2026
+Written by Koshin (https://koshinstudio.com/en/about/#operator) (web engineer and app engineer) · published 2026-10-17
+Development log of the Toreca Dash app / September 2026
 
   For first-come sales (stock gone in minutes), speed is everything. So the first-come monitor in my app Toreca Dash was built to “run every minute”.
 
@@ -11539,7 +11657,8 @@ URL: https://koshinstudio.com/en/notes/silent-discard/
 
   日本語版 (https://koshinstudio.com/notes/silent-discard/)
 
-  Development log of the Toreca Dash app / August–September 2026
+Written by Koshin (https://koshinstudio.com/en/about/#operator) (web engineer and app engineer) · published 2026-10-17
+Development log of the Toreca Dash app / August–September 2026
 
   My iPhone app Toreca Dash has many places that decide “this is out of scope” and throw an item away. Throwing away looks like the safe side: if it is wrong, only some junk is missing from the screen.
 
@@ -11621,7 +11740,8 @@ URL: https://koshinstudio.com/en/notes/tco-relay/
 
   日本語版 (https://koshinstudio.com/notes/tco-relay/)
 
-  Development log of the Toreca Dash app / October 2026
+Written by Koshin (https://koshinstudio.com/en/about/#operator) (web engineer and app engineer) · published 2026-10-17
+Development log of the Toreca Dash app / October 2026
 
   My iPhone app Toreca Dash collects trading-card lottery information from store posts on X (Twitter). Each post links to an application form. The app also opens that link to check the deadline and whether entries have already closed.
 
@@ -11720,7 +11840,8 @@ URL: https://koshinstudio.com/en/notes/gemini-meter/
 
   日本語版 (https://koshinstudio.com/notes/gemini-meter/)
 
-  Development log of the Toreca Dash app / September–October 2026
+Written by Koshin (https://koshinstudio.com/en/about/#operator) (web engineer and app engineer) · published 2026-10-17
+Development log of the Toreca Dash app / September–October 2026
 
   My iPhone app Toreca Dash uses Google’s Gemini (AI) to classify posts and match products. You pay for what you use, so I have worked on the cost several times. This is the record of two of those rounds.
 
@@ -11825,7 +11946,8 @@ URL: https://koshinstudio.com/en/notes/firestore-91/
 
   日本語版 (https://koshinstudio.com/notes/firestore-91/)
 
-  Development log of the Toreca Dash app / September 2026
+Written by Koshin (https://koshinstudio.com/en/about/#operator) (web engineer and app engineer) · published 2026-10-17
+Development log of the Toreca Dash app / September 2026
 
   The back end of my iPhone app Toreca Dash (a Japanese trading-card lottery and restock alert app) runs on Firebase’s Firestore database and a set of scheduled jobs. I had been reporting the cost of Gemini (AI) and of a scraping service in yen every day. I had not been reporting Firestore at all.
 
@@ -11926,7 +12048,8 @@ URL: https://koshinstudio.com/en/notes/negaeri-balance/
 
   日本語版 (https://koshinstudio.com/notes/negaeri-balance/)
 
-  Development log of Negaeri Shogi / September 2026
+Written by Koshin (https://koshinstudio.com/en/about/#operator) (web engineer and app engineer) · published 2026-10-17
+Development log of Negaeri Shogi / September 2026
 
   Negaeri Shogi (https://koshinstudio.com/en/works/negaeri-shogi/) is a shogi-style game on a 6×6 board played a bit like Othello. Pieces you sandwich defect to your side and are promoted at the same time. If the new moves of a promoted piece create another sandwich, the flips continue. That is a chain.
 
@@ -12089,7 +12212,8 @@ URL: https://koshinstudio.com/en/notes/itms-91064/
 
   日本語版 (https://koshinstudio.com/notes/itms-91064/)
 
-  Development log of Torecadash / October 2026
+Written by Koshin (https://koshinstudio.com/en/about/#operator) (web engineer and app engineer) · published 2026-10-08
+Development log of Torecadash / October 2026
 
   I uploaded my iOS app, Torecadash, and Apple's automated review rejected build 877 as an “Invalid Binary”. The error code was ITMS-91064. The cause was a combination of two entries in the privacy manifest (PrivacyInfo.xcprivacy). This is what happened and how I fixed it, written from my commit history.
 
@@ -12651,7 +12775,8 @@ URL: https://koshinstudio.com/en/notes/review-info-needed/
 
   日本語版 (https://koshinstudio.com/notes/review-info-needed/)
 
-  Development log of Torecadash / October 2026
+Written by Koshin (https://koshinstudio.com/en/about/#operator) (web engineer and app engineer) · published 2026-10-09
+Development log of Torecadash / October 2026
 
   I submitted my iOS app, Torecadash, to App Review for the first time on October 6 (4:24 a.m. Pacific time). What came back was not a rejection but an email saying “additional information is needed.” This is a summary of what Apple asked for.
 
@@ -12712,7 +12837,8 @@ URL: https://koshinstudio.com/en/notes/xcode152-sdk/
 
   日本語版 (https://koshinstudio.com/notes/xcode152-sdk/)
 
-  Development log of Torecadash / October 2026
+Written by Koshin (https://koshinstudio.com/en/about/#operator) (web engineer and app engineer) · published 2026-10-09
+Development log of Torecadash / October 2026
 
   I build my iOS app, Torecadash, on a 2017 Mac with Xcode 15.2. In this environment, newer versions of the Firebase iOS SDK and the AdMob (Google Mobile Ads) SDK do not build. This is which version breaks and which version I pinned, written from my hand-over notes (July 2026).
 
@@ -12783,7 +12909,8 @@ URL: https://koshinstudio.com/en/notes/torecadash-watchdog/
 
   日本語版 (https://koshinstudio.com/notes/torecadash-watchdog/)
 
-  Development log of Torecadash / October 2026
+Written by Koshin (https://koshinstudio.com/en/about/#operator) (web engineer and app engineer) · published 2026-10-09
+Development log of Torecadash / October 2026
 
   For my iOS app, Torecadash, I received a report: “the app crashes a lot.” Reading the device log, I found that the app froze and was force-quit by the OS. The cause was that it recounted 951 articles every time the screen was redrawn. This is written from my commit history.
 
@@ -12837,7 +12964,8 @@ URL: https://koshinstudio.com/en/notes/u2028/
 
   日本語版 (https://koshinstudio.com/notes/u2028/)
 
-  Development log of the Anime Type Quiz / October 2026
+Written by Koshin (https://koshinstudio.com/en/about/#operator) (web engineer and app engineer) · published 2026-10-09
+Development log of the Anime Type Quiz / October 2026
 
   While building the data for the Anime Type Quiz (https://koshinstudio.com/en/works/shindananime/), I fixed a bug where the JSON broke. The cause was splitlines(), a perfectly ordinary function.
 
@@ -12916,7 +13044,8 @@ URL: https://koshinstudio.com/en/notes/torecadash-ci/
 
   日本語版 (https://koshinstudio.com/notes/torecadash-ci/)
 
-  Development log of Torecadash / October 2026
+Written by Koshin (https://koshinstudio.com/en/about/#operator) (web engineer and app engineer) · published 2026-10-09
+Development log of Torecadash / October 2026
 
   While developing my iOS app, Torecadash, I hit a bug: “new builds are not arriving in TestFlight.” The first cause I came up with was wrong. This is where I went wrong, how I noticed, and what the real cause was, written from the numbers in my hand-over notes and commits.
 
@@ -12977,7 +13106,8 @@ URL: https://koshinstudio.com/en/notes/apple-signin/
 
   日本語版 (https://koshinstudio.com/notes/apple-signin/)
 
-  Development log of Torecadash / October 2026
+Written by Koshin (https://koshinstudio.com/en/about/#operator) (web engineer and app engineer) · published 2026-10-09
+Development log of Torecadash / October 2026
 
   In my iOS app, Torecadash, a user reported: “once I kill the app, it asks me to sign in with Apple again.” When I looked, 17 of the 19 users were anonymous accounts that had been created and thrown away. The cause was how I checked, with a single line, right after launch. This is from my hand-over notes and the commit record (August 14, 2026).
 
@@ -13052,7 +13182,8 @@ URL: https://koshinstudio.com/en/notes/logo-pop/
 
   日本語版 (https://koshinstudio.com/notes/logo-pop/)
 
-  Development log of Koshin Studio / October 2026
+Written by Koshin (https://koshinstudio.com/en/about/#operator) (web engineer and app engineer) · published 2026-10-09
+Development log of Koshin Studio / October 2026
 
   The top of this site has a large logo. When you tap a letter, it pops and particles scatter. After I rebuilt the logo with my own typeface, I was told “the particles come out of a strange place, not from the letter” and “it is still shifted to the right.” It took three stages to fix. Here are the cause and how I found it, with measured numbers.
 
@@ -13131,7 +13262,8 @@ URL: https://koshinstudio.com/en/notes/dup-zero/
 
   日本語版 (https://koshinstudio.com/notes/dup-zero/)
 
-  Development log of Torecadash / October 2026
+Written by Koshin (https://koshinstudio.com/en/about/#operator) (web engineer and app engineer) · published 2026-10-09
+Development log of Torecadash / October 2026
 
   My iOS app Torecadash has a job that merges “duplicates,” where one product is registered as several products, every night. One day I counted by myself and recorded “duplicates are practically zero.” But the repository audit reported 112 pairs. My way of measuring was wrong. This is the story from my commit record.
 
@@ -13200,7 +13332,8 @@ URL: https://koshinstudio.com/en/notes/torecadash-ai/
 
   日本語版 (https://koshinstudio.com/notes/torecadash-ai/)
 
-  Development log of Torecadash / October 2026
+Written by Koshin (https://koshinstudio.com/en/about/#operator) (web engineer and app engineer) · published 2026-10-09
+Development log of Torecadash / October 2026
 
   My iOS app Torecadash collects information on reservations, lotteries and first-come sales of trading cards (Pokémon, Yu-Gi-Oh!, One Piece) and notifies users. It uses an AI (Gemini) to decide “which product an article is about.” While trying to reduce calls to that AI, things I had written down as “it should shrink” were wrong twice. In order, with the numbers left in my commits:
 
@@ -13284,7 +13417,8 @@ URL: https://koshinstudio.com/en/notes/stopwatch-rank/
 
   日本語版 (https://koshinstudio.com/notes/stopwatch-rank/)
 
-  Development log of the 10-second stopwatch / October 2026
+Written by Koshin (https://koshinstudio.com/en/about/#operator) (web engineer and app engineer) · published 2026-10-09
+Development log of the 10-second stopwatch / October 2026
 
   Stop at exactly 10 seconds! (https://koshinstudio.com/en/works/) is a game where you count ten seconds in your head and stop. It is three rounds and the smaller your error, the better. When I added a ranking to it, I had to decide “what is fair” in three places. This is written from the README and code comments in the repository.
 
@@ -13352,7 +13486,8 @@ URL: https://koshinstudio.com/en/notes/anime-db/
 
   日本語版 (https://koshinstudio.com/notes/anime-db/)
 
-  Development log of the Anime Type Diagnosis / October 2026
+Written by Koshin (https://koshinstudio.com/en/about/#operator) (web engineer and app engineer) · published 2026-10-09
+Development log of the Anime Type Diagnosis / October 2026
 
   The Hardcore Anime Type Diagnosis (https://koshinstudio.com/en/works/shindananime/) picks your “one anime of fate” from a database of more than 6,000 titles. Where did these 6,000 come from, and how were they narrowed down? This is how the quiz’s data was built, from the repository’s commits and the current real numbers.
 
@@ -13458,7 +13593,8 @@ URL: https://koshinstudio.com/en/notes/match-percent/
 
   日本語版 (https://koshinstudio.com/notes/match-percent/)
 
-  Development log of the Anime Type Diagnosis / October 2026
+Written by Koshin (https://koshinstudio.com/en/about/#operator) (web engineer and app engineer) · published 2026-10-09
+Development log of the Anime Type Diagnosis / October 2026
 
   At the end, the Hardcore Anime Type Diagnosis (https://koshinstudio.com/en/works/shindananime/) shows “the one anime of fate” and two runners-up. Each has a number like “match 82%.” At one point this number disagreed with the ranking: “a title at 80% was chosen over a title at 82%.” I have re-measured how large the disagreement was, and I am writing it down.
 
@@ -13542,7 +13678,8 @@ URL: https://koshinstudio.com/en/notes/shindan12/
 
   日本語版 (https://koshinstudio.com/notes/shindan12/)
 
-  Development log of the Anime Type Diagnosis / October 2026
+Written by Koshin (https://koshinstudio.com/en/about/#operator) (web engineer and app engineer) · published 2026-10-09
+Development log of the Anime Type Diagnosis / October 2026
 
   The Hardcore Anime Type Diagnosis (https://koshinstudio.com/en/works/shindananime/) has 50 questions in total. People said it was long, so I made it possible to get a result from just the first 12 questions. The remaining 38 are for those who want to answer them.
 
@@ -13656,7 +13793,8 @@ URL: https://koshinstudio.com/en/notes/result-screen/
 
   日本語版 (https://koshinstudio.com/notes/result-screen/)
 
-  Development log of the Anime Type Diagnosis / October 2026
+Written by Koshin (https://koshinstudio.com/en/about/#operator) (web engineer and app engineer) · published 2026-10-09
+Development log of the Anime Type Diagnosis / October 2026
 
   The result screen of the Hardcore Anime Type Diagnosis (https://koshinstudio.com/en/works/shindananime/) shows the cover of your title of fate and “where to watch” buttons. When I first built it, both the buttons and the images showed things that differed from reality. I recounted with my own data how large the difference was, and I am writing it down.
 
@@ -13731,7 +13869,8 @@ URL: https://koshinstudio.com/en/notes/first-visit/
 
   日本語版 (https://koshinstudio.com/notes/first-visit/)
 
-  Development log of Sushi Stack / October 2026
+Written by Koshin (https://koshinstudio.com/en/about/#operator) (web engineer and app engineer) · published 2026-10-09
+Development log of Sushi Stack / October 2026
 
   The title screen of Sushi Stack (https://koshinstudio.com/en/works/) had six things you could press. Someone opening it for the first time did not know which to press. For the game portal launch, I narrowed “what a first-time player presses first” to one. I also wrote down, from my commits, two problems I fixed at the same time: saves vanishing, and what happens when you leave the screen.
 
@@ -13810,7 +13949,8 @@ URL: https://koshinstudio.com/en/notes/sushi-measure/
 
   日本語版 (https://koshinstudio.com/notes/sushi-measure/)
 
-  Development log of Sushi Stack / October 2026
+Written by Koshin (https://koshinstudio.com/en/about/#operator) (web engineer and app engineer) · published 2026-10-09
+Development log of Sushi Stack / October 2026
 
   Sushi Stack (https://koshinstudio.com/en/works/) is a falling-block puzzle where you bump the same toppings together to merge them and grow them until the tub is full. While adjusting balance, I realized my own measurement result had been wrong. What was wrong, how I found it, and how I fixed it are written with the numbers in my commits.
 
@@ -13880,7 +14020,8 @@ URL: https://koshinstudio.com/en/notes/anago/
 
   日本語版 (https://koshinstudio.com/notes/anago/)
 
-  Development log of Sushi Stack / September 2026
+Written by Koshin (https://koshinstudio.com/en/about/#operator) (web engineer and app engineer) · published 2026-10-09
+Development log of Sushi Stack / September 2026
 
   Added on October 8, 2026. The numbers in this article are from the September 8 version. On September 10 I changed the sizes and the falling pieces once more (see “Afterward” at the bottom).
 
@@ -14065,7 +14206,8 @@ URL: https://koshinstudio.com/en/notes/typo-catalog/
 
   日本語版 (https://koshinstudio.com/notes/typo-catalog/)
 
-  Development log of Torecadash / October 2026
+Written by Koshin (https://koshinstudio.com/en/about/#operator) (web engineer and app engineer) · published 2026-10-09
+Development log of Torecadash / October 2026
 
   In my iOS app Torecadash, a user reported: “this article duplicates another one, and the product name is odd.” When I looked, a misspelled product created just once was being reused every time an article from a shop arrived, and it kept multiplying. The cause, the fix, and the limits of the fix are written from my commit record.
 
@@ -14136,7 +14278,8 @@ URL: https://koshinstudio.com/en/notes/torecadash-9set/
 
   日本語版 (https://koshinstudio.com/notes/torecadash-9set/)
 
-  Development log of Torecadash / October 2026
+Written by Koshin (https://koshinstudio.com/en/about/#operator) (web engineer and app engineer) · published 2026-10-09
+Development log of Torecadash / October 2026
 
   My iOS app Torecadash collects lottery and first-come sale information for trading cards and notifies users. To check for gaps, I match and count listings on other roundup sites (Chusen Zukan, Pokechu) against the articles in my own app. When I measured on October 7, most gaps came from a small discrepancy: the same product that never matched. This is from my hand-over notes and commit record.
 
@@ -14213,7 +14356,8 @@ URL: https://koshinstudio.com/en/notes/fake-products/
 
   日本語版 (https://koshinstudio.com/notes/fake-products/)
 
-  Development log of Torecadash / October 2026
+Written by Koshin (https://koshinstudio.com/en/about/#operator) (web engineer and app engineer) · published 2026-10-09
+Development log of Torecadash / October 2026
 
   While inspecting the product list of my iOS app Torecadash, I found 80 products that do not exist around the Pokémon Card “30th CELEBRATION Card Set.” There are only 9 official products. The other 80 were fake products created as a result of splitting a “9-pack set” by its contents. What happened and how I fixed it are written from my hand-over notes.
 
@@ -14290,7 +14434,8 @@ URL: https://koshinstudio.com/en/notes/qiita-post-interval/
 
   日本語版 (https://koshinstudio.com/notes/qiita-post-interval/)
 
-  This site / October 2026
+Written by Koshin (https://koshinstudio.com/en/about/#operator) (web engineer and app engineer) · published 2026-10-09
+This site / October 2026
 
   I published summaries of this site’s articles on Qiita. But when I tried to create a second one right after the first, the new-article screen would not open and said “posting too frequently.” How long you have to wait did not seem to be written officially, so I measured it.
 
@@ -14367,7 +14512,8 @@ URL: https://koshinstudio.com/en/notes/crazygames/
 
   日本語版 (https://koshinstudio.com/notes/crazygames/)
 
-  Development log of Sushi Stack / October 2026
+Written by Koshin (https://koshinstudio.com/en/about/#operator) (web engineer and app engineer) · published 2026-10-09
+Development log of Sushi Stack / October 2026
 
   I submitted Sushi Stack (https://koshinstudio.com/en/works/), my merge puzzle game, to the browser-game portal CrazyGames, and it was rejected. The only reason given was that “overall quality does not meet expectations.” So I captured the game myself and looked for the problem. I found four. This is written from my commit record.
 
@@ -14435,7 +14581,8 @@ URL: https://koshinstudio.com/en/notes/adgap/
 
   日本語版 (https://koshinstudio.com/notes/adgap/)
 
-  Development log of Sushi Stack / October 2026
+Written by Koshin (https://koshinstudio.com/en/about/#operator) (web engineer and app engineer) · published 2026-10-09
+Development log of Sushi Stack / October 2026
 
   Sushi Stack has a mechanism that can insert one ad at the break between one game and the next. At first I set it to “one ad per 5 plays,” and the next day I changed it to count time, not plays. This is the reason and a record of how it behaves.
 
@@ -14515,7 +14662,8 @@ URL: https://koshinstudio.com/en/notes/ascii-text/
 
   日本語版 (https://koshinstudio.com/notes/ascii-text/)
 
-  Development log of Sushi Stack / October 2026
+Written by Koshin (https://koshinstudio.com/en/about/#operator) (web engineer and app engineer) · published 2026-10-09
+Development log of Sushi Stack / October 2026
 
   When I opened Sushi Stack (https://koshinstudio.com/en/works/) in a game portal’s preview, a report said that only the character 連 in “大連鎖！” (Big Chain!) appeared broken. I checked the file and the character was stored correctly. This is how I moved on, without knowing the cause, by making it a form that does not matter if it breaks, from my commit record.
 
@@ -14574,7 +14722,8 @@ URL: https://koshinstudio.com/en/notes/deploy-gotchas/
 
   日本語版 (https://koshinstudio.com/notes/deploy-gotchas/)
 
-  Development log of Koshin Studio / October 2026
+Written by Koshin (https://koshinstudio.com/en/about/#operator) (web engineer and app engineer) · published 2026-10-09
+Development log of Koshin Studio / October 2026
 
   This site is assembled from HTML and deployed to Cloudflare Pages. In a single day in September, four incidents of the “works on my machine, breaks when deployed” kind followed one another. This is written in order, from my commit record.
 
@@ -14635,7 +14784,8 @@ URL: https://koshinstudio.com/en/notes/hosting-compare/
 
   日本語版 (https://koshinstudio.com/notes/hosting-compare/)
 
-  A comparison / October 2026
+Written by Koshin (https://koshinstudio.com/en/about/#operator) (web engineer and app engineer) · published 2026-10-09
+A comparison / October 2026
 
   This site and the systems around my iOS app run on Cloudflare (see my article on deploy pitfalls (https://koshinstudio.com/notes/deploy-gotchas/) and my article on free tiers (https://koshinstudio.com/notes/ranking-free-tier/), both in Japanese). How do the other hosts compare? I read only the official pricing, limits and terms pages and lined them up. I have not used the other hosts to compare in practice.
 
@@ -14790,7 +14940,8 @@ URL: https://koshinstudio.com/en/notes/comment-services/
 
   日本語版 (https://koshinstudio.com/notes/comment-services/)
 
-  A comparison / October 2026
+Written by Koshin (https://koshinstudio.com/en/about/#operator) (web engineer and app engineer) · published 2026-10-09
+A comparison / October 2026
 
   The comment box on this site is giscus. It is set up so that nothing connects to an outside site until you press “Open comments.” What are the other options like? I read only the official descriptions and official repositories and lined them up. I have actually used only giscus.
 
@@ -14935,7 +15086,8 @@ URL: https://koshinstudio.com/en/notes/ios-sdk-compare/
 
   日本語版 (https://koshinstudio.com/notes/ios-sdk-compare/)
 
-  A comparison / October 2026
+Written by Koshin (https://koshinstudio.com/en/about/#operator) (web engineer and app engineer) · published 2026-10-09
+A comparison / October 2026
 
   For my iOS app Torecadash, I pinned Firebase to 11.4.0 and AdMob to 11.5.0 to suit Xcode 15.2 on an old Mac (that article (https://koshinstudio.com/en/notes/xcode152-sdk/)). The app was also rejected once for ITMS-91064 (that article (https://koshinstudio.com/en/notes/itms-91064/)). Here I line up the surrounding options I could not look into at the time, using official pages only. I have actually used only AdMob and Firebase. I have not used the others.
 
@@ -15078,7 +15230,8 @@ URL: https://koshinstudio.com/en/notes/claude-vs-gemini-api/
 
   日本語版 (https://koshinstudio.com/notes/claude-vs-gemini-api/)
 
-  A comparison / October 2026
+Written by Koshin (https://koshinstudio.com/en/about/#operator) (web engineer and app engineer) · published 2026-10-09
+A comparison / October 2026
 
   Torecadash moved from the Claude API to the Gemini API (the story is in the migration article (https://koshinstudio.com/en/notes/gemini-migration/)). Here I line up the official numbers I did not write down then. I use only what the official pages say. I did not compare accuracy or speed, because there are no official numbers for them.
 
@@ -15251,7 +15404,8 @@ URL: https://koshinstudio.com/en/notes/gemini-migration/
 
   日本語版 (https://koshinstudio.com/notes/gemini-migration/)
 
-  Development log of Torecadash / October 2026
+Written by Koshin (https://koshinstudio.com/en/about/#operator) (web engineer and app engineer) · published 2026-10-09
+Development log of Torecadash / October 2026
 
   On the server side of my iOS app Torecadash, AI is used for things like deciding “which product an article is about.” On July 25, 2026, I fully migrated this AI from Anthropic’s Claude (Haiku 4.5) to Google’s Gemini (gemini-3.1-flash-lite). What I decided, how I unified the calls, and what I added after the migration are written from my hand-over notes.
 
@@ -15324,7 +15478,8 @@ URL: https://koshinstudio.com/en/notes/fail-open/
 
   日本語版 (https://koshinstudio.com/notes/fail-open/)
 
-  Development log of Torecadash / October 2026
+Written by Koshin (https://koshinstudio.com/en/about/#operator) (web engineer and app engineer) · published 2026-10-09
+Development log of Torecadash / October 2026
 
   In my iOS app Torecadash, three in-app bug reports said “lots of resale prices are coming in from Amazon.” One was an obvious resale item at ¥79,800. The cause was a blind spot in a design I had put in on purpose: “if it cannot be confirmed, let it pass.” This is from my hand-over notes and the commit record (July 30, 2026).
 
@@ -15399,7 +15554,8 @@ URL: https://koshinstudio.com/en/notes/blocked-page/
 
   日本語版 (https://koshinstudio.com/notes/blocked-page/)
 
-  Development log of Torecadash / October 2026
+Written by Koshin (https://koshinstudio.com/en/about/#operator) (web engineer and app engineer) · published 2026-10-09
+Development log of Torecadash / October 2026
 
   My iOS app Torecadash regularly visits the sales pages of online shops to collect lottery and first-come sale information. One day I found that fetching from Pokémon Center Online had been returning zero products for three days straight. There were no errors, because each fetch was judged “fetched.” What was happening is written from my commit record.
 
@@ -15452,7 +15608,8 @@ URL: https://koshinstudio.com/en/notes/webaudio/
 
   日本語版 (https://koshinstudio.com/notes/webaudio/)
 
-  Development log of Sushi Stack / October 2026
+Written by Koshin (https://koshinstudio.com/en/about/#operator) (web engineer and app engineer) · published 2026-10-09
+Development log of Sushi Stack / October 2026
 
   The sound of Sushi Stack (https://koshinstudio.com/en/works/) uses not a single audio file. Japanese instruments are synthesized on the spot with the browser’s audio feature (WebAudio). The problem was that I had no way to listen while I was building it. So I measured the waveform and adjusted the volume. This is written with the numbers left in my commits.
 
@@ -15541,7 +15698,8 @@ URL: https://koshinstudio.com/en/notes/ranking-free-tier/
 
   日本語版 (https://koshinstudio.com/notes/ranking-free-tier/)
 
-  Development log of Sushi Stack / October 2026
+Written by Koshin (https://koshinstudio.com/en/about/#operator) (web engineer and app engineer) · published 2026-10-09
+Development log of Sushi Stack / October 2026
 
   Sushi Stack (https://koshinstudio.com/en/works/) has an online ranking. It runs on Cloudflare Workers and D1 (a database), within the free tier. I halved how much of the free tier this ranking server uses. What I counted and what I changed are written with the measured values in my commits.
 
@@ -15610,7 +15768,8 @@ URL: https://koshinstudio.com/en/notes/torecadash-review/
 
   日本語版 (https://koshinstudio.com/notes/torecadash-review/)
 
-  Development log of Torecadash / October 2026
+Written by Koshin (https://koshinstudio.com/en/about/#operator) (web engineer and app engineer) · published 2026-10-09
+Development log of Torecadash / October 2026
 
   When I tried to submit my iOS app Torecadash to App Review, I was stopped before submitting several times: things caught by Apple’s automated checks, things caught on the submission screen, and things I found by checking against the guidelines. From my commit record, here are four.
 
@@ -15665,7 +15824,8 @@ URL: https://koshinstudio.com/en/notes/scrape-cost/
 
   日本語版 (https://koshinstudio.com/notes/scrape-cost/)
 
-  Development log of Torecadash / October 2026
+Written by Koshin (https://koshinstudio.com/en/about/#operator) (web engineer and app engineer) · published 2026-10-09
+Development log of Torecadash / October 2026
 
   My iOS app Torecadash regularly visits sales pages on online shops and collects lottery and first-come sale information. Pages are fetched through an external service (Scrape.do), and each fetch setting uses a different number of credits. For one site, I re-measured something I had accepted as “it cannot be helped,” and it became 3 times faster using about one eighth of the credits. This is from my commit record.
 
@@ -15726,7 +15886,8 @@ URL: https://koshinstudio.com/en/notes/bulk-accident/
 
   日本語版 (https://koshinstudio.com/notes/bulk-accident/)
 
-  Development log of Torecadash / October 2026
+Written by Koshin (https://koshinstudio.com/en/about/#operator) (web engineer and app engineer) · published 2026-10-09
+Development log of Torecadash / October 2026
 
   In my iOS app Torecadash, a new job that fixes article status in bulk hit every article, including ones I never meant to target, the first time I ran it. 18 items from other sites were wrongly restored to visible. This is how I fixed the accident, and how I checked that the test I built afterward to close the same hole actually works, from my hand-over notes.
 
@@ -15797,7 +15958,8 @@ URL: https://koshinstudio.com/en/notes/card-supplies-guide/
 
   日本語版 (https://koshinstudio.com/notes/card-supplies-guide/)
 
-  A buying guide / October 2026
+Written by Koshin (https://koshinstudio.com/en/about/#operator) (web engineer and app engineer) · published 2026-10-16
+A buying guide / October 2026
 
   There are many ways to protect Pokémon cards: sleeves, loaders, deck boxes, binders. This guide lists what to check before you buy, so that what you order actually fits.
 

@@ -27,7 +27,7 @@
 <link rel="alternate" hreflang="x-default" href="https://koshinstudio.com/en/notes/logo-pop/">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="alternate" type="application/rss+xml" title="Koshin Studio — Notes" href="https://koshinstudio.com/feed.xml">
-<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BlogPosting","headline":"Retina で canvas が2倍の大きさになる：inset:0 では広がらない（押すと弾けるロゴの不具合）","url":"https://koshinstudio.com/notes/logo-pop/","description":"押して弾ける動きの粒が「変なところから出る」。原因は、Retina で canvas の CSS 上の大きさが2倍になること（inset:0 では広がらない）と、GSAP が位置を書き換えること。三段階で直した記録。","datePublished":"2026-10-08","dateModified":"2026-10-08","inLanguage":"ja","image":"https://koshinstudio.com/assets/og/og_notes_logo-pop.jpg","author":{"@id":"https://koshinstudio.com#studio"},"publisher":{"@id":"https://koshinstudio.com#studio"},"mainEntityOfPage":"https://koshinstudio.com/notes/logo-pop/"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Koshin Studio","item":"https://koshinstudio.com/"},{"@type":"ListItem","position":2,"name":"Notes","item":"https://koshinstudio.com/notes/"},{"@type":"ListItem","position":3,"name":"Retina で canvas が2倍の大きさになる：inset:0 では広がらない（押すと弾けるロゴの不具合）","item":"https://koshinstudio.com/notes/logo-pop/"}]}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BlogPosting","headline":"Retina で canvas が2倍の大きさになる：inset:0 では広がらない（押すと弾けるロゴの不具合）","url":"https://koshinstudio.com/notes/logo-pop/","description":"押して弾ける動きの粒が「変なところから出る」。原因は、Retina で canvas の CSS 上の大きさが2倍になること（inset:0 では広がらない）と、GSAP が位置を書き換えること。三段階で直した記録。","datePublished":"2026-10-08","dateModified":"2026-10-08","inLanguage":"ja","image":"https://koshinstudio.com/assets/og/og_notes_logo-pop.jpg","author":{"@id":"https://koshinstudio.com#koshin"},"publisher":{"@id":"https://koshinstudio.com#studio"},"mainEntityOfPage":"https://koshinstudio.com/notes/logo-pop/"},{"@type":"Person","@id":"https://koshinstudio.com#koshin","name":"Koshin","jobTitle":"Webエンジニア・アプリエンジニア","url":"https://koshinstudio.com/about/","worksFor":{"@id":"https://koshinstudio.com#studio"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Koshin Studio","item":"https://koshinstudio.com/"},{"@type":"ListItem","position":2,"name":"Notes","item":"https://koshinstudio.com/notes/"},{"@type":"ListItem","position":3,"name":"Retina で canvas が2倍の大きさになる：inset:0 では広がらない（押すと弾けるロゴの不具合）","item":"https://koshinstudio.com/notes/logo-pop/"}]}]}</script>
 <meta property="og:image" content="https://koshinstudio.com/assets/og/og_notes_logo-pop.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
@@ -46,7 +46,7 @@
   <h1>Retina で canvas が2倍の大きさになる：inset:0 では広がらない（押すと弾けるロゴの不具合）</h1>  <div class="rule"></div>
 <!--lang-->
   <p class="note"><a href="/en/notes/logo-pop/" hreflang="en" lang="en">English version</a></p>
-<!--/lang-->  <p class="lead">Koshin Studio 開発の記録 ／ 2026年10月</p>
+<!--/lang--><!--byline--><p class="note byline">書いた人：<a href="/about/#operator">Koshin</a>（Web エンジニア・アプリエンジニア）　公開：2026-10-08</p><!--/byline--><p class="lead">Koshin Studio 開発の記録 ／ 2026年10月</p>
 
   <p>このサイトのトップには、大きなロゴがあります。字を押すと、その字がぽんと弾けて、粒が散ります。ロゴを、自分で作った書体「恒紳ポップ」で作り直したあと、この動きについて、「粒が、字ではない変なところから出る」「まだ、右に寄っている」と指摘を受けました。直すまでに<strong>三段階</strong>かかったので、何が原因で、どう見つけたのかを、測った数字で書きます。</p>
 <!--toc-->
