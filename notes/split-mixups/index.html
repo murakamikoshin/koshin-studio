@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>1 つの記事を商品ごとに分ける処理で起きた 3 つの取り違え：子が親になり、共有リンクが別の店を指し、名前が 2 つの商品のものだった — Koshin Studio</title>
+<meta name="description" content="分けた「子」の記事に親向けの処理をもう一度かけて、締切当日の抽選 60 件（23 店）が消えた。13 店が共有するリンクで別の店の親を引いた。2 つの商品が名乗る名前が 267 組あった。画面に何も出ないまま、本物が消える失敗の記録。">
+<meta property="og:title" content="1 つの記事を商品ごとに分ける処理で起きた 3 つの取り違え：子が親になり、共有リンクが別の店を指し、名前が 2 つの商品のものだった">
+<meta property="og:description" content="分けた「子」の記事に親向けの処理をもう一度かけて、締切当日の抽選 60 件（23 店）が消えた。13 店が共有するリンクで別の店の親を引いた。2 つの商品が名乗る名前が 267 組あった。画面に何も出ないまま、本物が消える失敗の記録。">
+<meta property="og:type" content="article">
+<meta name="theme-color" content="#fbfaf7">
+<link rel="icon" href="/favicon.ico?v=1697d589" sizes="48x48">
+<link rel="icon" href="/favicon.svg?v=b9d7922f" type="image/svg+xml" sizes="any">
+<link rel="icon" href="/assets/icon/icon-192.png?v=e2566235" type="image/png" sizes="192x192">
+<link rel="apple-touch-icon" href="/assets/icon/icon-180.png?v=84e7f0e6">
+<link rel="manifest" href="/site.webmanifest">
+<script>document.documentElement.className+=" js"</script>
+<link rel="stylesheet" href="/style.css?v=dd51310c">
+<meta name="google-adsense-account" content="ca-pub-3863314847163872">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3863314847163872" crossorigin="anonymous"></script>
+<link rel="canonical" href="https://koshinstudio.com/notes/split-mixups/">
+<meta property="og:url" content="https://koshinstudio.com/notes/split-mixups/">
+<meta property="og:site_name" content="Koshin Studio">
+<meta property="og:locale" content="ja_JP">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="alternate" type="application/rss+xml" title="Koshin Studio — Notes" href="https://koshinstudio.com/feed.xml">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BlogPosting","headline":"1 つの記事を商品ごとに分ける処理で起きた 3 つの取り違え：子が親になり、共有リンクが別の店を指し、名前が 2 つの商品のものだった","url":"https://koshinstudio.com/notes/split-mixups/","description":"分けた「子」の記事に親向けの処理をもう一度かけて、締切当日の抽選 60 件（23 店）が消えた。13 店が共有するリンクで別の店の親を引いた。2 つの商品が名乗る名前が 267 組あった。画面に何も出ないまま、本物が消える失敗の記録。","datePublished":"2026-10-17","dateModified":"2026-10-17","inLanguage":"ja","image":"https://koshinstudio.com/assets/og/og_notes_split-mixups.jpg","author":{"@id":"https://koshinstudio.com#studio"},"publisher":{"@id":"https://koshinstudio.com#studio"},"mainEntityOfPage":"https://koshinstudio.com/notes/split-mixups/"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Koshin Studio","item":"https://koshinstudio.com/"},{"@type":"ListItem","position":2,"name":"Notes","item":"https://koshinstudio.com/notes/"},{"@type":"ListItem","position":3,"name":"1 つの記事を商品ごとに分ける処理で起きた 3 つの取り違え：子が親になり、共有リンクが別の店を指し、名前が 2 つの商品のものだった","item":"https://koshinstudio.com/notes/split-mixups/"}]}]}</script>
+<meta property="og:image" content="https://koshinstudio.com/assets/og/og_notes_split-mixups.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
+</head>
+<body class="article">
+<canvas id="motes"></canvas>
+
+<header class="site"><div class="wrap">
+  <a class="logo" href="/"><img class="logo-mark" src="/favicon.svg?v=b9d7922f" alt="" width="28" height="28">Koshin Studio</a>
+  <nav><a href="/works/">Works</a><a href="/notes/">Notes</a><a href="/picks/">Picks</a><a href="/calc/">Tools</a><a href="/about/">About</a></nav>
+</div></header>
+
+<main><div class="wrap">
+  <nav class="crumbs" aria-label="現在地"><a href="/">Koshin Studio</a><i aria-hidden="true">›</i><a href="/notes/">Notes</a><i aria-hidden="true">›</i><span aria-current="page">1 つの記事を商品ごとに分ける処理で起きた 3 つの取り違え：子が親になり、共有リンクが別の店を指し、名前が 2 つの商品のものだった</span></nav>
+  <h1>1 つの記事を商品ごとに分ける処理で起きた 3 つの取り違え：子が親になり、共有リンクが別の店を指し、名前が 2 つの商品のものだった</h1>  <div class="rule"></div>
+  <p class="lead">トレカダッシュ 開発の記録 ／ 2026年9月</p>
+
+  <p>iOS アプリ「<a href="/works/torecadash/">トレカダッシュ</a>」には、お店の告知を、<strong>商品ごとの記事に分ける</strong>処理があります。1 つの告知に「ポケモンカードの A と B の抽選」と書いてあれば、A の記事と B の記事に分けます。分けた記事を「子」、元の記事を「親」と呼びます。</p>
+  <p>この処理のまわりで、3 つの「取り違え」が見つかりました。どれも、<strong>画面には何も出ないまま、本物の抽選が消える</strong>失敗です。</p>
+  <p class="note">数字は、2026 年 9 月の作業の記録（9 月 5 日と 9 月 20 日の分を含む）から書いています。</p>
+<!--toc-->
+  <nav class="toc" aria-label="目次"><p>目次</p><ol><li><a href="#s1">1. 子に、親向けの処理をもう一度かけた（9 月 20 日）</a></li><li><a href="#s2">2. リンクだけで親を探したら、別の店の記事が出てきた</a></li><li><a href="#s3">3. 2 つの商品が名乗る名前は、どちらも特定しない（9 月 5 日）</a></li><li><a href="#s4">分かったこと</a></li></ol></nav>
+<!--/toc-->
+  <h2 class="rv" id="s1">1. 子に、親向けの処理をもう一度かけた（9 月 20 日）</h2>
+  <p>多角的に点検していて、<strong>その日の 23:59 が締切の抽選、60 件（23 店）が、全部フィードから消えている</strong>のが見つかりました。</p>
+  <p>子の記事は、親のチラシの画像と、親の題名（<code>splitFromTitle</code>）を、そのまま持っています。複数の商品が書かれた記事を聞き直す処理が、この子を見て、「9 商品が載っている」と読みました。子の商品の欄は空になり、「9 件」と書き換えられました。そして翌日、総称の記事（特定の商品を指さない記事）を整理する処理が、「商品が無い総称だ」として、伏せました。</p>
+  <p>割った先の商品の ID は、すでにいる兄弟と同じなので、新しい記事は 0 件でした。<strong>その商品だけが、消えた</strong>のです。</p>
+  <p>同じ根っこの問題は、もう 1 つありました。結果発表や当選者向けの案内を見分ける判定が、子の題名は商品名だけで、本文（親の題名）が届かないので、すり抜けていました（16 件）。</p>
+  <p>直し方は、記事を集めて判定したり伏せたりする処理を足すときに、<strong>子を除く</strong>（<code>splitFromArticleId</code> を持つ記事を除く）か、親の題名を本文として渡すか、どちらかを必ず決めることでした。「子だから触らない」の目印には、URL の中の印ではなく、記事の項目を使います。URL の印は、応募先の張り替えで消えるからです。</p>
+
+  <h2 class="rv" id="s2">2. リンクだけで親を探したら、別の店の記事が出てきた</h2>
+  <p>ふるいちという店の、2 商品をまとめた告知が、10 件、分割されませんでした。親の記事を探す関数が、<strong>リンクだけで</strong>探していたからです。</p>
+  <p>この店のチェーンは、同じ共有のページを、<strong>13 店が同じリンクで</strong>持っています。リンクだけで探すと、次のどれかに当たりました。</p>
+  <ul>
+    <li>リンクだけで決まる、決め打ちの ID。</li>
+    <li>同じリンクを持つ記事を探して、先頭の 1 件を取る。</li>
+    <li>応募先の張り替えで印が消えた子の記事（親と同じリンクになる）。</li>
+  </ul>
+  <p>その結果、チェーン全体の別の店の記事や、子の記事を親として、<strong>何度も分割</strong>していました。ログに「2 商品へ分割しました」が、毎回<strong>同じ親</strong>で出ていました。</p>
+  <p>リンクは、店を特定する鍵ではありません。共有のページ、引用、まとめ記事の由来で、同じリンクを複数の記事が持ちます。直し方は、記事をリンクで引くときに、<strong>サイトと店名も条件に入れる</strong>こと、子の記事を親にしないことでした。「ログに同じ親の ID が何度も出たら疑う」も、教訓として残しました。</p>
+
+  <h2 class="rv" id="s3">3. 2 つの商品が名乗る名前は、どちらも特定しない（9 月 5 日）</h2>
+  <p>商品には、別の呼び方（別表記）を登録しておきます。「30th CELEBRATION BOX」という呼び方が、拡張パック「30th CELEBRATION」と、別の商品「30th CELEBRATION FUTURISTIC BOX」の<strong>両方</strong>の別表記に入っていました。</p>
+  <p>この名前は、どちらの商品も特定しません。AI に候補として見せると、<strong>そのとき、どちらを選んだかで結果が決まります</strong>。実際に、表示中の 25 件が、別の商品の名前で出ていました。</p>
+  <p>数えると、こういう「2 つ以上の商品が名乗る名前」は、<strong>267 組、321 件</strong>ありました。</p>
+  <p>同じ形の別の失敗もありました。店名を「<code>＠</code> より前」で切る処理が、「カードショップ＠ほ～む。」の 3 支店を<strong>1 つの店</strong>に潰し、毎日、2 支店を「重複」として畳んでいました。</p>
+  <p>直し方は、<strong>名前で何かを特定する仕組みを作ったら、「その名前を名乗るものが 2 つ以上ないか」を数える</strong>ことでした。監査を 1 本作って、0 件を保ちます。残す相手は、機械的に決まるときだけです。その名前を正式名にしている商品がちょうど 1 つなら、そこだけに残す。決まらないなら、全部から外す。足す側（入口）と、掃除する側の両方に、同じ判定を置きます。片方だけだと、外したそばから足し直されます。</p>
+
+  <h2 class="rv" id="s4">分かったこと</h2>
+  <blockquote>分けた先の記事は、元の記事ではない。名前は、持ち主が 1 つのときだけ、鍵になる。</blockquote>
+  <ul>
+    <li><strong>派生したものに、元のものの処理を、もう一度かけない。</strong>子の目印を、記事の項目に持たせる。</li>
+    <li><strong>リンクは、鍵ではない。</strong>サイトと店名も条件にする。</li>
+    <li><strong>名前の持ち主を数える。</strong>2 つ以上が名乗る名前は、何も特定しません。</li>
+    <li><strong>伏せる処理を足したら、代わりが本当に表示中かを数える。</strong>伏せた側だけを見ても、消しすぎは見えません。</li>
+  </ul>
+
+
+  <div class="ad-slot" data-slot="footer" hidden></div>
+<!--/ad-->
+
+  <div class="rule" style="margin:40px 0 22px"></div>
+  <p class="eyebrow">この話に出てくるもの</p>
+  <ul class="plain">
+    <li><a href="/works/torecadash/">トレカダッシュ</a> — トレカの抽選・予約・先着の情報を集める iPhone アプリ</li>
+    <li><a href="/notes/fake-products/">「9種セット」を中身ごとに分けて、偽の商品が80個できていた</a> — 同じ分割の処理の、別の失敗</li>
+    <li><a href="/notes/silent-discard/">本物の抽選を、静かに捨てていた 4 つの実例</a> — 画面に出ない失敗の、別の実例</li>
+    <li><a href="/notes/typo-catalog/">一度だけ生まれた誤字が、店ごとに増えていった</a> — 商品名の取り違えの、別の経路</li>
+  </ul>
+
+<!--related-->
+  <div class="rule" style="margin:40px 0 22px"></div>
+  <p class="eyebrow">ほかの記録</p>
+  <ul class="plain">
+    <li><a href="/notes/silent-discard/">本物の抽選を、静かに捨てていた 4 つの実例：正規表現・年のない日付・まとめて聞く・null</a> — 「x.com」が「e-starbox.com」に一致して応募リンクが一度も採用されなかった、年のない日付が 6 年前と読まれてポケカ案件が 0 件だった、まとめ判定の数がずれた、「決められない」が「無い」と読まれ 129 件を伏せかけた。捨てる判定の失敗の記録。</li>
+    <li><a href="/notes/rerun-on-deploy/">配備のたびに、日次の処理が丸ごと走り直していた：48 時間で 477 回、その日の Gemini 費用の 46.6%</a> — 1 日 1 回のはずの処理が 43 回走り、Gemini の費用の 46.6% を占めていた。タイムアウトした回は最終実行時刻が書かれず、再起動のたびに取りこぼし扱いされていた。逆に、配備が 8 時に重なって、ダイジェストが 1 通も届かなかった問題も。</li>
+    <li><a href="/notes/notify-gate/">通知は取り消せない：直近 72 時間の通知の 19% が誤通知で、関門が通知の「後」に効いていた</a> — 直近 72 時間に通知した 644 件のうち 122 件（19%）が誤通知だった。記事の関門は後から記事を下げるが、通知は保存の約 0.6 秒後に飛ぶ。下げた 30 件のうち 25 件はもう通知済みだった。通知を送る側の入口に同じ関門を通した記録。</li>
+  </ul>
+<!--/related-->
+
+<!--comments-->
+  <section class="comments" id="comments" data-repo="murakamikoshin/koshin-studio" data-repo-id="R_kgDOURc3ew"
+    data-category="Announcements" data-category-id="DIC_kwDOURc3e84DHTVr">
+    <h2 id="comments-h">コメント</h2>
+    <p>感想や、記事の間違いの指摘は、ここへ。書くには、GitHub のアカウントが要ります。</p>
+    <p><button type="button" class="btn ghost" id="load-comments">コメントを開く</button></p>
+    <p class="note">押すと、giscus（giscus.app）と GitHub に接続します。押さなければ、接続しません。詳しくは<a href="/privacy/">あつかい</a>に書いています。</p>
+    <div id="giscus-box"></div>
+  </section>
+<!--/comments-->
+</div>
+</main>
+
+<footer class="site"><div class="wrap">
+  <span>© 2026 Koshin Studio</span>
+  <div class="sns-row"></div>
+  <nav><a href="/picks/">Picks</a><a href="/calc/">Tools</a><a href="/about/">About</a><a href="/privacy/">あつかい</a><a href="/en/" hreflang="en" lang="en">English</a></nav>
+</div></footer>
+<script src="/motion.js?v=1e7447ec" defer></script>
+</body>
+</html>

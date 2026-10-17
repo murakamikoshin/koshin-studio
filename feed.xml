@@ -7,6 +7,20 @@
   <language>ja</language>
   <atom:link href="https://koshinstudio.com/feed.xml" rel="self" type="application/rss+xml"/>
   <item>
+    <title>「1 分おき」の監視は、1 件あたり 10 分に 1 回だった：速くする前に、見直しの間隔と、通知が届いた数を数えた</title>
+    <link>https://koshinstudio.com/notes/interval-vs-delivery/</link>
+    <guid isPermaLink="true">https://koshinstudio.com/notes/interval-vs-delivery/</guid>
+    <pubDate>Fri, 16 Oct 2026 15:00:00 GMT</pubDate>
+    <description>先着の監視は 63 件を 1 回に 4〜9 件しか見られず、1 件あたり約 10 分に 1 回。7 日間で捕まえたのは 3 回。間隔を詰めると別の監視が遅くなり、「審査しない」ことで先着の 45% に通知が飛んでいなかった。</description>
+  </item>
+  <item>
+    <title>1 つの記事を商品ごとに分ける処理で起きた 3 つの取り違え：子が親になり、共有リンクが別の店を指し、名前が 2 つの商品のものだった</title>
+    <link>https://koshinstudio.com/notes/split-mixups/</link>
+    <guid isPermaLink="true">https://koshinstudio.com/notes/split-mixups/</guid>
+    <pubDate>Fri, 16 Oct 2026 15:00:00 GMT</pubDate>
+    <description>分けた「子」の記事に親向けの処理をもう一度かけて、締切当日の抽選 60 件（23 店）が消えた。13 店が共有するリンクで別の店の親を引いた。2 つの商品が名乗る名前が 267 組あった。画面に何も出ないまま、本物が消える失敗の記録。</description>
+  </item>
+  <item>
     <title>本物の抽選を、静かに捨てていた 4 つの実例：正規表現・年のない日付・まとめて聞く・null</title>
     <link>https://koshinstudio.com/notes/silent-discard/</link>
     <guid isPermaLink="true">https://koshinstudio.com/notes/silent-discard/</guid>

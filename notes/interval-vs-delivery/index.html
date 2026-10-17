@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>「1 分おき」の監視は、1 件あたり 10 分に 1 回だった：速くする前に、見直しの間隔と、通知が届いた数を数えた — Koshin Studio</title>
+<meta name="description" content="先着の監視は 63 件を 1 回に 4〜9 件しか見られず、1 件あたり約 10 分に 1 回。7 日間で捕まえたのは 3 回。間隔を詰めると別の監視が遅くなり、「審査しない」ことで先着の 45% に通知が飛んでいなかった。">
+<meta property="og:title" content="「1 分おき」の監視は、1 件あたり 10 分に 1 回だった：速くする前に、見直しの間隔と、通知が届いた数を数えた">
+<meta property="og:description" content="先着の監視は 63 件を 1 回に 4〜9 件しか見られず、1 件あたり約 10 分に 1 回。7 日間で捕まえたのは 3 回。間隔を詰めると別の監視が遅くなり、「審査しない」ことで先着の 45% に通知が飛んでいなかった。">
+<meta property="og:type" content="article">
+<meta name="theme-color" content="#fbfaf7">
+<link rel="icon" href="/favicon.ico?v=1697d589" sizes="48x48">
+<link rel="icon" href="/favicon.svg?v=b9d7922f" type="image/svg+xml" sizes="any">
+<link rel="icon" href="/assets/icon/icon-192.png?v=e2566235" type="image/png" sizes="192x192">
+<link rel="apple-touch-icon" href="/assets/icon/icon-180.png?v=84e7f0e6">
+<link rel="manifest" href="/site.webmanifest">
+<script>document.documentElement.className+=" js"</script>
+<link rel="stylesheet" href="/style.css?v=dd51310c">
+<meta name="google-adsense-account" content="ca-pub-3863314847163872">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3863314847163872" crossorigin="anonymous"></script>
+<link rel="canonical" href="https://koshinstudio.com/notes/interval-vs-delivery/">
+<meta property="og:url" content="https://koshinstudio.com/notes/interval-vs-delivery/">
+<meta property="og:site_name" content="Koshin Studio">
+<meta property="og:locale" content="ja_JP">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="alternate" type="application/rss+xml" title="Koshin Studio — Notes" href="https://koshinstudio.com/feed.xml">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BlogPosting","headline":"「1 分おき」の監視は、1 件あたり 10 分に 1 回だった：速くする前に、見直しの間隔と、通知が届いた数を数えた","url":"https://koshinstudio.com/notes/interval-vs-delivery/","description":"先着の監視は 63 件を 1 回に 4〜9 件しか見られず、1 件あたり約 10 分に 1 回。7 日間で捕まえたのは 3 回。間隔を詰めると別の監視が遅くなり、「審査しない」ことで先着の 45% に通知が飛んでいなかった。","datePublished":"2026-10-17","dateModified":"2026-10-17","inLanguage":"ja","image":"https://koshinstudio.com/assets/og/og_notes_interval-vs-delivery.jpg","author":{"@id":"https://koshinstudio.com#studio"},"publisher":{"@id":"https://koshinstudio.com#studio"},"mainEntityOfPage":"https://koshinstudio.com/notes/interval-vs-delivery/"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Koshin Studio","item":"https://koshinstudio.com/"},{"@type":"ListItem","position":2,"name":"Notes","item":"https://koshinstudio.com/notes/"},{"@type":"ListItem","position":3,"name":"「1 分おき」の監視は、1 件あたり 10 分に 1 回だった：速くする前に、見直しの間隔と、通知が届いた数を数えた","item":"https://koshinstudio.com/notes/interval-vs-delivery/"}]}]}</script>
+<meta property="og:image" content="https://koshinstudio.com/assets/og/og_notes_interval-vs-delivery.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
+</head>
+<body class="article">
+<canvas id="motes"></canvas>
+
+<header class="site"><div class="wrap">
+  <a class="logo" href="/"><img class="logo-mark" src="/favicon.svg?v=b9d7922f" alt="" width="28" height="28">Koshin Studio</a>
+  <nav><a href="/works/">Works</a><a href="/notes/">Notes</a><a href="/picks/">Picks</a><a href="/calc/">Tools</a><a href="/about/">About</a></nav>
+</div></header>
+
+<main><div class="wrap">
+  <nav class="crumbs" aria-label="現在地"><a href="/">Koshin Studio</a><i aria-hidden="true">›</i><a href="/notes/">Notes</a><i aria-hidden="true">›</i><span aria-current="page">「1 分おき」の監視は、1 件あたり 10 分に 1 回だった：速くする前に、見直しの間隔と、通知が届いた数を数えた</span></nav>
+  <h1>「1 分おき」の監視は、1 件あたり 10 分に 1 回だった：速くする前に、見直しの間隔と、通知が届いた数を数えた</h1>  <div class="rule"></div>
+  <p class="lead">トレカダッシュ 開発の記録 ／ 2026年9月</p>
+
+  <p>iOS アプリ「<a href="/works/torecadash/">トレカダッシュ</a>」の中でも、<strong>先着販売</strong>（在庫が数分で消える販売）の通知は、速さが勝負です。そこで、先着の監視は、「1 分おきに動く」ように作りました。</p>
+  <p>2026 年 9 月 7 日に、その反応速度を実際に測ってみると、設計の意図と実態が<strong>約 10 倍</strong>ずれていました。この記事は、そこから、さらに「速くした結果、別のものが遅くなった」ことまで見つかった記録です。</p>
+  <p class="note">数字は、2026 年 9 月 7 日の測定の記録から書いています。</p>
+<!--toc-->
+  <nav class="toc" aria-label="目次"><p>目次</p><ol><li><a href="#s1">「1 分おき」は、1 件あたり 10 分に 1 回だった</a></li><li><a href="#s2">原因：共有の外部 API の枠を、対等に奪い合っていた</a></li><li><a href="#s3">速くしたら、いちばん速く見たいものが、遅くなった</a></li><li><a href="#s4">もう 1 つ：「審査しない」ものには、通知が飛ばない</a></li><li><a href="#s5">分かったこと</a></li></ol></nav>
+<!--/toc-->
+  <h2 class="rv" id="s1">「1 分おき」は、1 件あたり 10 分に 1 回だった</h2>
+  <div class="scroll rv"><table>
+    <thead><tr><th>測ったこと</th><th>値</th></tr></thead>
+    <tbody>
+      <tr><td>ジョブの間隔</td><td>約 61 秒（設計どおり）</td></tr>
+      <tr><td>監視する対象</td><td>63 件</td></tr>
+      <tr><td>1 回で見られる件数</td><td>4〜9 件（53 回中 48 回が、時間予算切れ）</td></tr>
+      <tr><td><strong>1 件あたりの見直しの間隔</strong></td><td><strong>約 10 分に 1 回</strong></td></tr>
+      <tr><td>7 日間で、先着を捕まえた回数</td><td><strong>3 回</strong>（空振りは 8,648 回）</td></tr>
+    </tbody>
+  </table></div>
+  <p>「1 分おきに動く」と書いてあると、速いつもりになります。しかし、利用者が体感するのは、<strong>1 件あたり、何分に 1 回見に行くか</strong>です。63 件を、1 回に 4〜9 件しか見られないなら、1 周するのに約 10 分かかります。計算式は、<strong>対象の件数 ÷ 1 回に見られる件数 × 間隔</strong>です。この式を一度も出していなかったので、「動いているのに、勝てない」状態が続いていました。</p>
+
+  <h2 class="rv" id="s2">原因：共有の外部 API の枠を、対等に奪い合っていた</h2>
+  <p>在庫を見に行くときに使う、楽天の API は、<strong>1.5 秒に 1 回</strong>しか呼べません。この枠を、5 つのジョブが対等に奪い合っていました。いちばん急ぐ監視の取り分は、<strong>13%</strong>しかありませんでした。</p>
+  <p>直し方は、急ぐ処理が走っている間だけ、まとめて見る系の処理が、枠を取りに行かないようにすることでした。ここで、見つけた落とし穴があります。</p>
+  <ul>
+    <li>譲る印を、1 回の呼び出しごとに立てて、下ろすと、<strong>呼び出しの合間に、奪い返されます。</strong>実測では、「1 回 4 件」の回が、20 回中 13 回、残りました。</li>
+    <li>印を、巡回のあいだ<strong>立てっぱなし</strong>にすると、1 回に見られる件数が、30〜33 件になりました。</li>
+    <li>譲る側には、必ず待ちの上限を置きます。置かないと、譲りっぱなしで飢えます。</li>
+  </ul>
+
+  <h2 class="rv" id="s3">速くしたら、いちばん速く見たいものが、遅くなった</h2>
+  <p>同じ日に、先着の反応を上げようとして、いくつかのジョブの間隔を詰めました。Amazon の確認を 5 分おきにしたところ、<strong>今度は、楽天ブックスの瞬殺監視が遅くなりました</strong>。</p>
+  <div class="scroll rv"><table>
+    <thead><tr><th></th><th>前</th><th>間隔を詰めた後</th><th>戻した後</th></tr></thead>
+    <tbody>
+      <tr><td>楽天ブックスの瞬殺監視の完了間隔</td><td>60〜80 秒</td><td><strong>2 分 41 秒・3 分 52 秒</strong></td><td>60〜110 秒</td></tr>
+      <tr><td>同じ監視の見送り（10 分あたり）</td><td>0 回</td><td><strong>6 回</strong></td><td>0 回</td></tr>
+      <tr><td>ジョブの順番待ち</td><td>0</td><td><strong>17〜29</strong></td><td>0</td></tr>
+    </tbody>
+  </table></div>
+  <p>原因は、Amazon の確認が 1 回 5〜8 分かかるのに、間隔を 5 分にしたことです。<strong>1 回の所要時間が、間隔以上</strong>になると、そのジョブは、同時に走れる枠（8 つ）の 1 つを、<strong>ずっと占有</strong>します。その分だけ、ほかのジョブが順番を待ちます。間隔を戻すと、元に戻りました。</p>
+
+  <h2 class="rv" id="s4">もう 1 つ：「審査しない」ものには、通知が飛ばない</h2>
+  <p>先着の通知は、出品が「定価より高い転売」ではないかを、価格で審査してから送ります。この審査は、単位が食い違って比べられないとき、<strong>「審査しない」</strong>として通り過ぎる作りでした。コメントには「推測しない、安全側」と書いてありました。</p>
+  <p>ところが、「審査しなかった出品」には、「価格が確認できていない」という印が付き、<strong>通知が止まります</strong>。直近 7 日間の先着 148 件を数えると、こうでした。</p>
+  <div class="scroll rv"><table>
+    <thead><tr><th>結果</th><th>件数</th></tr></thead>
+    <tbody>
+      <tr><td>通知した</td><td>41 件</td></tr>
+      <tr><td>通知を見送った（定価を確認できていない）</td><td><strong>25 件</strong></td></tr>
+    </tbody>
+  </table></div>
+  <p>画面に出た 55 件のうち、<strong>45% に、通知が飛んでいませんでした</strong>。記事はフィードに出るので、監査にも映りません。苦情も出ません。検知を 10 分から 80 秒に速くしても、その先で、半分が静かに落ちていたのです。</p>
+  <p>しかも、「比べられない」は思い込みでした。カタログの定価 5,280 円を、1 箱のパック数 12 で割ると 440 円で、ちゃんとしたパック 1 つの値段です。つまり、<strong>その金額は、すでに 1 箱ぶんの値段</strong>で、掛けずに、そのまま比べればよかったのです。</p>
+
+  <h2 class="rv" id="s5">分かったこと</h2>
+  <blockquote>「速くして」の答えは、たいてい「速くする」ではなく、「途中で落ちているものを見つける」。</blockquote>
+  <ul>
+    <li><strong>間隔ではなく、1 件あたりの見直しの間隔を測る。</strong>対象の件数 ÷ 1 回の処理件数 × 間隔。</li>
+    <li><strong>届いた数を数える。</strong>作った記事の数ではなく、通知まで届いた数です。</li>
+    <li><strong>「判断できないとき」に、どちらへ倒れるかを書き出す。</strong>倒れた先が、利用者に届かない側なら、それは安全側ではありません。</li>
+    <li><strong>速くするほど、ほかが遅くなることがある。</strong>同時に走れる枠は、有限です。</li>
+    <li><strong>「比べられない」と書いてあるところは、実データで見直す。</strong>単位をそろえたら、比べられました。</li>
+  </ul>
+
+
+  <div class="ad-slot" data-slot="footer" hidden></div>
+<!--/ad-->
+
+  <div class="rule" style="margin:40px 0 22px"></div>
+  <p class="eyebrow">この話に出てくるもの</p>
+  <ul class="plain">
+    <li><a href="/works/torecadash/">トレカダッシュ</a> — トレカの抽選・予約・先着の情報を集める iPhone アプリ</li>
+    <li><a href="/notes/rerun-on-deploy/">配備のたびに、日次の処理が丸ごと走り直していた</a> — 同じ「定期処理」の、別の失敗</li>
+    <li><a href="/notes/notify-gate/">通知は取り消せない</a> — 通知の誤りを、数えて見つけた記録</li>
+    <li><a href="/notes/fail-open/">確認できなかったときに、通していた</a> — 関門が倒れる向きの話</li>
+  </ul>
+
+<!--related-->
+  <div class="rule" style="margin:40px 0 22px"></div>
+  <p class="eyebrow">ほかの記録</p>
+  <ul class="plain">
+    <li><a href="/notes/split-mixups/">1 つの記事を商品ごとに分ける処理で起きた 3 つの取り違え：子が親になり、共有リンクが別の店を指し、名前が 2 つの商品のものだった</a> — 分けた「子」の記事に親向けの処理をもう一度かけて、締切当日の抽選 60 件（23 店）が消えた。13 店が共有するリンクで別の店の親を引いた。2 つの商品が名乗る名前が 267 組あった。画面に何も出ないまま、本物が消える失敗の記録。</li>
+    <li><a href="/notes/silent-discard/">本物の抽選を、静かに捨てていた 4 つの実例：正規表現・年のない日付・まとめて聞く・null</a> — 「x.com」が「e-starbox.com」に一致して応募リンクが一度も採用されなかった、年のない日付が 6 年前と読まれてポケカ案件が 0 件だった、まとめ判定の数がずれた、「決められない」が「無い」と読まれ 129 件を伏せかけた。捨てる判定の失敗の記録。</li>
+    <li><a href="/notes/rerun-on-deploy/">配備のたびに、日次の処理が丸ごと走り直していた：48 時間で 477 回、その日の Gemini 費用の 46.6%</a> — 1 日 1 回のはずの処理が 43 回走り、Gemini の費用の 46.6% を占めていた。タイムアウトした回は最終実行時刻が書かれず、再起動のたびに取りこぼし扱いされていた。逆に、配備が 8 時に重なって、ダイジェストが 1 通も届かなかった問題も。</li>
+  </ul>
+<!--/related-->
+
+<!--comments-->
+  <section class="comments" id="comments" data-repo="murakamikoshin/koshin-studio" data-repo-id="R_kgDOURc3ew"
+    data-category="Announcements" data-category-id="DIC_kwDOURc3e84DHTVr">
+    <h2 id="comments-h">コメント</h2>
+    <p>感想や、記事の間違いの指摘は、ここへ。書くには、GitHub のアカウントが要ります。</p>
+    <p><button type="button" class="btn ghost" id="load-comments">コメントを開く</button></p>
+    <p class="note">押すと、giscus（giscus.app）と GitHub に接続します。押さなければ、接続しません。詳しくは<a href="/privacy/">あつかい</a>に書いています。</p>
+    <div id="giscus-box"></div>
+  </section>
+<!--/comments-->
+</div>
+</main>
+
+<footer class="site"><div class="wrap">
+  <span>© 2026 Koshin Studio</span>
+  <div class="sns-row"></div>
+  <nav><a href="/picks/">Picks</a><a href="/calc/">Tools</a><a href="/about/">About</a><a href="/privacy/">あつかい</a><a href="/en/" hreflang="en" lang="en">English</a></nav>
+</div></footer>
+<script src="/motion.js?v=1e7447ec" defer></script>
+</body>
+</html>
