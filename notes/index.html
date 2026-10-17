@@ -48,7 +48,6 @@
   <h3 class="rv">数えて、直した</h3>
   <p class="rv">勘で直す前に、まず数える。費用と監査の数字を疑って、測り直した記録。</p>
   <ul class="plain">
-    <li><a href="/notes/vps-migration/">Cloud Functions から月 4,300 円のサーバーへ移した：1 日 3,700 円の課金、EEA で全滅した Yahoo!、移行で踏んだ 5 つの罠</a></li>
     <li><a href="/notes/firestore-91/">Firestore の費用を円で出したら、読み取りの 91% が 1 か所だった：キャッシュを入れても効かなかった理由</a></li>
     <li><a href="/notes/gemini-meter/">Gemini の費用を削る前に、計器を疑った：単価・内訳・キャッシュの 3 つが壊れていて、キャッシュの条件は測り直すと変わっていた</a></li>
     <li><a href="/notes/scrape-cost/">「しょうがない」を測り直したら、取得の費用は8分の1だった</a></li>
@@ -64,6 +63,7 @@
     <li><a href="/notes/blocked-page/">「取れた」と読んでいたのは、ただの案内ページだった：3日間、商品が0件</a></li>
     <li><a href="/notes/tco-relay/">「確認済み」の印が付いていたのに、リンク先を一度も読めていなかった：t.co の中継ページ</a></li>
     <li><a href="/notes/silent-discard/">本物の抽選を、静かに捨てていた 4 つの実例：正規表現・年のない日付・まとめて聞く・null</a></li>
+    <li><a href="/notes/truncated-answer/">候補は見つかっていたのに、答えを読む所で毎回落ちていた：200 トークンで切れた URL と、ハイフンで 400 になる検索</a></li>
     <li><a href="/notes/waiting-room/">先着が始まった瞬間、サイトが順番待ちのページになる：8,000 バイトの関門を、15KB の案内ページがすり抜けた</a></li>
     <li><a href="/notes/notify-gate/">通知は取り消せない：直近 72 時間の通知の 19% が誤通知で、関門が通知の「後」に効いていた</a></li>
     <li><a href="/notes/destination-check/">表示中の記事のリンク先を、実際に開いて確かめた：約 60 件の間違いと、最初の点検が間違えた 3 つのこと</a></li>
@@ -90,6 +90,20 @@
     <li><a href="/notes/x-monitoring-gaps/">X 監視の漏れ 4 つ：検索に出ない投稿、持ち主が変わるアカウント、店を探せない検索、止まった後の取り戻し</a></li>
     <li><a href="/notes/coverage-check/">競合サイトと突き合わせて、取りこぼしを数えた：最初の「カバー率 23%」は測り方の間違いで、本当は 49% だった</a></li>
     <li><a href="/notes/self-inflicted/">自分で作った仕組みが、自分を傷つけた 4 つの記録：要約が条件を捨て、1 つの未定義が保存を止め、点検が本番の IP を閉め出された</a></li>
+  </ul>
+  <h3 class="rv">iOS アプリと基盤</h3>
+  <p class="rv">サーバーの移行、iCloud、広告、審査、ビルド。アプリとその土台の、実際に起きたことの記録。</p>
+  <ul class="plain">
+    <li><a href="/notes/vps-migration/">Cloud Functions から月 4,300 円のサーバーへ移した：1 日 3,700 円の課金、EEA で全滅した Yahoo!、移行で踏んだ 5 つの罠</a></li>
+    <li><a href="/notes/icloud-overwrite/">「iCloud が新しければ取り込む」の関数が、何も比べていなかった：応募の記録が 20 件から 1 件になりうる</a></li>
+    <li><a href="/notes/test-ads/">広告が出ないと、実機チェックの 25 項目が止まった：開発者モードだけテスト広告を使い、賞品名を直書きしない</a></li>
+    <li><a href="/notes/torecadash-watchdog/">iOS アプリが固まって強制終了される（0x8BADF00D）：SwiftUI の計算プロパティが毎回走っていた</a></li>
+    <li><a href="/notes/torecadash-ci/">TestFlight にビルドが来ない：Xcode Cloud の月25時間を使い切っていた（最初の診断は誤りだった）</a></li>
+    <li><a href="/notes/itms-91064/">ITMS-91064「無効なバイナリ」：NSPrivacyTracking が true なのに NSPrivacyTrackingDomains が空だった</a></li>
+    <li><a href="/notes/xcode152-sdk/">Xcode 15.2 で Firebase 12 が使えない（Swift 6.0 必須）：Firebase 11.4.0 と AdMob 11.5.0 に固定した理由</a></li>
+    <li><a href="/notes/torecadash-review/">App Store の審査で止まった四つ：iPad のスクショ、ITMS-91064、アカウント削除、投稿の通報</a></li>
+    <li><a href="/notes/review-info-needed/">App Store 審査で「Guideline 2.1 Information Needed」が届いた：求められた6つ</a></li>
+    <li><a href="/notes/apple-signin/">Firebase Auth：アプリを完全に終了すると、匿名アカウントが量産された（currentUser の復元待ち）</a></li>
   </ul>
   <h3 class="rv">ゲームの設計と測定</h3>
   <p class="rv">釣り合いを、AI 同士の対局や自動の試行で測って決めた記録。</p>
