@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Three mix-ups in splitting one article into products: a child treated as a parent, a shared link pointing to another store, a name owned by two products — Koshin Studio</title>
+<meta name="description" content="Reprocessing a split “child” hid 60 lotteries closing that day (23 stores); a link-only lookup shared by 13 stores picked another store’s parent; names claimed by two products numbered 267 pairs. Real items vanished with nothing on screen.">
+<meta property="og:title" content="Three mix-ups in splitting one article into products: a child treated as a parent, a shared link pointing to another store, a name owned by two products">
+<meta property="og:description" content="Reprocessing a split “child” hid 60 lotteries closing that day (23 stores); a link-only lookup shared by 13 stores picked another store’s parent; names claimed by two products numbered 267 pairs. Real items vanished with nothing on screen.">
+<meta property="og:type" content="article">
+<meta name="theme-color" content="#fbfaf7">
+<link rel="icon" href="/favicon.ico?v=1697d589" sizes="48x48">
+<link rel="icon" href="/favicon.svg?v=b9d7922f" type="image/svg+xml" sizes="any">
+<link rel="icon" href="/assets/icon/icon-192.png?v=e2566235" type="image/png" sizes="192x192">
+<link rel="apple-touch-icon" href="/assets/icon/icon-180.png?v=84e7f0e6">
+<link rel="manifest" href="/site.webmanifest">
+<script>document.documentElement.className+=" js"</script>
+<link rel="stylesheet" href="/style.css?v=dd51310c">
+<meta name="google-adsense-account" content="ca-pub-3863314847163872">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3863314847163872" crossorigin="anonymous"></script>
+<link rel="canonical" href="https://koshinstudio.com/en/notes/split-mixups/">
+<meta property="og:url" content="https://koshinstudio.com/en/notes/split-mixups/">
+<meta property="og:site_name" content="Koshin Studio">
+<meta property="og:locale" content="en_US">
+<link rel="alternate" hreflang="ja" href="https://koshinstudio.com/notes/split-mixups/">
+<link rel="alternate" hreflang="en" href="https://koshinstudio.com/en/notes/split-mixups/">
+<link rel="alternate" hreflang="x-default" href="https://koshinstudio.com/en/notes/split-mixups/">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="alternate" type="application/rss+xml" title="Koshin Studio — Notes" href="https://koshinstudio.com/feed.xml">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BlogPosting","headline":"Three mix-ups in splitting one article into products: a child treated as a parent, a shared link pointing to another store, a name owned by two products","url":"https://koshinstudio.com/en/notes/split-mixups/","description":"Reprocessing a split “child” hid 60 lotteries closing that day (23 stores); a link-only lookup shared by 13 stores picked another store’s parent; names claimed by two products numbered 267 pairs. Real items vanished with nothing on screen.","datePublished":"2026-10-17","dateModified":"2026-10-17","inLanguage":"en","image":"https://koshinstudio.com/assets/og/og_en_notes_split-mixups.jpg","author":{"@id":"https://koshinstudio.com#studio"},"publisher":{"@id":"https://koshinstudio.com#studio"},"mainEntityOfPage":"https://koshinstudio.com/en/notes/split-mixups/"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Koshin Studio","item":"https://koshinstudio.com/en/"},{"@type":"ListItem","position":2,"name":"Three mix-ups in splitting one article into products: a child treated as a parent, a shared link pointing to another store, a name owned by two products","item":"https://koshinstudio.com/en/notes/split-mixups/"}]}]}</script>
+<meta property="og:image" content="https://koshinstudio.com/assets/og/og_en_notes_split-mixups.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
+</head>
+<body class="article">
+<canvas id="motes"></canvas>
+
+<header class="site"><div class="wrap">
+  <a class="logo" href="/"><img class="logo-mark" src="/favicon.svg?v=b9d7922f" alt="" width="28" height="28">Koshin Studio</a>
+  <nav><a href="/works/">Works</a><a href="/notes/">Notes</a><a href="/picks/">Picks</a><a href="/calc/">Tools</a><a href="/about/">About</a></nav>
+</div></header>
+
+<main><div class="wrap">
+  <nav class="crumbs" aria-label="You are here"><a href="/en/">Koshin Studio</a><i aria-hidden="true">›</i><span aria-current="page">Splitting mix-ups</span></nav>
+  <h1>Three mix-ups in splitting one article into products: a child treated as a parent, a shared link pointing to another store, a name owned by two products</h1>  <div class="rule"></div>
+<!--lang-->
+  <p class="note"><a href="/notes/split-mixups/" hreflang="ja" lang="ja">日本語版</a></p>
+<!--/lang-->  <p class="lead">Development log of the Toreca Dash app / September 2026</p>
+
+  <p>My app Toreca Dash has a process that <strong>splits a store announcement into one article per product</strong>. If one announcement says “lotteries for Pokémon card A and B”, it makes an article for A and one for B. I call the split articles <em>children</em> and the original the <em>parent</em>.</p>
+  <p>Around this process I found three mix-ups. In each, <strong>a real lottery disappeared and nothing showed on screen</strong>.</p>
+  <p class="note">Numbers come from my work logs of September 2026 (including 5 and 20 September).</p>  <h2 class="rv" id="s1">1. Parent-level processing was applied to a child again (20 September)</h2>
+  <p>In a broad check I found that <strong>60 lotteries (23 stores) closing at 23:59 that day were all missing from the feed</strong>.</p>
+  <p>A child keeps the parent’s flyer image and the parent’s title (<code>splitFromTitle</code>). A job that re-asks about articles with several products looked at a child, read it as “9 products”, left the child’s product field empty and rewrote it as “9 items”. The next day a job that tidies generic articles (those that point to no particular product) judged it “a generic article with no product” and hid it.</p>
+  <p>The target product IDs were the same as the existing siblings, so zero new articles were made. <strong>Only that product vanished.</strong></p>
+  <p>The same root cause hit a second place: the check for result announcements and winner notices missed children because a child’s title is only the product name, and the body (the parent’s title) did not reach the check (16 articles).</p>
+  <p>The fix: when adding a job that collects, judges or hides articles, always decide to <strong>exclude children</strong> (articles with <code>splitFromArticleId</code>) or pass the parent title as body. The marker for “this is a child” is a field on the article, not a part of the URL, because URL markers are lost when application links are rewritten.</p>
+
+  <h2 class="rv" id="s2">2. Looking up the parent by link alone returned another store’s article</h2>
+  <p>Ten two-product announcements from one store chain were never split. The function that finds the parent looked it up <strong>by link alone</strong>.</p>
+  <p>That chain’s stores share one page, <strong>13 stores with the same link</strong>. A link-only lookup hit one of:</p>
+  <ul>
+    <li>an ID fixed by the link alone,</li>
+    <li>the first of the articles with that link,</li>
+    <li>a child whose marker was lost in a link rewrite (it has the parent’s link).</li>
+  </ul>
+  <p>As a result it <strong>split another store’s article, or a child, again and again</strong>. The log showed “split into 2 products” for the same parent each time.</p>
+  <p>A link is not a key that identifies a store. Shared pages, quotes and aggregator posts give several articles the same link. The fix: when looking up by link, <strong>add site and store name</strong> to the condition, and never take a child as a parent. “If the log shows the same parent ID again and again, suspect it” is now a lesson.</p>
+
+  <h2 class="rv" id="s3">3. A name claimed by two products identifies neither (5 September)</h2>
+  <p>Products have alternative names. “30th CELEBRATION BOX” was an alias of <strong>both</strong> the expansion pack “30th CELEBRATION” and a different product, “30th CELEBRATION FUTURISTIC BOX”.</p>
+  <p>That name identifies neither. If an AI sees it as a candidate, <strong>the result depends on which one it picked at that moment</strong>. 25 displayed articles were shown under the other product’s name.</p>
+  <p>Counting, such “names claimed by two or more products” numbered <strong>267 pairs and 321 articles</strong>.</p>
+  <p>The same shape: a step that cut store names “before the <code>＠</code>” merged three branches of one shop into <strong>one store</strong> and folded two of them away as duplicates every day.</p>
+  <p>The fix: whenever a system identifies something by name, <strong>count whether two or more things claim that name</strong>. An audit keeps it at zero. Keep a name only when it is mechanically decidable (exactly one product uses it as its official name); otherwise remove it from all. Put the same judgement at the entrance and in the cleaner, or what you remove is added back.</p>
+
+  <h2 class="rv" id="s4">What I learned</h2>
+  <blockquote>A split-off article is not the original. A name works as a key only if it has one owner.</blockquote>
+  <ul>
+    <li><strong>Do not re-run the original’s processing on derived items.</strong> Keep the child marker in a field of the article.</li>
+    <li><strong>A link is not a key.</strong> Also use site and store name.</li>
+    <li><strong>Count the owners of a name.</strong> A name claimed by two identifies nothing.</li>
+    <li><strong>When you add a job that hides things, count whether a replacement is really displayed.</strong> Looking only at the hidden side cannot show over-deletion.</li>
+  </ul>
+
+  <p class="note">This is the English version of <a href="/notes/split-mixups/" hreflang="ja" lang="ja">the original Japanese article</a>.</p>
+
+  <div class="rule" style="margin:40px 0 22px"></div>
+  <p class="eyebrow">More in English</p>
+  <ul class="plain">
+    <li><a href="/en/">All English pages</a></li>
+    <li><a href="/en/works/torecadash/">Toreca Dash</a></li>
+  </ul>
+</div>
+</main>
+
+<footer class="site"><div class="wrap"></div></footer>
+<script src="/motion.js?v=1e7447ec" defer></script>
+</body>
+</html>

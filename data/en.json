@@ -1,5 +1,33 @@
 [
   {
+    "ja": "/notes/same-page-not-same-store/",
+    "en": "/en/notes/same-page-not-same-store/",
+    "title": "“The same application page” does not mean “the same store”: 52 articles showed another store’s name",
+    "date": "2026-10-17",
+    "blurb": "A job that unified store names across articles sharing an application page turned a Sendai store into “Shinjuku South Exit”. One page was shared by 15 separate stores. I changed it to unify only when confirmed the same place and restored 52 articles from an untouched field."
+  },
+  {
+    "ja": "/notes/waiting-room/",
+    "en": "/en/notes/waiting-room/",
+    "title": "When first-come sales start, the site becomes a waiting-room page: a 15 KB notice slipped through an 8,000-byte gate",
+    "date": "2026-10-17",
+    "blurb": "On AEON Style Online, a first-come sale turned the whole site into a 15 KB “heavy access” page. It passed the 8,000-byte check added earlier that day and was read as “success, 0 products”. I switched to a title check; Amazon’s 13 minutes were serial AI screening."
+  },
+  {
+    "ja": "/notes/concurrency-slots/",
+    "en": "/en/notes/concurrency-slots/",
+    "title": "Before widening concurrency slots: widening a 2-core server from 8 to 14, and the earlier conclusion that was half wrong",
+    "date": "2026-10-17",
+    "blurb": "Shortening intervals made the 1-minute first-come monitor wait for a slot. I widened slots from 8 to 11 and 14 and measured. The real cap was not CPU but jobs sleeping on Rakuten API’s 1.5-second wait while holding slots."
+  },
+  {
+    "ja": "/notes/split-mixups/",
+    "en": "/en/notes/split-mixups/",
+    "title": "Three mix-ups in splitting one article into products: a child treated as a parent, a shared link pointing to another store, a name owned by two products",
+    "date": "2026-10-17",
+    "blurb": "Reprocessing a split “child” hid 60 lotteries closing that day (23 stores); a link-only lookup shared by 13 stores picked another store’s parent; names claimed by two products numbered 267 pairs. Real items vanished with nothing on screen."
+  },
+  {
     "ja": "/notes/self-inflicted/",
     "en": "/en/notes/self-inflicted/",
     "title": "Four times my own tools hurt me: a summary dropped conditions, one undefined stopped saving, a check locked out production, alerts that never cleared",

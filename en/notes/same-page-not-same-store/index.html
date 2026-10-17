@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>“The same application page” does not mean “the same store”: 52 articles showed another store’s name — Koshin Studio</title>
+<meta name="description" content="A job that unified store names across articles sharing an application page turned a Sendai store into “Shinjuku South Exit”. One page was shared by 15 separate stores. I changed it to unify only when confirmed the same place and restored 52 articles from an untouched field.">
+<meta property="og:title" content="“The same application page” does not mean “the same store”: 52 articles showed another store’s name">
+<meta property="og:description" content="A job that unified store names across articles sharing an application page turned a Sendai store into “Shinjuku South Exit”. One page was shared by 15 separate stores. I changed it to unify only when confirmed the same place and restored 52 articles from an untouched field.">
+<meta property="og:type" content="article">
+<meta name="theme-color" content="#fbfaf7">
+<link rel="icon" href="/favicon.ico?v=1697d589" sizes="48x48">
+<link rel="icon" href="/favicon.svg?v=b9d7922f" type="image/svg+xml" sizes="any">
+<link rel="icon" href="/assets/icon/icon-192.png?v=e2566235" type="image/png" sizes="192x192">
+<link rel="apple-touch-icon" href="/assets/icon/icon-180.png?v=84e7f0e6">
+<link rel="manifest" href="/site.webmanifest">
+<script>document.documentElement.className+=" js"</script>
+<link rel="stylesheet" href="/style.css?v=dd51310c">
+<meta name="google-adsense-account" content="ca-pub-3863314847163872">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3863314847163872" crossorigin="anonymous"></script>
+<link rel="canonical" href="https://koshinstudio.com/en/notes/same-page-not-same-store/">
+<meta property="og:url" content="https://koshinstudio.com/en/notes/same-page-not-same-store/">
+<meta property="og:site_name" content="Koshin Studio">
+<meta property="og:locale" content="en_US">
+<link rel="alternate" hreflang="ja" href="https://koshinstudio.com/notes/same-page-not-same-store/">
+<link rel="alternate" hreflang="en" href="https://koshinstudio.com/en/notes/same-page-not-same-store/">
+<link rel="alternate" hreflang="x-default" href="https://koshinstudio.com/en/notes/same-page-not-same-store/">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="alternate" type="application/rss+xml" title="Koshin Studio — Notes" href="https://koshinstudio.com/feed.xml">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BlogPosting","headline":"“The same application page” does not mean “the same store”: 52 articles showed another store’s name","url":"https://koshinstudio.com/en/notes/same-page-not-same-store/","description":"A job that unified store names across articles sharing an application page turned a Sendai store into “Shinjuku South Exit”. One page was shared by 15 separate stores. I changed it to unify only when confirmed the same place and restored 52 articles from an untouched field.","datePublished":"2026-10-17","dateModified":"2026-10-17","inLanguage":"en","image":"https://koshinstudio.com/assets/og/og_en_notes_same-page-not-same-store.jpg","author":{"@id":"https://koshinstudio.com#studio"},"publisher":{"@id":"https://koshinstudio.com#studio"},"mainEntityOfPage":"https://koshinstudio.com/en/notes/same-page-not-same-store/"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Koshin Studio","item":"https://koshinstudio.com/en/"},{"@type":"ListItem","position":2,"name":"“The same application page” does not mean “the same store”: 52 articles showed another store’s name","item":"https://koshinstudio.com/en/notes/same-page-not-same-store/"}]}]}</script>
+<meta property="og:image" content="https://koshinstudio.com/assets/og/og_en_notes_same-page-not-same-store.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
+</head>
+<body class="article">
+<canvas id="motes"></canvas>
+
+<header class="site"><div class="wrap">
+  <a class="logo" href="/"><img class="logo-mark" src="/favicon.svg?v=b9d7922f" alt="" width="28" height="28">Koshin Studio</a>
+  <nav><a href="/works/">Works</a><a href="/notes/">Notes</a><a href="/picks/">Picks</a><a href="/calc/">Tools</a><a href="/about/">About</a></nav>
+</div></header>
+
+<main><div class="wrap">
+  <nav class="crumbs" aria-label="You are here"><a href="/en/">Koshin Studio</a><i aria-hidden="true">›</i><span aria-current="page">Same page, not same store</span></nav>
+  <h1>“The same application page” does not mean “the same store”: 52 articles showed another store’s name</h1>  <div class="rule"></div>
+<!--lang-->
+  <p class="note"><a href="/notes/same-page-not-same-store/" hreflang="ja" lang="ja">日本語版</a></p>
+<!--/lang-->  <p class="lead">Development log of the Toreca Dash app / September 2026</p>
+
+  <p>In my app Toreca Dash a bug report said: “to users it looks like a different store’s lottery”. An article for a Sendai station store showed as “Shinjuku South Exit store”, and an article for a Hachioji flagship showed as “Noshiro store”. 52 articles were affected.</p>
+  <p>The cause was a wrong premise: <strong>“the same application page means the same store.”</strong></p>
+  <p class="note">Numbers come from my work log of 7 September 2026.</p>  <h2 class="rv" id="s1">The symptom: store names of other stores</h2>
+  <p>Articles carried the name of a different branch of the same chain. A user opens “the Sendai store’s lottery” and the text says Shinjuku. 52 articles were like that.</p>
+
+  <h2 class="rv" id="s2">The cause: the same page is not the same store</h2>
+  <p>A job unified the store name and deadline across articles that share an application page. Same lottery, same deadline; same store, same name, I assumed. It <strong>copied the highest-quality article’s store name to everyone in the group</strong>.</p>
+  <p>The premise did not hold. On real data:</p>
+  <div class="scroll rv"><table>
+    <thead><tr><th>Application page</th><th>Stores sharing it</th></tr></thead>
+    <tbody>
+      <tr><td>A page (1)</td><td><strong>15 separate stores</strong> (Sendai, Hamamatsu, Maebashi, Shiwa, Gamagori, Hiroshima and more)</td></tr>
+      <tr><td>A page (2)</td><td><strong>9 branches</strong> of one chain</td></tr>
+      <tr><td>A page (3)</td><td>One shop and three other chains (<strong>not even the same chain</strong>)</td></tr>
+    </tbody>
+  </table></div>
+  <p>Chains often use one application page for all stores. The same page does not mean the same store.</p>
+  <p>The same accident had already happened on the hiding side, and <strong>a guard existed there</strong> (the 51-branch case of one chain). <strong>I had forgotten to add it to the name-copying side.</strong> The same fix had not been applied to every entrance that uses the same judgement.</p>
+
+  <h2 class="rv" id="s3">A coordinates-only guard was not enough</h2>
+  <p>My first guard was “if coordinates disagree, they are different stores”. But for a group where <strong>only one article has coordinates</strong>, the “definitely different places” test returns false and passes. In a dry run (no writes), shops of three different chains were about to be rewritten as one store.</p>
+  <p>The lasting fix was to reverse the logic: <strong>“unify only when confirmed to be the same place”</strong>, not “do not unify when confirmed different”. Only when both have coordinates and they match. If coordinates are missing or differ, I respect each article’s own name. Deadlines are still unified, since they belong to the same lottery on the same page.</p>
+
+  <h2 class="rv" id="s4">Restoring the 52 articles</h2>
+  <p>I had not saved the original names. The clue was a field this job never touches (<code>category</code>), set when an article is created from its own source (the store’s X account or the aggregator row). I checked all 52 by eye, and category matched the source.</p>
+  <p>Coordinates could not serve as evidence. They are derived from the store name, so after a rewrite they were <strong>the coordinates of the wrong name</strong> (category was Sapporo Station but coordinates were Shinjuku). So I discarded coordinates too and put them back to be derived again.</p>
+  <ul>
+    <li>51 in a dry run, then the real run.</li>
+    <li>Afterwards, <strong>0 new overwrites</strong> (the guard works).</li>
+    <li>Only 2 displayed articles where name and category differed, both just different spellings of one store.</li>
+  </ul>
+
+  <h2 class="rv" id="s5">A bonus bug: items that could not enter the queue</h2>
+  <p>Trying to re-derive coordinates, none of 4 articles got their turn. The location fixer has two queues:</p>
+  <div class="scroll rv"><table>
+    <thead><tr><th>Queue</th><th>Contents</th></tr></thead>
+    <tbody>
+      <tr><td>Front (60 at a time)</td><td>Articles that want coordinates</td></tr>
+      <tr><td>Retry (a 300-item window)</td><td>658 measured, of which only <strong>34</strong> truly lacked coordinates</td></tr>
+    </tbody>
+  </table></div>
+  <p>The retry queue <strong>also held items that had been solved</strong> (success wrote the flag as false and left it in the queue). 624 finished articles filled the window, so the 34 that needed work never got a turn.</p>
+  <p>The fix: when solved, <strong>delete</strong> the flag. It sits in neither queue.</p>
+
+  <h2 class="rv" id="s6">What I learned</h2>
+  <blockquote>Before assuming “the same”, confirm “the same”.</blockquote>
+  <ul>
+    <li><strong>The same link does not mean the same store.</strong> Shared pages are normal.</li>
+    <li><strong>Unify only what you have confirmed is the same.</strong> If you cannot confirm, do not touch it.</li>
+    <li><strong>Apply a fix to every entrance that uses the same judgement.</strong> Adding it to one leaves the other.</li>
+    <li><strong>If you did not save the original, restore from a field you did not touch</strong>, and check it by eye, one by one.</li>
+    <li><strong>Setting a flag to false is not deleting it.</strong> It stays in the queue.</li>
+  </ul>
+
+  <p class="note">This is the English version of <a href="/notes/same-page-not-same-store/" hreflang="ja" lang="ja">the original Japanese article</a>.</p>
+
+  <div class="rule" style="margin:40px 0 22px"></div>
+  <p class="eyebrow">More in English</p>
+  <ul class="plain">
+    <li><a href="/en/">All English pages</a></li>
+    <li><a href="/en/works/torecadash/">Toreca Dash</a></li>
+  </ul>
+</div>
+</main>
+
+<footer class="site"><div class="wrap"></div></footer>
+<script src="/motion.js?v=1e7447ec" defer></script>
+</body>
+</html>

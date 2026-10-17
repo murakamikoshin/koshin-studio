@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Before widening concurrency slots: widening a 2-core server from 8 to 14, and the earlier conclusion that was half wrong — Koshin Studio</title>
+<meta name="description" content="Shortening intervals made the 1-minute first-come monitor wait for a slot. I widened slots from 8 to 11 and 14 and measured. The real cap was not CPU but jobs sleeping on Rakuten API’s 1.5-second wait while holding slots.">
+<meta property="og:title" content="Before widening concurrency slots: widening a 2-core server from 8 to 14, and the earlier conclusion that was half wrong">
+<meta property="og:description" content="Shortening intervals made the 1-minute first-come monitor wait for a slot. I widened slots from 8 to 11 and 14 and measured. The real cap was not CPU but jobs sleeping on Rakuten API’s 1.5-second wait while holding slots.">
+<meta property="og:type" content="article">
+<meta name="theme-color" content="#fbfaf7">
+<link rel="icon" href="/favicon.ico?v=1697d589" sizes="48x48">
+<link rel="icon" href="/favicon.svg?v=b9d7922f" type="image/svg+xml" sizes="any">
+<link rel="icon" href="/assets/icon/icon-192.png?v=e2566235" type="image/png" sizes="192x192">
+<link rel="apple-touch-icon" href="/assets/icon/icon-180.png?v=84e7f0e6">
+<link rel="manifest" href="/site.webmanifest">
+<script>document.documentElement.className+=" js"</script>
+<link rel="stylesheet" href="/style.css?v=dd51310c">
+<meta name="google-adsense-account" content="ca-pub-3863314847163872">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3863314847163872" crossorigin="anonymous"></script>
+<link rel="canonical" href="https://koshinstudio.com/en/notes/concurrency-slots/">
+<meta property="og:url" content="https://koshinstudio.com/en/notes/concurrency-slots/">
+<meta property="og:site_name" content="Koshin Studio">
+<meta property="og:locale" content="en_US">
+<link rel="alternate" hreflang="ja" href="https://koshinstudio.com/notes/concurrency-slots/">
+<link rel="alternate" hreflang="en" href="https://koshinstudio.com/en/notes/concurrency-slots/">
+<link rel="alternate" hreflang="x-default" href="https://koshinstudio.com/en/notes/concurrency-slots/">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="alternate" type="application/rss+xml" title="Koshin Studio — Notes" href="https://koshinstudio.com/feed.xml">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BlogPosting","headline":"Before widening concurrency slots: widening a 2-core server from 8 to 14, and the earlier conclusion that was half wrong","url":"https://koshinstudio.com/en/notes/concurrency-slots/","description":"Shortening intervals made the 1-minute first-come monitor wait for a slot. I widened slots from 8 to 11 and 14 and measured. The real cap was not CPU but jobs sleeping on Rakuten API’s 1.5-second wait while holding slots.","datePublished":"2026-10-17","dateModified":"2026-10-17","inLanguage":"en","image":"https://koshinstudio.com/assets/og/og_en_notes_concurrency-slots.jpg","author":{"@id":"https://koshinstudio.com#studio"},"publisher":{"@id":"https://koshinstudio.com#studio"},"mainEntityOfPage":"https://koshinstudio.com/en/notes/concurrency-slots/"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Koshin Studio","item":"https://koshinstudio.com/en/"},{"@type":"ListItem","position":2,"name":"Before widening concurrency slots: widening a 2-core server from 8 to 14, and the earlier conclusion that was half wrong","item":"https://koshinstudio.com/en/notes/concurrency-slots/"}]}]}</script>
+<meta property="og:image" content="https://koshinstudio.com/assets/og/og_en_notes_concurrency-slots.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
+</head>
+<body class="article">
+<canvas id="motes"></canvas>
+
+<header class="site"><div class="wrap">
+  <a class="logo" href="/"><img class="logo-mark" src="/favicon.svg?v=b9d7922f" alt="" width="28" height="28">Koshin Studio</a>
+  <nav><a href="/works/">Works</a><a href="/notes/">Notes</a><a href="/picks/">Picks</a><a href="/calc/">Tools</a><a href="/about/">About</a></nav>
+</div></header>
+
+<main><div class="wrap">
+  <nav class="crumbs" aria-label="You are here"><a href="/en/">Koshin Studio</a><i aria-hidden="true">›</i><span aria-current="page">Concurrency slots</span></nav>
+  <h1>Before widening concurrency slots: widening a 2-core server from 8 to 14, and the earlier conclusion that was half wrong</h1>  <div class="rule"></div>
+<!--lang-->
+  <p class="note"><a href="/notes/concurrency-slots/" hreflang="ja" lang="ja">日本語版</a></p>
+<!--/lang-->  <p class="lead">Development log of the Toreca Dash app / September 2026</p>
+
+  <p>The back end of my app Toreca Dash runs over 200 scheduled jobs on one small server (2 cores, 3.8 GB of memory). The number of jobs that can run at once is capped: the <strong>concurrency slots</strong>.</p>
+  <p>On 7 September 2026, when I shortened some intervals to speed up first-come monitoring, <strong>the monitor I most wanted fast was slowed by waiting for a slot</strong>. I raised the slots from 8 to 11 and then 14. This is the record of that decision and of what to look at.</p>
+  <p class="note">Numbers come from my work log of 7 September 2026.</p>  <h2 class="rv" id="s1">8 slots were not enough</h2>
+  <p>To speed up first-come monitoring I shortened several intervals. Then the one-minute “instant sell-out monitor” started being skipped, because all 8 slots were full.</p>
+  <div class="scroll rv"><table>
+    <thead><tr><th></th><th>8 slots (after shortening)</th><th>11 slots</th></tr></thead>
+    <tbody>
+      <tr><td>Queue length</td><td>17–29</td><td><strong>0</strong></td></tr>
+      <tr><td>Running at once</td><td>pinned at 8</td><td><strong>6 / 11 (room)</strong></td></tr>
+      <tr><td>Monitor skips</td><td>6 per 10 min</td><td><strong>1 per 10 min</strong></td></tr>
+      <tr><td>Load average</td><td>1.62</td><td><strong>1.24</strong></td></tr>
+      <tr><td>Memory</td><td>1,161 MB</td><td><strong>667 MB</strong></td></tr>
+    </tbody>
+  </table></div>
+  <p>With 11 slots the queue was 0 and load and memory fell. Most jobs only wait for network replies and use no CPU. <strong>The cap was the slots, not the CPU.</strong></p>
+  <p>The slot value lives only in a server settings file (<code>runner.env</code>) and <strong>never enters git</strong>, because the deploy script does not send it. Looking at the repository would not show this change, so I wrote it down and kept a backup of the old value.</p>
+
+  <h2 class="rv" id="s2">“Only 2 cores, so no more” was half wrong</h2>
+  <p>Later I added a lane for popular sets and a fastest lane. Concurrency pinned at 11, the queue grew to 15 and the monitor was skipped twice (effective interval 1.0 to 1.4 minutes).</p>
+  <ul>
+    <li>2 cores, load 1.66, 83% of them.</li>
+    <li>Long Rakuten jobs <strong>hold a slot while sleeping on the API’s 1.5-second wait</strong>: stock recheck 240 s, marketplace 181 s, new listings 110 s, stock 104 s.</li>
+    <li>They use no CPU yet consume slots, the hardest culprit to see.</li>
+  </ul>
+  <p>At the time I concluded “with 2 cores, widening the slots would just slow everything” and reduced the Rakuten popular lanes.</p>
+  <div class="scroll rv"><table>
+    <thead><tr><th></th><th>After adding</th><th>After reducing</th></tr></thead>
+    <tbody>
+      <tr><td>Concurrency</td><td>pinned at 11</td><td>9–11</td></tr>
+      <tr><td>Queue</td><td>up to 15</td><td>0–1</td></tr>
+      <tr><td>Monitor skips</td><td>2 per 10 min</td><td><strong>0</strong></td></tr>
+      <tr><td>Monitor effective interval</td><td>1.4 min</td><td><strong>1.0 min</strong></td></tr>
+      <tr><td>Load</td><td>1.66</td><td>1.25</td></tr>
+    </tbody>
+  </table></div>
+  <p>That conclusion turned out <strong>half wrong</strong>. The Rakuten jobs holding slots are asleep on the API wait and use no CPU. More slots only means “more can sleep at once”, not more CPU contention. I measured again with 11 and 14:</p>
+  <div class="scroll rv"><table>
+    <thead><tr><th></th><th>11 slots</th><th>14 slots</th></tr></thead>
+    <tbody>
+      <tr><td>Monitor skips</td><td>1 per 5 min</td><td><strong>0 per 6.7 min</strong></td></tr>
+      <tr><td>Effective interval</td><td>1.3 min</td><td><strong>1.0 min</strong></td></tr>
+      <tr><td>Load</td><td>1.25</td><td><strong>1.25 (unchanged)</strong></td></tr>
+    </tbody>
+  </table></div>
+
+  <h2 class="rv" id="s3">The deciding question: CPU-bound or waiting?</h2>
+  <ul>
+    <li>If waiting jobs hold the slots, widen them, after checking load (<code>uptime</code>) does not rise.</li>
+    <li>If CPU-bound jobs hold them, widening slows everything.</li>
+  </ul>
+  <p>Two places to look: the <strong>queue length</strong> (<code>queued</code> in the health check; if it is always at least 1 there is no spare), and the <strong>average run time per job</strong>, longest first. If long Rakuten-API jobs top the list, they are the ones sleeping on slots.</p>
+  <p>That day I made the same regression <strong>four times</strong>: Amazon every 5 minutes, Amazon-like store every 5 minutes, batched Rakuten popular lanes, Rakuten popular lanes every 10 minutes. Each time I meant to speed up and instead ate slots and slowed the one I cared about.</p>
+
+  <h2 class="rv" id="s4">What I learned</h2>
+  <blockquote>Do not count slots; look at what holds them.</blockquote>
+  <ul>
+    <li><strong>A job whose run time ≥ its interval occupies a slot.</strong> The faster it goes, the more others wait.</li>
+    <li><strong>Measure what the limit really is.</strong> CPU or slots? Look at load and memory.</li>
+    <li><strong>A previous conclusion can be half wrong.</strong> “2 cores, so no” did not apply to waiting jobs.</li>
+    <li><strong>Record settings that are not in git.</strong> A value only on the server is invisible in the repository.</li>
+    <li><strong>To speed one thing up, slow another down.</strong> Decide what to protect first.</li>
+  </ul>
+
+  <p class="note">This is the English version of <a href="/notes/concurrency-slots/" hreflang="ja" lang="ja">the original Japanese article</a>.</p>
+
+  <div class="rule" style="margin:40px 0 22px"></div>
+  <p class="eyebrow">More in English</p>
+  <ul class="plain">
+    <li><a href="/en/">All English pages</a></li>
+    <li><a href="/en/works/torecadash/">Toreca Dash</a></li>
+  </ul>
+</div>
+</main>
+
+<footer class="site"><div class="wrap"></div></footer>
+<script src="/motion.js?v=1e7447ec" defer></script>
+</body>
+</html>

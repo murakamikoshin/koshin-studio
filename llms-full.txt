@@ -569,6 +569,8 @@ URL: https://koshinstudio.com/notes/same-page-not-same-store/
 
 # 「同じ応募ページ」なら「同じ店」と決めつけていた：店名が別の店になった記事 52 件
 
+  English version (https://koshinstudio.com/en/notes/same-page-not-same-store/)
+
   トレカダッシュ 開発の記録 ／ 2026年9月
 
   iOS アプリ「トレカダッシュ (https://koshinstudio.com/works/torecadash/)」で、「利用者には、違う店の抽選に見える」という不具合が見つかりました。仙台駅前店の記事が「新宿南口店」と表示され、八王子本店の記事が「能代店」と表示されていました。52 件でした。
@@ -660,6 +662,8 @@ URL: https://koshinstudio.com/notes/waiting-room/
 
 # 先着が始まった瞬間、サイトが順番待ちのページになる：8,000 バイトの関門を、15KB の案内ページがすり抜けた
 
+  English version (https://koshinstudio.com/en/notes/waiting-room/)
+
   トレカダッシュ 開発の記録 ／ 2026年9月
 
   iOS アプリ「トレカダッシュ (https://koshinstudio.com/works/torecadash/)」は、通販サイトの販売ページを定期的に読んで、先着や抽選の情報を集めています。前に書いた (https://koshinstudio.com/notes/blocked-page/)とおり、「取れた」の判定に穴があり、案内ページを成功と読んでいた事件がありました。その判定を直したのと同じ日（2026 年 9 月 7 日）のうちに、同じ種類の穴が、別の形でもう 1 つ見つかりました。
@@ -730,6 +734,8 @@ URL: https://koshinstudio.com/notes/waiting-room/
 URL: https://koshinstudio.com/notes/concurrency-slots/
 
 # 同時実行の枠を増やす前に見るもの：2 コアのサーバーで、枠を 8 から 14 にした判断と、半分間違っていた前の結論
+
+  English version (https://koshinstudio.com/en/notes/concurrency-slots/)
 
   トレカダッシュ 開発の記録 ／ 2026年9月
 
@@ -1254,6 +1260,8 @@ URL: https://koshinstudio.com/notes/interval-vs-delivery/
 URL: https://koshinstudio.com/notes/split-mixups/
 
 # 1 つの記事を商品ごとに分ける処理で起きた 3 つの取り違え：子が親になり、共有リンクが別の店を指し、名前が 2 つの商品のものだった
+
+  English version (https://koshinstudio.com/en/notes/split-mixups/)
 
   トレカダッシュ 開発の記録 ／ 2026年9月
 
@@ -6712,6 +6720,348 @@ URL: https://koshinstudio.com/privacy/
 
 ---
 
+URL: https://koshinstudio.com/en/notes/same-page-not-same-store/
+
+# “The same application page” does not mean “the same store”: 52 articles showed another store’s name
+
+  日本語版 (https://koshinstudio.com/notes/same-page-not-same-store/)
+
+  Development log of the Toreca Dash app / September 2026
+
+  In my app Toreca Dash a bug report said: “to users it looks like a different store’s lottery”. An article for a Sendai station store showed as “Shinjuku South Exit store”, and an article for a Hachioji flagship showed as “Noshiro store”. 52 articles were affected.
+
+  The cause was a wrong premise: “the same application page means the same store.”
+
+  Numbers come from my work log of 7 September 2026.
+
+## The symptom: store names of other stores
+
+  Articles carried the name of a different branch of the same chain. A user opens “the Sendai store’s lottery” and the text says Shinjuku. 52 articles were like that.
+
+## The cause: the same page is not the same store
+
+  A job unified the store name and deadline across articles that share an application page. Same lottery, same deadline; same store, same name, I assumed. It copied the highest-quality article’s store name to everyone in the group.
+
+  The premise did not hold. On real data:
+
+    Application page | Stores sharing it
+
+      A page (1) | 15 separate stores (Sendai, Hamamatsu, Maebashi, Shiwa, Gamagori, Hiroshima and more)
+
+      A page (2) | 9 branches of one chain
+
+      A page (3) | One shop and three other chains (not even the same chain)
+
+  Chains often use one application page for all stores. The same page does not mean the same store.
+
+  The same accident had already happened on the hiding side, and a guard existed there (the 51-branch case of one chain). I had forgotten to add it to the name-copying side. The same fix had not been applied to every entrance that uses the same judgement.
+
+## A coordinates-only guard was not enough
+
+  My first guard was “if coordinates disagree, they are different stores”. But for a group where only one article has coordinates, the “definitely different places” test returns false and passes. In a dry run (no writes), shops of three different chains were about to be rewritten as one store.
+
+  The lasting fix was to reverse the logic: “unify only when confirmed to be the same place”, not “do not unify when confirmed different”. Only when both have coordinates and they match. If coordinates are missing or differ, I respect each article’s own name. Deadlines are still unified, since they belong to the same lottery on the same page.
+
+## Restoring the 52 articles
+
+  I had not saved the original names. The clue was a field this job never touches (category), set when an article is created from its own source (the store’s X account or the aggregator row). I checked all 52 by eye, and category matched the source.
+
+  Coordinates could not serve as evidence. They are derived from the store name, so after a rewrite they were the coordinates of the wrong name (category was Sapporo Station but coordinates were Shinjuku). So I discarded coordinates too and put them back to be derived again.
+
+- 51 in a dry run, then the real run.
+
+- Afterwards, 0 new overwrites (the guard works).
+
+- Only 2 displayed articles where name and category differed, both just different spellings of one store.
+
+## A bonus bug: items that could not enter the queue
+
+  Trying to re-derive coordinates, none of 4 articles got their turn. The location fixer has two queues:
+
+    Queue | Contents
+
+      Front (60 at a time) | Articles that want coordinates
+
+      Retry (a 300-item window) | 658 measured, of which only 34 truly lacked coordinates
+
+  The retry queue also held items that had been solved (success wrote the flag as false and left it in the queue). 624 finished articles filled the window, so the 34 that needed work never got a turn.
+
+  The fix: when solved, delete the flag. It sits in neither queue.
+
+## What I learned
+
+> Before assuming “the same”, confirm “the same”.
+
+- The same link does not mean the same store. Shared pages are normal.
+
+- Unify only what you have confirmed is the same. If you cannot confirm, do not touch it.
+
+- Apply a fix to every entrance that uses the same judgement. Adding it to one leaves the other.
+
+- If you did not save the original, restore from a field you did not touch, and check it by eye, one by one.
+
+- Setting a flag to false is not deleting it. It stays in the queue.
+
+  This is the English version of the original Japanese article (https://koshinstudio.com/notes/same-page-not-same-store/).
+
+  More in English
+
+- All English pages (https://koshinstudio.com/en/)
+
+- Toreca Dash (https://koshinstudio.com/en/works/torecadash/)
+
+
+---
+
+URL: https://koshinstudio.com/en/notes/waiting-room/
+
+# When first-come sales start, the site becomes a waiting-room page: a 15 KB notice slipped through an 8,000-byte gate
+
+  日本語版 (https://koshinstudio.com/notes/waiting-room/)
+
+  Development log of the Toreca Dash app / September 2026
+
+  My app Toreca Dash reads shopping-site pages to collect first-come and lottery information. As I wrote in an earlier article (https://koshinstudio.com/en/notes/blocked-page/), my “was it fetched?” check had a hole and treated a notice page as success. On the very day I fixed it (7 September 2026), I found another hole of the same kind in a different shape.
+
+  And it occurred at the moment when missing something matters most.
+
+  Numbers come from my work log of 7 September 2026.
+
+## When first-come sales start, the site becomes a waiting-room page
+
+  A report came: “AEON Style Online seems to have first-come sales too”, “it seems to have started at exactly 14:00”. So I tried fetching at that moment.
+
+    Method | Result
+
+      Plain request | 403 (blocked by bot protection)
+
+      Scraping service, cheap setting | 200, 15,188 bytes, title “Notice: heavy access”
+
+      Scraping service, super | 200, 15,188 bytes, same
+
+      Scraping service, super + render | 200, 15,459 bytes, same
+
+  The instant a first-come sale starts, the whole site becomes a waiting-room page, and every setting returns the same notice.
+
+## A 15 KB notice slipped through an 8,000-byte gate
+
+  The “not fetched” check I had added earlier that day looked for a JavaScript notice inside pages under 8,000 bytes. Large legitimate pages also contain the same sentence.
+
+  This waiting-room page is about 15 KB. It passed the gate and was read as “fetch succeeded, 0 products”. It failed silently at the moment I most needed it.
+
+  The fix: look at the title, not the size. If the title contains “heavy access” or “we will guide you in order”, treat it as a failure. I limited it to the title so legitimate pages that merely mention those words are not caught.
+
+  I also changed the frequency from every 3 hours to every 15 minutes. At about 21 credits a run it is costly, but about 6,000 credits a day stays within 92% of the remaining balance.
+
+## Two more causes of slowness found the same day
+
+  Amazon’s 13 minutes were AI screening, not fetching. The Amazon monitor ran every 30 minutes, one scan took 13 minutes and the worst delay was about 43 minutes. The meter showed the time went to AI screening of new listings (421 a day, about ¥10). Fetching itself cost only 1,047 credits a day. The cause was handling 15 genres one at a time. They are independent, so I ran 4 in parallel, with a 10-minute interval and 8-minute runs. AI screening runs only for new listings, so cost does not rise with patrol frequency.
+
+  Even when found fast, 17% were not notified. Finding things sooner means nothing if notifications stop afterwards. Counting what was delivered showed another hole (see the article on counting notifications (https://koshinstudio.com/en/notes/interval-vs-delivery/)).
+
+## What I learned
+
+> A hole in a judgement widens at the most important moment.
+
+- A notice page has more than one shape. Short ones and big waiting-room pages. Size cannot tell them apart.
+
+- Changing where you look reduces collateral. Title, not body, so legitimate pages are not caught.
+
+- When a report arrives, measure at that time, on the spot. “It started at 14:00” was the last chance to reproduce.
+
+- Check where slow time really goes. Amazon’s 13 minutes were serial AI screening, not fetching.
+
+  This is the English version of the original Japanese article (https://koshinstudio.com/notes/waiting-room/).
+
+  More in English
+
+- All English pages (https://koshinstudio.com/en/)
+
+- Toreca Dash (https://koshinstudio.com/en/works/torecadash/)
+
+
+---
+
+URL: https://koshinstudio.com/en/notes/concurrency-slots/
+
+# Before widening concurrency slots: widening a 2-core server from 8 to 14, and the earlier conclusion that was half wrong
+
+  日本語版 (https://koshinstudio.com/notes/concurrency-slots/)
+
+  Development log of the Toreca Dash app / September 2026
+
+  The back end of my app Toreca Dash runs over 200 scheduled jobs on one small server (2 cores, 3.8 GB of memory). The number of jobs that can run at once is capped: the concurrency slots.
+
+  On 7 September 2026, when I shortened some intervals to speed up first-come monitoring, the monitor I most wanted fast was slowed by waiting for a slot. I raised the slots from 8 to 11 and then 14. This is the record of that decision and of what to look at.
+
+  Numbers come from my work log of 7 September 2026.
+
+## 8 slots were not enough
+
+  To speed up first-come monitoring I shortened several intervals. Then the one-minute “instant sell-out monitor” started being skipped, because all 8 slots were full.
+
+     | 8 slots (after shortening) | 11 slots
+
+      Queue length | 17–29 | 0
+
+      Running at once | pinned at 8 | 6 / 11 (room)
+
+      Monitor skips | 6 per 10 min | 1 per 10 min
+
+      Load average | 1.62 | 1.24
+
+      Memory | 1,161 MB | 667 MB
+
+  With 11 slots the queue was 0 and load and memory fell. Most jobs only wait for network replies and use no CPU. The cap was the slots, not the CPU.
+
+  The slot value lives only in a server settings file (runner.env) and never enters git, because the deploy script does not send it. Looking at the repository would not show this change, so I wrote it down and kept a backup of the old value.
+
+## “Only 2 cores, so no more” was half wrong
+
+  Later I added a lane for popular sets and a fastest lane. Concurrency pinned at 11, the queue grew to 15 and the monitor was skipped twice (effective interval 1.0 to 1.4 minutes).
+
+- 2 cores, load 1.66, 83% of them.
+
+- Long Rakuten jobs hold a slot while sleeping on the API’s 1.5-second wait: stock recheck 240 s, marketplace 181 s, new listings 110 s, stock 104 s.
+
+- They use no CPU yet consume slots, the hardest culprit to see.
+
+  At the time I concluded “with 2 cores, widening the slots would just slow everything” and reduced the Rakuten popular lanes.
+
+     | After adding | After reducing
+
+      Concurrency | pinned at 11 | 9–11
+
+      Queue | up to 15 | 0–1
+
+      Monitor skips | 2 per 10 min | 0
+
+      Monitor effective interval | 1.4 min | 1.0 min
+
+      Load | 1.66 | 1.25
+
+  That conclusion turned out half wrong. The Rakuten jobs holding slots are asleep on the API wait and use no CPU. More slots only means “more can sleep at once”, not more CPU contention. I measured again with 11 and 14:
+
+     | 11 slots | 14 slots
+
+      Monitor skips | 1 per 5 min | 0 per 6.7 min
+
+      Effective interval | 1.3 min | 1.0 min
+
+      Load | 1.25 | 1.25 (unchanged)
+
+## The deciding question: CPU-bound or waiting?
+
+- If waiting jobs hold the slots, widen them, after checking load (uptime) does not rise.
+
+- If CPU-bound jobs hold them, widening slows everything.
+
+  Two places to look: the queue length (queued in the health check; if it is always at least 1 there is no spare), and the average run time per job, longest first. If long Rakuten-API jobs top the list, they are the ones sleeping on slots.
+
+  That day I made the same regression four times: Amazon every 5 minutes, Amazon-like store every 5 minutes, batched Rakuten popular lanes, Rakuten popular lanes every 10 minutes. Each time I meant to speed up and instead ate slots and slowed the one I cared about.
+
+## What I learned
+
+> Do not count slots; look at what holds them.
+
+- A job whose run time ≥ its interval occupies a slot. The faster it goes, the more others wait.
+
+- Measure what the limit really is. CPU or slots? Look at load and memory.
+
+- A previous conclusion can be half wrong. “2 cores, so no” did not apply to waiting jobs.
+
+- Record settings that are not in git. A value only on the server is invisible in the repository.
+
+- To speed one thing up, slow another down. Decide what to protect first.
+
+  This is the English version of the original Japanese article (https://koshinstudio.com/notes/concurrency-slots/).
+
+  More in English
+
+- All English pages (https://koshinstudio.com/en/)
+
+- Toreca Dash (https://koshinstudio.com/en/works/torecadash/)
+
+
+---
+
+URL: https://koshinstudio.com/en/notes/split-mixups/
+
+# Three mix-ups in splitting one article into products: a child treated as a parent, a shared link pointing to another store, a name owned by two products
+
+  日本語版 (https://koshinstudio.com/notes/split-mixups/)
+
+  Development log of the Toreca Dash app / September 2026
+
+  My app Toreca Dash has a process that splits a store announcement into one article per product. If one announcement says “lotteries for Pokémon card A and B”, it makes an article for A and one for B. I call the split articles children and the original the parent.
+
+  Around this process I found three mix-ups. In each, a real lottery disappeared and nothing showed on screen.
+
+  Numbers come from my work logs of September 2026 (including 5 and 20 September).
+
+## 1. Parent-level processing was applied to a child again (20 September)
+
+  In a broad check I found that 60 lotteries (23 stores) closing at 23:59 that day were all missing from the feed.
+
+  A child keeps the parent’s flyer image and the parent’s title (splitFromTitle). A job that re-asks about articles with several products looked at a child, read it as “9 products”, left the child’s product field empty and rewrote it as “9 items”. The next day a job that tidies generic articles (those that point to no particular product) judged it “a generic article with no product” and hid it.
+
+  The target product IDs were the same as the existing siblings, so zero new articles were made. Only that product vanished.
+
+  The same root cause hit a second place: the check for result announcements and winner notices missed children because a child’s title is only the product name, and the body (the parent’s title) did not reach the check (16 articles).
+
+  The fix: when adding a job that collects, judges or hides articles, always decide to exclude children (articles with splitFromArticleId) or pass the parent title as body. The marker for “this is a child” is a field on the article, not a part of the URL, because URL markers are lost when application links are rewritten.
+
+## 2. Looking up the parent by link alone returned another store’s article
+
+  Ten two-product announcements from one store chain were never split. The function that finds the parent looked it up by link alone.
+
+  That chain’s stores share one page, 13 stores with the same link. A link-only lookup hit one of:
+
+- an ID fixed by the link alone,
+
+- the first of the articles with that link,
+
+- a child whose marker was lost in a link rewrite (it has the parent’s link).
+
+  As a result it split another store’s article, or a child, again and again. The log showed “split into 2 products” for the same parent each time.
+
+  A link is not a key that identifies a store. Shared pages, quotes and aggregator posts give several articles the same link. The fix: when looking up by link, add site and store name to the condition, and never take a child as a parent. “If the log shows the same parent ID again and again, suspect it” is now a lesson.
+
+## 3. A name claimed by two products identifies neither (5 September)
+
+  Products have alternative names. “30th CELEBRATION BOX” was an alias of both the expansion pack “30th CELEBRATION” and a different product, “30th CELEBRATION FUTURISTIC BOX”.
+
+  That name identifies neither. If an AI sees it as a candidate, the result depends on which one it picked at that moment. 25 displayed articles were shown under the other product’s name.
+
+  Counting, such “names claimed by two or more products” numbered 267 pairs and 321 articles.
+
+  The same shape: a step that cut store names “before the ＠” merged three branches of one shop into one store and folded two of them away as duplicates every day.
+
+  The fix: whenever a system identifies something by name, count whether two or more things claim that name. An audit keeps it at zero. Keep a name only when it is mechanically decidable (exactly one product uses it as its official name); otherwise remove it from all. Put the same judgement at the entrance and in the cleaner, or what you remove is added back.
+
+## What I learned
+
+> A split-off article is not the original. A name works as a key only if it has one owner.
+
+- Do not re-run the original’s processing on derived items. Keep the child marker in a field of the article.
+
+- A link is not a key. Also use site and store name.
+
+- Count the owners of a name. A name claimed by two identifies nothing.
+
+- When you add a job that hides things, count whether a replacement is really displayed. Looking only at the hidden side cannot show over-deletion.
+
+  This is the English version of the original Japanese article (https://koshinstudio.com/notes/split-mixups/).
+
+  More in English
+
+- All English pages (https://koshinstudio.com/en/)
+
+- Toreca Dash (https://koshinstudio.com/en/works/torecadash/)
+
+
+---
+
 URL: https://koshinstudio.com/en/notes/self-inflicted/
 
 # Four times my own tools hurt me: a summary dropped conditions, one undefined stopped saving, a check locked out production, alerts that never cleared
@@ -11541,6 +11891,14 @@ URL: https://koshinstudio.com/en/
 - Every deploy re-ran the daily jobs: 477 runs in 48 hours, 46.6% of that day’s Gemini cost (https://koshinstudio.com/en/notes/rerun-on-deploy/)
 
 - Four times my own tools hurt me: a summary dropped conditions, one undefined stopped saving, a check locked out production, alerts that never cleared (https://koshinstudio.com/en/notes/self-inflicted/)
+
+- Before widening concurrency slots: widening a 2-core server from 8 to 14, and the earlier conclusion that was half wrong (https://koshinstudio.com/en/notes/concurrency-slots/)
+
+- “The same application page” does not mean “the same store”: 52 articles showed another store’s name (https://koshinstudio.com/en/notes/same-page-not-same-store/)
+
+- Three mix-ups in splitting one article into products: a child treated as a parent, a shared link pointing to another store, a name owned by two products (https://koshinstudio.com/en/notes/split-mixups/)
+
+- When first-come sales start, the site becomes a waiting-room page: a 15 KB notice slipped through an 8,000-byte gate (https://koshinstudio.com/en/notes/waiting-room/)
 
 ## Languages
 

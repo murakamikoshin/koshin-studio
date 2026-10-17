@@ -46,8 +46,7 @@
   <h1>配備のたびに、日次の処理が丸ごと走り直していた：48 時間で 477 回、その日の Gemini 費用の 46.6%</h1>  <div class="rule"></div>
 <!--lang-->
   <p class="note"><a href="/en/notes/rerun-on-deploy/" hreflang="en" lang="en">English version</a></p>
-<!--/lang-->
-  <p class="lead">トレカダッシュ 開発の記録 ／ 2026年9月</p>
+<!--/lang-->  <p class="lead">トレカダッシュ 開発の記録 ／ 2026年9月</p>
 
   <p>iOS アプリ「<a href="/works/torecadash/">トレカダッシュ</a>」の裏側では、定期的に動く処理がたくさん動いています。その中に、「1 日に 1 回だけ動くはず」の処理がありました。ところが、ある日のログを数えると、<strong>その処理が 43 回動いていました</strong>。</p>
   <p>この記事は、そこから見つかった、「配備（コードを入れ替えて再起動すること）のたびに、日次の処理が丸ごと走り直していた」不具合の記録です。</p>
