@@ -96,7 +96,7 @@
   <url><loc>https://koshinstudio.com/notes/card-supplies-guide/</loc><lastmod>2026-10-17</lastmod><priority>0.8</priority></url>
   <url><loc>https://koshinstudio.com/notes/catalog-seed-393/</loc><lastmod>2026-10-17</lastmod><priority>0.8</priority></url>
   <url><loc>https://koshinstudio.com/notes/claude-vs-gemini-api/</loc><lastmod>2026-10-17</lastmod><priority>0.8</priority></url>
-  <url><loc>https://koshinstudio.com/notes/cleanup-hides-entrance/</loc><priority>0.8</priority></url>
+  <url><loc>https://koshinstudio.com/notes/cleanup-hides-entrance/</loc><lastmod>2026-10-17</lastmod><priority>0.8</priority></url>
   <url><loc>https://koshinstudio.com/notes/comment-services/</loc><lastmod>2026-10-17</lastmod><priority>0.8</priority></url>
   <url><loc>https://koshinstudio.com/notes/concurrency-slots/</loc><lastmod>2026-10-17</lastmod><priority>0.8</priority></url>
   <url><loc>https://koshinstudio.com/notes/coverage-check/</loc><lastmod>2026-10-17</lastmod><priority>0.8</priority></url>
@@ -114,6 +114,7 @@
   <url><loc>https://koshinstudio.com/notes/genre-from-catalog/</loc><lastmod>2026-10-17</lastmod><priority>0.8</priority></url>
   <url><loc>https://koshinstudio.com/notes/hosting-compare/</loc><lastmod>2026-10-17</lastmod><priority>0.8</priority></url>
   <url><loc>https://koshinstudio.com/notes/hot-lane/</loc><lastmod>2026-10-17</lastmod><priority>0.8</priority></url>
+  <url><loc>https://koshinstudio.com/notes/icloud-overwrite/</loc><priority>0.8</priority></url>
   <url><loc>https://koshinstudio.com/notes/</loc><lastmod>2026-10-17</lastmod><priority>0.9</priority></url>
   <url><loc>https://koshinstudio.com/notes/interval-vs-delivery/</loc><lastmod>2026-10-17</lastmod><priority>0.8</priority></url>
   <url><loc>https://koshinstudio.com/notes/ios-sdk-compare/</loc><lastmod>2026-10-17</lastmod><priority>0.8</priority></url>
@@ -144,6 +145,7 @@
   <url><loc>https://koshinstudio.com/notes/torecadash-ci/</loc><lastmod>2026-10-17</lastmod><priority>0.8</priority></url>
   <url><loc>https://koshinstudio.com/notes/torecadash-review/</loc><lastmod>2026-10-17</lastmod><priority>0.8</priority></url>
   <url><loc>https://koshinstudio.com/notes/torecadash-watchdog/</loc><lastmod>2026-10-17</lastmod><priority>0.8</priority></url>
+  <url><loc>https://koshinstudio.com/notes/truncated-answer/</loc><priority>0.8</priority></url>
   <url><loc>https://koshinstudio.com/notes/typo-catalog/</loc><lastmod>2026-10-17</lastmod><priority>0.8</priority></url>
   <url><loc>https://koshinstudio.com/notes/u2028/</loc><lastmod>2026-10-17</lastmod><priority>0.8</priority></url>
   <url><loc>https://koshinstudio.com/notes/vps-migration/</loc><lastmod>2026-10-17</lastmod><priority>0.8</priority></url>

@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>候補は見つかっていたのに、答えを読む所で毎回落ちていた：200 トークンで切れた URL と、ハイフンで 400 になる検索 — Koshin Studio</title>
+<meta name="description" content="公式の告知ページを選ぶ AI の返事が 200 トークンで途中で切れて毎回失敗していた。直しても 0 件だったのは、店の告知が個別の商品名を書かないため、AI が指示に忠実に拒否していたから。楽天の検索は、ハイフンの位置で 400 になった。">
+<meta property="og:title" content="候補は見つかっていたのに、答えを読む所で毎回落ちていた：200 トークンで切れた URL と、ハイフンで 400 になる検索">
+<meta property="og:description" content="公式の告知ページを選ぶ AI の返事が 200 トークンで途中で切れて毎回失敗していた。直しても 0 件だったのは、店の告知が個別の商品名を書かないため、AI が指示に忠実に拒否していたから。楽天の検索は、ハイフンの位置で 400 になった。">
+<meta property="og:type" content="article">
+<meta name="theme-color" content="#fbfaf7">
+<link rel="icon" href="/favicon.ico?v=1697d589" sizes="48x48">
+<link rel="icon" href="/favicon.svg?v=b9d7922f" type="image/svg+xml" sizes="any">
+<link rel="icon" href="/assets/icon/icon-192.png?v=e2566235" type="image/png" sizes="192x192">
+<link rel="apple-touch-icon" href="/assets/icon/icon-180.png?v=84e7f0e6">
+<link rel="manifest" href="/site.webmanifest">
+<script>document.documentElement.className+=" js"</script>
+<link rel="stylesheet" href="/style.css?v=dd51310c">
+<meta name="google-adsense-account" content="ca-pub-3863314847163872">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3863314847163872" crossorigin="anonymous"></script>
+<link rel="canonical" href="https://koshinstudio.com/notes/truncated-answer/">
+<meta property="og:url" content="https://koshinstudio.com/notes/truncated-answer/">
+<meta property="og:site_name" content="Koshin Studio">
+<meta property="og:locale" content="ja_JP">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="alternate" type="application/rss+xml" title="Koshin Studio — Notes" href="https://koshinstudio.com/feed.xml">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BlogPosting","headline":"候補は見つかっていたのに、答えを読む所で毎回落ちていた：200 トークンで切れた URL と、ハイフンで 400 になる検索","url":"https://koshinstudio.com/notes/truncated-answer/","description":"公式の告知ページを選ぶ AI の返事が 200 トークンで途中で切れて毎回失敗していた。直しても 0 件だったのは、店の告知が個別の商品名を書かないため、AI が指示に忠実に拒否していたから。楽天の検索は、ハイフンの位置で 400 になった。","datePublished":"2026-10-17","dateModified":"2026-10-17","inLanguage":"ja","image":"https://koshinstudio.com/assets/og/og_notes_truncated-answer.jpg","author":{"@id":"https://koshinstudio.com#studio"},"publisher":{"@id":"https://koshinstudio.com#studio"},"mainEntityOfPage":"https://koshinstudio.com/notes/truncated-answer/"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Koshin Studio","item":"https://koshinstudio.com/"},{"@type":"ListItem","position":2,"name":"Notes","item":"https://koshinstudio.com/notes/"},{"@type":"ListItem","position":3,"name":"候補は見つかっていたのに、答えを読む所で毎回落ちていた：200 トークンで切れた URL と、ハイフンで 400 になる検索","item":"https://koshinstudio.com/notes/truncated-answer/"}]}]}</script>
+<meta property="og:image" content="https://koshinstudio.com/assets/og/og_notes_truncated-answer.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
+</head>
+<body class="article">
+<canvas id="motes"></canvas>
+
+<header class="site"><div class="wrap">
+  <a class="logo" href="/"><img class="logo-mark" src="/favicon.svg?v=b9d7922f" alt="" width="28" height="28">Koshin Studio</a>
+  <nav><a href="/works/">Works</a><a href="/notes/">Notes</a><a href="/picks/">Picks</a><a href="/calc/">Tools</a><a href="/about/">About</a></nav>
+</div></header>
+
+<main><div class="wrap">
+  <nav class="crumbs" aria-label="現在地"><a href="/">Koshin Studio</a><i aria-hidden="true">›</i><a href="/notes/">Notes</a><i aria-hidden="true">›</i><span aria-current="page">候補は見つかっていたのに、答えを読む所で毎回落ちていた：200 トークンで切れた URL と、ハイフンで 400 になる検索</span></nav>
+  <h1>候補は見つかっていたのに、答えを読む所で毎回落ちていた：200 トークンで切れた URL と、ハイフンで 400 になる検索</h1>  <div class="rule"></div>
+  <p class="lead">トレカダッシュ 開発の記録 ／ 2026年8月</p>
+
+  <p>iOS アプリ「<a href="/works/torecadash/">トレカダッシュ</a>」の、まとめサイト由来の記事は、お店の公式の告知のページへ、リンクを張り替えます。ところが、開発者モードの報告が、続けて 7 件、来ました。「正しい告知の URL は、これ。ちゃんとやって」。</p>
+  <p>調べると、<strong>候補は見つかっていたのに、答えを読む所で、毎回落ちていました</strong>。この記事は、その真因と、同じ時期に見つけた、よく似た 1 件の記録です。</p>
+  <p class="note">数字は、2026 年 8 月 23 日と 24 日の作業の記録から書いています。</p>
+<!--toc-->
+  <nav class="toc" aria-label="目次"><p>目次</p><ol><li><a href="#s1">真因：AI の返事が、200 トークンで途中で切れていた</a></li><li><a href="#s2">直しても、採用が 0 件だった：AI が指示に忠実だった</a></li><li><a href="#s3">よく似た 1 件：楽天のキーワード検索が、ハイフンで丸ごと失敗していた（8 月 24 日）</a></li><li><a href="#s4">分かったこと</a></li></ol></nav>
+<!--/toc-->
+  <h2 class="rv" id="s1">真因：AI の返事が、200 トークンで途中で切れていた</h2>
+  <p>公式の告知ページを選ぶ処理は、最後に AI に、「候補のどれが、そのお店の告知か」を答えさせます。その返事の長さの上限（<code>max_output_tokens</code>）を、<strong>200</strong> にしていました。</p>
+  <p>ところが、返事には、<strong>日本語をパーセント符号化した、長い URL</strong>が入ります。1 つで 200 文字を超えます。返事は途中で切れ、JSON として読めなくなり、<code>Unterminated string in JSON</code> という例外になっていました。</p>
+  <pre><code>WARN [応募リンク] 公式ページの判定に失敗 [お宝創庫・プレイズ / …]: Unterminated st…
+→ 対象 10 件、すべて「見つからず」</code></pre>
+  <p>候補は、見つかっていたのです。<strong>答えを読むところで、毎回、落ちていました。</strong>上限を 800 に上げました。さらに、それでも切れたときに、全部を捨てず、<code>"url": "…</code> の部分だけを拾い直す救済も入れました。</p>
+
+  <h2 class="rv" id="s2">直しても、採用が 0 件だった：AI が指示に忠実だった</h2>
+  <p>JSON を直しても、採用は 0 件でした。ログを見ると、候補はあるのに、「採用なし」です。原因は、<strong>AI が、指示に忠実だった</strong>ことでした。お店の告知は、こういう書き方をします。</p>
+  <pre><code>「【アプリ会員様限定】再版／ポケモンカードゲーム 4 種 抽選販売に関して」</code></pre>
+  <p>個別の商品名を書いていません。指示には、「商品が違う場合は、選ぶな」とありました。AI は、それに従って、拒否していたのです。</p>
+  <p>2 つ直しました。</p>
+  <ol>
+    <li>商品名で絞った検索に加えて、<strong>いつも</strong>、<code>site:店のドメイン 抽選</code> も検索して、候補にまとめる。（「空振りしたときだけ」では、無関係なページが 1 件返るだけで、発動しませんでした。）</li>
+    <li>指示に、「<strong>その店自身の告知のページ</strong>が、複数の商品をまとめて案内していて、個別の名前を書いていないときは、選んでよい」を足す。ただし、ほかの店やまとめサイトは、まとめて案内していても、<strong>絶対に選ばない</strong>。</li>
+  </ol>
+  <p>結果は、<strong>10 件のうち、3 件が、お店の公式の告知のページへ張り替わりました</strong>。</p>
+  <p>もう 1 つ、アプリ限定の店（アプリでしか、抽選の案内を出さない店）のために、「アプリでご確認ください」と出せる一覧を作りました。アプリが実在すると分かっている店だけです。推測で足しません。</p>
+
+  <h2 class="rv" id="s3">よく似た 1 件：楽天のキーワード検索が、ハイフンで丸ごと失敗していた（8 月 24 日）</h2>
+  <p>ログに、「楽天市場の個別弾の検索に失敗しました」が、遊戯王だけで 8 種以上、繰り返し出ていました。調べると、楽天の API は、検索のキーワードの<strong>ハイフンの使い方</strong>によっては、リクエスト自体が <code>400 wrong_parameter</code> で失敗しました。</p>
+  <div class="scroll rv"><table>
+    <thead><tr><th>キーワードの形</th><th>結果</th></tr></thead>
+    <tbody>
+      <tr><td><code>"A - B"</code>（ハイフンの前後に空白）</td><td>400</td></tr>
+      <tr><td><code>"A B "</code>（末尾に空白だけ残る）</td><td>400</td></tr>
+      <tr><td><code>"A B-"</code>（末尾がハイフンで終わる）</td><td>400</td></tr>
+      <tr><td><code>"AB-"</code>（空白を挟まない単語 ＋ 末尾ハイフン）</td><td>200（正常）</td></tr>
+    </tbody>
+  </table></div>
+  <p>遊戯王の商品名は、「LIMIT OVER COLLECTION - THE RIVALS -」のように、副題をハイフンで挟む書き方が多く、<strong>この形の弾は、個別弾の検索から、一度も拾えていませんでした</strong>。</p>
+  <p>直し方は、2 段階です。(1) ハイフンの直後の空白を詰める。(2) 末尾に残るハイフンと空白を落とす。「LIMIT OVER COLLECTION - THE RIVALS -」は、「LIMIT OVER COLLECTION -THE RIVALS」になり、200 を確かめました。同じ問題は、楽天ブックスの API でも、起きることを確かめたので、同じ整形を、キーワードを渡す 4 つの関数に当てました。</p>
+
+  <h2 class="rv" id="s4">分かったこと</h2>
+  <blockquote>候補が見つかっているのに、結果が 0 件のときは、答えを読む所を疑う。</blockquote>
+  <ul>
+    <li><strong>返事の長さの上限は、返す中身から決める。</strong>パーセント符号化した URL は、長いです。</li>
+    <li><strong>失敗は、全部捨てず、拾い直す。</strong>切れた JSON から、必要な部分だけ拾えます。</li>
+    <li><strong>AI は、指示に忠実。</strong>指示が、現実の書き方に合っていないと、正しく拒否します。</li>
+    <li><strong>外の API の癖は、実測で切り分ける。</strong>ハイフンの前後で、400 と 200 が分かれました。</li>
+    <li><strong>同じ癖は、同じ API を使う、ほかの場所にもある。</strong>楽天ブックスでも起きました。</li>
+  </ul>
+
+
+  <div class="ad-slot" data-slot="footer" hidden></div>
+<!--/ad-->
+
+  <div class="rule" style="margin:40px 0 22px"></div>
+  <p class="eyebrow">この話に出てくるもの</p>
+  <ul class="plain">
+    <li><a href="/works/torecadash/">トレカダッシュ</a> — トレカの抽選・予約・先着の情報を集める iPhone アプリ</li>
+    <li><a href="/notes/silent-discard/">本物の抽選を、静かに捨てていた 4 つの実例</a> — 別の「静かに失敗」</li>
+    <li><a href="/notes/gemini-meter/">Gemini の費用を削る前に、計器を疑った</a> — AI の利用に関する別の記録</li>
+    <li><a href="/notes/blocked-page/">「取れた」と読んでいたのは、ただの案内ページだった</a> — エラーが出ない失敗</li>
+  </ul>
+
+<!--related-->
+  <div class="rule" style="margin:40px 0 22px"></div>
+  <p class="eyebrow">ほかの記録</p>
+  <ul class="plain">
+    <li><a href="/notes/icloud-overwrite/">「iCloud が新しければ取り込む」の関数が、何も比べていなかった：応募の記録が 20 件から 1 件になりうる</a> — iCloud 同期の関数は、名前に反して新しいかを見ず、変更があると丸ごと置き換えていた。新しい端末の空の状態で保存すると、別の端末の 20 件が 1 件に上書きされうる。更新時刻を比べ、空では上書きしないようにした。</li>
+    <li><a href="/notes/cleanup-hides-entrance/">「後から掃除するから大丈夫」が、入口の不具合を隠していた：商品が毎日 400 件そっくり作り直されていた</a> — カタログからの商品登録が名前の完全一致でしか探さず、括弧・空白・全角の違いで毎日そっくりな商品を作り直し、この日だけで 437 件（410 件は記事なし）。統合の掃除が後から片付けていたため気づけなかった。</li>
+    <li><a href="/notes/vps-migration/">Cloud Functions から月 4,300 円のサーバーへ移した：1 日 3,700 円の課金、EEA で全滅した Yahoo!、移行で踏んだ 5 つの罠</a> — 無料のお試しが終わると 1 日約 3,700 円（月約 10.6 万円）かかった。待ち時間にも課金される構造が原因で、コードをほぼ書き換えずにシンガポールの VPS（月約 4,300 円）へ移した。ヘルシンキでは Yahoo! が全滅、秘密の値は 5 本でなく 15 本だった。</li>
+  </ul>
+<!--/related-->
+
+<!--comments-->
+  <section class="comments" id="comments" data-repo="murakamikoshin/koshin-studio" data-repo-id="R_kgDOURc3ew"
+    data-category="Announcements" data-category-id="DIC_kwDOURc3e84DHTVr">
+    <h2 id="comments-h">コメント</h2>
+    <p>感想や、記事の間違いの指摘は、ここへ。書くには、GitHub のアカウントが要ります。</p>
+    <p><button type="button" class="btn ghost" id="load-comments">コメントを開く</button></p>
+    <p class="note">押すと、giscus（giscus.app）と GitHub に接続します。押さなければ、接続しません。詳しくは<a href="/privacy/">あつかい</a>に書いています。</p>
+    <div id="giscus-box"></div>
+  </section>
+<!--/comments-->
+</div>
+</main>
+
+<footer class="site"><div class="wrap">
+  <span>© 2026 Koshin Studio</span>
+  <div class="sns-row"></div>
+  <nav><a href="/picks/">Picks</a><a href="/calc/">Tools</a><a href="/about/">About</a><a href="/privacy/">あつかい</a><a href="/en/" hreflang="en" lang="en">English</a></nav>
+</div></footer>
+<script src="/motion.js?v=1e7447ec" defer></script>
+</body>
+</html>

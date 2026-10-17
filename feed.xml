@@ -7,6 +7,20 @@
   <language>ja</language>
   <atom:link href="https://koshinstudio.com/feed.xml" rel="self" type="application/rss+xml"/>
   <item>
+    <title>候補は見つかっていたのに、答えを読む所で毎回落ちていた：200 トークンで切れた URL と、ハイフンで 400 になる検索</title>
+    <link>https://koshinstudio.com/notes/truncated-answer/</link>
+    <guid isPermaLink="true">https://koshinstudio.com/notes/truncated-answer/</guid>
+    <pubDate>Fri, 16 Oct 2026 15:00:00 GMT</pubDate>
+    <description>公式の告知ページを選ぶ AI の返事が 200 トークンで途中で切れて毎回失敗していた。直しても 0 件だったのは、店の告知が個別の商品名を書かないため、AI が指示に忠実に拒否していたから。楽天の検索は、ハイフンの位置で 400 になった。</description>
+  </item>
+  <item>
+    <title>「iCloud が新しければ取り込む」の関数が、何も比べていなかった：応募の記録が 20 件から 1 件になりうる</title>
+    <link>https://koshinstudio.com/notes/icloud-overwrite/</link>
+    <guid isPermaLink="true">https://koshinstudio.com/notes/icloud-overwrite/</guid>
+    <pubDate>Fri, 16 Oct 2026 15:00:00 GMT</pubDate>
+    <description>iCloud 同期の関数は、名前に反して新しいかを見ず、変更があると丸ごと置き換えていた。新しい端末の空の状態で保存すると、別の端末の 20 件が 1 件に上書きされうる。更新時刻を比べ、空では上書きしないようにした。</description>
+  </item>
+  <item>
     <title>「後から掃除するから大丈夫」が、入口の不具合を隠していた：商品が毎日 400 件そっくり作り直されていた</title>
     <link>https://koshinstudio.com/notes/cleanup-hides-entrance/</link>
     <guid isPermaLink="true">https://koshinstudio.com/notes/cleanup-hides-entrance/</guid>
