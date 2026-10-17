@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>「1 ページ ＝ 1 案件」ではなかった：1 つのフォームで 6 商品を受け付ける店の記事が、リンクが同じというだけで消されていた — Koshin Studio</title>
+<meta name="description" content="リンクだけで重複と決めるジョブが、1 つの Google フォームで 6 商品を受け付ける店の記事 5 件を消していた。「リンク ＋ 商品」に直した。サーバが作った「応募枠」をアプリが一度も読んでいなかったことも見つかった。">
+<meta property="og:title" content="「1 ページ ＝ 1 案件」ではなかった：1 つのフォームで 6 商品を受け付ける店の記事が、リンクが同じというだけで消されていた">
+<meta property="og:description" content="リンクだけで重複と決めるジョブが、1 つの Google フォームで 6 商品を受け付ける店の記事 5 件を消していた。「リンク ＋ 商品」に直した。サーバが作った「応募枠」をアプリが一度も読んでいなかったことも見つかった。">
+<meta property="og:type" content="article">
+<meta name="theme-color" content="#fbfaf7">
+<link rel="icon" href="/favicon.ico?v=1697d589" sizes="48x48">
+<link rel="icon" href="/favicon.svg?v=b9d7922f" type="image/svg+xml" sizes="any">
+<link rel="icon" href="/assets/icon/icon-192.png?v=e2566235" type="image/png" sizes="192x192">
+<link rel="apple-touch-icon" href="/assets/icon/icon-180.png?v=84e7f0e6">
+<link rel="manifest" href="/site.webmanifest">
+<script>document.documentElement.className+=" js"</script>
+<link rel="stylesheet" href="/style.css?v=dd51310c">
+<meta name="google-adsense-account" content="ca-pub-3863314847163872">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3863314847163872" crossorigin="anonymous"></script>
+<link rel="canonical" href="https://koshinstudio.com/notes/one-page-many-cases/">
+<meta property="og:url" content="https://koshinstudio.com/notes/one-page-many-cases/">
+<meta property="og:site_name" content="Koshin Studio">
+<meta property="og:locale" content="ja_JP">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="alternate" type="application/rss+xml" title="Koshin Studio — Notes" href="https://koshinstudio.com/feed.xml">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BlogPosting","headline":"「1 ページ ＝ 1 案件」ではなかった：1 つのフォームで 6 商品を受け付ける店の記事が、リンクが同じというだけで消されていた","url":"https://koshinstudio.com/notes/one-page-many-cases/","description":"リンクだけで重複と決めるジョブが、1 つの Google フォームで 6 商品を受け付ける店の記事 5 件を消していた。「リンク ＋ 商品」に直した。サーバが作った「応募枠」をアプリが一度も読んでいなかったことも見つかった。","datePublished":"2026-10-17","dateModified":"2026-10-17","inLanguage":"ja","image":"https://koshinstudio.com/assets/og/og_notes_one-page-many-cases.jpg","author":{"@id":"https://koshinstudio.com#studio"},"publisher":{"@id":"https://koshinstudio.com#studio"},"mainEntityOfPage":"https://koshinstudio.com/notes/one-page-many-cases/"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Koshin Studio","item":"https://koshinstudio.com/"},{"@type":"ListItem","position":2,"name":"Notes","item":"https://koshinstudio.com/notes/"},{"@type":"ListItem","position":3,"name":"「1 ページ ＝ 1 案件」ではなかった：1 つのフォームで 6 商品を受け付ける店の記事が、リンクが同じというだけで消されていた","item":"https://koshinstudio.com/notes/one-page-many-cases/"}]}]}</script>
+<meta property="og:image" content="https://koshinstudio.com/assets/og/og_notes_one-page-many-cases.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
+</head>
+<body class="article">
+<canvas id="motes"></canvas>
+
+<header class="site"><div class="wrap">
+  <a class="logo" href="/"><img class="logo-mark" src="/favicon.svg?v=b9d7922f" alt="" width="28" height="28">Koshin Studio</a>
+  <nav><a href="/works/">Works</a><a href="/notes/">Notes</a><a href="/picks/">Picks</a><a href="/calc/">Tools</a><a href="/about/">About</a></nav>
+</div></header>
+
+<main><div class="wrap">
+  <nav class="crumbs" aria-label="現在地"><a href="/">Koshin Studio</a><i aria-hidden="true">›</i><a href="/notes/">Notes</a><i aria-hidden="true">›</i><span aria-current="page">「1 ページ ＝ 1 案件」ではなかった：1 つのフォームで 6 商品を受け付ける店の記事が、リンクが同じというだけで消されていた</span></nav>
+  <h1>「1 ページ ＝ 1 案件」ではなかった：1 つのフォームで 6 商品を受け付ける店の記事が、リンクが同じというだけで消されていた</h1>  <div class="rule"></div>
+  <p class="lead">トレカダッシュ 開発の記録 ／ 2026年8月</p>
+
+  <p>iOS アプリ「<a href="/works/torecadash/">トレカダッシュ</a>」で、「<strong>複数の商品を受け付けている抽選なのに、1 件しか記事が無い</strong>」という報告が、2 回、来ました。1 回目に直したつもりでしたが、2 回目が来ました。</p>
+  <p>この記事は、その真因と、同じ時期に見つけた、「<strong>作った項目を、アプリが一度も読んでいなかった</strong>」話の記録です。</p>
+  <p class="note">この記事は、2026 年 8 月 25 日の作業の記録から書いています。</p>
+<!--toc-->
+  <nav class="toc" aria-label="目次"><p>目次</p><ol><li><a href="#s1">真因：リンクだけで、重複と決めていた</a></li><li><a href="#s2">サーバが作った「応募枠」を、アプリが一度も読んでいなかった</a></li><li><a href="#s3">商品の一覧に、告知文が混ざっていた</a></li><li><a href="#s4">分かったこと</a></li></ol></nav>
+<!--/toc-->
+  <h2 class="rv" id="s1">真因：リンクだけで、重複と決めていた</h2>
+  <p>1 回目の報告で、「リンクが同じだから、重複扱いされている」ところまでは、直しました。しかし、<strong>すでにある記事が、隠れたまま</strong>だったので、同じ指摘を、また受けました。</p>
+  <p>犯人は、<code>runHideDuplicateLinkArticles</code>、つまり、<strong>リンクだけで、重複と判断する</strong>ジョブでした。</p>
+  <p>実データは、こうでした。ある通販店は、<strong>1 つの Google フォームで、6 つの商品</strong>の抽選を受け付けています。6 件の記事は、全部、同じ URL です。このジョブが、そのうち 5 件を「重複」として、消していました。利用者からは、1 商品ぶんしか、見えません。</p>
+  <p>直し方は、まとめる単位を、<strong>リンク</strong>から、<strong>リンク ＋ 商品</strong>に変えることでした。同じリンクでも、商品が違えば、別の案件です。商品が分かっていない記事どうしは、区別する手がかりが無いので、これまでどおり、リンクだけで、重複とみなします。</p>
+  <p>「1 ページ ＝ 1 案件」という前提は、トレカの抽選では成り立ちません。1 つの申込みフォーム、1 つの告知のページで、複数の商品を受け付ける店は、普通にあります。</p>
+  <p>すでに隠されていた記事は、同じリンクの表示中の記事と、<strong>商品または題名が違うものに限って</strong>、表示に戻しました（7 件）。ある通販店の 5 件（6 商品すべてが表示される）、大手のゲーム店 1 件、別のチェーン 1 件です。</p>
+
+  <h2 class="rv" id="s2">サーバが作った「応募枠」を、アプリが一度も読んでいなかった</h2>
+  <p>8 月 23 日から、サーバーは、応募の条件を AI で読んで、「<strong>応募枠</strong>」（<code>entryTiers</code>）を取り出していました。「プレイヤーズクラブ：本人認証済みの枠と、未認証の枠」「A グループと B グループ」「ビックカメラの Suica カード会員限定」といったものです。実データにも、ちゃんと入っていました。</p>
+  <p>ところが、<strong>iOS のアプリが、この項目を、一度も読んでいませんでした</strong>。AI の費用だけを払って、利用者には、見えない状態です。アプリに、項目を足し、詳細の画面に、「応募枠」として表示するようにしました。</p>
+  <p>サーバーとアプリの項目の突き合わせは、コマンドで見つかります。アプリが読む項目を、ソースから機械的に抜き出し（<code>grep</code>）、Firestore の実データと比べます。</p>
+
+  <h2 class="rv" id="s3">商品の一覧に、告知文が混ざっていた</h2>
+  <p>「ONE PIECE カードゲームコーナー【事前入店申込・抽選】8 月 31 日（月）JUMP SHOP 東京駅店」のような、<strong>イベントの告知</strong>が、商品として登録されていました。</p>
+  <p>言い回しを並べる方式は、追いつきません。そこで、<strong>具体的な日付</strong>という、一般的な規則で弾きました。トレカの商品名に、「8 月 31 日」のような暦の日付は入りません。「Vol.3」「第 2 弾」「2025 年 19 号」は日付ではないので、影響しません。10 個のパターンで試して、食い違いは 0 件でした。すでにある 6 件を削除しました。</p>
+
+  <h2 class="rv" id="s4">分かったこと</h2>
+  <blockquote>前提を疑う。作ったものが、使われているかを確かめる。</blockquote>
+  <ul>
+    <li><strong>「1 ページ ＝ 1 案件」を、前提にしない。</strong>1 つのフォームで、複数の商品を受け付ける店は、普通にあります。</li>
+    <li><strong>直したら、すでにある記事も見る。</strong>入口だけを直しても、隠れた記事は戻りません。</li>
+    <li><strong>サーバが作った項目を、アプリが読んでいるか、突き合わせる。</strong>費用だけかかって、利用者に見えない、ということが起きます。</li>
+    <li><strong>言い回しの一覧より、一般的な規則。</strong>具体的な日付が入っていれば、商品名ではない、のように。</li>
+  </ul>
+
+
+  <div class="ad-slot" data-slot="footer" hidden></div>
+<!--/ad-->
+
+  <div class="rule" style="margin:40px 0 22px"></div>
+  <p class="eyebrow">この話に出てくるもの</p>
+  <ul class="plain">
+    <li><a href="/works/torecadash/">トレカダッシュ</a> — トレカの抽選・予約・先着の情報を集める iPhone アプリ</li>
+    <li><a href="/notes/same-page-not-same-store/">「同じ応募ページ」なら「同じ店」と決めつけていた</a> — 同じ形の、別の前提の間違い</li>
+    <li><a href="/notes/split-mixups/">1 つの記事を商品ごとに分ける処理で起きた 3 つの取り違え</a> — リンクと商品の取り違え</li>
+    <li><a href="/notes/fix-the-existing-data/">関門を直しても、すでにあるデータは直らない</a> — 直しても残る記事の話</li>
+  </ul>
+
+<!--related-->
+  <div class="rule" style="margin:40px 0 22px"></div>
+  <p class="eyebrow">ほかの記録</p>
+  <ul class="plain">
+    <li><a href="/notes/transliteration-gate/">英語表記とカタカナ表記は、1 文字も重ならない：正しい照合 42 件を、指紋の関門が却下していた</a> — 相場の紐付け率が 39% に低下。相場のサイトに商品はあったが、自社の英語表記とカタカナ表記では指紋が一致せず、26 時間で 42 件が却下されていた。関門は弱めず、この照合だけに狭い 2 つ目の判定を足した。</li>
+    <li><a href="/notes/timeout-third-fix/">タイムアウトを 3 回直しても止まらなかった：真犯人は、同じ鍵の中で動いていた 2 つ目の処理だった</a> — 楽天ブックスの在庫チェックが 1 日 17 回タイムアウトした。取得の上限、1 件ぶんの上限と 2 回直しても止まらず、3 回目で、同じ鍵の中の別の処理（全件を取り直し、上限なし）が真犯人と分かった。</li>
+    <li><a href="/notes/secret-in-logs/">ログに秘密のトークンが平文で残っていた：呼び忘れようがない唯一の出口で伏せる</a> — 通信の部品のエラーメッセージに URL がそのまま入り、取得サービスのトークンがログに出ていた。前に作った伏字の関数は、明示的に呼ぶ場所にしか効かず、呼び元は 50 か所以上。ログの唯一の出口で伏せる形に直した。</li>
+  </ul>
+<!--/related-->
+
+<!--comments-->
+  <section class="comments" id="comments" data-repo="murakamikoshin/koshin-studio" data-repo-id="R_kgDOURc3ew"
+    data-category="Announcements" data-category-id="DIC_kwDOURc3e84DHTVr">
+    <h2 id="comments-h">コメント</h2>
+    <p>感想や、記事の間違いの指摘は、ここへ。書くには、GitHub のアカウントが要ります。</p>
+    <p><button type="button" class="btn ghost" id="load-comments">コメントを開く</button></p>
+    <p class="note">押すと、giscus（giscus.app）と GitHub に接続します。押さなければ、接続しません。詳しくは<a href="/privacy/">あつかい</a>に書いています。</p>
+    <div id="giscus-box"></div>
+  </section>
+<!--/comments-->
+</div>
+</main>
+
+<footer class="site"><div class="wrap">
+  <span>© 2026 Koshin Studio</span>
+  <div class="sns-row"></div>
+  <nav><a href="/picks/">Picks</a><a href="/calc/">Tools</a><a href="/about/">About</a><a href="/privacy/">あつかい</a><a href="/en/" hreflang="en" lang="en">English</a></nav>
+</div></footer>
+<script src="/motion.js?v=1e7447ec" defer></script>
+</body>
+</html>

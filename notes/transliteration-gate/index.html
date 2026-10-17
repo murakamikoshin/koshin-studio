@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>英語表記とカタカナ表記は、1 文字も重ならない：正しい照合 42 件を、指紋の関門が却下していた — Koshin Studio</title>
+<meta name="description" content="相場の紐付け率が 39% に低下。相場のサイトに商品はあったが、自社の英語表記とカタカナ表記では指紋が一致せず、26 時間で 42 件が却下されていた。関門は弱めず、この照合だけに狭い 2 つ目の判定を足した。">
+<meta property="og:title" content="英語表記とカタカナ表記は、1 文字も重ならない：正しい照合 42 件を、指紋の関門が却下していた">
+<meta property="og:description" content="相場の紐付け率が 39% に低下。相場のサイトに商品はあったが、自社の英語表記とカタカナ表記では指紋が一致せず、26 時間で 42 件が却下されていた。関門は弱めず、この照合だけに狭い 2 つ目の判定を足した。">
+<meta property="og:type" content="article">
+<meta name="theme-color" content="#fbfaf7">
+<link rel="icon" href="/favicon.ico?v=1697d589" sizes="48x48">
+<link rel="icon" href="/favicon.svg?v=b9d7922f" type="image/svg+xml" sizes="any">
+<link rel="icon" href="/assets/icon/icon-192.png?v=e2566235" type="image/png" sizes="192x192">
+<link rel="apple-touch-icon" href="/assets/icon/icon-180.png?v=84e7f0e6">
+<link rel="manifest" href="/site.webmanifest">
+<script>document.documentElement.className+=" js"</script>
+<link rel="stylesheet" href="/style.css?v=dd51310c">
+<meta name="google-adsense-account" content="ca-pub-3863314847163872">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3863314847163872" crossorigin="anonymous"></script>
+<link rel="canonical" href="https://koshinstudio.com/notes/transliteration-gate/">
+<meta property="og:url" content="https://koshinstudio.com/notes/transliteration-gate/">
+<meta property="og:site_name" content="Koshin Studio">
+<meta property="og:locale" content="ja_JP">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="alternate" type="application/rss+xml" title="Koshin Studio — Notes" href="https://koshinstudio.com/feed.xml">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BlogPosting","headline":"英語表記とカタカナ表記は、1 文字も重ならない：正しい照合 42 件を、指紋の関門が却下していた","url":"https://koshinstudio.com/notes/transliteration-gate/","description":"相場の紐付け率が 39% に低下。相場のサイトに商品はあったが、自社の英語表記とカタカナ表記では指紋が一致せず、26 時間で 42 件が却下されていた。関門は弱めず、この照合だけに狭い 2 つ目の判定を足した。","datePublished":"2026-10-17","dateModified":"2026-10-17","inLanguage":"ja","image":"https://koshinstudio.com/assets/og/og_notes_transliteration-gate.jpg","author":{"@id":"https://koshinstudio.com#studio"},"publisher":{"@id":"https://koshinstudio.com#studio"},"mainEntityOfPage":"https://koshinstudio.com/notes/transliteration-gate/"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Koshin Studio","item":"https://koshinstudio.com/"},{"@type":"ListItem","position":2,"name":"Notes","item":"https://koshinstudio.com/notes/"},{"@type":"ListItem","position":3,"name":"英語表記とカタカナ表記は、1 文字も重ならない：正しい照合 42 件を、指紋の関門が却下していた","item":"https://koshinstudio.com/notes/transliteration-gate/"}]}]}</script>
+<meta property="og:image" content="https://koshinstudio.com/assets/og/og_notes_transliteration-gate.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
+</head>
+<body class="article">
+<canvas id="motes"></canvas>
+
+<header class="site"><div class="wrap">
+  <a class="logo" href="/"><img class="logo-mark" src="/favicon.svg?v=b9d7922f" alt="" width="28" height="28">Koshin Studio</a>
+  <nav><a href="/works/">Works</a><a href="/notes/">Notes</a><a href="/picks/">Picks</a><a href="/calc/">Tools</a><a href="/about/">About</a></nav>
+</div></header>
+
+<main><div class="wrap">
+  <nav class="crumbs" aria-label="現在地"><a href="/">Koshin Studio</a><i aria-hidden="true">›</i><a href="/notes/">Notes</a><i aria-hidden="true">›</i><span aria-current="page">英語表記とカタカナ表記は、1 文字も重ならない：正しい照合 42 件を、指紋の関門が却下していた</span></nav>
+  <h1>英語表記とカタカナ表記は、1 文字も重ならない：正しい照合 42 件を、指紋の関門が却下していた</h1>  <div class="rule"></div>
+  <p class="lead">トレカダッシュ 開発の記録 ／ 2026年8月</p>
+
+  <p>iOS アプリ「<a href="/works/torecadash/">トレカダッシュ</a>」は、商品ごとの<strong>相場</strong>を、売買の実績があるサイトから取ってきて、定価と並べて表示します。ところが、健全性のチェックに、こう出ていました。</p>
+  <pre><code>相場の紐付け率が低下: 177 / 449 件（39%）</code></pre>
+  <p>「新しい弾は、まだ相場のサイトに無いから、仕方ない」で、済ませることもできました。しかし、実際にそのサイトで検索してみると、<strong>商品は、ちゃんと存在していました</strong>。この記事は、その本当の理由と、直し方の記録です。</p>
+  <p class="note">この記事は、2026 年 8 月 24 日の作業の記録から書いています。</p>
+<!--toc-->
+  <nav class="toc" aria-label="目次"><p>目次</p><ol><li><a href="#s1">相場のサイトに、商品はあった</a></li><li><a href="#s2">原因：指紋のチェックが、構造的に成り立たない組み合わせだった</a></li><li><a href="#s3">直し方：指紋は弱めず、この照合だけに、2 つ目の判定を足す</a></li><li><a href="#s4">実データで確かめる：ドライランが先</a></li><li><a href="#s5">分かったこと</a></li></ol></nav>
+<!--/toc-->
+  <h2 class="rv" id="s1">相場のサイトに、商品はあった</h2>
+  <pre><code>自社    拡張パック「30th CELEBRATION」
+相場側  ポケモンカードゲーム MEGA 拡張パック「30周年 セレブレーション」ボックス（存在する）
+
+自社    QUARTER CENTURY TRINITY BOX
+相場側  遊戯王 OCG デュエルモンスターズ クォーター・センチュリー・トリニティ・ボックス（存在する）
+
+自社    スタートデッキ 青 クザン【ST-33】
+相場側  ワンピースカードゲーム スタートデッキ「青 クザン」（存在する）</code></pre>
+
+  <h2 class="rv" id="s2">原因：指紋のチェックが、構造的に成り立たない組み合わせだった</h2>
+  <p>この照合は、AI が選んだ候補を、コードの側でも、<strong>商品名の固有名が、実際に重なるか</strong>（指紋のチェック、<code>productNamesShareFingerprint</code>）で、確かめ直しています。これは、2026 年 8 月 8 日の、「無関係な商品を統合してしまう」データ破損の再発防止として入れたもので、<strong>これ自体は正しい</strong>ものです。</p>
+  <p>ところが、この相場の照合だけは、突き合わせが、構造的に成り立ちません。自社の商品名は、メーカー公式の<strong>英語表記</strong>、相場のサイトの商品名は、<strong>カタカナ表記</strong>であることが多く、<strong>文字が 1 つも共通しない</strong>からです。</p>
+  <p>実際のログ（26 時間）で、<strong>42 件</strong>が、「指紋が一致しないため却下」されていました。中身を見ると、<strong>大半が、正しい一致</strong>でした。</p>
+  <div class="scroll rv"><table>
+    <thead><tr><th>自社</th><th>相場のサイト</th></tr></thead>
+    <tbody>
+      <tr><td>PHOTON HYPERNOVA</td><td>フォトン・ハイパーノヴァ ボックス</td></tr>
+      <tr><td>CHAOS IMPACT</td><td>カオス・インパクト ボックス</td></tr>
+      <tr><td>ROMANCE DAWN【OP-01】</td><td>ブースターパック ロマンスドーン ボックス</td></tr>
+      <tr><td>RAGE OF THE ABYSS</td><td>レイジ オブ ジ アビス ボックス</td></tr>
+      <tr><td>拡張パック「30th CELEBRATION」</td><td>拡張パック「30周年 セレブレーション」ボックス</td></tr>
+    </tbody>
+  </table></div>
+  <p>しかも、この 42 件の中に、報告 [111]「相場が安すぎて怪しい」の商品（30th CELEBRATION）が、まさにいました。それ以前に、「抽選の価格が、相場に混ざっていた」問題を直しましたが、<strong>そもそも、実勢の相場に紐付けられていなかった</strong>という、もう一段深い原因が、残っていたのです。</p>
+
+  <h2 class="rv" id="s3">直し方：指紋は弱めず、この照合だけに、2 つ目の判定を足す</h2>
+  <p>指紋のチェック自体を緩めると、ほかの用途（別表記の登録、商品の重複の統合）まで、一緒に緩みます。元のデータ破損が、再発します。<strong>絶対に、弱めません。</strong></p>
+  <p>代わりに、相場の照合で指紋が一致しなかった候補に対してだけ、「これは、同じ固有名の、英語表記とカタカナ表記か？」という、<strong>一点に絞った、2 つ目の判定</strong>を足しました（<code>snkrdunkNamesAreTransliterationMatch</code>）。</p>
+  <ul>
+    <li><strong>型番が食い違うものは、AI に聞くまでもなく、却下。</strong>（OP-01 と OP-17 など、音がどれだけ似ていても。）</li>
+    <li>AI には、「<strong>音として、対応しているか</strong>」だけを答えさせ、迷ったら、必ず false。「英語版」などの言語の違いは、別の商品として扱わせる。</li>
+    <li>通した分は、必ずログ（「英語↔カタカナの表記ゆれとして一致を確認」）に残し、あとから、実データで検証できるようにする。</li>
+  </ul>
+
+  <h2 class="rv" id="s4">実データで確かめる：ドライランが先</h2>
+  <p>「見つからず」という判定には、7 日間のクールダウンがあります。表示中の記事がある商品 148 件だけについて、待ち時間を外して、判定し直させました。一括の書き換えなので、<strong>ドライランで件数を確かめてから</strong>、実行しました。</p>
+
+  <h2 class="rv" id="s5">分かったこと</h2>
+  <blockquote>正しい関門が、正しい照合を、構造的に落とすことがある。関門は弱めず、狭い 2 つ目の判定を足す。</blockquote>
+  <ul>
+    <li><strong>「仕方ない」で済ませず、実際に探す。</strong>商品は、ちゃんとありました。</li>
+    <li><strong>関門の却下を、数えて、中身を見る。</strong>42 件の大半が、正しい一致でした。</li>
+    <li><strong>関門は、弱めない。</strong>ほかの用途の守りまで、一緒に落ちます。</li>
+    <li><strong>狭い 2 つ目の判定を足す。</strong>型番の食い違いは、AI に聞かず却下。AI には、迷ったら false を許す。</li>
+    <li><strong>通した分は、ログに残す。</strong>あとから、実データで検証できます。</li>
+  </ul>
+
+
+  <div class="ad-slot" data-slot="footer" hidden></div>
+<!--/ad-->
+
+  <div class="rule" style="margin:40px 0 22px"></div>
+  <p class="eyebrow">この話に出てくるもの</p>
+  <ul class="plain">
+    <li><a href="/works/torecadash/">トレカダッシュ</a> — トレカの抽選・予約・先着の情報を集める iPhone アプリ</li>
+    <li><a href="/notes/typo-catalog/">一度だけ生まれた誤字が、店ごとに増えていった</a> — 商品名の別の問題</li>
+    <li><a href="/notes/genre-from-catalog/">商品のジャンルを、公式カタログで直した</a> — 関門を狭く足した別の例</li>
+    <li><a href="/notes/silent-discard/">本物の抽選を、静かに捨てていた 4 つの実例</a> — 関門の失敗の別の例</li>
+  </ul>
+
+<!--related-->
+  <div class="rule" style="margin:40px 0 22px"></div>
+  <p class="eyebrow">ほかの記録</p>
+  <ul class="plain">
+    <li><a href="/notes/timeout-third-fix/">タイムアウトを 3 回直しても止まらなかった：真犯人は、同じ鍵の中で動いていた 2 つ目の処理だった</a> — 楽天ブックスの在庫チェックが 1 日 17 回タイムアウトした。取得の上限、1 件ぶんの上限と 2 回直しても止まらず、3 回目で、同じ鍵の中の別の処理（全件を取り直し、上限なし）が真犯人と分かった。</li>
+    <li><a href="/notes/secret-in-logs/">ログに秘密のトークンが平文で残っていた：呼び忘れようがない唯一の出口で伏せる</a> — 通信の部品のエラーメッセージに URL がそのまま入り、取得サービスのトークンがログに出ていた。前に作った伏字の関数は、明示的に呼ぶ場所にしか効かず、呼び元は 50 か所以上。ログの唯一の出口で伏せる形に直した。</li>
+    <li><a href="/notes/swallowed-failure/">失敗を捨てると、画面は嘘をつく：「○件登録しました」と出て 1 件も入っていなかったカレンダー、固まる文字認識、店名を積み忘れた通知</a> — try? で失敗を捨てていたため、カレンダーに 0 件なのに「登録しました」と出て二度と登録できなくなった。文字認識の失敗で画面が固まった。通知バッファに店名を積み忘れて「店名なし」になった。</li>
+  </ul>
+<!--/related-->
+
+<!--comments-->
+  <section class="comments" id="comments" data-repo="murakamikoshin/koshin-studio" data-repo-id="R_kgDOURc3ew"
+    data-category="Announcements" data-category-id="DIC_kwDOURc3e84DHTVr">
+    <h2 id="comments-h">コメント</h2>
+    <p>感想や、記事の間違いの指摘は、ここへ。書くには、GitHub のアカウントが要ります。</p>
+    <p><button type="button" class="btn ghost" id="load-comments">コメントを開く</button></p>
+    <p class="note">押すと、giscus（giscus.app）と GitHub に接続します。押さなければ、接続しません。詳しくは<a href="/privacy/">あつかい</a>に書いています。</p>
+    <div id="giscus-box"></div>
+  </section>
+<!--/comments-->
+</div>
+</main>
+
+<footer class="site"><div class="wrap">
+  <span>© 2026 Koshin Studio</span>
+  <div class="sns-row"></div>
+  <nav><a href="/picks/">Picks</a><a href="/calc/">Tools</a><a href="/about/">About</a><a href="/privacy/">あつかい</a><a href="/en/" hreflang="en" lang="en">English</a></nav>
+</div></footer>
+<script src="/motion.js?v=1e7447ec" defer></script>
+</body>
+</html>

@@ -7,6 +7,20 @@
   <language>ja</language>
   <atom:link href="https://koshinstudio.com/feed.xml" rel="self" type="application/rss+xml"/>
   <item>
+    <title>「1 ページ ＝ 1 案件」ではなかった：1 つのフォームで 6 商品を受け付ける店の記事が、リンクが同じというだけで消されていた</title>
+    <link>https://koshinstudio.com/notes/one-page-many-cases/</link>
+    <guid isPermaLink="true">https://koshinstudio.com/notes/one-page-many-cases/</guid>
+    <pubDate>Fri, 16 Oct 2026 15:00:00 GMT</pubDate>
+    <description>リンクだけで重複と決めるジョブが、1 つの Google フォームで 6 商品を受け付ける店の記事 5 件を消していた。「リンク ＋ 商品」に直した。サーバが作った「応募枠」をアプリが一度も読んでいなかったことも見つかった。</description>
+  </item>
+  <item>
+    <title>英語表記とカタカナ表記は、1 文字も重ならない：正しい照合 42 件を、指紋の関門が却下していた</title>
+    <link>https://koshinstudio.com/notes/transliteration-gate/</link>
+    <guid isPermaLink="true">https://koshinstudio.com/notes/transliteration-gate/</guid>
+    <pubDate>Fri, 16 Oct 2026 15:00:00 GMT</pubDate>
+    <description>相場の紐付け率が 39% に低下。相場のサイトに商品はあったが、自社の英語表記とカタカナ表記では指紋が一致せず、26 時間で 42 件が却下されていた。関門は弱めず、この照合だけに狭い 2 つ目の判定を足した。</description>
+  </item>
+  <item>
     <title>タイムアウトを 3 回直しても止まらなかった：真犯人は、同じ鍵の中で動いていた 2 つ目の処理だった</title>
     <link>https://koshinstudio.com/notes/timeout-third-fix/</link>
     <guid isPermaLink="true">https://koshinstudio.com/notes/timeout-third-fix/</guid>
