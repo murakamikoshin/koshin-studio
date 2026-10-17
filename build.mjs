@@ -809,6 +809,8 @@ function ldFor(file, url) {
       crumbs([['Koshin Studio', '/'], isPick(nn) ? ['Picks', '/picks/'] : ['Notes', '/notes/'], [nn.title, nn.url]]),
     ];
   }
+  if (rel === '/en/works/index.html') return [crumbs([['Koshin Studio', '/en/'], ['Works', '/en/works/']]),
+    { '@type': 'CollectionPage', name: 'Works', url: url, inLanguage: 'en', isPartOf: { '@id': SITE + '#studio' } }];
   if (rel === '/works/index.html') return [crumbs([['Koshin Studio', '/'], ['Works', '/works/']]),
     { '@type': 'CollectionPage', name: 'Works', url: url, inLanguage: 'ja', isPartOf: { '@id': SITE + '#studio' } },
     { '@type': 'ItemList', name: '作ったもの',
