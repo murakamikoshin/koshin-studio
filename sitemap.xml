@@ -12,7 +12,7 @@
   <url><loc>https://koshinstudio.com/en/about/</loc><lastmod>2026-10-16</lastmod><priority>0.5</priority></url>
   <url><loc>https://koshinstudio.com/en/calc/gacha-rate/</loc><lastmod>2026-10-17</lastmod><priority>0.5</priority></url>
   <url><loc>https://koshinstudio.com/en/calc/gacha/</loc><lastmod>2026-10-17</lastmod><priority>0.5</priority></url>
-  <url><loc>https://koshinstudio.com/en/calc/lottery/</loc><priority>0.5</priority></url>
+  <url><loc>https://koshinstudio.com/en/calc/lottery/</loc><lastmod>2026-10-17</lastmod><priority>0.5</priority></url>
   <url><loc>https://koshinstudio.com/en/</loc><lastmod>2026-10-17</lastmod><priority>0.5</priority></url>
   <url><loc>https://koshinstudio.com/en/notes/adgap/</loc><lastmod>2026-10-17</lastmod><priority>0.5</priority></url>
   <url><loc>https://koshinstudio.com/en/notes/anago/</loc><lastmod>2026-10-17</lastmod><priority>0.5</priority></url>
@@ -111,6 +111,7 @@
   <url><loc>https://koshinstudio.com/notes/typo-catalog/</loc><lastmod>2026-10-17</lastmod><priority>0.8</priority></url>
   <url><loc>https://koshinstudio.com/notes/u2028/</loc><lastmod>2026-10-17</lastmod><priority>0.8</priority></url>
   <url><loc>https://koshinstudio.com/notes/webaudio/</loc><lastmod>2026-10-17</lastmod><priority>0.8</priority></url>
+  <url><loc>https://koshinstudio.com/notes/x-monitoring-gaps/</loc><priority>0.8</priority></url>
   <url><loc>https://koshinstudio.com/notes/xcode152-sdk/</loc><lastmod>2026-10-17</lastmod><priority>0.8</priority></url>
   <url><loc>https://koshinstudio.com/picks/</loc><lastmod>2026-10-17</lastmod><priority>0.5</priority></url>
   <url><loc>https://koshinstudio.com/privacy/</loc><lastmod>2026-10-17</lastmod><priority>0.5</priority></url>

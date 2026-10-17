@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>X 監視の漏れ 4 つ：検索に出ない投稿、持ち主が変わるアカウント、店を探せない検索、止まった後の取り戻し — Koshin Studio</title>
+<meta name="description" content="店の X 投稿を巡回する監視で、4 店の告知が検索に 751 件取っても出なかった、登録した店が個人になっていた、店の発掘が 63 店中 11 店だった、6 日止まった後 2 時間で 2,866 件中 185 件しか読めなかった。直し方と、費用の見積もり。">
+<meta property="og:title" content="X 監視の漏れ 4 つ：検索に出ない投稿、持ち主が変わるアカウント、店を探せない検索、止まった後の取り戻し">
+<meta property="og:description" content="店の X 投稿を巡回する監視で、4 店の告知が検索に 751 件取っても出なかった、登録した店が個人になっていた、店の発掘が 63 店中 11 店だった、6 日止まった後 2 時間で 2,866 件中 185 件しか読めなかった。直し方と、費用の見積もり。">
+<meta property="og:type" content="article">
+<meta name="theme-color" content="#fbfaf7">
+<link rel="icon" href="/favicon.ico?v=1697d589" sizes="48x48">
+<link rel="icon" href="/favicon.svg?v=b9d7922f" type="image/svg+xml" sizes="any">
+<link rel="icon" href="/assets/icon/icon-192.png?v=e2566235" type="image/png" sizes="192x192">
+<link rel="apple-touch-icon" href="/assets/icon/icon-180.png?v=84e7f0e6">
+<link rel="manifest" href="/site.webmanifest">
+<script>document.documentElement.className+=" js"</script>
+<link rel="stylesheet" href="/style.css?v=dd51310c">
+<meta name="google-adsense-account" content="ca-pub-3863314847163872">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3863314847163872" crossorigin="anonymous"></script>
+<link rel="canonical" href="https://koshinstudio.com/notes/x-monitoring-gaps/">
+<meta property="og:url" content="https://koshinstudio.com/notes/x-monitoring-gaps/">
+<meta property="og:site_name" content="Koshin Studio">
+<meta property="og:locale" content="ja_JP">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="alternate" type="application/rss+xml" title="Koshin Studio — Notes" href="https://koshinstudio.com/feed.xml">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BlogPosting","headline":"X 監視の漏れ 4 つ：検索に出ない投稿、持ち主が変わるアカウント、店を探せない検索、止まった後の取り戻し","url":"https://koshinstudio.com/notes/x-monitoring-gaps/","description":"店の X 投稿を巡回する監視で、4 店の告知が検索に 751 件取っても出なかった、登録した店が個人になっていた、店の発掘が 63 店中 11 店だった、6 日止まった後 2 時間で 2,866 件中 185 件しか読めなかった。直し方と、費用の見積もり。","datePublished":"2026-10-17","dateModified":"2026-10-17","inLanguage":"ja","image":"https://koshinstudio.com/assets/og/og_notes_x-monitoring-gaps.jpg","author":{"@id":"https://koshinstudio.com#studio"},"publisher":{"@id":"https://koshinstudio.com#studio"},"mainEntityOfPage":"https://koshinstudio.com/notes/x-monitoring-gaps/"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Koshin Studio","item":"https://koshinstudio.com/"},{"@type":"ListItem","position":2,"name":"Notes","item":"https://koshinstudio.com/notes/"},{"@type":"ListItem","position":3,"name":"X 監視の漏れ 4 つ：検索に出ない投稿、持ち主が変わるアカウント、店を探せない検索、止まった後の取り戻し","item":"https://koshinstudio.com/notes/x-monitoring-gaps/"}]}]}</script>
+<meta property="og:image" content="https://koshinstudio.com/assets/og/og_notes_x-monitoring-gaps.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
+</head>
+<body class="article">
+<canvas id="motes"></canvas>
+
+<header class="site"><div class="wrap">
+  <a class="logo" href="/"><img class="logo-mark" src="/favicon.svg?v=b9d7922f" alt="" width="28" height="28">Koshin Studio</a>
+  <nav><a href="/works/">Works</a><a href="/notes/">Notes</a><a href="/picks/">Picks</a><a href="/calc/">Tools</a><a href="/about/">About</a></nav>
+</div></header>
+
+<main><div class="wrap">
+  <nav class="crumbs" aria-label="現在地"><a href="/">Koshin Studio</a><i aria-hidden="true">›</i><a href="/notes/">Notes</a><i aria-hidden="true">›</i><span aria-current="page">X 監視の漏れ 4 つ：検索に出ない投稿、持ち主が変わるアカウント、店を探せない検索、止まった後の取り戻し</span></nav>
+  <h1>X 監視の漏れ 4 つ：検索に出ない投稿、持ち主が変わるアカウント、店を探せない検索、止まった後の取り戻し</h1>  <div class="rule"></div>
+  <p class="lead">トレカダッシュ 開発の記録 ／ 2026年9月</p>
+
+  <p>iOS アプリ「<a href="/works/torecadash/">トレカダッシュ</a>」の情報源のうち、いちばん速く、いちばん漏れやすいのが、<strong>お店の X（旧 Twitter）の投稿</strong>です。お店は、抽選や先着の告知を、まず X に出します。アプリは、登録したお店のアカウントを、定期的に巡回して読んでいます。</p>
+  <p>2026 年 9 月 19 日の 1 日で、この監視の「漏れ」が 4 つ、続けて見つかりました。この記事は、その記録です。</p>
+  <p class="note">数字は、2026 年 9 月 19〜20 日の作業の記録から書いています。個人のアカウントは、名前を出さずに書きます。</p>
+<!--toc-->
+  <nav class="toc" aria-label="目次"><p>目次</p><ol><li><a href="#s1">1. 検索に出てこない投稿がある</a></li><li><a href="#s2">2. 登録した店が、いつのまにか店ではなくなっていた</a></li><li><a href="#s3">3. 店を探す検索が、63 店中 11 店しか見つけていなかった</a></li><li><a href="#s4">4. 止まった後の取り戻しに、半日かかる</a></li><li><a href="#s5">おまけ：予算の「今月だけ」が、全停止を 2 回起こした</a></li><li><a href="#s6">分かったこと</a></li></ol></nav>
+<!--/toc-->
+  <h2 class="rv" id="s1">1. 検索に出てこない投稿がある</h2>
+  <p>監視は、X の検索で投稿を探していました。ところが、4 つの店の抽選の告知が、<strong>言葉で絞らずに 751 件を取っても、出てきません</strong>でした。1 店ずつでも出ませんでした。X の検索は、店の投稿の一部を、返さないことがあります。</p>
+  <p>タイムライン（その店の投稿の一覧）を直接読む方法（<code>profileTweets</code>）なら、取れました。</p>
+  <p>厄介なのは、<strong>記事が一度も作れない店は、「実績なし」のまま</strong>になることです。巡回の優先度や、対策の対象は、実績を基準にしています。実績がないと、対象にもならない。見えない店は、見えないままになります（鶏と卵です）。</p>
+  <p>直し方は、検索に加えて、<strong>店のタイムラインも読む</strong>ことでした。ただし、タイムラインは言葉で絞れず、読んだ件数の全部が課金されます。そこで、実績のある店は毎日、実績のない店は週に 1 回、1 店あたりの件数に上限（10 件と 8 件）を付けました。</p>
+  <div class="scroll rv"><table>
+    <thead><tr><th>見積もり</th><th>値</th></tr></thead>
+    <tbody>
+      <tr><td>実績のある店の投稿数</td><td>1 日 13.5 件</td></tr>
+      <tr><td>無作為に選んだ店の投稿数</td><td>1 日 4.5 件</td></tr>
+      <tr><td>追加後の月の見込み費用</td><td>約 $51（プランに含まれる枠は $39）</td></tr>
+    </tbody>
+  </table></div>
+  <p>費用は、店ごとの投稿数で大きく変わるので、見積もりは必ず実測で出します。月の使用額が $62 を超えたら自動で止まるようにし、残りの予算で全店を毎日読めるかを自動で見積もって、足りなければ読む店を絞る仕組みも入れました。</p>
+
+  <h2 class="rv" id="s2">2. 登録した店が、いつのまにか店ではなくなっていた</h2>
+  <p>監視の一覧に「店」として登録していた 2 つのアカウントが、今は店ではありませんでした。1 つは、8 月に中古店の支店として登録したアカウントで、今は個人の雑談になっていました。もう 1 つは、5 月に登録したアカウントで、情報発信の個人の「【PR】抽選販売」の投稿が、店の抽選として記事になっていました。</p>
+  <p>記事は、「店の一次情報」として出ます。誤った情報が、そのまま通知されます。</p>
+  <p>監視の一覧は、登録した時点の確認しかしていませんでした。その後、アカウントの持ち主や使い方が変わっても、気づく仕組みがなかったのです。</p>
+  <p>確かめ方は、一覧のコメントに書いた店名と、直近 30 日の記事の<strong>表示名</strong>を、2 文字の重なりで突き合わせることでした。828 件のうち、食い違いを目で 1 件ずつ見て、個人化していたのは 2 件でした。「不明」で登録したものが、そのまま正式名になっているだけ、という食い違いが大半だったので、機械では決めず、目で見ました。</p>
+
+  <h2 class="rv" id="s3">3. 店を探す検索が、63 店中 11 店しか見つけていなかった</h2>
+  <p>新しい店の X アカウントは、検索で探します。当時の検索は、「店名 ジャンル名 抽選 site:x.com」で、上位 5 件までを見ていました。63 店を試して、X を見つけられたのは<strong>11 店だけ</strong>でした。上位には、まとめアカウントや、客の抽選の投稿が来て、店名の照合で弾かれていたのです。</p>
+  <p>X のアカウントが分かっている 8 店で比べると、旧しくみは 5 店、「店名 site:x.com」に変えると 7 店（全部 1 位）でした。</p>
+  <p>ところが、言葉を広げた直後の下見で、<strong>個人や無関係のアカウント</strong>を拾いました。検索結果の題名には、投稿の本文が入っていて、本文に書かれた店名で一致していたからです。題名から<strong>表示名の部分だけ</strong>を取り出して照合するように直しました。検索の当たりを増やすと、同時に誤りも増えます。言葉を変えたら、動かす前に必ず下見をして、拾ったものを 1 件ずつ見ます。</p>
+
+  <h2 class="rv" id="s4">4. 止まった後の取り戻しに、半日かかる</h2>
+  <p>データ取得サービス（Apify）の予算が切れて、X の監視が 6 日間止まっていました。再開したところ、2 時間で読めたのは、<strong>2,866 件のうち 185 件</strong>でした。</p>
+  <p>巡回は、「実績のある店は 3 時間、ない店は 12 時間で一周」の順番制です。順番制は、全員がだいたい同じだけ遅れている普段の状態に合わせた作りでした。止まった後は、遅れが一様ではありません。取り戻しに半日以上かかり、<strong>翌日が締切の抽選は、読む前に終わる</strong>状態でした。</p>
+  <p>同じ理由で、検索で新しく見つけたアカウントも、「実績なし」の列の途中に入り、最長 12 時間、読まれませんでした。</p>
+  <p>直し方は、順番制の巡回に、<strong>「長く読めていないものを、古い順に上乗せして読む」枠</strong>を付けることでした。失敗し続けるものが枠を占領しないよう、試した印は別に持ちます。再開した直後は、手で取り戻しも走らせました。</p>
+
+  <h2 class="rv" id="s5">おまけ：予算の「今月だけ」が、全停止を 2 回起こした</h2>
+  <p>この取り戻しの原因だった、予算切れの話です。以前は、「今月だけ上限 $44」「9 月 6 日に $29 へ自動で戻す」のように、月ごとに上限を付け替えていました。戻した先の値が、その月の使用額より小さいと、<strong>サイクルの開始と同時に、X の監視が全部止まります</strong>。これを 2 回（8 月 28 日と 9 月 13 日）起こしました。</p>
+  <p>9 月 19 日に決めたのは、<strong>月の上限は $70 の 1 本だけ。間隔は月によって変えない</strong>（6 時間で全アカウントを一巡）でした。実測の月の費用は、$10〜18 程度です。月ごとに付け替える仕組みは、入れ直しません。</p>
+
+  <h2 class="rv" id="s6">分かったこと</h2>
+  <blockquote>見えない投稿は、見えないから、数えられない。</blockquote>
+  <ul>
+    <li><strong>検索だけに頼らない。</strong>検索は、すべては返さない。見えないものは、苦情も出ません。</li>
+    <li><strong>登録は、一度きりの確認にしない。</strong>持ち主は変わる。登録名と、今の表示名を、定期的に突き合わせます。</li>
+    <li><strong>検索の言葉を変えたら、下見する。</strong>当たりが増えると、誤りも増えます。</li>
+    <li><strong>止まったあとは、取り戻しの設計が別に要る。</strong>普段の順番制は、止まったあとには合いません。</li>
+    <li><strong>費用の上限は、月ごとに付け替えない。</strong>戻し忘れ、戻し先の誤りで、全部が止まります。</li>
+  </ul>
+
+
+  <div class="ad-slot" data-slot="footer" hidden></div>
+<!--/ad-->
+
+  <div class="rule" style="margin:40px 0 22px"></div>
+  <p class="eyebrow">この話に出てくるもの</p>
+  <ul class="plain">
+    <li><a href="/works/torecadash/">トレカダッシュ</a> — トレカの抽選・予約・先着の情報を集める iPhone アプリ</li>
+    <li><a href="/notes/interval-vs-delivery/">「1 分おき」の監視は、1 件あたり 10 分に 1 回だった</a> — 別の監視の、見直しの間隔の話</li>
+    <li><a href="/notes/silent-discard/">本物の抽選を、静かに捨てていた 4 つの実例</a> — 画面に出ない失敗の実例</li>
+  </ul>
+
+<!--related-->
+  <div class="rule" style="margin:40px 0 22px"></div>
+  <p class="eyebrow">ほかの記録</p>
+  <ul class="plain">
+    <li><a href="/notes/interval-vs-delivery/">「1 分おき」の監視は、1 件あたり 10 分に 1 回だった：速くする前に、見直しの間隔と、通知が届いた数を数えた</a> — 先着の監視は 63 件を 1 回に 4〜9 件しか見られず、1 件あたり約 10 分に 1 回。7 日間で捕まえたのは 3 回。間隔を詰めると別の監視が遅くなり、「審査しない」ことで先着の 45% に通知が飛んでいなかった。</li>
+    <li><a href="/notes/split-mixups/">1 つの記事を商品ごとに分ける処理で起きた 3 つの取り違え：子が親になり、共有リンクが別の店を指し、名前が 2 つの商品のものだった</a> — 分けた「子」の記事に親向けの処理をもう一度かけて、締切当日の抽選 60 件（23 店）が消えた。13 店が共有するリンクで別の店の親を引いた。2 つの商品が名乗る名前が 267 組あった。画面に何も出ないまま、本物が消える失敗の記録。</li>
+    <li><a href="/notes/silent-discard/">本物の抽選を、静かに捨てていた 4 つの実例：正規表現・年のない日付・まとめて聞く・null</a> — 「x.com」が「e-starbox.com」に一致して応募リンクが一度も採用されなかった、年のない日付が 6 年前と読まれてポケカ案件が 0 件だった、まとめ判定の数がずれた、「決められない」が「無い」と読まれ 129 件を伏せかけた。捨てる判定の失敗の記録。</li>
+  </ul>
+<!--/related-->
+
+<!--comments-->
+  <section class="comments" id="comments" data-repo="murakamikoshin/koshin-studio" data-repo-id="R_kgDOURc3ew"
+    data-category="Announcements" data-category-id="DIC_kwDOURc3e84DHTVr">
+    <h2 id="comments-h">コメント</h2>
+    <p>感想や、記事の間違いの指摘は、ここへ。書くには、GitHub のアカウントが要ります。</p>
+    <p><button type="button" class="btn ghost" id="load-comments">コメントを開く</button></p>
+    <p class="note">押すと、giscus（giscus.app）と GitHub に接続します。押さなければ、接続しません。詳しくは<a href="/privacy/">あつかい</a>に書いています。</p>
+    <div id="giscus-box"></div>
+  </section>
+<!--/comments-->
+</div>
+</main>
+
+<footer class="site"><div class="wrap">
+  <span>© 2026 Koshin Studio</span>
+  <div class="sns-row"></div>
+  <nav><a href="/picks/">Picks</a><a href="/calc/">Tools</a><a href="/about/">About</a><a href="/privacy/">あつかい</a><a href="/en/" hreflang="en" lang="en">English</a></nav>
+</div></footer>
+<script src="/motion.js?v=1e7447ec" defer></script>
+</body>
+</html>

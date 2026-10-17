@@ -7,6 +7,13 @@
   <language>ja</language>
   <atom:link href="https://koshinstudio.com/feed.xml" rel="self" type="application/rss+xml"/>
   <item>
+    <title>X 監視の漏れ 4 つ：検索に出ない投稿、持ち主が変わるアカウント、店を探せない検索、止まった後の取り戻し</title>
+    <link>https://koshinstudio.com/notes/x-monitoring-gaps/</link>
+    <guid isPermaLink="true">https://koshinstudio.com/notes/x-monitoring-gaps/</guid>
+    <pubDate>Fri, 16 Oct 2026 15:00:00 GMT</pubDate>
+    <description>店の X 投稿を巡回する監視で、4 店の告知が検索に 751 件取っても出なかった、登録した店が個人になっていた、店の発掘が 63 店中 11 店だった、6 日止まった後 2 時間で 2,866 件中 185 件しか読めなかった。直し方と、費用の見積もり。</description>
+  </item>
+  <item>
     <title>「1 分おき」の監視は、1 件あたり 10 分に 1 回だった：速くする前に、見直しの間隔と、通知が届いた数を数えた</title>
     <link>https://koshinstudio.com/notes/interval-vs-delivery/</link>
     <guid isPermaLink="true">https://koshinstudio.com/notes/interval-vs-delivery/</guid>
