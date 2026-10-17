@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>「確認済み」の印が付いていたのに、リンク先を一度も読めていなかった：t.co の中継ページ — Koshin Studio</title>
+<meta name="description" content="X の告知の応募リンクを、ブラウザの名乗りを付けて開くと、t.co は転送せず中継ページを返した。表示中の 220 件が全部読めておらず、9 件は閉じたフォームだった。直し方と、誤った「確認済み」の印の外し方の記録。">
+<meta property="og:title" content="「確認済み」の印が付いていたのに、リンク先を一度も読めていなかった：t.co の中継ページ">
+<meta property="og:description" content="X の告知の応募リンクを、ブラウザの名乗りを付けて開くと、t.co は転送せず中継ページを返した。表示中の 220 件が全部読めておらず、9 件は閉じたフォームだった。直し方と、誤った「確認済み」の印の外し方の記録。">
+<meta property="og:type" content="article">
+<meta name="theme-color" content="#fbfaf7">
+<link rel="icon" href="/favicon.ico?v=1697d589" sizes="48x48">
+<link rel="icon" href="/favicon.svg?v=b9d7922f" type="image/svg+xml" sizes="any">
+<link rel="icon" href="/assets/icon/icon-192.png?v=e2566235" type="image/png" sizes="192x192">
+<link rel="apple-touch-icon" href="/assets/icon/icon-180.png?v=84e7f0e6">
+<link rel="manifest" href="/site.webmanifest">
+<script>document.documentElement.className+=" js"</script>
+<link rel="stylesheet" href="/style.css?v=dd51310c">
+<meta name="google-adsense-account" content="ca-pub-3863314847163872">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3863314847163872" crossorigin="anonymous"></script>
+<link rel="canonical" href="https://koshinstudio.com/notes/tco-relay/">
+<meta property="og:url" content="https://koshinstudio.com/notes/tco-relay/">
+<meta property="og:site_name" content="Koshin Studio">
+<meta property="og:locale" content="ja_JP">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="alternate" type="application/rss+xml" title="Koshin Studio — Notes" href="https://koshinstudio.com/feed.xml">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BlogPosting","headline":"「確認済み」の印が付いていたのに、リンク先を一度も読めていなかった：t.co の中継ページ","url":"https://koshinstudio.com/notes/tco-relay/","description":"X の告知の応募リンクを、ブラウザの名乗りを付けて開くと、t.co は転送せず中継ページを返した。表示中の 220 件が全部読めておらず、9 件は閉じたフォームだった。直し方と、誤った「確認済み」の印の外し方の記録。","datePublished":"2026-10-17","dateModified":"2026-10-17","inLanguage":"ja","image":"https://koshinstudio.com/assets/og/og_notes_tco-relay.jpg","author":{"@id":"https://koshinstudio.com#studio"},"publisher":{"@id":"https://koshinstudio.com#studio"},"mainEntityOfPage":"https://koshinstudio.com/notes/tco-relay/"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Koshin Studio","item":"https://koshinstudio.com/"},{"@type":"ListItem","position":2,"name":"Notes","item":"https://koshinstudio.com/notes/"},{"@type":"ListItem","position":3,"name":"「確認済み」の印が付いていたのに、リンク先を一度も読めていなかった：t.co の中継ページ","item":"https://koshinstudio.com/notes/tco-relay/"}]}]}</script>
+<meta property="og:image" content="https://koshinstudio.com/assets/og/og_notes_tco-relay.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
+</head>
+<body class="article">
+<canvas id="motes"></canvas>
+
+<header class="site"><div class="wrap">
+  <a class="logo" href="/"><img class="logo-mark" src="/favicon.svg?v=b9d7922f" alt="" width="28" height="28">Koshin Studio</a>
+  <nav><a href="/works/">Works</a><a href="/notes/">Notes</a><a href="/picks/">Picks</a><a href="/calc/">Tools</a><a href="/about/">About</a></nav>
+</div></header>
+
+<main><div class="wrap">
+  <nav class="crumbs" aria-label="現在地"><a href="/">Koshin Studio</a><i aria-hidden="true">›</i><a href="/notes/">Notes</a><i aria-hidden="true">›</i><span aria-current="page">「確認済み」の印が付いていたのに、リンク先を一度も読めていなかった：t.co の中継ページ</span></nav>
+  <h1>「確認済み」の印が付いていたのに、リンク先を一度も読めていなかった：t.co の中継ページ</h1>  <div class="rule"></div>
+  <p class="lead">トレカダッシュ 開発の記録 ／ 2026年10月</p>
+
+  <p>iOS アプリ「<a href="/works/torecadash/">トレカダッシュ</a>」は、お店の X（旧 Twitter）の告知から、トレカの抽選販売の情報を集めています。告知には、応募用のフォームへのリンクが付いています。アプリは、そのリンク先も読みに行って、<strong>締切の日時や、もう受付が終わっていないか</strong>を確かめています。</p>
+  <p>ある日、「締切の日時が違う」という報告が来ました。調べると、締切の日時どころではなく、<strong>リンク先のページを、一度も読めていませんでした</strong>。しかも、読めていないのに、「確認済み」の印が付いていました。</p>
+  <p class="note">この記事は、2026 年 10 月 16 日の作業の記録（調査の内容と、数字）から書いています。</p>
+<!--toc-->
+  <nav class="toc" aria-label="目次"><p>目次</p><ol><li><a href="#s1">症状：閉じたフォームが、受付中のまま出ていた</a></li><li><a href="#s2">原因：t.co は、ブラウザのふりをすると、別のページを返す</a></li><li><a href="#s3">実際に、どれくらい読めていなかったか</a></li><li><a href="#s4">直し方</a></li><li><a href="#s5">すでに付いていた、「確認済み」の印をどうするか</a></li><li><a href="#s6">分かったこと</a></li></ol></nav>
+<!--/toc-->
+  <h2 class="rv" id="s1">症状：閉じたフォームが、受付中のまま出ていた</h2>
+  <p>報告された抽選は、ゲームショップの「30th CELEBRATION カードセット 9 種」の X の告知でした。応募先の Google フォームを開くと、<strong>「回答の受け付けは終了しました」</strong>と出ます。ところが、アプリでは、この抽選が表示中のままで、締切の日時も空でした。</p>
+  <p>おかしいのは、この記事に<strong>「受付が終わっていないか確認した」という印（日時）</strong>が付いていたことです。確認したのに、終わっていることに気づかなかった。確認が、中身を見ていなかったことになります。</p>
+
+  <h2 class="rv" id="s2">原因：t.co は、ブラウザのふりをすると、別のページを返す</h2>
+  <p>X の投稿に貼られたリンクは、<code>t.co</code> という短縮 URL を通ります。普通は、開くと、本来のリンク先へ転送されます（HTTP の 301）。</p>
+  <p>ところが、<strong>ブラウザの User-Agent（「私は Chrome です」という名乗り）を付けて開くと</strong>、転送されず、<strong>JavaScript で飛ばす、約 500 バイトの中継ページ</strong>が返ってきます。アプリの読み取り処理は、2 か所とも、ブラウザの名乗りを付けて開いて、「転送に従う」設定にしていました。その結果、次のことが起きていました。</p>
+  <ul>
+    <li>転送されないので、最後の URL は、<code>t.co</code> のままです。</li>
+    <li>読んだ本文は、応募フォームではなく、<strong>中継ページの HTML</strong> でした。</li>
+    <li>つまり、応募フォームの中身を、<strong>一度も読んでいませんでした</strong>。</li>
+  </ul>
+  <p>ブラウザの名乗りを足したのは、8 月 6 日のことでした。今回の不具合は、その変更の副作用でした。</p>
+
+  <h2 class="rv" id="s3">実際に、どれくらい読めていなかったか</h2>
+  <p>報告された 1 件だけの問題かを確かめるために、表示中の X の抽選・予約の記事のうち、<code>t.co</code> のリンクを持つものを全部調べました。</p>
+  <div class="scroll rv"><table>
+    <thead><tr><th>調べたこと</th><th>結果</th></tr></thead>
+    <tbody>
+      <tr><td><code>t.co</code> を持つ、表示中の記事</td><td>220 件</td></tr>
+      <tr><td>そのうち、中継ページが返ってきた記事</td><td><strong>220 件（全部）</strong></td></tr>
+      <tr><td>そのうち、実は閉じたフォームなのに、表示中だった記事</td><td><strong>9 件</strong></td></tr>
+    </tbody>
+  </table></div>
+  <p>9 件は、複数の店にまたがっていました。1 つの店の問題ではなく、仕組みの問題です。</p>
+  <p>もう 1 つ、見逃せない手がかりがありました。毎日動いている、「締切が空の記事を直す」処理が、<strong>「対象 126 件、更新 0 件」を、毎日繰り返していた</strong>ことです。対象が 126 件あるのに、直せたのが 0 件。これは、「直すものが無かった」のではなく、「読めていないから、直せなかった」の結果でした。</p>
+
+  <h2 class="rv" id="s4">直し方</h2>
+  <p>転送先を調べる処理を、<code>fetchTcoTarget</code> という 1 つの関数にまとめました。手順は、こうです。</p>
+  <ol>
+    <li><strong>名乗りを付けずに</strong>、<code>t.co</code> を開く。転送には<strong>従わず</strong>（<code>redirect: "manual"</code>）、最初の転送先だけを受け取る。</li>
+    <li>転送先が返ってきたら、それを使う。</li>
+    <li>中継ページが返ってきたら、その中の<strong>自動転送の指定（<code>&lt;meta http-equiv="refresh"&gt;</code>）</strong>を読んで、本当の転送先を取り出す。</li>
+    <li>その転送先を、今度は<strong>ブラウザの名乗りを付けて</strong>開く。</li>
+  </ol>
+  <p>名乗りを付けるか付けないかで、返ってくるものが違う。だから、「短縮 URL を解く」ときは名乗りなし、「本来のページを読む」ときはブラウザの名乗りあり、と使い分けました。同じ失敗を繰り返さないよう、テストも足しています。</p>
+
+  <h2 class="rv" id="s5">すでに付いていた、「確認済み」の印をどうするか</h2>
+  <p>直しただけでは、足りません。<strong>誤って付いた「確認済み」の印が、記事に残っている</strong>からです。印がある記事は、「もう確認した」と見なされて、再確認の対象から外れます。コードを直しても、既存の記事は直りません。</p>
+  <p>そこで、条件に合う 195 件（X の抽選・予約で、投稿へのリンクを持ち、<code>t.co</code> を持つもの）から、印を外しました。そのうえで、受付終了の確認と、締切の再抽出を、手で実行しました。</p>
+  <div class="scroll rv"><table>
+    <thead><tr><th>処理</th><th>直す前</th><th>直した後</th></tr></thead>
+    <tbody>
+      <tr><td>締切の再抽出（対象になった件数／更新できた件数）</td><td>対象 126 件・更新 <strong>0 件</strong>（毎日）</td><td>対象 123 件・更新 <strong>14 件</strong></td></tr>
+    </tbody>
+  </table></div>
+  <p>同じ日に、受付終了の確認の頻度も見直しました。締切の無い記事は 6 時間おき（締切のある記事は 24 時間おき）、1 回に見る件数は 40 件から 80 件、1 回の上限は 7 分です。<code>t.co</code> が読めるようになったので、閉じたフォームを丸 1 日出し続けないようにするためです。</p>
+
+  <h2 class="rv" id="s6">分かったこと</h2>
+  <blockquote>「確認した」の印は、読めたときだけ付ける。</blockquote>
+  <ul>
+    <li><strong>印は、成功したときだけ書く。</strong>読めなかったのに「確認した」と書くと、直した後も、その記事は二度と見直されません。</li>
+    <li><strong>外部のページを読んだら、目的のページかを確かめる。</strong>最後の URL が、短縮 URL のままではないか。本文が、期待した種類のページか。</li>
+    <li><strong>「更新 0 件」が続くのは、異常かもしれない。</strong>対象があるのに、毎日 0 件。「ない」のか「できない」のかを、区別します。</li>
+    <li><strong>通信の設定を変えたら、それを使う全部の通信を見直す。</strong>8 月に足したブラウザの名乗りが、2 か月後に、<code>t.co</code> の読み取りを壊していました。</li>
+  </ul>
+
+
+  <div class="ad-slot" data-slot="footer" hidden></div>
+<!--/ad-->
+
+  <div class="rule" style="margin:40px 0 22px"></div>
+  <p class="eyebrow">この話に出てくるもの</p>
+  <ul class="plain">
+    <li><a href="/works/torecadash/">トレカダッシュ</a> — トレカの抽選・予約・先着の情報を集める iPhone アプリ</li>
+    <li><a href="/notes/blocked-page/">「取れた」と読んでいたのは、ただの案内ページだった</a> — 同じ、「取れたことにしていた」失敗の記録</li>
+    <li><a href="/notes/fail-open/">確認できなかったときに、通していた</a> — 「確認できなかった」の扱いで起きた、別の失敗</li>
+  </ul>
+
+<!--related-->
+  <div class="rule" style="margin:40px 0 22px"></div>
+  <p class="eyebrow">ほかの記録</p>
+  <ul class="plain">
+    <li><a href="/notes/gemini-migration/">Claude API から Gemini API（gemini-3.1-flash-lite）へ移行した：16 か所の呼び出しを 1 つの関数にまとめた</a> — Anthropic の利用上限で予定外の課金が出たため Gemini へ移行。モデルの選び方（廃止予定日）、呼び出しの一本化、Web 検索の回数上限が無い問題への回路遮断器、止めるスイッチの記録。</li>
+    <li><a href="/notes/xcode152-sdk/">Xcode 15.2 で Firebase 12 が使えない（Swift 6.0 必須）：Firebase 11.4.0 と AdMob 11.5.0 に固定した理由</a> — 古い Mac の Xcode 15.2 では、Firebase 12 以降と 11.12.0 以降は Xcode 16.2 が必須、AdMob 11.6.0 以降は MarketplaceKit で Xcode 15.3 が必須。Exact Version で固定した記録。</li>
+    <li><a href="/notes/itms-91064/">ITMS-91064「無効なバイナリ」：NSPrivacyTracking が true なのに NSPrivacyTrackingDomains が空だった</a> — ビルドが Apple の自動審査で ITMS-91064 により却下された。NSPrivacyTracking が true で、NSPrivacyTrackingDomains が空の配列だったのが原因。ドメインを補った経緯と、確認できていないこと。</li>
+  </ul>
+<!--/related-->
+
+<!--comments-->
+  <section class="comments" id="comments" data-repo="murakamikoshin/koshin-studio" data-repo-id="R_kgDOURc3ew"
+    data-category="Announcements" data-category-id="DIC_kwDOURc3e84DHTVr">
+    <h2 id="comments-h">コメント</h2>
+    <p>感想や、記事の間違いの指摘は、ここへ。書くには、GitHub のアカウントが要ります。</p>
+    <p><button type="button" class="btn ghost" id="load-comments">コメントを開く</button></p>
+    <p class="note">押すと、giscus（giscus.app）と GitHub に接続します。押さなければ、接続しません。詳しくは<a href="/privacy/">あつかい</a>に書いています。</p>
+    <div id="giscus-box"></div>
+  </section>
+<!--/comments-->
+</div>
+</main>
+
+<footer class="site"><div class="wrap">
+  <span>© 2026 Koshin Studio</span>
+  <div class="sns-row"></div>
+  <nav><a href="/picks/">Picks</a><a href="/calc/">Tools</a><a href="/about/">About</a><a href="/privacy/">あつかい</a><a href="/en/" hreflang="en" lang="en">English</a></nav>
+</div></footer>
+<script src="/motion.js?v=1e7447ec" defer></script>
+</body>
+</html>
