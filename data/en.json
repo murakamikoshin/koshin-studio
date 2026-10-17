@@ -1,5 +1,19 @@
 [
   {
+    "ja": "/notes/gemini-meter/",
+    "en": "/en/notes/gemini-meter/",
+    "title": "Before cutting Gemini cost, I doubted the meter: price, breakdown and cache were all wrong, and the cache threshold changed when I re-measured",
+    "date": "2026-10-17",
+    "blurb": "The cost meter was broken in three places (prices under-reported 2.6×, 31 purposes merged, cache uncounted). The cache threshold was about 8,000 tokens in September and about 4,000 in October. Padding the prompt shifted 9% of answers."
+  },
+  {
+    "ja": "/notes/firestore-91/",
+    "en": "/en/notes/firestore-91/",
+    "title": "Firestore cost in yen: 91% of reads came from one place, and my first cache did not work",
+    "date": "2026-10-17",
+    "blurb": "Seen in yen for the first time, Firestore cost about ¥13,000 a month, close to Gemini. 91% of reads were a product list re-read for every post. A 60-second cache failed because 32 jobs ran at once; caching the pending promise fixed it."
+  },
+  {
     "ja": "/notes/negaeri-balance/",
     "en": "/en/notes/negaeri-balance/",
     "title": "Setting the rules of Negaeri Shogi by playing AI against AI: one change that worked, six that broke",

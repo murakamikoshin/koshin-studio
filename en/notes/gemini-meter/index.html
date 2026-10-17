@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Before cutting Gemini cost, I doubted the meter: price, breakdown and cache were all wrong, and the cache threshold changed when I re-measured — Koshin Studio</title>
+<meta name="description" content="The cost meter was broken in three places (prices under-reported 2.6×, 31 purposes merged, cache uncounted). The cache threshold was about 8,000 tokens in September and about 4,000 in October. Padding the prompt shifted 9% of answers.">
+<meta property="og:title" content="Before cutting Gemini cost, I doubted the meter: price, breakdown and cache were all wrong, and the cache threshold changed when I re-measured">
+<meta property="og:description" content="The cost meter was broken in three places (prices under-reported 2.6×, 31 purposes merged, cache uncounted). The cache threshold was about 8,000 tokens in September and about 4,000 in October. Padding the prompt shifted 9% of answers.">
+<meta property="og:type" content="article">
+<meta name="theme-color" content="#fbfaf7">
+<link rel="icon" href="/favicon.ico?v=1697d589" sizes="48x48">
+<link rel="icon" href="/favicon.svg?v=b9d7922f" type="image/svg+xml" sizes="any">
+<link rel="icon" href="/assets/icon/icon-192.png?v=e2566235" type="image/png" sizes="192x192">
+<link rel="apple-touch-icon" href="/assets/icon/icon-180.png?v=84e7f0e6">
+<link rel="manifest" href="/site.webmanifest">
+<script>document.documentElement.className+=" js"</script>
+<link rel="stylesheet" href="/style.css?v=dd51310c">
+<meta name="google-adsense-account" content="ca-pub-3863314847163872">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3863314847163872" crossorigin="anonymous"></script>
+<link rel="canonical" href="https://koshinstudio.com/en/notes/gemini-meter/">
+<meta property="og:url" content="https://koshinstudio.com/en/notes/gemini-meter/">
+<meta property="og:site_name" content="Koshin Studio">
+<meta property="og:locale" content="en_US">
+<link rel="alternate" hreflang="ja" href="https://koshinstudio.com/notes/gemini-meter/">
+<link rel="alternate" hreflang="en" href="https://koshinstudio.com/en/notes/gemini-meter/">
+<link rel="alternate" hreflang="x-default" href="https://koshinstudio.com/en/notes/gemini-meter/">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="alternate" type="application/rss+xml" title="Koshin Studio — Notes" href="https://koshinstudio.com/feed.xml">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BlogPosting","headline":"Before cutting Gemini cost, I doubted the meter: price, breakdown and cache were all wrong, and the cache threshold changed when I re-measured","url":"https://koshinstudio.com/en/notes/gemini-meter/","description":"The cost meter was broken in three places (prices under-reported 2.6×, 31 purposes merged, cache uncounted). The cache threshold was about 8,000 tokens in September and about 4,000 in October. Padding the prompt shifted 9% of answers.","datePublished":"2026-10-17","dateModified":"2026-10-17","inLanguage":"en","image":"https://koshinstudio.com/assets/og/og_en_notes_gemini-meter.jpg","author":{"@id":"https://koshinstudio.com#studio"},"publisher":{"@id":"https://koshinstudio.com#studio"},"mainEntityOfPage":"https://koshinstudio.com/en/notes/gemini-meter/"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Koshin Studio","item":"https://koshinstudio.com/en/"},{"@type":"ListItem","position":2,"name":"Before cutting Gemini cost, I doubted the meter: price, breakdown and cache were all wrong, and the cache threshold changed when I re-measured","item":"https://koshinstudio.com/en/notes/gemini-meter/"}]}]}</script>
+<meta property="og:image" content="https://koshinstudio.com/assets/og/og_en_notes_gemini-meter.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
+</head>
+<body class="article">
+<canvas id="motes"></canvas>
+
+<header class="site"><div class="wrap">
+  <a class="logo" href="/"><img class="logo-mark" src="/favicon.svg?v=b9d7922f" alt="" width="28" height="28">Koshin Studio</a>
+  <nav><a href="/works/">Works</a><a href="/notes/">Notes</a><a href="/picks/">Picks</a><a href="/calc/">Tools</a><a href="/about/">About</a></nav>
+</div></header>
+
+<main><div class="wrap">
+  <nav class="crumbs" aria-label="You are here"><a href="/en/">Koshin Studio</a><i aria-hidden="true">›</i><span aria-current="page">Gemini cost meter</span></nav>
+  <h1>Before cutting Gemini cost, I doubted the meter: price, breakdown and cache were all wrong, and the cache threshold changed when I re-measured</h1>  <div class="rule"></div>
+<!--lang-->
+  <p class="note"><a href="/notes/gemini-meter/" hreflang="ja" lang="ja">日本語版</a></p>
+<!--/lang-->  <p class="lead">Development log of the Toreca Dash app / September–October 2026</p>
+
+  <p>My iPhone app Toreca Dash uses Google’s Gemini (AI) to classify posts and match products. You pay for what you use, so I have worked on the cost several times. This is the record of two of those rounds.</p>
+  <ul>
+    <li><strong>4 September:</strong> before cutting anything I checked the measurement, and <strong>all three parts were broken</strong>.</li>
+    <li><strong>16 October:</strong> I re-measured when the cache works, and <strong>it disagreed with my September conclusion</strong>.</li>
+  </ul>
+  <p class="note">Numbers come from my work logs of 4 September and 16 October 2026. The model is gemini-3.1-flash-lite.</p>  <h2 class="rv" id="s1">Three parts of the meter were broken</h2>
+  <p>I was asked to cut cost. The first thing I did was not cutting, but checking whether the numbers were right. Cutting with a broken meter means cutting the wrong things. I found three faults.</p>
+  <div class="scroll rv"><table>
+    <thead><tr><th>Fault</th><th>What happened</th></tr></thead>
+    <tbody>
+      <tr><td>Wrong prices</td><td>The code used $0.10 input and $0.40 output per million tokens. The real prices are <strong>$0.25 and $1.50</strong>, so cost was <strong>under-reported by about 2.6×</strong>.</td></tr>
+      <tr><td>Labels collapsed</td><td>The per-purpose tally read a key that does not exist (<code>params.system</code>; the real one is <code>system_instruction</code>). <strong>31 purposes were merged into one lump</strong>, so I could never see which prompt was expensive.</td></tr>
+      <tr><td>Cache not counted</td><td>31% of input was cache hits at 1/10 the price, but everything was counted at full price, <strong>about 40% too high</strong>.</td></tr>
+    </tbody>
+  </table></div>
+  <p>One more thing: the “second most expensive” item, “(outside jobs)” at ¥195 a day, was not a production problem. It was <strong>me running things by hand</strong>. When judging production, exclude manual runs.</p>
+  <p>With the meter fixed, the cost was about ¥606 a day (¥18,168 a month); minus the cache, about ¥13,200 a month. Nearly all of it was <strong>input tokens</strong>: the instructions and candidate lists I resend every time.</p>
+
+  <h2 class="rv" id="s2">September: the cache starts above about 8,000 tokens</h2>
+  <p>Gemini discounts repeated long prompts (implicit caching) from the second call, at 1/10 the price for the cached part. I sent the same instruction three times at different lengths.</p>
+  <div class="scroll rv"><table>
+    <thead><tr><th>Prompt length (input tokens)</th><th>Cached tokens</th></tr></thead>
+    <tbody>
+      <tr><td>5,209</td><td>0</td></tr>
+      <tr><td>8,490</td><td>4,079</td></tr>
+      <tr><td>17,070</td><td>12,263</td></tr>
+    </tbody>
+  </table></div>
+  <p>The conclusion then was “it works above about 8,000 tokens”. Effective tokens are <strong>input − 0.9 × cached</strong>. Padding a prompt to reach the threshold <strong>costs more</strong>: stretching 4,200 tokens to 8,500 gives 4,814 effective tokens, more than before. The cache only pays off for prompts that are already large.</p>
+
+  <h2 class="rv" id="s3">October: the threshold was about 4,000 tokens</h2>
+  <p>I measured again with the production key, this time through the interactions API. The result differed from September.</p>
+  <div class="scroll rv"><table>
+    <thead><tr><th>Prompt length (input tokens)</th><th>Cached tokens</th></tr></thead>
+    <tbody>
+      <tr><td>1,770</td><td>0</td></tr>
+      <tr><td>4,093</td><td>2,031 (from the 2nd call)</td></tr>
+      <tr><td>7,017</td><td>4,076</td></tr>
+    </tbody>
+  </table></div>
+  <p>It worked from about 4,000 tokens, in chunks of about 2,038 tokens. September said 8,000, October said 4,000. <strong>I have not found out why.</strong> A difference in how I measured or a change on the service side are possibilities, but I do not know which. What I do know is that <strong>the cache threshold is not a fixed fact; re-measure it</strong>.</p>
+  <p>My production prompts were 1,000 to 2,500 tokens, so the fixed part never reached the threshold and <strong>hits were 0 all day</strong>. Input is almost all of the cost (output about 1%), so a working cache looked like a big saving.</p>
+
+  <h2 class="rv" id="s4">Padding the prompt shifted 9% of the answers</h2>
+  <p>I tried stretching the prompt to about 2,300 tokens with “notes that do not affect the judgement”. I compared old and new answers on 90 real cases.</p>
+  <ul>
+    <li><strong>8 answers (9%) differed</strong>, between “other”, “lottery” and “first-come sale”.</li>
+    <li>At about 2,600 tokens it <strong>still did not hit the cache</strong>.</li>
+  </ul>
+  <p>It lowers accuracy and does not even get cache hits, so I <strong>withdrew it</strong> and never shipped it. Text that “does not matter” still changes an AI’s answers. Do not add it without checking.</p>
+
+  <h2 class="rv" id="s5">What is left</h2>
+  <p>On real data the biggest single item is product matching: on average 7,151 input tokens, 297 times a day, about ¥83. Narrowing candidates, batching and skipping the AI when the title equals the product name are already in. Going further means <strong>fewer candidates, that is, less accuracy</strong>, so I left it.</p>
+  <p>If I cut more, it will be by shortening prompts, checking agreement on real data one at a time, and not chasing the cache with padding.</p>
+
+  <h2 class="rv" id="s6">What I learned</h2>
+  <blockquote>Before cutting cost, doubt the tool you cut it with.</blockquote>
+  <ul>
+    <li><strong>Do not write prices from memory.</strong> Check the official price page. The 2.6× under-report was a copied price.</li>
+    <li><strong>Print one real breakdown and look at it.</strong> 31 purposes collapsed into one still add up to the right total.</li>
+    <li><strong>Check that your own work is not in production numbers.</strong></li>
+    <li><strong>Re-measure conditions.</strong> September’s 8,000 was October’s 4,000.</li>
+    <li><strong>Test “harmless” changes on real data.</strong> 90 cases showed a 9% shift.</li>
+  </ul>
+
+  <p class="note">This is the English version of <a href="/notes/gemini-meter/" hreflang="ja" lang="ja">the original Japanese article</a>.</p>
+
+  <div class="rule" style="margin:40px 0 22px"></div>
+  <p class="eyebrow">More in English</p>
+  <ul class="plain">
+    <li><a href="/en/">All English pages</a></li>
+    <li><a href="/en/works/torecadash/">Toreca Dash</a></li>
+    <li><a href="/en/notes/firestore-91/">Firestore cost in yen</a></li>
+  </ul>
+</div>
+</main>
+
+<footer class="site"><div class="wrap"></div></footer>
+<script src="/motion.js?v=1e7447ec" defer></script>
+</body>
+</html>

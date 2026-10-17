@@ -1564,6 +1564,8 @@ URL: https://koshinstudio.com/notes/gemini-meter/
 
 # Gemini の費用を削る前に、計器を疑った：単価・内訳・キャッシュの 3 つが壊れていて、キャッシュの条件は測り直すと変わっていた
 
+  English version (https://koshinstudio.com/en/notes/gemini-meter/)
+
   トレカダッシュ 開発の記録 ／ 2026年9月〜10月
 
   iOS アプリ「トレカダッシュ (https://koshinstudio.com/works/torecadash/)」は、記事の判定や商品の照合に、Google の Gemini（AI）を使っています。使った分だけお金がかかるので、費用を減らす作業を何度かしました。この記事は、その中の 2 つの回の記録です。
@@ -1668,6 +1670,8 @@ URL: https://koshinstudio.com/notes/gemini-meter/
 URL: https://koshinstudio.com/notes/firestore-91/
 
 # Firestore の費用を円で出したら、読み取りの 91% が 1 か所だった：キャッシュを入れても効かなかった理由
+
+  English version (https://koshinstudio.com/en/notes/firestore-91/)
 
   トレカダッシュ 開発の記録 ／ 2026年9月
 
@@ -6692,6 +6696,212 @@ URL: https://koshinstudio.com/privacy/
   2026 年 10 月 17 日に、アフィリエイト（紹介リンク）の記述を外しました。現在、このサイトの記事には、紹介リンクはありません。今後、リンクを付けることがあれば、記事の冒頭と、このページに書きます。
 
   このページの内容についてのご質問は、About (https://koshinstudio.com/about/) にある連絡先までお願いします。
+
+
+---
+
+URL: https://koshinstudio.com/en/notes/gemini-meter/
+
+# Before cutting Gemini cost, I doubted the meter: price, breakdown and cache were all wrong, and the cache threshold changed when I re-measured
+
+  日本語版 (https://koshinstudio.com/notes/gemini-meter/)
+
+  Development log of the Toreca Dash app / September–October 2026
+
+  My iPhone app Toreca Dash uses Google’s Gemini (AI) to classify posts and match products. You pay for what you use, so I have worked on the cost several times. This is the record of two of those rounds.
+
+- 4 September: before cutting anything I checked the measurement, and all three parts were broken.
+
+- 16 October: I re-measured when the cache works, and it disagreed with my September conclusion.
+
+  Numbers come from my work logs of 4 September and 16 October 2026. The model is gemini-3.1-flash-lite.
+
+## Three parts of the meter were broken
+
+  I was asked to cut cost. The first thing I did was not cutting, but checking whether the numbers were right. Cutting with a broken meter means cutting the wrong things. I found three faults.
+
+    Fault | What happened
+
+      Wrong prices | The code used $0.10 input and $0.40 output per million tokens. The real prices are $0.25 and $1.50, so cost was under-reported by about 2.6×.
+
+      Labels collapsed | The per-purpose tally read a key that does not exist (params.system; the real one is system_instruction). 31 purposes were merged into one lump, so I could never see which prompt was expensive.
+
+      Cache not counted | 31% of input was cache hits at 1/10 the price, but everything was counted at full price, about 40% too high.
+
+  One more thing: the “second most expensive” item, “(outside jobs)” at ¥195 a day, was not a production problem. It was me running things by hand. When judging production, exclude manual runs.
+
+  With the meter fixed, the cost was about ¥606 a day (¥18,168 a month); minus the cache, about ¥13,200 a month. Nearly all of it was input tokens: the instructions and candidate lists I resend every time.
+
+## September: the cache starts above about 8,000 tokens
+
+  Gemini discounts repeated long prompts (implicit caching) from the second call, at 1/10 the price for the cached part. I sent the same instruction three times at different lengths.
+
+    Prompt length (input tokens) | Cached tokens
+
+      5,209 | 0
+
+      8,490 | 4,079
+
+      17,070 | 12,263
+
+  The conclusion then was “it works above about 8,000 tokens”. Effective tokens are input − 0.9 × cached. Padding a prompt to reach the threshold costs more: stretching 4,200 tokens to 8,500 gives 4,814 effective tokens, more than before. The cache only pays off for prompts that are already large.
+
+## October: the threshold was about 4,000 tokens
+
+  I measured again with the production key, this time through the interactions API. The result differed from September.
+
+    Prompt length (input tokens) | Cached tokens
+
+      1,770 | 0
+
+      4,093 | 2,031 (from the 2nd call)
+
+      7,017 | 4,076
+
+  It worked from about 4,000 tokens, in chunks of about 2,038 tokens. September said 8,000, October said 4,000. I have not found out why. A difference in how I measured or a change on the service side are possibilities, but I do not know which. What I do know is that the cache threshold is not a fixed fact; re-measure it.
+
+  My production prompts were 1,000 to 2,500 tokens, so the fixed part never reached the threshold and hits were 0 all day. Input is almost all of the cost (output about 1%), so a working cache looked like a big saving.
+
+## Padding the prompt shifted 9% of the answers
+
+  I tried stretching the prompt to about 2,300 tokens with “notes that do not affect the judgement”. I compared old and new answers on 90 real cases.
+
+- 8 answers (9%) differed, between “other”, “lottery” and “first-come sale”.
+
+- At about 2,600 tokens it still did not hit the cache.
+
+  It lowers accuracy and does not even get cache hits, so I withdrew it and never shipped it. Text that “does not matter” still changes an AI’s answers. Do not add it without checking.
+
+## What is left
+
+  On real data the biggest single item is product matching: on average 7,151 input tokens, 297 times a day, about ¥83. Narrowing candidates, batching and skipping the AI when the title equals the product name are already in. Going further means fewer candidates, that is, less accuracy, so I left it.
+
+  If I cut more, it will be by shortening prompts, checking agreement on real data one at a time, and not chasing the cache with padding.
+
+## What I learned
+
+> Before cutting cost, doubt the tool you cut it with.
+
+- Do not write prices from memory. Check the official price page. The 2.6× under-report was a copied price.
+
+- Print one real breakdown and look at it. 31 purposes collapsed into one still add up to the right total.
+
+- Check that your own work is not in production numbers.
+
+- Re-measure conditions. September’s 8,000 was October’s 4,000.
+
+- Test “harmless” changes on real data. 90 cases showed a 9% shift.
+
+  This is the English version of the original Japanese article (https://koshinstudio.com/notes/gemini-meter/).
+
+  More in English
+
+- All English pages (https://koshinstudio.com/en/)
+
+- Toreca Dash (https://koshinstudio.com/en/works/torecadash/)
+
+- Firestore cost in yen (https://koshinstudio.com/en/notes/firestore-91/)
+
+
+---
+
+URL: https://koshinstudio.com/en/notes/firestore-91/
+
+# Firestore cost in yen: 91% of reads came from one place, and my first cache did not work
+
+  日本語版 (https://koshinstudio.com/notes/firestore-91/)
+
+  Development log of the Toreca Dash app / September 2026
+
+  The back end of my iPhone app Toreca Dash (a Japanese trading-card lottery and restock alert app) runs on Firebase’s Firestore database and a set of scheduled jobs. I had been reporting the cost of Gemini (AI) and of a scraping service in yen every day. I had not been reporting Firestore at all.
+
+  On the night of 4 September 2026 I converted it to yen for the first time. It was almost the same as Gemini. This is the record of how I found that 91% of the reads came from one place, why my first cache did not work, and how I fixed it again.
+
+  Numbers come from my work log of 4 September 2026. Prices are the real Tokyo-region prices.
+
+## Once it was in yen, there was a cost nobody was watching
+
+    Day | Reads | Writes | Cost per day
+
+      28 Aug | 2.18 million | 120k | ¥226 (about ¥6,777 a month)
+
+      1 Sep | 3.66 million | 134k | ¥368 (about ¥11,028 a month)
+
+      3 Sep | 4.21 million | 162k | ¥427 (about ¥12,810 a month)
+
+  The free tier is 50,000 reads a day. I was reading 84 times that, and it had grown 89% in a week, growing with every new article. A cost that is not shown in yen might as well not exist: about ¥13,000 a month, and nobody noticed because it was not in the report.
+
+## A meter found it in three minutes
+
+  I added a meter that counts which job reads which collection, and how much. The answer came as soon as it was in.
+
+  8,725 reads  X monitor | products   ← 91% of the 9,593 measured
+  197 reads  X monitor | news_items
+  For each post, the X monitor asks an AI “which product is this about?”. To build the candidate list it re-read every product of the genre each time. The Pokémon genre has 693 products, so matching one post cost 693 reads. If I had searched the code, it would have taken much longer. Count before you search.
+
+## The first cache barely helped
+
+  The fix sounds simple: remember the list after reading it. I first cached for 60 seconds. It barely helped.
+
+  The X monitor handles up to 32 accounts at the same time (Promise.all). What happened was:
+
+- The first call sees “not in the cache” and starts reading.
+
+- Before it finishes, the other 31 calls also see “not in the cache”.
+
+- All of them read the same 693 products at once.
+
+  I measured one re-read every 23 seconds. A cache remembers a finished result; callers that arrive during the read have nothing to find.
+
+  The fix is to remember the pending promise, not the result. The first call stores its promise; the other 31 wait for the same one. However many calls arrive together, there is one read.
+
+  // An illustration of the idea: cache the pending promise, not the result
+cache.set(genre, { at: Date.now(), promise: loadProducts(genre) });
+// callers always await cache.get(genre).promise
+  I added three rules with it:
+
+- Drop the cache the moment a product is created or deleted. Otherwise the list shows products that no longer exist, or creates the same product twice.
+
+- Another function read the same products under the same conditions. I moved both to one cache so one side does not miss it.
+
+- The cache lasts 10 minutes per genre.
+
+  Measured in a quiet period and converted to a day, 5.07 million reads became 277,000.
+
+## Another one: reading 3,085 documents every 5 minutes and using 146
+
+  After the product cache, the next item at the top of the meter was a job that rechecks Rakuten Books stock every 5 minutes with this query:
+
+  news_items where saleType in ["reservation", "guerrilla"]
+  It returned 3,085 documents and then filtered to Rakuten Books in code. Only 146 were relevant: 95% was wasted. At 288 runs a day that is about 888,000 reads, roughly ¥2,400 a month.
+
+- Cache the target list (only references and ISBNs) for 2 hours.
+
+- But re-read the fields used for decisions every time, so I never write based on stale values. It is only 146 documents, so it is cheap.
+
+  Reads fell from 888,000 to about 79,000 a day (−91%).
+
+## What I learned
+
+> A cost you do not show in yen does not exist.
+
+- Fix the meter first. A cost you do not look at can grow unnoticed.
+
+- Count before searching. One “job × collection” tally showed where 91% went in three minutes.
+
+- For concurrent code, cache the pending promise. A cache of finished results lets everyone who arrives together walk past it.
+
+- Filter before you read. Reading everything and keeping 5% is paying to throw away 95%.
+
+- Confirm final numbers the next day. “5.07 million to 277,000” was a quiet-period measurement.
+
+  This is the English version of the original Japanese article (https://koshinstudio.com/notes/firestore-91/).
+
+  More in English
+
+- All English pages (https://koshinstudio.com/en/)
+
+- Toreca Dash (https://koshinstudio.com/en/works/torecadash/)
 
 
 ---

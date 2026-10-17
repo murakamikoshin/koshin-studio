@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Firestore cost in yen: 91% of reads came from one place, and my first cache did not work — Koshin Studio</title>
+<meta name="description" content="Seen in yen for the first time, Firestore cost about ¥13,000 a month, close to Gemini. 91% of reads were a product list re-read for every post. A 60-second cache failed because 32 jobs ran at once; caching the pending promise fixed it.">
+<meta property="og:title" content="Firestore cost in yen: 91% of reads came from one place, and my first cache did not work">
+<meta property="og:description" content="Seen in yen for the first time, Firestore cost about ¥13,000 a month, close to Gemini. 91% of reads were a product list re-read for every post. A 60-second cache failed because 32 jobs ran at once; caching the pending promise fixed it.">
+<meta property="og:type" content="article">
+<meta name="theme-color" content="#fbfaf7">
+<link rel="icon" href="/favicon.ico?v=1697d589" sizes="48x48">
+<link rel="icon" href="/favicon.svg?v=b9d7922f" type="image/svg+xml" sizes="any">
+<link rel="icon" href="/assets/icon/icon-192.png?v=e2566235" type="image/png" sizes="192x192">
+<link rel="apple-touch-icon" href="/assets/icon/icon-180.png?v=84e7f0e6">
+<link rel="manifest" href="/site.webmanifest">
+<script>document.documentElement.className+=" js"</script>
+<link rel="stylesheet" href="/style.css?v=dd51310c">
+<meta name="google-adsense-account" content="ca-pub-3863314847163872">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3863314847163872" crossorigin="anonymous"></script>
+<link rel="canonical" href="https://koshinstudio.com/en/notes/firestore-91/">
+<meta property="og:url" content="https://koshinstudio.com/en/notes/firestore-91/">
+<meta property="og:site_name" content="Koshin Studio">
+<meta property="og:locale" content="en_US">
+<link rel="alternate" hreflang="ja" href="https://koshinstudio.com/notes/firestore-91/">
+<link rel="alternate" hreflang="en" href="https://koshinstudio.com/en/notes/firestore-91/">
+<link rel="alternate" hreflang="x-default" href="https://koshinstudio.com/en/notes/firestore-91/">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="alternate" type="application/rss+xml" title="Koshin Studio — Notes" href="https://koshinstudio.com/feed.xml">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BlogPosting","headline":"Firestore cost in yen: 91% of reads came from one place, and my first cache did not work","url":"https://koshinstudio.com/en/notes/firestore-91/","description":"Seen in yen for the first time, Firestore cost about ¥13,000 a month, close to Gemini. 91% of reads were a product list re-read for every post. A 60-second cache failed because 32 jobs ran at once; caching the pending promise fixed it.","datePublished":"2026-10-17","dateModified":"2026-10-17","inLanguage":"en","image":"https://koshinstudio.com/assets/og/og_en_notes_firestore-91.jpg","author":{"@id":"https://koshinstudio.com#studio"},"publisher":{"@id":"https://koshinstudio.com#studio"},"mainEntityOfPage":"https://koshinstudio.com/en/notes/firestore-91/"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Koshin Studio","item":"https://koshinstudio.com/en/"},{"@type":"ListItem","position":2,"name":"Firestore cost in yen: 91% of reads came from one place, and my first cache did not work","item":"https://koshinstudio.com/en/notes/firestore-91/"}]}]}</script>
+<meta property="og:image" content="https://koshinstudio.com/assets/og/og_en_notes_firestore-91.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
+</head>
+<body class="article">
+<canvas id="motes"></canvas>
+
+<header class="site"><div class="wrap">
+  <a class="logo" href="/"><img class="logo-mark" src="/favicon.svg?v=b9d7922f" alt="" width="28" height="28">Koshin Studio</a>
+  <nav><a href="/works/">Works</a><a href="/notes/">Notes</a><a href="/picks/">Picks</a><a href="/calc/">Tools</a><a href="/about/">About</a></nav>
+</div></header>
+
+<main><div class="wrap">
+  <nav class="crumbs" aria-label="You are here"><a href="/en/">Koshin Studio</a><i aria-hidden="true">›</i><span aria-current="page">Firestore cost</span></nav>
+  <h1>Firestore cost in yen: 91% of reads came from one place, and my first cache did not work</h1>  <div class="rule"></div>
+<!--lang-->
+  <p class="note"><a href="/notes/firestore-91/" hreflang="ja" lang="ja">日本語版</a></p>
+<!--/lang-->  <p class="lead">Development log of the Toreca Dash app / September 2026</p>
+
+  <p>The back end of my iPhone app Toreca Dash (a Japanese trading-card lottery and restock alert app) runs on Firebase’s Firestore database and a set of scheduled jobs. I had been reporting the cost of Gemini (AI) and of a scraping service in yen every day. <strong>I had not been reporting Firestore at all.</strong></p>
+  <p>On the night of 4 September 2026 I converted it to yen for the first time. It was almost the same as Gemini. This is the record of how I found that 91% of the reads came from one place, why my first cache did not work, and how I fixed it again.</p>
+  <p class="note">Numbers come from my work log of 4 September 2026. Prices are the real Tokyo-region prices.</p>  <h2 class="rv" id="s1">Once it was in yen, there was a cost nobody was watching</h2>
+  <div class="scroll rv"><table>
+    <thead><tr><th>Day</th><th>Reads</th><th>Writes</th><th>Cost per day</th></tr></thead>
+    <tbody>
+      <tr><td>28 Aug</td><td>2.18 million</td><td>120k</td><td>¥226 (about ¥6,777 a month)</td></tr>
+      <tr><td>1 Sep</td><td>3.66 million</td><td>134k</td><td>¥368 (about ¥11,028 a month)</td></tr>
+      <tr><td>3 Sep</td><td><strong>4.21 million</strong></td><td>162k</td><td><strong>¥427 (about ¥12,810 a month)</strong></td></tr>
+    </tbody>
+  </table></div>
+  <p>The free tier is 50,000 reads a day. I was reading <strong>84 times that</strong>, and it had grown 89% in a week, growing with every new article. A cost that is not shown in yen might as well not exist: about ¥13,000 a month, and nobody noticed because it was not in the report.</p>
+
+  <h2 class="rv" id="s2">A meter found it in three minutes</h2>
+  <p>I added a meter that counts which job reads which collection, and how much. The answer came as soon as it was in.</p>
+  <pre><code>8,725 reads  X monitor | products   ← 91% of the 9,593 measured
+  197 reads  X monitor | news_items</code></pre>
+  <p>For each post, the X monitor asks an AI “which product is this about?”. To build the candidate list it <strong>re-read every product of the genre each time</strong>. The Pokémon genre has 693 products, so matching one post cost 693 reads. If I had searched the code, it would have taken much longer. <strong>Count before you search.</strong></p>
+
+  <h2 class="rv" id="s3">The first cache barely helped</h2>
+  <p>The fix sounds simple: remember the list after reading it. I first cached for 60 seconds. <strong>It barely helped.</strong></p>
+  <p>The X monitor handles up to 32 accounts <strong>at the same time</strong> (<code>Promise.all</code>). What happened was:</p>
+  <ol>
+    <li>The first call sees “not in the cache” and starts reading.</li>
+    <li>Before it finishes, the other 31 calls also see “not in the cache”.</li>
+    <li>All of them read the same 693 products at once.</li>
+  </ol>
+  <p>I measured one re-read every 23 seconds. A cache remembers a <strong>finished result</strong>; callers that arrive during the read have nothing to find.</p>
+  <p>The fix is to <strong>remember the pending promise, not the result</strong>. The first call stores its promise; the other 31 wait for the same one. However many calls arrive together, there is one read.</p>
+  <pre><code>// An illustration of the idea: cache the pending promise, not the result
+cache.set(genre, { at: Date.now(), promise: loadProducts(genre) });
+// callers always await cache.get(genre).promise</code></pre>
+  <p>I added three rules with it:</p>
+  <ul>
+    <li><strong>Drop the cache the moment a product is created or deleted.</strong> Otherwise the list shows products that no longer exist, or creates the same product twice.</li>
+    <li><strong>Another function read the same products under the same conditions.</strong> I moved both to one cache so one side does not miss it.</li>
+    <li>The cache lasts 10 minutes per genre.</li>
+  </ul>
+  <p>Measured in a quiet period and converted to a day, <strong>5.07 million reads became 277,000</strong>.</p>
+
+  <h2 class="rv" id="s4">Another one: reading 3,085 documents every 5 minutes and using 146</h2>
+  <p>After the product cache, the next item at the top of the meter was a job that rechecks Rakuten Books stock <strong>every 5 minutes</strong> with this query:</p>
+  <pre><code>news_items where saleType in ["reservation", "guerrilla"]</code></pre>
+  <p>It returned 3,085 documents and then filtered to Rakuten Books in code. Only 146 were relevant: <strong>95% was wasted</strong>. At 288 runs a day that is about 888,000 reads, roughly ¥2,400 a month.</p>
+  <ul>
+    <li>Cache the target list (only references and ISBNs) for 2 hours.</li>
+    <li>But <strong>re-read the fields used for decisions every time</strong>, so I never write based on stale values. It is only 146 documents, so it is cheap.</li>
+  </ul>
+  <p>Reads fell from 888,000 to about 79,000 a day (−91%).</p>
+
+  <h2 class="rv" id="s5">What I learned</h2>
+  <blockquote>A cost you do not show in yen does not exist.</blockquote>
+  <ul>
+    <li><strong>Fix the meter first.</strong> A cost you do not look at can grow unnoticed.</li>
+    <li><strong>Count before searching.</strong> One “job × collection” tally showed where 91% went in three minutes.</li>
+    <li><strong>For concurrent code, cache the pending promise.</strong> A cache of finished results lets everyone who arrives together walk past it.</li>
+    <li><strong>Filter before you read.</strong> Reading everything and keeping 5% is paying to throw away 95%.</li>
+    <li><strong>Confirm final numbers the next day.</strong> “5.07 million to 277,000” was a quiet-period measurement.</li>
+  </ul>
+
+  <p class="note">This is the English version of <a href="/notes/firestore-91/" hreflang="ja" lang="ja">the original Japanese article</a>.</p>
+
+  <div class="rule" style="margin:40px 0 22px"></div>
+  <p class="eyebrow">More in English</p>
+  <ul class="plain">
+    <li><a href="/en/">All English pages</a></li>
+    <li><a href="/en/works/torecadash/">Toreca Dash</a></li>
+  </ul>
+</div>
+</main>
+
+<footer class="site"><div class="wrap"></div></footer>
+<script src="/motion.js?v=1e7447ec" defer></script>
+</body>
+</html>

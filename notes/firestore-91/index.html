@@ -22,6 +22,9 @@
 <meta property="og:url" content="https://koshinstudio.com/notes/firestore-91/">
 <meta property="og:site_name" content="Koshin Studio">
 <meta property="og:locale" content="ja_JP">
+<link rel="alternate" hreflang="ja" href="https://koshinstudio.com/notes/firestore-91/">
+<link rel="alternate" hreflang="en" href="https://koshinstudio.com/en/notes/firestore-91/">
+<link rel="alternate" hreflang="x-default" href="https://koshinstudio.com/en/notes/firestore-91/">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="alternate" type="application/rss+xml" title="Koshin Studio — Notes" href="https://koshinstudio.com/feed.xml">
 <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BlogPosting","headline":"Firestore の費用を円で出したら、読み取りの 91% が 1 か所だった：キャッシュを入れても効かなかった理由","url":"https://koshinstudio.com/notes/firestore-91/","description":"Firestore を初めて円で見たら、月 1.3 万円で Gemini とほぼ同額だった。読み取りの 91% は商品一覧の読み直し。60 秒キャッシュが効かなかったのは、32 件が同時に動いていたから。「読み込み中の約束」を覚えて直した記録。","datePublished":"2026-10-17","dateModified":"2026-10-17","inLanguage":"ja","image":"https://koshinstudio.com/assets/og/og_notes_firestore-91.jpg","author":{"@id":"https://koshinstudio.com#studio"},"publisher":{"@id":"https://koshinstudio.com#studio"},"mainEntityOfPage":"https://koshinstudio.com/notes/firestore-91/"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Koshin Studio","item":"https://koshinstudio.com/"},{"@type":"ListItem","position":2,"name":"Notes","item":"https://koshinstudio.com/notes/"},{"@type":"ListItem","position":3,"name":"Firestore の費用を円で出したら、読み取りの 91% が 1 か所だった：キャッシュを入れても効かなかった理由","item":"https://koshinstudio.com/notes/firestore-91/"}]}]}</script>
@@ -41,7 +44,9 @@
 <main><div class="wrap">
   <nav class="crumbs" aria-label="現在地"><a href="/">Koshin Studio</a><i aria-hidden="true">›</i><a href="/notes/">Notes</a><i aria-hidden="true">›</i><span aria-current="page">Firestore の費用を円で出したら、読み取りの 91% が 1 か所だった：キャッシュを入れても効かなかった理由</span></nav>
   <h1>Firestore の費用を円で出したら、読み取りの 91% が 1 か所だった：キャッシュを入れても効かなかった理由</h1>  <div class="rule"></div>
-  <p class="lead">トレカダッシュ 開発の記録 ／ 2026年9月</p>
+<!--lang-->
+  <p class="note"><a href="/en/notes/firestore-91/" hreflang="en" lang="en">English version</a></p>
+<!--/lang-->  <p class="lead">トレカダッシュ 開発の記録 ／ 2026年9月</p>
 
   <p>iOS アプリ「<a href="/works/torecadash/">トレカダッシュ</a>」の裏側は、Firebase の Firestore（データベース）と、定期的に動く処理でできています。費用は、Gemini（AI）と取得サービスの分は、毎日、円で出して見ていました。ところが、<strong>Firestore の費用は、レポートに載せていませんでした</strong>。</p>
   <p>9 月 4 日の深夜に、はじめて円で出してみました。結果は、Gemini とほぼ同額でした。この記事は、そこから読み取りの 91% が 1 か所に集中していると分かり、キャッシュを入れても効かず、直し直した記録です。</p>
