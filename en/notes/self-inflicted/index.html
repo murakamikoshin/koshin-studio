@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Four times my own tools hurt me: a summary dropped conditions, one undefined stopped saving, a check locked out production, alerts that never cleared — Koshin Studio</title>
+<meta name="description" content="A “15 characters” prompt dropped entry conditions in 671 checked lotteries; one undefined broke every save and burned 41% of a day’s credits; six parallel requests got the production IP blocked; I made alerts that kept ringing after the fix.">
+<meta property="og:title" content="Four times my own tools hurt me: a summary dropped conditions, one undefined stopped saving, a check locked out production, alerts that never cleared">
+<meta property="og:description" content="A “15 characters” prompt dropped entry conditions in 671 checked lotteries; one undefined broke every save and burned 41% of a day’s credits; six parallel requests got the production IP blocked; I made alerts that kept ringing after the fix.">
+<meta property="og:type" content="article">
+<meta name="theme-color" content="#fbfaf7">
+<link rel="icon" href="/favicon.ico?v=1697d589" sizes="48x48">
+<link rel="icon" href="/favicon.svg?v=b9d7922f" type="image/svg+xml" sizes="any">
+<link rel="icon" href="/assets/icon/icon-192.png?v=e2566235" type="image/png" sizes="192x192">
+<link rel="apple-touch-icon" href="/assets/icon/icon-180.png?v=84e7f0e6">
+<link rel="manifest" href="/site.webmanifest">
+<script>document.documentElement.className+=" js"</script>
+<link rel="stylesheet" href="/style.css?v=dd51310c">
+<meta name="google-adsense-account" content="ca-pub-3863314847163872">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3863314847163872" crossorigin="anonymous"></script>
+<link rel="canonical" href="https://koshinstudio.com/en/notes/self-inflicted/">
+<meta property="og:url" content="https://koshinstudio.com/en/notes/self-inflicted/">
+<meta property="og:site_name" content="Koshin Studio">
+<meta property="og:locale" content="en_US">
+<link rel="alternate" hreflang="ja" href="https://koshinstudio.com/notes/self-inflicted/">
+<link rel="alternate" hreflang="en" href="https://koshinstudio.com/en/notes/self-inflicted/">
+<link rel="alternate" hreflang="x-default" href="https://koshinstudio.com/en/notes/self-inflicted/">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="alternate" type="application/rss+xml" title="Koshin Studio — Notes" href="https://koshinstudio.com/feed.xml">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BlogPosting","headline":"Four times my own tools hurt me: a summary dropped conditions, one undefined stopped saving, a check locked out production, alerts that never cleared","url":"https://koshinstudio.com/en/notes/self-inflicted/","description":"A “15 characters” prompt dropped entry conditions in 671 checked lotteries; one undefined broke every save and burned 41% of a day’s credits; six parallel requests got the production IP blocked; I made alerts that kept ringing after the fix.","datePublished":"2026-10-17","dateModified":"2026-10-17","inLanguage":"en","image":"https://koshinstudio.com/assets/og/og_en_notes_self-inflicted.jpg","author":{"@id":"https://koshinstudio.com#studio"},"publisher":{"@id":"https://koshinstudio.com#studio"},"mainEntityOfPage":"https://koshinstudio.com/en/notes/self-inflicted/"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Koshin Studio","item":"https://koshinstudio.com/en/"},{"@type":"ListItem","position":2,"name":"Four times my own tools hurt me: a summary dropped conditions, one undefined stopped saving, a check locked out production, alerts that never cleared","item":"https://koshinstudio.com/en/notes/self-inflicted/"}]}]}</script>
+<meta property="og:image" content="https://koshinstudio.com/assets/og/og_en_notes_self-inflicted.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
+</head>
+<body class="article">
+<canvas id="motes"></canvas>
+
+<header class="site"><div class="wrap">
+  <a class="logo" href="/"><img class="logo-mark" src="/favicon.svg?v=b9d7922f" alt="" width="28" height="28">Koshin Studio</a>
+  <nav><a href="/works/">Works</a><a href="/notes/">Notes</a><a href="/picks/">Picks</a><a href="/calc/">Tools</a><a href="/about/">About</a></nav>
+</div></header>
+
+<main><div class="wrap">
+  <nav class="crumbs" aria-label="You are here"><a href="/en/">Koshin Studio</a><i aria-hidden="true">›</i><span aria-current="page">Self-inflicted</span></nav>
+  <h1>Four times my own tools hurt me: a summary dropped conditions, one undefined stopped saving, a check locked out production, alerts that never cleared</h1>  <div class="rule"></div>
+<!--lang-->
+  <p class="note"><a href="/notes/self-inflicted/" hreflang="ja" lang="ja">日本語版</a></p>
+<!--/lang-->  <p class="lead">Development log of the Toreca Dash app / August–September 2026</p>
+
+  <p>Besides external bugs, my app’s development has had several cases where <strong>something I built, or a check I ran, harmed me</strong>. These are four of them, each fixed once numbers made it visible.</p>
+  <p class="note">Numbers and dates come from my work logs between 28 August and 15 September 2026.</p>  <h2 class="rv" id="s1">1. “About 15 characters” dropped the entry conditions (14 September)</h2>
+  <p>The app asks an AI to summarise lottery entry conditions (follow and repost, membership card needed, etc.) for display. I compared 671 displayed lotteries with the original posts (text and images) using an AI.</p>
+  <p>I found more <strong>omissions</strong> than contradictions.</p>
+  <div class="scroll rv"><table>
+    <thead><tr><th>Missing condition</th><th>Count</th></tr></thead>
+    <tbody>
+      <tr><td>Repost</td><td>23</td></tr>
+      <tr><td>Membership</td><td>20</td></tr>
+      <tr><td>App</td><td>13</td></tr>
+      <tr><td>LivePocket (entry service)</td><td>13</td></tr>
+    </tbody>
+  </table></div>
+  <p>The cause was the prompt. It asked for <strong>“about 15 characters”</strong>, so the AI cut conditions to one or two. A rule “do not write receiving or purchase conditions” was stretched to drop even “membership card checked at purchase”, which is an entry condition because you cannot buy without it.</p>
+  <p>A length limit makes an AI choose what to drop; a drop rule drops boundary conditions too. The fix: <strong>“include everything, up to N characters”, and list what must stay</strong>. In the check itself, I did not stop at counting AI verdicts, but checked representative cases against the original image, since an AI review is noisy.</p>
+
+  <h2 class="rv" id="s2">2. One undefined value made every save fail (28 August)</h2>
+  <p>A job wrote back a whole map of scraping-service settings at once. One day the write failed every time with:</p>
+  <pre><code>Cannot use "undefined" as a Firestore value (found in field "domains.`www.yamada-denkiweb.com`.super")</code></pre>
+  <p>One <code>undefined</code> in one site’s entry made <strong>every later save fail</strong>.</p>
+  <p>The damage showed up elsewhere. A record meaning “pause sites that cannot be fetched with any setting for 6 hours” could not be saved. One site was hit on every patrol with three settings (1 + 10 + 25 = 36 credits), burning <strong>13,183 credits in a day, 41% of that day’s total</strong>. The service spreads its daily budget over time of day, so when one site uses 41% of a day, less is left for the others.</p>
+  <p>The lesson: when you write a whole map back, <strong>one dirty value breaks the whole save</strong>. Strip <code>undefined</code> before writing, and make failed saves loud.</p>
+
+  <h2 class="rv" id="s3">3. My check locked my production IP out (15 September)</h2>
+  <p>I ran a stock-check script from the same server as production. It opened 501 Yahoo Shopping product pages <strong>six at a time</strong> with plain requests. Within minutes the server’s IP address got <strong>HTTP 489</strong> (access denied) and it did not clear for hours.</p>
+  <p>Production imports and stock rechecks read Yahoo from the same IP. <strong>My check blinded production.</strong> The check also sent pages it could not read to the scraping service, burning credits.</p>
+  <p>The rule now: when reading shopping sites in bulk from the production server, <strong>one at a time with a pause after each</strong>. Run a handful first and check the status is still 200. For stock, check the structured data in the page on a small sample and leave the full check to the production recheck job.</p>
+
+  <h2 class="rv" id="s4">4. Four alerts that kept ringing after the fix (29 August)</h2>
+  <p>I have added many alerts. In one night on 29 August, <strong>I fixed three alerts that kept ringing although there was a way to resolve them, and made a fourth myself</strong>: a mark for “AI credit ran out” that stayed for 24 hours even after I topped up.</p>
+  <p>The same shape had appeared before:</p>
+  <ul>
+    <li>A data-fetching cost alert that “always exceeds 80% at month end”.</li>
+    <li>A scraping-service alert that “always has 20% left at month end”.</li>
+    <li>An alert that fires on 0 items when 0 is normal.</li>
+    <li>A cancelled official price that the catalogue wrote back the next morning.</li>
+  </ul>
+  <p>An alert that never clears buries real problems. Now when I write one, I make the condition that clears it at the same time, asking three things:</p>
+  <ol>
+    <li>When the problem is fixed, who clears this alert?</li>
+    <li>Does it fire just because time passes, such as month end?</li>
+    <li>Is 0, or a low value, a normal state?</li>
+  </ol>
+  <p>I do not write an alert nobody clears. The code that clears the mark on success goes into the same change as the alert.</p>
+
+  <h2 class="rv" id="s5">What I learned</h2>
+  <blockquote>My tools work on me too.</blockquote>
+  <ul>
+    <li><strong>A limit makes you choose what to drop.</strong> If you set a length cap, say what must stay.</li>
+    <li><strong>Writing everything at once breaks on one dirty value.</strong> Clean before you write.</li>
+    <li><strong>A check must not disturb production.</strong> Same IP, same limits: go gently.</li>
+    <li><strong>Create an alert together with the way it clears.</strong></li>
+  </ul>
+
+  <p class="note">This is the English version of <a href="/notes/self-inflicted/" hreflang="ja" lang="ja">the original Japanese article</a>.</p>
+
+  <div class="rule" style="margin:40px 0 22px"></div>
+  <p class="eyebrow">More in English</p>
+  <ul class="plain">
+    <li><a href="/en/">All English pages</a></li>
+    <li><a href="/en/works/torecadash/">Toreca Dash</a></li>
+  </ul>
+</div>
+</main>
+
+<footer class="site"><div class="wrap"></div></footer>
+<script src="/motion.js?v=1e7447ec" defer></script>
+</body>
+</html>

@@ -1,5 +1,26 @@
 [
   {
+    "ja": "/notes/self-inflicted/",
+    "en": "/en/notes/self-inflicted/",
+    "title": "Four times my own tools hurt me: a summary dropped conditions, one undefined stopped saving, a check locked out production, alerts that never cleared",
+    "date": "2026-10-17",
+    "blurb": "A “15 characters” prompt dropped entry conditions in 671 checked lotteries; one undefined broke every save and burned 41% of a day’s credits; six parallel requests got the production IP blocked; I made alerts that kept ringing after the fix."
+  },
+  {
+    "ja": "/notes/rerun-on-deploy/",
+    "en": "/en/notes/rerun-on-deploy/",
+    "title": "Every deploy re-ran the daily jobs: 477 runs in 48 hours, 46.6% of that day’s Gemini cost",
+    "date": "2026-10-17",
+    "blurb": "A once-a-day job ran 43 times and used 46.6% of a day’s Gemini cost. Timed-out runs never wrote their last-run time, so every restart treated them as missed. A deploy at 08:00 also swallowed the digest."
+  },
+  {
+    "ja": "/notes/notify-gate/",
+    "en": "/en/notes/notify-gate/",
+    "title": "Notifications cannot be recalled: 19% of the last 72 hours’ notifications were wrong, and the gate worked after the fact",
+    "date": "2026-10-17",
+    "blurb": "Of 644 notifications in 72 hours, 122 (19%) were wrong. The article gate hides articles later, but a notification goes out about 0.6 seconds after saving; 25 of 30 hidden articles had already been pushed. I put the same gate at the notification entrance."
+  },
+  {
     "ja": "/notes/interval-vs-delivery/",
     "en": "/en/notes/interval-vs-delivery/",
     "title": "A “1-minute” monitor checked each item once per 10 minutes: before speeding up, count the revisit interval and what was delivered",

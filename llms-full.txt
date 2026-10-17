@@ -965,6 +965,8 @@ URL: https://koshinstudio.com/notes/self-inflicted/
 
 # 自分で作った仕組みが、自分を傷つけた 4 つの記録：要約が条件を捨て、1 つの未定義が保存を止め、点検が本番の IP を閉め出された
 
+  English version (https://koshinstudio.com/en/notes/self-inflicted/)
+
   トレカダッシュ 開発の記録 ／ 2026年8月〜9月
 
   iOS アプリ「トレカダッシュ (https://koshinstudio.com/works/torecadash/)」の開発では、外から来る不具合のほかに、自分で作った仕組みや、自分でした点検が、自分に被害を出したことが何度かありました。この記事は、そのうちの 4 つの記録です。どれも、数字で見えたあとに、直しました。
@@ -1414,6 +1416,8 @@ URL: https://koshinstudio.com/notes/rerun-on-deploy/
 
 # 配備のたびに、日次の処理が丸ごと走り直していた：48 時間で 477 回、その日の Gemini 費用の 46.6%
 
+  English version (https://koshinstudio.com/en/notes/rerun-on-deploy/)
+
   トレカダッシュ 開発の記録 ／ 2026年9月
 
   iOS アプリ「トレカダッシュ (https://koshinstudio.com/works/torecadash/)」の裏側では、定期的に動く処理がたくさん動いています。その中に、「1 日に 1 回だけ動くはず」の処理がありました。ところが、ある日のログを数えると、その処理が 43 回動いていました。
@@ -1484,6 +1488,8 @@ URL: https://koshinstudio.com/notes/rerun-on-deploy/
 URL: https://koshinstudio.com/notes/notify-gate/
 
 # 通知は取り消せない：直近 72 時間の通知の 19% が誤通知で、関門が通知の「後」に効いていた
+
+  English version (https://koshinstudio.com/en/notes/notify-gate/)
 
   トレカダッシュ 開発の記録 ／ 2026年9月
 
@@ -6706,6 +6712,260 @@ URL: https://koshinstudio.com/privacy/
 
 ---
 
+URL: https://koshinstudio.com/en/notes/self-inflicted/
+
+# Four times my own tools hurt me: a summary dropped conditions, one undefined stopped saving, a check locked out production, alerts that never cleared
+
+  日本語版 (https://koshinstudio.com/notes/self-inflicted/)
+
+  Development log of the Toreca Dash app / August–September 2026
+
+  Besides external bugs, my app’s development has had several cases where something I built, or a check I ran, harmed me. These are four of them, each fixed once numbers made it visible.
+
+  Numbers and dates come from my work logs between 28 August and 15 September 2026.
+
+## 1. “About 15 characters” dropped the entry conditions (14 September)
+
+  The app asks an AI to summarise lottery entry conditions (follow and repost, membership card needed, etc.) for display. I compared 671 displayed lotteries with the original posts (text and images) using an AI.
+
+  I found more omissions than contradictions.
+
+    Missing condition | Count
+
+      Repost | 23
+
+      Membership | 20
+
+      App | 13
+
+      LivePocket (entry service) | 13
+
+  The cause was the prompt. It asked for “about 15 characters”, so the AI cut conditions to one or two. A rule “do not write receiving or purchase conditions” was stretched to drop even “membership card checked at purchase”, which is an entry condition because you cannot buy without it.
+
+  A length limit makes an AI choose what to drop; a drop rule drops boundary conditions too. The fix: “include everything, up to N characters”, and list what must stay. In the check itself, I did not stop at counting AI verdicts, but checked representative cases against the original image, since an AI review is noisy.
+
+## 2. One undefined value made every save fail (28 August)
+
+  A job wrote back a whole map of scraping-service settings at once. One day the write failed every time with:
+
+  Cannot use "undefined" as a Firestore value (found in field "domains.`www.yamada-denkiweb.com`.super")
+  One undefined in one site’s entry made every later save fail.
+
+  The damage showed up elsewhere. A record meaning “pause sites that cannot be fetched with any setting for 6 hours” could not be saved. One site was hit on every patrol with three settings (1 + 10 + 25 = 36 credits), burning 13,183 credits in a day, 41% of that day’s total. The service spreads its daily budget over time of day, so when one site uses 41% of a day, less is left for the others.
+
+  The lesson: when you write a whole map back, one dirty value breaks the whole save. Strip undefined before writing, and make failed saves loud.
+
+## 3. My check locked my production IP out (15 September)
+
+  I ran a stock-check script from the same server as production. It opened 501 Yahoo Shopping product pages six at a time with plain requests. Within minutes the server’s IP address got HTTP 489 (access denied) and it did not clear for hours.
+
+  Production imports and stock rechecks read Yahoo from the same IP. My check blinded production. The check also sent pages it could not read to the scraping service, burning credits.
+
+  The rule now: when reading shopping sites in bulk from the production server, one at a time with a pause after each. Run a handful first and check the status is still 200. For stock, check the structured data in the page on a small sample and leave the full check to the production recheck job.
+
+## 4. Four alerts that kept ringing after the fix (29 August)
+
+  I have added many alerts. In one night on 29 August, I fixed three alerts that kept ringing although there was a way to resolve them, and made a fourth myself: a mark for “AI credit ran out” that stayed for 24 hours even after I topped up.
+
+  The same shape had appeared before:
+
+- A data-fetching cost alert that “always exceeds 80% at month end”.
+
+- A scraping-service alert that “always has 20% left at month end”.
+
+- An alert that fires on 0 items when 0 is normal.
+
+- A cancelled official price that the catalogue wrote back the next morning.
+
+  An alert that never clears buries real problems. Now when I write one, I make the condition that clears it at the same time, asking three things:
+
+- When the problem is fixed, who clears this alert?
+
+- Does it fire just because time passes, such as month end?
+
+- Is 0, or a low value, a normal state?
+
+  I do not write an alert nobody clears. The code that clears the mark on success goes into the same change as the alert.
+
+## What I learned
+
+> My tools work on me too.
+
+- A limit makes you choose what to drop. If you set a length cap, say what must stay.
+
+- Writing everything at once breaks on one dirty value. Clean before you write.
+
+- A check must not disturb production. Same IP, same limits: go gently.
+
+- Create an alert together with the way it clears.
+
+  This is the English version of the original Japanese article (https://koshinstudio.com/notes/self-inflicted/).
+
+  More in English
+
+- All English pages (https://koshinstudio.com/en/)
+
+- Toreca Dash (https://koshinstudio.com/en/works/torecadash/)
+
+
+---
+
+URL: https://koshinstudio.com/en/notes/rerun-on-deploy/
+
+# Every deploy re-ran the daily jobs: 477 runs in 48 hours, 46.6% of that day’s Gemini cost
+
+  日本語版 (https://koshinstudio.com/notes/rerun-on-deploy/)
+
+  Development log of the Toreca Dash app / September 2026
+
+  The back end of my app Toreca Dash runs many scheduled jobs. One of them was supposed to run once a day. Counting the logs for one day, it had run 43 times.
+
+  This article is about the bug that turned up: every deploy (replacing the code and restarting) re-ran the daily jobs from scratch.
+
+  Numbers come from my work log of 1 September 2026.
+
+## 477 catch-up runs in 48 hours
+
+  Jobs are triggered by cron. A restart loses any run scheduled at that moment, so on startup I look for jobs whose last run is too old and catch them up. The rule was “last run older than 1.05 × the interval”.
+
+  Counting 48 hours, there were 477 catch-up runs. A daily job that repairs product links ran 43 times in a day and accounted for 46.6% of that day’s Gemini cost, 1,295 calls. It was pricing the same articles with the AI again and getting nothing new.
+
+## The cause: the “it finished” record was not written
+
+  A job that exceeds its time limit (540 seconds) is recorded as “timed out”. But JavaScript cannot stop a running job, so the job keeps running to the end after “timed out” is recorded.
+
+  The problem was that the “last run time” was written only on success. If the job timed out, even if the body finished, no run time was written. On each restart the logic concluded:
+
+- This job has no (or an old) last-run record.
+
+- It is older than 1.05 × the interval, so it was missed.
+
+- Run it now.
+
+  A daily job re-ran on every restart. A few deploys a day make 43 runs.
+
+## The fix: “recorded a timeout” and “did not run” are different things
+
+  Even if a timeout was recorded, if the body finished, I now record the run as having happened. Only when it failed do I not record it.
+
+  This fix had to come together with lowering the time limit. Lowering the limit alone does not stop the catch-ups if the run time is never recorded.
+
+## The opposite problem: chasing too much, or too little
+
+  The catch-up had the opposite flaw too. On 31 August my deploy landed exactly on 08:00. Cron fires only at that instant, so the 08:00 digest notification was never sent.
+
+  The digest runs five times a day (6, 8, 12, 18, 21 h), an average of 4.8 hours apart, below the 6-hour minimum for catch-up, so it was treated as “wait for the next one”. But for users who chose that time, a whole day’s worth was lost.
+
+  The fix: only for jobs that deliver something to users, check at startup whether the last 55 minutes of schedule were missed, and run once. Until 10 minutes after the scheduled time it waits, since it may just not have run yet.
+
+  Do not extend this to all jobs. When I counted on real data, 33 jobs looked missed on every restart, and most had just been interrupted by it. Chasing them all would waste scraping and API limits. The rule for adding a job: if it misses a run, does something a user was owed disappear?
+
+## What I learned
+
+> “No record” does not always mean “did not run”.
+
+- Write the run record after every outcome. Writing it only on success makes timed-out runs look unrun.
+
+- Catch-up fails both ways. Chase deliveries; for the rest, wait for the next run.
+
+- Count what runs at each deploy. The 477 in 48 hours was invisible until counted.
+
+- Repeating the same work burns money. 46.6% of that day’s cost was calls that produced nothing.
+
+  This is the English version of the original Japanese article (https://koshinstudio.com/notes/rerun-on-deploy/).
+
+  More in English
+
+- All English pages (https://koshinstudio.com/en/)
+
+- Toreca Dash (https://koshinstudio.com/en/works/torecadash/)
+
+
+---
+
+URL: https://koshinstudio.com/en/notes/notify-gate/
+
+# Notifications cannot be recalled: 19% of the last 72 hours’ notifications were wrong, and the gate worked after the fact
+
+  日本語版 (https://koshinstudio.com/notes/notify-gate/)
+
+  Development log of the Toreca Dash app / September 2026
+
+  My iPhone app Toreca Dash collects trading-card lottery information and sends a push notification when something new appears. Collected articles pass a gate (filter) that checks “is this a lottery you can really apply to?”: it keeps out winner announcements, buy-back notices, non-card products and so on.
+
+  But a check on 20 September 2026 showed that about one notification in five went out for an article the gate should have rejected. The gate existed; the notifications were not stopped by it.
+
+  Written from my work log of the 20 September 2026 re-check.
+
+## I counted every notification of the last 72 hours
+
+  The method is simple: take every article notified in the last 72 hours and judge again whether it should have been.
+
+    Notified | Wrong | Share
+
+    644 | 122 | 19%
+
+    Reason | Count
+
+      Winner-only notice (cannot apply) | 30
+
+      Old post (days old, notified as if new) | 27
+
+      Expired | 11
+
+      No way to apply | 14
+
+      Not a card product | 10
+
+      Lottery with entry conditions | 8
+
+      Other | 22
+
+## The gate decided “show it?” after the fact
+
+  The article gate also worked by hiding articles later. But a notification is sent about 0.6 seconds after the article is saved. Hiding later does not recall it.
+
+  Of 30 articles the gate hid afterwards, 25 had already been pushed. They disappeared from the screen, but a notification on a phone cannot be taken back.
+
+## A second cause: catch-up made old posts look new
+
+  X monitoring had been down for a while. From 12:44 on 19 September a catch-up ran, and posts from 13 to 18 September were notified as new, 367 at once.
+
+  Importing posts made during the outage is right. But if you judge “new” by when I found it rather than the post date, week-old posts look like fresh news.
+
+## The fix: run the same gate at the sender
+
+  Adding gates that act at save time was not enough. A notification cannot be taken back, so I made the notification function’s entrance run the same judgement as the article gate.
+
+- New judgements go into the pre-save gate (screenArticleBeforeSave); the notification entrance goes through the same function, so the two cannot disagree.
+
+- Old posts are judged by post date, not save date.
+
+- After a catch-up or restart, always check the breakdown of skipped notifications.
+
+## What I learned
+
+> Stop what cannot be taken back before it goes out.
+
+- Put the gate before the exit that cannot be undone. A screen can be lowered later; a notification cannot.
+
+- Use the same judgement at save time and at the exit. Adding it to one leaves a path around it.
+
+- “New” means the post date. Not the day you found it.
+
+- Count everything. Only judging all 644 notifications one by one showed 19%.
+
+  This is the English version of the original Japanese article (https://koshinstudio.com/notes/notify-gate/).
+
+  More in English
+
+- All English pages (https://koshinstudio.com/en/)
+
+- Toreca Dash (https://koshinstudio.com/en/works/torecadash/)
+
+
+---
+
 URL: https://koshinstudio.com/en/notes/interval-vs-delivery/
 
 # A “1-minute” monitor checked each item once per 10 minutes: before speeding up, count the revisit interval and what was delivered
@@ -11275,6 +11535,12 @@ URL: https://koshinstudio.com/en/
 - Four real lotteries silently thrown away: a regex, dates without a year, batched answers and null (https://koshinstudio.com/en/notes/silent-discard/)
 
 - “Checked” marks on articles that had never been read: the t.co relay page (https://koshinstudio.com/en/notes/tco-relay/)
+
+- Notifications cannot be recalled: 19% of the last 72 hours’ notifications were wrong, and the gate worked after the fact (https://koshinstudio.com/en/notes/notify-gate/)
+
+- Every deploy re-ran the daily jobs: 477 runs in 48 hours, 46.6% of that day’s Gemini cost (https://koshinstudio.com/en/notes/rerun-on-deploy/)
+
+- Four times my own tools hurt me: a summary dropped conditions, one undefined stopped saving, a check locked out production, alerts that never cleared (https://koshinstudio.com/en/notes/self-inflicted/)
 
 ## Languages
 

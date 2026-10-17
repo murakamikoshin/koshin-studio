@@ -22,6 +22,9 @@
 <meta property="og:url" content="https://koshinstudio.com/notes/rerun-on-deploy/">
 <meta property="og:site_name" content="Koshin Studio">
 <meta property="og:locale" content="ja_JP">
+<link rel="alternate" hreflang="ja" href="https://koshinstudio.com/notes/rerun-on-deploy/">
+<link rel="alternate" hreflang="en" href="https://koshinstudio.com/en/notes/rerun-on-deploy/">
+<link rel="alternate" hreflang="x-default" href="https://koshinstudio.com/en/notes/rerun-on-deploy/">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="alternate" type="application/rss+xml" title="Koshin Studio — Notes" href="https://koshinstudio.com/feed.xml">
 <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BlogPosting","headline":"配備のたびに、日次の処理が丸ごと走り直していた：48 時間で 477 回、その日の Gemini 費用の 46.6%","url":"https://koshinstudio.com/notes/rerun-on-deploy/","description":"1 日 1 回のはずの処理が 43 回走り、Gemini の費用の 46.6% を占めていた。タイムアウトした回は最終実行時刻が書かれず、再起動のたびに取りこぼし扱いされていた。逆に、配備が 8 時に重なって、ダイジェストが 1 通も届かなかった問題も。","datePublished":"2026-10-17","dateModified":"2026-10-17","inLanguage":"ja","image":"https://koshinstudio.com/assets/og/og_notes_rerun-on-deploy.jpg","author":{"@id":"https://koshinstudio.com#studio"},"publisher":{"@id":"https://koshinstudio.com#studio"},"mainEntityOfPage":"https://koshinstudio.com/notes/rerun-on-deploy/"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Koshin Studio","item":"https://koshinstudio.com/"},{"@type":"ListItem","position":2,"name":"Notes","item":"https://koshinstudio.com/notes/"},{"@type":"ListItem","position":3,"name":"配備のたびに、日次の処理が丸ごと走り直していた：48 時間で 477 回、その日の Gemini 費用の 46.6%","item":"https://koshinstudio.com/notes/rerun-on-deploy/"}]}]}</script>
@@ -41,6 +44,9 @@
 <main><div class="wrap">
   <nav class="crumbs" aria-label="現在地"><a href="/">Koshin Studio</a><i aria-hidden="true">›</i><a href="/notes/">Notes</a><i aria-hidden="true">›</i><span aria-current="page">配備のたびに、日次の処理が丸ごと走り直していた：48 時間で 477 回、その日の Gemini 費用の 46.6%</span></nav>
   <h1>配備のたびに、日次の処理が丸ごと走り直していた：48 時間で 477 回、その日の Gemini 費用の 46.6%</h1>  <div class="rule"></div>
+<!--lang-->
+  <p class="note"><a href="/en/notes/rerun-on-deploy/" hreflang="en" lang="en">English version</a></p>
+<!--/lang-->
   <p class="lead">トレカダッシュ 開発の記録 ／ 2026年9月</p>
 
   <p>iOS アプリ「<a href="/works/torecadash/">トレカダッシュ</a>」の裏側では、定期的に動く処理がたくさん動いています。その中に、「1 日に 1 回だけ動くはず」の処理がありました。ところが、ある日のログを数えると、<strong>その処理が 43 回動いていました</strong>。</p>

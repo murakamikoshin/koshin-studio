@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Every deploy re-ran the daily jobs: 477 runs in 48 hours, 46.6% of that day’s Gemini cost — Koshin Studio</title>
+<meta name="description" content="A once-a-day job ran 43 times and used 46.6% of a day’s Gemini cost. Timed-out runs never wrote their last-run time, so every restart treated them as missed. A deploy at 08:00 also swallowed the digest.">
+<meta property="og:title" content="Every deploy re-ran the daily jobs: 477 runs in 48 hours, 46.6% of that day’s Gemini cost">
+<meta property="og:description" content="A once-a-day job ran 43 times and used 46.6% of a day’s Gemini cost. Timed-out runs never wrote their last-run time, so every restart treated them as missed. A deploy at 08:00 also swallowed the digest.">
+<meta property="og:type" content="article">
+<meta name="theme-color" content="#fbfaf7">
+<link rel="icon" href="/favicon.ico?v=1697d589" sizes="48x48">
+<link rel="icon" href="/favicon.svg?v=b9d7922f" type="image/svg+xml" sizes="any">
+<link rel="icon" href="/assets/icon/icon-192.png?v=e2566235" type="image/png" sizes="192x192">
+<link rel="apple-touch-icon" href="/assets/icon/icon-180.png?v=84e7f0e6">
+<link rel="manifest" href="/site.webmanifest">
+<script>document.documentElement.className+=" js"</script>
+<link rel="stylesheet" href="/style.css?v=dd51310c">
+<meta name="google-adsense-account" content="ca-pub-3863314847163872">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3863314847163872" crossorigin="anonymous"></script>
+<link rel="canonical" href="https://koshinstudio.com/en/notes/rerun-on-deploy/">
+<meta property="og:url" content="https://koshinstudio.com/en/notes/rerun-on-deploy/">
+<meta property="og:site_name" content="Koshin Studio">
+<meta property="og:locale" content="en_US">
+<link rel="alternate" hreflang="ja" href="https://koshinstudio.com/notes/rerun-on-deploy/">
+<link rel="alternate" hreflang="en" href="https://koshinstudio.com/en/notes/rerun-on-deploy/">
+<link rel="alternate" hreflang="x-default" href="https://koshinstudio.com/en/notes/rerun-on-deploy/">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="alternate" type="application/rss+xml" title="Koshin Studio — Notes" href="https://koshinstudio.com/feed.xml">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BlogPosting","headline":"Every deploy re-ran the daily jobs: 477 runs in 48 hours, 46.6% of that day’s Gemini cost","url":"https://koshinstudio.com/en/notes/rerun-on-deploy/","description":"A once-a-day job ran 43 times and used 46.6% of a day’s Gemini cost. Timed-out runs never wrote their last-run time, so every restart treated them as missed. A deploy at 08:00 also swallowed the digest.","datePublished":"2026-10-17","dateModified":"2026-10-17","inLanguage":"en","image":"https://koshinstudio.com/assets/og/og_en_notes_rerun-on-deploy.jpg","author":{"@id":"https://koshinstudio.com#studio"},"publisher":{"@id":"https://koshinstudio.com#studio"},"mainEntityOfPage":"https://koshinstudio.com/en/notes/rerun-on-deploy/"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Koshin Studio","item":"https://koshinstudio.com/en/"},{"@type":"ListItem","position":2,"name":"Every deploy re-ran the daily jobs: 477 runs in 48 hours, 46.6% of that day’s Gemini cost","item":"https://koshinstudio.com/en/notes/rerun-on-deploy/"}]}]}</script>
+<meta property="og:image" content="https://koshinstudio.com/assets/og/og_en_notes_rerun-on-deploy.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
+</head>
+<body class="article">
+<canvas id="motes"></canvas>
+
+<header class="site"><div class="wrap">
+  <a class="logo" href="/"><img class="logo-mark" src="/favicon.svg?v=b9d7922f" alt="" width="28" height="28">Koshin Studio</a>
+  <nav><a href="/works/">Works</a><a href="/notes/">Notes</a><a href="/picks/">Picks</a><a href="/calc/">Tools</a><a href="/about/">About</a></nav>
+</div></header>
+
+<main><div class="wrap">
+  <nav class="crumbs" aria-label="You are here"><a href="/en/">Koshin Studio</a><i aria-hidden="true">›</i><span aria-current="page">Re-runs on deploy</span></nav>
+  <h1>Every deploy re-ran the daily jobs: 477 runs in 48 hours, 46.6% of that day’s Gemini cost</h1>  <div class="rule"></div>
+<!--lang-->
+  <p class="note"><a href="/notes/rerun-on-deploy/" hreflang="ja" lang="ja">日本語版</a></p>
+<!--/lang-->  <p class="lead">Development log of the Toreca Dash app / September 2026</p>
+
+  <p>The back end of my app Toreca Dash runs many scheduled jobs. One of them was supposed to run <strong>once a day</strong>. Counting the logs for one day, it had run <strong>43 times</strong>.</p>
+  <p>This article is about the bug that turned up: <strong>every deploy (replacing the code and restarting) re-ran the daily jobs from scratch</strong>.</p>
+  <p class="note">Numbers come from my work log of 1 September 2026.</p>  <h2 class="rv" id="s1">477 catch-up runs in 48 hours</h2>
+  <p>Jobs are triggered by cron. A restart loses any run scheduled at that moment, so on startup I look for jobs whose last run is too old and catch them up. The rule was “last run older than 1.05 × the interval”.</p>
+  <p>Counting 48 hours, there were <strong>477 catch-up runs</strong>. A daily job that repairs product links ran <strong>43 times</strong> in a day and accounted for <strong>46.6%</strong> of that day’s Gemini cost, 1,295 calls. It was pricing the same articles with the AI again and getting nothing new.</p>
+
+  <h2 class="rv" id="s2">The cause: the “it finished” record was not written</h2>
+  <p>A job that exceeds its time limit (540 seconds) is recorded as “timed out”. But JavaScript cannot stop a running job, so <strong>the job keeps running to the end after “timed out” is recorded</strong>.</p>
+  <p>The problem was that the “last run time” was written only on success. If the job timed out, even if the body finished, no run time was written. On each restart the logic concluded:</p>
+  <ol>
+    <li>This job has no (or an old) last-run record.</li>
+    <li>It is older than 1.05 × the interval, so it was missed.</li>
+    <li>Run it now.</li>
+  </ol>
+  <p>A daily job re-ran on every restart. A few deploys a day make 43 runs.</p>
+
+  <h2 class="rv" id="s3">The fix: “recorded a timeout” and “did not run” are different things</h2>
+  <p>Even if a timeout was recorded, <strong>if the body finished, I now record the run as having happened</strong>. Only when it failed do I not record it.</p>
+  <p>This fix had to come together with lowering the time limit. Lowering the limit alone does not stop the catch-ups if the run time is never recorded.</p>
+
+  <h2 class="rv" id="s4">The opposite problem: chasing too much, or too little</h2>
+  <p>The catch-up had the opposite flaw too. On 31 August my deploy landed exactly on 08:00. Cron fires only at that instant, so <strong>the 08:00 digest notification was never sent</strong>.</p>
+  <p>The digest runs five times a day (6, 8, 12, 18, 21 h), an average of 4.8 hours apart, below the 6-hour minimum for catch-up, so it was treated as “wait for the next one”. But for users who chose that time, a whole day’s worth was lost.</p>
+  <p>The fix: only for jobs that deliver something to users, check at startup whether the <strong>last 55 minutes</strong> of schedule were missed, and run once. Until 10 minutes after the scheduled time it waits, since it may just not have run yet.</p>
+  <p><strong>Do not extend this to all jobs.</strong> When I counted on real data, 33 jobs looked missed on every restart, and most had just been interrupted by it. Chasing them all would waste scraping and API limits. The rule for adding a job: <strong>if it misses a run, does something a user was owed disappear?</strong></p>
+
+  <h2 class="rv" id="s5">What I learned</h2>
+  <blockquote>“No record” does not always mean “did not run”.</blockquote>
+  <ul>
+    <li><strong>Write the run record after every outcome.</strong> Writing it only on success makes timed-out runs look unrun.</li>
+    <li><strong>Catch-up fails both ways.</strong> Chase deliveries; for the rest, wait for the next run.</li>
+    <li><strong>Count what runs at each deploy.</strong> The 477 in 48 hours was invisible until counted.</li>
+    <li><strong>Repeating the same work burns money.</strong> 46.6% of that day’s cost was calls that produced nothing.</li>
+  </ul>
+
+  <p class="note">This is the English version of <a href="/notes/rerun-on-deploy/" hreflang="ja" lang="ja">the original Japanese article</a>.</p>
+
+  <div class="rule" style="margin:40px 0 22px"></div>
+  <p class="eyebrow">More in English</p>
+  <ul class="plain">
+    <li><a href="/en/">All English pages</a></li>
+    <li><a href="/en/works/torecadash/">Toreca Dash</a></li>
+  </ul>
+</div>
+</main>
+
+<footer class="site"><div class="wrap"></div></footer>
+<script src="/motion.js?v=1e7447ec" defer></script>
+</body>
+</html>
