@@ -422,7 +422,7 @@ const noteThemes = [
   { title: '数えて、直した', lead: '勘で直す前に、まず数える。費用と監査の数字を疑って、測り直した記録。',
     slugs: ['firestore-91', 'gemini-meter', 'scrape-cost', 'dup-zero', 'audit-sweep-61', 'fix-the-existing-data', 'budget-starved', 'torecadash-ai'] },
   { title: '静かに壊れていた', lead: 'エラーが出ないまま、本物が消えていた、または読めていなかった失敗の記録。',
-    slugs: ['blocked-page', 'tco-relay', 'silent-discard', 'truncated-answer', 'waiting-room', 'notify-gate', 'destination-check'] },
+    slugs: ['blocked-page', 'tco-relay', 'weird-articles-by-route', 'silent-discard', 'truncated-answer', 'waiting-room', 'notify-gate', 'destination-check'] },
   { title: '名前と商品の取り違え', lead: '同じ名前、同じリンクが、別のものを指していた。商品と店の取り違えの記録。',
     slugs: ['split-mixups', 'same-page-not-same-store', 'store-name-variants', 'geocode-shizuoka', 'one-page-many-cases', 'transliteration-gate', 'catalog-seed-393', 'genre-from-catalog', 'leaked-value', 'cleanup-hides-entrance', 'typo-catalog', 'fake-products'] },
   { title: '監視と定期処理', lead: '先着の監視、同時実行の枠、配備と再実行。動き続ける処理の設計の記録。',
