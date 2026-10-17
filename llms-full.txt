@@ -10978,6 +10978,12 @@ URL: https://koshinstudio.com/en/
 
 - Firebase 12 does not work with Xcode 15.2 (Swift 6.0 required): why I pinned Firebase 11.4.0 and AdMob 11.5.0 (https://koshinstudio.com/en/notes/xcode152-sdk/)
 
+- Firestore cost in yen: 91% of reads came from one place, and my first cache did not work (https://koshinstudio.com/en/notes/firestore-91/)
+
+- Before cutting Gemini cost, I doubted the meter: price, breakdown and cache were all wrong, and the cache threshold changed when I re-measured (https://koshinstudio.com/en/notes/gemini-meter/)
+
+- Setting the rules of Negaeri Shogi by playing AI against AI: one change that worked, six that broke (https://koshinstudio.com/en/notes/negaeri-balance/)
+
 ## Languages
 
   English (https://koshinstudio.com/en/) · 日本語 (https://koshinstudio.com/)
