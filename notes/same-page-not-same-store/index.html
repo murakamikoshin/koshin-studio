@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>「同じ応募ページ」なら「同じ店」と決めつけていた：店名が別の店になった記事 52 件 — Koshin Studio</title>
+<meta name="description" content="同じ応募ページの記事の店名を書き揃える処理が、仙台駅前店を「新宿南口店」にしていた。応募ページは 15 の別々の店が共有していた。「確かめられたときだけ揃える」に直し、52 件を、触っていない項目から復元した記録。">
+<meta property="og:title" content="「同じ応募ページ」なら「同じ店」と決めつけていた：店名が別の店になった記事 52 件">
+<meta property="og:description" content="同じ応募ページの記事の店名を書き揃える処理が、仙台駅前店を「新宿南口店」にしていた。応募ページは 15 の別々の店が共有していた。「確かめられたときだけ揃える」に直し、52 件を、触っていない項目から復元した記録。">
+<meta property="og:type" content="article">
+<meta name="theme-color" content="#fbfaf7">
+<link rel="icon" href="/favicon.ico?v=1697d589" sizes="48x48">
+<link rel="icon" href="/favicon.svg?v=b9d7922f" type="image/svg+xml" sizes="any">
+<link rel="icon" href="/assets/icon/icon-192.png?v=e2566235" type="image/png" sizes="192x192">
+<link rel="apple-touch-icon" href="/assets/icon/icon-180.png?v=84e7f0e6">
+<link rel="manifest" href="/site.webmanifest">
+<script>document.documentElement.className+=" js"</script>
+<link rel="stylesheet" href="/style.css?v=dd51310c">
+<meta name="google-adsense-account" content="ca-pub-3863314847163872">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3863314847163872" crossorigin="anonymous"></script>
+<link rel="canonical" href="https://koshinstudio.com/notes/same-page-not-same-store/">
+<meta property="og:url" content="https://koshinstudio.com/notes/same-page-not-same-store/">
+<meta property="og:site_name" content="Koshin Studio">
+<meta property="og:locale" content="ja_JP">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="alternate" type="application/rss+xml" title="Koshin Studio — Notes" href="https://koshinstudio.com/feed.xml">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BlogPosting","headline":"「同じ応募ページ」なら「同じ店」と決めつけていた：店名が別の店になった記事 52 件","url":"https://koshinstudio.com/notes/same-page-not-same-store/","description":"同じ応募ページの記事の店名を書き揃える処理が、仙台駅前店を「新宿南口店」にしていた。応募ページは 15 の別々の店が共有していた。「確かめられたときだけ揃える」に直し、52 件を、触っていない項目から復元した記録。","datePublished":"2026-10-17","dateModified":"2026-10-17","inLanguage":"ja","image":"https://koshinstudio.com/assets/og/og_notes_same-page-not-same-store.jpg","author":{"@id":"https://koshinstudio.com#studio"},"publisher":{"@id":"https://koshinstudio.com#studio"},"mainEntityOfPage":"https://koshinstudio.com/notes/same-page-not-same-store/"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Koshin Studio","item":"https://koshinstudio.com/"},{"@type":"ListItem","position":2,"name":"Notes","item":"https://koshinstudio.com/notes/"},{"@type":"ListItem","position":3,"name":"「同じ応募ページ」なら「同じ店」と決めつけていた：店名が別の店になった記事 52 件","item":"https://koshinstudio.com/notes/same-page-not-same-store/"}]}]}</script>
+<meta property="og:image" content="https://koshinstudio.com/assets/og/og_notes_same-page-not-same-store.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
+</head>
+<body class="article">
+<canvas id="motes"></canvas>
+
+<header class="site"><div class="wrap">
+  <a class="logo" href="/"><img class="logo-mark" src="/favicon.svg?v=b9d7922f" alt="" width="28" height="28">Koshin Studio</a>
+  <nav><a href="/works/">Works</a><a href="/notes/">Notes</a><a href="/picks/">Picks</a><a href="/calc/">Tools</a><a href="/about/">About</a></nav>
+</div></header>
+
+<main><div class="wrap">
+  <nav class="crumbs" aria-label="現在地"><a href="/">Koshin Studio</a><i aria-hidden="true">›</i><a href="/notes/">Notes</a><i aria-hidden="true">›</i><span aria-current="page">「同じ応募ページ」なら「同じ店」と決めつけていた：店名が別の店になった記事 52 件</span></nav>
+  <h1>「同じ応募ページ」なら「同じ店」と決めつけていた：店名が別の店になった記事 52 件</h1>  <div class="rule"></div>
+  <p class="lead">トレカダッシュ 開発の記録 ／ 2026年9月</p>
+
+  <p>iOS アプリ「<a href="/works/torecadash/">トレカダッシュ</a>」で、「利用者には、違う店の抽選に見える」という不具合が見つかりました。仙台駅前店の記事が「新宿南口店」と表示され、八王子本店の記事が「能代店」と表示されていました。52 件でした。</p>
+  <p>原因は、「同じ応募ページなら、同じ店だ」という、<strong>前提の間違い</strong>でした。</p>
+  <p class="note">数字は、2026 年 9 月 7 日の作業の記録から書いています。</p>
+<!--toc-->
+  <nav class="toc" aria-label="目次"><p>目次</p><ol><li><a href="#s1">症状：店名が、別の店の名前になっていた</a></li><li><a href="#s2">真因：応募ページが同じでも、店は同じとは限らない</a></li><li><a href="#s3">「座標が食い違う」だけの関門では、足りなかった</a></li><li><a href="#s4">すでにできている 52 件を、戻した</a></li><li><a href="#s5">ついでに見つかった、「行列に並べない」バグ</a></li><li><a href="#s6">分かったこと</a></li></ol></nav>
+<!--/toc-->
+  <h2 class="rv" id="s1">症状：店名が、別の店の名前になっていた</h2>
+  <p>同じチェーンの、別の支店の名前が、記事に書かれていました。利用者から見ると、「仙台の店の抽選」のつもりで開いたら、「新宿の店」と書いてある、という状態です。52 件が、そうなっていました。</p>
+
+  <h2 class="rv" id="s2">真因：応募ページが同じでも、店は同じとは限らない</h2>
+  <p>「同じ応募ページを持つ記事の、店名と締切を、そろえる」処理がありました。同じ抽選なら、締切も同じ。同じ店なら、名前も同じ。そう考えて、グループの中で<strong>いちばん質の高い記事の店名を、全員に書き写して</strong>いました。</p>
+  <p>この前提が、成り立っていませんでした。実データで数えると、こうでした。</p>
+  <div class="scroll rv"><table>
+    <thead><tr><th>応募ページ</th><th>共有している店</th></tr></thead>
+    <tbody>
+      <tr><td>ある応募ページ（1）</td><td><strong>15 の別々の店</strong>（仙台、浜松、前橋、紫波、蒲郡、広島、など）</td></tr>
+      <tr><td>ある応募ページ（2）</td><td>同じチェーンの<strong>9 支店</strong></td></tr>
+      <tr><td>ある応募ページ（3）</td><td>ある店と、別のチェーン 3 つ（<strong>チェーンすら別</strong>）</td></tr>
+    </tbody>
+  </table></div>
+  <p>チェーン全体で 1 つの応募ページを使う店は、普通にあります。同じページでも、店はそれぞれ違います。</p>
+  <p>この種の事故は、<strong>隠す側では、すでに一度起きていて、そちらには関門が入っていました</strong>（あるチェーンの 51 支店の件）。ところが、<strong>店名を書き写す側には、入れ忘れていました</strong>。同じ判定を使う、別の入口に、同じ修正を当てていなかったのです。</p>
+
+  <h2 class="rv" id="s3">「座標が食い違う」だけの関門では、足りなかった</h2>
+  <p>最初は、「座標（店の位置）が食い違うなら、別の店」という関門で守ろうとしました。ところが、<strong>片方の記事しか座標を持っていない</strong>組では、「確実に別の場所」の判定が false になり、素通りしてしまいます。実際に、書き込まずに結果だけを見る下見（ドライラン）で、ある 3 つの別のチェーンの店が、全部「晴れる屋 2 秋葉原タワー店」に書き換わるところでした。</p>
+  <p>恒久対策は、判定の向きを逆にすることでした。<strong>「別の店だと確かめられたとき、そろえない」ではなく、「同じ場所だと確かめられたときだけ、そろえる」。</strong>両方に座標があり、一致しているときだけ、そろえます。座標が無い、または食い違う組は、「同じ店だと分からない」ので、各記事が自分で名乗る名前を尊重します。締切は、同じ応募ページの同じ抽選なので、今までどおりそろえます。</p>
+
+  <h2 class="rv" id="s4">すでにできている 52 件を、戻した</h2>
+  <p>書き換えられた店名の、元の値は、保存していませんでした。手がかりは、<strong>この処理が一度も触らない項目</strong>（<code>category</code>）でした。記事が作られたときに、その記事自身の出どころ（店の X アカウント、まとめの行）から入ります。52 件をすべて目で確かめると、category のほうが、出どころと一致していました。</p>
+  <p>座標は、根拠にできませんでした。座標は店名から引き直す仕組みなので、店名が書き換えられたあとは、<strong>間違った名前の座標</strong>になっています（category は札幌駅前店なのに、座標は新宿）。だから、戻すときに座標も捨てて、引き直しの対象に戻しました。</p>
+  <ul>
+    <li>下見で 51 件、実行。</li>
+    <li>実行後、<strong>新たな上書きは 0 件</strong>（関門が効いている）。</li>
+    <li>表示中で、店名と category が食い違う記事は 2 件だけ。どちらも、同じ店の書き方の違いでした。</li>
+  </ul>
+
+  <h2 class="rv" id="s5">ついでに見つかった、「行列に並べない」バグ</h2>
+  <p>座標を引き直そうとしたら、4 件とも、順番が回ってきませんでした。位置情報を直す処理には、列が 2 つありました。</p>
+  <div class="scroll rv"><table>
+    <thead><tr><th>列</th><th>中身</th></tr></thead>
+    <tbody>
+      <tr><td>正面（60 件ずつ）</td><td>座標がほしい記事</td></tr>
+      <tr><td>再挑戦（300 件の窓）</td><td>実測 658 件。うち、座標が本当に無いのは<strong>34 件だけ</strong></td></tr>
+    </tbody>
+  </table></div>
+  <p>再挑戦の列に、<strong>解決できた記事まで入れていました</strong>（成功したときに、印を「false」に書いていたため、列に残る）。624 件の「もう用のない記事」が、窓を埋めて、本当に必要な 34 件に、順番が回りませんでした。</p>
+  <p>直し方は、解決できたら、印そのものを<strong>消す</strong>ことです。どちらの列にも並びません。</p>
+
+  <h2 class="rv" id="s6">分かったこと</h2>
+  <blockquote>「同じ」と決めつける前に、「同じ」だと確かめる。</blockquote>
+  <ul>
+    <li><strong>リンクが同じでも、店は同じとは限らない。</strong>共有のページは普通にあります。</li>
+    <li><strong>揃えるのは、同じだと確かめられたときだけ。</strong>確かめられないときは、触らない。</li>
+    <li><strong>同じ事故の修正は、同じ判定を使う、すべての入口に。</strong>片方にだけ入れると、もう片方で起きます。</li>
+    <li><strong>元の値を保存していないときは、触っていない項目から復元する。</strong>ただし、その項目の裏づけを、1 件ずつ目で確かめる。</li>
+    <li><strong>印を「false」にするのは、消すのとは違う。</strong>列に残り続けます。</li>
+  </ul>
+
+
+  <div class="ad-slot" data-slot="footer" hidden></div>
+<!--/ad-->
+
+  <div class="rule" style="margin:40px 0 22px"></div>
+  <p class="eyebrow">この話に出てくるもの</p>
+  <ul class="plain">
+    <li><a href="/works/torecadash/">トレカダッシュ</a> — トレカの抽選・予約・先着の情報を集める iPhone アプリ</li>
+    <li><a href="/notes/split-mixups/">1 つの記事を商品ごとに分ける処理で起きた 3 つの取り違え</a> — 共有リンクが別の店の親を指した話</li>
+    <li><a href="/notes/silent-discard/">本物の抽選を、静かに捨てていた 4 つの実例</a> — 画面に出ない失敗の実例</li>
+  </ul>
+
+<!--related-->
+  <div class="rule" style="margin:40px 0 22px"></div>
+  <p class="eyebrow">ほかの記録</p>
+  <ul class="plain">
+    <li><a href="/notes/waiting-room/">先着が始まった瞬間、サイトが順番待ちのページになる：8,000 バイトの関門を、15KB の案内ページがすり抜けた</a> — イオンスタイルオンラインで先着が始まると、全体が「アクセス集中」の 15KB のページになった。同じ日の先に入れた 8,000 バイト未満の関門をすり抜け、「成功・商品 0 件」と読まれていた。題名で見る関門に直し、Amazon の 13 分が直列の AI 審査だったことも分かった。</li>
+    <li><a href="/notes/concurrency-slots/">同時実行の枠を増やす前に見るもの：2 コアのサーバーで、枠を 8 から 14 にした判断と、半分間違っていた前の結論</a> — 先着の監視を速くしようと間隔を詰めると、1 分おきの瞬殺監視が枠の順番待ちで遅くなった。枠を 8、11、14 と変えて測った。上限の正体は CPU ではなく、楽天 API の 1.5 秒待ちで枠を握る処理だった。</li>
+    <li><a href="/notes/coverage-check/">競合サイトと突き合わせて、取りこぼしを数えた：最初の「カバー率 23%」は測り方の間違いで、本当は 49% だった</a> — 他のサイトが出している抽選を、こちらが出せているかを数えた。最初の 23% は、商品名の書き方の違いと期限切れの記事で歪んでいた。直して 49%、穴埋めの 5 つの問題を直して 90% に。規約で自動取得が禁止のサイトは取り込まなかった。</li>
+  </ul>
+<!--/related-->
+
+<!--comments-->
+  <section class="comments" id="comments" data-repo="murakamikoshin/koshin-studio" data-repo-id="R_kgDOURc3ew"
+    data-category="Announcements" data-category-id="DIC_kwDOURc3e84DHTVr">
+    <h2 id="comments-h">コメント</h2>
+    <p>感想や、記事の間違いの指摘は、ここへ。書くには、GitHub のアカウントが要ります。</p>
+    <p><button type="button" class="btn ghost" id="load-comments">コメントを開く</button></p>
+    <p class="note">押すと、giscus（giscus.app）と GitHub に接続します。押さなければ、接続しません。詳しくは<a href="/privacy/">あつかい</a>に書いています。</p>
+    <div id="giscus-box"></div>
+  </section>
+<!--/comments-->
+</div>
+</main>
+
+<footer class="site"><div class="wrap">
+  <span>© 2026 Koshin Studio</span>
+  <div class="sns-row"></div>
+  <nav><a href="/picks/">Picks</a><a href="/calc/">Tools</a><a href="/about/">About</a><a href="/privacy/">あつかい</a><a href="/en/" hreflang="en" lang="en">English</a></nav>
+</div></footer>
+<script src="/motion.js?v=1e7447ec" defer></script>
+</body>
+</html>

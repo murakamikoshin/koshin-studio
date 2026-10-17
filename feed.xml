@@ -7,6 +7,20 @@
   <language>ja</language>
   <atom:link href="https://koshinstudio.com/feed.xml" rel="self" type="application/rss+xml"/>
   <item>
+    <title>公式の一覧から、「作品名だけの商品」が 393 件できていた：商品名の欄に、商品の形は入っていなかった</title>
+    <link>https://koshinstudio.com/notes/catalog-seed-393/</link>
+    <guid isPermaLink="true">https://koshinstudio.com/notes/catalog-seed-393/</guid>
+    <pubDate>Fri, 16 Oct 2026 15:00:00 GMT</pubDate>
+    <description>公式サイトの一覧を取り込むと、この日だけで商品が 502 件できた（ふだんは 1〜10 件）。商品名の欄は作品名だけで、形はカテゴリ側にあった。393 件を掃除し、328 件を正しい名前で入れ直すと、別表記のぶつかりが 0 組から 250 組になった。</description>
+  </item>
+  <item>
+    <title>「同じ応募ページ」なら「同じ店」と決めつけていた：店名が別の店になった記事 52 件</title>
+    <link>https://koshinstudio.com/notes/same-page-not-same-store/</link>
+    <guid isPermaLink="true">https://koshinstudio.com/notes/same-page-not-same-store/</guid>
+    <pubDate>Fri, 16 Oct 2026 15:00:00 GMT</pubDate>
+    <description>同じ応募ページの記事の店名を書き揃える処理が、仙台駅前店を「新宿南口店」にしていた。応募ページは 15 の別々の店が共有していた。「確かめられたときだけ揃える」に直し、52 件を、触っていない項目から復元した記録。</description>
+  </item>
+  <item>
     <title>先着が始まった瞬間、サイトが順番待ちのページになる：8,000 バイトの関門を、15KB の案内ページがすり抜けた</title>
     <link>https://koshinstudio.com/notes/waiting-room/</link>
     <guid isPermaLink="true">https://koshinstudio.com/notes/waiting-room/</guid>

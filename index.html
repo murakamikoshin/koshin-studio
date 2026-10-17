@@ -161,19 +161,19 @@
   <section class="band" id="notes-teaser"><div class="wrap">
     <h2 class="sec">制作の記録<span>Notes</span></h2>
     <ul class="notes"><!--notes:start-->
-    <li class="rv" data-delay="0"><a class="note-row" href="/notes/waiting-room/">
+    <li class="rv" data-delay="0"><a class="note-row" href="/notes/catalog-seed-393/">
+      <time datetime="2026-10-17">2026.10.17</time>
+      <div><h3>公式の一覧から、「作品名だけの商品」が 393 件できていた：商品名の欄に、商品の形は入っていなかった</h3><p>公式サイトの一覧を取り込むと、この日だけで商品が 502 件できた（ふだんは 1〜10 件）。商品名の欄は作品名だけで、形はカテゴリ側にあった。393 件を掃除し、328 件を正しい名前で入れ直すと、別表記のぶつかりが 0 組から 250 組になった。</p>
+      <div class="tags"><span class="tag">トレカダッシュ</span></div></div>
+    </a></li>
+    <li class="rv" data-delay="70"><a class="note-row" href="/notes/same-page-not-same-store/">
+      <time datetime="2026-10-17">2026.10.17</time>
+      <div><h3>「同じ応募ページ」なら「同じ店」と決めつけていた：店名が別の店になった記事 52 件</h3><p>同じ応募ページの記事の店名を書き揃える処理が、仙台駅前店を「新宿南口店」にしていた。応募ページは 15 の別々の店が共有していた。「確かめられたときだけ揃える」に直し、52 件を、触っていない項目から復元した記録。</p>
+      <div class="tags"><span class="tag">トレカダッシュ</span></div></div>
+    </a></li>
+    <li class="rv" data-delay="140"><a class="note-row" href="/notes/waiting-room/">
       <time datetime="2026-10-17">2026.10.17</time>
       <div><h3>先着が始まった瞬間、サイトが順番待ちのページになる：8,000 バイトの関門を、15KB の案内ページがすり抜けた</h3><p>イオンスタイルオンラインで先着が始まると、全体が「アクセス集中」の 15KB のページになった。同じ日の先に入れた 8,000 バイト未満の関門をすり抜け、「成功・商品 0 件」と読まれていた。題名で見る関門に直し、Amazon の 13 分が直列の AI 審査だったことも分かった。</p>
-      <div class="tags"><span class="tag">トレカダッシュ</span></div></div>
-    </a></li>
-    <li class="rv" data-delay="70"><a class="note-row" href="/notes/concurrency-slots/">
-      <time datetime="2026-10-17">2026.10.17</time>
-      <div><h3>同時実行の枠を増やす前に見るもの：2 コアのサーバーで、枠を 8 から 14 にした判断と、半分間違っていた前の結論</h3><p>先着の監視を速くしようと間隔を詰めると、1 分おきの瞬殺監視が枠の順番待ちで遅くなった。枠を 8、11、14 と変えて測った。上限の正体は CPU ではなく、楽天 API の 1.5 秒待ちで枠を握る処理だった。</p>
-      <div class="tags"><span class="tag">トレカダッシュ</span></div></div>
-    </a></li>
-    <li class="rv" data-delay="140"><a class="note-row" href="/notes/coverage-check/">
-      <time datetime="2026-10-17">2026.10.17</time>
-      <div><h3>競合サイトと突き合わせて、取りこぼしを数えた：最初の「カバー率 23%」は測り方の間違いで、本当は 49% だった</h3><p>他のサイトが出している抽選を、こちらが出せているかを数えた。最初の 23% は、商品名の書き方の違いと期限切れの記事で歪んでいた。直して 49%、穴埋めの 5 つの問題を直して 90% に。規約で自動取得が禁止のサイトは取り込まなかった。</p>
       <div class="tags"><span class="tag">トレカダッシュ</span></div></div>
     </a></li>
     <!--notes:end--></ul>
