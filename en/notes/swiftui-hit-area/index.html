@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The same report for the third time: a SwiftUI button responded only on its text, and my two earlier “fixes” did nothing — Koshin Studio</title>
+<meta name="description" content="The “Won” and “Lost” buttons responded only on the text. Two earlier fixes (modifier order) did not work; I built the look inside a ButtonStyle and replaced six places. A mail-order article with coordinates had the same kind of root.">
+<meta property="og:title" content="The same report for the third time: a SwiftUI button responded only on its text, and my two earlier “fixes” did nothing">
+<meta property="og:description" content="The “Won” and “Lost” buttons responded only on the text. Two earlier fixes (modifier order) did not work; I built the look inside a ButtonStyle and replaced six places. A mail-order article with coordinates had the same kind of root.">
+<meta property="og:type" content="article">
+<meta name="theme-color" content="#fbfaf7">
+<link rel="icon" href="/favicon.ico?v=1697d589" sizes="48x48">
+<link rel="icon" href="/favicon.svg?v=b9d7922f" type="image/svg+xml" sizes="any">
+<link rel="icon" href="/assets/icon/icon-192.png?v=e2566235" type="image/png" sizes="192x192">
+<link rel="apple-touch-icon" href="/assets/icon/icon-180.png?v=84e7f0e6">
+<link rel="manifest" href="/site.webmanifest">
+<script>document.documentElement.className+=" js"</script>
+<link rel="stylesheet" href="/style.css?v=dd51310c">
+<meta name="google-adsense-account" content="ca-pub-3863314847163872">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3863314847163872" crossorigin="anonymous"></script>
+<link rel="canonical" href="https://koshinstudio.com/en/notes/swiftui-hit-area/">
+<meta property="og:url" content="https://koshinstudio.com/en/notes/swiftui-hit-area/">
+<meta property="og:site_name" content="Koshin Studio">
+<meta property="og:locale" content="en_US">
+<link rel="alternate" hreflang="ja" href="https://koshinstudio.com/notes/swiftui-hit-area/">
+<link rel="alternate" hreflang="en" href="https://koshinstudio.com/en/notes/swiftui-hit-area/">
+<link rel="alternate" hreflang="x-default" href="https://koshinstudio.com/en/notes/swiftui-hit-area/">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="alternate" type="application/rss+xml" title="Koshin Studio — Notes" href="https://koshinstudio.com/feed.xml">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BlogPosting","headline":"The same report for the third time: a SwiftUI button responded only on its text, and my two earlier “fixes” did nothing","url":"https://koshinstudio.com/en/notes/swiftui-hit-area/","description":"The “Won” and “Lost” buttons responded only on the text. Two earlier fixes (modifier order) did not work; I built the look inside a ButtonStyle and replaced six places. A mail-order article with coordinates had the same kind of root.","datePublished":"2026-10-17","dateModified":"2026-10-17","inLanguage":"en","image":"https://koshinstudio.com/assets/og/og_en_notes_swiftui-hit-area.jpg","author":{"@id":"https://koshinstudio.com#studio"},"publisher":{"@id":"https://koshinstudio.com#studio"},"mainEntityOfPage":"https://koshinstudio.com/en/notes/swiftui-hit-area/"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Koshin Studio","item":"https://koshinstudio.com/en/"},{"@type":"ListItem","position":2,"name":"The same report for the third time: a SwiftUI button responded only on its text, and my two earlier “fixes” did nothing","item":"https://koshinstudio.com/en/notes/swiftui-hit-area/"}]}]}</script>
+<meta property="og:image" content="https://koshinstudio.com/assets/og/og_en_notes_swiftui-hit-area.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
+</head>
+<body class="article">
+<canvas id="motes"></canvas>
+
+<header class="site"><div class="wrap">
+  <a class="logo" href="/"><img class="logo-mark" src="/favicon.svg?v=b9d7922f" alt="" width="28" height="28">Koshin Studio</a>
+  <nav><a href="/works/">Works</a><a href="/notes/">Notes</a><a href="/picks/">Picks</a><a href="/calc/">Tools</a><a href="/about/">About</a></nav>
+</div></header>
+
+<main><div class="wrap">
+  <nav class="crumbs" aria-label="You are here"><a href="/en/">Koshin Studio</a><i aria-hidden="true">›</i><span aria-current="page">Button hit area</span></nav>
+  <h1>The same report for the third time: a SwiftUI button responded only on its text, and my two earlier “fixes” did nothing</h1>  <div class="rule"></div>
+<!--lang-->
+  <p class="note"><a href="/notes/swiftui-hit-area/" hreflang="ja" lang="ja">日本語版</a></p>
+<!--/lang-->  <p class="lead">Development log of the Toreca Dash app / August 2026</p>
+
+  <p>The application-record screen of my app Toreca Dash has “Won” and “Lost” buttons. A report came: “the buttons <strong>only respond on the text</strong>; hard to use”.</p>
+  <p>This was the <strong>third time</strong> I got that report (20 July, 1 August and 27 August). I had thought I had fixed it twice. The code said “fix”. And yet <strong>it had never been fixed</strong>.</p>
+  <p class="note">Written from my work log of 27 August 2026.</p>  <h2 class="rv" id="s1">The first two fixes did not work</h2>
+  <p>The first two times I “added <code>.contentShape</code>” and “moved <code>.buttonStyle(.plain)</code>”. The real issue was <strong>the order of the modifiers</strong>, and I had not got the order right.</p>
+  <p>SwiftUI’s <code>Button("Won") { … }</code> has <strong>a label that is only text</strong>. Adding <code>.frame().padding().background()</code> outside to make it look bigger still leaves <strong>only the text responding to taps</strong>. The visible size and the tappable area were different things.</p>
+
+  <h2 class="rv" id="s2">The fix: build the look inside a ButtonStyle</h2>
+  <p>If you build the button’s look <strong>inside a <code>ButtonStyle</code></strong> (the mechanism that defines a button’s appearance), the result is exactly the tappable area. Build it inside, not outside. I created an <code>ActionButtonStyle</code> and replaced six places (Won, Lost, Applied, enter announcement date, and “Apply” in two filters).</p>
+
+  <h2 class="rv" id="s3">Two similar items the same day</h2>
+  <p>Other reports that day had the same root.</p>
+  <ul>
+    <li><strong>“Let me switch status in the deadline calendar.”</strong> I made the badge I had added earlier switch between “Applied” and “Not yet” on tap. But <strong>the row itself was a Button</strong>, so a button inside it did not respond. I changed the row to a tap gesture (<code>contentShape</code> + <code>onTapGesture</code>). Also <strong>Won and Lost are not switched, since they are “records”</strong>: a mis-tap that erases one cannot be undone.</li>
+    <li><strong>“Mailed, yet it has a location.”</strong> An article for Rakuten Books (mail order only) had coordinates in Shizuoka. I had judged mail order <strong>only by the site prefix</strong>, so aggregator-derived articles (a different prefix) slipped through. I now judge by store name too. Another cause: even after switching it to delivery, <strong>I had not cleared the coordinates and prefecture</strong>. If the prefecture remains, area filtering stops the article showing to users in other prefectures (mailed, yet shown only to people in Shizuoka).</li>
+  </ul>
+
+  <h2 class="rv" id="s4">What I learned</h2>
+  <blockquote>Before writing “fixed”, search for the same shape elsewhere.</blockquote>
+  <ul>
+    <li><strong>When the same report comes twice, doubt the fix.</strong> Even if the code says “fix”, it may not work.</li>
+    <li><strong>Visible size and responsive area are different things.</strong> Building inside a ButtonStyle makes them match.</li>
+    <li><strong>Look for the same shape on every screen.</strong> <code>grep</code> every place that is written the same way and fix them.</li>
+    <li><strong>Make irreversible records safe from mis-taps.</strong> Only “Applied” switches.</li>
+    <li><strong>When you correct a value, correct its related values.</strong> If you change to delivery, clear coordinates and prefecture too.</li>
+  </ul>
+
+  <p class="note">This is the English version of <a href="/notes/swiftui-hit-area/" hreflang="ja" lang="ja">the original Japanese article</a>.</p>
+
+  <div class="rule" style="margin:40px 0 22px"></div>
+  <p class="eyebrow">More in English</p>
+  <ul class="plain">
+    <li><a href="/en/">All English pages</a></li>
+    <li><a href="/en/works/torecadash/">Toreca Dash</a></li>
+  </ul>
+</div>
+</main>
+
+<footer class="site"><div class="wrap"></div></footer>
+<script src="/motion.js?v=1e7447ec" defer></script>
+</body>
+</html>

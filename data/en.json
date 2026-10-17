@@ -1,5 +1,26 @@
 [
   {
+    "ja": "/notes/aggregator-pagination/",
+    "en": "/en/notes/aggregator-pagination/",
+    "title": "An aggregator crawl read only page 1: card articles were on pages 2–4, and only the first 6,000 characters went to the AI",
+    "date": "2026-10-17",
+    "blurb": "The crawl of a stock-information aggregator read only page 1 (mostly consoles), while Pokémon and Gundam articles were on later pages. Only the first 6,000 characters went to the AI, so later stores dropped. I followed 12 pages and read all the text."
+  },
+  {
+    "ja": "/notes/fill-the-gap/",
+    "en": "/en/notes/fill-the-gap/",
+    "title": "“Not just noticing; not letting it happen”: turning a report-only monitor into one that fills gaps on the spot",
+    "date": "2026-10-17",
+    "blurb": "The gap monitor only reported and nothing was filled until a person noticed. I made it create missing articles on the spot, logged a branch that dropped silently, and showed how to apply even with no link. Coverage went from 92% to 100%."
+  },
+  {
+    "ja": "/notes/swiftui-hit-area/",
+    "en": "/en/notes/swiftui-hit-area/",
+    "title": "The same report for the third time: a SwiftUI button responded only on its text, and my two earlier “fixes” did nothing",
+    "date": "2026-10-17",
+    "blurb": "The “Won” and “Lost” buttons responded only on the text. Two earlier fixes (modifier order) did not work; I built the look inside a ButtonStyle and replaced six places. A mail-order article with coordinates had the same kind of root."
+  },
+  {
     "ja": "/notes/weird-articles-by-route/",
     "en": "/en/notes/weird-articles-by-route/",
     "title": "“Weird articles keep multiplying”: I counted by creation route and closed the entrances, and my counting was wrong twice",

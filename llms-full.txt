@@ -9,6 +9,8 @@ URL: https://koshinstudio.com/notes/aggregator-pagination/
 
 # まとめサイトの巡回は、一覧の 1 ページ目しか見ていなかった：トレカの記事は 2〜4 ページ目にあり、本文も先頭 6,000 文字で切れていた
 
+  English version (https://koshinstudio.com/en/notes/aggregator-pagination/)
+
   トレカダッシュ 開発の記録 ／ 2026年8月
 
   iOS アプリ「トレカダッシュ (https://koshinstudio.com/works/torecadash/)」の情報源の 1 つに、入荷情報のまとめサイトがあります。抽選の記事を、まとめて載せているサイトです。この巡回に、「出るべきものが、出ていない」原因が、2 つ、ありました。
@@ -363,6 +365,8 @@ URL: https://koshinstudio.com/notes/fill-the-gap/
 
 # 「気づくだけでなく、そもそも起こさない」：報告だけの監視を、見つけてその場で埋める形に作り替えた
 
+  English version (https://koshinstudio.com/en/notes/fill-the-gap/)
+
   トレカダッシュ 開発の記録 ／ 2026年8月
 
   iOS アプリ「トレカダッシュ (https://koshinstudio.com/works/torecadash/)」の目標は、抽選の情報を、もれなく出すことです。ユーザーからの指示は、「気づくだけじゃなくて、そもそも取りこぼしが起きないようにして」でした。
@@ -435,6 +439,8 @@ URL: https://koshinstudio.com/notes/fill-the-gap/
 URL: https://koshinstudio.com/notes/swiftui-hit-area/
 
 # 同じ報告が 3 回目：SwiftUI のボタンが「文字の上でしか」反応しなかった。過去 2 回の「修正」は効いていなかった
+
+  English version (https://koshinstudio.com/en/notes/swiftui-hit-area/)
 
   トレカダッシュ 開発の記録 ／ 2026年8月
 
@@ -8345,6 +8351,199 @@ URL: https://koshinstudio.com/privacy/
 
 ---
 
+URL: https://koshinstudio.com/en/notes/aggregator-pagination/
+
+# An aggregator crawl read only page 1: card articles were on pages 2–4, and only the first 6,000 characters went to the AI
+
+  日本語版 (https://koshinstudio.com/notes/aggregator-pagination/)
+
+  Development log of the Toreca Dash app / August 2026
+
+  One of my app Toreca Dash’s sources is an aggregator site for stock information, which lists lottery articles together. This crawl had two causes of “things that should appear but did not”.
+
+  Written from my work log of 28 August 2026.
+
+## Cause 1: only the first page of the list was read
+
+  The function that reads the aggregator’s list of lottery articles (fetchNyukaNowChusenArticles) read only page 1. The 11 items on page 1 were mostly game consoles, a virtual pet and plush toys. The trading-card articles were on later pages.
+
+    Kind of article | Where it was
+
+      Pokémon cards | a later page
+
+      Gundam card game | page 2
+
+      Dragon Ball, Digimon, Duel Masters | page 3
+
+      Union Arena, Weiss Schwarz | page 4
+
+  Many existing articles derive from one Pokémon-card roundup, yet the crawl no longer read that article itself. The fix was to follow up to 12 pages.
+
+## Cause 2: only the first 6,000 characters of the body went to the AI
+
+  A Pokémon-card roundup lists 15 or more stores on one page. I gave the AI only the first 6,000 characters of the body, so the later stores dropped out entirely. That is also why the number readable per run wobbled 48, 39, 40.
+
+  The fix was to read all of it in 5,000-character pieces with a 600-character overlap. The import itself uses the same function.
+
+## Found the same day: dates with no year
+
+  The aggregator’s table writes only “30 August (Sun)”. I was not giving the AI today’s date, so Pokémon-card items came back as 30 August 2020. A past deadline is rejected by the entrance gate, so Pokémon-card items from this route were not imported at all. After I put today’s date and “do not fill in a year before today” in the prompt, the open items I could read went from 0 to 46. (This is also told in another article (https://koshinstudio.com/en/notes/silent-discard/).)
+
+## What I learned
+
+> Three cut points in an import: pages, characters, years.
+
+- Read a list to its last page. What you want is not necessarily on page 1.
+
+- Check that the AI’s character limit is not dropping the back half. A wobbling count is a sign.
+
+- Pass the whole text, in order, with overlap. If you pass only the head, the rest drops.
+
+- For dates with no year, give today’s date. Otherwise it fills in six years ago.
+
+- “Not reading the source of existing articles now” is a sign of a gap.
+
+  This is the English version of the original Japanese article (https://koshinstudio.com/notes/aggregator-pagination/).
+
+  More in English
+
+- All English pages (https://koshinstudio.com/en/)
+
+- Toreca Dash (https://koshinstudio.com/en/works/torecadash/)
+
+
+---
+
+URL: https://koshinstudio.com/en/notes/fill-the-gap/
+
+# “Not just noticing; not letting it happen”: turning a report-only monitor into one that fills gaps on the spot
+
+  日本語版 (https://koshinstudio.com/notes/fill-the-gap/)
+
+  Development log of the Toreca Dash app / August 2026
+
+  The goal of my app Toreca Dash is to show lottery information without missing any. The user’s instruction was: “don’t just notice; make sure missing things do not happen in the first place”.
+
+  This article records how, on 27 August 2026, I turned monitoring from “find and report” into “find and fill on the spot”.
+
+  Numbers come from my work log of 27 August 2026.
+
+## A report-only monitor does not fill until a person notices
+
+  The old gap monitor (reportCoverageGap) only reported. The gap stayed until someone noticed and ran a fix by hand. I made it create articles on the spot (fill), three times a day after the import.
+
+- It uses the existing creation path. Duplicates are prevented by the existing check (hasExistingCoverageForStore).
+
+- If the import side works correctly, this ends with 0. Anything created here means the import side still has a hole. Read the count as “the size of the holes left”.
+
+## I added a log to the branch that silently dropped things
+
+  An early return in one function (touchLastSeenIfExists) was the only branch that moved on without saying anything. All other branches log. That silence is why another hole (24 stores getting the same article ID) was not found for so long. A branch that silently drops is a hiding place for holes nobody can see.
+
+## Even with no link, show “how to apply”
+
+  Of 32 articles with an unknown application link, 17 were not given a URL in the other table either (a store’s app, an in-store QR and so on). But the other side writes the “how to apply” and “conditions” in prose. I imported those and passed them to the application-method detector. “Apply in the app” or “apply with the QR code in store” helps more than “we do not know where to apply”.
+
+## Articles missed by the link repair
+
+  Articles marked “application link unknown” that were neither app-only nor pointing to an aggregator never became a repair target: only 15 of 34 were. I made the mark itself the condition for being a target.
+
+## The final numbers
+
+     | Before | After
+
+      Gap coverage (against one site, 24 items) | 92% | 100% (96% on the way)
+
+      Displayed articles | 1,444 | 1,488 (+44)
+
+      Articles with an application link | 97.4% | 97.8%
+
+  But 100% is a number for one site. A gap survey against the X aggregates found 3 stores, but the stored text was cut at 500 characters, so that is a lower bound. I decided to measure again after X monitoring resumed.
+
+## What I learned
+
+> Connect the mechanism that notices to the one that fills.
+
+- A report-only monitor does not fill until a person notices. Fill on the spot.
+
+- The count filled is “the size of the holes left”. 0 is the goal.
+
+- Add logs to branches that silently drop. One silent place hides a hole for a long time.
+
+- Without a link you can still show how to apply. “Apply in the app” beats “unknown”.
+
+- Decide repair targets by the mark itself. A combination of conditions leaves gaps.
+
+- 100% is a number for what you measured. Call it a lower bound.
+
+  This is the English version of the original Japanese article (https://koshinstudio.com/notes/fill-the-gap/).
+
+  More in English
+
+- All English pages (https://koshinstudio.com/en/)
+
+- Toreca Dash (https://koshinstudio.com/en/works/torecadash/)
+
+
+---
+
+URL: https://koshinstudio.com/en/notes/swiftui-hit-area/
+
+# The same report for the third time: a SwiftUI button responded only on its text, and my two earlier “fixes” did nothing
+
+  日本語版 (https://koshinstudio.com/notes/swiftui-hit-area/)
+
+  Development log of the Toreca Dash app / August 2026
+
+  The application-record screen of my app Toreca Dash has “Won” and “Lost” buttons. A report came: “the buttons only respond on the text; hard to use”.
+
+  This was the third time I got that report (20 July, 1 August and 27 August). I had thought I had fixed it twice. The code said “fix”. And yet it had never been fixed.
+
+  Written from my work log of 27 August 2026.
+
+## The first two fixes did not work
+
+  The first two times I “added .contentShape” and “moved .buttonStyle(.plain)”. The real issue was the order of the modifiers, and I had not got the order right.
+
+  SwiftUI’s Button("Won") { … } has a label that is only text. Adding .frame().padding().background() outside to make it look bigger still leaves only the text responding to taps. The visible size and the tappable area were different things.
+
+## The fix: build the look inside a ButtonStyle
+
+  If you build the button’s look inside a ButtonStyle (the mechanism that defines a button’s appearance), the result is exactly the tappable area. Build it inside, not outside. I created an ActionButtonStyle and replaced six places (Won, Lost, Applied, enter announcement date, and “Apply” in two filters).
+
+## Two similar items the same day
+
+  Other reports that day had the same root.
+
+- “Let me switch status in the deadline calendar.” I made the badge I had added earlier switch between “Applied” and “Not yet” on tap. But the row itself was a Button, so a button inside it did not respond. I changed the row to a tap gesture (contentShape + onTapGesture). Also Won and Lost are not switched, since they are “records”: a mis-tap that erases one cannot be undone.
+
+- “Mailed, yet it has a location.” An article for Rakuten Books (mail order only) had coordinates in Shizuoka. I had judged mail order only by the site prefix, so aggregator-derived articles (a different prefix) slipped through. I now judge by store name too. Another cause: even after switching it to delivery, I had not cleared the coordinates and prefecture. If the prefecture remains, area filtering stops the article showing to users in other prefectures (mailed, yet shown only to people in Shizuoka).
+
+## What I learned
+
+> Before writing “fixed”, search for the same shape elsewhere.
+
+- When the same report comes twice, doubt the fix. Even if the code says “fix”, it may not work.
+
+- Visible size and responsive area are different things. Building inside a ButtonStyle makes them match.
+
+- Look for the same shape on every screen. grep every place that is written the same way and fix them.
+
+- Make irreversible records safe from mis-taps. Only “Applied” switches.
+
+- When you correct a value, correct its related values. If you change to delivery, clear coordinates and prefecture too.
+
+  This is the English version of the original Japanese article (https://koshinstudio.com/notes/swiftui-hit-area/).
+
+  More in English
+
+- All English pages (https://koshinstudio.com/en/)
+
+- Toreca Dash (https://koshinstudio.com/en/works/torecadash/)
+
+
+---
+
 URL: https://koshinstudio.com/en/notes/weird-articles-by-route/
 
 # “Weird articles keep multiplying”: I counted by creation route and closed the entrances, and my counting was wrong twice
@@ -15862,6 +16061,12 @@ URL: https://koshinstudio.com/en/
 - “The server went down and I cannot recover it” was wrong: only inbound SSH had been blocked (https://koshinstudio.com/en/notes/misdiagnosis-down/)
 
 - “Weird articles keep multiplying”: I counted by creation route and closed the entrances, and my counting was wrong twice (https://koshinstudio.com/en/notes/weird-articles-by-route/)
+
+- An aggregator crawl read only page 1: card articles were on pages 2–4, and only the first 6,000 characters went to the AI (https://koshinstudio.com/en/notes/aggregator-pagination/)
+
+- “Not just noticing; not letting it happen”: turning a report-only monitor into one that fills gaps on the spot (https://koshinstudio.com/en/notes/fill-the-gap/)
+
+- The same report for the third time: a SwiftUI button responded only on its text, and my two earlier “fixes” did nothing (https://koshinstudio.com/en/notes/swiftui-hit-area/)
 
 ## Languages
 

@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>“Not just noticing; not letting it happen”: turning a report-only monitor into one that fills gaps on the spot — Koshin Studio</title>
+<meta name="description" content="The gap monitor only reported and nothing was filled until a person noticed. I made it create missing articles on the spot, logged a branch that dropped silently, and showed how to apply even with no link. Coverage went from 92% to 100%.">
+<meta property="og:title" content="“Not just noticing; not letting it happen”: turning a report-only monitor into one that fills gaps on the spot">
+<meta property="og:description" content="The gap monitor only reported and nothing was filled until a person noticed. I made it create missing articles on the spot, logged a branch that dropped silently, and showed how to apply even with no link. Coverage went from 92% to 100%.">
+<meta property="og:type" content="article">
+<meta name="theme-color" content="#fbfaf7">
+<link rel="icon" href="/favicon.ico?v=1697d589" sizes="48x48">
+<link rel="icon" href="/favicon.svg?v=b9d7922f" type="image/svg+xml" sizes="any">
+<link rel="icon" href="/assets/icon/icon-192.png?v=e2566235" type="image/png" sizes="192x192">
+<link rel="apple-touch-icon" href="/assets/icon/icon-180.png?v=84e7f0e6">
+<link rel="manifest" href="/site.webmanifest">
+<script>document.documentElement.className+=" js"</script>
+<link rel="stylesheet" href="/style.css?v=dd51310c">
+<meta name="google-adsense-account" content="ca-pub-3863314847163872">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3863314847163872" crossorigin="anonymous"></script>
+<link rel="canonical" href="https://koshinstudio.com/en/notes/fill-the-gap/">
+<meta property="og:url" content="https://koshinstudio.com/en/notes/fill-the-gap/">
+<meta property="og:site_name" content="Koshin Studio">
+<meta property="og:locale" content="en_US">
+<link rel="alternate" hreflang="ja" href="https://koshinstudio.com/notes/fill-the-gap/">
+<link rel="alternate" hreflang="en" href="https://koshinstudio.com/en/notes/fill-the-gap/">
+<link rel="alternate" hreflang="x-default" href="https://koshinstudio.com/en/notes/fill-the-gap/">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="alternate" type="application/rss+xml" title="Koshin Studio — Notes" href="https://koshinstudio.com/feed.xml">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BlogPosting","headline":"“Not just noticing; not letting it happen”: turning a report-only monitor into one that fills gaps on the spot","url":"https://koshinstudio.com/en/notes/fill-the-gap/","description":"The gap monitor only reported and nothing was filled until a person noticed. I made it create missing articles on the spot, logged a branch that dropped silently, and showed how to apply even with no link. Coverage went from 92% to 100%.","datePublished":"2026-10-17","dateModified":"2026-10-17","inLanguage":"en","image":"https://koshinstudio.com/assets/og/og_en_notes_fill-the-gap.jpg","author":{"@id":"https://koshinstudio.com#studio"},"publisher":{"@id":"https://koshinstudio.com#studio"},"mainEntityOfPage":"https://koshinstudio.com/en/notes/fill-the-gap/"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Koshin Studio","item":"https://koshinstudio.com/en/"},{"@type":"ListItem","position":2,"name":"“Not just noticing; not letting it happen”: turning a report-only monitor into one that fills gaps on the spot","item":"https://koshinstudio.com/en/notes/fill-the-gap/"}]}]}</script>
+<meta property="og:image" content="https://koshinstudio.com/assets/og/og_en_notes_fill-the-gap.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
+</head>
+<body class="article">
+<canvas id="motes"></canvas>
+
+<header class="site"><div class="wrap">
+  <a class="logo" href="/"><img class="logo-mark" src="/favicon.svg?v=b9d7922f" alt="" width="28" height="28">Koshin Studio</a>
+  <nav><a href="/works/">Works</a><a href="/notes/">Notes</a><a href="/picks/">Picks</a><a href="/calc/">Tools</a><a href="/about/">About</a></nav>
+</div></header>
+
+<main><div class="wrap">
+  <nav class="crumbs" aria-label="You are here"><a href="/en/">Koshin Studio</a><i aria-hidden="true">›</i><span aria-current="page">Fill the gap</span></nav>
+  <h1>“Not just noticing; not letting it happen”: turning a report-only monitor into one that fills gaps on the spot</h1>  <div class="rule"></div>
+<!--lang-->
+  <p class="note"><a href="/notes/fill-the-gap/" hreflang="ja" lang="ja">日本語版</a></p>
+<!--/lang-->  <p class="lead">Development log of the Toreca Dash app / August 2026</p>
+
+  <p>The goal of my app Toreca Dash is to show lottery information <strong>without missing any</strong>. The user’s instruction was: “<strong>don’t just notice; make sure missing things do not happen in the first place</strong>”.</p>
+  <p>This article records how, on 27 August 2026, I turned monitoring from “find and report” into “find and fill on the spot”.</p>
+  <p class="note">Numbers come from my work log of 27 August 2026.</p>  <h2 class="rv" id="s1">A report-only monitor does not fill until a person notices</h2>
+  <p>The old gap monitor (<code>reportCoverageGap</code>) only <strong>reported</strong>. The gap stayed until someone noticed and ran a fix by hand. I made it create articles on the spot (fill), three times a day after the import.</p>
+  <ul>
+    <li>It uses the existing creation path. Duplicates are prevented by the existing check (<code>hasExistingCoverageForStore</code>).</li>
+    <li>If the import side works correctly, this ends with 0. <strong>Anything created here means the import side still has a hole</strong>. Read the count as “the size of the holes left”.</li>
+  </ul>
+
+  <h2 class="rv" id="s2">I added a log to the branch that silently dropped things</h2>
+  <p>An early return in one function (<code>touchLastSeenIfExists</code>) was <strong>the only branch that moved on without saying anything</strong>. All other branches log. That silence is why another hole (24 stores getting the same article ID) was not found for so long. A branch that silently drops is a hiding place for holes nobody can see.</p>
+
+  <h2 class="rv" id="s3">Even with no link, show “how to apply”</h2>
+  <p>Of 32 articles with an unknown application link, 17 were <strong>not given a URL in the other table either</strong> (a store’s app, an in-store QR and so on). But the other side writes the “how to apply” and “conditions” in prose. I imported those and passed them to the application-method detector. “Apply in the app” or “apply with the QR code in store” helps more than “we do not know where to apply”.</p>
+
+  <h2 class="rv" id="s4">Articles missed by the link repair</h2>
+  <p>Articles marked “application link unknown” that were <strong>neither app-only nor pointing to an aggregator</strong> never became a repair target: only 15 of 34 were. <strong>I made the mark itself the condition for being a target.</strong></p>
+
+  <h2 class="rv" id="s5">The final numbers</h2>
+  <div class="scroll rv"><table>
+    <thead><tr><th></th><th>Before</th><th>After</th></tr></thead>
+    <tbody>
+      <tr><td>Gap coverage (against one site, 24 items)</td><td>92%</td><td><strong>100%</strong> (96% on the way)</td></tr>
+      <tr><td>Displayed articles</td><td>1,444</td><td>1,488 (+44)</td></tr>
+      <tr><td>Articles with an application link</td><td>97.4%</td><td>97.8%</td></tr>
+    </tbody>
+  </table></div>
+  <p>But 100% is <strong>a number for one site</strong>. A gap survey against the X aggregates found 3 stores, but the stored text was cut at 500 characters, so <strong>that is a lower bound</strong>. I decided to measure again after X monitoring resumed.</p>
+
+  <h2 class="rv" id="s6">What I learned</h2>
+  <blockquote>Connect the mechanism that notices to the one that fills.</blockquote>
+  <ul>
+    <li><strong>A report-only monitor does not fill until a person notices.</strong> Fill on the spot.</li>
+    <li><strong>The count filled is “the size of the holes left”.</strong> 0 is the goal.</li>
+    <li><strong>Add logs to branches that silently drop.</strong> One silent place hides a hole for a long time.</li>
+    <li><strong>Without a link you can still show how to apply.</strong> “Apply in the app” beats “unknown”.</li>
+    <li><strong>Decide repair targets by the mark itself.</strong> A combination of conditions leaves gaps.</li>
+    <li><strong>100% is a number for what you measured.</strong> Call it a lower bound.</li>
+  </ul>
+
+  <p class="note">This is the English version of <a href="/notes/fill-the-gap/" hreflang="ja" lang="ja">the original Japanese article</a>.</p>
+
+  <div class="rule" style="margin:40px 0 22px"></div>
+  <p class="eyebrow">More in English</p>
+  <ul class="plain">
+    <li><a href="/en/">All English pages</a></li>
+    <li><a href="/en/works/torecadash/">Toreca Dash</a></li>
+  </ul>
+</div>
+</main>
+
+<footer class="site"><div class="wrap"></div></footer>
+<script src="/motion.js?v=1e7447ec" defer></script>
+</body>
+</html>
