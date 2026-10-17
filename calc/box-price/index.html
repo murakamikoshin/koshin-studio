@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>トレカの BOX・パックの単価換算計算機 — 1 パックいくら？定価の何倍？ — Koshin Studio</title>
+<meta name="description" content="トレカのBOXやセットの値段を、1パックあたりに直して、定価と比べる計算機。ジャンルごとの1BOXのパック数（179件の出品から数えた実測）つき。BOXの値段と1パックの定価を比べる間違いを防ぎます。">
+<meta property="og:title" content="トレカの BOX・パックの単価換算計算機">
+<meta property="og:description" content="BOXの値段を1パックあたりに直して、定価と比べる。ジャンル別のパック数の実測つき。">
+<meta property="og:type" content="article">
+<meta name="theme-color" content="#fbfaf7">
+<link rel="icon" href="/favicon.ico?v=1697d589" sizes="48x48">
+<link rel="icon" href="/favicon.svg?v=b9d7922f" type="image/svg+xml" sizes="any">
+<link rel="icon" href="/assets/icon/icon-192.png?v=e2566235" type="image/png" sizes="192x192">
+<link rel="apple-touch-icon" href="/assets/icon/icon-180.png?v=84e7f0e6">
+<link rel="manifest" href="/site.webmanifest">
+<script>document.documentElement.className+=" js"</script>
+<link rel="stylesheet" href="/style.css?v=dd51310c">
+<meta name="google-adsense-account" content="ca-pub-3863314847163872">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3863314847163872" crossorigin="anonymous"></script>
+<link rel="canonical" href="https://koshinstudio.com/calc/box-price/">
+<meta property="og:url" content="https://koshinstudio.com/calc/box-price/">
+<meta property="og:site_name" content="Koshin Studio">
+<meta property="og:locale" content="ja_JP">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="alternate" type="application/rss+xml" title="Koshin Studio — Notes" href="https://koshinstudio.com/feed.xml">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Koshin Studio","item":"https://koshinstudio.com/"},{"@type":"ListItem","position":2,"name":"Tools","item":"https://koshinstudio.com/calc/"},{"@type":"ListItem","position":3,"name":"トレカの BOX・パックの単価換算計算機","item":"https://koshinstudio.com/calc/box-price/"}]},{"@type":"WebApplication","name":"トレカの BOX・パックの単価換算計算機","url":"https://koshinstudio.com/calc/box-price/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any (ブラウザ)","inLanguage":"ja","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"JPY"},"author":{"@id":"https://koshinstudio.com#studio"},"publisher":{"@id":"https://koshinstudio.com#studio"}}]}</script>
+<meta property="og:image" content="https://koshinstudio.com/assets/og/og_calc_box-price.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
+</head>
+<body>
+<canvas id="motes"></canvas>
+
+<header class="site"><div class="wrap">
+  <a class="logo" href="/"><img class="logo-mark" src="/favicon.svg?v=b9d7922f" alt="" width="28" height="28">Koshin Studio</a>
+  <nav><a href="/works/">Works</a><a href="/notes/">Notes</a><a href="/picks/">Picks</a><a href="/calc/">Tools</a><a href="/about/">About</a></nav>
+</div></header>
+
+<main><div class="wrap">
+  <nav class="crumbs" aria-label="現在地"><a href="/">Koshin Studio</a><i aria-hidden="true">›</i><a href="/calc/">Tools</a><i aria-hidden="true">›</i><span aria-current="page">トレカの BOX・パックの単価換算計算機</span></nav>
+  <h1>トレカの BOX・パックの単価換算計算機</h1>
+  <div class="rule"></div>
+  <p class="lead">1 パックいくら？ 定価の何倍？</p>
+
+  <p>BOX やセットの値段を、<strong>1 パックあたり</strong>に直して、定価と比べます。トレカの定価は、<strong>1 パックの値段</strong>で書かれていることが多く、売られているのは、<strong>BOX（何パックか入った箱）</strong>や、セットです。BOX の値段と、1 パックの定価を、そのまま比べると、「30 倍の転売価格」に見えてしまいます。単位をそろえてから、比べるための計算機です。</p>
+
+  <form class="calc" id="calc" onsubmit="return false">
+    <label>支払う金額（円）<input type="number" id="price" min="1" step="1" value="5782" inputmode="numeric"></label>
+    <label>ジャンル（パック数の目安を入れます）<select id="genre">
+      <option value="">選ばない</option>
+      <option value="pokemon">ポケモンカード（30）</option>
+      <option value="onepiece" selected>ONE PIECE カード（24）</option>
+      <option value="yugioh">遊戯王（30）</option>
+      <option value="mtg">マジック：ザ・ギャザリング（30）</option>
+      <option value="digimon">デジモン（24）</option>
+      <option value="gundam">ガンダム（24）</option>
+      <option value="unionarena">ユニオンアリーナ（16）</option>
+      <option value="duelmasters">デュエル・マスターズ（16）</option>
+      <option value="vobaca">ハイキュー!! バボカ!! BREAK（18）</option>
+      <option value="weiss">ヴァイスシュヴァルツ（12）</option>
+      <option value="hololive">ホロライブ（12）</option>
+    </select></label>
+    <label>中のパック数<input type="number" id="packs" min="1" max="200" value="24" inputmode="numeric"></label>
+    <label>1 パックの定価（円・任意）<input type="number" id="retail" min="0" step="1" value="240" inputmode="numeric"></label>
+    <label>送料など、ほかにかかる金額（円・任意）<input type="number" id="ship" min="0" step="1" placeholder="例 550" inputmode="numeric"></label>
+  </form>
+  <p class="note">ジャンルの目安は、<strong>ふつうの BOX の場合</strong>です。商品によって違うので、必ず、商品のページや箱に書かれたパック数を、入れ直してください。</p>
+
+  <div class="calc-out" id="out" aria-live="polite"></div>
+  <noscript><p class="note">この計算機は、JavaScript で動きます。</p></noscript>
+
+  <h2 class="rv">例 1：ONE PIECE カードの BOX 5,782 円は、転売価格か</h2>
+  <p>ONE PIECE カードのブースター BOX は、パック数が 24 で統一されています。1 パックの定価が 240 円なら、BOX の定価は 240 円 × 24 = <strong>5,760 円</strong>です。5,782 円の出品は、定価に 22 円を足しただけで、<strong>ほぼ定価どおり</strong>です。1 パック 240 円と BOX 5,782 円を、そのまま比べると、24 倍の転売に見えます。実際に、アプリの開発では、これが「転売価格」という報告になり、調べると誤報でした。</p>
+
+  <h2 class="rv">例 2：「30 倍」に見えた、ポケモンカードの BOX</h2>
+  <p>ポケモンカードの拡張パックの BOX は、30 パック入りで、1 パックの定価が 180 円です。BOX の定価は、180 円 × 30 = <strong>5,400 円</strong>。この BOX が 5,400 円で売られていても、1 パックの定価の 180 円と比べると、ちょうど 30 倍になります。アプリは、ポケモンの拡張パックのパック数を、<strong>1 商品も学習できていない</strong>時期があり、定価 180 円のまま BOX の価格 5,400 円を比べて、「30 倍の転売」のように表示していました。</p>
+  <p>ただし、パック数は、商品ごとに違います。同じポケモンカードでも、「30th CELEBRATION」の BOX は 20 パックで、1 パック 360 円、定価は 7,200 円です。「ポケモンなら 30 パック」と決めつけると、逆の間違いになります。</p>
+
+  <h2 class="rv">BOX の中身は、何パックか：179 件の出品から数えた</h2>
+  <p>アプリの開発で、フィード上の BOX の記事 480 件のうち、<strong>題名にパック数が書かれていた 179 件</strong>を集計しました。ジャンルごとの結果です。</p>
+  <div class="scroll rv"><table>
+    <thead><tr><th>ジャンル</th><th>目安のパック数</th><th>数えた結果</th></tr></thead>
+    <tbody>
+      <tr><td>マジック：ザ・ギャザリング</td><td>30</td><td>60 件（30 パック 33 件、12 パック 19 件）</td></tr>
+      <tr><td>ヴァイスシュヴァルツ</td><td>12</td><td>45 件（10 パック 25 件、12 パック 17 件）</td></tr>
+      <tr><td>遊戯王</td><td>30</td><td>19 件（15 パック 12 件、30 パック 6 件）</td></tr>
+      <tr><td>デュエル・マスターズ</td><td>16</td><td>14 件（16 パック 6 件、14 パック 4 件）</td></tr>
+      <tr><td>デジモン</td><td>24</td><td>14 件、すべて 24 パック</td></tr>
+      <tr><td>ガンダム</td><td>24</td><td>8 件、すべて 24 パック</td></tr>
+      <tr><td>ホロライブ</td><td>12</td><td>8 件、すべて 12 パック</td></tr>
+      <tr><td>ONE PIECE カード</td><td>24</td><td>6 件のうち 5 件が 24 パック（公式に統一されている、とされる）</td></tr>
+      <tr><td>ハイキュー!! バボカ!! BREAK</td><td>18</td><td>2 件とも 18 パック</td></tr>
+      <tr><td>ユニオンアリーナ</td><td>16</td><td>公式の商品ページに「16 パック」と明記</td></tr>
+      <tr><td>ポケモンカード</td><td>30</td><td>拡張パックの BOX は 30 パック入り（例外あり）</td></tr>
+    </tbody>
+  </table></div>
+  <p>この表を読むときの注意が 3 つあります。</p>
+  <ul>
+    <li><strong>出品の題名から数えた値で、公式の発表ではありません。</strong>ONE PIECE のように公式に統一されているものと、ジャンルの中で 2 つの値に分かれるもの（マジックのプレイ用とコレクター用、遊戯王の 15 と 30 など）があります。2 つに分かれるジャンルの目安は、<strong>多いほう</strong>にしています。</li>
+    <li><strong>40 パック入りの BOX は、1 件もありませんでした。</strong>数えた中の最大は 36 パックでした。</li>
+    <li><strong>「5 パックセット」のような、まとめ売りを、BOX の中身と読んではいけません。</strong>BOX の定価を実際より安く見積もることになり、正常な出品を「転売」と判断してしまいます。</li>
+  </ul>
+
+  <h2 class="rv">使い方の流れ</h2>
+  <ol>
+    <li>商品のページや箱で、<strong>パック数</strong>を確かめて、「中のパック数」に入れる。</li>
+    <li>公式の発表（メーカーのサイト）で、<strong>1 パックの定価</strong>を調べて、入れる。</li>
+    <li>送料がかかるときは、「ほかにかかる金額」に入れる。<strong>送料を含めて比べる</strong>ほうが、実際の負担に近くなります。</li>
+    <li>「定価の何倍か」と、「定価の合計との差」を見る。</li>
+  </ol>
+
+  <h2 class="rv">この計算が当てはまらないとき</h2>
+  <ul>
+    <li>定価が、<strong>1 パックの値段ではなく、BOX の値段で発表される</strong>商品もあります。その場合は、「中のパック数」に 1、「1 パックの定価」に BOX の定価を入れてください。</li>
+    <li>封入に、特典（プロモカードなど）が付く商品は、特典の分の値段は、この計算に入っていません。</li>
+    <li>相場が定価と違うことは、人気のある商品では普通です。この計算機は、「定価の何倍か」を出すだけで、<strong>その値段が適正かどうかは、決めません</strong>。人気のない商品は、定価以下で売られているのが、正常です。</li>
+  </ul>
+
+  <p class="note">抽選に応募するときの当たる確率は、<a href="/calc/lottery/">抽選の当選確率計算機</a>で出せます。この計算機のもとになった、価格の判定の失敗の記録は、<a href="/notes/interval-vs-delivery/">「1 分おき」の監視の記事</a>にも書いています。</p>
+
+  <script src="/calc/box-price/box.js" defer></script>
+  <script src="/calc/box-price/page.js" defer></script>
+</div>
+</main>
+
+<footer class="site"><div class="wrap">
+  <span>© 2026 Koshin Studio</span>
+  <div class="sns-row"></div>
+  <nav><a href="/picks/">Picks</a><a href="/calc/">Tools</a><a href="/about/">About</a><a href="/privacy/">あつかい</a><a href="/en/" hreflang="en" lang="en">English</a></nav>
+</div></footer>
+<script src="/motion.js?v=1e7447ec" defer></script>
+</body>
+</html>

@@ -462,6 +462,7 @@ ${picks.map(noteRow).join('\n')}
 const tools = [
   { url: '/calc/gacha/', title: 'ガチャのコンプリート計算機', blurb: '全種類をそろえるのに、何回・何円かかるか。平均と、9 割の人が揃う回数、コンプリートセットとの損得まで。' },
   { url: '/calc/gacha-rate/', title: 'ガチャの当たり確率・天井計算機', blurb: '排出率から、何回で当たるか。欲しい個数と天井（○回で確定）にも対応。' },
+  { url: '/calc/box-price/', title: 'トレカの BOX・パックの単価換算計算機', blurb: 'BOX やセットの値段を 1 パックあたりに直して、定価と比べる。ジャンルごとの 1 BOX のパック数（179 件の出品から数えた実測）つき。' },
   { url: '/calc/lottery/', title: '抽選の当選確率計算機', blurb: '倍率と応募の回数から、ひとつ以上当たる確率を出す。応募先ごとに確率が違っても使える。トレカの抽選販売の考え方つき。' },
 ];
 mkdirSync(here + '/calc', { recursive: true });
@@ -790,7 +791,7 @@ function ldFor(file, url) {
     { '@type': 'CollectionPage', name: 'Picks', url: url, inLanguage: 'ja', isPartOf: { '@id': SITE + '#studio' } },
     { '@type': 'ItemList', name: '比べたもの・買ったもの',
       itemListElement: picks.map((n, i) => ({ '@type': 'ListItem', position: i + 1, url: SITE + n.url, name: n.title })) }];
-  const tool = { '/calc/gacha/index.html': ['ガチャのコンプリート計算機', '/calc/gacha/'], '/calc/gacha-rate/index.html': ['ガチャの当たり確率・天井計算機', '/calc/gacha-rate/'], '/calc/lottery/index.html': ['抽選の当選確率計算機', '/calc/lottery/'] }[rel];
+  const tool = { '/calc/gacha/index.html': ['ガチャのコンプリート計算機', '/calc/gacha/'], '/calc/gacha-rate/index.html': ['ガチャの当たり確率・天井計算機', '/calc/gacha-rate/'], '/calc/lottery/index.html': ['抽選の当選確率計算機', '/calc/lottery/'], '/calc/box-price/index.html': ['トレカの BOX・パックの単価換算計算機', '/calc/box-price/'] }[rel];
   if (tool) return [crumbs([['Koshin Studio', '/'], ['Tools', '/calc/'], [tool[0], tool[1]]]),
     { '@type': 'WebApplication', name: tool[0], url: SITE + tool[1], applicationCategory: 'UtilitiesApplication',
       operatingSystem: 'Any (ブラウザ)', inLanguage: 'ja', isAccessibleForFree: true,
@@ -902,6 +903,7 @@ for (const file of pages) {
     '/calc/gacha/index.html': [['Tools', '/calc/'], ['ガチャのコンプリート計算機', '/calc/gacha/']],
     '/calc/gacha-rate/index.html': [['Tools', '/calc/'], ['ガチャの当たり確率・天井計算機', '/calc/gacha-rate/']],
     '/calc/lottery/index.html': [['Tools', '/calc/'], ['抽選の当選確率計算機', '/calc/lottery/']],
+    '/calc/box-price/index.html': [['Tools', '/calc/'], ['トレカの BOX・パックの単価換算計算機', '/calc/box-price/']],
   };
   let trail = TRAIL[rel];
   const wm2 = rel.match(/^\/works\/([^/]+)\//);
