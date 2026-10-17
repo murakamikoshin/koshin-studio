@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>With no ads, 25 real-device checks were blocked: test ads in developer mode only, and no hard-coded prize names — Koshin Studio</title>
+<meta name="description" content="Before ads were served, 25 of 163 real-device checklist items could not be verified. In developer mode only, the app switches to Google’s test ad units. Prize names are read from one setting and never hard-coded, including in the checklist.">
+<meta property="og:title" content="With no ads, 25 real-device checks were blocked: test ads in developer mode only, and no hard-coded prize names">
+<meta property="og:description" content="Before ads were served, 25 of 163 real-device checklist items could not be verified. In developer mode only, the app switches to Google’s test ad units. Prize names are read from one setting and never hard-coded, including in the checklist.">
+<meta property="og:type" content="article">
+<meta name="theme-color" content="#fbfaf7">
+<link rel="icon" href="/favicon.ico?v=1697d589" sizes="48x48">
+<link rel="icon" href="/favicon.svg?v=b9d7922f" type="image/svg+xml" sizes="any">
+<link rel="icon" href="/assets/icon/icon-192.png?v=e2566235" type="image/png" sizes="192x192">
+<link rel="apple-touch-icon" href="/assets/icon/icon-180.png?v=84e7f0e6">
+<link rel="manifest" href="/site.webmanifest">
+<script>document.documentElement.className+=" js"</script>
+<link rel="stylesheet" href="/style.css?v=dd51310c">
+<meta name="google-adsense-account" content="ca-pub-3863314847163872">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3863314847163872" crossorigin="anonymous"></script>
+<link rel="canonical" href="https://koshinstudio.com/en/notes/test-ads/">
+<meta property="og:url" content="https://koshinstudio.com/en/notes/test-ads/">
+<meta property="og:site_name" content="Koshin Studio">
+<meta property="og:locale" content="en_US">
+<link rel="alternate" hreflang="ja" href="https://koshinstudio.com/notes/test-ads/">
+<link rel="alternate" hreflang="en" href="https://koshinstudio.com/en/notes/test-ads/">
+<link rel="alternate" hreflang="x-default" href="https://koshinstudio.com/en/notes/test-ads/">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="alternate" type="application/rss+xml" title="Koshin Studio — Notes" href="https://koshinstudio.com/feed.xml">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BlogPosting","headline":"With no ads, 25 real-device checks were blocked: test ads in developer mode only, and no hard-coded prize names","url":"https://koshinstudio.com/en/notes/test-ads/","description":"Before ads were served, 25 of 163 real-device checklist items could not be verified. In developer mode only, the app switches to Google’s test ad units. Prize names are read from one setting and never hard-coded, including in the checklist.","datePublished":"2026-10-17","dateModified":"2026-10-17","inLanguage":"en","image":"https://koshinstudio.com/assets/og/og_en_notes_test-ads.jpg","author":{"@id":"https://koshinstudio.com#studio"},"publisher":{"@id":"https://koshinstudio.com#studio"},"mainEntityOfPage":"https://koshinstudio.com/en/notes/test-ads/"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Koshin Studio","item":"https://koshinstudio.com/en/"},{"@type":"ListItem","position":2,"name":"With no ads, 25 real-device checks were blocked: test ads in developer mode only, and no hard-coded prize names","item":"https://koshinstudio.com/en/notes/test-ads/"}]}]}</script>
+<meta property="og:image" content="https://koshinstudio.com/assets/og/og_en_notes_test-ads.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
+</head>
+<body class="article">
+<canvas id="motes"></canvas>
+
+<header class="site"><div class="wrap">
+  <a class="logo" href="/"><img class="logo-mark" src="/favicon.svg?v=b9d7922f" alt="" width="28" height="28">Koshin Studio</a>
+  <nav><a href="/works/">Works</a><a href="/notes/">Notes</a><a href="/picks/">Picks</a><a href="/calc/">Tools</a><a href="/about/">About</a></nav>
+</div></header>
+
+<main><div class="wrap">
+  <nav class="crumbs" aria-label="You are here"><a href="/en/">Koshin Studio</a><i aria-hidden="true">›</i><span aria-current="page">Test ads</span></nav>
+  <h1>With no ads, 25 real-device checks were blocked: test ads in developer mode only, and no hard-coded prize names</h1>  <div class="rule"></div>
+<!--lang-->
+  <p class="note"><a href="/notes/test-ads/" hreflang="ja" lang="ja">日本語版</a></p>
+<!--/lang-->  <p class="lead">Development log of the Toreca Dash app / September 2026</p>
+
+  <p>My app Toreca Dash has a daily lottery (omikuji) feature. “Watch a video to try” starts the draw animation after a video ad.</p>
+  <p>On 11 September 2026, reviewing the real-device checklist revealed a problem: <strong>because ads were not being served yet, 25 of the 163 checklist items could not be verified</strong>.</p>
+  <p class="note">Numbers come from my work log of 11 September 2026.</p>  <h2 class="rv" id="s1">Without an ad, you cannot check what follows</h2>
+  <p>Before review and before serving starts, my own ad slot has no inventory. The omikuji’s “Watch a video to try” stays at <strong>“Preparing an ad…” and cannot be pressed</strong>. Everything after it (the draw, the animation, the prize applying, entering a delivery address) cannot be verified. <strong>25 of the 163 items (15%)</strong> of the real-device checklist were blocked.</p>
+
+  <h2 class="rv" id="s2">Use test ads only in developer mode</h2>
+  <p>I use the <strong>test ad units</strong> Google publishes. Test ads always have inventory. Switching to them only in developer mode lets me verify through to the end on the same path as production.</p>
+  <div class="scroll rv"><table>
+    <thead><tr><th></th><th>Production</th><th>Developer mode</th></tr></thead>
+    <tbody>
+      <tr><td>Banner</td><td>My ad unit</td><td>Google’s test unit</td></tr>
+      <tr><td>Rewarded (video)</td><td>My ad unit</td><td>Google’s test unit</td></tr>
+      <tr><td>Native</td><td>My ad unit</td><td>Google’s test unit</td></tr>
+      <tr><td>App open</td><td>My ad unit</td><td>Google’s test unit</td></tr>
+    </tbody>
+  </table></div>
+  <p>Developer mode is enabled only by <strong>“tap the version 7 times” and “only on the same device ID”</strong>. Users never see it. Ad rules say test ads are for your own device only; this satisfies that.</p>
+
+  <h2 class="rv" id="s3">Never hard-code prize names anywhere</h2>
+  <p>Another, similar story. After I changed the omikuji prizes, I was told “some text is still the old one”. I will keep changing prizes, each time.</p>
+  <p>Looking into it, the display side was correct:</p>
+  <ul>
+    <li>The prize list, the terms and the result card all read <strong>one and the same setting</strong> (<code>lotteryConfig/publicStatus</code>).</li>
+    <li>The process that changes prizes writes both “current” and “public” <strong>in the same transaction</strong>, so they cannot drift.</li>
+    <li>Temporarily unlocking Pro features is decided by a separate field (<code>perk</code>), not the prize name.</li>
+  </ul>
+  <p>What was stale was <strong>two places with prize names hard-coded</strong>:</p>
+  <ol>
+    <li>Three items of the real-device checklist (shown in the app), written like “Medium luck says ‘ads hidden for 24 hours’”.</li>
+    <li>The fallback text used when the setting has not arrived.</li>
+  </ol>
+  <p>I rewrote the checklist to <strong>not name prizes</strong> (“the prize names currently set in the admin page appear as they are”), and the fallback to “Prizes are being prepared”. I added an item “right after changing prizes, the prize list, terms and result card all show the new prizes” (164 items). Since I change prizes every time, I put “where to look each time” into one item.</p>
+  <p>I did keep an old wording in the server’s “defaults when no setting exists”, because <strong>wording and effect are paired</strong> (hidden-ads text and the ad-free unlock). Neutralising only one side would make “unlocked but no explanation”.</p>
+
+  <h2 class="rv" id="s4">What I learned</h2>
+  <blockquote>Make a way to verify what you cannot verify; do not hard-code what changes.</blockquote>
+  <ul>
+    <li><strong>For things that come from outside, such as ads, provide a test path.</strong> Relying on production inventory leaves what follows unchecked.</li>
+    <li><strong>Keep the test path for developers only.</strong> Guard it with 7 taps and the device ID.</li>
+    <li><strong>Do not hard-code wording that changes every time.</strong> Read from one setting; write in one transaction.</li>
+    <li><strong>Do not fix only one half of a pair.</strong> Fix wording and effect together.</li>
+  </ul>
+
+  <p class="note">This is the English version of <a href="/notes/test-ads/" hreflang="ja" lang="ja">the original Japanese article</a>.</p>
+
+  <div class="rule" style="margin:40px 0 22px"></div>
+  <p class="eyebrow">More in English</p>
+  <ul class="plain">
+    <li><a href="/en/">All English pages</a></li>
+    <li><a href="/en/works/torecadash/">Toreca Dash</a></li>
+  </ul>
+</div>
+</main>
+
+<footer class="site"><div class="wrap"></div></footer>
+<script src="/motion.js?v=1e7447ec" defer></script>
+</body>
+</html>

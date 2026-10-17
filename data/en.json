@@ -1,5 +1,33 @@
 [
   {
+    "ja": "/notes/test-ads/",
+    "en": "/en/notes/test-ads/",
+    "title": "With no ads, 25 real-device checks were blocked: test ads in developer mode only, and no hard-coded prize names",
+    "date": "2026-10-17",
+    "blurb": "Before ads were served, 25 of 163 real-device checklist items could not be verified. In developer mode only, the app switches to Google’s test ad units. Prize names are read from one setting and never hard-coded, including in the checklist."
+  },
+  {
+    "ja": "/notes/leaked-value/",
+    "en": "/en/notes/leaked-value/",
+    "title": "“That’s just a Beyblade” came back after I added a gate: the blocked value leaked in another form",
+    "date": "2026-10-17",
+    "blurb": "A gate “do not create a product whose name contains a toy’s name” was bypassed because the AI’s product name lost the toy’s name. I moved the judgement to the announcement body and rejected only when no card-game word appears."
+  },
+  {
+    "ja": "/notes/budget-starved/",
+    "en": "/en/notes/budget-starved/",
+    "title": "Checks that logged “deferred to next run” had never run: three time budgets counted from the same start",
+    "date": "2026-10-17",
+    "blurb": "A process had three stages whose time budgets were counted from the same start time, so the rotating 25 checks ran 0 times each run. “Deferred 18 items” meant all of them. I allocated from the job’s time limit and logged each step’s time."
+  },
+  {
+    "ja": "/notes/timeout-third-fix/",
+    "en": "/en/notes/timeout-third-fix/",
+    "title": "I fixed a timeout three times and it did not stop: the culprit was a second process under the same lock",
+    "date": "2026-10-17",
+    "blurb": "A Rakuten Books stock check timed out 17 times a day. Limiting fetches, then a whole item, did not help; the third time I found that another process under the same lock re-fetched everything with no time limit."
+  },
+  {
     "ja": "/notes/cleanup-hides-entrance/",
     "en": "/en/notes/cleanup-hides-entrance/",
     "title": "“It gets cleaned up later” hid an entrance bug: 400 near-identical products were re-created every day",

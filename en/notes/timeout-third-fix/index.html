@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>I fixed a timeout three times and it did not stop: the culprit was a second process under the same lock — Koshin Studio</title>
+<meta name="description" content="A Rakuten Books stock check timed out 17 times a day. Limiting fetches, then a whole item, did not help; the third time I found that another process under the same lock re-fetched everything with no time limit.">
+<meta property="og:title" content="I fixed a timeout three times and it did not stop: the culprit was a second process under the same lock">
+<meta property="og:description" content="A Rakuten Books stock check timed out 17 times a day. Limiting fetches, then a whole item, did not help; the third time I found that another process under the same lock re-fetched everything with no time limit.">
+<meta property="og:type" content="article">
+<meta name="theme-color" content="#fbfaf7">
+<link rel="icon" href="/favicon.ico?v=1697d589" sizes="48x48">
+<link rel="icon" href="/favicon.svg?v=b9d7922f" type="image/svg+xml" sizes="any">
+<link rel="icon" href="/assets/icon/icon-192.png?v=e2566235" type="image/png" sizes="192x192">
+<link rel="apple-touch-icon" href="/assets/icon/icon-180.png?v=84e7f0e6">
+<link rel="manifest" href="/site.webmanifest">
+<script>document.documentElement.className+=" js"</script>
+<link rel="stylesheet" href="/style.css?v=dd51310c">
+<meta name="google-adsense-account" content="ca-pub-3863314847163872">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3863314847163872" crossorigin="anonymous"></script>
+<link rel="canonical" href="https://koshinstudio.com/en/notes/timeout-third-fix/">
+<meta property="og:url" content="https://koshinstudio.com/en/notes/timeout-third-fix/">
+<meta property="og:site_name" content="Koshin Studio">
+<meta property="og:locale" content="en_US">
+<link rel="alternate" hreflang="ja" href="https://koshinstudio.com/notes/timeout-third-fix/">
+<link rel="alternate" hreflang="en" href="https://koshinstudio.com/en/notes/timeout-third-fix/">
+<link rel="alternate" hreflang="x-default" href="https://koshinstudio.com/en/notes/timeout-third-fix/">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="alternate" type="application/rss+xml" title="Koshin Studio — Notes" href="https://koshinstudio.com/feed.xml">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BlogPosting","headline":"I fixed a timeout three times and it did not stop: the culprit was a second process under the same lock","url":"https://koshinstudio.com/en/notes/timeout-third-fix/","description":"A Rakuten Books stock check timed out 17 times a day. Limiting fetches, then a whole item, did not help; the third time I found that another process under the same lock re-fetched everything with no time limit.","datePublished":"2026-10-17","dateModified":"2026-10-17","inLanguage":"en","image":"https://koshinstudio.com/assets/og/og_en_notes_timeout-third-fix.jpg","author":{"@id":"https://koshinstudio.com#studio"},"publisher":{"@id":"https://koshinstudio.com#studio"},"mainEntityOfPage":"https://koshinstudio.com/en/notes/timeout-third-fix/"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Koshin Studio","item":"https://koshinstudio.com/en/"},{"@type":"ListItem","position":2,"name":"I fixed a timeout three times and it did not stop: the culprit was a second process under the same lock","item":"https://koshinstudio.com/en/notes/timeout-third-fix/"}]}]}</script>
+<meta property="og:image" content="https://koshinstudio.com/assets/og/og_en_notes_timeout-third-fix.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
+</head>
+<body class="article">
+<canvas id="motes"></canvas>
+
+<header class="site"><div class="wrap">
+  <a class="logo" href="/"><img class="logo-mark" src="/favicon.svg?v=b9d7922f" alt="" width="28" height="28">Koshin Studio</a>
+  <nav><a href="/works/">Works</a><a href="/notes/">Notes</a><a href="/picks/">Picks</a><a href="/calc/">Tools</a><a href="/about/">About</a></nav>
+</div></header>
+
+<main><div class="wrap">
+  <nav class="crumbs" aria-label="You are here"><a href="/en/">Koshin Studio</a><i aria-hidden="true">›</i><span aria-current="page">Third fix for a timeout</span></nav>
+  <h1>I fixed a timeout three times and it did not stop: the culprit was a second process under the same lock</h1>  <div class="rule"></div>
+<!--lang-->
+  <p class="note"><a href="/notes/timeout-third-fix/" hreflang="ja" lang="ja">日本語版</a></p>
+<!--/lang-->  <p class="lead">Development log of the Toreca Dash app / August 2026</p>
+
+  <p>The job in my app Toreca Dash that rechecks Rakuten Books stock <strong>timed out 17 times a day</strong>. A timeout means a run does not finish within its limit (480 seconds).</p>
+  <p>I <strong>fixed it three times, and it did not stop.</strong> The real culprit was in a place I had not looked, each time. This is the record of how I tracked it down.</p>
+  <p class="note">Written from my work log of 25 August 2026.</p>  <h2 class="rv" id="s1">First fix: fetches had no timeout</h2>
+  <p>The first thing I found was that fetches had no time limit. If an external site never replies, the process waits forever. I added a limit. But <strong>the 17 timeouts a day did not stop</strong>.</p>
+
+  <h2 class="rv" id="s2">Second fix: the screening of items that became buyable</h2>
+  <p>Next I suspected the <strong>resale-price screening</strong> of items that had become purchasable. It includes calls to an external API, so a path that could hang remained. When screening skips an item, the notification count stays 0, so the symptom does not reveal it.</p>
+  <p>I extracted the whole handling of one item into a single function (<code>processOne()</code>) and wrapped it in a <code>Promise.race</code> (take whichever finishes first) with <strong>the remaining time as the limit</strong>. After deploying, 0 timeouts in 7 minutes, and the log said “checked: 12 (rest next time because time ran out)”, a normal finish.</p>
+  <p>The lesson: <strong>putting a limit only on “the spot that looks stuck” is not enough.</strong> The time budget is only checked at the head of the loop. If any unbounded wait remains inside one item’s processing, the job runs to the hard limit. Put the limit on <strong>the whole processing of one item</strong>.</p>
+  <p>But the timeouts <strong>had not stopped</strong>.</p>
+
+  <h2 class="rv" id="s3">Third fix: the culprit was a second process under the same lock</h2>
+  <p>The reason three fixes did not work: none of the places I limited was <strong>the real one</strong>.</p>
+  <p>The culprit was a <strong>second process</strong> (<code>runRevalidateRakutenBooksAvailability</code>) running under the same “prevent double runs” lock.</p>
+  <ul>
+    <li>It re-fetches <strong>every</strong> Rakuten Books reservation and first-come article and calls the API one by one.</li>
+    <li>Rakuten’s API has a 1.5-second interval limit.</li>
+    <li>It had <strong>no time limit at all</strong>.</li>
+  </ul>
+  <p>However many limits I put on the first process (the stock check), the second ran to 480 seconds. The log shows the first one’s completion message, so it looked like <strong>“it finishes normally yet times out”</strong>.</p>
+  <p>I gave the second process a “remaining time” limit too. It runs every minute anyway, so cutting it short loses nothing. 15 minutes after deploying, <strong>0</strong> timeouts.</p>
+
+  <h2 class="rv" id="s4">A bonus: a site that erred every time</h2>
+  <p>Another bug found along the way: a game company’s shop site returned an <strong>infinite redirect loop</strong> (<code>maximum redirect reached</code>) with a plain fetch, logging an error at every recheck (a dozen or so a day). The scraping service’s “escalation memory” already knew it needed a stronger setting.</p>
+  <p>The fix: <strong>hosts remembered in the escalation memory go straight through the scraping service without trying a plain fetch</strong>. I did not list host names by hand. The memory builds up automatically from real failures, so new sites need no extra work.</p>
+
+  <h2 class="rv" id="s5">What I learned</h2>
+  <blockquote>When chasing a timeout, first count everything the function calls.</blockquote>
+  <ul>
+    <li><strong>One scheduled function can contain two or more processes.</strong> Three times I looked only at the first.</li>
+    <li><strong>Put the limit on the whole processing of one item.</strong> One suspect spot is not enough.</li>
+    <li><strong>“Finishes normally yet times out” means suspect another process.</strong> The completion message may be the first one’s.</li>
+    <li><strong>Log the time of each segment.</strong> Next time it will be obvious at once.</li>
+    <li><strong>Prefer memory built from real failures to hand-written lists.</strong> It works on new sites automatically.</li>
+  </ul>
+
+  <p class="note">This is the English version of <a href="/notes/timeout-third-fix/" hreflang="ja" lang="ja">the original Japanese article</a>.</p>
+
+  <div class="rule" style="margin:40px 0 22px"></div>
+  <p class="eyebrow">More in English</p>
+  <ul class="plain">
+    <li><a href="/en/">All English pages</a></li>
+    <li><a href="/en/works/torecadash/">Toreca Dash</a></li>
+  </ul>
+</div>
+</main>
+
+<footer class="site"><div class="wrap"></div></footer>
+<script src="/motion.js?v=1e7447ec" defer></script>
+</body>
+</html>

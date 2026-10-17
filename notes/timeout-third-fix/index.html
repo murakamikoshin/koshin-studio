@@ -22,6 +22,9 @@
 <meta property="og:url" content="https://koshinstudio.com/notes/timeout-third-fix/">
 <meta property="og:site_name" content="Koshin Studio">
 <meta property="og:locale" content="ja_JP">
+<link rel="alternate" hreflang="ja" href="https://koshinstudio.com/notes/timeout-third-fix/">
+<link rel="alternate" hreflang="en" href="https://koshinstudio.com/en/notes/timeout-third-fix/">
+<link rel="alternate" hreflang="x-default" href="https://koshinstudio.com/en/notes/timeout-third-fix/">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="alternate" type="application/rss+xml" title="Koshin Studio — Notes" href="https://koshinstudio.com/feed.xml">
 <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BlogPosting","headline":"タイムアウトを 3 回直しても止まらなかった：真犯人は、同じ鍵の中で動いていた 2 つ目の処理だった","url":"https://koshinstudio.com/notes/timeout-third-fix/","description":"楽天ブックスの在庫チェックが 1 日 17 回タイムアウトした。取得の上限、1 件ぶんの上限と 2 回直しても止まらず、3 回目で、同じ鍵の中の別の処理（全件を取り直し、上限なし）が真犯人と分かった。","datePublished":"2026-10-17","dateModified":"2026-10-17","inLanguage":"ja","image":"https://koshinstudio.com/assets/og/og_notes_timeout-third-fix.jpg","author":{"@id":"https://koshinstudio.com#studio"},"publisher":{"@id":"https://koshinstudio.com#studio"},"mainEntityOfPage":"https://koshinstudio.com/notes/timeout-third-fix/"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Koshin Studio","item":"https://koshinstudio.com/"},{"@type":"ListItem","position":2,"name":"Notes","item":"https://koshinstudio.com/notes/"},{"@type":"ListItem","position":3,"name":"タイムアウトを 3 回直しても止まらなかった：真犯人は、同じ鍵の中で動いていた 2 つ目の処理だった","item":"https://koshinstudio.com/notes/timeout-third-fix/"}]}]}</script>
@@ -41,6 +44,9 @@
 <main><div class="wrap">
   <nav class="crumbs" aria-label="現在地"><a href="/">Koshin Studio</a><i aria-hidden="true">›</i><a href="/notes/">Notes</a><i aria-hidden="true">›</i><span aria-current="page">タイムアウトを 3 回直しても止まらなかった：真犯人は、同じ鍵の中で動いていた 2 つ目の処理だった</span></nav>
   <h1>タイムアウトを 3 回直しても止まらなかった：真犯人は、同じ鍵の中で動いていた 2 つ目の処理だった</h1>  <div class="rule"></div>
+<!--lang-->
+  <p class="note"><a href="/en/notes/timeout-third-fix/" hreflang="en" lang="en">English version</a></p>
+<!--/lang-->
   <p class="lead">トレカダッシュ 開発の記録 ／ 2026年8月</p>
 
   <p>iOS アプリ「<a href="/works/torecadash/">トレカダッシュ</a>」の、楽天ブックスの在庫を確かめる処理が、<strong>1 日に 17 回、タイムアウト</strong>していました。タイムアウトは、処理が時間の上限（480 秒）までに終わらないことです。</p>

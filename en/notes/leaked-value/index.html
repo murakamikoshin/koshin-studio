@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>“That’s just a Beyblade” came back after I added a gate: the blocked value leaked in another form — Koshin Studio</title>
+<meta name="description" content="A gate “do not create a product whose name contains a toy’s name” was bypassed because the AI’s product name lost the toy’s name. I moved the judgement to the announcement body and rejected only when no card-game word appears.">
+<meta property="og:title" content="“That’s just a Beyblade” came back after I added a gate: the blocked value leaked in another form">
+<meta property="og:description" content="A gate “do not create a product whose name contains a toy’s name” was bypassed because the AI’s product name lost the toy’s name. I moved the judgement to the announcement body and rejected only when no card-game word appears.">
+<meta property="og:type" content="article">
+<meta name="theme-color" content="#fbfaf7">
+<link rel="icon" href="/favicon.ico?v=1697d589" sizes="48x48">
+<link rel="icon" href="/favicon.svg?v=b9d7922f" type="image/svg+xml" sizes="any">
+<link rel="icon" href="/assets/icon/icon-192.png?v=e2566235" type="image/png" sizes="192x192">
+<link rel="apple-touch-icon" href="/assets/icon/icon-180.png?v=84e7f0e6">
+<link rel="manifest" href="/site.webmanifest">
+<script>document.documentElement.className+=" js"</script>
+<link rel="stylesheet" href="/style.css?v=dd51310c">
+<meta name="google-adsense-account" content="ca-pub-3863314847163872">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3863314847163872" crossorigin="anonymous"></script>
+<link rel="canonical" href="https://koshinstudio.com/en/notes/leaked-value/">
+<meta property="og:url" content="https://koshinstudio.com/en/notes/leaked-value/">
+<meta property="og:site_name" content="Koshin Studio">
+<meta property="og:locale" content="en_US">
+<link rel="alternate" hreflang="ja" href="https://koshinstudio.com/notes/leaked-value/">
+<link rel="alternate" hreflang="en" href="https://koshinstudio.com/en/notes/leaked-value/">
+<link rel="alternate" hreflang="x-default" href="https://koshinstudio.com/en/notes/leaked-value/">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="alternate" type="application/rss+xml" title="Koshin Studio — Notes" href="https://koshinstudio.com/feed.xml">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BlogPosting","headline":"“That’s just a Beyblade” came back after I added a gate: the blocked value leaked in another form","url":"https://koshinstudio.com/en/notes/leaked-value/","description":"A gate “do not create a product whose name contains a toy’s name” was bypassed because the AI’s product name lost the toy’s name. I moved the judgement to the announcement body and rejected only when no card-game word appears.","datePublished":"2026-10-17","dateModified":"2026-10-17","inLanguage":"en","image":"https://koshinstudio.com/assets/og/og_en_notes_leaked-value.jpg","author":{"@id":"https://koshinstudio.com#studio"},"publisher":{"@id":"https://koshinstudio.com#studio"},"mainEntityOfPage":"https://koshinstudio.com/en/notes/leaked-value/"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Koshin Studio","item":"https://koshinstudio.com/en/"},{"@type":"ListItem","position":2,"name":"“That’s just a Beyblade” came back after I added a gate: the blocked value leaked in another form","item":"https://koshinstudio.com/en/notes/leaked-value/"}]}]}</script>
+<meta property="og:image" content="https://koshinstudio.com/assets/og/og_en_notes_leaked-value.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
+</head>
+<body class="article">
+<canvas id="motes"></canvas>
+
+<header class="site"><div class="wrap">
+  <a class="logo" href="/"><img class="logo-mark" src="/favicon.svg?v=b9d7922f" alt="" width="28" height="28">Koshin Studio</a>
+  <nav><a href="/works/">Works</a><a href="/notes/">Notes</a><a href="/picks/">Picks</a><a href="/calc/">Tools</a><a href="/about/">About</a></nav>
+</div></header>
+
+<main><div class="wrap">
+  <nav class="crumbs" aria-label="You are here"><a href="/en/">Koshin Studio</a><i aria-hidden="true">›</i><span aria-current="page">Leaked value</span></nav>
+  <h1>“That’s just a Beyblade” came back after I added a gate: the blocked value leaked in another form</h1>  <div class="rule"></div>
+<!--lang-->
+  <p class="note"><a href="/notes/leaked-value/" hreflang="ja" lang="ja">日本語版</a></p>
+<!--/lang-->  <p class="lead">Development log of the Toreca Dash app / September 2026</p>
+
+  <p>My app Toreca Dash received three reports: “this is just a Beyblade”. An app that gathers trading-card information had a toy, Beyblade, registered as a product.</p>
+  <p>On 6 September I had added a gate: “do not create a product if the product name contains a toy’s name”. Yet it came back. This article is about <strong>a value I had blocked coming back in a different form</strong>.</p>
+  <p class="note">Numbers come from my work logs of 6 to 11 September 2026.</p>  <h2 class="rv" id="s1">I added the gate, but the toy’s name had vanished from the product name</h2>
+  <p>The store announcement was:</p>
+  <pre><code>New toy: Beyblade X
+(1) CX-19 Random Booster Kuro Tread set
+(2) CX-00 Tigerage FT3-60T</code></pre>
+  <p>An AI builds product names from it, and the products created were:</p>
+  <pre><code>"CX-19 Random Booster Kuro Tread Select"
+"CX-00 'Tigerage' FT3-60T"</code></pre>
+  <p>Neither contains the word <strong>“Beyblade”</strong>. My gate rejected a product name that contained a toy’s name. Because the AI’s product name no longer had it, the gate let it through. The value I had blocked (the toy’s name) returned in another form (a product name without it).</p>
+
+  <h2 class="rv" id="s2">The fix: judge on the announcement text, not the product name</h2>
+  <p>I moved the judgement to <strong>the announcement body, not the product name</strong>. The body states the toy’s name.</p>
+  <p>But “contains a toy’s name, so reject” would not do. Store announcements sometimes <strong>list both toys and card games</strong>, such as “[Beyblade] [Dragon Ball Card Game]”. Rejecting would remove real lotteries. So the rule is: reject <strong>only when no card-game word appears at all</strong>.</p>
+  <p>Counting on real data:</p>
+  <div class="scroll rv"><table>
+    <thead><tr><th>What I checked</th><th>Count</th></tr></thead>
+    <tbody>
+      <tr><td>Articles that touch a toy line</td><td>44</td></tr>
+      <tr><td>Of those, matching the rule (no card-game word)</td><td>31</td></tr>
+      <tr><td>Of those, displayed</td><td>only the reported one</td></tr>
+      <tr><td>Articles with a card-game word (all kept)</td><td>13</td></tr>
+    </tbody>
+  </table></div>
+
+  <h2 class="rv" id="s3">What I learned</h2>
+  <blockquote>A blocked value comes back in another form. Follow where the value goes.</blockquote>
+  <ul>
+    <li><strong>When you add a gate, follow where the blocked value leaks.</strong> Stop it creating products and it survives in a title or another field.</li>
+    <li><strong>Judge close to the source of the material.</strong> The original announcement is more reliable than a product name processed by an AI.</li>
+    <li><strong>Do not reject on “present” alone.</strong> Listings are mixed, so limit it to “no other word at all”.</li>
+    <li><strong>Count what remains for a rejecting rule.</strong> I confirmed the 13 stay.</li>
+  </ul>
+
+  <p class="note">This is the English version of <a href="/notes/leaked-value/" hreflang="ja" lang="ja">the original Japanese article</a>.</p>
+
+  <div class="rule" style="margin:40px 0 22px"></div>
+  <p class="eyebrow">More in English</p>
+  <ul class="plain">
+    <li><a href="/en/">All English pages</a></li>
+    <li><a href="/en/works/torecadash/">Toreca Dash</a></li>
+  </ul>
+</div>
+</main>
+
+<footer class="site"><div class="wrap"></div></footer>
+<script src="/motion.js?v=1e7447ec" defer></script>
+</body>
+</html>

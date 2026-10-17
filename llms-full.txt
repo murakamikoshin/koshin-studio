@@ -325,6 +325,8 @@ URL: https://koshinstudio.com/notes/timeout-third-fix/
 
 # タイムアウトを 3 回直しても止まらなかった：真犯人は、同じ鍵の中で動いていた 2 つ目の処理だった
 
+  English version (https://koshinstudio.com/en/notes/timeout-third-fix/)
+
   トレカダッシュ 開発の記録 ／ 2026年8月
 
   iOS アプリ「トレカダッシュ (https://koshinstudio.com/works/torecadash/)」の、楽天ブックスの在庫を確かめる処理が、1 日に 17 回、タイムアウトしていました。タイムアウトは、処理が時間の上限（480 秒）までに終わらないことです。
@@ -880,6 +882,8 @@ URL: https://koshinstudio.com/notes/test-ads/
 
 # 広告が出ないと、実機チェックの 25 項目が止まった：開発者モードだけテスト広告を使い、賞品名を直書きしない
 
+  English version (https://koshinstudio.com/en/notes/test-ads/)
+
   トレカダッシュ 開発の記録 ／ 2026年9月
 
   iOS アプリ「トレカダッシュ (https://koshinstudio.com/works/torecadash/)」には、毎日 1 回、おみくじ（抽選）を引ける機能があります。「動画を見て挑戦する」と、動画の広告のあとに、抽選の演出が始まります。
@@ -959,6 +963,8 @@ URL: https://koshinstudio.com/notes/leaked-value/
 
 # 「これベイブレードじゃん」が、関門を入れても戻ってきた：弾いた値が、別の形で漏れた
 
+  English version (https://koshinstudio.com/en/notes/leaked-value/)
+
   トレカダッシュ 開発の記録 ／ 2026年9月
 
   iOS アプリ「トレカダッシュ (https://koshinstudio.com/works/torecadash/)」には、「これ、ベイブレードじゃん」という報告が、3 件来ました。トレーディングカードの情報を集めるアプリなのに、玩具のベイブレードが、商品として登録されていました。
@@ -1026,6 +1032,8 @@ URL: https://koshinstudio.com/notes/leaked-value/
 URL: https://koshinstudio.com/notes/budget-starved/
 
 # 「次回へ」と出続けていた 25 本の点検は、一度も走っていなかった：3 つの時間予算を、同じ開始時刻から数えていた
+
+  English version (https://koshinstudio.com/en/notes/budget-starved/)
 
   トレカダッシュ 開発の記録 ／ 2026年9月
 
@@ -7839,6 +7847,311 @@ URL: https://koshinstudio.com/privacy/
 
 ---
 
+URL: https://koshinstudio.com/en/notes/test-ads/
+
+# With no ads, 25 real-device checks were blocked: test ads in developer mode only, and no hard-coded prize names
+
+  日本語版 (https://koshinstudio.com/notes/test-ads/)
+
+  Development log of the Toreca Dash app / September 2026
+
+  My app Toreca Dash has a daily lottery (omikuji) feature. “Watch a video to try” starts the draw animation after a video ad.
+
+  On 11 September 2026, reviewing the real-device checklist revealed a problem: because ads were not being served yet, 25 of the 163 checklist items could not be verified.
+
+  Numbers come from my work log of 11 September 2026.
+
+## Without an ad, you cannot check what follows
+
+  Before review and before serving starts, my own ad slot has no inventory. The omikuji’s “Watch a video to try” stays at “Preparing an ad…” and cannot be pressed. Everything after it (the draw, the animation, the prize applying, entering a delivery address) cannot be verified. 25 of the 163 items (15%) of the real-device checklist were blocked.
+
+## Use test ads only in developer mode
+
+  I use the test ad units Google publishes. Test ads always have inventory. Switching to them only in developer mode lets me verify through to the end on the same path as production.
+
+     | Production | Developer mode
+
+      Banner | My ad unit | Google’s test unit
+
+      Rewarded (video) | My ad unit | Google’s test unit
+
+      Native | My ad unit | Google’s test unit
+
+      App open | My ad unit | Google’s test unit
+
+  Developer mode is enabled only by “tap the version 7 times” and “only on the same device ID”. Users never see it. Ad rules say test ads are for your own device only; this satisfies that.
+
+## Never hard-code prize names anywhere
+
+  Another, similar story. After I changed the omikuji prizes, I was told “some text is still the old one”. I will keep changing prizes, each time.
+
+  Looking into it, the display side was correct:
+
+- The prize list, the terms and the result card all read one and the same setting (lotteryConfig/publicStatus).
+
+- The process that changes prizes writes both “current” and “public” in the same transaction, so they cannot drift.
+
+- Temporarily unlocking Pro features is decided by a separate field (perk), not the prize name.
+
+  What was stale was two places with prize names hard-coded:
+
+- Three items of the real-device checklist (shown in the app), written like “Medium luck says ‘ads hidden for 24 hours’”.
+
+- The fallback text used when the setting has not arrived.
+
+  I rewrote the checklist to not name prizes (“the prize names currently set in the admin page appear as they are”), and the fallback to “Prizes are being prepared”. I added an item “right after changing prizes, the prize list, terms and result card all show the new prizes” (164 items). Since I change prizes every time, I put “where to look each time” into one item.
+
+  I did keep an old wording in the server’s “defaults when no setting exists”, because wording and effect are paired (hidden-ads text and the ad-free unlock). Neutralising only one side would make “unlocked but no explanation”.
+
+## What I learned
+
+> Make a way to verify what you cannot verify; do not hard-code what changes.
+
+- For things that come from outside, such as ads, provide a test path. Relying on production inventory leaves what follows unchecked.
+
+- Keep the test path for developers only. Guard it with 7 taps and the device ID.
+
+- Do not hard-code wording that changes every time. Read from one setting; write in one transaction.
+
+- Do not fix only one half of a pair. Fix wording and effect together.
+
+  This is the English version of the original Japanese article (https://koshinstudio.com/notes/test-ads/).
+
+  More in English
+
+- All English pages (https://koshinstudio.com/en/)
+
+- Toreca Dash (https://koshinstudio.com/en/works/torecadash/)
+
+
+---
+
+URL: https://koshinstudio.com/en/notes/leaked-value/
+
+# “That’s just a Beyblade” came back after I added a gate: the blocked value leaked in another form
+
+  日本語版 (https://koshinstudio.com/notes/leaked-value/)
+
+  Development log of the Toreca Dash app / September 2026
+
+  My app Toreca Dash received three reports: “this is just a Beyblade”. An app that gathers trading-card information had a toy, Beyblade, registered as a product.
+
+  On 6 September I had added a gate: “do not create a product if the product name contains a toy’s name”. Yet it came back. This article is about a value I had blocked coming back in a different form.
+
+  Numbers come from my work logs of 6 to 11 September 2026.
+
+## I added the gate, but the toy’s name had vanished from the product name
+
+  The store announcement was:
+
+  New toy: Beyblade X
+(1) CX-19 Random Booster Kuro Tread set
+(2) CX-00 Tigerage FT3-60T
+  An AI builds product names from it, and the products created were:
+
+  "CX-19 Random Booster Kuro Tread Select"
+"CX-00 'Tigerage' FT3-60T"
+  Neither contains the word “Beyblade”. My gate rejected a product name that contained a toy’s name. Because the AI’s product name no longer had it, the gate let it through. The value I had blocked (the toy’s name) returned in another form (a product name without it).
+
+## The fix: judge on the announcement text, not the product name
+
+  I moved the judgement to the announcement body, not the product name. The body states the toy’s name.
+
+  But “contains a toy’s name, so reject” would not do. Store announcements sometimes list both toys and card games, such as “[Beyblade] [Dragon Ball Card Game]”. Rejecting would remove real lotteries. So the rule is: reject only when no card-game word appears at all.
+
+  Counting on real data:
+
+    What I checked | Count
+
+      Articles that touch a toy line | 44
+
+      Of those, matching the rule (no card-game word) | 31
+
+      Of those, displayed | only the reported one
+
+      Articles with a card-game word (all kept) | 13
+
+## What I learned
+
+> A blocked value comes back in another form. Follow where the value goes.
+
+- When you add a gate, follow where the blocked value leaks. Stop it creating products and it survives in a title or another field.
+
+- Judge close to the source of the material. The original announcement is more reliable than a product name processed by an AI.
+
+- Do not reject on “present” alone. Listings are mixed, so limit it to “no other word at all”.
+
+- Count what remains for a rejecting rule. I confirmed the 13 stay.
+
+  This is the English version of the original Japanese article (https://koshinstudio.com/notes/leaked-value/).
+
+  More in English
+
+- All English pages (https://koshinstudio.com/en/)
+
+- Toreca Dash (https://koshinstudio.com/en/works/torecadash/)
+
+
+---
+
+URL: https://koshinstudio.com/en/notes/budget-starved/
+
+# Checks that logged “deferred to next run” had never run: three time budgets counted from the same start
+
+  日本語版 (https://koshinstudio.com/notes/budget-starved/)
+
+  Development log of the Toreca Dash app / September 2026
+
+  Behind my app Toreca Dash is a process that checks and fixes articles’ “sale type”. Inside it was a part that ran “25 checks in rotation”.
+
+  On 11 September 2026, after adding a meter that times each stage, I learned that those 25 checks had never run once. The log kept saying “deferred 18 items to the next run for the time budget”. That “18” meant not some of them but all.
+
+  Numbers come from my work log of 11 September 2026.
+
+## Three budgets were counted from the same start time
+
+  The process had three stages, each with a time budget.
+
+    Stage | Budget | Measured
+
+      ① Main loop | 420 s | uses all 425 s
+
+      ② Always-run slot | 780 s (total) | only 360 s really usable; ends at 861 s
+
+      ③ Rotating 25 checks | 700 s (total) | ② overruns 700 s, so 0 checks every time
+
+  The three budgets were counted from the same start time: ① 420 seconds, ② 780 in total, ③ 700 in total. It looks as if each stage has room. But ② can only use 360 seconds of its 780 after ① used 425, and when ② ended (861 seconds), ③’s “700 in total” was long gone. ③ was judged “out of budget” before it started, every time: 0 checks.
+
+  The log’s “deferred 18 items to the next run” meant sending everything to the next run, every time. “Next run” never came.
+
+## The fix: do not widen by feel; allocate from the job’s time limit
+
+  I stopped widening the numbers by feel. Instead I allocate from the job’s own time limit. The limit is written in one place (REPAIR_SALE_TYPES_TIMEOUT_SEC) and each stage’s deadline is that times a ratio.
+
+    Stage | Deadline (share of the limit)
+
+      ① Main | 23%
+
+      ② Always-run slot | 67%
+
+      ③ Rotation | 93%
+
+  The limit became 1,800 seconds. Since each deadline is a share of the whole rather than a continuation of the previous stage, later stages keep their budget even if an earlier stage uses everything.
+
+## Add a meter: which stage was heavy was invisible
+
+  Another cause: I had widened the limit without knowing which of the 12 was heavy. So I log the seconds each step takes. Heaviest first as measured:
+
+    Step | Time
+
+      Attach replacement articles to hidden, already-notified ones | 119 s
+
+      Find the application link from the QR in the announcement image | 102 s
+
+      Fix the unit of the reference price | 48 s
+
+      Copy the reference price | 46 s
+
+      Fix articles with neither a link nor an application method | 41 s
+
+## What I learned
+
+> “Next run” only means something if a next run is certain.
+
+- Counting budgets from the same start starves the later stages. If an earlier one uses it all, the later one has 0.
+
+- Count the “deferred” log lines. If everything is deferred every time, it has never run.
+
+- Allocate from the job’s total limit, not by feel.
+
+- Measure each stage first. Widening limits without knowing what is heavy does not help.
+
+  This is the English version of the original Japanese article (https://koshinstudio.com/notes/budget-starved/).
+
+  More in English
+
+- All English pages (https://koshinstudio.com/en/)
+
+- Toreca Dash (https://koshinstudio.com/en/works/torecadash/)
+
+
+---
+
+URL: https://koshinstudio.com/en/notes/timeout-third-fix/
+
+# I fixed a timeout three times and it did not stop: the culprit was a second process under the same lock
+
+  日本語版 (https://koshinstudio.com/notes/timeout-third-fix/)
+
+  Development log of the Toreca Dash app / August 2026
+
+  The job in my app Toreca Dash that rechecks Rakuten Books stock timed out 17 times a day. A timeout means a run does not finish within its limit (480 seconds).
+
+  I fixed it three times, and it did not stop. The real culprit was in a place I had not looked, each time. This is the record of how I tracked it down.
+
+  Written from my work log of 25 August 2026.
+
+## First fix: fetches had no timeout
+
+  The first thing I found was that fetches had no time limit. If an external site never replies, the process waits forever. I added a limit. But the 17 timeouts a day did not stop.
+
+## Second fix: the screening of items that became buyable
+
+  Next I suspected the resale-price screening of items that had become purchasable. It includes calls to an external API, so a path that could hang remained. When screening skips an item, the notification count stays 0, so the symptom does not reveal it.
+
+  I extracted the whole handling of one item into a single function (processOne()) and wrapped it in a Promise.race (take whichever finishes first) with the remaining time as the limit. After deploying, 0 timeouts in 7 minutes, and the log said “checked: 12 (rest next time because time ran out)”, a normal finish.
+
+  The lesson: putting a limit only on “the spot that looks stuck” is not enough. The time budget is only checked at the head of the loop. If any unbounded wait remains inside one item’s processing, the job runs to the hard limit. Put the limit on the whole processing of one item.
+
+  But the timeouts had not stopped.
+
+## Third fix: the culprit was a second process under the same lock
+
+  The reason three fixes did not work: none of the places I limited was the real one.
+
+  The culprit was a second process (runRevalidateRakutenBooksAvailability) running under the same “prevent double runs” lock.
+
+- It re-fetches every Rakuten Books reservation and first-come article and calls the API one by one.
+
+- Rakuten’s API has a 1.5-second interval limit.
+
+- It had no time limit at all.
+
+  However many limits I put on the first process (the stock check), the second ran to 480 seconds. The log shows the first one’s completion message, so it looked like “it finishes normally yet times out”.
+
+  I gave the second process a “remaining time” limit too. It runs every minute anyway, so cutting it short loses nothing. 15 minutes after deploying, 0 timeouts.
+
+## A bonus: a site that erred every time
+
+  Another bug found along the way: a game company’s shop site returned an infinite redirect loop (maximum redirect reached) with a plain fetch, logging an error at every recheck (a dozen or so a day). The scraping service’s “escalation memory” already knew it needed a stronger setting.
+
+  The fix: hosts remembered in the escalation memory go straight through the scraping service without trying a plain fetch. I did not list host names by hand. The memory builds up automatically from real failures, so new sites need no extra work.
+
+## What I learned
+
+> When chasing a timeout, first count everything the function calls.
+
+- One scheduled function can contain two or more processes. Three times I looked only at the first.
+
+- Put the limit on the whole processing of one item. One suspect spot is not enough.
+
+- “Finishes normally yet times out” means suspect another process. The completion message may be the first one’s.
+
+- Log the time of each segment. Next time it will be obvious at once.
+
+- Prefer memory built from real failures to hand-written lists. It works on new sites automatically.
+
+  This is the English version of the original Japanese article (https://koshinstudio.com/notes/timeout-third-fix/).
+
+  More in English
+
+- All English pages (https://koshinstudio.com/en/)
+
+- Toreca Dash (https://koshinstudio.com/en/works/torecadash/)
+
+
+---
+
 URL: https://koshinstudio.com/en/notes/cleanup-hides-entrance/
 
 # “It gets cleaned up later” hid an entrance bug: 400 near-identical products were re-created every day
@@ -14204,6 +14517,14 @@ URL: https://koshinstudio.com/en/
 - A secret token was in the logs in plain text: scrub at the one exit that cannot be forgotten (https://koshinstudio.com/en/notes/secret-in-logs/)
 
 - Moving from Cloud Functions to a ¥4,300 server: ¥3,700 a day, Yahoo! failing in the EEA, and five traps (https://koshinstudio.com/en/notes/vps-migration/)
+
+- Checks that logged “deferred to next run” had never run: three time budgets counted from the same start (https://koshinstudio.com/en/notes/budget-starved/)
+
+- “That’s just a Beyblade” came back after I added a gate: the blocked value leaked in another form (https://koshinstudio.com/en/notes/leaked-value/)
+
+- With no ads, 25 real-device checks were blocked: test ads in developer mode only, and no hard-coded prize names (https://koshinstudio.com/en/notes/test-ads/)
+
+- I fixed a timeout three times and it did not stop: the culprit was a second process under the same lock (https://koshinstudio.com/en/notes/timeout-third-fix/)
 
 ## Languages
 

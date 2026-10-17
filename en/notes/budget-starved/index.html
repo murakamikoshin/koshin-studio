@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Checks that logged “deferred to next run” had never run: three time budgets counted from the same start — Koshin Studio</title>
+<meta name="description" content="A process had three stages whose time budgets were counted from the same start time, so the rotating 25 checks ran 0 times each run. “Deferred 18 items” meant all of them. I allocated from the job’s time limit and logged each step’s time.">
+<meta property="og:title" content="Checks that logged “deferred to next run” had never run: three time budgets counted from the same start">
+<meta property="og:description" content="A process had three stages whose time budgets were counted from the same start time, so the rotating 25 checks ran 0 times each run. “Deferred 18 items” meant all of them. I allocated from the job’s time limit and logged each step’s time.">
+<meta property="og:type" content="article">
+<meta name="theme-color" content="#fbfaf7">
+<link rel="icon" href="/favicon.ico?v=1697d589" sizes="48x48">
+<link rel="icon" href="/favicon.svg?v=b9d7922f" type="image/svg+xml" sizes="any">
+<link rel="icon" href="/assets/icon/icon-192.png?v=e2566235" type="image/png" sizes="192x192">
+<link rel="apple-touch-icon" href="/assets/icon/icon-180.png?v=84e7f0e6">
+<link rel="manifest" href="/site.webmanifest">
+<script>document.documentElement.className+=" js"</script>
+<link rel="stylesheet" href="/style.css?v=dd51310c">
+<meta name="google-adsense-account" content="ca-pub-3863314847163872">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3863314847163872" crossorigin="anonymous"></script>
+<link rel="canonical" href="https://koshinstudio.com/en/notes/budget-starved/">
+<meta property="og:url" content="https://koshinstudio.com/en/notes/budget-starved/">
+<meta property="og:site_name" content="Koshin Studio">
+<meta property="og:locale" content="en_US">
+<link rel="alternate" hreflang="ja" href="https://koshinstudio.com/notes/budget-starved/">
+<link rel="alternate" hreflang="en" href="https://koshinstudio.com/en/notes/budget-starved/">
+<link rel="alternate" hreflang="x-default" href="https://koshinstudio.com/en/notes/budget-starved/">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="alternate" type="application/rss+xml" title="Koshin Studio — Notes" href="https://koshinstudio.com/feed.xml">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BlogPosting","headline":"Checks that logged “deferred to next run” had never run: three time budgets counted from the same start","url":"https://koshinstudio.com/en/notes/budget-starved/","description":"A process had three stages whose time budgets were counted from the same start time, so the rotating 25 checks ran 0 times each run. “Deferred 18 items” meant all of them. I allocated from the job’s time limit and logged each step’s time.","datePublished":"2026-10-17","dateModified":"2026-10-17","inLanguage":"en","image":"https://koshinstudio.com/assets/og/og_en_notes_budget-starved.jpg","author":{"@id":"https://koshinstudio.com#studio"},"publisher":{"@id":"https://koshinstudio.com#studio"},"mainEntityOfPage":"https://koshinstudio.com/en/notes/budget-starved/"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Koshin Studio","item":"https://koshinstudio.com/en/"},{"@type":"ListItem","position":2,"name":"Checks that logged “deferred to next run” had never run: three time budgets counted from the same start","item":"https://koshinstudio.com/en/notes/budget-starved/"}]}]}</script>
+<meta property="og:image" content="https://koshinstudio.com/assets/og/og_en_notes_budget-starved.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
+</head>
+<body class="article">
+<canvas id="motes"></canvas>
+
+<header class="site"><div class="wrap">
+  <a class="logo" href="/"><img class="logo-mark" src="/favicon.svg?v=b9d7922f" alt="" width="28" height="28">Koshin Studio</a>
+  <nav><a href="/works/">Works</a><a href="/notes/">Notes</a><a href="/picks/">Picks</a><a href="/calc/">Tools</a><a href="/about/">About</a></nav>
+</div></header>
+
+<main><div class="wrap">
+  <nav class="crumbs" aria-label="You are here"><a href="/en/">Koshin Studio</a><i aria-hidden="true">›</i><span aria-current="page">Budget starvation</span></nav>
+  <h1>Checks that logged “deferred to next run” had never run: three time budgets counted from the same start</h1>  <div class="rule"></div>
+<!--lang-->
+  <p class="note"><a href="/notes/budget-starved/" hreflang="ja" lang="ja">日本語版</a></p>
+<!--/lang-->  <p class="lead">Development log of the Toreca Dash app / September 2026</p>
+
+  <p>Behind my app Toreca Dash is a process that checks and fixes articles’ “sale type”. Inside it was a part that ran “25 checks in rotation”.</p>
+  <p>On 11 September 2026, after adding a meter that times each stage, I learned that <strong>those 25 checks had never run once</strong>. The log kept saying “deferred 18 items to the next run for the time budget”. That “18” meant not some of them but <strong>all</strong>.</p>
+  <p class="note">Numbers come from my work log of 11 September 2026.</p>  <h2 class="rv" id="s1">Three budgets were counted from the same start time</h2>
+  <p>The process had three stages, each with a time budget.</p>
+  <div class="scroll rv"><table>
+    <thead><tr><th>Stage</th><th>Budget</th><th>Measured</th></tr></thead>
+    <tbody>
+      <tr><td>① Main loop</td><td>420 s</td><td><strong>uses all 425 s</strong></td></tr>
+      <tr><td>② Always-run slot</td><td>780 s (total)</td><td>only 360 s really usable; ends at 861 s</td></tr>
+      <tr><td>③ Rotating 25 checks</td><td>700 s (total)</td><td>② overruns 700 s, so <strong>0 checks every time</strong></td></tr>
+    </tbody>
+  </table></div>
+  <p>The three budgets were <strong>counted from the same start time</strong>: ① 420 seconds, ② 780 in total, ③ 700 in total. It looks as if each stage has room. But ② can only use 360 seconds of its 780 after ① used 425, and when ② ended (861 seconds), ③’s “700 in total” was long gone. ③ was judged “out of budget” before it started, every time: <strong>0 checks</strong>.</p>
+  <p>The log’s “deferred 18 items to the next run” meant <strong>sending everything to the next run</strong>, every time. “Next run” never came.</p>
+
+  <h2 class="rv" id="s2">The fix: do not widen by feel; allocate from the job’s time limit</h2>
+  <p>I stopped widening the numbers by feel. Instead I <strong>allocate from the job’s own time limit</strong>. The limit is written in one place (<code>REPAIR_SALE_TYPES_TIMEOUT_SEC</code>) and each stage’s deadline is that times a ratio.</p>
+  <div class="scroll rv"><table>
+    <thead><tr><th>Stage</th><th>Deadline (share of the limit)</th></tr></thead>
+    <tbody>
+      <tr><td>① Main</td><td>23%</td></tr>
+      <tr><td>② Always-run slot</td><td>67%</td></tr>
+      <tr><td>③ Rotation</td><td>93%</td></tr>
+    </tbody>
+  </table></div>
+  <p>The limit became 1,800 seconds. Since each deadline is a share of the whole rather than a continuation of the previous stage, later stages keep their budget even if an earlier stage uses everything.</p>
+
+  <h2 class="rv" id="s3">Add a meter: which stage was heavy was invisible</h2>
+  <p>Another cause: <strong>I had widened the limit without knowing which of the 12 was heavy</strong>. So I log the seconds each step takes. Heaviest first as measured:</p>
+  <div class="scroll rv"><table>
+    <thead><tr><th>Step</th><th>Time</th></tr></thead>
+    <tbody>
+      <tr><td>Attach replacement articles to hidden, already-notified ones</td><td>119 s</td></tr>
+      <tr><td>Find the application link from the QR in the announcement image</td><td>102 s</td></tr>
+      <tr><td>Fix the unit of the reference price</td><td>48 s</td></tr>
+      <tr><td>Copy the reference price</td><td>46 s</td></tr>
+      <tr><td>Fix articles with neither a link nor an application method</td><td>41 s</td></tr>
+    </tbody>
+  </table></div>
+
+  <h2 class="rv" id="s4">What I learned</h2>
+  <blockquote>“Next run” only means something if a next run is certain.</blockquote>
+  <ul>
+    <li><strong>Counting budgets from the same start starves the later stages.</strong> If an earlier one uses it all, the later one has 0.</li>
+    <li><strong>Count the “deferred” log lines.</strong> If everything is deferred every time, it has never run.</li>
+    <li><strong>Allocate from the job’s total limit, not by feel.</strong></li>
+    <li><strong>Measure each stage first.</strong> Widening limits without knowing what is heavy does not help.</li>
+  </ul>
+
+  <p class="note">This is the English version of <a href="/notes/budget-starved/" hreflang="ja" lang="ja">the original Japanese article</a>.</p>
+
+  <div class="rule" style="margin:40px 0 22px"></div>
+  <p class="eyebrow">More in English</p>
+  <ul class="plain">
+    <li><a href="/en/">All English pages</a></li>
+    <li><a href="/en/works/torecadash/">Toreca Dash</a></li>
+  </ul>
+</div>
+</main>
+
+<footer class="site"><div class="wrap"></div></footer>
+<script src="/motion.js?v=1e7447ec" defer></script>
+</body>
+</html>
