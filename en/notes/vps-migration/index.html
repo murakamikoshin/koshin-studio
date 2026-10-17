@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Moving from Cloud Functions to a ¥4,300 server: ¥3,700 a day, Yahoo! failing in the EEA, and five traps — Koshin Studio</title>
+<meta name="description" content="After the free trial, Cloud Functions cost about ¥3,700 a day because waiting time was billed. I moved almost unchanged code to a Singapore VPS (about ¥4,300 a month). Helsinki failed because Yahoo! blocks the EEA; there were 15 secrets, not 5.">
+<meta property="og:title" content="Moving from Cloud Functions to a ¥4,300 server: ¥3,700 a day, Yahoo! failing in the EEA, and five traps">
+<meta property="og:description" content="After the free trial, Cloud Functions cost about ¥3,700 a day because waiting time was billed. I moved almost unchanged code to a Singapore VPS (about ¥4,300 a month). Helsinki failed because Yahoo! blocks the EEA; there were 15 secrets, not 5.">
+<meta property="og:type" content="article">
+<meta name="theme-color" content="#fbfaf7">
+<link rel="icon" href="/favicon.ico?v=1697d589" sizes="48x48">
+<link rel="icon" href="/favicon.svg?v=b9d7922f" type="image/svg+xml" sizes="any">
+<link rel="icon" href="/assets/icon/icon-192.png?v=e2566235" type="image/png" sizes="192x192">
+<link rel="apple-touch-icon" href="/assets/icon/icon-180.png?v=84e7f0e6">
+<link rel="manifest" href="/site.webmanifest">
+<script>document.documentElement.className+=" js"</script>
+<link rel="stylesheet" href="/style.css?v=dd51310c">
+<meta name="google-adsense-account" content="ca-pub-3863314847163872">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3863314847163872" crossorigin="anonymous"></script>
+<link rel="canonical" href="https://koshinstudio.com/en/notes/vps-migration/">
+<meta property="og:url" content="https://koshinstudio.com/en/notes/vps-migration/">
+<meta property="og:site_name" content="Koshin Studio">
+<meta property="og:locale" content="en_US">
+<link rel="alternate" hreflang="ja" href="https://koshinstudio.com/notes/vps-migration/">
+<link rel="alternate" hreflang="en" href="https://koshinstudio.com/en/notes/vps-migration/">
+<link rel="alternate" hreflang="x-default" href="https://koshinstudio.com/en/notes/vps-migration/">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="alternate" type="application/rss+xml" title="Koshin Studio — Notes" href="https://koshinstudio.com/feed.xml">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BlogPosting","headline":"Moving from Cloud Functions to a ¥4,300 server: ¥3,700 a day, Yahoo! failing in the EEA, and five traps","url":"https://koshinstudio.com/en/notes/vps-migration/","description":"After the free trial, Cloud Functions cost about ¥3,700 a day because waiting time was billed. I moved almost unchanged code to a Singapore VPS (about ¥4,300 a month). Helsinki failed because Yahoo! blocks the EEA; there were 15 secrets, not 5.","datePublished":"2026-10-17","dateModified":"2026-10-17","inLanguage":"en","image":"https://koshinstudio.com/assets/og/og_en_notes_vps-migration.jpg","author":{"@id":"https://koshinstudio.com#studio"},"publisher":{"@id":"https://koshinstudio.com#studio"},"mainEntityOfPage":"https://koshinstudio.com/en/notes/vps-migration/"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Koshin Studio","item":"https://koshinstudio.com/en/"},{"@type":"ListItem","position":2,"name":"Moving from Cloud Functions to a ¥4,300 server: ¥3,700 a day, Yahoo! failing in the EEA, and five traps","item":"https://koshinstudio.com/en/notes/vps-migration/"}]}]}</script>
+<meta property="og:image" content="https://koshinstudio.com/assets/og/og_en_notes_vps-migration.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
+</head>
+<body class="article">
+<canvas id="motes"></canvas>
+
+<header class="site"><div class="wrap">
+  <a class="logo" href="/"><img class="logo-mark" src="/favicon.svg?v=b9d7922f" alt="" width="28" height="28">Koshin Studio</a>
+  <nav><a href="/works/">Works</a><a href="/notes/">Notes</a><a href="/picks/">Picks</a><a href="/calc/">Tools</a><a href="/about/">About</a></nav>
+</div></header>
+
+<main><div class="wrap">
+  <nav class="crumbs" aria-label="You are here"><a href="/en/">Koshin Studio</a><i aria-hidden="true">›</i><span aria-current="page">VPS migration</span></nav>
+  <h1>Moving from Cloud Functions to a ¥4,300 server: ¥3,700 a day, Yahoo! failing in the EEA, and five traps</h1>  <div class="rule"></div>
+<!--lang-->
+  <p class="note"><a href="/notes/vps-migration/" hreflang="ja" lang="ja">日本語版</a></p>
+<!--/lang-->  <p class="lead">Development log of the Toreca Dash app / August 2026</p>
+
+  <p>The back end of my iPhone app Toreca Dash originally ran on Google Cloud Functions (billed per function for the time it runs). When the free trial ended on 16 August 2026, from 17 August it cost <strong>about ¥3,700 a day</strong> (about ¥106,000 a month).</p>
+  <p>This article records how I moved that code <strong>almost unchanged</strong> to a server (VPS) at about ¥4,300 a month: what I decided, what I corrected later, and the traps.</p>
+  <p class="note">Numbers come from my work log of 20 August 2026. I do not include server addresses or connection details.</p>  <h2 class="rv" id="s1">Why move: waiting time was billed too</h2>
+  <p>About 97% of the Cloud Functions bill was CPU time (vCPU seconds). But nearly all of my functions just <strong>wait for scraping targets and AI replies</strong>, and that waiting was billed in full.</p>
+  <p>On a flat-rate server that structural waste disappears.</p>
+  <p>I also considered Cloudflare Workers. The Firestore admin SDK does not run there and hundreds of places would need rewriting to another API, so I dropped it. On a VPS the current code runs as is.</p>
+
+  <h2 class="rv" id="s2">What I chose, and where I first got it wrong</h2>
+  <div class="scroll rv"><table>
+    <thead><tr><th>Item</th><th>Details</th></tr></thead>
+    <tbody>
+      <tr><td>Provider</td><td>Hetzner Cloud</td></tr>
+      <tr><td>Spec</td><td>2 vCPU, 4 GB memory, 80 GB SSD</td></tr>
+      <tr><td>Location</td><td><strong>Singapore</strong></td></tr>
+      <tr><td>Price</td><td>€26.99 a month (about ¥4,300)</td></tr>
+    </tbody>
+  </table></div>
+  <p>I first built it in Helsinki (€5.99 a month). <strong>Then I rebuilt it.</strong></p>
+  <p>The reason: Yahoo! Shopping’s API <strong>blocks access from the EEA and the UK</strong>. Calling it from Helsinki returned not the API response but a notice page, “For customers in the European Economic Area and the UK”, with HTTP 403. <strong>All 15 genres failed.</strong> It is a legal geo-block, not bot detection, so retrying never helps. From Singapore it returns HTTP 200 normally.</p>
+  <p>I deleted the Helsinki server; it had cost €0.02 (about ¥3).</p>
+  <p>Hetzner’s pricing gives a <strong>€7 a month discount only in three European locations</strong>. The cheapest line (CX) is sold only in Europe. So “cheap location = EEA = Yahoo! dies”. Do not go back to Europe for the price.</p>
+  <p>Singapore also helped by being closer to Japanese sites: the Pokémon card new-arrival check went <strong>from 52.7 seconds to 15.8 seconds (3.3× faster)</strong>.</p>
+
+  <h2 class="rv" id="s3">Run the code unchanged: intercept <code>require</code></h2>
+  <p>I wrote a runner (<code>runner.js</code>). <strong>The original code (<code>index.js</code>) is not changed at all.</strong></p>
+  <p>Instead of copying 132 schedules by hand, I intercept <code>require</code> and replace <code>firebase-functions</code> with my own, making the calls that register schedules just add to a list. Then I load the original code, and all definitions are collected automatically. The counts collected:</p>
+  <pre><code>132 scheduled jobs / 256 HTTP endpoints / 9 Firestore triggers</code></pre>
+  <p>Not copying by hand was right. One schedule is written as the <strong>template string</strong> <code>`every ${X_CHECK_INTERVAL_MINUTES} minutes`</code>. Copying by eye would have got it wrong. I matched all 132 mechanically and confirmed they agree.</p>
+  <p>The 9 Firestore triggers (functions that fire when data changes) do not fire on the VPS. I left them on Cloud Functions (they are event-driven and cost almost nothing). The 256 HTTP endpoints stay there too, because the app and admin page call them.</p>
+
+  <h2 class="rv" id="s4">Five traps I hit in the move</h2>
+  <h3 class="rv">1. There were 15 secrets, not 5</h3>
+  <p>My earlier notes said “5 secrets”. Counting every environment variable in the code gave <strong>15</strong>. The missing 10 included Rakuten, Google Maps, Yahoo!, X authentication, the billing integration, a membership-site session and a debug secret.</p>
+  <p>A missed secret does not raise an error; it <strong>quietly returns 0 results</strong>. Extract the variable names from the code mechanically and count them.</p>
+
+  <h3 class="rv">2. A secret value contained newlines</h3>
+  <p>The membership-site session secret is in a “one line per site” format, so <strong>the value itself contains newlines</strong>. Written naively into an env file, line two onwards becomes separate variables and <strong>3 of 4 sites quietly die</strong>. I made the env-file reader understand escaped newlines (<code>\n</code>).</p>
+
+  <h3 class="rv">3. A write-blocked rehearsal looped forever</h3>
+  <p>Rakuten’s and Yahoo!’s APIs need a spacing between calls (rate limiting). The code writes “last call time” to Firestore and <strong>waits until it advances</strong>. In a rehearsal where all writes were swallowed, the time never advanced and the loop never ended. (Cloud Functions was also updating it every 1.5 seconds, so “someone else updated it, wait again” repeated forever. A Rakuten Ichiba job not returning for over 15 minutes revealed it.) In rehearsal I let just that rate-limit record through.</p>
+
+  <h3 class="rv">4. “Writes on, notifications off” silently deletes notifications</h3>
+  <p>The job that sends notifications in batches <strong>deletes</strong> the pending list once it counts them as sent. Stubbing only the sending while allowing writes would <strong>delete without sending</strong>, losing notifications. So during the rehearsal stage I did not register seven notification-related schedules on the VPS. They are removed from the skip list only when notifications are turned on.</p>
+
+  <h3 class="rv">5. A new exit IP quietly stops one scraper</h3>
+  <p>A supermarket site was fetched with a plain request and had no fallback. From Japan it was 200, from Singapore 403. I compared all 75 hosts from both Japan and Singapore: 6 are “visible from Japan, not from Singapore”; 5 of those already went through the scraping service or had a fallback and were fine. Only one broke. “403 from Singapore” alone is not proof of breakage. Check whether it goes through the scraping service.</p>
+
+  <h2 class="rv" id="s5">The order of the move: not to send notifications twice</h2>
+  <ol>
+    <li><strong>Stage 1:</strong> read only (no writes, no notifications) and compare fetch counts with Cloud Functions.</li>
+    <li><strong>Stage 2:</strong> write, but leave notifications to Cloud Functions.</li>
+    <li><strong>Stage 3:</strong> delete <strong>only</strong> the 132 scheduled functions from Cloud Functions.</li>
+    <li><strong>Stage 4:</strong> turn notifications on in the VPS.</li>
+  </ol>
+  <p>Always keep exactly one side sending notifications. If both send at once, users get the same notification twice.</p>
+
+  <h2 class="rv" id="s6">What I learned</h2>
+  <blockquote>A service billed by time does not suit code that mostly waits.</blockquote>
+  <ul>
+    <li><strong>Look at the billing unit.</strong> If waiting is billed, scraping and AI calls are expensive.</li>
+    <li><strong>Hosting has legal limits.</strong> The cheap place may be a place you cannot use.</li>
+    <li><strong>Look for a way to move without rewriting.</strong> Interception and mechanical matching avoided hand-copy errors.</li>
+    <li><strong>Count settings by machine.</strong> 15, not 5.</li>
+    <li><strong>Move in stages to avoid duplicate notifications.</strong></li>
+  </ul>
+
+  <p class="note">This is the English version of <a href="/notes/vps-migration/" hreflang="ja" lang="ja">the original Japanese article</a>.</p>
+
+  <div class="rule" style="margin:40px 0 22px"></div>
+  <p class="eyebrow">More in English</p>
+  <ul class="plain">
+    <li><a href="/en/">All English pages</a></li>
+    <li><a href="/en/works/torecadash/">Toreca Dash</a></li>
+  </ul>
+</div>
+</main>
+
+<footer class="site"><div class="wrap"></div></footer>
+<script src="/motion.js?v=1e7447ec" defer></script>
+</body>
+</html>

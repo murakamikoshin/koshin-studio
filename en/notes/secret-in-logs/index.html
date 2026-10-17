@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>A secret token was in the logs in plain text: scrub at the one exit that cannot be forgotten — Koshin Studio</title>
+<meta name="description" content="An HTTP library put the request URL in its error message, so a scraping-service token reached the logs. My earlier scrubbing function worked only where called, and there are over 50 callers. I moved the scrubbing to the single exit every log passes through.">
+<meta property="og:title" content="A secret token was in the logs in plain text: scrub at the one exit that cannot be forgotten">
+<meta property="og:description" content="An HTTP library put the request URL in its error message, so a scraping-service token reached the logs. My earlier scrubbing function worked only where called, and there are over 50 callers. I moved the scrubbing to the single exit every log passes through.">
+<meta property="og:type" content="article">
+<meta name="theme-color" content="#fbfaf7">
+<link rel="icon" href="/favicon.ico?v=1697d589" sizes="48x48">
+<link rel="icon" href="/favicon.svg?v=b9d7922f" type="image/svg+xml" sizes="any">
+<link rel="icon" href="/assets/icon/icon-192.png?v=e2566235" type="image/png" sizes="192x192">
+<link rel="apple-touch-icon" href="/assets/icon/icon-180.png?v=84e7f0e6">
+<link rel="manifest" href="/site.webmanifest">
+<script>document.documentElement.className+=" js"</script>
+<link rel="stylesheet" href="/style.css?v=dd51310c">
+<meta name="google-adsense-account" content="ca-pub-3863314847163872">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3863314847163872" crossorigin="anonymous"></script>
+<link rel="canonical" href="https://koshinstudio.com/en/notes/secret-in-logs/">
+<meta property="og:url" content="https://koshinstudio.com/en/notes/secret-in-logs/">
+<meta property="og:site_name" content="Koshin Studio">
+<meta property="og:locale" content="en_US">
+<link rel="alternate" hreflang="ja" href="https://koshinstudio.com/notes/secret-in-logs/">
+<link rel="alternate" hreflang="en" href="https://koshinstudio.com/en/notes/secret-in-logs/">
+<link rel="alternate" hreflang="x-default" href="https://koshinstudio.com/en/notes/secret-in-logs/">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="alternate" type="application/rss+xml" title="Koshin Studio — Notes" href="https://koshinstudio.com/feed.xml">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BlogPosting","headline":"A secret token was in the logs in plain text: scrub at the one exit that cannot be forgotten","url":"https://koshinstudio.com/en/notes/secret-in-logs/","description":"An HTTP library put the request URL in its error message, so a scraping-service token reached the logs. My earlier scrubbing function worked only where called, and there are over 50 callers. I moved the scrubbing to the single exit every log passes through.","datePublished":"2026-10-17","dateModified":"2026-10-17","inLanguage":"en","image":"https://koshinstudio.com/assets/og/og_en_notes_secret-in-logs.jpg","author":{"@id":"https://koshinstudio.com#studio"},"publisher":{"@id":"https://koshinstudio.com#studio"},"mainEntityOfPage":"https://koshinstudio.com/en/notes/secret-in-logs/"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Koshin Studio","item":"https://koshinstudio.com/en/"},{"@type":"ListItem","position":2,"name":"A secret token was in the logs in plain text: scrub at the one exit that cannot be forgotten","item":"https://koshinstudio.com/en/notes/secret-in-logs/"}]}]}</script>
+<meta property="og:image" content="https://koshinstudio.com/assets/og/og_en_notes_secret-in-logs.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
+</head>
+<body class="article">
+<canvas id="motes"></canvas>
+
+<header class="site"><div class="wrap">
+  <a class="logo" href="/"><img class="logo-mark" src="/favicon.svg?v=b9d7922f" alt="" width="28" height="28">Koshin Studio</a>
+  <nav><a href="/works/">Works</a><a href="/notes/">Notes</a><a href="/picks/">Picks</a><a href="/calc/">Tools</a><a href="/about/">About</a></nav>
+</div></header>
+
+<main><div class="wrap">
+  <nav class="crumbs" aria-label="You are here"><a href="/en/">Koshin Studio</a><i aria-hidden="true">›</i><span aria-current="page">Secrets in logs</span></nav>
+  <h1>A secret token was in the logs in plain text: scrub at the one exit that cannot be forgotten</h1>  <div class="rule"></div>
+<!--lang-->
+  <p class="note"><a href="/notes/secret-in-logs/" hreflang="ja" lang="ja">日本語版</a></p>
+<!--/lang-->  <p class="lead">Development log of the Toreca Dash app / August 2026</p>
+
+  <p>While checking the logs behind my app Toreca Dash, I found that <strong>an external service’s secret (an API token) was written in plain text</strong>. It was 24 August 2026.</p>
+  <p>It had been a to-do I had marked “no deadline, optional”. Looking at the server’s real logs, <strong>it really had leaked</strong>. This article records the cause and the fix: scrub at a place that cannot be forgotten.</p>
+  <p class="note">Written from my work log of 24 August 2026. No real value is included.</p>  <h2 class="rv" id="s1">A real token was in the log</h2>
+  <p>The server log had lines like this (the token part was real):</p>
+  <pre><code>WARN [recheck] fetch via the scraping service failed [https://…]:
+request to https://api.scrape.do/?token=&lt;the real token&gt;&amp;url=… failed, reason: read ETIMEDOUT</code></pre>
+  <p>The cause: <strong>the error message of the HTTP library (node-fetch) includes the request URL as is</strong>. The <code>token=</code> in the URL carries the secret.</p>
+
+  <h2 class="rv" id="s2">I had “fixed” the same thing before</h2>
+  <p>On 19 August the same thing had happened with Rakuten API credentials. I wrote a function to scrub secrets from log strings (<code>redactSecretsForLog</code>). But it <strong>only works where it is called explicitly</strong>. There are over 50 places that call the scraping service, and I had forgotten some.</p>
+
+  <h2 class="rv" id="s3">The fix: scrub at the single exit every log goes through</h2>
+  <p>So that I would not repeat the same fix, I did two things:</p>
+  <ol>
+    <li><strong>Scrub at the log exit (<code>fmt()</code>).</strong> Every server log goes through it, so <strong>it cannot be forgotten</strong>. It scrubs URL query values such as <code>token</code>, <code>api_key</code>, <code>secret</code>, <code>applicationId</code>, <code>accessKey</code>, <code>affiliateId</code> and <code>setCookies</code>, and also the raw form of the X-monitoring login cookies.</li>
+    <li><strong>Rebuild the error in the function that calls the scraping service.</strong> Before returning it to callers, re-create the error with the scrubbed text. That function is also used on the event-driven side (Cloud Functions triggers), so this covers that log too.</li>
+  </ol>
+  <p>I checked four real log strings. I also checked that <strong>ordinary log lines do not change</strong> (an unrelated <code>=</code> like <code>deadline=2026-08-30</code> must not be scrubbed).</p>
+
+  <h2 class="rv" id="s4">What about logs already written?</h2>
+  <p>Even after the fix, <strong>logs already written still hold the real token</strong>. They can be read only with administrator rights on the server, so urgency was low, but if it worries you, reissue the token in the service’s dashboard and replace the value in the server’s settings. At the time of this record I had left that as an item awaiting a decision.</p>
+
+  <h2 class="rv" id="s5">What I learned</h2>
+  <blockquote>If there are 50 places where you can forget, do it once at a place you cannot forget.</blockquote>
+  <ul>
+    <li><strong>A countermeasure you must call explicitly leaks when forgotten.</strong> Forget one of 50 and it leaks.</li>
+    <li><strong>Scrub at the single exit.</strong> Put one at the place every log goes through.</li>
+    <li><strong>Check you are not scrubbing too much.</strong> Test that ordinary logs do not change.</li>
+    <li><strong>Things already written do not vanish.</strong> Decide whether to reissue.</li>
+    <li><strong>Do not trust a third-party library’s error messages.</strong> They can include the URL as is.</li>
+  </ul>
+
+  <p class="note">This is the English version of <a href="/notes/secret-in-logs/" hreflang="ja" lang="ja">the original Japanese article</a>.</p>
+
+  <div class="rule" style="margin:40px 0 22px"></div>
+  <p class="eyebrow">More in English</p>
+  <ul class="plain">
+    <li><a href="/en/">All English pages</a></li>
+    <li><a href="/en/works/torecadash/">Toreca Dash</a></li>
+  </ul>
+</div>
+</main>
+
+<footer class="site"><div class="wrap"></div></footer>
+<script src="/motion.js?v=1e7447ec" defer></script>
+</body>
+</html>

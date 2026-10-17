@@ -1,5 +1,26 @@
 [
   {
+    "ja": "/notes/cleanup-hides-entrance/",
+    "en": "/en/notes/cleanup-hides-entrance/",
+    "title": "“It gets cleaned up later” hid an entrance bug: 400 near-identical products were re-created every day",
+    "date": "2026-10-17",
+    "blurb": "Catalogue registration looked up existing products by exact name only, so brackets, spaces and full/half-width differences re-created near-identical products daily: 437 in one day, 410 with no articles. The nightly merge job hid it."
+  },
+  {
+    "ja": "/notes/secret-in-logs/",
+    "en": "/en/notes/secret-in-logs/",
+    "title": "A secret token was in the logs in plain text: scrub at the one exit that cannot be forgotten",
+    "date": "2026-10-17",
+    "blurb": "An HTTP library put the request URL in its error message, so a scraping-service token reached the logs. My earlier scrubbing function worked only where called, and there are over 50 callers. I moved the scrubbing to the single exit every log passes through."
+  },
+  {
+    "ja": "/notes/vps-migration/",
+    "en": "/en/notes/vps-migration/",
+    "title": "Moving from Cloud Functions to a ¥4,300 server: ¥3,700 a day, Yahoo! failing in the EEA, and five traps",
+    "date": "2026-10-17",
+    "blurb": "After the free trial, Cloud Functions cost about ¥3,700 a day because waiting time was billed. I moved almost unchanged code to a Singapore VPS (about ¥4,300 a month). Helsinki failed because Yahoo! blocks the EEA; there were 15 secrets, not 5."
+  },
+  {
     "ja": "/notes/destination-check/",
     "en": "/en/notes/destination-check/",
     "title": "I opened the links of displayed articles and compared them: about 60 mistakes, and three mistakes in my own first check",

@@ -9,6 +9,8 @@ URL: https://koshinstudio.com/notes/secret-in-logs/
 
 # ログに秘密のトークンが平文で残っていた：呼び忘れようがない唯一の出口で伏せる
 
+  English version (https://koshinstudio.com/en/notes/secret-in-logs/)
+
   トレカダッシュ 開発の記録 ／ 2026年8月
 
   iOS アプリ「トレカダッシュ (https://koshinstudio.com/works/torecadash/)」の裏側のログを調べていて、外部サービスの秘密の値（API のトークン）が、そのまま書かれているのを見つけました。2026 年 8 月 24 日のことです。
@@ -290,6 +292,8 @@ URL: https://koshinstudio.com/notes/cleanup-hides-entrance/
 
 # 「後から掃除するから大丈夫」が、入口の不具合を隠していた：商品が毎日 400 件そっくり作り直されていた
 
+  English version (https://koshinstudio.com/en/notes/cleanup-hides-entrance/)
+
   トレカダッシュ 開発の記録 ／ 2026年8月
 
   iOS アプリ「トレカダッシュ (https://koshinstudio.com/works/torecadash/)」の商品のデータには、毎日夜に、重複した商品をまとめる掃除の処理があります。「後から掃除するから、大丈夫」。そう思っていた場所に、毎日、そっくりな商品が作り直されている入口の不具合が、隠れていました。
@@ -366,6 +370,8 @@ URL: https://koshinstudio.com/notes/cleanup-hides-entrance/
 URL: https://koshinstudio.com/notes/vps-migration/
 
 # Cloud Functions から月 4,300 円のサーバーへ移した：1 日 3,700 円の課金、EEA で全滅した Yahoo!、移行で踏んだ 5 つの罠
+
+  English version (https://koshinstudio.com/en/notes/vps-migration/)
 
   トレカダッシュ 開発の記録 ／ 2026年8月
 
@@ -7442,6 +7448,264 @@ URL: https://koshinstudio.com/privacy/
 
 ---
 
+URL: https://koshinstudio.com/en/notes/cleanup-hides-entrance/
+
+# “It gets cleaned up later” hid an entrance bug: 400 near-identical products were re-created every day
+
+  日本語版 (https://koshinstudio.com/notes/cleanup-hides-entrance/)
+
+  Development log of the Toreca Dash app / August 2026
+
+  My app Toreca Dash has a nightly clean-up job that merges duplicate products. “It will be cleaned up later, so it is fine.” That was the belief, and in that place an entrance bug was re-creating near-identical products every day.
+
+  A full check on 27 August 2026 showed that 437 products had been created that day alone, and 410 of them had no articles attached.
+
+  Numbers come from my work log of 27 August 2026.
+
+## The cause: it only looked for an exact name match
+
+  The step that registers products from the official catalogue decided “does this product already exist?” by exact name match only.
+
+  Existing "Expansion Pack「Ancient Roar」"  ↔  Catalogue "Expansion Pack Ancient Roar"
+Existing "V Starter Deck Grass (full-width space) Bulbasaur"  ↔  Catalogue "V Starter Deck Grass Bulbasaur"
+  Differences in brackets, spaces or full-width versus half-width made it say “not there yet”, and near-identical products were re-created every day.
+
+  The duplicates were later cleaned up by the weekly and daily merge jobs. That is why I did not notice. In between, users see the same product twice and article links split.
+
+  The fix was to compare with the same normalisation the merge job uses (it absorbs brackets, spaces and full/half-width). The catalogue itself also has spelling-variant duplicates, so within one run I keep one per key.
+
+  The lesson: a mechanism with a clean-up job “for later” hides entrance bugs. If the clean-up count is about the same every time, it is not that things are cleaned; they are being created every day.
+
+## Another: six products absorbed into one
+
+  Six Magic: The Gathering “FINAL FANTASY” Commander decks (Psionic Spell, Limit Break, Counter-Blitz, Trans-Reanimate and others) were all absorbed into one product.
+
+- Another set’s name gets into a product’s aliases.
+
+- It shows up as an AI candidate.
+
+- It leads to the next wrong match.
+
+  That is a self-multiplying loop. Cleaning the aliases alone did not fix it, because the AI kept choosing the same product. I added a filter that removes products whose quoted proper name differs (namesDifferentQuotedVariant) to the candidate list too. With it gone from the candidates, the AI can answer “new product” and the correct one is created.
+
+  To remove false positives, when the quoted text is a generic word, place name, store name, quantity or state, it is not treated as a proper name. On real data, before this condition 6 of 12 were false positives.
+
+  There was also an idea I did not adopt: a strong rule “delete if the product’s proper name is not in the aliases”. 6 of 43 were false positives (different sets with the same code, names containing “+”), so I dropped it.
+
+## My own repair put a deadline on first-come sales
+
+  I ran a repair job that inherits dates from articles of the same announcement page (inheritDatesFromSameAnnouncement). It gave a first-come sale (sold until stock runs out) the deadline of a lottery article on the same page. A first-come sale has no deadline, and users would see a false “you can buy until that day”.
+
+  In both places that inherit (the save-time step and the repair job), first-come articles no longer get a deadline. I deleted the one that had been affected.
+
+  The lesson: after running a repair job, compare the audit before and after. Looking only at “how many were fixed” hides anomalies you added yourself.
+
+## What I learned
+
+> A later clean-up hides entrance bugs.
+
+- If the clean-up count is the same each time, they are made daily. It is not being cleaned up.
+
+- Use the same normalisation at the entrance and in the clean-up. If the entrance is stricter, the clean-up covers for it.
+
+- Cleaning aliases alone does not stop self-multiplication. Remove it from the AI’s candidates.
+
+- Count false positives before a strong rule. 6 of 43 means dropping it.
+
+- Compare audits before and after a repair. To find the anomalies you added.
+
+  This is the English version of the original Japanese article (https://koshinstudio.com/notes/cleanup-hides-entrance/).
+
+  More in English
+
+- All English pages (https://koshinstudio.com/en/)
+
+- Toreca Dash (https://koshinstudio.com/en/works/torecadash/)
+
+
+---
+
+URL: https://koshinstudio.com/en/notes/secret-in-logs/
+
+# A secret token was in the logs in plain text: scrub at the one exit that cannot be forgotten
+
+  日本語版 (https://koshinstudio.com/notes/secret-in-logs/)
+
+  Development log of the Toreca Dash app / August 2026
+
+  While checking the logs behind my app Toreca Dash, I found that an external service’s secret (an API token) was written in plain text. It was 24 August 2026.
+
+  It had been a to-do I had marked “no deadline, optional”. Looking at the server’s real logs, it really had leaked. This article records the cause and the fix: scrub at a place that cannot be forgotten.
+
+  Written from my work log of 24 August 2026. No real value is included.
+
+## A real token was in the log
+
+  The server log had lines like this (the token part was real):
+
+  WARN [recheck] fetch via the scraping service failed [https://…]:
+request to https://api.scrape.do/?token=<the real token>&url=… failed, reason: read ETIMEDOUT
+  The cause: the error message of the HTTP library (node-fetch) includes the request URL as is. The token= in the URL carries the secret.
+
+## I had “fixed” the same thing before
+
+  On 19 August the same thing had happened with Rakuten API credentials. I wrote a function to scrub secrets from log strings (redactSecretsForLog). But it only works where it is called explicitly. There are over 50 places that call the scraping service, and I had forgotten some.
+
+## The fix: scrub at the single exit every log goes through
+
+  So that I would not repeat the same fix, I did two things:
+
+- Scrub at the log exit (fmt()). Every server log goes through it, so it cannot be forgotten. It scrubs URL query values such as token, api_key, secret, applicationId, accessKey, affiliateId and setCookies, and also the raw form of the X-monitoring login cookies.
+
+- Rebuild the error in the function that calls the scraping service. Before returning it to callers, re-create the error with the scrubbed text. That function is also used on the event-driven side (Cloud Functions triggers), so this covers that log too.
+
+  I checked four real log strings. I also checked that ordinary log lines do not change (an unrelated = like deadline=2026-08-30 must not be scrubbed).
+
+## What about logs already written?
+
+  Even after the fix, logs already written still hold the real token. They can be read only with administrator rights on the server, so urgency was low, but if it worries you, reissue the token in the service’s dashboard and replace the value in the server’s settings. At the time of this record I had left that as an item awaiting a decision.
+
+## What I learned
+
+> If there are 50 places where you can forget, do it once at a place you cannot forget.
+
+- A countermeasure you must call explicitly leaks when forgotten. Forget one of 50 and it leaks.
+
+- Scrub at the single exit. Put one at the place every log goes through.
+
+- Check you are not scrubbing too much. Test that ordinary logs do not change.
+
+- Things already written do not vanish. Decide whether to reissue.
+
+- Do not trust a third-party library’s error messages. They can include the URL as is.
+
+  This is the English version of the original Japanese article (https://koshinstudio.com/notes/secret-in-logs/).
+
+  More in English
+
+- All English pages (https://koshinstudio.com/en/)
+
+- Toreca Dash (https://koshinstudio.com/en/works/torecadash/)
+
+
+---
+
+URL: https://koshinstudio.com/en/notes/vps-migration/
+
+# Moving from Cloud Functions to a ¥4,300 server: ¥3,700 a day, Yahoo! failing in the EEA, and five traps
+
+  日本語版 (https://koshinstudio.com/notes/vps-migration/)
+
+  Development log of the Toreca Dash app / August 2026
+
+  The back end of my iPhone app Toreca Dash originally ran on Google Cloud Functions (billed per function for the time it runs). When the free trial ended on 16 August 2026, from 17 August it cost about ¥3,700 a day (about ¥106,000 a month).
+
+  This article records how I moved that code almost unchanged to a server (VPS) at about ¥4,300 a month: what I decided, what I corrected later, and the traps.
+
+  Numbers come from my work log of 20 August 2026. I do not include server addresses or connection details.
+
+## Why move: waiting time was billed too
+
+  About 97% of the Cloud Functions bill was CPU time (vCPU seconds). But nearly all of my functions just wait for scraping targets and AI replies, and that waiting was billed in full.
+
+  On a flat-rate server that structural waste disappears.
+
+  I also considered Cloudflare Workers. The Firestore admin SDK does not run there and hundreds of places would need rewriting to another API, so I dropped it. On a VPS the current code runs as is.
+
+## What I chose, and where I first got it wrong
+
+    Item | Details
+
+      Provider | Hetzner Cloud
+
+      Spec | 2 vCPU, 4 GB memory, 80 GB SSD
+
+      Location | Singapore
+
+      Price | €26.99 a month (about ¥4,300)
+
+  I first built it in Helsinki (€5.99 a month). Then I rebuilt it.
+
+  The reason: Yahoo! Shopping’s API blocks access from the EEA and the UK. Calling it from Helsinki returned not the API response but a notice page, “For customers in the European Economic Area and the UK”, with HTTP 403. All 15 genres failed. It is a legal geo-block, not bot detection, so retrying never helps. From Singapore it returns HTTP 200 normally.
+
+  I deleted the Helsinki server; it had cost €0.02 (about ¥3).
+
+  Hetzner’s pricing gives a €7 a month discount only in three European locations. The cheapest line (CX) is sold only in Europe. So “cheap location = EEA = Yahoo! dies”. Do not go back to Europe for the price.
+
+  Singapore also helped by being closer to Japanese sites: the Pokémon card new-arrival check went from 52.7 seconds to 15.8 seconds (3.3× faster).
+
+## Run the code unchanged: intercept require
+
+  I wrote a runner (runner.js). The original code (index.js) is not changed at all.
+
+  Instead of copying 132 schedules by hand, I intercept require and replace firebase-functions with my own, making the calls that register schedules just add to a list. Then I load the original code, and all definitions are collected automatically. The counts collected:
+
+  132 scheduled jobs / 256 HTTP endpoints / 9 Firestore triggers
+  Not copying by hand was right. One schedule is written as the template string `every ${X_CHECK_INTERVAL_MINUTES} minutes`. Copying by eye would have got it wrong. I matched all 132 mechanically and confirmed they agree.
+
+  The 9 Firestore triggers (functions that fire when data changes) do not fire on the VPS. I left them on Cloud Functions (they are event-driven and cost almost nothing). The 256 HTTP endpoints stay there too, because the app and admin page call them.
+
+## Five traps I hit in the move
+
+### 1. There were 15 secrets, not 5
+
+  My earlier notes said “5 secrets”. Counting every environment variable in the code gave 15. The missing 10 included Rakuten, Google Maps, Yahoo!, X authentication, the billing integration, a membership-site session and a debug secret.
+
+  A missed secret does not raise an error; it quietly returns 0 results. Extract the variable names from the code mechanically and count them.
+
+### 2. A secret value contained newlines
+
+  The membership-site session secret is in a “one line per site” format, so the value itself contains newlines. Written naively into an env file, line two onwards becomes separate variables and 3 of 4 sites quietly die. I made the env-file reader understand escaped newlines (\n).
+
+### 3. A write-blocked rehearsal looped forever
+
+  Rakuten’s and Yahoo!’s APIs need a spacing between calls (rate limiting). The code writes “last call time” to Firestore and waits until it advances. In a rehearsal where all writes were swallowed, the time never advanced and the loop never ended. (Cloud Functions was also updating it every 1.5 seconds, so “someone else updated it, wait again” repeated forever. A Rakuten Ichiba job not returning for over 15 minutes revealed it.) In rehearsal I let just that rate-limit record through.
+
+### 4. “Writes on, notifications off” silently deletes notifications
+
+  The job that sends notifications in batches deletes the pending list once it counts them as sent. Stubbing only the sending while allowing writes would delete without sending, losing notifications. So during the rehearsal stage I did not register seven notification-related schedules on the VPS. They are removed from the skip list only when notifications are turned on.
+
+### 5. A new exit IP quietly stops one scraper
+
+  A supermarket site was fetched with a plain request and had no fallback. From Japan it was 200, from Singapore 403. I compared all 75 hosts from both Japan and Singapore: 6 are “visible from Japan, not from Singapore”; 5 of those already went through the scraping service or had a fallback and were fine. Only one broke. “403 from Singapore” alone is not proof of breakage. Check whether it goes through the scraping service.
+
+## The order of the move: not to send notifications twice
+
+- Stage 1: read only (no writes, no notifications) and compare fetch counts with Cloud Functions.
+
+- Stage 2: write, but leave notifications to Cloud Functions.
+
+- Stage 3: delete only the 132 scheduled functions from Cloud Functions.
+
+- Stage 4: turn notifications on in the VPS.
+
+  Always keep exactly one side sending notifications. If both send at once, users get the same notification twice.
+
+## What I learned
+
+> A service billed by time does not suit code that mostly waits.
+
+- Look at the billing unit. If waiting is billed, scraping and AI calls are expensive.
+
+- Hosting has legal limits. The cheap place may be a place you cannot use.
+
+- Look for a way to move without rewriting. Interception and mechanical matching avoided hand-copy errors.
+
+- Count settings by machine. 15, not 5.
+
+- Move in stages to avoid duplicate notifications.
+
+  This is the English version of the original Japanese article (https://koshinstudio.com/notes/vps-migration/).
+
+  More in English
+
+- All English pages (https://koshinstudio.com/en/)
+
+- Toreca Dash (https://koshinstudio.com/en/works/torecadash/)
+
+
+---
+
 URL: https://koshinstudio.com/en/notes/destination-check/
 
 # I opened the links of displayed articles and compared them: about 60 mistakes, and three mistakes in my own first check
@@ -13543,6 +13807,12 @@ URL: https://koshinstudio.com/en/
 - I opened the links of displayed articles and compared them: about 60 mistakes, and three mistakes in my own first check (https://koshinstudio.com/en/notes/destination-check/)
 
 - Four gaps in monitoring X: posts missing from search, accounts that change hands, a store-finding query, and catching up after an outage (https://koshinstudio.com/en/notes/x-monitoring-gaps/)
+
+- “It gets cleaned up later” hid an entrance bug: 400 near-identical products were re-created every day (https://koshinstudio.com/en/notes/cleanup-hides-entrance/)
+
+- A secret token was in the logs in plain text: scrub at the one exit that cannot be forgotten (https://koshinstudio.com/en/notes/secret-in-logs/)
+
+- Moving from Cloud Functions to a ¥4,300 server: ¥3,700 a day, Yahoo! failing in the EEA, and five traps (https://koshinstudio.com/en/notes/vps-migration/)
 
 ## Languages
 
