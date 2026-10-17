@@ -420,7 +420,7 @@ const noteRow = (n, i) => `    <li class="rv" data-delay="${i * 70}"><a class="n
 const themeNoteBySlug = Object.fromEntries(notes.map((n) => [n.slug, n]));
 const noteThemes = [
   { title: '数えて、直した', lead: '勘で直す前に、まず数える。費用と監査の数字を疑って、測り直した記録。',
-    slugs: ['firestore-91', 'gemini-meter', 'scrape-cost', 'dup-zero', 'audit-sweep-61', 'torecadash-ai'] },
+    slugs: ['firestore-91', 'gemini-meter', 'scrape-cost', 'dup-zero', 'audit-sweep-61', 'fix-the-existing-data', 'torecadash-ai'] },
   { title: '静かに壊れていた', lead: 'エラーが出ないまま、本物が消えていた、または読めていなかった失敗の記録。',
     slugs: ['blocked-page', 'tco-relay', 'silent-discard', 'waiting-room', 'notify-gate', 'destination-check'] },
   { title: '名前と商品の取り違え', lead: '同じ名前、同じリンクが、別のものを指していた。商品と店の取り違えの記録。',
