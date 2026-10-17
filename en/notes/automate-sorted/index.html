@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>“Automate everything that can be”: counting showed 66 repair jobs had never run on a schedule, and I added only six — Koshin Studio</title>
+<meta name="description" content="Matching 319 HTTP endpoints against 184 scheduled jobs by call showed 66 that only ran by hand. After a dry run I scheduled only the continuously needed ones, six, and fixed a queue that let the same job pile up.">
+<meta property="og:title" content="“Automate everything that can be”: counting showed 66 repair jobs had never run on a schedule, and I added only six">
+<meta property="og:description" content="Matching 319 HTTP endpoints against 184 scheduled jobs by call showed 66 that only ran by hand. After a dry run I scheduled only the continuously needed ones, six, and fixed a queue that let the same job pile up.">
+<meta property="og:type" content="article">
+<meta name="theme-color" content="#fbfaf7">
+<link rel="icon" href="/favicon.ico?v=1697d589" sizes="48x48">
+<link rel="icon" href="/favicon.svg?v=b9d7922f" type="image/svg+xml" sizes="any">
+<link rel="icon" href="/assets/icon/icon-192.png?v=e2566235" type="image/png" sizes="192x192">
+<link rel="apple-touch-icon" href="/assets/icon/icon-180.png?v=84e7f0e6">
+<link rel="manifest" href="/site.webmanifest">
+<script>document.documentElement.className+=" js"</script>
+<link rel="stylesheet" href="/style.css?v=dd51310c">
+<meta name="google-adsense-account" content="ca-pub-3863314847163872">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3863314847163872" crossorigin="anonymous"></script>
+<link rel="canonical" href="https://koshinstudio.com/en/notes/automate-sorted/">
+<meta property="og:url" content="https://koshinstudio.com/en/notes/automate-sorted/">
+<meta property="og:site_name" content="Koshin Studio">
+<meta property="og:locale" content="en_US">
+<link rel="alternate" hreflang="ja" href="https://koshinstudio.com/notes/automate-sorted/">
+<link rel="alternate" hreflang="en" href="https://koshinstudio.com/en/notes/automate-sorted/">
+<link rel="alternate" hreflang="x-default" href="https://koshinstudio.com/en/notes/automate-sorted/">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="alternate" type="application/rss+xml" title="Koshin Studio — Notes" href="https://koshinstudio.com/feed.xml">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BlogPosting","headline":"“Automate everything that can be”: counting showed 66 repair jobs had never run on a schedule, and I added only six","url":"https://koshinstudio.com/en/notes/automate-sorted/","description":"Matching 319 HTTP endpoints against 184 scheduled jobs by call showed 66 that only ran by hand. After a dry run I scheduled only the continuously needed ones, six, and fixed a queue that let the same job pile up.","datePublished":"2026-10-17","dateModified":"2026-10-17","inLanguage":"en","image":"https://koshinstudio.com/assets/og/og_en_notes_automate-sorted.jpg","author":{"@id":"https://koshinstudio.com#studio"},"publisher":{"@id":"https://koshinstudio.com#studio"},"mainEntityOfPage":"https://koshinstudio.com/en/notes/automate-sorted/"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Koshin Studio","item":"https://koshinstudio.com/en/"},{"@type":"ListItem","position":2,"name":"“Automate everything that can be”: counting showed 66 repair jobs had never run on a schedule, and I added only six","item":"https://koshinstudio.com/en/notes/automate-sorted/"}]}]}</script>
+<meta property="og:image" content="https://koshinstudio.com/assets/og/og_en_notes_automate-sorted.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
+</head>
+<body class="article">
+<canvas id="motes"></canvas>
+
+<header class="site"><div class="wrap">
+  <a class="logo" href="/"><img class="logo-mark" src="/favicon.svg?v=b9d7922f" alt="" width="28" height="28">Koshin Studio</a>
+  <nav><a href="/works/">Works</a><a href="/notes/">Notes</a><a href="/picks/">Picks</a><a href="/calc/">Tools</a><a href="/about/">About</a></nav>
+</div></header>
+
+<main><div class="wrap">
+  <nav class="crumbs" aria-label="You are here"><a href="/en/">Koshin Studio</a><i aria-hidden="true">›</i><span aria-current="page">Automation sorted</span></nav>
+  <h1>“Automate everything that can be”: counting showed 66 repair jobs had never run on a schedule, and I added only six</h1>  <div class="rule"></div>
+<!--lang-->
+  <p class="note"><a href="/notes/automate-sorted/" hreflang="ja" lang="ja">日本語版</a></p>
+<!--/lang-->  <p class="lead">Development log of the Toreca Dash app / August 2026</p>
+
+  <p>On my app Toreca Dash the instruction was: “<strong>automate everything that can be automated</strong>”.</p>
+  <p>On 28 August 2026, the first thing I did was <strong>count</strong>. 66 repair processes had never once been called from a schedule. This article records how I counted, and why I did not put all 66 on a schedule.</p>
+  <p class="note">Numbers come from my work log of 28 August 2026.</p>  <h2 class="rv" id="s1">Counted: 66 only worked if you hit the URL by hand</h2>
+  <p>I matched 319 HTTP endpoints against 184 scheduled jobs <strong>by function calls, not by name</strong>, because something with a different name can still be called from a scheduled job.</p>
+  <p>The result: <strong>66 only ran if someone hit the URL by hand</strong>. Articles that could be fixed stay broken until a person remembers “time to run that”.</p>
+
+  <h2 class="rv" id="s2">I did not schedule all 66 at once</h2>
+  <p>The 66 fell into three groups:</p>
+  <ol>
+    <li><strong>Needed continuously</strong> (needed whenever new data arrives) → put on a schedule.</li>
+    <li><strong>One-off migrations</strong> (<code>backfill*</code>, <code>reclassify*</code> and so on) → do not schedule. Running them daily is wasted work and only adds room for accidents.</li>
+    <li><strong>Destructive or needing human judgement</strong> (deleting orphaned products, manual re-linking) → do not schedule.</li>
+  </ol>
+  <p>A new scheduled job runs once the moment it is deployed. Before adding any, <strong>I rehearsed all of them with a dry run (no writes) to see what they would hit</strong>.</p>
+
+  <h2 class="rv" id="s3">The six I added</h2>
+  <div class="scroll rv"><table>
+    <thead><tr><th>Job</th><th>Dry-run result</th></tr></thead>
+    <tbody>
+      <tr><td>Fix empty deadlines on X articles</td><td>32 targets, 0 updated</td></tr>
+      <tr><td>Fix aggregator-derived store names</td><td>5 (an account’s promotional text had become the seller)</td></tr>
+      <tr><td>Fix shipping fees counted in the price</td><td>0</td></tr>
+      <tr><td>Fix links to generic products</td><td>0</td></tr>
+      <tr><td>Fix titles of split articles</td><td>newly built</td></tr>
+      <tr><td>Fix aggregator-derived deadlines</td><td>newly built</td></tr>
+    </tbody>
+  </table></div>
+  <p>I spread their start times. Running them together fights for concurrency slots and lengthens the queue. Scheduled jobs went from 184 to 190.</p>
+  <p>The remaining candidates (deadline repair, broken product-image repair, Rakuten affiliate-link repair) take over 2 minutes and their dry runs did not finish in time, so I held back. <strong>I do not add one without checking it.</strong></p>
+
+  <h2 class="rv" id="s4">The product catalogue was already fully automatic</h2>
+  <p>To “can the product catalogue be automated too?” the answer was “it already is”. All 15 genres had an import from the official catalogue, updated an hour earlier. Linking articles to products is automatic: 1,406 of 1,415 measured were linked. The rest were “new sets not yet on the official site”, which come in automatically once the official site lists them.</p>
+
+  <h2 class="rv" id="s5">The queue kept growing</h2>
+  <p>Counting also turned up another thing. The queue length was <strong>growing 81, 86, 91 within 45 seconds</strong>.</p>
+  <p>The cause: the function that adds jobs (<code>enqueue</code>) only checked “is it running”, and <strong>did not check jobs already waiting in the queue</strong>. While the concurrency limit was reached, the time for a “every minute” job kept coming, and <strong>the same job piled up many times</strong>.</p>
+  <p>I made it remember the names of waiting jobs and <strong>not add them twice</strong>. The queue stayed at 0.</p>
+
+  <h2 class="rv" id="s6">What I learned</h2>
+  <blockquote>Automation is not putting everything on a schedule. Count, sort, check, then add.</blockquote>
+  <ul>
+    <li><strong>Count first.</strong> 66 had never been called. Match by calls, not names.</li>
+    <li><strong>Sort.</strong> Add only what is needed continuously; not one-off migrations or destructive jobs.</li>
+    <li><strong>Check with a dry run before adding.</strong> A new scheduled job runs the moment it is added.</li>
+    <li><strong>Spread the times.</strong> Running together lengthens the queue.</li>
+    <li><strong>Before queueing, check “is it waiting” too.</strong> Checking only “running” lets it pile up.</li>
+  </ul>
+
+  <p class="note">This is the English version of <a href="/notes/automate-sorted/" hreflang="ja" lang="ja">the original Japanese article</a>.</p>
+
+  <div class="rule" style="margin:40px 0 22px"></div>
+  <p class="eyebrow">More in English</p>
+  <ul class="plain">
+    <li><a href="/en/">All English pages</a></li>
+    <li><a href="/en/works/torecadash/">Toreca Dash</a></li>
+  </ul>
+</div>
+</main>
+
+<footer class="site"><div class="wrap"></div></footer>
+<script src="/motion.js?v=1e7447ec" defer></script>
+</body>
+</html>

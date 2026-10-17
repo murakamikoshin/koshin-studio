@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>“The server went down and I cannot recover it” was wrong: only inbound SSH had been blocked — Koshin Studio</title>
+<meta name="description" content="From 3:10 a.m. I could not connect to the server and judged it stopped. In fact its processes had run for over 7 days, all 192 scheduled jobs were normal, and only inbound SSH was blocked.">
+<meta property="og:title" content="“The server went down and I cannot recover it” was wrong: only inbound SSH had been blocked">
+<meta property="og:description" content="From 3:10 a.m. I could not connect to the server and judged it stopped. In fact its processes had run for over 7 days, all 192 scheduled jobs were normal, and only inbound SSH was blocked.">
+<meta property="og:type" content="article">
+<meta name="theme-color" content="#fbfaf7">
+<link rel="icon" href="/favicon.ico?v=1697d589" sizes="48x48">
+<link rel="icon" href="/favicon.svg?v=b9d7922f" type="image/svg+xml" sizes="any">
+<link rel="icon" href="/assets/icon/icon-192.png?v=e2566235" type="image/png" sizes="192x192">
+<link rel="apple-touch-icon" href="/assets/icon/icon-180.png?v=84e7f0e6">
+<link rel="manifest" href="/site.webmanifest">
+<script>document.documentElement.className+=" js"</script>
+<link rel="stylesheet" href="/style.css?v=dd51310c">
+<meta name="google-adsense-account" content="ca-pub-3863314847163872">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3863314847163872" crossorigin="anonymous"></script>
+<link rel="canonical" href="https://koshinstudio.com/en/notes/misdiagnosis-down/">
+<meta property="og:url" content="https://koshinstudio.com/en/notes/misdiagnosis-down/">
+<meta property="og:site_name" content="Koshin Studio">
+<meta property="og:locale" content="en_US">
+<link rel="alternate" hreflang="ja" href="https://koshinstudio.com/notes/misdiagnosis-down/">
+<link rel="alternate" hreflang="en" href="https://koshinstudio.com/en/notes/misdiagnosis-down/">
+<link rel="alternate" hreflang="x-default" href="https://koshinstudio.com/en/notes/misdiagnosis-down/">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="alternate" type="application/rss+xml" title="Koshin Studio — Notes" href="https://koshinstudio.com/feed.xml">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BlogPosting","headline":"“The server went down and I cannot recover it” was wrong: only inbound SSH had been blocked","url":"https://koshinstudio.com/en/notes/misdiagnosis-down/","description":"From 3:10 a.m. I could not connect to the server and judged it stopped. In fact its processes had run for over 7 days, all 192 scheduled jobs were normal, and only inbound SSH was blocked.","datePublished":"2026-10-17","dateModified":"2026-10-17","inLanguage":"en","image":"https://koshinstudio.com/assets/og/og_en_notes_misdiagnosis-down.jpg","author":{"@id":"https://koshinstudio.com#studio"},"publisher":{"@id":"https://koshinstudio.com#studio"},"mainEntityOfPage":"https://koshinstudio.com/en/notes/misdiagnosis-down/"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Koshin Studio","item":"https://koshinstudio.com/en/"},{"@type":"ListItem","position":2,"name":"“The server went down and I cannot recover it” was wrong: only inbound SSH had been blocked","item":"https://koshinstudio.com/en/notes/misdiagnosis-down/"}]}]}</script>
+<meta property="og:image" content="https://koshinstudio.com/assets/og/og_en_notes_misdiagnosis-down.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
+</head>
+<body class="article">
+<canvas id="motes"></canvas>
+
+<header class="site"><div class="wrap">
+  <a class="logo" href="/"><img class="logo-mark" src="/favicon.svg?v=b9d7922f" alt="" width="28" height="28">Koshin Studio</a>
+  <nav><a href="/works/">Works</a><a href="/notes/">Notes</a><a href="/picks/">Picks</a><a href="/calc/">Tools</a><a href="/about/">About</a></nav>
+</div></header>
+
+<main><div class="wrap">
+  <nav class="crumbs" aria-label="You are here"><a href="/en/">Koshin Studio</a><i aria-hidden="true">›</i><span aria-current="page">Misdiagnosis</span></nav>
+  <h1>“The server went down and I cannot recover it” was wrong: only inbound SSH had been blocked</h1>  <div class="rule"></div>
+<!--lang-->
+  <p class="note"><a href="/notes/misdiagnosis-down/" hreflang="ja" lang="ja">日本語版</a></p>
+<!--/lang-->  <p class="lead">Development log of the Toreca Dash app / August 2026</p>
+
+  <p>My app Toreca Dash’s server <strong>became unreachable from 3:10 a.m.</strong> on 28 August 2026. I wrote in my notes: “the server went down; I cannot recover it from here”.</p>
+  <p>That judgement was <strong>wrong</strong>. I only learned that when it came back at 10:15. This article is the record of why I was wrong and what the work I did in between produced.</p>
+  <p class="note">Written from my work log of 28 August 2026.</p>  <h2 class="rv" id="s1">What I saw, and what I concluded</h2>
+  <ul>
+    <li>Ports 22 (SSH), 80 and 443 of the server were all closed.</li>
+    <li>A traceroute reached a carrier backbone in Singapore and stopped just past it.</li>
+    <li>The hosting provider’s (Hetzner) status page showed no incident for that region.</li>
+  </ul>
+  <p>From that I concluded: “the server has stopped, and I cannot recover it from here (it needs a restart in the provider’s console)”.</p>
+
+  <h2 class="rv" id="s2">What was true: the server had been running all along</h2>
+  <p>When it became reachable at 10:15 and I checked:</p>
+  <div class="scroll rv"><table>
+    <thead><tr><th>What I checked</th><th>Result</th></tr></thead>
+    <tbody>
+      <tr><td>Server processes</td><td><strong>had been running all along</strong> (uptime 7 days 10 hours)</td></tr>
+      <tr><td>Jobs completed</td><td>4,100</td></tr>
+      <tr><td>192 scheduled jobs</td><td>kept running normally</td></tr>
+      <tr><td>What was blocked</td><td><strong>only inbound SSH</strong></td></tr>
+    </tbody>
+  </table></div>
+  <p>The server had not stopped. <strong>Only connections from outside (SSH) were blocked.</strong> Nothing behind the app had stopped.</p>
+
+  <h2 class="rv" id="s3">A second mistake: the “pile of repairs” was made by me</h2>
+  <p>Meanwhile I also noticed “41 hourly repairs have piled up” and blamed that on the server too.</p>
+  <p>In fact I had created it: <strong>I called an endpoint that does not accept a dry run (a no-write rehearsal), thinking it was a check</strong>. What I took as a check ran production work 41 times.</p>
+
+  <h2 class="rv" id="s4">The alternative route: deploy only what I needed elsewhere</h2>
+  <p>Because I could not get into the server, I <strong>deployed just the checks and repairs I needed to Cloud Functions, individually</strong> (<code>firebase deploy --only functions:name</code>). I did not touch any scheduled jobs. Those HTTP endpoints stay after the server comes back and can be used for checks as they are.</p>
+  <p>I also noted what to do after recovery: first, send the day’s changes to the server. That day I had added 8 scheduled jobs, so they would run as catch-ups right after deploy. All had been run by hand from dry run through real run, so running them does no harm.</p>
+
+  <h2 class="rv" id="s5">What I learned</h2>
+  <blockquote>“Cannot connect” is not “stopped”.</blockquote>
+  <ul>
+    <li><strong>Do not conclude from one angle.</strong> Ports can be closed while the process keeps running.</li>
+    <li><strong>Look at other signals.</strong> Are notifications arriving, is data being updated, what is the app’s state? Some things are visible from outside.</li>
+    <li><strong>Before writing “cannot recover”, write how much you actually know.</strong> All I knew was “SSH does not connect”.</li>
+    <li><strong>Do not run production while “checking”.</strong> An entrance with no dry run cannot be rehearsed.</li>
+    <li><strong>Keep an alternative route for when you cannot get in.</strong> A place where I could deploy individual functions helped.</li>
+  </ul>
+
+  <p class="note">This is the English version of <a href="/notes/misdiagnosis-down/" hreflang="ja" lang="ja">the original Japanese article</a>.</p>
+
+  <div class="rule" style="margin:40px 0 22px"></div>
+  <p class="eyebrow">More in English</p>
+  <ul class="plain">
+    <li><a href="/en/">All English pages</a></li>
+    <li><a href="/en/works/torecadash/">Toreca Dash</a></li>
+  </ul>
+</div>
+</main>
+
+<footer class="site"><div class="wrap"></div></footer>
+<script src="/motion.js?v=1e7447ec" defer></script>
+</body>
+</html>

@@ -1,5 +1,26 @@
 [
   {
+    "ja": "/notes/weird-articles-by-route/",
+    "en": "/en/notes/weird-articles-by-route/",
+    "title": "“Weird articles keep multiplying”: I counted by creation route and closed the entrances, and my counting was wrong twice",
+    "date": "2026-10-17",
+    "blurb": "252 displayed lotteries were counted by route. Ended rounds left in an aggregator’s table were imported daily with empty deadlines (33); links to search results or top pages and deadlines disagreeing with the store’s own row were closed at the entrance."
+  },
+  {
+    "ja": "/notes/automate-sorted/",
+    "en": "/en/notes/automate-sorted/",
+    "title": "“Automate everything that can be”: counting showed 66 repair jobs had never run on a schedule, and I added only six",
+    "date": "2026-10-17",
+    "blurb": "Matching 319 HTTP endpoints against 184 scheduled jobs by call showed 66 that only ran by hand. After a dry run I scheduled only the continuously needed ones, six, and fixed a queue that let the same job pile up."
+  },
+  {
+    "ja": "/notes/misdiagnosis-down/",
+    "en": "/en/notes/misdiagnosis-down/",
+    "title": "“The server went down and I cannot recover it” was wrong: only inbound SSH had been blocked",
+    "date": "2026-10-17",
+    "blurb": "From 3:10 a.m. I could not connect to the server and judged it stopped. In fact its processes had run for over 7 days, all 192 scheduled jobs were normal, and only inbound SSH was blocked."
+  },
+  {
     "ja": "/notes/store-name-variants/",
     "en": "/en/notes/store-name-variants/",
     "title": "“ヤマダ電機” versus “ヤマダデンキ”: spelling variants and duplicates had three overlapping causes",

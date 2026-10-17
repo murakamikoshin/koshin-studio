@@ -72,6 +72,8 @@ URL: https://koshinstudio.com/notes/misdiagnosis-down/
 
 # 「サーバーが落ちた。こちらからは復旧できない」は、誤りだった：止まっていたのは、SSH の受信だけだった
 
+  English version (https://koshinstudio.com/en/notes/misdiagnosis-down/)
+
   トレカダッシュ 開発の記録 ／ 2026年8月
 
   iOS アプリ「トレカダッシュ (https://koshinstudio.com/works/torecadash/)」のサーバーに、午前 3 時 10 分から、つながらなくなりました。2026 年 8 月 28 日の朝のことです。私は、「サーバーが落ちた。こちらからは、復旧できない」と、記録に書きました。
@@ -148,6 +150,8 @@ URL: https://koshinstudio.com/notes/misdiagnosis-down/
 URL: https://koshinstudio.com/notes/weird-articles-by-route/
 
 # 「変な記事がめっちゃ増えてる」：作られた経路ごとに数えて入口を塞いだ。数え方も 2 回、間違えた
+
+  English version (https://koshinstudio.com/en/notes/weird-articles-by-route/)
 
   トレカダッシュ 開発の記録 ／ 2026年8月
 
@@ -267,6 +271,8 @@ URL: https://koshinstudio.com/notes/weird-articles-by-route/
 URL: https://koshinstudio.com/notes/automate-sorted/
 
 # 「自動化できるものは全部自動化して」：まず数えると、修復処理 66 個が一度も定期実行から呼ばれていなかった。全部は載せず、6 個だけ載せた
+
+  English version (https://koshinstudio.com/en/notes/automate-sorted/)
 
   トレカダッシュ 開発の記録 ／ 2026年8月
 
@@ -8339,6 +8345,291 @@ URL: https://koshinstudio.com/privacy/
 
 ---
 
+URL: https://koshinstudio.com/en/notes/weird-articles-by-route/
+
+# “Weird articles keep multiplying”: I counted by creation route and closed the entrances, and my counting was wrong twice
+
+  日本語版 (https://koshinstudio.com/notes/weird-articles-by-route/)
+
+  Development log of the Toreca Dash app / August 2026
+
+  For my app Toreca Dash the instruction came: “weird articles keep multiplying. No deadlines, so many odd articles. Solve it permanently. Investigate the articles made by other routes thoroughly too.”
+
+  This article records counting articles by the route that created them and closing the entrances, and also how I got the counting wrong twice.
+
+  Numbers come from my work log of 28 August 2026.
+
+## I counted by route
+
+  Articles are created by several routes (stores’ official X posts, store sites, aggregator sites, AI discovery). I counted what kinds of “weird articles” each route had.
+
+    Route | Lotteries | No deadline | Link is a search result | Link is a top page | Link is the aggregator itself
+
+      X (store official) | 118 | 11 | 0 | 1 | 0
+
+      Store site (direct) | 63 | 1 | 1 | 0 | 0
+
+      Aggregator A | 39 | 33 | 3 | 2 | 8
+
+      Aggregator B | 28 | 11 | 0 | 1 | 5
+
+      AI discovery | 4 | 2 | 0 | 0 | 0
+
+      Total | 252 | 58 | 4 | 4 | 13
+
+## I corrected my counting twice
+
+- First I counted over all articles and said “1,204 of 1,398 have no deadline (86%)”. A deadline is a concept only for lotteries. First-come sales (1,055) and reservations (91) never had one. I had counted without checking what the field means.
+
+- I wrote “the saved chunk is another store’s (98%)”, but in fact the full post text was stored and it just happened to begin with Amazon. I asserted from the leading marker alone.
+
+## Holes found and fixes
+
+### 1. Ended rounds left in the aggregator’s table were imported every day (33)
+
+  The aggregator keeps past rounds in its table. In real data, a store’s “13–14 July” was imported on 27 August; the deadline was in the past and not adopted, giving an article with an empty deadline. With no deadline, the mechanism that removes articles past their deadline never acts, and it stays forever.
+
+  I closed the entrance in three layers:
+
+- Read the acceptance period as a date and skip rows that have ended.
+
+- If a deadline cannot be read, do not create the article.
+
+- If the store’s row has ended, do not create it.
+
+  Checked in practice: I cleared the mark, re-ran the import, read 24 stores and got 0 new.
+
+### 2. The application link was not an application page (5 reports)
+
+  A search-results page (?keywords=) or a site’s top page had been adopted. I added “looks like a search result URL” and “looks like a site top page URL” checks to the single gate that adopts application links. Every route goes through that one gate, so the fix works there alone.
+
+### 3. The article holds the full post text, so a reader who forgets to cut reads the first store (39)
+
+  The article’s source text (sourceText) now holds only that store’s chunk. The full text goes into a separate field for verification. Whatever the reader does, it cannot pick up another store’s value.
+
+### 4. The deadline disagreed with the store’s own row (5 of 6)
+
+  A deadline is looked for in “the text chunk, the page linked, the attached image”, in that order. But the last two are not necessarily that store’s information. In real data the saved deadline and the store’s row differed by 53, 18 and 20 days, each a finished lottery shown as open.
+
+  I made a function that returns a value “only when an end is stated explicitly” and, at the end of fixing a deadline, a gate: if it disagrees with the row, trust the row. One caution: a function that also returns the date for a row that only has a start, like “from 19 June”, must not be used as is to overwrite.
+
+## Clean-up starts with a dry run
+
+- The job “hide articles with no deadline”: 33. Before running, I read each one’s own row period and confirmed all 33 had ended and 0 were open, then ran it.
+
+- The job “align the deadline to the row”: 5. It does not hide; if the date has passed, the existing past-deadline mechanism removes it.
+
+  Both repairs now run automatically every day at 4:20 and 4:30 (from 190 to 192 jobs).
+
+## Result
+
+     | Before | After
+
+      Displayed lotteries | 252 | 199
+
+      No deadline | 58 | 25
+
+      Aggregator A with no deadline | 33 | 0
+
+      Shown past the deadline | 5 | 0
+
+      “Other site ended, mine open” | 12 | 7
+
+  The remaining 7 are likely cases where mine has caught the newer round (the other table is out of date).
+
+## What I learned
+
+> Count by route, and doubt the counting itself.
+
+- Count by route. A table shows where weird articles enter.
+
+- Check what a field means before counting. A deadline is only for lotteries.
+
+- Do not assert from a leading marker. The full text was stored.
+
+- If no deadline can be read, do not create the article. Articles with an empty deadline stay forever.
+
+- Make it impossible to pick up another store’s value. Do not rely on the reader’s care.
+
+- If they disagree, trust that store’s row. The linked page and image are not necessarily that store’s information.
+
+  This is the English version of the original Japanese article (https://koshinstudio.com/notes/weird-articles-by-route/).
+
+  More in English
+
+- All English pages (https://koshinstudio.com/en/)
+
+- Toreca Dash (https://koshinstudio.com/en/works/torecadash/)
+
+
+---
+
+URL: https://koshinstudio.com/en/notes/automate-sorted/
+
+# “Automate everything that can be”: counting showed 66 repair jobs had never run on a schedule, and I added only six
+
+  日本語版 (https://koshinstudio.com/notes/automate-sorted/)
+
+  Development log of the Toreca Dash app / August 2026
+
+  On my app Toreca Dash the instruction was: “automate everything that can be automated”.
+
+  On 28 August 2026, the first thing I did was count. 66 repair processes had never once been called from a schedule. This article records how I counted, and why I did not put all 66 on a schedule.
+
+  Numbers come from my work log of 28 August 2026.
+
+## Counted: 66 only worked if you hit the URL by hand
+
+  I matched 319 HTTP endpoints against 184 scheduled jobs by function calls, not by name, because something with a different name can still be called from a scheduled job.
+
+  The result: 66 only ran if someone hit the URL by hand. Articles that could be fixed stay broken until a person remembers “time to run that”.
+
+## I did not schedule all 66 at once
+
+  The 66 fell into three groups:
+
+- Needed continuously (needed whenever new data arrives) → put on a schedule.
+
+- One-off migrations (backfill*, reclassify* and so on) → do not schedule. Running them daily is wasted work and only adds room for accidents.
+
+- Destructive or needing human judgement (deleting orphaned products, manual re-linking) → do not schedule.
+
+  A new scheduled job runs once the moment it is deployed. Before adding any, I rehearsed all of them with a dry run (no writes) to see what they would hit.
+
+## The six I added
+
+    Job | Dry-run result
+
+      Fix empty deadlines on X articles | 32 targets, 0 updated
+
+      Fix aggregator-derived store names | 5 (an account’s promotional text had become the seller)
+
+      Fix shipping fees counted in the price | 0
+
+      Fix links to generic products | 0
+
+      Fix titles of split articles | newly built
+
+      Fix aggregator-derived deadlines | newly built
+
+  I spread their start times. Running them together fights for concurrency slots and lengthens the queue. Scheduled jobs went from 184 to 190.
+
+  The remaining candidates (deadline repair, broken product-image repair, Rakuten affiliate-link repair) take over 2 minutes and their dry runs did not finish in time, so I held back. I do not add one without checking it.
+
+## The product catalogue was already fully automatic
+
+  To “can the product catalogue be automated too?” the answer was “it already is”. All 15 genres had an import from the official catalogue, updated an hour earlier. Linking articles to products is automatic: 1,406 of 1,415 measured were linked. The rest were “new sets not yet on the official site”, which come in automatically once the official site lists them.
+
+## The queue kept growing
+
+  Counting also turned up another thing. The queue length was growing 81, 86, 91 within 45 seconds.
+
+  The cause: the function that adds jobs (enqueue) only checked “is it running”, and did not check jobs already waiting in the queue. While the concurrency limit was reached, the time for a “every minute” job kept coming, and the same job piled up many times.
+
+  I made it remember the names of waiting jobs and not add them twice. The queue stayed at 0.
+
+## What I learned
+
+> Automation is not putting everything on a schedule. Count, sort, check, then add.
+
+- Count first. 66 had never been called. Match by calls, not names.
+
+- Sort. Add only what is needed continuously; not one-off migrations or destructive jobs.
+
+- Check with a dry run before adding. A new scheduled job runs the moment it is added.
+
+- Spread the times. Running together lengthens the queue.
+
+- Before queueing, check “is it waiting” too. Checking only “running” lets it pile up.
+
+  This is the English version of the original Japanese article (https://koshinstudio.com/notes/automate-sorted/).
+
+  More in English
+
+- All English pages (https://koshinstudio.com/en/)
+
+- Toreca Dash (https://koshinstudio.com/en/works/torecadash/)
+
+
+---
+
+URL: https://koshinstudio.com/en/notes/misdiagnosis-down/
+
+# “The server went down and I cannot recover it” was wrong: only inbound SSH had been blocked
+
+  日本語版 (https://koshinstudio.com/notes/misdiagnosis-down/)
+
+  Development log of the Toreca Dash app / August 2026
+
+  My app Toreca Dash’s server became unreachable from 3:10 a.m. on 28 August 2026. I wrote in my notes: “the server went down; I cannot recover it from here”.
+
+  That judgement was wrong. I only learned that when it came back at 10:15. This article is the record of why I was wrong and what the work I did in between produced.
+
+  Written from my work log of 28 August 2026.
+
+## What I saw, and what I concluded
+
+- Ports 22 (SSH), 80 and 443 of the server were all closed.
+
+- A traceroute reached a carrier backbone in Singapore and stopped just past it.
+
+- The hosting provider’s (Hetzner) status page showed no incident for that region.
+
+  From that I concluded: “the server has stopped, and I cannot recover it from here (it needs a restart in the provider’s console)”.
+
+## What was true: the server had been running all along
+
+  When it became reachable at 10:15 and I checked:
+
+    What I checked | Result
+
+      Server processes | had been running all along (uptime 7 days 10 hours)
+
+      Jobs completed | 4,100
+
+      192 scheduled jobs | kept running normally
+
+      What was blocked | only inbound SSH
+
+  The server had not stopped. Only connections from outside (SSH) were blocked. Nothing behind the app had stopped.
+
+## A second mistake: the “pile of repairs” was made by me
+
+  Meanwhile I also noticed “41 hourly repairs have piled up” and blamed that on the server too.
+
+  In fact I had created it: I called an endpoint that does not accept a dry run (a no-write rehearsal), thinking it was a check. What I took as a check ran production work 41 times.
+
+## The alternative route: deploy only what I needed elsewhere
+
+  Because I could not get into the server, I deployed just the checks and repairs I needed to Cloud Functions, individually (firebase deploy --only functions:name). I did not touch any scheduled jobs. Those HTTP endpoints stay after the server comes back and can be used for checks as they are.
+
+  I also noted what to do after recovery: first, send the day’s changes to the server. That day I had added 8 scheduled jobs, so they would run as catch-ups right after deploy. All had been run by hand from dry run through real run, so running them does no harm.
+
+## What I learned
+
+> “Cannot connect” is not “stopped”.
+
+- Do not conclude from one angle. Ports can be closed while the process keeps running.
+
+- Look at other signals. Are notifications arriving, is data being updated, what is the app’s state? Some things are visible from outside.
+
+- Before writing “cannot recover”, write how much you actually know. All I knew was “SSH does not connect”.
+
+- Do not run production while “checking”. An entrance with no dry run cannot be rehearsed.
+
+- Keep an alternative route for when you cannot get in. A place where I could deploy individual functions helped.
+
+  This is the English version of the original Japanese article (https://koshinstudio.com/notes/misdiagnosis-down/).
+
+  More in English
+
+- All English pages (https://koshinstudio.com/en/)
+
+- Toreca Dash (https://koshinstudio.com/en/works/torecadash/)
+
+
+---
+
 URL: https://koshinstudio.com/en/notes/store-name-variants/
 
 # “ヤマダ電機” versus “ヤマダデンキ”: spelling variants and duplicates had three overlapping causes
@@ -15565,6 +15856,12 @@ URL: https://koshinstudio.com/en/
 - “ヤマダ電機” versus “ヤマダデンキ”: spelling variants and duplicates had three overlapping causes (https://koshinstudio.com/en/notes/store-name-variants/)
 
 - English and katakana names share no characters: a fingerprint gate rejected 42 correct matches (https://koshinstudio.com/en/notes/transliteration-gate/)
+
+- “Automate everything that can be”: counting showed 66 repair jobs had never run on a schedule, and I added only six (https://koshinstudio.com/en/notes/automate-sorted/)
+
+- “The server went down and I cannot recover it” was wrong: only inbound SSH had been blocked (https://koshinstudio.com/en/notes/misdiagnosis-down/)
+
+- “Weird articles keep multiplying”: I counted by creation route and closed the entrances, and my counting was wrong twice (https://koshinstudio.com/en/notes/weird-articles-by-route/)
 
 ## Languages
 
