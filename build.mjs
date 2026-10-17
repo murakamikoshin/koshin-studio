@@ -424,7 +424,7 @@ const noteThemes = [
   { title: '静かに壊れていた', lead: 'エラーが出ないまま、本物が消えていた、または読めていなかった失敗の記録。',
     slugs: ['blocked-page', 'tco-relay', 'silent-discard', 'truncated-answer', 'waiting-room', 'notify-gate', 'destination-check'] },
   { title: '名前と商品の取り違え', lead: '同じ名前、同じリンクが、別のものを指していた。商品と店の取り違えの記録。',
-    slugs: ['split-mixups', 'same-page-not-same-store', 'one-page-many-cases', 'transliteration-gate', 'catalog-seed-393', 'genre-from-catalog', 'leaked-value', 'cleanup-hides-entrance', 'typo-catalog', 'fake-products'] },
+    slugs: ['split-mixups', 'same-page-not-same-store', 'store-name-variants', 'geocode-shizuoka', 'one-page-many-cases', 'transliteration-gate', 'catalog-seed-393', 'genre-from-catalog', 'leaked-value', 'cleanup-hides-entrance', 'typo-catalog', 'fake-products'] },
   { title: '監視と定期処理', lead: '先着の監視、同時実行の枠、配備と再実行。動き続ける処理の設計の記録。',
     slugs: ['interval-vs-delivery', 'hot-lane', 'concurrency-slots', 'timeout-third-fix', 'rerun-on-deploy', 'x-monitoring-gaps', 'coverage-check', 'self-inflicted'] },
   { title: 'iOS アプリと基盤', lead: 'サーバーの移行、iCloud、広告、審査、ビルド。アプリとその土台の、実際に起きたことの記録。',

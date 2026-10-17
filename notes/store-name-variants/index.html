@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>「ヤマダ電機」と「ヤマダデンキ」：表記ゆれと重複の原因は 3 つ重なっていた（包含だけの比較・59 秒の差・手動専用のジョブ） — Koshin Studio</title>
+<meta name="description" content="店名を「含んでいるか」だけで比べ、締切を 59 秒の差で別と判定し、重複整理が手動専用だった。言い換えの表は作らず一般則で直し、1 時間おきの定期実行にした。表記ゆれ 2 件、重複 7 組が 0 に。">
+<meta property="og:title" content="「ヤマダ電機」と「ヤマダデンキ」：表記ゆれと重複の原因は 3 つ重なっていた（包含だけの比較・59 秒の差・手動専用のジョブ）">
+<meta property="og:description" content="店名を「含んでいるか」だけで比べ、締切を 59 秒の差で別と判定し、重複整理が手動専用だった。言い換えの表は作らず一般則で直し、1 時間おきの定期実行にした。表記ゆれ 2 件、重複 7 組が 0 に。">
+<meta property="og:type" content="article">
+<meta name="theme-color" content="#fbfaf7">
+<link rel="icon" href="/favicon.ico?v=1697d589" sizes="48x48">
+<link rel="icon" href="/favicon.svg?v=b9d7922f" type="image/svg+xml" sizes="any">
+<link rel="icon" href="/assets/icon/icon-192.png?v=e2566235" type="image/png" sizes="192x192">
+<link rel="apple-touch-icon" href="/assets/icon/icon-180.png?v=84e7f0e6">
+<link rel="manifest" href="/site.webmanifest">
+<script>document.documentElement.className+=" js"</script>
+<link rel="stylesheet" href="/style.css?v=dd51310c">
+<meta name="google-adsense-account" content="ca-pub-3863314847163872">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3863314847163872" crossorigin="anonymous"></script>
+<link rel="canonical" href="https://koshinstudio.com/notes/store-name-variants/">
+<meta property="og:url" content="https://koshinstudio.com/notes/store-name-variants/">
+<meta property="og:site_name" content="Koshin Studio">
+<meta property="og:locale" content="ja_JP">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="alternate" type="application/rss+xml" title="Koshin Studio — Notes" href="https://koshinstudio.com/feed.xml">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BlogPosting","headline":"「ヤマダ電機」と「ヤマダデンキ」：表記ゆれと重複の原因は 3 つ重なっていた（包含だけの比較・59 秒の差・手動専用のジョブ）","url":"https://koshinstudio.com/notes/store-name-variants/","description":"店名を「含んでいるか」だけで比べ、締切を 59 秒の差で別と判定し、重複整理が手動専用だった。言い換えの表は作らず一般則で直し、1 時間おきの定期実行にした。表記ゆれ 2 件、重複 7 組が 0 に。","datePublished":"2026-10-17","dateModified":"2026-10-17","inLanguage":"ja","image":"https://koshinstudio.com/assets/og/og_notes_store-name-variants.jpg","author":{"@id":"https://koshinstudio.com#studio"},"publisher":{"@id":"https://koshinstudio.com#studio"},"mainEntityOfPage":"https://koshinstudio.com/notes/store-name-variants/"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Koshin Studio","item":"https://koshinstudio.com/"},{"@type":"ListItem","position":2,"name":"Notes","item":"https://koshinstudio.com/notes/"},{"@type":"ListItem","position":3,"name":"「ヤマダ電機」と「ヤマダデンキ」：表記ゆれと重複の原因は 3 つ重なっていた（包含だけの比較・59 秒の差・手動専用のジョブ）","item":"https://koshinstudio.com/notes/store-name-variants/"}]}]}</script>
+<meta property="og:image" content="https://koshinstudio.com/assets/og/og_notes_store-name-variants.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
+</head>
+<body class="article">
+<canvas id="motes"></canvas>
+
+<header class="site"><div class="wrap">
+  <a class="logo" href="/"><img class="logo-mark" src="/favicon.svg?v=b9d7922f" alt="" width="28" height="28">Koshin Studio</a>
+  <nav><a href="/works/">Works</a><a href="/notes/">Notes</a><a href="/picks/">Picks</a><a href="/calc/">Tools</a><a href="/about/">About</a></nav>
+</div></header>
+
+<main><div class="wrap">
+  <nav class="crumbs" aria-label="現在地"><a href="/">Koshin Studio</a><i aria-hidden="true">›</i><a href="/notes/">Notes</a><i aria-hidden="true">›</i><span aria-current="page">「ヤマダ電機」と「ヤマダデンキ」：表記ゆれと重複の原因は 3 つ重なっていた（包含だけの比較・59 秒の差・手動専用のジョブ）</span></nav>
+  <h1>「ヤマダ電機」と「ヤマダデンキ」：表記ゆれと重複の原因は 3 つ重なっていた（包含だけの比較・59 秒の差・手動専用のジョブ）</h1>  <div class="rule"></div>
+  <p class="lead">トレカダッシュ 開発の記録 ／ 2026年8月</p>
+
+  <p>iOS アプリ「<a href="/works/torecadash/">トレカダッシュ</a>」の記事では、同じ店の名前が、「ヤマダ電機」と「ヤマダデンキ」のように、書き方がバラバラでした。報告は、2 つ来ました。「表記揺れしている」「同じ理由で、記事が重複している」。指示は、「他の店でも同じことが起きないように、徹底的に」でした。</p>
+  <p>この記事は、原因が 3 つ重なっていたことと、「言い換えの表を作らず、一般則で直す」過程の記録です。</p>
+  <p class="note">この記事は、2026 年 8 月 25 日の作業の記録から書いています。</p>
+<!--toc-->
+  <nav class="toc" aria-label="目次"><p>目次</p><ol><li><a href="#s1">原因は、3 つ重なっていた</a></li><li><a href="#s2">直し方：言い換えの表は、作らない</a></li><li><a href="#s3">テストで見つけた、2 つの危険</a></li><li><a href="#s4">実行結果</a></li><li><a href="#s5">分かったこと</a></li></ol></nav>
+<!--/toc-->
+  <h2 class="rv" id="s1">原因は、3 つ重なっていた</h2>
+  <ol>
+    <li><strong>店名の比較が、「含んでいるか」だけだった。</strong>「ヤマダ電機」と「ヤマダデンキ」は、どちらも、もう一方を含まないので、別の店になります。</li>
+    <li><strong>締切を、ミリ秒まで一致で比べていた。</strong>同じ「8/26 まで」でも、まとめサイト由来は 23:59:00、X 由来は 23:59:59 で、<strong>59 秒の差</strong>のせいで、重複と判定されませんでした。実データの 4 商品が、これでした。</li>
+    <li><strong>重複を整理するジョブが、手動で動かす専用で、一度も自動で走っていなかった。</strong>「一度きりの修復」のつもりで作っても、記事は毎日入るので、重複も毎日生まれます。</li>
+  </ol>
+
+  <h2 class="rv" id="s2">直し方：言い換えの表は、作らない</h2>
+  <p>店名の比較のキー（<code>storeNameComparisonKey</code>）を作りました。法人格、記号、空白、全角と半角を落とし、カタカナをひらがなにし、「電機、電器、でんき」を 1 つに寄せます。</p>
+  <p><strong>店名の言い換えの表は、作りません。</strong>新しい店が増えるたびに、再発するからです。読みが同じになる書き分けを、まとめる一般則にしました。</p>
+  <ul>
+    <li>締切は、<strong>日付として</strong>（日本時間の日付で）比べ、代わりに<strong>販売の形式の一致</strong>を求めます。同じ日でも、先着と抽選は、別の案件だからです。</li>
+    <li>店名（<code>sellerName</code>）が無く、カテゴリにしか店名が無い記事も、対象に含めます。入荷情報のサイトや公式サイト由来の記事は、こちらが多く、まるごと見落としていました。</li>
+    <li>重複で隠すときは、必ず隠した印（<code>hiddenByDuplicate</code>）を付けます。</li>
+    <li><strong>1 時間おきの定期実行</strong>を、足しました。</li>
+    <li>表記そのものも、<strong>実データの多数派に寄せ</strong>ます。正しい表記の一覧は、持ちません。同数のときは、カタカナ表記、次に文字列の順で固定して、実行のたびに答えが変わる、書き換え合戦を防ぎます。</li>
+  </ul>
+
+  <h2 class="rv" id="s3">テストで見つけた、2 つの危険</h2>
+  <p>どちらも、直したあとに、テストで見つけました。</p>
+  <ul>
+    <li><strong>「＠」の前だけをキーにすると、店名に＠を含む店が、極端に短いキーになる。</strong>「カードショップ＠ほ～む。鹿児島店」が「かーどしょっぷ」というキーになり、別の店と同一視されます。比較のキーでは、＠で切りません。（宣伝文が付いた名前は、包含の判定で拾えます。）</li>
+    <li><strong>「片方がもう片方の先頭部分なら、同じ名前」にすると、支店名が消える。</strong>「イエローサブマリン」と「イエローサブマリン秋葉原店」が統合され、支店名が消えます。付け足しが、「＠」「【」「（」で始まる<strong>注記</strong>のときだけ、同じ名前とみなします。</li>
+  </ul>
+  <p>実データ 17 パターンで確かめて、食い違いは 0 件でした。</p>
+
+  <h2 class="rv" id="s4">実行結果</h2>
+  <div class="scroll rv"><table>
+    <thead><tr><th></th><th>前</th><th>後</th></tr></thead>
+    <tbody>
+      <tr><td>店名の表記揺れ</td><td>2 件</td><td><strong>0 件</strong></td></tr>
+      <tr><td>同じ商品・同じ締切・同じ店の重複</td><td>7 組</td><td><strong>0 組</strong></td></tr>
+    </tbody>
+  </table></div>
+  <p>ついでに、「○○＠スタッフ募集中」のような宣伝文の付いた店名 23 件も、そろいました。重複のとき、残す側は、値段と当落発表日を持つほうです。</p>
+
+  <h2 class="rv" id="s5">分かったこと</h2>
+  <blockquote>一覧で直さず、一般則で直す。そして、直す処理は、自動で走らせる。</blockquote>
+  <ul>
+    <li><strong>「含んでいるか」だけで比べない。</strong>書き分けは、含みません。</li>
+    <li><strong>ミリ秒まで一致で比べない。</strong>日付と、販売の形式で比べます。</li>
+    <li><strong>「一度きりの修復」は、毎日生まれるものには足りない。</strong>自動で、定期的に走らせます。</li>
+    <li><strong>言い換えの表は、新しい店で再発する。</strong>読みが同じになる、書き分けの一般則にします。</li>
+    <li><strong>統合は、注記のときだけ。</strong>支店名を、消してはいけません。</li>
+  </ul>
+
+
+  <div class="ad-slot" data-slot="footer" hidden></div>
+<!--/ad-->
+
+  <div class="rule" style="margin:40px 0 22px"></div>
+  <p class="eyebrow">この話に出てくるもの</p>
+  <ul class="plain">
+    <li><a href="/works/torecadash/">トレカダッシュ</a> — トレカの抽選・予約・先着の情報を集める iPhone アプリ</li>
+    <li><a href="/notes/same-page-not-same-store/">「同じ応募ページ」なら「同じ店」と決めつけていた</a> — 店名の別の問題</li>
+    <li><a href="/notes/dup-zero/">「重複は実質ゼロ」と数えたのに、監査は 112 組を出していた</a> — 重複の別の話</li>
+    <li><a href="/notes/geocode-shizuoka/">あいまいな店名で地図を引くと、日本の真ん中の静岡が返る</a> — 店名と位置の話</li>
+  </ul>
+
+<!--related-->
+  <div class="rule" style="margin:40px 0 22px"></div>
+  <p class="eyebrow">ほかの記録</p>
+  <ul class="plain">
+    <li><a href="/notes/geocode-shizuoka/">あいまいな店名で地図を引くと、日本の真ん中の静岡が返る：チェーン名を並べず、Google 自身の答えで判定した</a> — 店名を Google の地図検索に渡すと、あいまいな名前では日本全体の矩形の真ん中（静岡・愛知）が返った。ヤマダデンキが浜松、サンエーが掛川の工場に。チェーン名の一覧は作らず、答え自身で信用できるかを 4 つの規則で判定した。</li>
+    <li><a href="/notes/one-page-many-cases/">「1 ページ ＝ 1 案件」ではなかった：1 つのフォームで 6 商品を受け付ける店の記事が、リンクが同じというだけで消されていた</a> — リンクだけで重複と決めるジョブが、1 つの Google フォームで 6 商品を受け付ける店の記事 5 件を消していた。「リンク ＋ 商品」に直した。サーバが作った「応募枠」をアプリが一度も読んでいなかったことも見つかった。</li>
+    <li><a href="/notes/transliteration-gate/">英語表記とカタカナ表記は、1 文字も重ならない：正しい照合 42 件を、指紋の関門が却下していた</a> — 相場の紐付け率が 39% に低下。相場のサイトに商品はあったが、自社の英語表記とカタカナ表記では指紋が一致せず、26 時間で 42 件が却下されていた。関門は弱めず、この照合だけに狭い 2 つ目の判定を足した。</li>
+  </ul>
+<!--/related-->
+
+<!--comments-->
+  <section class="comments" id="comments" data-repo="murakamikoshin/koshin-studio" data-repo-id="R_kgDOURc3ew"
+    data-category="Announcements" data-category-id="DIC_kwDOURc3e84DHTVr">
+    <h2 id="comments-h">コメント</h2>
+    <p>感想や、記事の間違いの指摘は、ここへ。書くには、GitHub のアカウントが要ります。</p>
+    <p><button type="button" class="btn ghost" id="load-comments">コメントを開く</button></p>
+    <p class="note">押すと、giscus（giscus.app）と GitHub に接続します。押さなければ、接続しません。詳しくは<a href="/privacy/">あつかい</a>に書いています。</p>
+    <div id="giscus-box"></div>
+  </section>
+<!--/comments-->
+</div>
+</main>
+
+<footer class="site"><div class="wrap">
+  <span>© 2026 Koshin Studio</span>
+  <div class="sns-row"></div>
+  <nav><a href="/picks/">Picks</a><a href="/calc/">Tools</a><a href="/about/">About</a><a href="/privacy/">あつかい</a><a href="/en/" hreflang="en" lang="en">English</a></nav>
+</div></footer>
+<script src="/motion.js?v=1e7447ec" defer></script>
+</body>
+</html>

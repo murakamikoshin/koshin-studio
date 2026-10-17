@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>あいまいな店名で地図を引くと、日本の真ん中の静岡が返る：チェーン名を並べず、Google 自身の答えで判定した — Koshin Studio</title>
+<meta name="description" content="店名を Google の地図検索に渡すと、あいまいな名前では日本全体の矩形の真ん中（静岡・愛知）が返った。ヤマダデンキが浜松、サンエーが掛川の工場に。チェーン名の一覧は作らず、答え自身で信用できるかを 4 つの規則で判定した。">
+<meta property="og:title" content="あいまいな店名で地図を引くと、日本の真ん中の静岡が返る：チェーン名を並べず、Google 自身の答えで判定した">
+<meta property="og:description" content="店名を Google の地図検索に渡すと、あいまいな名前では日本全体の矩形の真ん中（静岡・愛知）が返った。ヤマダデンキが浜松、サンエーが掛川の工場に。チェーン名の一覧は作らず、答え自身で信用できるかを 4 つの規則で判定した。">
+<meta property="og:type" content="article">
+<meta name="theme-color" content="#fbfaf7">
+<link rel="icon" href="/favicon.ico?v=1697d589" sizes="48x48">
+<link rel="icon" href="/favicon.svg?v=b9d7922f" type="image/svg+xml" sizes="any">
+<link rel="icon" href="/assets/icon/icon-192.png?v=e2566235" type="image/png" sizes="192x192">
+<link rel="apple-touch-icon" href="/assets/icon/icon-180.png?v=84e7f0e6">
+<link rel="manifest" href="/site.webmanifest">
+<script>document.documentElement.className+=" js"</script>
+<link rel="stylesheet" href="/style.css?v=dd51310c">
+<meta name="google-adsense-account" content="ca-pub-3863314847163872">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3863314847163872" crossorigin="anonymous"></script>
+<link rel="canonical" href="https://koshinstudio.com/notes/geocode-shizuoka/">
+<meta property="og:url" content="https://koshinstudio.com/notes/geocode-shizuoka/">
+<meta property="og:site_name" content="Koshin Studio">
+<meta property="og:locale" content="ja_JP">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="alternate" type="application/rss+xml" title="Koshin Studio — Notes" href="https://koshinstudio.com/feed.xml">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BlogPosting","headline":"あいまいな店名で地図を引くと、日本の真ん中の静岡が返る：チェーン名を並べず、Google 自身の答えで判定した","url":"https://koshinstudio.com/notes/geocode-shizuoka/","description":"店名を Google の地図検索に渡すと、あいまいな名前では日本全体の矩形の真ん中（静岡・愛知）が返った。ヤマダデンキが浜松、サンエーが掛川の工場に。チェーン名の一覧は作らず、答え自身で信用できるかを 4 つの規則で判定した。","datePublished":"2026-10-17","dateModified":"2026-10-17","inLanguage":"ja","image":"https://koshinstudio.com/assets/og/og_notes_geocode-shizuoka.jpg","author":{"@id":"https://koshinstudio.com#studio"},"publisher":{"@id":"https://koshinstudio.com#studio"},"mainEntityOfPage":"https://koshinstudio.com/notes/geocode-shizuoka/"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Koshin Studio","item":"https://koshinstudio.com/"},{"@type":"ListItem","position":2,"name":"Notes","item":"https://koshinstudio.com/notes/"},{"@type":"ListItem","position":3,"name":"あいまいな店名で地図を引くと、日本の真ん中の静岡が返る：チェーン名を並べず、Google 自身の答えで判定した","item":"https://koshinstudio.com/notes/geocode-shizuoka/"}]}]}</script>
+<meta property="og:image" content="https://koshinstudio.com/assets/og/og_notes_geocode-shizuoka.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
+</head>
+<body class="article">
+<canvas id="motes"></canvas>
+
+<header class="site"><div class="wrap">
+  <a class="logo" href="/"><img class="logo-mark" src="/favicon.svg?v=b9d7922f" alt="" width="28" height="28">Koshin Studio</a>
+  <nav><a href="/works/">Works</a><a href="/notes/">Notes</a><a href="/picks/">Picks</a><a href="/calc/">Tools</a><a href="/about/">About</a></nav>
+</div></header>
+
+<main><div class="wrap">
+  <nav class="crumbs" aria-label="現在地"><a href="/">Koshin Studio</a><i aria-hidden="true">›</i><a href="/notes/">Notes</a><i aria-hidden="true">›</i><span aria-current="page">あいまいな店名で地図を引くと、日本の真ん中の静岡が返る：チェーン名を並べず、Google 自身の答えで判定した</span></nav>
+  <h1>あいまいな店名で地図を引くと、日本の真ん中の静岡が返る：チェーン名を並べず、Google 自身の答えで判定した</h1>  <div class="rule"></div>
+  <p class="lead">トレカダッシュ 開発の記録 ／ 2026年8月</p>
+
+  <p>iOS アプリ「<a href="/works/torecadash/">トレカダッシュ</a>」には、店の位置を地図に出して、近い順に並べる機能があります。「位置情報が、静岡になる」という報告が来ました。店の位置は、店の名前を Google の地図の検索（Places API）に渡して、座標を取っています。</p>
+  <p>原因は、<strong>あいまいな店名で問い合わせると、Google が、日本全体の真ん中（静岡と愛知）を返す</strong>ことでした。この記事は、その実測と、「チェーン名を並べない」直し方の記録です。</p>
+  <p class="note">この記事は、2026 年 8 月 25 日の作業の記録から書いています。</p>
+<!--toc-->
+  <nav class="toc" aria-label="目次"><p>目次</p><ol><li><a href="#s1">実測：あいまいな名前の答えは、静岡と愛知</a></li><li><a href="#s2">直し方：チェーン名を並べず、Google 自身の答えで判定する</a></li><li><a href="#s3">同じ日に見つけた、似た話：通知の店名が「ライヴポケット」</a></li><li><a href="#s4">分かったこと</a></li></ol></nav>
+<!--/toc-->
+  <h2 class="rv" id="s1">実測：あいまいな名前の答えは、静岡と愛知</h2>
+  <p>検索には、「日本全体の矩形」を、位置の手がかり（<code>locationbias</code>）として渡しています。名前があいまいで、決め手が無いと、Google は、その矩形の真ん中を返します。それが、静岡と愛知です。API で実測しました。</p>
+  <div class="scroll rv"><table>
+    <thead><tr><th>問い合わせた名前</th><th>Google の答え</th></tr></thead>
+    <tbody>
+      <tr><td>ヤマダデンキ</td><td>ヤマダデンキ テックランド浜松本店（静岡県）</td></tr>
+      <tr><td>サンエー</td><td>㈱サンエー化研 掛川工場（静岡県）</td></tr>
+      <tr><td>ホビーステーション</td><td>トレカステーション豊橋店（愛知県）</td></tr>
+      <tr><td>ブックオフ</td><td>BOOKOFF 掛川店（静岡県）</td></tr>
+      <tr><td>晴れる屋</td><td>晴れる屋 静岡店（静岡県）</td></tr>
+      <tr><td>おむすび</td><td>お米とおむすび むらせ 浜松広沢店（静岡県）</td></tr>
+    </tbody>
+  </table></div>
+  <p>「サンエー」は、小売のチェーンのことでしたが、答えは、同じ名前の、別の会社の工場でした。</p>
+
+  <h2 class="rv" id="s2">直し方：チェーン名を並べず、Google 自身の答えで判定する</h2>
+  <p>「あいまいなチェーン名の一覧」を作る方式は、採りませんでした。新しいチェーンが増えるたびに、再発します。代わりに、<strong>Google が返した答え自身</strong>で、信用できるかを判定する関数（<code>geocodeMatchIsTrustworthy</code>）を作りました。</p>
+  <ol>
+    <li>問い合わせた名前が、返ってきた店名の<strong>頭でしかなく</strong>、残りが支店名なら、<strong>不採用</strong>。（ヤマダデンキ → …テックランド浜松本店）「店」が付いただけなら、同じ店。</li>
+    <li>店名に、支店の手がかり（〇〇店、館、モール…）があれば、従来どおり<strong>採用</strong>。</li>
+    <li>返ってきた店名が、問い合わせた名前と同じ、または、その一部なら<strong>採用</strong>。（カードショップクラクラ、ゲームショップ プラスアルファ）<strong>逆向きは採用しない</strong>。（サンエー ⊂ ㈱サンエー化研は、別の会社。）</li>
+    <li>それ以外は、<strong>店名と住所が 2 文字以上重なっているか</strong>で判定。（池袋、戸塚、札幌、高田馬場などを名前に持つ店は、ここで通る。）</li>
+  </ol>
+  <p>実データの 25 パターンで確かめると、<strong>誤り 9 件は全部不採用、正しい 16 件は全部採用</strong>でした。取りこぼしは、ローマ字表記の 1 件だけでした。</p>
+  <p>すでに、間違った位置が焼き付いていた記事 30 件と、店の位置のキャッシュ 22 件は、消して、解決し直しました。キャッシュを消すと、1 店につき 1 回だけ、API を呼び直します。</p>
+
+  <h2 class="rv" id="s3">同じ日に見つけた、似た話：通知の店名が「ライヴポケット」</h2>
+  <p>「通知の店名が、ライヴポケットになる」という報告もありました。店名が取れなかったときに、最後の受け皿として、カテゴリ（「ライヴポケット」）が通知に出ていました。ライヴポケットは、<strong>応募を受け付ける場であって、店ではありません</strong>。そこで、<strong>分からないときは、null を返す</strong>ようにしました。呼び出し側は、店名が無ければ記事の題名を使います。ライヴポケットの題名は、「キデイランド ららぽーと富士見店 …」のように、店名から始まるので、そのほうが正しく伝わります。</p>
+
+  <h2 class="rv" id="s4">分かったこと</h2>
+  <blockquote>外部の答えは、答え自身で、信用できるかを確かめる。</blockquote>
+  <ul>
+    <li><strong>決め手が無いとき、外部サービスは「もっともらしい答え」を返す。</strong>日本の真ん中、静岡と愛知です。</li>
+    <li><strong>チェーン名の一覧を作らない。</strong>新しいチェーンが増えるたびに、再発します。</li>
+    <li><strong>逆向きの包含は採用しない。</strong>サンエーは、サンエー化研の一部ではありません。</li>
+    <li><strong>焼き付いた値は、消して解決し直す。</strong>キャッシュも一緒に。</li>
+    <li><strong>分からないときは、null。</strong>間違った名前より、名前なしのほうが、まし。</li>
+  </ul>
+
+
+  <div class="ad-slot" data-slot="footer" hidden></div>
+<!--/ad-->
+
+  <div class="rule" style="margin:40px 0 22px"></div>
+  <p class="eyebrow">この話に出てくるもの</p>
+  <ul class="plain">
+    <li><a href="/works/torecadash/">トレカダッシュ</a> — トレカの抽選・予約・先着の情報を集める iPhone アプリ</li>
+    <li><a href="/notes/same-page-not-same-store/">「同じ応募ページ」なら「同じ店」と決めつけていた</a> — 店名と位置の別の問題</li>
+    <li><a href="/notes/transliteration-gate/">英語表記とカタカナ表記は、1 文字も重ならない</a> — 関門と判定の別の話</li>
+    <li><a href="/notes/self-inflicted/">自分で作った仕組みが、自分を傷つけた 4 つの記録</a> — 自分の変更の失敗</li>
+  </ul>
+
+<!--related-->
+  <div class="rule" style="margin:40px 0 22px"></div>
+  <p class="eyebrow">ほかの記録</p>
+  <ul class="plain">
+    <li><a href="/notes/one-page-many-cases/">「1 ページ ＝ 1 案件」ではなかった：1 つのフォームで 6 商品を受け付ける店の記事が、リンクが同じというだけで消されていた</a> — リンクだけで重複と決めるジョブが、1 つの Google フォームで 6 商品を受け付ける店の記事 5 件を消していた。「リンク ＋ 商品」に直した。サーバが作った「応募枠」をアプリが一度も読んでいなかったことも見つかった。</li>
+    <li><a href="/notes/transliteration-gate/">英語表記とカタカナ表記は、1 文字も重ならない：正しい照合 42 件を、指紋の関門が却下していた</a> — 相場の紐付け率が 39% に低下。相場のサイトに商品はあったが、自社の英語表記とカタカナ表記では指紋が一致せず、26 時間で 42 件が却下されていた。関門は弱めず、この照合だけに狭い 2 つ目の判定を足した。</li>
+    <li><a href="/notes/timeout-third-fix/">タイムアウトを 3 回直しても止まらなかった：真犯人は、同じ鍵の中で動いていた 2 つ目の処理だった</a> — 楽天ブックスの在庫チェックが 1 日 17 回タイムアウトした。取得の上限、1 件ぶんの上限と 2 回直しても止まらず、3 回目で、同じ鍵の中の別の処理（全件を取り直し、上限なし）が真犯人と分かった。</li>
+  </ul>
+<!--/related-->
+
+<!--comments-->
+  <section class="comments" id="comments" data-repo="murakamikoshin/koshin-studio" data-repo-id="R_kgDOURc3ew"
+    data-category="Announcements" data-category-id="DIC_kwDOURc3e84DHTVr">
+    <h2 id="comments-h">コメント</h2>
+    <p>感想や、記事の間違いの指摘は、ここへ。書くには、GitHub のアカウントが要ります。</p>
+    <p><button type="button" class="btn ghost" id="load-comments">コメントを開く</button></p>
+    <p class="note">押すと、giscus（giscus.app）と GitHub に接続します。押さなければ、接続しません。詳しくは<a href="/privacy/">あつかい</a>に書いています。</p>
+    <div id="giscus-box"></div>
+  </section>
+<!--/comments-->
+</div>
+</main>
+
+<footer class="site"><div class="wrap">
+  <span>© 2026 Koshin Studio</span>
+  <div class="sns-row"></div>
+  <nav><a href="/picks/">Picks</a><a href="/calc/">Tools</a><a href="/about/">About</a><a href="/privacy/">あつかい</a><a href="/en/" hreflang="en" lang="en">English</a></nav>
+</div></footer>
+<script src="/motion.js?v=1e7447ec" defer></script>
+</body>
+</html>
