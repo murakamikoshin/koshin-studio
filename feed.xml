@@ -7,6 +7,13 @@
   <language>ja</language>
   <atom:link href="https://koshinstudio.com/feed.xml" rel="self" type="application/rss+xml"/>
   <item>
+    <title>監査 61 本を総点検して見つけた 4 つ：朝 4 時に 51 本が固まり、鍵の期限は 55 秒で、定価の補完は「入れない」と決めた</title>
+    <link>https://koshinstudio.com/notes/audit-sweep-61/</link>
+    <guid isPermaLink="true">https://koshinstudio.com/notes/audit-sweep-61/</guid>
+    <pubDate>Fri, 16 Oct 2026 15:00:00 GMT</pubDate>
+    <description>1 日 1 回の処理が 4 時に 27 本・5 時に 24 本集まって枠を塞いでいた。楽天の巡回は 1 回 181〜480 秒で、鍵の期限は 55 秒しかなかった。数えても直せない異常を数えるのをやめ、定価を 1 店で埋める案は、測ったうえで入れなかった。</description>
+  </item>
+  <item>
     <title>公式の一覧から、「作品名だけの商品」が 393 件できていた：商品名の欄に、商品の形は入っていなかった</title>
     <link>https://koshinstudio.com/notes/catalog-seed-393/</link>
     <guid isPermaLink="true">https://koshinstudio.com/notes/catalog-seed-393/</guid>
