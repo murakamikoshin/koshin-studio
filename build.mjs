@@ -428,7 +428,7 @@ const noteThemes = [
   { title: '監視と定期処理', lead: '先着の監視、同時実行の枠、配備と再実行。動き続ける処理の設計の記録。',
     slugs: ['interval-vs-delivery', 'hot-lane', 'concurrency-slots', 'rerun-on-deploy', 'x-monitoring-gaps', 'coverage-check', 'self-inflicted'] },
   { title: 'iOS アプリと基盤', lead: 'サーバーの移行、iCloud、広告、審査、ビルド。アプリとその土台の、実際に起きたことの記録。',
-    slugs: ['vps-migration', 'icloud-overwrite', 'test-ads', 'torecadash-watchdog', 'torecadash-ci', 'itms-91064', 'xcode152-sdk', 'torecadash-review', 'review-info-needed', 'apple-signin'] },
+    slugs: ['vps-migration', 'secret-in-logs', 'icloud-overwrite', 'swallowed-failure', 'test-ads', 'torecadash-watchdog', 'torecadash-ci', 'itms-91064', 'xcode152-sdk', 'torecadash-review', 'review-info-needed', 'apple-signin'] },
   { title: 'ゲームの設計と測定', lead: '釣り合いを、AI 同士の対局や自動の試行で測って決めた記録。',
     slugs: ['negaeri-balance', 'negaeri-online', 'anago', 'sushi-measure', 'stopwatch-rank', 'shindan12'] },
   { title: '公式の情報で比べた', lead: '値段・規約・上限を、公式の情報だけで比べた記事。確認できなかったことも書いてあります。',
