@@ -426,7 +426,7 @@ const noteThemes = [
   { title: '名前と商品の取り違え', lead: '同じ名前、同じリンクが、別のものを指していた。商品と店の取り違えの記録。',
     slugs: ['split-mixups', 'same-page-not-same-store', 'catalog-seed-393', 'genre-from-catalog', 'typo-catalog', 'fake-products'] },
   { title: '監視と定期処理', lead: '先着の監視、同時実行の枠、配備と再実行。動き続ける処理の設計の記録。',
-    slugs: ['interval-vs-delivery', 'concurrency-slots', 'rerun-on-deploy', 'x-monitoring-gaps', 'coverage-check', 'self-inflicted'] },
+    slugs: ['interval-vs-delivery', 'hot-lane', 'concurrency-slots', 'rerun-on-deploy', 'x-monitoring-gaps', 'coverage-check', 'self-inflicted'] },
   { title: 'ゲームの設計と測定', lead: '釣り合いを、AI 同士の対局や自動の試行で測って決めた記録。',
     slugs: ['negaeri-balance', 'negaeri-online', 'anago', 'sushi-measure', 'stopwatch-rank', 'shindan12'] },
   { title: '公式の情報で比べた', lead: '値段・規約・上限を、公式の情報だけで比べた記事。確認できなかったことも書いてあります。',
