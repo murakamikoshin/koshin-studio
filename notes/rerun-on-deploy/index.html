@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>配備のたびに、日次の処理が丸ごと走り直していた：48 時間で 477 回、その日の Gemini 費用の 46.6% — Koshin Studio</title>
+<meta name="description" content="1 日 1 回のはずの処理が 43 回走り、Gemini の費用の 46.6% を占めていた。タイムアウトした回は最終実行時刻が書かれず、再起動のたびに取りこぼし扱いされていた。逆に、配備が 8 時に重なって、ダイジェストが 1 通も届かなかった問題も。">
+<meta property="og:title" content="配備のたびに、日次の処理が丸ごと走り直していた：48 時間で 477 回、その日の Gemini 費用の 46.6%">
+<meta property="og:description" content="1 日 1 回のはずの処理が 43 回走り、Gemini の費用の 46.6% を占めていた。タイムアウトした回は最終実行時刻が書かれず、再起動のたびに取りこぼし扱いされていた。逆に、配備が 8 時に重なって、ダイジェストが 1 通も届かなかった問題も。">
+<meta property="og:type" content="article">
+<meta name="theme-color" content="#fbfaf7">
+<link rel="icon" href="/favicon.ico?v=1697d589" sizes="48x48">
+<link rel="icon" href="/favicon.svg?v=b9d7922f" type="image/svg+xml" sizes="any">
+<link rel="icon" href="/assets/icon/icon-192.png?v=e2566235" type="image/png" sizes="192x192">
+<link rel="apple-touch-icon" href="/assets/icon/icon-180.png?v=84e7f0e6">
+<link rel="manifest" href="/site.webmanifest">
+<script>document.documentElement.className+=" js"</script>
+<link rel="stylesheet" href="/style.css?v=dd51310c">
+<meta name="google-adsense-account" content="ca-pub-3863314847163872">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3863314847163872" crossorigin="anonymous"></script>
+<link rel="canonical" href="https://koshinstudio.com/notes/rerun-on-deploy/">
+<meta property="og:url" content="https://koshinstudio.com/notes/rerun-on-deploy/">
+<meta property="og:site_name" content="Koshin Studio">
+<meta property="og:locale" content="ja_JP">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="alternate" type="application/rss+xml" title="Koshin Studio — Notes" href="https://koshinstudio.com/feed.xml">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BlogPosting","headline":"配備のたびに、日次の処理が丸ごと走り直していた：48 時間で 477 回、その日の Gemini 費用の 46.6%","url":"https://koshinstudio.com/notes/rerun-on-deploy/","description":"1 日 1 回のはずの処理が 43 回走り、Gemini の費用の 46.6% を占めていた。タイムアウトした回は最終実行時刻が書かれず、再起動のたびに取りこぼし扱いされていた。逆に、配備が 8 時に重なって、ダイジェストが 1 通も届かなかった問題も。","datePublished":"2026-10-17","dateModified":"2026-10-17","inLanguage":"ja","image":"https://koshinstudio.com/assets/og/og_notes_rerun-on-deploy.jpg","author":{"@id":"https://koshinstudio.com#studio"},"publisher":{"@id":"https://koshinstudio.com#studio"},"mainEntityOfPage":"https://koshinstudio.com/notes/rerun-on-deploy/"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Koshin Studio","item":"https://koshinstudio.com/"},{"@type":"ListItem","position":2,"name":"Notes","item":"https://koshinstudio.com/notes/"},{"@type":"ListItem","position":3,"name":"配備のたびに、日次の処理が丸ごと走り直していた：48 時間で 477 回、その日の Gemini 費用の 46.6%","item":"https://koshinstudio.com/notes/rerun-on-deploy/"}]}]}</script>
+<meta property="og:image" content="https://koshinstudio.com/assets/og/og_notes_rerun-on-deploy.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
+</head>
+<body class="article">
+<canvas id="motes"></canvas>
+
+<header class="site"><div class="wrap">
+  <a class="logo" href="/"><img class="logo-mark" src="/favicon.svg?v=b9d7922f" alt="" width="28" height="28">Koshin Studio</a>
+  <nav><a href="/works/">Works</a><a href="/notes/">Notes</a><a href="/picks/">Picks</a><a href="/calc/">Tools</a><a href="/about/">About</a></nav>
+</div></header>
+
+<main><div class="wrap">
+  <nav class="crumbs" aria-label="現在地"><a href="/">Koshin Studio</a><i aria-hidden="true">›</i><a href="/notes/">Notes</a><i aria-hidden="true">›</i><span aria-current="page">配備のたびに、日次の処理が丸ごと走り直していた：48 時間で 477 回、その日の Gemini 費用の 46.6%</span></nav>
+  <h1>配備のたびに、日次の処理が丸ごと走り直していた：48 時間で 477 回、その日の Gemini 費用の 46.6%</h1>  <div class="rule"></div>
+  <p class="lead">トレカダッシュ 開発の記録 ／ 2026年9月</p>
+
+  <p>iOS アプリ「<a href="/works/torecadash/">トレカダッシュ</a>」の裏側では、定期的に動く処理がたくさん動いています。その中に、「1 日に 1 回だけ動くはず」の処理がありました。ところが、ある日のログを数えると、<strong>その処理が 43 回動いていました</strong>。</p>
+  <p>この記事は、そこから見つかった、「配備（コードを入れ替えて再起動すること）のたびに、日次の処理が丸ごと走り直していた」不具合の記録です。</p>
+  <p class="note">数字は、2026 年 9 月 1 日の作業の記録から書いています。</p>
+<!--toc-->
+  <nav class="toc" aria-label="目次"><p>目次</p><ol><li><a href="#s1">48 時間で、477 回の追い実行</a></li><li><a href="#s2">原因：「終わった」という記録が、残っていなかった</a></li><li><a href="#s3">直し方：「タイムアウトを記録した」と「走らなかった」は別のこと</a></li><li><a href="#s4">逆の問題：追いかけすぎても、足りなくても困る</a></li><li><a href="#s5">分かったこと</a></li></ol></nav>
+<!--/toc-->
+  <h2 class="rv" id="s1">48 時間で、477 回の追い実行</h2>
+  <p>処理の実行は、時刻になると動く仕組み（cron）で決まっています。再起動すると、その瞬間にあった予定は、消えます。そこで、起動したときに「前回の実行が古すぎる処理」を探して、取りこぼしとして追いかけて動かす仕組みを入れていました。この追い実行の判断は、「前回の実行時刻が、間隔の 1.05 倍より古いか」でした。</p>
+  <p>この日の 48 時間で数えると、追い実行は<strong>477 回</strong>ありました。中でも、記事に商品の紐付けを直す日次の処理は、1 日 1 回のはずが<strong>43 回</strong>動いていて、その日の Gemini（AI）の費用の<strong>46.6%</strong>、呼び出しにして 1,295 回を占めていました。やっていたのは、同じ記事に、もう一度 AI で値段を付けているだけで、得られるものは何もありません。</p>
+
+  <h2 class="rv" id="s2">原因：「終わった」という記録が、残っていなかった</h2>
+  <p>この処理は、時間の上限（540 秒）を超えると、「タイムアウトした」と記録されます。ただし、JavaScript には、動いている処理を途中で止める仕組みがないので、<strong>タイムアウトと記録されたあとも、本体は最後まで動き続けます</strong>。</p>
+  <p>問題は、「最後の実行時刻」の書き込みが、成功して終わったときだけだったことです。タイムアウトした回は、本体が最後まで終わっても、実行時刻が書かれません。すると、再起動のたびに、こう判断されます。</p>
+  <ol>
+    <li>この処理の最後の実行は、記録が無い（または古い）。</li>
+    <li>間隔の 1.05 倍より古いから、取りこぼしだ。</li>
+    <li>いま走らせよう。</li>
+  </ol>
+  <p>日次の処理が、再起動のたびに、丸ごと走っていました。配備を 1 日に何度かするだけで、日に 43 回です。</p>
+
+  <h2 class="rv" id="s3">直し方：「タイムアウトを記録した」と「走らなかった」は別のこと</h2>
+  <p>タイムアウトと記録されても、<strong>本体が最後まで終わったなら、その回は走ったものとして記録する</strong>ようにしました。失敗して終わったときだけは、記録しません。</p>
+  <p>この直しは、時間の上限を下げる対策と、必ず対にしておく必要がありました。上限だけを下げても、実行時刻が残らなければ、追い実行は止まりません。</p>
+
+  <h2 class="rv" id="s4">逆の問題：追いかけすぎても、足りなくても困る</h2>
+  <p>この追い実行には、反対の問題もありました。8 月 31 日、私の配備が、朝 8 時ちょうどに重なりました。時刻に動く仕組みは、「その瞬間」にしか発火しないので、<strong>8 時のダイジェスト通知が、1 通も送られませんでした</strong>。</p>
+  <p>ダイジェストは、1 日に 5 回（6・8・12・18・21 時）です。平均の間隔は 4.8 時間で、追い実行の下限（6 時間）に届かず、「待てば次が来る」と見なされていました。ところが、利用者にとっては、その時刻を選んでいた人の 1 日ぶんが、消えたのです。</p>
+  <p>直し方は、<strong>利用者への届け物に関わる処理だけ</strong>、起動時に「直前の 55 分の予定を取りこぼしていないか」を見て、1 回流す形でした。予定から 10 分たつまでは、まだ走っていないだけかもしれないので、待ちます。</p>
+  <p>ここで、<strong>全部の処理に広げては、いけません</strong>。実データで数えたら、再起動のたびに 33 件が「取りこぼし」と判定され、ほとんどは再起動で中断されただけでした。全部を追いかけると、取得サービスや API の上限を、無駄に食います。足す基準は、<strong>「取りこぼすと、利用者への届け物が消えるか」</strong>です。</p>
+
+  <h2 class="rv" id="s5">分かったこと</h2>
+  <blockquote>「記録が無い」は、「走らなかった」とは限らない。</blockquote>
+  <ul>
+    <li><strong>実行の記録は、結果のあとに必ず書く。</strong>成功のときだけ書くと、タイムアウトした回が「未実行」に見えます。</li>
+    <li><strong>追い実行は、少なすぎても多すぎても壊れる。</strong>届け物は追いかける。それ以外は、次の回を待つ。</li>
+    <li><strong>配備のたびに何が走るかを、数える。</strong>48 時間の 477 回は、数えるまで見えていませんでした。</li>
+    <li><strong>同じ記事に、同じ仕事を繰り返すと、費用が溶ける。</strong>その日の費用の 46.6% が、何も生まない呼び出しでした。</li>
+  </ul>
+
+
+  <div class="ad-slot" data-slot="footer" hidden></div>
+<!--/ad-->
+
+  <div class="rule" style="margin:40px 0 22px"></div>
+  <p class="eyebrow">この話に出てくるもの</p>
+  <ul class="plain">
+    <li><a href="/works/torecadash/">トレカダッシュ</a> — トレカの抽選・予約・先着の情報を集める iPhone アプリ</li>
+    <li><a href="/notes/gemini-meter/">Gemini の費用を削る前に、計器を疑った</a> — 同じ費用の、別の見つけ方</li>
+    <li><a href="/notes/blocked-page/">「取れた」と読んでいたのは、ただの案内ページだった</a> — 記録と実際が食い違っていた、別の失敗</li>
+  </ul>
+
+<!--related-->
+  <div class="rule" style="margin:40px 0 22px"></div>
+  <p class="eyebrow">ほかの記録</p>
+  <ul class="plain">
+    <li><a href="/notes/notify-gate/">通知は取り消せない：直近 72 時間の通知の 19% が誤通知で、関門が通知の「後」に効いていた</a> — 直近 72 時間に通知した 644 件のうち 122 件（19%）が誤通知だった。記事の関門は後から記事を下げるが、通知は保存の約 0.6 秒後に飛ぶ。下げた 30 件のうち 25 件はもう通知済みだった。通知を送る側の入口に同じ関門を通した記録。</li>
+    <li><a href="/notes/gemini-meter/">Gemini の費用を削る前に、計器を疑った：単価・内訳・キャッシュの 3 つが壊れていて、キャッシュの条件は測り直すと変わっていた</a> — Gemini の費用の計測は 3 か所とも壊れていた（単価は 1/2.6 の過小表示、31 の用途が 1 つに潰れ、キャッシュ未計上）。キャッシュが効く条件は 9 月は約 8,000、10 月は約 4,000 トークンと食い違った。指示文を水増しすると判定が 9% ずれた。</li>
+    <li><a href="/notes/firestore-91/">Firestore の費用を円で出したら、読み取りの 91% が 1 か所だった：キャッシュを入れても効かなかった理由</a> — Firestore を初めて円で見たら、月 1.3 万円で Gemini とほぼ同額だった。読み取りの 91% は商品一覧の読み直し。60 秒キャッシュが効かなかったのは、32 件が同時に動いていたから。「読み込み中の約束」を覚えて直した記録。</li>
+  </ul>
+<!--/related-->
+
+<!--comments-->
+  <section class="comments" id="comments" data-repo="murakamikoshin/koshin-studio" data-repo-id="R_kgDOURc3ew"
+    data-category="Announcements" data-category-id="DIC_kwDOURc3e84DHTVr">
+    <h2 id="comments-h">コメント</h2>
+    <p>感想や、記事の間違いの指摘は、ここへ。書くには、GitHub のアカウントが要ります。</p>
+    <p><button type="button" class="btn ghost" id="load-comments">コメントを開く</button></p>
+    <p class="note">押すと、giscus（giscus.app）と GitHub に接続します。押さなければ、接続しません。詳しくは<a href="/privacy/">あつかい</a>に書いています。</p>
+    <div id="giscus-box"></div>
+  </section>
+<!--/comments-->
+</div>
+</main>
+
+<footer class="site"><div class="wrap">
+  <span>© 2026 Koshin Studio</span>
+  <div class="sns-row"></div>
+  <nav><a href="/picks/">Picks</a><a href="/calc/">Tools</a><a href="/about/">About</a><a href="/privacy/">あつかい</a><a href="/en/" hreflang="en" lang="en">English</a></nav>
+</div></footer>
+<script src="/motion.js?v=1e7447ec" defer></script>
+</body>
+</html>

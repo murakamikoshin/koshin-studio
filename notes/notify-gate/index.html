@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>通知は取り消せない：直近 72 時間の通知の 19% が誤通知で、関門が通知の「後」に効いていた — Koshin Studio</title>
+<meta name="description" content="直近 72 時間に通知した 644 件のうち 122 件（19%）が誤通知だった。記事の関門は後から記事を下げるが、通知は保存の約 0.6 秒後に飛ぶ。下げた 30 件のうち 25 件はもう通知済みだった。通知を送る側の入口に同じ関門を通した記録。">
+<meta property="og:title" content="通知は取り消せない：直近 72 時間の通知の 19% が誤通知で、関門が通知の「後」に効いていた">
+<meta property="og:description" content="直近 72 時間に通知した 644 件のうち 122 件（19%）が誤通知だった。記事の関門は後から記事を下げるが、通知は保存の約 0.6 秒後に飛ぶ。下げた 30 件のうち 25 件はもう通知済みだった。通知を送る側の入口に同じ関門を通した記録。">
+<meta property="og:type" content="article">
+<meta name="theme-color" content="#fbfaf7">
+<link rel="icon" href="/favicon.ico?v=1697d589" sizes="48x48">
+<link rel="icon" href="/favicon.svg?v=b9d7922f" type="image/svg+xml" sizes="any">
+<link rel="icon" href="/assets/icon/icon-192.png?v=e2566235" type="image/png" sizes="192x192">
+<link rel="apple-touch-icon" href="/assets/icon/icon-180.png?v=84e7f0e6">
+<link rel="manifest" href="/site.webmanifest">
+<script>document.documentElement.className+=" js"</script>
+<link rel="stylesheet" href="/style.css?v=dd51310c">
+<meta name="google-adsense-account" content="ca-pub-3863314847163872">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3863314847163872" crossorigin="anonymous"></script>
+<link rel="canonical" href="https://koshinstudio.com/notes/notify-gate/">
+<meta property="og:url" content="https://koshinstudio.com/notes/notify-gate/">
+<meta property="og:site_name" content="Koshin Studio">
+<meta property="og:locale" content="ja_JP">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="alternate" type="application/rss+xml" title="Koshin Studio — Notes" href="https://koshinstudio.com/feed.xml">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BlogPosting","headline":"通知は取り消せない：直近 72 時間の通知の 19% が誤通知で、関門が通知の「後」に効いていた","url":"https://koshinstudio.com/notes/notify-gate/","description":"直近 72 時間に通知した 644 件のうち 122 件（19%）が誤通知だった。記事の関門は後から記事を下げるが、通知は保存の約 0.6 秒後に飛ぶ。下げた 30 件のうち 25 件はもう通知済みだった。通知を送る側の入口に同じ関門を通した記録。","datePublished":"2026-10-17","dateModified":"2026-10-17","inLanguage":"ja","image":"https://koshinstudio.com/assets/og/og_notes_notify-gate.jpg","author":{"@id":"https://koshinstudio.com#studio"},"publisher":{"@id":"https://koshinstudio.com#studio"},"mainEntityOfPage":"https://koshinstudio.com/notes/notify-gate/"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Koshin Studio","item":"https://koshinstudio.com/"},{"@type":"ListItem","position":2,"name":"Notes","item":"https://koshinstudio.com/notes/"},{"@type":"ListItem","position":3,"name":"通知は取り消せない：直近 72 時間の通知の 19% が誤通知で、関門が通知の「後」に効いていた","item":"https://koshinstudio.com/notes/notify-gate/"}]}]}</script>
+<meta property="og:image" content="https://koshinstudio.com/assets/og/og_notes_notify-gate.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
+</head>
+<body class="article">
+<canvas id="motes"></canvas>
+
+<header class="site"><div class="wrap">
+  <a class="logo" href="/"><img class="logo-mark" src="/favicon.svg?v=b9d7922f" alt="" width="28" height="28">Koshin Studio</a>
+  <nav><a href="/works/">Works</a><a href="/notes/">Notes</a><a href="/picks/">Picks</a><a href="/calc/">Tools</a><a href="/about/">About</a></nav>
+</div></header>
+
+<main><div class="wrap">
+  <nav class="crumbs" aria-label="現在地"><a href="/">Koshin Studio</a><i aria-hidden="true">›</i><a href="/notes/">Notes</a><i aria-hidden="true">›</i><span aria-current="page">通知は取り消せない：直近 72 時間の通知の 19% が誤通知で、関門が通知の「後」に効いていた</span></nav>
+  <h1>通知は取り消せない：直近 72 時間の通知の 19% が誤通知で、関門が通知の「後」に効いていた</h1>  <div class="rule"></div>
+  <p class="lead">トレカダッシュ 開発の記録 ／ 2026年9月</p>
+
+  <p>iOS アプリ「<a href="/works/torecadash/">トレカダッシュ</a>」は、トレカの抽選販売の情報を集めて、新しい情報が見つかると、利用者のスマートフォンに通知します。集めた記事には、「本当に応募できる抽選か」を確かめる関門（フィルター）があります。当選者の発表、買取の告知、カード以外の商品、などを出さないための仕組みです。</p>
+  <p>ところが、2026 年 9 月 20 日の点検で、<strong>通知した記事の約 5 件に 1 件が、関門を通るべきではない記事だった</strong>と分かりました。関門はあったのに、通知は止まっていませんでした。</p>
+  <p class="note">この記事は、2026 年 9 月 20 日の再点検の記録から書いています。</p>
+<!--toc-->
+  <nav class="toc" aria-label="目次"><p>目次</p><ol><li><a href="#s1">直近 72 時間の通知を、全部数えた</a></li><li><a href="#s2">関門は、「出すか」を後から決めていた</a></li><li><a href="#s3">もう 1 つの原因：取り戻しで、古い投稿が新着になった</a></li><li><a href="#s4">直し方：通知を送る側で、同じ関門を通す</a></li><li><a href="#s5">分かったこと</a></li></ol></nav>
+<!--/toc-->
+  <h2 class="rv" id="s1">直近 72 時間の通知を、全部数えた</h2>
+  <p>点検の方法は、単純です。直近 72 時間に通知した記事を全部取り出して、1 件ずつ「通知してよかったか」を判定し直しました。</p>
+  <div class="scroll rv"><table>
+    <thead><tr><th>通知した件数</th><th>誤通知</th><th>割合</th></tr></thead>
+    <tbody><tr><td>644 件</td><td><strong>122 件</strong></td><td><strong>19%</strong></td></tr></tbody>
+  </table></div>
+  <p>誤通知の内訳は、次のとおりです。</p>
+  <div class="scroll rv"><table>
+    <thead><tr><th>誤通知の理由</th><th>件数</th></tr></thead>
+    <tbody>
+      <tr><td>当選者向けの案内（応募できない）</td><td>30</td></tr>
+      <tr><td>古い投稿（何日も前の投稿が、新着のように通知された）</td><td>27</td></tr>
+      <tr><td>期限切れ</td><td>11</td></tr>
+      <tr><td>応募する手段が無い</td><td>14</td></tr>
+      <tr><td>カード以外の商品</td><td>10</td></tr>
+      <tr><td>参加条件のある抽選</td><td>8</td></tr>
+      <tr><td>そのほか</td><td>22</td></tr>
+    </tbody>
+  </table></div>
+
+  <h2 class="rv" id="s2">関門は、「出すか」を後から決めていた</h2>
+  <p>記事の関門は、あとから記事を「非表示」に下げる形でも働いていました。ところが、通知は、<strong>記事を保存した約 0.6 秒後</strong>に飛びます。関門が後から記事を下げても、通知は、もう送られています。</p>
+  <p>実際に、関門が後から非表示にした記事 30 件のうち、<strong>25 件は、すでにプッシュ通知が届いた後</strong>でした。画面からは消えても、スマートフォンに届いた通知は、取り消せません。</p>
+
+  <h2 class="rv" id="s3">もう 1 つの原因：取り戻しで、古い投稿が新着になった</h2>
+  <p>X の監視が止まっていた期間がありました。9 月 19 日 12:44 から、その分を取り戻す処理が動きました。このとき、<strong>9 月 13 日から 18 日の投稿が、新着として 367 件まとめて通知</strong>されました。</p>
+  <p>止まっていた間の投稿を取り込むのは正しいことです。しかし、「いつ見つけたか」ではなく、<strong>投稿の日付</strong>で見ないと、何日も前の投稿が、いま出たばかりの情報に見えてしまいます。</p>
+
+  <h2 class="rv" id="s4">直し方：通知を送る側で、同じ関門を通す</h2>
+  <p>直し方は、「保存のときに効く関門」を増やすだけでは足りない、という点にありました。通知は取り消せないので、<strong>通知を送る関数の入口</strong>に、記事の関門と同じ判定を通すようにしました。</p>
+  <ul>
+    <li>判定は、記事を保存する前の関門（<code>screenArticleBeforeSave</code>）に足す。通知を送る関数の入口も、同じ関数を通る。判定が 2 か所に別々に書かれて、食い違うことがない。</li>
+    <li>古い投稿は、保存した日ではなく、<strong>投稿日</strong>で見る。</li>
+    <li>取り戻しや再起動のあとは、通知を見送った理由の内訳を、必ず確認する。</li>
+  </ul>
+
+  <h2 class="rv" id="s5">分かったこと</h2>
+  <blockquote>取り消せないものは、出す前に止める。</blockquote>
+  <ul>
+    <li><strong>関門は、取り消せない出口の手前に置く。</strong>画面に出す関門は、あとから下げられます。通知は、下げられません。</li>
+    <li><strong>保存時の判定と、出口の判定は、同じものを使う。</strong>片方にだけ足すと、すり抜ける道が残ります。</li>
+    <li><strong>「新しい」は、日付で決める。</strong>見つけた日ではなく、投稿された日です。</li>
+    <li><strong>全件を数える。</strong>通知した 644 件を 1 件ずつ判定し直して、はじめて 19% と分かりました。</li>
+  </ul>
+
+
+  <div class="ad-slot" data-slot="footer" hidden></div>
+<!--/ad-->
+
+  <div class="rule" style="margin:40px 0 22px"></div>
+  <p class="eyebrow">この話に出てくるもの</p>
+  <ul class="plain">
+    <li><a href="/works/torecadash/">トレカダッシュ</a> — トレカの抽選・予約・先着の情報を集める iPhone アプリ</li>
+    <li><a href="/notes/fail-open/">確認できなかったときに、通していた</a> — 関門が「通す」側に倒れていた失敗</li>
+    <li><a href="/notes/typo-catalog/">一度だけ生まれた誤字が、店ごとに増えていった</a> — 入口の関門と、保険のチェックの限界</li>
+  </ul>
+
+<!--related-->
+  <div class="rule" style="margin:40px 0 22px"></div>
+  <p class="eyebrow">ほかの記録</p>
+  <ul class="plain">
+    <li><a href="/notes/gemini-meter/">Gemini の費用を削る前に、計器を疑った：単価・内訳・キャッシュの 3 つが壊れていて、キャッシュの条件は測り直すと変わっていた</a> — Gemini の費用の計測は 3 か所とも壊れていた（単価は 1/2.6 の過小表示、31 の用途が 1 つに潰れ、キャッシュ未計上）。キャッシュが効く条件は 9 月は約 8,000、10 月は約 4,000 トークンと食い違った。指示文を水増しすると判定が 9% ずれた。</li>
+    <li><a href="/notes/firestore-91/">Firestore の費用を円で出したら、読み取りの 91% が 1 か所だった：キャッシュを入れても効かなかった理由</a> — Firestore を初めて円で見たら、月 1.3 万円で Gemini とほぼ同額だった。読み取りの 91% は商品一覧の読み直し。60 秒キャッシュが効かなかったのは、32 件が同時に動いていたから。「読み込み中の約束」を覚えて直した記録。</li>
+    <li><a href="/notes/tco-relay/">「確認済み」の印が付いていたのに、リンク先を一度も読めていなかった：t.co の中継ページ</a> — X の告知の応募リンクを、ブラウザの名乗りを付けて開くと、t.co は転送せず中継ページを返した。表示中の 220 件が全部読めておらず、9 件は閉じたフォームだった。直し方と、誤った「確認済み」の印の外し方の記録。</li>
+  </ul>
+<!--/related-->
+
+<!--comments-->
+  <section class="comments" id="comments" data-repo="murakamikoshin/koshin-studio" data-repo-id="R_kgDOURc3ew"
+    data-category="Announcements" data-category-id="DIC_kwDOURc3e84DHTVr">
+    <h2 id="comments-h">コメント</h2>
+    <p>感想や、記事の間違いの指摘は、ここへ。書くには、GitHub のアカウントが要ります。</p>
+    <p><button type="button" class="btn ghost" id="load-comments">コメントを開く</button></p>
+    <p class="note">押すと、giscus（giscus.app）と GitHub に接続します。押さなければ、接続しません。詳しくは<a href="/privacy/">あつかい</a>に書いています。</p>
+    <div id="giscus-box"></div>
+  </section>
+<!--/comments-->
+</div>
+</main>
+
+<footer class="site"><div class="wrap">
+  <span>© 2026 Koshin Studio</span>
+  <div class="sns-row"></div>
+  <nav><a href="/picks/">Picks</a><a href="/calc/">Tools</a><a href="/about/">About</a><a href="/privacy/">あつかい</a><a href="/en/" hreflang="en" lang="en">English</a></nav>
+</div></footer>
+<script src="/motion.js?v=1e7447ec" defer></script>
+</body>
+</html>
