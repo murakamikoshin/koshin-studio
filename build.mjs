@@ -128,6 +128,15 @@ writeFileSync(here + '/works/index.html',
   <h1>Works</h1>
   <div class="rule"></div>
   <p class="lead">作ったものの一覧です。増えたらここに並びます。</p>
+  <p class="rv">ブラウザですぐ遊べるゲームが 3 つ、診断アプリが 1 つ、iPhone のアプリが 1 つあります。どれも、登録なしで始められます（iPhone のアプリは、App Store から入れます）。それぞれのページに、<strong>遊び方、仕組み、預かる情報、まだ確かめていないこと</strong>を書いています。</p>
+  <ul class="rv">
+    <li><strong>すし積む</strong> — 寿司のネタを落として、同じものを合体させる、物理演算のパズル。</li>
+    <li><strong>寝返り将棋</strong> — 6×6 の盤で、挟んだ駒が裏返って寝返る将棋。AI 対戦とオンライン対戦があります。</li>
+    <li><strong>10秒ピッタリで止めろ！</strong> — 数字も音も出ない画面で、頭の中で 10 秒を数えて止める。</li>
+    <li><strong>ガチアニメ診断</strong> — 6 つの軸で、64 タイプに分ける診断。</li>
+    <li><strong>トレカダッシュ</strong> — トレカの抽選・予約・先着の情報を集めた iPhone アプリ。</li>
+  </ul>
+  <p class="rv">作り方や、測ったことの記録は、<a href="/notes/">Notes</a> にあります。たとえば、<a href="/notes/negaeri-balance/">寝返り将棋のルールを AI 同士の対局で決めた記録</a>や、<a href="/notes/stopwatch-rank/">10 秒ゲームのランキングを公平にした記録</a>です。</p>
 
   <h2 class="sr">作品の一覧</h2>
   <div class="chips rv">${chips}</div>
