@@ -4,3 +4,17 @@
 /stack/   /about/  301
 /contact  /about/  301
 /contact/ /about/  301
+
+# 2026-10-17 薄い翻訳ページを整理（英語版へ）
+/zh/*  /en/  301
+/es/*  /en/  301
+/pt/*  /en/  301
+/fr/*  /en/  301
+/de/*  /en/  301
+/ru/*  /en/  301
+/id/*  /en/  301
+/ko/*  /en/  301
+/tr/*  /en/  301
+/zh-hant/*  /en/  301
+/vi/*  /en/  301
+/th/*  /en/  301

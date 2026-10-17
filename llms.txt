@@ -114,18 +114,6 @@
 - [A bulk update hit “all articles”: count before you write, and break your tests to prove they work](https://koshinstudio.com/en/notes/bulk-accident/): A bulk job hit every article and wrongly restored 18 items. How I reverted them from status history and proved new tests work by breaking rules one at a time.
 - [Pokémon card sleeves and loaders: sizes and what “pt” means](https://koshinstudio.com/en/notes/card-supplies-guide/): What to check before buying Pokémon card sleeves, toploaders and deck boxes: standard vs small size, what 35pt means, and a buying checklist. Not a hands-on review; unverified points are listed.
 - [English hub](https://koshinstudio.com/en/): Games, tools and development logs in English
-- [简体中文](https://koshinstudio.com/zh/): Games and tools in this language
-- [Español](https://koshinstudio.com/es/): Games and tools in this language
-- [Português](https://koshinstudio.com/pt/): Games and tools in this language
-- [Français](https://koshinstudio.com/fr/): Games and tools in this language
-- [Deutsch](https://koshinstudio.com/de/): Games and tools in this language
-- [Русский](https://koshinstudio.com/ru/): Games and tools in this language
-- [Bahasa Indonesia](https://koshinstudio.com/id/): Games and tools in this language
-- [한국어](https://koshinstudio.com/ko/): Games and tools in this language
-- [Türkçe](https://koshinstudio.com/tr/): Games and tools in this language
-- [繁體中文](https://koshinstudio.com/zh-hant/): Games and tools in this language
-- [Tiếng Việt](https://koshinstudio.com/vi/): Games and tools in this language
-- [ไทย](https://koshinstudio.com/th/): Games and tools in this language
 
 ## そのほか
 - [About](https://koshinstudio.com/about/): 運営者・連絡先・記事の書き方と訂正について
