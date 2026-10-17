@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Fixing a gate does not fix existing data: a “tried already” mark, a URL marker and a lookup table — Koshin Studio</title>
+<meta name="description" content="After fixing a judgement, 12 of 32 existing articles stayed wrong (the skip mark lasts 7 days); a marker stored in the URL was lost on link rewrite and 111 articles were split again; removing a table key left written values. Five reports had one shape.">
+<meta property="og:title" content="Fixing a gate does not fix existing data: a “tried already” mark, a URL marker and a lookup table">
+<meta property="og:description" content="After fixing a judgement, 12 of 32 existing articles stayed wrong (the skip mark lasts 7 days); a marker stored in the URL was lost on link rewrite and 111 articles were split again; removing a table key left written values. Five reports had one shape.">
+<meta property="og:type" content="article">
+<meta name="theme-color" content="#fbfaf7">
+<link rel="icon" href="/favicon.ico?v=1697d589" sizes="48x48">
+<link rel="icon" href="/favicon.svg?v=b9d7922f" type="image/svg+xml" sizes="any">
+<link rel="icon" href="/assets/icon/icon-192.png?v=e2566235" type="image/png" sizes="192x192">
+<link rel="apple-touch-icon" href="/assets/icon/icon-180.png?v=84e7f0e6">
+<link rel="manifest" href="/site.webmanifest">
+<script>document.documentElement.className+=" js"</script>
+<link rel="stylesheet" href="/style.css?v=dd51310c">
+<meta name="google-adsense-account" content="ca-pub-3863314847163872">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3863314847163872" crossorigin="anonymous"></script>
+<link rel="canonical" href="https://koshinstudio.com/en/notes/fix-the-existing-data/">
+<meta property="og:url" content="https://koshinstudio.com/en/notes/fix-the-existing-data/">
+<meta property="og:site_name" content="Koshin Studio">
+<meta property="og:locale" content="en_US">
+<link rel="alternate" hreflang="ja" href="https://koshinstudio.com/notes/fix-the-existing-data/">
+<link rel="alternate" hreflang="en" href="https://koshinstudio.com/en/notes/fix-the-existing-data/">
+<link rel="alternate" hreflang="x-default" href="https://koshinstudio.com/en/notes/fix-the-existing-data/">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="alternate" type="application/rss+xml" title="Koshin Studio — Notes" href="https://koshinstudio.com/feed.xml">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BlogPosting","headline":"Fixing a gate does not fix existing data: a “tried already” mark, a URL marker and a lookup table","url":"https://koshinstudio.com/en/notes/fix-the-existing-data/","description":"After fixing a judgement, 12 of 32 existing articles stayed wrong (the skip mark lasts 7 days); a marker stored in the URL was lost on link rewrite and 111 articles were split again; removing a table key left written values. Five reports had one shape.","datePublished":"2026-10-17","dateModified":"2026-10-17","inLanguage":"en","image":"https://koshinstudio.com/assets/og/og_en_notes_fix-the-existing-data.jpg","author":{"@id":"https://koshinstudio.com#studio"},"publisher":{"@id":"https://koshinstudio.com#studio"},"mainEntityOfPage":"https://koshinstudio.com/en/notes/fix-the-existing-data/"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Koshin Studio","item":"https://koshinstudio.com/en/"},{"@type":"ListItem","position":2,"name":"Fixing a gate does not fix existing data: a “tried already” mark, a URL marker and a lookup table","item":"https://koshinstudio.com/en/notes/fix-the-existing-data/"}]}]}</script>
+<meta property="og:image" content="https://koshinstudio.com/assets/og/og_en_notes_fix-the-existing-data.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
+</head>
+<body class="article">
+<canvas id="motes"></canvas>
+
+<header class="site"><div class="wrap">
+  <a class="logo" href="/"><img class="logo-mark" src="/favicon.svg?v=b9d7922f" alt="" width="28" height="28">Koshin Studio</a>
+  <nav><a href="/works/">Works</a><a href="/notes/">Notes</a><a href="/picks/">Picks</a><a href="/calc/">Tools</a><a href="/about/">About</a></nav>
+</div></header>
+
+<main><div class="wrap">
+  <nav class="crumbs" aria-label="You are here"><a href="/en/">Koshin Studio</a><i aria-hidden="true">›</i><span aria-current="page">Fixing existing data</span></nav>
+  <h1>Fixing a gate does not fix existing data: a “tried already” mark, a URL marker and a lookup table</h1>  <div class="rule"></div>
+<!--lang-->
+  <p class="note"><a href="/notes/fix-the-existing-data/" hreflang="ja" lang="ja">日本語版</a></p>
+<!--/lang-->  <p class="lead">Development log of the Toreca Dash app / August–September 2026</p>
+
+  <p>While developing my app Toreca Dash, I kept getting the same report in the same shape: “<strong>I fixed it, but it is not fixed</strong>”. The code is fixed, the tests pass, yet the screen still shows the mistake.</p>
+  <p>The reason: fixing code does not rewrite <strong>data that is already saved</strong>. These are three forms of it, with real cases.</p>
+  <p class="note">Numbers come from my work logs of 26 August, 3 September and 8 September 2026.</p>  <h2 class="rv" id="s1">1. I loosened a gate, but a “tried already” mark remained (3 September)</h2>
+  <p>A product-matching gate had a mistake. I fixed it and deployed. Yet <strong>12 of the 32 existing articles stayed wrong</strong>.</p>
+  <p>The reason was the “skip mark”. When the gate once says “this pairing is wrong”, the article gets a “tried already” mark and <strong>is not retried for 7 days</strong>. Fixing the judgement does not revisit it while the mark lasts. Among those 12 were <strong>4 open lotteries</strong> closing on 5 and 6 September. Lotteries close in days, so waiting for the mark to expire means they vanish. The same day I found the same shape again (a 14-day cooldown in a process that splits into multiple products).</p>
+  <p>The fix: before skipping because of a mark, <strong>re-check with the current judgement</strong>. If the judgement is a pure function that uses neither AI nor external calls, it costs nothing. If you also store “what material I judged with” (for example whether I looked at the image), you can retry only when new material appears.</p>
+
+  <h2 class="rv" id="s2">2. A state marker was stored in the URL (3 September)</h2>
+  <p>Split articles (children) need a marker saying “already split”. At the time I put it in <strong>a part of the URL</strong> (<code>?_product=product-name</code>): “never split again if this is present”.</p>
+  <p>But this project later <strong>rewrites application URLs</strong> to the store’s official page. The same day I started running that rewrite over everything. Anything stored in the URL is certain to be lost. Of 832 child articles, <strong>111 lost their marker</strong>, looked like “parents not yet split”, and were split again. Broken articles pointing at themselves as the “replacement” went from 8 to 14 in 30 minutes. In the past, the same route had once made 1 article into 18.</p>
+  <p>The fix was to decide using a <strong>field that does not get rewritten</strong>, such as <code>splitFromArticleId</code>. The other lesson: on a day you let “a process that only applied to some” run over everything, <strong>check what depends on the fields that process rewrites</strong>.</p>
+
+  <h2 class="rv" id="s3">3. Removing a key from a table does not remove written values (26 August)</h2>
+  <p>I removed a store chain from the “nearest branch” lookup table. It was gone from the code. But the <strong>“nearest branch key” written on articles stayed</strong>. The app thought “there is a key, so show a distance”, prepared it and got no answer (the server returns 400 for an unresolvable key). Three articles were stuck forever.</p>
+  <p>A change to a table is a change to code; migrating data does not happen automatically. When you remove something from a table, <strong>clean the existing data in the same change</strong>. This pairs with the mistake of adding a new hidden flag and forgetting to add it to the restore step: that is a miss on the adding side, this is a miss on the removing side.</p>
+  <p>Cleaning can reveal new anomalies in audits. Those are real holes that were hidden. I did not restore the key to hide them.</p>
+
+  <h2 class="rv" id="s4">Five reports of one shape (8 September)</h2>
+  <p>On 8 September, five of the seven things found by running all 61 audits had <strong>the same shape</strong>: “a mechanism exists to fix it, but it does not reach the target, or never gets its turn”.</p>
+  <div class="scroll rv"><table>
+    <thead><tr><th>Symptom</th><th>Root</th></tr></thead>
+    <tbody>
+      <tr><td>Opening days mixed into store names (4th report)</td><td>The fixer and the gate were different functions; the comment “same yardstick” was false</td></tr>
+      <tr><td>A notification opens an article that does not exist (322)</td><td>The mark (split) was missing from the target query of the filling job</td></tr>
+      <tr><td>Official events still displayed</td><td>The rejecting gate existed, but its re-apply never got a turn</td></tr>
+      <tr><td>Wrong-unit reference prices (24)</td><td>The fix was buried in a 25-job rotation, one lap 2.5 days</td></tr>
+      <tr><td>“19 deferred to the next run for time budget”</td><td>A cheap fix shared a budget and rotation with an expensive one</td></tr>
+    </tbody>
+  </table></div>
+  <p>A gate protects only new articles. Fixing existing articles is a separate process, and if that does not run, “fixed but not fixed” repeats. When the same report keeps coming, you have usually fixed the entrance but not the exit (existing data).</p>
+  <p>The shared solution was to take “re-apply the save-time gate to existing articles” out of the rotation and run it every time. It reads articles once and passes them through the gate (no AI or external call; at most 20 articles and 50 marks per run).</p>
+
+  <h2 class="rv" id="s5">What I learned</h2>
+  <blockquote>When you fix the entrance, fix the exit (existing data) too.</blockquote>
+  <ul>
+    <li><strong>When you add a gate, check that its re-apply runs every time.</strong> A gate protects only new articles.</li>
+    <li><strong>Re-check “tried already” marks with the current judgement.</strong> Waiting for expiry means the lottery is over.</li>
+    <li><strong>Put state markers in fields that are not rewritten.</strong> URLs get replaced later.</li>
+    <li><strong>When you remove from a table, clean the data.</strong> A code change does not move data.</li>
+    <li><strong>When a report comes twice, suspect the exit.</strong> Fixing the entrance is not enough.</li>
+  </ul>
+
+  <p class="note">This is the English version of <a href="/notes/fix-the-existing-data/" hreflang="ja" lang="ja">the original Japanese article</a>.</p>
+
+  <div class="rule" style="margin:40px 0 22px"></div>
+  <p class="eyebrow">More in English</p>
+  <ul class="plain">
+    <li><a href="/en/">All English pages</a></li>
+    <li><a href="/en/works/torecadash/">Toreca Dash</a></li>
+  </ul>
+</div>
+</main>
+
+<footer class="site"><div class="wrap"></div></footer>
+<script src="/motion.js?v=1e7447ec" defer></script>
+</body>
+</html>

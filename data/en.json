@@ -1,5 +1,40 @@
 [
   {
+    "ja": "/notes/hot-lane/",
+    "en": "/en/notes/hot-lane/",
+    "title": "When you cannot watch everything quickly: popular 128 of 427 sets run fast, and the fastest lane yields to the budget",
+    "date": "2026-10-17",
+    "blurb": "Full laps over 427 sets took 4 to 24 hours. A separate lane for 128 popular sets and truly once-a-minute checks for popular items; batching stopped another monitor and measuring over a short window misjudged cost."
+  },
+  {
+    "ja": "/notes/fix-the-existing-data/",
+    "en": "/en/notes/fix-the-existing-data/",
+    "title": "Fixing a gate does not fix existing data: a “tried already” mark, a URL marker and a lookup table",
+    "date": "2026-10-17",
+    "blurb": "After fixing a judgement, 12 of 32 existing articles stayed wrong (the skip mark lasts 7 days); a marker stored in the URL was lost on link rewrite and 111 articles were split again; removing a table key left written values. Five reports had one shape."
+  },
+  {
+    "ja": "/notes/genre-from-catalog/",
+    "en": "/en/notes/genre-from-catalog/",
+    "title": "Fixing product genre from the official catalogue: three dry runs took 13 changes down to 4",
+    "date": "2026-10-17",
+    "blurb": "A Duel Masters product was registered as Pokémon. Making the official catalogue the source of truth, my first dry run would have moved nine correct Weiss Schwarz products to another game; after three dry runs there were 0 misfires."
+  },
+  {
+    "ja": "/notes/catalog-seed-393/",
+    "en": "/en/notes/catalog-seed-393/",
+    "title": "393 “work-name-only” products from an official list: the name field did not contain the product form",
+    "date": "2026-10-17",
+    "blurb": "An official-list import created 502 products in one day (usually 1–10). The name field held only the work name; the form was in the category. Cleaning 393 and re-registering 328 correct names took alias collisions from 0 pairs to 250."
+  },
+  {
+    "ja": "/notes/negaeri-online/",
+    "en": "/en/notes/negaeri-online/",
+    "title": "Online play that trusts nothing the client says: the server decides moves, clocks and results",
+    "date": "2026-10-17",
+    "blurb": "Online play without login. Moves are validated by the rules engine, the clock lives only on the server, a disconnect gets 30 seconds, tokens are signed with HMAC, and ratings use pre-match numbers. With real values from the server code."
+  },
+  {
     "ja": "/notes/same-page-not-same-store/",
     "en": "/en/notes/same-page-not-same-store/",
     "title": "“The same application page” does not mean “the same store”: 52 articles showed another store’s name",

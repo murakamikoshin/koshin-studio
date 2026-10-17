@@ -23,9 +23,10 @@
   <url><loc>https://koshinstudio.com/en/notes/blocked-page/</loc><lastmod>2026-10-17</lastmod><priority>0.5</priority></url>
   <url><loc>https://koshinstudio.com/en/notes/bulk-accident/</loc><lastmod>2026-10-17</lastmod><priority>0.5</priority></url>
   <url><loc>https://koshinstudio.com/en/notes/card-supplies-guide/</loc><lastmod>2026-10-17</lastmod><priority>0.5</priority></url>
+  <url><loc>https://koshinstudio.com/en/notes/catalog-seed-393/</loc><priority>0.5</priority></url>
   <url><loc>https://koshinstudio.com/en/notes/claude-vs-gemini-api/</loc><lastmod>2026-10-17</lastmod><priority>0.5</priority></url>
   <url><loc>https://koshinstudio.com/en/notes/comment-services/</loc><lastmod>2026-10-17</lastmod><priority>0.5</priority></url>
-  <url><loc>https://koshinstudio.com/en/notes/concurrency-slots/</loc><priority>0.5</priority></url>
+  <url><loc>https://koshinstudio.com/en/notes/concurrency-slots/</loc><lastmod>2026-10-17</lastmod><priority>0.5</priority></url>
   <url><loc>https://koshinstudio.com/en/notes/crazygames/</loc><lastmod>2026-10-17</lastmod><priority>0.5</priority></url>
   <url><loc>https://koshinstudio.com/en/notes/deploy-gotchas/</loc><lastmod>2026-10-17</lastmod><priority>0.5</priority></url>
   <url><loc>https://koshinstudio.com/en/notes/dup-zero/</loc><lastmod>2026-10-17</lastmod><priority>0.5</priority></url>
@@ -33,27 +34,31 @@
   <url><loc>https://koshinstudio.com/en/notes/fake-products/</loc><lastmod>2026-10-17</lastmod><priority>0.5</priority></url>
   <url><loc>https://koshinstudio.com/en/notes/firestore-91/</loc><lastmod>2026-10-17</lastmod><priority>0.5</priority></url>
   <url><loc>https://koshinstudio.com/en/notes/first-visit/</loc><lastmod>2026-10-17</lastmod><priority>0.5</priority></url>
+  <url><loc>https://koshinstudio.com/en/notes/fix-the-existing-data/</loc><priority>0.5</priority></url>
   <url><loc>https://koshinstudio.com/en/notes/gemini-meter/</loc><lastmod>2026-10-17</lastmod><priority>0.5</priority></url>
   <url><loc>https://koshinstudio.com/en/notes/gemini-migration/</loc><lastmod>2026-10-17</lastmod><priority>0.5</priority></url>
+  <url><loc>https://koshinstudio.com/en/notes/genre-from-catalog/</loc><priority>0.5</priority></url>
   <url><loc>https://koshinstudio.com/en/notes/hosting-compare/</loc><lastmod>2026-10-17</lastmod><priority>0.5</priority></url>
+  <url><loc>https://koshinstudio.com/en/notes/hot-lane/</loc><priority>0.5</priority></url>
   <url><loc>https://koshinstudio.com/en/notes/interval-vs-delivery/</loc><lastmod>2026-10-17</lastmod><priority>0.5</priority></url>
   <url><loc>https://koshinstudio.com/en/notes/ios-sdk-compare/</loc><lastmod>2026-10-17</lastmod><priority>0.5</priority></url>
   <url><loc>https://koshinstudio.com/en/notes/itms-91064/</loc><lastmod>2026-10-17</lastmod><priority>0.5</priority></url>
   <url><loc>https://koshinstudio.com/en/notes/logo-pop/</loc><lastmod>2026-10-17</lastmod><priority>0.5</priority></url>
   <url><loc>https://koshinstudio.com/en/notes/match-percent/</loc><lastmod>2026-10-17</lastmod><priority>0.5</priority></url>
   <url><loc>https://koshinstudio.com/en/notes/negaeri-balance/</loc><lastmod>2026-10-17</lastmod><priority>0.5</priority></url>
+  <url><loc>https://koshinstudio.com/en/notes/negaeri-online/</loc><priority>0.5</priority></url>
   <url><loc>https://koshinstudio.com/en/notes/notify-gate/</loc><lastmod>2026-10-17</lastmod><priority>0.5</priority></url>
   <url><loc>https://koshinstudio.com/en/notes/qiita-post-interval/</loc><lastmod>2026-10-17</lastmod><priority>0.5</priority></url>
   <url><loc>https://koshinstudio.com/en/notes/ranking-free-tier/</loc><lastmod>2026-10-17</lastmod><priority>0.5</priority></url>
   <url><loc>https://koshinstudio.com/en/notes/rerun-on-deploy/</loc><lastmod>2026-10-17</lastmod><priority>0.5</priority></url>
   <url><loc>https://koshinstudio.com/en/notes/result-screen/</loc><lastmod>2026-10-17</lastmod><priority>0.5</priority></url>
   <url><loc>https://koshinstudio.com/en/notes/review-info-needed/</loc><lastmod>2026-10-17</lastmod><priority>0.5</priority></url>
-  <url><loc>https://koshinstudio.com/en/notes/same-page-not-same-store/</loc><priority>0.5</priority></url>
+  <url><loc>https://koshinstudio.com/en/notes/same-page-not-same-store/</loc><lastmod>2026-10-17</lastmod><priority>0.5</priority></url>
   <url><loc>https://koshinstudio.com/en/notes/scrape-cost/</loc><lastmod>2026-10-17</lastmod><priority>0.5</priority></url>
   <url><loc>https://koshinstudio.com/en/notes/self-inflicted/</loc><lastmod>2026-10-17</lastmod><priority>0.5</priority></url>
   <url><loc>https://koshinstudio.com/en/notes/shindan12/</loc><lastmod>2026-10-17</lastmod><priority>0.5</priority></url>
   <url><loc>https://koshinstudio.com/en/notes/silent-discard/</loc><lastmod>2026-10-17</lastmod><priority>0.5</priority></url>
-  <url><loc>https://koshinstudio.com/en/notes/split-mixups/</loc><priority>0.5</priority></url>
+  <url><loc>https://koshinstudio.com/en/notes/split-mixups/</loc><lastmod>2026-10-17</lastmod><priority>0.5</priority></url>
   <url><loc>https://koshinstudio.com/en/notes/stopwatch-rank/</loc><lastmod>2026-10-17</lastmod><priority>0.5</priority></url>
   <url><loc>https://koshinstudio.com/en/notes/sushi-measure/</loc><lastmod>2026-10-17</lastmod><priority>0.5</priority></url>
   <url><loc>https://koshinstudio.com/en/notes/tco-relay/</loc><lastmod>2026-10-17</lastmod><priority>0.5</priority></url>
@@ -64,7 +69,7 @@
   <url><loc>https://koshinstudio.com/en/notes/torecadash-watchdog/</loc><lastmod>2026-10-17</lastmod><priority>0.5</priority></url>
   <url><loc>https://koshinstudio.com/en/notes/typo-catalog/</loc><lastmod>2026-10-17</lastmod><priority>0.5</priority></url>
   <url><loc>https://koshinstudio.com/en/notes/u2028/</loc><lastmod>2026-10-17</lastmod><priority>0.5</priority></url>
-  <url><loc>https://koshinstudio.com/en/notes/waiting-room/</loc><priority>0.5</priority></url>
+  <url><loc>https://koshinstudio.com/en/notes/waiting-room/</loc><lastmod>2026-10-17</lastmod><priority>0.5</priority></url>
   <url><loc>https://koshinstudio.com/en/notes/webaudio/</loc><lastmod>2026-10-17</lastmod><priority>0.5</priority></url>
   <url><loc>https://koshinstudio.com/en/notes/xcode152-sdk/</loc><lastmod>2026-10-17</lastmod><priority>0.5</priority></url>
   <url><loc>https://koshinstudio.com/en/privacy/</loc><lastmod>2026-10-16</lastmod><priority>0.5</priority></url>

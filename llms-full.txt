@@ -9,6 +9,8 @@ URL: https://koshinstudio.com/notes/fix-the-existing-data/
 
 # 関門を直しても、すでにあるデータは直らない：「もう試した」印・URL の目印・対応表の 3 つの実例
 
+  English version (https://koshinstudio.com/en/notes/fix-the-existing-data/)
+
   トレカダッシュ 開発の記録 ／ 2026年8月〜9月
 
   iOS アプリ「トレカダッシュ (https://koshinstudio.com/works/torecadash/)」の開発では、「直したのに、直っていない」という報告が、何度も、同じ形で来ました。コードを直す。テストも通る。ところが、画面には、まだ間違いが残っている。
@@ -91,6 +93,8 @@ URL: https://koshinstudio.com/notes/fix-the-existing-data/
 URL: https://koshinstudio.com/notes/hot-lane/
 
 # 全部を速く見られないとき、何を速くするか：427 弾のうち人気の 128 弾を速く回し、予算を超えたら自分から譲る
+
+  English version (https://koshinstudio.com/en/notes/hot-lane/)
 
   トレカダッシュ 開発の記録 ／ 2026年9月
 
@@ -290,6 +294,8 @@ URL: https://koshinstudio.com/notes/genre-from-catalog/
 
 # 商品のジャンルを、公式カタログで直した：下見を 3 回やって、13 件から 4 件に絞った
 
+  English version (https://koshinstudio.com/en/notes/genre-from-catalog/)
+
   トレカダッシュ 開発の記録 ／ 2026年9月
 
   iOS アプリ「トレカダッシュ (https://koshinstudio.com/works/torecadash/)」には、「この商品が、ポケモンカード扱いなのが、そもそも間違い」という報告が来ました。商品の名前は「勝敵！逆転おこせ鬼の∞ディスペクター！！」。これは、デュエル・マスターズの商品なのに、ポケモンカードの商品として登録され、ポケモンカードのフィードに出ていました。
@@ -483,6 +489,8 @@ URL: https://koshinstudio.com/notes/audit-sweep-61/
 URL: https://koshinstudio.com/notes/catalog-seed-393/
 
 # 公式の一覧から、「作品名だけの商品」が 393 件できていた：商品名の欄に、商品の形は入っていなかった
+
+  English version (https://koshinstudio.com/en/notes/catalog-seed-393/)
 
   トレカダッシュ 開発の記録 ／ 2026年9月
 
@@ -1896,6 +1904,8 @@ URL: https://koshinstudio.com/notes/tco-relay/
 URL: https://koshinstudio.com/notes/negaeri-online/
 
 # オンライン対戦は、端末の言うことを何も信用しない：手・持ち時間・勝敗を、サーバーが決める設計
+
+  English version (https://koshinstudio.com/en/notes/negaeri-online/)
 
   寝返り将棋 制作の記録 ／ 2026年9月
 
@@ -6716,6 +6726,477 @@ URL: https://koshinstudio.com/privacy/
   2026 年 10 月 17 日に、アフィリエイト（紹介リンク）の記述を外しました。現在、このサイトの記事には、紹介リンクはありません。今後、リンクを付けることがあれば、記事の冒頭と、このページに書きます。
 
   このページの内容についてのご質問は、About (https://koshinstudio.com/about/) にある連絡先までお願いします。
+
+
+---
+
+URL: https://koshinstudio.com/en/notes/hot-lane/
+
+# When you cannot watch everything quickly: popular 128 of 427 sets run fast, and the fastest lane yields to the budget
+
+  日本語版 (https://koshinstudio.com/notes/hot-lane/)
+
+  Development log of the Toreca Dash app / September 2026
+
+  My app Toreca Dash searches shopping sites by set (a release unit of products) to collect first-come and pre-order information. There are 427 sets in all. I would like to watch them all quickly, but there are limits on scraping cost and on calls to external services.
+
+  On the night of 7 September 2026 I decided on a policy, “watch only the popular ones quickly”, and built it. This is a record of what I sped up, what I gave up, and how I protected cost.
+
+  Numbers come from my work log of 7 September 2026.
+
+## Policy: three popular genres, latest and last two years only
+
+  The policy: “for Pokémon cards, ONE PIECE cards and Dragon Ball, the latest sets and the last two years of sets are enough”. Three genres × the last 24 months is 128 sets, about 30% of all 427.
+
+  The original per-set search walked all 427 sets in order, and one lap took different times per site.
+
+     | One lap over 427 sets | Popular lane, 128 sets
+
+      Amazon | 4 hours | every 30 minutes (about 450 s per run)
+
+      Rakuten Books | 24 hours | 22 sets every 10 minutes, one lap per hour
+
+      Rakuten Ichiba | 24 hours | 22 sets every 10 minutes, one lap per hour
+
+      Yahoo! | 8 hours | 128 sets every 2 hours
+
+  The popular lane runs on a separate cursor from the normal lane. Sharing one would disturb the normal lane’s progress.
+
+  Two sites (Amiami and AEON Style) have no concept of a popular lane. They do not search by set but read a list page whole, all at once. There is nothing to narrow; going faster means shortening the interval, which is a cost question.
+
+## Batching them stopped another monitor
+
+  I caused a regression with Rakuten right after adding this, and fixed it on the spot. At first I ran Rakuten as “128 sets in one go every hour”. But Rakuten’s API allows one call per 1.5 seconds shared by all jobs, and the instant sell-out monitor alone uses 30 calls a minute, 75% of the allowance all the time. A batch took over 13 minutes, and meanwhile even the sell-out monitor was skipped as “previous run still going”.
+
+  The same 128 sets per hour, scattered as 22 sets every 10 minutes, makes no pile-up. I also offset the minutes (Rakuten Books lane at :03, :13…, Ichiba lane at :08, :18…). Right afterwards: the sell-out monitor ran 8 times in 9 minutes with 0 skips, average 44.9 s, no worse.
+
+## Fastest lane: popular items truly once a minute
+
+  There was also a request: “I want popular items checked every minute.” That made the third time that day I confirmed what I wrote about before (https://koshinstudio.com/en/notes/interval-vs-delivery/): “runs every minute” is not “checks each item every minute”.
+
+- Rakuten Books sell-out monitor: 62 to 92 items were un-notified, about 30 could be checked per run, one lap 3 minutes. Only 18 of them were in the three popular genres (Pokémon 9, Dragon Ball 5, One Piece 4). Checking those first on every run makes it truly once a minute, at zero cost. The other 44 are about every 3.7 minutes. Advance the cursor only for the rotating part; if popular items advance it, it stops there and other items never get a turn.
+
+- Amazon fastest lane: 28 sets (popular genres, before release or within 60 days after), 10 sets per minute in rotation, one lap about 2.8 minutes. Measured: 27.4 s per run, 0 skips.
+
+  I cannot hit all 28 sets every minute. At 40,320 requests a day, the month would be 1.96 million, above the 1.25 million contract. At 10 sets a minute it is 14,400 a day. In exchange I moved Amazon’s popular lane (128 sets) from 30 to 60 minutes.
+
+    Amazon lane | Target | Cycle
+
+      Fastest | 28 sets before / just after release | about 2.8 min
+
+      Popular | 128 sets, three genres | 1 hour
+
+      Normal | All 427 sets | 4 hours
+
+## What I cannot do, I say I cannot
+
+- Rakuten Ichiba: the sell-out monitor uses 75% of the 1.5-second allowance. Adding every-minute checks would break the monitor. The popular lane (every 20 minutes) is the limit.
+
+- Yahoo!: once a minute is 40,000 calls a day, orders of magnitude over. Also new saves were recently 0. It stays at every 2 hours.
+
+## The fastest lane yields when it exceeds the budget pace
+
+  Amazon is a priority host that passes the scraping service’s daily throttling unconditionally, because it is the lifeline of the first-come race. That is right in itself, but if the every-minute fastest lane also passes unconditionally, Amazon eats the whole allowance and every other site is throttled.
+
+  Rather than fix a count on the safe side, it is more reliable to look at actual consumption and stop automatically. I added a check (isScrapeDoOverPace()) that skips the run if the time-proportional budget pace is exceeded.
+
+  Measured over a 2-minute window: 55 requests, 55 credits, 27.5 credits a minute (about 39,600 a day). The allowance was 1,147,389 remaining and 23 days to reset, 47,392 a day. One trap about window length: measured over 10 minutes it looked like 47.5 credits a minute (68,400 a day). A costly job every 3 hours (25 credits each) happened to fall in that window. Extrapolating from a short window is wrong; check the next day’s daily total.
+
+## What I learned
+
+> When you cannot speed up everything, decide what to speed up and what to slow down in return.
+
+- Narrow the target. 128 of 427; even then only a narrower 18 or 28 can be truly once a minute.
+
+- Do not batch; scatter. The same count with no pile-up does not stop others.
+
+- With a shared allowance, faster for one means slower for another. Decide what to protect first.
+
+- Make the budget yield by itself. Stopping on actual consumption beats a fixed count.
+
+- Do not extrapolate from a short window. Confirm with the daily record.
+
+  This is the English version of the original Japanese article (https://koshinstudio.com/notes/hot-lane/).
+
+  More in English
+
+- All English pages (https://koshinstudio.com/en/)
+
+- Toreca Dash (https://koshinstudio.com/en/works/torecadash/)
+
+
+---
+
+URL: https://koshinstudio.com/en/notes/fix-the-existing-data/
+
+# Fixing a gate does not fix existing data: a “tried already” mark, a URL marker and a lookup table
+
+  日本語版 (https://koshinstudio.com/notes/fix-the-existing-data/)
+
+  Development log of the Toreca Dash app / August–September 2026
+
+  While developing my app Toreca Dash, I kept getting the same report in the same shape: “I fixed it, but it is not fixed”. The code is fixed, the tests pass, yet the screen still shows the mistake.
+
+  The reason: fixing code does not rewrite data that is already saved. These are three forms of it, with real cases.
+
+  Numbers come from my work logs of 26 August, 3 September and 8 September 2026.
+
+## 1. I loosened a gate, but a “tried already” mark remained (3 September)
+
+  A product-matching gate had a mistake. I fixed it and deployed. Yet 12 of the 32 existing articles stayed wrong.
+
+  The reason was the “skip mark”. When the gate once says “this pairing is wrong”, the article gets a “tried already” mark and is not retried for 7 days. Fixing the judgement does not revisit it while the mark lasts. Among those 12 were 4 open lotteries closing on 5 and 6 September. Lotteries close in days, so waiting for the mark to expire means they vanish. The same day I found the same shape again (a 14-day cooldown in a process that splits into multiple products).
+
+  The fix: before skipping because of a mark, re-check with the current judgement. If the judgement is a pure function that uses neither AI nor external calls, it costs nothing. If you also store “what material I judged with” (for example whether I looked at the image), you can retry only when new material appears.
+
+## 2. A state marker was stored in the URL (3 September)
+
+  Split articles (children) need a marker saying “already split”. At the time I put it in a part of the URL (?_product=product-name): “never split again if this is present”.
+
+  But this project later rewrites application URLs to the store’s official page. The same day I started running that rewrite over everything. Anything stored in the URL is certain to be lost. Of 832 child articles, 111 lost their marker, looked like “parents not yet split”, and were split again. Broken articles pointing at themselves as the “replacement” went from 8 to 14 in 30 minutes. In the past, the same route had once made 1 article into 18.
+
+  The fix was to decide using a field that does not get rewritten, such as splitFromArticleId. The other lesson: on a day you let “a process that only applied to some” run over everything, check what depends on the fields that process rewrites.
+
+## 3. Removing a key from a table does not remove written values (26 August)
+
+  I removed a store chain from the “nearest branch” lookup table. It was gone from the code. But the “nearest branch key” written on articles stayed. The app thought “there is a key, so show a distance”, prepared it and got no answer (the server returns 400 for an unresolvable key). Three articles were stuck forever.
+
+  A change to a table is a change to code; migrating data does not happen automatically. When you remove something from a table, clean the existing data in the same change. This pairs with the mistake of adding a new hidden flag and forgetting to add it to the restore step: that is a miss on the adding side, this is a miss on the removing side.
+
+  Cleaning can reveal new anomalies in audits. Those are real holes that were hidden. I did not restore the key to hide them.
+
+## Five reports of one shape (8 September)
+
+  On 8 September, five of the seven things found by running all 61 audits had the same shape: “a mechanism exists to fix it, but it does not reach the target, or never gets its turn”.
+
+    Symptom | Root
+
+      Opening days mixed into store names (4th report) | The fixer and the gate were different functions; the comment “same yardstick” was false
+
+      A notification opens an article that does not exist (322) | The mark (split) was missing from the target query of the filling job
+
+      Official events still displayed | The rejecting gate existed, but its re-apply never got a turn
+
+      Wrong-unit reference prices (24) | The fix was buried in a 25-job rotation, one lap 2.5 days
+
+      “19 deferred to the next run for time budget” | A cheap fix shared a budget and rotation with an expensive one
+
+  A gate protects only new articles. Fixing existing articles is a separate process, and if that does not run, “fixed but not fixed” repeats. When the same report keeps coming, you have usually fixed the entrance but not the exit (existing data).
+
+  The shared solution was to take “re-apply the save-time gate to existing articles” out of the rotation and run it every time. It reads articles once and passes them through the gate (no AI or external call; at most 20 articles and 50 marks per run).
+
+## What I learned
+
+> When you fix the entrance, fix the exit (existing data) too.
+
+- When you add a gate, check that its re-apply runs every time. A gate protects only new articles.
+
+- Re-check “tried already” marks with the current judgement. Waiting for expiry means the lottery is over.
+
+- Put state markers in fields that are not rewritten. URLs get replaced later.
+
+- When you remove from a table, clean the data. A code change does not move data.
+
+- When a report comes twice, suspect the exit. Fixing the entrance is not enough.
+
+  This is the English version of the original Japanese article (https://koshinstudio.com/notes/fix-the-existing-data/).
+
+  More in English
+
+- All English pages (https://koshinstudio.com/en/)
+
+- Toreca Dash (https://koshinstudio.com/en/works/torecadash/)
+
+
+---
+
+URL: https://koshinstudio.com/en/notes/genre-from-catalog/
+
+# Fixing product genre from the official catalogue: three dry runs took 13 changes down to 4
+
+  日本語版 (https://koshinstudio.com/notes/genre-from-catalog/)
+
+  Development log of the Toreca Dash app / September 2026
+
+  In my app Toreca Dash a report said: “this product being treated as a Pokémon card is wrong in the first place”. The product was “Winning enemy! Reversal, the Oni’s ∞ Dispectar!!”. It is a Duel Masters product, but had been registered as a Pokémon card product and shown in the Pokémon feed.
+
+  The fix was “make the official catalogue the source of truth for genre”. But before applying it in bulk I needed three dry runs before it was safe. This is that process.
+
+  Numbers come from my work log of 11 September 2026.
+
+## Why a Duel Masters product became Pokémon
+
+  Store X accounts are monitored as “Pokémon card” accounts, so an article’s genre becomes its product’s genre. This product’s name has neither the game’s name nor a product code. The two existing judgements (guess from words in the name, guess from the product code) could answer neither.
+
+  The official catalogue lists it as “DM26-RP3 Duel Masters TCG Reverse Card chapter 3 Winning enemy! Reversal, the Oni’s ∞ Dispectar!!”. Like the product name, image and price, genre too belongs to the official source. I added a judgement “decide genre from the official catalogue” and put the same judgement in both the entrance (creating products) and the re-apply step (fixing existing products).
+
+## Dry run 1: nine correct products were about to be moved to another game
+
+  The first rule was “if the name is wholly contained in a set name of exactly one genre, use that genre”. A dry run (results only, no writes) gave 13 to fix. Nine correct Weiss Schwarz products would have been moved to Union Arena.
+
+    Run | Rule | To fix | What was in it
+
+      1 | Name wholly contained in one genre’s set | 13 | 9 correct Weiss products moved to Union Arena
+
+      2 | + ambiguity checked on the work name with form words removed | 9 | 5 Weiss products still misfired
+
+      3 | + only when the official set name itself names the game or a code | 4 | 0 misfires
+
+## The real cause: the official list does not cover old sets
+
+  Misfires came from the official list not including older sets (Weiss Schwarz has 64, only recent ones). Also a set name that is only a form word plus a work name, such as “Booster Pack Chainsaw Man”, does not identify the game, because the same work’s cards appear in several games.
+
+  So I trust a match only when the set name contains a game name such as “Duel Masters TCG” or “ONE PIECE”, or a code only that genre uses such as [SB02], [EVX13] or DM26-RP3.
+
+  The four left were all correct fixes:
+
+  pokemon    → onepiece     "Heroines Edition"        (ONE PIECE ... [EB-03])
+pokemon    → duelmasters  "Winning enemy! Reversal..." (the reported one)
+yugioh     → dragonball   "MANGA BOOSTER 02"        ([SB02])
+dragonball → gundam       "Premium Card Collection 02" ([EVX13])
+
+## One more: a product name written across lines was treated as “not written”
+
+  The same day another automatic report came in: “rejected a match whose product-name fingerprint did not match”. Stores’ X posts write product names across several lines.
+
+  [On sale today]
+○ Union Arena
+Advanced Deck
+∟ BLEACH Thousand-Year Blood War
+Limit one per person
+
+* Booster Pack "BLEACH Thousand-Year Blood War Vol.3" is
+sold by lottery. Only winners may buy.
+  The match code has a rule: “if the chosen product name appears whole in the title, say nothing”. But it did not strip the leading “∟”, so it judged the name as not whole in the title. It then used another product in the same post (“Booster Pack BLEACH Thousand-Year Blood War Vol.3”) as grounds to reject a correct match.
+
+  Several products in one post is normal. The fix was to add continuation marks (∟ └ ┗ ├ ┣ ⇒ → ▶ >) to the comparison-only normaliser. It is called from 6 places, so one fix applies to all. I confirmed on real data that a rejection becomes an acceptance.
+
+## What I learned
+
+> One dry run is not enough.
+
+- An official list is not complete. Do not stop at “trust it if it is listed”; narrow to “only when it names itself”.
+
+- Dry-run before you write. 13 in run 1, 4 in run 3, and 0 misfires.
+
+- Put the same judgement at the entrance and the re-apply step. One of them alone leaves a gap.
+
+- Normalise writing variants before comparing. One “∟” dropped a correct match.
+
+  This is the English version of the original Japanese article (https://koshinstudio.com/notes/genre-from-catalog/).
+
+  More in English
+
+- All English pages (https://koshinstudio.com/en/)
+
+- Toreca Dash (https://koshinstudio.com/en/works/torecadash/)
+
+
+---
+
+URL: https://koshinstudio.com/en/notes/catalog-seed-393/
+
+# 393 “work-name-only” products from an official list: the name field did not contain the product form
+
+  日本語版 (https://koshinstudio.com/notes/catalog-seed-393/)
+
+  Development log of the Toreca Dash app / September 2026
+
+  The product list of my app Toreca Dash is partly built from official site lists. Counting products created by that import per day, I saw 502 in one day, against the usual 1 to 10.
+
+  Looking inside, 379 were Weiss Schwarz, and the names looked like this:
+
+  GA Bunko
+Makai Senki Disgaea 4
+Goddess of Victory: NIKKE
+Love Live! Nijigasaki High School Idol Club
+  All of them were names of works, not names of products. This is the cause, and a side effect that appeared after the clean-up.
+
+  Numbers come from my work log of 7 September 2026.
+
+## The cause: the product form was outside the name
+
+  On the official list page, the name field (products__name) holds only the work name. The product form (booster pack, trial deck) is in the category (part of the page URL).
+
+    Category | Real data in the name field
+
+      booster-pack | “Azur Lane Vol.3”, “Stellasora”, “anemoi”
+
+      trial-deck | “Girls und Panzer Oarai Girls Academy”, “GA Bunko”
+
+  The right product name carries the form, like “Trial Deck GA Bunko”. It then matches existing correct products such as “Booster Pack D4DJ Groovy Mix”.
+
+## The fix: at the entrance, and for what was already made
+
+  Entrance: add the form from the category (trial-deck becomes trial deck, booster-pack becomes booster pack, and so on). If the form cannot be decided (“others”), do not add it and do not create the product.
+
+  Existing items: I made a clean-up tool. By default it only previews; it deletes with delete=true. It deletes only items for which all four are true:
+
+- created from the official list,
+
+- no form word in the name,
+
+- no articles attached,
+
+- no official price and no image.
+
+  The preview found 393. After the run, products went from 811 to 418. One, “[Oshi no Ko] Vol.3”, has articles attached, so I kept it. Over-deletion draws no complaints, so I keep the conditions strict.
+
+  After cleaning I re-imported the official list and re-registered 328 Weiss Schwarz entries with correct names (form attached, like “Trial Deck Is the Order a Rabbit??”). Zero entries lack a form word.
+
+## Why no audit caught it
+
+  The name audit looks for “unnatural product names”: symbols, line breaks, URLs. Proper Japanese work names do not look unnatural. “Love Live! Nijigasaki High School Idol Club” is a perfectly good name.
+
+  The other gap: there was no audit that counts. Counting “products created per day” would have made 502 obvious. If you only look at what is shown, things that quietly increase are invisible.
+
+## A side effect: alias collisions from 0 pairs to 250
+
+  Adding 328 correctly named products caused a new problem. Products have alternative names (aliases). An existing product’s alias, “Booster Pack Is the Order a Rabbit??”, collided with the new official-name product. The audit that counts aliases claimed by two or more products went from 0 pairs to 250.
+
+  I ran the repair tool the audit points to, previewing first. The rule is “keep the one that uses the name as its official name”; only the other product loses it. 253 ambiguous aliases (220 products) were removed, and the audit returned to 0.
+
+## What I learned
+
+> After a change that grows the catalogue, run the audits again.
+
+- Check what a source field really contains on real data. The “name” field does not necessarily hold the product name.
+
+- Count how many are created per day. 502 would have been obvious.
+
+- When deleting, require all conditions. Keep anything that has articles.
+
+- More names mean more collisions. If you fix the entrance and stop, the next person sees 250 in an audit that should be 0.
+
+  This is the English version of the original Japanese article (https://koshinstudio.com/notes/catalog-seed-393/).
+
+  More in English
+
+- All English pages (https://koshinstudio.com/en/)
+
+- Toreca Dash (https://koshinstudio.com/en/works/torecadash/)
+
+
+---
+
+URL: https://koshinstudio.com/en/notes/negaeri-online/
+
+# Online play that trusts nothing the client says: the server decides moves, clocks and results
+
+  日本語版 (https://koshinstudio.com/notes/negaeri-online/)
+
+  Development log of Negaeri Shogi / September 2026
+
+  Negaeri Shogi (https://koshinstudio.com/en/works/negaeri-shogi/) has online play against strangers, with no sign-up or login. Press a button and you are matched with someone else who is waiting.
+
+  The first rule I set for an online game was: trust nothing the client says. A client can be rewritten by its owner. It can send lies: “the board is like this”, “I have 2 minutes left”, “I won”. This article records how I built the server so those lies do not matter. Numbers and mechanisms are the real values in the server code.
+
+  This is a record of the mechanism. Balance between human players is still not verified enough (see how I set the rules by AI-vs-AI play (https://koshinstudio.com/en/notes/negaeri-balance/)).
+
+## Principle: the server decides; the client only asks
+
+  A client can send only three kinds of message:
+
+- join: join this match (with a signed identity token).
+
+- move: play this move.
+
+- resign: resign.
+
+  It cannot send the board, the remaining time or the result. A received move is checked against the server’s own board by the rules engine, the same file the screen uses. Because the rules are written in one place, a move the screen allows can never be “illegal” on the server.
+
+## One match = one small server
+
+  The server runs on Cloudflare Workers. One match is handled by one Durable Object (a small server that keeps state), and both players connect to it over a WebSocket. The match’s progress (moves and clocks) is saved the moment each move is committed.
+
+  A Durable Object sleeps when idle. When it wakes it replays the saved moves from the start to rebuild the board. Saving only the moves is less likely to drift than saving the board.
+
+## What the server does when a move arrives
+
+- Check for a timeout first. If the player to move has used all their time, the move is not accepted and they lose on time.
+
+- Check whose turn it is. A move out of turn gets “it is not your turn”.
+
+- Validate with the rules. An illegal move makes that player lose (reason: illegal move).
+
+- Apply the move. Advance the board, append the move, advance the clock, save.
+
+- Tell both players. The move, the order of flipped pieces, the chain count and the new clocks.
+
+  An illegal move is not dropped silently; it loses the game.
+
+## Only the server holds the clock
+
+  Each player gets 3 minutes, plus 5 seconds per move (Fischer clock). The clock lives only on the server; the time on the screen is just a display of what the server sent.
+
+  // when a move is committed
+const used = now - clock.turnStartedAt;
+clock.remaining[mover] = Math.max(0, clock.remaining[mover] - used) + INCREMENT_MS;
+clock.turnStartedAt = now;
+  Subtract the time used, add 5 seconds, start the other side’s turn. Math.max(0, …) keeps it from going below 0.
+
+  The other problem is who notices a timeout when nobody moves. If the opponent sends nothing, the server does nothing. So I use an alarm (the server is woken at a given time). The next wake time is the earlier of “the moment the player to move runs out” and “the moment the disconnect grace ends”, and at least 1 second ahead.
+
+## A disconnect gets 30 seconds
+
+  Mobile connections drop. Losing on a momentary dropout would be harsh, so even after a disconnect the server waits 30 seconds. The opponent is told that the player left and how long the wait is. If the player returns in time, play resumes; the server resends all moves and clock state (a sync) so the screen catches up. If not, they lose on time.
+
+  If the same person reopens the same match on another screen, the older connection is closed, so two screens cannot send different moves.
+
+## Identifying people without sign-up
+
+  With no login, the server must prove “you are that ID”. It issues an ID and signs it with a secret key (HMAC-SHA256), giving a token of the form “ID.signature”. The client stores it.
+
+  To pose as another ID you need that ID’s valid signature, which you cannot make without the key. Signatures are compared with a comparison that checks every character to the end. An ordinary comparison stops at the first different character, and the timing difference can leak the signature.
+
+  The token is valid only while it stays on the device. Clearing the device’s data makes you a new person. It is the trade-off for not requiring registration.
+
+## Matchmaking: start close in rating, widen the longer you wait
+
+  It matches players with close ratings. It starts at ±100 and widens the allowed gap by 100 every 10 seconds of waiting: a compromise between not making people wait and matching similar strength.
+
+  Two players are paired if the gap fits either player’s allowed range, so the one waiting longer takes priority and no one waits forever. With several waiting, it goes from the longest wait and picks the closest rating.
+
+  The lower-rated player gets the first move. The first move is slightly stronger, so the weaker player holds the stronger side, partly cancelling the gap.
+
+## Ratings: Elo, using pre-match numbers
+
+  Ratings use Elo, starting at 1500. The expected score is:
+
+  1 / (1 + 10 ** ((opponentRating - myRating) / 400))
+  The step size (K) is large while you have few games: 40 up to 30 games, 20 up to 100, then 10, so ratings approach true strength quickly.
+
+  What I took care over: do not update the two ratings one after the other. Updating one first and then computing the other uses the opponent’s updated rating, which is unfair. Both use pre-match ratings.
+
+  Only players with 10 or more games appear on the ranking, to avoid someone playing once and parking at a lucky rating.
+
+## How I check it
+
+- Unit tests: 126 tests cover rules, AI, clocks, rating, matchmaking and signatures.
+
+- End-to-end tests: there are tests that open two browsers and make an online match happen, and tests that connect directly to the server.
+
+  Not yet verified: behaviour with many strangers playing, and whether the first-player edge (61% in AI-vs-AI play (https://koshinstudio.com/en/notes/negaeri-balance/)) is the same for humans.
+
+## What I learned
+
+> Everything a client reports is a request. The server decides.
+
+- The server holds the clock, the board and the result. Anything you give the client can be rewritten.
+
+- Use the same rules for the screen and the server. Separate copies drift apart.
+
+- Assume connections break. Decide the wait and the restore beforehand.
+
+- Updating in sequence is unfair. Compute ratings from pre-match numbers.
+
+  This is the English version of the original Japanese article (https://koshinstudio.com/notes/negaeri-online/).
+
+  More in English
+
+- All English pages (https://koshinstudio.com/en/)
+
+- Negaeri Shogi (https://koshinstudio.com/en/works/negaeri-shogi/)
 
 
 ---
@@ -11899,6 +12380,16 @@ URL: https://koshinstudio.com/en/
 - Three mix-ups in splitting one article into products: a child treated as a parent, a shared link pointing to another store, a name owned by two products (https://koshinstudio.com/en/notes/split-mixups/)
 
 - When first-come sales start, the site becomes a waiting-room page: a 15 KB notice slipped through an 8,000-byte gate (https://koshinstudio.com/en/notes/waiting-room/)
+
+- 393 “work-name-only” products from an official list: the name field did not contain the product form (https://koshinstudio.com/en/notes/catalog-seed-393/)
+
+- Fixing a gate does not fix existing data: a “tried already” mark, a URL marker and a lookup table (https://koshinstudio.com/en/notes/fix-the-existing-data/)
+
+- Fixing product genre from the official catalogue: three dry runs took 13 changes down to 4 (https://koshinstudio.com/en/notes/genre-from-catalog/)
+
+- When you cannot watch everything quickly: popular 128 of 427 sets run fast, and the fastest lane yields to the budget (https://koshinstudio.com/en/notes/hot-lane/)
+
+- Online play that trusts nothing the client says: the server decides moves, clocks and results (https://koshinstudio.com/en/notes/negaeri-online/)
 
 ## Languages
 

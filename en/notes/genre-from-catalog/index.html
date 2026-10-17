@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Fixing product genre from the official catalogue: three dry runs took 13 changes down to 4 — Koshin Studio</title>
+<meta name="description" content="A Duel Masters product was registered as Pokémon. Making the official catalogue the source of truth, my first dry run would have moved nine correct Weiss Schwarz products to another game; after three dry runs there were 0 misfires.">
+<meta property="og:title" content="Fixing product genre from the official catalogue: three dry runs took 13 changes down to 4">
+<meta property="og:description" content="A Duel Masters product was registered as Pokémon. Making the official catalogue the source of truth, my first dry run would have moved nine correct Weiss Schwarz products to another game; after three dry runs there were 0 misfires.">
+<meta property="og:type" content="article">
+<meta name="theme-color" content="#fbfaf7">
+<link rel="icon" href="/favicon.ico?v=1697d589" sizes="48x48">
+<link rel="icon" href="/favicon.svg?v=b9d7922f" type="image/svg+xml" sizes="any">
+<link rel="icon" href="/assets/icon/icon-192.png?v=e2566235" type="image/png" sizes="192x192">
+<link rel="apple-touch-icon" href="/assets/icon/icon-180.png?v=84e7f0e6">
+<link rel="manifest" href="/site.webmanifest">
+<script>document.documentElement.className+=" js"</script>
+<link rel="stylesheet" href="/style.css?v=dd51310c">
+<meta name="google-adsense-account" content="ca-pub-3863314847163872">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3863314847163872" crossorigin="anonymous"></script>
+<link rel="canonical" href="https://koshinstudio.com/en/notes/genre-from-catalog/">
+<meta property="og:url" content="https://koshinstudio.com/en/notes/genre-from-catalog/">
+<meta property="og:site_name" content="Koshin Studio">
+<meta property="og:locale" content="en_US">
+<link rel="alternate" hreflang="ja" href="https://koshinstudio.com/notes/genre-from-catalog/">
+<link rel="alternate" hreflang="en" href="https://koshinstudio.com/en/notes/genre-from-catalog/">
+<link rel="alternate" hreflang="x-default" href="https://koshinstudio.com/en/notes/genre-from-catalog/">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="alternate" type="application/rss+xml" title="Koshin Studio — Notes" href="https://koshinstudio.com/feed.xml">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BlogPosting","headline":"Fixing product genre from the official catalogue: three dry runs took 13 changes down to 4","url":"https://koshinstudio.com/en/notes/genre-from-catalog/","description":"A Duel Masters product was registered as Pokémon. Making the official catalogue the source of truth, my first dry run would have moved nine correct Weiss Schwarz products to another game; after three dry runs there were 0 misfires.","datePublished":"2026-10-17","dateModified":"2026-10-17","inLanguage":"en","image":"https://koshinstudio.com/assets/og/og_en_notes_genre-from-catalog.jpg","author":{"@id":"https://koshinstudio.com#studio"},"publisher":{"@id":"https://koshinstudio.com#studio"},"mainEntityOfPage":"https://koshinstudio.com/en/notes/genre-from-catalog/"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Koshin Studio","item":"https://koshinstudio.com/en/"},{"@type":"ListItem","position":2,"name":"Fixing product genre from the official catalogue: three dry runs took 13 changes down to 4","item":"https://koshinstudio.com/en/notes/genre-from-catalog/"}]}]}</script>
+<meta property="og:image" content="https://koshinstudio.com/assets/og/og_en_notes_genre-from-catalog.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
+</head>
+<body class="article">
+<canvas id="motes"></canvas>
+
+<header class="site"><div class="wrap">
+  <a class="logo" href="/"><img class="logo-mark" src="/favicon.svg?v=b9d7922f" alt="" width="28" height="28">Koshin Studio</a>
+  <nav><a href="/works/">Works</a><a href="/notes/">Notes</a><a href="/picks/">Picks</a><a href="/calc/">Tools</a><a href="/about/">About</a></nav>
+</div></header>
+
+<main><div class="wrap">
+  <nav class="crumbs" aria-label="You are here"><a href="/en/">Koshin Studio</a><i aria-hidden="true">›</i><span aria-current="page">Genre from catalogue</span></nav>
+  <h1>Fixing product genre from the official catalogue: three dry runs took 13 changes down to 4</h1>  <div class="rule"></div>
+<!--lang-->
+  <p class="note"><a href="/notes/genre-from-catalog/" hreflang="ja" lang="ja">日本語版</a></p>
+<!--/lang-->  <p class="lead">Development log of the Toreca Dash app / September 2026</p>
+
+  <p>In my app Toreca Dash a report said: “this product being treated as a Pokémon card is wrong in the first place”. The product was “Winning enemy! Reversal, the Oni’s ∞ Dispectar!!”. It is a Duel Masters product, but had been registered as a Pokémon card product and shown in the Pokémon feed.</p>
+  <p>The fix was “make the official catalogue the source of truth for genre”. But before applying it in bulk I needed <strong>three dry runs</strong> before it was safe. This is that process.</p>
+  <p class="note">Numbers come from my work log of 11 September 2026.</p>  <h2 class="rv" id="s1">Why a Duel Masters product became Pokémon</h2>
+  <p>Store X accounts are monitored as “Pokémon card” accounts, so an article’s genre becomes its product’s genre. This product’s name has neither the game’s name nor a product code. The two existing judgements (guess from words in the name, guess from the product code) could answer neither.</p>
+  <p>The official catalogue lists it as “DM26-RP3 Duel Masters TCG Reverse Card chapter 3 Winning enemy! Reversal, the Oni’s ∞ Dispectar!!”. Like the product name, image and price, <strong>genre too belongs to the official source</strong>. I added a judgement “decide genre from the official catalogue” and put the same judgement in <strong>both</strong> the entrance (creating products) and the re-apply step (fixing existing products).</p>
+
+  <h2 class="rv" id="s2">Dry run 1: nine correct products were about to be moved to another game</h2>
+  <p>The first rule was “if the name is wholly contained in a set name of exactly one genre, use that genre”. A dry run (results only, no writes) gave 13 to fix. <strong>Nine correct Weiss Schwarz products would have been moved to Union Arena.</strong></p>
+  <div class="scroll rv"><table>
+    <thead><tr><th>Run</th><th>Rule</th><th>To fix</th><th>What was in it</th></tr></thead>
+    <tbody>
+      <tr><td>1</td><td>Name wholly contained in one genre’s set</td><td>13</td><td>9 correct Weiss products moved to Union Arena</td></tr>
+      <tr><td>2</td><td>+ ambiguity checked on the work name with form words removed</td><td>9</td><td>5 Weiss products still misfired</td></tr>
+      <tr><td>3</td><td>+ <strong>only when the official set name itself names the game or a code</strong></td><td><strong>4</strong></td><td><strong>0 misfires</strong></td></tr>
+    </tbody>
+  </table></div>
+
+  <h2 class="rv" id="s3">The real cause: the official list does not cover old sets</h2>
+  <p>Misfires came from the official list not including older sets (Weiss Schwarz has 64, only recent ones). Also a set name that is only a <strong>form word plus a work name</strong>, such as “Booster Pack Chainsaw Man”, does not identify the game, because the same work’s cards appear in several games.</p>
+  <p>So I trust a match only when the set name contains a <strong>game name</strong> such as “Duel Masters TCG” or “ONE PIECE”, or a <strong>code only that genre uses</strong> such as <code>[SB02]</code>, <code>[EVX13]</code> or <code>DM26-RP3</code>.</p>
+  <p>The four left were all correct fixes:</p>
+  <pre><code>pokemon    → onepiece     "Heroines Edition"        (ONE PIECE ... [EB-03])
+pokemon    → duelmasters  "Winning enemy! Reversal..." (the reported one)
+yugioh     → dragonball   "MANGA BOOSTER 02"        ([SB02])
+dragonball → gundam       "Premium Card Collection 02" ([EVX13])</code></pre>
+
+  <h2 class="rv" id="s4">One more: a product name written across lines was treated as “not written”</h2>
+  <p>The same day another automatic report came in: “rejected a match whose product-name fingerprint did not match”. Stores’ X posts write product names <strong>across several lines</strong>.</p>
+  <pre><code>[On sale today]
+○ Union Arena
+Advanced Deck
+∟ BLEACH Thousand-Year Blood War
+Limit one per person
+
+* Booster Pack "BLEACH Thousand-Year Blood War Vol.3" is
+sold by lottery. Only winners may buy.</code></pre>
+  <p>The match code has a rule: “if the chosen product name appears whole in the title, say nothing”. But <strong>it did not strip the leading “∟”</strong>, so it judged the name as not whole in the title. It then used <strong>another product</strong> in the same post (“Booster Pack BLEACH Thousand-Year Blood War Vol.3”) as grounds to reject a correct match.</p>
+  <p>Several products in one post is normal. The fix was to add continuation marks (<code>∟ └ ┗ ├ ┣ ⇒ → ▶ &gt;</code>) to the <strong>comparison-only</strong> normaliser. It is called from 6 places, so one fix applies to all. I confirmed on real data that a rejection becomes an acceptance.</p>
+
+  <h2 class="rv" id="s5">What I learned</h2>
+  <blockquote>One dry run is not enough.</blockquote>
+  <ul>
+    <li><strong>An official list is not complete.</strong> Do not stop at “trust it if it is listed”; narrow to “only when it names itself”.</li>
+    <li><strong>Dry-run before you write.</strong> 13 in run 1, 4 in run 3, and 0 misfires.</li>
+    <li><strong>Put the same judgement at the entrance and the re-apply step.</strong> One of them alone leaves a gap.</li>
+    <li><strong>Normalise writing variants before comparing.</strong> One “∟” dropped a correct match.</li>
+  </ul>
+
+  <p class="note">This is the English version of <a href="/notes/genre-from-catalog/" hreflang="ja" lang="ja">the original Japanese article</a>.</p>
+
+  <div class="rule" style="margin:40px 0 22px"></div>
+  <p class="eyebrow">More in English</p>
+  <ul class="plain">
+    <li><a href="/en/">All English pages</a></li>
+    <li><a href="/en/works/torecadash/">Toreca Dash</a></li>
+  </ul>
+</div>
+</main>
+
+<footer class="site"><div class="wrap"></div></footer>
+<script src="/motion.js?v=1e7447ec" defer></script>
+</body>
+</html>

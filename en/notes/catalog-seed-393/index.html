@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>393 “work-name-only” products from an official list: the name field did not contain the product form — Koshin Studio</title>
+<meta name="description" content="An official-list import created 502 products in one day (usually 1–10). The name field held only the work name; the form was in the category. Cleaning 393 and re-registering 328 correct names took alias collisions from 0 pairs to 250.">
+<meta property="og:title" content="393 “work-name-only” products from an official list: the name field did not contain the product form">
+<meta property="og:description" content="An official-list import created 502 products in one day (usually 1–10). The name field held only the work name; the form was in the category. Cleaning 393 and re-registering 328 correct names took alias collisions from 0 pairs to 250.">
+<meta property="og:type" content="article">
+<meta name="theme-color" content="#fbfaf7">
+<link rel="icon" href="/favicon.ico?v=1697d589" sizes="48x48">
+<link rel="icon" href="/favicon.svg?v=b9d7922f" type="image/svg+xml" sizes="any">
+<link rel="icon" href="/assets/icon/icon-192.png?v=e2566235" type="image/png" sizes="192x192">
+<link rel="apple-touch-icon" href="/assets/icon/icon-180.png?v=84e7f0e6">
+<link rel="manifest" href="/site.webmanifest">
+<script>document.documentElement.className+=" js"</script>
+<link rel="stylesheet" href="/style.css?v=dd51310c">
+<meta name="google-adsense-account" content="ca-pub-3863314847163872">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3863314847163872" crossorigin="anonymous"></script>
+<link rel="canonical" href="https://koshinstudio.com/en/notes/catalog-seed-393/">
+<meta property="og:url" content="https://koshinstudio.com/en/notes/catalog-seed-393/">
+<meta property="og:site_name" content="Koshin Studio">
+<meta property="og:locale" content="en_US">
+<link rel="alternate" hreflang="ja" href="https://koshinstudio.com/notes/catalog-seed-393/">
+<link rel="alternate" hreflang="en" href="https://koshinstudio.com/en/notes/catalog-seed-393/">
+<link rel="alternate" hreflang="x-default" href="https://koshinstudio.com/en/notes/catalog-seed-393/">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="alternate" type="application/rss+xml" title="Koshin Studio — Notes" href="https://koshinstudio.com/feed.xml">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BlogPosting","headline":"393 “work-name-only” products from an official list: the name field did not contain the product form","url":"https://koshinstudio.com/en/notes/catalog-seed-393/","description":"An official-list import created 502 products in one day (usually 1–10). The name field held only the work name; the form was in the category. Cleaning 393 and re-registering 328 correct names took alias collisions from 0 pairs to 250.","datePublished":"2026-10-17","dateModified":"2026-10-17","inLanguage":"en","image":"https://koshinstudio.com/assets/og/og_en_notes_catalog-seed-393.jpg","author":{"@id":"https://koshinstudio.com#studio"},"publisher":{"@id":"https://koshinstudio.com#studio"},"mainEntityOfPage":"https://koshinstudio.com/en/notes/catalog-seed-393/"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Koshin Studio","item":"https://koshinstudio.com/en/"},{"@type":"ListItem","position":2,"name":"393 “work-name-only” products from an official list: the name field did not contain the product form","item":"https://koshinstudio.com/en/notes/catalog-seed-393/"}]}]}</script>
+<meta property="og:image" content="https://koshinstudio.com/assets/og/og_en_notes_catalog-seed-393.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
+</head>
+<body class="article">
+<canvas id="motes"></canvas>
+
+<header class="site"><div class="wrap">
+  <a class="logo" href="/"><img class="logo-mark" src="/favicon.svg?v=b9d7922f" alt="" width="28" height="28">Koshin Studio</a>
+  <nav><a href="/works/">Works</a><a href="/notes/">Notes</a><a href="/picks/">Picks</a><a href="/calc/">Tools</a><a href="/about/">About</a></nav>
+</div></header>
+
+<main><div class="wrap">
+  <nav class="crumbs" aria-label="You are here"><a href="/en/">Koshin Studio</a><i aria-hidden="true">›</i><span aria-current="page">Work-name products</span></nav>
+  <h1>393 “work-name-only” products from an official list: the name field did not contain the product form</h1>  <div class="rule"></div>
+<!--lang-->
+  <p class="note"><a href="/notes/catalog-seed-393/" hreflang="ja" lang="ja">日本語版</a></p>
+<!--/lang-->  <p class="lead">Development log of the Toreca Dash app / September 2026</p>
+
+  <p>The product list of my app Toreca Dash is partly built from official site lists. Counting products created by that import per day, I saw <strong>502 in one day</strong>, against the usual 1 to 10.</p>
+  <p>Looking inside, 379 were Weiss Schwarz, and the names looked like this:</p>
+  <pre><code>GA Bunko
+Makai Senki Disgaea 4
+Goddess of Victory: NIKKE
+Love Live! Nijigasaki High School Idol Club</code></pre>
+  <p>All of them were <strong>names of works, not names of products</strong>. This is the cause, and a side effect that appeared after the clean-up.</p>
+  <p class="note">Numbers come from my work log of 7 September 2026.</p>  <h2 class="rv" id="s1">The cause: the product form was outside the name</h2>
+  <p>On the official list page, the name field (<code>products__name</code>) holds <strong>only the work name</strong>. The product form (booster pack, trial deck) is in the <strong>category (part of the page URL)</strong>.</p>
+  <div class="scroll rv"><table>
+    <thead><tr><th>Category</th><th>Real data in the name field</th></tr></thead>
+    <tbody>
+      <tr><td>booster-pack</td><td>“Azur Lane Vol.3”, “Stellasora”, “anemoi”</td></tr>
+      <tr><td>trial-deck</td><td>“Girls und Panzer Oarai Girls Academy”, “GA Bunko”</td></tr>
+    </tbody>
+  </table></div>
+  <p>The right product name carries the form, like “Trial Deck GA Bunko”. It then matches existing correct products such as “Booster Pack D4DJ Groovy Mix”.</p>
+
+  <h2 class="rv" id="s2">The fix: at the entrance, and for what was already made</h2>
+  <p><strong>Entrance:</strong> add the form from the category (trial-deck becomes trial deck, booster-pack becomes booster pack, and so on). If the form cannot be decided (“others”), do not add it and do not create the product.</p>
+  <p><strong>Existing items:</strong> I made a clean-up tool. By default it only previews; it deletes with <code>delete=true</code>. It deletes only items for which <strong>all four</strong> are true:</p>
+  <ol>
+    <li>created from the official list,</li>
+    <li>no form word in the name,</li>
+    <li>no articles attached,</li>
+    <li>no official price and no image.</li>
+  </ol>
+  <p>The preview found 393. After the run, products went from 811 to 418. One, “[Oshi no Ko] Vol.3”, has articles attached, so <strong>I kept it</strong>. Over-deletion draws no complaints, so I keep the conditions strict.</p>
+  <p>After cleaning I re-imported the official list and re-registered <strong>328</strong> Weiss Schwarz entries with correct names (form attached, like “Trial Deck Is the Order a Rabbit??”). Zero entries lack a form word.</p>
+
+  <h2 class="rv" id="s3">Why no audit caught it</h2>
+  <p>The name audit looks for “unnatural product names”: symbols, line breaks, URLs. <strong>Proper Japanese work names do not look unnatural.</strong> “Love Live! Nijigasaki High School Idol Club” is a perfectly good name.</p>
+  <p>The other gap: <strong>there was no audit that counts</strong>. Counting “products created per day” would have made 502 obvious. If you only look at what is shown, things that quietly increase are invisible.</p>
+
+  <h2 class="rv" id="s4">A side effect: alias collisions from 0 pairs to 250</h2>
+  <p>Adding 328 correctly named products caused a new problem. Products have alternative names (aliases). An existing product’s alias, “Booster Pack Is the Order a Rabbit??”, <strong>collided</strong> with the new official-name product. The audit that counts aliases claimed by two or more products went <strong>from 0 pairs to 250</strong>.</p>
+  <p>I ran the repair tool the audit points to, previewing first. The rule is <strong>“keep the one that uses the name as its official name”</strong>; only the other product loses it. 253 ambiguous aliases (220 products) were removed, and the audit returned to 0.</p>
+
+  <h2 class="rv" id="s5">What I learned</h2>
+  <blockquote>After a change that grows the catalogue, run the audits again.</blockquote>
+  <ul>
+    <li><strong>Check what a source field really contains on real data.</strong> The “name” field does not necessarily hold the product name.</li>
+    <li><strong>Count how many are created per day.</strong> 502 would have been obvious.</li>
+    <li><strong>When deleting, require all conditions.</strong> Keep anything that has articles.</li>
+    <li><strong>More names mean more collisions.</strong> If you fix the entrance and stop, the next person sees 250 in an audit that should be 0.</li>
+  </ul>
+
+  <p class="note">This is the English version of <a href="/notes/catalog-seed-393/" hreflang="ja" lang="ja">the original Japanese article</a>.</p>
+
+  <div class="rule" style="margin:40px 0 22px"></div>
+  <p class="eyebrow">More in English</p>
+  <ul class="plain">
+    <li><a href="/en/">All English pages</a></li>
+    <li><a href="/en/works/torecadash/">Toreca Dash</a></li>
+  </ul>
+</div>
+</main>
+
+<footer class="site"><div class="wrap"></div></footer>
+<script src="/motion.js?v=1e7447ec" defer></script>
+</body>
+</html>

@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Online play that trusts nothing the client says: the server decides moves, clocks and results — Koshin Studio</title>
+<meta name="description" content="Online play without login. Moves are validated by the rules engine, the clock lives only on the server, a disconnect gets 30 seconds, tokens are signed with HMAC, and ratings use pre-match numbers. With real values from the server code.">
+<meta property="og:title" content="Online play that trusts nothing the client says: the server decides moves, clocks and results">
+<meta property="og:description" content="Online play without login. Moves are validated by the rules engine, the clock lives only on the server, a disconnect gets 30 seconds, tokens are signed with HMAC, and ratings use pre-match numbers. With real values from the server code.">
+<meta property="og:type" content="article">
+<meta name="theme-color" content="#fbfaf7">
+<link rel="icon" href="/favicon.ico?v=1697d589" sizes="48x48">
+<link rel="icon" href="/favicon.svg?v=b9d7922f" type="image/svg+xml" sizes="any">
+<link rel="icon" href="/assets/icon/icon-192.png?v=e2566235" type="image/png" sizes="192x192">
+<link rel="apple-touch-icon" href="/assets/icon/icon-180.png?v=84e7f0e6">
+<link rel="manifest" href="/site.webmanifest">
+<script>document.documentElement.className+=" js"</script>
+<link rel="stylesheet" href="/style.css?v=dd51310c">
+<meta name="google-adsense-account" content="ca-pub-3863314847163872">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3863314847163872" crossorigin="anonymous"></script>
+<link rel="canonical" href="https://koshinstudio.com/en/notes/negaeri-online/">
+<meta property="og:url" content="https://koshinstudio.com/en/notes/negaeri-online/">
+<meta property="og:site_name" content="Koshin Studio">
+<meta property="og:locale" content="en_US">
+<link rel="alternate" hreflang="ja" href="https://koshinstudio.com/notes/negaeri-online/">
+<link rel="alternate" hreflang="en" href="https://koshinstudio.com/en/notes/negaeri-online/">
+<link rel="alternate" hreflang="x-default" href="https://koshinstudio.com/en/notes/negaeri-online/">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="alternate" type="application/rss+xml" title="Koshin Studio — Notes" href="https://koshinstudio.com/feed.xml">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BlogPosting","headline":"Online play that trusts nothing the client says: the server decides moves, clocks and results","url":"https://koshinstudio.com/en/notes/negaeri-online/","description":"Online play without login. Moves are validated by the rules engine, the clock lives only on the server, a disconnect gets 30 seconds, tokens are signed with HMAC, and ratings use pre-match numbers. With real values from the server code.","datePublished":"2026-10-17","dateModified":"2026-10-17","inLanguage":"en","image":"https://koshinstudio.com/assets/og/og_en_notes_negaeri-online.jpg","author":{"@id":"https://koshinstudio.com#studio"},"publisher":{"@id":"https://koshinstudio.com#studio"},"mainEntityOfPage":"https://koshinstudio.com/en/notes/negaeri-online/"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Koshin Studio","item":"https://koshinstudio.com/en/"},{"@type":"ListItem","position":2,"name":"Online play that trusts nothing the client says: the server decides moves, clocks and results","item":"https://koshinstudio.com/en/notes/negaeri-online/"}]}]}</script>
+<meta property="og:image" content="https://koshinstudio.com/assets/og/og_en_notes_negaeri-online.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
+</head>
+<body class="article">
+<canvas id="motes"></canvas>
+
+<header class="site"><div class="wrap">
+  <a class="logo" href="/"><img class="logo-mark" src="/favicon.svg?v=b9d7922f" alt="" width="28" height="28">Koshin Studio</a>
+  <nav><a href="/works/">Works</a><a href="/notes/">Notes</a><a href="/picks/">Picks</a><a href="/calc/">Tools</a><a href="/about/">About</a></nav>
+</div></header>
+
+<main><div class="wrap">
+  <nav class="crumbs" aria-label="You are here"><a href="/en/">Koshin Studio</a><i aria-hidden="true">›</i><span aria-current="page">Online play design</span></nav>
+  <h1>Online play that trusts nothing the client says: the server decides moves, clocks and results</h1>  <div class="rule"></div>
+<!--lang-->
+  <p class="note"><a href="/notes/negaeri-online/" hreflang="ja" lang="ja">日本語版</a></p>
+<!--/lang-->  <p class="lead">Development log of Negaeri Shogi / September 2026</p>
+
+  <p><a href="/en/works/negaeri-shogi/">Negaeri Shogi</a> has online play against strangers, with no sign-up or login. Press a button and you are matched with someone else who is waiting.</p>
+  <p>The first rule I set for an online game was: <strong>trust nothing the client says</strong>. A client can be rewritten by its owner. It can send lies: “the board is like this”, “I have 2 minutes left”, “I won”. This article records how I built the server so those lies do not matter. Numbers and mechanisms are the real values in the server code.</p>
+  <p class="note">This is a record of the mechanism. Balance between human players is still not verified enough (see <a href="/en/notes/negaeri-balance/">how I set the rules by AI-vs-AI play</a>).</p>  <h2 class="rv" id="s1">Principle: the server decides; the client only asks</h2>
+  <p>A client can send only three kinds of message:</p>
+  <ul>
+    <li><code>join</code>: join this match (with a signed identity token).</li>
+    <li><code>move</code>: play this move.</li>
+    <li><code>resign</code>: resign.</li>
+  </ul>
+  <p>It cannot send the board, the remaining time or the result. A received move is checked against the server’s own board by the rules engine, the same file the screen uses. <strong>Because the rules are written in one place</strong>, a move the screen allows can never be “illegal” on the server.</p>
+
+  <h2 class="rv" id="s2">One match = one small server</h2>
+  <p>The server runs on Cloudflare Workers. One match is handled by one Durable Object (a small server that keeps state), and both players connect to it over a WebSocket. The match’s progress (moves and clocks) is saved the moment each move is committed.</p>
+  <p>A Durable Object sleeps when idle. When it wakes it <strong>replays the saved moves from the start to rebuild the board</strong>. Saving only the moves is less likely to drift than saving the board.</p>
+
+  <h2 class="rv" id="s3">What the server does when a move arrives</h2>
+  <ol>
+    <li><strong>Check for a timeout first.</strong> If the player to move has used all their time, the move is not accepted and they lose on time.</li>
+    <li><strong>Check whose turn it is.</strong> A move out of turn gets “it is not your turn”.</li>
+    <li><strong>Validate with the rules.</strong> An illegal move makes <strong>that player lose</strong> (reason: illegal move).</li>
+    <li><strong>Apply the move.</strong> Advance the board, append the move, advance the clock, save.</li>
+    <li><strong>Tell both players.</strong> The move, the order of flipped pieces, the chain count and the new clocks.</li>
+  </ol>
+  <p>An illegal move is not dropped silently; it loses the game.</p>
+
+  <h2 class="rv" id="s4">Only the server holds the clock</h2>
+  <p>Each player gets <strong>3 minutes, plus 5 seconds per move</strong> (Fischer clock). The clock lives only on the server; the time on the screen is just a display of what the server sent.</p>
+  <pre><code>// when a move is committed
+const used = now - clock.turnStartedAt;
+clock.remaining[mover] = Math.max(0, clock.remaining[mover] - used) + INCREMENT_MS;
+clock.turnStartedAt = now;</code></pre>
+  <p>Subtract the time used, add 5 seconds, start the other side’s turn. <code>Math.max(0, …)</code> keeps it from going below 0.</p>
+  <p>The other problem is <strong>who notices a timeout when nobody moves</strong>. If the opponent sends nothing, the server does nothing. So I use an alarm (the server is woken at a given time). The next wake time is the earlier of “the moment the player to move runs out” and “the moment the disconnect grace ends”, and at least 1 second ahead.</p>
+
+  <h2 class="rv" id="s5">A disconnect gets 30 seconds</h2>
+  <p>Mobile connections drop. Losing on a momentary dropout would be harsh, so even after a disconnect the server <strong>waits 30 seconds</strong>. The opponent is told that the player left and how long the wait is. If the player returns in time, play resumes; the server resends all moves and clock state (a sync) so the screen catches up. If not, they lose on time.</p>
+  <p>If the same person reopens the same match on another screen, <strong>the older connection is closed</strong>, so two screens cannot send different moves.</p>
+
+  <h2 class="rv" id="s6">Identifying people without sign-up</h2>
+  <p>With no login, the server must prove “you are that ID”. It issues an ID and signs it with a <strong>secret key (HMAC-SHA256)</strong>, giving a token of the form “ID.signature”. The client stores it.</p>
+  <p>To pose as another ID you need that ID’s valid signature, which you cannot make without the key. Signatures are compared with a <strong>comparison that checks every character to the end</strong>. An ordinary comparison stops at the first different character, and the timing difference can leak the signature.</p>
+  <p>The token is valid only while it stays on the device. Clearing the device’s data makes you a new person. It is the trade-off for not requiring registration.</p>
+
+  <h2 class="rv" id="s7">Matchmaking: start close in rating, widen the longer you wait</h2>
+  <p>It matches players with close ratings. It starts at <strong>±100</strong> and widens the allowed gap by <strong>100</strong> every <strong>10 seconds</strong> of waiting: a compromise between not making people wait and matching similar strength.</p>
+  <p>Two players are paired if the gap fits <em>either</em> player’s allowed range, so the one waiting longer takes priority and no one waits forever. With several waiting, it goes from the longest wait and picks the closest rating.</p>
+  <p>The lower-rated player gets the first move. The first move is slightly stronger, so the weaker player holds the stronger side, partly cancelling the gap.</p>
+
+  <h2 class="rv" id="s8">Ratings: Elo, using pre-match numbers</h2>
+  <p>Ratings use Elo, starting at 1500. The expected score is:</p>
+  <pre><code>1 / (1 + 10 ** ((opponentRating - myRating) / 400))</code></pre>
+  <p>The step size (K) is large while you have few games: 40 up to 30 games, 20 up to 100, then 10, so ratings approach true strength quickly.</p>
+  <p>What I took care over: <strong>do not update the two ratings one after the other</strong>. Updating one first and then computing the other uses the opponent’s updated rating, which is unfair. Both use <strong>pre-match ratings</strong>.</p>
+  <p>Only players with <strong>10 or more games</strong> appear on the ranking, to avoid someone playing once and parking at a lucky rating.</p>
+
+  <h2 class="rv" id="s9">How I check it</h2>
+  <ul>
+    <li><strong>Unit tests:</strong> 126 tests cover rules, AI, clocks, rating, matchmaking and signatures.</li>
+    <li><strong>End-to-end tests:</strong> there are tests that open two browsers and make an online match happen, and tests that connect directly to the server.</li>
+  </ul>
+  <p>Not yet verified: behaviour with many strangers playing, and whether the first-player edge (<a href="/en/notes/negaeri-balance/">61% in AI-vs-AI play</a>) is the same for humans.</p>
+
+  <h2 class="rv" id="s10">What I learned</h2>
+  <blockquote>Everything a client reports is a request. The server decides.</blockquote>
+  <ul>
+    <li><strong>The server holds the clock, the board and the result.</strong> Anything you give the client can be rewritten.</li>
+    <li><strong>Use the same rules for the screen and the server.</strong> Separate copies drift apart.</li>
+    <li><strong>Assume connections break.</strong> Decide the wait and the restore beforehand.</li>
+    <li><strong>Updating in sequence is unfair.</strong> Compute ratings from pre-match numbers.</li>
+  </ul>
+
+  <p class="note">This is the English version of <a href="/notes/negaeri-online/" hreflang="ja" lang="ja">the original Japanese article</a>.</p>
+
+  <div class="rule" style="margin:40px 0 22px"></div>
+  <p class="eyebrow">More in English</p>
+  <ul class="plain">
+    <li><a href="/en/">All English pages</a></li>
+    <li><a href="/en/works/negaeri-shogi/">Negaeri Shogi</a></li>
+  </ul>
+</div>
+</main>
+
+<footer class="site"><div class="wrap"></div></footer>
+<script src="/motion.js?v=1e7447ec" defer></script>
+</body>
+</html>
