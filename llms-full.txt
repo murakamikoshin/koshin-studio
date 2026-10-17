@@ -10896,6 +10896,8 @@ URL: https://koshinstudio.com/en/
 
 - Gacha drop rate and pity calculator (https://koshinstudio.com/en/calc/gacha-rate/) — From the drop rate, how many pulls until you get it?
 
+- Lottery win chance calculator (https://koshinstudio.com/en/calc/lottery/) — From the odds and the number of entries, the chance you win at least once.
+
 ## Development logs
 
   Measured results and fixes, written up with numbers. These articles are in English and Japanese.
