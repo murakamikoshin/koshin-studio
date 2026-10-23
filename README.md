@@ -26,9 +26,9 @@ Cloudflare Pages に置く静的サイト。枠組み（Next.js など）は使�
 
 ## 手元の置き方
 
-**ぜんぶ横に並べる。入れ子にしない。** 置き場は `~/Desktop/koshin/` に決めてある。
+**ぜんぶ横に並べる。入れ子にしない。** 置き場は `~/Desktop/koshinstudio/` に決めてある。
 
-    ~/Desktop/koshin/
+    ~/Desktop/koshinstudio/
       koshin-studio/     ← このリポジトリ。koshinstudio.com そのもの
       sushitsumu/        ← ゲーム（すし積む）
       stopwatch10/       ← ゲーム（10秒ピッタリで止めろ！）

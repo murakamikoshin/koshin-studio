@@ -12,7 +12,7 @@
    その数字を書いてあるので、撮り直したら alt も直すこと。
 
    ゲーム本体はこのリポジトリには無い。隣に置くか、場所を教える:
-       GAME_DIR_STOPWATCH10=~/Desktop/koshin/stopwatch10 node tools/shots-stopwatch10.mjs
+       GAME_DIR_STOPWATCH10=~/Desktop/koshinstudio/stopwatch10 node tools/shots-stopwatch10.mjs
 */
 import { chromium } from 'playwright-core';
 import { mkdirSync, existsSync } from 'node:fs';
@@ -25,11 +25,11 @@ const CHROME = process.env.CHROME || '/opt/pw-browsers/chromium-1194/chrome-linu
 const HOME = process.env.HOME || '';
 const tidy = (d) => String(d).trim().replace(/^~(?=$|\/)/, HOME).replace(/\/+$/, '');
 const GAME = [process.env.GAME_DIR_STOPWATCH10, process.argv[2],
-  SITE + '/../stopwatch10', HOME + '/Desktop/koshin/stopwatch10', HOME + '/stopwatch10']
+  SITE + '/../stopwatch10', HOME + '/Desktop/koshinstudio/stopwatch10', HOME + '/stopwatch10']
   .filter(Boolean).map(tidy).find((d) => existsSync(d + '/index.html'));
 if (!GAME) {
   console.error('ゲーム本体が見つかりません。隣に置くか、場所を教えてください:');
-  console.error('  GAME_DIR_STOPWATCH10=~/Desktop/koshin/stopwatch10 node tools/shots-stopwatch10.mjs');
+  console.error('  GAME_DIR_STOPWATCH10=~/Desktop/koshinstudio/stopwatch10 node tools/shots-stopwatch10.mjs');
   process.exit(1);
 }
 mkdirSync(OUT, { recursive: true });
