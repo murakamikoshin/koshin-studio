@@ -204,5 +204,42 @@
       "bk-shogi",
       "it-shogi"
     ]
+  },
+  {
+    "slug": "draft-party",
+    "title": "ドラフト会議ごっこ",
+    "kind": "game",
+    "year": "2026",
+    "status": "公開中",
+    "url": "/works/draft-party/",
+    "play": "/draft/",
+    "cover": "/assets/draft-party-square",
+    "coverW": 720,
+    "coverH": 720,
+    "genre": [
+      "パーティーゲーム",
+      "ドラフト"
+    ],
+    "blurb": "好きなワードで指名して、被ったらくじ引き。選手の能力を見て選ぶスカウトモードでは、数年後の成績発表まで。みんなで遊ぶ、ブラウザのドラフト会議。",
+    "tags": [
+      "ブラウザ",
+      "オンライン",
+      "4 言語"
+    ],
+    "featured": true,
+    "stats": [
+      {
+        "n": 12,
+        "label": "球団まで"
+      },
+      {
+        "n": 4,
+        "label": "言語"
+      },
+      {
+        "n": 2,
+        "label": "つのモード"
+      }
+    ]
   }
 ]

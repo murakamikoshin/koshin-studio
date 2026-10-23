@@ -34,7 +34,7 @@
 
 <header class="site"><div class="wrap">
   <a class="logo" href="/"><img class="logo-mark" src="/favicon.svg?v=b9d7922f" alt="" width="28" height="28">Koshin Studio</a>
-  <nav><a href="/works/">Works</a><a href="/notes/">Notes</a><a href="/picks/">Picks</a><a href="/calc/">Tools</a><a href="/about/">About</a></nav>
+  <nav><a href="/works/">Works</a><a href="/en/works/#game">Games</a><a href="/notes/">Notes</a><a href="/picks/">Picks</a><a href="/calc/">Tools</a><a href="/about/">About</a></nav>
 </div></header>
 
 <main><div class="wrap">
@@ -51,6 +51,8 @@
   <p><strong>Stop at 10 seconds</strong> stores only <strong>your name, the errors of your three tries and the time you submitted</strong>. It does not create a device number. The day’s ranking is cleared when the date changes.</p>
   <p><strong>Negaeri Shogi</strong>, when you play online (and when you open the ranking), stores <strong>a device-generated number, your name (default: “Anonymous” in Japanese), your rating, win/loss counts, and the moves and result of each game</strong>. Your name and rating appear in the ranking. Playing against the AI, or two players on the same device, stores nothing.</p>
   <p><strong>Anime Type Quiz</strong> calculates your answers on your device only and sends them nowhere.</p>
+  <p><strong>Draft Party</strong> (/draft/) keeps, only for the lifetime of a room and for the sake of play, <strong>a device-generated number, your team name, the words (or players) you pick, chat messages, reports and the room settings</strong>. If you use your own image as a team icon, <strong>a version shrunk on your device</strong> is sent only to the other participants of that room (private friends rooms only — it is not used in random match or public rooms). If a host registers players’ names and abilities, that content is likewise handled only inside that room. There is no ranking. A room’s data, including reports, is deleted 10 minutes after the game ends (30 minutes after a room is abandoned). Stamps and quick phrases are not stored.</p>
+  <p>What other participants type — chat, names and so on — is shown to the people in the same room. If a host registers real people’s names or similar, that content is the host’s responsibility. Inappropriate content is filtered automatically, and can be reported (two reports hide it for everyone).</p>
   <p>You can choose any name. You do not need to use your real name.</p>
 
   <h2 class="rv">What is not stored</h2>
@@ -58,7 +60,7 @@
   <p>The site runs Cloudflare Web Analytics, which counts how many times pages are opened and which pages are read. It is not used to track individuals or for advertising.</p>
 
   <h2 class="rv">What stays only on your device</h2>
-  <p>High scores, personal bests, collection data, language and sound settings stay <strong>only on your device</strong>. If you do not submit to a ranking, nothing leaves your device. Clearing your browser’s storage removes it.</p>
+  <p>High scores, personal bests, collection data, language and sound settings — and, for Draft Party, your team name, icon, device number (for rejoining) and last choices — stay <strong>only on your device</strong>. If you do not submit to a ranking, nothing leaves your device. Clearing your browser’s storage removes it.</p>
 
   <h2 class="rv">Comments on articles</h2>
   <p>Some articles have a comments section. <strong>Only when you press “Open comments”</strong> does your browser connect to giscus (giscus.app) and GitHub. If you do not press it, no connection is made. Writing a comment requires a GitHub account, and comments are public, stored in GitHub Discussions with your GitHub username. You can delete your own comment on GitHub.</p>
@@ -67,7 +69,7 @@
   <p>To remove a record you submitted to a ranking, contact the address on the <a href="/about/" hreflang="ja" lang="ja">About page</a> (Japanese) with the name you used. We will confirm and delete it.</p>
 
   <h2 class="rv">Where it is hosted</h2>
-  <p>This site and the ranking servers run on Cloudflare. Sushi Stack and Negaeri Shogi rankings are stored in Cloudflare D1 (a database), and Stop at 10 seconds in Cloudflare KV.</p>
+  <p>This site and the ranking servers run on Cloudflare. Sushi Stack and Negaeri Shogi rankings are stored in Cloudflare D1 (a database), and Stop at 10 seconds in Cloudflare KV. Draft Party room data is kept in Cloudflare Durable Objects for the period described above.</p>
 
   <h2 class="rv">About advertising</h2>
   <p>When our games are published on other sites (game portals), that site’s own advertising systems may apply, under that site’s policy.</p>
@@ -75,7 +77,9 @@
   <p>You can turn off personalized advertising at any time in <a href="https://adssettings.google.com/" rel="noopener">Google Ad Settings</a>, or opt out of third-party vendors’ cookies at <a href="https://www.aboutads.info/choices/" rel="noopener">aboutads.info</a>. Visitors in the European Economic Area and the UK first see a consent prompt provided by Google. We do not receive cookie information for any purpose other than ads.</p>
 
   <h2 class="rv">Children</h2>
-  <p>We do not ask for age and do not collect information related to age. Apart from the name you put in a ranking, nothing reaches us.</p>
+  <p>We do not ask for age and do not collect information related to age. Apart from the name you put in a ranking, and what you type inside a Draft Party room (such as chat), nothing reaches us.</p>
+
+  <p>On October 23, 2026, we added how Draft Party (/draft/) is handled.</p>
 
   <p class="note">This is the English version of <a href="/privacy/" hreflang="ja" lang="ja">the Japanese privacy page</a>. If they differ, the Japanese page is the original.</p>
 </div>

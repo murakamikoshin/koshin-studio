@@ -105,6 +105,7 @@
 - [ガチアニメ診断](https://koshinstudio.com/works/shindananime/): 12問から6つの軸に分解して、あなたのアニメタイプと、6千作を超えるデータベースから今いちばん刺さる運命の1作を選ぶ診断。回答は端末の中だけで計算します。
 - [トレカダッシュ](https://koshinstudio.com/works/torecadash/): トレカの抽選・予約・先着販売の情報を、店舗やジャンルごとにまとめて通知する iPhone アプリ。締切カレンダーと応募の記録つき。App Store で配信中です。
 - [寝返り将棋](https://koshinstudio.com/works/negaeri-shogi/): 挟まれた駒は敵に寝返り、出世する。6×6の盤で、持ち駒を打って挟み、連鎖で一気に裏返す。AI 対戦と、レーティングつきのオンライン対戦。
+- [ドラフト会議ごっこ](https://koshinstudio.com/works/draft-party/): 好きなワードで指名して、被ったらくじ引き。選手の能力を見て選ぶスカウトモードでは、数年後の成績発表まで。みんなで遊ぶ、ブラウザのドラフト会議。
 
 ## ガチアニメ診断のガイド
 - [ガイド](https://koshinstudio.com/anime/): 診断の仕組みと 64 タイプ
@@ -201,6 +202,7 @@
 - [I re-measured a “nothing can be done” assumption and scraping cost dropped to one eighth](https://koshinstudio.com/en/notes/scrape-cost/): I believed two sites could not be fetched more often because of cost. Comparing three Scrape.do settings showed rendering was wasted: 3x faster, 1/8 the credits.
 - [A bulk update hit “all articles”: count before you write, and break your tests to prove they work](https://koshinstudio.com/en/notes/bulk-accident/): A bulk job hit every article and wrongly restored 18 items. How I reverted them from status history and proved new tests work by breaking rules one at a time.
 - [Pokémon card sleeves and loaders: sizes and what “pt” means](https://koshinstudio.com/en/notes/card-supplies-guide/): What to check before buying Pokémon card sleeves, toploaders and deck boxes: standard vs small size, what 35pt means, and a buying checklist. Not a hands-on review; unverified points are listed.
+- [Draft Party — a free multiplayer draft game you play in your browser](https://koshinstudio.com/en/works/draft-party/): Draft Party is a free browser game. Pick any word; if teams tie, they draw lots. In Scout mode you pick fictional rookies by their abilities and watch several seasons of stats, standings and head-to-head results together. Play with friends or random players, in four languages.
 - [English hub](https://koshinstudio.com/en/): Games, tools and development logs in English
 
 ## そのほか

@@ -8288,6 +8288,62 @@ URL: https://koshinstudio.com/works/negaeri-shogi/
 
 ---
 
+URL: https://koshinstudio.com/works/draft-party/
+
+# ドラフト会議ごっこ
+
+  English version (https://koshinstudio.com/en/works/draft-party/)
+
+  好きなワードで指名して、被ったらくじ引き。
+みんなで盛り上がる、ブラウザのドラフト会議。
+
+  遊ぶ (https://koshinstudio.com/draft/)
+
+  無料。ブラウザだけで遊べて、登録も要りません。日本語・英語・韓国語・繁体字中国語に対応しています。
+
+    12球団まで
+    2つのモード
+    4言語
+
+## どんな遊びか
+
+  球団名を決めて、ワードで指名していくゲームです。1巡目は全員が同時に、ほかの人に見えないように入札します。一斉に公開して、同じワードが被った球団はくじ引きです。競合した球団が順番に伏せた紙を1枚ずつ取り、全員が取り終わったら一斉に開けます。当たった球団だけが交渉権を得て、外れた球団は別のワードで入札し直します（外れ1位）。
+
+  2巡目からは、1球団ずつ順番に指名します（順番は巡目ごとに反転）。最後に交渉結果の発表があり、「入団合意」と「入団拒否」が出ます。結果は画像にして、Xでシェアできます。
+
+## 2つのモード
+
+### フリーワードモード
+
+  人でも食べ物でも思いつきの言葉でも、野球に限らず何でも指名できます。ホストがお題を決めたり、みんなで投票して決めたりもできます。
+
+### スカウトモード
+
+  架空の新人選手の能力・将来性・実績を見て指名します。能力は「スカウトの見立て」なので、実際の力とはずれることがあります。入団した選手は数年かけて成長し、全チームが総当たりを戦います。年ごとの順位表、全チームとの対戦成績、首位打者や最多勝などのタイトル、新人王、ドラフト採点まで出て、その発表は参加者みんなで同時に見ながら、スタンプやチャットで盛り上がれます。ホストが選手を自分で登録するモードもあります。
+
+## 友達と、知らない人と
+
+- 友達部屋：6文字の合言葉かURLで入ります。球団数・巡目数・制限時間・モード・お題はホストが決め、「開始」を押すまで始まりません。友達がそろったあとに公開すると、ランダムマッチの人も入ってきます。ホストは、困った人を退室させることもできます。
+
+- ランダムマッチ：同じ言語の人と自動で組まれます。人が足りなくてもCPU球団が加わるので、待たされずに始まります。
+
+  球団には、オリジナルのエンブレムが自動で付きます（選び直せます）。友達部屋では自分の画像も使えます。
+
+## 作りについて
+
+  進行と判定はすべてサーバー（Cloudflare Workers の Durable Objects）が行います。1巡目の入札は公開まで他の人に送られず、くじ引きの当たりの位置も、全員が引き終わるまでサーバーだけが知っています。ホストでも、入札を覗いたり抽選を操作したりはできません。ログイン機能はなく、効果音とBGMはブラウザで作っています（音声ファイルは使っていません）。
+
+  スカウトモードの選手は、毎回ランダムに作られる架空の人物です。実在の選手・球団・成績とは関係ありません。このゲームはNPBや各球団とも関係がありません。
+
+## 預かるもの
+
+  部屋の中でのやり取りのために、端末が作った番号、球団名、指名した内容、チャットの発言、部屋の設定を、その部屋のあいだだけ預かります。ゲーム終了の10分後に、すべて削除されます。ランキングはありません。くわしくはあつかい (https://koshinstudio.com/privacy/)に書いています。
+
+    遊ぶ (https://koshinstudio.com/draft/)
+
+
+---
+
 URL: https://koshinstudio.com/anime/
 
 # ガチアニメ診断ガイド
@@ -8667,6 +8723,10 @@ URL: https://koshinstudio.com/privacy/
 
   「寝返り将棋」では、オンライン対戦を遊んだとき（と順位表を開いたとき）に、端末が作った番号、名前（既定は「名無し」）、レーティング、勝ち負けの数、一局ごとの手順と結果を預かります。順位表に、名前とレーティングが載ります。AI 対戦と、同じ端末での2人対戦では、何も預かりません。
 
+  「ドラフト会議ごっこ」では、部屋の中でのやり取りのために、端末が作った番号、球団名、指名したワード（または選手）、チャットの発言、通報、部屋の設定を、その部屋のあいだだけ預かります。友達部屋で自分の画像をアイコンにした場合は、端末で小さくした画像が部屋の参加者にだけ送られます（公開していない友達部屋のみ。ランダムマッチと公開中の部屋では使われません）。ホストが選手の名前や能力を登録した場合は、その内容も同じ部屋の中だけで扱います。ランキングはありません。部屋のデータは、ゲーム終了の10分後（誰もいなくなった部屋は30分後）に、通報の記録もふくめてすべて削除されます。スタンプと定型文は保存しません。
+
+  チャットや名前など、ほかの参加者が入力した内容は、同じ部屋の人に表示されます。ホストが実在の人物の名前などを登録する場合、その内容はホストの責任です。不適切な内容は、自動で弾き、通報（2人で全員の画面から非表示）できる仕組みを用意しています。
+
   名前は自由に決められます。本名を入れる必要はありません。
 
 ## 預からないもの
@@ -8677,7 +8737,7 @@ URL: https://koshinstudio.com/privacy/
 
 ## 端末の中だけに残るもの
 
-  ハイスコア・自己ベスト・寿司図鑑・言葉の設定・音の設定は、その端末の中にだけ残ります。番付に載せなければ、外へは何も出ません。ブラウザの保存領域を消せば、いつでも消えます。
+  ハイスコア・自己ベスト・寿司図鑑・言葉の設定・音の設定、「ドラフト会議ごっこ」の球団名・アイコン・端末の番号（再入室用）・前回の選択は、その端末の中にだけ残ります。番付に載せなければ、外へは何も出ません。ブラウザの保存領域を消せば、いつでも消えます。
 
 ## 記事のコメント欄
 
@@ -8691,7 +8751,7 @@ URL: https://koshinstudio.com/privacy/
 
 ## 置き場所
 
-  このサイトと番付のサーバーは Cloudflare 上で動いています。番付のデータは、「すし積む」は Cloudflare の D1（データベース）に、「10秒ピッタリで止めろ！」は Cloudflare の KV に保存されます。
+  このサイトと番付のサーバーは Cloudflare 上で動いています。番付のデータは、「すし積む」は Cloudflare の D1（データベース）に、「10秒ピッタリで止めろ！」は Cloudflare の KV に保存されます。「ドラフト会議ごっこ」の部屋のデータは、Cloudflare の Durable Objects に、上に書いた期間だけ保存されます。
 
 ## 広告について
 
@@ -8703,9 +8763,11 @@ URL: https://koshinstudio.com/privacy/
 
 ## 子どもについて
 
-  年齢を尋ねていませんし、年齢に関わる情報も集めていません。番付に名前を載せる以外に、こちらへ届くものはありません。
+  年齢を尋ねていませんし、年齢に関わる情報も集めていません。番付に名前を載せる以外に、また「ドラフト会議ごっこ」の部屋の中で入力した内容（チャットなど）を除いて、こちらへ届くものはありません。
 
 ## このページの更新と、お問い合わせ
+
+  2026 年 10 月 23 日に、「ドラフト会議ごっこ」（/draft/）の扱いを追記しました。
 
   2026 年 10 月 17 日に、アフィリエイト（紹介リンク）の記述を外しました。現在、このサイトの記事には、紹介リンクはありません。今後、リンクを付けることがあれば、記事の冒頭と、このページに書きます。
 
@@ -12619,6 +12681,10 @@ Last updated October 2026
 
   Anime Type Quiz calculates your answers on your device only and sends them nowhere.
 
+  Draft Party (/draft/) keeps, only for the lifetime of a room and for the sake of play, a device-generated number, your team name, the words (or players) you pick, chat messages, reports and the room settings. If you use your own image as a team icon, a version shrunk on your device is sent only to the other participants of that room (private friends rooms only — it is not used in random match or public rooms). If a host registers players’ names and abilities, that content is likewise handled only inside that room. There is no ranking. A room’s data, including reports, is deleted 10 minutes after the game ends (30 minutes after a room is abandoned). Stamps and quick phrases are not stored.
+
+  What other participants type — chat, names and so on — is shown to the people in the same room. If a host registers real people’s names or similar, that content is the host’s responsibility. Inappropriate content is filtered automatically, and can be reported (two reports hide it for everyone).
+
   You can choose any name. You do not need to use your real name.
 
 ## What is not stored
@@ -12629,7 +12695,7 @@ Last updated October 2026
 
 ## What stays only on your device
 
-  High scores, personal bests, collection data, language and sound settings stay only on your device. If you do not submit to a ranking, nothing leaves your device. Clearing your browser’s storage removes it.
+  High scores, personal bests, collection data, language and sound settings — and, for Draft Party, your team name, icon, device number (for rejoining) and last choices — stay only on your device. If you do not submit to a ranking, nothing leaves your device. Clearing your browser’s storage removes it.
 
 ## Comments on articles
 
@@ -12641,7 +12707,7 @@ Last updated October 2026
 
 ## Where it is hosted
 
-  This site and the ranking servers run on Cloudflare. Sushi Stack and Negaeri Shogi rankings are stored in Cloudflare D1 (a database), and Stop at 10 seconds in Cloudflare KV.
+  This site and the ranking servers run on Cloudflare. Sushi Stack and Negaeri Shogi rankings are stored in Cloudflare D1 (a database), and Stop at 10 seconds in Cloudflare KV. Draft Party room data is kept in Cloudflare Durable Objects for the period described above.
 
 ## About advertising
 
@@ -12653,7 +12719,9 @@ Last updated October 2026
 
 ## Children
 
-  We do not ask for age and do not collect information related to age. Apart from the name you put in a ranking, nothing reaches us.
+  We do not ask for age and do not collect information related to age. Apart from the name you put in a ranking, and what you type inside a Draft Party room (such as chat), nothing reaches us.
+
+  On October 23, 2026, we added how Draft Party (/draft/) is handled.
 
   This is the English version of the Japanese privacy page (https://koshinstudio.com/privacy/). If they differ, the Japanese page is the original.
 
@@ -16320,6 +16388,62 @@ A buying guide / October 2026
 - All English pages (https://koshinstudio.com/en/)
 
   Languages: 日本語 (https://koshinstudio.com/notes/card-supplies-guide/)
+
+
+---
+
+URL: https://koshinstudio.com/en/works/draft-party/
+
+# Draft Party
+
+  日本語版 (https://koshinstudio.com/works/draft-party/)
+
+  Pick any word you like. Tie with someone? Lottery!
+A draft day for everyone, in your browser.
+
+  Play now (https://koshinstudio.com/draft/)
+
+  Free. Runs in your browser, no install or sign-up. Available in Japanese, English, Korean and Traditional Chinese.
+
+    12teams at most
+    2modes
+    4languages
+
+## What it is
+
+  Name your team and pick words. In Round 1 everyone bids at the same time, hidden from the others, and all bids are revealed together. If teams chose the same word, they draw lots: the competing teams take turns picking one hidden paper, and when everyone has picked, all papers open at once. Only the winner gets the rights; the others re-bid with a different word.
+
+  From Round 2, teams pick one at a time, and the order flips every round. At the end, the contract talks are announced — “signed” or “refused”. You can turn your result into an image and share it on X.
+
+## Two modes
+
+### Free-word mode
+
+  Pick anything — a person, a food, any word, not just baseball. The host can set a theme, or everyone can vote for one.
+
+### Scout mode
+
+  Pick fictional rookies by their abilities, potential and records. The abilities are the scouts’ estimates and can differ from reality. Signed players grow over several years while every team plays every other team. You get yearly standings, head-to-head records against every team, titles such as batting champion and wins leader, Rookie of the Year and draft grades — revealed to everyone at the same time, so you can react together with stamps and chat. There is also a mode where the host registers the players.
+
+## With friends, or with strangers
+
+- Friends room: enter with a 6-character room code or a link. The host chooses the number of teams, rounds, time limit, mode and theme, and nothing starts until the host presses Start. Once your friends are in, the host can make the room public so random-match players can join. The host can also remove anyone who causes trouble.
+
+- Random match: you are grouped with players using the same language. If there aren’t enough players, CPU teams join, so it starts without a wait.
+
+  Every team gets an original emblem automatically (you can pick another), and in friends rooms you can use your own image.
+
+## How it is built
+
+  The server (Cloudflare Workers with Durable Objects) runs all the progress and judging. Round 1 bids are not sent to anyone until the reveal, and the winning paper of a lottery is known only to the server until everyone has drawn. Even the host cannot peek at bids or rig a lottery. There is no login, and the sound effects and music are generated in the browser (no audio files).
+
+  The players in Scout mode are fictional people generated at random each time. They have no connection to real players, teams or results, and this game has no connection to any professional league or team.
+
+## What is stored
+
+  For the sake of play inside a room, a device-generated number, your team name, what you pick, chat messages and the room settings are kept only for the life of that room, and are all deleted 10 minutes after the game ends. There is no ranking. Details are on the privacy page (https://koshinstudio.com/en/privacy/).
+
+    Play now (https://koshinstudio.com/draft/)
 
 
 ---

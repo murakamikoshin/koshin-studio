@@ -84,7 +84,7 @@ const head = (title, desc, extra = '') => `<!doctype html>
 
 <header class="site"><div class="wrap">
   <a class="logo" href="/"><img class="logo-mark" src="/favicon.svg" alt="" width="28" height="28">Koshin Studio</a>
-  <nav><a href="/works/">Works</a><a href="/notes/">Notes</a><a href="/picks/">Picks</a><a href="/calc/">Tools</a><a href="/about/">About</a></nav>
+  <nav><a href="/works/">Works</a><a href="/works/#game">Games</a><a href="/notes/">Notes</a><a href="/picks/">Picks</a><a href="/calc/">Tools</a><a href="/about/">About</a></nav>
 </div></header>
 `;
 const socialHtml = (conf.social || []).map((x) =>
@@ -902,8 +902,8 @@ for (const file of pages) {
   const rel = file.slice(here.length);
   let html = readFileSync(file, 'utf8');
   /* 脚の SNS 欄と、広告の枠を差し替える（data/site.json が元） */
-  html = html.replace(/<header class="site"><div class="wrap">\s*<a class="logo" href="\/">Koshin Studio<\/a>\s*<nav>[\s\S]*?<\/nav>/,
-    '<header class="site"><div class="wrap">\n  <a class="logo" href="/"><img class="logo-mark" src="/favicon.svg" alt="" width="28" height="28">Koshin Studio</a>\n  <nav><a href="/works/">Works</a><a href="/notes/">Notes</a><a href="/picks/">Picks</a><a href="/calc/">Tools</a><a href="/about/">About</a></nav>');
+  html = html.replace(/<header class="site"><div class="wrap">\s*<a class="logo" href="\/">(?:<img[^>]*>)?Koshin Studio<\/a>\s*<nav>[\s\S]*?<\/nav>/,
+    '<header class="site"><div class="wrap">\n  <a class="logo" href="/"><img class="logo-mark" src="/favicon.svg" alt="" width="28" height="28">Koshin Studio</a>\n  <nav><a href="/works/">Works</a><a href="' + (rel.startsWith('/en/') ? '/en/works/#game' : '/works/#game') + '">Games</a><a href="/notes/">Notes</a><a href="/picks/">Picks</a><a href="/calc/">Tools</a><a href="/about/">About</a></nav>');
   /* 英語の頁は、脚が空のまま作られていた（プライバシーも連絡先も、たどれなかった）。入れる */
   html = html.replace('<footer class="site"><div class="wrap"></div></footer>',
     '<footer class="site"><div class="wrap">\n  <span>© 2026 Koshin Studio</span>\n  <nav><a href="/en/" hreflang="en" lang="en">English</a><a href="/en/works/" hreflang="en" lang="en">Works</a><a href="/en/about/" hreflang="en" lang="en">About</a><a href="/en/about/#contact" hreflang="en" lang="en">Contact</a><a href="/en/privacy/" hreflang="en" lang="en">Privacy</a><a href="/" hreflang="ja" lang="ja">日本語</a></nav>\n</div></footer>');
