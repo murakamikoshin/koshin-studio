@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://koshinstudio.com/about/</loc><lastmod>2026-10-17</lastmod><priority>0.7</priority></url>
+  <url><loc>https://koshinstudio.com/about/</loc><lastmod>2026-10-23</lastmod><priority>0.7</priority></url>
   <url><loc>https://koshinstudio.com/anime/axes/</loc><lastmod>2026-10-17</lastmod><priority>0.8</priority></url>
   <url><loc>https://koshinstudio.com/anime/guide/</loc><lastmod>2026-10-17</lastmod><priority>0.5</priority></url>
   <url><loc>https://koshinstudio.com/anime/</loc><lastmod>2026-10-17</lastmod><priority>0.8</priority></url>
@@ -10,7 +10,7 @@
   <url><loc>https://koshinstudio.com/calc/gacha/</loc><lastmod>2026-10-17</lastmod><priority>0.5</priority></url>
   <url><loc>https://koshinstudio.com/calc/</loc><lastmod>2026-10-17</lastmod><priority>0.5</priority></url>
   <url><loc>https://koshinstudio.com/calc/lottery/</loc><lastmod>2026-10-17</lastmod><priority>0.5</priority></url>
-  <url><loc>https://koshinstudio.com/en/about/</loc><lastmod>2026-10-17</lastmod><priority>0.5</priority></url>
+  <url><loc>https://koshinstudio.com/en/about/</loc><lastmod>2026-10-23</lastmod><priority>0.5</priority></url>
   <url><loc>https://koshinstudio.com/en/calc/gacha-rate/</loc><lastmod>2026-10-17</lastmod><priority>0.5</priority></url>
   <url><loc>https://koshinstudio.com/en/calc/gacha/</loc><lastmod>2026-10-17</lastmod><priority>0.5</priority></url>
   <url><loc>https://koshinstudio.com/en/calc/lottery/</loc><lastmod>2026-10-17</lastmod><priority>0.5</priority></url>
@@ -103,7 +103,7 @@
   <url><loc>https://koshinstudio.com/en/works/stopwatch10/</loc><lastmod>2026-10-17</lastmod><priority>0.5</priority></url>
   <url><loc>https://koshinstudio.com/en/works/sushitsumu/</loc><lastmod>2026-10-17</lastmod><priority>0.5</priority></url>
   <url><loc>https://koshinstudio.com/en/works/torecadash/</loc><lastmod>2026-10-17</lastmod><priority>0.5</priority></url>
-  <url><loc>https://koshinstudio.com/</loc><lastmod>2026-10-17</lastmod><priority>1.0</priority></url>
+  <url><loc>https://koshinstudio.com/</loc><lastmod>2026-10-23</lastmod><priority>1.0</priority></url>
   <url><loc>https://koshinstudio.com/notes/adgap/</loc><lastmod>2026-10-17</lastmod><priority>0.8</priority></url>
   <url><loc>https://koshinstudio.com/notes/aggregator-pagination/</loc><lastmod>2026-10-17</lastmod><priority>0.8</priority></url>
   <url><loc>https://koshinstudio.com/notes/anago/</loc><lastmod>2026-10-17</lastmod><priority>0.8</priority></url>
