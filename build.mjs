@@ -1290,8 +1290,12 @@ writeFileSync(here + '/robots.txt',
     ...['GPTBot', 'OAI-SearchBot', 'ChatGPT-User', 'ClaudeBot', 'Claude-SearchBot', 'Claude-User',
       'PerplexityBot', 'Perplexity-User', 'Google-Extended', 'Applebot-Extended', 'Bingbot', 'Googlebot']
       .map((ua) => 'User-agent: ' + ua).concat(['User-agent: *']),
-    'Allow: /', 'Disallow: /submit', 'Disallow: /top', '',
+    'Allow: /', 'Disallow: /submit', 'Disallow: /top',
+    /* ドラフト会議ごっこ（/draft/）: 招待URL（部屋ごとに変わる）と API は検索に載せない */
+    'Disallow: /draft/r/', 'Disallow: /draft/api/', '',
     'Sitemap: ' + SITE + '/sitemap.xml',
+    /* ドラフト会議ごっこ（別の Worker が配信）の sitemap は、向こうが書き出す */
+    'Sitemap: ' + SITE + '/draft/sitemap.xml',
     /* トレカダッシュ Web版（/app/torecadash/、別の Pages から worker が中継）は
        ページが毎時入れ替わるので、sitemap も向こうが自分で書き出す */
     'Sitemap: ' + SITE + '/app/torecadash/sitemap.xml', ''].join('\n'));

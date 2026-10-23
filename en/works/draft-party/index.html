@@ -72,7 +72,7 @@
     <li><strong>Friends room</strong>: enter with a 6-character room code or a link. The host chooses the number of teams, rounds, time limit, mode and theme, and nothing starts until the host presses Start. Once your friends are in, the host can make the room public so random-match players can join. The host can also remove anyone who causes trouble.</li>
     <li><strong>Random match</strong>: you are grouped with players using the same language. If there aren’t enough players, CPU teams join, so it starts without a wait.</li>
   </ul>
-  <p>Every team gets an original emblem automatically (you can pick another), and in friends rooms you can use your own image.</p>
+  <p>Every team gets an original emblem automatically (you can pick another), and you can use your own image in any room (inappropriate images are hidden after reports).</p>
 
   <h2 class="rv">How it is built</h2>
   <p>The server (Cloudflare Workers with Durable Objects) runs all the progress and judging. Round 1 bids are not sent to anyone until the reveal, and the winning paper of a lottery is known only to the server until everyone has drawn. Even the host cannot peek at bids or rig a lottery. There is no login, and the sound effects and music are generated in the browser (no audio files).</p>

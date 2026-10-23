@@ -8327,7 +8327,7 @@ URL: https://koshinstudio.com/works/draft-party/
 
 - ランダムマッチ：同じ言語の人と自動で組まれます。人が足りなくてもCPU球団が加わるので、待たされずに始まります。
 
-  球団には、オリジナルのエンブレムが自動で付きます（選び直せます）。友達部屋では自分の画像も使えます。
+  球団には、オリジナルのエンブレムが自動で付きます（選び直せます）。自分の画像もどの部屋でも使えます（不適切な画像は通報で隠れます）。
 
 ## 作りについて
 
@@ -8723,7 +8723,7 @@ URL: https://koshinstudio.com/privacy/
 
   「寝返り将棋」では、オンライン対戦を遊んだとき（と順位表を開いたとき）に、端末が作った番号、名前（既定は「名無し」）、レーティング、勝ち負けの数、一局ごとの手順と結果を預かります。順位表に、名前とレーティングが載ります。AI 対戦と、同じ端末での2人対戦では、何も預かりません。
 
-  「ドラフト会議ごっこ」では、部屋の中でのやり取りのために、端末が作った番号、球団名、指名したワード（または選手）、チャットの発言、通報、部屋の設定を、その部屋のあいだだけ預かります。友達部屋で自分の画像をアイコンにした場合は、端末で小さくした画像が部屋の参加者にだけ送られます（公開していない友達部屋のみ。ランダムマッチと公開中の部屋では使われません）。ホストが選手の名前や能力を登録した場合は、その内容も同じ部屋の中だけで扱います。ランキングはありません。部屋のデータは、ゲーム終了の10分後（誰もいなくなった部屋は30分後）に、通報の記録もふくめてすべて削除されます。スタンプと定型文は保存しません。
+  「ドラフト会議ごっこ」では、部屋の中でのやり取りのために、端末が作った番号、球団名、指名したワード（または選手）、チャットの発言、通報、部屋の設定を、その部屋のあいだだけ預かります。自分の画像をアイコンにした場合は、端末で小さくした画像が、その部屋の参加者にだけ送られます（ランダムマッチと公開中の部屋では、広告のあるロビーと結果の画面には出さず、エンブレムを表示します）。不適切な画像は、2人の通報で全員から隠れます。ホストが選手の名前や能力を登録した場合は、その内容も同じ部屋の中だけで扱います。ランキングはありません。部屋のデータは、ゲーム終了の10分後（誰もいなくなった部屋は30分後）に、通報の記録もふくめてすべて削除されます。スタンプと定型文は保存しません。
 
   チャットや名前など、ほかの参加者が入力した内容は、同じ部屋の人に表示されます。ホストが実在の人物の名前などを登録する場合、その内容はホストの責任です。不適切な内容は、自動で弾き、通報（2人で全員の画面から非表示）できる仕組みを用意しています。
 
@@ -12681,7 +12681,7 @@ Last updated October 2026
 
   Anime Type Quiz calculates your answers on your device only and sends them nowhere.
 
-  Draft Party (/draft/) keeps, only for the lifetime of a room and for the sake of play, a device-generated number, your team name, the words (or players) you pick, chat messages, reports and the room settings. If you use your own image as a team icon, a version shrunk on your device is sent only to the other participants of that room (private friends rooms only — it is not used in random match or public rooms). If a host registers players’ names and abilities, that content is likewise handled only inside that room. There is no ranking. A room’s data, including reports, is deleted 10 minutes after the game ends (30 minutes after a room is abandoned). Stamps and quick phrases are not stored.
+  Draft Party (/draft/) keeps, only for the lifetime of a room and for the sake of play, a device-generated number, your team name, the words (or players) you pick, chat messages, reports and the room settings. If you use your own image as a team icon, a version shrunk on your device is sent only to the other participants of that room (in random match and public rooms it is not shown on the lobby and results screens, which carry ads — an emblem is shown instead). An inappropriate image is hidden for everyone after two reports. If a host registers players’ names and abilities, that content is likewise handled only inside that room. There is no ranking. A room’s data, including reports, is deleted 10 minutes after the game ends (30 minutes after a room is abandoned). Stamps and quick phrases are not stored.
 
   What other participants type — chat, names and so on — is shown to the people in the same room. If a host registers real people’s names or similar, that content is the host’s responsibility. Inappropriate content is filtered automatically, and can be reported (two reports hide it for everyone).
 
@@ -16431,7 +16431,7 @@ A draft day for everyone, in your browser.
 
 - Random match: you are grouped with players using the same language. If there aren’t enough players, CPU teams join, so it starts without a wait.
 
-  Every team gets an original emblem automatically (you can pick another), and in friends rooms you can use your own image.
+  Every team gets an original emblem automatically (you can pick another), and you can use your own image in any room (inappropriate images are hidden after reports).
 
 ## How it is built
 
