@@ -139,7 +139,7 @@
   <url><loc>https://koshinstudio.com/notes/hosting-compare/</loc><lastmod>2026-10-17</lastmod><priority>0.8</priority></url>
   <url><loc>https://koshinstudio.com/notes/hot-lane/</loc><lastmod>2026-10-17</lastmod><priority>0.8</priority></url>
   <url><loc>https://koshinstudio.com/notes/icloud-overwrite/</loc><lastmod>2026-10-17</lastmod><priority>0.8</priority></url>
-  <url><loc>https://koshinstudio.com/notes/</loc><lastmod>2026-10-17</lastmod><priority>0.9</priority></url>
+  <url><loc>https://koshinstudio.com/notes/</loc><lastmod>2026-10-23</lastmod><priority>0.9</priority></url>
   <url><loc>https://koshinstudio.com/notes/interval-vs-delivery/</loc><lastmod>2026-10-17</lastmod><priority>0.8</priority></url>
   <url><loc>https://koshinstudio.com/notes/ios-sdk-compare/</loc><lastmod>2026-10-17</lastmod><priority>0.8</priority></url>
   <url><loc>https://koshinstudio.com/notes/itms-91064/</loc><lastmod>2026-10-17</lastmod><priority>0.8</priority></url>
@@ -168,15 +168,15 @@
   <url><loc>https://koshinstudio.com/notes/sushi-measure/</loc><lastmod>2026-10-17</lastmod><priority>0.8</priority></url>
   <url><loc>https://koshinstudio.com/notes/swallowed-failure/</loc><lastmod>2026-10-17</lastmod><priority>0.8</priority></url>
   <url><loc>https://koshinstudio.com/notes/swiftui-hit-area/</loc><lastmod>2026-10-17</lastmod><priority>0.8</priority></url>
-  <url><loc>https://koshinstudio.com/notes/tcg-lottery-app-compare/</loc><priority>0.8</priority></url>
+  <url><loc>https://koshinstudio.com/notes/tcg-lottery-app-compare/</loc><lastmod>2026-10-23</lastmod><priority>0.8</priority></url>
   <url><loc>https://koshinstudio.com/notes/tco-relay/</loc><lastmod>2026-10-17</lastmod><priority>0.8</priority></url>
   <url><loc>https://koshinstudio.com/notes/test-ads/</loc><lastmod>2026-10-17</lastmod><priority>0.8</priority></url>
   <url><loc>https://koshinstudio.com/notes/timeout-third-fix/</loc><lastmod>2026-10-17</lastmod><priority>0.8</priority></url>
   <url><loc>https://koshinstudio.com/notes/torecadash-9set/</loc><lastmod>2026-10-17</lastmod><priority>0.8</priority></url>
-  <url><loc>https://koshinstudio.com/notes/torecadash-ai/</loc><lastmod>2026-10-17</lastmod><priority>0.8</priority></url>
-  <url><loc>https://koshinstudio.com/notes/torecadash-ci/</loc><lastmod>2026-10-17</lastmod><priority>0.8</priority></url>
+  <url><loc>https://koshinstudio.com/notes/torecadash-ai/</loc><lastmod>2026-10-23</lastmod><priority>0.8</priority></url>
+  <url><loc>https://koshinstudio.com/notes/torecadash-ci/</loc><lastmod>2026-10-23</lastmod><priority>0.8</priority></url>
   <url><loc>https://koshinstudio.com/notes/torecadash-review/</loc><lastmod>2026-10-17</lastmod><priority>0.8</priority></url>
-  <url><loc>https://koshinstudio.com/notes/torecadash-watchdog/</loc><lastmod>2026-10-17</lastmod><priority>0.8</priority></url>
+  <url><loc>https://koshinstudio.com/notes/torecadash-watchdog/</loc><lastmod>2026-10-23</lastmod><priority>0.8</priority></url>
   <url><loc>https://koshinstudio.com/notes/transliteration-gate/</loc><lastmod>2026-10-17</lastmod><priority>0.8</priority></url>
   <url><loc>https://koshinstudio.com/notes/truncated-answer/</loc><lastmod>2026-10-17</lastmod><priority>0.8</priority></url>
   <url><loc>https://koshinstudio.com/notes/typo-catalog/</loc><lastmod>2026-10-17</lastmod><priority>0.8</priority></url>
@@ -195,5 +195,5 @@
   <url><loc>https://koshinstudio.com/works/stopwatch10/</loc><lastmod>2026-10-17</lastmod><priority>0.8</priority></url>
   <url><loc>https://koshinstudio.com/works/sushitsumu/guide</loc><lastmod>2026-10-17</lastmod><priority>0.5</priority></url>
   <url><loc>https://koshinstudio.com/works/sushitsumu/</loc><lastmod>2026-10-17</lastmod><priority>0.8</priority></url>
-  <url><loc>https://koshinstudio.com/works/torecadash/</loc><lastmod>2026-10-17</lastmod><priority>0.8</priority></url>
+  <url><loc>https://koshinstudio.com/works/torecadash/</loc><lastmod>2026-10-23</lastmod><priority>0.8</priority></url>
 </urlset>
