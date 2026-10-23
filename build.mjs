@@ -40,6 +40,8 @@ const PICK_WORKS = new Set(['比べたもの', '買ったもの']);
 const isPick = (n) => PICK_WORKS.has(n.work);
 const records = notes.filter((n) => !isPick(n));
 const picks = notes.filter(isPick);
+/* 記事の Markdown 版（AI が本文だけを取りやすいように）を置く頁 */
+const mdPaths = new Set(notes.map((n) => n.url));
 const pickById = Object.fromEntries((read('/data/picks.json').items || []).map((x) => [x.id, x]));
 /* 楽天の商品API（tools/rakuten-picks.mjs）で選んだ「画像つきの1点」。無ければ文字のリンクだけ */
 const pickRk = existsSync(here + '/data/picks-rakuten.json') ? read('/data/picks-rakuten.json') : {};
@@ -799,7 +801,17 @@ function ldFor(file, url) {
   const nm = rel.match(/^\/notes\/([^/]+)\/index\.html$/);
   if (nm && noteBySlug[nm[1]]) {
     const nn = noteBySlug[nm[1]];
+    /* 「よくある質問」の見出しの下の h3 + p を、FAQPage にも出す（本文と同じ文なので食い違わない） */
+    const faqLd = [];
+    const fm = readFileSync(file, 'utf8').match(/<h2[^>]*>よくある質問<\/h2>([\s\S]*?)(?=<h2|<!--related|<\/main>)/);
+    if (fm) {
+      const plain = (t) => t.replace(/<[^>]+>/g, '').replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&quot;/g, '"').replace(/&#39;/g, "'").replace(/&amp;/g, '&').replace(/\s+/g, ' ').trim();
+      const qa = [...fm[1].matchAll(/<h3[^>]*>([\s\S]*?)<\/h3>\s*<p[^>]*>([\s\S]*?)<\/p>/g)]
+        .map((m) => ({ '@type': 'Question', name: plain(m[1]), acceptedAnswer: { '@type': 'Answer', text: plain(m[2]) } }));
+      if (qa.length) faqLd.push({ '@type': 'FAQPage', mainEntity: qa });
+    }
     return [
+      ...faqLd,
       { '@type': 'BlogPosting', headline: nn.title, url: SITE + nn.url, description: nn.blurb,
         datePublished: nn.date, dateModified: nn.updated || nn.date, inLanguage: 'ja',
         image: ogFor(rel),
@@ -1019,6 +1031,7 @@ for (const file of pages) {
              .replace(/\n?\s*<meta property="og:locale"[^>]*>/g, '')
              .replace(/\n?\s*<link rel="alternate" hreflang="[^"]*"[^>]*>/g, '')
              .replace(/\n?\s*<link rel="alternate" type="application\/rss\+xml"[^>]*>/g, '')
+             .replace(/\n?\s*<link rel="alternate" type="text\/markdown"[^>]*>/g, '')
              .replace(/\n?\s*<script type="application\/ld\+json">[\s\S]*?<\/script>/g, '');
   const ld = ldFor(file, url);
   const pageMeta = altPageMeta[url.slice(SITE.length)] || null;
@@ -1060,6 +1073,7 @@ for (const file of pages) {
     ...hreflangs,
     `<meta name="twitter:card" content="summary_large_image">`,
     `<link rel="alternate" type="application/rss+xml" title="Koshin Studio — Notes" href="${SITE}/feed.xml">`,
+    mdPaths.has(relUrl) ? `<link rel="alternate" type="text/markdown" href="${SITE + relUrl}index.md">` : '',
     ld ? `<script type="application/ld+json">${JSON.stringify(
       { '@context': 'https://schema.org', '@graph': ld }).replace(/"inLanguage":"ja"/g, `"inLanguage":"${pageLang}"`)}</script>` : '',
   ].filter(Boolean).join('\n');
@@ -1315,7 +1329,7 @@ const llms = [
   '# Koshin Studio', '',
   `> ${conf.tagline || ''} 個人で、ゲーム・アプリ・診断を作って、試して、書いているスタジオです。記事は、実際に作って測ったことと、公式ページだけで比べた結果（出典と確認日つき）を書いています。確認できなかったことは、確認できなかったと書きます。`, '',
   `サイト: ${SITE}/`, `全文: ${abs('/llms-full.txt')}`, '',
-  '## Notes（制作の記録）', ...records.map((n) => line(n.title, n.url, n.blurb)), '',
+  '## Notes（制作の記録。各記事の Markdown 版は、URL の末尾を index.md にした所）', ...records.map((n) => line(n.title, n.url, n.blurb)), '',
   '## Picks（比べたもの・買ったもの）', ...picks.map((n) => line(n.title, n.url, n.blurb)), '',
   '## Tools（計算機）', ...toolRows.map((t) => line(t.title, t.url, t.blurb)), '',
   '## Works（作ったもの）', ...works.map((w) => line(w.title, w.url, w.blurb)), '',
@@ -1327,6 +1341,14 @@ const llms = [
   ...Object.values(I18N).filter((l) => l.path !== '/en/').map((l) => line(l.label, l.path, 'Games and tools in this language')), '',
   '## そのほか', line('About', '/about/', '運営者・連絡先・記事の書き方と訂正について'), line('あつかい（プライバシー）', '/privacy/', ''), ''].join('\n');
 writeFileSync(here + '/llms.txt', llms);
+/* 記事ごとの Markdown 版。題・要約・公開日・出典を頭に付け、本文は llms-full と同じ変換 */
+for (const n of notes) {
+  const f = here + n.url + 'index.html';
+  if (!existsSync(f)) continue;
+  const body = mainAsText(f).replace(/^# .*\n+/, '').replace(/^書いた人：.*\n+/m, '');
+  writeFileSync(here + n.url + 'index.md',
+    `# ${n.title}\n\n> ${n.blurb}\n\n- URL: ${abs(n.url)}\n- 公開: ${n.date}\n- 書いた人: Koshin（${abs('/about/')}）\n- サイト: Koshin Studio\n\n${body}\n`);
+}
 const fullPages = [].concat(
   records.map((n) => n.url), picks.map((n) => n.url), toolRows.map((t) => t.url),
   works.map((w) => w.url), ['/anime/', '/anime/axes/', '/anime/guide/', '/about/', '/privacy/'], enPairs.map((p) => p.en), ['/en/']);
