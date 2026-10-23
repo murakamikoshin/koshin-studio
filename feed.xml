@@ -7,6 +7,13 @@
   <language>ja</language>
   <atom:link href="https://koshinstudio.com/feed.xml" rel="self" type="application/rss+xml"/>
   <item>
+    <title>すし積むの番付に載らなくなった：ゲームの数字を変えて、サーバーの検算を直し忘れていた（しかも二つ）</title>
+    <link>https://koshinstudio.com/notes/rank-verify-mismatch/</link>
+    <guid isPermaLink="true">https://koshinstudio.com/notes/rank-verify-mismatch/</guid>
+    <pubDate>Thu, 22 Oct 2026 15:00:00 GMT</pubDate>
+    <description>番付に、普通に遊んでも載らなくなった。ゲームの数字を変えて、サーバーの検算を直し忘れていた。金の桶の褒美（8,000→25,000）と、降るネタ（3種→5種）の二つ。注意書きでは守れず、同じ種で出題を比べる検査を足した。</description>
+  </item>
+  <item>
     <title>トレカ抽選アプリを比較：トレカダッシュ・トレゲト・NowPokeca・Pokeka Tracker・トレカの地図のメリットとデメリット</title>
     <link>https://koshinstudio.com/notes/tcg-lottery-app-compare/</link>
     <guid isPermaLink="true">https://koshinstudio.com/notes/tcg-lottery-app-compare/</guid>
