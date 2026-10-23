@@ -569,6 +569,7 @@ h2::after{transform-origin:left center;transition:transform 1.1s var(--ease) .1s
   scrollbar-width:thin}
 .shots figure{margin:0;flex:0 0 auto;scroll-snap-align:start}
 .shot-wide{margin:0}
+/* 画像の影は薄く（白背景用）。2026-10-23 */
 .shots img{height:330px;width:auto;max-width:100%}
 .shots img,.shot-wide img{border-radius:6px;
   border:1px solid var(--line);box-shadow:0 4px 14px -8px rgba(0,0,0,.28);display:block}
