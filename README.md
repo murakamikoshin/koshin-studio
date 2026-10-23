@@ -26,14 +26,20 @@ Cloudflare Pages に置く静的サイト。枠組み（Next.js など）は使�
 
 ## 手元の置き方
 
-**三つとも横に並べる。入れ子にしない。**
+**ぜんぶ横に並べる。入れ子にしない。** 置き場は `~/Desktop/koshin/` に決めてある。
 
-    <入れ物>/
+    ~/Desktop/koshin/
       koshin-studio/     ← このリポジトリ。koshinstudio.com そのもの
-      sushitsumu/        ← ゲーム
-      stopwatch10/       ← ゲーム
+      sushitsumu/        ← ゲーム（すし積む）
+      stopwatch10/       ← ゲーム（10秒ピッタリで止めろ！）
+      OthelloShogi/      ← ゲーム（巻き返し将棋 / negaeri-shogi）
+      shindananime/      ← アプリ（ガチアニメ診断）
 
-入れ物の名前は何でもよい（`~/Desktop/koshin/` など）。
+トレカダッシュは別枠。iOS アプリは `~/Desktop/CardAlertHub`（別プロジェクトで、ここには入れない）。
+Web 版は cardalerthub の VPS が毎時組んで出すので、手元にはこのサイト用のフォルダが無い。
+
+古い `~/koshin-studio`（ゲーム本体を直接抱えていたコピー）は2026-10-23に消した。
+ゲームの最新版は、それぞれのリポジトリにある。
 **`koshin-studio` の中にゲームを clone してはいけない。**
 `npx wrangler pages deploy .` がそれごと上げようとして転ぶ
 （前に `tools/node_modules` の symlink を混ぜて実際に転んだ）。
