@@ -114,9 +114,13 @@ URL: https://koshinstudio.com/notes/tcg-lottery-app-compare/
 
   先に書いておきます。私（Koshin）は、トレカダッシュを作っている本人です。中立な第三者の比較ではありません。ほかのサービスの内容は、2026 年 10 月 23 日に、それぞれの公式ページ・App Store のページで確かめた範囲だけを書き、書かれていなかったことは「記載なし」としています。弱いところも、トレカダッシュについて書きました。
 
+  トレカダッシュを App Store で見る (https://apps.apple.com/jp/app/id6788758920)
+
+  トレカダッシュの App Store のページ：https://apps.apple.com/jp/app/id6788758920 (https://apps.apple.com/jp/app/id6788758920)（無料・iPhone）／ 紹介ページ：https://cardalerthub.web.app/ (https://cardalerthub.web.app/) ／ このサイトの作品ページ (https://koshinstudio.com/works/torecadash/)
+
 ## 結論：どれを選ぶか
 
-- ポケカ以外（遊戯王・ワンピース・ガンダムなど）も追いたい／iPhone に通知がほしい → トレカダッシュ（15 ジャンル）
+- ポケカ以外（遊戯王・ワンピース・ガンダムなど）も追いたい／iPhone に通知がほしい → トレカダッシュ (https://apps.apple.com/jp/app/id6788758920)（15 ジャンル）
 
 - iPhone ではなく、ブラウザや LINE で十分 → トレゲト（Web と LINE、6 ジャンル）
 
@@ -131,6 +135,8 @@ URL: https://koshinstudio.com/notes/tcg-lottery-app-compare/
 ## 5 つの比較表
 
      | トレカダッシュ | トレゲト | NowPokeca | Pokeka Tracker | トレカの地図
+
+      入手先 | App Store (https://apps.apple.com/jp/app/id6788758920) | cardchusen.com (https://cardchusen.com/) | App Store (https://apps.apple.com/us/app/-/id6469001897) | App Store (https://apps.apple.com/es/app/pokeka-tracker-%E3%83%9D%E3%82%B1%E3%82%AB%E4%BE%A1%E6%A0%BC%E3%82%92%E7%A2%BA%E8%AA%8D%E3%81%A7%E3%81%8D%E3%82%8B%E3%82%A2%E3%83%97%E3%83%AA/id6450254728) | torecamap.co.jp (https://torecamap.co.jp/)
 
       形 | iPhone アプリ | Web サイト＋LINE 通知 | iPhone アプリ | iPhone / iPad アプリ | Web サイト
 

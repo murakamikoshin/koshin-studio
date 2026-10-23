@@ -104,9 +104,9 @@
   <url><loc>https://koshinstudio.com/en/works/sushitsumu/</loc><lastmod>2026-10-17</lastmod><priority>0.5</priority></url>
   <url><loc>https://koshinstudio.com/en/works/torecadash/</loc><lastmod>2026-10-17</lastmod><priority>0.5</priority></url>
   <url><loc>https://koshinstudio.com/</loc><lastmod>2026-10-23</lastmod><priority>1.0</priority></url>
-  <url><loc>https://koshinstudio.com/notes/adgap/</loc><lastmod>2026-10-17</lastmod><priority>0.8</priority></url>
+  <url><loc>https://koshinstudio.com/notes/adgap/</loc><lastmod>2026-10-23</lastmod><priority>0.8</priority></url>
   <url><loc>https://koshinstudio.com/notes/aggregator-pagination/</loc><lastmod>2026-10-17</lastmod><priority>0.8</priority></url>
-  <url><loc>https://koshinstudio.com/notes/anago/</loc><lastmod>2026-10-17</lastmod><priority>0.8</priority></url>
+  <url><loc>https://koshinstudio.com/notes/anago/</loc><lastmod>2026-10-23</lastmod><priority>0.8</priority></url>
   <url><loc>https://koshinstudio.com/notes/anime-db/</loc><lastmod>2026-10-17</lastmod><priority>0.8</priority></url>
   <url><loc>https://koshinstudio.com/notes/apple-signin/</loc><lastmod>2026-10-17</lastmod><priority>0.8</priority></url>
   <url><loc>https://koshinstudio.com/notes/ascii-text/</loc><lastmod>2026-10-17</lastmod><priority>0.8</priority></url>
@@ -152,7 +152,7 @@
   <url><loc>https://koshinstudio.com/notes/notify-gate/</loc><lastmod>2026-10-17</lastmod><priority>0.8</priority></url>
   <url><loc>https://koshinstudio.com/notes/one-page-many-cases/</loc><lastmod>2026-10-17</lastmod><priority>0.8</priority></url>
   <url><loc>https://koshinstudio.com/notes/qiita-post-interval/</loc><lastmod>2026-10-17</lastmod><priority>0.8</priority></url>
-  <url><loc>https://koshinstudio.com/notes/rank-verify-mismatch/</loc><priority>0.8</priority></url>
+  <url><loc>https://koshinstudio.com/notes/rank-verify-mismatch/</loc><lastmod>2026-10-23</lastmod><priority>0.8</priority></url>
   <url><loc>https://koshinstudio.com/notes/ranking-free-tier/</loc><lastmod>2026-10-17</lastmod><priority>0.8</priority></url>
   <url><loc>https://koshinstudio.com/notes/rerun-on-deploy/</loc><lastmod>2026-10-17</lastmod><priority>0.8</priority></url>
   <url><loc>https://koshinstudio.com/notes/result-screen/</loc><lastmod>2026-10-17</lastmod><priority>0.8</priority></url>
@@ -166,7 +166,7 @@
   <url><loc>https://koshinstudio.com/notes/split-mixups/</loc><lastmod>2026-10-17</lastmod><priority>0.8</priority></url>
   <url><loc>https://koshinstudio.com/notes/stopwatch-rank/</loc><lastmod>2026-10-17</lastmod><priority>0.8</priority></url>
   <url><loc>https://koshinstudio.com/notes/store-name-variants/</loc><lastmod>2026-10-17</lastmod><priority>0.8</priority></url>
-  <url><loc>https://koshinstudio.com/notes/sushi-measure/</loc><lastmod>2026-10-17</lastmod><priority>0.8</priority></url>
+  <url><loc>https://koshinstudio.com/notes/sushi-measure/</loc><lastmod>2026-10-23</lastmod><priority>0.8</priority></url>
   <url><loc>https://koshinstudio.com/notes/swallowed-failure/</loc><lastmod>2026-10-17</lastmod><priority>0.8</priority></url>
   <url><loc>https://koshinstudio.com/notes/swiftui-hit-area/</loc><lastmod>2026-10-17</lastmod><priority>0.8</priority></url>
   <url><loc>https://koshinstudio.com/notes/tcg-lottery-app-compare/</loc><lastmod>2026-10-23</lastmod><priority>0.8</priority></url>
@@ -195,6 +195,6 @@
   <url><loc>https://koshinstudio.com/works/shindananime/</loc><lastmod>2026-10-17</lastmod><priority>0.8</priority></url>
   <url><loc>https://koshinstudio.com/works/stopwatch10/</loc><lastmod>2026-10-17</lastmod><priority>0.8</priority></url>
   <url><loc>https://koshinstudio.com/works/sushitsumu/guide</loc><lastmod>2026-10-17</lastmod><priority>0.5</priority></url>
-  <url><loc>https://koshinstudio.com/works/sushitsumu/</loc><lastmod>2026-10-17</lastmod><priority>0.8</priority></url>
+  <url><loc>https://koshinstudio.com/works/sushitsumu/</loc><lastmod>2026-10-23</lastmod><priority>0.8</priority></url>
   <url><loc>https://koshinstudio.com/works/torecadash/</loc><lastmod>2026-10-23</lastmod><priority>0.8</priority></url>
 </urlset>
