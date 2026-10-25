@@ -1,158 +1,158 @@
 {
- "itms-91064": {
-  "title": "ITMS-91064 Invalid Binary: NSPrivacyTracking fix",
-  "desc": "An iOS build was rejected with ITMS-91064: NSPrivacyTracking was true while NSPrivacyTrackingDomains was empty. How it was fixed, and what is not verified."
- },
- "review-info-needed": {
-  "title": "App Store Guideline 2.1 Information Needed: 6 items",
-  "desc": "My first App Store submission got a request for more information (Guideline 2.1), not a rejection. The six things Apple asked for and how they connect to earlier fixes."
- },
- "xcode152-sdk": {
-  "title": "Firebase 12 on Xcode 15.2: why I pinned 11.4.0",
-  "desc": "On an old Mac stuck on Xcode 15.2, newer Firebase and AdMob SDKs fail to build. Which versions break, which I pinned (Firebase 11.4.0, AdMob 11.5.0), and why."
- },
- "torecadash-watchdog": {
-  "title": "iOS app killed by watchdog 0x8BADF00D: SwiftUI fix",
-  "desc": "An iOS app was force-quit by the watchdog (0x8BADF00D). A SwiftUI computed property re-filtered and re-sorted 951 articles on the main thread every body evaluation."
- },
- "u2028": {
-  "title": "Python splitlines() breaks JSONL: U+2028 culprit",
-  "desc": "Python splitlines() broke a JSONL file because 2 of 7,247 records contained U+2028 (LINE SEPARATOR). Why it happens and the one-line fix: split on the newline only."
- },
- "torecadash-ci": {
-  "title": "No TestFlight builds: Xcode Cloud 25 free hours",
-  "desc": "New builds stopped appearing in TestFlight. My first diagnosis (“[ci skip] is blocking builds”) was wrong; the workflow built the iOS app on every commit."
- },
- "apple-signin": {
-  "title": "Firebase Auth creates anonymous accounts on relaunch",
-  "desc": "Force-quitting the app made Firebase create a new anonymous account each launch: 17 of 19 users were throwaway. Cause: reading currentUser too early."
- },
- "logo-pop": {
-  "title": "Canvas 2x too large on Retina: inset:0 won’t stretch",
-  "desc": "Burst particles appeared in the wrong place on high-DPI screens. A canvas with only inset:0 keeps its pixel size, so it was 2x larger in CSS on Retina."
- },
- "crazygames": {
-  "title": "Rejected by CrazyGames with no reason: 4 causes",
-  "desc": "A game portal rejected my game with only “overall quality below expectations.” I recorded what the reviewer saw, found four causes and fixed them by measuring."
- },
- "adgap": {
-  "title": "Ad interval by time, not by plays",
-  "desc": "Why I replaced “one ad every 5 plays” with “7 minutes since the last ad” in a browser game, how it behaves, and what I still do not know."
- },
- "ascii-text": {
-  "title": "Garbled Japanese in CrazyGames preview: ASCII fix",
-  "desc": "One character broke in a game portal’s preview though the file bytes were correct. How I made the game immune without finding the cause."
- },
- "deploy-gotchas": {
-  "title": "Works locally, breaks deployed: 4 static-site bugs",
-  "desc": "Stale cache, breadcrumbs that multiplied each build, a symlink into my own environment, and local-only images: four deploy incidents on Cloudflare Pages."
- },
- "hosting-compare": {
-  "title": "Static hosting compared: Cloudflare, Netlify, Vercel",
-  "desc": "Cloudflare Pages, Netlify, Vercel, GitHub Pages and Firebase Hosting compared by official terms (Oct 2026): ads allowed, free limits, file limits, config."
- },
- "comment-services": {
-  "title": "Comment systems compared: giscus, Disqus, Remark42",
-  "desc": "giscus, utterances, Disqus, Remark42, Cusdis, Staticman and Commento compared by official pages (Oct 2026): storage, ads and tracking, maintenance status."
- },
- "ios-sdk-compare": {
-  "title": "iOS ad SDKs compared: AdMob, AppLovin, LevelPlay",
-  "desc": "AdMob, AppLovin MAX, LevelPlay, Firebase and Supabase compared by official pages (Oct 2026): payouts, privacy manifests, minimum Xcode, free tiers."
- },
- "claude-vs-gemini-api": {
-  "title": "Claude API vs Gemini API: official numbers compared",
-  "desc": "Claude and Gemini API compared by official pages (Oct 2026): small-model prices, web search cost and caps, spend limits, deprecation notice."
- },
- "gemini-migration": {
-  "title": "Claude to Gemini API migration: 16 calls, 1 function",
-  "desc": "Moving an iOS app backend from Claude Haiku 4.5 to Gemini 3.1 Flash-Lite: choosing by deprecation date, one wrapper, a search cap breaker, a kill switch."
- },
- "fail-open": {
-  "title": "Fail-open let resale items through: the fix",
-  "desc": "A gate that let items pass when the list price could not be confirmed had a blind spot: a daily search cap. Telling “did not know” from “could not look.”"
- },
- "blocked-page": {
-  "title": "A scraper read a notice page as success: 0 products",
-  "desc": "A scraper returned zero products for three days because a 2,410-byte “enable JavaScript” page counted as success. How I centralized the check."
- },
- "webaudio": {
-  "title": "Measuring WebAudio waveforms to set game volume",
-  "desc": "A browser game with no audio files: koto, taiko and gong synthesized with WebAudio. I could not listen, so I set volume by measuring waveform peaks."
- },
- "ranking-free-tier": {
-  "title": "Halving Cloudflare D1 free-tier use: 5 calls to 2",
-  "desc": "A game ranking on Workers and D1: calls per play from 5 to 2, rows read from 421 to 221. Server-side rank counting and removing the preflight call."
- },
- "torecadash-review": {
-  "title": "Four things before App Review: ITMS-91064 and more",
-  "desc": "Before submitting an iOS app, four things stopped me: iPad screenshots, ITMS-91064, account deletion (5.1.1(v)) and user-content reporting (1.2), and how I fixed each."
- },
- "scrape-cost": {
-  "title": "Re-measuring scraper cost: 1/8 of the credits",
-  "desc": "I believed two sites could not be fetched more often because of cost. Comparing three Scrape.do settings showed rendering was wasted: 3x faster, 1/8 the credits."
- },
- "bulk-accident": {
-  "title": "A bulk update hit all articles: count, then write",
-  "desc": "A bulk job hit every article and wrongly restored 18 items. How I reverted them from status history and proved new tests work by breaking rules one at a time."
- },
- "dup-zero": {
-  "title": "I counted zero duplicates; the audit found 112 pairs",
-  "desc": "A nightly merge job timed out partway through the first genre, so later genres were never reached. My count of zero saw only that genre. Fixed with a rotating budget."
- },
- "torecadash-ai": {
-  "title": "Cutting AI calls: 45% became 4.5%, batching ran 0 times",
-  "desc": "Reducing calls to an AI in a trading-card app: a predicted 45% cut was 4.5%, and batching ran zero times after deploy. What I found by recounting, with numbers."
- },
- "stopwatch-rank": {
-  "title": "A fair 10-second stopwatch ranking: decimals and ties",
-  "desc": "Why I truncate to three decimals so coarse clocks get no advantage, how ties (a 1/333 chance) are broken, and how I counted KV writes on the free tier."
- },
- "anime-db": {
-  "title": "16,177 titles to 6,091: building an anime database",
-  "desc": "An anime quiz picks from about 6,000 titles. Where they came from, the criterion that cut 62.3% of 16,177, what remains, and the biases of the method."
- },
- "match-percent": {
-  "title": "Quiz match % disagreed with the ranking: 35-40%",
-  "desc": "An anime quiz’s match percentage used a different yardstick from its ranking. With the old display, 35 to 40% of 1,000 synthetic respondents saw a reversed top 3."
- },
- "shindan12": {
-  "title": "Anime quiz: 12 questions vs 50, how much changes",
-  "desc": "A 50-question anime quiz now gives a result after 12. Measured with 1,000 synthetic respondents: the type mostly matches, but the single recommended title changes a lot."
- },
- "result-screen": {
-  "title": "Fixing an anime quiz result screen: 29% wrong links",
-  "desc": "The anime quiz showed the same two streaming buttons for every title; about 29% were wrong. How I narrowed buttons by availability and fixed image problems."
- },
- "first-visit": {
-  "title": "Six buttons to one: a first-time player screen",
-  "desc": "A browser game title screen had six things to press. I made the first step one button, and fixed saves vanishing inside an iframe and play continuing in a hidden tab."
- },
- "sushi-measure": {
-  "title": "“The pile settles at 89%” was wrong: a bad measurement",
-  "desc": "Rebalancing a merge puzzle, I found my measurement had counted falling pieces. Three causes: a backward size ladder, a pit-shaped tub, and pieces tunneling the floor."
- },
- "anago": {
-  "title": "The conger eel was too big: measuring a merge puzzle",
-  "desc": "I could never reach my puzzle’s last piece. Statistics from hundreds of auto-played games showed the real cause: everything was too big for the tub."
- },
- "typo-catalog": {
-  "title": "One typo multiplied across shops: SEREBRATION",
-  "desc": "A misspelled product created once was reused as an existing product for every shop. Fixing 13 articles, exact-match prevention, and the limits of a safety net."
- },
- "torecadash-9set": {
-  "title": "A 9-pack set that never matched: coverage 54% to 91%",
-  "desc": "Matching my app against roundup sites showed 54% of lotteries displayed: a product mix-up, an asymmetric name key and an article ID that blocked new rounds."
- },
- "fake-products": {
-  "title": "Splitting a 9-pack set created 80 fake products",
-  "desc": "One real product was split by its contents, creating 80 products that do not exist. Stopping the entry, restoring 22 parents, detaching 190 children and an audit."
- },
- "qiita-post-interval": {
-  "title": "Qiita “posting too frequently”: measured, ~30 minutes",
-  "desc": "After publishing, a new Qiita account could not create the next article. Checking the editor every 5 minutes, two measurements gave about 30 minutes; one was lost."
- },
- "card-supplies-guide": {
-  "title": "Pokémon card sleeves and loaders: sizes and what “pt” means",
-  "desc": "What to check before buying Pokémon card sleeves, toploaders and deck boxes: standard vs small size, what 35pt means, and a buying checklist. Not a hands-on review; unverified points are listed."
- }
+  "itms-91064": {
+    "title": "ITMS-91064 Invalid Binary: NSPrivacyTracking fix",
+    "desc": "An iOS build was rejected with ITMS-91064: NSPrivacyTracking was true while NSPrivacyTrackingDomains was empty. How it was fixed, and what is not verified."
+  },
+  "review-info-needed": {
+    "title": "App Store Guideline 2.1 Information Needed: 6 items",
+    "desc": "My first App Store submission got a request for more information (Guideline 2.1), not a rejection. The six things Apple asked for and how they connect to earlier fixes."
+  },
+  "xcode152-sdk": {
+    "title": "Firebase 12 on Xcode 15.2: why I pinned 11.4.0",
+    "desc": "On an old Mac stuck on Xcode 15.2, newer Firebase and AdMob SDKs fail to build. Which versions break, which I pinned (Firebase 11.4.0, AdMob 11.5.0), and why."
+  },
+  "torecadash-watchdog": {
+    "title": "iOS app killed by watchdog 0x8BADF00D: SwiftUI fix",
+    "desc": "An iOS app was force-quit by the watchdog (0x8BADF00D). A SwiftUI computed property re-filtered and re-sorted 951 articles on the main thread every body evaluation."
+  },
+  "u2028": {
+    "title": "Python splitlines() breaks JSONL: U+2028 culprit",
+    "desc": "Python splitlines() broke a JSONL file because 2 of 7,247 records contained U+2028 (LINE SEPARATOR). Why it happens and the one-line fix: split on the newline only."
+  },
+  "torecadash-ci": {
+    "title": "No TestFlight builds: Xcode Cloud 25 free hours",
+    "desc": "New builds stopped appearing in TestFlight. My first diagnosis (“[ci skip] is blocking builds”) was wrong; the workflow built the iOS app on every commit."
+  },
+  "apple-signin": {
+    "title": "Firebase Auth creates anonymous accounts on relaunch",
+    "desc": "Force-quitting the app made Firebase create a new anonymous account each launch: 17 of 19 users were throwaway. Cause: reading currentUser too early."
+  },
+  "logo-pop": {
+    "title": "Canvas 2x too large on Retina: inset:0 won’t stretch",
+    "desc": "Burst particles appeared in the wrong place on high-DPI screens. A canvas with only inset:0 keeps its pixel size, so it was 2x larger in CSS on Retina."
+  },
+  "crazygames": {
+    "title": "Rejected by CrazyGames with no reason: 4 causes",
+    "desc": "A game portal rejected my game with only “overall quality below expectations.” I recorded what the reviewer saw, found four causes and fixed them by measuring."
+  },
+  "adgap": {
+    "title": "Ad interval by time, not by plays",
+    "desc": "Why I replaced “one ad every 5 plays” with “7 minutes since the last ad” in a browser game, how it behaves, and what I still do not know."
+  },
+  "ascii-text": {
+    "title": "Garbled Japanese in CrazyGames preview: ASCII fix",
+    "desc": "One character broke in a game portal’s preview though the file bytes were correct. How I made the game immune without finding the cause."
+  },
+  "deploy-gotchas": {
+    "title": "Works locally, breaks deployed: 4 static-site bugs",
+    "desc": "Stale cache, breadcrumbs that multiplied each build, a symlink into my own environment, and local-only images: four deploy incidents on Cloudflare Pages."
+  },
+  "hosting-compare": {
+    "title": "Static hosting compared: Cloudflare, Netlify, Vercel",
+    "desc": "Cloudflare Pages, Netlify, Vercel, GitHub Pages and Firebase Hosting compared by official terms (Oct 2026): ads allowed, free limits, file limits, config."
+  },
+  "comment-services": {
+    "title": "Comment systems compared: giscus, Disqus, Remark42",
+    "desc": "giscus, utterances, Disqus, Remark42, Cusdis, Staticman and Commento compared by official pages (Oct 2026): storage, ads and tracking, maintenance status."
+  },
+  "ios-sdk-compare": {
+    "title": "iOS ad SDKs compared: AdMob, AppLovin, LevelPlay",
+    "desc": "AdMob, AppLovin MAX, LevelPlay, Firebase and Supabase compared by official pages (Oct 2026): payouts, privacy manifests, minimum Xcode, free tiers."
+  },
+  "claude-vs-gemini-api": {
+    "title": "Claude API vs Gemini API: official numbers compared",
+    "desc": "Claude and Gemini API compared by official pages (Oct 2026): small-model prices, web search cost and caps, spend limits, deprecation notice."
+  },
+  "gemini-migration": {
+    "title": "Claude to Gemini API migration: 16 calls, 1 function",
+    "desc": "Moving an iOS app backend from Claude Haiku 4.5 to Gemini 3.1 Flash-Lite: choosing by deprecation date, one wrapper, a search cap breaker, a kill switch."
+  },
+  "fail-open": {
+    "title": "Fail-open let resale items through: the fix",
+    "desc": "A gate that let items pass when the list price could not be confirmed had a blind spot: a daily search cap. Telling “did not know” from “could not look.”"
+  },
+  "blocked-page": {
+    "title": "A scraper read a notice page as success: 0 products",
+    "desc": "A scraper returned zero products for three days because a 2,410-byte “enable JavaScript” page counted as success. How I centralized the check."
+  },
+  "webaudio": {
+    "title": "Measuring WebAudio waveforms to set game volume",
+    "desc": "A browser game with no audio files: koto, taiko and gong synthesized with WebAudio. I could not listen, so I set volume by measuring waveform peaks."
+  },
+  "ranking-free-tier": {
+    "title": "Halving Cloudflare D1 free-tier use: 5 calls to 2",
+    "desc": "A game ranking on Workers and D1: calls per play from 5 to 2, rows read from 421 to 221. Server-side rank counting and removing the preflight call."
+  },
+  "torecadash-review": {
+    "title": "Four things before App Review: ITMS-91064 and more",
+    "desc": "Before submitting an iOS app, four things stopped me: iPad screenshots, ITMS-91064, account deletion (5.1.1(v)) and user-content reporting (1.2), and how I fixed each."
+  },
+  "scrape-cost": {
+    "title": "Re-measuring scraper cost: 1/8 of the credits",
+    "desc": "I believed two sites could not be fetched more often because of cost. Comparing three Scrape.do settings showed rendering was wasted: 3x faster, 1/8 the credits."
+  },
+  "bulk-accident": {
+    "title": "A bulk update hit all articles: count, then write",
+    "desc": "A bulk job hit every article and wrongly restored 18 items. How I reverted them from status history and proved new tests work by breaking rules one at a time."
+  },
+  "dup-zero": {
+    "title": "I counted zero duplicates; the audit found 112 pairs",
+    "desc": "A nightly merge job timed out partway through the first genre, so later genres were never reached. My count of zero saw only that genre. Fixed with a rotating budget."
+  },
+  "torecadash-ai": {
+    "title": "Cutting AI calls: 45% became 4.5%, batching ran 0 times",
+    "desc": "Reducing calls to an AI in a trading-card app: a predicted 45% cut was 4.5%, and batching ran zero times after deploy. What I found by recounting, with numbers."
+  },
+  "stopwatch-rank": {
+    "title": "A fair 10-second stopwatch ranking: decimals and ties",
+    "desc": "Why I truncate to three decimals so coarse clocks get no advantage, how ties (a 1/333 chance) are broken, and how I counted KV writes on the free tier."
+  },
+  "anime-db": {
+    "title": "16,177 titles to 6,091: building an anime database",
+    "desc": "An anime quiz picks from about 6,000 titles. Where they came from, the criterion that cut 62.3% of 16,177, what remains, and the biases of the method."
+  },
+  "match-percent": {
+    "title": "Quiz match % disagreed with the ranking: 35-40%",
+    "desc": "An anime quiz’s match percentage used a different yardstick from its ranking. With the old display, 35 to 40% of 1,000 synthetic respondents saw a reversed top 3."
+  },
+  "shindan12": {
+    "title": "Anime quiz: 12 questions vs 50, how much changes",
+    "desc": "A 50-question anime quiz now gives a result after 12. Measured with 1,000 synthetic respondents: the type mostly matches, but the single recommended title changes a lot."
+  },
+  "result-screen": {
+    "title": "Fixing an anime quiz result screen: 29% wrong links",
+    "desc": "The anime quiz showed the same two streaming buttons for every title; about 29% were wrong. How I narrowed buttons by availability and fixed image problems."
+  },
+  "first-visit": {
+    "title": "Six buttons to one: a first-time player screen",
+    "desc": "A browser game title screen had six things to press. I made the first step one button, and fixed saves vanishing inside an iframe and play continuing in a hidden tab."
+  },
+  "sushi-measure": {
+    "title": "“The pile settles at 89%” was wrong: a bad measurement",
+    "desc": "Rebalancing a merge puzzle, I found my measurement had counted falling pieces. Three causes: a backward size ladder, a pit-shaped tub, and pieces tunneling the floor."
+  },
+  "anago": {
+    "title": "The conger eel was too big: measuring a merge puzzle",
+    "desc": "I could never reach my puzzle’s last piece. Statistics from hundreds of auto-played games showed the real cause: everything was too big for the tub."
+  },
+  "typo-catalog": {
+    "title": "One typo multiplied across shops: SEREBRATION",
+    "desc": "A misspelled product created once was reused as an existing product for every shop. Fixing 13 articles, exact-match prevention, and the limits of a safety net."
+  },
+  "torecadash-9set": {
+    "title": "A 9-pack set that never matched: coverage 54% to 91%",
+    "desc": "Matching my app against roundup sites showed 54% of lotteries displayed: a product mix-up, an asymmetric name key and an article ID that blocked new rounds."
+  },
+  "fake-products": {
+    "title": "Splitting a 9-pack set created 80 fake products",
+    "desc": "One real product was split by its contents, creating 80 products that do not exist. Stopping the entry, restoring 22 parents, detaching 190 children and an audit."
+  },
+  "qiita-post-interval": {
+    "title": "Qiita “posting too frequently”: measured, ~30 minutes",
+    "desc": "After publishing, a new Qiita account could not create the next article. Checking the editor every 5 minutes, two measurements gave about 30 minutes; one was lost."
+  },
+  "card-supplies-guide": {
+    "title": "Pokémon card sleeves and loaders: sizes and what “pt” means",
+    "desc": "What to check before buying Pokémon card sleeves, toploaders and deck boxes: standard vs small size, what 35pt means, and a buying checklist."
+  }
 }

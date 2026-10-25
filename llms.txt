@@ -7,7 +7,7 @@
 
 ## Notes（制作の記録。各記事の Markdown 版は、URL の末尾を index.md にした所）
 - [すし積むの番付に載らなくなった：ゲームの数字を変えて、サーバーの検算を直し忘れていた（しかも二つ）](https://koshinstudio.com/notes/rank-verify-mismatch/): 番付に、普通に遊んでも載らなくなった。ゲームの数字を変えて、サーバーの検算を直し忘れていた。金の桶の褒美（8,000→25,000）と、降るネタ（3種→5種）の二つ。注意書きでは守れず、同じ種で出題を比べる検査を足した。
-- [トレカ抽選アプリを比較：トレカダッシュ・トレゲト・NowPokeca・Pokeka Tracker・トレカの地図のメリットとデメリット](https://koshinstudio.com/notes/tcg-lottery-app-compare/): トレカの抽選・予約・再販を追うアプリ・サイトを、ジャンル数・通知・地図・料金で比較。作者（トレカダッシュの開発者）による比較で、トレカダッシュの弱いところも書いた。
+- [ポケカ・トレカ抽選アプリを比較：トレカダッシュ・トレゲト・NowPokeca・Pokeka Tracker・トレカの地図のメリットとデメリット](https://koshinstudio.com/notes/tcg-lottery-app-compare/): ポケカをはじめトレカの抽選・予約・再販を追うアプリ・サイトを、ジャンル数・通知・地図・料金で比較。作者（トレカダッシュの開発者）による比較で、トレカダッシュの弱いところも書いた。
 - [まとめサイトの巡回は、一覧の 1 ページ目しか見ていなかった：トレカの記事は 2〜4 ページ目にあり、本文も先頭 6,000 文字で切れていた](https://koshinstudio.com/notes/aggregator-pagination/): 入荷情報のまとめサイトの巡回は、一覧の 1 ページ目（ゲーム機中心）しか読まず、ポケカやガンダムは後ろのページにあった。本文も先頭 6,000 文字しか AI に渡さず、後半の店が落ちていた。12 ページまで辿り、重なりつきで全文を読む形に直した。
 - [「サーバーが落ちた。こちらからは復旧できない」は、誤りだった：止まっていたのは、SSH の受信だけだった](https://koshinstudio.com/notes/misdiagnosis-down/): 午前 3 時 10 分からサーバーに接続できなくなり、私は「止まった」と判断した。実際は、プロセスは 7 日以上動き続け、定期実行 192 本も正常で、遮断されていたのは SSH の受信だけだった。
 - [「変な記事がめっちゃ増えてる」：作られた経路ごとに数えて入口を塞いだ。数え方も 2 回、間違えた](https://koshinstudio.com/notes/weird-articles-by-route/): 表示中の抽選 252 件を経路ごとに数えた。まとめの表に残る終わった回を毎日取り込んで締切が空になっていた（33 件）ほか、応募リンクが検索結果やトップ、締切が自分の店の行と食い違うものを、入口で塞いだ。
@@ -105,7 +105,7 @@
 - [ガチアニメ診断](https://koshinstudio.com/works/shindananime/): 12問から6つの軸に分解して、あなたのアニメタイプと、6千作を超えるデータベースから今いちばん刺さる運命の1作を選ぶ診断。回答は端末の中だけで計算します。
 - [トレカダッシュ](https://koshinstudio.com/works/torecadash/): トレカの抽選・予約・先着販売の情報を、店舗やジャンルごとにまとめて通知する iPhone アプリ。締切カレンダーと応募の記録つき。App Store で配信中です。
 - [寝返り将棋](https://koshinstudio.com/works/negaeri-shogi/): 挟まれた駒は敵に寝返り、出世する。6×6の盤で、持ち駒を打って挟み、連鎖で一気に裏返す。AI 対戦と、レーティングつきのオンライン対戦。
-- [ドラフト会議ごっこ](https://koshinstudio.com/works/draft-party/): 好きなワードで指名して、被ったらくじ引き。選手の能力を見て選ぶスカウトモードでは、数年後の成績発表まで。みんなで遊ぶ、ブラウザのドラフト会議。
+- [ドラフト会議ごっこ](https://koshinstudio.com/works/draft-party/): 選手の能力を見て指名して、被ったらくじ引き。数年後の成績や選手の人生まで見られる、みんなで遊ぶ無料のドラフトゲーム（ドラフトシミュレーター）。
 
 ## ガチアニメ診断のガイド
 - [ガイド](https://koshinstudio.com/anime/): 診断の仕組みと 64 タイプ
@@ -202,7 +202,7 @@
 - [I re-measured a “nothing can be done” assumption and scraping cost dropped to one eighth](https://koshinstudio.com/en/notes/scrape-cost/): I believed two sites could not be fetched more often because of cost. Comparing three Scrape.do settings showed rendering was wasted: 3x faster, 1/8 the credits.
 - [A bulk update hit “all articles”: count before you write, and break your tests to prove they work](https://koshinstudio.com/en/notes/bulk-accident/): A bulk job hit every article and wrongly restored 18 items. How I reverted them from status history and proved new tests work by breaking rules one at a time.
 - [Pokémon card sleeves and loaders: sizes and what “pt” means](https://koshinstudio.com/en/notes/card-supplies-guide/): What to check before buying Pokémon card sleeves, toploaders and deck boxes: standard vs small size, what 35pt means, and a buying checklist. Not a hands-on review; unverified points are listed.
-- [Draft Party — a free multiplayer draft game you play in your browser](https://koshinstudio.com/en/works/draft-party/): Draft Party is a free browser game. Pick any word; if teams tie, they draw lots. In Scout mode you pick fictional rookies by their abilities and watch several seasons of stats, standings and head-to-head results together. Play with friends or random players, in four languages.
+- [Draft Party — a free multiplayer draft game you play in your browser](https://koshinstudio.com/en/works/draft-party/): Draft Party is a free browser game. Scout fictional rookies by their abilities and draw lots on ties, then watch several seasons of stats, standings and head-to-head results together. Play with friends or strangers, in four languages.
 - [English hub](https://koshinstudio.com/en/): Games, tools and development logs in English
 
 ## そのほか

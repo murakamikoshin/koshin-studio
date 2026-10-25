@@ -106,11 +106,11 @@ URL: https://koshinstudio.com/notes/rank-verify-mismatch/
 
 URL: https://koshinstudio.com/notes/tcg-lottery-app-compare/
 
-# トレカ抽選アプリを比較：トレカダッシュ・トレゲト・NowPokeca・Pokeka Tracker・トレカの地図のメリットとデメリット
+# ポケカ・トレカ抽選アプリを比較：トレカダッシュ・トレゲト・NowPokeca・Pokeka Tracker・トレカの地図のメリットとデメリット
   書いた人：Koshin (https://koshinstudio.com/about/#operator)（Web エンジニア・アプリエンジニア）　公開：2026-10-23
 トレカダッシュ ／ 比較 ／ 2026年10月
 
-  トレカの抽選・予約・再販の情報を追うアプリやサイトは、いくつかあります。この記事は、トレカ抽選アプリを探している人向けに、トレカダッシュと、ほかのアプリ・サイト 4 つを、同じ項目で並べた比較です。
+  トレカの抽選・予約・再販の情報を追うアプリやサイトは、いくつかあります。この記事は、ポケカをはじめとするトレカの抽選アプリを探している人向けに、トレカダッシュと、ほかのアプリ・サイト 4 つを、同じ項目で並べた比較です。
 
   先に書いておきます。私（Koshin）は、トレカダッシュを作っている本人です。中立な第三者の比較ではありません。ほかのサービスの内容は、2026 年 10 月 23 日に、それぞれの公式ページ・App Store のページで確かめた範囲だけを書き、書かれていなかったことは「記載なし」としています。弱いところも、トレカダッシュについて書きました。
 
@@ -264,7 +264,7 @@ URL: https://koshinstudio.com/notes/tcg-lottery-app-compare/
 
 ### 抽選の当選率を上げるには？
 
-  アプリでは、当選率そのものは変えられません。ただ、締切の見落としを減らすことと、応募できる店の数を増やすことは、アプリでできます。当選率は、店ごとの差が大きいという調査もあります（トレゲトの集計）。
+  アプリでは、当選率そのものは変えられません。ただ、締切の見落としを減らすことと、応募できる店の数を増やすことは、アプリでできます。当選率は、店ごとの差が大きいという調査もあります（トレゲトの集計）。倍率と応募の回数から、ひとつ以上当たる確率は、抽選の当選確率計算機 (https://koshinstudio.com/calc/lottery/)で計算できます。
 
 ## 調べ方と、この記事の限界
 
@@ -8207,6 +8207,12 @@ URL: https://koshinstudio.com/works/torecadash/
 
   基本機能は無料です。商品フォローの数や通知の速さなどを広げる、有料の Pro もあります。
 
+## 抽選・予約のときに使える計算機
+
+- 抽選の当選確率計算機 (https://koshinstudio.com/calc/lottery/) — 倍率と応募の回数から、ひとつ以上当たる確率を計算します。
+
+- トレカの BOX・パックの単価換算計算機 (https://koshinstudio.com/calc/box-price/) — BOX やセットの値段を1パックあたりに直して、定価と比べます。
+
 ## ご注意
 
 - 掲載している情報は、各販売店の公開情報をもとにしています。応募・購入の前に、必ず、各販売店の公式ページで最新の内容を確認してください。
@@ -8294,7 +8300,7 @@ URL: https://koshinstudio.com/works/draft-party/
 
   English version (https://koshinstudio.com/en/works/draft-party/)
 
-  好きなワードで指名して、被ったらくじ引き。
+  選手の能力を見て指名して、被ったらくじ引き。
 みんなで盛り上がる、ブラウザのドラフト会議。
 
   遊ぶ (https://koshinstudio.com/draft/)
@@ -8307,25 +8313,39 @@ URL: https://koshinstudio.com/works/draft-party/
 
 ## どんな遊びか
 
-  球団名を決めて、ワードで指名していくゲームです。1巡目は全員が同時に、ほかの人に見えないように入札します。一斉に公開して、同じワードが被った球団はくじ引きです。競合した球団が順番に伏せた紙を1枚ずつ取り、全員が取り終わったら一斉に開けます。当たった球団だけが交渉権を得て、外れた球団は別のワードで入札し直します（外れ1位）。
+  球団名を決めて、架空の新人選手を指名していくゲームです。1巡目は全員が同時に、ほかの人に見えないように入札します。一斉に公開して、同じ選手が被った球団はくじ引きです。競合した球団が順番に伏せた紙を1枚ずつ取り、全員が取り終わったら一斉に開けます。当たった球団だけが交渉権を得て、外れた球団は別の選手で入札し直します（外れ1位）。
 
   2巡目からは、1球団ずつ順番に指名します（順番は巡目ごとに反転）。最後に交渉結果の発表があり、「入団合意」と「入団拒否」が出ます。結果は画像にして、Xでシェアできます。
 
+  ドラフトゲームやドラフトシミュレーターを探している人向けに、流れや仕組みを別のページにまとめています：ドラフトシミュレーター (https://koshinstudio.com/draft/simulator/)／無料のドラフトゲーム (https://koshinstudio.com/draft/game/)／ドラフト会議の仕組み（1巡目入札・外れ1位・ウェーバー方式） (https://koshinstudio.com/draft/guide/)。
+
 ## 2つのモード
-
-### フリーワードモード
-
-  人でも食べ物でも思いつきの言葉でも、野球に限らず何でも指名できます。ホストがお題を決めたり、みんなで投票して決めたりもできます。
 
 ### スカウトモード
 
-  架空の新人選手の能力・将来性・実績を見て指名します。能力は「スカウトの見立て」なので、実際の力とはずれることがあります。入団した選手は数年かけて成長し、全チームが総当たりを戦います。年ごとの順位表、全チームとの対戦成績、首位打者や最多勝などのタイトル、新人王、ドラフト採点まで出て、その発表は参加者みんなで同時に見ながら、スタンプやチャットで盛り上がれます。ホストが選手を自分で登録するモードもあります。
+  まず参加者それぞれが、自分の選手を高校3年間の練習で育てます。調子や運で結果が変わり、同じ能力を続けて鍛えると特殊能力も身につきます。育てた選手は、みんなの選手やCPUの選手と一緒にドラフトにかけられ（自分の選手は、最後の巡目まで残っていれば自分で指名できます）、指名された選手の持ち主は、入団するか断るかを自分で決めます。
+
+  架空の新人選手の能力・将来性・実績を見て指名します。能力は「スカウトの見立て」なので、実際の力とはずれることがあります。入団した選手は数年かけて成長し、全チームが総当たりを戦います。年ごとの順位表、全チームとの対戦成績、首位打者や最多勝などのタイトル、新人王、ドラフト採点まで出て、その発表は参加者みんなで同時に見ながら、スタンプやチャットで盛り上がれます。ホストが選手を自分で登録することもできます。
+
+### 選択肢モード
+
+  ホストが用意した選択肢（例：クラスの全員、好きなアニメ50本）の中から選んで指名します。友達どうしの盛り上がり向けです。
+
+## ドラフトのあと：その後の人生と世界ランキング
+
+  ドラフトが終わると、指名された選手がどんな人生を歩んだかを読めます。1年目から活躍、二軍からの這い上がり、移籍、戦力外からの復活、海外挑戦、そして引退まで。各球団の目玉選手から順に見られて、全員分も開けます。見つけた出来事と結末は「人生図鑑」に溜まっていきます。
+
+  メジャー志望の選手は入団を断ることがあり、交渉の発表の前に「前兆」が出ることがあります。前兆が出ても入団することもあります。
+
+  ドラフトの出来は「ドラフトスコア」（CPU球団の平均が50点）になり、世界ランキング (https://koshinstudio.com/draft/ranking)（今日・今週・歴代）に載ります。12球団・6巡の標準設定の部屋が対象で、人間が2人以上の「みんなで」と、ひとり遊びの「ひとり」は別の表です。結果は画像つきのカードで、Xに共有できます。
 
 ## 友達と、知らない人と
 
-- 友達部屋：6文字の合言葉かURLで入ります。球団数・巡目数・制限時間・モード・お題はホストが決め、「開始」を押すまで始まりません。友達がそろったあとに公開すると、ランダムマッチの人も入ってきます。ホストは、困った人を退室させることもできます。
+- 友達部屋：6文字の合言葉かURLで入ります。球団数・巡目数・制限時間・入団拒否・モードはホストが自由に決め、「開始」を押すまで始まりません。公開すると、募集中の部屋の一覧に載って、知らない人も入ってきます。ホストは、困った人を退室させることもできます。
 
-- ランダムマッチ：同じ言語の人と自動で組まれます。人が足りなくてもCPU球団が加わるので、待たされずに始まります。
+- 募集中の部屋を探す：公開されている部屋を、ルール（球団数・巡数・制限時間・入団拒否）を見てから選んで参加できます。
+
+- おまかせ：探すのが面倒なときは、ワンタップで募集中の部屋に入ります。なければCPU球団が加わり、待たされずに始まります。
 
   球団には、オリジナルのエンブレムが自動で付きます（選び直せます）。自分の画像もどの部屋でも使えます（不適切な画像は通報で隠れます）。
 
@@ -8337,7 +8357,7 @@ URL: https://koshinstudio.com/works/draft-party/
 
 ## 預かるもの
 
-  部屋の中でのやり取りのために、端末が作った番号、球団名、指名した内容、チャットの発言、部屋の設定を、その部屋のあいだだけ預かります。ゲーム終了の10分後に、すべて削除されます。ランキングはありません。くわしくはあつかい (https://koshinstudio.com/privacy/)に書いています。
+  部屋の中でのやり取りのために、端末が作った番号、球団名、指名した内容、チャットの発言、部屋の設定を、その部屋のあいだだけ預かります。ゲーム終了の10分後に、すべて削除されます。世界ランキングには、ゲーム終了時に球団名・ドラフトスコア・評価（S〜D）・日時だけを記録します（端末の番号やチャットは含みません）。Xへ画像つきで共有するときは、共有する結果の画像と文章を7日間だけサーバーに置きます。くわしくはあつかい (https://koshinstudio.com/privacy/)に書いています。
 
     遊ぶ (https://koshinstudio.com/draft/)
 
@@ -8723,7 +8743,13 @@ URL: https://koshinstudio.com/privacy/
 
   「寝返り将棋」では、オンライン対戦を遊んだとき（と順位表を開いたとき）に、端末が作った番号、名前（既定は「名無し」）、レーティング、勝ち負けの数、一局ごとの手順と結果を預かります。順位表に、名前とレーティングが載ります。AI 対戦と、同じ端末での2人対戦では、何も預かりません。
 
-  「ドラフト会議ごっこ」では、部屋の中でのやり取りのために、端末が作った番号、球団名、指名したワード（または選手）、チャットの発言、通報、部屋の設定を、その部屋のあいだだけ預かります。自分の画像をアイコンにした場合は、端末で小さくした画像が、その部屋の参加者にだけ送られます（ランダムマッチと公開中の部屋では、広告のあるロビーと結果の画面には出さず、エンブレムを表示します）。不適切な画像は、2人の通報で全員から隠れます。ホストが選手の名前や能力を登録した場合は、その内容も同じ部屋の中だけで扱います。ランキングはありません。部屋のデータは、ゲーム終了の10分後（誰もいなくなった部屋は30分後）に、通報の記録もふくめてすべて削除されます。スタンプと定型文は保存しません。
+  「ドラフト会議ごっこ」では、部屋の中でのやり取りのために、端末が作った番号、球団名、育てた選手の名前、指名した選手（または選択肢）、チャットの発言、通報、部屋の設定を、その部屋のあいだだけ預かります。自分の画像をアイコンにした場合は、端末で小さくした画像が、その部屋の参加者にだけ送られます（ランダムマッチと公開中の部屋では、広告のあるロビーと結果の画面には出さず、エンブレムを表示します）。不適切な画像は、2人の通報で全員から隠れます。ホストが選手の名前や能力を登録した場合は、その内容も同じ部屋の中だけで扱います。部屋のデータは、ゲーム終了の10分後（誰もいなくなった部屋は30分後）に、通報の記録もふくめてすべて削除されます。スタンプと定型文は保存しません。
+
+  「ドラフト会議ごっこ」の世界ランキング（12球団・6巡の標準設定の部屋が対象）では、ゲームの終わりに、サーバーが球団名、ドラフトスコア、評価（S〜D）、日時だけを記録します。端末が作った番号やチャットは含みません。「今日」「今週」の表のために14日間残し、「歴代」は上位300件だけを残します。球団名にNGワードが含まれる場合は、伏せ字になります。
+
+  「ドラフト会議ごっこ」の結果をXへ共有するとき、画像つきのカードにするために、共有する結果の画像と、投稿の文章（球団名と指名した内容が入ります）を、7日間だけサーバーに置きます。検索には載せません（noindex）が、そのURLを知っている人は開けます。置いた時に返る印（トークン）で、本人が消すこともできます。1つの端末から1時間に置けるのは12回までです。
+
+  「ドラフト会議ごっこ」で育てた選手を、あなたが「世界に公開する」に設定した場合に限り、その選手の名前・ポジション・能力・実績を、30日間（最新1000人まで）サーバーに保存し、ほかの人の部屋の候補に「世界の選手」として表示します。球団名・端末が作った番号など、あなたを特定できる情報は一緒に保存しません。不適切な選手は、利用者2人の通報で保存から削除されます。公開した選手が指名された回数などは、数字だけを保存します。
 
   チャットや名前など、ほかの参加者が入力した内容は、同じ部屋の人に表示されます。ホストが実在の人物の名前などを登録する場合、その内容はホストの責任です。不適切な内容は、自動で弾き、通報（2人で全員の画面から非表示）できる仕組みを用意しています。
 
@@ -8751,7 +8777,7 @@ URL: https://koshinstudio.com/privacy/
 
 ## 置き場所
 
-  このサイトと番付のサーバーは Cloudflare 上で動いています。番付のデータは、「すし積む」は Cloudflare の D1（データベース）に、「10秒ピッタリで止めろ！」は Cloudflare の KV に保存されます。「ドラフト会議ごっこ」の部屋のデータは、Cloudflare の Durable Objects に、上に書いた期間だけ保存されます。
+  このサイトと番付のサーバーは Cloudflare 上で動いています。番付のデータは、「すし積む」は Cloudflare の D1（データベース）に、「10秒ピッタリで止めろ！」は Cloudflare の KV に保存されます。「ドラフト会議ごっこ」の部屋のデータ、世界ランキング、共有する画像は、Cloudflare の Durable Objects に、上に書いた期間だけ保存されます。
 
 ## 広告について
 
@@ -8763,11 +8789,13 @@ URL: https://koshinstudio.com/privacy/
 
 ## 子どもについて
 
-  年齢を尋ねていませんし、年齢に関わる情報も集めていません。番付に名前を載せる以外に、また「ドラフト会議ごっこ」の部屋の中で入力した内容（チャットなど）を除いて、こちらへ届くものはありません。
+  年齢を尋ねていませんし、年齢に関わる情報も集めていません。番付に名前を載せる以外に、また「ドラフト会議ごっこ」の部屋の中で入力した内容（チャットなど）と、世界ランキング・共有画像として記録されるもの（上に書きました）を除いて、こちらへ届くものはありません。
 
 ## このページの更新と、お問い合わせ
 
   2026 年 10 月 23 日に、「ドラフト会議ごっこ」（/draft/）の扱いを追記しました。
+
+  2026 年 10 月 26 日に、「ドラフト会議ごっこ」の世界ランキングと、Xへ共有する画像の扱いを追記しました。
 
   2026 年 10 月 17 日に、アフィリエイト（紹介リンク）の記述を外しました。現在、このサイトの記事には、紹介リンクはありません。今後、リンクを付けることがあれば、記事の冒頭と、このページに書きます。
 
@@ -12681,7 +12709,13 @@ Last updated October 2026
 
   Anime Type Quiz calculates your answers on your device only and sends them nowhere.
 
-  Draft Party (/draft/) keeps, only for the lifetime of a room and for the sake of play, a device-generated number, your team name, the words (or players) you pick, chat messages, reports and the room settings. If you use your own image as a team icon, a version shrunk on your device is sent only to the other participants of that room (in random match and public rooms it is not shown on the lobby and results screens, which carry ads — an emblem is shown instead). An inappropriate image is hidden for everyone after two reports. If a host registers players’ names and abilities, that content is likewise handled only inside that room. There is no ranking. A room’s data, including reports, is deleted 10 minutes after the game ends (30 minutes after a room is abandoned). Stamps and quick phrases are not stored.
+  Draft Party (/draft/) keeps, only for the lifetime of a room and for the sake of play, a device-generated number, your team name, the names of the players you raise, the players (or options) you pick, chat messages, reports and the room settings. If you use your own image as a team icon, a version shrunk on your device is sent only to the other participants of that room (in random match and public rooms it is not shown on the lobby and results screens, which carry ads — an emblem is shown instead). An inappropriate image is hidden for everyone after two reports. If a host registers players’ names and abilities, that content is likewise handled only inside that room. A room’s data, including reports, is deleted 10 minutes after the game ends (30 minutes after a room is abandoned). Stamps and quick phrases are not stored.
+
+  Draft Party’s world ranking (rooms with the standard settings of 12 teams and 6 rounds count) records only your team name, Draft Score, grade (S–D) and date when a game ends, with no device number and no chat. Entries are kept for 14 days for the “today” and “this week” tables, and only the top 300 are kept for “all time”. A team name that contains a blocked word is masked.
+
+  When you share a Draft Party result on X, the shared result image and the post text (they include your team name and picks) are kept on our server for 7 days only, so X can show an image card. They are not indexed by search engines, but anyone with the URL can open them, and you can delete yours with the token returned when it was uploaded. One device can upload up to 12 an hour.
+
+  Only if you choose “Share this player with the world” for a player you raised in Draft Party, that player’s name, position, stats and achievements are stored on the server for 30 days (up to the latest 1,000) and shown as a “world player” in other people’s drafts. Your team name, the device-generated number and other information that could identify you are not stored with it. Inappropriate players are removed after two reports from users. For shared players we store only counters such as how many times they were drafted.
 
   What other participants type — chat, names and so on — is shown to the people in the same room. If a host registers real people’s names or similar, that content is the host’s responsibility. Inappropriate content is filtered automatically, and can be reported (two reports hide it for everyone).
 
@@ -12707,7 +12741,7 @@ Last updated October 2026
 
 ## Where it is hosted
 
-  This site and the ranking servers run on Cloudflare. Sushi Stack and Negaeri Shogi rankings are stored in Cloudflare D1 (a database), and Stop at 10 seconds in Cloudflare KV. Draft Party room data is kept in Cloudflare Durable Objects for the period described above.
+  This site and the ranking servers run on Cloudflare. Sushi Stack and Negaeri Shogi rankings are stored in Cloudflare D1 (a database), and Stop at 10 seconds in Cloudflare KV. Draft Party room data, the world ranking and shared images are kept in Cloudflare Durable Objects for the periods described above.
 
 ## About advertising
 
@@ -12719,9 +12753,11 @@ Last updated October 2026
 
 ## Children
 
-  We do not ask for age and do not collect information related to age. Apart from the name you put in a ranking, and what you type inside a Draft Party room (such as chat), nothing reaches us.
+  We do not ask for age and do not collect information related to age. Apart from the name you put in a ranking, what you type inside a Draft Party room (such as chat), and what is recorded for the world ranking and shared images (described above), nothing reaches us.
 
   On October 23, 2026, we added how Draft Party (/draft/) is handled.
+
+  On October 26, 2026, we added how Draft Party’s world ranking and images shared to X are handled.
 
   This is the English version of the Japanese privacy page (https://koshinstudio.com/privacy/). If they differ, the Japanese page is the original.
 
@@ -12852,6 +12888,12 @@ The Japanese card drops that are hard to keep up with, in one place, with alerts
 - The app shows the information and sends you to the store. It does not buy or enter lotteries for you.
 
 - Screens are available in Japanese and English. More languages are being added.
+
+## Calculators for lotteries and pre-orders
+
+- Lottery win chance calculator (https://koshinstudio.com/en/calc/lottery/) — the chance of winning at least one lottery from the odds and the number of entries.
+
+- Trading-card box and pack unit-price calculator (https://koshinstudio.com/calc/box-price/) (Japanese) — turn a box price into a per-pack price and compare it with the list price.
 
 ## FAQ
 
@@ -16398,7 +16440,7 @@ URL: https://koshinstudio.com/en/works/draft-party/
 
   日本語版 (https://koshinstudio.com/works/draft-party/)
 
-  Pick any word you like. Tie with someone? Lottery!
+  Scout rookies by their abilities. Tie with someone? Lottery!
 A draft day for everyone, in your browser.
 
   Play now (https://koshinstudio.com/draft/)
@@ -16411,25 +16453,39 @@ A draft day for everyone, in your browser.
 
 ## What it is
 
-  Name your team and pick words. In Round 1 everyone bids at the same time, hidden from the others, and all bids are revealed together. If teams chose the same word, they draw lots: the competing teams take turns picking one hidden paper, and when everyone has picked, all papers open at once. Only the winner gets the rights; the others re-bid with a different word.
+  Name your team and pick fictional rookies. In Round 1 everyone bids at the same time, hidden from the others, and all bids are revealed together. If teams chose the same player, they draw lots: the competing teams take turns picking one hidden paper, and when everyone has picked, all papers open at once. Only the winner gets the rights; the others re-bid on a different player.
 
   From Round 2, teams pick one at a time, and the order flips every round. At the end, the contract talks are announced — “signed” or “refused”. You can turn your result into an image and share it on X.
 
+  Looking for a draft game or a draft simulator? The flow and rules are laid out on their own pages: Baseball draft simulator (https://koshinstudio.com/draft/en/simulator/).
+
 ## Two modes
-
-### Free-word mode
-
-  Pick anything — a person, a food, any word, not just baseball. The host can set a theme, or everyone can vote for one.
 
 ### Scout mode
 
-  Pick fictional rookies by their abilities, potential and records. The abilities are the scouts’ estimates and can differ from reality. Signed players grow over several years while every team plays every other team. You get yearly standings, head-to-head records against every team, titles such as batting champion and wins leader, Rookie of the Year and draft grades — revealed to everyone at the same time, so you can react together with stamps and chat. There is also a mode where the host registers the players.
+  First, each participant raises their own player through three years of high school. Form and luck change the results, and training the same stat repeatedly can unlock special skills. The raised players join everyone else’s and the CPU’s in the draft (yours can be drafted by you only in the final round, if it is still there), and when one is picked, its owner decides whether to sign or refuse.
+
+  Pick fictional rookies by their abilities, potential and records. The abilities are the scouts’ estimates and can differ from reality. Signed players grow over several years while every team plays every other team. You get yearly standings, head-to-head records against every team, titles such as batting champion and wins leader, Rookie of the Year and draft grades — revealed to everyone at the same time, so you can react together with stamps and chat. The host can also register the players.
+
+### Choice mode
+
+  Pick from a list the host prepared — for example, everyone in your class or 50 favorite anime. Great for groups of friends.
+
+## After the draft: careers and the world ranking
+
+  When the draft ends you can read how each drafted player’s life turned out: a breakout rookie year, a climb up from the minors, a trade, a comeback after being released, a move overseas, and finally retirement. You see each team’s headline pick first, and can open everyone’s. The events and endings you find collect in a “career log”.
+
+  Players eyeing the majors may refuse to sign, and an “omen” can appear before the result is announced — though sometimes they sign anyway.
+
+  Your draft becomes a Draft Score (the CPU teams’ average is 50) and enters the world ranking (https://koshinstudio.com/draft/ranking) (today, this week, all time). Rooms with the standard settings (12 teams, 6 rounds) count; “multiplayer” (two or more humans) and “solo” are separate boards. You can share the result on X as an image card.
 
 ## With friends, or with strangers
 
-- Friends room: enter with a 6-character room code or a link. The host chooses the number of teams, rounds, time limit, mode and theme, and nothing starts until the host presses Start. Once your friends are in, the host can make the room public so random-match players can join. The host can also remove anyone who causes trouble.
+- Friends room: enter with a 6-character room code or a link. The host freely chooses the number of teams, rounds, time limit, refusals and mode, and nothing starts until the host presses Start. A public room is listed so strangers can join. The host can also remove anyone who causes trouble.
 
-- Random match: you are grouped with players using the same language. If there aren’t enough players, CPU teams join, so it starts without a wait.
+- Find an open room: browse public rooms and see their rules (teams, rounds, time limit, refusals) before you join.
+
+- Quick join: don’t want to search? One tap puts you in an open room, or starts one with CPU teams so there is no wait.
 
   Every team gets an original emblem automatically (you can pick another), and you can use your own image in any room (inappropriate images are hidden after reports).
 
@@ -16441,7 +16497,7 @@ A draft day for everyone, in your browser.
 
 ## What is stored
 
-  For the sake of play inside a room, a device-generated number, your team name, what you pick, chat messages and the room settings are kept only for the life of that room, and are all deleted 10 minutes after the game ends. There is no ranking. Details are on the privacy page (https://koshinstudio.com/en/privacy/).
+  For the sake of play inside a room, a device-generated number, your team name, what you pick, chat messages and the room settings are kept only for the life of that room, and are all deleted 10 minutes after the game ends. The world ranking records only your team name, Draft Score, grade (S–D) and date when a game ends (no device number and no chat). When you share an image card on X, the shared result image and its text are kept on the server for 7 days. Details are on the privacy page (https://koshinstudio.com/en/privacy/).
 
     Play now (https://koshinstudio.com/draft/)
 

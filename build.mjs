@@ -125,7 +125,7 @@ const chips = ['<button class="chip on" data-f="all">All<i>すべて</i></button
     `<button class="chip" data-f="${k}">${kinds[k].label}<i>${kinds[k].ja}</i></button>`)).join('');
 
 writeFileSync(here + '/works/index.html',
-  head('Works — ブラウザゲーム・アプリ・Web サイトの制作一覧 — Koshin Studio', 'これまでに作ったものの一覧。ブラウザゲーム、スマートフォンのアプリ、Web サイト、3D モデル。分野で絞り込めます。') +
+  head('Works — ブラウザゲーム・アプリ・Web サイトの制作一覧 — Koshin Studio', 'これまでに作ったものの一覧。無料のブラウザゲーム（落ち物パズル・将棋風ボードゲーム・ドラフトゲームなど）、トレカの抽選通知アプリ、アニメ診断、Web サイト、3D モデル。分野で絞り込めます。') +
 `<main><div class="wrap">
   <h1>Works</h1>
   <div class="rule"></div>
@@ -334,7 +334,7 @@ const groups = [['R', 'D'], ['R', 'H'], ['F', 'D'], ['F', 'H']].map(([w, m]) => 
 }));
 writeAnime('/anime/types/index.html',
   head('64タイプ一覧 — ガチアニメ診断のタイプと二つ名 — Koshin Studio',
-       'ガチアニメ診断の64タイプの一覧。世界観と後味の組み合わせで4つに分けて、二つ名とタイプコードを並べています。') +
+       'ガチアニメ診断の64タイプの一覧。世界観と後味の組み合わせで4つに分けて、二つ名とタイプコードを並べています。気になるタイプから、診断の中身をたどれます。') +
 `<main><div class="wrap">
   <h1>64タイプ</h1>
   <div class="rule"></div>
@@ -473,7 +473,7 @@ ${g.list.map(noteRow).join('\n')}
 const af0 = conf.affiliate || {};
 mkdirSync(here + '/picks', { recursive: true });
 writeFileSync(here + '/picks/index.html',
-  head('Picks — 比べたもの・買ったもの — Koshin Studio', '使ったもの・買ったものの感想と、公式の情報だけで比べた記事。数字には出典と確認した日を付けています。') +
+  head('Picks — 比べたもの・買ったもの — Koshin Studio', '使ったもの・買ったものの感想と、公式の情報だけで比べた記事。ポケカのスリーブ・ローダーの選び方、静的サイトの置き場所、Claude API と Gemini API の比較など。数字には出典と確認した日を付けています。') +
 `<main><div class="wrap">
   <h1>Picks</h1>
   <div class="rule"></div>
