@@ -352,6 +352,82 @@ The Japanese card drops that are hard to keep up with, in one place, with alerts
 
 ---
 
+URL: https://koshinstudio.com/en/works/tube-drift/
+
+# Tube Drift
+
+  日本語版 (https://koshinstudio.com/works/tube-drift/)
+
+  Spin a neon tunnel with your finger.
+Slip past the walls by a hair.
+
+  Play now (https://koshinstudio.com/play/tube-drift/)
+
+  Free. Runs in your browser, no install or sign-up. Hold your phone upright and swipe left and right without lifting your finger. The in-game text is in Japanese, but the game is just swiping.
+
+      Rotate the ship into the gap in the wall
+
+    30seconds per run
+    4themes
+    3daily missions
+
+## What it is
+
+  Tube Drift is a 3D endless runner where you fly down a neon tunnel. The only control is a left-right swipe: spin the tunnel around your finger and slide the ship through the gaps in the walls rushing toward you.
+
+  Hit a wall and the run is over. A run lasts about 30 seconds, so it fits a commute or one last round before bed.
+
+## How to score
+
+### The closer to the wall, the more you earn
+
+  Slipping right past a wall gives a near-miss bonus. Chain them and your combo climbs, raising the multiplier up to ×8.
+
+### FEVER doubles it again
+
+  Reach a combo of 10 and FEVER starts: about 7 seconds of double score. One mistake breaks the combo, so deciding when to push is the skill.
+
+### Collect gems, change the scenery
+
+  Gems float in the tunnel. Your running total unlocks new themes: Sunset, Deep Sea, Jade and White Night. Same controls, different mood.
+
+### Daily missions
+
+  Three missions rotate every day, such as “score 1500 in one run”, “8 near-misses” or “reach combo 12”. Complete them for bonus gems.
+
+## FAQ
+
+### Is it free?
+
+  Yes. No install, no sign-up. High scores and gems are saved only on your device.
+
+### Which devices work?
+
+  Browsers on iPhone and Android. It also runs on a computer, but swiping on a phone in portrait is the most comfortable.
+
+### Is there sound?
+
+  Yes, music and effects, with a toggle at the bottom right. There are no audio files; everything is synthesized on the spot.
+
+## How it is made
+
+  Rendering uses three.js, and the whole game fits in a single HTML file. The music is synthesized live and gets thicker with your combo and FEVER.
+
+  Play now (https://koshinstudio.com/play/tube-drift/)
+
+  More games to play
+
+- Stop at exactly 10 seconds! (https://koshinstudio.com/en/works/stopwatch10/) — count ten seconds in your head; the smaller the error, the better.
+
+- Sushi Stack (https://koshinstudio.com/en/works/sushitsumu/) — merge matching toppings up to the golden sushi tub.
+
+- All works (https://koshinstudio.com/en/works/)
+
+  This is the English version of the Japanese page (https://koshinstudio.com/works/tube-drift/).
+
+
+---
+
 URL: https://koshinstudio.com/en/works/sushitsumu/
 
 # Sushi Stack

@@ -1,5 +1,28 @@
 [
   {
+    "slug": "tube-drift",
+    "title": "Tube Drift",
+    "kind": "game",
+    "year": "2026",
+    "status": "公開中",
+    "url": "/works/tube-drift/",
+    "cover": "/assets/tube-drift-square",
+    "blurb": "左右スワイプでネオンのトンネルを回して、壁ギリギリをすり抜ける3Dランゲーム。1回30秒、登録なしでスマホのブラウザからすぐ遊べる無料ゲームです。",
+    "tags": [
+      "ブラウザ",
+      "3D",
+      "スワイプ"
+    ],
+    "coverW": 720,
+    "coverH": 720,
+    "play": "/play/tube-drift/",
+    "genre": [
+      "アクション",
+      "ランゲーム"
+    ],
+    "featured": true
+  },
+  {
     "slug": "danmaku-maker",
     "title": "弾幕メーカー",
     "kind": "game",

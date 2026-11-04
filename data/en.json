@@ -72,6 +72,13 @@
     "cover": "/assets/torecadash-square@2x.jpg"
   },
   {
+    "ja": "/works/tube-drift/",
+    "en": "/en/works/tube-drift/",
+    "title": "Tube Drift",
+    "date": "2026-11-04",
+    "blurb": "Tube Drift is a free 3D browser runner. Swipe left and right to spin the neon tunnel and slip past walls by a hair. 30-second runs, no install or sign-up."
+  },
+  {
     "ja": "/works/sushitsumu/",
     "en": "/en/works/sushitsumu/",
     "title": "Sushi Stack",

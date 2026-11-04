@@ -18,6 +18,7 @@ const ROUTES = {
     sushitsumu: 'https://sushitsumu.pages.dev',
     stopwatch10: 'https://stopwatch10.pages.dev',
     'kaeru-sekai': 'https://kaeru-sekai.pages.dev',
+    'tube-drift': 'https://tube-drift.pages.dev',
   },
   app: {
     shindananime: 'https://shindananime.pages.dev',

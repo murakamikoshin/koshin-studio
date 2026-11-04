@@ -62,6 +62,7 @@ English: a one-person studio making browser games and an iPhone app, with develo
 - [抽選の当選確率計算機](https://koshinstudio.com/calc/lottery/): 倍率と応募の回数から、ひとつ以上当たる確率を出す。応募先ごとに確率が違っても使える。トレカの抽選販売の考え方つき。
 
 ## Works（作ったもの）
+- [Tube Drift](https://koshinstudio.com/works/tube-drift/): 左右スワイプでネオンのトンネルを回して、壁ギリギリをすり抜ける3Dランゲーム。1回30秒、登録なしでスマホのブラウザからすぐ遊べる無料ゲームです。
 - [弾幕メーカー](https://koshinstudio.com/works/danmaku-maker/): 弾幕ステージを自分で作って投稿し、世界中のプレイヤーが作ったステージを遊べる iPhone・iPad の弾幕ゲーム。発射台は最大8個、遊び方は4つ。10言語対応、App Store で配信中。
 - [還る世界](https://koshinstudio.com/works/kaeru-sekai/): 灰色に枯れた世界に光の種をまいて緑をよみがえらせる3Dの景色ゲーム。谷・島・砂漠・火山など番号ごとに違う世界が生まれ、人を住まわせて100年を見届けられます。
 - [すし積む](https://koshinstudio.com/works/sushitsumu/): シャリから始めて、同じネタ同士をぶつけて育てる落ち物パズル。行き着く先は金のすし桶。ブラウザだけで遊べます。
@@ -88,6 +89,7 @@ English: a one-person studio making browser games and an iPhone app, with develo
 - [Privacy: what this site keeps and what it does not](https://koshinstudio.com/en/privacy/): What Koshin Studio stores (names and results you submit to rankings, online game ratings), what it does not collect, how comments and analytics work, and how to ask for deletion.
 - [Anime Type Quiz — find your anime type and the one anime that fits you](https://koshinstudio.com/en/works/shindananime/): A free anime quiz. Answer 12 questions (up to 50), get your anime type from 6 axes (like RDCP-VM) and a nickname, and see your destined anime plus two runners-up chosen from over 6,000 real titles.
 - [Toreca Dash (トレカダッシュ) — Japan TCG lottery, pre-order & restock alerts](https://koshinstudio.com/en/works/torecadash/): An iPhone app that gathers lottery, pre-order and first-come sales of trading cards from stores across Japan, with a deadline calendar and alerts. Store information is mostly in Japanese.
+- [Tube Drift](https://koshinstudio.com/en/works/tube-drift/): Tube Drift is a free 3D browser runner. Swipe left and right to spin the neon tunnel and slip past walls by a hair. 30-second runs, no install or sign-up.
 - [Sushi Stack](https://koshinstudio.com/en/works/sushitsumu/): Sushi Stack is a free browser merge puzzle. Drop rice, merge matching toppings up 11 tiers to reach the golden sushi tub. Online ranking, 14 languages, no install or sign-up.
 - [Stop at exactly 10 seconds!](https://koshinstudio.com/en/works/stopwatch10/): A free browser game: press start and count ten seconds in your head, with no numbers or sound on screen. Three modes, millisecond precision, and a fair daily ranking.
 - [About Koshin Studio](https://koshinstudio.com/en/about/): Koshin Studio is a one-person studio making free browser games and small apps, and writing down what it measures. How I work, how articles are written, the tools I use, and how to contact me.

@@ -50,6 +50,7 @@ await check('/app/sushitsumu/', { status: 404 });   /* play のものは app に
 /* 作品が増えたら、ここにも一行足す。ROUTES を書き換えただけで
    出し忘れても気づけるようにしておく */
 await check('/play/stopwatch10/', { status: 200, asked: 'https://stopwatch10.pages.dev/' });
+await check('/play/tube-drift/', { status: 200, asked: 'https://tube-drift.pages.dev/' });
 await check('/app/', { status: 302, loc: 'https://koshinstudio.com/works/' });
 await check('/app/nope/', { status: 404 });
 await check('/app/shindananime/', { status: 200, asked: 'https://shindananime.pages.dev/' });
