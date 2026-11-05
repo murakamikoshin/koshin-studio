@@ -1,16 +1,16 @@
 [
   {
-    "slug": "kaeru-dani",
-    "title": "還る谷",
+    "slug": "kaeru-sekai",
+    "title": "還る世界",
     "kind": "game",
     "year": "2026",
     "status": "公開中",
-    "url": "/works/kaeru-dani/",
-    "play": "/play/kaeru-dani/",
-    "cover": "/assets/kaeru-dani-square",
+    "url": "/works/kaeru-sekai/",
+    "play": "/play/kaeru-sekai/",
+    "cover": "/assets/kaeru-sekai-square",
     "coverW": 720,
     "coverH": 720,
-    "image": "/assets/kaeru-dani-wide@2x.jpg",
+    "image": "/assets/kaeru-sekai-wide@2x.jpg",
     "genre": [
       "シミュレーション",
       "箱庭",

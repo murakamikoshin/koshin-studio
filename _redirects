@@ -18,3 +18,7 @@
 /zh-hant/*  /en/  301
 /vi/*  /en/  301
 /th/*  /en/  301
+
+# 2026-11-05 還る谷 → 還る世界
+/works/kaeru-dani  /works/kaeru-sekai/  301
+/works/kaeru-dani/  /works/kaeru-sekai/  301

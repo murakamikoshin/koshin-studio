@@ -17,7 +17,7 @@ const ROUTES = {
   play: {
     sushitsumu: 'https://sushitsumu.pages.dev',
     stopwatch10: 'https://stopwatch10.pages.dev',
-    'kaeru-dani': 'https://kaeru-dani.pages.dev',
+    'kaeru-sekai': 'https://kaeru-sekai.pages.dev',
   },
   app: {
     shindananime: 'https://shindananime.pages.dev',
@@ -27,6 +27,12 @@ const ROUTES = {
   },
 };
 
+/* 名前を変えた作品。古い道で来たら、新しい道へ送り直す（後ろの道と ?… はそのまま） */
+const MOVED = {
+  play: { 'kaeru-dani': 'kaeru-sekai' },
+  app: {},
+};
+
 export default {
   async fetch(request) {
     const url = new URL(request.url);
@@ -34,6 +40,9 @@ export default {
     const m = url.pathname.match(/^\/(play|app)(?:\/([A-Za-z0-9_-]+)(\/.*)?)?\/?$/);
     if (!m) return new Response('Not found', { status: 404 });
     const [, kind, slug, rest] = m;
+
+    const moved = (MOVED[kind] || {})[slug];
+    if (moved) return Response.redirect(url.origin + '/' + kind + '/' + moved + (rest || '/') + url.search, 301);
 
     /* 入口だけで来たら、作品の一覧へ返す */
     if (!slug) return Response.redirect(url.origin + '/works/', 302);

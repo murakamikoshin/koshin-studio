@@ -7909,14 +7909,14 @@ URL: https://koshinstudio.com/calc/lottery/
 
 ---
 
-URL: https://koshinstudio.com/works/kaeru-dani/
+URL: https://koshinstudio.com/works/kaeru-sekai/
 
-# 還る谷
+# 還る世界
 
   色を失った世界に、光の種をまく。
 緑が戻ったら、人を住まわせて100年を見届ける。
 
-  遊ぶ (https://koshinstudio.com/play/kaeru-dani/)
+  遊ぶ (https://koshinstudio.com/play/kaeru-sekai/)
 
       種をまいたところから、緑が戻る
 
@@ -7952,7 +7952,7 @@ URL: https://koshinstudio.com/works/kaeru-dani/
 
   スマートフォンでも動くように、端末の速さを見ながら描く細かさを自動で下げています。表示が重いときは、少し待つと軽くなります。
 
-    遊ぶ (https://koshinstudio.com/play/kaeru-dani/)
+    遊ぶ (https://koshinstudio.com/play/kaeru-sekai/)
 
 
 ---

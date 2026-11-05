@@ -39,7 +39,8 @@ const check = async (path, want) => {
   if (!ok) { console.error('× ' + path, JSON.stringify(got), '≠', JSON.stringify(want)); bad = 1; }
 };
 await check('/play/sushitsumu/', { status: 200, asked: 'https://sushitsumu.pages.dev/' });
-await check('/play/kaeru-dani/', { status: 200, asked: 'https://kaeru-dani.pages.dev/' });
+await check('/play/kaeru-sekai/', { status: 200, asked: 'https://kaeru-sekai.pages.dev/' });
+await check('/play/kaeru-dani/', { status: 301, loc: 'https://koshinstudio.com/play/kaeru-sekai/' });
 await check('/play/sushitsumu/?lang=en', { status: 200, asked: 'https://sushitsumu.pages.dev/?lang=en' });
 await check('/play/sushitsumu', { status: 301, loc: 'https://koshinstudio.com/play/sushitsumu/' });
 await check('/play/', { status: 302, loc: 'https://koshinstudio.com/works/' });
