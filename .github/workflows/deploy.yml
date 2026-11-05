@@ -1,0 +1,38 @@
+# main に push されたら、サイト（Pages）と中継（Worker）を出す。
+# 要るもの：リポジトリの Settings → Secrets and variables → Actions に
+#   CLOUDFLARE_API_TOKEN（Pages 編集・Workers 編集・Workers ルート編集）
+name: deploy
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+concurrency: { group: deploy, cancel-in-progress: false }
+env:
+  CLOUDFLARE_ACCOUNT_ID: 819c918e8d9f77952de1623c1b0f1a5c
+  CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 22 }
+      - name: 組み立て
+        run: node build.mjs
+      - name: 中継の判定
+        run: node worker/test.mjs
+      - name: 中継を出す（worker/ が変わった時だけ）
+        run: |
+          git fetch --depth=2 origin "${{ github.sha }}" || true
+          if git diff --name-only HEAD~1 HEAD 2>/dev/null | grep -q '^worker/' || [ "${{ github.event_name }}" = workflow_dispatch ]; then
+            cd worker && npx -y wrangler@3 deploy
+          else echo "worker/ は変わっていないので飛ばす"; fi
+      - name: サイトを出す
+        run: bash tools/deploy.sh
+      - name: 出たか確かめる
+        run: |
+          sleep 20
+          for u in / /works/ /play/sushitsumu/; do
+            c=$(curl -s -o /dev/null -w "%{http_code}" "https://koshinstudio.com$u"); echo "$c $u"; [ "$c" = 200 ] || exit 1
+          done
+          c=$(curl -s -o /dev/null -w "%{http_code}" https://koshinstudio.com/REVIEW.md); echo "$c /REVIEW.md"; [ "$c" = 404 ] || exit 1

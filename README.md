@@ -355,8 +355,13 @@ Cloudflare の Settings → Builds & deployments で本番ブランチを `main`
 | すし積む | `sushitsumu` | `/play/sushitsumu/` |
 | 10秒ピッタリで止めろ！ | `stopwatch10` | `/play/stopwatch10/` |
 
-Pages は Git 連携していない。**push しただけでは公開されない。**
-公開は必ず手元からの `wrangler pages deploy`。
+**2026-11-05 から、main に push すると GitHub Actions が出す**（`.github/workflows/deploy.yml`）。
+組み立て → 中継の判定 → （worker/ が変わった時だけ）中継を出す → `tools/deploy.sh` でサイトを出す → 本番で 200 / REVIEW.md が 404 を確かめる、の順。
+要るのはリポジトリの Secrets に `CLOUDFLARE_API_TOKEN` を一つ置くことだけ。手元から `wrangler pages deploy` で出すやり方も、これまで通り使える。
+
+| 作品 | Pages | 道 |
+|---|---|---|
+| 還る世界 | `kaeru-sekai` | `/play/kaeru-sekai/`（旧 `/play/kaeru-dani/` は中継が 301 で送り直す） |
 
 ---
 
