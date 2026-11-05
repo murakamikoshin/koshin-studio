@@ -17,6 +17,7 @@ const ROUTES = {
   play: {
     sushitsumu: 'https://sushitsumu.pages.dev',
     stopwatch10: 'https://stopwatch10.pages.dev',
+    'kaeru-dani': 'https://kaeru-dani.pages.dev',
   },
   app: {
     shindananime: 'https://shindananime.pages.dev',

@@ -1,5 +1,44 @@
 [
   {
+    "slug": "kaeru-dani",
+    "title": "還る谷",
+    "kind": "game",
+    "year": "2026",
+    "status": "公開中",
+    "url": "/works/kaeru-dani/",
+    "play": "/play/kaeru-dani/",
+    "cover": "/assets/kaeru-dani-square",
+    "coverW": 720,
+    "coverH": 720,
+    "image": "/assets/kaeru-dani-wide@2x.jpg",
+    "genre": [
+      "シミュレーション",
+      "箱庭",
+      "3D"
+    ],
+    "blurb": "灰色に枯れた谷に光の種をまいて、森と湖をよみがえらせる3Dの景色ゲーム。人を住まわせて100年を見届け、谷を歩いて写真を撮れます。",
+    "tags": [
+      "ブラウザ",
+      "3D",
+      "写真が撮れる"
+    ],
+    "featured": true,
+    "stats": [
+      {
+        "n": 10,
+        "label": "粒の光の種"
+      },
+      {
+        "n": 100,
+        "label": "年を見届ける"
+      },
+      {
+        "n": 300,
+        "label": "人が釣り合う目安"
+      }
+    ]
+  },
+  {
     "slug": "sushitsumu",
     "title": "すし積む",
     "kind": "game",

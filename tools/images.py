@@ -39,6 +39,13 @@ GAMES = [
     (where('stopwatch10', os.path.join(site, '..', 'stopwatch10')), [
         ('cover-square-800x800.png',     'stopwatch10-square',   [360, 720]),
     ]),
+    # 還る谷は index.html を src/ に置いているので、store/ があるかで探す
+    (next((os.path.expanduser(d) for d in (os.environ.get('GAME_DIR_KAERU_DANI'),
+                                          os.path.join(site, '..', 'kaeru-dani'))
+           if d and os.path.isdir(os.path.join(os.path.expanduser(d), 'store'))), None), [
+        ('cover-square-800x800.png',     'kaeru-dani-square',    [360, 720]),
+        ('cover-landscape-1920x1080.png','kaeru-dani-wide',      [960, 1600]),
+    ]),
 ]
 
 JOBS = [(os.path.join(root, 'store', src), name, widths)
@@ -97,7 +104,8 @@ raw = os.path.join(shots, 'raw')
 if os.path.isdir(raw):
     os.makedirs(shots, exist_ok=True)
     for name, w in (('title', 560), ('play', 560), ('dex', 560), ('desktop', 1200),
-                    ('sw10-ready', 560), ('sw10-run', 560), ('sw10-done', 560)):
+                    ('sw10-ready', 560), ('sw10-run', 560), ('sw10-done', 560),
+                    ('kaeru-dani-restore', 560), ('kaeru-dani-night', 560), ('kaeru-dani-house', 560)):
         src = os.path.join(raw, name + '.png')
         if not os.path.exists(src):
             continue
