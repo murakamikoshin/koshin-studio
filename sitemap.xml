@@ -97,14 +97,14 @@
   <url><loc>https://koshinstudio.com/en/notes/x-monitoring-gaps/</loc><lastmod>2026-10-26</lastmod><priority>0.5</priority></url>
   <url><loc>https://koshinstudio.com/en/notes/xcode152-sdk/</loc><lastmod>2026-10-26</lastmod><priority>0.5</priority></url>
   <url><loc>https://koshinstudio.com/en/privacy/</loc><lastmod>2026-10-26</lastmod><priority>0.5</priority></url>
-  <url><loc>https://koshinstudio.com/en/works/draft-party/</loc><lastmod>2026-10-26</lastmod><priority>0.5</priority></url>
+  <url><loc>https://koshinstudio.com/en/works/draft-party/</loc><lastmod>2026-11-05</lastmod><priority>0.5</priority></url>
   <url><loc>https://koshinstudio.com/en/works/</loc><lastmod>2026-10-26</lastmod><priority>0.5</priority></url>
   <url><loc>https://koshinstudio.com/en/works/negaeri-shogi/</loc><lastmod>2026-10-26</lastmod><priority>0.5</priority></url>
   <url><loc>https://koshinstudio.com/en/works/shindananime/</loc><lastmod>2026-10-26</lastmod><priority>0.5</priority></url>
   <url><loc>https://koshinstudio.com/en/works/stopwatch10/</loc><lastmod>2026-10-26</lastmod><priority>0.5</priority></url>
   <url><loc>https://koshinstudio.com/en/works/sushitsumu/</loc><lastmod>2026-10-26</lastmod><priority>0.5</priority></url>
   <url><loc>https://koshinstudio.com/en/works/torecadash/</loc><lastmod>2026-10-26</lastmod><priority>0.5</priority></url>
-  <url><loc>https://koshinstudio.com/</loc><lastmod>2026-10-26</lastmod><priority>1.0</priority></url>
+  <url><loc>https://koshinstudio.com/</loc><lastmod>2026-11-05</lastmod><priority>1.0</priority></url>
   <url><loc>https://koshinstudio.com/notes/adgap/</loc><lastmod>2026-10-26</lastmod><priority>0.8</priority></url>
   <url><loc>https://koshinstudio.com/notes/aggregator-pagination/</loc><lastmod>2026-10-26</lastmod><priority>0.8</priority></url>
   <url><loc>https://koshinstudio.com/notes/anago/</loc><lastmod>2026-10-26</lastmod><priority>0.8</priority></url>
@@ -192,8 +192,8 @@
   <url><loc>https://koshinstudio.com/picks/</loc><lastmod>2026-10-26</lastmod><priority>0.5</priority></url>
   <url><loc>https://koshinstudio.com/privacy/</loc><lastmod>2026-10-26</lastmod><priority>0.5</priority></url>
   <url><loc>https://koshinstudio.com/works/draft-party/</loc><lastmod>2026-10-26</lastmod><priority>0.8</priority></url>
-  <url><loc>https://koshinstudio.com/works/</loc><lastmod>2026-10-26</lastmod><priority>0.9</priority></url>
-  <url><loc>https://koshinstudio.com/works/kaeru-dani/</loc><priority>0.8</priority></url>
+  <url><loc>https://koshinstudio.com/works/</loc><lastmod>2026-11-05</lastmod><priority>0.9</priority></url>
+  <url><loc>https://koshinstudio.com/works/kaeru-dani/</loc><lastmod>2026-11-05</lastmod><priority>0.8</priority></url>
   <url><loc>https://koshinstudio.com/works/negaeri-shogi/</loc><lastmod>2026-10-26</lastmod><priority>0.8</priority></url>
   <url><loc>https://koshinstudio.com/works/shindananime/</loc><lastmod>2026-10-26</lastmod><priority>0.8</priority></url>
   <url><loc>https://koshinstudio.com/works/stopwatch10/</loc><lastmod>2026-10-26</lastmod><priority>0.8</priority></url>
