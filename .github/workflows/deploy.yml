@@ -14,7 +14,10 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
+      # 履歴ごと取る。sitemap の lastmod は git の「その頁を最後に変えた日」で、
+      # 浅い clone（既定の depth 1）だと全頁が配備の日になり、嘘の更新を報せてしまう
       - uses: actions/checkout@v4
+        with: { fetch-depth: 0 }
       - uses: actions/setup-node@v4
         with: { node-version: 22 }
       - name: 組み立て
@@ -36,3 +39,9 @@ jobs:
             c=$(curl -s -o /dev/null -w "%{http_code}" "https://koshinstudio.com$u"); echo "$c $u"; [ "$c" = 200 ] || exit 1
           done
           c=$(curl -s -o /dev/null -w "%{http_code}" https://koshinstudio.com/REVIEW.md); echo "$c /REVIEW.md"; [ "$c" = 404 ] || exit 1
+          # 守りの頭が付いているか（_headers が効いているか）
+          h=$(curl -sI https://koshinstudio.com/ | tr -d '\r')
+          echo "$h" | grep -qi '^strict-transport-security:' || { echo "HSTS が無い"; exit 1; }
+          echo "$h" | grep -qi '^content-security-policy:' || { echo "CSP が無い"; exit 1; }
+      - name: Bing・Yandex に変わった頁を知らせる（IndexNow）
+        run: node tools/indexnow.mjs --changed

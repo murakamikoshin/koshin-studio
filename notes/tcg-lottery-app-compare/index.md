@@ -7,7 +7,8 @@
 - 書いた人: Koshin（https://koshinstudio.com/about/）
 - サイト: Koshin Studio
 
-  書いた人：Koshin (https://koshinstudio.com/about/#operator)（Web エンジニア・アプリエンジニア）　公開：2026-10-23
+  English version (https://koshinstudio.com/en/notes/tcg-lottery-app-compare/)
+
 トレカダッシュ ／ 比較 ／ 2026年10月
 
   トレカの抽選・予約・再販の情報を追うアプリやサイトは、いくつかあります。この記事は、ポケカをはじめとするトレカの抽選アプリを探している人向けに、トレカダッシュと、ほかのアプリ・サイト 4 つを、同じ項目で並べた比較です。

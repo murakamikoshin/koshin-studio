@@ -42,6 +42,9 @@ const records = notes.filter((n) => !isPick(n));
 const picks = notes.filter(isPick);
 /* 記事の Markdown 版（AI が本文だけを取りやすいように）を置く頁 */
 const mdPaths = new Set(notes.map((n) => n.url));
+/* 英語の記事にも Markdown 版を置く（海外の AI の検索・回答が、本文を取りやすいように） */
+for (const p of (existsSync(here + '/data/en.json') ? read('/data/en.json') : []))
+  if (/^\/en\/notes\/[^/]+\/$/.test(p.en)) mdPaths.add(p.en);
 const pickById = Object.fromEntries((read('/data/picks.json').items || []).map((x) => [x.id, x]));
 /* 楽天の商品API（tools/rakuten-picks.mjs）で選んだ「画像つきの1点」。無ければ文字のリンクだけ */
 const pickRk = existsSync(here + '/data/picks-rakuten.json') ? read('/data/picks-rakuten.json') : {};
@@ -517,6 +520,115 @@ ${tools.map((t, i) => `    <li class="rv" data-delay="${i * 70}"><a class="note-
   </ul>
 </div></main>` + foot);
 
+/* ---- 英語の一覧：/en/notes/ と /en/calc/（2026-11-07） ----
+   英語の記事は 90 本近くあるのに、英語の記事一覧が無く、英語の頁の「Notes」は
+   日本語の一覧に繋がっていた。data/en.json（手で書いた英語版の対）から組む。
+   枠（head と脚）は、手で書いた英語の頁 /en/works/ のものを借りる */
+const enShellSrc = existsSync(here + '/en/works/index.html') ? readFileSync(here + '/en/works/index.html', 'utf8') : '';
+const enData = existsSync(here + '/data/en.json') ? JSON.parse(readFileSync(here + '/data/en.json', 'utf8')) : [];
+function enPage(path, title, desc, main) {
+  if (!enShellSrc) return;
+  const top = enShellSrc.slice(0, enShellSrc.indexOf('<main'))
+    .replace(/<title>[\s\S]*?<\/title>/, `<title>${esc(title)}</title>`)
+    .replace(/<meta name="description" content="[^"]*">/, `<meta name="description" content="${esc(desc)}">`)
+    .replace(/<meta property="og:title" content="[^"]*">/, `<meta property="og:title" content="${esc(title)}">`)
+    .replace(/<meta property="og:description" content="[^"]*">/, `<meta property="og:description" content="${esc(desc)}">`);
+  const bottom = enShellSrc.slice(enShellSrc.indexOf('</main>') + '</main>'.length);
+  mkdirSync(here + path, { recursive: true });
+  writeFileSync(here + path + 'index.html', top + main + bottom);
+}
+/* 作品の英語名。記事の札（どの作品の記録か）に使う */
+const WORK_EN = { 'トレカダッシュ': 'Toreca Dash', 'すし積む': 'Sushi Stack', '寝返り将棋': 'Negaeri Shogi',
+  'ガチアニメ診断': 'Anime Type Quiz', '10秒ピッタリで止めろ！': 'Stop at 10 seconds', 'Koshin Studio': 'This site',
+  'このサイト': 'This site', '比べたもの': 'Comparisons', '買ったもの': 'Things I bought' };
+const enNotePairs = enData.filter((p) => /^\/en\/notes\/[^/]+\/$/.test(p.en) && existsSync(here + p.en + 'index.html'))
+  .map((p) => {
+    const ja = notes.find((n) => n.url === p.ja) || {};
+    /* 並びは、日本語で書いた日（実際に起きた順）。英語版を足した日ではない */
+    return { ...p, sortDate: ja.date || p.date, work: WORK_EN[ja.work] || ja.work || '' };
+  })
+  .sort((a, b) => (b.sortDate || '').localeCompare(a.sortDate || ''));
+const enNoteBySlug = Object.fromEntries(enNotePairs.map((p) => [p.en.split('/')[3], p]));
+const EN_THEMES = [
+  ['Count first, then fix', 'Before guessing, count. Records of doubting cost and audit numbers and measuring again.', 0],
+  ['Silent failures', 'No error appeared, yet real data was being dropped or never read.', 1],
+  ['Mixed-up names and products', 'The same name or the same link pointed to different things.', 2],
+  ['Monitoring and scheduled jobs', 'First-come monitoring, concurrency slots, deploys and re-runs: designing jobs that keep running.', 3],
+  ['iOS apps and infrastructure', 'Server migration, iCloud, ads, App Review and builds: what actually happened to an app and its base.', 4],
+  ['Game design, measured', 'Balancing decided by AI-vs-AI matches and automated play.', 5],
+  ['Compared from official sources', 'Prices, terms and limits compared using only official information, with what could not be confirmed.', 6],
+];
+const enRow = (p, i) => `    <li class="rv" data-delay="${Math.min(i, 8) * 70}"><a class="note-row" href="${p.en}" hreflang="en" lang="en">
+      <time datetime="${p.sortDate}">${p.sortDate.replace(/-/g, '.')}</time>
+      <div><h3>${esc(p.title)}</h3><p>${esc(p.blurb || '')}</p>${p.work ? `
+      <div class="tags"><span class="tag">${esc(p.work)}</span></div>` : ''}</div>
+    </a></li>`;
+enPage('/en/notes/', 'Notes — development logs with measured numbers | Koshin Studio',
+  `${enNotePairs.length} development logs from building browser games and an iOS app: App Store review, ads, crawling, cost cuts and API migrations, with measured numbers.`,
+  `<main><div class="wrap">
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/en/">Koshin Studio</a><i aria-hidden="true">›</i><span aria-current="page">Notes</span></nav>
+  <h1>Notes</h1>
+  <div class="rule"></div>
+  <p class="lead">Development logs.<br>Most of them are about measuring before fixing.</p>
+  <p class="rv">Written from real work records (commits and numbers measured at hand) while building browser games and an iPhone app. Each article is the English version of a Japanese original; the Japanese one is linked at the end. ${enNotePairs.length} articles. <a href="/en/feed.xml">RSS feed</a>.</p>
+  <h2 class="rv" id="themes">Read by theme</h2>
+${EN_THEMES.map(([t, lead, i]) => {
+    const list = (noteThemes[i] ? noteThemes[i].slugs : []).map((s) => enNoteBySlug[s]).filter(Boolean);
+    return list.length ? `  <h3 class="rv">${esc(t)}</h3>
+  <p class="rv">${esc(lead)}</p>
+  <ul class="plain">
+${list.map((p) => `    <li><a href="${p.en}" hreflang="en" lang="en">${esc(p.title)}</a></li>`).join('\n')}
+  </ul>` : '';
+  }).filter(Boolean).join('\n')}
+  <h2 class="rv" id="all">All articles, newest first</h2>
+  <ul class="notes">
+${enNotePairs.map(enRow).join('\n')}
+  </ul>
+</div></main>`);
+
+const enTools = [
+  { url: '/en/calc/gacha/', title: 'Gacha completion calculator', blurb: 'How many pulls, and how much money, to collect every type. The average, the pulls by which 90% of people finish, and whether a complete set is cheaper.' },
+  { url: '/en/calc/gacha-rate/', title: 'Gacha drop rate and pity calculator', blurb: 'From the drop rate, how many pulls until you get it. Supports how many copies you want and a pity (guaranteed after N pulls).' },
+  { url: '/en/calc/box-price/', title: 'TCG booster box price per pack calculator', blurb: 'Turn a booster box or set price into a price per pack and compare it with the list price. Typical pack counts per box for each game, counted from 179 listings.' },
+  { url: '/en/calc/lottery/', title: 'Lottery win chance calculator', blurb: 'From the odds and the number of entries, the chance you win at least once. Works even when each entry has different odds.' },
+].filter((t) => existsSync(here + t.url + 'index.html'));
+enPage('/en/calc/', 'Tools — free gacha, lottery and TCG box calculators | Koshin Studio',
+  'Free in-browser calculators: gacha completion, drop rate and pity, lottery win chance, and TCG booster box price per pack. Checked against 200,000 simulated players.',
+  `<main><div class="wrap">
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/en/">Koshin Studio</a><i aria-hidden="true">›</i><span aria-current="page">Tools</span></nav>
+  <h1>Tools</h1>
+  <div class="rule"></div>
+  <p class="lead">Calculators</p>
+  <p class="rv">These calculators run only in your browser. The numbers you enter are not sent anywhere. Each one is checked against the results of a computer simulation of 200,000 players.</p>
+  <p class="rv">Each shows not only the average but also <strong>how long an unlucky player takes</strong> (the number of tries by which 90% and 99% of people succeed). Looking only at the average makes it easy to believe “it should hit by then.” If you are not sure which to use:</p>
+  <ul class="rv">
+    <li><strong>You want every type</strong> (capsule toys, randomly packed collections) → the completion calculator.</li>
+    <li><strong>You want one specific item</strong> (a gacha with a fixed drop rate, with or without pity) → the drop rate and pity calculator.</li>
+    <li><strong>You want to know whether a booster box is priced above retail</strong> → the price per pack calculator.</li>
+    <li><strong>You enter several lottery sales</strong> (with known or estimated odds) → the lottery win chance calculator.</li>
+  </ul>
+  <p class="rv note">All of these are probabilities, not guarantees. Where the assumptions do not hold (odds that change mid-game, lotteries that forbid multiple entries), each page explains it under “when this calculation does not fit.”</p>
+  <ul class="notes">
+${enTools.map((t, i) => `    <li class="rv" data-delay="${i * 70}"><a class="note-row" href="${t.url}" hreflang="en" lang="en">
+      <time>Calculator</time>
+      <div><h3>${esc(t.title)}</h3><p>${esc(t.blurb)}</p></div>
+    </a></li>`).join('\n')}
+  </ul>
+</div></main>`);
+
+/* 英語の記事の配信（RSS）。日本語の feed.xml とは別に */
+writeFileSync(here + '/en/feed.xml',
+  '<?xml version="1.0" encoding="UTF-8"?>\n' +
+  '<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">\n<channel>\n' +
+  `  <title>Koshin Studio — Notes (English)</title>\n  <link>${SITE}/en/notes/</link>\n` +
+  '  <description>Development logs from building browser games and an iOS app, with measured numbers</description>\n  <language>en</language>\n' +
+  `  <atom:link href="${SITE}/en/feed.xml" rel="self" type="application/rss+xml"/>\n` +
+  enNotePairs.slice(0, 50).map((p) => `  <item>\n    <title>${esc(p.title)}</title>\n` +
+    `    <link>${SITE}${p.en}</link>\n    <guid isPermaLink="true">${SITE}${p.en}</guid>\n` +
+    `    <pubDate>${new Date((p.date || p.sortDate) + 'T00:00:00+09:00').toUTCString()}</pubDate>\n` +
+    `    <description>${esc(p.blurb || '')}</description>\n  </item>`).join('\n') +
+  '\n</channel>\n</rss>\n');
+
 /* ---- トップ ---- */
 const kindKeys = Object.keys(kinds);
 
@@ -704,7 +816,7 @@ function ldFor(file, url) {
            （works.json の appStoreUrl。無い作品には何も足さない） */
         ...(w.appStoreUrl ? { downloadUrl: w.appStoreUrl, installUrl: w.appStoreUrl } : {}),
         ...(w.kind === 'game'
-          ? { gamePlatform: 'Web browser', playMode: 'SinglePlayer',
+          ? { gamePlatform: 'Web browser', playMode: w.playMode || 'SinglePlayer',
               ...(w.genre && w.genre.length ? { genre: w.genre } : {}) }
           : {}),
         author: { '@id': SITE + '#studio' }, publisher: { '@id': SITE + '#studio' },
@@ -721,17 +833,38 @@ function ldFor(file, url) {
       }] : []),
     ];
   }
+  /* 英語の一覧（build が組む /en/notes/ と /en/calc/） */
+  if (rel === '/en/notes/index.html') return [crumbs([['Koshin Studio', '/en/'], ['Notes', '/en/notes/']]),
+    { '@type': 'CollectionPage', name: 'Notes', url: url, inLanguage: 'en', isPartOf: { '@id': SITE + '#studio' } },
+    { '@type': 'ItemList', name: 'Development logs', numberOfItems: enNotePairs.length,
+      itemListElement: enNotePairs.slice(0, 30).map((p, i) => ({ '@type': 'ListItem', position: i + 1, url: SITE + p.en, name: p.title })) }];
+  if (rel === '/en/calc/index.html') return [crumbs([['Koshin Studio', '/en/'], ['Tools', '/en/calc/']]),
+    { '@type': 'CollectionPage', name: 'Tools', url: url, inLanguage: 'en', isPartOf: { '@id': SITE + '#studio' } },
+    { '@type': 'ItemList', name: 'Calculators',
+      itemListElement: enTools.map((t, i) => ({ '@type': 'ListItem', position: i + 1, url: SITE + t.url, name: t.title })) }];
   const em = rel.match(/^\/en\/notes\/([^/]+)\/index\.html$/);
   if (em && enByPath['/en/notes/' + em[1] + '/']) {
     const p = enByPath['/en/notes/' + em[1] + '/'];
+    /* 「FAQ」の見出しの下の h3 + p を FAQPage にも出す（日本語の「よくある質問」と同じ扱い） */
+    const faqLd = [];
+    const fm = readFileSync(file, 'utf8').match(/<h2[^>]*>(?:FAQ|Frequently asked questions)<\/h2>([\s\S]*?)(?=<h2|<!--related|<\/main>)/i);
+    if (fm) {
+      const plain = (t) => t.replace(/<[^>]+>/g, '').replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&quot;/g, '"').replace(/&#39;/g, "'").replace(/&amp;/g, '&').replace(/\s+/g, ' ').trim();
+      const qa = [...fm[1].matchAll(/<h3[^>]*>([\s\S]*?)<\/h3>\s*<p[^>]*>([\s\S]*?)<\/p>/g)]
+        .map((m) => ({ '@type': 'Question', name: plain(m[1]), acceptedAnswer: { '@type': 'Answer', text: plain(m[2]) } }));
+      if (qa.length) faqLd.push({ '@type': 'FAQPage', mainEntity: qa });
+    }
     return [
+      ...faqLd,
       { '@type': 'BlogPosting', headline: p.title, url: SITE + p.en, description: p.blurb,
         datePublished: p.date, dateModified: p.updated || p.date, inLanguage: 'en',
         image: ogForPair(rel, p.ja + 'index.html'),
         author: { '@id': SITE + '#koshin' }, publisher: { '@id': SITE + '#studio' },
-        mainEntityOfPage: SITE + p.en },
+        mainEntityOfPage: SITE + p.en,
+        /* 日本語の元記事。翻訳であることを、検索側にも伝える */
+        translationOfWork: { '@type': 'BlogPosting', url: SITE + p.ja, inLanguage: 'ja' } },
       KOSHIN,
-      crumbs([['Koshin Studio', '/en/'], [p.title, p.en]]),
+      crumbs([['Koshin Studio', '/en/'], ['Notes', '/en/notes/'], [p.title, p.en]]),
     ];
   }
   const am = altPageMeta[rel.replace(/index\.html$/, '')];
@@ -777,16 +910,16 @@ function ldFor(file, url) {
           applicationCategory: w.category || (w.kind === 'game' ? 'GameApplication' : 'UtilitiesApplication'),
           operatingSystem: w.os || 'Web', ...(w.status === '公開中' ? { datePublished: w.year } : {}),
           ...(w.appStoreUrl ? { downloadUrl: w.appStoreUrl, installUrl: w.appStoreUrl } : {}),
-          ...(w.kind === 'game' ? { gamePlatform: 'Web browser', playMode: 'SinglePlayer' } : {}),
+          ...(w.kind === 'game' ? { gamePlatform: 'Web browser', playMode: w.playMode || 'SinglePlayer' } : {}),
           author: { '@id': SITE + '#studio' }, publisher: { '@id': SITE + '#studio' },
           offers: { '@type': 'Offer', price: '0', priceCurrency: 'JPY' } },
-        crumbs([['Koshin Studio', '/en/'], [ep.title, ep.en]]),
+        crumbs([['Koshin Studio', '/en/'], ['Works', '/en/works/'], [ep.title, ep.en]]),
       ];
     }
     const pg = page(ep.title); pg.inLanguage = 'en';
     return [pg, crumbs([['Koshin Studio', '/en/'], [ep.title, ep.en]])];
   }
-  const cl = rel.match(/^\/([a-z]{2})\/calc\/(gacha|gacha-rate|lottery)\/index\.html$/);
+  const cl = rel.match(/^\/([a-z]{2})\/calc\/(gacha|gacha-rate|lottery|box-price)\/index\.html$/);
   if (cl && I18N[cl[1]]) {
     const h1 = (readFileSync(file, 'utf8').match(/<h1>(.*?)<\/h1>/) || [, ''])[1];
     return [
@@ -794,7 +927,7 @@ function ldFor(file, url) {
         operatingSystem: 'Any (browser)', inLanguage: 'ja', isAccessibleForFree: true,
         offers: { '@type': 'Offer', price: '0', priceCurrency: 'JPY' },
         author: { '@id': SITE + '#studio' }, publisher: { '@id': SITE + '#studio' } },
-      crumbs([['Koshin Studio', I18N[cl[1]].path], [h1, '/' + cl[1] + '/calc/' + cl[2] + '/']]),
+      crumbs([['Koshin Studio', I18N[cl[1]].path], ['Tools', I18N[cl[1]].path + 'calc/'], [h1, '/' + cl[1] + '/calc/' + cl[2] + '/']]),
     ];
   }
   const hm = rel.match(/^\/([a-z]{2})\/index\.html$/);
@@ -817,7 +950,8 @@ function ldFor(file, url) {
         datePublished: nn.date, dateModified: nn.updated || nn.date, inLanguage: 'ja',
         image: ogFor(rel),
         author: { '@id': SITE + '#koshin' }, publisher: { '@id': SITE + '#studio' },
-        mainEntityOfPage: SITE + nn.url },
+        mainEntityOfPage: SITE + nn.url,
+        ...(jaToEn[nn.url] ? { workTranslation: { '@type': 'BlogPosting', url: SITE + jaToEn[nn.url].en, inLanguage: 'en' } } : {}) },
       KOSHIN,
       crumbs([['Koshin Studio', '/'], isPick(nn) ? ['Picks', '/picks/'] : ['Notes', '/notes/'], [nn.title, nn.url]]),
     ];
@@ -903,8 +1037,12 @@ for (const file of pages) {
   const rel = file.slice(here.length);
   let html = readFileSync(file, 'utf8');
   /* 脚の SNS 欄と、広告の枠を差し替える（data/site.json が元） */
-  html = html.replace(/<header class="site"><div class="wrap">\s*<a class="logo" href="\/">(?:<img[^>]*>)?Koshin Studio<\/a>\s*<nav>[\s\S]*?<\/nav>/,
-    '<header class="site"><div class="wrap">\n  <a class="logo" href="/"><img class="logo-mark" src="/favicon.svg" alt="" width="28" height="28">Koshin Studio</a>\n  <nav><a href="/works/">Works</a><a href="' + (rel.startsWith('/en/') ? '/en/works/#game' : '/works/#game') + '">Games</a><a href="/notes/">Notes</a><a href="/picks/">Picks</a><a href="/calc/">Tools</a><a href="/about/">About</a></nav>');
+  html = html.replace(/<header class="site"><div class="wrap">\s*<a class="logo" href="\/(?:en\/)?">(?:<img[^>]*>)?Koshin Studio<\/a>\s*<nav>[\s\S]*?<\/nav>/,
+    /* 英語の頁の見出しの行は、英語の頁へ繋ぐ（日本語の一覧へ飛ばさない）。
+       Picks は日本の店の紹介なので、英語の頁には出さない */
+    (rel.startsWith('/en/')
+      ? '<header class="site"><div class="wrap">\n  <a class="logo" href="/en/"><img class="logo-mark" src="/favicon.svg" alt="" width="28" height="28">Koshin Studio</a>\n  <nav><a href="/en/works/">Works</a><a href="/en/works/#game">Games</a><a href="/en/notes/">Notes</a><a href="/en/calc/">Tools</a><a href="/en/about/">About</a><a href="/" hreflang="ja" lang="ja">日本語</a></nav>'
+      : '<header class="site"><div class="wrap">\n  <a class="logo" href="/"><img class="logo-mark" src="/favicon.svg" alt="" width="28" height="28">Koshin Studio</a>\n  <nav><a href="/works/">Works</a><a href="/works/#game">Games</a><a href="/notes/">Notes</a><a href="/picks/">Picks</a><a href="/calc/">Tools</a><a href="/about/">About</a></nav>'));
   /* 英語の頁は、脚が空のまま作られていた（プライバシーも連絡先も、たどれなかった）。入れる */
   html = html.replace('<footer class="site"><div class="wrap"></div></footer>',
     '<footer class="site"><div class="wrap">\n  <span>© 2026 Koshin Studio</span>\n  <nav><a href="/en/" hreflang="en" lang="en">English</a><a href="/en/works/" hreflang="en" lang="en">Works</a><a href="/en/about/" hreflang="en" lang="en">About</a><a href="/en/about/#contact" hreflang="en" lang="en">Contact</a><a href="/en/privacy/" hreflang="en" lang="en">Privacy</a><a href="/" hreflang="ja" lang="ja">日本語</a></nav>\n</div></footer>');
@@ -1044,7 +1182,7 @@ for (const file of pages) {
   const hubSet = (relUrl === '/' || hubPaths[relUrl])
     ? [['ja', '/']].concat(Object.values(I18N).map((l) => [l.lang, l.path])) : null;
   /* 計算機は、日本語と各言語のページを、同じ組にする */
-  const calcM = relUrl.match(/^(?:\/([a-z]{2}))?\/calc\/(gacha|gacha-rate|lottery)\/$/);
+  const calcM = relUrl.match(/^(?:\/([a-z]{2}))?\/calc\/(gacha|gacha-rate|lottery|box-price)\/$/);
   const calcSet = calcM && (!calcM[1] || I18N[calcM[1]])
     ? [['ja', '/calc/' + calcM[2] + '/']].concat(Object.values(I18N).map((l) => [l.lang, l.path + 'calc/' + calcM[2] + '/'])) : null;
   const grp = hubSet || calcSet;
@@ -1076,7 +1214,10 @@ for (const file of pages) {
     `<link rel="alternate" type="application/rss+xml" title="Koshin Studio — Notes" href="${SITE}/feed.xml">`,
     mdPaths.has(relUrl) ? `<link rel="alternate" type="text/markdown" href="${SITE + relUrl}index.md">` : '',
     ld ? `<script type="application/ld+json">${JSON.stringify(
-      { '@context': 'https://schema.org', '@graph': ld }).replace(/"inLanguage":"ja"/g, `"inLanguage":"${pageLang}"`)}</script>` : '',
+      { '@context': 'https://schema.org', '@graph': ld }).replace(/"inLanguage":"ja"/g, `"inLanguage":"${pageLang}"`)
+      .replace(/"jobTitle":"Webエンジニア・アプリエンジニア"/g, pageLang === 'en' ? '"jobTitle":"Web and app engineer"' : '$&')
+      .replace(/"operatingSystem":"Any \(ブラウザ\)"/g, pageLang === 'en' ? '"operatingSystem":"Any (browser)"' : '$&')}</script>` : '',
+    pageLang === 'en' ? `<link rel="alternate" type="application/rss+xml" title="Koshin Studio — Notes (English)" href="${SITE}/en/feed.xml">` : '',
   ].filter(Boolean).join('\n');
   html = html.replace('</head>', head + '\n</head>');
   /* ヘッダーのロゴ画像も、ファビコンと同じ印を付ける（絵を替えたら別の URL に） */
@@ -1265,19 +1406,27 @@ const lastMod = (f) => {
 
 writeFileSync(here + '/sitemap.xml',
   '<?xml version="1.0" encoding="UTF-8"?>\n' +
-  '<urlset xmlns="http://www.sitemap.org/schemas/sitemap/0.9">\n'.replace('sitemap.org', 'sitemaps.org') +
+  '<urlset xmlns="http://www.sitemap.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">\n'.replace('sitemap.org', 'sitemaps.org') +
   pages.filter((f) => !readFileSync(f, 'utf8').includes('name="robots" content="noindex')).map((f) => {
     const rel = f.slice(here.length);
     const pri = rel === '/index.html' ? '1.0'
-      : /^\/(works|notes)\/index\.html$/.test(rel) ? '0.9'
+      : /^\/(en\/)?(works|notes)\/index\.html$/.test(rel) || rel === '/en/index.html' ? '0.9'
+      /* 英語の作品・記事・計算機も、日本語と同じ重みで出す（海外から来てもらうため） */
+      : /^\/en\/(works|notes)\/[^/]+\/index\.html$/.test(rel) ? '0.8'
+      : /^\/en\/calc\//.test(rel) ? '0.6'
       : /^\/works\/[^/]+\/index\.html$/.test(rel) ? '0.8'
       : /^\/notes\/[^/]+\/index\.html$/.test(rel) ? '0.8'
       : /^\/anime\/(index\.html|types\/index\.html|axes\/index\.html)$/.test(rel) ? '0.8'
       : /^\/anime\/types\/[^/]+\/index\.html$/.test(rel) ? '0.6'
       : /^\/about\/index\.html$/.test(rel) ? '0.7' : '0.5';
     const m = lastMod(f);
+    /* 言語の対（日本語 ⇄ 英語）を、頁の head と同じく sitemap にも書く。
+       頁に書いた hreflang をそのまま写すので、食い違わない */
+    const alts = [...readFileSync(f, 'utf8').matchAll(/<link rel="alternate" hreflang="([^"]+)" href="([^"]+)">/g)]
+      .map((x) => `<xhtml:link rel="alternate" hreflang="${x[1]}" href="${x[2]}"/>`).join('');
+    /* 名前空間の違う xhtml:link は、規格上 loc・lastmod・priority の後ろに置く */
     return `  <url><loc>${urlOf(f)}</loc>${m ? `<lastmod>${m}</lastmod>` : ''}`
-      + `<priority>${pri}</priority></url>`;
+      + `<priority>${pri}</priority>${alts}</url>`;
   }).join('\n') + '\n</urlset>\n');
 
 /* /submit と /top は、すし積むの番付サーバーへの通信先の名前で、ゲームの
@@ -1289,7 +1438,8 @@ writeFileSync(here + '/robots.txt',
     '# 検索エンジンにも、AI の検索・回答のための取得にも、記事と計算機を読んでもらってかまいません。',
     '# 下の名前付きの取得ロボットも、同じ規則で、許可しています（全部「User-agent: *」と同じ）。',
     ...['GPTBot', 'OAI-SearchBot', 'ChatGPT-User', 'ClaudeBot', 'Claude-SearchBot', 'Claude-User',
-      'PerplexityBot', 'Perplexity-User', 'Google-Extended', 'Applebot-Extended', 'Bingbot', 'Googlebot']
+      'PerplexityBot', 'Perplexity-User', 'Google-Extended', 'Applebot-Extended', 'Bingbot', 'Googlebot',
+      'Applebot', 'DuckAssistBot', 'MistralAI-User', 'meta-externalagent', 'Amazonbot', 'YouBot', 'cohere-ai']
       .map((ua) => 'User-agent: ' + ua).concat(['User-agent: *']),
     'Allow: /', 'Disallow: /submit', 'Disallow: /top',
     /* ドラフト会議ごっこ（/draft/）: 招待URL（部屋ごとに変わる）と API は検索に載せない */
@@ -1334,6 +1484,7 @@ const llms = [
   '# Koshin Studio', '',
   `> ${conf.tagline || ''} 個人で、ゲーム・アプリ・診断を作って、試して、書いているスタジオです。記事は、実際に作って測ったことと、公式ページだけで比べた結果（出典と確認日つき）を書いています。確認できなかったことは、確認できなかったと書きます。`, '',
   `サイト: ${SITE}/`, `全文: ${abs('/llms-full.txt')}`, '',
+  `English: a one-person studio making browser games and an iPhone app, with development logs that report measured numbers and say what could not be confirmed. English index for AI: ${abs('/en/llms.txt')} (full text: ${abs('/en/llms-full.txt')}).`, '',
   '## Notes（制作の記録。各記事の Markdown 版は、URL の末尾を index.md にした所）', ...records.map((n) => line(n.title, n.url, n.blurb)), '',
   '## Picks（比べたもの・買ったもの）', ...picks.map((n) => line(n.title, n.url, n.blurb)), '',
   '## Tools（計算機）', ...toolRows.map((t) => line(t.title, t.url, t.blurb)), '',
@@ -1346,6 +1497,32 @@ const llms = [
   ...Object.values(I18N).filter((l) => l.path !== '/en/').map((l) => line(l.label, l.path, 'Games and tools in this language')), '',
   '## そのほか', line('About', '/about/', '運営者・連絡先・記事の書き方と訂正について'), line('あつかい（プライバシー）', '/privacy/', ''), ''].join('\n');
 writeFileSync(here + '/llms.txt', llms);
+
+/* 英語だけの llms.txt と全文。海外の AI の検索・回答が、英語の頁だけを、英語の説明つきで読めるように */
+const enWorkPairs = enPairs.filter((p) => /^\/en\/works\/[^/]+\/$/.test(p.en));
+const enLlms = [
+  '# Koshin Studio (English)', '',
+  '> A one-person studio by Koshin, a web and app engineer in Japan. I build free browser games and an iPhone app, and write development logs that report the numbers I measured, cite official sources with the date checked, and say plainly what I could not confirm. Every English article is a hand-checked translation of a Japanese original, linked from the article.', '',
+  `Site (English): ${abs('/en/')}`, `Full text of the English pages: ${abs('/en/llms-full.txt')}`, `Japanese index: ${abs('/llms.txt')}`, '',
+  '## Works (free browser games and apps)', ...enWorkPairs.map((p) => line(p.title, p.en, p.blurb)), '',
+  '## Tools (calculators)', ...enTools.map((t) => line(t.title, t.url, t.blurb)), '',
+  `## Notes (development logs; each has a Markdown version at the article URL + index.md)`,
+  ...enNotePairs.map((p) => line(p.title, p.en, p.blurb)), '',
+  '## About', line('About', '/en/about/', 'Who runs this site, contact, and how articles are written and corrected'),
+  line('Privacy', '/en/privacy/', ''), ''].join('\n');
+writeFileSync(here + '/en/llms.txt', enLlms);
+for (const p of enNotePairs) {
+  const f = here + p.en + 'index.html';
+  const body = mainAsText(f).replace(/^# .*\n+/, '').replace(/^Written by .*\n+/m, '');
+  writeFileSync(here + p.en + 'index.md',
+    `# ${p.title}\n\n> ${p.blurb || ''}\n\n- URL: ${abs(p.en)}\n- Original (Japanese): ${abs(p.ja)}\n- Published: ${p.date || p.sortDate}\n- Author: Koshin (${abs('/en/about/')})\n- Site: Koshin Studio\n\n${body}\n`);
+}
+const enFull = ['# Koshin Studio — full text of the English pages', '', `> Main text of the English pages on ${SITE}/en/. The source of each part is its URL.`, ''].concat(
+  ['/en/', ...enWorkPairs.map((p) => p.en), '/en/calc/', ...enTools.map((t) => t.url), ...enNotePairs.map((p) => p.en), '/en/about/']
+    .filter((u) => existsSync(here + u + 'index.html'))
+    .map((u) => `\n---\n\nURL: ${abs(u)}\n\n${mainAsText(here + u + 'index.html')}\n`)).join('\n');
+writeFileSync(here + '/en/llms-full.txt', enFull);
+console.log(`site: en/llms.txt（${enLlms.split('\n').length} 行）と en/llms-full.txt（${Math.round(enFull.length / 1024)} KB）、英語の一覧 2 枚と en/feed.xml を書きました`);
 /* 記事ごとの Markdown 版。題・要約・公開日・出典を頭に付け、本文は llms-full と同じ変換 */
 for (const n of notes) {
   const f = here + n.url + 'index.html';

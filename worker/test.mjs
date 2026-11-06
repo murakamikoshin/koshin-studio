@@ -56,5 +56,13 @@ await check('/app/shindananime/', { status: 200, asked: 'https://shindananime.pa
 await check('/app/torecadash/', { status: 200, asked: 'https://torecadash-web.pages.dev/' });
 await check('/app/torecadash/g/pokemon/', { status: 200, asked: 'https://torecadash-web.pages.dev/g/pokemon/' });
 await check('/app/torecadash', { status: 301, loc: 'https://koshinstudio.com/app/torecadash/' });
+/* 守りの頭：中継した物には HSTS と nosniff が付く */
+{
+  const res = await mod.fetch(new Request('https://koshinstudio.com/play/sushitsumu/'));
+  if (!/max-age=31536000/.test(res.headers.get('strict-transport-security') || '')
+    || res.headers.get('x-content-type-options') !== 'nosniff') {
+    console.error('× 中継の守りの頭が付いていない'); bad = 1;
+  }
+}
 console.log(bad ? '\n合わないところがあります' : '\n判定はすべて狙いどおり。');
 process.exit(bad);

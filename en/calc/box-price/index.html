@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TCG Booster Box Price per Pack Calculator (Japan) | Koshin Studio</title>
+<meta name="description" content="Turn a Japanese TCG booster box price into a price per pack and compare it with retail. Pack counts for Pokémon, One Piece, Yu-Gi-Oh!, MTG and more.">
+<meta property="og:title" content="TCG Booster Box Price per Pack Calculator (Japan) | Koshin Studio">
+<meta property="og:description" content="Turn a Japanese TCG booster box price into a price per pack and compare it with retail. Pack counts for Pokémon, One Piece, Yu-Gi-Oh!, MTG and more.">
+<meta property="og:type" content="article">
+<meta name="theme-color" content="#fbfaf7">
+<link rel="icon" href="/favicon.ico?v=1697d589" sizes="48x48">
+<link rel="icon" href="/favicon.svg?v=b9d7922f" type="image/svg+xml" sizes="any">
+<link rel="icon" href="/assets/icon/icon-192.png?v=e2566235" type="image/png" sizes="192x192">
+<link rel="apple-touch-icon" href="/assets/icon/icon-180.png?v=84e7f0e6">
+<link rel="manifest" href="/site.webmanifest">
+<script>document.documentElement.className+=" js"</script>
+<link rel="stylesheet" href="/style.css?v=3d886c33">
+<meta name="google-adsense-account" content="ca-pub-3863314847163872">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3863314847163872" crossorigin="anonymous"></script>
+<link rel="canonical" href="https://koshinstudio.com/en/calc/box-price/">
+<meta property="og:url" content="https://koshinstudio.com/en/calc/box-price/">
+<meta property="og:site_name" content="Koshin Studio">
+<meta property="og:locale" content="en_US">
+<link rel="alternate" hreflang="ja" href="https://koshinstudio.com/calc/box-price/">
+<link rel="alternate" hreflang="en" href="https://koshinstudio.com/en/calc/box-price/">
+<link rel="alternate" hreflang="x-default" href="https://koshinstudio.com/en/calc/box-price/">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="alternate" type="application/rss+xml" title="Koshin Studio — Notes" href="https://koshinstudio.com/feed.xml">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebApplication","name":"TCG booster box price per pack calculator","url":"https://koshinstudio.com/en/calc/box-price/","applicationCategory":"UtilitiesApplication","operatingSystem":"Any (browser)","inLanguage":"en","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"JPY"},"author":{"@id":"https://koshinstudio.com#studio"},"publisher":{"@id":"https://koshinstudio.com#studio"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Koshin Studio","item":"https://koshinstudio.com/en/"},{"@type":"ListItem","position":2,"name":"Tools","item":"https://koshinstudio.com/en/calc/"},{"@type":"ListItem","position":3,"name":"TCG booster box price per pack calculator","item":"https://koshinstudio.com/en/calc/box-price/"}]}]}</script>
+<link rel="alternate" type="application/rss+xml" title="Koshin Studio — Notes (English)" href="https://koshinstudio.com/en/feed.xml">
+<meta property="og:image" content="https://koshinstudio.com/assets/sushitsumu-wide.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
+</head>
+<body>
+<canvas id="motes"></canvas>
+
+<header class="site"><div class="wrap">
+  <a class="logo" href="/en/"><img class="logo-mark" src="/favicon.svg?v=b9d7922f" alt="" width="28" height="28">Koshin Studio</a>
+  <nav><a href="/en/works/">Works</a><a href="/en/works/#game">Games</a><a href="/en/notes/">Notes</a><a href="/en/calc/">Tools</a><a href="/en/about/">About</a><a href="/" hreflang="ja" lang="ja">日本語</a></nav>
+</div></header>
+
+<main><div class="wrap">
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/en/">Koshin Studio</a><i aria-hidden="true">›</i><a href="/en/calc/">Tools</a><i aria-hidden="true">›</i><span aria-current="page">TCG booster box price per pack calculator</span></nav>
+  <h1>TCG booster box price per pack calculator</h1>
+  <div class="rule"></div>
+  <p class="lead">How much per pack? How many times the list price?</p>
+
+  <p>This converts the price of a booster box or set into a price <strong>per pack</strong> and compares it with the list price. In Japan, trading card list prices are usually given <strong>per pack</strong>, but what is sold is often a <strong>box (a case holding several packs)</strong> or a set. Comparing a box price directly with the per-pack list price makes a fair price look like a “30× scalper price.” This calculator puts both in the same unit first.</p>
+  <p class="note">Amounts are in Japanese yen, as cards are priced in Japan. The calculation itself works in any currency if you enter every amount in the same one.</p>
+
+  <form class="calc" id="calc" onsubmit="return false">
+    <label>Amount you pay (yen)<input type="number" id="price" min="1" step="1" value="5782" inputmode="numeric"></label>
+    <label>Game (fills in a typical pack count)<select id="genre">
+      <option value="">None</option>
+      <option value="pokemon">Pokémon Card Game (30)</option>
+      <option value="onepiece" selected>ONE PIECE Card Game (24)</option>
+      <option value="yugioh">Yu-Gi-Oh! OCG (30)</option>
+      <option value="mtg">Magic: The Gathering (30)</option>
+      <option value="digimon">Digimon Card Game (24)</option>
+      <option value="gundam">Gundam Card Game (24)</option>
+      <option value="unionarena">Union Arena (16)</option>
+      <option value="duelmasters">Duel Masters (16)</option>
+      <option value="vobaca">Haikyu!! VABACA!! BREAK (18)</option>
+      <option value="weiss">Weiß Schwarz (12)</option>
+      <option value="hololive">hololive OFFICIAL CARD GAME (12)</option>
+    </select></label>
+    <label>Packs inside<input type="number" id="packs" min="1" max="200" value="24" inputmode="numeric"></label>
+    <label>List price per pack (yen, optional)<input type="number" id="retail" min="0" step="1" value="240" inputmode="numeric"></label>
+    <label>Shipping and other costs (yen, optional)<input type="number" id="ship" min="0" step="1" placeholder="e.g. 550" inputmode="numeric"></label>
+  </form>
+  <p class="note">The typical counts are for <strong>a standard Japanese booster box</strong>. Products differ, so always enter the pack count printed on the product page or the box.</p>
+
+  <div class="calc-out" id="out" aria-live="polite"></div>
+  <noscript><p class="note">This calculator needs JavaScript.</p></noscript>
+
+  <h2 class="rv">Example 1: is a ¥5,782 ONE PIECE box a scalper price?</h2>
+  <p>ONE PIECE Card Game booster boxes in Japan always hold 24 packs. With a list price of ¥240 per pack, the box list price is ¥240 × 24 = <strong>¥5,760</strong>. A listing at ¥5,782 is only ¥22 above that: <strong>essentially list price</strong>. Compared directly with ¥240 per pack, it looks like a 24× markup. This exact mistake was reported as a “scalper price” while I was developing my app, and it turned out to be a false alarm.</p>
+
+  <h2 class="rv">Example 2: the Pokémon box that looked “30×”</h2>
+  <p>A Japanese Pokémon Card Game expansion booster box holds 30 packs at a list price of ¥180 per pack, so the box list price is ¥180 × 30 = <strong>¥5,400</strong>. Sold at exactly ¥5,400, it is still 30 times the per-pack price. For a while my app had learned the pack count for <strong>not a single</strong> Pokémon expansion box, so it compared ¥5,400 with ¥180 and showed a “30× scalper price.”</p>
+  <p>Pack counts differ by product, though. The Pokémon “30th CELEBRATION” box holds 20 packs at ¥360 each, for a list price of ¥7,200. Assuming “Pokémon means 30 packs” makes the opposite mistake.</p>
+
+  <h2 class="rv">How many packs are in a box: counted from 179 listings</h2>
+  <p>While building the app, I took the 480 box listings in its feed and counted the <strong>179 whose titles stated a pack count</strong>. By game:</p>
+  <div class="scroll rv"><table>
+    <thead><tr><th>Game</th><th>Typical packs</th><th>What I counted</th></tr></thead>
+    <tbody>
+      <tr><td>Magic: The Gathering</td><td>30</td><td>60 listings (33 with 30 packs, 19 with 12)</td></tr>
+      <tr><td>Weiß Schwarz</td><td>12</td><td>45 listings (25 with 10 packs, 17 with 12)</td></tr>
+      <tr><td>Yu-Gi-Oh! OCG</td><td>30</td><td>19 listings (12 with 15 packs, 6 with 30)</td></tr>
+      <tr><td>Duel Masters</td><td>16</td><td>14 listings (6 with 16 packs, 4 with 14)</td></tr>
+      <tr><td>Digimon Card Game</td><td>24</td><td>14 listings, all 24 packs</td></tr>
+      <tr><td>Gundam Card Game</td><td>24</td><td>8 listings, all 24 packs</td></tr>
+      <tr><td>hololive OFFICIAL CARD GAME</td><td>12</td><td>8 listings, all 12 packs</td></tr>
+      <tr><td>ONE PIECE Card Game</td><td>24</td><td>5 of 6 listings with 24 packs (said to be standardized officially)</td></tr>
+      <tr><td>Haikyu!! VABACA!! BREAK</td><td>18</td><td>Both listings 18 packs</td></tr>
+      <tr><td>Union Arena</td><td>16</td><td>The official product page states 16 packs</td></tr>
+      <tr><td>Pokémon Card Game</td><td>30</td><td>Expansion boxes hold 30 packs (with exceptions)</td></tr>
+    </tbody>
+  </table></div>
+  <p>Three cautions when reading this table:</p>
+  <ul>
+    <li><strong>These are counts from listing titles, not official figures.</strong> Some games are standardized officially, like ONE PIECE; others split into two values (MTG play and collector boxes, Yu-Gi-Oh! 15 and 30). Where a game splits, the typical value is <strong>the larger one</strong>.</li>
+    <li><strong>Not a single box held 40 packs.</strong> The largest I counted was 36.</li>
+    <li><strong>Do not read a bundle such as a “5-pack set” as a box’s contents.</strong> It underestimates the box list price and makes normal listings look like scalping.</li>
+  </ul>
+
+  <h2 class="rv">How to use it</h2>
+  <ol>
+    <li>Check the <strong>pack count</strong> on the product page or box and enter it under “Packs inside.”</li>
+    <li>Look up the <strong>list price per pack</strong> in the official announcement (the publisher’s site) and enter it.</li>
+    <li>If there is shipping, enter it under “Shipping and other costs.” <strong>Comparing with shipping included</strong> is closer to what you actually pay.</li>
+    <li>Read “how many times the list price” and “difference from the list price total.”</li>
+  </ol>
+
+  <h2 class="rv">When this calculation does not fit</h2>
+  <ul>
+    <li>Some products announce a <strong>box price rather than a per-pack price</strong>. Then enter 1 for “Packs inside” and the box list price as the per-pack price.</li>
+    <li>If a product includes a bonus (such as a promo card), its value is not part of this calculation.</li>
+    <li>For popular products, market prices differing from list price is normal. This calculator only shows “how many times the list price.” <strong>It does not decide whether a price is fair.</strong> Unpopular products selling below list price is normal too.</li>
+  </ul>
+
+  <p class="note">For the chance of winning when you enter lotteries, use the <a href="/en/calc/lottery/" hreflang="en" lang="en">lottery win chance calculator</a>. To follow lotteries at Japanese stores, see the <a href="/en/notes/tcg-lottery-app-compare/" hreflang="en" lang="en">comparison of Japanese TCG lottery apps</a>.</p>
+
+  <script src="/calc/box-price/box.js" defer></script>
+  <script src="/calc/box-price/page.js" defer></script>
+</div>
+</main>
+
+<footer class="site"><div class="wrap">
+  <span>© 2026 Koshin Studio</span>
+  <div class="sns-row"></div>
+  <nav><a href="/en/" hreflang="en" lang="en">English</a><a href="/" hreflang="ja" lang="ja">日本語</a><a href="/en/about/#contact" hreflang="en" lang="en">Contact</a><a href="/en/privacy/" hreflang="en" lang="en">Privacy</a></nav>
+</div></footer>
+<script src="/motion.js?v=1e7447ec" defer></script>
+</body>
+</html>

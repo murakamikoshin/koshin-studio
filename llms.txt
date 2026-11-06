@@ -5,6 +5,8 @@
 サイト: https://koshinstudio.com/
 全文: https://koshinstudio.com/llms-full.txt
 
+English: a one-person studio making browser games and an iPhone app, with development logs that report measured numbers and say what could not be confirmed. English index for AI: https://koshinstudio.com/en/llms.txt (full text: https://koshinstudio.com/en/llms-full.txt).
+
 ## Notes（制作の記録。各記事の Markdown 版は、URL の末尾を index.md にした所）
 - [すし積むの番付に載らなくなった：ゲームの数字を変えて、サーバーの検算を直し忘れていた（しかも二つ）](https://koshinstudio.com/notes/rank-verify-mismatch/): 番付に、普通に遊んでも載らなくなった。ゲームの数字を変えて、サーバーの検算を直し忘れていた。金の桶の褒美（8,000→25,000）と、降るネタ（3種→5種）の二つ。注意書きでは守れず、同じ種で出題を比べる検査を足した。
 - [ポケカ・トレカ抽選アプリを比較：トレカダッシュ・トレゲト・NowPokeca・Pokeka Tracker・トレカの地図のメリットとデメリット](https://koshinstudio.com/notes/tcg-lottery-app-compare/): ポケカをはじめトレカの抽選・予約・再販を追うアプリ・サイトを、ジャンル数・通知・地図・料金で比較。作者（トレカダッシュの開発者）による比較で、トレカダッシュの弱いところも書いた。
@@ -204,6 +206,11 @@
 - [A bulk update hit “all articles”: count before you write, and break your tests to prove they work](https://koshinstudio.com/en/notes/bulk-accident/): A bulk job hit every article and wrongly restored 18 items. How I reverted them from status history and proved new tests work by breaking rules one at a time.
 - [Pokémon card sleeves and loaders: sizes and what “pt” means](https://koshinstudio.com/en/notes/card-supplies-guide/): What to check before buying Pokémon card sleeves, toploaders and deck boxes: standard vs small size, what 35pt means, and a buying checklist. Not a hands-on review; unverified points are listed.
 - [Draft Party — a free multiplayer draft game you play in your browser](https://koshinstudio.com/en/works/draft-party/): Draft Party is a free browser game. Scout fictional rookies by their abilities and draw lots on ties, then watch several seasons of stats, standings and head-to-head results together. Play with friends or strangers, in four languages.
+- [Sushi Stack scores stopped reaching the leaderboard: I changed the game’s numbers and forgot the server’s re-check (twice)](https://koshinstudio.com/en/notes/rank-verify-mismatch/): Honest runs of a browser game stopped reaching the online leaderboard: two game values changed without updating the server that re-checks scores. The fix, and a test that compares both sides with the same seeds.
+- [Japanese Pokémon card & TCG lottery apps compared: Toreca Dash, Toreget, NowPokeca, Pokeka Tracker and Toreca no Chizu](https://koshinstudio.com/en/notes/tcg-lottery-app-compare/): Five apps and sites that track Pokémon card and TCG lotteries, pre-orders and restocks at stores in Japan, compared on games, alerts, maps and price — by the developer of one of them, weak points included.
+- [Kaeru Sekai (Returning World) — a free 3D game: bring a gray world back to green](https://koshinstudio.com/en/works/kaeru-sekai/): A free 3D browser game. Plant seeds of light to bring a withered gray world back to green, then settle people and watch 100 years pass. Valleys, islands, deserts and volcanoes, generated from a number. No install.
+- [Notes — development logs with measured numbers](https://koshinstudio.com/en/notes/): Development logs from building browser games and an iOS app, in English: App Store review, ads, duplicates, crawling, cost cuts and API migrations, each with measured numbers.
+- [Tools — free gacha, lottery and TCG box calculators](https://koshinstudio.com/en/calc/): Free in-browser calculators: gacha completion, gacha drop rate and pity, lottery win chance, and TCG booster box price per pack.
 - [English hub](https://koshinstudio.com/en/): Games, tools and development logs in English
 
 ## そのほか

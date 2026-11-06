@@ -67,6 +67,14 @@ export default {
     /* 中継したことが分かるように、内容はそのまま、頭だけ触る */
     const out = new Response(res.body, res);
     out.headers.set('X-Served-By', 'koshin-studio/' + kind);
+    /* 守りの頭。サイト本体（_headers）と揃える。ただし作品の側が決めた物は上書きしない
+       （埋め込みの可否や CSP は、作品ごとに事情が違うので、ここでは足さない） */
+    out.headers.set('Strict-Transport-Security', 'max-age=31536000; includeSubDomains');
+    for (const [k, v] of [
+      ['X-Content-Type-Options', 'nosniff'],
+      ['Referrer-Policy', 'strict-origin-when-cross-origin'],
+      ['X-Permitted-Cross-Domain-Policies', 'none'],
+    ]) if (!out.headers.has(k)) out.headers.set(k, v);
     return out;
   },
 };

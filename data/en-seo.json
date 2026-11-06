@@ -154,5 +154,13 @@
   "card-supplies-guide": {
     "title": "Pokémon card sleeves and loaders: sizes and what “pt” means",
     "desc": "What to check before buying Pokémon card sleeves, toploaders and deck boxes: standard vs small size, what 35pt means, and a buying checklist."
+  },
+  "rank-verify-mismatch": {
+    "title": "Leaderboard rejected honest scores: server re-check out of sync",
+    "desc": "Honest runs stopped reaching my browser game’s leaderboard: game values changed, the server’s score re-check did not. The fix, and a test to catch it."
+  },
+  "tcg-lottery-app-compare": {
+    "title": "Japanese Pokémon Card Lottery Apps Compared (2026)",
+    "desc": "Five apps and sites that track Pokémon card and TCG lotteries at stores in Japan, compared on games, alerts, maps and price, weak points included."
   }
 }

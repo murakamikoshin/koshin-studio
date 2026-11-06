@@ -1,0 +1,360 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+<channel>
+  <title>Koshin Studio — Notes (English)</title>
+  <link>https://koshinstudio.com/en/notes/</link>
+  <description>Development logs from building browser games and an iOS app, with measured numbers</description>
+  <language>en</language>
+  <atom:link href="https://koshinstudio.com/en/feed.xml" rel="self" type="application/rss+xml"/>
+  <item>
+    <title>Sushi Stack scores stopped reaching the leaderboard: I changed the game’s numbers and forgot the server’s re-check (twice)</title>
+    <link>https://koshinstudio.com/en/notes/rank-verify-mismatch/</link>
+    <guid isPermaLink="true">https://koshinstudio.com/en/notes/rank-verify-mismatch/</guid>
+    <pubDate>Fri, 06 Nov 2026 15:00:00 GMT</pubDate>
+    <description>Honest runs of a browser game stopped reaching the online leaderboard: two game values changed without updating the server that re-checks scores. The fix, and a test that compares both sides with the same seeds.</description>
+  </item>
+  <item>
+    <title>Japanese Pokémon card &amp; TCG lottery apps compared: Toreca Dash, Toreget, NowPokeca, Pokeka Tracker and Toreca no Chizu</title>
+    <link>https://koshinstudio.com/en/notes/tcg-lottery-app-compare/</link>
+    <guid isPermaLink="true">https://koshinstudio.com/en/notes/tcg-lottery-app-compare/</guid>
+    <pubDate>Fri, 06 Nov 2026 15:00:00 GMT</pubDate>
+    <description>Five apps and sites that track Pokémon card and TCG lotteries, pre-orders and restocks at stores in Japan, compared on games, alerts, maps and price — by the developer of one of them, weak points included.</description>
+  </item>
+  <item>
+    <title>An aggregator crawl read only page 1: card articles were on pages 2–4, and only the first 6,000 characters went to the AI</title>
+    <link>https://koshinstudio.com/en/notes/aggregator-pagination/</link>
+    <guid isPermaLink="true">https://koshinstudio.com/en/notes/aggregator-pagination/</guid>
+    <pubDate>Fri, 16 Oct 2026 15:00:00 GMT</pubDate>
+    <description>The crawl of a stock-information aggregator read only page 1 (mostly consoles), while Pokémon and Gundam articles were on later pages. Only the first 6,000 characters went to the AI, so later stores dropped. I followed 12 pages and read all the text.</description>
+  </item>
+  <item>
+    <title>“Not just noticing; not letting it happen”: turning a report-only monitor into one that fills gaps on the spot</title>
+    <link>https://koshinstudio.com/en/notes/fill-the-gap/</link>
+    <guid isPermaLink="true">https://koshinstudio.com/en/notes/fill-the-gap/</guid>
+    <pubDate>Fri, 16 Oct 2026 15:00:00 GMT</pubDate>
+    <description>The gap monitor only reported and nothing was filled until a person noticed. I made it create missing articles on the spot, logged a branch that dropped silently, and showed how to apply even with no link. Coverage went from 92% to 100%.</description>
+  </item>
+  <item>
+    <title>The same report for the third time: a SwiftUI button responded only on its text, and my two earlier “fixes” did nothing</title>
+    <link>https://koshinstudio.com/en/notes/swiftui-hit-area/</link>
+    <guid isPermaLink="true">https://koshinstudio.com/en/notes/swiftui-hit-area/</guid>
+    <pubDate>Fri, 16 Oct 2026 15:00:00 GMT</pubDate>
+    <description>The “Won” and “Lost” buttons responded only on the text. Two earlier fixes (modifier order) did not work; I built the look inside a ButtonStyle and replaced six places. A mail-order article with coordinates had the same kind of root.</description>
+  </item>
+  <item>
+    <title>“Weird articles keep multiplying”: I counted by creation route and closed the entrances, and my counting was wrong twice</title>
+    <link>https://koshinstudio.com/en/notes/weird-articles-by-route/</link>
+    <guid isPermaLink="true">https://koshinstudio.com/en/notes/weird-articles-by-route/</guid>
+    <pubDate>Fri, 16 Oct 2026 15:00:00 GMT</pubDate>
+    <description>252 displayed lotteries were counted by route. Ended rounds left in an aggregator’s table were imported daily with empty deadlines (33); links to search results or top pages and deadlines disagreeing with the store’s own row were closed at the entrance.</description>
+  </item>
+  <item>
+    <title>“Automate everything that can be”: counting showed 66 repair jobs had never run on a schedule, and I added only six</title>
+    <link>https://koshinstudio.com/en/notes/automate-sorted/</link>
+    <guid isPermaLink="true">https://koshinstudio.com/en/notes/automate-sorted/</guid>
+    <pubDate>Fri, 16 Oct 2026 15:00:00 GMT</pubDate>
+    <description>Matching 319 HTTP endpoints against 184 scheduled jobs by call showed 66 that only ran by hand. After a dry run I scheduled only the continuously needed ones, six, and fixed a queue that let the same job pile up.</description>
+  </item>
+  <item>
+    <title>“The server went down and I cannot recover it” was wrong: only inbound SSH had been blocked</title>
+    <link>https://koshinstudio.com/en/notes/misdiagnosis-down/</link>
+    <guid isPermaLink="true">https://koshinstudio.com/en/notes/misdiagnosis-down/</guid>
+    <pubDate>Fri, 16 Oct 2026 15:00:00 GMT</pubDate>
+    <description>From 3:10 a.m. I could not connect to the server and judged it stopped. In fact its processes had run for over 7 days, all 192 scheduled jobs were normal, and only inbound SSH was blocked.</description>
+  </item>
+  <item>
+    <title>“ヤマダ電機” versus “ヤマダデンキ”: spelling variants and duplicates had three overlapping causes</title>
+    <link>https://koshinstudio.com/en/notes/store-name-variants/</link>
+    <guid isPermaLink="true">https://koshinstudio.com/en/notes/store-name-variants/</guid>
+    <pubDate>Fri, 16 Oct 2026 15:00:00 GMT</pubDate>
+    <description>Store names compared only by “contains”, deadlines differing by 59 seconds, and a manual-only dedupe job. I used a general comparison key instead of a synonym table, ran it hourly, and found two dangers in testing.</description>
+  </item>
+  <item>
+    <title>“One page = one case” was false: articles of a shop taking 6 products on one form were hidden just for sharing a link</title>
+    <link>https://koshinstudio.com/en/notes/one-page-many-cases/</link>
+    <guid isPermaLink="true">https://koshinstudio.com/en/notes/one-page-many-cases/</guid>
+    <pubDate>Fri, 16 Oct 2026 15:00:00 GMT</pubDate>
+    <description>A job that decided duplicates by link alone hid 5 of 6 articles of a shop taking 6 products on one Google Form. I changed it to link + product. I also found the server’s “entry tiers” were never read by the app.</description>
+  </item>
+  <item>
+    <title>English and katakana names share no characters: a fingerprint gate rejected 42 correct matches</title>
+    <link>https://koshinstudio.com/en/notes/transliteration-gate/</link>
+    <guid isPermaLink="true">https://koshinstudio.com/en/notes/transliteration-gate/</guid>
+    <pubDate>Fri, 16 Oct 2026 15:00:00 GMT</pubDate>
+    <description>The market-price link rate fell to 39%. The products existed on the market site, but my English names and its katakana names share no characters, so 42 matches were rejected in 26 hours. I kept the gate and added a narrow second judgement for this match only.</description>
+  </item>
+  <item>
+    <title>Looking up an ambiguous store name returns Shizuoka, the middle of Japan: I judged by Google’s own answer, not a list of chains</title>
+    <link>https://koshinstudio.com/en/notes/geocode-shizuoka/</link>
+    <guid isPermaLink="true">https://koshinstudio.com/en/notes/geocode-shizuoka/</guid>
+    <pubDate>Fri, 16 Oct 2026 15:00:00 GMT</pubDate>
+    <description>Passing a store name to Google’s place search with a rectangle covering Japan returned its middle (Shizuoka/Aichi) for ambiguous names. Instead of a list of chain names I judged trust from the answer itself with four rules.</description>
+  </item>
+  <item>
+    <title>If you throw failure away, the screen lies: a calendar that said “registered” with none added, a frozen OCR, a notification without a store name</title>
+    <link>https://koshinstudio.com/en/notes/swallowed-failure/</link>
+    <guid isPermaLink="true">https://koshinstudio.com/en/notes/swallowed-failure/</guid>
+    <pubDate>Fri, 16 Oct 2026 15:00:00 GMT</pubDate>
+    <description>try? discarded failures, so the calendar showed “registered N events” with 0 added and could never register again, OCR failure froze the screen, and the notification buffer forgot the store name.</description>
+  </item>
+  <item>
+    <title>Candidates were found, yet reading the answer failed every time: a URL cut at 200 tokens, and a search that returned 400 on hyphens</title>
+    <link>https://koshinstudio.com/en/notes/truncated-answer/</link>
+    <guid isPermaLink="true">https://koshinstudio.com/en/notes/truncated-answer/</guid>
+    <pubDate>Fri, 16 Oct 2026 15:00:00 GMT</pubDate>
+    <description>An AI reply choosing an official announcement page was cut at 200 tokens and failed every time. The result stayed 0 because store announcements name no product and the AI obeyed my instruction. Rakuten’s search returned 400 depending on hyphen position.</description>
+  </item>
+  <item>
+    <title>A function named “load from iCloud if newer” compared nothing: a 20-record history could become 1</title>
+    <link>https://koshinstudio.com/en/notes/icloud-overwrite/</link>
+    <guid isPermaLink="true">https://koshinstudio.com/en/notes/icloud-overwrite/</guid>
+    <pubDate>Fri, 16 Oct 2026 15:00:00 GMT</pubDate>
+    <description>The iCloud sync function never checked whether data was newer and replaced everything. A fresh device with an empty state could overwrite another device’s 20 records with 1. I added update-time comparison and never overwrite with empty.</description>
+  </item>
+  <item>
+    <title>With no ads, 25 real-device checks were blocked: test ads in developer mode only, and no hard-coded prize names</title>
+    <link>https://koshinstudio.com/en/notes/test-ads/</link>
+    <guid isPermaLink="true">https://koshinstudio.com/en/notes/test-ads/</guid>
+    <pubDate>Fri, 16 Oct 2026 15:00:00 GMT</pubDate>
+    <description>Before ads were served, 25 of 163 real-device checklist items could not be verified. In developer mode only, the app switches to Google’s test ad units. Prize names are read from one setting and never hard-coded, including in the checklist.</description>
+  </item>
+  <item>
+    <title>“That’s just a Beyblade” came back after I added a gate: the blocked value leaked in another form</title>
+    <link>https://koshinstudio.com/en/notes/leaked-value/</link>
+    <guid isPermaLink="true">https://koshinstudio.com/en/notes/leaked-value/</guid>
+    <pubDate>Fri, 16 Oct 2026 15:00:00 GMT</pubDate>
+    <description>A gate “do not create a product whose name contains a toy’s name” was bypassed because the AI’s product name lost the toy’s name. I moved the judgement to the announcement body and rejected only when no card-game word appears.</description>
+  </item>
+  <item>
+    <title>Checks that logged “deferred to next run” had never run: three time budgets counted from the same start</title>
+    <link>https://koshinstudio.com/en/notes/budget-starved/</link>
+    <guid isPermaLink="true">https://koshinstudio.com/en/notes/budget-starved/</guid>
+    <pubDate>Fri, 16 Oct 2026 15:00:00 GMT</pubDate>
+    <description>A process had three stages whose time budgets were counted from the same start time, so the rotating 25 checks ran 0 times each run. “Deferred 18 items” meant all of them. I allocated from the job’s time limit and logged each step’s time.</description>
+  </item>
+  <item>
+    <title>I fixed a timeout three times and it did not stop: the culprit was a second process under the same lock</title>
+    <link>https://koshinstudio.com/en/notes/timeout-third-fix/</link>
+    <guid isPermaLink="true">https://koshinstudio.com/en/notes/timeout-third-fix/</guid>
+    <pubDate>Fri, 16 Oct 2026 15:00:00 GMT</pubDate>
+    <description>A Rakuten Books stock check timed out 17 times a day. Limiting fetches, then a whole item, did not help; the third time I found that another process under the same lock re-fetched everything with no time limit.</description>
+  </item>
+  <item>
+    <title>“It gets cleaned up later” hid an entrance bug: 400 near-identical products were re-created every day</title>
+    <link>https://koshinstudio.com/en/notes/cleanup-hides-entrance/</link>
+    <guid isPermaLink="true">https://koshinstudio.com/en/notes/cleanup-hides-entrance/</guid>
+    <pubDate>Fri, 16 Oct 2026 15:00:00 GMT</pubDate>
+    <description>Catalogue registration looked up existing products by exact name only, so brackets, spaces and full/half-width differences re-created near-identical products daily: 437 in one day, 410 with no articles. The nightly merge job hid it.</description>
+  </item>
+  <item>
+    <title>A secret token was in the logs in plain text: scrub at the one exit that cannot be forgotten</title>
+    <link>https://koshinstudio.com/en/notes/secret-in-logs/</link>
+    <guid isPermaLink="true">https://koshinstudio.com/en/notes/secret-in-logs/</guid>
+    <pubDate>Fri, 16 Oct 2026 15:00:00 GMT</pubDate>
+    <description>An HTTP library put the request URL in its error message, so a scraping-service token reached the logs. My earlier scrubbing function worked only where called, and there are over 50 callers. I moved the scrubbing to the single exit every log passes through.</description>
+  </item>
+  <item>
+    <title>Moving from Cloud Functions to a ¥4,300 server: ¥3,700 a day, Yahoo! failing in the EEA, and five traps</title>
+    <link>https://koshinstudio.com/en/notes/vps-migration/</link>
+    <guid isPermaLink="true">https://koshinstudio.com/en/notes/vps-migration/</guid>
+    <pubDate>Fri, 16 Oct 2026 15:00:00 GMT</pubDate>
+    <description>After the free trial, Cloud Functions cost about ¥3,700 a day because waiting time was billed. I moved almost unchanged code to a Singapore VPS (about ¥4,300 a month). Helsinki failed because Yahoo! blocks the EEA; there were 15 secrets, not 5.</description>
+  </item>
+  <item>
+    <title>I opened the links of displayed articles and compared them: about 60 mistakes, and three mistakes in my own first check</title>
+    <link>https://koshinstudio.com/en/notes/destination-check/</link>
+    <guid isPermaLink="true">https://koshinstudio.com/en/notes/destination-check/</guid>
+    <pubDate>Fri, 16 Oct 2026 15:00:00 GMT</pubDate>
+    <description>Opening more than 1,000 destination pages and comparing with the articles: Amazon invitation requests shown as first-come, closed or sold-out items displayed, links to other stores or products, application links redirecting to a site’s top page. My first check was wrong in three ways too.</description>
+  </item>
+  <item>
+    <title>Four things from a full sweep of 61 audits: 51 jobs clumped at 4 a.m., a lock that expired in 55 seconds, and a price-filling idea I decided not to add</title>
+    <link>https://koshinstudio.com/en/notes/audit-sweep-61/</link>
+    <guid isPermaLink="true">https://koshinstudio.com/en/notes/audit-sweep-61/</guid>
+    <pubDate>Fri, 16 Oct 2026 15:00:00 GMT</pubDate>
+    <description>Once-a-day jobs clumped at 27 at 4 o’clock and 24 at 5; a Rakuten patrol took 181–480 s per run with a 55-second lock; I stopped counting anomalies that cannot be fixed; and I measured a way to fill official prices from one store but did not add it.</description>
+  </item>
+  <item>
+    <title>Comparing with other sites to count gaps: the first “23% coverage” was a measuring mistake and the truth was 49%</title>
+    <link>https://koshinstudio.com/en/notes/coverage-check/</link>
+    <guid isPermaLink="true">https://koshinstudio.com/en/notes/coverage-check/</guid>
+    <pubDate>Fri, 16 Oct 2026 15:00:00 GMT</pubDate>
+    <description>Counting whether I show lotteries other sites list: the first 23% was distorted by product-name spelling and expired articles. After fixing it, 49%; after fixing five gap-filling problems, 90%. Sites whose terms prohibit automated fetching were not imported.</description>
+  </item>
+  <item>
+    <title>Four gaps in monitoring X: posts missing from search, accounts that change hands, a store-finding query, and catching up after an outage</title>
+    <link>https://koshinstudio.com/en/notes/x-monitoring-gaps/</link>
+    <guid isPermaLink="true">https://koshinstudio.com/en/notes/x-monitoring-gaps/</guid>
+    <pubDate>Fri, 16 Oct 2026 15:00:00 GMT</pubDate>
+    <description>Four stores’ lottery posts did not appear in search even after 751 posts; a registered store had become a person; store-finding found 11 of 63; and after a 6-day outage only 185 of 2,866 were read in 2 hours. Fixes and cost estimates.</description>
+  </item>
+  <item>
+    <title>When you cannot watch everything quickly: popular 128 of 427 sets run fast, and the fastest lane yields to the budget</title>
+    <link>https://koshinstudio.com/en/notes/hot-lane/</link>
+    <guid isPermaLink="true">https://koshinstudio.com/en/notes/hot-lane/</guid>
+    <pubDate>Fri, 16 Oct 2026 15:00:00 GMT</pubDate>
+    <description>Full laps over 427 sets took 4 to 24 hours. A separate lane for 128 popular sets and truly once-a-minute checks for popular items; batching stopped another monitor and measuring over a short window misjudged cost.</description>
+  </item>
+  <item>
+    <title>Fixing a gate does not fix existing data: a “tried already” mark, a URL marker and a lookup table</title>
+    <link>https://koshinstudio.com/en/notes/fix-the-existing-data/</link>
+    <guid isPermaLink="true">https://koshinstudio.com/en/notes/fix-the-existing-data/</guid>
+    <pubDate>Fri, 16 Oct 2026 15:00:00 GMT</pubDate>
+    <description>After fixing a judgement, 12 of 32 existing articles stayed wrong (the skip mark lasts 7 days); a marker stored in the URL was lost on link rewrite and 111 articles were split again; removing a table key left written values. Five reports had one shape.</description>
+  </item>
+  <item>
+    <title>Fixing product genre from the official catalogue: three dry runs took 13 changes down to 4</title>
+    <link>https://koshinstudio.com/en/notes/genre-from-catalog/</link>
+    <guid isPermaLink="true">https://koshinstudio.com/en/notes/genre-from-catalog/</guid>
+    <pubDate>Fri, 16 Oct 2026 15:00:00 GMT</pubDate>
+    <description>A Duel Masters product was registered as Pokémon. Making the official catalogue the source of truth, my first dry run would have moved nine correct Weiss Schwarz products to another game; after three dry runs there were 0 misfires.</description>
+  </item>
+  <item>
+    <title>393 “work-name-only” products from an official list: the name field did not contain the product form</title>
+    <link>https://koshinstudio.com/en/notes/catalog-seed-393/</link>
+    <guid isPermaLink="true">https://koshinstudio.com/en/notes/catalog-seed-393/</guid>
+    <pubDate>Fri, 16 Oct 2026 15:00:00 GMT</pubDate>
+    <description>An official-list import created 502 products in one day (usually 1–10). The name field held only the work name; the form was in the category. Cleaning 393 and re-registering 328 correct names took alias collisions from 0 pairs to 250.</description>
+  </item>
+  <item>
+    <title>Online play that trusts nothing the client says: the server decides moves, clocks and results</title>
+    <link>https://koshinstudio.com/en/notes/negaeri-online/</link>
+    <guid isPermaLink="true">https://koshinstudio.com/en/notes/negaeri-online/</guid>
+    <pubDate>Fri, 16 Oct 2026 15:00:00 GMT</pubDate>
+    <description>Online play without login. Moves are validated by the rules engine, the clock lives only on the server, a disconnect gets 30 seconds, tokens are signed with HMAC, and ratings use pre-match numbers. With real values from the server code.</description>
+  </item>
+  <item>
+    <title>“The same application page” does not mean “the same store”: 52 articles showed another store’s name</title>
+    <link>https://koshinstudio.com/en/notes/same-page-not-same-store/</link>
+    <guid isPermaLink="true">https://koshinstudio.com/en/notes/same-page-not-same-store/</guid>
+    <pubDate>Fri, 16 Oct 2026 15:00:00 GMT</pubDate>
+    <description>A job that unified store names across articles sharing an application page turned a Sendai store into “Shinjuku South Exit”. One page was shared by 15 separate stores. I changed it to unify only when confirmed the same place and restored 52 articles from an untouched field.</description>
+  </item>
+  <item>
+    <title>When first-come sales start, the site becomes a waiting-room page: a 15 KB notice slipped through an 8,000-byte gate</title>
+    <link>https://koshinstudio.com/en/notes/waiting-room/</link>
+    <guid isPermaLink="true">https://koshinstudio.com/en/notes/waiting-room/</guid>
+    <pubDate>Fri, 16 Oct 2026 15:00:00 GMT</pubDate>
+    <description>On AEON Style Online, a first-come sale turned the whole site into a 15 KB “heavy access” page. It passed the 8,000-byte check added earlier that day and was read as “success, 0 products”. I switched to a title check; Amazon’s 13 minutes were serial AI screening.</description>
+  </item>
+  <item>
+    <title>Before widening concurrency slots: widening a 2-core server from 8 to 14, and the earlier conclusion that was half wrong</title>
+    <link>https://koshinstudio.com/en/notes/concurrency-slots/</link>
+    <guid isPermaLink="true">https://koshinstudio.com/en/notes/concurrency-slots/</guid>
+    <pubDate>Fri, 16 Oct 2026 15:00:00 GMT</pubDate>
+    <description>Shortening intervals made the 1-minute first-come monitor wait for a slot. I widened slots from 8 to 11 and 14 and measured. The real cap was not CPU but jobs sleeping on Rakuten API’s 1.5-second wait while holding slots.</description>
+  </item>
+  <item>
+    <title>Three mix-ups in splitting one article into products: a child treated as a parent, a shared link pointing to another store, a name owned by two products</title>
+    <link>https://koshinstudio.com/en/notes/split-mixups/</link>
+    <guid isPermaLink="true">https://koshinstudio.com/en/notes/split-mixups/</guid>
+    <pubDate>Fri, 16 Oct 2026 15:00:00 GMT</pubDate>
+    <description>Reprocessing a split “child” hid 60 lotteries closing that day (23 stores); a link-only lookup shared by 13 stores picked another store’s parent; names claimed by two products numbered 267 pairs. Real items vanished with nothing on screen.</description>
+  </item>
+  <item>
+    <title>Four times my own tools hurt me: a summary dropped conditions, one undefined stopped saving, a check locked out production, alerts that never cleared</title>
+    <link>https://koshinstudio.com/en/notes/self-inflicted/</link>
+    <guid isPermaLink="true">https://koshinstudio.com/en/notes/self-inflicted/</guid>
+    <pubDate>Fri, 16 Oct 2026 15:00:00 GMT</pubDate>
+    <description>A “15 characters” prompt dropped entry conditions in 671 checked lotteries; one undefined broke every save and burned 41% of a day’s credits; six parallel requests got the production IP blocked; I made alerts that kept ringing after the fix.</description>
+  </item>
+  <item>
+    <title>Every deploy re-ran the daily jobs: 477 runs in 48 hours, 46.6% of that day’s Gemini cost</title>
+    <link>https://koshinstudio.com/en/notes/rerun-on-deploy/</link>
+    <guid isPermaLink="true">https://koshinstudio.com/en/notes/rerun-on-deploy/</guid>
+    <pubDate>Fri, 16 Oct 2026 15:00:00 GMT</pubDate>
+    <description>A once-a-day job ran 43 times and used 46.6% of a day’s Gemini cost. Timed-out runs never wrote their last-run time, so every restart treated them as missed. A deploy at 08:00 also swallowed the digest.</description>
+  </item>
+  <item>
+    <title>Notifications cannot be recalled: 19% of the last 72 hours’ notifications were wrong, and the gate worked after the fact</title>
+    <link>https://koshinstudio.com/en/notes/notify-gate/</link>
+    <guid isPermaLink="true">https://koshinstudio.com/en/notes/notify-gate/</guid>
+    <pubDate>Fri, 16 Oct 2026 15:00:00 GMT</pubDate>
+    <description>Of 644 notifications in 72 hours, 122 (19%) were wrong. The article gate hides articles later, but a notification goes out about 0.6 seconds after saving; 25 of 30 hidden articles had already been pushed. I put the same gate at the notification entrance.</description>
+  </item>
+  <item>
+    <title>A “1-minute” monitor checked each item once per 10 minutes: before speeding up, count the revisit interval and what was delivered</title>
+    <link>https://koshinstudio.com/en/notes/interval-vs-delivery/</link>
+    <guid isPermaLink="true">https://koshinstudio.com/en/notes/interval-vs-delivery/</guid>
+    <pubDate>Fri, 16 Oct 2026 15:00:00 GMT</pubDate>
+    <description>A first-come monitor watched 63 items but checked 4–9 per run, so each item once per 10 minutes, and caught 3 sales in 7 days. Shortening other intervals slowed it further, and “not screened” meant 45% of first-come listings got no notification.</description>
+  </item>
+  <item>
+    <title>Four real lotteries silently thrown away: a regex, dates without a year, batched answers and null</title>
+    <link>https://koshinstudio.com/en/notes/silent-discard/</link>
+    <guid isPermaLink="true">https://koshinstudio.com/en/notes/silent-discard/</guid>
+    <pubDate>Fri, 16 Oct 2026 15:00:00 GMT</pubDate>
+    <description>“x.com” matched “e-starbox.com” so application links were never used; a date with no year was read as 2020 so no Pokémon items were imported; batched answers got out of step; “cannot decide” was read as “none” and nearly hid 129 lotteries.</description>
+  </item>
+  <item>
+    <title>“Checked” marks on articles that had never been read: the t.co relay page</title>
+    <link>https://koshinstudio.com/en/notes/tco-relay/</link>
+    <guid isPermaLink="true">https://koshinstudio.com/en/notes/tco-relay/</guid>
+    <pubDate>Fri, 16 Oct 2026 15:00:00 GMT</pubDate>
+    <description>Opened with a browser User-Agent, t.co returned a relay page instead of redirecting. All 220 displayed articles were unread and 9 were closed forms. How I fixed it and how I removed the wrong “checked” marks.</description>
+  </item>
+  <item>
+    <title>Before cutting Gemini cost, I doubted the meter: price, breakdown and cache were all wrong, and the cache threshold changed when I re-measured</title>
+    <link>https://koshinstudio.com/en/notes/gemini-meter/</link>
+    <guid isPermaLink="true">https://koshinstudio.com/en/notes/gemini-meter/</guid>
+    <pubDate>Fri, 16 Oct 2026 15:00:00 GMT</pubDate>
+    <description>The cost meter was broken in three places (prices under-reported 2.6×, 31 purposes merged, cache uncounted). The cache threshold was about 8,000 tokens in September and about 4,000 in October. Padding the prompt shifted 9% of answers.</description>
+  </item>
+  <item>
+    <title>Firestore cost in yen: 91% of reads came from one place, and my first cache did not work</title>
+    <link>https://koshinstudio.com/en/notes/firestore-91/</link>
+    <guid isPermaLink="true">https://koshinstudio.com/en/notes/firestore-91/</guid>
+    <pubDate>Fri, 16 Oct 2026 15:00:00 GMT</pubDate>
+    <description>Seen in yen for the first time, Firestore cost about ¥13,000 a month, close to Gemini. 91% of reads were a product list re-read for every post. A 60-second cache failed because 32 jobs ran at once; caching the pending promise fixed it.</description>
+  </item>
+  <item>
+    <title>Setting the rules of Negaeri Shogi by playing AI against AI: one change that worked, six that broke</title>
+    <link>https://koshinstudio.com/en/notes/negaeri-balance/</link>
+    <guid isPermaLink="true">https://koshinstudio.com/en/notes/negaeri-balance/</guid>
+    <pubDate>Fri, 16 Oct 2026 15:00:00 GMT</pubDate>
+    <description>A 6×6 board game where sandwiched pieces defect. Instead of guessing the numbers, I ran 40 to 100 AI-vs-AI games per rule. Flips per move went from 2% to 81%, removing the king guard ended games in 17 moves, and the first-move edge is still unsolved.</description>
+  </item>
+  <item>
+    <title>Pokémon card sleeves and loaders: sizes and what “pt” means</title>
+    <link>https://koshinstudio.com/en/notes/card-supplies-guide/</link>
+    <guid isPermaLink="true">https://koshinstudio.com/en/notes/card-supplies-guide/</guid>
+    <pubDate>Thu, 15 Oct 2026 15:00:00 GMT</pubDate>
+    <description>What to check before buying Pokémon card sleeves, toploaders and deck boxes: standard vs small size, what 35pt means, and a buying checklist. Not a hands-on review; unverified points are listed.</description>
+  </item>
+  <item>
+    <title>ITMS-91064 “Invalid Binary”: NSPrivacyTracking was true but NSPrivacyTrackingDomains was empty</title>
+    <link>https://koshinstudio.com/en/notes/itms-91064/</link>
+    <guid isPermaLink="true">https://koshinstudio.com/en/notes/itms-91064/</guid>
+    <pubDate>Wed, 07 Oct 2026 15:00:00 GMT</pubDate>
+    <description>An iOS build was rejected by Apple's automated review with ITMS-91064. NSPrivacyTracking was true while NSPrivacyTrackingDomains was an empty array. How it was fixed, and what was not verified.</description>
+  </item>
+  <item>
+    <title>App Store review sent “Guideline 2.1 Information Needed”: the six things Apple asked for</title>
+    <link>https://koshinstudio.com/en/notes/review-info-needed/</link>
+    <guid isPermaLink="true">https://koshinstudio.com/en/notes/review-info-needed/</guid>
+    <pubDate>Thu, 08 Oct 2026 15:00:00 GMT</pubDate>
+    <description>My first App Store submission got a request for more information (Guideline 2.1), not a rejection. The six things Apple asked for and how they connect to earlier fixes.</description>
+  </item>
+  <item>
+    <title>Firebase 12 does not work with Xcode 15.2 (Swift 6.0 required): why I pinned Firebase 11.4.0 and AdMob 11.5.0</title>
+    <link>https://koshinstudio.com/en/notes/xcode152-sdk/</link>
+    <guid isPermaLink="true">https://koshinstudio.com/en/notes/xcode152-sdk/</guid>
+    <pubDate>Thu, 08 Oct 2026 15:00:00 GMT</pubDate>
+    <description>On an old Mac stuck on Xcode 15.2, newer Firebase and AdMob SDKs fail to build. Which versions break, which I pinned (Firebase 11.4.0, AdMob 11.5.0), and why.</description>
+  </item>
+  <item>
+    <title>iOS app freezes and is killed (0x8BADF00D): a SwiftUI computed property ran on every redraw</title>
+    <link>https://koshinstudio.com/en/notes/torecadash-watchdog/</link>
+    <guid isPermaLink="true">https://koshinstudio.com/en/notes/torecadash-watchdog/</guid>
+    <pubDate>Thu, 08 Oct 2026 15:00:00 GMT</pubDate>
+    <description>An iOS app was force-quit by the watchdog (0x8BADF00D). A SwiftUI computed property re-filtered and re-sorted 951 articles on the main thread every body evaluation.</description>
+  </item>
+  <item>
+    <title>No builds arriving in TestFlight: I had used up the 25 free Xcode Cloud hours (my first diagnosis was wrong)</title>
+    <link>https://koshinstudio.com/en/notes/torecadash-ci/</link>
+    <guid isPermaLink="true">https://koshinstudio.com/en/notes/torecadash-ci/</guid>
+    <pubDate>Thu, 08 Oct 2026 15:00:00 GMT</pubDate>
+    <description>New builds stopped appearing in TestFlight. My first diagnosis (“[ci skip] is blocking builds”) was wrong; the workflow built the iOS app on every commit.</description>
+  </item>
+</channel>
+</rss>

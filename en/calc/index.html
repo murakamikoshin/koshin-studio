@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tools — free gacha, lottery and TCG box calculators | Koshin Studio</title>
+<meta name="description" content="Free in-browser calculators: gacha completion, drop rate and pity, lottery win chance, and TCG booster box price per pack. Checked against 200,000 simulated players.">
+<meta name="theme-color" content="#fbfaf7">
+<meta property="og:title" content="Tools — free gacha, lottery and TCG box calculators | Koshin Studio">
+<meta property="og:description" content="Free in-browser calculators: gacha completion, drop rate and pity, lottery win chance, and TCG booster box price per pack. Checked against 200,000 simulated players.">
+<link rel="icon" href="/favicon.ico?v=1697d589" sizes="48x48">
+<link rel="icon" href="/favicon.svg?v=b9d7922f" type="image/svg+xml" sizes="any">
+<link rel="icon" href="/assets/icon/icon-192.png?v=e2566235" type="image/png" sizes="192x192">
+<link rel="apple-touch-icon" href="/assets/icon/icon-180.png?v=84e7f0e6">
+<link rel="manifest" href="/site.webmanifest">
+<script>document.documentElement.className+=" js"</script>
+<link rel="stylesheet" href="/style.css?v=3d886c33">
+<meta name="google-adsense-account" content="ca-pub-3863314847163872">
+<link rel="canonical" href="https://koshinstudio.com/en/calc/">
+<meta property="og:url" content="https://koshinstudio.com/en/calc/">
+<meta property="og:site_name" content="Koshin Studio">
+<meta property="og:locale" content="en_US">
+<link rel="alternate" hreflang="ja" href="https://koshinstudio.com/calc/">
+<link rel="alternate" hreflang="en" href="https://koshinstudio.com/en/calc/">
+<link rel="alternate" hreflang="x-default" href="https://koshinstudio.com/en/calc/">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="alternate" type="application/rss+xml" title="Koshin Studio — Notes" href="https://koshinstudio.com/feed.xml">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Koshin Studio","item":"https://koshinstudio.com/en/"},{"@type":"ListItem","position":2,"name":"Tools","item":"https://koshinstudio.com/en/calc/"}]},{"@type":"CollectionPage","name":"Tools","url":"https://koshinstudio.com/en/calc/","inLanguage":"en","isPartOf":{"@id":"https://koshinstudio.com#studio"}},{"@type":"ItemList","name":"Calculators","itemListElement":[{"@type":"ListItem","position":1,"url":"https://koshinstudio.com/en/calc/gacha/","name":"Gacha completion calculator"},{"@type":"ListItem","position":2,"url":"https://koshinstudio.com/en/calc/gacha-rate/","name":"Gacha drop rate and pity calculator"},{"@type":"ListItem","position":3,"url":"https://koshinstudio.com/en/calc/box-price/","name":"TCG booster box price per pack calculator"},{"@type":"ListItem","position":4,"url":"https://koshinstudio.com/en/calc/lottery/","name":"Lottery win chance calculator"}]}]}</script>
+<link rel="alternate" type="application/rss+xml" title="Koshin Studio — Notes (English)" href="https://koshinstudio.com/en/feed.xml">
+<meta property="og:image" content="https://koshinstudio.com/assets/og/og_calc.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
+</head>
+<body class="article doc">
+<canvas id="motes"></canvas>
+
+<header class="site"><div class="wrap">
+  <a class="logo" href="/en/"><img class="logo-mark" src="/favicon.svg?v=b9d7922f" alt="" width="28" height="28">Koshin Studio</a>
+  <nav><a href="/en/works/">Works</a><a href="/en/works/#game">Games</a><a href="/en/notes/">Notes</a><a href="/en/calc/">Tools</a><a href="/en/about/">About</a><a href="/" hreflang="ja" lang="ja">日本語</a></nav>
+</div></header>
+
+<main><div class="wrap">
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/en/">Koshin Studio</a><i aria-hidden="true">›</i><span aria-current="page">Tools</span></nav>
+  <h1>Tools</h1>
+  <div class="rule"></div>
+<!--lang-->
+  <p class="note"><a href="/calc/" hreflang="ja" lang="ja">日本語版</a></p>
+<!--/lang-->
+  <p class="lead">Calculators</p>
+  <p class="rv">These calculators run only in your browser. The numbers you enter are not sent anywhere. Each one is checked against the results of a computer simulation of 200,000 players.</p>
+  <p class="rv">Each shows not only the average but also <strong>how long an unlucky player takes</strong> (the number of tries by which 90% and 99% of people succeed). Looking only at the average makes it easy to believe “it should hit by then.” If you are not sure which to use:</p>
+  <ul class="rv">
+    <li><strong>You want every type</strong> (capsule toys, randomly packed collections) → the completion calculator.</li>
+    <li><strong>You want one specific item</strong> (a gacha with a fixed drop rate, with or without pity) → the drop rate and pity calculator.</li>
+    <li><strong>You want to know whether a booster box is priced above retail</strong> → the price per pack calculator.</li>
+    <li><strong>You enter several lottery sales</strong> (with known or estimated odds) → the lottery win chance calculator.</li>
+  </ul>
+  <p class="rv note">All of these are probabilities, not guarantees. Where the assumptions do not hold (odds that change mid-game, lotteries that forbid multiple entries), each page explains it under “when this calculation does not fit.”</p>
+  <ul class="notes">
+    <li class="rv" data-delay="0"><a class="note-row" href="/en/calc/gacha/" hreflang="en" lang="en">
+      <time>Calculator</time>
+      <div><h3>Gacha completion calculator</h3><p>How many pulls, and how much money, to collect every type. The average, the pulls by which 90% of people finish, and whether a complete set is cheaper.</p></div>
+    </a></li>
+    <li class="rv" data-delay="70"><a class="note-row" href="/en/calc/gacha-rate/" hreflang="en" lang="en">
+      <time>Calculator</time>
+      <div><h3>Gacha drop rate and pity calculator</h3><p>From the drop rate, how many pulls until you get it. Supports how many copies you want and a pity (guaranteed after N pulls).</p></div>
+    </a></li>
+    <li class="rv" data-delay="140"><a class="note-row" href="/en/calc/box-price/" hreflang="en" lang="en">
+      <time>Calculator</time>
+      <div><h3>TCG booster box price per pack calculator</h3><p>Turn a booster box or set price into a price per pack and compare it with the list price. Typical pack counts per box for each game, counted from 179 listings.</p></div>
+    </a></li>
+    <li class="rv" data-delay="210"><a class="note-row" href="/en/calc/lottery/" hreflang="en" lang="en">
+      <time>Calculator</time>
+      <div><h3>Lottery win chance calculator</h3><p>From the odds and the number of entries, the chance you win at least once. Works even when each entry has different odds.</p></div>
+    </a></li>
+  </ul>
+</div></main>
+
+<footer class="site"><div class="wrap">
+  <span>© 2026 Koshin Studio</span>
+  <div class="sns-row"></div>
+  <nav><a href="/en/" hreflang="en" lang="en">English</a><a href="/" hreflang="ja" lang="ja">日本語</a><a href="/en/about/#contact" hreflang="en" lang="en">Contact</a><a href="/en/privacy/" hreflang="en" lang="en">Privacy</a></nav>
+</div></footer>
+<script src="/motion.js?v=1e7447ec" defer></script>
+</body>
+</html>

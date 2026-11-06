@@ -623,5 +623,40 @@
     "title": "Draft Party — a free multiplayer draft game you play in your browser",
     "date": "2026-10-23",
     "blurb": "Draft Party is a free browser game. Scout fictional rookies by their abilities and draw lots on ties, then watch several seasons of stats, standings and head-to-head results together. Play with friends or strangers, in four languages."
+  },
+  {
+    "ja": "/notes/rank-verify-mismatch/",
+    "en": "/en/notes/rank-verify-mismatch/",
+    "title": "Sushi Stack scores stopped reaching the leaderboard: I changed the game’s numbers and forgot the server’s re-check (twice)",
+    "date": "2026-11-07",
+    "blurb": "Honest runs of a browser game stopped reaching the online leaderboard: two game values changed without updating the server that re-checks scores. The fix, and a test that compares both sides with the same seeds."
+  },
+  {
+    "ja": "/notes/tcg-lottery-app-compare/",
+    "en": "/en/notes/tcg-lottery-app-compare/",
+    "title": "Japanese Pokémon card & TCG lottery apps compared: Toreca Dash, Toreget, NowPokeca, Pokeka Tracker and Toreca no Chizu",
+    "date": "2026-11-07",
+    "blurb": "Five apps and sites that track Pokémon card and TCG lotteries, pre-orders and restocks at stores in Japan, compared on games, alerts, maps and price — by the developer of one of them, weak points included."
+  },
+  {
+    "ja": "/works/kaeru-sekai/",
+    "en": "/en/works/kaeru-sekai/",
+    "title": "Kaeru Sekai (Returning World) — a free 3D game: bring a gray world back to green",
+    "date": "2026-11-07",
+    "blurb": "A free 3D browser game. Plant seeds of light to bring a withered gray world back to green, then settle people and watch 100 years pass. Valleys, islands, deserts and volcanoes, generated from a number. No install."
+  },
+  {
+    "ja": "/notes/",
+    "en": "/en/notes/",
+    "title": "Notes — development logs with measured numbers",
+    "date": "2026-11-07",
+    "blurb": "Development logs from building browser games and an iOS app, in English: App Store review, ads, duplicates, crawling, cost cuts and API migrations, each with measured numbers."
+  },
+  {
+    "ja": "/calc/",
+    "en": "/en/calc/",
+    "title": "Tools — free gacha, lottery and TCG box calculators",
+    "date": "2026-11-07",
+    "blurb": "Free in-browser calculators: gacha completion, gacha drop rate and pity, lottery win chance, and TCG booster box price per pack."
   }
 ]

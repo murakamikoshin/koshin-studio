@@ -242,6 +242,10 @@
     "picks": [
       "bk-shogi",
       "it-shogi"
+    ],
+    "playMode": [
+      "SinglePlayer",
+      "MultiPlayer"
     ]
   },
   {
@@ -279,6 +283,7 @@
         "n": 2,
         "label": "つのモード"
       }
-    ]
+    ],
+    "playMode": "MultiPlayer"
   }
 ]

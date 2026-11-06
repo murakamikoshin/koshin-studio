@@ -7,7 +7,8 @@
 - 書いた人: Koshin（https://koshinstudio.com/about/）
 - サイト: Koshin Studio
 
-  書いた人：Koshin (https://koshinstudio.com/about/#operator)（Web エンジニア・アプリエンジニア）　公開：2026-10-23
+  English version (https://koshinstudio.com/en/notes/rank-verify-mismatch/)
+
 すし積む 開発の記録 ／ 2026年10月
 
   ブラウザゲーム「すし積む (https://koshinstudio.com/works/)」には、オンラインの番付（ランキング）があります。この番付が、普通に遊んで終わらせても、載らなくなっていました。画面には、「記録の辻褄が合わなかったため、載せられませんでした」と出ます。原因は、ゲームの数字を変えたのに、サーバーの検算の数字を直していなかったことでした。しかも、直したと思ったあとにも、もう一つ残っていました。
