@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Danmaku Maker guide: how to dodge bullet hell, build stages and publish them</title>
+<meta name="description" content="How to play Danmaku Maker and get better at it: the hitbox size, odd vs even aimed shots, boss phases, revives and rankings, and the rules for building and publishing stages (5 a day), with the app’s real values.">
+<meta name="apple-itunes-app" content="app-id=6788758920">
+<meta property="og:title" content="Danmaku Maker guide: how to dodge bullet hell, build stages and publish them">
+<meta property="og:description" content="How to play Danmaku Maker and get better at it: the hitbox size, odd vs even aimed shots, boss phases, revives and rankings, and the rules for building and publishing stages (5 a day), with the app’s real values.">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#fbfaf7">
+<link rel="icon" href="/favicon.ico?v=1697d589" sizes="48x48">
+<link rel="icon" href="/favicon.svg?v=b9d7922f" type="image/svg+xml" sizes="any">
+<link rel="icon" href="/assets/icon/icon-192.png?v=e2566235" type="image/png" sizes="192x192">
+<link rel="apple-touch-icon" href="/assets/icon/icon-180.png?v=84e7f0e6">
+<link rel="manifest" href="/site.webmanifest">
+<script>document.documentElement.className+=" js"</script>
+<link rel="stylesheet" href="/style.css?v=3d886c33">
+<meta name="google-adsense-account" content="ca-pub-3863314847163872">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3863314847163872" crossorigin="anonymous"></script>
+<link rel="canonical" href="https://koshinstudio.com/en/works/danmaku-maker/guide">
+<meta property="og:url" content="https://koshinstudio.com/en/works/danmaku-maker/guide">
+<meta property="og:site_name" content="Koshin Studio">
+<meta property="og:locale" content="en_US">
+<link rel="alternate" hreflang="ja" href="https://koshinstudio.com/works/danmaku-maker/guide">
+<link rel="alternate" hreflang="en" href="https://koshinstudio.com/en/works/danmaku-maker/guide">
+<link rel="alternate" hreflang="x-default" href="https://koshinstudio.com/en/works/danmaku-maker/guide">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="alternate" type="application/rss+xml" title="Koshin Studio — Notes" href="https://koshinstudio.com/feed.xml">
+<link rel="alternate" type="application/rss+xml" title="Koshin Studio — Notes (English)" href="https://koshinstudio.com/en/feed.xml">
+<meta property="og:image" content="https://koshinstudio.com/assets/og/og_en_works_danmaku-maker_guide.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
+</head>
+<body class="article doc">
+<canvas id="motes"></canvas>
+
+<header class="site"><div class="wrap">
+  <a class="logo" href="/en/"><img class="logo-mark" src="/favicon.svg?v=b9d7922f" alt="" width="28" height="28">Koshin Studio</a>
+  <nav><a href="/en/works/">Works</a><a href="/en/works/#game">Games</a><a href="/en/notes/">Notes</a><a href="/en/calc/">Tools</a><a href="/en/about/">About</a><a href="/" hreflang="ja" lang="ja">日本語</a></nav>
+</div></header>
+
+<main><div class="wrap">
+  <nav class="crumbs" aria-label="You are here"><a href="/en/">Koshin Studio</a><i aria-hidden="true">›</i><a href="/en/works/danmaku-maker/" hreflang="en" lang="en">Danmaku Maker</a><i aria-hidden="true">›</i><span aria-current="page">Guide</span></nav>
+  <h1>Danmaku Maker guide</h1>
+  <div class="rule"></div>
+<!--lang-->
+  <p class="note"><a href="/works/danmaku-maker/guide" hreflang="ja" lang="ja">日本語版</a></p>
+<!--/lang-->  <p class="lead">Dodge, defeat, build, and send it to a friend.</p>
+  <p>Danmaku Maker is an iPhone and iPad game where you build bullet-hell (danmaku) stages and play stages made by people around the world. This guide covers how to play, how to dodge better, and the rules for building and publishing stages, using the app’s real values.</p>
+  <p><a class="btn" href="https://apps.apple.com/app/id6824245206" rel="noopener">Open in the App Store</a> <a class="btn ghost" href="/en/works/danmaku-maker/try/" hreflang="en" lang="en">Try it in your browser (free)</a></p>
+
+  <h2 class="rv" id="s1">Controls</h2>
+  <p>Drag anywhere on the screen and your ship moves by the same amount (<strong>relative movement</strong>). You never touch the ship itself, so your finger never hides it. In boss fights, your ship fires automatically.</p>
+
+  <h2 class="rv" id="s2">Four ways to play</h2>
+  <ul>
+    <li><strong>Survive</strong>: last the set time without being hit.</li>
+    <li><strong>Defeat the boss</strong>: chip the boss’s HP to zero with auto-fire.</li>
+    <li><strong>Damage race</strong>: the boss has infinite HP; survive to the time limit and your total damage is recorded.</li>
+    <li><strong>Boss rush</strong>: play scenes in order (mid-boss → minions only → final boss, and so on).</li>
+  </ul>
+  <p>Some stages give you <strong>lives</strong> (1 to 5). Each hit costs one and removes that bullet. There are no invincibility frames after a hit. At zero, you fail.</p>
+
+  <h2 class="rv" id="s3">How to dodge better</h2>
+  <h3>The hitbox is smaller than it looks</h3>
+  <p>You are hit only when <strong>a bullet’s center comes within 5.5 px of your ship’s center</strong>. Bullets are drawn with a 6 px colored radius, so a visual graze does not count. Gaps are wider than they look.</p>
+  <h3>Check whether aimed shots are odd or even</h3>
+  <p>With an <strong>odd</strong> number of aimed bullets, the middle one comes straight at where you are, so standing still gets you hit; keep drifting sideways. With an <strong>even</strong> number, where you stand is exactly a gap, so stay put instead of panicking.</p>
+  <h3>For rotating rings, get between the arms</h3>
+  <p>When a ring pattern rotates, each bullet still flies straight. Step between two arms and shift slowly with the rotation. In a true spiral the bullets themselves curve, and the arms sweep around toward you, so move outward early.</p>
+  <h3>Lure homing bullets, then sidestep</h3>
+  <p>Homing bullets can only turn for <strong>2.5 seconds</strong> after they are fired. Instead of running around, let them come close and then step sideways; they cannot turn sharply enough.</p>
+  <h3>Use boss phase changes to reset</h3>
+  <p>As the boss loses HP it moves from phase 1 to 2 to 3, and <strong>every bullet on screen disappears at the moment the phase changes</strong>. Use that instant to move back to a safe spot.</p>
+  <p>The math behind each pattern, with live demos, is in <a href="/en/notes/danmaku-patterns/" hreflang="en" lang="en">how bullet-hell patterns work</a>.</p>
+
+  <h2 class="rv" id="s4">Revives and rankings</h2>
+  <ul>
+    <li>After a hit you can <strong>revive</strong> on the spot by watching an ad, <strong>once per play</strong> (free and unlimited with the Remove Ads purchase).</li>
+    <li><strong>Clears that used a revive do not count toward rankings or clear counts.</strong> Go without one for records.</li>
+    <li>Rankings list plays made with the shot style the stage’s creator chose.</li>
+    <li>The name shown in rankings and comments is the same across all stages.</li>
+  </ul>
+
+  <h2 class="rv" id="s5">Building a stage</h2>
+  <ol>
+    <li>Choose the clear condition: survive, defeat the boss, damage race or boss rush.</li>
+    <li>Place emitters (<strong>up to 8</strong>). For each, set the pattern, color, speed, interval, angle, and when it starts and stops firing. A live preview shows the motion as you edit.</li>
+    <li>Choose the boss’s look and size, minions, music, and the look of bullets and background.</li>
+    <li><strong>Clear it yourself in a test play.</strong> Any change means clearing it again.</li>
+  </ol>
+  <p>Stages save automatically, and you can play and edit them any time without publishing. In boss fights, emitters stick to the boss, and you can assign emitters to each phase.</p>
+  <p>With Pattern Maker (a one-time purchase), draw a line with your finger and bullets follow it at the speed you drew.</p>
+
+  <h2 class="rv" id="s6">Publishing rules</h2>
+  <ul>
+    <li>Publishing, liking and reporting need Sign in with Apple. Playing does not.</li>
+    <li><strong>Only stages the creator has cleared</strong> appear in the world list. Stages you have not cleared can still be shared with people who have the link, without appearing in the list.</li>
+    <li>You can publish <strong>5 stages a day</strong> to the world (counted in Japan time). Each ad you watch adds one more. With Remove Ads or the Lifetime Pack there is no daily limit (apart from a separate anti-spam cap of 30 a day). Link-only stages do not count.</li>
+    <li>Stages made with purchased patterns can be played by everyone without buying anything.</li>
+    <li>You can remove a published stage later. Its rankings, comments and likes are removed with it.</li>
+  </ul>
+
+  <h2 class="rv" id="s7">FAQ</h2>
+  <h3>Are any stages locked behind a purchase?</h3>
+  <p>No. Purchases add patterns and looks for building stages. Stages made with paid items can be played by everyone.</p>
+  <h3>Can I play on Android or a computer?</h3>
+  <p>The app is iPhone and iPad only. There is a free <a href="/en/works/danmaku-maker/try/" hreflang="en" lang="en">browser trial</a> (no sign-up) for phones and computers.</p>
+  <h3>Which languages does it support?</h3>
+  <p>The app is fully translated into 10 languages, and stages from players worldwide appear in the same lists.</p>
+  <h3>A stage seems impossible. Any tips?</h3>
+  <p>Every published stage has been cleared by its creator. Hold still for a moment, check whether the bullets are odd or even and whether they rotate or curve, and then decide how to move.</p>
+
+  <p class="note">This is the English version of <a href="/works/danmaku-maker/guide" hreflang="ja" lang="ja">the Japanese guide</a>.</p>
+  <p style="margin-top:40px"><a class="btn" href="https://apps.apple.com/app/id6824245206" rel="noopener">Open in the App Store</a></p>
+</div></main>
+
+<footer class="site"><div class="wrap">
+  <span>© 2026 Koshin Studio</span>
+  <div class="sns-row"></div>
+  <nav><a href="/en/" hreflang="en" lang="en">English</a><a href="/" hreflang="ja" lang="ja">日本語</a><a href="/en/about/#contact" hreflang="en" lang="en">Contact</a><a href="/en/privacy/" hreflang="en" lang="en">Privacy</a></nav>
+</div></footer>
+<script src="/motion.js?v=1e7447ec" defer></script>
+</body>
+</html>

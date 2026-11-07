@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>弾幕メーカー 遊び方と攻略｜弾幕の避け方・ステージの作り方・投稿のルール — Koshin Studio</title>
+<meta name="description" content="弾幕メーカーの遊び方と攻略。当たり判定の大きさ、自機狙いの奇数弾・偶数弾、ボス戦の段階、復活とランキング、ステージの作り方と投稿のルール（1日5本など）を、アプリの実際の値で説明します。">
+<meta name="theme-color" content="#fbfaf7">
+<link rel="icon" href="/favicon.ico?v=1697d589" sizes="48x48">
+<link rel="icon" href="/favicon.svg?v=b9d7922f" type="image/svg+xml" sizes="any">
+<link rel="icon" href="/assets/icon/icon-192.png?v=e2566235" type="image/png" sizes="192x192">
+<link rel="apple-touch-icon" href="/assets/icon/icon-180.png?v=84e7f0e6">
+<link rel="manifest" href="/site.webmanifest">
+<script>document.documentElement.className+=" js"</script>
+<link rel="stylesheet" href="/style.css?v=3d886c33">
+<meta name="google-adsense-account" content="ca-pub-3863314847163872">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3863314847163872" crossorigin="anonymous"></script>
+<link rel="canonical" href="https://koshinstudio.com/works/danmaku-maker/guide">
+<meta property="og:url" content="https://koshinstudio.com/works/danmaku-maker/guide">
+<meta property="og:site_name" content="Koshin Studio">
+<meta property="og:locale" content="ja_JP">
+<link rel="alternate" hreflang="ja" href="https://koshinstudio.com/works/danmaku-maker/guide">
+<link rel="alternate" hreflang="en" href="https://koshinstudio.com/en/works/danmaku-maker/guide">
+<link rel="alternate" hreflang="x-default" href="https://koshinstudio.com/en/works/danmaku-maker/guide">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="alternate" type="application/rss+xml" title="Koshin Studio — Notes" href="https://koshinstudio.com/feed.xml">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebPage","name":"弾幕メーカー 遊び方","url":"https://koshinstudio.com/works/danmaku-maker/guide","inLanguage":"ja","primaryImageOfPage":"https://koshinstudio.com/assets/og/og_works_danmaku-maker_guide.jpg","about":{"@type":"VideoGame","name":"弾幕メーカー","url":"https://koshinstudio.com/works/danmaku-maker/"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Koshin Studio","item":"https://koshinstudio.com/"},{"@type":"ListItem","position":2,"name":"Works","item":"https://koshinstudio.com/works/"},{"@type":"ListItem","position":3,"name":"弾幕メーカー","item":"https://koshinstudio.com/works/danmaku-maker/"},{"@type":"ListItem","position":4,"name":"遊び方","item":"https://koshinstudio.com/works/danmaku-maker/guide"}]},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"課金しないと遊べないステージはありますか？","acceptedAnswer":{"@type":"Answer","text":"ありません。課金で増えるのは、ステージを作るときに使える弾幕や見た目です。課金した人が作ったステージも、誰でも遊べます。"}},{"@type":"Question","name":"Android やパソコンで遊べますか？","acceptedAnswer":{"@type":"Answer","text":"アプリは iPhone・iPad だけです。パソコンやスマートフォンのブラウザで試せるブラウザ版のお試し（無料・登録なし）があります。"}},{"@type":"Question","name":"英語など、ほかの言語でも遊べますか？","acceptedAnswer":{"@type":"Answer","text":"はい。アプリは 10 の言語に対応しています。世界中の人が作ったステージが、同じ一覧に並びます。"}},{"@type":"Question","name":"どうしてもクリアできないステージは？","acceptedAnswer":{"@type":"Answer","text":"投稿されたステージは、作った本人がクリアしたものだけです。まず自機を止めて、弾の並びが奇数か偶数か、回っているか曲がっているかを見てから、動き方を決めると突破しやすくなります。"}}]}]}</script>
+<meta property="og:image" content="https://koshinstudio.com/assets/og/og_works_danmaku-maker_guide.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
+</head>
+<body>
+<canvas id="motes"></canvas>
+
+<header class="site"><div class="wrap">
+  <a class="logo" href="/"><img class="logo-mark" src="/favicon.svg?v=b9d7922f" alt="" width="28" height="28">Koshin Studio</a>
+  <nav><a href="/works/">Works</a><a href="/works/#game">Games</a><a href="/notes/">Notes</a><a href="/picks/">Picks</a><a href="/calc/">Tools</a><a href="/about/">About</a></nav>
+</div></header>
+
+<main><div class="wrap">
+  <nav class="crumbs" aria-label="現在地"><a href="/">Koshin Studio</a><i aria-hidden="true">›</i><a href="/works/">Works</a><i aria-hidden="true">›</i><a href="/works/danmaku-maker/">弾幕メーカー</a><i aria-hidden="true">›</i><span aria-current="page">遊び方</span></nav>
+  <h1>弾幕メーカー 遊び方と攻略</h1>
+  <div class="rule"></div>
+<!--lang-->
+  <p class="note"><a href="/en/works/danmaku-maker/guide" hreflang="en" lang="en">English version</a></p>
+<!--/lang-->  <p class="lead">避ける、倒す、作る、送りつける。</p>
+  <p>弾幕メーカーは、弾幕シューティングのステージを自分で作って、世界中の人と遊び合う iPhone・iPad のゲームです。このページでは、遊び方と、避けるコツ、ステージを作って投稿するときのルールを、アプリの実際の値でまとめました。</p>
+  <p><a class="btn" href="https://apps.apple.com/jp/app/id6824245206" rel="noopener">App Store で開く</a> <a class="btn ghost" href="/works/danmaku-maker/try/">ブラウザで試す（無料）</a></p>
+
+  <h2 class="rv" id="s1">操作</h2>
+  <p>画面のどこでも、指でなぞると自機が同じだけ動きます（<strong>相対移動</strong>）。自機の真上を触らなくていいので、指で自機が隠れません。弾は、自機に当たるまで何発あっても大丈夫です。ボス戦では、自機は自動で弾を撃ちます。</p>
+
+  <h2 class="rv" id="s2">4 つの遊び方</h2>
+  <ul>
+    <li><strong>耐えきる</strong>：決めた時間、被弾せずに生き残る。</li>
+    <li><strong>ボスを倒す</strong>：自動ショットで、ボスの HP を削りきる。</li>
+    <li><strong>ダメージ勝負</strong>：ボスの HP は無限。制限時間まで生き残ると、与えたダメージの合計が記録されます。</li>
+    <li><strong>ボス連戦</strong>：場面を順番に進む（中ボス → 雑魚だけ → 大ボス、など）。</li>
+  </ul>
+  <p>ステージによっては、<strong>ライフ</strong>（1〜5）が付いています。弾に当たるたびに 1 減って、当たった弾は消えます。当たった直後の無敵時間はありません。0 になったら失敗です。</p>
+
+  <h2 class="rv" id="s3">避けるコツ</h2>
+  <h3>当たり判定は、見た目より小さい</h3>
+  <p>当たるのは、<strong>弾の中心と自機の中心が 5.5 px より近づいたとき</strong>だけです。弾の色の部分は半径 6 px で描いているので、見た目で「かすった」くらいでは当たりません。すき間は、思っているより通れます。</p>
+  <h3>自機狙いは、奇数か偶数かを見る</h3>
+  <p>自機を狙って扇形に撃つ弾は、数が<strong>奇数</strong>だと真ん中の 1 発が今いる場所にまっすぐ来るので、止まっていると当たります。少しずつ横に動き続けます。<strong>偶数</strong>だと、今いる場所がちょうどすき間になるので、慌てて動かずに止まるのが正解です。</p>
+  <h3>回る弾幕は、腕と腕の間へ</h3>
+  <p>円形に広がる弾幕が回っている場合、1 発ずつはまっすぐ飛んでいます。腕と腕の間に入って、腕の回る向きに合わせて少しずつずれていけば避けられます。弾そのものが曲がる「渦巻き」は、腕が自分のほうへ回り込んでくるので、早めに外側へ逃げます。</p>
+  <h3>追尾弾は、引きつけて横へ</h3>
+  <p>追尾弾が曲がれるのは、出てから <strong>2.5 秒だけ</strong>です。あわてて逃げ回るより、ぎりぎりまで引きつけてから横へかわすと、曲がりきれずに外れます。</p>
+  <h3>ボス戦は、段階の切り替わりで息を整える</h3>
+  <p>ボスの HP が減るごとに、第 1 → 第 2 → 第 3 段階に切り替わり、<strong>切り替わりの瞬間に画面の弾が全部消えます</strong>。弾が消えた一瞬に、自機を安全な位置へ戻しておきましょう。</p>
+  <p>パターンごとの計算は、<a href="/notes/danmaku-patterns/">弾幕の作り方の記事</a>に、動く見本つきで書いています。</p>
+
+  <h2 class="rv" id="s4">復活とランキング</h2>
+  <ul>
+    <li>被弾したあと、広告を見ると、その場から<strong>復活</strong>できます。<strong>1 プレイにつき 1 回</strong>です（広告削除を買うと、無料・回数無制限）。</li>
+    <li><strong>復活を使ったクリアは、ランキングとクリア数には数えられません。</strong>記録を狙うなら、復活なしで。</li>
+    <li>ランキングに載るのは、そのステージで作者が決めた撃ち方で遊んだ記録です。</li>
+    <li>ランキングとコメントに出る名前は、すべてのステージで共通です。</li>
+  </ul>
+
+  <h2 class="rv" id="s5">ステージの作り方</h2>
+  <ol>
+    <li>クリア条件（耐えきる・ボスを倒す・ダメージ勝負・ボス連戦）を選ぶ。</li>
+    <li>発射台を置く（<strong>最大 8 個</strong>）。それぞれ、弾幕のパターン、色、速さ、発射間隔、角度、撃ち始めと終わりの時間を決める。作りながら、見本の動きで確かめられます。</li>
+    <li>ボスの見た目や大きさ、雑魚、BGM、弾や背景の見た目を決める。</li>
+    <li><strong>テストプレイで、自分でクリアする。</strong>内容を変えたら、もう一度クリアが必要です。</li>
+  </ol>
+  <p>作ったステージは自動で保存され、投稿しなくても、いつでも遊べて直せます。ボス戦では、発射台はボスにくっつき、段階ごとに使う発射台を分けられます。</p>
+  <p>「弾幕作成モード」（買い切り）では、指で線を描くと、弾がその線の上を、描いた速さで進む弾幕が作れます。</p>
+
+  <h2 class="rv" id="s6">投稿のルール</h2>
+  <ul>
+    <li>投稿・いいね・通報には、Apple でサインインが必要です。遊ぶだけなら要りません。</li>
+    <li><strong>作った本人がクリアしたステージだけ</strong>が、世界のステージとして一覧に出ます。まだクリアしていないステージは一覧に出さず、URL を知っている人だけが遊べる形で送れます。</li>
+    <li>世界に公開できるのは、<strong>1 日 5 本まで</strong>（日本時間で数えます）。広告を見るごとに 1 本ずつ増やせます。広告削除・永久買い切りパックを買うと、上限はありません（いたずら防止のため、1 日 30 本までという別の上限はあります）。URL を知っている人だけのステージは、数えません。</li>
+    <li>課金で使えるようになった弾幕を使ったステージも、遊ぶ人は買わなくても遊べます。</li>
+    <li>投稿したステージは、あとから世界から消せます。消すと、そのステージのランキング・コメント・いいねも一緒に消えます。</li>
+  </ul>
+
+  <h2 class="rv" id="s7">よくある質問</h2>
+  <h3>課金しないと遊べないステージはありますか？</h3>
+  <p>ありません。課金で増えるのは、ステージを作るときに使える弾幕や見た目です。課金した人が作ったステージも、誰でも遊べます。</p>
+  <h3>Android やパソコンで遊べますか？</h3>
+  <p>アプリは iPhone・iPad だけです。パソコンやスマートフォンのブラウザで試せる<a href="/works/danmaku-maker/try/">ブラウザ版のお試し</a>（無料・登録なし）があります。</p>
+  <h3>英語など、ほかの言語でも遊べますか？</h3>
+  <p>はい。アプリは 10 の言語に対応しています。世界中の人が作ったステージが、同じ一覧に並びます。</p>
+  <h3>どうしてもクリアできないステージは？</h3>
+  <p>投稿されたステージは、作った本人がクリアしたものだけです。まず自機を止めて、弾の並びが奇数か偶数か、回っているか曲がっているかを見てから、動き方を決めると突破しやすくなります。</p>
+
+  <p style="margin-top:40px"><a class="btn" href="https://apps.apple.com/jp/app/id6824245206" rel="noopener">App Store で開く</a></p>
+</div></main>
+
+<footer class="site"><div class="wrap">
+  <span>© 2026 Koshin Studio</span>
+  <div class="sns-row"></div>
+  <nav><a href="/picks/">Picks</a><a href="/calc/">Tools</a><a href="/about/">運営者情報</a><a href="/about/#contact">お問い合わせ</a><a href="/privacy/">プライバシーポリシー</a><a href="/en/" hreflang="en" lang="en">English</a></nav>
+</div></footer>
+<script src="/motion.js?v=1e7447ec" defer></script>
+</body>
+</html>

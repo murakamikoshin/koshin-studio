@@ -610,6 +610,162 @@ ${enTools.map((t, i) => `    <li class="rv" data-delay="${i * 70}"><a class="not
   </ul>
 </div></main>`);
 
+/* ---- /en/anime/：ガチアニメ診断ガイドの英語（2026-11-07） ----
+   軸の名前・一言・二つ名は、診断の英語版（/app/shindananime/en/）と同じ文字列（data/anime-en.json）。
+   タイプごとの頁（64 枚）は、日本語でも検索に出していない薄い頁なので、英語は作らない */
+const animeEn = read('/data/anime-en.json');
+const enNick = (t) => animeEn.nick.fixed[t.code] || [animeEn.nick.wm[t.letters[0] + t.letters[1]],
+  animeEn.nick.st[t.letters[2] + t.letters[3]], animeEn.nick.vw[t.letters[4] + t.letters[5]]].join(' ');
+const enSide = (t, i) => (t.letters[i] === animeEn.axes[i].pos.l ? animeEn.axes[i].pos : animeEn.axes[i].neg);
+const EN_APP = '/app/shindananime/en/';
+const enCta = (label) => `<p class="rv" style="margin-top:30px"><a class="btn" data-play="shindananime" href="${EN_APP}">${label}</a><a class="btn ghost" href="/en/works/shindananime/" hreflang="en" lang="en">About this quiz</a></p>`;
+const enChip = (t) => `<span class="type-chip"><b>${t.code}</b><span>${esc(enNick(t))}</span></span>`;
+const enAnimeCrumb = (here) => `<nav class="crumbs" aria-label="You are here"><a href="/en/">Koshin Studio</a><i aria-hidden="true">›</i>${here === 'Guide' ? '' : '<a href="/en/anime/">Anime Type Quiz guide</a><i aria-hidden="true">›</i>'}<span aria-current="page">${esc(here === 'Guide' ? 'Anime Type Quiz guide' : here)}</span></nav>`;
+
+enPage('/en/anime/', 'Anime Type Quiz guide: the 6 axes and 64 types | Koshin Studio',
+  'A guide to the Anime Type Quiz: what its six axes measure, how the 64 types and their names are made, and how anime are matched to your type.',
+  `<main><div class="wrap">
+  ${enAnimeCrumb('Guide')}
+  <h1>Anime Type Quiz guide</h1>
+  <div class="rule"></div>
+  <p class="lead">What the six axes and the 64 types<br>of the Anime Type Quiz actually mean.</p>
+  <p class="rv"><strong>New here?</strong> Start with <a href="/en/anime/guide/" hreflang="en" lang="en">how to choose an anime quiz</a> (what to look for, how to answer, how to read the result).</p>
+
+  <h2 class="rv">How the quiz works</h2>
+  <p class="rv">The Anime Type Quiz measures your taste in anime on <strong>six axes</strong>, from 12 up to 50 multiple-choice questions. Each axis gets one letter for the side you lean to, and the letters together form your type code (for example <code>RDCP-VM</code>). Every axis has two sides, so there are 2<sup>6</sup> = <strong>64 types</strong>.</p>
+  <p class="rv">Every anime in the quiz’s database has values on the same six axes. Your result is chosen by treating your six values and each anime’s six values as vectors and measuring how close they are (cosine similarity).</p>
+  ${enCta('Take the quiz (free, 1 minute)')}
+
+  <h2 class="rv">The six axes</h2>
+  <div class="kinds">
+${animeEn.axes.map((a, i) => `    <div class="kind rv" data-delay="${i * 60}"><h3>${esc(a.label)}<i>${a.pos.l} / ${a.neg.l}</i></h3>
+      <p>${esc(a.ask)} ${esc(a.pos.name)} or ${esc(a.neg.name)}.</p></div>`).join('\n')}
+  </div>
+  <p class="rv"><a href="/en/anime/axes/" hreflang="en" lang="en">Read about the six axes →</a></p>
+
+  <h2 class="rv">64 types</h2>
+  <p class="rv">Each type’s name combines world × aftertaste, structure × sub-taste, and visuals × viewing style. Four common ones:</p>
+  <div class="type-list rv">${featured.map(enChip).join('')}</div>
+  <p class="rv"><a href="/en/anime/types/" hreflang="en" lang="en">See all 64 types →</a></p>
+</div></main>`);
+
+const enGuideFaq = [
+  { q: 'Is the anime quiz free? How many questions are there?',
+    a: 'The Anime Type Quiz is free. The first 12 questions (about 30 seconds) give you your type and your destined anime. Keep answering and it extends to up to 50 questions. All are multiple choice.' },
+  { q: 'Is the anime quiz accurate?',
+    a: 'It depends what “accurate” means. Your type is fairly stable even with 12 questions: with simulated respondents, more than 90% landed on the same side letter by letter. Your destined anime moves as you add questions: the anime picked after 12 questions is still first after 50 for only 1 in 5 to 8 people. The quiz measures how close an anime is to your taste, not whether you will enjoy it.' },
+  { q: 'Are my answers or results saved anywhere?',
+    a: 'No. Your answers are computed only on your device and are not sent to a server.' },
+  { q: 'Will I get the same result every time?',
+    a: 'Your type tends to be stable, but your destined anime changes with how you answer, the era setting and the genres you choose. Mark an anime as watched and the next best one replaces it.' },
+  { q: 'Does it pick older anime?',
+    a: 'Less often. 90.5% of the anime in the database are from 2000 or later, and it leans toward newer and widely discussed titles. On the result screen you can choose any era, 2010 or later, or 2018 or later.' },
+];
+enPage('/en/anime/guide/', 'How to choose an anime quiz that finds shows you will like | Koshin Studio',
+  'Four things to check when choosing an anime personality quiz, how to answer, and how to read the result, with what the Anime Type Quiz measures and numbers measured on this site.',
+  `<main><div class="wrap">
+  ${enAnimeCrumb('How to choose an anime quiz')}
+  <h1>How to choose an anime quiz</h1>
+  <div class="rule"></div>
+  <p class="lead">Whether a quiz result “fits”<br>depends on what it measures.</p>
+  <p class="rv">There are many anime quizzes, and similar names hide different methods. This page covers what to look at when choosing one, how to answer, and how to read the result, using the <a href="/en/works/shindananime/" hreflang="en" lang="en">Anime Type Quiz</a> as the example. The numbers were measured on this site.</p>
+
+  <h2 class="rv">Two kinds of anime quiz</h2>
+  <ul class="rv">
+    <li><strong>Quizzes that assign a type.</strong> You answer questions and get your “anime taste type” or a character. The result is a category.</li>
+    <li><strong>Quizzes that recommend shows.</strong> From your taste they name what to watch. The result is a title.</li>
+  </ul>
+  <p class="rv">The Anime Type Quiz gives <strong>both at once</strong>: a type on six axes (for example <code>RDCP-VM</code>), and then one destined anime and two runners-up from its database.</p>
+
+  <h2 class="rv">Four things to check when choosing an anime quiz</h2>
+  <h3>1. Does it say what it measures?</h3>
+  <p class="rv">“You are this type” means little if you cannot see the basis. The Anime Type Quiz measures six axes: <strong>world, aftertaste, structure and pace, sub-taste, visuals vs story, and viewing style</strong>. Each is explained on <a href="/en/anime/axes/" hreflang="en" lang="en">the six axes</a>.</p>
+  <h3>2. Can you see why you got your result?</h3>
+  <p class="rv">Each letter of the type code shows which side of an axis you leaned to. The result screen shows how far you leaned on each axis and a match percentage for each anime, computed from the same measure used to rank them (<a href="/en/notes/match-percent/" hreflang="en" lang="en">why 80% was beating 82%</a> explains how).</p>
+  <h3>3. How many anime does it choose from?</h3>
+  <p class="rv">The quiz chooses from <strong>6,074 anime</strong>. It started from 16,177 entries and dropped those with too few review words to place on the axes. The criteria, and the resulting bias (90.5% from 2000 or later), are in <a href="/en/notes/anime-db/" hreflang="en" lang="en">the article on the database</a>.</p>
+  <h3>4. Where do your answers go?</h3>
+  <p class="rv">The Anime Type Quiz computes your answers only on your device and does not send them to a server. See the <a href="/en/privacy/" hreflang="en" lang="en">privacy policy</a>.</p>
+
+  <h2 class="rv">How to answer</h2>
+  <ul class="rv">
+    <li><strong>Go with your gut.</strong> For questions you hesitate on, “somewhat” is enough.</li>
+    <li><strong>Avoid answering “neither” again and again.</strong> If everything is in the middle, the axes cannot point anywhere and the result blurs.</li>
+    <li><strong>Start with 12, continue if you like.</strong> Twelve questions (about 30 seconds) give your type and destined anime. Continuing extends to up to 50 questions and also weighs picture quality and era, plus likes such as romance, horror or isekai.</li>
+    <li><strong>Mark shows you have seen.</strong> The next best one takes its place.</li>
+    <li><strong>Switch the era on the result screen.</strong> Any era, 2010 or later, or 2018 or later.</li>
+  </ul>
+
+  <h2 class="rv">Reading the result: the type is stable, the anime moves</h2>
+  <p class="rv">How much the result changes between 12 and 50 questions was measured with 1,000 simulated respondents (<a href="/en/notes/shindan12/" hreflang="en" lang="en">how much changes when the quiz is cut to 12 questions</a>).</p>
+  <ul class="rv">
+    <li><strong>The type is mostly right even when short.</strong> Letter by letter, more than 90% land on the same side even with moderately noisy answers.</li>
+    <li><strong>The destined anime moves as questions are added.</strong> The anime picked at 12 questions is still first at 50 for only 1 in 5 to 8 people. Choosing one out of 6,000 means small differences in input reorder the top.</li>
+  </ul>
+  <p class="rv">If you only want your type, 12 questions are enough. For a better pick, keep going: 50 questions get about 1.7 to 1.9 times closer to your “true” taste.</p>
+
+  <h2 class="rv">What a quiz can and cannot tell you</h2>
+  <ul class="rv">
+    <li><strong>It can tell:</strong> the <strong>tendency</strong> of your taste, and anime close to it.</li>
+    <li><strong>It cannot tell:</strong> whether you will <strong>enjoy</strong> a given anime. It measures closeness between taste and work.</li>
+    <li><strong>It is biased:</strong> the database leans toward newer and widely discussed anime, so older or less discussed titles come up less.</li>
+    <li><strong>Taste changes:</strong> today’s result may not be next year’s.</li>
+  </ul>
+  <h2 class="rv">FAQ</h2>
+${enGuideFaq.map((f) => `  <h3>${esc(f.q)}</h3>\n  <p class="rv">${esc(f.a)}</p>`).join('\n')}
+  ${enCta('Take the Anime Type Quiz (free, 1 minute)')}
+  <p class="rv" style="margin-top:34px">Read next: <a href="/en/anime/axes/" hreflang="en" lang="en">the six axes</a> / <a href="/en/anime/types/" hreflang="en" lang="en">all 64 types</a> / <a href="/en/anime/" hreflang="en" lang="en">guide home</a></p>
+  <p class="note">The quiz’s anime titles appear in English where an English title could be matched; otherwise in Japanese.</p>
+</div></main>`);
+
+enPage('/en/anime/axes/', 'The six axes of the Anime Type Quiz: what each one measures | Koshin Studio',
+  'World, aftertaste, structure and pace, sub-taste, visuals vs story, and viewing style: what each of the Anime Type Quiz’s six axes measures.',
+  `<main><div class="wrap">
+  ${enAnimeCrumb('The six axes')}
+  <h1>The six axes</h1>
+  <div class="rule"></div>
+  <p class="lead">These six are what the Anime Type Quiz measures.<br>Each has two sides, and the side you lean to becomes a letter.</p>
+${animeEn.axes.map((a) => `
+  <h2 class="rv">${esc(a.label)}<span class="axis-code"> ${a.pos.l} / ${a.neg.l}</span></h2>
+  <p class="rv"><em>${esc(a.ask)}</em></p>
+  <p class="rv">${esc(a.body)}</p>
+  <div class="axis-sides rv">
+    <div><b>${a.pos.l} — ${esc(a.pos.name)}</b><p>${esc(a.pos.desc)}.</p></div>
+    <div><b>${a.neg.l} — ${esc(a.neg.name)}</b><p>${esc(a.neg.desc)}.</p></div>
+  </div>`).join('\n')}
+
+  <h2 class="rv">About picture quality and era</h2>
+  <p class="rv">As an item outside the type code, the quiz also asks whether you prefer newer, high-quality anime or any era. Within one type, this and your genre likes and dislikes change which anime are chosen.</p>
+  ${enCta('Take the quiz (free, 1 minute)')}
+  <p class="rv"><a href="/en/anime/types/" hreflang="en" lang="en">See all 64 types →</a></p>
+</div></main>`);
+
+const enCodeEx = typeByCode['RDCP-VM'];
+const enGroups = [['R', 'D'], ['R', 'H'], ['F', 'D'], ['F', 'H']].map(([w, m]) => ({
+  title: `${animeEn.axes[0][w === 'R' ? 'pos' : 'neg'].name} × ${animeEn.axes[1][m === 'D' ? 'pos' : 'neg'].name}`,
+  list: animeTypes.filter((t) => t.letters[0] === w && t.letters[1] === m),
+}));
+enPage('/en/anime/types/', 'All 64 types of the Anime Type Quiz, with their names | Koshin Studio',
+  'All 64 types of the Anime Type Quiz, grouped by world and aftertaste, with each type’s name and code, and how to read a type code.',
+  `<main><div class="wrap">
+  ${enAnimeCrumb('All 64 types')}
+  <h1>64 types</h1>
+  <div class="rule"></div>
+  <p class="lead">Six axes combine into 64 types.<br>Grouped here by world and aftertaste.</p>
+
+  <h2 class="rv">How to read a type code</h2>
+  <p class="rv">A type code is one letter per axis for the side you leaned to. For example <code>${enCodeEx.code}</code> (“${esc(enNick(enCodeEx))}”) is made of these six letters:</p>
+  <div class="scroll rv"><table>
+    <tr><th>Axis</th><th>Letter</th><th>Side</th></tr>
+${enCodeEx.letters.map((l, i) => { const side = enSide(enCodeEx, i); return `    <tr><td>${esc(animeEn.axes[i].label)}</td><td><code>${esc(l)}</code></td><td>${esc(side.name)}: ${esc(side.desc)}</td></tr>`; }).join('\n')}
+  </table></div>
+  <p class="rv">Each axis has two sides, so 2<sup>6</sup> = <strong>64 types</strong>. How the quiz works is in <a href="/en/anime/guide/" hreflang="en" lang="en">how to choose an anime quiz</a>, and what the axes mean is in <a href="/en/anime/axes/" hreflang="en" lang="en">the six axes</a>.</p>
+${enGroups.map((g) => `
+  <h2 class="rv">${esc(g.title)}</h2>
+  <div class="type-list rv">${g.list.map(enChip).join('')}</div>`).join('\n')}
+  ${enCta('Find your type')}
+</div></main>`);
+
 /* 英語の記事の配信（RSS）。日本語の feed.xml とは別に */
 writeFileSync(here + '/en/feed.xml',
   '<?xml version="1.0" encoding="UTF-8"?>\n' +
@@ -776,6 +932,10 @@ function ldFor(file, url) {
       '@type': 'ListItem', position: i + 1, name: t[0], item: SITE + t[1],
     })),
   });
+  if (rel === '/en/anime/guide/index.html') return [page('How to choose an anime quiz'),
+    { '@type': 'FAQPage', mainEntity: enGuideFaq.map((f) => ({ '@type': 'Question', name: f.q,
+      acceptedAnswer: { '@type': 'Answer', text: f.a } })) },
+    crumbs([['Koshin Studio', '/en/'], ['Anime Type Quiz guide', '/en/anime/'], ['How to choose an anime quiz', '/en/anime/guide/']])];
   /* 弾幕メーカーのブラウザ版（お試し）。ブラウザで遊べるゲームとして書く。
      よくある質問は、頁の「よくある質問 / FAQ」の h3 + p から取る（目に見える文と同じ） */
   const tryM = rel.match(/^(\/en)?\/works\/danmaku-maker\/try\/index\.html$/);
@@ -1192,6 +1352,14 @@ for (const file of pages) {
              .replace(/\n?\s*<link rel="alternate" type="text\/markdown"[^>]*>/g, '')
              .replace(/\n?\s*<script type="application\/ld\+json">[\s\S]*?<\/script>/g, '');
   const ld = ldFor(file, url);
+  /* 作品の遊び方の頁（works の下の guide.html）：目に見える「よくある質問 / FAQ」を FAQPage にも出す */
+  if (ld && /^\/(en\/)?works\/[^/]+\/guide\.html$/.test(rel) && !ld.some((x) => x['@type'] === 'FAQPage')) {
+    const fm = html.match(/<h2[^>]*>(?:よくある質問|FAQ)<\/h2>([\s\S]*?)(?=<h2|<p class="note">|<p style="margin-top|<\/main>)/);
+    const plain = (t) => t.replace(/<[^>]+>/g, '').replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&quot;/g, '"').replace(/&#39;/g, "'").replace(/&amp;/g, '&').replace(/\s+/g, ' ').trim();
+    const qa = fm ? [...fm[1].matchAll(/<h3[^>]*>([\s\S]*?)<\/h3>\s*<p[^>]*>([\s\S]*?)<\/p>/g)]
+      .map((m) => ({ '@type': 'Question', name: plain(m[1]), acceptedAnswer: { '@type': 'Answer', text: plain(m[2]) } })) : [];
+    if (qa.length) ld.push({ '@type': 'FAQPage', mainEntity: qa });
+  }
   const pageMeta = altPageMeta[url.slice(SITE.length)] || null;
   const pageLang = pageMeta ? pageMeta.lang : (L ? L.lang : 'ja');
   const pageLocale = pageMeta ? pageMeta.locale : (L ? L.locale : 'ja_JP');
@@ -1525,6 +1693,9 @@ const enLlms = [
   `Site (English): ${abs('/en/')}`, `Full text of the English pages: ${abs('/en/llms-full.txt')}`, `Japanese index: ${abs('/llms.txt')}`, '',
   '## Works (free browser games and apps)', ...enWorkPairs.map((p) => line(p.title, p.en, p.blurb)), '',
   '## Tools (calculators)', ...enTools.map((t) => line(t.title, t.url, t.blurb)), '',
+  '## Anime Type Quiz guide', line('Anime Type Quiz guide', '/en/anime/', 'The six axes and 64 types of the Anime Type Quiz'),
+  line('How to choose an anime quiz', '/en/anime/guide/', 'What to check in an anime quiz, how to answer, how to read the result'),
+  line('The six axes', '/en/anime/axes/', 'What each axis measures'), line('All 64 types', '/en/anime/types/', 'Every type name and code'), '',
   `## Notes (development logs; each has a Markdown version at the article URL + index.md)`,
   ...enNotePairs.map((p) => line(p.title, p.en, p.blurb)), '',
   '## About', line('About', '/en/about/', 'Who runs this site, contact, and how articles are written and corrected'),
@@ -1537,7 +1708,7 @@ for (const p of enNotePairs) {
     `# ${p.title}\n\n> ${p.blurb || ''}\n\n- URL: ${abs(p.en)}\n- Original (Japanese): ${abs(p.ja)}\n- Published: ${p.date || p.sortDate}\n- Author: Koshin (${abs('/en/about/')})\n- Site: Koshin Studio\n\n${body}\n`);
 }
 const enFull = ['# Koshin Studio — full text of the English pages', '', `> Main text of the English pages on ${SITE}/en/. The source of each part is its URL.`, ''].concat(
-  ['/en/', ...enWorkPairs.map((p) => p.en), '/en/calc/', ...enTools.map((t) => t.url), ...enNotePairs.map((p) => p.en), '/en/about/']
+  ['/en/', ...enWorkPairs.map((p) => p.en), '/en/calc/', ...enTools.map((t) => t.url), '/en/anime/', '/en/anime/guide/', '/en/anime/axes/', '/en/anime/types/', ...enNotePairs.map((p) => p.en), '/en/about/']
     .filter((u) => existsSync(here + u + 'index.html'))
     .map((u) => `\n---\n\nURL: ${abs(u)}\n\n${mainAsText(here + u + 'index.html')}\n`)).join('\n');
 writeFileSync(here + '/en/llms-full.txt', enFull);

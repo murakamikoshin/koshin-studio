@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>How to play Negaeri Shogi: rules, chains and winning tips for the 6×6 flipping shogi game</title>
+<meta name="description" content="The rules of Negaeri Shogi with a diagram and the real values: drop a piece to sandwich enemy pieces and they defect and promote, the board edge counts, pieces next to a king never flip. Plus what AI-vs-AI games showed about winning.">
+<meta property="og:title" content="How to play Negaeri Shogi: rules, chains and winning tips for the 6×6 flipping shogi game">
+<meta property="og:description" content="The rules of Negaeri Shogi with a diagram and the real values: drop a piece to sandwich enemy pieces and they defect and promote, the board edge counts, pieces next to a king never flip. Plus what AI-vs-AI games showed about winning.">
+<meta property="og:type" content="article">
+<meta name="theme-color" content="#fbfaf7">
+<link rel="icon" href="/favicon.ico?v=1697d589" sizes="48x48">
+<link rel="icon" href="/favicon.svg?v=b9d7922f" type="image/svg+xml" sizes="any">
+<link rel="icon" href="/assets/icon/icon-192.png?v=e2566235" type="image/png" sizes="192x192">
+<link rel="apple-touch-icon" href="/assets/icon/icon-180.png?v=84e7f0e6">
+<link rel="manifest" href="/site.webmanifest">
+<script>document.documentElement.className+=" js"</script>
+<link rel="stylesheet" href="/style.css?v=3d886c33">
+<meta name="google-adsense-account" content="ca-pub-3863314847163872">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3863314847163872" crossorigin="anonymous"></script>
+<link rel="canonical" href="https://koshinstudio.com/en/works/negaeri-shogi/guide">
+<meta property="og:url" content="https://koshinstudio.com/en/works/negaeri-shogi/guide">
+<meta property="og:site_name" content="Koshin Studio">
+<meta property="og:locale" content="en_US">
+<link rel="alternate" hreflang="ja" href="https://koshinstudio.com/works/negaeri-shogi/guide">
+<link rel="alternate" hreflang="en" href="https://koshinstudio.com/en/works/negaeri-shogi/guide">
+<link rel="alternate" hreflang="x-default" href="https://koshinstudio.com/en/works/negaeri-shogi/guide">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="alternate" type="application/rss+xml" title="Koshin Studio — Notes" href="https://koshinstudio.com/feed.xml">
+<link rel="alternate" type="application/rss+xml" title="Koshin Studio — Notes (English)" href="https://koshinstudio.com/en/feed.xml">
+<meta property="og:image" content="https://koshinstudio.com/assets/og/og_en_works_negaeri-shogi_guide.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
+</head>
+<body class="article doc">
+<canvas id="motes"></canvas>
+
+<header class="site"><div class="wrap">
+  <a class="logo" href="/en/"><img class="logo-mark" src="/favicon.svg?v=b9d7922f" alt="" width="28" height="28">Koshin Studio</a>
+  <nav><a href="/en/works/">Works</a><a href="/en/works/#game">Games</a><a href="/en/notes/">Notes</a><a href="/en/calc/">Tools</a><a href="/en/about/">About</a><a href="/" hreflang="ja" lang="ja">日本語</a></nav>
+</div></header>
+
+<main><div class="wrap">
+  <nav class="crumbs" aria-label="You are here"><a href="/en/">Koshin Studio</a><i aria-hidden="true">›</i><a href="/en/works/negaeri-shogi/" hreflang="en" lang="en">Negaeri Shogi</a><i aria-hidden="true">›</i><span aria-current="page">How to play</span></nav>
+  <h1>How to play Negaeri Shogi</h1>
+  <div class="rule"></div>
+<!--lang-->
+  <p class="note"><a href="/works/negaeri-shogi/guide" hreflang="ja" lang="ja">日本語版</a></p>
+<!--/lang-->  <p class="lead">Sandwiched pieces defect to the enemy. Defectors get promoted.</p>
+  <p>Negaeri Shogi is a two-player game played with shogi (Japanese chess) pieces, where you sandwich and flip pieces the way you do in Othello. The board is 6×6 and a game takes a few minutes. This page explains the rules with a diagram and the real values, and sums up what AI-vs-AI games showed about how to win. Every number is taken directly from the game’s rule code (<code>rules.ts</code>).</p>
+  <p><a class="btn" href="/play/negaeri-shogi/">Play (free, no sign-up)</a></p>
+
+  <h2 class="rv" id="s1">Board and pieces</h2>
+  <p>The board has 36 squares. Each side starts with three pawns around its king, plus a rook and a bishop. The first player is at the bottom; the second player’s pieces are upside down at the top.</p>
+<div class="scroll rv"><table style="border-collapse:collapse;margin:0 auto" aria-label="Starting position. First player at the bottom, second player at the top (upside-down pieces). K king, P pawn, R rook, B bishop"><tbody><tr><td style="width:2.2em;height:2.2em;text-align:center;border:1px solid var(--line,#ccc)"></td><td style="width:2.2em;height:2.2em;text-align:center;border:1px solid var(--line,#ccc)"></td><td style="width:2.2em;height:2.2em;text-align:center;border:1px solid var(--line,#ccc)"><span style="display:inline-block;transform:rotate(180deg)">B</span></td><td style="width:2.2em;height:2.2em;text-align:center;border:1px solid var(--line,#ccc)"><span style="display:inline-block;transform:rotate(180deg)">K</span></td><td style="width:2.2em;height:2.2em;text-align:center;border:1px solid var(--line,#ccc)"><span style="display:inline-block;transform:rotate(180deg)">R</span></td><td style="width:2.2em;height:2.2em;text-align:center;border:1px solid var(--line,#ccc)"></td></tr><tr><td style="width:2.2em;height:2.2em;text-align:center;border:1px solid var(--line,#ccc)"></td><td style="width:2.2em;height:2.2em;text-align:center;border:1px solid var(--line,#ccc)"></td><td style="width:2.2em;height:2.2em;text-align:center;border:1px solid var(--line,#ccc)"><span style="display:inline-block;transform:rotate(180deg)">P</span></td><td style="width:2.2em;height:2.2em;text-align:center;border:1px solid var(--line,#ccc)"><span style="display:inline-block;transform:rotate(180deg)">P</span></td><td style="width:2.2em;height:2.2em;text-align:center;border:1px solid var(--line,#ccc)"><span style="display:inline-block;transform:rotate(180deg)">P</span></td><td style="width:2.2em;height:2.2em;text-align:center;border:1px solid var(--line,#ccc)"></td></tr><tr><td style="width:2.2em;height:2.2em;text-align:center;border:1px solid var(--line,#ccc)"></td><td style="width:2.2em;height:2.2em;text-align:center;border:1px solid var(--line,#ccc)"></td><td style="width:2.2em;height:2.2em;text-align:center;border:1px solid var(--line,#ccc)"></td><td style="width:2.2em;height:2.2em;text-align:center;border:1px solid var(--line,#ccc)"></td><td style="width:2.2em;height:2.2em;text-align:center;border:1px solid var(--line,#ccc)"></td><td style="width:2.2em;height:2.2em;text-align:center;border:1px solid var(--line,#ccc)"></td></tr><tr><td style="width:2.2em;height:2.2em;text-align:center;border:1px solid var(--line,#ccc)"></td><td style="width:2.2em;height:2.2em;text-align:center;border:1px solid var(--line,#ccc)"></td><td style="width:2.2em;height:2.2em;text-align:center;border:1px solid var(--line,#ccc)"></td><td style="width:2.2em;height:2.2em;text-align:center;border:1px solid var(--line,#ccc)"></td><td style="width:2.2em;height:2.2em;text-align:center;border:1px solid var(--line,#ccc)"></td><td style="width:2.2em;height:2.2em;text-align:center;border:1px solid var(--line,#ccc)"></td></tr><tr><td style="width:2.2em;height:2.2em;text-align:center;border:1px solid var(--line,#ccc)"></td><td style="width:2.2em;height:2.2em;text-align:center;border:1px solid var(--line,#ccc)">P</td><td style="width:2.2em;height:2.2em;text-align:center;border:1px solid var(--line,#ccc)">P</td><td style="width:2.2em;height:2.2em;text-align:center;border:1px solid var(--line,#ccc)">P</td><td style="width:2.2em;height:2.2em;text-align:center;border:1px solid var(--line,#ccc)"></td><td style="width:2.2em;height:2.2em;text-align:center;border:1px solid var(--line,#ccc)"></td></tr><tr><td style="width:2.2em;height:2.2em;text-align:center;border:1px solid var(--line,#ccc)"></td><td style="width:2.2em;height:2.2em;text-align:center;border:1px solid var(--line,#ccc)">R</td><td style="width:2.2em;height:2.2em;text-align:center;border:1px solid var(--line,#ccc)">K</td><td style="width:2.2em;height:2.2em;text-align:center;border:1px solid var(--line,#ccc)">B</td><td style="width:2.2em;height:2.2em;text-align:center;border:1px solid var(--line,#ccc)"></td><td style="width:2.2em;height:2.2em;text-align:center;border:1px solid var(--line,#ccc)"></td></tr></tbody></table></div>
+  <p>There are <strong>four kinds of piece</strong>, moving as in standard shogi:</p>
+  <ul>
+    <li><strong>King (K)</strong>: one square in any of 8 directions. Lose it and you lose.</li>
+    <li><strong>Pawn (P)</strong>: one square forward. Promoted, it becomes a <strong>tokin</strong>: one square forward, diagonally forward, sideways or straight back (6 directions).</li>
+    <li><strong>Rook (R)</strong>: any distance vertically or horizontally. Promoted, a <strong>dragon</strong>: also one square diagonally.</li>
+    <li><strong>Bishop (B)</strong>: any distance diagonally. Promoted, a <strong>horse</strong>: also one square vertically or horizontally.</li>
+  </ul>
+  <p>Pieces in hand at the start: <strong>first player 4 pawns, 1 rook, 1 bishop; second player 3 pawns, 1 rook, 1 bishop</strong>. Why the first player gets one extra pawn is explained under “first and second player.”</p>
+
+  <h2 class="rv" id="s2">Each turn: drop or move</h2>
+  <ul>
+    <li><strong>Drop</strong>: place a piece from your hand on an empty square. <strong>Flipping only happens when you drop.</strong></li>
+    <li><strong>Move</strong>: move one of your pieces on the board as in shogi. Moving never flips anything. Moving onto an enemy piece captures it into your hand (a promoted piece returns to its normal side).</li>
+  </ul>
+  <p>If you can neither drop nor move, you pass.</p>
+
+  <h2 class="rv" id="s3">Sandwiched pieces defect</h2>
+  <p>When you drop a piece, look in all <strong>8 directions</strong> from it. If one or more enemy pieces in a line are followed by one of yours, every enemy piece in between flips to your side, exactly as in Othello. Any piece you drop can sandwich in all 8 directions.</p>
+  <p>Flipped pieces <strong>promote on the spot</strong> (pawn → tokin, rook → dragon, bishop → horse). The dropped piece itself does not promote.</p>
+  <p>This is where it differs from both shogi and Othello.</p>
+  <h3>The board edge counts as your piece</h3>
+  <p>A line of enemy pieces that runs into <strong>the edge of the board</strong> is also sandwiched. Pieces pushed against the edge defect together. In 40 AI-vs-AI games each, this rule raised the average flips per move from 0.76 to 2.51, and the share of games with a chain of 3 or more steps from 15% to 85%. The edge is the most important place on the board.</p>
+  <h3>Pieces next to their own king never flip</h3>
+  <p>A piece on any of the 8 squares around its own king cannot be flipped (it stays loyal to its king), and a sandwich stops when it reaches such a piece. Kings never flip either. Without this rule, a king’s guards could all flip in one move and most games ended with an early king capture.</p>
+  <h3>Chains</h3>
+  <p>Each flipped piece then checks all 8 directions the same way, and if it sandwiches more pieces, they flip too. This is a <strong>chain</strong>, and one move can chain up to <strong>5 steps</strong>. No piece flips twice in one move, and a king never starts a chain.</p>
+
+  <h2 class="rv" id="s4">Winning and losing</h2>
+  <ul>
+    <li><strong>Capture the enemy king</strong> and you win.</li>
+    <li>If <strong>both players pass in a row</strong>, whoever has more pieces on the board wins.</li>
+    <li>If <strong>the same position appears 4 times</strong>, the game ends and is decided by piece count (equal counts are a draw).</li>
+    <li>Online games give each player 3 minutes plus 5 seconds per move. Run out of time and you lose.</li>
+  </ul>
+
+  <h2 class="rv" id="s5">Tips for winning</h2>
+  <p>These come from AI-vs-AI games and from how the rules work; they have not been fully tested between human players.</p>
+  <ol>
+    <li><strong>Push enemy pieces toward the edge.</strong> The edge ends a sandwich, so pieces lined up against it can be taken in one drop. Do not leave your own pieces lined up there.</li>
+    <li><strong>Keep your pieces near your king.</strong> Pieces next to your king cannot flip, so that area is safe. Enemy pieces next to their king will not flip either, so do not waste drops on them.</li>
+    <li><strong>Count the whole chain before you drop.</strong> Flipped pieces start new sandwiches. A drop whose chain reaches a second or third step changes the board far more than one that takes a single piece.</li>
+    <li><strong>Use moves to set up the next sandwich.</strong> Moving does not flip, but a piece placed beyond an enemy line lets your next drop take the whole line. Captured pieces go to your hand, so they also give you more drops.</li>
+    <li><strong>Always weigh the king against the count.</strong> If the king is out of reach, passes or a repeated position end the game by piece count. When you are ahead on count, you do not have to attack.</li>
+  </ol>
+
+  <h2 class="rv" id="s6">First and second player</h2>
+  <p>With equal hands, the first player won <strong>40%</strong> of 60 AI-vs-AI games: whoever breaks formation first tends to get punished, which favors the second player. Giving only the first player one extra pawn raised its win rate to <strong>59%</strong> over 100 games. That is a little much, but pieces can only be added one at a time, so the game leans to “the first player has a slight edge,” as in shogi and chess.</p>
+  <p>How these values were decided is in <a href="/en/notes/negaeri-balance/" hreflang="en" lang="en">setting the rules of Negaeri Shogi with AI-vs-AI games</a>.</p>
+
+  <h2 class="rv" id="s7">Ways to play</h2>
+  <ul>
+    <li><strong>Two players on one device</strong>: take turns. Good for learning the rules.</li>
+    <li><strong>Versus AI</strong>: easy, normal and hard. Easy reads 2 moves ahead (with deliberate randomness), normal 4 moves and hard 6 moves.</li>
+    <li><strong>Online</strong>: you are matched with someone waiting. Results move your rating and put you on the leaderboard.</li>
+  </ul>
+  <p>The game is available in English and Japanese.</p>
+
+  <h2 class="rv" id="s8">FAQ</h2>
+  <h3>Can I play without knowing shogi?</h3>
+  <p>Yes. There are only four kinds of piece plus three promoted forms, described above under “Board and pieces.” Starting with the easy AI is a good way in.</p>
+  <h3>How is it different from other sandwich-and-flip board games?</h3>
+  <p>Compared with Othello, the sandwich (8 directions) works the same way. The differences: capturing the king wins, you can also move pieces, flipped pieces promote and chain, the board edge counts, and pieces next to a king never flip.</p>
+  <h3>Can a game be drawn?</h3>
+  <p>Yes. When both players pass in a row, or the same position appears 4 times, equal piece counts make a draw.</p>
+  <h3>Which side has the advantage?</h3>
+  <p>In 100 AI-vs-AI games, the first player won 59%. The balance between human players has not been confirmed yet.</p>
+
+  <p class="note">This is the English version of <a href="/works/negaeri-shogi/guide" hreflang="ja" lang="ja">the Japanese guide</a>.</p>
+  <p style="margin-top:40px"><a class="btn" href="/play/negaeri-shogi/">Play</a></p>
+</div></main>
+
+<footer class="site"><div class="wrap">
+  <span>© 2026 Koshin Studio</span>
+  <div class="sns-row"></div>
+  <nav><a href="/en/" hreflang="en" lang="en">English</a><a href="/" hreflang="ja" lang="ja">日本語</a><a href="/en/about/#contact" hreflang="en" lang="en">Contact</a><a href="/en/privacy/" hreflang="en" lang="en">Privacy</a></nav>
+</div></footer>
+<script src="/motion.js?v=1e7447ec" defer></script>
+</body>
+</html>

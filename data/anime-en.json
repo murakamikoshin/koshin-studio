@@ -1,0 +1,36 @@
+{
+  "note": "Anime Type Quiz（ガチアニメ診断）の英語。axes の name・desc と nick（二つ名の部品）は、診断本体の英語の文字列（shindananime の src/strings.js の en）と同じ。ask と body は /en/anime/axes/ の解説文で、日本語（data/anime-axes.json）から訳した。",
+  "axes": [
+    { "label": "World", "ask": "Is the setting an extension of reality, or another world?",
+      "body": "Whether the story’s world continues from the lives we live now, or runs on entirely different rules. People who lean R (Realistic) are moved by grounded settings such as school, work and family. People who lean F (Fantasy) get drawn in most by settings that let them forget reality for a while: magic, other worlds, invented civilizations. Neither side is better.",
+      "pos": { "l": "R", "name": "Realistic", "desc": "You are moved by grounded human drama" },
+      "neg": { "l": "F", "name": "Fantasy", "desc": "You get fired up by a world far from reality" } },
+    { "label": "Aftertaste", "ask": "After it ends, do you want weight or a lift?",
+      "body": "An axis about how stories end and how intense they get on the way. D (Dark) people can savor merciless turns and a heavy afterglow as part of the work. H (Happy) people want things to pay off in the end, however hard the middle gets. The quiz asks about genre likes such as gore or romance separately; this axis looks at your taste in aftertaste itself.",
+      "pos": { "l": "D", "name": "Dark", "desc": "You remember stories most when there is no salvation" },
+      "neg": { "l": "H", "name": "Happy", "desc": "You want reversals and a happy finale" } },
+    { "label": "Structure & pace", "ask": "Do you want to pick up foreshadowing, or ride the momentum?",
+      "body": "Your taste in how a story is built. C (Foreshadowing) puts weight on small oddities early on that pay off later, and on the fun of solving a setting’s mysteries. S (Pace & momentum) wants to be pulled along by fast developments and episode-by-episode highs rather than fine logic. The difference is whether you watch while thinking ahead, or ride the moment.",
+      "pos": { "l": "C", "name": "Foreshadowing", "desc": "You love picking up foreshadowing and theorizing" },
+      "neg": { "l": "S", "name": "Pace & momentum", "desc": "You want to be swept along by momentum and tempo" } },
+    { "label": "Sub-taste", "ask": "Is the highlight a battle of wits, or action?",
+      "body": "Your taste in what kind of highlight you want. P (Mind games) enjoys reading what lies beneath words and the maneuvering between characters. A (Action) gets fired up by animation showpieces and powerful fights. In the type code, one letter is given depending on which side your answers lean to on average.",
+      "pos": { "l": "P", "name": "Mind games", "desc": "You like mind games and drama between the lines" },
+      "neg": { "l": "A", "name": "Action", "desc": "You like animation showpieces and powerful battles" } },
+    { "label": "Visual vs story", "ask": "What decides it for you: the visuals or the script?",
+      "body": "An axis about what draws you to a work. V (Visuals) people come in through color, composition and a sense of direction. T (Story) people will follow a show with plain art if the script is good. The quiz asks about picture quality and era as a separate item, and that is not part of the type code.",
+      "pos": { "l": "V", "name": "Visuals", "desc": "You get hooked by visuals and directing" },
+      "neg": { "l": "T", "name": "Story", "desc": "You choose by script and story" } },
+    { "label": "Viewing style", "ask": "Do you savor it slowly, or enjoy it casually?",
+      "body": "An axis about viewing habits. M (Deep-dive) people savor one episode at a time and read reactions and analyses afterward. L (Binge) people watch something fun all at once and move on to the next show. It looks at how you watch, not at how heavy the work is.",
+      "pos": { "l": "M", "name": "Deep-dive", "desc": "You savor one episode at a time, then read every analysis" },
+      "neg": { "l": "L", "name": "Binge", "desc": "You binge what is fun, then move on to the next" } }
+  ],
+  "nick": {
+    "fixed": { "RDCP-VM": "Abyss-Gazing Theory Collector", "FHSA-TL": "Full-Adrenaline Thrill Hunter",
+               "FDCA-VM": "Otherworld-Roaming Romance Seeker", "RHSP-TL": "Escapist Casual Fan" },
+    "wm": { "RD": "Abyss-Gazing", "RH": "Everyday-Loving", "FD": "Despair-Realm-Conquering", "FH": "Otherworld-Racing" },
+    "st": { "CP": "Theory-Crafting", "CA": "Foreshadowing-Battle", "SP": "Gut-Feeling Drama", "SA": "Thrill-Ride" },
+    "vw": { "VM": "Collector", "VL": "Hunter", "TM": "Analyst", "TL": "Runner" }
+  }
+}

@@ -22,6 +22,12 @@ Japanese index: https://koshinstudio.com/llms.txt
 - [TCG booster box price per pack calculator](https://koshinstudio.com/en/calc/box-price/): Turn a booster box or set price into a price per pack and compare it with the list price. Typical pack counts per box for each game, counted from 179 listings.
 - [Lottery win chance calculator](https://koshinstudio.com/en/calc/lottery/): From the odds and the number of entries, the chance you win at least once. Works even when each entry has different odds.
 
+## Anime Type Quiz guide
+- [Anime Type Quiz guide](https://koshinstudio.com/en/anime/): The six axes and 64 types of the Anime Type Quiz
+- [How to choose an anime quiz](https://koshinstudio.com/en/anime/guide/): What to check in an anime quiz, how to answer, how to read the result
+- [The six axes](https://koshinstudio.com/en/anime/axes/): What each axis measures
+- [All 64 types](https://koshinstudio.com/en/anime/types/): Every type name and code
+
 ## Notes (development logs; each has a Markdown version at the article URL + index.md)
 - [How bullet-hell patterns work: ring, aimed, rain, spiral and homing, with formulas and live demos](https://koshinstudio.com/en/notes/danmaku-patterns/): The exact math behind ring, aimed (odd vs even), rain, spiral and homing bullet-hell patterns, from a real danmaku game, with live demos.
 - [Sushi Stack scores stopped reaching the leaderboard: I changed the game’s numbers and forgot the server’s re-check (twice)](https://koshinstudio.com/en/notes/rank-verify-mismatch/): Honest runs of a browser game stopped reaching the online leaderboard: two game values changed without updating the server that re-checks scores. The fix, and a test that compares both sides with the same seeds.

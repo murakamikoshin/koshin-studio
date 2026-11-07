@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>寝返り将棋 遊び方とコツ｜挟むと寝返る6×6の将棋のルール・連鎖・勝ち方 — Koshin Studio</title>
+<meta name="description" content="寝返り将棋のルールを、図と実際の数値で説明します。打って挟むと相手の駒が寝返って成る、盤の端も挟みになる、玉のとなりは寝返らない。AI 同士の対局で分かった、勝ちやすい打ち方も。">
+<meta name="theme-color" content="#fbfaf7">
+<link rel="icon" href="/favicon.ico?v=1697d589" sizes="48x48">
+<link rel="icon" href="/favicon.svg?v=b9d7922f" type="image/svg+xml" sizes="any">
+<link rel="icon" href="/assets/icon/icon-192.png?v=e2566235" type="image/png" sizes="192x192">
+<link rel="apple-touch-icon" href="/assets/icon/icon-180.png?v=84e7f0e6">
+<link rel="manifest" href="/site.webmanifest">
+<script>document.documentElement.className+=" js"</script>
+<link rel="stylesheet" href="/style.css?v=3d886c33">
+<meta name="google-adsense-account" content="ca-pub-3863314847163872">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3863314847163872" crossorigin="anonymous"></script>
+<link rel="canonical" href="https://koshinstudio.com/works/negaeri-shogi/guide">
+<meta property="og:url" content="https://koshinstudio.com/works/negaeri-shogi/guide">
+<meta property="og:site_name" content="Koshin Studio">
+<meta property="og:locale" content="ja_JP">
+<link rel="alternate" hreflang="ja" href="https://koshinstudio.com/works/negaeri-shogi/guide">
+<link rel="alternate" hreflang="en" href="https://koshinstudio.com/en/works/negaeri-shogi/guide">
+<link rel="alternate" hreflang="x-default" href="https://koshinstudio.com/en/works/negaeri-shogi/guide">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="alternate" type="application/rss+xml" title="Koshin Studio — Notes" href="https://koshinstudio.com/feed.xml">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebPage","name":"寝返り将棋 遊び方","url":"https://koshinstudio.com/works/negaeri-shogi/guide","inLanguage":"ja","primaryImageOfPage":"https://koshinstudio.com/assets/og/og_works_negaeri-shogi_guide.jpg","about":{"@type":"VideoGame","name":"寝返り将棋","url":"https://koshinstudio.com/works/negaeri-shogi/"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Koshin Studio","item":"https://koshinstudio.com/"},{"@type":"ListItem","position":2,"name":"Works","item":"https://koshinstudio.com/works/"},{"@type":"ListItem","position":3,"name":"寝返り将棋","item":"https://koshinstudio.com/works/negaeri-shogi/"},{"@type":"ListItem","position":4,"name":"遊び方","item":"https://koshinstudio.com/works/negaeri-shogi/guide"}]},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"将棋を知らなくても遊べますか？","acceptedAnswer":{"@type":"Answer","text":"遊べます。使う駒は 4 種類と、成った 3 種類だけです。動き方はこのページの「盤と駒」に書いています。まずは AI の「弱」から始めるのがおすすめです。"}},{"@type":"Question","name":"挟んで裏返す盤ゲームとの違いは何ですか？","acceptedAnswer":{"@type":"Answer","text":"オセロと比べると、挟み方（8 方向）は同じです。違うのは、玉を取れば勝ちになること、駒を動かす手もあること、寝返った駒が成って連鎖すること、盤の端も挟みになること、玉のとなりは寝返らないことです。"}},{"@type":"Question","name":"引き分けはありますか？","acceptedAnswer":{"@type":"Answer","text":"あります。2 人とも続けてパスしたときや、同じ局面が 4 回出たときに、盤の上の駒の数が同じなら引き分けです。"}},{"@type":"Question","name":"先手と後手、どちらが有利ですか？","acceptedAnswer":{"@type":"Answer","text":"AI 同士の 100 局では、先手の勝率が 59% でした。人どうしの対局での釣り合いは、まだ確かめられていません。"}}]}]}</script>
+<meta property="og:image" content="https://koshinstudio.com/assets/og/og_works_negaeri-shogi_guide.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
+</head>
+<body>
+<canvas id="motes"></canvas>
+
+<header class="site"><div class="wrap">
+  <a class="logo" href="/"><img class="logo-mark" src="/favicon.svg?v=b9d7922f" alt="" width="28" height="28">Koshin Studio</a>
+  <nav><a href="/works/">Works</a><a href="/works/#game">Games</a><a href="/notes/">Notes</a><a href="/picks/">Picks</a><a href="/calc/">Tools</a><a href="/about/">About</a></nav>
+</div></header>
+
+<main><div class="wrap">
+  <nav class="crumbs" aria-label="現在地"><a href="/">Koshin Studio</a><i aria-hidden="true">›</i><a href="/works/">Works</a><i aria-hidden="true">›</i><a href="/works/negaeri-shogi/">寝返り将棋</a><i aria-hidden="true">›</i><span aria-current="page">遊び方</span></nav>
+  <h1>寝返り将棋 遊び方とコツ</h1>
+  <div class="rule"></div>
+<!--lang-->
+  <p class="note"><a href="/en/works/negaeri-shogi/guide" hreflang="en" lang="en">English version</a></p>
+<!--/lang-->  <p class="lead">挟まれた駒は、敵に寝返る。寝返った駒は、出世する。</p>
+  <p>寝返り将棋は、将棋の駒を使って、オセロのように挟んで裏返す 2 人用のゲームです。6×6 の小さな盤で、1 局は数分で終わります。このページでは、ルールを図と実際の数値で説明し、AI 同士の対局で分かった「勝ちやすい打ち方」をまとめました。数値は、ゲームのルールを書いたコード（<code>rules.ts</code>）の値そのままです。</p>
+  <p><a class="btn" href="/play/negaeri-shogi/">遊ぶ（無料・登録なし）</a></p>
+
+  <h2 class="rv" id="s1">盤と駒</h2>
+  <p>盤は 6×6 の 36 マス。始めは、玉のまわりに歩 3 枚と飛・角を置いた形です。下が先手、上が後手（逆さの駒）です。</p>
+<div class="scroll rv"><table style="border-collapse:collapse;margin:0 auto" aria-label="開始の盤。下が先手、上が後手（逆さの駒）"><tbody><tr><td style="width:2.2em;height:2.2em;text-align:center;border:1px solid var(--line,#ccc)"></td><td style="width:2.2em;height:2.2em;text-align:center;border:1px solid var(--line,#ccc)"></td><td style="width:2.2em;height:2.2em;text-align:center;border:1px solid var(--line,#ccc)"><span style="display:inline-block;transform:rotate(180deg)">角</span></td><td style="width:2.2em;height:2.2em;text-align:center;border:1px solid var(--line,#ccc)"><span style="display:inline-block;transform:rotate(180deg)">玉</span></td><td style="width:2.2em;height:2.2em;text-align:center;border:1px solid var(--line,#ccc)"><span style="display:inline-block;transform:rotate(180deg)">飛</span></td><td style="width:2.2em;height:2.2em;text-align:center;border:1px solid var(--line,#ccc)"></td></tr><tr><td style="width:2.2em;height:2.2em;text-align:center;border:1px solid var(--line,#ccc)"></td><td style="width:2.2em;height:2.2em;text-align:center;border:1px solid var(--line,#ccc)"></td><td style="width:2.2em;height:2.2em;text-align:center;border:1px solid var(--line,#ccc)"><span style="display:inline-block;transform:rotate(180deg)">歩</span></td><td style="width:2.2em;height:2.2em;text-align:center;border:1px solid var(--line,#ccc)"><span style="display:inline-block;transform:rotate(180deg)">歩</span></td><td style="width:2.2em;height:2.2em;text-align:center;border:1px solid var(--line,#ccc)"><span style="display:inline-block;transform:rotate(180deg)">歩</span></td><td style="width:2.2em;height:2.2em;text-align:center;border:1px solid var(--line,#ccc)"></td></tr><tr><td style="width:2.2em;height:2.2em;text-align:center;border:1px solid var(--line,#ccc)"></td><td style="width:2.2em;height:2.2em;text-align:center;border:1px solid var(--line,#ccc)"></td><td style="width:2.2em;height:2.2em;text-align:center;border:1px solid var(--line,#ccc)"></td><td style="width:2.2em;height:2.2em;text-align:center;border:1px solid var(--line,#ccc)"></td><td style="width:2.2em;height:2.2em;text-align:center;border:1px solid var(--line,#ccc)"></td><td style="width:2.2em;height:2.2em;text-align:center;border:1px solid var(--line,#ccc)"></td></tr><tr><td style="width:2.2em;height:2.2em;text-align:center;border:1px solid var(--line,#ccc)"></td><td style="width:2.2em;height:2.2em;text-align:center;border:1px solid var(--line,#ccc)"></td><td style="width:2.2em;height:2.2em;text-align:center;border:1px solid var(--line,#ccc)"></td><td style="width:2.2em;height:2.2em;text-align:center;border:1px solid var(--line,#ccc)"></td><td style="width:2.2em;height:2.2em;text-align:center;border:1px solid var(--line,#ccc)"></td><td style="width:2.2em;height:2.2em;text-align:center;border:1px solid var(--line,#ccc)"></td></tr><tr><td style="width:2.2em;height:2.2em;text-align:center;border:1px solid var(--line,#ccc)"></td><td style="width:2.2em;height:2.2em;text-align:center;border:1px solid var(--line,#ccc)">歩</td><td style="width:2.2em;height:2.2em;text-align:center;border:1px solid var(--line,#ccc)">歩</td><td style="width:2.2em;height:2.2em;text-align:center;border:1px solid var(--line,#ccc)">歩</td><td style="width:2.2em;height:2.2em;text-align:center;border:1px solid var(--line,#ccc)"></td><td style="width:2.2em;height:2.2em;text-align:center;border:1px solid var(--line,#ccc)"></td></tr><tr><td style="width:2.2em;height:2.2em;text-align:center;border:1px solid var(--line,#ccc)"></td><td style="width:2.2em;height:2.2em;text-align:center;border:1px solid var(--line,#ccc)">飛</td><td style="width:2.2em;height:2.2em;text-align:center;border:1px solid var(--line,#ccc)">玉</td><td style="width:2.2em;height:2.2em;text-align:center;border:1px solid var(--line,#ccc)">角</td><td style="width:2.2em;height:2.2em;text-align:center;border:1px solid var(--line,#ccc)"></td><td style="width:2.2em;height:2.2em;text-align:center;border:1px solid var(--line,#ccc)"></td></tr></tbody></table></div>
+  <p>駒は、<strong>玉・歩・飛・角の 4 種類</strong>。動き方は本将棋と同じです。</p>
+  <ul>
+    <li><strong>玉</strong>：まわり 8 マスに 1 マスずつ。取られたら負け。</li>
+    <li><strong>歩</strong>：前に 1 マス。成ると<strong>と金</strong>（前・斜め前・横・後ろの 6 方向に 1 マス）。</li>
+    <li><strong>飛</strong>：縦横にどこまでも。成ると<strong>竜</strong>（さらに斜めに 1 マス）。</li>
+    <li><strong>角</strong>：斜めにどこまでも。成ると<strong>馬</strong>（さらに縦横に 1 マス）。</li>
+  </ul>
+  <p>はじめの持ち駒は、<strong>先手が歩 4・飛 1・角 1、後手が歩 3・飛 1・角 1</strong>。先手だけ歩が 1 枚多いのは、後で説明する「先手と後手の釣り合い」のためです。</p>
+
+  <h2 class="rv" id="s2">1 手でできること：打つか、動かすか</h2>
+  <p>自分の番には、次のどちらかを 1 回します。</p>
+  <ul>
+    <li><strong>打つ</strong>：持ち駒を、盤の空いたマスに置く。<strong>挟んで裏返すのは、打ったときだけ</strong>です。</li>
+    <li><strong>動かす</strong>：盤の上の自分の駒を、将棋と同じように動かす。動かしても挟みは起きません。相手の駒のいるマスに動けば、その駒を取って持ち駒にします（成っていた駒は、元に戻ります）。</li>
+  </ul>
+  <p>打つ手も動かす手も無いときは、パスです。</p>
+
+  <h2 class="rv" id="s3">挟むと寝返る</h2>
+  <p>駒を打ったとき、そこから縦・横・斜めの <strong>8 方向</strong>を見て、相手の駒が 1 枚以上続いた先に自分の駒があれば、その間の相手の駒が全部裏返って、自分の駒になります。オセロと同じ挟み方です。どの駒を打っても、8 方向すべてで挟めます。</p>
+  <p>寝返った駒は、<strong>その場で成ります</strong>（歩→と金、飛→竜、角→馬）。打った駒そのものは成りません。</p>
+  <p>ここからが、将棋とも オセロとも違うところです。</p>
+  <h3>盤の端も、挟みになる</h3>
+  <p>相手の駒が並んだ先が<strong>盤の外</strong>でも、挟んだことになります。端に追い込まれた駒は、まとめて寝返ります。AI 同士の対局（40 局ずつ）で比べると、これがある場合は 1 手で寝返る駒が平均 0.76 枚から 2.51 枚に増え、3 段以上の連鎖が起きた対局は 15% から 85% になりました。端は、いちばん大事な場所です。</p>
+  <h3>玉のとなりは、寝返らない</h3>
+  <p>自分の玉のとなり 8 マスにいる駒は、挟まれても寝返りません（玉への忠誠、という見立てです）。挟みは、その駒に当たったところで止まります。玉そのものも、寝返りません。これが無いと、玉の守りが 1 手で全部寝返って、序盤で玉を取られる対局ばかりになりました。</p>
+  <h3>連鎖</h3>
+  <p>寝返った駒からも、同じように 8 方向の挟みを調べます。そこでまた挟めれば、さらに寝返る。これが<strong>連鎖</strong>で、1 手で最大 <strong>5 段</strong>まで続きます。同じ駒が 1 手の中で 2 回裏返ることはありません。玉は連鎖の起点になりません。</p>
+
+  <h2 class="rv" id="s4">勝ち負け</h2>
+  <ul>
+    <li>相手の<strong>玉を取ったら勝ち</strong>。</li>
+    <li><strong>2 人とも続けてパス</strong>したら、盤の上の駒が多いほうの勝ち。</li>
+    <li><strong>同じ局面が 4 回</strong>出たら、そこで駒の数で決着（同じ数なら引き分け）。</li>
+    <li>オンライン対戦は持ち時間が各 3 分、1 手ごとに 5 秒足されます。時間が切れたら負けです。</li>
+  </ul>
+
+  <h2 class="rv" id="s5">勝ちやすい打ち方</h2>
+  <p>AI 同士の対局と、ルールの仕組みから言えることです。人どうしでの検証は、まだ十分ではありません。</p>
+  <ol>
+    <li><strong>相手の駒を端へ追い込む。</strong>端が挟みの終わりになるので、端に並んだ駒は 1 手でまとめて取れます。逆に、自分の駒を端に並べたままにしないこと。</li>
+    <li><strong>自分の駒は、自分の玉のそばに置く。</strong>玉のとなりの駒は寝返らないので、玉のまわりは安全地帯です。相手の玉のとなりの駒は狙っても寝返らないので、時間の無駄になります。</li>
+    <li><strong>打つ前に、連鎖の先まで数える。</strong>寝返った駒からまた挟みが始まります。1 枚しか取れない手より、2 段目・3 段目まで続く手のほうが、盤ががらりと変わります。</li>
+    <li><strong>動かす手で、次の挟みを準備する。</strong>動かしても挟みは起きませんが、相手の駒の向こう側に自分の駒を置いておけば、次に打つ 1 枚でまとめて挟めます。取った駒は持ち駒になるので、打てる手も増えます。</li>
+    <li><strong>玉を取るか、数で勝つかを、いつも両方見る。</strong>玉が取れなくても、パスや同じ局面の繰り返しになれば駒の数で決まります。数で勝っているなら、無理に攻めない手もあります。</li>
+  </ol>
+
+  <h2 class="rv" id="s6">先手と後手の釣り合い</h2>
+  <p>持ち駒を同じにして AI 同士で 60 局打たせると、先手の勝率は <strong>40%</strong> でした。先に陣形を崩したほうが狙われやすく、後手が有利になります。そこで先手にだけ歩を 1 枚多く持たせたところ、100 局で先手の勝率は <strong>59%</strong> になりました。少し効きすぎですが、駒は 1 枚単位でしか足せないので、将棋やチェスと同じ「先手がわずかに有利」の側にしています。</p>
+  <p>どうやってこの数値を決めたかは、<a href="/notes/negaeri-balance/">寝返り将棋のルールを、AI 同士の対局で決めた記録</a>に書いています。</p>
+
+  <h2 class="rv" id="s7">遊び方は 4 つ</h2>
+  <ul>
+    <li><strong>2 人（同じ端末）</strong>：1 台を交代で。ルールを覚えるのに向いています。</li>
+    <li><strong>AI 対戦</strong>：弱・中・強の 3 段階。弱は 2 手先まで（わざと少しぶれます）、中は 4 手先、強は 6 手先まで読みます。</li>
+    <li><strong>オンライン対戦</strong>：待っている人と組まれます。勝敗でレーティングが上下し、順位表に載ります。</li>
+  </ul>
+
+  <h2 class="rv" id="s8">よくある質問</h2>
+  <h3>将棋を知らなくても遊べますか？</h3>
+  <p>遊べます。使う駒は 4 種類と、成った 3 種類だけです。動き方はこのページの「盤と駒」に書いています。まずは AI の「弱」から始めるのがおすすめです。</p>
+  <h3>挟んで裏返す盤ゲームとの違いは何ですか？</h3>
+  <p>オセロと比べると、挟み方（8 方向）は同じです。違うのは、玉を取れば勝ちになること、駒を動かす手もあること、寝返った駒が成って連鎖すること、盤の端も挟みになること、玉のとなりは寝返らないことです。</p>
+  <h3>引き分けはありますか？</h3>
+  <p>あります。2 人とも続けてパスしたときや、同じ局面が 4 回出たときに、盤の上の駒の数が同じなら引き分けです。</p>
+  <h3>先手と後手、どちらが有利ですか？</h3>
+  <p>AI 同士の 100 局では、先手の勝率が 59% でした。人どうしの対局での釣り合いは、まだ確かめられていません。</p>
+
+  <p style="margin-top:40px"><a class="btn" href="/play/negaeri-shogi/">遊ぶ</a></p>
+</div></main>
+
+<footer class="site"><div class="wrap">
+  <span>© 2026 Koshin Studio</span>
+  <div class="sns-row"></div>
+  <nav><a href="/picks/">Picks</a><a href="/calc/">Tools</a><a href="/about/">運営者情報</a><a href="/about/#contact">お問い合わせ</a><a href="/privacy/">プライバシーポリシー</a><a href="/en/" hreflang="en" lang="en">English</a></nav>
+</div></footer>
+<script src="/motion.js?v=1e7447ec" defer></script>
+</body>
+</html>

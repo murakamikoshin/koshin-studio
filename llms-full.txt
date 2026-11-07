@@ -7523,7 +7523,7 @@ URL: https://koshinstudio.com/works/danmaku-maker/
 
 - 投稿するには、作者本人がクリアすることが条件です。「作れるけど誰もクリアできない」ステージは、出回りません。
 
-  弾幕のパターンが、どういう計算で動いているのかは、弾幕パターンの作り方の記事 (https://koshinstudio.com/notes/danmaku-patterns/)に、動く見本つきで書きました。
+  遊び方・避けるコツ・投稿のルールは、弾幕メーカー 遊び方と攻略 (https://koshinstudio.com/works/danmaku-maker/guide)にまとめました。弾幕のパターンが、どういう計算で動いているのかは、弾幕パターンの作り方の記事 (https://koshinstudio.com/notes/danmaku-patterns/)に、動く見本つきで書きました。
 
 ## 遊び合う
 
@@ -7974,7 +7974,7 @@ URL: https://koshinstudio.com/works/negaeri-shogi/
 
 - 相手の玉を取ったら勝ちです。動かせる手がなければパス。両方がパスなら、盤の上の駒が多いほうが勝ちです。
 
-  遊ぶ画面の「遊び方」で、短い手引きも見られます。
+  遊ぶ画面の「遊び方」で、短い手引きも見られます。図と実際の数値でのくわしい説明と、勝ちやすい打ち方は、寝返り将棋 遊び方とコツ (https://koshinstudio.com/works/negaeri-shogi/guide)にまとめました。
 
 ## 遊び方は、4つ
 
@@ -8081,6 +8081,8 @@ URL: https://koshinstudio.com/anime/
 
 # ガチアニメ診断ガイド
 
+  English version (https://koshinstudio.com/en/anime/)
+
   ガチアニメ診断ガイド。
 6つの軸と64タイプが、それぞれ何を表しているかを書いています。
 
@@ -8135,6 +8137,8 @@ URL: https://koshinstudio.com/anime/
 URL: https://koshinstudio.com/anime/axes/
 
 # 6つの軸
+
+  English version (https://koshinstudio.com/en/anime/axes/)
 
   ガチアニメ診断が測っているのは、この6つ。
 それぞれ2択で、どちら側に寄ったかが文字になります。
@@ -8213,6 +8217,8 @@ URL: https://koshinstudio.com/anime/axes/
 URL: https://koshinstudio.com/anime/guide/
 
 # アニメ診断の選び方
+
+  English version (https://koshinstudio.com/en/anime/guide/)
 
   診断の結果が「当たる」かどうかは、
 何を測っているかで決まります。
@@ -9107,6 +9113,8 @@ Defected pieces get promoted.
 
 - Online games have 3 minutes per player, plus 5 seconds per move.
 
+  The full rules with a diagram and the real values, plus tips for winning, are in How to play Negaeri Shogi (https://koshinstudio.com/en/works/negaeri-shogi/guide).
+
 ## Ways to play
 
 - Two players on one device.
@@ -9226,6 +9234,10 @@ Your anime type, and the one anime that fits you right now.
   You get a “destined pick” and two runners-up. Even people with the same type get different titles, because the pick also takes into account the years you prefer and the themes you like or dislike. If you have already seen a title, press “Seen it” and the next best match moves up.
 
   Closeness between titles is measured by cosine similarity of the six-axis vectors. Popularity and era preferences add only a little, on purpose: if they counted for more, the same few titles would come up for everyone.
+
+## The axes and the 64 types
+
+  What each of the six axes measures, all 64 type names, and how to read your result are explained in the Anime Type Quiz guide (https://koshinstudio.com/en/anime/): the six axes (https://koshinstudio.com/en/anime/axes/), all 64 types (https://koshinstudio.com/en/anime/types/) and how to choose an anime quiz (https://koshinstudio.com/en/anime/guide/).
 
 ## Frequently asked questions
 
@@ -12795,7 +12807,7 @@ Survive the ones people around the world have made.
 
 - To publish, you must clear your own stage. Impossible stages never go out.
 
-  How the patterns are calculated is explained, with live demos, in how bullet-hell patterns work (https://koshinstudio.com/en/notes/danmaku-patterns/).
+  How to play, how to dodge and the publishing rules are in the Danmaku Maker guide (https://koshinstudio.com/en/works/danmaku-maker/guide). How the patterns are calculated is explained, with live demos, in how bullet-hell patterns work (https://koshinstudio.com/en/notes/danmaku-patterns/).
 
 ## Play together
 
@@ -16594,6 +16606,294 @@ When I tried to submit my iOS app Torecadash to App Review, I was stopped before
   This is the English version of the original Japanese article (https://koshinstudio.com/notes/app-store-review/).
 
   More development logs, by theme: Notes (https://koshinstudio.com/en/notes/). About the app: Toreca Dash (https://koshinstudio.com/en/works/torecadash/).
+
+
+
+
+---
+
+URL: https://koshinstudio.com/en/anime/
+
+# Anime Type Quiz guide
+
+  日本語版 (https://koshinstudio.com/anime/)
+
+  What the six axes and the 64 types
+of the Anime Type Quiz actually mean.
+
+  New here? Start with how to choose an anime quiz (https://koshinstudio.com/en/anime/guide/) (what to look for, how to answer, how to read the result).
+
+## How the quiz works
+
+  The Anime Type Quiz measures your taste in anime on six axes, from 12 up to 50 multiple-choice questions. Each axis gets one letter for the side you lean to, and the letters together form your type code (for example RDCP-VM). Every axis has two sides, so there are 26 = 64 types.
+
+  Every anime in the quiz’s database has values on the same six axes. Your result is chosen by treating your six values and each anime’s six values as vectors and measuring how close they are (cosine similarity).
+
+  Take the quiz (free, 1 minute) (https://koshinstudio.com/app/shindananime/)About this quiz (https://koshinstudio.com/en/works/shindananime/)
+
+## The six axes
+
+### WorldR / F
+
+      Is the setting an extension of reality, or another world? Realistic or Fantasy.
+
+### AftertasteD / H
+
+      After it ends, do you want weight or a lift? Dark or Happy.
+
+### Structure & paceC / S
+
+      Do you want to pick up foreshadowing, or ride the momentum? Foreshadowing or Pace & momentum.
+
+### Sub-tasteP / A
+
+      Is the highlight a battle of wits, or action? Mind games or Action.
+
+### Visual vs storyV / T
+
+      What decides it for you: the visuals or the script? Visuals or Story.
+
+### Viewing styleM / L
+
+      Do you savor it slowly, or enjoy it casually? Deep-dive or Binge.
+
+  Read about the six axes → (https://koshinstudio.com/en/anime/axes/)
+
+## 64 types
+
+  Each type’s name combines world × aftertaste, structure × sub-taste, and visuals × viewing style. Four common ones:
+
+  RDCP-VMAbyss-Gazing Theory CollectorFHSA-TLFull-Adrenaline Thrill HunterFDCA-VMOtherworld-Roaming Romance SeekerRHSP-TLEscapist Casual Fan
+  See all 64 types → (https://koshinstudio.com/en/anime/types/)
+
+
+---
+
+URL: https://koshinstudio.com/en/anime/guide/
+
+# How to choose an anime quiz
+
+  日本語版 (https://koshinstudio.com/anime/guide/)
+
+  Whether a quiz result “fits”
+depends on what it measures.
+
+  There are many anime quizzes, and similar names hide different methods. This page covers what to look at when choosing one, how to answer, and how to read the result, using the Anime Type Quiz (https://koshinstudio.com/en/works/shindananime/) as the example. The numbers were measured on this site.
+
+## Two kinds of anime quiz
+
+- Quizzes that assign a type. You answer questions and get your “anime taste type” or a character. The result is a category.
+
+- Quizzes that recommend shows. From your taste they name what to watch. The result is a title.
+
+  The Anime Type Quiz gives both at once: a type on six axes (for example RDCP-VM), and then one destined anime and two runners-up from its database.
+
+## Four things to check when choosing an anime quiz
+
+### 1. Does it say what it measures?
+
+  “You are this type” means little if you cannot see the basis. The Anime Type Quiz measures six axes: world, aftertaste, structure and pace, sub-taste, visuals vs story, and viewing style. Each is explained on the six axes (https://koshinstudio.com/en/anime/axes/).
+
+### 2. Can you see why you got your result?
+
+  Each letter of the type code shows which side of an axis you leaned to. The result screen shows how far you leaned on each axis and a match percentage for each anime, computed from the same measure used to rank them (why 80% was beating 82% (https://koshinstudio.com/en/notes/match-percent/) explains how).
+
+### 3. How many anime does it choose from?
+
+  The quiz chooses from 6,074 anime. It started from 16,177 entries and dropped those with too few review words to place on the axes. The criteria, and the resulting bias (90.5% from 2000 or later), are in the article on the database (https://koshinstudio.com/en/notes/anime-db/).
+
+### 4. Where do your answers go?
+
+  The Anime Type Quiz computes your answers only on your device and does not send them to a server. See the privacy policy (https://koshinstudio.com/en/privacy/).
+
+## How to answer
+
+- Go with your gut. For questions you hesitate on, “somewhat” is enough.
+
+- Avoid answering “neither” again and again. If everything is in the middle, the axes cannot point anywhere and the result blurs.
+
+- Start with 12, continue if you like. Twelve questions (about 30 seconds) give your type and destined anime. Continuing extends to up to 50 questions and also weighs picture quality and era, plus likes such as romance, horror or isekai.
+
+- Mark shows you have seen. The next best one takes its place.
+
+- Switch the era on the result screen. Any era, 2010 or later, or 2018 or later.
+
+## Reading the result: the type is stable, the anime moves
+
+  How much the result changes between 12 and 50 questions was measured with 1,000 simulated respondents (how much changes when the quiz is cut to 12 questions (https://koshinstudio.com/en/notes/shindan12/)).
+
+- The type is mostly right even when short. Letter by letter, more than 90% land on the same side even with moderately noisy answers.
+
+- The destined anime moves as questions are added. The anime picked at 12 questions is still first at 50 for only 1 in 5 to 8 people. Choosing one out of 6,000 means small differences in input reorder the top.
+
+  If you only want your type, 12 questions are enough. For a better pick, keep going: 50 questions get about 1.7 to 1.9 times closer to your “true” taste.
+
+## What a quiz can and cannot tell you
+
+- It can tell: the tendency of your taste, and anime close to it.
+
+- It cannot tell: whether you will enjoy a given anime. It measures closeness between taste and work.
+
+- It is biased: the database leans toward newer and widely discussed anime, so older or less discussed titles come up less.
+
+- Taste changes: today’s result may not be next year’s.
+
+## FAQ
+
+### Is the anime quiz free? How many questions are there?
+
+  The Anime Type Quiz is free. The first 12 questions (about 30 seconds) give you your type and your destined anime. Keep answering and it extends to up to 50 questions. All are multiple choice.
+
+### Is the anime quiz accurate?
+
+  It depends what “accurate” means. Your type is fairly stable even with 12 questions: with simulated respondents, more than 90% landed on the same side letter by letter. Your destined anime moves as you add questions: the anime picked after 12 questions is still first after 50 for only 1 in 5 to 8 people. The quiz measures how close an anime is to your taste, not whether you will enjoy it.
+
+### Are my answers or results saved anywhere?
+
+  No. Your answers are computed only on your device and are not sent to a server.
+
+### Will I get the same result every time?
+
+  Your type tends to be stable, but your destined anime changes with how you answer, the era setting and the genres you choose. Mark an anime as watched and the next best one replaces it.
+
+### Does it pick older anime?
+
+  Less often. 90.5% of the anime in the database are from 2000 or later, and it leans toward newer and widely discussed titles. On the result screen you can choose any era, 2010 or later, or 2018 or later.
+
+  Take the Anime Type Quiz (free, 1 minute) (https://koshinstudio.com/app/shindananime/)About this quiz (https://koshinstudio.com/en/works/shindananime/)
+
+  Read next: the six axes (https://koshinstudio.com/en/anime/axes/) / all 64 types (https://koshinstudio.com/en/anime/types/) / guide home (https://koshinstudio.com/en/anime/)
+
+  The quiz’s anime titles appear in English where an English title could be matched; otherwise in Japanese.
+
+
+---
+
+URL: https://koshinstudio.com/en/anime/axes/
+
+# The six axes
+
+  日本語版 (https://koshinstudio.com/anime/axes/)
+
+  These six are what the Anime Type Quiz measures.
+Each has two sides, and the side you lean to becomes a letter.
+
+## World R / F
+
+  Is the setting an extension of reality, or another world?
+
+  Whether the story’s world continues from the lives we live now, or runs on entirely different rules. People who lean R (Realistic) are moved by grounded settings such as school, work and family. People who lean F (Fantasy) get drawn in most by settings that let them forget reality for a while: magic, other worlds, invented civilizations. Neither side is better.
+
+    R — RealisticYou are moved by grounded human drama.
+
+    F — FantasyYou get fired up by a world far from reality.
+
+## Aftertaste D / H
+
+  After it ends, do you want weight or a lift?
+
+  An axis about how stories end and how intense they get on the way. D (Dark) people can savor merciless turns and a heavy afterglow as part of the work. H (Happy) people want things to pay off in the end, however hard the middle gets. The quiz asks about genre likes such as gore or romance separately; this axis looks at your taste in aftertaste itself.
+
+    D — DarkYou remember stories most when there is no salvation.
+
+    H — HappyYou want reversals and a happy finale.
+
+## Structure & pace C / S
+
+  Do you want to pick up foreshadowing, or ride the momentum?
+
+  Your taste in how a story is built. C (Foreshadowing) puts weight on small oddities early on that pay off later, and on the fun of solving a setting’s mysteries. S (Pace & momentum) wants to be pulled along by fast developments and episode-by-episode highs rather than fine logic. The difference is whether you watch while thinking ahead, or ride the moment.
+
+    C — ForeshadowingYou love picking up foreshadowing and theorizing.
+
+    S — Pace & momentumYou want to be swept along by momentum and tempo.
+
+## Sub-taste P / A
+
+  Is the highlight a battle of wits, or action?
+
+  Your taste in what kind of highlight you want. P (Mind games) enjoys reading what lies beneath words and the maneuvering between characters. A (Action) gets fired up by animation showpieces and powerful fights. In the type code, one letter is given depending on which side your answers lean to on average.
+
+    P — Mind gamesYou like mind games and drama between the lines.
+
+    A — ActionYou like animation showpieces and powerful battles.
+
+## Visual vs story V / T
+
+  What decides it for you: the visuals or the script?
+
+  An axis about what draws you to a work. V (Visuals) people come in through color, composition and a sense of direction. T (Story) people will follow a show with plain art if the script is good. The quiz asks about picture quality and era as a separate item, and that is not part of the type code.
+
+    V — VisualsYou get hooked by visuals and directing.
+
+    T — StoryYou choose by script and story.
+
+## Viewing style M / L
+
+  Do you savor it slowly, or enjoy it casually?
+
+  An axis about viewing habits. M (Deep-dive) people savor one episode at a time and read reactions and analyses afterward. L (Binge) people watch something fun all at once and move on to the next show. It looks at how you watch, not at how heavy the work is.
+
+    M — Deep-diveYou savor one episode at a time, then read every analysis.
+
+    L — BingeYou binge what is fun, then move on to the next.
+
+## About picture quality and era
+
+  As an item outside the type code, the quiz also asks whether you prefer newer, high-quality anime or any era. Within one type, this and your genre likes and dislikes change which anime are chosen.
+
+  Take the quiz (free, 1 minute) (https://koshinstudio.com/app/shindananime/)About this quiz (https://koshinstudio.com/en/works/shindananime/)
+
+  See all 64 types → (https://koshinstudio.com/en/anime/types/)
+
+
+---
+
+URL: https://koshinstudio.com/en/anime/types/
+
+# 64 types
+
+  日本語版 (https://koshinstudio.com/anime/types/)
+
+  Six axes combine into 64 types.
+Grouped here by world and aftertaste.
+
+## How to read a type code
+
+  A type code is one letter per axis for the side you leaned to. For example RDCP-VM (“Abyss-Gazing Theory Collector”) is made of these six letters:
+
+    Axis | Letter | Side
+
+    World | R | Realistic: You are moved by grounded human drama
+
+    Aftertaste | D | Dark: You remember stories most when there is no salvation
+
+    Structure & pace | C | Foreshadowing: You love picking up foreshadowing and theorizing
+
+    Sub-taste | P | Mind games: You like mind games and drama between the lines
+
+    Visual vs story | V | Visuals: You get hooked by visuals and directing
+
+    Viewing style | M | Deep-dive: You savor one episode at a time, then read every analysis
+
+  Each axis has two sides, so 26 = 64 types. How the quiz works is in how to choose an anime quiz (https://koshinstudio.com/en/anime/guide/), and what the axes mean is in the six axes (https://koshinstudio.com/en/anime/axes/).
+
+## Realistic × Dark
+
+  RDCA-TLAbyss-Gazing Foreshadowing-Battle RunnerRDCA-TMAbyss-Gazing Foreshadowing-Battle AnalystRDCA-VLAbyss-Gazing Foreshadowing-Battle HunterRDCA-VMAbyss-Gazing Foreshadowing-Battle CollectorRDCP-TLAbyss-Gazing Theory-Crafting RunnerRDCP-TMAbyss-Gazing Theory-Crafting AnalystRDCP-VLAbyss-Gazing Theory-Crafting HunterRDCP-VMAbyss-Gazing Theory CollectorRDSA-TLAbyss-Gazing Thrill-Ride RunnerRDSA-TMAbyss-Gazing Thrill-Ride AnalystRDSA-VLAbyss-Gazing Thrill-Ride HunterRDSA-VMAbyss-Gazing Thrill-Ride CollectorRDSP-TLAbyss-Gazing Gut-Feeling Drama RunnerRDSP-TMAbyss-Gazing Gut-Feeling Drama AnalystRDSP-VLAbyss-Gazing Gut-Feeling Drama HunterRDSP-VMAbyss-Gazing Gut-Feeling Drama Collector
+
+## Realistic × Happy
+
+  RHCA-TLEveryday-Loving Foreshadowing-Battle RunnerRHCA-TMEveryday-Loving Foreshadowing-Battle AnalystRHCA-VLEveryday-Loving Foreshadowing-Battle HunterRHCA-VMEveryday-Loving Foreshadowing-Battle CollectorRHCP-TLEveryday-Loving Theory-Crafting RunnerRHCP-TMEveryday-Loving Theory-Crafting AnalystRHCP-VLEveryday-Loving Theory-Crafting HunterRHCP-VMEveryday-Loving Theory-Crafting CollectorRHSA-TLEveryday-Loving Thrill-Ride RunnerRHSA-TMEveryday-Loving Thrill-Ride AnalystRHSA-VLEveryday-Loving Thrill-Ride HunterRHSA-VMEveryday-Loving Thrill-Ride CollectorRHSP-TLEscapist Casual FanRHSP-TMEveryday-Loving Gut-Feeling Drama AnalystRHSP-VLEveryday-Loving Gut-Feeling Drama HunterRHSP-VMEveryday-Loving Gut-Feeling Drama Collector
+
+## Fantasy × Dark
+
+  FDCA-TLDespair-Realm-Conquering Foreshadowing-Battle RunnerFDCA-TMDespair-Realm-Conquering Foreshadowing-Battle AnalystFDCA-VLDespair-Realm-Conquering Foreshadowing-Battle HunterFDCA-VMOtherworld-Roaming Romance SeekerFDCP-TLDespair-Realm-Conquering Theory-Crafting RunnerFDCP-TMDespair-Realm-Conquering Theory-Crafting AnalystFDCP-VLDespair-Realm-Conquering Theory-Crafting HunterFDCP-VMDespair-Realm-Conquering Theory-Crafting CollectorFDSA-TLDespair-Realm-Conquering Thrill-Ride RunnerFDSA-TMDespair-Realm-Conquering Thrill-Ride AnalystFDSA-VLDespair-Realm-Conquering Thrill-Ride HunterFDSA-VMDespair-Realm-Conquering Thrill-Ride CollectorFDSP-TLDespair-Realm-Conquering Gut-Feeling Drama RunnerFDSP-TMDespair-Realm-Conquering Gut-Feeling Drama AnalystFDSP-VLDespair-Realm-Conquering Gut-Feeling Drama HunterFDSP-VMDespair-Realm-Conquering Gut-Feeling Drama Collector
+
+## Fantasy × Happy
+
+  FHCA-TLOtherworld-Racing Foreshadowing-Battle RunnerFHCA-TMOtherworld-Racing Foreshadowing-Battle AnalystFHCA-VLOtherworld-Racing Foreshadowing-Battle HunterFHCA-VMOtherworld-Racing Foreshadowing-Battle CollectorFHCP-TLOtherworld-Racing Theory-Crafting RunnerFHCP-TMOtherworld-Racing Theory-Crafting AnalystFHCP-VLOtherworld-Racing Theory-Crafting HunterFHCP-VMOtherworld-Racing Theory-Crafting CollectorFHSA-TLFull-Adrenaline Thrill HunterFHSA-TMOtherworld-Racing Thrill-Ride AnalystFHSA-VLOtherworld-Racing Thrill-Ride HunterFHSA-VMOtherworld-Racing Thrill-Ride CollectorFHSP-TLOtherworld-Racing Gut-Feeling Drama RunnerFHSP-TMOtherworld-Racing Gut-Feeling Drama AnalystFHSP-VLOtherworld-Racing Gut-Feeling Drama HunterFHSP-VMOtherworld-Racing Gut-Feeling Drama Collector
+  Find your type (https://koshinstudio.com/app/shindananime/)About this quiz (https://koshinstudio.com/en/works/shindananime/)
 
 
 ---

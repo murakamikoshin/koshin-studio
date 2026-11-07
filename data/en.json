@@ -392,5 +392,47 @@
     "title": "Where App Store review stopped me: “Guideline 2.1 Information Needed” on the first submission, and four rejections",
     "date": "2026-11-07",
     "blurb": "Records of an indie iOS app stuck in App Store review: the six items asked for in Guideline 2.1 Information Needed on the first submission, and four rejections including iPad screenshots."
+  },
+  {
+    "ja": "/works/negaeri-shogi/guide",
+    "en": "/en/works/negaeri-shogi/guide",
+    "title": "How to play Negaeri Shogi: rules, chains and winning tips for the 6×6 flipping shogi game",
+    "date": "2026-11-07",
+    "blurb": "The rules of Negaeri Shogi with a diagram and the real values: drop a piece to sandwich enemy pieces and they defect and promote, the board edge counts, pieces next to a king never flip. Plus what AI-vs-AI games showed about winning."
+  },
+  {
+    "ja": "/works/danmaku-maker/guide",
+    "en": "/en/works/danmaku-maker/guide",
+    "title": "Danmaku Maker guide: how to dodge bullet hell, build stages and publish them",
+    "date": "2026-11-07",
+    "blurb": "How to play Danmaku Maker and get better at it: the hitbox size, odd vs even aimed shots, boss phases, revives and rankings, and the rules for building and publishing stages (5 a day), with the app’s real values."
+  },
+  {
+    "ja": "/anime/",
+    "en": "/en/anime/",
+    "title": "Anime Type Quiz guide: the 6 axes and 64 types",
+    "date": "2026-11-07",
+    "blurb": "A guide to the Anime Type Quiz: its six axes, 64 types and how anime are matched to your type."
+  },
+  {
+    "ja": "/anime/guide/",
+    "en": "/en/anime/guide/",
+    "title": "How to choose an anime quiz that finds shows you will like",
+    "date": "2026-11-07",
+    "blurb": "Four things to check when choosing an anime quiz, how to answer, and how to read the result, with measured numbers."
+  },
+  {
+    "ja": "/anime/axes/",
+    "en": "/en/anime/axes/",
+    "title": "The six axes of the Anime Type Quiz",
+    "date": "2026-11-07",
+    "blurb": "What each of the six axes of the Anime Type Quiz measures."
+  },
+  {
+    "ja": "/anime/types/",
+    "en": "/en/anime/types/",
+    "title": "All 64 types of the Anime Type Quiz",
+    "date": "2026-11-07",
+    "blurb": "All 64 types of the Anime Type Quiz with names and codes, grouped by world and aftertaste."
   }
 ]
