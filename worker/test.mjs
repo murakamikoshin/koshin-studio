@@ -53,9 +53,10 @@ await check('/play/stopwatch10/', { status: 200, asked: 'https://stopwatch10.pag
 await check('/app/', { status: 302, loc: 'https://koshinstudio.com/works/' });
 await check('/app/nope/', { status: 404 });
 await check('/app/shindananime/', { status: 200, asked: 'https://shindananime.pages.dev/' });
-await check('/app/torecadash/', { status: 200, asked: 'https://torecadash-web.pages.dev/' });
-await check('/app/torecadash/g/pokemon/', { status: 200, asked: 'https://torecadash-web.pages.dev/g/pokemon/' });
-await check('/app/torecadash', { status: 301, loc: 'https://koshinstudio.com/app/torecadash/' });
+/* トレカダッシュの Web版は休止中：紹介ページへ送る */
+await check('/app/torecadash/', { status: 302, loc: 'https://koshinstudio.com/works/torecadash/' });
+await check('/app/torecadash/g/pokemon/', { status: 302, loc: 'https://koshinstudio.com/works/torecadash/' });
+
 /* 守りの頭：中継した物には HSTS と nosniff が付く */
 {
   const res = await mod.fetch(new Request('https://koshinstudio.com/play/sushitsumu/'));

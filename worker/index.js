@@ -21,10 +21,16 @@ const ROUTES = {
   },
   app: {
     shindananime: 'https://shindananime.pages.dev',
-    /* トレカダッシュの Web版（受付中の抽選・予約まとめ）。
-       中身は cardalerthub の functions/web/ が VPS で毎時組んで出す */
-    torecadash: 'https://torecadash-web.pages.dev',
+    /* トレカダッシュの Web版（torecadash-web.pages.dev）は、Pages のプロジェクトが無く
+       530 になっていたので外した（2026-11-07）。作り直したら、ここに一行戻し、
+       下の PAUSED から消し、build.mjs の robots.txt に sitemap の行を戻す */
   },
+};
+
+/* いまは中身の無い入口。404 にせず、紹介ページへ一時的に送る（戻すかもしれないので 302） */
+const PAUSED = {
+  play: {},
+  app: { torecadash: '/works/torecadash/' },
 };
 
 /* 名前を変えた作品。古い道で来たら、新しい道へ送り直す（後ろの道と ?… はそのまま） */
@@ -43,6 +49,9 @@ export default {
 
     const moved = (MOVED[kind] || {})[slug];
     if (moved) return Response.redirect(url.origin + '/' + kind + '/' + moved + (rest || '/') + url.search, 301);
+
+    const paused = (PAUSED[kind] || {})[slug];
+    if (paused) return Response.redirect(url.origin + paused, 302);
 
     /* 入口だけで来たら、作品の一覧へ返す */
     if (!slug) return Response.redirect(url.origin + '/works/', 302);

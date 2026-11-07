@@ -1472,9 +1472,9 @@ writeFileSync(here + '/robots.txt',
     'Sitemap: ' + SITE + '/sitemap.xml',
     /* ドラフト会議ごっこ（別の Worker が配信）の sitemap は、向こうが書き出す */
     'Sitemap: ' + SITE + '/draft/sitemap.xml',
-    /* トレカダッシュ Web版（/app/torecadash/、別の Pages から worker が中継）は
-       ページが毎時入れ替わるので、sitemap も向こうが自分で書き出す */
-    'Sitemap: ' + SITE + '/app/torecadash/sitemap.xml', ''].join('\n'));
+    /* トレカダッシュ Web版（/app/torecadash/）の sitemap は、Web版を休止している間は載せない
+       （中身が無く 530 になっていた。2026-11-07） */
+    ''].join('\n'));
 
 
 /* ---- llms.txt / llms-full.txt（AI が、このサイトを読み取りやすくする） ----

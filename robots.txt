@@ -28,4 +28,3 @@ Disallow: /draft/api/
 
 Sitemap: https://koshinstudio.com/sitemap.xml
 Sitemap: https://koshinstudio.com/draft/sitemap.xml
-Sitemap: https://koshinstudio.com/app/torecadash/sitemap.xml
