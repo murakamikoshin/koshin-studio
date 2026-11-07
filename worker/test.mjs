@@ -57,6 +57,15 @@ await check('/app/shindananime/', { status: 200, asked: 'https://shindananime.pa
 await check('/app/torecadash/', { status: 302, loc: 'https://koshinstudio.com/works/torecadash/' });
 await check('/app/torecadash/g/pokemon/', { status: 302, loc: 'https://koshinstudio.com/works/torecadash/' });
 
+/* 束ねた記録：旧 URL は新しい記事のその節へ 301、ほかの記事はそのまま Pages へ通す */
+await check('/notes/store-name-variants/', { status: 301, loc: 'https://koshinstudio.com/notes/tcg-store-matching/#s1' });
+await check('/notes/store-name-variants', { status: 301, loc: 'https://koshinstudio.com/notes/tcg-store-matching/#s1' });
+await check('/notes/notify-gate/index.md', { status: 301, loc: 'https://koshinstudio.com/notes/data-repair/#s7' });
+await check('/en/notes/vps-migration/', { status: 301, loc: 'https://koshinstudio.com/en/notes/scheduled-jobs/#s1' });
+await check('/notes/anago/', { status: 200, asked: 'https://koshinstudio.com/notes/anago/' });
+await check('/en/notes/', { status: 200, asked: 'https://koshinstudio.com/en/notes/' });
+await check('/notes/tcg-store-matching/', { status: 200, asked: 'https://koshinstudio.com/notes/tcg-store-matching/' });
+
 /* 守りの頭：中継した物には HSTS と nosniff が付く */
 {
   const res = await mod.fetch(new Request('https://koshinstudio.com/play/sushitsumu/'));

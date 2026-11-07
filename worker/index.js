@@ -39,9 +39,19 @@ const MOVED = {
   app: {},
 };
 
+import { MOVED_NOTES } from './moved-notes.js';
+
 export default {
   async fetch(request) {
     const url = new URL(request.url);
+
+    /* /notes/ と /en/notes/：束ねた旧記事だけ 301 で送り、ほかはそのまま Pages へ通す */
+    if (/^\/(en\/)?notes\//.test(url.pathname)) {
+      const key = url.pathname.replace(/\/index\.(md|html)$/, '').replace(/\/$/, '');
+      const to = MOVED_NOTES[key];
+      if (to) return Response.redirect(url.origin + to, 301);
+      return fetch(request);
+    }
 
     const m = url.pathname.match(/^\/(play|app)(?:\/([A-Za-z0-9_-]+)(\/.*)?)?\/?$/);
     if (!m) return new Response('Not found', { status: 404 });

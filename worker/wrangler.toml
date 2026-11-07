@@ -2,11 +2,20 @@ name = "koshin-studio-routes"
 main = "index.js"
 compatibility_date = "2026-01-01"
 
-# /play/* と /app/* だけを受ける。ほかは Pages がそのまま返す
+# /play/* と /app/* を受ける（下に /notes/ の転送も）。ほかは Pages がそのまま返す
 [[routes]]
 pattern = "koshinstudio.com/play/*"
 zone_name = "koshinstudio.com"
 
 [[routes]]
 pattern = "koshinstudio.com/app/*"
+zone_name = "koshinstudio.com"
+
+# 束ねた記録の旧 URL を 301 で送るため（ほかの記事は、そのまま Pages へ通す）
+[[routes]]
+pattern = "koshinstudio.com/notes/*"
+zone_name = "koshinstudio.com"
+
+[[routes]]
+pattern = "koshinstudio.com/en/notes/*"
 zone_name = "koshinstudio.com"
