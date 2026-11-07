@@ -1,5 +1,63 @@
 [
   {
+    "slug": "danmaku-maker",
+    "title": "弾幕メーカー",
+    "kind": "game",
+    "category": "GameApplication",
+    "year": "2026",
+    "status": "公開中",
+    "url": "/works/danmaku-maker/",
+    "cover": "/assets/danmaku-maker-square",
+    "coverW": 720,
+    "coverH": 720,
+    "genre": [
+      "シューティング",
+      "弾幕",
+      "ステージ作成"
+    ],
+    "blurb": "弾幕ステージを自分で作って投稿し、世界中のプレイヤーが作ったステージを遊べる iPhone・iPad の弾幕ゲーム。発射台は最大8個、遊び方は4つ。10言語対応、App Store で配信中。",
+    "tags": [
+      "iOS",
+      "ブラウザ版あり",
+      "10言語"
+    ],
+    "featured": true,
+    "stats": [
+      {
+        "n": 4,
+        "label": "つの遊び方"
+      },
+      {
+        "n": 30,
+        "label": "本の公式ステージ"
+      },
+      {
+        "n": 8,
+        "label": "個まで置ける発射台"
+      }
+    ],
+    "faq": [
+      {
+        "q": "どこで手に入りますか？",
+        "a": "App Store で配信している、iPhone・iPad 向けのゲームです。このページの「App Store で開く」から入れます。Android 版は、ありません。インストールせずに試せるブラウザ版のお試し（無料・登録なし）があります。"
+      },
+      {
+        "q": "ログインは必要ですか？",
+        "a": "遊ぶだけなら、ログインは要りません。ステージの投稿・いいね・通報には、Apple でサインインが必要です。"
+      },
+      {
+        "q": "課金しないと遊べないステージはありますか？",
+        "a": "ありません。課金で増えるのは、ステージを作るときに使える弾幕や見た目です。課金した人が作ったステージも、誰でも遊べます。"
+      }
+    ],
+    "os": "iOS",
+    "appStoreUrl": "https://apps.apple.com/jp/app/id6824245206",
+    "playMode": [
+      "SinglePlayer",
+      "MultiPlayer"
+    ]
+  },
+  {
     "slug": "kaeru-sekai",
     "title": "還る世界",
     "kind": "game",

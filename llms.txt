@@ -8,6 +8,7 @@
 English: a one-person studio making browser games and an iPhone app, with development logs that report measured numbers and say what could not be confirmed. English index for AI: https://koshinstudio.com/en/llms.txt (full text: https://koshinstudio.com/en/llms-full.txt).
 
 ## Notes（制作の記録。各記事の Markdown 版は、URL の末尾を index.md にした所）
+- [弾幕の作り方：放射・自機狙い・雨・渦巻き・追尾の仕組みを、計算式と動く見本で解説](https://koshinstudio.com/notes/danmaku-patterns/): 弾幕は短い計算式でできている。弾幕メーカーで実際に使っている放射・自機狙い（奇数弾と偶数弾）・雨・首ふり扇・渦巻き・追尾の式を、動く見本で確かめられるように書いた。
 - [すし積むの番付に載らなくなった：ゲームの数字を変えて、サーバーの検算を直し忘れていた（しかも二つ）](https://koshinstudio.com/notes/rank-verify-mismatch/): 番付に、普通に遊んでも載らなくなった。ゲームの数字を変えて、サーバーの検算を直し忘れていた。金の桶の褒美（8,000→25,000）と、降るネタ（3種→5種）の二つ。注意書きでは守れず、同じ種で出題を比べる検査を足した。
 - [ポケカ・トレカ抽選アプリを比較：トレカダッシュ・トレゲト・NowPokeca・Pokeka Tracker・トレカの地図のメリットとデメリット](https://koshinstudio.com/notes/tcg-lottery-app-compare/): ポケカをはじめトレカの抽選・予約・再販を追うアプリ・サイトを、ジャンル数・通知・地図・料金で比較。作者（トレカダッシュの開発者）による比較で、トレカダッシュの弱いところも書いた。
 - [まとめサイトの巡回は、一覧の 1 ページ目しか見ていなかった：トレカの記事は 2〜4 ページ目にあり、本文も先頭 6,000 文字で切れていた](https://koshinstudio.com/notes/aggregator-pagination/): 入荷情報のまとめサイトの巡回は、一覧の 1 ページ目（ゲーム機中心）しか読まず、ポケカやガンダムは後ろのページにあった。本文も先頭 6,000 文字しか AI に渡さず、後半の店が落ちていた。12 ページまで辿り、重なりつきで全文を読む形に直した。
@@ -102,6 +103,7 @@ English: a one-person studio making browser games and an iPhone app, with develo
 - [抽選の当選確率計算機](https://koshinstudio.com/calc/lottery/): 倍率と応募の回数から、ひとつ以上当たる確率を出す。応募先ごとに確率が違っても使える。トレカの抽選販売の考え方つき。
 
 ## Works（作ったもの）
+- [弾幕メーカー](https://koshinstudio.com/works/danmaku-maker/): 弾幕ステージを自分で作って投稿し、世界中のプレイヤーが作ったステージを遊べる iPhone・iPad の弾幕ゲーム。発射台は最大8個、遊び方は4つ。10言語対応、App Store で配信中。
 - [還る世界](https://koshinstudio.com/works/kaeru-sekai/): 灰色に枯れた世界に光の種をまいて緑をよみがえらせる3Dの景色ゲーム。谷・島・砂漠・火山など番号ごとに違う世界が生まれ、人を住まわせて100年を見届けられます。
 - [すし積む](https://koshinstudio.com/works/sushitsumu/): シャリから始めて、同じネタ同士をぶつけて育てる落ち物パズル。行き着く先は金のすし桶。ブラウザだけで遊べます。
 - [10秒ピッタリで止めろ！](https://koshinstudio.com/works/stopwatch10/): 頭の中で10秒を数えて止めるだけ。3回勝負で、1回あたりの誤差が小さいほど強い。導入も登録も要らず、開いた瞬間に始まります。
@@ -211,6 +213,9 @@ English: a one-person studio making browser games and an iPhone app, with develo
 - [Kaeru Sekai (Returning World) — a free 3D game: bring a gray world back to green](https://koshinstudio.com/en/works/kaeru-sekai/): A free 3D browser game. Plant seeds of light to bring a withered gray world back to green, then settle people and watch 100 years pass. Valleys, islands, deserts and volcanoes, generated from a number. No install.
 - [Notes — development logs with measured numbers](https://koshinstudio.com/en/notes/): Development logs from building browser games and an iOS app, in English: App Store review, ads, duplicates, crawling, cost cuts and API migrations, each with measured numbers.
 - [Tools — free gacha, lottery and TCG box calculators](https://koshinstudio.com/en/calc/): Free in-browser calculators: gacha completion, gacha drop rate and pity, lottery win chance, and TCG booster box price per pack.
+- [Danmaku Maker — build and share bullet-hell stages (iPhone game)](https://koshinstudio.com/en/works/danmaku-maker/): A free iPhone and iPad bullet-hell game in 10 languages: build stages with up to 8 emitters, publish them, and play stages made by players worldwide. Four modes, 30 official stages.
+- [Danmaku Maker (browser) — free bullet hell maker & pattern generator](https://koshinstudio.com/en/works/danmaku-maker/try/): Make bullet-hell patterns and stages in your browser for free: ring, aimed and rain patterns, a live preview, and share links. The browser version of Danmaku Maker.
+- [How bullet-hell patterns work: ring, aimed, rain, spiral and homing, with formulas and live demos](https://koshinstudio.com/en/notes/danmaku-patterns/): The exact math behind ring, aimed (odd vs even), rain, spiral and homing bullet-hell patterns, from a real danmaku game, with live demos.
 - [English hub](https://koshinstudio.com/en/): Games, tools and development logs in English
 
 ## そのほか

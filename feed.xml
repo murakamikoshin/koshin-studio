@@ -7,6 +7,13 @@
   <language>ja</language>
   <atom:link href="https://koshinstudio.com/feed.xml" rel="self" type="application/rss+xml"/>
   <item>
+    <title>弾幕の作り方：放射・自機狙い・雨・渦巻き・追尾の仕組みを、計算式と動く見本で解説</title>
+    <link>https://koshinstudio.com/notes/danmaku-patterns/</link>
+    <guid isPermaLink="true">https://koshinstudio.com/notes/danmaku-patterns/</guid>
+    <pubDate>Fri, 06 Nov 2026 15:00:00 GMT</pubDate>
+    <description>弾幕は短い計算式でできている。弾幕メーカーで実際に使っている放射・自機狙い（奇数弾と偶数弾）・雨・首ふり扇・渦巻き・追尾の式を、動く見本で確かめられるように書いた。</description>
+  </item>
+  <item>
     <title>すし積むの番付に載らなくなった：ゲームの数字を変えて、サーバーの検算を直し忘れていた（しかも二つ）</title>
     <link>https://koshinstudio.com/notes/rank-verify-mismatch/</link>
     <guid isPermaLink="true">https://koshinstudio.com/notes/rank-verify-mismatch/</guid>

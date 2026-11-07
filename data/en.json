@@ -658,5 +658,26 @@
     "title": "Tools — free gacha, lottery and TCG box calculators",
     "date": "2026-11-07",
     "blurb": "Free in-browser calculators: gacha completion, gacha drop rate and pity, lottery win chance, and TCG booster box price per pack."
+  },
+  {
+    "ja": "/works/danmaku-maker/",
+    "en": "/en/works/danmaku-maker/",
+    "title": "Danmaku Maker — build and share bullet-hell stages (iPhone game)",
+    "date": "2026-11-07",
+    "blurb": "A free iPhone and iPad bullet-hell game in 10 languages: build stages with up to 8 emitters, publish them, and play stages made by players worldwide. Four modes, 30 official stages."
+  },
+  {
+    "ja": "/works/danmaku-maker/try/",
+    "en": "/en/works/danmaku-maker/try/",
+    "title": "Danmaku Maker (browser) — free bullet hell maker & pattern generator",
+    "date": "2026-11-07",
+    "blurb": "Make bullet-hell patterns and stages in your browser for free: ring, aimed and rain patterns, a live preview, and share links. The browser version of Danmaku Maker."
+  },
+  {
+    "ja": "/notes/danmaku-patterns/",
+    "en": "/en/notes/danmaku-patterns/",
+    "title": "How bullet-hell patterns work: ring, aimed, rain, spiral and homing, with formulas and live demos",
+    "date": "2026-11-07",
+    "blurb": "The exact math behind ring, aimed (odd vs even), rain, spiral and homing bullet-hell patterns, from a real danmaku game, with live demos."
   }
 ]

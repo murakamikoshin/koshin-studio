@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>弾幕メーカー｜弾幕を自分で作って遊ぶ弾幕作成ゲーム（iPhone・無料のブラウザ版あり）</title>
+<meta name="description" content="弾幕メーカーは、弾幕ステージを自分で作って世界中のプレイヤーと遊び合う iPhone・iPad の弾幕シューティング。ブラウザで試せる無料の弾幕作成ツールもあります。">
+<meta name="apple-itunes-app" content="app-id=6788758920">
+<meta property="og:title" content="弾幕メーカー｜弾幕を自分で作って遊ぶ弾幕作成ゲーム（iPhone・無料のブラウザ版あり）">
+<meta property="og:description" content="弾幕メーカーは、弾幕ステージを自分で作って世界中のプレイヤーと遊び合う iPhone・iPad の弾幕シューティング。ブラウザで試せる無料の弾幕作成ツールもあります。">
+<meta property="og:type" content="article">
+<meta name="theme-color" content="#fbfaf7">
+<link rel="icon" href="/favicon.ico?v=1697d589" sizes="48x48">
+<link rel="icon" href="/favicon.svg?v=b9d7922f" type="image/svg+xml" sizes="any">
+<link rel="icon" href="/assets/icon/icon-192.png?v=e2566235" type="image/png" sizes="192x192">
+<link rel="apple-touch-icon" href="/assets/icon/icon-180.png?v=84e7f0e6">
+<link rel="manifest" href="/site.webmanifest">
+<script>document.documentElement.className+=" js"</script>
+<link rel="stylesheet" href="/style.css?v=3d886c33">
+<meta name="google-adsense-account" content="ca-pub-3863314847163872">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3863314847163872" crossorigin="anonymous"></script>
+<link rel="canonical" href="https://koshinstudio.com/works/danmaku-maker/">
+<meta property="og:url" content="https://koshinstudio.com/works/danmaku-maker/">
+<meta property="og:site_name" content="Koshin Studio">
+<meta property="og:locale" content="ja_JP">
+<link rel="alternate" hreflang="ja" href="https://koshinstudio.com/works/danmaku-maker/">
+<link rel="alternate" hreflang="en" href="https://koshinstudio.com/en/works/danmaku-maker/">
+<link rel="alternate" hreflang="x-default" href="https://koshinstudio.com/en/works/danmaku-maker/">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="alternate" type="application/rss+xml" title="Koshin Studio — Notes" href="https://koshinstudio.com/feed.xml">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"VideoGame","name":"弾幕メーカー","url":"https://koshinstudio.com/works/danmaku-maker/","description":"弾幕ステージを自分で作って投稿し、世界中のプレイヤーが作ったステージを遊べる iPhone・iPad の弾幕ゲーム。発射台は最大8個、遊び方は4つ。10言語対応、App Store で配信中。","inLanguage":"ja","image":"https://koshinstudio.com/assets/danmaku-maker-square@2x.jpg","applicationCategory":"GameApplication","operatingSystem":"iOS","datePublished":"2026","downloadUrl":"https://apps.apple.com/jp/app/id6824245206","installUrl":"https://apps.apple.com/jp/app/id6824245206","gamePlatform":"iOS (iPhone, iPad)","playMode":["SinglePlayer","MultiPlayer"],"genre":["シューティング","弾幕","ステージ作成"],"author":{"@id":"https://koshinstudio.com#studio"},"publisher":{"@id":"https://koshinstudio.com#studio"},"offers":{"@type":"Offer","price":"0","priceCurrency":"JPY"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Koshin Studio","item":"https://koshinstudio.com/"},{"@type":"ListItem","position":2,"name":"Works","item":"https://koshinstudio.com/works/"},{"@type":"ListItem","position":3,"name":"弾幕メーカー","item":"https://koshinstudio.com/works/danmaku-maker/"}]},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"どこで手に入りますか？","acceptedAnswer":{"@type":"Answer","text":"App Store で配信している、iPhone・iPad 向けのゲームです。このページの「App Store で開く」から入れます。Android 版は、ありません。インストールせずに試せるブラウザ版のお試し（無料・登録なし）があります。"}},{"@type":"Question","name":"ログインは必要ですか？","acceptedAnswer":{"@type":"Answer","text":"遊ぶだけなら、ログインは要りません。ステージの投稿・いいね・通報には、Apple でサインインが必要です。"}},{"@type":"Question","name":"課金しないと遊べないステージはありますか？","acceptedAnswer":{"@type":"Answer","text":"ありません。課金で増えるのは、ステージを作るときに使える弾幕や見た目です。課金した人が作ったステージも、誰でも遊べます。"}}]}]}</script>
+<meta property="og:image" content="https://koshinstudio.com/assets/og/og_works_danmaku-maker.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
+</head>
+<body class="article doc">
+<canvas id="motes"></canvas>
+
+<header class="site"><div class="wrap">
+  <a class="logo" href="/"><img class="logo-mark" src="/favicon.svg?v=b9d7922f" alt="" width="28" height="28">Koshin Studio</a>
+  <nav><a href="/works/">Works</a><a href="/works/#game">Games</a><a href="/notes/">Notes</a><a href="/picks/">Picks</a><a href="/calc/">Tools</a><a href="/about/">About</a></nav>
+</div></header>
+
+<main><div class="wrap">
+  <nav class="crumbs" aria-label="現在地"><a href="/">Koshin Studio</a><i aria-hidden="true">›</i><a href="/works/">Works</a><i aria-hidden="true">›</i><span aria-current="page">弾幕メーカー</span></nav>
+  <h1>弾幕メーカー</h1>  <div class="rule"></div>
+<!--lang-->
+  <p class="note"><a href="/en/works/danmaku-maker/" hreflang="en" lang="en">English version</a></p>
+<!--/lang-->  <p class="lead">弾幕ステージを、自分で作る。<br>世界の誰かが作ったステージを、避けきる。</p>
+
+  <p>iPhone・iPad のゲームです。<strong>App Store で配信中</strong>です（無料。追加の弾幕などは買い切りの課金）。</p>
+  <p><a class="btn" href="https://apps.apple.com/jp/app/id6824245206" rel="noopener">App Store で開く</a> <a class="btn ghost" href="/works/danmaku-maker/try/">ブラウザで試す（無料）</a></p>
+  <p class="note">インストールせずに試すなら、<a href="/works/danmaku-maker/try/">ブラウザ版のお試し</a>へ。サンプルのステージを遊べて、放射・自機狙い・雨の 3 つの弾幕で、自分のステージも作れます（弾幕作成ツールとして、そのまま使えます）。</p>
+
+  <div class="shots rv">
+    <figure>
+      <picture>
+        <source srcset="/assets/shots/danmaku-ja-play_hell.webp" type="image/webp">
+        <img src="/assets/shots/danmaku-ja-play_hell.jpg" alt="画面いっぱいに色とりどりの弾が広がり、その間を自機がすり抜けているプレイ画面" width="560" height="1214" loading="lazy" decoding="async">
+      </picture>
+      <figcaption>弾の間を、すり抜けて生き残る</figcaption>
+    </figure>
+    <figure>
+      <picture>
+        <source srcset="/assets/shots/danmaku-ja-play_boss.webp" type="image/webp">
+        <img src="/assets/shots/danmaku-ja-play_boss.jpg" alt="ボスが弾幕を撃ち、自機が自動ショットで HP を削っているボス戦の画面" width="560" height="1214" loading="lazy" decoding="async">
+      </picture>
+      <figcaption>ボス戦は、自動ショットで HP を削る</figcaption>
+    </figure>
+    <figure>
+      <picture>
+        <source srcset="/assets/shots/danmaku-ja-editor.webp" type="image/webp">
+        <img src="/assets/shots/danmaku-ja-editor.jpg" alt="発射台と弾幕パターンを選び、プレビューで弾の動きを確かめているエディタの画面" width="560" height="1214" loading="lazy" decoding="async">
+      </picture>
+      <figcaption>エディタ。作りながら、動きを確かめられる</figcaption>
+    </figure>
+  </div>
+
+  <div class="stats rv">
+    <div><b data-count="4">4</b><span>つの遊び方</span></div>
+    <div><b data-count="30">30</b><span>本の公式ステージ</span></div>
+    <div><b data-count="8">8</b><span>個まで置ける発射台</span></div>
+  </div>
+
+  <h2 class="rv">どんなゲームか</h2>
+  <p>弾幕シューティングの「ステージ」を、自分で作って投稿し、世界中のプレイヤーが作ったステージを遊べるゲームです。遊ぶのは、画面のどこでもドラッグするだけ。指で自機が隠れない、相対移動の操作です。決められた時間を生き残る、ボスを倒す、などのクリア条件があります。</p>
+  <p>遊び方は 4 つです。<strong>耐えきる</strong>（時間まで生き残る）、<strong>ボスを倒す</strong>（自動ショットで HP を削りきる）、<strong>ダメージ勝負</strong>、<strong>ボス連戦</strong>（中ボス → 雑魚だけ → 大ボスのように、場面を順に組む）。</p>
+
+  <h2 class="rv">作る</h2>
+  <ul>
+    <li>放射・渦巻き・自機狙い・雨・首ふり扇などの弾幕パターンから選び、<strong>発射台を最大 8 個</strong>まで置けます。色・速さ・間隔・角度・パターンの向きを、自由に変えられます。</li>
+    <li>ボスの大きさと見た目、雑魚の姿、撃ち方、BGM、弾や背景の見た目も、ステージごとに決められます。</li>
+    <li>ループ再生のプレビューで、作りながら弾の動きをその場で確かめられます。</li>
+    <li>「弾幕作成モード」（買い切り）では、指で線を描くと、弾がその線の上を、描いた速さで進む、自分だけの弾幕が作れます。</li>
+    <li><strong>投稿するには、作者本人がクリアすること</strong>が条件です。「作れるけど誰もクリアできない」ステージは、出回りません。</li>
+  </ul>
+  <p>弾幕のパターンが、どういう計算で動いているのかは、<a href="/notes/danmaku-patterns/">弾幕パターンの作り方の記事</a>に、動く見本つきで書きました。</p>
+
+  <h2 class="rv">遊び合う</h2>
+  <ul>
+    <li>世界のステージを「人気」「新着」「高難度」「急上昇」から探せます。クリア条件での絞り込みや、ステージ名での検索もできます。</li>
+    <li>ステージ ID で検索したり、URL で友達に送ったりできます。</li>
+    <li>クリアタイムやダメージのランキングがあります。</li>
+    <li>いいね、挑戦数、クリア率で、ステージの人気や難しさが一目で分かります。</li>
+    <li>はじめに遊べる、公式のサンプルステージが 30 本あります（易しい順）。</li>
+  </ul>
+
+  <h2 class="rv">料金と広告</h2>
+  <p>ダウンロードは無料で、<strong>課金しなくても、すべてのステージを遊べます</strong>。課金は、ステージを作る側の追加（撃ち方・弾幕パック・見た目・弾幕作成モード）と、広告の削除で、どれも買い切りです。全部入りの「永久買い切りパック」もあります。</p>
+  <p>広告は、被弾したあとの「その場から復活」（1 プレイ 1 回）と、メニュー画面の下のバナーです。ステージを始めるたびに広告が出ることはありません。</p>
+
+  <h2 class="rv">よくある質問</h2>
+  <h3>どこで手に入りますか？</h3>
+  <p>App Store で配信している、iPhone・iPad 向けのゲームです。このページの「App Store で開く」から入れます。Android 版は、ありません。インストールせずに試せる<a href="/works/danmaku-maker/try/">ブラウザ版のお試し</a>（無料・登録なし）があります。</p>
+  <h3>ログインは必要ですか？</h3>
+  <p>遊ぶだけなら、ログインは要りません。ステージの投稿・いいね・通報には、Apple でサインインが必要です。</p>
+  <h3>課金しないと遊べないステージはありますか？</h3>
+  <p>ありません。課金で増えるのは、ステージを作るときに使える弾幕や見た目です。課金した人が作ったステージも、誰でも遊べます。</p>
+  <h3>英語など、ほかの言語でも遊べますか？</h3>
+  <p>はい。画面は 10 の言語（日本語・英語・中国語の簡体字と繁体字・韓国語・スペイン語・フランス語・ドイツ語・ポルトガル語・ロシア語）に対応していて、世界中のプレイヤーが作ったステージを、同じ一覧で遊べます。iOS 17.0 以降で動きます。</p>
+
+  <h2 class="rv">作りについて</h2>
+  <p>画面は SwiftUI、プレイ画面は SpriteKit で作っています。弾の動きの計算は、画面から切り離した Swift のパッケージにまとめていて、同じ計算で、公式ステージをボットに自動で遊ばせて、クリアできるかを確かめています。投稿・ランキングの裏側は Firebase です。</p>
+
+  <p class="note">アプリのサポート・利用規約・プライバシーポリシー：<a href="https://danmaku-maker.web.app/ja/support" rel="noopener">サポート</a> ／ <a href="https://danmaku-maker.web.app/ja/terms" rel="noopener">利用規約</a> ／ <a href="https://danmaku-maker.web.app/ja/privacy" rel="noopener">プライバシーポリシー</a>（アプリ専用のページです）</p>
+
+  <p style="margin-top:40px"><a class="btn" href="https://apps.apple.com/jp/app/id6824245206" rel="noopener">App Store で開く</a></p>
+
+<!--related-->
+  <div class="rule" style="margin:40px 0 22px"></div>
+  <p class="eyebrow">この作品の記録</p>
+  <ul class="plain">
+    <li><a href="/notes/danmaku-patterns/">弾幕の作り方：放射・自機狙い・雨・渦巻き・追尾の仕組みを、計算式と動く見本で解説</a> — 弾幕は短い計算式でできている。弾幕メーカーで実際に使っている放射・自機狙い（奇数弾と偶数弾）・雨・首ふり扇・渦巻き・追尾の式を、動く見本で確かめられるように書いた。</li>
+  </ul>
+<!--/related-->
+</div></main>
+
+<footer class="site"><div class="wrap">
+  <span>© 2026 Koshin Studio</span>
+  <div class="sns-row"></div>
+  <nav><a href="/picks/">Picks</a><a href="/calc/">Tools</a><a href="/about/">About</a><a href="/about/#contact">お問い合わせ</a><a href="/privacy/">あつかい</a><a href="/en/" hreflang="en" lang="en">English</a></nav>
+</div></footer>
+<script src="/vendor/gsap.min.js?v=9396f256" defer></script>
+<script src="/vendor/ScrollTrigger.min.js?v=05ca5ad8" defer></script>
+<script src="/motion.js?v=1e7447ec" defer></script>
+</body>
+</html>

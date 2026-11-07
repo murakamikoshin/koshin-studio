@@ -1,0 +1,203 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>弾幕の作り方｜放射・自機狙い・渦巻き・追尾の計算式と動く見本 — Koshin Studio</title>
+<meta name="description" content="弾幕シューティングの弾幕は、短い計算式でできています。弾幕ゲーム「弾幕メーカー」で実際に使っている放射・自機狙い（奇数弾と偶数弾）・雨・渦巻き・追尾の式を、動く見本つきで解説。">
+<meta property="og:title" content="弾幕の作り方｜放射・自機狙い・渦巻き・追尾の計算式と動く見本 — Koshin Studio">
+<meta property="og:description" content="弾幕シューティングの弾幕は、短い計算式でできています。弾幕ゲーム「弾幕メーカー」で実際に使っている放射・自機狙い（奇数弾と偶数弾）・雨・渦巻き・追尾の式を、動く見本つきで解説。">
+<meta property="og:type" content="article">
+<meta name="theme-color" content="#fbfaf7">
+<link rel="icon" href="/favicon.ico?v=1697d589" sizes="48x48">
+<link rel="icon" href="/favicon.svg?v=b9d7922f" type="image/svg+xml" sizes="any">
+<link rel="icon" href="/assets/icon/icon-192.png?v=e2566235" type="image/png" sizes="192x192">
+<link rel="apple-touch-icon" href="/assets/icon/icon-180.png?v=84e7f0e6">
+<link rel="manifest" href="/site.webmanifest">
+<script>document.documentElement.className+=" js"</script>
+<link rel="stylesheet" href="/style.css?v=3d886c33">
+<meta name="google-adsense-account" content="ca-pub-3863314847163872">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3863314847163872" crossorigin="anonymous"></script>
+<link rel="canonical" href="https://koshinstudio.com/notes/danmaku-patterns/">
+<meta property="og:url" content="https://koshinstudio.com/notes/danmaku-patterns/">
+<meta property="og:site_name" content="Koshin Studio">
+<meta property="og:locale" content="ja_JP">
+<link rel="alternate" hreflang="ja" href="https://koshinstudio.com/notes/danmaku-patterns/">
+<link rel="alternate" hreflang="en" href="https://koshinstudio.com/en/notes/danmaku-patterns/">
+<link rel="alternate" hreflang="x-default" href="https://koshinstudio.com/en/notes/danmaku-patterns/">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="alternate" type="application/rss+xml" title="Koshin Studio — Notes" href="https://koshinstudio.com/feed.xml">
+<link rel="alternate" type="text/markdown" href="https://koshinstudio.com/notes/danmaku-patterns/index.md">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BlogPosting","headline":"弾幕の作り方：放射・自機狙い・雨・渦巻き・追尾の仕組みを、計算式と動く見本で解説","url":"https://koshinstudio.com/notes/danmaku-patterns/","description":"弾幕は短い計算式でできている。弾幕メーカーで実際に使っている放射・自機狙い（奇数弾と偶数弾）・雨・首ふり扇・渦巻き・追尾の式を、動く見本で確かめられるように書いた。","datePublished":"2026-11-07","dateModified":"2026-11-07","inLanguage":"ja","image":"https://koshinstudio.com/assets/og/og_notes_danmaku-patterns.jpg","author":{"@id":"https://koshinstudio.com#koshin"},"publisher":{"@id":"https://koshinstudio.com#studio"},"mainEntityOfPage":"https://koshinstudio.com/notes/danmaku-patterns/","workTranslation":{"@type":"BlogPosting","url":"https://koshinstudio.com/en/notes/danmaku-patterns/","inLanguage":"en"}},{"@type":"Person","@id":"https://koshinstudio.com#koshin","name":"Koshin","jobTitle":"Webエンジニア・アプリエンジニア","url":"https://koshinstudio.com/about/","worksFor":{"@id":"https://koshinstudio.com#studio"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Koshin Studio","item":"https://koshinstudio.com/"},{"@type":"ListItem","position":2,"name":"Notes","item":"https://koshinstudio.com/notes/"},{"@type":"ListItem","position":3,"name":"弾幕の作り方：放射・自機狙い・雨・渦巻き・追尾の仕組みを、計算式と動く見本で解説","item":"https://koshinstudio.com/notes/danmaku-patterns/"}]}]}</script>
+<meta property="og:image" content="https://koshinstudio.com/assets/og/og_notes_danmaku-patterns.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
+</head>
+<body class="article">
+<canvas id="motes"></canvas>
+
+<header class="site"><div class="wrap">
+  <a class="logo" href="/"><img class="logo-mark" src="/favicon.svg?v=b9d7922f" alt="" width="28" height="28">Koshin Studio</a>
+  <nav><a href="/works/">Works</a><a href="/works/#game">Games</a><a href="/notes/">Notes</a><a href="/picks/">Picks</a><a href="/calc/">Tools</a><a href="/about/">About</a></nav>
+</div></header>
+
+<main><div class="wrap">
+  <nav class="crumbs" aria-label="現在地"><a href="/">Koshin Studio</a><i aria-hidden="true">›</i><a href="/notes/">Notes</a><i aria-hidden="true">›</i><span aria-current="page">弾幕の作り方：放射・自機狙い・雨・渦巻き・追尾の仕組みを、計算式と動く見本で解説</span></nav>
+  <h1>弾幕の作り方：放射・自機狙い・雨・渦巻き・追尾の仕組みを、計算式と動く見本で解説</h1>
+  <div class="rule"></div>
+<!--lang-->
+  <p class="note"><a href="/en/notes/danmaku-patterns/" hreflang="en" lang="en">English version</a></p>
+<!--/lang--><!--byline--><p class="note byline">書いた人：<a href="/about/#operator">Koshin</a>（Web エンジニア・アプリエンジニア）　公開：2026-11-07</p><!--/byline--><p class="lead">弾幕メーカー 開発の記録 ／ 2026年11月</p>
+
+  <p>弾幕シューティングの弾幕は、見た目は複雑でも、ひとつひとつは<strong>短い計算式</strong>でできています。この記事は、私が作っている弾幕ゲーム<a href="/works/danmaku-maker/">「弾幕メーカー」</a>で実際に使っている式を、そのまま書き出して、動く見本で確かめられるようにしたものです。弾幕を自分で作りたい人、ゲームで弾幕を組みたい人向けです。</p>
+  <p class="note">式は、アプリの弾の計算（DanmakuCore の <code>Simulation.swift</code> と <code>AdPatterns.swift</code>）から写しました。見本は、その式を JavaScript に移したもので、画面の自機は指やマウスを置いた所へ動きます（当たり判定はしません）。自機の上の白い小さな円が、ゲームの当たり判定の大きさです。</p>
+<!--toc-->
+  <nav class="toc" aria-label="目次"><p>目次</p><ol><li><a href="#s1">弾幕は「発射台」と、4 つの数でできている</a></li><li><a href="#s2">放射：円の上に、等しい間隔で並べる</a></li><li><a href="#s3">回る放射と、本当の渦巻きは、別物</a></li><li><a href="#s4">自機狙い：奇数弾と偶数弾で、避け方が真逆になる</a></li><li><a href="#s5">雨：画面の上から、ばらばらに降らせる</a></li><li><a href="#s6">首ふり扇：真下を中心に、ゆっくり首を振る</a></li><li><a href="#s7">追尾：曲がれるのは、最初の 2.5 秒だけ</a></li><li><a href="#s8">当たり判定は、見た目より小さい</a></li><li><a href="#s9">まとめ：弾幕を作るときのコツ</a></li><li><a href="#s10">自分で作ってみる</a></li></ol></nav>
+<!--/toc-->
+  <h2 class="rv" id="s1">弾幕は「発射台」と、4 つの数でできている</h2>
+  <p>弾幕メーカーでは、弾を撃つ場所を<strong>発射台</strong>と呼び、1 ステージに最大 8 個まで置けます。発射台ごとに決めるのは、ほぼ次の 4 つです。</p>
+  <div class="scroll rv"><table>
+    <thead><tr><th>記号</th><th>意味</th><th>単位</th></tr></thead>
+    <tbody>
+      <tr><td><code>i</code></td><td>発射の間隔</td><td>秒（0.05〜2）</td></tr>
+      <tr><td><code>c</code></td><td>1 回に出す弾の数</td><td>個（1〜36）</td></tr>
+      <tr><td><code>v</code></td><td>弾の速さ</td><td>×60 px／秒（1〜5）</td></tr>
+      <tr><td><code>r</code></td><td>角度（パターンによって、回転・広がり・振れ幅の意味になる）</td><td>度</td></tr>
+    </tbody>
+  </table></div>
+  <p>画面は 360×540 の大きさで計算し、1/120 秒ずつ進めます。<code>k</code> 回目の発射で、<code>j</code> 番目の弾（0 から <code>c−1</code>）を、角度 <code>θ</code> の向きに、速さ <code>v × 60</code> で出す。弾は、出たあとはまっすぐ進むだけです（追尾など、一部を除く）。<strong>弾幕の形は、ほとんど「出す瞬間の角度の決め方」で決まります。</strong></p>
+
+  <h2 class="rv" id="s2">放射：円の上に、等しい間隔で並べる</h2>
+  <p>いちばん基本の弾幕です。<code>c</code> 発を、円を等分した向きに出します。</p>
+  <p><code>θ = 2π × j ÷ c ＋ k × r°</code></p>
+  <p><code>r = 0</code> なら、毎回同じ向きに出るので、輪が同心円で広がります。下の見本は 16 発・1 秒おきです。</p>
+  <figure class="rv" style="flex:1 1 140px;max-width:300px;margin:18px auto">
+    <canvas data-demo="ring" data-label="放射（16発・回転なし）" width="360" height="540" style="width:100%;aspect-ratio:2/3;border-radius:8px;display:block;touch-action:none"></canvas>
+    <label style="display:flex;gap:8px;align-items:center;font-size:13px">弾数<input type="range" id="d-ring-c" data-k="c" min="1" max="36" step="1" style="flex:1"><output for="d-ring-c"></output></label>
+    <figcaption>放射（16発・回転なし）</figcaption>
+  </figure>
+
+  <p>輪と輪の間をくぐるのが、避け方の基本です。弾の数を増やすほど、すき間は狭くなります。</p>
+
+  <h2 class="rv" id="s3">回る放射と、本当の渦巻きは、別物</h2>
+  <p>放射の <code>r</code> を 0 以外にすると、発射のたびに全体が <code>r</code> 度ずつ回ります。間隔を短く（0.12 秒）、弾を少なく（3 発）すると、弾の列が渦の腕のように見えます。</p>
+  <figure class="rv" style="flex:1 1 140px;max-width:300px;margin:18px auto">
+    <canvas data-demo="rotate" data-label="回る放射（3発・0.12秒おき・11°ずつ回る）" width="360" height="540" style="width:100%;aspect-ratio:2/3;border-radius:8px;display:block;touch-action:none"></canvas>
+    <label style="display:flex;gap:8px;align-items:center;font-size:13px">回転<input type="range" id="d-rotate-r" data-k="r" min="-30" max="30" step="1" style="flex:1"><output for="d-rotate-r"></output></label>
+    <figcaption>回る放射（3発・0.12秒おき・11°ずつ回る）</figcaption>
+  </figure>
+
+  <p>ただし、<strong>ひとつひとつの弾は、まっすぐ飛んでいます。</strong>渦に見えるのは、出す向きが少しずつずれているからです。弾幕メーカーも、はじめはこれを「渦巻き」と呼んでいました。</p>
+  <p>あとから、弾そのものが曲がる、本当の渦巻きを足しました。出たあと 8 秒のあいだ、毎秒 30° ずつ、同じ向きに向きを変えます。</p>
+  <figure class="rv" style="flex:1 1 140px;max-width:300px;margin:18px auto">
+    <canvas data-demo="swirl" data-label="本当の渦巻き（弾が毎秒30°曲がる）" width="360" height="540" style="width:100%;aspect-ratio:2/3;border-radius:8px;display:block;touch-action:none"></canvas>
+    
+    <figcaption>本当の渦巻き（弾が毎秒30°曲がる）</figcaption>
+  </figure>
+
+  <p>見比べると、回る放射は外へ行くほど腕がまっすぐに開き、本当の渦巻きは外へ行っても腕が巻き続けます。避け方も違います。回る放射は「腕と腕の間」に入ればよく、本当の渦巻きは、腕が自分のほうへ回り込んできます。</p>
+  <p class="note">古い「渦巻き」は、計算を変えると、すでに投稿されたステージの動きが変わってしまいます。そのため、計算はそのまま残して、エディタの選択肢からだけ外し、新しい渦巻きを別のパターンとして足しました。</p>
+
+  <h2 class="rv" id="s4">自機狙い：奇数弾と偶数弾で、避け方が真逆になる</h2>
+  <p>撃つ瞬間の自機の位置を向き、その左右に <code>r</code> 度の扇を広げます。</p>
+  <p><code>b = atan2(自機y − 発射台y, 自機x − 発射台x)</code><br><code>θ = b ＋ (j ÷ (c−1) − 0.5) × r°</code></p>
+  <p>ここで、弾の数が<strong>奇数</strong>か<strong>偶数</strong>かで、性質が真逆になります。</p>
+  <ul>
+    <li><strong>奇数（5 発など）</strong>：真ん中の弾（<code>j = (c−1)÷2</code>）の角度がちょうど <code>b</code> になり、<strong>自機の今いる場所へまっすぐ</strong>飛んできます。止まっていると当たります。少しずつ横へ動き続けるのが基本です。</li>
+    <li><strong>偶数（6 発など）</strong>：真ん中に弾がなく、<strong>自機の今いる場所が、ちょうどすき間</strong>になります。止まっていれば避けられ、慌てて動くと当たります。</li>
+  </ul>
+  <div class="rv" style="display:flex;flex-wrap:wrap;gap:12px;justify-content:center;align-items:flex-start">
+  <figure class="rv" style="flex:1 1 140px;max-width:300px;margin:18px auto">
+    <canvas data-demo="aimOdd" data-label="自機狙い・奇数弾（5発）" width="360" height="540" style="width:100%;aspect-ratio:2/3;border-radius:8px;display:block;touch-action:none"></canvas>
+    
+    <figcaption>自機狙い・奇数弾（5発）</figcaption>
+  </figure>
+  <figure class="rv" style="flex:1 1 140px;max-width:300px;margin:18px auto">
+    <canvas data-demo="aimEven" data-label="自機狙い・偶数弾（6発）" width="360" height="540" style="width:100%;aspect-ratio:2/3;border-radius:8px;display:block;touch-action:none"></canvas>
+    
+    <figcaption>自機狙い・偶数弾（6発）</figcaption>
+  </figure>
+  </div>
+  <p>見本で、自機を止めてみると違いが分かります。弾幕を作るときは、奇数と偶数を混ぜると、「動く」と「止まる」の判断を迫れます。</p>
+
+  <h2 class="rv" id="s5">雨：画面の上から、ばらばらに降らせる</h2>
+  <p>発射台の位置は使わず、画面の上端の、ランダムな横位置から、ほぼ真下に出します。向きは真下から <code>±0.15</code> ラジアン（約 ±8.6°）だけ、ばらつかせています。</p>
+  <p><code>x = 乱数 × 360、y = −8、θ = 90° ＋ (乱数 − 0.5) × 0.3</code></p>
+  <figure class="rv" style="flex:1 1 140px;max-width:300px;margin:18px auto">
+    <canvas data-demo="rain" data-label="雨（2発・0.25秒おき）" width="360" height="540" style="width:100%;aspect-ratio:2/3;border-radius:8px;display:block;touch-action:none"></canvas>
+    
+    <figcaption>雨（2発・0.25秒おき）</figcaption>
+  </figure>
+
+  <p>ばらばらに見えますが、乱数は<strong>ステージごとに決まった種から作る</strong>（mulberry32）ので、同じステージなら、誰が遊んでも同じ雨が降ります。そうしないと、ランキングで運の良し悪しが勝負を分けてしまいます。</p>
+
+  <h2 class="rv" id="s6">首ふり扇：真下を中心に、ゆっくり首を振る</h2>
+  <p>真下（90°）を中心に、発射のたびに、正弦波で左右へ振ります。扇の広がりは 0.5 ラジアン（約 29°）で固定です。</p>
+  <p><code>中心 = 90° ＋ sin(0.25 × k) × r°</code></p>
+  <figure class="rv" style="flex:1 1 140px;max-width:300px;margin:18px auto">
+    <canvas data-demo="sweep" data-label="首ふり扇（振れ幅60°）" width="360" height="540" style="width:100%;aspect-ratio:2/3;border-radius:8px;display:block;touch-action:none"></canvas>
+    <label style="display:flex;gap:8px;align-items:center;font-size:13px">振れ幅<input type="range" id="d-sweep-r" data-k="r" min="0" max="90" step="1" style="flex:1"><output for="d-sweep-r"></output></label>
+    <figcaption>首ふり扇（振れ幅60°）</figcaption>
+  </figure>
+
+  <p><code>0.25 × k</code> の 0.25 を大きくすると首を振るのが速くなり、<code>r</code> を大きくすると振れ幅が広がります。弾の帯が波打つので、帯の「戻ってくる側」を読んで避けます。</p>
+
+  <h2 class="rv" id="s7">追尾：曲がれるのは、最初の 2.5 秒だけ</h2>
+  <p>追尾弾は、毎フレーム、自機の方向へ向きを近づけます。ただし、1 秒に曲がれる角度に上限（<code>max(25°, 2 × |r|°)</code>）があり、さらに<strong>追うのは出てから 2.5 秒だけ</strong>です。そのあとは、まっすぐ飛びます。</p>
+  <figure class="rv" style="flex:1 1 140px;max-width:300px;margin:18px auto">
+    <canvas data-demo="homing" data-label="追尾弾（3発）" width="360" height="540" style="width:100%;aspect-ratio:2/3;border-radius:8px;display:block;touch-action:none"></canvas>
+    
+    <figcaption>追尾弾（3発）</figcaption>
+  </figure>
+
+  <p>時間で切らずに追い続けさせると、弾は自機のまわりを回り続け、いつかは必ず当たります。避けようのない弾は、難しいのではなく、ただ理不尽です。「追ってくるけれど、引きつけて横へかわせば外れる」くらいが、遊びとして成り立つ線でした。</p>
+
+  <h2 class="rv" id="s8">当たり判定は、見た目より小さい</h2>
+  <p>弾幕メーカーの当たり判定は、<strong>弾の中心と自機の中心の距離が 5.5 px 未満</strong>のときです（計算では、距離の 2 乗が 30.25 未満）。弾の色の部分は半径 6 px で描いているので、見た目では「かすった」くらいでは当たりません。弾幕ゲームでは、当たり判定を見た目より小さくするのが一般的で、これがあるから、すき間を抜けるのが楽しくなります。</p>
+  <p>もう一つ、画面に出せる弾は 1,600 発までにしています。それを超える分は出しません。スマートフォンでも描くのが追いつき、それでも画面がほぼ埋まる数です。</p>
+
+  <h2 class="rv" id="s9">まとめ：弾幕を作るときのコツ</h2>
+  <ul>
+    <li><strong>形は、出す瞬間の角度で決まる。</strong>放射・自機狙い・首ふりは、どれも 1 行の式です。</li>
+    <li><strong>回る放射と、曲がる弾は別物。</strong>同じ「渦」に見えても、避け方が違います。</li>
+    <li><strong>自機狙いは、奇数と偶数を使い分ける。</strong>奇数は「動け」、偶数は「止まれ」。</li>
+    <li><strong>ばらつきは、決まった種の乱数で。</strong>同じステージなら同じ弾幕に。</li>
+    <li><strong>追尾には、時間の上限を。</strong>避けられない弾は、作らない。</li>
+  </ul>
+
+  <h2 class="rv" id="s10">自分で作ってみる</h2>
+  <p>ここに書いた放射・自機狙い・雨の 3 つは、<a href="/works/danmaku-maker/try/">弾幕メーカーのブラウザ版（無料・登録なし）</a>で、そのまま自分の弾幕として組めます。作ったステージは、自分でクリアするとリンクで友達に送れます。渦巻き・首ふり扇・追尾のほか、花・星・レーザー・地雷など、ずっと多くのパターンは、<a href="/works/danmaku-maker/">iPhone・iPad 版</a>で使えます。</p>
+  <p><a class="btn" href="/works/danmaku-maker/try/">ブラウザで弾幕を作る</a></p>
+
+<!--related-->
+  <div class="rule" style="margin:40px 0 22px"></div>
+  <p class="eyebrow">ほかの記録</p>
+  <ul class="plain">
+    <li><a href="/notes/rank-verify-mismatch/">すし積むの番付に載らなくなった：ゲームの数字を変えて、サーバーの検算を直し忘れていた（しかも二つ）</a> — 番付に、普通に遊んでも載らなくなった。ゲームの数字を変えて、サーバーの検算を直し忘れていた。金の桶の褒美（8,000→25,000）と、降るネタ（3種→5種）の二つ。注意書きでは守れず、同じ種で出題を比べる検査を足した。</li>
+    <li><a href="/notes/tcg-lottery-app-compare/">ポケカ・トレカ抽選アプリを比較：トレカダッシュ・トレゲト・NowPokeca・Pokeka Tracker・トレカの地図のメリットとデメリット</a> — ポケカをはじめトレカの抽選・予約・再販を追うアプリ・サイトを、ジャンル数・通知・地図・料金で比較。作者（トレカダッシュの開発者）による比較で、トレカダッシュの弱いところも書いた。</li>
+    <li><a href="/notes/aggregator-pagination/">まとめサイトの巡回は、一覧の 1 ページ目しか見ていなかった：トレカの記事は 2〜4 ページ目にあり、本文も先頭 6,000 文字で切れていた</a> — 入荷情報のまとめサイトの巡回は、一覧の 1 ページ目（ゲーム機中心）しか読まず、ポケカやガンダムは後ろのページにあった。本文も先頭 6,000 文字しか AI に渡さず、後半の店が落ちていた。12 ページまで辿り、重なりつきで全文を読む形に直した。</li>
+  </ul>
+<!--/related-->
+
+<!--comments-->
+  <section class="comments" id="comments" data-repo="murakamikoshin/koshin-studio" data-repo-id="R_kgDOURc3ew"
+    data-category="Announcements" data-category-id="DIC_kwDOURc3e84DHTVr">
+    <h2 id="comments-h">コメント</h2>
+    <p>感想や、記事の間違いの指摘は、ここへ。書くには、GitHub のアカウントが要ります。</p>
+    <p><button type="button" class="btn ghost" id="load-comments">コメントを開く</button></p>
+    <p class="note">押すと、giscus（giscus.app）と GitHub に接続します。押さなければ、接続しません。詳しくは<a href="/privacy/">あつかい</a>に書いています。</p>
+    <div id="giscus-box"></div>
+  </section>
+<!--/comments-->
+</div></main>
+
+<footer class="site"><div class="wrap">
+  <span>© 2026 Koshin Studio</span>
+  <div class="sns-row"></div>
+  <nav><a href="/picks/">Picks</a><a href="/calc/">Tools</a><a href="/about/">About</a><a href="/about/#contact">お問い合わせ</a><a href="/privacy/">あつかい</a><a href="/en/" hreflang="en" lang="en">English</a></nav>
+</div></footer>
+<script src="/motion.js?v=1e7447ec" defer></script>
+<script src="/notes/danmaku-patterns/demo.js" defer></script>
+</body>
+</html>

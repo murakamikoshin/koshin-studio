@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Danmaku Maker (browser) — free bullet hell maker &amp; pattern generator, no sign-up</title>
+<meta name="description" content="Make bullet-hell patterns and stages in your browser for free: ring, aimed and rain patterns, a live preview, and share links. The browser version of Danmaku Maker.">
+<meta property="og:title" content="Danmaku Maker (browser) — free bullet hell maker &amp; pattern generator, no sign-up">
+<meta property="og:description" content="Make bullet-hell patterns and stages in your browser for free: ring, aimed and rain patterns, a live preview, and share links. The browser version of Danmaku Maker.">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#110e26">
+<link rel="stylesheet" href="/works/danmaku-maker/try/trial.css">
+<meta name="google-adsense-account" content="ca-pub-3863314847163872">
+<link rel="canonical" href="https://koshinstudio.com/en/works/danmaku-maker/try/">
+<meta property="og:url" content="https://koshinstudio.com/en/works/danmaku-maker/try/">
+<meta property="og:site_name" content="Koshin Studio">
+<meta property="og:locale" content="en_US">
+<link rel="alternate" hreflang="ja" href="https://koshinstudio.com/works/danmaku-maker/try/">
+<link rel="alternate" hreflang="en" href="https://koshinstudio.com/en/works/danmaku-maker/try/">
+<link rel="alternate" hreflang="x-default" href="https://koshinstudio.com/en/works/danmaku-maker/try/">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="alternate" type="application/rss+xml" title="Koshin Studio — Notes" href="https://koshinstudio.com/feed.xml">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"VideoGame","name":"Danmaku Maker (browser version)","alternateName":["Danmaku Maker","bullet hell maker"],"url":"https://koshinstudio.com/en/works/danmaku-maker/try/","description":"Make bullet-hell patterns and stages in your browser for free: ring, aimed and rain patterns, a live preview, and share links. The browser version of Danmaku Maker.","inLanguage":"en","image":"https://koshinstudio.com/assets/danmaku-maker-square@2x.jpg","applicationCategory":"GameApplication","operatingSystem":"Web","gamePlatform":"Web browser","playMode":"SinglePlayer","genre":["Bullet hell","Shoot 'em up","Level editor"],"isAccessibleForFree":true,"author":{"@id":"https://koshinstudio.com#studio"},"publisher":{"@id":"https://koshinstudio.com#studio"},"isPartOf":{"@type":"VideoGame","name":"Danmaku Maker","url":"https://koshinstudio.com/en/works/danmaku-maker/"},"offers":{"@type":"Offer","price":"0","priceCurrency":"JPY"}},{"@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Is it free?","acceptedAnswer":{"@type":"Answer","text":"Yes. This trial is free and shows no ads. The app is free too, with one-time purchases for extra patterns and looks."}},{"@type":"Question","name":"Where are my stages saved?","acceptedAnswer":{"@type":"Answer","text":"Only in this browser. Nothing is sent to a server. Clearing your browser’s site data removes them. To give a stage to someone, send the share link."}},{"@type":"Question","name":"How is the trial different from the app?","acceptedAnswer":{"@type":"Answer","text":"In the trial you build with three patterns (ring, aimed, rain) and share stages by link. The app adds publishing to the world, world stages, rankings and boss rush, and many more patterns."}},{"@type":"Question","name":"Does it work on phones?","acceptedAnswer":{"@type":"Answer","text":"Yes, in the browser on phones and computers."}}]},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Koshin Studio","item":"https://koshinstudio.com/en/"},{"@type":"ListItem","position":2,"name":"Works","item":"https://koshinstudio.com/en/works/"},{"@type":"ListItem","position":3,"name":"Danmaku Maker","item":"https://koshinstudio.com/en/works/danmaku-maker/"},{"@type":"ListItem","position":4,"name":"Browser version","item":"https://koshinstudio.com/en/works/danmaku-maker/try/"}]}]}</script>
+<link rel="alternate" type="application/rss+xml" title="Koshin Studio — Notes (English)" href="https://koshinstudio.com/en/feed.xml">
+<meta property="og:image" content="https://koshinstudio.com/assets/og/og_en_works_danmaku-maker_try.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
+</head>
+<body>
+<div id="home" class="wrap">
+  <header class="top">
+    <div>
+      <p class="sub" style="margin:0 0 6px"><a class="home" href="/en/">Koshin Studio</a> › <a class="home" href="/en/works/danmaku-maker/">About Danmaku Maker</a></p>
+      <h1>Danmaku <span>Maker</span> <small class="badge surv" style="font-size:12px">Trial</small></h1>
+      <p class="sub" data-t="sub"></p>
+    </div>
+    <button class="btn primary" id="new-btn" data-t="newb"></button>
+  </header>
+
+  <section class="sec">
+    <h2 data-t="world"></h2>
+    <div id="list-sample" class="sec"></div>
+  </section>
+
+  <section class="sec">
+    <h2 data-t="codeH"></h2>
+    <div class="codebox">
+      <input id="code-in" type="text" data-ph="codePh" autocomplete="off" aria-label="code">
+      <button class="btn cyan" id="code-play" data-t="play"></button>
+    </div>
+    <div class="err" id="code-err" hidden></div>
+  </section>
+
+  <section class="sec">
+    <h2 data-t="recv"></h2>
+    <div id="list-recv" class="sec"></div>
+  </section>
+
+  <section class="sec">
+    <h2 data-t="mine"></h2>
+    <div id="list-mine" class="sec"></div>
+  </section>
+
+  <div class="cta">
+    <b>What the free app adds</b>
+    <p>Publish stages to the world, play stages from around the world, rankings and boss rush, with far more bullet patterns than the three here.</p>
+    <p class="note" style="margin:0">Patterns you can build with: the trial has three — ring, aimed and rain</p>
+    <div class="lock" id="lock-list"></div>
+    <a class="btn" data-app href="https://apps.apple.com/app/id6824245206" rel="noopener">See it on the App Store</a>
+  </div>
+
+  <p class="note" data-t="note"></p>
+
+  <section class="sec about">
+  <h2>About the Danmaku Maker trial</h2>
+    <p>Danmaku Maker is a game where you build bullet-hell (danmaku) stages and play each other’s. This page is a <strong>browser trial</strong> of the iPhone and iPad game <a href="/en/works/danmaku-maker/" hreflang="en" lang="en">Danmaku Maker</a>. Nothing to install, no sign-up.</p>
+  <h3>How to play</h3><p>Drag anywhere on the screen and your ship moves by the same amount (relative movement, so your finger never hides the ship). On a keyboard, use the arrow keys; hold Shift to move slowly. One hit and you lose. Survive stages are cleared by lasting until the timer ends; boss stages by chipping the boss’s HP to zero with auto-fire.</p>
+  <h3>How to build</h3><p>Tap “Build a stage” and place up to 8 emitters (the things that fire bullets). Choose a pattern (ring, aimed or rain) and the bullet count, speed, interval, angle and color, and a preview shows the motion. Then clear it yourself in a test play: only stages you have cleared can be shared by link.</p>
+  <p>The math behind the three patterns is explained, with live demos, in <a href="/en/notes/danmaku-patterns/" hreflang="en" lang="en">how bullet-hell patterns work</a>.</p>
+  <h2>FAQ</h2>
+  <h3>Is it free?</h3>
+  <p>Yes. This trial is free and shows no ads. The app is free too, with one-time purchases for extra patterns and looks.</p>
+  <h3>Where are my stages saved?</h3>
+  <p>Only in this browser. Nothing is sent to a server. Clearing your browser’s site data removes them. To give a stage to someone, send the share link.</p>
+  <h3>How is the trial different from the app?</h3>
+  <p>In the trial you build with three patterns (ring, aimed, rain) and share stages by link. The app adds publishing to the world, world stages, rankings and boss rush, and many more patterns.</p>
+  <h3>Does it work on phones?</h3>
+  <p>Yes, in the browser on phones and computers.</p>
+  <p><a href="/en/works/danmaku-maker/">About Danmaku Maker →</a>　<a href="/en/works/#game">All games by Koshin Studio →</a></p>
+  </section>
+</div>
+
+<div id="edit" class="wrap" hidden>
+  <header class="top">
+    <h1 data-t="editor"></h1>
+    <button class="btn small" id="ed-back" data-t="back"></button>
+  </header>
+  <div class="field"><label data-t="cond"></label>
+    <div class="modes">
+      <input type="radio" name="ed-mode" id="ed-mode-s" value="survive"><label for="ed-mode-s"><b data-t="mS"></b><span data-t="mSd"></span></label>
+      <input type="radio" name="ed-mode" id="ed-mode-b" value="boss"><label for="ed-mode-b"><b data-t="mB"></b><span data-t="mBd"></span></label>
+    </div>
+  </div>
+  <div class="grid2">
+    <div class="field"><label for="ed-name" data-t="name"></label><input id="ed-name" type="text" maxlength="20" data-ph="namePh"></div>
+    <div class="field"><label for="ed-author" data-t="author"></label><input id="ed-author" type="text" maxlength="12" data-ph="authorPh"></div>
+  </div>
+  <div class="grid2">
+    <div class="field"><label for="ed-dur" id="ed-dur-l"></label><select id="ed-dur"></select></div>
+    <div class="field" id="ed-mv-f"><label for="ed-mv" data-t="mv"></label><select id="ed-mv"><option value="0" data-t="mv0"></option><option value="1" data-t="mv1"></option><option value="2" data-t="mv2"></option></select></div>
+  </div>
+  <div class="sl" id="ed-hp-f"><span data-t="bhp"></span><input type="range" id="ed-hp" min="100" max="1000" step="50" aria-label="HP"><output id="ed-hp-o"></output></div>
+  <p class="note" id="ed-boss-note" style="margin:0" data-t="bossNote"></p>
+  <div id="ed-ems" class="sec"></div>
+  <button class="btn" id="ed-add" data-t="add"></button>
+  <div class="status" id="ed-status"></div>
+  <div class="bar">
+    <button class="btn cyan" id="ed-test" data-t="test"></button>
+    <button class="btn primary" id="ed-post" disabled data-t="post"></button>
+  </div>
+  <p class="note" style="margin:0"><span data-t="lockT"></span> <a data-app href="https://apps.apple.com/app/id6824245206" rel="noopener" data-t="worldCta"></a></p>
+</div>
+
+<div id="play" hidden>
+  <div class="pbar">
+    <button class="btn small" id="p-quit" data-t="quit"></button>
+    <div class="ttl" id="p-title"></div>
+    <div class="tm" id="p-time">0.0</div>
+  </div>
+  <div id="stagebox">
+    <canvas id="cv"></canvas>
+    <div id="result" hidden>
+      <div class="rbox">
+        <div class="big" id="r-big"></div>
+        <div id="r-msg" class="note"></div>
+        <div class="row" style="justify-content:center">
+          <button class="btn primary" id="r-retry" data-t="retry"></button>
+          <button class="btn" id="r-back" data-t="backB"></button>
+        </div>
+        <div id="r-app" class="app"><span data-t="appRes"></span><br><a class="btn small cyan" data-app href="https://apps.apple.com/app/id6824245206" rel="noopener" data-t="appBtn" style="display:inline-block;margin-top:8px"></a></div>
+      </div>
+    </div>
+  </div>
+  <div class="hint" data-t="hint"></div>
+</div>
+
+<div id="modal" hidden>
+  <div class="mbox">
+    <h2 data-t="shareH"></h2>
+    <p class="note" style="margin:0" data-t="shareNote"></p>
+    <textarea id="m-code" readonly aria-label="link"></textarea>
+    <div class="row">
+      <a class="btn xbtn" id="m-x" href="#" target="_blank" rel="noopener" data-t="xs"></a>
+      <button class="btn cyan" id="m-copy" data-t="copy"></button>
+      <button class="btn" id="m-close" data-t="close"></button>
+      <span class="note" id="m-msg"></span>
+    </div>
+    <p class="note" style="margin:0"><a data-app href="https://apps.apple.com/app/id6824245206" rel="noopener" data-t="worldCta"></a></p>
+  </div>
+</div>
+
+<div id="cta-modal" hidden style="position:fixed;inset:0;background:rgba(10,8,24,.8);display:flex;align-items:center;justify-content:center;z-index:40;padding:16px">
+  <div class="mbox">
+    <h2>This pattern is in the app</h2>
+    <p style="margin:0">Spiral, homing, flower, star, heart, lasers, mines, meteors, gravity shots, snakes, patterns you draw with your finger and many more are in the app (free, with one-time add-ons).</p>
+    <div class="row"><a class="btn primary" data-app href="https://apps.apple.com/app/id6824245206" rel="noopener" style="text-decoration:none">See it on the App Store</a><button class="btn" id="cta-close">Later</button></div>
+  </div>
+</div>
+<script src="/works/danmaku-maker/try/trial.js" defer></script>
+</body>
+</html>

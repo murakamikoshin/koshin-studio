@@ -1,0 +1,190 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>How to make bullet hell patterns: formulas and live demos</title>
+<meta name="description" content="The exact math behind ring, aimed (odd vs even), rain, spiral and homing bullet-hell patterns, from a real danmaku game, with live demos.">
+<meta property="og:title" content="How to make bullet hell patterns: formulas and live demos">
+<meta property="og:description" content="The exact math behind ring, aimed (odd vs even), rain, spiral and homing bullet-hell patterns, from a real danmaku game, with live demos.">
+<meta property="og:type" content="article">
+<meta name="theme-color" content="#fbfaf7">
+<link rel="icon" href="/favicon.ico?v=1697d589" sizes="48x48">
+<link rel="icon" href="/favicon.svg?v=b9d7922f" type="image/svg+xml" sizes="any">
+<link rel="icon" href="/assets/icon/icon-192.png?v=e2566235" type="image/png" sizes="192x192">
+<link rel="apple-touch-icon" href="/assets/icon/icon-180.png?v=84e7f0e6">
+<link rel="manifest" href="/site.webmanifest">
+<script>document.documentElement.className+=" js"</script>
+<link rel="stylesheet" href="/style.css?v=3d886c33">
+<meta name="google-adsense-account" content="ca-pub-3863314847163872">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3863314847163872" crossorigin="anonymous"></script>
+<link rel="canonical" href="https://koshinstudio.com/en/notes/danmaku-patterns/">
+<meta property="og:url" content="https://koshinstudio.com/en/notes/danmaku-patterns/">
+<meta property="og:site_name" content="Koshin Studio">
+<meta property="og:locale" content="en_US">
+<link rel="alternate" hreflang="ja" href="https://koshinstudio.com/notes/danmaku-patterns/">
+<link rel="alternate" hreflang="en" href="https://koshinstudio.com/en/notes/danmaku-patterns/">
+<link rel="alternate" hreflang="x-default" href="https://koshinstudio.com/en/notes/danmaku-patterns/">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="alternate" type="application/rss+xml" title="Koshin Studio — Notes" href="https://koshinstudio.com/feed.xml">
+<link rel="alternate" type="text/markdown" href="https://koshinstudio.com/en/notes/danmaku-patterns/index.md">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BlogPosting","headline":"How bullet-hell patterns work: ring, aimed, rain, spiral and homing, with formulas and live demos","url":"https://koshinstudio.com/en/notes/danmaku-patterns/","description":"The exact math behind ring, aimed (odd vs even), rain, spiral and homing bullet-hell patterns, from a real danmaku game, with live demos.","datePublished":"2026-11-07","dateModified":"2026-11-07","inLanguage":"en","image":"https://koshinstudio.com/assets/og/og_en_notes_danmaku-patterns.jpg","author":{"@id":"https://koshinstudio.com#koshin"},"publisher":{"@id":"https://koshinstudio.com#studio"},"mainEntityOfPage":"https://koshinstudio.com/en/notes/danmaku-patterns/","translationOfWork":{"@type":"BlogPosting","url":"https://koshinstudio.com/notes/danmaku-patterns/","inLanguage":"en"}},{"@type":"Person","@id":"https://koshinstudio.com#koshin","name":"Koshin","jobTitle":"Web and app engineer","url":"https://koshinstudio.com/about/","worksFor":{"@id":"https://koshinstudio.com#studio"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Koshin Studio","item":"https://koshinstudio.com/en/"},{"@type":"ListItem","position":2,"name":"Notes","item":"https://koshinstudio.com/en/notes/"},{"@type":"ListItem","position":3,"name":"How bullet-hell patterns work: ring, aimed, rain, spiral and homing, with formulas and live demos","item":"https://koshinstudio.com/en/notes/danmaku-patterns/"}]}]}</script>
+<link rel="alternate" type="application/rss+xml" title="Koshin Studio — Notes (English)" href="https://koshinstudio.com/en/feed.xml">
+<meta property="og:image" content="https://koshinstudio.com/assets/og/og_en_notes_danmaku-patterns.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
+</head>
+<body class="article">
+<canvas id="motes"></canvas>
+
+<header class="site"><div class="wrap">
+  <a class="logo" href="/en/"><img class="logo-mark" src="/favicon.svg?v=b9d7922f" alt="" width="28" height="28">Koshin Studio</a>
+  <nav><a href="/en/works/">Works</a><a href="/en/works/#game">Games</a><a href="/en/notes/">Notes</a><a href="/en/calc/">Tools</a><a href="/en/about/">About</a><a href="/" hreflang="ja" lang="ja">日本語</a></nav>
+</div></header>
+
+<main><div class="wrap">
+  <nav class="crumbs" aria-label="You are here"><a href="/en/">Koshin Studio</a><i aria-hidden="true">›</i><span aria-current="page">How bullet-hell patterns work</span></nav>
+  <h1>How bullet-hell patterns work: ring, aimed, rain, spiral and homing, with formulas and live demos</h1>
+  <div class="rule"></div>
+<!--lang-->
+  <p class="note"><a href="/notes/danmaku-patterns/" hreflang="ja" lang="ja">日本語版</a></p>
+<!--/lang--><!--byline--><p class="note byline">Written by <a href="/en/about/#operator">Koshin</a> (web engineer and app engineer) · published 2026-11-07</p><!--/byline--><p class="lead">Development log of Danmaku Maker / November 2026</p>
+
+  <p>However complex a bullet-hell (danmaku) pattern looks, each piece is a <strong>short formula</strong>. This article writes out the formulas my danmaku game <a href="/en/works/danmaku-maker/" hreflang="en" lang="en">Danmaku Maker</a> actually uses, with live demos so you can check them. It is for anyone who wants to design bullet patterns, or build them into a game.</p>
+  <p class="note">The formulas are copied from the app’s bullet code (<code>Simulation.swift</code> and <code>AdPatterns.swift</code> in DanmakuCore). The demos are those formulas ported to JavaScript; the ship follows your finger or mouse (there is no hit detection). The small white circle on the ship is the size of the game’s hitbox.</p>
+
+  <h2 class="rv" id="s1">A pattern is an emitter and four numbers</h2>
+  <p>In Danmaku Maker the thing that fires is an <strong>emitter</strong>; a stage can have up to 8. Each emitter mainly sets four numbers:</p>
+  <div class="scroll rv"><table>
+    <thead><tr><th>Symbol</th><th>Meaning</th><th>Unit</th></tr></thead>
+    <tbody>
+      <tr><td><code>i</code></td><td>Interval between shots</td><td>seconds (0.05–2)</td></tr>
+      <tr><td><code>c</code></td><td>Bullets per shot</td><td>count (1–36)</td></tr>
+      <tr><td><code>v</code></td><td>Bullet speed</td><td>×60 px/s (1–5)</td></tr>
+      <tr><td><code>r</code></td><td>Angle (rotation, spread or swing, depending on the pattern)</td><td>degrees</td></tr>
+    </tbody>
+  </table></div>
+  <p>The field is computed at 360×540 and stepped every 1/120 s. On shot number <code>k</code>, bullet <code>j</code> (0 to <code>c−1</code>) leaves at angle <code>θ</code> with speed <code>v × 60</code>, and after that it simply flies straight (except for homing and a few others). <strong>The shape of a pattern is decided almost entirely by how the angle is chosen at the moment of firing.</strong></p>
+
+  <h2 class="rv" id="s2">Ring: evenly spaced around a circle</h2>
+  <p>The most basic pattern: <code>c</code> bullets in directions that divide the circle evenly.</p>
+  <p><code>θ = 2π × j ÷ c + k × r°</code></p>
+  <p>With <code>r = 0</code> every shot goes the same way, so rings spread as concentric circles. The demo fires 16 bullets every second.</p>
+  <figure class="rv" style="flex:1 1 140px;max-width:300px;margin:18px auto">
+    <canvas data-demo="ring" data-label="Ring (16 bullets, no rotation)" width="360" height="540" style="width:100%;aspect-ratio:2/3;border-radius:8px;display:block;touch-action:none"></canvas>
+    <label style="display:flex;gap:8px;align-items:center;font-size:13px">Bullets<input type="range" id="d-ring-c" data-k="c" min="1" max="36" step="1" style="flex:1"><output for="d-ring-c"></output></label>
+    <figcaption>Ring (16 bullets, no rotation)</figcaption>
+  </figure>
+
+  <p>Slipping between rings is the basic way to dodge. More bullets mean narrower gaps.</p>
+
+  <h2 class="rv" id="s3">A rotating ring is not a real spiral</h2>
+  <p>Set the ring’s <code>r</code> to something other than 0 and the whole ring turns by <code>r</code> degrees each shot. With a short interval (0.12 s) and few bullets (3), the trails look like the arms of a spiral.</p>
+  <figure class="rv" style="flex:1 1 140px;max-width:300px;margin:18px auto">
+    <canvas data-demo="rotate" data-label="Rotating ring (3 bullets, every 0.12 s, turning 11°)" width="360" height="540" style="width:100%;aspect-ratio:2/3;border-radius:8px;display:block;touch-action:none"></canvas>
+    <label style="display:flex;gap:8px;align-items:center;font-size:13px">Rotation<input type="range" id="d-rotate-r" data-k="r" min="-30" max="30" step="1" style="flex:1"><output for="d-rotate-r"></output></label>
+    <figcaption>Rotating ring (3 bullets, every 0.12 s, turning 11°)</figcaption>
+  </figure>
+
+  <p>But <strong>every bullet flies straight.</strong> It only looks like a spiral because the firing direction shifts a little each time. Danmaku Maker originally called this “spiral” too.</p>
+  <p>Later I added a real spiral where the bullets themselves curve: for 8 seconds after firing, each one turns 30° per second in the same direction.</p>
+  <figure class="rv" style="flex:1 1 140px;max-width:300px;margin:18px auto">
+    <canvas data-demo="swirl" data-label="Real spiral (bullets curve 30° per second)" width="360" height="540" style="width:100%;aspect-ratio:2/3;border-radius:8px;display:block;touch-action:none"></canvas>
+    
+    <figcaption>Real spiral (bullets curve 30° per second)</figcaption>
+  </figure>
+
+  <p>Compare them: the rotating ring’s arms straighten out as they travel, while the real spiral’s arms keep winding. Dodging differs too: with the rotating ring you step into the gap between arms; with the real spiral the arms sweep around toward you.</p>
+  <p class="note">Changing the old “spiral” math would change the behavior of stages already published. So the old calculation stays as it is, hidden from the editor, and the real spiral was added as a separate pattern.</p>
+
+  <h2 class="rv" id="s4">Aimed shots: odd and even counts need opposite dodges</h2>
+  <p>Aim at where the player is at the moment of firing, and open a fan of <code>r</code> degrees around that direction.</p>
+  <p><code>b = atan2(player y − emitter y, player x − emitter x)</code><br><code>θ = b + (j ÷ (c−1) − 0.5) × r°</code></p>
+  <p>Whether the count is <strong>odd</strong> or <strong>even</strong> flips how it behaves:</p>
+  <ul>
+    <li><strong>Odd (e.g. 5)</strong>: the middle bullet (<code>j = (c−1)÷2</code>) has angle exactly <code>b</code>, so it flies <strong>straight at where you are now</strong>. Standing still gets you hit; keep drifting sideways.</li>
+    <li><strong>Even (e.g. 6)</strong>: there is no middle bullet, so <strong>where you are now is exactly a gap</strong>. Standing still dodges it; panicking into a move gets you hit.</li>
+  </ul>
+  <div class="rv" style="display:flex;flex-wrap:wrap;gap:12px;justify-content:center;align-items:flex-start">
+  <figure class="rv" style="flex:1 1 140px;max-width:300px;margin:18px auto">
+    <canvas data-demo="aimOdd" data-label="Aimed, odd (5 bullets)" width="360" height="540" style="width:100%;aspect-ratio:2/3;border-radius:8px;display:block;touch-action:none"></canvas>
+    
+    <figcaption>Aimed, odd (5 bullets)</figcaption>
+  </figure>
+  <figure class="rv" style="flex:1 1 140px;max-width:300px;margin:18px auto">
+    <canvas data-demo="aimEven" data-label="Aimed, even (6 bullets)" width="360" height="540" style="width:100%;aspect-ratio:2/3;border-radius:8px;display:block;touch-action:none"></canvas>
+    
+    <figcaption>Aimed, even (6 bullets)</figcaption>
+  </figure>
+  </div>
+  <p>Hold the ship still in the demos to see the difference. Mixing odd and even aimed shots in one stage forces the player to choose between moving and staying.</p>
+
+  <h2 class="rv" id="s5">Rain: scattered from the top of the screen</h2>
+  <p>Rain ignores the emitter’s position: bullets start at a random x along the top edge and head almost straight down, varying by only <code>±0.15</code> radians (about ±8.6°).</p>
+  <p><code>x = random × 360, y = −8, θ = 90° + (random − 0.5) × 0.3</code></p>
+  <figure class="rv" style="flex:1 1 140px;max-width:300px;margin:18px auto">
+    <canvas data-demo="rain" data-label="Rain (2 bullets every 0.25 s)" width="360" height="540" style="width:100%;aspect-ratio:2/3;border-radius:8px;display:block;touch-action:none"></canvas>
+    
+    <figcaption>Rain (2 bullets every 0.25 s)</figcaption>
+  </figure>
+
+  <p>It looks random, but the random numbers come from <strong>a seed fixed per stage</strong> (mulberry32), so the same stage rains the same way for everyone. Otherwise luck would decide the rankings.</p>
+
+  <h2 class="rv" id="s6">Sweeping fan: swinging around straight down</h2>
+  <p>Centered on straight down (90°), the fan swings left and right on a sine wave from shot to shot. Its width is fixed at 0.5 radians (about 29°).</p>
+  <p><code>center = 90° + sin(0.25 × k) × r°</code></p>
+  <figure class="rv" style="flex:1 1 140px;max-width:300px;margin:18px auto">
+    <canvas data-demo="sweep" data-label="Sweeping fan (swing 60°)" width="360" height="540" style="width:100%;aspect-ratio:2/3;border-radius:8px;display:block;touch-action:none"></canvas>
+    <label style="display:flex;gap:8px;align-items:center;font-size:13px">Swing<input type="range" id="d-sweep-r" data-k="r" min="0" max="90" step="1" style="flex:1"><output for="d-sweep-r"></output></label>
+    <figcaption>Sweeping fan (swing 60°)</figcaption>
+  </figure>
+
+  <p>Raising the 0.25 in <code>0.25 × k</code> swings faster; raising <code>r</code> swings wider. The band of bullets ripples, so you dodge by reading the side it is coming back to.</p>
+
+  <h2 class="rv" id="s7">Homing: it only turns for the first 2.5 seconds</h2>
+  <p>Each frame, a homing bullet turns toward the player, but the turn per second is capped (<code>max(25°, 2 × |r|°)</code>), and it <strong>only homes for 2.5 seconds</strong> after firing. After that it flies straight.</p>
+  <figure class="rv" style="flex:1 1 140px;max-width:300px;margin:18px auto">
+    <canvas data-demo="homing" data-label="Homing (3 bullets)" width="360" height="540" style="width:100%;aspect-ratio:2/3;border-radius:8px;display:block;touch-action:none"></canvas>
+    
+    <figcaption>Homing (3 bullets)</figcaption>
+  </figure>
+
+  <p>If homing never stopped, bullets would circle the player until they hit. An undodgeable bullet is not hard, just unfair. “It follows you, but if you lure it in and sidestep, it misses” was the line where it still works as play.</p>
+
+  <h2 class="rv" id="s8">The hitbox is smaller than it looks</h2>
+  <p>In Danmaku Maker you are hit when <strong>the distance between a bullet’s center and the ship’s center is under 5.5 px</strong> (in code, distance squared under 30.25). Bullets are drawn with a 6 px colored radius, so a visual graze does not count. Making the hitbox smaller than the sprite is standard in bullet-hell games, and it is what makes squeezing through gaps fun.</p>
+  <p>The screen also holds at most 1,600 bullets; anything beyond that is not fired. Phones keep up at that count, and it still nearly fills the screen.</p>
+
+  <h2 class="rv" id="s9">Summary: tips for designing patterns</h2>
+  <ul>
+    <li><strong>Shape comes from the firing angle.</strong> Ring, aimed and sweep are each a one-line formula.</li>
+    <li><strong>A rotating ring and curving bullets are different.</strong> Both look like a spiral, but you dodge them differently.</li>
+    <li><strong>Use odd and even aimed shots on purpose.</strong> Odd says “move,” even says “stay.”</li>
+    <li><strong>Randomness from a fixed seed.</strong> Same stage, same bullets.</li>
+    <li><strong>Give homing a time limit.</strong> Do not make bullets that cannot be dodged.</li>
+  </ul>
+
+  <h2 class="rv" id="s10">Try building one</h2>
+  <p>Ring, aimed and rain can be built straight away in <a href="/en/works/danmaku-maker/try/" hreflang="en" lang="en">the free browser version of Danmaku Maker</a> (no sign-up). Clear your own stage and you can send it to a friend by link. Spiral, sweeping fan and homing, plus flower, star, lasers, mines and many more, are in the <a href="/en/works/danmaku-maker/" hreflang="en" lang="en">iPhone and iPad app</a>.</p>
+  <p><a class="btn" href="/en/works/danmaku-maker/try/" hreflang="en" lang="en">Build bullet patterns in your browser</a></p>
+
+  <p class="note">This is the English version of <a href="/notes/danmaku-patterns/" hreflang="ja" lang="ja">the original Japanese article</a>.</p>
+
+  <div class="rule" style="margin:40px 0 22px"></div>
+  <p class="eyebrow">More in English</p>
+  <ul class="plain">
+    <li><a href="/en/">All English pages</a></li>
+  </ul>
+</div>
+</main>
+
+<footer class="site"><div class="wrap">
+  <span>© 2026 Koshin Studio</span>
+  <div class="sns-row"></div>
+  <nav><a href="/en/" hreflang="en" lang="en">English</a><a href="/" hreflang="ja" lang="ja">日本語</a><a href="/en/about/#contact" hreflang="en" lang="en">Contact</a><a href="/en/privacy/" hreflang="en" lang="en">Privacy</a></nav>
+</div></footer>
+<script src="/motion.js?v=1e7447ec" defer></script>
+<script src="/notes/danmaku-patterns/demo.js" defer></script>
+</body>
+</html>

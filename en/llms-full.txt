@@ -708,6 +708,94 @@ When the green returns, let people settle and watch 100 years go by.
 
 ---
 
+URL: https://koshinstudio.com/en/works/danmaku-maker/
+
+# Danmaku Maker
+
+  日本語版 (https://koshinstudio.com/works/danmaku-maker/)
+
+  Build your own bullet-hell stages.
+Survive the ones people around the world have made.
+
+  A game for iPhone and iPad, available on the App Store (free; extra patterns and items are one-time purchases). The game is fully translated into 10 languages: English, Japanese, Simplified and Traditional Chinese, Korean, Spanish, French, German, Brazilian Portuguese and Russian. Requires iOS 17.0 or later.
+
+  Open in the App Store (https://apps.apple.com/app/id6824245206) Try it in your browser (free) (https://koshinstudio.com/en/works/danmaku-maker/try/)
+
+  No install needed to try it: the browser version (https://koshinstudio.com/en/works/danmaku-maker/try/) lets you play sample stages and build your own with three patterns (it works as a free bullet hell maker on its own).
+
+      Weave between the bullets and survive
+
+      In boss fights, auto-fire chips away its HP
+
+      The editor previews bullets as you build
+
+    4ways to play
+    30official stages
+    8emitters per stage
+
+## What it is
+
+  A bullet-hell (danmaku) shooter where you build stages, publish them, and play stages made by players around the world. To play, drag anywhere on the screen: movement is relative, so your finger never hides your ship. Survive until time runs out, defeat the boss, and so on.
+
+  There are four ways to play: survive, defeat the boss (auto-fire chips away its HP), damage race, and boss rush (chain scenes such as mid-boss → minions only → final boss).
+
+## Create
+
+- Pick bullet patterns such as ring, spiral, aimed, rain and sweeping fan, and place up to 8 emitters. Tune color, speed, interval, angle and pattern direction.
+
+- Choose the boss size and look, minion looks, shot style, music, and bullet and background looks for each stage.
+
+- Looping previews show your bullets in action while you edit.
+
+- With Pattern Maker (one-time purchase), draw a line with your finger and bullets follow it at the speed you drew.
+
+- To publish, you must clear your own stage. Impossible stages never go out.
+
+  How the patterns are calculated is explained, with live demos, in how bullet-hell patterns work (https://koshinstudio.com/en/notes/danmaku-patterns/).
+
+## Play together
+
+- Browse world stages by Popular, New, Hard and Rising; filter by clear condition or search by stage name.
+
+- Search by stage ID and share stages by link.
+
+- Rankings for clear time and damage.
+
+- Likes, attempts and clear rate show how popular and how hard a stage is.
+
+- 30 official sample stages to start with, from easy to hard.
+
+## Price and ads
+
+  Free to download, and every stage can be played without paying. Purchases add creation tools (shot styles, pattern packs, looks, Pattern Maker) and remove ads; all are one-time. A Lifetime Pack includes everything.
+
+  Ads appear when you choose to revive after being hit (once per play) and as a banner at the bottom of the menu. There is no ad at the start of every stage.
+
+## FAQ
+
+### Where can I get it?
+
+  On the App Store, for iPhone and iPad. There is no Android version, but there is a free browser trial (https://koshinstudio.com/en/works/danmaku-maker/try/) (no install, no sign-up).
+
+### Do I need to sign in?
+
+  Not to play. Publishing, liking and reporting stages use Sign in with Apple.
+
+### Are any stages locked behind a purchase?
+
+  No. Purchases add patterns and looks for building stages. Stages made with paid items can be played by everyone.
+
+## How it is made
+
+  The interface is SwiftUI and the play screen is SpriteKit. Bullet movement is computed in a separate Swift package, and the same code lets a bot play every official stage automatically to confirm it can be cleared. Publishing and rankings run on Firebase.
+
+  App support, terms and privacy: Support (https://danmaku-maker.web.app/en/support) / Terms (https://danmaku-maker.web.app/en/terms) / Privacy (https://danmaku-maker.web.app/en/privacy) (pages for the app)
+
+  Open in the App Store (https://apps.apple.com/app/id6824245206)
+
+
+---
+
 URL: https://koshinstudio.com/en/calc/
 
 # Tools
@@ -953,6 +1041,146 @@ URL: https://koshinstudio.com/en/calc/lottery/
 - This is probability, not a promise. Do not buy things you do not want just to raise your number of entries.
 
   For gacha, see the gacha rate and pity calculator (https://koshinstudio.com/en/calc/gacha-rate/) and the complete-the-set calculator (https://koshinstudio.com/en/calc/gacha/).
+
+
+---
+
+URL: https://koshinstudio.com/en/notes/danmaku-patterns/
+
+# How bullet-hell patterns work: ring, aimed, rain, spiral and homing, with formulas and live demos
+
+  日本語版 (https://koshinstudio.com/notes/danmaku-patterns/)
+
+Written by Koshin (https://koshinstudio.com/en/about/#operator) (web engineer and app engineer) · published 2026-11-07
+Development log of Danmaku Maker / November 2026
+
+  However complex a bullet-hell (danmaku) pattern looks, each piece is a short formula. This article writes out the formulas my danmaku game Danmaku Maker (https://koshinstudio.com/en/works/danmaku-maker/) actually uses, with live demos so you can check them. It is for anyone who wants to design bullet patterns, or build them into a game.
+
+  The formulas are copied from the app’s bullet code (Simulation.swift and AdPatterns.swift in DanmakuCore). The demos are those formulas ported to JavaScript; the ship follows your finger or mouse (there is no hit detection). The small white circle on the ship is the size of the game’s hitbox.
+
+## A pattern is an emitter and four numbers
+
+  In Danmaku Maker the thing that fires is an emitter; a stage can have up to 8. Each emitter mainly sets four numbers:
+
+    Symbol | Meaning | Unit
+
+      i | Interval between shots | seconds (0.05–2)
+
+      c | Bullets per shot | count (1–36)
+
+      v | Bullet speed | ×60 px/s (1–5)
+
+      r | Angle (rotation, spread or swing, depending on the pattern) | degrees
+
+  The field is computed at 360×540 and stepped every 1/120 s. On shot number k, bullet j (0 to c−1) leaves at angle θ with speed v × 60, and after that it simply flies straight (except for homing and a few others). The shape of a pattern is decided almost entirely by how the angle is chosen at the moment of firing.
+
+## Ring: evenly spaced around a circle
+
+  The most basic pattern: c bullets in directions that divide the circle evenly.
+
+  θ = 2π × j ÷ c + k × r°
+
+  With r = 0 every shot goes the same way, so rings spread as concentric circles. The demo fires 16 bullets every second.
+
+    Bullets
+    Ring (16 bullets, no rotation)
+
+  Slipping between rings is the basic way to dodge. More bullets mean narrower gaps.
+
+## A rotating ring is not a real spiral
+
+  Set the ring’s r to something other than 0 and the whole ring turns by r degrees each shot. With a short interval (0.12 s) and few bullets (3), the trails look like the arms of a spiral.
+
+    Rotation
+    Rotating ring (3 bullets, every 0.12 s, turning 11°)
+
+  But every bullet flies straight. It only looks like a spiral because the firing direction shifts a little each time. Danmaku Maker originally called this “spiral” too.
+
+  Later I added a real spiral where the bullets themselves curve: for 8 seconds after firing, each one turns 30° per second in the same direction.
+
+    Real spiral (bullets curve 30° per second)
+
+  Compare them: the rotating ring’s arms straighten out as they travel, while the real spiral’s arms keep winding. Dodging differs too: with the rotating ring you step into the gap between arms; with the real spiral the arms sweep around toward you.
+
+  Changing the old “spiral” math would change the behavior of stages already published. So the old calculation stays as it is, hidden from the editor, and the real spiral was added as a separate pattern.
+
+## Aimed shots: odd and even counts need opposite dodges
+
+  Aim at where the player is at the moment of firing, and open a fan of r degrees around that direction.
+
+  b = atan2(player y − emitter y, player x − emitter x)
+θ = b + (j ÷ (c−1) − 0.5) × r°
+
+  Whether the count is odd or even flips how it behaves:
+
+- Odd (e.g. 5): the middle bullet (j = (c−1)÷2) has angle exactly b, so it flies straight at where you are now. Standing still gets you hit; keep drifting sideways.
+
+- Even (e.g. 6): there is no middle bullet, so where you are now is exactly a gap. Standing still dodges it; panicking into a move gets you hit.
+
+    Aimed, odd (5 bullets)
+
+    Aimed, even (6 bullets)
+
+  Hold the ship still in the demos to see the difference. Mixing odd and even aimed shots in one stage forces the player to choose between moving and staying.
+
+## Rain: scattered from the top of the screen
+
+  Rain ignores the emitter’s position: bullets start at a random x along the top edge and head almost straight down, varying by only ±0.15 radians (about ±8.6°).
+
+  x = random × 360, y = −8, θ = 90° + (random − 0.5) × 0.3
+
+    Rain (2 bullets every 0.25 s)
+
+  It looks random, but the random numbers come from a seed fixed per stage (mulberry32), so the same stage rains the same way for everyone. Otherwise luck would decide the rankings.
+
+## Sweeping fan: swinging around straight down
+
+  Centered on straight down (90°), the fan swings left and right on a sine wave from shot to shot. Its width is fixed at 0.5 radians (about 29°).
+
+  center = 90° + sin(0.25 × k) × r°
+
+    Swing
+    Sweeping fan (swing 60°)
+
+  Raising the 0.25 in 0.25 × k swings faster; raising r swings wider. The band of bullets ripples, so you dodge by reading the side it is coming back to.
+
+## Homing: it only turns for the first 2.5 seconds
+
+  Each frame, a homing bullet turns toward the player, but the turn per second is capped (max(25°, 2 × |r|°)), and it only homes for 2.5 seconds after firing. After that it flies straight.
+
+    Homing (3 bullets)
+
+  If homing never stopped, bullets would circle the player until they hit. An undodgeable bullet is not hard, just unfair. “It follows you, but if you lure it in and sidestep, it misses” was the line where it still works as play.
+
+## The hitbox is smaller than it looks
+
+  In Danmaku Maker you are hit when the distance between a bullet’s center and the ship’s center is under 5.5 px (in code, distance squared under 30.25). Bullets are drawn with a 6 px colored radius, so a visual graze does not count. Making the hitbox smaller than the sprite is standard in bullet-hell games, and it is what makes squeezing through gaps fun.
+
+  The screen also holds at most 1,600 bullets; anything beyond that is not fired. Phones keep up at that count, and it still nearly fills the screen.
+
+## Summary: tips for designing patterns
+
+- Shape comes from the firing angle. Ring, aimed and sweep are each a one-line formula.
+
+- A rotating ring and curving bullets are different. Both look like a spiral, but you dodge them differently.
+
+- Use odd and even aimed shots on purpose. Odd says “move,” even says “stay.”
+
+- Randomness from a fixed seed. Same stage, same bullets.
+
+- Give homing a time limit. Do not make bullets that cannot be dodged.
+
+## Try building one
+
+  Ring, aimed and rain can be built straight away in the free browser version of Danmaku Maker (https://koshinstudio.com/en/works/danmaku-maker/try/) (no sign-up). Clear your own stage and you can send it to a friend by link. Spiral, sweeping fan and homing, plus flower, star, lasers, mines and many more, are in the iPhone and iPad app (https://koshinstudio.com/en/works/danmaku-maker/).
+
+  Build bullet patterns in your browser (https://koshinstudio.com/en/works/danmaku-maker/try/)
+
+  This is the English version of the original Japanese article (https://koshinstudio.com/notes/danmaku-patterns/).
+
+  More in English
+
+- All English pages (https://koshinstudio.com/en/)
 
 
 ---

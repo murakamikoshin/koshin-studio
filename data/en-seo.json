@@ -162,5 +162,9 @@
   "tcg-lottery-app-compare": {
     "title": "Japanese Pokémon Card Lottery Apps Compared (2026)",
     "desc": "Five apps and sites that track Pokémon card and TCG lotteries at stores in Japan, compared on games, alerts, maps and price, weak points included."
+  },
+  "danmaku-patterns": {
+    "title": "How to make bullet hell patterns: formulas and live demos",
+    "desc": "The exact math behind ring, aimed (odd vs even), rain, spiral and homing bullet-hell patterns, from a real danmaku game, with live demos."
   }
 }

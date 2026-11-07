@@ -540,7 +540,7 @@ function enPage(path, title, desc, main) {
 /* 作品の英語名。記事の札（どの作品の記録か）に使う */
 const WORK_EN = { 'トレカダッシュ': 'Toreca Dash', 'すし積む': 'Sushi Stack', '寝返り将棋': 'Negaeri Shogi',
   'ガチアニメ診断': 'Anime Type Quiz', '10秒ピッタリで止めろ！': 'Stop at 10 seconds', 'Koshin Studio': 'This site',
-  'このサイト': 'This site', '比べたもの': 'Comparisons', '買ったもの': 'Things I bought' };
+  'このサイト': 'This site', '比べたもの': 'Comparisons', '買ったもの': 'Things I bought', '弾幕メーカー': 'Danmaku Maker' };
 const enNotePairs = enData.filter((p) => /^\/en\/notes\/[^/]+\/$/.test(p.en) && existsSync(here + p.en + 'index.html'))
   .map((p) => {
     const ja = notes.find((n) => n.url === p.ja) || {};
@@ -782,6 +782,30 @@ function ldFor(file, url) {
       '@type': 'ListItem', position: i + 1, name: t[0], item: SITE + t[1],
     })),
   });
+  /* 弾幕メーカーのブラウザ版（お試し）。ブラウザで遊べるゲームとして書く。
+     よくある質問は、頁の「よくある質問 / FAQ」の h3 + p から取る（目に見える文と同じ） */
+  const tryM = rel.match(/^(\/en)?\/works\/danmaku-maker\/try\/index\.html$/);
+  if (tryM) {
+    const en = !!tryM[1];
+    const src = readFileSync(file, 'utf8');
+    const plain = (t) => t.replace(/<[^>]+>/g, '').replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&quot;/g, '"').replace(/&#39;/g, "'").replace(/&amp;/g, '&').replace(/\s+/g, ' ').trim();
+    const fm = src.match(/<h2>(?:よくある質問|FAQ)<\/h2>([\s\S]*?)<p><a /);
+    const qa = fm ? [...fm[1].matchAll(/<h3>([\s\S]*?)<\/h3>\s*<p>([\s\S]*?)<\/p>/g)]
+      .map((m) => ({ '@type': 'Question', name: plain(m[1]), acceptedAnswer: { '@type': 'Answer', text: plain(m[2]) } })) : [];
+    const desc = (src.match(/<meta name="description" content="([^"]*)"/) || [, ''])[1];
+    const home = en ? '/en/' : '/', works = en ? '/en/works/danmaku-maker/' : '/works/danmaku-maker/';
+    return [
+      { '@type': 'VideoGame', name: en ? 'Danmaku Maker (browser version)' : '弾幕メーカー ブラウザ版', alternateName: en ? ['Danmaku Maker', 'bullet hell maker'] : ['弾幕メーカー', '弾幕作成ツール', '弾幕ジェネレーター'],
+        url: url, description: desc, inLanguage: en ? 'en' : 'ja', image: SITE + '/assets/danmaku-maker-square@2x.jpg',
+        applicationCategory: 'GameApplication', operatingSystem: 'Web', gamePlatform: 'Web browser', playMode: 'SinglePlayer',
+        genre: en ? ['Bullet hell', 'Shoot \'em up', 'Level editor'] : ['弾幕シューティング', 'ステージ作成'], isAccessibleForFree: true,
+        author: { '@id': SITE + '#studio' }, publisher: { '@id': SITE + '#studio' },
+        isPartOf: { '@type': 'VideoGame', name: en ? 'Danmaku Maker' : '弾幕メーカー', url: SITE + works },
+        offers: { '@type': 'Offer', price: '0', priceCurrency: 'JPY' } },
+      ...(qa.length ? [{ '@type': 'FAQPage', mainEntity: qa }] : []),
+      crumbs([['Koshin Studio', home], ['Works', home + 'works/'], [en ? 'Danmaku Maker' : '弾幕メーカー', works], [en ? 'Browser version' : 'ブラウザ版', works + 'try/']]),
+    ];
+  }
   if (rel === '/index.html') {
     return [
       PERSON,
@@ -816,7 +840,7 @@ function ldFor(file, url) {
            （works.json の appStoreUrl。無い作品には何も足さない） */
         ...(w.appStoreUrl ? { downloadUrl: w.appStoreUrl, installUrl: w.appStoreUrl } : {}),
         ...(w.kind === 'game'
-          ? { gamePlatform: 'Web browser', playMode: w.playMode || 'SinglePlayer',
+          ? { gamePlatform: w.os === 'iOS' ? 'iOS (iPhone, iPad)' : 'Web browser', playMode: w.playMode || 'SinglePlayer',
               ...(w.genre && w.genre.length ? { genre: w.genre } : {}) }
           : {}),
         author: { '@id': SITE + '#studio' }, publisher: { '@id': SITE + '#studio' },
@@ -910,7 +934,7 @@ function ldFor(file, url) {
           applicationCategory: w.category || (w.kind === 'game' ? 'GameApplication' : 'UtilitiesApplication'),
           operatingSystem: w.os || 'Web', ...(w.status === '公開中' ? { datePublished: w.year } : {}),
           ...(w.appStoreUrl ? { downloadUrl: w.appStoreUrl, installUrl: w.appStoreUrl } : {}),
-          ...(w.kind === 'game' ? { gamePlatform: 'Web browser', playMode: w.playMode || 'SinglePlayer' } : {}),
+          ...(w.kind === 'game' ? { gamePlatform: w.os === 'iOS' ? 'iOS (iPhone, iPad)' : 'Web browser', playMode: w.playMode || 'SinglePlayer' } : {}),
           author: { '@id': SITE + '#studio' }, publisher: { '@id': SITE + '#studio' },
           offers: { '@type': 'Offer', price: '0', priceCurrency: 'JPY' } },
         crumbs([['Koshin Studio', '/en/'], ['Works', '/en/works/'], [ep.title, ep.en]]),
@@ -1141,7 +1165,8 @@ for (const file of pages) {
      自動で並べただけの画面には広告を出せない（一覧・タイプ別・404・あつかいは除く）。
      サイトの確認用のメタタグは、全頁に残す */
   const adPath = rel.replace(/index\.html$/, '');
-  const isContentPage = /^\/(en\/)?(notes|works|calc)\/[^/]+\//.test(adPath) ||
+  /* 遊ぶ画面（/try/）には広告を入れない。自動広告が弾幕の上に重なると、遊べなくなる */
+  const isContentPage = (/^\/(en\/)?(notes|works|calc)\/[^/]+\//.test(adPath) && !/\/try\/$/.test(adPath)) ||
     /^\/anime\/(guide|axes)\//.test(adPath) || /^\/works\/[^/]+\/guide\.html$/.test(rel);
   if (live || (ads.verify && ads.client)) {
     html = html.replace('</head>',
