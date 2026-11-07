@@ -29,21 +29,22 @@
 </head>
 <body>
 <div id="home" class="wrap">
-  <header class="top">
+  <header class="top" data-ui>
     <div>
       <p class="sub" style="margin:0 0 6px"><a class="home" href="/en/">Koshin Studio</a> › <a class="home" href="/en/works/danmaku-maker/">About Danmaku Maker</a></p>
-      <h1>Danmaku <span>Maker</span> <small class="badge surv" style="font-size:12px">Trial</small></h1>
+      <h1>Danmaku <span>Maker</span> <small class="badge surv" style="font-size:12px" data-t="tag">Trial</small></h1>
       <p class="sub" data-t="sub"></p>
+      <select id="lang-pick" class="btn small" style="margin-top:6px"></select>
     </div>
     <button class="btn primary" id="new-btn" data-t="newb"></button>
   </header>
 
-  <section class="sec">
+  <section class="sec" data-ui>
     <h2 data-t="world"></h2>
     <div id="list-sample" class="sec"></div>
   </section>
 
-  <section class="sec">
+  <section class="sec" data-ui>
     <h2 data-t="codeH"></h2>
     <div class="codebox">
       <input id="code-in" type="text" data-ph="codePh" autocomplete="off" aria-label="code">
@@ -52,25 +53,25 @@
     <div class="err" id="code-err" hidden></div>
   </section>
 
-  <section class="sec">
+  <section class="sec" data-ui>
     <h2 data-t="recv"></h2>
     <div id="list-recv" class="sec"></div>
   </section>
 
-  <section class="sec">
+  <section class="sec" data-ui>
     <h2 data-t="mine"></h2>
     <div id="list-mine" class="sec"></div>
   </section>
 
-  <div class="cta">
-    <b>What the free app adds</b>
-    <p>Publish stages to the world, play stages from around the world, rankings and boss rush, with far more bullet patterns than the three here.</p>
-    <p class="note" style="margin:0">Patterns you can build with: the trial has three — ring, aimed and rain</p>
+  <div class="cta" data-ui>
+    <b data-t="ctaB">What the free app adds</b>
+    <p data-t="ctaP">Publish stages to the world, play stages from around the world, rankings and boss rush, with far more bullet patterns than the three here.</p>
+    <p class="note" style="margin:0" data-t="lockH">Patterns you can build with: the trial has three — ring, aimed and rain</p>
     <div class="lock" id="lock-list"></div>
-    <a class="btn" data-app href="https://apps.apple.com/app/id6824245206" rel="noopener">See it on the App Store</a>
+    <a class="btn" data-app href="https://apps.apple.com/app/id6824245206" rel="noopener" data-t="ctaA">See it on the App Store</a>
   </div>
 
-  <p class="note" data-t="note"></p>
+  <p class="note" data-t="note" data-ui></p>
 
   <section class="sec about">
   <h2>About the Danmaku Maker trial</h2>
@@ -91,7 +92,7 @@
   </section>
 </div>
 
-<div id="edit" class="wrap" hidden>
+<div id="edit" class="wrap" hidden data-ui>
   <header class="top">
     <h1 data-t="editor"></h1>
     <button class="btn small" id="ed-back" data-t="back"></button>
@@ -122,7 +123,7 @@
   <p class="note" style="margin:0"><span data-t="lockT"></span> <a data-app href="https://apps.apple.com/app/id6824245206" rel="noopener" data-t="worldCta"></a></p>
 </div>
 
-<div id="play" hidden>
+<div id="play" hidden data-ui>
   <div class="pbar">
     <button class="btn small" id="p-quit" data-t="quit"></button>
     <div class="ttl" id="p-title"></div>
@@ -145,7 +146,7 @@
   <div class="hint" data-t="hint"></div>
 </div>
 
-<div id="modal" hidden>
+<div id="modal" hidden data-ui>
   <div class="mbox">
     <h2 data-t="shareH"></h2>
     <p class="note" style="margin:0" data-t="shareNote"></p>
@@ -160,13 +161,14 @@
   </div>
 </div>
 
-<div id="cta-modal" hidden style="position:fixed;inset:0;background:rgba(10,8,24,.8);display:flex;align-items:center;justify-content:center;z-index:40;padding:16px">
+<div id="cta-modal" data-ui hidden style="position:fixed;inset:0;background:rgba(10,8,24,.8);display:flex;align-items:center;justify-content:center;z-index:40;padding:16px">
   <div class="mbox">
-    <h2>This pattern is in the app</h2>
-    <p style="margin:0">Spiral, homing, flower, star, heart, lasers, mines, meteors, gravity shots, snakes, patterns you draw with your finger and many more are in the app (free, with one-time add-ons).</p>
-    <div class="row"><a class="btn primary" data-app href="https://apps.apple.com/app/id6824245206" rel="noopener" style="text-decoration:none">See it on the App Store</a><button class="btn" id="cta-close">Later</button></div>
+    <h2 data-t="lockModalH">This pattern is in the app</h2>
+    <p style="margin:0" data-t="lockModalP">Spiral, homing, flower, star, heart, lasers, mines, meteors, gravity shots, snakes, patterns you draw with your finger and many more are in the app (free, with one-time add-ons).</p>
+    <div class="row"><a class="btn primary" data-app href="https://apps.apple.com/app/id6824245206" rel="noopener" style="text-decoration:none" data-t="ctaA">See it on the App Store</a><button class="btn" id="cta-close" data-t="later">Later</button></div>
   </div>
 </div>
+<script src="/works/danmaku-maker/try/i18n.js" defer></script>
 <script src="/works/danmaku-maker/try/trial.js" defer></script>
 </body>
 </html>

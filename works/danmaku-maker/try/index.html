@@ -28,21 +28,22 @@
 </head>
 <body>
 <div id="home" class="wrap">
-  <header class="top">
+  <header class="top" data-ui>
     <div>
       <p class="sub" style="margin:0 0 6px"><a class="home" href="/">Koshin Studio</a> › <a class="home" href="/works/danmaku-maker/">弾幕メーカーについて</a></p>
-      <h1>弾幕<span>メーカー</span> <small class="badge surv" style="font-size:12px">お試し版</small></h1>
+      <h1>弾幕<span>メーカー</span> <small class="badge surv" style="font-size:12px" data-t="tag">お試し版</small></h1>
       <p class="sub" data-t="sub"></p>
+      <select id="lang-pick" class="btn small" style="margin-top:6px"></select>
     </div>
     <button class="btn primary" id="new-btn" data-t="newb"></button>
   </header>
 
-  <section class="sec">
+  <section class="sec" data-ui>
     <h2 data-t="world"></h2>
     <div id="list-sample" class="sec"></div>
   </section>
 
-  <section class="sec">
+  <section class="sec" data-ui>
     <h2 data-t="codeH"></h2>
     <div class="codebox">
       <input id="code-in" type="text" data-ph="codePh" autocomplete="off" aria-label="code">
@@ -51,25 +52,25 @@
     <div class="err" id="code-err" hidden></div>
   </section>
 
-  <section class="sec">
+  <section class="sec" data-ui>
     <h2 data-t="recv"></h2>
     <div id="list-recv" class="sec"></div>
   </section>
 
-  <section class="sec">
+  <section class="sec" data-ui>
     <h2 data-t="mine"></h2>
     <div id="list-mine" class="sec"></div>
   </section>
 
-  <div class="cta">
-    <b>アプリ版（無料）でできること</b>
-    <p>作ったステージを世界に投稿、世界中のステージで遊ぶ、ランキング、ボス連戦。弾幕パターンも、ここの3種類よりずっと多く使えます。</p>
-    <p class="note" style="margin:0">ステージ作りで使える弾幕：お試し版は 放射・自機狙い・雨 の3種類</p>
+  <div class="cta" data-ui>
+    <b data-t="ctaB">アプリ版（無料）でできること</b>
+    <p data-t="ctaP">作ったステージを世界に投稿、世界中のステージで遊ぶ、ランキング、ボス連戦。弾幕パターンも、ここの3種類よりずっと多く使えます。</p>
+    <p class="note" style="margin:0" data-t="lockH">ステージ作りで使える弾幕：お試し版は 放射・自機狙い・雨 の3種類</p>
     <div class="lock" id="lock-list"></div>
-    <a class="btn" data-app href="https://apps.apple.com/app/id6824245206" rel="noopener">App Store で見る</a>
+    <a class="btn" data-app href="https://apps.apple.com/app/id6824245206" rel="noopener" data-t="ctaA">App Store で見る</a>
   </div>
 
-  <p class="note" data-t="note"></p>
+  <p class="note" data-t="note" data-ui></p>
 
   <section class="sec about">
   <h2>弾幕メーカー お試し版について</h2>
@@ -90,7 +91,7 @@
   </section>
 </div>
 
-<div id="edit" class="wrap" hidden>
+<div id="edit" class="wrap" hidden data-ui>
   <header class="top">
     <h1 data-t="editor"></h1>
     <button class="btn small" id="ed-back" data-t="back"></button>
@@ -121,7 +122,7 @@
   <p class="note" style="margin:0"><span data-t="lockT"></span> <a data-app href="https://apps.apple.com/app/id6824245206" rel="noopener" data-t="worldCta"></a></p>
 </div>
 
-<div id="play" hidden>
+<div id="play" hidden data-ui>
   <div class="pbar">
     <button class="btn small" id="p-quit" data-t="quit"></button>
     <div class="ttl" id="p-title"></div>
@@ -144,7 +145,7 @@
   <div class="hint" data-t="hint"></div>
 </div>
 
-<div id="modal" hidden>
+<div id="modal" hidden data-ui>
   <div class="mbox">
     <h2 data-t="shareH"></h2>
     <p class="note" style="margin:0" data-t="shareNote"></p>
@@ -159,13 +160,14 @@
   </div>
 </div>
 
-<div id="cta-modal" hidden style="position:fixed;inset:0;background:rgba(10,8,24,.8);display:flex;align-items:center;justify-content:center;z-index:40;padding:16px">
+<div id="cta-modal" data-ui hidden style="position:fixed;inset:0;background:rgba(10,8,24,.8);display:flex;align-items:center;justify-content:center;z-index:40;padding:16px">
   <div class="mbox">
-    <h2>このパターンはアプリで使えます</h2>
-    <p style="margin:0">渦巻き・追尾・花・星・ハート・レーザー・地雷・隕石・重力弾・スネーク、指で描いた自分だけの弾幕など、ずっと多くの弾幕パターンが、アプリ版（無料・買い切りの追加あり）で使えます。</p>
-    <div class="row"><a class="btn primary" data-app href="https://apps.apple.com/app/id6824245206" rel="noopener" style="text-decoration:none">App Store で見る</a><button class="btn" id="cta-close">あとで</button></div>
+    <h2 data-t="lockModalH">このパターンはアプリで使えます</h2>
+    <p style="margin:0" data-t="lockModalP">渦巻き・追尾・花・星・ハート・レーザー・地雷・隕石・重力弾・スネーク、指で描いた自分だけの弾幕など、ずっと多くの弾幕パターンが、アプリ版（無料・買い切りの追加あり）で使えます。</p>
+    <div class="row"><a class="btn primary" data-app href="https://apps.apple.com/app/id6824245206" rel="noopener" style="text-decoration:none" data-t="ctaA">App Store で見る</a><button class="btn" id="cta-close" data-t="later">あとで</button></div>
   </div>
 </div>
+<script src="/works/danmaku-maker/try/i18n.js" defer></script>
 <script src="/works/danmaku-maker/try/trial.js" defer></script>
 </body>
 </html>

@@ -6,89 +6,68 @@
    言語は <html lang> で決める（日本語と英語の頁が、この 1 本を共有する） */
 (function () {
 'use strict';
-const EN = /^en/.test(document.documentElement.lang || '');
-const APP = 'https://apps.apple.com/' + (EN ? '' : 'jp/') + 'app/id6824245206';
+/* ---------- 言語 ----------
+   画面の文言は 10 言語（i18n.js。アプリの翻訳から作った）。決め方：
+   ?lang= → 前に選んだ言語 → ブラウザの言語（日本語・英語の人は、頁の言語のまま）。
+   頁の説明文（検索向け）は、頁の言語（日本語か英語）のまま */
+const PAGE_LANG = /^en/.test(document.documentElement.lang || '') ? 'en' : 'ja';
+const I18N = window.DM_I18N || {}, LANG_NAMES = window.DM_LANGS || {};
+function norm(l) {
+  l = String(l || '').toLowerCase();
+  if (/^zh-(tw|hk|mo|hant)/.test(l)) return 'zh-Hant';
+  if (/^zh/.test(l)) return 'zh-Hans';
+  if (/^pt/.test(l)) return 'pt-BR';
+  const b = l.split('-')[0];
+  return ['ja', 'en', 'ko', 'es', 'fr', 'de', 'ru'].includes(b) ? b : null;
+}
+function pickLang() {
+  const q = norm(new URLSearchParams(location.search).get('lang'));
+  if (q && I18N[q]) return q;
+  try { const saved = localStorage.getItem('dm_lang'); if (saved && I18N[saved]) return saved; } catch (e) { /* 保存できない環境 */ }
+  for (const l of (navigator.languages || [navigator.language])) {
+    const n = norm(l);
+    if (!n) continue;
+    if (n === 'ja' || n === 'en') return PAGE_LANG;
+    if (I18N[n]) return n;
+  }
+  return PAGE_LANG;
+}
+const LANG = pickLang();
+const D = I18N[LANG] || I18N[PAGE_LANG] || {};
+const f = (k, ...a) => String(D[k] || '').replace(/\{(\d)\}/g, (_, i) => a[+i]);
+const EN = LANG !== 'ja';   /* 日本語以外では、App Store も日本以外の入口にする */
+const APP = 'https://apps.apple.com/' + (LANG === 'ja' ? 'jp/' : '') + 'app/id6824245206';
 const SELF = location.origin + location.pathname;
-const S = EN ? {
-  ty: { ring: 'Ring', spiral: 'Rotating ring', aim: 'Aimed', rain: 'Rain', sweep: 'Sweeping fan' },
-  rl: { ring: 'Rotation', spiral: 'Rotation', aim: 'Spread', rain: '(none)', sweep: 'Swing' },
-  sub: 'Build a stage, clear it, and send it to a friend.', newb: '+ Build a stage',
-  codeH: 'Play from a code or link', codePh: 'Paste a DM1- code or a link', play: 'Play',
-  world: 'Sample stages', recv: 'Stages you received', mine: 'Your stages',
-  emptyRecv: 'Stages you open from a friend’s code or link appear here.',
-  emptyMine: 'Nothing yet. Tap “Build a stage” to start. You must clear your own stage before sharing it.',
-  note: 'Trial version. Your stages and records are kept only in this browser. Share them with a link.',
-  boss: 'Boss', surv: 'Survive', hp: 'HP', limit: 'limit', sec: 's', survFor: (d) => `survive ${d}s`, by: 'by',
-  rate: 'clear rate', tries: 'Tries', clears: 'Clears', edit: 'Edit', code: 'Share',
-  codeErr: 'Could not read that code. Paste everything from DM1- to the end.',
-  editor: 'Editor', back: '← Back', cond: 'Clear condition', mS: 'Survive', mSd: 'Survive the set time without being hit',
-  mB: 'Defeat the boss', mBd: 'Auto-fire chips its HP to zero', name: 'Stage name', namePh: 'e.g. Hell spiral',
-  author: 'Creator', authorPh: 'e.g. Koshin', dur: 'Time to survive', durB: 'Time limit', mv: 'Boss movement',
-  mv0: 'Still', mv1: 'Slow side to side', mv2: 'Fast side to side', bhp: 'Boss HP',
-  bossNote: 'In boss fights the emitters stick to the boss. As HP drops it switches to phase 1–3, clearing the bullets on screen.',
-  add: '+ Add emitter', test: 'Test play', post: 'Get share link',
-  ok: 'Cleared. You can share it now.', need: 'To share, first clear it yourself in a test play.',
-  em: 'Emitter', del: 'Delete', pat: 'Pattern', color: 'Bullet color', phase: 'Phase',
-  phases: ['All phases', 'Phase 1', 'Phase 2', 'Phase 3'],
-  sl: { x: 'Horizontal', y: 'Vertical', s: 'Start', e: 'End', i: 'Interval', c: 'Bullets', v: 'Speed', r: 'Angle' },
-  toEnd: 'to end', lockH: 'In the app:', lockT: 'Spiral, homing, flower, lasers, mines and many more patterns are in the app.',
-  lockedOpt: '(app)', pre: 'Preview of ',
-  quit: 'Quit', retry: 'Retry', backB: 'Back', test_: 'Test: ',
-  hint: 'Drag anywhere to move / keyboard: arrow keys, Shift to slow down',
-  win: 'CLEAR!', bossWin: 'Defeated!', timeUp: 'Time up', hit: 'Hit…',
-  tOk: 'Clear confirmed. You can share it.', tNg: 'You need to clear your own stage before sharing it.',
-  wBoss: (t) => `Boss defeated in ${t}s!`, wSurv: (d) => `Survived ${d}s!`, lTime: (h) => `Boss HP left: ${h}`, lHit: (t) => `Hit at ${t}s`,
-  phaseB: (n) => 'PHASE ' + n,
-  appRes: 'In the app, stages go out to players worldwide, with rankings and many more patterns.', appBtn: 'Get the app (free)',
-  shareH: 'Share link', shareNote: 'Send this link and your friend can play the same stage in their browser.',
-  xs: 'Share on X', copy: 'Copy', close: 'Close', copied: 'Copied', selected: 'Selected. Press and hold to copy.',
-  xText: (n, b) => `I made a ${b ? 'boss' : 'bullet-hell'} stage “${n}”. Can you clear it?\n#DanmakuMaker`,
-  worldCta: 'Publish to the world in the app', ready: 'READY', unnamed: 'Untitled stage', anon: 'Anonymous',
-  samples: [['First swirl', 'Sample'], ['Sudden rain', 'Sample'], ['Watching you', 'Sample'], ['Three-phase boss', 'Sample'], ['Fireworks from hell', 'Sample']]
-} : {
-  ty: { ring: '放射', spiral: '回転する放射', aim: '自機狙い', rain: '雨', sweep: '首ふり扇' },
-  rl: { ring: '回転', spiral: '回転', aim: '広がり', rain: '（なし）', sweep: '振れ幅' },
-  sub: '作って、クリアして、友達に送りつけろ。', newb: '＋ ステージを作る',
-  codeH: 'コード・リンクで遊ぶ', codePh: 'DM1- から始まるコードか、リンクを貼り付け', play: '遊ぶ',
-  world: 'サンプルのステージ', recv: '受け取ったステージ', mine: '自分のステージ',
-  emptyRecv: '友達のコードやリンクで遊ぶと、ここに並びます。',
-  emptyMine: 'まだありません。「ステージを作る」から始めましょう。送るには、自分でクリアする必要があります。',
-  note: 'お試し版です。ステージと記録は、このブラウザの中にだけ残ります。人へはリンクで渡します。',
-  boss: 'ボス', surv: '耐久', hp: 'HP', limit: '制限', sec: '秒', survFor: (d) => `${d}秒耐える`, by: 'by',
-  rate: 'クリア率', tries: '挑戦', clears: 'クリア', edit: '編集', code: '共有',
-  codeErr: 'コードを読み取れませんでした。DM1- から最後まで全部貼り付けてください。',
-  editor: 'エディタ', back: '← 一覧へ', cond: 'クリア条件', mS: '耐えきる', mSd: '決めた時間、被弾せずに生き残る',
-  mB: 'ボスを倒す', mBd: '自動ショットでHPを削りきる', name: 'ステージ名', namePh: '例：地獄の渦',
-  author: '作者名', authorPh: '例：Koshin', dur: '耐える時間', durB: '制限時間', mv: 'ボスの動き',
-  mv0: '動かない', mv1: 'ゆっくり左右', mv2: '速く左右', bhp: 'ボスHP',
-  bossNote: 'ボス戦では発射台はボスにくっつきます。HPが減るごとに「第1〜第3段階」に切り替わり、切り替わりで画面の弾が消えます。',
-  add: '＋ 発射台を追加', test: 'テストプレイ', post: '共有リンクを作る',
-  ok: 'クリア確認済み。共有できます。', need: '共有するには、まず自分でテストプレイしてクリアしてください。',
-  em: '発射台', del: '削除', pat: 'パターン', color: '弾の色', phase: '使う段階',
-  phases: ['全段階', '第1段階', '第2段階', '第3段階'],
-  sl: { x: '横位置', y: '縦位置', s: '開始', e: '終了', i: '発射間隔', c: '弾数', v: '弾の速さ', r: '角度' },
-  toEnd: '最後まで', lockH: 'アプリで使える：', lockT: '渦巻き・追尾・花・レーザー・地雷など、ずっと多くの弾幕はアプリで使えます。',
-  lockedOpt: '（アプリ）', pre: 'のプレビュー',
-  quit: 'やめる', retry: 'もう一度', backB: '戻る', test_: 'テスト：',
-  hint: '画面のどこでもドラッグで移動 ／ キーボード：矢印キー、Shiftで低速',
-  win: 'CLEAR!', bossWin: '撃破！', timeUp: '時間切れ', hit: '被弾…',
-  tOk: 'クリア確認完了。共有できます。', tNg: '作った本人もクリアできないと、共有できません。',
-  wBoss: (t) => `${t}秒 でボスを撃破！`, wSurv: (d) => `${d}秒 耐えきった！`, lTime: (h) => `ボスの残りHP ${h}`, lHit: (t) => `${t}秒 で被弾`,
-  phaseB: (n) => '第' + n + '段階',
-  appRes: 'アプリなら、作ったステージを世界に投稿できて、ランキングと、ずっと多くの弾幕パターンが使えます。', appBtn: 'アプリを入れる（無料）',
-  shareH: '共有リンク', shareNote: 'このリンクを送ると、相手もブラウザで同じステージを遊べます。',
-  xs: 'Xでシェア', copy: 'コピー', close: '閉じる', copied: 'コピーしました', selected: '選択しました。長押しでコピーしてください。',
-  xText: (n, b) => `「${n}」の${b ? 'ボス' : '弾幕'}を作った！クリアできる？\n#弾幕メーカー`,
-  worldCta: '世界への投稿はアプリで', ready: 'READY', unnamed: '名無しステージ', anon: '名無し',
-  samples: [['はじめての渦', 'サンプル'], ['にわか雨', 'サンプル'], ['見てるぞ', 'サンプル'], ['三段変化のボス', 'サンプル'], ['鬼畜・花火大会', 'サンプル']]
+const SEP = LANG === 'ja' ? '・' : ' · ';
+const S = {
+  ty: { ring: D.ty_ring, spiral: D.ty_spiral, aim: D.ty_aim, rain: D.ty_rain, sweep: D.ty_sweep },
+  rl: { ring: D.rl_rot, spiral: D.rl_rot, aim: D.rl_aim, rain: D.rl_rain, sweep: D.rl_sweep },
+  sl: { x: D.sl_x, y: D.sl_y, s: D.sl_s, e: D.sl_e, i: D.sl_i, c: D.sl_c, v: D.sl_v, r: D.sl_r },
+  phases: [D.ph0, D.ph1, D.ph2, D.ph3],
+  sub: D.sub, newb: D.newb, codeH: D.codeH, codePh: D.codePh, play: D.play, world: D.world, recv: D.recv, mine: D.mine,
+  emptyRecv: D.emptyRecv, emptyMine: D.emptyMine, note: D.note, boss: D.boss, surv: D.surv, by: 'by', rate: D.rate,
+  tries: D.tries, clears: D.clears, edit: D.edit, code: D.code, codeErr: D.codeErr, editor: D.editor, back: D.back,
+  cond: D.cond, mS: D.mS, mSd: D.mSd, mB: D.mB, mBd: D.mBd, name: D.name, namePh: D.namePh, author: D.author, authorPh: D.authorPh,
+  dur: D.dur, durB: D.durB, mv: D.mv, mv0: D.mv0, mv1: D.mv1, mv2: D.mv2, bhp: D.bhp, bossNote: D.bossNote, add: D.add,
+  test: D.test, post: D.post, ok: D.ok, need: D.need, del: D.del, pat: D.pat, color: D.color, phase: D.phase,
+  toEnd: D.toEnd, lockT: D.lockT, moreOpt: D.moreOpt, quit: D.quit, retry: D.retry, backB: D.backB,
+  hint: D.hintDrag + ' ／ ⌨ ←↑↓→ · Shift', win: D.win, bossWin: D.bossWin, timeUp: D.timeUp, hit: D.hit,
+  tOk: D.ok, tNg: D.tNg, appRes: D.appRes, appBtn: D.appBtn, shareH: D.shareH, shareNote: D.shareNote,
+  xs: '𝕏 ' + D.share, copy: D.copy, close: D.close, copied: D.copied, selected: D.selected, worldCta: D.worldCta,
+  ready: D.ready, unnamed: D.unnamed, anon: D.anon, ctaB: D.ctaB, ctaP: D.appRes, ctaA: D.ctaA, lockH: D.lockH + ' ' + [D.ty_ring, D.ty_aim, D.ty_rain].join(' · '),
+  lockModalH: D.lockModalH, lockModalP: D.appRes, later: D.later, tag: D.tag, langLabel: D.langLabel,
+  em: (n) => f('em', n), survFor: (d) => f('survFor', d), bossFor: (h, d) => f('bossFor', h, d), secs: (n) => f('secs', n),
+  wBoss: (t) => f('wBoss', t), wSurv: (d) => f('wSurv', d), lTime: (h) => f('lTime', h), lHit: (t) => f('lHit', t),
+  phaseB: (n) => f('phaseB', n), test_: D.test + ': ',
+  xText: (n, url) => f('xText', n, url),
+  samples: [[D.s1, D.sampleBy], [D.s2, D.sampleBy], [D.s3, D.sampleBy], [D.s5, D.sampleBy], [D.s4, D.sampleBy]],
 };
 
 const W = 360, H = 540;
 const PAL = ['#ff6b9d', '#5ce1e6', '#ffd166', '#b28dff', '#7cf29c'];
 const TK = ['ring', 'spiral', 'aim', 'rain', 'sweep'];   // 共有コードの並び（変えない）
 const FREE = ['ring', 'aim', 'rain'];                     // お試し版のステージ作りで使えるもの
-const LOCKED = EN ? ['Spiral', 'Homing', 'Flower', 'Star', 'Heart', 'Sweeping laser', 'Mines', 'Meteors', 'Gravity', 'Snake', 'Draw your own']
-  : ['渦巻き', '追尾', '花', '星', 'ハート', 'なぎ払いレーザー', '地雷', '隕石', '重力弾', 'スネーク', '自分で描く'];
+const LOCKED = ['swirl', 'homing', 'flower', 'star', 'heart', 'sweepLaser', 'mine', 'meteor', 'gravity', 'snake', 'maker'].map((k) => D['lk_' + k]);
 const DEF = { ring: { i: 1, c: 16, v: 2, r: 6 }, spiral: { i: .1, c: 3, v: 2, r: 11 }, aim: { i: .8, c: 5, v: 3, r: 40 }, rain: { i: .25, c: 2, v: 2, r: 0 }, sweep: { i: .15, c: 5, v: 2.5, r: 60 } };
 const $ = (id) => document.getElementById(id);
 
@@ -133,7 +112,18 @@ function dec(code) {
 const linkOf = (code) => SELF + '#' + code;
 
 /* ---------- 文言を入れる（HTML は骨だけ） ---------- */
-document.querySelectorAll('[data-t]').forEach((el) => { el.textContent = S[el.dataset.t]; });
+document.querySelectorAll('[data-t]').forEach((el) => { if (typeof S[el.dataset.t] === 'string') el.textContent = S[el.dataset.t]; });
+/* 画面の部品にだけ、選んだ言語を付ける（読み上げ・翻訳機能のため）。説明文は頁の言語のまま */
+document.querySelectorAll('[data-ui]').forEach((el) => { el.lang = LANG; });
+const pick = $('lang-pick');
+if (pick) {
+  pick.innerHTML = Object.keys(LANG_NAMES).map((l) => `<option value="${l}"${l === LANG ? ' selected' : ''}>${LANG_NAMES[l]}</option>`).join('');
+  pick.setAttribute('aria-label', S.langLabel);
+  pick.addEventListener('change', () => {
+    try { localStorage.setItem('dm_lang', pick.value); } catch (e) { /* 保存できなくても、下の URL で切り替わる */ }
+    const u = new URL(location.href); u.searchParams.set('lang', pick.value); location.href = u.toString();
+  });
+}
 document.querySelectorAll('[data-ph]').forEach((el) => { el.placeholder = S[el.dataset.ph]; });
 document.querySelectorAll('a[data-app]').forEach((a) => { a.href = APP; });
 $('lock-list').innerHTML = LOCKED.map((n) => `<button type="button" data-lock="1">🔒 ${esc(n)}</button>`).join('');
@@ -147,7 +137,7 @@ function card(st, kind) {
   const acts = kind === 'mine' ? `<div class="acts"><button class="btn small" data-act="edit" data-id="${st.id}">${S.edit}</button><button class="btn small" data-act="code" data-id="${st.id}">${S.code}</button></div>`
     : kind === 'recv' ? `<div class="acts"><button class="btn small" data-act="code" data-id="${st.id}">${S.code}</button></div>` : '';
   return `<div class="stage" role="button" tabindex="0" data-act="play" data-id="${st.id}">
-    <div><div class="nm">${esc(st.n)}</div><div class="by">${st.m === 'boss' ? `<span class="badge boss">${S.boss}</span>${S.hp}${st.h}・${S.limit}${st.d}${S.sec}` : `<span class="badge surv">${S.surv}</span>${S.survFor(st.d)}`}・${S.by} ${esc(st.a)}</div></div>
+    <div><div class="nm">${esc(st.n)}</div><div class="by">${st.m === 'boss' ? `<span class="badge boss">${S.boss}</span>${S.bossFor(st.h, st.d)}` : `<span class="badge surv">${S.surv}</span>${S.survFor(st.d)}`}${SEP}${S.by} ${esc(st.a)}</div></div>
     <div class="rate">${rate}<small>${S.rate}</small></div>
     <div class="meta"><span>${S.tries} <b>${s.t}</b></span><span>${S.clears} <b>${s.c}</b></span></div>${acts}</div>`;
 }
@@ -188,21 +178,21 @@ function renderMode() {
   const b = draft.m === 'boss';
   $('ed-mode-s').checked = !b; $('ed-mode-b').checked = b;
   if (!DURS[draft.m].includes(draft.d)) draft.d = DURS[draft.m][1];
-  $('ed-dur').innerHTML = DURS[draft.m].map((v) => `<option value="${v}"${v === draft.d ? ' selected' : ''}>${v}${S.sec}</option>`).join('');
+  $('ed-dur').innerHTML = DURS[draft.m].map((v) => `<option value="${v}"${v === draft.d ? ' selected' : ''}>${S.secs(v)}</option>`).join('');
   $('ed-dur-l').textContent = b ? S.durB : S.dur;
   $('ed-mv-f').hidden = !b; $('ed-hp-f').hidden = !b; $('ed-boss-note').hidden = !b;
   $('ed-hp-o').textContent = draft.h;
   renderEms();
 }
-const SLIDERS = [['x', 0, 1, .05, (v) => Math.round(v * 100) + '%'], ['y', 0, .6, .05, (v) => Math.round(v * 100) + '%'], ['s', 0, 180, .5, (v) => v + S.sec], ['e', 0, 180, .5, (v) => +v >= draft.d ? S.toEnd : v + S.sec], ['i', .05, 2, .05, (v) => (+v).toFixed(2) + 's'], ['c', 1, 36, 1, (v) => v], ['v', 1, 5, .25, (v) => (+v).toFixed(2)], ['r', -90, 90, 1, (v) => v + '°']];
+const SLIDERS = [['x', 0, 1, .05, (v) => Math.round(v * 100) + '%'], ['y', 0, .6, .05, (v) => Math.round(v * 100) + '%'], ['s', 0, 180, .5, (v) => S.secs(v)], ['e', 0, 180, .5, (v) => +v >= draft.d ? S.toEnd : S.secs(v)], ['i', .05, 2, .05, (v) => (+v).toFixed(2) + 's'], ['c', 1, 36, 1, (v) => v], ['v', 1, 5, .25, (v) => (+v).toFixed(2)], ['r', -90, 90, 1, (v) => v + '°']];
 function renderEms() {
   /* 編集中の発射台が、お試し版で作れないパターン（受け取ったサンプルを開いた時など）なら、選べる中の近いものに替える */
   for (const m of draft.e) if (!FREE.includes(m.t)) Object.assign(m, { t: 'ring' }, DEF.ring);
   $('ed-ems').innerHTML = draft.e.map((m, i) => `<div class="em" data-i="${i}">
-    <div class="em-head"><span class="tag">${S.em} ${i + 1}</span>${draft.e.length > 1 ? `<button class="btn small" data-del="${i}">${S.del}</button>` : ''}</div>
-    <canvas class="pv" aria-label="${EN ? S.pre + S.ty[m.t] : S.ty[m.t] + S.pre}"></canvas>
+    <div class="em-head"><span class="tag">${S.em(i + 1)}</span>${draft.e.length > 1 ? `<button class="btn small" data-del="${i}">${S.del}</button>` : ''}</div>
+    <canvas class="pv" aria-label="${S.ty[m.t]}"></canvas>
     <div class="grid2">
-      <div class="field"><label for="em${i}-t">${S.pat}</label><select id="em${i}-t" data-k="t">${FREE.map((t) => `<option value="${t}"${t === m.t ? ' selected' : ''}>${S.ty[t]}</option>`).join('')}<option value="__app">🔒 ${EN ? 'More patterns' : 'ほかのパターン'} ${S.lockedOpt}</option></select></div>
+      <div class="field"><label for="em${i}-t">${S.pat}</label><select id="em${i}-t" data-k="t">${FREE.map((t) => `<option value="${t}"${t === m.t ? ' selected' : ''}>${S.ty[t]}</option>`).join('')}<option value="__app">🔒 ${S.moreOpt}</option></select></div>
       <div class="field"><label>${S.color}</label><div class="sw">${PAL.map((c, j) => `<input type="radio" name="em${i}-k" id="em${i}-k${j}" data-k="k" value="${j}" aria-label="${S.color} ${j + 1}" style="background:${c}"${j === m.k ? ' checked' : ''}>`).join('')}</div></div>
     </div>
     ${draft.m === 'boss' ? `<div class="field"><label for="em${i}-ph">${S.phase}</label><select id="em${i}-ph" data-k="ph">${S.phases.map((p, j) => `<option value="${j}"${j === m.ph ? ' selected' : ''}>${p}</option>`).join('')}</select></div>` : ''}
@@ -249,8 +239,8 @@ $('ed-post').onclick = () => {
 function openModal(code, st) {
   const url = linkOf(code);
   $('m-code').value = url; $('m-msg').textContent = '';
-  const text = S.xText(st ? st.n : S.unnamed, st && st.m === 'boss');
-  $('m-x').href = 'https://x.com/intent/post?text=' + encodeURIComponent(text) + '&url=' + encodeURIComponent(url);
+  const text = S.xText(st ? st.n : S.unnamed, url);
+  $('m-x').href = 'https://x.com/intent/post?text=' + encodeURIComponent(text);
   $('modal').hidden = false;
 }
 $('m-close').onclick = () => { $('modal').hidden = true; };
