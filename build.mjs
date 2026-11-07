@@ -98,7 +98,7 @@ const foot = `
 <footer class="site"><div class="wrap">
   <span>© 2026 Koshin Studio</span>
   <div class="sns-row">${socialHtml}</div>
-  <nav><a href="/about/">About</a><a href="/privacy/">あつかい</a><a href="/en/" hreflang="en" lang="en">English</a></nav>
+  <nav><a href="/about/">運営者情報</a><a href="/about/#contact">お問い合わせ</a><a href="/privacy/">プライバシーポリシー</a><a href="/en/" hreflang="en" lang="en">English</a></nav>
 </div></footer>
 <script src="/motion.js" defer></script>
 </body>
@@ -274,7 +274,7 @@ writeAnime('/anime/guide/index.html',
   <h3>3. 何作の中から選んでいるか</h3>
   <p class="rv">診断が実際に使う作品は、<strong>6,074 作</strong>です。もとは 16,177 件あって、レビューの言葉が少なく、軸を決める手がかりが足りない作品は、落としました。落とした基準と、残った作品の偏り（2000 年以降が 90.5%）は、<a href="/notes/anime-db/">データベースの記事</a>に、数字で書いています。</p>
   <h3>4. 回答は、どこへ行くか</h3>
-  <p class="rv">ガチアニメ診断は、回答を、この端末の中だけで計算します。サーバーには送りません。診断のデータの扱いは、<a href="/privacy/">あつかい</a>に書いています。</p>
+  <p class="rv">ガチアニメ診断は、回答を、この端末の中だけで計算します。サーバーには送りません。診断のデータの扱いは、<a href="/privacy/">プライバシーポリシー</a>に書いています。</p>
 
   <h2 class="rv">答え方のコツ</h2>
   <ul class="rv">
@@ -1028,8 +1028,8 @@ function ldFor(file, url) {
       crumbs([['Koshin Studio', '/'], ['Works', '/works/'], ['ガチアニメ診断', '/works/shindananime/'], ['ガイド', '/anime/'], ['64タイプ', '/anime/types/'], [t.code, typeUrl(t.code)]])];
   }
   if (rel === '/privacy/index.html') {
-    return [page('あつかい（プライバシー）'),
-      crumbs([['Koshin Studio', '/'], ['あつかい', '/privacy/']])];
+    return [page('プライバシーポリシー'),
+      crumbs([['Koshin Studio', '/'], ['プライバシーポリシー', '/privacy/']])];
   }
   const gm = rel.match(/^\/works\/([^/]+)\/guide\.html$/);
   if (gm && workBySlug[gm[1]]) {
@@ -1073,7 +1073,7 @@ for (const file of pages) {
   html = html.replace(/(<footer class="site"><div class="wrap">[\s\S]*?)<nav>[\s\S]*?<\/nav>(\s*<\/div><\/footer>)/,
     '$1' + (I18N[rel.split('/')[1]]
       ? '<nav><a href="/en/" hreflang="en" lang="en">English</a><a href="/" hreflang="ja" lang="ja">日本語</a><a href="/en/about/#contact" hreflang="en" lang="en">Contact</a><a href="/en/privacy/" hreflang="en" lang="en">Privacy</a></nav>'
-      : '<nav><a href="/picks/">Picks</a><a href="/calc/">Tools</a><a href="/about/">About</a><a href="/about/#contact">お問い合わせ</a><a href="/privacy/">あつかい</a><a href="/en/" hreflang="en" lang="en">English</a></nav>') + '$2');
+      : '<nav><a href="/picks/">Picks</a><a href="/calc/">Tools</a><a href="/about/">運営者情報</a><a href="/about/#contact">お問い合わせ</a><a href="/privacy/">プライバシーポリシー</a><a href="/en/" hreflang="en" lang="en">English</a></nav>') + '$2');
   html = html.replace(/<div class="sns-row">[\s\S]*?<\/div>/g, `<div class="sns-row">${socialHtml}</div>`);
   if (!/class="sns-row"/.test(html)) {
     html = html.replace('<footer class="site"><div class="wrap">\n  <span>© 2026 Koshin Studio</span>',
@@ -1107,7 +1107,7 @@ for (const file of pages) {
     '/anime/axes/index.html': [['Works', '/works/'], ['ガチアニメ診断', '/works/shindananime/'], ['ガイド', '/anime/'], ['6つの軸', '/anime/axes/']],
     '/anime/guide/index.html': [['Works', '/works/'], ['ガチアニメ診断', '/works/shindananime/'], ['ガイド', '/anime/'], ['選び方', '/anime/guide/']],
     '/anime/types/index.html': [['Works', '/works/'], ['ガチアニメ診断', '/works/shindananime/'], ['ガイド', '/anime/'], ['64タイプ', '/anime/types/']],
-    '/privacy/index.html': [['あつかい', '/privacy/']],
+    '/privacy/index.html': [['プライバシーポリシー', '/privacy/']],
     '/picks/index.html': [['Picks', '/picks/']],
     '/calc/index.html': [['Tools', '/calc/']],
     '/calc/gacha/index.html': [['Tools', '/calc/'], ['ガチャのコンプリート計算機', '/calc/gacha/']],
@@ -1402,7 +1402,7 @@ for (const file of pages) {
     <h2 id="comments-h">コメント</h2>
     <p>感想や、記事の間違いの指摘は、ここへ。書くには、GitHub のアカウントが要ります。</p>
     <p><button type="button" class="btn ghost" id="load-comments">コメントを開く</button></p>
-    <p class="note">押すと、giscus（giscus.app）と GitHub に接続します。押さなければ、接続しません。詳しくは<a href="/privacy/">あつかい</a>に書いています。</p>
+    <p class="note">押すと、giscus（giscus.app）と GitHub に接続します。押さなければ、接続しません。詳しくは<a href="/privacy/">プライバシーポリシー</a>に書いています。</p>
     <div id="giscus-box"></div>
   </section>
 <!--/comments-->\n`;

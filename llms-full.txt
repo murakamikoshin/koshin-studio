@@ -8569,7 +8569,7 @@ URL: https://koshinstudio.com/works/negaeri-shogi/
 
 ## 預かるもの
 
-  オンライン対戦を遊ぶと、名前（既定は「名無し」）、レーティング、勝敗の数、対局の記録を、こちらのサーバーに預かります。登録の画面はなく、端末に作られる ID で本人を見分けます。くわしくはあつかい (https://koshinstudio.com/privacy/)に書いています。AI 対戦と2人対戦は、何も預かりません。
+  オンライン対戦を遊ぶと、名前（既定は「名無し」）、レーティング、勝敗の数、対局の記録を、こちらのサーバーに預かります。登録の画面はなく、端末に作られる ID で本人を見分けます。くわしくはプライバシーポリシー (https://koshinstudio.com/privacy/)に書いています。AI 対戦と2人対戦は、何も預かりません。
 
     遊ぶ (https://koshinstudio.com/play/negaeri-shogi/)
 
@@ -8639,7 +8639,7 @@ URL: https://koshinstudio.com/works/draft-party/
 
 ## 預かるもの
 
-  部屋の中でのやり取りのために、端末が作った番号、球団名、指名した内容、チャットの発言、部屋の設定を、その部屋のあいだだけ預かります。ゲーム終了の10分後に、すべて削除されます。世界ランキングには、ゲーム終了時に球団名・ドラフトスコア・評価（S〜D）・日時だけを記録します（端末の番号やチャットは含みません）。Xへ画像つきで共有するときは、共有する結果の画像と文章を7日間だけサーバーに置きます。くわしくはあつかい (https://koshinstudio.com/privacy/)に書いています。
+  部屋の中でのやり取りのために、端末が作った番号、球団名、指名した内容、チャットの発言、部屋の設定を、その部屋のあいだだけ預かります。ゲーム終了の10分後に、すべて削除されます。世界ランキングには、ゲーム終了時に球団名・ドラフトスコア・評価（S〜D）・日時だけを記録します（端末の番号やチャットは含みません）。Xへ画像つきで共有するときは、共有する結果の画像と文章を7日間だけサーバーに置きます。くわしくはプライバシーポリシー (https://koshinstudio.com/privacy/)に書いています。
 
     遊ぶ (https://koshinstudio.com/draft/)
 
@@ -8812,7 +8812,7 @@ URL: https://koshinstudio.com/anime/guide/
 
 ### 4. 回答は、どこへ行くか
 
-  ガチアニメ診断は、回答を、この端末の中だけで計算します。サーバーには送りません。診断のデータの扱いは、あつかい (https://koshinstudio.com/privacy/)に書いています。
+  ガチアニメ診断は、回答を、この端末の中だけで計算します。サーバーには送りません。診断のデータの扱いは、プライバシーポリシー (https://koshinstudio.com/privacy/)に書いています。
 
 ## 答え方のコツ
 
@@ -9001,14 +9001,14 @@ URL: https://koshinstudio.com/about/
 
   koshinstudio88@gmail.comメールで送る
 
-  個人情報や、診断の回答の扱いはあつかい (https://koshinstudio.com/privacy/)に書いています。
+  個人情報や、診断の回答の扱いはプライバシーポリシー (https://koshinstudio.com/privacy/)に書いています。
 
 
 ---
 
 URL: https://koshinstudio.com/privacy/
 
-# あつかい
+# プライバシーポリシー
 
   English version (https://koshinstudio.com/en/privacy/)
 
