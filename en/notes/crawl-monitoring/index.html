@@ -1,0 +1,433 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cutting misses in crawling and monitoring: 7 records | Koshin Studio</title>
+<meta name="description" content="Seven records of counting and cutting misses while crawling and monitoring lottery and first-come sales: aggregator pagination, gaps in X monitoring, how coverage was measured, intervals vs delivery, and waiting-room pages.">
+<meta property="og:title" content="Seven records of cutting misses in crawling and monitoring: pagination, X monitoring, measuring coverage and waiting rooms">
+<meta property="og:description" content="Seven records of counting and cutting misses while crawling and monitoring lottery and first-come sales: aggregator pagination, gaps in X monitoring, how coverage was measured, intervals vs delivery, and waiting-room pages.">
+<meta property="og:type" content="article">
+<meta name="theme-color" content="#fbfaf7">
+<link rel="icon" href="/favicon.ico?v=1697d589" sizes="48x48">
+<link rel="icon" href="/favicon.svg?v=b9d7922f" type="image/svg+xml" sizes="any">
+<link rel="icon" href="/assets/icon/icon-192.png?v=e2566235" type="image/png" sizes="192x192">
+<link rel="apple-touch-icon" href="/assets/icon/icon-180.png?v=84e7f0e6">
+<link rel="manifest" href="/site.webmanifest">
+<script>document.documentElement.className+=" js"</script>
+<link rel="stylesheet" href="/style.css?v=3d886c33">
+<meta name="google-adsense-account" content="ca-pub-3863314847163872">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3863314847163872" crossorigin="anonymous"></script>
+<link rel="canonical" href="https://koshinstudio.com/en/notes/crawl-monitoring/">
+<meta property="og:url" content="https://koshinstudio.com/en/notes/crawl-monitoring/">
+<meta property="og:site_name" content="Koshin Studio">
+<meta property="og:locale" content="en_US">
+<link rel="alternate" hreflang="ja" href="https://koshinstudio.com/notes/crawl-monitoring/">
+<link rel="alternate" hreflang="en" href="https://koshinstudio.com/en/notes/crawl-monitoring/">
+<link rel="alternate" hreflang="x-default" href="https://koshinstudio.com/en/notes/crawl-monitoring/">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="alternate" type="application/rss+xml" title="Koshin Studio — Notes" href="https://koshinstudio.com/feed.xml">
+<link rel="alternate" type="text/markdown" href="https://koshinstudio.com/en/notes/crawl-monitoring/index.md">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BlogPosting","headline":"Seven records of cutting misses in crawling and monitoring: pagination, X monitoring, measuring coverage and waiting rooms","url":"https://koshinstudio.com/en/notes/crawl-monitoring/","description":"Seven records of counting and cutting misses while crawling and monitoring lottery and first-come sales: aggregator pagination, gaps in X monitoring, how coverage was measured, intervals vs delivery, and waiting-room pages.","datePublished":"2026-11-07","dateModified":"2026-11-07","inLanguage":"en","image":"https://koshinstudio.com/assets/og/og_en_notes_crawl-monitoring.jpg","author":{"@id":"https://koshinstudio.com#koshin"},"publisher":{"@id":"https://koshinstudio.com#studio"},"mainEntityOfPage":"https://koshinstudio.com/en/notes/crawl-monitoring/","translationOfWork":{"@type":"BlogPosting","url":"https://koshinstudio.com/notes/crawl-monitoring/","inLanguage":"en"}},{"@type":"Person","@id":"https://koshinstudio.com#koshin","name":"Koshin","jobTitle":"Web and app engineer","url":"https://koshinstudio.com/about/","worksFor":{"@id":"https://koshinstudio.com#studio"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Koshin Studio","item":"https://koshinstudio.com/en/"},{"@type":"ListItem","position":2,"name":"Notes","item":"https://koshinstudio.com/en/notes/"},{"@type":"ListItem","position":3,"name":"Seven records of cutting misses in crawling and monitoring: pagination, X monitoring, measuring coverage and waiting rooms","item":"https://koshinstudio.com/en/notes/crawl-monitoring/"}]}]}</script>
+<link rel="alternate" type="application/rss+xml" title="Koshin Studio — Notes (English)" href="https://koshinstudio.com/en/feed.xml">
+<meta property="og:image" content="https://koshinstudio.com/assets/og/og_en_notes_crawl-monitoring.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
+</head>
+<body class="article">
+<canvas id="motes"></canvas>
+
+<header class="site"><div class="wrap">
+  <a class="logo" href="/en/"><img class="logo-mark" src="/favicon.svg?v=b9d7922f" alt="" width="28" height="28">Koshin Studio</a>
+  <nav><a href="/en/works/">Works</a><a href="/en/works/#game">Games</a><a href="/en/notes/">Notes</a><a href="/en/calc/">Tools</a><a href="/en/about/">About</a><a href="/" hreflang="ja" lang="ja">日本語</a></nav>
+</div></header>
+
+<main><div class="wrap">
+  <nav class="crumbs" aria-label="You are here"><a href="/en/">Koshin Studio</a><i aria-hidden="true">›</i><span aria-current="page">Seven records of cutting misses in crawling and monitoring</span></nav>
+  <h1>Seven records of cutting misses in crawling and monitoring: pagination, X monitoring, measuring coverage and waiting rooms</h1>
+  <div class="rule"></div>
+<!--lang-->
+  <p class="note"><a href="/notes/crawl-monitoring/" hreflang="ja" lang="ja">日本語版</a></p>
+<!--/lang--><!--byline--><p class="note byline">Written by <a href="/en/about/#operator">Koshin</a> (web engineer and app engineer) · published 2026-11-07</p><!--/byline--><p class="lead">Development log of Toreca Dash / 7 records in one place</p>
+  <p>Lotteries and first-come sales are over once you miss them. Toreca Dash crawls store sites, aggregator sites and X to watch for them. These are seven records of <strong>counting the misses and cutting them</strong>, including cases where the measurement itself was wrong.</p>
+  <p class="note">Each section was first published as a separate record (from 2026-10). Numbers and sources are as in the work logs of the time. They were gathered into one article per theme on 7 November 2026.</p>
+
+    <nav class="toc" aria-label="Contents"><p>Contents</p><ol><li><a href="#s1">An aggregator crawl read only page 1</a></li><li><a href="#s2">Four gaps in monitoring X</a></li><li><a href="#s3">Comparing with other sites to count gaps</a></li><li><a href="#s4">A “1-minute” monitor checked each item once per 10 minutes</a></li><li><a href="#s5">When you cannot watch everything quickly</a></li><li><a href="#s6">When first-come sales start, the site becomes a waiting-room page</a></li><li><a href="#s7">“Not just noticing; not letting it happen”</a></li><li><a href="#s8">Key points of each</a></li></ol></nav>
+  <h2 class="rv" id="s1">An aggregator crawl read only page 1: card articles were on pages 2–4, and only the first 6,000 characters went to the AI</h2>
+  <p class="note">Record from 2026-10-17.</p>
+<p>One of my app Toreca Dash’s sources is an <strong>aggregator site for stock information</strong>, which lists lottery articles together. This crawl had two causes of “things that should appear but did not”.</p>
+  <p class="note">Written from my work log of 28 August 2026.</p>  <h3 class="rv" id="c1-s1">Cause 1: only the first page of the list was read</h3>
+  <p>The function that reads the aggregator’s list of lottery articles (<code>fetchNyukaNowChusenArticles</code>) read <strong>only page 1</strong>. The 11 items on page 1 were mostly game consoles, a virtual pet and plush toys. The trading-card articles were on later pages.</p>
+  <div class="scroll rv"><table>
+    <thead><tr><th>Kind of article</th><th>Where it was</th></tr></thead>
+    <tbody>
+      <tr><td>Pokémon cards</td><td>a later page</td></tr>
+      <tr><td>Gundam card game</td><td>page 2</td></tr>
+      <tr><td>Dragon Ball, Digimon, Duel Masters</td><td>page 3</td></tr>
+      <tr><td>Union Arena, Weiss Schwarz</td><td>page 4</td></tr>
+    </tbody>
+  </table></div>
+  <p>Many existing articles derive from one Pokémon-card roundup, yet <strong>the crawl no longer read that article itself</strong>. The fix was to follow up to 12 pages.</p>
+
+  <h3 class="rv" id="c1-s2">Cause 2: only the first 6,000 characters of the body went to the AI</h3>
+  <p>A Pokémon-card roundup lists 15 or more stores on one page. I gave the AI only the first 6,000 characters of the body, so <strong>the later stores dropped out entirely</strong>. That is also why the number readable per run wobbled 48, 39, 40.</p>
+  <p>The fix was to <strong>read all of it in 5,000-character pieces with a 600-character overlap</strong>. The import itself uses the same function.</p>
+
+  <h3 class="rv" id="c1-s3">Found the same day: dates with no year</h3>
+  <p>The aggregator’s table writes only “30 August (Sun)”. I was not giving the AI today’s date, so Pokémon-card items came back as <strong>30 August 2020</strong>. A past deadline is rejected by the entrance gate, so Pokémon-card items from this route were not imported at all. After I put today’s date and “do not fill in a year before today” in the prompt, the open items I could read went <strong>from 0 to 46</strong>. (This is also told in <a href="/en/notes/silent-failures/#s1">another article</a>.)</p>
+
+  <h3 class="rv" id="c1-s4">What I learned</h3>
+  <blockquote>Three cut points in an import: pages, characters, years.</blockquote>
+  <ul>
+    <li><strong>Read a list to its last page.</strong> What you want is not necessarily on page 1.</li>
+    <li><strong>Check that the AI’s character limit is not dropping the back half.</strong> A wobbling count is a sign.</li>
+    <li><strong>Pass the whole text, in order, with overlap.</strong> If you pass only the head, the rest drops.</li>
+    <li><strong>For dates with no year, give today’s date.</strong> Otherwise it fills in six years ago.</li>
+    <li><strong>“Not reading the source of existing articles now” is a sign of a gap.</strong></li>
+  </ul>
+  <h2 class="rv" id="s2">Four gaps in monitoring X: posts missing from search, accounts that change hands, a store-finding query, and catching up after an outage</h2>
+  <p class="note">Record from 2026-10-17.</p>
+<p>Of my app Toreca Dash’s sources, the fastest and the easiest to miss is <strong>stores’ own posts on X (Twitter)</strong>. Stores announce lotteries and first-come sales on X first. The app patrols registered store accounts regularly.</p>
+  <p>On 19 September 2026, four “gaps” in this monitoring turned up in a single day. This is the record.</p>
+  <p class="note">Numbers come from my work logs of 19–20 September 2026. Private individuals’ accounts are not named.</p>  <h3 class="rv" id="c2-s1">1. Some posts do not appear in search</h3>
+  <p>The monitor found posts through X search. But for four stores, lottery announcements did not appear <strong>even after fetching 751 posts without any keyword filter</strong>, nor per store. X search can omit part of a store’s posts.</p>
+  <p>Reading the timeline (the store’s own list of posts) directly (<code>profileTweets</code>) worked.</p>
+  <p>The nasty part: <strong>a store for which no article can ever be created stays “no track record”</strong>. Patrol priority and countermeasures are based on track record, so those stores are never included. What cannot be seen stays unseen (a chicken-and-egg problem).</p>
+  <p>The fix: read store timelines in addition to search. But timeline reads cannot be filtered by words and every item read is billed. So stores with a track record are read daily, stores without it weekly, with a cap per store (10 and 8 items).</p>
+  <div class="scroll rv"><table>
+    <thead><tr><th>Estimate</th><th>Value</th></tr></thead>
+    <tbody>
+      <tr><td>Posts per day, stores with a track record</td><td>13.5</td></tr>
+      <tr><td>Posts per day, randomly chosen stores</td><td>4.5</td></tr>
+      <tr><td>Monthly cost after adding</td><td>about $51 (the plan includes $39)</td></tr>
+    </tbody>
+  </table></div>
+  <p>Cost varies a lot with each store’s posting rate, so always estimate from measurements. It stops automatically once the month passes $62, and an automatic pace check estimates whether all stores can be read daily with the remaining budget, narrowing the stores if not.</p>
+
+  <h3 class="rv" id="c2-s2">2. A registered store had quietly stopped being a store</h3>
+  <p>Two accounts registered as “stores” in the monitoring list were no longer stores. One, registered in August as a branch of a second-hand shop, had become a person’s chatter. The other, registered in May, was an individual info account whose “[PR] lottery sale” posts became articles as if from a store.</p>
+  <p>Articles appear as “store primary information”, so wrong information is notified as is.</p>
+  <p>The list was checked only once, when registered. Nothing noticed when an account’s owner or use changed.</p>
+  <p>The check: match the store name in the list comments against the <strong>display name</strong> on articles from the last 30 days, by a 2-character overlap. Of 828, I reviewed mismatches by eye and found 2 had become personal. Most mismatches were just “unknown” registrations that became official names, so I decided by eye, not by machine.</p>
+
+  <h3 class="rv" id="c2-s3">3. The store-finding search found only 11 of 63 stores</h3>
+  <p>New stores’ X accounts are found by search. The query was “store name genre name lottery site:x.com”, looking at the top 5 results. Out of 63 stores, it found X for <strong>only 11</strong>. Aggregators and customers’ posts ranked first and were rejected by the store-name match.</p>
+  <p>Among 8 stores whose X account was known, the old method found 5 and the “store name site:x.com” query found 7 (all ranked first).</p>
+  <p>But in a dry run right after widening the query, it picked up <strong>personal or unrelated accounts</strong>, because search-result titles contain the whole post and the match fired on the store name in the body. I changed it to extract <strong>only the display-name part</strong> of the title. More hits bring more mistakes at the same time. When you change a query, always run a preview and look at each item it picks up.</p>
+
+  <h3 class="rv" id="c2-s4">4. Catching up after an outage took half a day</h3>
+  <p>The data-fetching service’s (Apify) budget ran out, and X monitoring was down for 6 days. When I resumed, in 2 hours it read <strong>185 of 2,866</strong>.</p>
+  <p>Patrol is a rotation: “stores with a track record every 3 hours, others every 12 hours”. A rotation fits the normal state where everyone is about equally behind. After an outage, lateness is not uniform. Catching up would take more than half a day, and <strong>lotteries closing the next day would end before being read</strong>.</p>
+  <p>For the same reason, newly found accounts joined the middle of the “no track record” list and went unread for up to 12 hours.</p>
+  <p>The fix: add to the rotation a slot that <strong>reads the longest-unread items, oldest first</strong>. Attempt marks are kept separately so items that keep failing do not hog it. I also ran a manual catch-up right after resuming.</p>
+
+  <h3 class="rv" id="c2-s5">Aside: a “this month only” budget stopped everything twice</h3>
+  <p>This catch-up was caused by the budget running out. I used to change the cap month by month, “this month only $44”, “automatically go back to $29 on 6 September”. If the value I went back to was below that month’s usage, <strong>all X monitoring stopped at the cycle start</strong>. It happened twice (28 August and 13 September).</p>
+  <p>The decision on 19 September: <strong>one monthly cap of $70, and the interval not changed by month</strong> (all accounts once per 6 hours). Real monthly cost is about $10 to $18. I do not bring back a month-by-month cap.</p>
+
+  <h3 class="rv" id="c2-s6">What I learned</h3>
+  <blockquote>Posts you cannot see cannot be counted.</blockquote>
+  <ul>
+    <li><strong>Do not rely on search alone.</strong> Search does not return everything, and what is invisible raises no complaints.</li>
+    <li><strong>Registration is not a one-time check.</strong> Owners change. Compare the registered name with the current display name regularly.</li>
+    <li><strong>Preview when you change a query.</strong> More hits means more mistakes.</li>
+    <li><strong>After an outage, catch-up needs its own design.</strong> The normal rotation does not suit it.</li>
+    <li><strong>Do not change a cost cap by month.</strong> Forgetting to restore it, or restoring the wrong value, stops everything.</li>
+  </ul>
+  <h2 class="rv" id="s3">Comparing with other sites to count gaps: the first “23% coverage” was a measuring mistake and the truth was 49%</h2>
+  <p class="note">Record from 2026-10-17.</p>
+<p>One goal of my app Toreca Dash is to show lottery information <strong>without leaving anything out</strong>. The best way to find gaps is to compare with other sites that publish the same information and count “what they have and I do not”.</p>
+  <p>I did this in the early hours of 29 August 2026. The first number was “23% coverage”. But that was <strong>a mistake in how I measured</strong>. This article records the five problems found as the number moved from 23% to 49% and then 90%.</p>
+  <p class="note">Numbers come from my work log of 29 August 2026. I do not name other sites.</p>  <h3 class="rv" id="c3-s1">First, I surveyed every competitor</h3>
+  <p>The request was: “remove every article competitors publish that this app does not”. First I surveyed every possible competitor. Whether I could import from each was decided by <strong>reading the robots.txt (the request to machines) and the terms of use in full</strong>.</p>
+  <div class="scroll rv"><table>
+    <thead><tr><th>What I found</th><th>Count</th><th>Handling</th></tr></thead>
+    <tbody>
+      <tr><td>Sites I already imported from</td><td>3</td><td>Unchanged</td></tr>
+      <tr><td>Site newly added this time (Site A)</td><td>1</td><td>Per-case entries, with application links</td></tr>
+      <tr><td>Sites whose terms have no prohibition and can be imported</td><td>2</td><td>Compared by hand this time</td></tr>
+      <tr><td>Explainer-style sites with no per-store list</td><td>several</td><td>Skipped: almost no difference</td></tr>
+      <tr><td><strong>Sites whose robots.txt and terms prohibit automated fetching</strong></td><td>2</td><td><strong>Not imported.</strong> Not allowed as application links either</td></tr>
+      <tr><td>A site whose domain no longer exists</td><td>1</td><td>Removed from the list</td></tr>
+    </tbody>
+  </table></div>
+  <p>One site states the prohibition in Japanese at the very top of its robots.txt. That a machine can fetch it does not mean it should.</p>
+
+  <h3 class="rv" id="c3-s2">The comparison site was finer-grained than mine</h3>
+  <p>The site I added (Site A) lists “store × product × deadline × application link”, <strong>90 entries on a single page</strong>. My sources were per-article, A is per-case, and its application links are the external forms themselves (Google Forms, LivePocket, Lottery Rotobox, the store’s official X). It was a good counterpart both for counting and for filling gaps.</p>
+
+  <h3 class="rv" id="c3-s3">Problem 1: a different way of writing a product name counted as “missed”</h3>
+  <p>The first number was <strong>23% coverage</strong>. Reason one was how product names are written.</p>
+  <pre><code>Them  30th CELEBRATION BOX
+Mine  Expansion Pack "30th CELEBRATION"</code></pre>
+  <p>Neither contains the other, so naive “contains” never matches. 60 entries were counted as missed because of this.</p>
+  <p>But “same if contained” is not the answer. The name “30th CELEBRATION” is <strong>contained in</strong> “30th CELEBRATION Premium Deck Set”. That errs in the direction of counting a different product as “covered”, hiding holes.</p>
+  <p>The fix: drop set-type words (expansion pack, high-class pack) and quantity words (BOX, n-piece set, n types), then <strong>link to a catalogue product ID</strong>. The order: exact match, then the longest catalogue name contained in their name, then the reverse only when there is exactly one.</p>
+
+  <h3 class="rv" id="c3-s4">Problem 2: an expired article counted as “covered”</h3>
+  <p>Reason two was 5 entries. An article with a 29 July deadline at one store was <strong>paired</strong> with their 30 August case and reported as “article exists but hidden”. It was a different, earlier lottery. After these two fixes the true number was <strong>49%</strong>.</p>
+
+  <h3 class="rv" id="c3-s5">Problem 3: articles made to fill gaps landed on the wrong product</h3>
+  <p>Gaps are filled by creating articles. But I passed their product name to an AI as is. The AI linked “30th CELEBRATION BOX” to <strong>“30th CELEBRATION FUTURISTIC BOX”, priced at ¥27,500</strong>. 10 articles ended up on the wrong product.</p>
+  <p>The counting side had already narrowed to one catalogue product. The right fix was to <strong>give the creating side my catalogue name</strong>: one judgement for counting and creating.</p>
+  <p>While repairing, I made another mistake. I wrote product IDs <strong>truncated to the first 10 characters</strong> and created 10 articles with nonexistent IDs. My check printed IDs with <code>slice(0, 10)</code> to read them, and I used those short values directly. I fixed it at once, and the rule is now: <strong>never use an ID shortened for display in processing</strong>.</p>
+
+  <h3 class="rv" id="c3-s6">Problem 4: application links other than t.co were always discarded</h3>
+  <p>The step that attaches application links to aggregator-derived articles passed each store’s URL through a link-expanding function. That function <strong>only looks at t.co (X’s short URL)</strong>, because links in X posts are always shortened. Other sources hold application URLs in plain form. Through it, they gave <strong>0 results every time</strong> and fell back to web search.</p>
+  <p>Of 32 articles made from Site A, <strong>17 pointed to the source site’s page rather than the application form</strong>. Sending users to the source site was something I had decided to prohibit.</p>
+  <p>The fix: use plain, unshortened URLs as candidates directly (the usual check still decides adoption). For articles already made, I added a step that rewrites the application link on every comparison, and rewrote 16.</p>
+
+  <h3 class="rv" id="c3-s7">Problem 5: articles hidden for “no deadline” had no way back</h3>
+  <p>A job hid aggregator-derived articles whose deadline was unknown. It only hid; <strong>even if the deadline became known later, it stayed hidden forever</strong>. It is the same shape as an alert that keeps ringing after the fix. For cases where the other site gives a deadline, I now set it and restore the article (articles hidden for other reasons are not restored). Two were restored.</p>
+  <p>I also fixed how deadline times are handled. The parsed date was returned as a “Japan-time shifted” value and, saved as is, would have been a <strong>deadline 9 hours off</strong>. 23:59 Japan time is 14:59 UTC; I now return the real time.</p>
+
+  <h3 class="rv" id="c3-s8">Result</h3>
+  <div class="scroll rv"><table>
+    <thead><tr><th></th><th>Count</th></tr></thead>
+    <tbody>
+      <tr><td>Open cases Site A lists</td><td>86</td></tr>
+      <tr><td>Shown in my app</td><td><strong>77 (90% coverage)</strong></td></tr>
+      <tr><td>Missing from the feed</td><td><strong>0</strong></td></tr>
+      <tr><td>Article exists but hidden</td><td>2</td></tr>
+      <tr><td>Cannot create because they do not identify the product</td><td>7</td></tr>
+    </tbody>
+  </table></div>
+  <p>This work created 32 articles, rewrote 16 application links and restored 2 with deadlines.</p>
+  <p>The remaining 9 all have known reasons:</p>
+  <ul>
+    <li>One store’s premium deck set is <strong>deliberately excluded</strong>, because its application page says only “for one box of the expansion pack”. Here the other side is wrong.</li>
+    <li>Seven “Starter Set ex, 3 types” entries: the other side <strong>does not say which 3 types</strong> either. Guessing three articles would put articles about other products side by side, so I do not create them.</li>
+    <li>The last is one article hidden for not being seen recently. It may also need a “way back” and stays on my to-do list.</li>
+  </ul>
+
+  <h3 class="rv" id="c3-s9">What I learned</h3>
+  <blockquote>A flaw in the counting tool does not make the number look bad; it makes holes invisible.</blockquote>
+  <ul>
+    <li><strong>Doubt how you measure coverage.</strong> The first 23% was really 49%, and I got to 90%.</li>
+    <li><strong>Do not use “same if contained”.</strong> It counts a different product as covered.</li>
+    <li><strong>The other side’s entries can be wrong.</strong> Among the remainder was one such case.</li>
+    <li><strong>Make one judgement for counting and creating.</strong> Otherwise the product counted and the product created differ.</li>
+    <li><strong>Never use a value shortened for display in processing.</strong></li>
+    <li><strong>A hiding process needs a way back, built together.</strong></li>
+    <li><strong>Read the terms before importing.</strong> Being able to fetch is not being allowed to.</li>
+  </ul>
+  <h2 class="rv" id="s4">A “1-minute” monitor checked each item once per 10 minutes: before speeding up, count the revisit interval and what was delivered</h2>
+  <p class="note">Record from 2026-10-17.</p>
+<p>For first-come sales (stock gone in minutes), speed is everything. So the first-come monitor in my app Toreca Dash was built to “run every minute”.</p>
+  <p>On 7 September 2026 I measured its real reaction speed. It was <strong>about 10× off from what I had designed</strong>. And when I sped things up, something else got slower.</p>
+  <p class="note">Numbers come from my measurement log of 7 September 2026.</p>  <h3 class="rv" id="c4-s1">“Every minute” was once per 10 minutes per item</h3>
+  <div class="scroll rv"><table>
+    <thead><tr><th>What I measured</th><th>Value</th></tr></thead>
+    <tbody>
+      <tr><td>Job interval</td><td>about 61 seconds (as designed)</td></tr>
+      <tr><td>Items watched</td><td>63</td></tr>
+      <tr><td>Items checked per run</td><td>4 to 9 (48 of 53 runs hit the time budget)</td></tr>
+      <tr><td><strong>Revisit interval per item</strong></td><td><strong>about once per 10 minutes</strong></td></tr>
+      <tr><td>First-come sales caught in 7 days</td><td><strong>3</strong> (8,648 empty runs)</td></tr>
+    </tbody>
+  </table></div>
+  <p>“Runs every minute” feels fast. What users feel is <strong>how often each item is checked</strong>. If you can only check 4 to 9 of 63 per run, one pass takes about 10 minutes. The formula is <strong>items ÷ items per run × interval</strong>. I had never computed it, so “running but never winning” went on.</p>
+
+  <h3 class="rv" id="c4-s2">Cause: equal sharing of a shared external API</h3>
+  <p>The Rakuten API I use to check stock allows <strong>one call per 1.5 seconds</strong>. Five jobs shared it equally, so the most urgent monitor got only <strong>13%</strong>.</p>
+  <p>The fix: while the urgent job runs, the batch jobs do not take slots. One trap:</p>
+  <ul>
+    <li>If the “yield” flag is raised and lowered around each call, <strong>it is taken back between calls</strong>. In one measurement, 13 of 20 runs were still stuck at “4 items”.</li>
+    <li>Holding the flag <strong>for the whole patrol</strong> gave 30 to 33 items per run.</li>
+    <li>Always put a wait limit on the yielding side, or it starves.</li>
+  </ul>
+
+  <h3 class="rv" id="c4-s3">Speeding things up slowed down the one I cared about</h3>
+  <p>The same day I shortened the intervals of several jobs. When I set the Amazon check to 5 minutes, <strong>the Rakuten Books instant-sellout monitor got slower</strong>.</p>
+  <div class="scroll rv"><table>
+    <thead><tr><th></th><th>Before</th><th>After shortening</th><th>After reverting</th></tr></thead>
+    <tbody>
+      <tr><td>Rakuten Books monitor completion interval</td><td>60–80 s</td><td><strong>2 min 41 s / 3 min 52 s</strong></td><td>60–110 s</td></tr>
+      <tr><td>Skips of that monitor (per 10 min)</td><td>0</td><td><strong>6</strong></td><td>0</td></tr>
+      <tr><td>Jobs waiting in the queue</td><td>0</td><td><strong>17–29</strong></td><td>0</td></tr>
+    </tbody>
+  </table></div>
+  <p>The Amazon check takes 5 to 8 minutes per run, yet I set a 5-minute interval. When <strong>a run takes at least as long as its interval</strong>, the job occupies one of the concurrency slots (8) permanently, and other jobs wait. Reverting restored it.</p>
+
+  <h3 class="rv" id="c4-s4">One more: “not screened” means “not notified”</h3>
+  <p>Before a first-come notification, listings are screened by price against the official price to catch resale. When units did not match, the screen returned <strong>“not screened”</strong>. A comment called it “safe, no guessing”.</p>
+  <p>But an unscreened listing gets a “price unverified” mark, and <strong>notifications stop</strong>. Counting 148 first-come listings over 7 days:</p>
+  <div class="scroll rv"><table>
+    <thead><tr><th>Result</th><th>Listings</th></tr></thead>
+    <tbody>
+      <tr><td>Notified</td><td>41</td></tr>
+      <tr><td>Skipped (official price unverified)</td><td><strong>25</strong></td></tr>
+    </tbody>
+  </table></div>
+  <p>Of 55 displayed, <strong>45% never got a notification</strong>. The article still shows in the feed, so audits do not see it and nobody complains. Making detection faster, from 10 minutes to 80 seconds, did not help while half of them silently fell out afterwards.</p>
+  <p>And “cannot compare” was an assumption. The catalogue price of 5,280 yen divided by 12 packs per box is 440 yen, a normal single-pack price. <strong>That amount was already the price of one box</strong>. I could have compared it directly.</p>
+
+  <h3 class="rv" id="c4-s5">What I learned</h3>
+  <blockquote>The answer to “make it faster” is usually not “faster” but “find what is dropping out on the way”.</blockquote>
+  <ul>
+    <li><strong>Measure the revisit interval per item, not the job interval.</strong> items ÷ per run × interval.</li>
+    <li><strong>Count what arrived.</strong> Not articles created, but notifications delivered.</li>
+    <li><strong>Write down which way a gate falls when it cannot decide.</strong> If it falls to “users get nothing”, that is not the safe side.</li>
+    <li><strong>Faster can make something else slower.</strong> Concurrency slots are limited.</li>
+    <li><strong>Revisit what is marked “cannot compare”.</strong> Once units were aligned, it could be compared.</li>
+  </ul>
+  <h2 class="rv" id="s5">When you cannot watch everything quickly: popular 128 of 427 sets run fast, and the fastest lane yields to the budget</h2>
+  <p class="note">Record from 2026-10-17.</p>
+<p>My app Toreca Dash searches shopping sites by <strong>set</strong> (a release unit of products) to collect first-come and pre-order information. There are <strong>427 sets in all</strong>. I would like to watch them all quickly, but there are limits on scraping cost and on calls to external services.</p>
+  <p>On the night of 7 September 2026 I decided on a policy, “watch only the popular ones quickly”, and built it. This is a record of what I sped up, what I gave up, and how I protected cost.</p>
+  <p class="note">Numbers come from my work log of 7 September 2026.</p>  <h3 class="rv" id="c5-s1">Policy: three popular genres, latest and last two years only</h3>
+  <p>The policy: “for Pokémon cards, ONE PIECE cards and Dragon Ball, the <strong>latest sets and the last two years of sets</strong> are enough”. Three genres × the last 24 months is <strong>128 sets</strong>, about 30% of all 427.</p>
+  <p>The original per-set search walked all 427 sets in order, and one lap took different times per site.</p>
+  <div class="scroll rv"><table>
+    <thead><tr><th></th><th>One lap over 427 sets</th><th>Popular lane, 128 sets</th></tr></thead>
+    <tbody>
+      <tr><td>Amazon</td><td>4 hours</td><td><strong>every 30 minutes</strong> (about 450 s per run)</td></tr>
+      <tr><td>Rakuten Books</td><td>24 hours</td><td><strong>22 sets every 10 minutes, one lap per hour</strong></td></tr>
+      <tr><td>Rakuten Ichiba</td><td>24 hours</td><td><strong>22 sets every 10 minutes, one lap per hour</strong></td></tr>
+      <tr><td>Yahoo!</td><td>8 hours</td><td><strong>128 sets every 2 hours</strong></td></tr>
+    </tbody>
+  </table></div>
+  <p>The popular lane runs on a <strong>separate cursor</strong> from the normal lane. Sharing one would disturb the normal lane’s progress.</p>
+  <p>Two sites (Amiami and AEON Style) have no concept of a popular lane. They do not search by set but <strong>read a list page whole</strong>, all at once. There is nothing to narrow; going faster means shortening the interval, which is a cost question.</p>
+
+  <h3 class="rv" id="c5-s2">Batching them stopped another monitor</h3>
+  <p>I caused a regression with Rakuten right after adding this, and fixed it on the spot. At first I ran Rakuten as “128 sets in one go every hour”. But Rakuten’s API allows <strong>one call per 1.5 seconds shared by all jobs</strong>, and the instant sell-out monitor alone uses 30 calls a minute, <strong>75% of the allowance all the time</strong>. A batch took over 13 minutes, and meanwhile even the sell-out monitor was skipped as “previous run still going”.</p>
+  <p>The same 128 sets per hour, <strong>scattered as 22 sets every 10 minutes</strong>, makes no pile-up. I also offset the minutes (Rakuten Books lane at :03, :13…, Ichiba lane at :08, :18…). Right afterwards: the sell-out monitor ran 8 times in 9 minutes with <strong>0 skips</strong>, average 44.9 s, no worse.</p>
+
+  <h3 class="rv" id="c5-s3">Fastest lane: popular items truly once a minute</h3>
+  <p>There was also a request: “I want popular items checked every minute.” That made the third time that day I confirmed what <a href="/en/notes/crawl-monitoring/#s4">I wrote about before</a>: “runs every minute” is not “checks each item every minute”.</p>
+  <ul>
+    <li><strong>Rakuten Books sell-out monitor:</strong> 62 to 92 items were un-notified, about 30 could be checked per run, one lap 3 minutes. Only <strong>18 of them</strong> were in the three popular genres (Pokémon 9, Dragon Ball 5, One Piece 4). Checking those first on every run makes it truly once a minute, at zero cost. The other 44 are about every 3.7 minutes. Advance the cursor only for the rotating part; if popular items advance it, it stops there and other items never get a turn.</li>
+    <li><strong>Amazon fastest lane:</strong> <strong>28 sets</strong> (popular genres, before release or within 60 days after), 10 sets per minute in rotation, one lap about 2.8 minutes. Measured: 27.4 s per run, 0 skips.</li>
+  </ul>
+  <p>I cannot hit all 28 sets every minute. At 40,320 requests a day, the month would be 1.96 million, above the 1.25 million contract. At 10 sets a minute it is 14,400 a day. In exchange I moved Amazon’s popular lane (128 sets) from 30 to 60 minutes.</p>
+  <div class="scroll rv"><table>
+    <thead><tr><th>Amazon lane</th><th>Target</th><th>Cycle</th></tr></thead>
+    <tbody>
+      <tr><td>Fastest</td><td>28 sets before / just after release</td><td><strong>about 2.8 min</strong></td></tr>
+      <tr><td>Popular</td><td>128 sets, three genres</td><td>1 hour</td></tr>
+      <tr><td>Normal</td><td>All 427 sets</td><td>4 hours</td></tr>
+    </tbody>
+  </table></div>
+
+  <h3 class="rv" id="c5-s4">What I cannot do, I say I cannot</h3>
+  <ul>
+    <li><strong>Rakuten Ichiba:</strong> the sell-out monitor uses 75% of the 1.5-second allowance. Adding every-minute checks would break the monitor. The popular lane (every 20 minutes) is the limit.</li>
+    <li><strong>Yahoo!:</strong> once a minute is 40,000 calls a day, orders of magnitude over. Also new saves were recently 0. It stays at every 2 hours.</li>
+  </ul>
+
+  <h3 class="rv" id="c5-s5">The fastest lane yields when it exceeds the budget pace</h3>
+  <p>Amazon is a priority host that <strong>passes the scraping service’s daily throttling unconditionally</strong>, because it is the lifeline of the first-come race. That is right in itself, but if the every-minute fastest lane also passes unconditionally, <strong>Amazon eats the whole allowance and every other site is throttled</strong>.</p>
+  <p>Rather than fix a count on the safe side, it is more reliable to <strong>look at actual consumption and stop automatically</strong>. I added a check (<code>isScrapeDoOverPace()</code>) that skips the run if the time-proportional budget pace is exceeded.</p>
+  <p>Measured over a 2-minute window: 55 requests, 55 credits, 27.5 credits a minute (about 39,600 a day). The allowance was 1,147,389 remaining and 23 days to reset, 47,392 a day. One trap about <strong>window length</strong>: measured over 10 minutes it looked like 47.5 credits a minute (68,400 a day). A costly job every 3 hours (25 credits each) happened to fall in that window. <strong>Extrapolating from a short window is wrong; check the next day’s daily total.</strong></p>
+
+  <h3 class="rv" id="c5-s6">What I learned</h3>
+  <blockquote>When you cannot speed up everything, decide what to speed up and what to slow down in return.</blockquote>
+  <ul>
+    <li><strong>Narrow the target.</strong> 128 of 427; even then only a narrower 18 or 28 can be truly once a minute.</li>
+    <li><strong>Do not batch; scatter.</strong> The same count with no pile-up does not stop others.</li>
+    <li><strong>With a shared allowance, faster for one means slower for another.</strong> Decide what to protect first.</li>
+    <li><strong>Make the budget yield by itself.</strong> Stopping on actual consumption beats a fixed count.</li>
+    <li><strong>Do not extrapolate from a short window.</strong> Confirm with the daily record.</li>
+  </ul>
+  <h2 class="rv" id="s6">When first-come sales start, the site becomes a waiting-room page: a 15 KB notice slipped through an 8,000-byte gate</h2>
+  <p class="note">Record from 2026-10-17.</p>
+<p>My app Toreca Dash reads shopping-site pages to collect first-come and lottery information. As I wrote in <a href="/en/notes/silent-failures/#s4">an earlier article</a>, my “was it fetched?” check had a hole and treated a notice page as success. <strong>On the very day I fixed it (7 September 2026), I found another hole of the same kind in a different shape.</strong></p>
+  <p>And it occurred at the moment when missing something matters most.</p>
+  <p class="note">Numbers come from my work log of 7 September 2026.</p>  <h3 class="rv" id="c6-s1">When first-come sales start, the site becomes a waiting-room page</h3>
+  <p>A report came: “AEON Style Online seems to have first-come sales too”, “it seems to have started at exactly 14:00”. So I tried fetching at that moment.</p>
+  <div class="scroll rv"><table>
+    <thead><tr><th>Method</th><th>Result</th></tr></thead>
+    <tbody>
+      <tr><td>Plain request</td><td>403 (blocked by bot protection)</td></tr>
+      <tr><td>Scraping service, cheap setting</td><td>200, 15,188 bytes, title “Notice: heavy access”</td></tr>
+      <tr><td>Scraping service, super</td><td>200, 15,188 bytes, same</td></tr>
+      <tr><td>Scraping service, super + render</td><td>200, 15,459 bytes, same</td></tr>
+    </tbody>
+  </table></div>
+  <p>The instant a first-come sale starts, the whole site becomes a waiting-room page, and every setting returns the same notice.</p>
+
+  <h3 class="rv" id="c6-s2">A 15 KB notice slipped through an 8,000-byte gate</h3>
+  <p>The “not fetched” check I had added earlier that day looked for a JavaScript notice inside <strong>pages under 8,000 bytes</strong>. Large legitimate pages also contain the same sentence.</p>
+  <p>This waiting-room page is <strong>about 15 KB</strong>. It passed the gate and was read as “fetch succeeded, 0 products”. <strong>It failed silently at the moment I most needed it.</strong></p>
+  <p>The fix: look at the <strong>title</strong>, not the size. If the title contains “heavy access” or “we will guide you in order”, treat it as a failure. I limited it to the title so legitimate pages that merely mention those words are not caught.</p>
+  <p>I also changed the frequency from every 3 hours to every 15 minutes. At about 21 credits a run it is costly, but about 6,000 credits a day stays within 92% of the remaining balance.</p>
+
+  <h3 class="rv" id="c6-s3">Two more causes of slowness found the same day</h3>
+  <p><strong>Amazon’s 13 minutes were AI screening, not fetching.</strong> The Amazon monitor ran every 30 minutes, one scan took 13 minutes and the worst delay was about 43 minutes. The meter showed the time went to AI screening of new listings (421 a day, about ¥10). Fetching itself cost only 1,047 credits a day. The cause was handling 15 genres <strong>one at a time</strong>. They are independent, so I ran 4 in parallel, with a 10-minute interval and 8-minute runs. AI screening runs only for new listings, so cost does not rise with patrol frequency.</p>
+  <p><strong>Even when found fast, 17% were not notified.</strong> Finding things sooner means nothing if notifications stop afterwards. Counting what was delivered showed another hole (see the <a href="/en/notes/crawl-monitoring/#s4">article on counting notifications</a>).</p>
+
+  <h3 class="rv" id="c6-s4">What I learned</h3>
+  <blockquote>A hole in a judgement widens at the most important moment.</blockquote>
+  <ul>
+    <li><strong>A notice page has more than one shape.</strong> Short ones and big waiting-room pages. Size cannot tell them apart.</li>
+    <li><strong>Changing where you look reduces collateral.</strong> Title, not body, so legitimate pages are not caught.</li>
+    <li><strong>When a report arrives, measure at that time, on the spot.</strong> “It started at 14:00” was the last chance to reproduce.</li>
+    <li><strong>Check where slow time really goes.</strong> Amazon’s 13 minutes were serial AI screening, not fetching.</li>
+  </ul>
+  <h2 class="rv" id="s7">“Not just noticing; not letting it happen”: turning a report-only monitor into one that fills gaps on the spot</h2>
+  <p class="note">Record from 2026-10-17.</p>
+<p>The goal of my app Toreca Dash is to show lottery information <strong>without missing any</strong>. The user’s instruction was: “<strong>don’t just notice; make sure missing things do not happen in the first place</strong>”.</p>
+  <p>This article records how, on 27 August 2026, I turned monitoring from “find and report” into “find and fill on the spot”.</p>
+  <p class="note">Numbers come from my work log of 27 August 2026.</p>  <h3 class="rv" id="c7-s1">A report-only monitor does not fill until a person notices</h3>
+  <p>The old gap monitor (<code>reportCoverageGap</code>) only <strong>reported</strong>. The gap stayed until someone noticed and ran a fix by hand. I made it create articles on the spot (fill), three times a day after the import.</p>
+  <ul>
+    <li>It uses the existing creation path. Duplicates are prevented by the existing check (<code>hasExistingCoverageForStore</code>).</li>
+    <li>If the import side works correctly, this ends with 0. <strong>Anything created here means the import side still has a hole</strong>. Read the count as “the size of the holes left”.</li>
+  </ul>
+
+  <h3 class="rv" id="c7-s2">I added a log to the branch that silently dropped things</h3>
+  <p>An early return in one function (<code>touchLastSeenIfExists</code>) was <strong>the only branch that moved on without saying anything</strong>. All other branches log. That silence is why another hole (24 stores getting the same article ID) was not found for so long. A branch that silently drops is a hiding place for holes nobody can see.</p>
+
+  <h3 class="rv" id="c7-s3">Even with no link, show “how to apply”</h3>
+  <p>Of 32 articles with an unknown application link, 17 were <strong>not given a URL in the other table either</strong> (a store’s app, an in-store QR and so on). But the other side writes the “how to apply” and “conditions” in prose. I imported those and passed them to the application-method detector. “Apply in the app” or “apply with the QR code in store” helps more than “we do not know where to apply”.</p>
+
+  <h3 class="rv" id="c7-s4">Articles missed by the link repair</h3>
+  <p>Articles marked “application link unknown” that were <strong>neither app-only nor pointing to an aggregator</strong> never became a repair target: only 15 of 34 were. <strong>I made the mark itself the condition for being a target.</strong></p>
+
+  <h3 class="rv" id="c7-s5">The final numbers</h3>
+  <div class="scroll rv"><table>
+    <thead><tr><th></th><th>Before</th><th>After</th></tr></thead>
+    <tbody>
+      <tr><td>Gap coverage (against one site, 24 items)</td><td>92%</td><td><strong>100%</strong> (96% on the way)</td></tr>
+      <tr><td>Displayed articles</td><td>1,444</td><td>1,488 (+44)</td></tr>
+      <tr><td>Articles with an application link</td><td>97.4%</td><td>97.8%</td></tr>
+    </tbody>
+  </table></div>
+  <p>But 100% is <strong>a number for one site</strong>. A gap survey against the X aggregates found 3 stores, but the stored text was cut at 500 characters, so <strong>that is a lower bound</strong>. I decided to measure again after X monitoring resumed.</p>
+
+  <h3 class="rv" id="c7-s6">What I learned</h3>
+  <blockquote>Connect the mechanism that notices to the one that fills.</blockquote>
+  <ul>
+    <li><strong>A report-only monitor does not fill until a person notices.</strong> Fill on the spot.</li>
+    <li><strong>The count filled is “the size of the holes left”.</strong> 0 is the goal.</li>
+    <li><strong>Add logs to branches that silently drop.</strong> One silent place hides a hole for a long time.</li>
+    <li><strong>Without a link you can still show how to apply.</strong> “Apply in the app” beats “unknown”.</li>
+    <li><strong>Decide repair targets by the mark itself.</strong> A combination of conditions leaves gaps.</li>
+    <li><strong>100% is a number for what you measured.</strong> Call it a lower bound.</li>
+  </ul>
+
+  <h2 class="rv" id="s8">Key points of each</h2>
+  <ul>
+    <li><a href="#s1">An aggregator crawl read only page 1</a>: The crawl of a stock-information aggregator read only page 1 (mostly consoles), while Pokémon and Gundam articles were on later pages. Only the first 6,000 characters went to the AI, so later stores dropped. I followed 12 pages and read all the text.</li>
+    <li><a href="#s2">Four gaps in monitoring X</a>: Four stores’ lottery posts did not appear in search even after 751 posts; a registered store had become a person; store-finding found 11 of 63; and after a 6-day outage only 185 of 2,866 were read in 2 hours. Fixes and cost estimates.</li>
+    <li><a href="#s3">Comparing with other sites to count gaps</a>: Counting whether I show lotteries other sites list: the first 23% was distorted by product-name spelling and expired articles. After fixing it, 49%; after fixing five gap-filling problems, 90%. Sites whose terms prohibit automated fetching were not imported.</li>
+    <li><a href="#s4">A “1-minute” monitor checked each item once per 10 minutes</a>: A first-come monitor watched 63 items but checked 4–9 per run, so each item once per 10 minutes, and caught 3 sales in 7 days. Shortening other intervals slowed it further, and “not screened” meant 45% of first-come listings got no notification.</li>
+    <li><a href="#s5">When you cannot watch everything quickly</a>: Full laps over 427 sets took 4 to 24 hours. A separate lane for 128 popular sets and truly once-a-minute checks for popular items; batching stopped another monitor and measuring over a short window misjudged cost.</li>
+    <li><a href="#s6">When first-come sales start, the site becomes a waiting-room page</a>: On AEON Style Online, a first-come sale turned the whole site into a 15 KB “heavy access” page. It passed the 8,000-byte check added earlier that day and was read as “success, 0 products”. I switched to a title check; Amazon’s 13 minutes were serial AI screening.</li>
+    <li><a href="#s7">“Not just noticing; not letting it happen”</a>: The gap monitor only reported and nothing was filled until a person noticed. I made it create missing articles on the spot, logged a branch that dropped silently, and showed how to apply even with no link. Coverage went from 92% to 100%.</li>
+  </ul>
+  <p class="note">This is the English version of <a href="/notes/crawl-monitoring/" hreflang="ja" lang="ja">the original Japanese article</a>.</p>
+  <p>More development logs, by theme: <a href="/en/notes/" hreflang="en" lang="en">Notes</a>. About the app: <a href="/en/works/torecadash/" hreflang="en" lang="en">Toreca Dash</a>.</p>
+</div>
+</main>
+
+<footer class="site"><div class="wrap">
+  <span>© 2026 Koshin Studio</span>
+  <div class="sns-row"></div>
+  <nav><a href="/en/" hreflang="en" lang="en">English</a><a href="/" hreflang="ja" lang="ja">日本語</a><a href="/en/about/#contact" hreflang="en" lang="en">Contact</a><a href="/en/privacy/" hreflang="en" lang="en">Privacy</a></nav>
+</div></footer>
+<script src="/motion.js?v=1e7447ec" defer></script>
+</body>
+</html>

@@ -75,8 +75,8 @@
 
 - トレカダッシュ (https://koshinstudio.com/works/torecadash/) — トレカの抽選・予約・先着の情報を集める iPhone アプリ
 
-- App Store 審査で「Guideline 2.1 Information Needed」が届いた (https://koshinstudio.com/notes/review-info-needed/) — 審査に関する別の記録
+- App Store 審査で「Guideline 2.1 Information Needed」が届いた (https://koshinstudio.com/notes/app-store-review/#s1) — 審査に関する別の記録
 
-- App Store の審査で止まった四つ (https://koshinstudio.com/notes/torecadash-review/) — 審査の記録
+- App Store の審査で止まった四つ (https://koshinstudio.com/notes/app-store-review/#s2) — 審査の記録
 
 - 広告の間隔を、回数ではなく時間で測る (https://koshinstudio.com/notes/adgap/) — 広告の別の話

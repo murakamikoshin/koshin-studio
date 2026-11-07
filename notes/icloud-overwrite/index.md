@@ -63,4 +63,4 @@
 
 - iOS アプリが固まって強制終了される (https://koshinstudio.com/notes/torecadash-watchdog/) — アプリ側の別の失敗
 
-- 確認できなかったときに、通していた (https://koshinstudio.com/notes/fail-open/) — 名前と中身が違った別の例
+- 確認できなかったときに、通していた (https://koshinstudio.com/notes/silent-failures/#s7) — 名前と中身が違った別の例

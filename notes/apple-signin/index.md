@@ -73,6 +73,6 @@
 
   この話に出てくるもの
 
-- 初めての審査で、「情報が必要です」と返ってきた (https://koshinstudio.com/notes/review-info-needed/) — 同じアプリの、審査の記録（アカウント削除も）
+- 初めての審査で、「情報が必要です」と返ってきた (https://koshinstudio.com/notes/app-store-review/#s1) — 同じアプリの、審査の記録（アカウント削除も）
 
-- 「取れた」と読んでいたのは、ただの案内ページだった (https://koshinstudio.com/notes/blocked-page/) — 同じアプリの、別の記録
+- 「取れた」と読んでいたのは、ただの案内ページだった (https://koshinstudio.com/notes/silent-failures/#s4) — 同じアプリの、別の記録

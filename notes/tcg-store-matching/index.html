@@ -1,0 +1,279 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>店名の照合で起きた4つの取り違え｜トレカ抽選アプリの開発記録 — Koshin Studio</title>
+<meta name="description" content="トレカの抽選情報を集めるアプリで、店名の照合が間違えた4つの記録。ヤマダ電機とヤマダデンキの表記ゆれ、地図検索が静岡を返す件、同じ応募ページでも別の店、1つのフォームで6商品。">
+<meta property="og:title" content="店名の照合で起きた4つの取り違え：表記ゆれ・あいまいな地図検索・「同じ応募ページ＝同じ店」・1ページ複数案件">
+<meta property="og:description" content="トレカの抽選情報を集めるアプリで、店名の照合が間違えた4つの記録。ヤマダ電機とヤマダデンキの表記ゆれ、地図検索が静岡を返す件、同じ応募ページでも別の店、1つのフォームで6商品。">
+<meta property="og:type" content="article">
+<meta name="theme-color" content="#fbfaf7">
+<link rel="icon" href="/favicon.ico?v=1697d589" sizes="48x48">
+<link rel="icon" href="/favicon.svg?v=b9d7922f" type="image/svg+xml" sizes="any">
+<link rel="icon" href="/assets/icon/icon-192.png?v=e2566235" type="image/png" sizes="192x192">
+<link rel="apple-touch-icon" href="/assets/icon/icon-180.png?v=84e7f0e6">
+<link rel="manifest" href="/site.webmanifest">
+<script>document.documentElement.className+=" js"</script>
+<link rel="stylesheet" href="/style.css?v=3d886c33">
+<meta name="google-adsense-account" content="ca-pub-3863314847163872">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3863314847163872" crossorigin="anonymous"></script>
+<link rel="canonical" href="https://koshinstudio.com/notes/tcg-store-matching/">
+<meta property="og:url" content="https://koshinstudio.com/notes/tcg-store-matching/">
+<meta property="og:site_name" content="Koshin Studio">
+<meta property="og:locale" content="ja_JP">
+<link rel="alternate" hreflang="ja" href="https://koshinstudio.com/notes/tcg-store-matching/">
+<link rel="alternate" hreflang="en" href="https://koshinstudio.com/en/notes/tcg-store-matching/">
+<link rel="alternate" hreflang="x-default" href="https://koshinstudio.com/en/notes/tcg-store-matching/">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="alternate" type="application/rss+xml" title="Koshin Studio — Notes" href="https://koshinstudio.com/feed.xml">
+<link rel="alternate" type="text/markdown" href="https://koshinstudio.com/notes/tcg-store-matching/index.md">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BlogPosting","headline":"店名の照合で起きた4つの取り違え：表記ゆれ・あいまいな地図検索・「同じ応募ページ＝同じ店」・1ページ複数案件","url":"https://koshinstudio.com/notes/tcg-store-matching/","description":"トレカの抽選情報を集めるアプリで、店名の照合が間違えた4つの記録。ヤマダ電機とヤマダデンキの表記ゆれ、地図検索が静岡を返す件、同じ応募ページでも別の店、1つのフォームで6商品。","datePublished":"2026-10-17","dateModified":"2026-11-07","inLanguage":"ja","image":"https://koshinstudio.com/assets/og/og_notes_tcg-store-matching.jpg","author":{"@id":"https://koshinstudio.com#koshin"},"publisher":{"@id":"https://koshinstudio.com#studio"},"mainEntityOfPage":"https://koshinstudio.com/notes/tcg-store-matching/","workTranslation":{"@type":"BlogPosting","url":"https://koshinstudio.com/en/notes/tcg-store-matching/","inLanguage":"en"}},{"@type":"Person","@id":"https://koshinstudio.com#koshin","name":"Koshin","jobTitle":"Webエンジニア・アプリエンジニア","url":"https://koshinstudio.com/about/","worksFor":{"@id":"https://koshinstudio.com#studio"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Koshin Studio","item":"https://koshinstudio.com/"},{"@type":"ListItem","position":2,"name":"Notes","item":"https://koshinstudio.com/notes/"},{"@type":"ListItem","position":3,"name":"店名の照合で起きた4つの取り違え：表記ゆれ・あいまいな地図検索・「同じ応募ページ＝同じ店」・1ページ複数案件","item":"https://koshinstudio.com/notes/tcg-store-matching/"}]}]}</script>
+<meta property="og:image" content="https://koshinstudio.com/assets/og/og_notes_tcg-store-matching.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
+</head>
+<body class="article">
+<canvas id="motes"></canvas>
+
+<header class="site"><div class="wrap">
+  <a class="logo" href="/"><img class="logo-mark" src="/favicon.svg?v=b9d7922f" alt="" width="28" height="28">Koshin Studio</a>
+  <nav><a href="/works/">Works</a><a href="/works/#game">Games</a><a href="/notes/">Notes</a><a href="/picks/">Picks</a><a href="/calc/">Tools</a><a href="/about/">About</a></nav>
+</div></header>
+
+<main><div class="wrap">
+  <nav class="crumbs" aria-label="現在地"><a href="/">Koshin Studio</a><i aria-hidden="true">›</i><a href="/notes/">Notes</a><i aria-hidden="true">›</i><span aria-current="page">店名の照合で起きた4つの取り違え：表記ゆれ・あいまいな地図検索・「同じ応募ページ＝同じ店」・1ページ複数案件</span></nav>
+  <h1>店名の照合で起きた4つの取り違え：表記ゆれ・あいまいな地図検索・「同じ応募ページ＝同じ店」・1ページ複数案件</h1>
+  <div class="rule"></div>
+<!--lang-->
+  <p class="note"><a href="/en/notes/tcg-store-matching/" hreflang="en" lang="en">English version</a></p>
+<!--/lang--><!--byline--><p class="note byline">書いた人：<a href="/about/#operator">Koshin</a>（Web エンジニア・アプリエンジニア）　公開：2026-10-17</p><!--/byline--><p class="lead">トレカダッシュ 開発の記録 ／ 4 件のまとめ</p>
+  <p>トレカダッシュは、店の告知や X の投稿から「どの店の、どの抽選か」を読み取って並べます。いちばん間違えやすいのが<strong>店の名前</strong>でした。同じ店が別の名前で書かれ、別の店が同じリンクを使い、あいまいな名前は地図で遠くの場所に化けます。ここには、店の照合で実際に起きた 4 つの取り違えと、その直し方を、起きた順にまとめました。</p>
+  <p class="note">それぞれの節は、もとは別々に公開していた記録です（2026 年 10 月から）。数字と出典は、その時の作業の記録のままです。テーマごとに読めるよう、1 つの記事にまとめ直しました（2026 年 11 月 7 日）。</p>
+<!--toc-->
+  <nav class="toc" aria-label="目次"><p>目次</p><ol><li><a href="#s1">「ヤマダ電機」と「ヤマダデンキ」：表記ゆれと重複の原因は 3 つ重なっていた（包含だけの比較・59 秒の差・手動専用のジョブ）</a></li><li><a href="#s2">あいまいな店名で地図を引くと、日本の真ん中の静岡が返る：チェーン名を並べず、Google 自身の答えで判定した</a></li><li><a href="#s3">「同じ応募ページ」なら「同じ店」と決めつけていた：店名が別の店になった記事 52 件</a></li><li><a href="#s4">「1 ページ ＝ 1 案件」ではなかった：1 つのフォームで 6 商品を受け付ける店の記事が、リンクが同じというだけで消されていた</a></li><li><a href="#s5">それぞれの要点</a></li></ol></nav>
+<!--/toc-->
+  <h2 class="rv" id="s1">「ヤマダ電機」と「ヤマダデンキ」：表記ゆれと重複の原因は 3 つ重なっていた（包含だけの比較・59 秒の差・手動専用のジョブ）</h2>
+  <p class="note">2026 年 10 月 17 日の記録。</p>
+<p>iOS アプリ「<a href="/works/torecadash/">トレカダッシュ</a>」の記事では、同じ店の名前が、「ヤマダ電機」と「ヤマダデンキ」のように、書き方がバラバラでした。報告は、2 つ来ました。「表記揺れしている」「同じ理由で、記事が重複している」。指示は、「他の店でも同じことが起きないように、徹底的に」でした。</p>
+  <p>この記事は、原因が 3 つ重なっていたことと、「言い換えの表を作らず、一般則で直す」過程の記録です。</p>
+  <p class="note">この記事は、2026 年 8 月 25 日の作業の記録から書いています。</p>
+
+  <h3 class="rv" id="c1-s1">原因は、3 つ重なっていた</h3>
+  <ol>
+    <li><strong>店名の比較が、「含んでいるか」だけだった。</strong>「ヤマダ電機」と「ヤマダデンキ」は、どちらも、もう一方を含まないので、別の店になります。</li>
+    <li><strong>締切を、ミリ秒まで一致で比べていた。</strong>同じ「8/26 まで」でも、まとめサイト由来は 23:59:00、X 由来は 23:59:59 で、<strong>59 秒の差</strong>のせいで、重複と判定されませんでした。実データの 4 商品が、これでした。</li>
+    <li><strong>重複を整理するジョブが、手動で動かす専用で、一度も自動で走っていなかった。</strong>「一度きりの修復」のつもりで作っても、記事は毎日入るので、重複も毎日生まれます。</li>
+  </ol>
+
+  <h3 class="rv" id="c1-s2">直し方：言い換えの表は、作らない</h3>
+  <p>店名の比較のキー（<code>storeNameComparisonKey</code>）を作りました。法人格、記号、空白、全角と半角を落とし、カタカナをひらがなにし、「電機、電器、でんき」を 1 つに寄せます。</p>
+  <p><strong>店名の言い換えの表は、作りません。</strong>新しい店が増えるたびに、再発するからです。読みが同じになる書き分けを、まとめる一般則にしました。</p>
+  <ul>
+    <li>締切は、<strong>日付として</strong>（日本時間の日付で）比べ、代わりに<strong>販売の形式の一致</strong>を求めます。同じ日でも、先着と抽選は、別の案件だからです。</li>
+    <li>店名（<code>sellerName</code>）が無く、カテゴリにしか店名が無い記事も、対象に含めます。入荷情報のサイトや公式サイト由来の記事は、こちらが多く、まるごと見落としていました。</li>
+    <li>重複で隠すときは、必ず隠した印（<code>hiddenByDuplicate</code>）を付けます。</li>
+    <li><strong>1 時間おきの定期実行</strong>を、足しました。</li>
+    <li>表記そのものも、<strong>実データの多数派に寄せ</strong>ます。正しい表記の一覧は、持ちません。同数のときは、カタカナ表記、次に文字列の順で固定して、実行のたびに答えが変わる、書き換え合戦を防ぎます。</li>
+  </ul>
+
+  <h3 class="rv" id="c1-s3">テストで見つけた、2 つの危険</h3>
+  <p>どちらも、直したあとに、テストで見つけました。</p>
+  <ul>
+    <li><strong>「＠」の前だけをキーにすると、店名に＠を含む店が、極端に短いキーになる。</strong>「カードショップ＠ほ～む。鹿児島店」が「かーどしょっぷ」というキーになり、別の店と同一視されます。比較のキーでは、＠で切りません。（宣伝文が付いた名前は、包含の判定で拾えます。）</li>
+    <li><strong>「片方がもう片方の先頭部分なら、同じ名前」にすると、支店名が消える。</strong>「イエローサブマリン」と「イエローサブマリン秋葉原店」が統合され、支店名が消えます。付け足しが、「＠」「【」「（」で始まる<strong>注記</strong>のときだけ、同じ名前とみなします。</li>
+  </ul>
+  <p>実データ 17 パターンで確かめて、食い違いは 0 件でした。</p>
+
+  <h3 class="rv" id="c1-s4">実行結果</h3>
+  <div class="scroll rv"><table>
+    <thead><tr><th></th><th>前</th><th>後</th></tr></thead>
+    <tbody>
+      <tr><td>店名の表記揺れ</td><td>2 件</td><td><strong>0 件</strong></td></tr>
+      <tr><td>同じ商品・同じ締切・同じ店の重複</td><td>7 組</td><td><strong>0 組</strong></td></tr>
+    </tbody>
+  </table></div>
+  <p>ついでに、「○○＠スタッフ募集中」のような宣伝文の付いた店名 23 件も、そろいました。重複のとき、残す側は、値段と当落発表日を持つほうです。</p>
+
+  <h3 class="rv" id="c1-s5">分かったこと</h3>
+  <blockquote>一覧で直さず、一般則で直す。そして、直す処理は、自動で走らせる。</blockquote>
+  <ul>
+    <li><strong>「含んでいるか」だけで比べない。</strong>書き分けは、含みません。</li>
+    <li><strong>ミリ秒まで一致で比べない。</strong>日付と、販売の形式で比べます。</li>
+    <li><strong>「一度きりの修復」は、毎日生まれるものには足りない。</strong>自動で、定期的に走らせます。</li>
+    <li><strong>言い換えの表は、新しい店で再発する。</strong>読みが同じになる、書き分けの一般則にします。</li>
+    <li><strong>統合は、注記のときだけ。</strong>支店名を、消してはいけません。</li>
+  </ul>
+  <h2 class="rv" id="s2">あいまいな店名で地図を引くと、日本の真ん中の静岡が返る：チェーン名を並べず、Google 自身の答えで判定した</h2>
+  <p class="note">2026 年 10 月 17 日の記録。</p>
+<p>iOS アプリ「<a href="/works/torecadash/">トレカダッシュ</a>」には、店の位置を地図に出して、近い順に並べる機能があります。「位置情報が、静岡になる」という報告が来ました。店の位置は、店の名前を Google の地図の検索（Places API）に渡して、座標を取っています。</p>
+  <p>原因は、<strong>あいまいな店名で問い合わせると、Google が、日本全体の真ん中（静岡と愛知）を返す</strong>ことでした。この記事は、その実測と、「チェーン名を並べない」直し方の記録です。</p>
+  <p class="note">この記事は、2026 年 8 月 25 日の作業の記録から書いています。</p>
+
+  <h3 class="rv" id="c2-s1">実測：あいまいな名前の答えは、静岡と愛知</h3>
+  <p>検索には、「日本全体の矩形」を、位置の手がかり（<code>locationbias</code>）として渡しています。名前があいまいで、決め手が無いと、Google は、その矩形の真ん中を返します。それが、静岡と愛知です。API で実測しました。</p>
+  <div class="scroll rv"><table>
+    <thead><tr><th>問い合わせた名前</th><th>Google の答え</th></tr></thead>
+    <tbody>
+      <tr><td>ヤマダデンキ</td><td>ヤマダデンキ テックランド浜松本店（静岡県）</td></tr>
+      <tr><td>サンエー</td><td>㈱サンエー化研 掛川工場（静岡県）</td></tr>
+      <tr><td>ホビーステーション</td><td>トレカステーション豊橋店（愛知県）</td></tr>
+      <tr><td>ブックオフ</td><td>BOOKOFF 掛川店（静岡県）</td></tr>
+      <tr><td>晴れる屋</td><td>晴れる屋 静岡店（静岡県）</td></tr>
+      <tr><td>おむすび</td><td>お米とおむすび むらせ 浜松広沢店（静岡県）</td></tr>
+    </tbody>
+  </table></div>
+  <p>「サンエー」は、小売のチェーンのことでしたが、答えは、同じ名前の、別の会社の工場でした。</p>
+
+  <h3 class="rv" id="c2-s2">直し方：チェーン名を並べず、Google 自身の答えで判定する</h3>
+  <p>「あいまいなチェーン名の一覧」を作る方式は、採りませんでした。新しいチェーンが増えるたびに、再発します。代わりに、<strong>Google が返した答え自身</strong>で、信用できるかを判定する関数（<code>geocodeMatchIsTrustworthy</code>）を作りました。</p>
+  <ol>
+    <li>問い合わせた名前が、返ってきた店名の<strong>頭でしかなく</strong>、残りが支店名なら、<strong>不採用</strong>。（ヤマダデンキ → …テックランド浜松本店）「店」が付いただけなら、同じ店。</li>
+    <li>店名に、支店の手がかり（〇〇店、館、モール…）があれば、従来どおり<strong>採用</strong>。</li>
+    <li>返ってきた店名が、問い合わせた名前と同じ、または、その一部なら<strong>採用</strong>。（カードショップクラクラ、ゲームショップ プラスアルファ）<strong>逆向きは採用しない</strong>。（サンエー ⊂ ㈱サンエー化研は、別の会社。）</li>
+    <li>それ以外は、<strong>店名と住所が 2 文字以上重なっているか</strong>で判定。（池袋、戸塚、札幌、高田馬場などを名前に持つ店は、ここで通る。）</li>
+  </ol>
+  <p>実データの 25 パターンで確かめると、<strong>誤り 9 件は全部不採用、正しい 16 件は全部採用</strong>でした。取りこぼしは、ローマ字表記の 1 件だけでした。</p>
+  <p>すでに、間違った位置が焼き付いていた記事 30 件と、店の位置のキャッシュ 22 件は、消して、解決し直しました。キャッシュを消すと、1 店につき 1 回だけ、API を呼び直します。</p>
+
+  <h3 class="rv" id="c2-s3">同じ日に見つけた、似た話：通知の店名が「ライヴポケット」</h3>
+  <p>「通知の店名が、ライヴポケットになる」という報告もありました。店名が取れなかったときに、最後の受け皿として、カテゴリ（「ライヴポケット」）が通知に出ていました。ライヴポケットは、<strong>応募を受け付ける場であって、店ではありません</strong>。そこで、<strong>分からないときは、null を返す</strong>ようにしました。呼び出し側は、店名が無ければ記事の題名を使います。ライヴポケットの題名は、「キデイランド ららぽーと富士見店 …」のように、店名から始まるので、そのほうが正しく伝わります。</p>
+
+  <h3 class="rv" id="c2-s4">分かったこと</h3>
+  <blockquote>外部の答えは、答え自身で、信用できるかを確かめる。</blockquote>
+  <ul>
+    <li><strong>決め手が無いとき、外部サービスは「もっともらしい答え」を返す。</strong>日本の真ん中、静岡と愛知です。</li>
+    <li><strong>チェーン名の一覧を作らない。</strong>新しいチェーンが増えるたびに、再発します。</li>
+    <li><strong>逆向きの包含は採用しない。</strong>サンエーは、サンエー化研の一部ではありません。</li>
+    <li><strong>焼き付いた値は、消して解決し直す。</strong>キャッシュも一緒に。</li>
+    <li><strong>分からないときは、null。</strong>間違った名前より、名前なしのほうが、まし。</li>
+  </ul>
+  <h2 class="rv" id="s3">「同じ応募ページ」なら「同じ店」と決めつけていた：店名が別の店になった記事 52 件</h2>
+  <p class="note">2026 年 10 月 17 日の記録。</p>
+<p>iOS アプリ「<a href="/works/torecadash/">トレカダッシュ</a>」で、「利用者には、違う店の抽選に見える」という不具合が見つかりました。仙台駅前店の記事が「新宿南口店」と表示され、八王子本店の記事が「能代店」と表示されていました。52 件でした。</p>
+  <p>原因は、「同じ応募ページなら、同じ店だ」という、<strong>前提の間違い</strong>でした。</p>
+  <p class="note">数字は、2026 年 9 月 7 日の作業の記録から書いています。</p>
+
+  <h3 class="rv" id="c3-s1">症状：店名が、別の店の名前になっていた</h3>
+  <p>同じチェーンの、別の支店の名前が、記事に書かれていました。利用者から見ると、「仙台の店の抽選」のつもりで開いたら、「新宿の店」と書いてある、という状態です。52 件が、そうなっていました。</p>
+
+  <h3 class="rv" id="c3-s2">真因：応募ページが同じでも、店は同じとは限らない</h3>
+  <p>「同じ応募ページを持つ記事の、店名と締切を、そろえる」処理がありました。同じ抽選なら、締切も同じ。同じ店なら、名前も同じ。そう考えて、グループの中で<strong>いちばん質の高い記事の店名を、全員に書き写して</strong>いました。</p>
+  <p>この前提が、成り立っていませんでした。実データで数えると、こうでした。</p>
+  <div class="scroll rv"><table>
+    <thead><tr><th>応募ページ</th><th>共有している店</th></tr></thead>
+    <tbody>
+      <tr><td>ある応募ページ（1）</td><td><strong>15 の別々の店</strong>（仙台、浜松、前橋、紫波、蒲郡、広島、など）</td></tr>
+      <tr><td>ある応募ページ（2）</td><td>同じチェーンの<strong>9 支店</strong></td></tr>
+      <tr><td>ある応募ページ（3）</td><td>ある店と、別のチェーン 3 つ（<strong>チェーンすら別</strong>）</td></tr>
+    </tbody>
+  </table></div>
+  <p>チェーン全体で 1 つの応募ページを使う店は、普通にあります。同じページでも、店はそれぞれ違います。</p>
+  <p>この種の事故は、<strong>隠す側では、すでに一度起きていて、そちらには関門が入っていました</strong>（あるチェーンの 51 支店の件）。ところが、<strong>店名を書き写す側には、入れ忘れていました</strong>。同じ判定を使う、別の入口に、同じ修正を当てていなかったのです。</p>
+
+  <h3 class="rv" id="c3-s3">「座標が食い違う」だけの関門では、足りなかった</h3>
+  <p>最初は、「座標（店の位置）が食い違うなら、別の店」という関門で守ろうとしました。ところが、<strong>片方の記事しか座標を持っていない</strong>組では、「確実に別の場所」の判定が false になり、素通りしてしまいます。実際に、書き込まずに結果だけを見る下見（ドライラン）で、ある 3 つの別のチェーンの店が、全部「晴れる屋 2 秋葉原タワー店」に書き換わるところでした。</p>
+  <p>恒久対策は、判定の向きを逆にすることでした。<strong>「別の店だと確かめられたとき、そろえない」ではなく、「同じ場所だと確かめられたときだけ、そろえる」。</strong>両方に座標があり、一致しているときだけ、そろえます。座標が無い、または食い違う組は、「同じ店だと分からない」ので、各記事が自分で名乗る名前を尊重します。締切は、同じ応募ページの同じ抽選なので、今までどおりそろえます。</p>
+
+  <h3 class="rv" id="c3-s4">すでにできている 52 件を、戻した</h3>
+  <p>書き換えられた店名の、元の値は、保存していませんでした。手がかりは、<strong>この処理が一度も触らない項目</strong>（<code>category</code>）でした。記事が作られたときに、その記事自身の出どころ（店の X アカウント、まとめの行）から入ります。52 件をすべて目で確かめると、category のほうが、出どころと一致していました。</p>
+  <p>座標は、根拠にできませんでした。座標は店名から引き直す仕組みなので、店名が書き換えられたあとは、<strong>間違った名前の座標</strong>になっています（category は札幌駅前店なのに、座標は新宿）。だから、戻すときに座標も捨てて、引き直しの対象に戻しました。</p>
+  <ul>
+    <li>下見で 51 件、実行。</li>
+    <li>実行後、<strong>新たな上書きは 0 件</strong>（関門が効いている）。</li>
+    <li>表示中で、店名と category が食い違う記事は 2 件だけ。どちらも、同じ店の書き方の違いでした。</li>
+  </ul>
+
+  <h3 class="rv" id="c3-s5">ついでに見つかった、「行列に並べない」バグ</h3>
+  <p>座標を引き直そうとしたら、4 件とも、順番が回ってきませんでした。位置情報を直す処理には、列が 2 つありました。</p>
+  <div class="scroll rv"><table>
+    <thead><tr><th>列</th><th>中身</th></tr></thead>
+    <tbody>
+      <tr><td>正面（60 件ずつ）</td><td>座標がほしい記事</td></tr>
+      <tr><td>再挑戦（300 件の窓）</td><td>実測 658 件。うち、座標が本当に無いのは<strong>34 件だけ</strong></td></tr>
+    </tbody>
+  </table></div>
+  <p>再挑戦の列に、<strong>解決できた記事まで入れていました</strong>（成功したときに、印を「false」に書いていたため、列に残る）。624 件の「もう用のない記事」が、窓を埋めて、本当に必要な 34 件に、順番が回りませんでした。</p>
+  <p>直し方は、解決できたら、印そのものを<strong>消す</strong>ことです。どちらの列にも並びません。</p>
+
+  <h3 class="rv" id="c3-s6">分かったこと</h3>
+  <blockquote>「同じ」と決めつける前に、「同じ」だと確かめる。</blockquote>
+  <ul>
+    <li><strong>リンクが同じでも、店は同じとは限らない。</strong>共有のページは普通にあります。</li>
+    <li><strong>揃えるのは、同じだと確かめられたときだけ。</strong>確かめられないときは、触らない。</li>
+    <li><strong>同じ事故の修正は、同じ判定を使う、すべての入口に。</strong>片方にだけ入れると、もう片方で起きます。</li>
+    <li><strong>元の値を保存していないときは、触っていない項目から復元する。</strong>ただし、その項目の裏づけを、1 件ずつ目で確かめる。</li>
+    <li><strong>印を「false」にするのは、消すのとは違う。</strong>列に残り続けます。</li>
+  </ul>
+  <h2 class="rv" id="s4">「1 ページ ＝ 1 案件」ではなかった：1 つのフォームで 6 商品を受け付ける店の記事が、リンクが同じというだけで消されていた</h2>
+  <p class="note">2026 年 10 月 17 日の記録。</p>
+<p>iOS アプリ「<a href="/works/torecadash/">トレカダッシュ</a>」で、「<strong>複数の商品を受け付けている抽選なのに、1 件しか記事が無い</strong>」という報告が、2 回、来ました。1 回目に直したつもりでしたが、2 回目が来ました。</p>
+  <p>この記事は、その真因と、同じ時期に見つけた、「<strong>作った項目を、アプリが一度も読んでいなかった</strong>」話の記録です。</p>
+  <p class="note">この記事は、2026 年 8 月 25 日の作業の記録から書いています。</p>
+
+  <h3 class="rv" id="c4-s1">真因：リンクだけで、重複と決めていた</h3>
+  <p>1 回目の報告で、「リンクが同じだから、重複扱いされている」ところまでは、直しました。しかし、<strong>すでにある記事が、隠れたまま</strong>だったので、同じ指摘を、また受けました。</p>
+  <p>犯人は、<code>runHideDuplicateLinkArticles</code>、つまり、<strong>リンクだけで、重複と判断する</strong>ジョブでした。</p>
+  <p>実データは、こうでした。ある通販店は、<strong>1 つの Google フォームで、6 つの商品</strong>の抽選を受け付けています。6 件の記事は、全部、同じ URL です。このジョブが、そのうち 5 件を「重複」として、消していました。利用者からは、1 商品ぶんしか、見えません。</p>
+  <p>直し方は、まとめる単位を、<strong>リンク</strong>から、<strong>リンク ＋ 商品</strong>に変えることでした。同じリンクでも、商品が違えば、別の案件です。商品が分かっていない記事どうしは、区別する手がかりが無いので、これまでどおり、リンクだけで、重複とみなします。</p>
+  <p>「1 ページ ＝ 1 案件」という前提は、トレカの抽選では成り立ちません。1 つの申込みフォーム、1 つの告知のページで、複数の商品を受け付ける店は、普通にあります。</p>
+  <p>すでに隠されていた記事は、同じリンクの表示中の記事と、<strong>商品または題名が違うものに限って</strong>、表示に戻しました（7 件）。ある通販店の 5 件（6 商品すべてが表示される）、大手のゲーム店 1 件、別のチェーン 1 件です。</p>
+
+  <h3 class="rv" id="c4-s2">サーバが作った「応募枠」を、アプリが一度も読んでいなかった</h3>
+  <p>8 月 23 日から、サーバーは、応募の条件を AI で読んで、「<strong>応募枠</strong>」（<code>entryTiers</code>）を取り出していました。「プレイヤーズクラブ：本人認証済みの枠と、未認証の枠」「A グループと B グループ」「ビックカメラの Suica カード会員限定」といったものです。実データにも、ちゃんと入っていました。</p>
+  <p>ところが、<strong>iOS のアプリが、この項目を、一度も読んでいませんでした</strong>。AI の費用だけを払って、利用者には、見えない状態です。アプリに、項目を足し、詳細の画面に、「応募枠」として表示するようにしました。</p>
+  <p>サーバーとアプリの項目の突き合わせは、コマンドで見つかります。アプリが読む項目を、ソースから機械的に抜き出し（<code>grep</code>）、Firestore の実データと比べます。</p>
+
+  <h3 class="rv" id="c4-s3">商品の一覧に、告知文が混ざっていた</h3>
+  <p>「ONE PIECE カードゲームコーナー【事前入店申込・抽選】8 月 31 日（月）JUMP SHOP 東京駅店」のような、<strong>イベントの告知</strong>が、商品として登録されていました。</p>
+  <p>言い回しを並べる方式は、追いつきません。そこで、<strong>具体的な日付</strong>という、一般的な規則で弾きました。トレカの商品名に、「8 月 31 日」のような暦の日付は入りません。「Vol.3」「第 2 弾」「2025 年 19 号」は日付ではないので、影響しません。10 個のパターンで試して、食い違いは 0 件でした。すでにある 6 件を削除しました。</p>
+
+  <h3 class="rv" id="c4-s4">分かったこと</h3>
+  <blockquote>前提を疑う。作ったものが、使われているかを確かめる。</blockquote>
+  <ul>
+    <li><strong>「1 ページ ＝ 1 案件」を、前提にしない。</strong>1 つのフォームで、複数の商品を受け付ける店は、普通にあります。</li>
+    <li><strong>直したら、すでにある記事も見る。</strong>入口だけを直しても、隠れた記事は戻りません。</li>
+    <li><strong>サーバが作った項目を、アプリが読んでいるか、突き合わせる。</strong>費用だけかかって、利用者に見えない、ということが起きます。</li>
+    <li><strong>言い回しの一覧より、一般的な規則。</strong>具体的な日付が入っていれば、商品名ではない、のように。</li>
+  </ul>
+
+  <h2 class="rv" id="s5">それぞれの要点</h2>
+  <ul>
+    <li><a href="#s1">「ヤマダ電機」と「ヤマダデンキ」</a>：店名を「含んでいるか」だけで比べ、締切を 59 秒の差で別と判定し、重複整理が手動専用だった。言い換えの表は作らず一般則で直し、1 時間おきの定期実行にした。表記ゆれ 2 件、重複 7 組が 0 に。</li>
+    <li><a href="#s2">あいまいな店名で地図を引くと、日本の真ん中の静岡が返る</a>：店名を Google の地図検索に渡すと、あいまいな名前では日本全体の矩形の真ん中（静岡・愛知）が返った。ヤマダデンキが浜松、サンエーが掛川の工場に。チェーン名の一覧は作らず、答え自身で信用できるかを 4 つの規則で判定した。</li>
+    <li><a href="#s3">「同じ応募ページ」なら「同じ店」と決めつけていた</a>：同じ応募ページの記事の店名を書き揃える処理が、仙台駅前店を「新宿南口店」にしていた。応募ページは 15 の別々の店が共有していた。「確かめられたときだけ揃える」に直し、52 件を、触っていない項目から復元した記録。</li>
+    <li><a href="#s4">「1 ページ ＝ 1 案件」ではなかった</a>：リンクだけで重複と決めるジョブが、1 つの Google フォームで 6 商品を受け付ける店の記事 5 件を消していた。「リンク ＋ 商品」に直した。サーバが作った「応募枠」をアプリが一度も読んでいなかったことも見つかった。</li>
+  </ul>
+  <p>ほかの記録は、<a href="/notes/">Notes の一覧</a>から、テーマごとに読めます。トレカダッシュそのものは、<a href="/works/torecadash/">作品ページ</a>に書いています。</p>
+
+<!--related-->
+  <div class="rule" style="margin:40px 0 22px"></div>
+  <p class="eyebrow">ほかの記録</p>
+  <ul class="plain">
+    <li><a href="/notes/crawl-monitoring/">巡回と監視の取りこぼしを減らした7つの記録：ページ送り・X 監視・カバー率の測り方・先着の順番待ち</a> — 抽選・先着の情報を集める巡回と監視で、取りこぼしを数えて減らした7つの記録。まとめサイトのページ送り、X 監視の漏れ、カバー率の測り方、監視の間隔と配信、順番待ちページ。</li>
+    <li><a href="/notes/scheduled-jobs/">定期実行とサーバー運用で起きた9つのこと：タイムアウト・時間予算・配備のたびの再実行・VPS 移行</a> — 毎日・毎時動く処理と、それを載せるサーバーで起きた9つの記録。Cloud Functions から VPS への移行、3回直したタイムアウト、走っていなかった点検、配備のたびの再実行、ログの秘密。</li>
+    <li><a href="/notes/xcode152-sdk/">Xcode 15.2 で Firebase 12 が使えない（Swift 6.0 必須）：Firebase 11.4.0 と AdMob 11.5.0 に固定した理由</a> — 古い Mac の Xcode 15.2 では、Firebase 12 以降と 11.12.0 以降は Xcode 16.2 が必須、AdMob 11.6.0 以降は MarketplaceKit で Xcode 15.3 が必須。Exact Version で固定した記録。</li>
+  </ul>
+<!--/related-->
+
+<!--comments-->
+  <section class="comments" id="comments" data-repo="murakamikoshin/koshin-studio" data-repo-id="R_kgDOURc3ew"
+    data-category="Announcements" data-category-id="DIC_kwDOURc3e84DHTVr">
+    <h2 id="comments-h">コメント</h2>
+    <p>感想や、記事の間違いの指摘は、ここへ。書くには、GitHub のアカウントが要ります。</p>
+    <p><button type="button" class="btn ghost" id="load-comments">コメントを開く</button></p>
+    <p class="note">押すと、giscus（giscus.app）と GitHub に接続します。押さなければ、接続しません。詳しくは<a href="/privacy/">プライバシーポリシー</a>に書いています。</p>
+    <div id="giscus-box"></div>
+  </section>
+<!--/comments-->
+</div></main>
+
+<footer class="site"><div class="wrap">
+  <span>© 2026 Koshin Studio</span>
+  <div class="sns-row"></div>
+  <nav><a href="/picks/">Picks</a><a href="/calc/">Tools</a><a href="/about/">運営者情報</a><a href="/about/#contact">お問い合わせ</a><a href="/privacy/">プライバシーポリシー</a><a href="/en/" hreflang="en" lang="en">English</a></nav>
+</div></footer>
+<script src="/motion.js?v=1e7447ec" defer></script>
+</body>
+</html>

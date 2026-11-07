@@ -65,6 +65,6 @@
 
   この話に出てくるもの
 
-- App Store の審査で止まった四つ (https://koshinstudio.com/notes/torecadash-review/) — ITMS-91064 を含む、審査の手前の記録
+- App Store の審査で止まった四つ (https://koshinstudio.com/notes/app-store-review/#s2) — ITMS-91064 を含む、審査の手前の記録
 
-- App Store 審査で「Guideline 2.1 Information Needed」が届いた (https://koshinstudio.com/notes/review-info-needed/) — このあとの記録
+- App Store 審査で「Guideline 2.1 Information Needed」が届いた (https://koshinstudio.com/notes/app-store-review/#s1) — このあとの記録

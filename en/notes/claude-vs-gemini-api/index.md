@@ -12,7 +12,7 @@
 
 A comparison / October 2026
 
-  Torecadash moved from the Claude API to the Gemini API (the story is in the migration article (https://koshinstudio.com/en/notes/gemini-migration/)). Here I line up the official numbers I did not write down then. I use only what the official pages say. I did not compare accuracy or speed, because there are no official numbers for them.
+  Torecadash moved from the Claude API to the Gemini API (the story is in the migration article (https://koshinstudio.com/en/notes/ai-cost-cutting/#s1)). Here I line up the official numbers I did not write down then. I use only what the official pages say. I did not compare accuracy or speed, because there are no official numbers for them.
 
   All numbers were seen on official pages on October 8, 2026. Prices and limits change. Check each item’s source again before you use it. What the official pages did not say is written as “could not confirm,” not as “does not exist.”
 

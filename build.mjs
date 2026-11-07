@@ -424,20 +424,16 @@ const noteRow = (n, i) => `    <li class="rv" data-delay="${i * 70}"><a class="n
 /* テーマ別の案内（記事の数が増えたので、はじめての方向けに） */
 const themeNoteBySlug = Object.fromEntries(notes.map((n) => [n.slug, n]));
 const noteThemes = [
-  { title: '数えて、直した', lead: '勘で直す前に、まず数える。費用と監査の数字を疑って、測り直した記録。',
-    slugs: ['firestore-91', 'gemini-meter', 'scrape-cost', 'dup-zero', 'audit-sweep-61', 'fix-the-existing-data', 'budget-starved', 'torecadash-ai'] },
-  { title: '静かに壊れていた', lead: 'エラーが出ないまま、本物が消えていた、または読めていなかった失敗の記録。',
-    slugs: ['blocked-page', 'tco-relay', 'weird-articles-by-route', 'silent-discard', 'truncated-answer', 'waiting-room', 'notify-gate', 'destination-check'] },
-  { title: '名前と商品の取り違え', lead: '同じ名前、同じリンクが、別のものを指していた。商品と店の取り違えの記録。',
-    slugs: ['split-mixups', 'same-page-not-same-store', 'store-name-variants', 'geocode-shizuoka', 'one-page-many-cases', 'transliteration-gate', 'catalog-seed-393', 'genre-from-catalog', 'leaked-value', 'cleanup-hides-entrance', 'typo-catalog', 'fake-products'] },
-  { title: '監視と定期処理', lead: '先着の監視、同時実行の枠、配備と再実行。動き続ける処理の設計の記録。',
-    slugs: ['interval-vs-delivery', 'hot-lane', 'concurrency-slots', 'timeout-third-fix', 'rerun-on-deploy', 'automate-sorted', 'x-monitoring-gaps', 'aggregator-pagination', 'coverage-check', 'fill-the-gap', 'misdiagnosis-down', 'self-inflicted'] },
-  { title: 'iOS アプリと基盤', lead: 'サーバーの移行、iCloud、広告、審査、ビルド。アプリとその土台の、実際に起きたことの記録。',
-    slugs: ['vps-migration', 'secret-in-logs', 'icloud-overwrite', 'swallowed-failure', 'swiftui-hit-area', 'test-ads', 'torecadash-watchdog', 'torecadash-ci', 'itms-91064', 'xcode152-sdk', 'torecadash-review', 'review-info-needed', 'apple-signin'] },
-  { title: 'ゲームの設計と測定', lead: '釣り合いを、AI 同士の対局や自動の試行で測って決めた記録。',
-    slugs: ['negaeri-balance', 'negaeri-online', 'anago', 'sushi-measure', 'stopwatch-rank', 'shindan12'] },
+  { title: 'データを集めて、照合する', lead: 'トレカの抽選情報を、巡回で集め、店と商品に結びつける。取りこぼしと取り違え、エラーを出さずに壊れていたことの記録。',
+    slugs: ['crawl-monitoring', 'tcg-store-matching', 'tcg-product-matching', 'silent-failures'] },
+  { title: '運用と費用', lead: '毎日動く処理とサーバー、AI とデータベースの費用、データの直し方。動き続ける仕組みを、測って直した記録。',
+    slugs: ['scheduled-jobs', 'ai-cost-cutting', 'data-repair'] },
+  { title: 'iOS アプリと App Store', lead: '審査、ビルド、固まる・落ちる・反応しない。iPhone アプリで実際に起きたことの記録。',
+    slugs: ['app-store-review', 'itms-91064', 'xcode152-sdk', 'torecadash-watchdog', 'apple-signin', 'swiftui-hit-area', 'icloud-overwrite', 'test-ads', 'torecadash-ci'] },
+  { title: 'ゲームの設計と測定', lead: '釣り合いを、AI 同士の対局や自動の試行で測って決めた記録。弾幕の作り方も。',
+    slugs: ['danmaku-patterns', 'negaeri-balance', 'negaeri-online', 'anago', 'sushi-measure', 'stopwatch-rank', 'shindan12'] },
   { title: '公式の情報で比べた', lead: '値段・規約・上限を、公式の情報だけで比べた記事。確認できなかったことも書いてあります。',
-    slugs: ['hosting-compare', 'claude-vs-gemini-api', 'ios-sdk-compare', 'comment-services'] },
+    slugs: ['tcg-lottery-app-compare', 'hosting-compare', 'claude-vs-gemini-api', 'ios-sdk-compare', 'comment-services'] },
 ];
 
 /* 記事を作品ごとにまとめる（新しい記事が先に来る順を保つ）。作品ページがあれば、そこへのリンクも */
@@ -550,13 +546,11 @@ const enNotePairs = enData.filter((p) => /^\/en\/notes\/[^/]+\/$/.test(p.en) && 
   .sort((a, b) => (b.sortDate || '').localeCompare(a.sortDate || ''));
 const enNoteBySlug = Object.fromEntries(enNotePairs.map((p) => [p.en.split('/')[3], p]));
 const EN_THEMES = [
-  ['Count first, then fix', 'Before guessing, count. Records of doubting cost and audit numbers and measuring again.', 0],
-  ['Silent failures', 'No error appeared, yet real data was being dropped or never read.', 1],
-  ['Mixed-up names and products', 'The same name or the same link pointed to different things.', 2],
-  ['Monitoring and scheduled jobs', 'First-come monitoring, concurrency slots, deploys and re-runs: designing jobs that keep running.', 3],
-  ['iOS apps and infrastructure', 'Server migration, iCloud, ads, App Review and builds: what actually happened to an app and its base.', 4],
-  ['Game design, measured', 'Balancing decided by AI-vs-AI matches and automated play.', 5],
-  ['Compared from official sources', 'Prices, terms and limits compared using only official information, with what could not be confirmed.', 6],
+  ['Collecting and matching data', 'Crawling for trading-card lottery information and linking it to stores and products: misses, mix-ups, and things that broke without an error.', 0],
+  ['Operations and costs', 'Daily jobs and servers, AI and database costs, and repairing data: measuring and fixing systems that keep running.', 1],
+  ['iOS apps and the App Store', 'Review, builds, freezes, crashes and buttons that would not respond: what actually happened to an iPhone app.', 2],
+  ['Game design, measured', 'Balancing decided by AI-vs-AI matches and automated play, and how bullet-hell patterns are made.', 3],
+  ['Compared from official sources', 'Prices, terms and limits compared using only official information, with what could not be confirmed.', 4],
 ];
 const enRow = (p, i) => `    <li class="rv" data-delay="${Math.min(i, 8) * 70}"><a class="note-row" href="${p.en}" hreflang="en" lang="en">
       <time datetime="${p.sortDate}">${p.sortDate.replace(/-/g, '.')}</time>

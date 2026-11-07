@@ -89,7 +89,7 @@
 
 ### 5. 情報源が多い
 
-  公式サイト・通販サイト・まとめサイト・X の公開投稿を、サーバーが自動で集めています。何を、どれだけ集めているかは、まとめサイトの巡回の記事 (https://koshinstudio.com/notes/aggregator-pagination/)や取得が 0 件になった記事 (https://koshinstudio.com/notes/blocked-page/)に、失敗も含めて書きました。
+  公式サイト・通販サイト・まとめサイト・X の公開投稿を、サーバーが自動で集めています。何を、どれだけ集めているかは、まとめサイトの巡回の記事 (https://koshinstudio.com/notes/crawl-monitoring/#s1)や取得が 0 件になった記事 (https://koshinstudio.com/notes/silent-failures/#s4)に、失敗も含めて書きました。
 
 ## トレカダッシュのデメリット
 

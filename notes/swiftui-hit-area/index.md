@@ -55,6 +55,6 @@
 
 - iOS アプリが固まって強制終了される (https://koshinstudio.com/notes/torecadash-watchdog/) — アプリの別の不具合
 
-- 失敗を捨てると、画面は嘘をつく (https://koshinstudio.com/notes/swallowed-failure/) — アプリの別の失敗
+- 失敗を捨てると、画面は嘘をつく (https://koshinstudio.com/notes/silent-failures/#s6) — アプリの別の失敗
 
-- 関門を直しても、すでにあるデータは直らない (https://koshinstudio.com/notes/fix-the-existing-data/) — 直したのに直っていない話
+- 関門を直しても、すでにあるデータは直らない (https://koshinstudio.com/notes/data-repair/#s5) — 直したのに直っていない話

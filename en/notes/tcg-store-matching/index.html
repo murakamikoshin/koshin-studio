@@ -1,0 +1,252 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>4 store-matching mistakes in a TCG lottery app | Koshin Studio</title>
+<meta name="description" content="Four real cases where matching store names went wrong in a trading-card lottery app: spelling variants, a map lookup that returned Shizuoka, one entry page used by different stores, and one form for six products.">
+<meta property="og:title" content="Four store-matching mistakes in a TCG lottery app: spelling variants, vague map lookups, shared entry pages, and one page with many products">
+<meta property="og:description" content="Four real cases where matching store names went wrong in a trading-card lottery app: spelling variants, a map lookup that returned Shizuoka, one entry page used by different stores, and one form for six products.">
+<meta property="og:type" content="article">
+<meta name="theme-color" content="#fbfaf7">
+<link rel="icon" href="/favicon.ico?v=1697d589" sizes="48x48">
+<link rel="icon" href="/favicon.svg?v=b9d7922f" type="image/svg+xml" sizes="any">
+<link rel="icon" href="/assets/icon/icon-192.png?v=e2566235" type="image/png" sizes="192x192">
+<link rel="apple-touch-icon" href="/assets/icon/icon-180.png?v=84e7f0e6">
+<link rel="manifest" href="/site.webmanifest">
+<script>document.documentElement.className+=" js"</script>
+<link rel="stylesheet" href="/style.css?v=3d886c33">
+<meta name="google-adsense-account" content="ca-pub-3863314847163872">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3863314847163872" crossorigin="anonymous"></script>
+<link rel="canonical" href="https://koshinstudio.com/en/notes/tcg-store-matching/">
+<meta property="og:url" content="https://koshinstudio.com/en/notes/tcg-store-matching/">
+<meta property="og:site_name" content="Koshin Studio">
+<meta property="og:locale" content="en_US">
+<link rel="alternate" hreflang="ja" href="https://koshinstudio.com/notes/tcg-store-matching/">
+<link rel="alternate" hreflang="en" href="https://koshinstudio.com/en/notes/tcg-store-matching/">
+<link rel="alternate" hreflang="x-default" href="https://koshinstudio.com/en/notes/tcg-store-matching/">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="alternate" type="application/rss+xml" title="Koshin Studio — Notes" href="https://koshinstudio.com/feed.xml">
+<link rel="alternate" type="text/markdown" href="https://koshinstudio.com/en/notes/tcg-store-matching/index.md">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BlogPosting","headline":"Four store-matching mistakes in a TCG lottery app: spelling variants, vague map lookups, shared entry pages, and one page with many products","url":"https://koshinstudio.com/en/notes/tcg-store-matching/","description":"Four real cases where matching store names went wrong in a trading-card lottery app: spelling variants, a map lookup that returned Shizuoka, one entry page used by different stores, and one form for six products.","datePublished":"2026-11-07","dateModified":"2026-11-07","inLanguage":"en","image":"https://koshinstudio.com/assets/og/og_en_notes_tcg-store-matching.jpg","author":{"@id":"https://koshinstudio.com#koshin"},"publisher":{"@id":"https://koshinstudio.com#studio"},"mainEntityOfPage":"https://koshinstudio.com/en/notes/tcg-store-matching/","translationOfWork":{"@type":"BlogPosting","url":"https://koshinstudio.com/notes/tcg-store-matching/","inLanguage":"en"}},{"@type":"Person","@id":"https://koshinstudio.com#koshin","name":"Koshin","jobTitle":"Web and app engineer","url":"https://koshinstudio.com/about/","worksFor":{"@id":"https://koshinstudio.com#studio"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Koshin Studio","item":"https://koshinstudio.com/en/"},{"@type":"ListItem","position":2,"name":"Notes","item":"https://koshinstudio.com/en/notes/"},{"@type":"ListItem","position":3,"name":"Four store-matching mistakes in a TCG lottery app: spelling variants, vague map lookups, shared entry pages, and one page with many products","item":"https://koshinstudio.com/en/notes/tcg-store-matching/"}]}]}</script>
+<link rel="alternate" type="application/rss+xml" title="Koshin Studio — Notes (English)" href="https://koshinstudio.com/en/feed.xml">
+<meta property="og:image" content="https://koshinstudio.com/assets/og/og_en_notes_tcg-store-matching.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
+</head>
+<body class="article">
+<canvas id="motes"></canvas>
+
+<header class="site"><div class="wrap">
+  <a class="logo" href="/en/"><img class="logo-mark" src="/favicon.svg?v=b9d7922f" alt="" width="28" height="28">Koshin Studio</a>
+  <nav><a href="/en/works/">Works</a><a href="/en/works/#game">Games</a><a href="/en/notes/">Notes</a><a href="/en/calc/">Tools</a><a href="/en/about/">About</a><a href="/" hreflang="ja" lang="ja">日本語</a></nav>
+</div></header>
+
+<main><div class="wrap">
+  <nav class="crumbs" aria-label="You are here"><a href="/en/">Koshin Studio</a><i aria-hidden="true">›</i><span aria-current="page">Four store-matching mistakes in a TCG lottery app</span></nav>
+  <h1>Four store-matching mistakes in a TCG lottery app: spelling variants, vague map lookups, shared entry pages, and one page with many products</h1>
+  <div class="rule"></div>
+<!--lang-->
+  <p class="note"><a href="/notes/tcg-store-matching/" hreflang="ja" lang="ja">日本語版</a></p>
+<!--/lang--><!--byline--><p class="note byline">Written by <a href="/en/about/#operator">Koshin</a> (web engineer and app engineer) · published 2026-11-07</p><!--/byline--><p class="lead">Development log of Toreca Dash / 4 records in one place</p>
+  <p>Toreca Dash reads store announcements and posts on X to work out which store is running which lottery. The easiest thing to get wrong was <strong>the store’s name</strong>: the same store written differently, different stores sharing one link, and vague names turning into a far-away place on the map. These are four real store-matching mistakes and how they were fixed, in the order they happened.</p>
+  <p class="note">Each section was first published as a separate record (from 2026-10). Numbers and sources are as in the work logs of the time. They were gathered into one article per theme on 7 November 2026.</p>
+
+    <nav class="toc" aria-label="Contents"><p>Contents</p><ol><li><a href="#s1">“ヤマダ電機” versus “ヤマダデンキ”</a></li><li><a href="#s2">Looking up an ambiguous store name returns Shizuoka, the middle of Japan</a></li><li><a href="#s3">“The same application page” does not mean “the same store”</a></li><li><a href="#s4">“One page = one case” was false</a></li><li><a href="#s5">Key points of each</a></li></ol></nav>
+  <h2 class="rv" id="s1">“ヤマダ電機” versus “ヤマダデンキ”: spelling variants and duplicates had three overlapping causes</h2>
+  <p class="note">Record from 2026-10-17.</p>
+<p>In my app Toreca Dash, the same store’s name was written differently, such as “ヤマダ電機” and “ヤマダデンキ” (both Yamada Denki). Two reports came: “spellings vary” and “articles are duplicated for the same reason”. The instruction was: “make sure it does not happen for other stores either, thoroughly”.</p>
+  <p>This article records that three causes overlapped, and the process of fixing with a general rule instead of a synonym table.</p>
+  <p class="note">Written from my work log of 25 August 2026.</p>  <h3 class="rv" id="c1-s1">Three causes overlapped</h3>
+  <ol>
+    <li><strong>Store names were compared only by “contains”.</strong> The two Yamada spellings contain neither one another, so they were different stores.</li>
+    <li><strong>Deadlines were compared to the millisecond.</strong> The same “until 26 Aug” was 23:59:00 from the aggregator and 23:59:59 from X, a <strong>59-second difference</strong> that stopped them being seen as duplicates. Four real products were like this.</li>
+    <li><strong>The dedupe job was manual-only and had never run automatically.</strong> Even if I make it as a “one-off repair”, articles arrive daily, so duplicates are born daily.</li>
+  </ol>
+
+  <h3 class="rv" id="c1-s2">The fix: no synonym table</h3>
+  <p>I made a comparison key (<code>storeNameComparisonKey</code>). It drops corporate forms, symbols, spaces and full/half-width, turns katakana into hiragana, and unifies “電機 / 電器 / でんき”.</p>
+  <p><strong>I do not make a table of store-name synonyms.</strong> It would recur whenever a new store appears. I made a general rule that unifies different writings that sound the same.</p>
+  <ul>
+    <li>Deadlines are compared <strong>as dates</strong> (Japan-time dates) and I require <strong>the same sale type</strong> instead. Even on the same day, first-come and lottery are different cases.</li>
+    <li>Articles that have no store name (<code>sellerName</code>) and only a store name in the category are included. Aggregator and official-site articles are mostly like that, and I had overlooked them wholesale.</li>
+    <li>When hiding as a duplicate, always set the hidden mark (<code>hiddenByDuplicate</code>).</li>
+    <li>I added <strong>an hourly scheduled run</strong>.</li>
+    <li>The spelling itself is also <strong>pulled to the majority of real data</strong>. I keep no list of correct spellings. On a tie, katakana wins, then string order, so the answer does not change at each run and cause a rewrite war.</li>
+  </ul>
+
+  <h3 class="rv" id="c1-s3">Two dangers found in testing</h3>
+  <p>Both found by tests after the fix.</p>
+  <ul>
+    <li><strong>If you key only on the part before “＠”, a store whose name itself contains ＠ gets an extremely short key.</strong> “Card Shop ＠ Home. Kagoshima” would become a key like “card shop” and be equated with other stores. The comparison key does not cut at ＠. (Names with an advertising tail are caught by the contains test.)</li>
+    <li><strong>If “one is the beginning of the other means the same name”, branch names disappear.</strong> “Yellow Submarine” and “Yellow Submarine Akihabara” would merge and lose the branch. I treat them as the same only when the addition begins with a <strong>note</strong> marker such as “＠”, “【” or “（”.</li>
+  </ul>
+  <p>I checked 17 real patterns and found 0 mismatches.</p>
+
+  <h3 class="rv" id="c1-s4">Result</h3>
+  <div class="scroll rv"><table>
+    <thead><tr><th></th><th>Before</th><th>After</th></tr></thead>
+    <tbody>
+      <tr><td>Store-name spelling variants</td><td>2</td><td><strong>0</strong></td></tr>
+      <tr><td>Duplicates with same product, deadline and store</td><td>7 groups</td><td><strong>0 groups</strong></td></tr>
+    </tbody>
+  </table></div>
+  <p>As a bonus, 23 store names with an advertising tail like “○○ ＠ staff wanted” were unified too. When there are duplicates, the one kept is the one with a price and a result-announcement date.</p>
+
+  <h3 class="rv" id="c1-s5">What I learned</h3>
+  <blockquote>Fix with a general rule, not a list; and run the fixing job automatically.</blockquote>
+  <ul>
+    <li><strong>Do not compare only by “contains”.</strong> Different writings do not contain each other.</li>
+    <li><strong>Do not compare to the millisecond.</strong> Compare by date and sale type.</li>
+    <li><strong>A “one-off repair” is not enough for what is born daily.</strong> Run it automatically, regularly.</li>
+    <li><strong>A synonym table recurs with new stores.</strong> Use a general rule for same-sounding writings.</li>
+    <li><strong>Merge only notes.</strong> Never erase a branch name.</li>
+  </ul>
+  <h2 class="rv" id="s2">Looking up an ambiguous store name returns Shizuoka, the middle of Japan: I judged by Google’s own answer, not a list of chains</h2>
+  <p class="note">Record from 2026-10-17.</p>
+<p>My app Toreca Dash shows store locations on a map and sorts by distance. A report said “the location shows Shizuoka”. Store locations come from passing the store name to Google’s place search (Places API).</p>
+  <p>The cause: <strong>when you query with an ambiguous store name, Google returns the middle of Japan (Shizuoka and Aichi)</strong>. This article records the measurement and the fix of not listing chain names.</p>
+  <p class="note">Written from my work log of 25 August 2026.</p>  <h3 class="rv" id="c2-s1">Measured: the answer to an ambiguous name is Shizuoka or Aichi</h3>
+  <p>I pass a rectangle covering all of Japan as a location hint (<code>locationbias</code>). With an ambiguous name and nothing to decide by, Google returns the middle of that rectangle, which is Shizuoka and Aichi. I measured it with the API.</p>
+  <div class="scroll rv"><table>
+    <thead><tr><th>Query</th><th>Google’s answer</th></tr></thead>
+    <tbody>
+      <tr><td>Yamada Denki</td><td>Yamada Denki Tecc Land Hamamatsu (Shizuoka)</td></tr>
+      <tr><td>San-A</td><td>San-A Kaken, Kakegawa Factory (Shizuoka)</td></tr>
+      <tr><td>Hobby Station</td><td>Toreca Station Toyohashi (Aichi)</td></tr>
+      <tr><td>Book Off</td><td>BOOKOFF Kakegawa (Shizuoka)</td></tr>
+      <tr><td>Hareruya</td><td>Hareruya Shizuoka (Shizuoka)</td></tr>
+      <tr><td>Omusubi</td><td>a rice-ball shop in Hamamatsu (Shizuoka)</td></tr>
+    </tbody>
+  </table></div>
+  <p>“San-A” meant a retail chain, but the answer was a different company’s factory with a similar name.</p>
+
+  <h3 class="rv" id="c2-s2">The fix: judge by Google’s own answer, not a list of chain names</h3>
+  <p>I did not make a “list of ambiguous chain names”. It would recur whenever a new chain appears. Instead I wrote a function (<code>geocodeMatchIsTrustworthy</code>) that judges from <strong>Google’s own answer</strong>.</p>
+  <ol>
+    <li>If the queried name is <strong>only the head</strong> of the returned name and the rest is a branch name, <strong>reject</strong>. (Yamada Denki → …Tecc Land Hamamatsu.) If only “store” was added, it is the same shop.</li>
+    <li>If the name has a branch hint (“… store”, hall, mall…), <strong>accept</strong> as before.</li>
+    <li>If the returned name equals the queried name or is a part of it, <strong>accept</strong>. <strong>Do not accept the reverse.</strong> (San-A ⊂ San-A Kaken is a different company.)</li>
+    <li>Otherwise, judge by <strong>whether the name and address share 2 or more characters</strong>. (Stores with Ikebukuro, Totsuka, Sapporo or Takadanobaba in the name pass here.)</li>
+  </ol>
+  <p>On 25 real patterns, <strong>all 9 wrong ones were rejected and all 16 correct ones accepted</strong>. The only miss was one written in Roman letters.</p>
+  <p>I cleared the 30 articles with a wrong location baked in and 22 store cache entries, and resolved them again. Clearing the cache costs one API call per store.</p>
+
+  <h3 class="rv" id="c2-s3">A similar story the same day: the notification’s store name was “LivePocket”</h3>
+  <p>A report said “the notification’s store name is LivePocket”. When no store name could be found, the category (“LivePocket”) was used as the last fallback. LivePocket is <strong>a place that takes applications, not a store</strong>. So <strong>when unknown, return null</strong>. The caller uses the article title if there is no store name. LivePocket titles begin with the store name, like “Kiddy Land LaLaport Fujimi store …”, which says it more correctly.</p>
+
+  <h3 class="rv" id="c2-s4">What I learned</h3>
+  <blockquote>Check an external answer for trustworthiness using the answer itself.</blockquote>
+  <ul>
+    <li><strong>With nothing to decide by, an external service returns a plausible answer.</strong> The middle of Japan: Shizuoka and Aichi.</li>
+    <li><strong>Do not make a list of chain names.</strong> It recurs when a new chain appears.</li>
+    <li><strong>Do not accept the reverse containment.</strong> San-A is not part of San-A Kaken.</li>
+    <li><strong>Clear baked-in values and resolve again.</strong> The cache too.</li>
+    <li><strong>When unknown, null.</strong> No name is better than a wrong one.</li>
+  </ul>
+  <h2 class="rv" id="s3">“The same application page” does not mean “the same store”: 52 articles showed another store’s name</h2>
+  <p class="note">Record from 2026-10-17.</p>
+<p>In my app Toreca Dash a bug report said: “to users it looks like a different store’s lottery”. An article for a Sendai station store showed as “Shinjuku South Exit store”, and an article for a Hachioji flagship showed as “Noshiro store”. 52 articles were affected.</p>
+  <p>The cause was a wrong premise: <strong>“the same application page means the same store.”</strong></p>
+  <p class="note">Numbers come from my work log of 7 September 2026.</p>  <h3 class="rv" id="c3-s1">The symptom: store names of other stores</h3>
+  <p>Articles carried the name of a different branch of the same chain. A user opens “the Sendai store’s lottery” and the text says Shinjuku. 52 articles were like that.</p>
+
+  <h3 class="rv" id="c3-s2">The cause: the same page is not the same store</h3>
+  <p>A job unified the store name and deadline across articles that share an application page. Same lottery, same deadline; same store, same name, I assumed. It <strong>copied the highest-quality article’s store name to everyone in the group</strong>.</p>
+  <p>The premise did not hold. On real data:</p>
+  <div class="scroll rv"><table>
+    <thead><tr><th>Application page</th><th>Stores sharing it</th></tr></thead>
+    <tbody>
+      <tr><td>A page (1)</td><td><strong>15 separate stores</strong> (Sendai, Hamamatsu, Maebashi, Shiwa, Gamagori, Hiroshima and more)</td></tr>
+      <tr><td>A page (2)</td><td><strong>9 branches</strong> of one chain</td></tr>
+      <tr><td>A page (3)</td><td>One shop and three other chains (<strong>not even the same chain</strong>)</td></tr>
+    </tbody>
+  </table></div>
+  <p>Chains often use one application page for all stores. The same page does not mean the same store.</p>
+  <p>The same accident had already happened on the hiding side, and <strong>a guard existed there</strong> (the 51-branch case of one chain). <strong>I had forgotten to add it to the name-copying side.</strong> The same fix had not been applied to every entrance that uses the same judgement.</p>
+
+  <h3 class="rv" id="c3-s3">A coordinates-only guard was not enough</h3>
+  <p>My first guard was “if coordinates disagree, they are different stores”. But for a group where <strong>only one article has coordinates</strong>, the “definitely different places” test returns false and passes. In a dry run (no writes), shops of three different chains were about to be rewritten as one store.</p>
+  <p>The lasting fix was to reverse the logic: <strong>“unify only when confirmed to be the same place”</strong>, not “do not unify when confirmed different”. Only when both have coordinates and they match. If coordinates are missing or differ, I respect each article’s own name. Deadlines are still unified, since they belong to the same lottery on the same page.</p>
+
+  <h3 class="rv" id="c3-s4">Restoring the 52 articles</h3>
+  <p>I had not saved the original names. The clue was a field this job never touches (<code>category</code>), set when an article is created from its own source (the store’s X account or the aggregator row). I checked all 52 by eye, and category matched the source.</p>
+  <p>Coordinates could not serve as evidence. They are derived from the store name, so after a rewrite they were <strong>the coordinates of the wrong name</strong> (category was Sapporo Station but coordinates were Shinjuku). So I discarded coordinates too and put them back to be derived again.</p>
+  <ul>
+    <li>51 in a dry run, then the real run.</li>
+    <li>Afterwards, <strong>0 new overwrites</strong> (the guard works).</li>
+    <li>Only 2 displayed articles where name and category differed, both just different spellings of one store.</li>
+  </ul>
+
+  <h3 class="rv" id="c3-s5">A bonus bug: items that could not enter the queue</h3>
+  <p>Trying to re-derive coordinates, none of 4 articles got their turn. The location fixer has two queues:</p>
+  <div class="scroll rv"><table>
+    <thead><tr><th>Queue</th><th>Contents</th></tr></thead>
+    <tbody>
+      <tr><td>Front (60 at a time)</td><td>Articles that want coordinates</td></tr>
+      <tr><td>Retry (a 300-item window)</td><td>658 measured, of which only <strong>34</strong> truly lacked coordinates</td></tr>
+    </tbody>
+  </table></div>
+  <p>The retry queue <strong>also held items that had been solved</strong> (success wrote the flag as false and left it in the queue). 624 finished articles filled the window, so the 34 that needed work never got a turn.</p>
+  <p>The fix: when solved, <strong>delete</strong> the flag. It sits in neither queue.</p>
+
+  <h3 class="rv" id="c3-s6">What I learned</h3>
+  <blockquote>Before assuming “the same”, confirm “the same”.</blockquote>
+  <ul>
+    <li><strong>The same link does not mean the same store.</strong> Shared pages are normal.</li>
+    <li><strong>Unify only what you have confirmed is the same.</strong> If you cannot confirm, do not touch it.</li>
+    <li><strong>Apply a fix to every entrance that uses the same judgement.</strong> Adding it to one leaves the other.</li>
+    <li><strong>If you did not save the original, restore from a field you did not touch</strong>, and check it by eye, one by one.</li>
+    <li><strong>Setting a flag to false is not deleting it.</strong> It stays in the queue.</li>
+  </ul>
+  <h2 class="rv" id="s4">“One page = one case” was false: articles of a shop taking 6 products on one form were hidden just for sharing a link</h2>
+  <p class="note">Record from 2026-10-17.</p>
+<p>My app Toreca Dash twice received the report “<strong>several products are accepted, yet there is only one article</strong>”. I thought I fixed it the first time, but the second report came.</p>
+  <p>This article records the real cause, and a story from the same period: <strong>a field I created that the app never read</strong>.</p>
+  <p class="note">Written from my work log of 25 August 2026.</p>  <h3 class="rv" id="c4-s1">The real cause: duplicates decided by link alone</h3>
+  <p>After the first report I had fixed it as far as “they are treated as duplicates because the link is the same”. But <strong>existing articles stayed hidden</strong>, so I got the same complaint again.</p>
+  <p>The culprit was <code>runHideDuplicateLinkArticles</code>, a job that <strong>judges duplicates by link alone</strong>.</p>
+  <p>The real data: one mail-order shop takes lotteries for <strong>6 products on a single Google Form</strong>. All 6 articles have the same URL. The job hid 5 of them as “duplicates”, so users saw only one product.</p>
+  <p>The fix: change the grouping unit from <strong>link</strong> to <strong>link + product</strong>. The same link with a different product is a different case. For articles whose product is unknown, there is nothing to tell them apart, so they are treated as duplicates by link alone as before.</p>
+  <p>“One page = one case” does not hold for card lotteries. Stores that accept several products on one form or one announcement page are common.</p>
+  <p>I restored the articles that had been hidden as link-only duplicates, only those <strong>whose product or title differs</strong> from a displayed article with the same link (7 articles): 5 from the mail-order shop (all 6 products now show), 1 from a large game store and 1 from another chain.</p>
+
+  <h3 class="rv" id="c4-s2">The server created “entry tiers”, and the app never read them</h3>
+  <p>Since 23 August the server had been reading entry conditions with an AI and extracting <strong>entry tiers</strong> (<code>entryTiers</code>): “Players Club: identity-verified tier versus unverified tier”, “Group A and Group B”, “Bic Camera Suica card members only”. They were in the real data.</p>
+  <p>But <strong>the iOS app never read this field</strong>. I was paying for the AI and users could not see it. I added the field to the app and show it in the detail screen as “Entry tiers”.</p>
+  <p>You can find such server/app mismatches mechanically: extract the fields the app reads from the source (<code>grep</code>) and compare them with Firestore’s real data.</p>
+
+  <h3 class="rv" id="c4-s3">Announcement text had got into the product list</h3>
+  <p>Event notices such as “ONE PIECE Card Game corner [advance entry / lottery] Monday 31 August, JUMP SHOP Tokyo Station” had been registered as products.</p>
+  <p>A list of phrases cannot keep up, so I rejected them with a general rule: <strong>a concrete date</strong>. A trading-card product name does not contain a calendar date like “31 August”. “Vol.3”, “Set 2” and “2025 issue 19” are not dates and are unaffected. I tested 10 patterns with 0 mismatches and deleted the 6 existing ones.</p>
+
+  <h3 class="rv" id="c4-s4">What I learned</h3>
+  <blockquote>Doubt the premise. Check that what you built is used.</blockquote>
+  <ul>
+    <li><strong>Do not assume “one page = one case”.</strong> Stores accepting several products on one form are common.</li>
+    <li><strong>After fixing, look at existing articles.</strong> Fixing the entrance does not bring hidden articles back.</li>
+    <li><strong>Cross-check the fields the server makes and the app reads.</strong> You can pay the cost and users still see nothing.</li>
+    <li><strong>A general rule beats a list of phrases.</strong> “A concrete date means it is not a product name.”</li>
+  </ul>
+
+  <h2 class="rv" id="s5">Key points of each</h2>
+  <ul>
+    <li><a href="#s1">“ヤマダ電機” versus “ヤマダデンキ”</a>: Store names compared only by “contains”, deadlines differing by 59 seconds, and a manual-only dedupe job. I used a general comparison key instead of a synonym table, ran it hourly, and found two dangers in testing.</li>
+    <li><a href="#s2">Looking up an ambiguous store name returns Shizuoka, the middle of Japan</a>: Passing a store name to Google’s place search with a rectangle covering Japan returned its middle (Shizuoka/Aichi) for ambiguous names. Instead of a list of chain names I judged trust from the answer itself with four rules.</li>
+    <li><a href="#s3">“The same application page” does not mean “the same store”</a>: A job that unified store names across articles sharing an application page turned a Sendai store into “Shinjuku South Exit”. One page was shared by 15 separate stores. I changed it to unify only when confirmed the same place and restored 52 articles from an untouched field.</li>
+    <li><a href="#s4">“One page = one case” was false</a>: A job that decided duplicates by link alone hid 5 of 6 articles of a shop taking 6 products on one Google Form. I changed it to link + product. I also found the server’s “entry tiers” were never read by the app.</li>
+  </ul>
+  <p class="note">This is the English version of <a href="/notes/tcg-store-matching/" hreflang="ja" lang="ja">the original Japanese article</a>.</p>
+  <p>More development logs, by theme: <a href="/en/notes/" hreflang="en" lang="en">Notes</a>. About the app: <a href="/en/works/torecadash/" hreflang="en" lang="en">Toreca Dash</a>.</p>
+</div>
+</main>
+
+<footer class="site"><div class="wrap">
+  <span>© 2026 Koshin Studio</span>
+  <div class="sns-row"></div>
+  <nav><a href="/en/" hreflang="en" lang="en">English</a><a href="/" hreflang="ja" lang="ja">日本語</a><a href="/en/about/#contact" hreflang="en" lang="en">Contact</a><a href="/en/privacy/" hreflang="en" lang="en">Privacy</a></nav>
+</div></footer>
+<script src="/motion.js?v=1e7447ec" defer></script>
+</body>
+</html>

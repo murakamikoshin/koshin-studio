@@ -4,10 +4,10 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Notes — development logs with measured numbers | Koshin Studio</title>
-<meta name="description" content="84 development logs from building browser games and an iOS app: App Store review, ads, crawling, cost cuts and API migrations, with measured numbers.">
+<meta name="description" content="43 development logs from building browser games and an iOS app: App Store review, ads, crawling, cost cuts and API migrations, with measured numbers.">
 <meta name="theme-color" content="#fbfaf7">
 <meta property="og:title" content="Notes — development logs with measured numbers | Koshin Studio">
-<meta property="og:description" content="84 development logs from building browser games and an iOS app: App Store review, ads, crawling, cost cuts and API migrations, with measured numbers.">
+<meta property="og:description" content="43 development logs from building browser games and an iOS app: App Store review, ads, crawling, cost cuts and API migrations, with measured numbers.">
 <link rel="icon" href="/favicon.ico?v=1697d589" sizes="48x48">
 <link rel="icon" href="/favicon.svg?v=b9d7922f" type="image/svg+xml" sizes="any">
 <link rel="icon" href="/assets/icon/icon-192.png?v=e2566235" type="image/png" sizes="192x192">
@@ -25,7 +25,7 @@
 <link rel="alternate" hreflang="x-default" href="https://koshinstudio.com/en/notes/">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="alternate" type="application/rss+xml" title="Koshin Studio — Notes" href="https://koshinstudio.com/feed.xml">
-<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Koshin Studio","item":"https://koshinstudio.com/en/"},{"@type":"ListItem","position":2,"name":"Notes","item":"https://koshinstudio.com/en/notes/"}]},{"@type":"CollectionPage","name":"Notes","url":"https://koshinstudio.com/en/notes/","inLanguage":"en","isPartOf":{"@id":"https://koshinstudio.com#studio"}},{"@type":"ItemList","name":"Development logs","numberOfItems":84,"itemListElement":[{"@type":"ListItem","position":1,"url":"https://koshinstudio.com/en/notes/danmaku-patterns/","name":"How bullet-hell patterns work: ring, aimed, rain, spiral and homing, with formulas and live demos"},{"@type":"ListItem","position":2,"url":"https://koshinstudio.com/en/notes/rank-verify-mismatch/","name":"Sushi Stack scores stopped reaching the leaderboard: I changed the game’s numbers and forgot the server’s re-check (twice)"},{"@type":"ListItem","position":3,"url":"https://koshinstudio.com/en/notes/tcg-lottery-app-compare/","name":"Japanese Pokémon card & TCG lottery apps compared: Toreca Dash, Toreget, NowPokeca, Pokeka Tracker and Toreca no Chizu"},{"@type":"ListItem","position":4,"url":"https://koshinstudio.com/en/notes/aggregator-pagination/","name":"An aggregator crawl read only page 1: card articles were on pages 2–4, and only the first 6,000 characters went to the AI"},{"@type":"ListItem","position":5,"url":"https://koshinstudio.com/en/notes/fill-the-gap/","name":"“Not just noticing; not letting it happen”: turning a report-only monitor into one that fills gaps on the spot"},{"@type":"ListItem","position":6,"url":"https://koshinstudio.com/en/notes/swiftui-hit-area/","name":"The same report for the third time: a SwiftUI button responded only on its text, and my two earlier “fixes” did nothing"},{"@type":"ListItem","position":7,"url":"https://koshinstudio.com/en/notes/weird-articles-by-route/","name":"“Weird articles keep multiplying”: I counted by creation route and closed the entrances, and my counting was wrong twice"},{"@type":"ListItem","position":8,"url":"https://koshinstudio.com/en/notes/automate-sorted/","name":"“Automate everything that can be”: counting showed 66 repair jobs had never run on a schedule, and I added only six"},{"@type":"ListItem","position":9,"url":"https://koshinstudio.com/en/notes/misdiagnosis-down/","name":"“The server went down and I cannot recover it” was wrong: only inbound SSH had been blocked"},{"@type":"ListItem","position":10,"url":"https://koshinstudio.com/en/notes/store-name-variants/","name":"“ヤマダ電機” versus “ヤマダデンキ”: spelling variants and duplicates had three overlapping causes"},{"@type":"ListItem","position":11,"url":"https://koshinstudio.com/en/notes/one-page-many-cases/","name":"“One page = one case” was false: articles of a shop taking 6 products on one form were hidden just for sharing a link"},{"@type":"ListItem","position":12,"url":"https://koshinstudio.com/en/notes/transliteration-gate/","name":"English and katakana names share no characters: a fingerprint gate rejected 42 correct matches"},{"@type":"ListItem","position":13,"url":"https://koshinstudio.com/en/notes/geocode-shizuoka/","name":"Looking up an ambiguous store name returns Shizuoka, the middle of Japan: I judged by Google’s own answer, not a list of chains"},{"@type":"ListItem","position":14,"url":"https://koshinstudio.com/en/notes/swallowed-failure/","name":"If you throw failure away, the screen lies: a calendar that said “registered” with none added, a frozen OCR, a notification without a store name"},{"@type":"ListItem","position":15,"url":"https://koshinstudio.com/en/notes/truncated-answer/","name":"Candidates were found, yet reading the answer failed every time: a URL cut at 200 tokens, and a search that returned 400 on hyphens"},{"@type":"ListItem","position":16,"url":"https://koshinstudio.com/en/notes/icloud-overwrite/","name":"A function named “load from iCloud if newer” compared nothing: a 20-record history could become 1"},{"@type":"ListItem","position":17,"url":"https://koshinstudio.com/en/notes/test-ads/","name":"With no ads, 25 real-device checks were blocked: test ads in developer mode only, and no hard-coded prize names"},{"@type":"ListItem","position":18,"url":"https://koshinstudio.com/en/notes/leaked-value/","name":"“That’s just a Beyblade” came back after I added a gate: the blocked value leaked in another form"},{"@type":"ListItem","position":19,"url":"https://koshinstudio.com/en/notes/budget-starved/","name":"Checks that logged “deferred to next run” had never run: three time budgets counted from the same start"},{"@type":"ListItem","position":20,"url":"https://koshinstudio.com/en/notes/timeout-third-fix/","name":"I fixed a timeout three times and it did not stop: the culprit was a second process under the same lock"},{"@type":"ListItem","position":21,"url":"https://koshinstudio.com/en/notes/cleanup-hides-entrance/","name":"“It gets cleaned up later” hid an entrance bug: 400 near-identical products were re-created every day"},{"@type":"ListItem","position":22,"url":"https://koshinstudio.com/en/notes/secret-in-logs/","name":"A secret token was in the logs in plain text: scrub at the one exit that cannot be forgotten"},{"@type":"ListItem","position":23,"url":"https://koshinstudio.com/en/notes/vps-migration/","name":"Moving from Cloud Functions to a ¥4,300 server: ¥3,700 a day, Yahoo! failing in the EEA, and five traps"},{"@type":"ListItem","position":24,"url":"https://koshinstudio.com/en/notes/destination-check/","name":"I opened the links of displayed articles and compared them: about 60 mistakes, and three mistakes in my own first check"},{"@type":"ListItem","position":25,"url":"https://koshinstudio.com/en/notes/audit-sweep-61/","name":"Four things from a full sweep of 61 audits: 51 jobs clumped at 4 a.m., a lock that expired in 55 seconds, and a price-filling idea I decided not to add"},{"@type":"ListItem","position":26,"url":"https://koshinstudio.com/en/notes/coverage-check/","name":"Comparing with other sites to count gaps: the first “23% coverage” was a measuring mistake and the truth was 49%"},{"@type":"ListItem","position":27,"url":"https://koshinstudio.com/en/notes/x-monitoring-gaps/","name":"Four gaps in monitoring X: posts missing from search, accounts that change hands, a store-finding query, and catching up after an outage"},{"@type":"ListItem","position":28,"url":"https://koshinstudio.com/en/notes/hot-lane/","name":"When you cannot watch everything quickly: popular 128 of 427 sets run fast, and the fastest lane yields to the budget"},{"@type":"ListItem","position":29,"url":"https://koshinstudio.com/en/notes/fix-the-existing-data/","name":"Fixing a gate does not fix existing data: a “tried already” mark, a URL marker and a lookup table"},{"@type":"ListItem","position":30,"url":"https://koshinstudio.com/en/notes/genre-from-catalog/","name":"Fixing product genre from the official catalogue: three dry runs took 13 changes down to 4"}]}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Koshin Studio","item":"https://koshinstudio.com/en/"},{"@type":"ListItem","position":2,"name":"Notes","item":"https://koshinstudio.com/en/notes/"}]},{"@type":"CollectionPage","name":"Notes","url":"https://koshinstudio.com/en/notes/","inLanguage":"en","isPartOf":{"@id":"https://koshinstudio.com#studio"}},{"@type":"ItemList","name":"Development logs","numberOfItems":43,"itemListElement":[{"@type":"ListItem","position":1,"url":"https://koshinstudio.com/en/notes/danmaku-patterns/","name":"How bullet-hell patterns work: ring, aimed, rain, spiral and homing, with formulas and live demos"},{"@type":"ListItem","position":2,"url":"https://koshinstudio.com/en/notes/rank-verify-mismatch/","name":"Sushi Stack scores stopped reaching the leaderboard: I changed the game’s numbers and forgot the server’s re-check (twice)"},{"@type":"ListItem","position":3,"url":"https://koshinstudio.com/en/notes/tcg-lottery-app-compare/","name":"Japanese Pokémon card & TCG lottery apps compared: Toreca Dash, Toreget, NowPokeca, Pokeka Tracker and Toreca no Chizu"},{"@type":"ListItem","position":4,"url":"https://koshinstudio.com/en/notes/swiftui-hit-area/","name":"The same report for the third time: a SwiftUI button responded only on its text, and my two earlier “fixes” did nothing"},{"@type":"ListItem","position":5,"url":"https://koshinstudio.com/en/notes/icloud-overwrite/","name":"A function named “load from iCloud if newer” compared nothing: a 20-record history could become 1"},{"@type":"ListItem","position":6,"url":"https://koshinstudio.com/en/notes/test-ads/","name":"With no ads, 25 real-device checks were blocked: test ads in developer mode only, and no hard-coded prize names"},{"@type":"ListItem","position":7,"url":"https://koshinstudio.com/en/notes/negaeri-online/","name":"Online play that trusts nothing the client says: the server decides moves, clocks and results"},{"@type":"ListItem","position":8,"url":"https://koshinstudio.com/en/notes/negaeri-balance/","name":"Setting the rules of Negaeri Shogi by playing AI against AI: one change that worked, six that broke"},{"@type":"ListItem","position":9,"url":"https://koshinstudio.com/en/notes/tcg-store-matching/","name":"Four store-matching mistakes in a TCG lottery app: spelling variants, vague map lookups, shared entry pages, and one page with many products"},{"@type":"ListItem","position":10,"url":"https://koshinstudio.com/en/notes/crawl-monitoring/","name":"Seven records of cutting misses in crawling and monitoring: pagination, X monitoring, measuring coverage and waiting rooms"},{"@type":"ListItem","position":11,"url":"https://koshinstudio.com/en/notes/scheduled-jobs/","name":"Nine things that happened running scheduled jobs and a server: timeouts, time budgets, re-runs on deploy and a VPS migration"},{"@type":"ListItem","position":12,"url":"https://koshinstudio.com/en/notes/card-supplies-guide/","name":"Pokémon card sleeves and loaders: sizes and what “pt” means"},{"@type":"ListItem","position":13,"url":"https://koshinstudio.com/en/notes/itms-91064/","name":"ITMS-91064 “Invalid Binary”: NSPrivacyTracking was true but NSPrivacyTrackingDomains was empty"},{"@type":"ListItem","position":14,"url":"https://koshinstudio.com/en/notes/xcode152-sdk/","name":"Firebase 12 does not work with Xcode 15.2 (Swift 6.0 required): why I pinned Firebase 11.4.0 and AdMob 11.5.0"},{"@type":"ListItem","position":15,"url":"https://koshinstudio.com/en/notes/torecadash-watchdog/","name":"iOS app freezes and is killed (0x8BADF00D): a SwiftUI computed property ran on every redraw"},{"@type":"ListItem","position":16,"url":"https://koshinstudio.com/en/notes/torecadash-ci/","name":"No builds arriving in TestFlight: I had used up the 25 free Xcode Cloud hours (my first diagnosis was wrong)"},{"@type":"ListItem","position":17,"url":"https://koshinstudio.com/en/notes/apple-signin/","name":"Firebase Auth: force-quitting the app created anonymous accounts in bulk (waiting for currentUser to restore)"},{"@type":"ListItem","position":18,"url":"https://koshinstudio.com/en/notes/logo-pop/","name":"A canvas becomes twice as large on Retina: inset:0 does not stretch it (a bug in a logo that bursts when you tap it)"},{"@type":"ListItem","position":19,"url":"https://koshinstudio.com/en/notes/stopwatch-rank/","name":"Making a 10-second stopwatch ranking fair: 3 decimals, ties and write counts"},{"@type":"ListItem","position":20,"url":"https://koshinstudio.com/en/notes/anime-db/","name":"From 16,177 titles to 6,091: how the anime quiz database was built by dropping over 60%"},{"@type":"ListItem","position":21,"url":"https://koshinstudio.com/en/notes/match-percent/","name":"“80% was chosen over 82%”: the quiz’s match percentage disagreed with its ranking"},{"@type":"ListItem","position":22,"url":"https://koshinstudio.com/en/notes/result-screen/","name":"The streaming buttons were shown even for titles you could not watch: making the quiz result screen true"},{"@type":"ListItem","position":23,"url":"https://koshinstudio.com/en/notes/first-visit/","name":"Cutting six buttons to one: first-time players did not know what to press"},{"@type":"ListItem","position":24,"url":"https://koshinstudio.com/en/notes/qiita-post-interval/","name":"Measuring Qiita’s “posting too frequently” limit: a new account could not create another article for about 30 minutes"},{"@type":"ListItem","position":25,"url":"https://koshinstudio.com/en/notes/crazygames/","name":"Rejected by CrazyGames with no reason given: I recorded the game and found four problems"},{"@type":"ListItem","position":26,"url":"https://koshinstudio.com/en/notes/ascii-text/","name":"Japanese text garbled in the CrazyGames preview: the file was correct, the cause was never found, so I escaped to ASCII"},{"@type":"ListItem","position":27,"url":"https://koshinstudio.com/en/notes/deploy-gotchas/","name":"Works on my machine, breaks when deployed: four incidents shipping a static site to Cloudflare Pages"},{"@type":"ListItem","position":28,"url":"https://koshinstudio.com/en/notes/hosting-compare/","name":"Comparing static site hosts by their official terms: Cloudflare Pages, Netlify, Vercel, GitHub Pages and Firebase Hosting"},{"@type":"ListItem","position":29,"url":"https://koshinstudio.com/en/notes/comment-services/","name":"Comparing comment systems for static sites by their official information: giscus, utterances, Disqus, Remark42 and more"},{"@type":"ListItem","position":30,"url":"https://koshinstudio.com/en/notes/ios-sdk-compare/","name":"Comparing iOS ad SDKs and Firebase by their official information: AdMob, AppLovin MAX, LevelPlay and Supabase"}]}]}</script>
 <link rel="alternate" type="application/rss+xml" title="Koshin Studio — Notes (English)" href="https://koshinstudio.com/en/feed.xml">
 <meta property="og:image" content="https://koshinstudio.com/assets/og/og_en_notes.jpg">
 <meta property="og:image:width" content="1200">
@@ -48,84 +48,40 @@
   <p class="note"><a href="/notes/" hreflang="ja" lang="ja">日本語版</a></p>
 <!--/lang-->
   <p class="lead">Development logs.<br>Most of them are about measuring before fixing.</p>
-  <p class="rv">Written from real work records (commits and numbers measured at hand) while building browser games and an iPhone app. Each article is the English version of a Japanese original; the Japanese one is linked at the end. 84 articles. <a href="/en/feed.xml">RSS feed</a>.</p>
+  <p class="rv">Written from real work records (commits and numbers measured at hand) while building browser games and an iPhone app. Each article is the English version of a Japanese original; the Japanese one is linked at the end. 43 articles. <a href="/en/feed.xml">RSS feed</a>.</p>
   <h2 class="rv" id="themes">Read by theme</h2>
-  <h3 class="rv">Count first, then fix</h3>
-  <p class="rv">Before guessing, count. Records of doubting cost and audit numbers and measuring again.</p>
+  <h3 class="rv">Collecting and matching data</h3>
+  <p class="rv">Crawling for trading-card lottery information and linking it to stores and products: misses, mix-ups, and things that broke without an error.</p>
   <ul class="plain">
-    <li><a href="/en/notes/firestore-91/" hreflang="en" lang="en">Firestore cost in yen: 91% of reads came from one place, and my first cache did not work</a></li>
-    <li><a href="/en/notes/gemini-meter/" hreflang="en" lang="en">Before cutting Gemini cost, I doubted the meter: price, breakdown and cache were all wrong, and the cache threshold changed when I re-measured</a></li>
-    <li><a href="/en/notes/scrape-cost/" hreflang="en" lang="en">I re-measured a “nothing can be done” assumption and scraping cost dropped to one eighth</a></li>
-    <li><a href="/en/notes/dup-zero/" hreflang="en" lang="en">I counted “duplicates are practically zero,” but the audit reported 112 pairs</a></li>
-    <li><a href="/en/notes/audit-sweep-61/" hreflang="en" lang="en">Four things from a full sweep of 61 audits: 51 jobs clumped at 4 a.m., a lock that expired in 55 seconds, and a price-filling idea I decided not to add</a></li>
-    <li><a href="/en/notes/fix-the-existing-data/" hreflang="en" lang="en">Fixing a gate does not fix existing data: a “tried already” mark, a URL marker and a lookup table</a></li>
-    <li><a href="/en/notes/budget-starved/" hreflang="en" lang="en">Checks that logged “deferred to next run” had never run: three time budgets counted from the same start</a></li>
-    <li><a href="/en/notes/torecadash-ai/" hreflang="en" lang="en">“It should shrink” was wrong twice: cutting AI calls and what I measured afterward</a></li>
+    <li><a href="/en/notes/crawl-monitoring/" hreflang="en" lang="en">Seven records of cutting misses in crawling and monitoring: pagination, X monitoring, measuring coverage and waiting rooms</a></li>
+    <li><a href="/en/notes/tcg-store-matching/" hreflang="en" lang="en">Four store-matching mistakes in a TCG lottery app: spelling variants, vague map lookups, shared entry pages, and one page with many products</a></li>
+    <li><a href="/en/notes/tcg-product-matching/" hreflang="en" lang="en">Eight product-matching failures in a TCG lottery app: English vs katakana, splitting sets, official catalogs and spreading typos</a></li>
+    <li><a href="/en/notes/silent-failures/" hreflang="en" lang="en">Seven silent failures: real lotteries discarded, pages never read, and errors swallowed without a trace</a></li>
   </ul>
-  <h3 class="rv">Silent failures</h3>
-  <p class="rv">No error appeared, yet real data was being dropped or never read.</p>
+  <h3 class="rv">Operations and costs</h3>
+  <p class="rv">Daily jobs and servers, AI and database costs, and repairing data: measuring and fixing systems that keep running.</p>
   <ul class="plain">
-    <li><a href="/en/notes/blocked-page/" hreflang="en" lang="en">What I read as “fetched” was just a notice page: three days of zero products</a></li>
-    <li><a href="/en/notes/tco-relay/" hreflang="en" lang="en">“Checked” marks on articles that had never been read: the t.co relay page</a></li>
-    <li><a href="/en/notes/weird-articles-by-route/" hreflang="en" lang="en">“Weird articles keep multiplying”: I counted by creation route and closed the entrances, and my counting was wrong twice</a></li>
-    <li><a href="/en/notes/silent-discard/" hreflang="en" lang="en">Four real lotteries silently thrown away: a regex, dates without a year, batched answers and null</a></li>
-    <li><a href="/en/notes/truncated-answer/" hreflang="en" lang="en">Candidates were found, yet reading the answer failed every time: a URL cut at 200 tokens, and a search that returned 400 on hyphens</a></li>
-    <li><a href="/en/notes/waiting-room/" hreflang="en" lang="en">When first-come sales start, the site becomes a waiting-room page: a 15 KB notice slipped through an 8,000-byte gate</a></li>
-    <li><a href="/en/notes/notify-gate/" hreflang="en" lang="en">Notifications cannot be recalled: 19% of the last 72 hours’ notifications were wrong, and the gate worked after the fact</a></li>
-    <li><a href="/en/notes/destination-check/" hreflang="en" lang="en">I opened the links of displayed articles and compared them: about 60 mistakes, and three mistakes in my own first check</a></li>
+    <li><a href="/en/notes/scheduled-jobs/" hreflang="en" lang="en">Nine things that happened running scheduled jobs and a server: timeouts, time budgets, re-runs on deploy and a VPS migration</a></li>
+    <li><a href="/en/notes/ai-cost-cutting/" hreflang="en" lang="en">Five records of measuring, then cutting, AI and Firestore costs: a broken Gemini meter, 91% of reads in one place, and crawl costs</a></li>
+    <li><a href="/en/notes/data-repair/" hreflang="en" lang="en">Seven lessons from repairing bad data: existing records, bulk-job accidents, counting duplicates and the notification gate</a></li>
   </ul>
-  <h3 class="rv">Mixed-up names and products</h3>
-  <p class="rv">The same name or the same link pointed to different things.</p>
+  <h3 class="rv">iOS apps and the App Store</h3>
+  <p class="rv">Review, builds, freezes, crashes and buttons that would not respond: what actually happened to an iPhone app.</p>
   <ul class="plain">
-    <li><a href="/en/notes/split-mixups/" hreflang="en" lang="en">Three mix-ups in splitting one article into products: a child treated as a parent, a shared link pointing to another store, a name owned by two products</a></li>
-    <li><a href="/en/notes/same-page-not-same-store/" hreflang="en" lang="en">“The same application page” does not mean “the same store”: 52 articles showed another store’s name</a></li>
-    <li><a href="/en/notes/store-name-variants/" hreflang="en" lang="en">“ヤマダ電機” versus “ヤマダデンキ”: spelling variants and duplicates had three overlapping causes</a></li>
-    <li><a href="/en/notes/geocode-shizuoka/" hreflang="en" lang="en">Looking up an ambiguous store name returns Shizuoka, the middle of Japan: I judged by Google’s own answer, not a list of chains</a></li>
-    <li><a href="/en/notes/one-page-many-cases/" hreflang="en" lang="en">“One page = one case” was false: articles of a shop taking 6 products on one form were hidden just for sharing a link</a></li>
-    <li><a href="/en/notes/transliteration-gate/" hreflang="en" lang="en">English and katakana names share no characters: a fingerprint gate rejected 42 correct matches</a></li>
-    <li><a href="/en/notes/catalog-seed-393/" hreflang="en" lang="en">393 “work-name-only” products from an official list: the name field did not contain the product form</a></li>
-    <li><a href="/en/notes/genre-from-catalog/" hreflang="en" lang="en">Fixing product genre from the official catalogue: three dry runs took 13 changes down to 4</a></li>
-    <li><a href="/en/notes/leaked-value/" hreflang="en" lang="en">“That’s just a Beyblade” came back after I added a gate: the blocked value leaked in another form</a></li>
-    <li><a href="/en/notes/cleanup-hides-entrance/" hreflang="en" lang="en">“It gets cleaned up later” hid an entrance bug: 400 near-identical products were re-created every day</a></li>
-    <li><a href="/en/notes/typo-catalog/" hreflang="en" lang="en">A typo born once multiplied across shops: the “30th SEREBRATION” incident</a></li>
-    <li><a href="/en/notes/fake-products/" hreflang="en" lang="en">Splitting a “9-pack set” by contents created 80 fake products</a></li>
-  </ul>
-  <h3 class="rv">Monitoring and scheduled jobs</h3>
-  <p class="rv">First-come monitoring, concurrency slots, deploys and re-runs: designing jobs that keep running.</p>
-  <ul class="plain">
-    <li><a href="/en/notes/interval-vs-delivery/" hreflang="en" lang="en">A “1-minute” monitor checked each item once per 10 minutes: before speeding up, count the revisit interval and what was delivered</a></li>
-    <li><a href="/en/notes/hot-lane/" hreflang="en" lang="en">When you cannot watch everything quickly: popular 128 of 427 sets run fast, and the fastest lane yields to the budget</a></li>
-    <li><a href="/en/notes/concurrency-slots/" hreflang="en" lang="en">Before widening concurrency slots: widening a 2-core server from 8 to 14, and the earlier conclusion that was half wrong</a></li>
-    <li><a href="/en/notes/timeout-third-fix/" hreflang="en" lang="en">I fixed a timeout three times and it did not stop: the culprit was a second process under the same lock</a></li>
-    <li><a href="/en/notes/rerun-on-deploy/" hreflang="en" lang="en">Every deploy re-ran the daily jobs: 477 runs in 48 hours, 46.6% of that day’s Gemini cost</a></li>
-    <li><a href="/en/notes/automate-sorted/" hreflang="en" lang="en">“Automate everything that can be”: counting showed 66 repair jobs had never run on a schedule, and I added only six</a></li>
-    <li><a href="/en/notes/x-monitoring-gaps/" hreflang="en" lang="en">Four gaps in monitoring X: posts missing from search, accounts that change hands, a store-finding query, and catching up after an outage</a></li>
-    <li><a href="/en/notes/aggregator-pagination/" hreflang="en" lang="en">An aggregator crawl read only page 1: card articles were on pages 2–4, and only the first 6,000 characters went to the AI</a></li>
-    <li><a href="/en/notes/coverage-check/" hreflang="en" lang="en">Comparing with other sites to count gaps: the first “23% coverage” was a measuring mistake and the truth was 49%</a></li>
-    <li><a href="/en/notes/fill-the-gap/" hreflang="en" lang="en">“Not just noticing; not letting it happen”: turning a report-only monitor into one that fills gaps on the spot</a></li>
-    <li><a href="/en/notes/misdiagnosis-down/" hreflang="en" lang="en">“The server went down and I cannot recover it” was wrong: only inbound SSH had been blocked</a></li>
-    <li><a href="/en/notes/self-inflicted/" hreflang="en" lang="en">Four times my own tools hurt me: a summary dropped conditions, one undefined stopped saving, a check locked out production, alerts that never cleared</a></li>
-  </ul>
-  <h3 class="rv">iOS apps and infrastructure</h3>
-  <p class="rv">Server migration, iCloud, ads, App Review and builds: what actually happened to an app and its base.</p>
-  <ul class="plain">
-    <li><a href="/en/notes/vps-migration/" hreflang="en" lang="en">Moving from Cloud Functions to a ¥4,300 server: ¥3,700 a day, Yahoo! failing in the EEA, and five traps</a></li>
-    <li><a href="/en/notes/secret-in-logs/" hreflang="en" lang="en">A secret token was in the logs in plain text: scrub at the one exit that cannot be forgotten</a></li>
-    <li><a href="/en/notes/icloud-overwrite/" hreflang="en" lang="en">A function named “load from iCloud if newer” compared nothing: a 20-record history could become 1</a></li>
-    <li><a href="/en/notes/swallowed-failure/" hreflang="en" lang="en">If you throw failure away, the screen lies: a calendar that said “registered” with none added, a frozen OCR, a notification without a store name</a></li>
-    <li><a href="/en/notes/swiftui-hit-area/" hreflang="en" lang="en">The same report for the third time: a SwiftUI button responded only on its text, and my two earlier “fixes” did nothing</a></li>
-    <li><a href="/en/notes/test-ads/" hreflang="en" lang="en">With no ads, 25 real-device checks were blocked: test ads in developer mode only, and no hard-coded prize names</a></li>
-    <li><a href="/en/notes/torecadash-watchdog/" hreflang="en" lang="en">iOS app freezes and is killed (0x8BADF00D): a SwiftUI computed property ran on every redraw</a></li>
-    <li><a href="/en/notes/torecadash-ci/" hreflang="en" lang="en">No builds arriving in TestFlight: I had used up the 25 free Xcode Cloud hours (my first diagnosis was wrong)</a></li>
+    <li><a href="/en/notes/app-store-review/" hreflang="en" lang="en">Where App Store review stopped me: “Guideline 2.1 Information Needed” on the first submission, and four rejections</a></li>
     <li><a href="/en/notes/itms-91064/" hreflang="en" lang="en">ITMS-91064 “Invalid Binary”: NSPrivacyTracking was true but NSPrivacyTrackingDomains was empty</a></li>
     <li><a href="/en/notes/xcode152-sdk/" hreflang="en" lang="en">Firebase 12 does not work with Xcode 15.2 (Swift 6.0 required): why I pinned Firebase 11.4.0 and AdMob 11.5.0</a></li>
-    <li><a href="/en/notes/torecadash-review/" hreflang="en" lang="en">Four things that stopped my iOS app before App Review: iPad screenshots, ITMS-91064, account deletion, reporting posts</a></li>
-    <li><a href="/en/notes/review-info-needed/" hreflang="en" lang="en">App Store review sent “Guideline 2.1 Information Needed”: the six things Apple asked for</a></li>
+    <li><a href="/en/notes/torecadash-watchdog/" hreflang="en" lang="en">iOS app freezes and is killed (0x8BADF00D): a SwiftUI computed property ran on every redraw</a></li>
     <li><a href="/en/notes/apple-signin/" hreflang="en" lang="en">Firebase Auth: force-quitting the app created anonymous accounts in bulk (waiting for currentUser to restore)</a></li>
+    <li><a href="/en/notes/swiftui-hit-area/" hreflang="en" lang="en">The same report for the third time: a SwiftUI button responded only on its text, and my two earlier “fixes” did nothing</a></li>
+    <li><a href="/en/notes/icloud-overwrite/" hreflang="en" lang="en">A function named “load from iCloud if newer” compared nothing: a 20-record history could become 1</a></li>
+    <li><a href="/en/notes/test-ads/" hreflang="en" lang="en">With no ads, 25 real-device checks were blocked: test ads in developer mode only, and no hard-coded prize names</a></li>
+    <li><a href="/en/notes/torecadash-ci/" hreflang="en" lang="en">No builds arriving in TestFlight: I had used up the 25 free Xcode Cloud hours (my first diagnosis was wrong)</a></li>
   </ul>
   <h3 class="rv">Game design, measured</h3>
-  <p class="rv">Balancing decided by AI-vs-AI matches and automated play.</p>
+  <p class="rv">Balancing decided by AI-vs-AI matches and automated play, and how bullet-hell patterns are made.</p>
   <ul class="plain">
+    <li><a href="/en/notes/danmaku-patterns/" hreflang="en" lang="en">How bullet-hell patterns work: ring, aimed, rain, spiral and homing, with formulas and live demos</a></li>
     <li><a href="/en/notes/negaeri-balance/" hreflang="en" lang="en">Setting the rules of Negaeri Shogi by playing AI against AI: one change that worked, six that broke</a></li>
     <li><a href="/en/notes/negaeri-online/" hreflang="en" lang="en">Online play that trusts nothing the client says: the server decides moves, clocks and results</a></li>
     <li><a href="/en/notes/anago/" hreflang="en" lang="en">The conger eel was too big: finding why a merge puzzle’s last piece was out of reach</a></li>
@@ -136,6 +92,7 @@
   <h3 class="rv">Compared from official sources</h3>
   <p class="rv">Prices, terms and limits compared using only official information, with what could not be confirmed.</p>
   <ul class="plain">
+    <li><a href="/en/notes/tcg-lottery-app-compare/" hreflang="en" lang="en">Japanese Pokémon card &amp; TCG lottery apps compared: Toreca Dash, Toreget, NowPokeca, Pokeka Tracker and Toreca no Chizu</a></li>
     <li><a href="/en/notes/hosting-compare/" hreflang="en" lang="en">Comparing static site hosts by their official terms: Cloudflare Pages, Netlify, Vercel, GitHub Pages and Firebase Hosting</a></li>
     <li><a href="/en/notes/claude-vs-gemini-api/" hreflang="en" lang="en">Claude API vs Gemini API by official numbers: small-model prices, web search, spend limits and deprecation</a></li>
     <li><a href="/en/notes/ios-sdk-compare/" hreflang="en" lang="en">Comparing iOS ad SDKs and Firebase by their official information: AdMob, AppLovin MAX, LevelPlay and Supabase</a></li>
@@ -158,215 +115,45 @@
       <div><h3>Japanese Pokémon card &amp; TCG lottery apps compared: Toreca Dash, Toreget, NowPokeca, Pokeka Tracker and Toreca no Chizu</h3><p>Five apps and sites that track Pokémon card and TCG lotteries, pre-orders and restocks at stores in Japan, compared on games, alerts, maps and price — by the developer of one of them, weak points included.</p>
       <div class="tags"><span class="tag">Toreca Dash</span></div></div>
     </a></li>
-    <li class="rv" data-delay="210"><a class="note-row" href="/en/notes/aggregator-pagination/" hreflang="en" lang="en">
-      <time datetime="2026-10-17">2026.10.17</time>
-      <div><h3>An aggregator crawl read only page 1: card articles were on pages 2–4, and only the first 6,000 characters went to the AI</h3><p>The crawl of a stock-information aggregator read only page 1 (mostly consoles), while Pokémon and Gundam articles were on later pages. Only the first 6,000 characters went to the AI, so later stores dropped. I followed 12 pages and read all the text.</p>
-      <div class="tags"><span class="tag">Toreca Dash</span></div></div>
-    </a></li>
-    <li class="rv" data-delay="280"><a class="note-row" href="/en/notes/fill-the-gap/" hreflang="en" lang="en">
-      <time datetime="2026-10-17">2026.10.17</time>
-      <div><h3>“Not just noticing; not letting it happen”: turning a report-only monitor into one that fills gaps on the spot</h3><p>The gap monitor only reported and nothing was filled until a person noticed. I made it create missing articles on the spot, logged a branch that dropped silently, and showed how to apply even with no link. Coverage went from 92% to 100%.</p>
-      <div class="tags"><span class="tag">Toreca Dash</span></div></div>
-    </a></li>
-    <li class="rv" data-delay="350"><a class="note-row" href="/en/notes/swiftui-hit-area/" hreflang="en" lang="en">
+    <li class="rv" data-delay="210"><a class="note-row" href="/en/notes/swiftui-hit-area/" hreflang="en" lang="en">
       <time datetime="2026-10-17">2026.10.17</time>
       <div><h3>The same report for the third time: a SwiftUI button responded only on its text, and my two earlier “fixes” did nothing</h3><p>The “Won” and “Lost” buttons responded only on the text. Two earlier fixes (modifier order) did not work; I built the look inside a ButtonStyle and replaced six places. A mail-order article with coordinates had the same kind of root.</p>
       <div class="tags"><span class="tag">Toreca Dash</span></div></div>
     </a></li>
-    <li class="rv" data-delay="420"><a class="note-row" href="/en/notes/weird-articles-by-route/" hreflang="en" lang="en">
-      <time datetime="2026-10-17">2026.10.17</time>
-      <div><h3>“Weird articles keep multiplying”: I counted by creation route and closed the entrances, and my counting was wrong twice</h3><p>252 displayed lotteries were counted by route. Ended rounds left in an aggregator’s table were imported daily with empty deadlines (33); links to search results or top pages and deadlines disagreeing with the store’s own row were closed at the entrance.</p>
-      <div class="tags"><span class="tag">Toreca Dash</span></div></div>
-    </a></li>
-    <li class="rv" data-delay="490"><a class="note-row" href="/en/notes/automate-sorted/" hreflang="en" lang="en">
-      <time datetime="2026-10-17">2026.10.17</time>
-      <div><h3>“Automate everything that can be”: counting showed 66 repair jobs had never run on a schedule, and I added only six</h3><p>Matching 319 HTTP endpoints against 184 scheduled jobs by call showed 66 that only ran by hand. After a dry run I scheduled only the continuously needed ones, six, and fixed a queue that let the same job pile up.</p>
-      <div class="tags"><span class="tag">Toreca Dash</span></div></div>
-    </a></li>
-    <li class="rv" data-delay="560"><a class="note-row" href="/en/notes/misdiagnosis-down/" hreflang="en" lang="en">
-      <time datetime="2026-10-17">2026.10.17</time>
-      <div><h3>“The server went down and I cannot recover it” was wrong: only inbound SSH had been blocked</h3><p>From 3:10 a.m. I could not connect to the server and judged it stopped. In fact its processes had run for over 7 days, all 192 scheduled jobs were normal, and only inbound SSH was blocked.</p>
-      <div class="tags"><span class="tag">Toreca Dash</span></div></div>
-    </a></li>
-    <li class="rv" data-delay="560"><a class="note-row" href="/en/notes/store-name-variants/" hreflang="en" lang="en">
-      <time datetime="2026-10-17">2026.10.17</time>
-      <div><h3>“ヤマダ電機” versus “ヤマダデンキ”: spelling variants and duplicates had three overlapping causes</h3><p>Store names compared only by “contains”, deadlines differing by 59 seconds, and a manual-only dedupe job. I used a general comparison key instead of a synonym table, ran it hourly, and found two dangers in testing.</p>
-      <div class="tags"><span class="tag">Toreca Dash</span></div></div>
-    </a></li>
-    <li class="rv" data-delay="560"><a class="note-row" href="/en/notes/one-page-many-cases/" hreflang="en" lang="en">
-      <time datetime="2026-10-17">2026.10.17</time>
-      <div><h3>“One page = one case” was false: articles of a shop taking 6 products on one form were hidden just for sharing a link</h3><p>A job that decided duplicates by link alone hid 5 of 6 articles of a shop taking 6 products on one Google Form. I changed it to link + product. I also found the server’s “entry tiers” were never read by the app.</p>
-      <div class="tags"><span class="tag">Toreca Dash</span></div></div>
-    </a></li>
-    <li class="rv" data-delay="560"><a class="note-row" href="/en/notes/transliteration-gate/" hreflang="en" lang="en">
-      <time datetime="2026-10-17">2026.10.17</time>
-      <div><h3>English and katakana names share no characters: a fingerprint gate rejected 42 correct matches</h3><p>The market-price link rate fell to 39%. The products existed on the market site, but my English names and its katakana names share no characters, so 42 matches were rejected in 26 hours. I kept the gate and added a narrow second judgement for this match only.</p>
-      <div class="tags"><span class="tag">Toreca Dash</span></div></div>
-    </a></li>
-    <li class="rv" data-delay="560"><a class="note-row" href="/en/notes/geocode-shizuoka/" hreflang="en" lang="en">
-      <time datetime="2026-10-17">2026.10.17</time>
-      <div><h3>Looking up an ambiguous store name returns Shizuoka, the middle of Japan: I judged by Google’s own answer, not a list of chains</h3><p>Passing a store name to Google’s place search with a rectangle covering Japan returned its middle (Shizuoka/Aichi) for ambiguous names. Instead of a list of chain names I judged trust from the answer itself with four rules.</p>
-      <div class="tags"><span class="tag">Toreca Dash</span></div></div>
-    </a></li>
-    <li class="rv" data-delay="560"><a class="note-row" href="/en/notes/swallowed-failure/" hreflang="en" lang="en">
-      <time datetime="2026-10-17">2026.10.17</time>
-      <div><h3>If you throw failure away, the screen lies: a calendar that said “registered” with none added, a frozen OCR, a notification without a store name</h3><p>try? discarded failures, so the calendar showed “registered N events” with 0 added and could never register again, OCR failure froze the screen, and the notification buffer forgot the store name.</p>
-      <div class="tags"><span class="tag">Toreca Dash</span></div></div>
-    </a></li>
-    <li class="rv" data-delay="560"><a class="note-row" href="/en/notes/truncated-answer/" hreflang="en" lang="en">
-      <time datetime="2026-10-17">2026.10.17</time>
-      <div><h3>Candidates were found, yet reading the answer failed every time: a URL cut at 200 tokens, and a search that returned 400 on hyphens</h3><p>An AI reply choosing an official announcement page was cut at 200 tokens and failed every time. The result stayed 0 because store announcements name no product and the AI obeyed my instruction. Rakuten’s search returned 400 depending on hyphen position.</p>
-      <div class="tags"><span class="tag">Toreca Dash</span></div></div>
-    </a></li>
-    <li class="rv" data-delay="560"><a class="note-row" href="/en/notes/icloud-overwrite/" hreflang="en" lang="en">
+    <li class="rv" data-delay="280"><a class="note-row" href="/en/notes/icloud-overwrite/" hreflang="en" lang="en">
       <time datetime="2026-10-17">2026.10.17</time>
       <div><h3>A function named “load from iCloud if newer” compared nothing: a 20-record history could become 1</h3><p>The iCloud sync function never checked whether data was newer and replaced everything. A fresh device with an empty state could overwrite another device’s 20 records with 1. I added update-time comparison and never overwrite with empty.</p>
       <div class="tags"><span class="tag">Toreca Dash</span></div></div>
     </a></li>
-    <li class="rv" data-delay="560"><a class="note-row" href="/en/notes/test-ads/" hreflang="en" lang="en">
+    <li class="rv" data-delay="350"><a class="note-row" href="/en/notes/test-ads/" hreflang="en" lang="en">
       <time datetime="2026-10-17">2026.10.17</time>
       <div><h3>With no ads, 25 real-device checks were blocked: test ads in developer mode only, and no hard-coded prize names</h3><p>Before ads were served, 25 of 163 real-device checklist items could not be verified. In developer mode only, the app switches to Google’s test ad units. Prize names are read from one setting and never hard-coded, including in the checklist.</p>
       <div class="tags"><span class="tag">Toreca Dash</span></div></div>
     </a></li>
-    <li class="rv" data-delay="560"><a class="note-row" href="/en/notes/leaked-value/" hreflang="en" lang="en">
-      <time datetime="2026-10-17">2026.10.17</time>
-      <div><h3>“That’s just a Beyblade” came back after I added a gate: the blocked value leaked in another form</h3><p>A gate “do not create a product whose name contains a toy’s name” was bypassed because the AI’s product name lost the toy’s name. I moved the judgement to the announcement body and rejected only when no card-game word appears.</p>
-      <div class="tags"><span class="tag">Toreca Dash</span></div></div>
-    </a></li>
-    <li class="rv" data-delay="560"><a class="note-row" href="/en/notes/budget-starved/" hreflang="en" lang="en">
-      <time datetime="2026-10-17">2026.10.17</time>
-      <div><h3>Checks that logged “deferred to next run” had never run: three time budgets counted from the same start</h3><p>A process had three stages whose time budgets were counted from the same start time, so the rotating 25 checks ran 0 times each run. “Deferred 18 items” meant all of them. I allocated from the job’s time limit and logged each step’s time.</p>
-      <div class="tags"><span class="tag">Toreca Dash</span></div></div>
-    </a></li>
-    <li class="rv" data-delay="560"><a class="note-row" href="/en/notes/timeout-third-fix/" hreflang="en" lang="en">
-      <time datetime="2026-10-17">2026.10.17</time>
-      <div><h3>I fixed a timeout three times and it did not stop: the culprit was a second process under the same lock</h3><p>A Rakuten Books stock check timed out 17 times a day. Limiting fetches, then a whole item, did not help; the third time I found that another process under the same lock re-fetched everything with no time limit.</p>
-      <div class="tags"><span class="tag">Toreca Dash</span></div></div>
-    </a></li>
-    <li class="rv" data-delay="560"><a class="note-row" href="/en/notes/cleanup-hides-entrance/" hreflang="en" lang="en">
-      <time datetime="2026-10-17">2026.10.17</time>
-      <div><h3>“It gets cleaned up later” hid an entrance bug: 400 near-identical products were re-created every day</h3><p>Catalogue registration looked up existing products by exact name only, so brackets, spaces and full/half-width differences re-created near-identical products daily: 437 in one day, 410 with no articles. The nightly merge job hid it.</p>
-      <div class="tags"><span class="tag">Toreca Dash</span></div></div>
-    </a></li>
-    <li class="rv" data-delay="560"><a class="note-row" href="/en/notes/secret-in-logs/" hreflang="en" lang="en">
-      <time datetime="2026-10-17">2026.10.17</time>
-      <div><h3>A secret token was in the logs in plain text: scrub at the one exit that cannot be forgotten</h3><p>An HTTP library put the request URL in its error message, so a scraping-service token reached the logs. My earlier scrubbing function worked only where called, and there are over 50 callers. I moved the scrubbing to the single exit every log passes through.</p>
-      <div class="tags"><span class="tag">Toreca Dash</span></div></div>
-    </a></li>
-    <li class="rv" data-delay="560"><a class="note-row" href="/en/notes/vps-migration/" hreflang="en" lang="en">
-      <time datetime="2026-10-17">2026.10.17</time>
-      <div><h3>Moving from Cloud Functions to a ¥4,300 server: ¥3,700 a day, Yahoo! failing in the EEA, and five traps</h3><p>After the free trial, Cloud Functions cost about ¥3,700 a day because waiting time was billed. I moved almost unchanged code to a Singapore VPS (about ¥4,300 a month). Helsinki failed because Yahoo! blocks the EEA; there were 15 secrets, not 5.</p>
-      <div class="tags"><span class="tag">Toreca Dash</span></div></div>
-    </a></li>
-    <li class="rv" data-delay="560"><a class="note-row" href="/en/notes/destination-check/" hreflang="en" lang="en">
-      <time datetime="2026-10-17">2026.10.17</time>
-      <div><h3>I opened the links of displayed articles and compared them: about 60 mistakes, and three mistakes in my own first check</h3><p>Opening more than 1,000 destination pages and comparing with the articles: Amazon invitation requests shown as first-come, closed or sold-out items displayed, links to other stores or products, application links redirecting to a site’s top page. My first check was wrong in three ways too.</p>
-      <div class="tags"><span class="tag">Toreca Dash</span></div></div>
-    </a></li>
-    <li class="rv" data-delay="560"><a class="note-row" href="/en/notes/audit-sweep-61/" hreflang="en" lang="en">
-      <time datetime="2026-10-17">2026.10.17</time>
-      <div><h3>Four things from a full sweep of 61 audits: 51 jobs clumped at 4 a.m., a lock that expired in 55 seconds, and a price-filling idea I decided not to add</h3><p>Once-a-day jobs clumped at 27 at 4 o’clock and 24 at 5; a Rakuten patrol took 181–480 s per run with a 55-second lock; I stopped counting anomalies that cannot be fixed; and I measured a way to fill official prices from one store but did not add it.</p>
-      <div class="tags"><span class="tag">Toreca Dash</span></div></div>
-    </a></li>
-    <li class="rv" data-delay="560"><a class="note-row" href="/en/notes/coverage-check/" hreflang="en" lang="en">
-      <time datetime="2026-10-17">2026.10.17</time>
-      <div><h3>Comparing with other sites to count gaps: the first “23% coverage” was a measuring mistake and the truth was 49%</h3><p>Counting whether I show lotteries other sites list: the first 23% was distorted by product-name spelling and expired articles. After fixing it, 49%; after fixing five gap-filling problems, 90%. Sites whose terms prohibit automated fetching were not imported.</p>
-      <div class="tags"><span class="tag">Toreca Dash</span></div></div>
-    </a></li>
-    <li class="rv" data-delay="560"><a class="note-row" href="/en/notes/x-monitoring-gaps/" hreflang="en" lang="en">
-      <time datetime="2026-10-17">2026.10.17</time>
-      <div><h3>Four gaps in monitoring X: posts missing from search, accounts that change hands, a store-finding query, and catching up after an outage</h3><p>Four stores’ lottery posts did not appear in search even after 751 posts; a registered store had become a person; store-finding found 11 of 63; and after a 6-day outage only 185 of 2,866 were read in 2 hours. Fixes and cost estimates.</p>
-      <div class="tags"><span class="tag">Toreca Dash</span></div></div>
-    </a></li>
-    <li class="rv" data-delay="560"><a class="note-row" href="/en/notes/hot-lane/" hreflang="en" lang="en">
-      <time datetime="2026-10-17">2026.10.17</time>
-      <div><h3>When you cannot watch everything quickly: popular 128 of 427 sets run fast, and the fastest lane yields to the budget</h3><p>Full laps over 427 sets took 4 to 24 hours. A separate lane for 128 popular sets and truly once-a-minute checks for popular items; batching stopped another monitor and measuring over a short window misjudged cost.</p>
-      <div class="tags"><span class="tag">Toreca Dash</span></div></div>
-    </a></li>
-    <li class="rv" data-delay="560"><a class="note-row" href="/en/notes/fix-the-existing-data/" hreflang="en" lang="en">
-      <time datetime="2026-10-17">2026.10.17</time>
-      <div><h3>Fixing a gate does not fix existing data: a “tried already” mark, a URL marker and a lookup table</h3><p>After fixing a judgement, 12 of 32 existing articles stayed wrong (the skip mark lasts 7 days); a marker stored in the URL was lost on link rewrite and 111 articles were split again; removing a table key left written values. Five reports had one shape.</p>
-      <div class="tags"><span class="tag">Toreca Dash</span></div></div>
-    </a></li>
-    <li class="rv" data-delay="560"><a class="note-row" href="/en/notes/genre-from-catalog/" hreflang="en" lang="en">
-      <time datetime="2026-10-17">2026.10.17</time>
-      <div><h3>Fixing product genre from the official catalogue: three dry runs took 13 changes down to 4</h3><p>A Duel Masters product was registered as Pokémon. Making the official catalogue the source of truth, my first dry run would have moved nine correct Weiss Schwarz products to another game; after three dry runs there were 0 misfires.</p>
-      <div class="tags"><span class="tag">Toreca Dash</span></div></div>
-    </a></li>
-    <li class="rv" data-delay="560"><a class="note-row" href="/en/notes/catalog-seed-393/" hreflang="en" lang="en">
-      <time datetime="2026-10-17">2026.10.17</time>
-      <div><h3>393 “work-name-only” products from an official list: the name field did not contain the product form</h3><p>An official-list import created 502 products in one day (usually 1–10). The name field held only the work name; the form was in the category. Cleaning 393 and re-registering 328 correct names took alias collisions from 0 pairs to 250.</p>
-      <div class="tags"><span class="tag">Toreca Dash</span></div></div>
-    </a></li>
-    <li class="rv" data-delay="560"><a class="note-row" href="/en/notes/negaeri-online/" hreflang="en" lang="en">
+    <li class="rv" data-delay="420"><a class="note-row" href="/en/notes/negaeri-online/" hreflang="en" lang="en">
       <time datetime="2026-10-17">2026.10.17</time>
       <div><h3>Online play that trusts nothing the client says: the server decides moves, clocks and results</h3><p>Online play without login. Moves are validated by the rules engine, the clock lives only on the server, a disconnect gets 30 seconds, tokens are signed with HMAC, and ratings use pre-match numbers. With real values from the server code.</p>
       <div class="tags"><span class="tag">Negaeri Shogi</span></div></div>
     </a></li>
-    <li class="rv" data-delay="560"><a class="note-row" href="/en/notes/same-page-not-same-store/" hreflang="en" lang="en">
-      <time datetime="2026-10-17">2026.10.17</time>
-      <div><h3>“The same application page” does not mean “the same store”: 52 articles showed another store’s name</h3><p>A job that unified store names across articles sharing an application page turned a Sendai store into “Shinjuku South Exit”. One page was shared by 15 separate stores. I changed it to unify only when confirmed the same place and restored 52 articles from an untouched field.</p>
-      <div class="tags"><span class="tag">Toreca Dash</span></div></div>
-    </a></li>
-    <li class="rv" data-delay="560"><a class="note-row" href="/en/notes/waiting-room/" hreflang="en" lang="en">
-      <time datetime="2026-10-17">2026.10.17</time>
-      <div><h3>When first-come sales start, the site becomes a waiting-room page: a 15 KB notice slipped through an 8,000-byte gate</h3><p>On AEON Style Online, a first-come sale turned the whole site into a 15 KB “heavy access” page. It passed the 8,000-byte check added earlier that day and was read as “success, 0 products”. I switched to a title check; Amazon’s 13 minutes were serial AI screening.</p>
-      <div class="tags"><span class="tag">Toreca Dash</span></div></div>
-    </a></li>
-    <li class="rv" data-delay="560"><a class="note-row" href="/en/notes/concurrency-slots/" hreflang="en" lang="en">
-      <time datetime="2026-10-17">2026.10.17</time>
-      <div><h3>Before widening concurrency slots: widening a 2-core server from 8 to 14, and the earlier conclusion that was half wrong</h3><p>Shortening intervals made the 1-minute first-come monitor wait for a slot. I widened slots from 8 to 11 and 14 and measured. The real cap was not CPU but jobs sleeping on Rakuten API’s 1.5-second wait while holding slots.</p>
-      <div class="tags"><span class="tag">Toreca Dash</span></div></div>
-    </a></li>
-    <li class="rv" data-delay="560"><a class="note-row" href="/en/notes/split-mixups/" hreflang="en" lang="en">
-      <time datetime="2026-10-17">2026.10.17</time>
-      <div><h3>Three mix-ups in splitting one article into products: a child treated as a parent, a shared link pointing to another store, a name owned by two products</h3><p>Reprocessing a split “child” hid 60 lotteries closing that day (23 stores); a link-only lookup shared by 13 stores picked another store’s parent; names claimed by two products numbered 267 pairs. Real items vanished with nothing on screen.</p>
-      <div class="tags"><span class="tag">Toreca Dash</span></div></div>
-    </a></li>
-    <li class="rv" data-delay="560"><a class="note-row" href="/en/notes/self-inflicted/" hreflang="en" lang="en">
-      <time datetime="2026-10-17">2026.10.17</time>
-      <div><h3>Four times my own tools hurt me: a summary dropped conditions, one undefined stopped saving, a check locked out production, alerts that never cleared</h3><p>A “15 characters” prompt dropped entry conditions in 671 checked lotteries; one undefined broke every save and burned 41% of a day’s credits; six parallel requests got the production IP blocked; I made alerts that kept ringing after the fix.</p>
-      <div class="tags"><span class="tag">Toreca Dash</span></div></div>
-    </a></li>
-    <li class="rv" data-delay="560"><a class="note-row" href="/en/notes/rerun-on-deploy/" hreflang="en" lang="en">
-      <time datetime="2026-10-17">2026.10.17</time>
-      <div><h3>Every deploy re-ran the daily jobs: 477 runs in 48 hours, 46.6% of that day’s Gemini cost</h3><p>A once-a-day job ran 43 times and used 46.6% of a day’s Gemini cost. Timed-out runs never wrote their last-run time, so every restart treated them as missed. A deploy at 08:00 also swallowed the digest.</p>
-      <div class="tags"><span class="tag">Toreca Dash</span></div></div>
-    </a></li>
-    <li class="rv" data-delay="560"><a class="note-row" href="/en/notes/notify-gate/" hreflang="en" lang="en">
-      <time datetime="2026-10-17">2026.10.17</time>
-      <div><h3>Notifications cannot be recalled: 19% of the last 72 hours’ notifications were wrong, and the gate worked after the fact</h3><p>Of 644 notifications in 72 hours, 122 (19%) were wrong. The article gate hides articles later, but a notification goes out about 0.6 seconds after saving; 25 of 30 hidden articles had already been pushed. I put the same gate at the notification entrance.</p>
-      <div class="tags"><span class="tag">Toreca Dash</span></div></div>
-    </a></li>
-    <li class="rv" data-delay="560"><a class="note-row" href="/en/notes/interval-vs-delivery/" hreflang="en" lang="en">
-      <time datetime="2026-10-17">2026.10.17</time>
-      <div><h3>A “1-minute” monitor checked each item once per 10 minutes: before speeding up, count the revisit interval and what was delivered</h3><p>A first-come monitor watched 63 items but checked 4–9 per run, so each item once per 10 minutes, and caught 3 sales in 7 days. Shortening other intervals slowed it further, and “not screened” meant 45% of first-come listings got no notification.</p>
-      <div class="tags"><span class="tag">Toreca Dash</span></div></div>
-    </a></li>
-    <li class="rv" data-delay="560"><a class="note-row" href="/en/notes/silent-discard/" hreflang="en" lang="en">
-      <time datetime="2026-10-17">2026.10.17</time>
-      <div><h3>Four real lotteries silently thrown away: a regex, dates without a year, batched answers and null</h3><p>“x.com” matched “e-starbox.com” so application links were never used; a date with no year was read as 2020 so no Pokémon items were imported; batched answers got out of step; “cannot decide” was read as “none” and nearly hid 129 lotteries.</p>
-      <div class="tags"><span class="tag">Toreca Dash</span></div></div>
-    </a></li>
-    <li class="rv" data-delay="560"><a class="note-row" href="/en/notes/tco-relay/" hreflang="en" lang="en">
-      <time datetime="2026-10-17">2026.10.17</time>
-      <div><h3>“Checked” marks on articles that had never been read: the t.co relay page</h3><p>Opened with a browser User-Agent, t.co returned a relay page instead of redirecting. All 220 displayed articles were unread and 9 were closed forms. How I fixed it and how I removed the wrong “checked” marks.</p>
-      <div class="tags"><span class="tag">Toreca Dash</span></div></div>
-    </a></li>
-    <li class="rv" data-delay="560"><a class="note-row" href="/en/notes/gemini-meter/" hreflang="en" lang="en">
-      <time datetime="2026-10-17">2026.10.17</time>
-      <div><h3>Before cutting Gemini cost, I doubted the meter: price, breakdown and cache were all wrong, and the cache threshold changed when I re-measured</h3><p>The cost meter was broken in three places (prices under-reported 2.6×, 31 purposes merged, cache uncounted). The cache threshold was about 8,000 tokens in September and about 4,000 in October. Padding the prompt shifted 9% of answers.</p>
-      <div class="tags"><span class="tag">Toreca Dash</span></div></div>
-    </a></li>
-    <li class="rv" data-delay="560"><a class="note-row" href="/en/notes/firestore-91/" hreflang="en" lang="en">
-      <time datetime="2026-10-17">2026.10.17</time>
-      <div><h3>Firestore cost in yen: 91% of reads came from one place, and my first cache did not work</h3><p>Seen in yen for the first time, Firestore cost about ¥13,000 a month, close to Gemini. 91% of reads were a product list re-read for every post. A 60-second cache failed because 32 jobs ran at once; caching the pending promise fixed it.</p>
-      <div class="tags"><span class="tag">Toreca Dash</span></div></div>
-    </a></li>
-    <li class="rv" data-delay="560"><a class="note-row" href="/en/notes/negaeri-balance/" hreflang="en" lang="en">
+    <li class="rv" data-delay="490"><a class="note-row" href="/en/notes/negaeri-balance/" hreflang="en" lang="en">
       <time datetime="2026-10-17">2026.10.17</time>
       <div><h3>Setting the rules of Negaeri Shogi by playing AI against AI: one change that worked, six that broke</h3><p>A 6×6 board game where sandwiched pieces defect. Instead of guessing the numbers, I ran 40 to 100 AI-vs-AI games per rule. Flips per move went from 2% to 81%, removing the king guard ended games in 17 moves, and the first-move edge is still unsolved.</p>
       <div class="tags"><span class="tag">Negaeri Shogi</span></div></div>
+    </a></li>
+    <li class="rv" data-delay="560"><a class="note-row" href="/en/notes/tcg-store-matching/" hreflang="en" lang="en">
+      <time datetime="2026-10-17">2026.10.17</time>
+      <div><h3>Four store-matching mistakes in a TCG lottery app: spelling variants, vague map lookups, shared entry pages, and one page with many products</h3><p>Four real cases where matching store names went wrong in a trading-card lottery app: spelling variants, a map lookup that returned Shizuoka, one entry page used by different stores, and one form for six products.</p>
+      <div class="tags"><span class="tag">Toreca Dash</span></div></div>
+    </a></li>
+    <li class="rv" data-delay="560"><a class="note-row" href="/en/notes/crawl-monitoring/" hreflang="en" lang="en">
+      <time datetime="2026-10-17">2026.10.17</time>
+      <div><h3>Seven records of cutting misses in crawling and monitoring: pagination, X monitoring, measuring coverage and waiting rooms</h3><p>Seven records of counting and cutting misses while crawling and monitoring lottery and first-come sales: aggregator pagination, gaps in X monitoring, how coverage was measured, intervals vs delivery, and waiting-room pages.</p>
+      <div class="tags"><span class="tag">Toreca Dash</span></div></div>
+    </a></li>
+    <li class="rv" data-delay="560"><a class="note-row" href="/en/notes/scheduled-jobs/" hreflang="en" lang="en">
+      <time datetime="2026-10-17">2026.10.17</time>
+      <div><h3>Nine things that happened running scheduled jobs and a server: timeouts, time budgets, re-runs on deploy and a VPS migration</h3><p>Nine records from the jobs that run hourly and daily, and the server under them: moving from Cloud Functions to a VPS, a timeout fixed three times, checks that never ran, re-runs on every deploy, and secrets in logs.</p>
+      <div class="tags"><span class="tag">Toreca Dash</span></div></div>
     </a></li>
     <li class="rv" data-delay="560"><a class="note-row" href="/en/notes/card-supplies-guide/" hreflang="en" lang="en">
       <time datetime="2026-10-16">2026.10.16</time>
@@ -376,11 +163,6 @@
     <li class="rv" data-delay="560"><a class="note-row" href="/en/notes/itms-91064/" hreflang="en" lang="en">
       <time datetime="2026-10-08">2026.10.08</time>
       <div><h3>ITMS-91064 “Invalid Binary”: NSPrivacyTracking was true but NSPrivacyTrackingDomains was empty</h3><p>An iOS build was rejected by Apple's automated review with ITMS-91064. NSPrivacyTracking was true while NSPrivacyTrackingDomains was an empty array. How it was fixed, and what was not verified.</p>
-      <div class="tags"><span class="tag">Toreca Dash</span></div></div>
-    </a></li>
-    <li class="rv" data-delay="560"><a class="note-row" href="/en/notes/review-info-needed/" hreflang="en" lang="en">
-      <time datetime="2026-10-08">2026.10.08</time>
-      <div><h3>App Store review sent “Guideline 2.1 Information Needed”: the six things Apple asked for</h3><p>My first App Store submission got a request for more information (Guideline 2.1), not a rejection. The six things Apple asked for and how they connect to earlier fixes.</p>
       <div class="tags"><span class="tag">Toreca Dash</span></div></div>
     </a></li>
     <li class="rv" data-delay="560"><a class="note-row" href="/en/notes/xcode152-sdk/" hreflang="en" lang="en">
@@ -408,11 +190,6 @@
       <div><h3>A canvas becomes twice as large on Retina: inset:0 does not stretch it (a bug in a logo that bursts when you tap it)</h3><p>Burst particles appeared in the wrong place on high-DPI screens. A canvas with only inset:0 keeps its pixel size, so it was 2x larger in CSS on Retina.</p>
       <div class="tags"><span class="tag">This site</span></div></div>
     </a></li>
-    <li class="rv" data-delay="560"><a class="note-row" href="/en/notes/dup-zero/" hreflang="en" lang="en">
-      <time datetime="2026-10-08">2026.10.08</time>
-      <div><h3>I counted “duplicates are practically zero,” but the audit reported 112 pairs</h3><p>A nightly merge job timed out partway through the first genre, so later genres were never reached. My count of zero saw only that genre. Fixed with a rotating budget.</p>
-      <div class="tags"><span class="tag">Toreca Dash</span></div></div>
-    </a></li>
     <li class="rv" data-delay="560"><a class="note-row" href="/en/notes/stopwatch-rank/" hreflang="en" lang="en">
       <time datetime="2026-10-08">2026.10.08</time>
       <div><h3>Making a 10-second stopwatch ranking fair: 3 decimals, ties and write counts</h3><p>Why I truncate to three decimals so coarse clocks get no advantage, how ties (a 1/333 chance) are broken, and how I counted KV writes on the free tier.</p>
@@ -437,21 +214,6 @@
       <time datetime="2026-10-08">2026.10.08</time>
       <div><h3>Cutting six buttons to one: first-time players did not know what to press</h3><p>A browser game title screen had six things to press. I made the first step one button, and fixed saves vanishing inside an iframe and play continuing in a hidden tab.</p>
       <div class="tags"><span class="tag">Sushi Stack</span></div></div>
-    </a></li>
-    <li class="rv" data-delay="560"><a class="note-row" href="/en/notes/typo-catalog/" hreflang="en" lang="en">
-      <time datetime="2026-10-08">2026.10.08</time>
-      <div><h3>A typo born once multiplied across shops: the “30th SEREBRATION” incident</h3><p>A misspelled product created once was reused as an existing product for every shop. Fixing 13 articles, exact-match prevention, and the limits of a safety net.</p>
-      <div class="tags"><span class="tag">Toreca Dash</span></div></div>
-    </a></li>
-    <li class="rv" data-delay="560"><a class="note-row" href="/en/notes/torecadash-9set/" hreflang="en" lang="en">
-      <time datetime="2026-10-08">2026.10.08</time>
-      <div><h3>The “9-pack set” was nine different products: the same product that never matched</h3><p>Matching my app against roundup sites showed 54% of lotteries displayed: a product mix-up, an asymmetric name key and an article ID that blocked new rounds.</p>
-      <div class="tags"><span class="tag">Toreca Dash</span></div></div>
-    </a></li>
-    <li class="rv" data-delay="560"><a class="note-row" href="/en/notes/fake-products/" hreflang="en" lang="en">
-      <time datetime="2026-10-08">2026.10.08</time>
-      <div><h3>Splitting a “9-pack set” by contents created 80 fake products</h3><p>One real product was split by its contents, creating 80 products that do not exist. Stopping the entry, restoring 22 parents, detaching 190 children and an audit.</p>
-      <div class="tags"><span class="tag">Toreca Dash</span></div></div>
     </a></li>
     <li class="rv" data-delay="560"><a class="note-row" href="/en/notes/qiita-post-interval/" hreflang="en" lang="en">
       <time datetime="2026-10-08">2026.10.08</time>
@@ -493,21 +255,6 @@
       <div><h3>Claude API vs Gemini API by official numbers: small-model prices, web search, spend limits and deprecation</h3><p>Claude and Gemini API compared by official pages (Oct 2026): small-model prices, web search cost and caps, spend limits, deprecation notice.</p>
       <div class="tags"><span class="tag">Comparisons</span></div></div>
     </a></li>
-    <li class="rv" data-delay="560"><a class="note-row" href="/en/notes/gemini-migration/" hreflang="en" lang="en">
-      <time datetime="2026-10-08">2026.10.08</time>
-      <div><h3>Migrating from the Claude API to the Gemini API (gemini-3.1-flash-lite): 16 call sites into one function</h3><p>Moving an iOS app backend from Claude Haiku 4.5 to Gemini 3.1 Flash-Lite: choosing by deprecation date, one wrapper, a search cap breaker, a kill switch.</p>
-      <div class="tags"><span class="tag">Toreca Dash</span></div></div>
-    </a></li>
-    <li class="rv" data-delay="560"><a class="note-row" href="/en/notes/fail-open/" hreflang="en" lang="en">
-      <time datetime="2026-10-08">2026.10.08</time>
-      <div><h3>It let things through when it could not check: how “fail-open” brought in resale items</h3><p>A gate that let items pass when the list price could not be confirmed had a blind spot: a daily search cap. Telling “did not know” from “could not look.”</p>
-      <div class="tags"><span class="tag">Toreca Dash</span></div></div>
-    </a></li>
-    <li class="rv" data-delay="560"><a class="note-row" href="/en/notes/blocked-page/" hreflang="en" lang="en">
-      <time datetime="2026-10-08">2026.10.08</time>
-      <div><h3>What I read as “fetched” was just a notice page: three days of zero products</h3><p>A scraper returned zero products for three days because a 2,410-byte “enable JavaScript” page counted as success. How I centralized the check.</p>
-      <div class="tags"><span class="tag">Toreca Dash</span></div></div>
-    </a></li>
     <li class="rv" data-delay="560"><a class="note-row" href="/en/notes/webaudio/" hreflang="en" lang="en">
       <time datetime="2026-10-08">2026.10.08</time>
       <div><h3>I could not listen, so I measured the waveform: building Japanese instruments with WebAudio for Sushi Stack</h3><p>A browser game with no audio files: koto, taiko and gong synthesized with WebAudio. I could not listen, so I set volume by measuring waveform peaks.</p>
@@ -518,30 +265,30 @@
       <div><h3>Making a ranking server use only half of the free tier: from 5 calls to 2</h3><p>A game ranking on Workers and D1: calls per play from 5 to 2, rows read from 421 to 221. Server-side rank counting and removing the preflight call.</p>
       <div class="tags"><span class="tag">Sushi Stack</span></div></div>
     </a></li>
-    <li class="rv" data-delay="560"><a class="note-row" href="/en/notes/torecadash-review/" hreflang="en" lang="en">
+    <li class="rv" data-delay="560"><a class="note-row" href="/en/notes/tcg-product-matching/" hreflang="en" lang="en">
       <time datetime="2026-10-08">2026.10.08</time>
-      <div><h3>Four things that stopped my iOS app before App Review: iPad screenshots, ITMS-91064, account deletion, reporting posts</h3><p>Before submitting an iOS app, four things stopped me: iPad screenshots, ITMS-91064, account deletion (5.1.1(v)) and user-content reporting (1.2), and how I fixed each.</p>
+      <div><h3>Eight product-matching failures in a TCG lottery app: English vs katakana, splitting sets, official catalogs and spreading typos</h3><p>Eight real failures in matching trading-card lottery articles to products: English vs katakana names, splitting 9-pack sets, products seeded from official catalogs, spreading typos, and leaked values.</p>
       <div class="tags"><span class="tag">Toreca Dash</span></div></div>
     </a></li>
-    <li class="rv" data-delay="560"><a class="note-row" href="/en/notes/scrape-cost/" hreflang="en" lang="en">
+    <li class="rv" data-delay="560"><a class="note-row" href="/en/notes/silent-failures/" hreflang="en" lang="en">
       <time datetime="2026-10-08">2026.10.08</time>
-      <div><h3>I re-measured a “nothing can be done” assumption and scraping cost dropped to one eighth</h3><p>I believed two sites could not be fetched more often because of cost. Comparing three Scrape.do settings showed rendering was wasted: 3x faster, 1/8 the credits.</p>
+      <div><h3>Seven silent failures: real lotteries discarded, pages never read, and errors swallowed without a trace</h3><p>Seven real cases where nothing raised an error yet real data was being dropped or never read: regexes, dates without a year, truncated AI answers, t.co relays, notice pages, swallowed try? failures, and fail-open.</p>
       <div class="tags"><span class="tag">Toreca Dash</span></div></div>
     </a></li>
-    <li class="rv" data-delay="560"><a class="note-row" href="/en/notes/bulk-accident/" hreflang="en" lang="en">
+    <li class="rv" data-delay="560"><a class="note-row" href="/en/notes/data-repair/" hreflang="en" lang="en">
       <time datetime="2026-10-08">2026.10.08</time>
-      <div><h3>A bulk update hit “all articles”: count before you write, and break your tests to prove they work</h3><p>A bulk job hit every article and wrongly restored 18 items. How I reverted them from status history and proved new tests work by breaking rules one at a time.</p>
+      <div><h3>Seven lessons from repairing bad data: existing records, bulk-job accidents, counting duplicates and the notification gate</h3><p>Seven real lessons from repairing bad data: fixing the gate does not fix existing data, cleanup can hide entry bugs, a bulk job that hit everything, how duplicates were counted, and notifications that cannot be undone.</p>
+      <div class="tags"><span class="tag">Toreca Dash</span></div></div>
+    </a></li>
+    <li class="rv" data-delay="560"><a class="note-row" href="/en/notes/app-store-review/" hreflang="en" lang="en">
+      <time datetime="2026-10-08">2026.10.08</time>
+      <div><h3>Where App Store review stopped me: “Guideline 2.1 Information Needed” on the first submission, and four rejections</h3><p>Records of an indie iOS app stuck in App Store review: the six items asked for in Guideline 2.1 Information Needed on the first submission, and four rejections including iPad screenshots.</p>
       <div class="tags"><span class="tag">Toreca Dash</span></div></div>
     </a></li>
     <li class="rv" data-delay="560"><a class="note-row" href="/en/notes/u2028/" hreflang="en" lang="en">
       <time datetime="2026-10-07">2026.10.07</time>
       <div><h3>Python splitlines() breaks JSONL: the culprit was U+2028, an invisible line separator</h3><p>Python splitlines() broke a JSONL file because 2 of 7,247 records contained U+2028 (LINE SEPARATOR). Why it happens and the one-line fix: split on the newline only.</p>
       <div class="tags"><span class="tag">Anime Type Quiz</span></div></div>
-    </a></li>
-    <li class="rv" data-delay="560"><a class="note-row" href="/en/notes/torecadash-ai/" hreflang="en" lang="en">
-      <time datetime="2026-10-07">2026.10.07</time>
-      <div><h3>“It should shrink” was wrong twice: cutting AI calls and what I measured afterward</h3><p>Reducing calls to an AI in a trading-card app: a predicted 45% cut was 4.5%, and batching ran zero times after deploy. What I found by recounting, with numbers.</p>
-      <div class="tags"><span class="tag">Toreca Dash</span></div></div>
     </a></li>
     <li class="rv" data-delay="560"><a class="note-row" href="/en/notes/shindan12/" hreflang="en" lang="en">
       <time datetime="2026-10-07">2026.10.07</time>
@@ -557,6 +304,11 @@
       <time datetime="2026-10-07">2026.10.07</time>
       <div><h3>Measuring the gap between ads in time, not in plays</h3><p>Why I replaced “one ad every 5 plays” with “7 minutes since the last ad” in a browser game, how it behaves, and what I still do not know.</p>
       <div class="tags"><span class="tag">Sushi Stack</span></div></div>
+    </a></li>
+    <li class="rv" data-delay="560"><a class="note-row" href="/en/notes/ai-cost-cutting/" hreflang="en" lang="en">
+      <time datetime="2026-10-07">2026.10.07</time>
+      <div><h3>Five records of measuring, then cutting, AI and Firestore costs: a broken Gemini meter, 91% of reads in one place, and crawl costs</h3><p>Five records of cutting AI (Claude, Gemini), Firestore and crawling costs in an indie app: doubting the meter first, converting to yen, and counting where the money actually went.</p>
+      <div class="tags"><span class="tag">Toreca Dash</span></div></div>
     </a></li>
     <li class="rv" data-delay="560"><a class="note-row" href="/en/notes/anago/" hreflang="en" lang="en">
       <time datetime="2026-09-07">2026.09.07</time>

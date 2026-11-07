@@ -1,0 +1,358 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AI と Firestore の費用を測り直して削った5つの記録｜Gemini・Claude — Koshin Studio</title>
+<meta name="description" content="個人開発のアプリで、AI（Claude・Gemini）と Firestore、取得の費用を削った5つの記録。削る前に計器を疑い、円で出して、どこに使われているかを数えた。">
+<meta property="og:title" content="AI と Firestore の費用を、測り直して削った5つの記録：Gemini の計器・読み取りの91%・取得の費用">
+<meta property="og:description" content="個人開発のアプリで、AI（Claude・Gemini）と Firestore、取得の費用を削った5つの記録。削る前に計器を疑い、円で出して、どこに使われているかを数えた。">
+<meta property="og:type" content="article">
+<meta name="theme-color" content="#fbfaf7">
+<link rel="icon" href="/favicon.ico?v=1697d589" sizes="48x48">
+<link rel="icon" href="/favicon.svg?v=b9d7922f" type="image/svg+xml" sizes="any">
+<link rel="icon" href="/assets/icon/icon-192.png?v=e2566235" type="image/png" sizes="192x192">
+<link rel="apple-touch-icon" href="/assets/icon/icon-180.png?v=84e7f0e6">
+<link rel="manifest" href="/site.webmanifest">
+<script>document.documentElement.className+=" js"</script>
+<link rel="stylesheet" href="/style.css?v=3d886c33">
+<meta name="google-adsense-account" content="ca-pub-3863314847163872">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3863314847163872" crossorigin="anonymous"></script>
+<link rel="canonical" href="https://koshinstudio.com/notes/ai-cost-cutting/">
+<meta property="og:url" content="https://koshinstudio.com/notes/ai-cost-cutting/">
+<meta property="og:site_name" content="Koshin Studio">
+<meta property="og:locale" content="ja_JP">
+<link rel="alternate" hreflang="ja" href="https://koshinstudio.com/notes/ai-cost-cutting/">
+<link rel="alternate" hreflang="en" href="https://koshinstudio.com/en/notes/ai-cost-cutting/">
+<link rel="alternate" hreflang="x-default" href="https://koshinstudio.com/en/notes/ai-cost-cutting/">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="alternate" type="application/rss+xml" title="Koshin Studio — Notes" href="https://koshinstudio.com/feed.xml">
+<link rel="alternate" type="text/markdown" href="https://koshinstudio.com/notes/ai-cost-cutting/index.md">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BlogPosting","headline":"AI と Firestore の費用を、測り直して削った5つの記録：Gemini の計器・読み取りの91%・取得の費用","url":"https://koshinstudio.com/notes/ai-cost-cutting/","description":"個人開発のアプリで、AI（Claude・Gemini）と Firestore、取得の費用を削った5つの記録。削る前に計器を疑い、円で出して、どこに使われているかを数えた。","datePublished":"2026-10-07","dateModified":"2026-11-07","inLanguage":"ja","image":"https://koshinstudio.com/assets/og/og_notes_ai-cost-cutting.jpg","author":{"@id":"https://koshinstudio.com#koshin"},"publisher":{"@id":"https://koshinstudio.com#studio"},"mainEntityOfPage":"https://koshinstudio.com/notes/ai-cost-cutting/","workTranslation":{"@type":"BlogPosting","url":"https://koshinstudio.com/en/notes/ai-cost-cutting/","inLanguage":"en"}},{"@type":"Person","@id":"https://koshinstudio.com#koshin","name":"Koshin","jobTitle":"Webエンジニア・アプリエンジニア","url":"https://koshinstudio.com/about/","worksFor":{"@id":"https://koshinstudio.com#studio"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Koshin Studio","item":"https://koshinstudio.com/"},{"@type":"ListItem","position":2,"name":"Notes","item":"https://koshinstudio.com/notes/"},{"@type":"ListItem","position":3,"name":"AI と Firestore の費用を、測り直して削った5つの記録：Gemini の計器・読み取りの91%・取得の費用","item":"https://koshinstudio.com/notes/ai-cost-cutting/"}]}]}</script>
+<meta property="og:image" content="https://koshinstudio.com/assets/og/og_notes_ai-cost-cutting.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
+</head>
+<body class="article">
+<canvas id="motes"></canvas>
+
+<header class="site"><div class="wrap">
+  <a class="logo" href="/"><img class="logo-mark" src="/favicon.svg?v=b9d7922f" alt="" width="28" height="28">Koshin Studio</a>
+  <nav><a href="/works/">Works</a><a href="/works/#game">Games</a><a href="/notes/">Notes</a><a href="/picks/">Picks</a><a href="/calc/">Tools</a><a href="/about/">About</a></nav>
+</div></header>
+
+<main><div class="wrap">
+  <nav class="crumbs" aria-label="現在地"><a href="/">Koshin Studio</a><i aria-hidden="true">›</i><a href="/notes/">Notes</a><i aria-hidden="true">›</i><span aria-current="page">AI と Firestore の費用を、測り直して削った5つの記録：Gemini の計器・読み取りの91%・取得の費用</span></nav>
+  <h1>AI と Firestore の費用を、測り直して削った5つの記録：Gemini の計器・読み取りの91%・取得の費用</h1>
+  <div class="rule"></div>
+<!--lang-->
+  <p class="note"><a href="/en/notes/ai-cost-cutting/" hreflang="en" lang="en">English version</a></p>
+<!--/lang--><!--byline--><p class="note byline">書いた人：<a href="/about/#operator">Koshin</a>（Web エンジニア・アプリエンジニア）　公開：2026-10-07</p><!--/byline--><p class="lead">トレカダッシュ 開発の記録 ／ 5 件のまとめ</p>
+  <p>個人で作るアプリにとって、毎月の費用は死活問題です。トレカダッシュでは、AI の問い合わせ、データベースの読み取り、ページの取得に、お金がかかります。ここには、<strong>削る前に測り直した</strong> 5 つの記録をまとめました。「減るはず」が外れた話も、そのまま書いています。</p>
+  <p class="note">それぞれの節は、もとは別々に公開していた記録です（2026 年 10 月から）。数字と出典は、その時の作業の記録のままです。テーマごとに読めるよう、1 つの記事にまとめ直しました（2026 年 11 月 7 日）。</p>
+<!--toc-->
+  <nav class="toc" aria-label="目次"><p>目次</p><ol><li><a href="#s1">Claude API から Gemini API（gemini-3.1-flash-lite）へ移行した：16 か所の呼び出しを 1 つの関数にまとめた</a></li><li><a href="#s2">「減るはず」が、二度外れた：AIへの問い合わせを削る話</a></li><li><a href="#s3">「しょうがない」を測り直したら、取得の費用は8分の1だった</a></li><li><a href="#s4">Firestore の費用を円で出したら、読み取りの 91% が 1 か所だった：キャッシュを入れても効かなかった理由</a></li><li><a href="#s5">Gemini の費用を削る前に、計器を疑った：単価・内訳・キャッシュの 3 つが壊れていて、キャッシュの条件は測り直すと変わっていた</a></li><li><a href="#s6">それぞれの要点</a></li></ol></nav>
+<!--/toc-->
+  <h2 class="rv" id="s1">Claude API から Gemini API（gemini-3.1-flash-lite）へ移行した：16 か所の呼び出しを 1 つの関数にまとめた</h2>
+  <p class="note">2026 年 10 月 8 日の記録。</p>
+<p>iOS アプリ「トレカダッシュ」のサーバー側では、記事が「どの商品の話か」を判定するなどに、AI を使っています。2026 年 7 月 25 日に、この AI を、<strong>Anthropic の Claude（Haiku 4.5）から、Google の Gemini（<code>gemini-3.1-flash-lite</code>）へ、全面的に移行</strong>しました。何を決めて、どう一本化して、移行のあとに何を足したのか。開発の引き継ぎ記録で書きます。</p>
+  <p class="note">このサイトには、トレカダッシュの作品ページがあります（<a href="/works/torecadash/">トレカダッシュ</a>）。ここに書くのは、開発の記録です。料金の金額は書きません。</p>
+
+  <h3 class="rv" id="c1-s1">きっかけ</h3>
+  <p>移行の理由は、記録によると、<strong>Anthropic の API の利用上限に達して、予定外の課金が出た</strong>ためです。それ以降は、Gemini だけが稼働していて、Anthropic の SDK とキーは、コードからも、秘密の置き場所（Secret Manager）からも、消しました。7 月 30 日の点検で、コードの中に Anthropic の記述が 0 件であることを、確かめています。</p>
+
+  <h3 class="rv" id="c1-s2">モデルの選び方</h3>
+  <p>使うモデルは、<code>gemini-3.1-flash-lite</code> にしました。記録に、選ばなかったほうの理由も、残っています。</p>
+  <ul>
+    <li>より安い Gemini 2.5 Flash-Lite は、<strong>2026 年 10 月 16 日に廃止予定</strong>だったので、見送りました（記録による。2026 年 10 月 8 日に公式の廃止予定の一覧を見直したところ、この機種は「廃止日の告知なし」になっていました。当時の記載が後で変わったのかは、確かめられていません）。</li>
+    <li>選んだ <code>gemini-3.1-flash-lite</code> の廃止予定日は、2027 年 5 月 7 日。移行した時点（7 月 25 日）で、まだ約 9 か月半ありました。</li>
+  </ul>
+  <p>安さだけで選ぶと、すぐに廃止されて、また移行することになります。「いつ廃止されるか」も、選ぶ基準に入れました。</p>
+
+  <h3 class="rv" id="c1-s3">16 か所の呼び出しを、1 つの関数に</h3>
+  <p>AI を呼ぶ処理は、全部で 16 か所ありました（販売形式の判定、商品の照合、出品の発見など）。これらを、<code>functions/index.js</code> の冒頭にある、<strong>1 つの関数（<code>createGeminiInteraction</code>）</strong>を通すように、統一しました。中では、<code>@google/genai</code> の <code>client.interactions.create()</code> を呼んでいます。</p>
+  <p>呼び出し側は、元の Anthropic 形式に近い引数（<code>system_instruction</code>、<code>generation_config</code> の <code>max_output_tokens</code>、<code>input</code>）を、そのまま渡します。返ってくるのは、テキスト（<code>output_text</code>）です。<strong>呼び出し側を、ほとんど書き換えずに</strong>、中身だけを入れ替えられる形にしました。</p>
+
+  <h3 class="rv" id="c1-s4">Web 検索には、「回数の上限」の設定が無かった</h3>
+  <p>4 か所（出品の発見、販売元の発見、楽天ブックスの調査、定価の調査）では、AI に Web 検索をさせます。Gemini では、<code>tools: [{type: "google_search"}]</code>（Google 検索による裏付け）を使います。</p>
+  <p>ここに、落とし穴がありました。Anthropic の Web 検索の機能には、<code>max_uses</code>（検索の回数の上限）がありましたが、<strong>Gemini には、それに当たる設定が無く</strong>、モデルが、必要だと思う回数だけ、自分で検索します。記録には、こうあります。「この設定項目の不在自体が、想定外コストの原因になり得る」。</p>
+  <p>そこで、移行の翌日（7 月 26 日）に、<code>createGeminiInteraction</code> の中に、<strong>日次のカウンタによる回路遮断器</strong>を足しました（1 日 300 回まで）。上限に達したときは、呼び出し元に、エラーとして返します。価格の審査では、このエラーを、「定価が分からなかった」のとは区別して、除外する設計にしています（<a href="/notes/silent-failures/#s7">別の記事</a>に書きました）。</p>
+
+  <h3 class="rv" id="c1-s5">止めるためのスイッチ</h3>
+  <p>もう一つ、足したものがあります。<code>AI_CALLS_PAUSED</code> という、<strong>AI の呼び出し全体を、1 か所で止められるスイッチ</strong>です。記録には、7 月 25 日の反省が書いてあります。「呼び出しを止めたつもりが、実際には止まっておらず、10 分おきの自動処理が、エラーを出し続けた」。予算を超えそうなときは、まず、これを <code>true</code> にして、すぐに止める、と決めました。</p>
+
+  <h3 class="rv" id="c1-s6">新しい処理を足すときの注意</h3>
+  <p>AI を呼ぶ関数（Cloud Functions）には、<code>secrets: ["GEMINI_API_KEY"]</code> を、必ず付けます。忘れると、配備したあとに、権限のエラーで失敗します。</p>
+
+  <h3 class="rv" id="c1-s7">確認できていないこと</h3>
+  <p>この記事は、引き継ぎ記録の、AI に関する節から書きました。移行の前後で、判定の精度を比べた数字は、この記事の材料に含まれていません。ですので、「Gemini のほうが良い（悪い）」という評価は、ここでは、していません。</p>
+
+  <h3 class="rv" id="c1-s8">分かったこと</h3>
+  <blockquote>呼び出しを 1 か所に集めると、止める場所も、1 か所で済む。</blockquote>
+  <ul>
+    <li><strong>呼び出しは、1 つの関数を通す。</strong>移行も、上限の安全装置も、止めるスイッチも、その 1 か所に置けます。</li>
+    <li><strong>「設定が無い」ことを、リスクとして数える。</strong>回数の上限が無いサービスに乗り換えるときは、自分の側に上限を作ります。</li>
+    <li><strong>止めるスイッチは、実際に止まることを、確かめておく。</strong>止めたつもりで止まっていない、が、いちばん高くつきます。</li>
+  </ul>
+  <p class="note">この記事は、HANDOFF（AI API 関連情報、2026年7月25日・26日）の記録から書きました。</p>
+  <h2 class="rv" id="s2">「減るはず」が、二度外れた：AIへの問い合わせを削る話</h2>
+  <p class="note">2026 年 10 月 7 日の記録。</p>
+<p>iOS アプリ「トレカダッシュ」は、トレカ（ポケカ・遊戯王・ワンピース）の予約・抽選・先着販売の情報を集めて、通知するアプリです。集めた記事が「どの商品の話か」を決める処理に、AI（Gemini）を使っています。この AI への問い合わせを減らそうとして、<strong>「減るはず」と書いたものが、二度、外れました</strong>。コミットに残っている数字で、順に書きます。</p>
+  <p class="note">このサイトには、トレカダッシュの作品ページはまだありません。ここに書くのは、開発の記録です。</p>
+
+  <h3 class="rv" id="c2-s1">何をAIに聞いているのか</h3>
+  <p>記事の題名（たとえば「30th CELEBRATION プレミアムデッキセット エーフィ」）を、最近の商品の候補リスト（直近60件）と突き合わせて、<strong>どの商品なのかを AI に答えてもらう</strong>、という処理です。1回の問い合わせは約 3,083 トークンで、そのうち約 1,800 は、毎回同じ固定の説明文でした。</p>
+
+  <h3 class="rv" id="c2-s2">一つ目：題名が商品名そのものなら、聞かなくていい</h3>
+  <p>題名が、既知の商品名とそのまま一致するなら、AI に聞く必要はありません。この「短絡」を入れたところ、実データでは<strong>X の監視で 43%</strong>が当てはまりました。食い違い（短絡の答えが、AI の答えと違う）は 0 件です。そこで、これで<strong>約 45% 減る</strong>と記録しました。</p>
+  <p>ところが、配備して90分たっても、短絡は<strong>1回も発火しませんでした</strong>。数え直すと、こうでした。</p>
+  <div class="scroll rv"><table>
+    <tr><th>対象</th><th class="n">短絡できる件数</th><th class="n">元から無料だった</th><th class="n">新たに減る</th></tr>
+    <tr><td>X の監視</td><td class="n">813</td><td class="n">768</td><td class="n">45（2%）</td></tr>
+    <tr><td>その他</td><td class="n">419</td><td class="n">188</td><td class="n">231（32%）</td></tr>
+  </table></div>
+  <p>この処理の手前には、公式カタログと照らし合わせる、<strong>元から無料の経路</strong>がありました。短絡できる記事のほとんどは、そこで先に片付いていたのです。新たに減る分を足すと、<strong>1日に約39回、全体の約4.5%</strong>。45% ではなく、4.5% でした。</p>
+  <blockquote>その規則が当たる割合と、実際に減る呼び出しは、別物。</blockquote>
+  <p>手前に無料の経路があるなら、差し引きまで数えないといけない。コミットの教訓の欄には、そう書いてあります。処理自体は正しく安全だったので残しています。ただし、AI の削減としては小さいものでした。</p>
+
+  <h3 class="rv" id="c2-s3">二つ目：まとめて聞く</h3>
+  <p>次の本命は、<strong>複数の記事を1回の問い合わせにまとめる</strong>ことでした。固定の説明文が1回で済むからです。候補リストは、同じジャンルの記事なら「最近の60件」を共有するので、合併してもほとんど増えません。</p>
+  <p>設計では、二つのことに気をつけました。</p>
+  <ul>
+    <li><strong>待ち時間を入れない。</strong>実測では、数百ミリ秒の短い窓では、まとめられませんでした（同じ「秒」に来る記事は、24時間で12回だけ）。かといって、数分待つと、X 監視の巡回が5倍遅くなります。そこで、「まだ動いている記事が、全員、待ちに入った瞬間に送る」方式にしました。保険の上限は20秒です。</li>
+    <li><strong>精度を落とさない。</strong>まとめると、候補リストが全員ぶんの合併になり、他の記事の候補が見えてしまいます。そこで、答えは本物の商品IDで返してもらい、その記事自身の候補に含まれるかを、必ず検証します。候補外なら採用しません。返事が欠けた記事は、その記事だけ1件で聞き直します。</li>
+  </ul>
+  <p>効果は、直近2日の実際の記事で、候補リストを再現して測りました（送る文字数）。</p>
+  <div class="scroll rv"><table>
+    <tr><th>まとめる件数</th><th class="n">1件ずつ</th><th class="n">まとめて</th><th class="n">減り方</th></tr>
+    <tr><td>2件</td><td class="n">21,762字</td><td class="n">13,427字</td><td class="n">−38%</td></tr>
+    <tr><td>3件</td><td class="n">32,673字</td><td class="n">14,964字</td><td class="n">−54%</td></tr>
+    <tr><td>4件</td><td class="n">43,571字</td><td class="n">16,192字</td><td class="n">−63%</td></tr>
+    <tr><td>6件</td><td class="n">65,000字</td><td class="n">17,729字</td><td class="n">−73%</td></tr>
+  </table></div>
+
+  <h3 class="rv" id="c2-s4">三つ目：配備したのに、一度も束ねていなかった</h3>
+  <p>配備して6時間。商品照合は47回あり、<strong>束ねは0回</strong>でした。同じ分に2〜7件の呼び出しがあったのに、1件ずつ聞いていたのです。</p>
+  <p>原因は、「送る条件」でした。条件を「待っている数 ≧ まだ終わっていない処理の数（pending）」で見ていたのですが、<strong>待ちに入った処理も、pending に含まれていました</strong>。X の監視は32アカウントを同時に回します。先に31件が終わっていれば、pending は1。最後の1件が待ちに来た瞬間に、条件が成立して、<strong>1件のまま即送信</strong>されていました。</p>
+  <p>直し方は、「まだ待ちにも来ていない処理がゼロか」で見ること。完全に終わった数と、いま待っている数の合計が、全体に達したら送ります。あわせて、保険の上限を20秒から6秒に縮めました。1件しか来ない回で毎回20秒待つと、X 監視1回の実行（実測17.8秒）より長くなって、巡回が遅れるからです。</p>
+  <p>この確認のとき、一つ目の短絡も、見直されました。<strong>6時間で、47回中28回（60%）</strong>が、AI を呼ばずに済んでいました。短絡は、正しく効いていました。</p>
+
+  <h3 class="rv" id="c2-s5">分かったこと</h3>
+  <ul>
+    <li><strong>「当たる割合」を、削減量と書かない。</strong>手前に無料の経路があれば、減るのは差し引き分だけです。</li>
+    <li><strong>配備しただけでは、動いたことにならない。</strong>「束ね0回」は、数え直したから見つかりました。ログに「束ねた」と出るかを先に決めておけば、もっと早く気づけたはずです。</li>
+    <li>三つの数字（4.5%、−38〜73%、60%）は、どれも、<strong>最初に見積もった数字ではありません</strong>。配備したあとに、実データで測り直した数字です。</li>
+  </ul>
+  <p class="note">この記事の数字は、コミットの記録（2026年9月4日・5日）から取りました。料金の金額は書いていません。</p>
+  <h2 class="rv" id="s3">「しょうがない」を測り直したら、取得の費用は8分の1だった</h2>
+  <p class="note">2026 年 10 月 8 日の記録。</p>
+<p>iOS アプリ「トレカダッシュ」は、通販サイトなどの販売ページを定期的に見に行って、抽選や先着の情報を集めています。ページの取得は、外部のサービス（Scrape.do）を通して行っていて、<strong>取得の設定ごとに、使うクレジットが違います</strong>。あるサイトについて、「これはしょうがない」と思っていたことを、測り直したら、<strong>3 倍速く、使う量は 8 分の 1</strong>になりました。コミットの記録で書きます。</p>
+  <p class="note">このサイトには、トレカダッシュの作品ページはまだありません。ここに書くのは、開発の記録です。金額は書かず、クレジットの数だけを書きます。</p>
+
+  <h3 class="rv" id="c3-s1">「しょうがない」の理由は、費用だった</h3>
+  <p>イオンスタイルオンラインと、あみあみの 2 サイトは、取得の間隔を縮められない、と考えていました。理由は、取得にかかる費用が重いこと。つまり、<strong>古い単価を前提にした結論</strong>です。それを、もう一度、測ってみることにしました。</p>
+
+  <h3 class="rv" id="c3-s2">3 つの設定で、同じページを取った</h3>
+  <p>取得の設定は、3 段階あります。単純に取る（1 クレジット）、ブラウザで描画してから取る（render、5 クレジット）、さらに強力な経路で描画して取る（super＋render、25 クレジット）。イオンの一覧ページを、この 3 つで取って、中身を比べました。2 ページを、それぞれ 3 回、くり返しています。</p>
+  <div class="scroll rv"><table>
+    <tr><th>設定</th><th class="n">クレジット</th><th class="n">サイズ（バイト）</th><th class="n">商品</th><th class="n">価格</th></tr>
+    <tr><td>単純に取る</td><td class="n">1</td><td class="n">649,734</td><td class="n">20 件</td><td class="n">25 件</td></tr>
+    <tr><td>render</td><td class="n">5</td><td class="n">663,026</td><td class="n">20 件</td><td class="n">25 件</td></tr>
+    <tr><td>super＋render</td><td class="n">25</td><td class="n">669,510</td><td class="n">20 件</td><td class="n">25 件</td></tr>
+  </table></div>
+  <p>3 つとも、<strong>取れた商品も価格も、まったく同じ</strong>でした。つまり、描画（render）は、<strong>まるごと無駄</strong>だったことになります。1 クレジットで足りるものに、25 クレジット払っていました。</p>
+
+  <h3 class="rv" id="c3-s3">直し方</h3>
+  <ul>
+    <li><strong>安い設定から先に試す。</strong>イオンは、まず単純に取ります。先着の開始時に出る「アクセス集中」のページが返ってきたときだけ、自動で強い設定に切り替えます。</li>
+    <li><strong>間隔を、15 分から 5 分に。</strong>5 分おきは、1 日 288 回です。2 ページなので、576 クレジット。前は、1 日に約 4,600 クレジットでした（コミットの記載です）。<strong>3 倍速くなって、使う量は約 8 分の 1</strong>です。</li>
+    <li><strong>あみあみにも、同じ実測の結果を当てた。</strong>描画を外して、1 回あたり 5 クレジットから 1 クレジットに。1 日に約 1,200 クレジットの節約です。</li>
+  </ul>
+  <p>ただし、あみあみの<strong>間隔は、15 分のまま</strong>にしました。その日、タイムアウトを 2 回出していて、1 回の実行が 284 秒もかかっていたからです。取得全体も混み合ってきていたので、触らないと決めました。測ったのは「描画が要るか」で、「間隔を縮めても大丈夫か」ではありません。</p>
+
+  <h3 class="rv" id="c3-s4">分かったこと</h3>
+  <blockquote>「しょうがない」は、いつ測った数字に、もとづいているか。</blockquote>
+  <ul>
+    <li><strong>古い結論は、測り直す。</strong>単価も、設定も、サイトの作りも、変わります。「イオンはしょうがない」は、測ったら、そうではありませんでした。</li>
+    <li><strong>強い設定は、「念のため」で入れがち。</strong>必要かどうかは、結果を比べれば分かります。同じ結果が出るなら、安いほうで足ります。</li>
+    <li><strong>一つ直したら、他の条件も確かめる。</strong>同じ測定で、あみあみの設定も直せましたが、間隔は別の事情（タイムアウト）があるので、そのままにしました。</li>
+  </ul>
+  <p class="note">この記事の数字は、コミット（2026年9月7日）の記録から取りました。「4,600」は、コミットの記載で、25 クレジット × 2 ページ × 96 回（15 分おき）の計算（4,800）とは、少しずれています。</p>
+  <h2 class="rv" id="s4">Firestore の費用を円で出したら、読み取りの 91% が 1 か所だった：キャッシュを入れても効かなかった理由</h2>
+  <p class="note">2026 年 10 月 17 日の記録。</p>
+<p>iOS アプリ「<a href="/works/torecadash/">トレカダッシュ</a>」の裏側は、Firebase の Firestore（データベース）と、定期的に動く処理でできています。費用は、Gemini（AI）と取得サービスの分は、毎日、円で出して見ていました。ところが、<strong>Firestore の費用は、レポートに載せていませんでした</strong>。</p>
+  <p>9 月 4 日の深夜に、はじめて円で出してみました。結果は、Gemini とほぼ同額でした。この記事は、そこから読み取りの 91% が 1 か所に集中していると分かり、キャッシュを入れても効かず、直し直した記録です。</p>
+  <p class="note">数字は、2026 年 9 月 4 日の作業の記録から書いています。価格は、東京リージョンの実際の単価です。</p>
+
+  <h3 class="rv" id="c4-s1">円で出したら、誰も見ていなかった費用が出てきた</h3>
+  <p>Firestore の読み取りを、日ごとに円にしました。</p>
+  <div class="scroll rv"><table>
+    <thead><tr><th>日</th><th>読み取り</th><th>書き込み</th><th>1 日の費用</th></tr></thead>
+    <tbody>
+      <tr><td>8 月 28 日</td><td>218 万件</td><td>12 万件</td><td>226 円（月 6,777 円）</td></tr>
+      <tr><td>9 月 1 日</td><td>366 万件</td><td>13.4 万件</td><td>368 円（月 11,028 円）</td></tr>
+      <tr><td>9 月 3 日</td><td><strong>421 万件</strong></td><td>16.2 万件</td><td><strong>427 円（月 12,810 円）</strong></td></tr>
+    </tbody>
+  </table></div>
+  <p>無料の枠は、1 日 5 万件の読み取りまでです。その<strong>84 倍</strong>を読んでいました。しかも、1 週間で 89% 増えていて、記事が増えるほど増える形でした。</p>
+  <p>円で出していない費用は、ないのと同じでした。月に約 1 万 3 千円かかっていたのに、レポートに載っていないというだけで、誰も気にしていませんでした。</p>
+
+  <h3 class="rv" id="c4-s2">計器を入れたら、3 分で分かった</h3>
+  <p>どこで読んでいるのかを知るために、「どの処理が、どのコレクション（データの置き場）を、どれだけ読んだか」を数える計器を入れました。入れたその場で、答えが出ました。</p>
+  <pre><code>8,725 件  X 監視 | products（商品）    ← 測定した 9,593 件の 91%
+  197 件  X 監視 | news_items（記事）</code></pre>
+  <p>X の監視は、記事を 1 件処理するたびに、AI に「どの商品の話か」を聞きます。その候補を作るために、<strong>ジャンルの商品を、毎回、全部読み直していました</strong>。ポケモンのジャンルは商品が 693 件あります。記事 1 件の照合が、693 件の読み取りです。</p>
+  <p>コードを読んで探していたら、もっと時間がかかったはずです。<strong>探す前に、数える</strong>。計器を 1 つ足しただけで、読み取りの 91% が 1 か所だと分かりました。</p>
+
+  <h3 class="rv" id="c4-s3">最初のキャッシュは、ほとんど効かなかった</h3>
+  <p>直し方は単純です。商品の一覧を、一度読んだら覚えておく（キャッシュ）。最初は 60 秒覚えさせました。ところが、<strong>ほとんど効きませんでした</strong>。</p>
+  <p>理由は、X の監視が、最大 32 アカウントを<strong>同時に</strong>処理していることでした（<code>Promise.all</code>）。コードは、こう動いていました。</p>
+  <ol>
+    <li>1 件目が、「キャッシュに無い」と判断して、読みに行く。</li>
+    <li>読み終わる前に、残りの 31 件も、同じ「キャッシュに無い」を見る。</li>
+    <li>全員が、同じ 693 件を、同時に読みに行く。</li>
+  </ol>
+  <p>実測では、23 秒に 1 回、読み直していました。キャッシュは「読み終わった結果」を覚えるもので、<strong>読んでいる最中の人は、まだ何も覚えていない</strong>のです。</p>
+  <p>直し方は、<strong>結果ではなく、「読み込み中」という約束（Promise）そのものを覚える</strong>ことでした。1 件目が読み始めたら、その約束を置いておく。残りの 31 件は、新しく読みに行かず、同じ約束を待つ。同時に呼ばれても、読み込みは 1 本になります。</p>
+  <pre><code>// 考え方を書いた例です。結果ではなく、読み込み中の約束を覚える
+cache.set(genre, { at: Date.now(), promise: loadProducts(genre) });
+// 呼び出しは、いつも cache.get(genre).promise を待つ</code></pre>
+  <p>これに合わせて、3 つのことも決めました。</p>
+  <ul>
+    <li><strong>商品を作ったときと消したときは、その場でキャッシュを捨てる。</strong>捨てないと、もう無い商品を候補に見せたり、同じ商品をもう 1 件作ってしまったりします。</li>
+    <li><strong>同じ相手を読む処理が、もう 1 つあった。</strong>別の関数が、同じ条件で商品を読んでいました。キャッシュを一本化して、片方だけ効かない状態を避けました。</li>
+    <li>覚える時間は、ジャンルごとに 10 分にしました。</li>
+  </ul>
+  <p>静かな時間帯で測ると、1 日に換算して、<strong>507 万件が 27.7 万件</strong>になりました。</p>
+
+  <h3 class="rv" id="c4-s4">もう 1 つ：5 分おきに 3,085 件読んで、使うのは 146 件だった</h3>
+  <p>商品のキャッシュを入れたあと、計器の一番上に出てきたのが、別の処理でした。楽天ブックスの在庫を確かめ直す処理が、<strong>5 分おき</strong>に、こういう問い合わせをしていました。</p>
+  <pre><code>news_items where saleType in ["reservation", "guerrilla"]</code></pre>
+  <p>返ってきた 3,085 件を、プログラムの側で「楽天ブックスのものだけ」に絞っていました。実際の対象は 146 件で、<strong>95% が無駄</strong>です。1 日 288 回なので、約 88.8 万件、月に約 2,400 円でした。</p>
+  <p>直し方は、2 つです。</p>
+  <ul>
+    <li>対象の一覧（参照と ISBN だけ）を、2 時間覚えておく。</li>
+    <li>ただし、<strong>判断に使う中身は、毎回読み直す</strong>。古い値で書き換える事故を作らないためです。読むのは 146 件だけなので、安く済みます。</li>
+  </ul>
+  <p>読み取りは、1 日 88.8 万件から約 7.9 万件へ、91% 減りました。</p>
+
+  <h3 class="rv" id="c4-s5">分かったこと</h3>
+  <blockquote>円で出していない費用は、存在しないのと同じ。</blockquote>
+  <ul>
+    <li><strong>まず、計器を直す。</strong>見ていない費用は、増え続けても気づけません。</li>
+    <li><strong>探す前に数える。</strong>「ジョブ × コレクション」の集計を 1 つ足しただけで、91% の所在が 3 分で分かりました。</li>
+    <li><strong>同時に動く処理に、キャッシュを付けるなら、「読み込み中の約束」を覚える。</strong>結果だけを覚えるキャッシュは、同時に来た全員を素通りさせます。</li>
+    <li><strong>絞り込みは、読む前にする。</strong>全部読んでから 5% に絞るのは、95% を捨てるために読んでいるのと同じです。</li>
+    <li><strong>確定した数字は、翌日の記録で見る。</strong>この日の「507 万件が 27.7 万件」は、静かな時間帯の測定でした。</li>
+  </ul>
+  <h2 class="rv" id="s5">Gemini の費用を削る前に、計器を疑った：単価・内訳・キャッシュの 3 つが壊れていて、キャッシュの条件は測り直すと変わっていた</h2>
+  <p class="note">2026 年 10 月 17 日の記録。</p>
+<p>iOS アプリ「<a href="/works/torecadash/">トレカダッシュ</a>」は、記事の判定や商品の照合に、Google の Gemini（AI）を使っています。使った分だけお金がかかるので、費用を減らす作業を何度かしました。この記事は、その中の 2 つの回の記録です。</p>
+  <ul>
+    <li><strong>9 月 4 日：</strong>費用を削る前に計測を点検したら、<strong>3 か所とも壊れていた</strong>。</li>
+    <li><strong>10 月 16 日：</strong>「キャッシュが効く条件」を測り直したら、<strong>9 月の結論と食い違っていた</strong>。</li>
+  </ul>
+  <p class="note">数字は、2026 年 9 月 4 日と 10 月 16 日の作業の記録から書いています。使ったのは gemini-3.1-flash-lite です。</p>
+
+  <h3 class="rv" id="c5-s1">計器が、3 か所とも壊れていた</h3>
+  <p>「費用を削って」と言われて、最初にしたのは、削ることではなく、<strong>費用の計測が合っているかの確認</strong>でした。合っていない計器で削ると、効かない場所を削って「なぜ下がらない」となります。実際に、3 つの欠陥が見つかりました。</p>
+  <div class="scroll rv"><table>
+    <thead><tr><th>計器の欠陥</th><th>起きていたこと</th></tr></thead>
+    <tbody>
+      <tr><td>単価が違う</td><td>コード上の単価は、100 万トークンあたり入力 $0.10・出力 $0.40。実際の価格は <strong>入力 $0.25・出力 $1.50</strong>。費用を<strong>約 1/2.6 に、少なく表示</strong>していた。</td></tr>
+      <tr><td>内訳のラベルが潰れていた</td><td>用途別の集計が、実際には存在しない名前のキー（<code>params.system</code>）を見ていた（正しくは <code>system_instruction</code>）。<strong>31 種類の用途が、全部 1 つの塊</strong>になり、どの指示文が高いのか、一度も読めていなかった。</td></tr>
+      <tr><td>キャッシュを数えていない</td><td>入力の 31% はキャッシュの命中で、単価が 1/10 なのに、全部を定価で数えていた。<strong>約 4 割、多く</strong>見積もっていた。</td></tr>
+    </tbody>
+  </table></div>
+  <p>もう 1 つ、見かけ上の「費用 2 位」が、本番の問題ではありませんでした。「ジョブ外」という名前の項目が 1 日 195 円で 2 位でしたが、これは<strong>私自身が、手で実行した分</strong>でした。本番の実力を見るときは、手動で動かした分を、必ず除きます。</p>
+  <p>直した計器で測ると、この時点で、1 日約 606 円（月 18,168 円）。キャッシュの分を引いた実質は、月約 13,200 円でした。費用のほとんどは<strong>入力トークン</strong>で、中身は、毎回送り直す指示文と候補の一覧です。</p>
+
+  <h3 class="rv" id="c5-s2">9 月の測定：キャッシュは約 8,000 トークンを超えてから</h3>
+  <p>Gemini には、同じ長い指示文を繰り返し送ると、2 回目から安くなる仕組み（暗黙のキャッシュ）があります。命中した分の単価は 1/10 です。そこで、同じ指示文を 3 回続けて送って、どこから効くかを測りました。</p>
+  <div class="scroll rv"><table>
+    <thead><tr><th>指示文の長さ（入力トークン）</th><th>キャッシュの命中</th></tr></thead>
+    <tbody>
+      <tr><td>5,209</td><td>0</td></tr>
+      <tr><td>8,490</td><td>4,079</td></tr>
+      <tr><td>17,070</td><td>12,263</td></tr>
+    </tbody>
+  </table></div>
+  <p>当時の結論は、「約 8,000 トークンを超えてから効く」でした。実質のトークンは、<strong>入力 − 0.9 × 命中</strong>で計算できます。</p>
+  <p>ここで、無理に指示文を長くして基準に乗せるのは、<strong>逆に高くつく</strong>、と分かりました。4,200 トークンの指示文を 8,500 に膨らませると、実質は 4,814 トークンで、元より多いのです。キャッシュが得になるのは、元から大きい指示文だけです。</p>
+
+  <h3 class="rv" id="c5-s3">10 月の測り直し：条件は、約 4,000 トークンだった</h3>
+  <p>もう一度、本番のキーで、同じ測定をしました。今度は、interactions API という呼び出し口で測りました。結果は、9 月と違いました。</p>
+  <div class="scroll rv"><table>
+    <thead><tr><th>指示文の長さ（入力トークン）</th><th>キャッシュの命中</th></tr></thead>
+    <tbody>
+      <tr><td>1,770</td><td>0</td></tr>
+      <tr><td>4,093</td><td>2,031（2 回目から）</td></tr>
+      <tr><td>7,017</td><td>4,076</td></tr>
+    </tbody>
+  </table></div>
+  <p>約 4,000 トークンから効き、先頭の<strong>約 2,038 トークン単位</strong>で命中していました。9 月は「8,000 から」、10 月は「4,000 から」。<strong>なぜ食い違うのかは、確かめていません。</strong>測り方の違いや、サービス側の変更が考えられますが、どれが原因かは分かっていません。分かるのは、「キャッシュの条件は、固定の事実ではなく、測り直すもの」ということです。</p>
+  <p>本番の指示文は、1,000〜2,500 トークンでした。先頭の固定部分が基準に届かず、<strong>命中は 1 日中 0</strong> でした。入力トークンが費用のほぼ全部（出力は約 1%）なので、キャッシュが効けば、大きな節約に見えました。</p>
+
+  <h3 class="rv" id="c5-s4">指示文を水増ししてみた。判定が 9% ずれた</h3>
+  <p>「判定に影響しない注記」を足して、指示文を約 2,300 トークンに伸ばし、基準に乗せる案を試しました。実データ 90 件で、元の指示文と答えを比べました。</p>
+  <ul>
+    <li><strong>判定が 8 件（9%）食い違いました。</strong>「その他」「抽選」「ゲリラ販売」のあいだで、答えが変わりました。</li>
+    <li>しかも、約 2,600 トークンでは、<strong>キャッシュに命中しませんでした</strong>。</li>
+  </ul>
+  <p>精度が落ちるのに、命中も取れない。この案は<strong>取り下げ</strong>て、本番には出していません。「影響しない」はずの文章でも、AI の答えは変わります。確かめずに足してはいけません。</p>
+
+  <h3 class="rv" id="c5-s5">いま残っている、いちばん大きい項目</h3>
+  <p>実データで内訳を見ると、最大の単独項目は、商品の照合でした。1 回あたり平均 7,151 入力トークン、1 日 297 回で、約 83 円です。候補の絞り込み、まとめて聞く、AI に聞かずに済ませる、は、すでに入れてあります。これ以上は、<strong>候補を減らす、つまり精度を下げる方向</strong>になるので、見送っています。</p>
+  <p>削るなら、指示文を短くする方向です。その場合は、1 本ずつ、実データで判定が一致するかを確かめます。末尾の水増しで、キャッシュを狙いません。</p>
+
+  <h3 class="rv" id="c5-s6">分かったこと</h3>
+  <blockquote>費用を削る前に、削る道具を疑う。</blockquote>
+  <ul>
+    <li><strong>単価は、記憶で書かない。</strong>公式の価格ページで確かめます。1/2.6 の過小表示は、単価の書き写しの誤りでした。</li>
+    <li><strong>内訳のラベルが、本当に分かれているか、実データを 1 回出して目で見る。</strong>31 種類が 1 つに潰れていても、合計は合っているので、気づきません。</li>
+    <li><strong>自分の作業が、本番の数字に混ざっていないか見る。</strong></li>
+    <li><strong>条件は、測り直す。</strong>9 月の「8,000」は、10 月には「4,000」でした。</li>
+    <li><strong>「影響しない」変更も、実データで確かめる。</strong>90 件で試して、9% ずれました。</li>
+  </ul>
+
+  <h2 class="rv" id="s6">それぞれの要点</h2>
+  <ul>
+    <li><a href="#s1">Claude API から Gemini API（gemini-3.1-flash-lite）へ移行した</a>：Anthropic の利用上限で予定外の課金が出たため Gemini へ移行。モデルの選び方（廃止予定日）、呼び出しの一本化、Web 検索の回数上限が無い問題への回路遮断器、止めるスイッチの記録。</li>
+    <li><a href="#s2">「減るはず」が、二度外れた</a>：トレカ情報アプリで、AI への問い合わせを減らそうとした記録。45%減るはずが4.5%、配備したのに束ねが0回。数え直して見つかったことを、コミットの数字で書いた。</li>
+    <li><a href="#s3">「しょうがない」を測り直したら、取得の費用は8分の1だった</a>：「イオンとあみあみは費用が重くて縮められない」は、古い単価に基づく思い込みだった。3つの取得設定で同じページを比べて、描画が丸ごと無駄だと分かった記録。</li>
+    <li><a href="#s4">Firestore の費用を円で出したら、読み取りの 91% が 1 か所だった</a>：Firestore を初めて円で見たら、月 1.3 万円で Gemini とほぼ同額だった。読み取りの 91% は商品一覧の読み直し。60 秒キャッシュが効かなかったのは、32 件が同時に動いていたから。「読み込み中の約束」を覚えて直した記録。</li>
+    <li><a href="#s5">Gemini の費用を削る前に、計器を疑った</a>：Gemini の費用の計測は 3 か所とも壊れていた（単価は 1/2.6 の過小表示、31 の用途が 1 つに潰れ、キャッシュ未計上）。キャッシュが効く条件は 9 月は約 8,000、10 月は約 4,000 トークンと食い違った。指示文を水増しすると判定が 9% ずれた。</li>
+  </ul>
+  <p>ほかの記録は、<a href="/notes/">Notes の一覧</a>から、テーマごとに読めます。トレカダッシュそのものは、<a href="/works/torecadash/">作品ページ</a>に書いています。</p>
+
+<!--related-->
+  <div class="rule" style="margin:40px 0 22px"></div>
+  <p class="eyebrow">ほかの記録</p>
+  <ul class="plain">
+    <li><a href="/notes/tcg-lottery-app-compare/">ポケカ・トレカ抽選アプリを比較：トレカダッシュ・トレゲト・NowPokeca・Pokeka Tracker・トレカの地図のメリットとデメリット</a> — ポケカをはじめトレカの抽選・予約・再販を追うアプリ・サイトを、ジャンル数・通知・地図・料金で比較。作者（トレカダッシュの開発者）による比較で、トレカダッシュの弱いところも書いた。</li>
+    <li><a href="/notes/swiftui-hit-area/">同じ報告が 3 回目：SwiftUI のボタンが「文字の上でしか」反応しなかった。過去 2 回の「修正」は効いていなかった</a> — 「当選」「落選」ボタンが文字の上しか反応しない報告は 3 回目。過去 2 回は修飾子の順序を直しても効かず、ButtonStyle の中で見た目を組み立てて、6 か所を差し替えた。同じ日の「郵送なのに位置情報」も同じ根っこだった。</li>
+    <li><a href="/notes/icloud-overwrite/">「iCloud が新しければ取り込む」の関数が、何も比べていなかった：応募の記録が 20 件から 1 件になりうる</a> — iCloud 同期の関数は、名前に反して新しいかを見ず、変更があると丸ごと置き換えていた。新しい端末の空の状態で保存すると、別の端末の 20 件が 1 件に上書きされうる。更新時刻を比べ、空では上書きしないようにした。</li>
+  </ul>
+<!--/related-->
+
+<!--comments-->
+  <section class="comments" id="comments" data-repo="murakamikoshin/koshin-studio" data-repo-id="R_kgDOURc3ew"
+    data-category="Announcements" data-category-id="DIC_kwDOURc3e84DHTVr">
+    <h2 id="comments-h">コメント</h2>
+    <p>感想や、記事の間違いの指摘は、ここへ。書くには、GitHub のアカウントが要ります。</p>
+    <p><button type="button" class="btn ghost" id="load-comments">コメントを開く</button></p>
+    <p class="note">押すと、giscus（giscus.app）と GitHub に接続します。押さなければ、接続しません。詳しくは<a href="/privacy/">プライバシーポリシー</a>に書いています。</p>
+    <div id="giscus-box"></div>
+  </section>
+<!--/comments-->
+</div></main>
+
+<footer class="site"><div class="wrap">
+  <span>© 2026 Koshin Studio</span>
+  <div class="sns-row"></div>
+  <nav><a href="/picks/">Picks</a><a href="/calc/">Tools</a><a href="/about/">運営者情報</a><a href="/about/#contact">お問い合わせ</a><a href="/privacy/">プライバシーポリシー</a><a href="/en/" hreflang="en" lang="en">English</a></nav>
+</div></footer>
+<script src="/motion.js?v=1e7447ec" defer></script>
+</body>
+</html>

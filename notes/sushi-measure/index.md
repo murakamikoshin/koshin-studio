@@ -68,6 +68,6 @@
 
 - すし積む（作品ページ） (https://koshinstudio.com/works/sushitsumu/) — 落ち物パズルのゲーム
 
-- 「減るはず」が、二度外れた (https://koshinstudio.com/notes/torecadash-ai/) — 数え直して外れが分かった、別の記録
+- 「減るはず」が、二度外れた (https://koshinstudio.com/notes/ai-cost-cutting/#s2) — 数え直して外れが分かった、別の記録
 
   遊ぶ (https://koshinstudio.com/play/sushitsumu/)作品ページへ (https://koshinstudio.com/works/sushitsumu/)

@@ -52,6 +52,6 @@ var articles: [Article] { fetched.filter…filter…map…sorted }
 
   この話に出てくるもの
 
-- 「減るはず」が、二度外れた (https://koshinstudio.com/notes/torecadash-ai/) — 同じアプリの、AI への問い合わせの記録
+- 「減るはず」が、二度外れた (https://koshinstudio.com/notes/ai-cost-cutting/#s2) — 同じアプリの、AI への問い合わせの記録
 
 - TestFlight にビルドが来ない原因を、一度間違えた (https://koshinstudio.com/notes/torecadash-ci/) — 同じアプリの、別の記録

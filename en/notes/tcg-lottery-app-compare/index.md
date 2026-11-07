@@ -92,7 +92,7 @@ Stores with open lotteries. The number on a pin is how many entries are open the
 
 ### 5. Many sources
 
-  A server automatically collects official sites, online shops, aggregator sites and public posts on X. What it collects and how much, including the failures, is in the article on crawling aggregator sites (https://koshinstudio.com/en/notes/aggregator-pagination/) and the article on a crawl returning zero results (https://koshinstudio.com/en/notes/blocked-page/).
+  A server automatically collects official sites, online shops, aggregator sites and public posts on X. What it collects and how much, including the failures, is in the article on crawling aggregator sites (https://koshinstudio.com/en/notes/crawl-monitoring/#s1) and the article on a crawl returning zero results (https://koshinstudio.com/en/notes/silent-failures/#s4).
 
 ## Toreca Dash: weaknesses
 

@@ -1,0 +1,420 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>7 lessons from repairing bad data | Koshin Studio</title>
+<meta name="description" content="Seven real lessons from repairing bad data: fixing the gate does not fix existing data, cleanup can hide entry bugs, a bulk job that hit everything, how duplicates were counted, and notifications that cannot be undone.">
+<meta property="og:title" content="Seven lessons from repairing bad data: existing records, bulk-job accidents, counting duplicates and the notification gate">
+<meta property="og:description" content="Seven real lessons from repairing bad data: fixing the gate does not fix existing data, cleanup can hide entry bugs, a bulk job that hit everything, how duplicates were counted, and notifications that cannot be undone.">
+<meta property="og:type" content="article">
+<meta name="theme-color" content="#fbfaf7">
+<link rel="icon" href="/favicon.ico?v=1697d589" sizes="48x48">
+<link rel="icon" href="/favicon.svg?v=b9d7922f" type="image/svg+xml" sizes="any">
+<link rel="icon" href="/assets/icon/icon-192.png?v=e2566235" type="image/png" sizes="192x192">
+<link rel="apple-touch-icon" href="/assets/icon/icon-180.png?v=84e7f0e6">
+<link rel="manifest" href="/site.webmanifest">
+<script>document.documentElement.className+=" js"</script>
+<link rel="stylesheet" href="/style.css?v=3d886c33">
+<meta name="google-adsense-account" content="ca-pub-3863314847163872">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3863314847163872" crossorigin="anonymous"></script>
+<link rel="canonical" href="https://koshinstudio.com/en/notes/data-repair/">
+<meta property="og:url" content="https://koshinstudio.com/en/notes/data-repair/">
+<meta property="og:site_name" content="Koshin Studio">
+<meta property="og:locale" content="en_US">
+<link rel="alternate" hreflang="ja" href="https://koshinstudio.com/notes/data-repair/">
+<link rel="alternate" hreflang="en" href="https://koshinstudio.com/en/notes/data-repair/">
+<link rel="alternate" hreflang="x-default" href="https://koshinstudio.com/en/notes/data-repair/">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="alternate" type="application/rss+xml" title="Koshin Studio — Notes" href="https://koshinstudio.com/feed.xml">
+<link rel="alternate" type="text/markdown" href="https://koshinstudio.com/en/notes/data-repair/index.md">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BlogPosting","headline":"Seven lessons from repairing bad data: existing records, bulk-job accidents, counting duplicates and the notification gate","url":"https://koshinstudio.com/en/notes/data-repair/","description":"Seven real lessons from repairing bad data: fixing the gate does not fix existing data, cleanup can hide entry bugs, a bulk job that hit everything, how duplicates were counted, and notifications that cannot be undone.","datePublished":"2026-11-07","dateModified":"2026-11-07","inLanguage":"en","image":"https://koshinstudio.com/assets/og/og_en_notes_data-repair.jpg","author":{"@id":"https://koshinstudio.com#koshin"},"publisher":{"@id":"https://koshinstudio.com#studio"},"mainEntityOfPage":"https://koshinstudio.com/en/notes/data-repair/","translationOfWork":{"@type":"BlogPosting","url":"https://koshinstudio.com/notes/data-repair/","inLanguage":"en"}},{"@type":"Person","@id":"https://koshinstudio.com#koshin","name":"Koshin","jobTitle":"Web and app engineer","url":"https://koshinstudio.com/about/","worksFor":{"@id":"https://koshinstudio.com#studio"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Koshin Studio","item":"https://koshinstudio.com/en/"},{"@type":"ListItem","position":2,"name":"Notes","item":"https://koshinstudio.com/en/notes/"},{"@type":"ListItem","position":3,"name":"Seven lessons from repairing bad data: existing records, bulk-job accidents, counting duplicates and the notification gate","item":"https://koshinstudio.com/en/notes/data-repair/"}]}]}</script>
+<link rel="alternate" type="application/rss+xml" title="Koshin Studio — Notes (English)" href="https://koshinstudio.com/en/feed.xml">
+<meta property="og:image" content="https://koshinstudio.com/assets/og/og_en_notes_data-repair.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
+</head>
+<body class="article">
+<canvas id="motes"></canvas>
+
+<header class="site"><div class="wrap">
+  <a class="logo" href="/en/"><img class="logo-mark" src="/favicon.svg?v=b9d7922f" alt="" width="28" height="28">Koshin Studio</a>
+  <nav><a href="/en/works/">Works</a><a href="/en/works/#game">Games</a><a href="/en/notes/">Notes</a><a href="/en/calc/">Tools</a><a href="/en/about/">About</a><a href="/" hreflang="ja" lang="ja">日本語</a></nav>
+</div></header>
+
+<main><div class="wrap">
+  <nav class="crumbs" aria-label="You are here"><a href="/en/">Koshin Studio</a><i aria-hidden="true">›</i><span aria-current="page">Seven lessons from repairing bad data</span></nav>
+  <h1>Seven lessons from repairing bad data: existing records, bulk-job accidents, counting duplicates and the notification gate</h1>
+  <div class="rule"></div>
+<!--lang-->
+  <p class="note"><a href="/notes/data-repair/" hreflang="ja" lang="ja">日本語版</a></p>
+<!--/lang--><!--byline--><p class="note byline">Written by <a href="/en/about/#operator">Koshin</a> (web engineer and app engineer) · published 2026-11-07</p><!--/byline--><p class="lead">Development log of Toreca Dash / 7 records in one place</p>
+  <p>Fixing the entry point does not fix <strong>data that already got in</strong>. And when something cleans up afterwards, the entry bug becomes invisible. These are seven real mistakes made while repairing data, and the procedures decided from them, in the order they happened.</p>
+  <p class="note">Each section was first published as a separate record (from 2026-10). Numbers and sources are as in the work logs of the time. They were gathered into one article per theme on 7 November 2026.</p>
+
+    <nav class="toc" aria-label="Contents"><p>Contents</p><ol><li><a href="#s1">A bulk update hit “all articles”</a></li><li><a href="#s2">I counted “duplicates are practically zero,” but the audit reported 112 pairs</a></li><li><a href="#s3">“It gets cleaned up later” hid an entrance bug</a></li><li><a href="#s4">“Weird articles keep multiplying”</a></li><li><a href="#s5">Fixing a gate does not fix existing data</a></li><li><a href="#s6">Four times my own tools hurt me</a></li><li><a href="#s7">Notifications cannot be recalled</a></li><li><a href="#s8">Key points of each</a></li></ol></nav>
+  <h2 class="rv" id="s1">A bulk update hit “all articles”: count before you write, and break your tests to prove they work</h2>
+  <p class="note">Record from 2026-10-08.</p>
+<p>In my iOS app Torecadash, a new job that fixes article status in bulk <strong>hit every article, including ones I never meant to target</strong>, the first time I ran it. 18 items from other sites were wrongly restored to visible. This is how I fixed the accident, and how I checked that the test I built afterward to close the same hole <em>actually works</em>, from my hand-over notes.</p>
+  <p class="note">This is a development log of the app.</p>
+
+  <h3 class="rv" id="c1-s1">What the job was for</h3>
+  <p>The app has a “price gate” that checks whether a listing’s price is reasonable (I wrote about it in <a href="/en/notes/silent-failures/#s7" hreflang="en" lang="en">another article</a>). Among articles hidden by this gate only because of price, I added a job that restores <strong>those that were actually correct and had been hidden because of a product mix-up</strong>. The condition for restoring is “the correct product’s list price matches the listing price.”</p>
+
+  <h3 class="rv" id="c1-s2">The accident: it hit all articles</h3>
+  <p>At first this job hit <strong>all articles without distinguishing the source</strong>. As a result, 18 articles from other sites (Amazon, Card Labo, Ministop and others) were restored to visible. They should have stayed hidden.</p>
+  <p>There were two fixes.</p>
+  <ul>
+    <li><strong>Narrow the scope.</strong> I limited the job to articles from that source only (those whose site identifier starts with that source).</li>
+    <li><strong>Put back what I had restored.</strong> I identified the 18 wrongly restored articles from the status history (<code>statusHistory</code>) and put them back to their original state (hidden, rejected by price).</li>
+  </ul>
+  <p>But there was something I could not get back for these 18. The job had <strong>overwritten the original list-price field with the listing price</strong>. The value stays as the listing price.</p>
+  <p><strong>The cause was that I had not counted the target range before writing.</strong> My notes say so: “count the target range before a bulk write.”</p>
+
+  <h3 class="rv" id="c1-s3">Building tests to close the same hole</h3>
+  <p>To make sure the problems found in that day’s inspection (wrong splitting of 9-pack sets, single cards slipping in, non-card products slipping in) never happen again, I built tests: 66 cases in <code>catalog-guards.test.js</code>, and all six test files together can be run in one procedure (<code>run-all.sh</code>).</p>
+  <p>I also added warnings to my daily operations notice: when the miss rate of matching falls below the criteria (Chusen Zukan 80%, Pokechu 75%, X roundup 75%), when nothing has run for 30 hours, and when single cards or non-card names appear in the product list. The judgments are <strong>pure functions with no side effects</strong>, so once things are fixed, the warning disappears by itself on the next run.</p>
+
+  <h3 class="rv" id="c1-s4">Breaking it to check that the tests work</h3>
+  <p>You cannot tell whether a test works just by writing it. A test that always passes may protect nothing. So I took a copy of the production code and <strong>removed its rules one at a time</strong> to confirm the tests fail.</p>
+  <ul>
+    <li>Remove one rule (break it).</li>
+    <li>Run the tests.</li>
+    <li>If they fail, the test is protecting that rule.</li>
+  </ul>
+  <p>With this procedure, <strong>I tried 6 kinds of modification, and the tests failed for all 6</strong> (all were detected).</p>
+  <p>I also wrote down an operating rule: if I touch <code>functions/index.js</code>, I always run all the tests before deploying.</p>
+
+  <h3 class="rv" id="c1-s5">What I learned</h3>
+  <blockquote>Count before a bulk write. Break the test to prove it.</blockquote>
+  <ul>
+    <li><strong>Before writing, count “how many it will hit.”</strong> If you run it without a preview, you notice the range was wrong only after it has finished writing.</li>
+    <li><strong>Write in a form you can undo.</strong> I could restore the 18 because I could identify them from the history. The overwritten field, though, cannot be restored.</li>
+    <li><strong>Prefer a test that fails when broken to a test that passes.</strong> Only after removing a rule and seeing it fail can I trust the test.</li>
+  </ul>
+  <p class="note">This article is written from my hand-over notes (§272) (October 7, 2026). The counts are as written in the notes.</p>
+  <h2 class="rv" id="s2">I counted “duplicates are practically zero,” but the audit reported 112 pairs</h2>
+  <p class="note">Record from 2026-10-08.</p>
+<p>My iOS app Torecadash has a job that merges “duplicates,” where one product is registered as several products, every night. One day I counted by myself and recorded “duplicates are practically zero.” But the repository audit reported <strong>112 pairs</strong>. <strong>My way of measuring was wrong.</strong> This is the story from my commit record.</p>
+  <p class="note">This is a development log of the app.</p>
+
+  <h3 class="rv" id="c2-s1">I counted zero, and 112 pairs appeared</h3>
+  <p>Looking at the 112 pairs, for example one trading-card booster pack was registered <strong>split into 7 entries</strong>, even though the merge job was supposed to run every night.</p>
+
+  <h3 class="rv" id="c2-s2">Cause: it timed out partway through, every night</h3>
+  <p>Running the merge over all genres takes <strong>about 15 minutes</strong>. But the time budget I had given the nightly scheduled run was <strong>480 seconds (8 minutes)</strong>. The order always starts from the same genre (Pokémon). So <strong>every night it timed out in the middle of Pokémon, and the later genres were never reached</strong>.</p>
+  <p>My count was “zero” because only the range I was looking at (the first genre) was clean.</p>
+
+  <h3 class="rv" id="c2-s3">The fix</h3>
+  <ul>
+    <li><strong>Rotate.</strong> Start from the genre after where the last run stopped, and stop when the time budget (6 minutes) is used up. The next night continues from where it stopped.</li>
+    <li><strong>First, run it to completion by hand.</strong> Running all genres to the end by hand took <strong>duplicates from 112 pairs to 0</strong> and products from <strong>2,753 to 2,570</strong>.</li>
+  </ul>
+
+  <h3 class="rv" id="c2-s4">What I already knew: one pass is not enough</h3>
+  <p>Two days earlier (September 5), I had learned something else about merging. <strong>When A is merged into B, B’s name can become the same as another C.</strong> Then one pass is not enough. In real data:</p>
+  <div class="scroll rv"><table>
+    <tr><th>Pass</th><th class="n">Merged</th><th>Result</th></tr>
+    <tr><td>1st</td><td class="n">138</td><td>53 new same-name pairs appeared</td></tr>
+    <tr><td>2nd</td><td class="n">54</td><td>0 same-name duplicates</td></tr>
+  </table></div>
+  <p>Products went from 2,935 to 2,713. So the daily slot now <strong>repeats until nothing is merged</strong> (up to 3 times). This “timeout” problem sat even before that repetition.</p>
+
+  <h3 class="rv" id="c2-s5">Three more things the same day</h3>
+  <ul>
+    <li><strong>Six open lotteries had disappeared because of another product’s list price.</strong> A 7,200 yen lottery (the official 360 yen × 20 packs) had been compared with <strong>another product’s list price of 27,500 yen</strong> left on the article and rejected by price. I added a condition: “<strong>fix only when it can be proven</strong>.” Across all real data, 10 matched the condition and all were sales at a normal price. I restored 11 to visible.</li>
+    <li><strong>False alarms in matching.</strong> Of 17 “article exists but hidden,” 9 had a replacement article visible under <strong>a different spelling</strong> of the same shop (like two different kanji spellings of the same store name). If the replacement is visible, it now counts as covered, which moved coverage from 87% to 90% and hidden items from 17 to 4.</li>
+    <li><strong>The audit itself had stopped.</strong> The reader part for audits misread a regular expression right after <code>=&gt;</code> as a division, and four audits were failing with <code>ReferenceError</code>. I changed it so that names it could not cut out are reported with a reason instead of being skipped silently.</li>
+  </ul>
+
+  <h3 class="rv" id="c2-s6">What I learned</h3>
+  <blockquote>When you count “zero,” first doubt what you counted.</blockquote>
+  <ul>
+    <li><strong>The range you looked at is not necessarily everything.</strong> Only the first genre was processed every night, so counting only the first genre looks clean.</li>
+    <li><strong>For time-limited jobs, check whether it finished.</strong> Running and reaching the end are different.</li>
+    <li><strong>The tool that counts also breaks.</strong> When an audit has stopped, the result looks like “0 items.” You need a way to notice that it stopped.</li>
+  </ul>
+  <p class="note">This article is written from my commit record (September 5 and 7, 2026).</p>
+  <h2 class="rv" id="s3">“It gets cleaned up later” hid an entrance bug: 400 near-identical products were re-created every day</h2>
+  <p class="note">Record from 2026-10-17.</p>
+<p>My app Toreca Dash has a nightly clean-up job that merges duplicate products. “It will be cleaned up later, so it is fine.” That was the belief, and in that place <strong>an entrance bug was re-creating near-identical products every day</strong>.</p>
+  <p>A full check on 27 August 2026 showed that <strong>437 products had been created that day alone, and 410 of them had no articles attached</strong>.</p>
+  <p class="note">Numbers come from my work log of 27 August 2026.</p>  <h3 class="rv" id="c3-s1">The cause: it only looked for an exact name match</h3>
+  <p>The step that registers products from the official catalogue decided “does this product already exist?” by <strong>exact name match only</strong>.</p>
+  <pre><code>Existing "Expansion Pack「Ancient Roar」"  ↔  Catalogue "Expansion Pack Ancient Roar"
+Existing "V Starter Deck Grass (full-width space) Bulbasaur"  ↔  Catalogue "V Starter Deck Grass Bulbasaur"</code></pre>
+  <p>Differences in brackets, spaces or full-width versus half-width made it say “not there yet”, and <strong>near-identical products were re-created every day</strong>.</p>
+  <p>The duplicates were later cleaned up by the weekly and daily merge jobs. That is why I did not notice. In between, users see the same product twice and article links split.</p>
+  <p>The fix was to compare with <strong>the same normalisation</strong> the merge job uses (it absorbs brackets, spaces and full/half-width). The catalogue itself also has spelling-variant duplicates, so within one run I keep one per key.</p>
+  <p>The lesson: <strong>a mechanism with a clean-up job “for later” hides entrance bugs</strong>. If the clean-up count is about the same every time, it is not that things are cleaned; <strong>they are being created every day</strong>.</p>
+
+  <h3 class="rv" id="c3-s2">Another: six products absorbed into one</h3>
+  <p>Six Magic: The Gathering “FINAL FANTASY” Commander decks (Psionic Spell, Limit Break, Counter-Blitz, Trans-Reanimate and others) were all <strong>absorbed into one product</strong>.</p>
+  <ul>
+    <li>Another set’s name gets into a product’s aliases.</li>
+    <li>It shows up as an AI candidate.</li>
+    <li>It leads to the next wrong match.</li>
+  </ul>
+  <p>That is a <strong>self-multiplying</strong> loop. Cleaning the aliases alone did not fix it, because the AI kept choosing the same product. I added <strong>a filter that removes products whose quoted proper name differs</strong> (<code>namesDifferentQuotedVariant</code>) to the candidate list too. With it gone from the candidates, the AI can answer “new product” and the correct one is created.</p>
+  <p>To remove false positives, when the quoted text is a generic word, place name, store name, quantity or state, it is not treated as a proper name. On real data, before this condition <strong>6 of 12 were false positives</strong>.</p>
+  <p>There was also an <strong>idea I did not adopt</strong>: a strong rule “delete if the product’s proper name is not in the aliases”. 6 of 43 were false positives (different sets with the same code, names containing “+”), so I dropped it.</p>
+
+  <h3 class="rv" id="c3-s3">My own repair put a deadline on first-come sales</h3>
+  <p>I ran a repair job that inherits dates from articles of the same announcement page (<code>inheritDatesFromSameAnnouncement</code>). It <strong>gave a first-come sale (sold until stock runs out) the deadline of a lottery article on the same page</strong>. A first-come sale has no deadline, and users would see a false “you can buy until that day”.</p>
+  <p>In both places that inherit (the save-time step and the repair job), first-come articles no longer get a deadline. I deleted the one that had been affected.</p>
+  <p>The lesson: after running a repair job, <strong>compare the audit before and after</strong>. Looking only at “how many were fixed” hides anomalies you added yourself.</p>
+
+  <h3 class="rv" id="c3-s4">What I learned</h3>
+  <blockquote>A later clean-up hides entrance bugs.</blockquote>
+  <ul>
+    <li><strong>If the clean-up count is the same each time, they are made daily.</strong> It is not being cleaned up.</li>
+    <li><strong>Use the same normalisation at the entrance and in the clean-up.</strong> If the entrance is stricter, the clean-up covers for it.</li>
+    <li><strong>Cleaning aliases alone does not stop self-multiplication.</strong> Remove it from the AI’s candidates.</li>
+    <li><strong>Count false positives before a strong rule.</strong> 6 of 43 means dropping it.</li>
+    <li><strong>Compare audits before and after a repair.</strong> To find the anomalies you added.</li>
+  </ul>
+  <h2 class="rv" id="s4">“Weird articles keep multiplying”: I counted by creation route and closed the entrances, and my counting was wrong twice</h2>
+  <p class="note">Record from 2026-10-17.</p>
+<p>For my app Toreca Dash the instruction came: “<strong>weird articles keep multiplying</strong>. No deadlines, so many odd articles. Solve it permanently. Investigate the articles made by other routes thoroughly too.”</p>
+  <p>This article records counting articles <strong>by the route that created them</strong> and closing the entrances, and also how I got the counting wrong twice.</p>
+  <p class="note">Numbers come from my work log of 28 August 2026.</p>  <h3 class="rv" id="c4-s1">I counted by route</h3>
+  <p>Articles are created by several routes (stores’ official X posts, store sites, aggregator sites, AI discovery). I counted what kinds of “weird articles” each route had.</p>
+  <div class="scroll rv"><table>
+    <thead><tr><th>Route</th><th>Lotteries</th><th>No deadline</th><th>Link is a search result</th><th>Link is a top page</th><th>Link is the aggregator itself</th></tr></thead>
+    <tbody>
+      <tr><td>X (store official)</td><td>118</td><td>11</td><td>0</td><td>1</td><td>0</td></tr>
+      <tr><td>Store site (direct)</td><td>63</td><td>1</td><td>1</td><td>0</td><td>0</td></tr>
+      <tr><td>Aggregator A</td><td>39</td><td>33</td><td>3</td><td>2</td><td>8</td></tr>
+      <tr><td>Aggregator B</td><td>28</td><td>11</td><td>0</td><td>1</td><td>5</td></tr>
+      <tr><td>AI discovery</td><td>4</td><td>2</td><td>0</td><td>0</td><td>0</td></tr>
+      <tr><td><strong>Total</strong></td><td><strong>252</strong></td><td><strong>58</strong></td><td><strong>4</strong></td><td><strong>4</strong></td><td><strong>13</strong></td></tr>
+    </tbody>
+  </table></div>
+
+  <h3 class="rv" id="c4-s2">I corrected my counting twice</h3>
+  <ol>
+    <li><strong>First I counted over all articles and said “1,204 of 1,398 have no deadline (86%)”.</strong> A deadline is a concept <strong>only for lotteries</strong>. First-come sales (1,055) and reservations (91) never had one. I had counted without checking what the field means.</li>
+    <li><strong>I wrote “the saved chunk is another store’s (98%)”,</strong> but in fact <strong>the full post text</strong> was stored and it just happened to begin with Amazon. I asserted from the leading marker alone.</li>
+  </ol>
+
+  <h3 class="rv" id="c4-s3">Holes found and fixes</h3>
+  <h4 class="rv">1. Ended rounds left in the aggregator’s table were imported every day (33)</h4>
+  <p>The aggregator keeps past rounds in its table. In real data, a store’s “13–14 July” was imported on 27 August; the deadline was in the past and not adopted, giving an <strong>article with an empty deadline</strong>. With no deadline, the mechanism that removes articles past their deadline never acts, and it stays forever.</p>
+  <p>I closed the entrance in three layers:</p>
+  <ul>
+    <li>Read the acceptance period as a date and skip rows that have ended.</li>
+    <li><strong>If a deadline cannot be read, do not create the article.</strong></li>
+    <li>If the store’s row has ended, do not create it.</li>
+  </ul>
+  <p>Checked in practice: I cleared the mark, re-ran the import, read 24 stores and got <strong>0 new</strong>.</p>
+
+  <h4 class="rv">2. The application link was not an application page (5 reports)</h4>
+  <p>A search-results page (<code>?keywords=</code>) or a site’s top page had been adopted. I added “looks like a search result URL” and “looks like a site top page URL” checks to the single gate that adopts application links. Every route goes through that one gate, so the fix works there alone.</p>
+
+  <h4 class="rv">3. The article holds the full post text, so a reader who forgets to cut reads the first store (39)</h4>
+  <p>The article’s source text (<code>sourceText</code>) now holds <strong>only that store’s chunk</strong>. The full text goes into a separate field for verification. Whatever the reader does, it cannot pick up another store’s value.</p>
+
+  <h4 class="rv">4. The deadline disagreed with the store’s own row (5 of 6)</h4>
+  <p>A deadline is looked for in “the text chunk, the page linked, the attached image”, in that order. But <strong>the last two are not necessarily that store’s information</strong>. In real data the saved deadline and the store’s row differed by 53, 18 and 20 days, each a <strong>finished lottery shown as open</strong>.</p>
+  <p>I made a function that returns a value “only when an end is stated explicitly” and, at the end of fixing a deadline, a gate: <strong>if it disagrees with the row, trust the row</strong>. One caution: a function that also returns the date for a row that only has a start, like “from 19 June”, must not be used as is to overwrite.</p>
+
+  <h3 class="rv" id="c4-s4">Clean-up starts with a dry run</h3>
+  <ul>
+    <li>The job “hide articles with no deadline”: 33. Before running, I read each one’s own row period and confirmed <strong>all 33 had ended and 0 were open</strong>, then ran it.</li>
+    <li>The job “align the deadline to the row”: 5. It does not hide; if the date has passed, the existing past-deadline mechanism removes it.</li>
+  </ul>
+  <p>Both repairs now run automatically every day at 4:20 and 4:30 (from 190 to 192 jobs).</p>
+
+  <h3 class="rv" id="c4-s5">Result</h3>
+  <div class="scroll rv"><table>
+    <thead><tr><th></th><th>Before</th><th>After</th></tr></thead>
+    <tbody>
+      <tr><td>Displayed lotteries</td><td>252</td><td>199</td></tr>
+      <tr><td>No deadline</td><td>58</td><td>25</td></tr>
+      <tr><td>Aggregator A with no deadline</td><td>33</td><td><strong>0</strong></td></tr>
+      <tr><td>Shown past the deadline</td><td>5</td><td><strong>0</strong></td></tr>
+      <tr><td>“Other site ended, mine open”</td><td>12</td><td>7</td></tr>
+    </tbody>
+  </table></div>
+  <p>The remaining 7 are likely cases where <strong>mine has caught the newer round</strong> (the other table is out of date).</p>
+
+  <h3 class="rv" id="c4-s6">What I learned</h3>
+  <blockquote>Count by route, and doubt the counting itself.</blockquote>
+  <ul>
+    <li><strong>Count by route.</strong> A table shows where weird articles enter.</li>
+    <li><strong>Check what a field means before counting.</strong> A deadline is only for lotteries.</li>
+    <li><strong>Do not assert from a leading marker.</strong> The full text was stored.</li>
+    <li><strong>If no deadline can be read, do not create the article.</strong> Articles with an empty deadline stay forever.</li>
+    <li><strong>Make it impossible to pick up another store’s value.</strong> Do not rely on the reader’s care.</li>
+    <li><strong>If they disagree, trust that store’s row.</strong> The linked page and image are not necessarily that store’s information.</li>
+  </ul>
+  <h2 class="rv" id="s5">Fixing a gate does not fix existing data: a “tried already” mark, a URL marker and a lookup table</h2>
+  <p class="note">Record from 2026-10-17.</p>
+<p>While developing my app Toreca Dash, I kept getting the same report in the same shape: “<strong>I fixed it, but it is not fixed</strong>”. The code is fixed, the tests pass, yet the screen still shows the mistake.</p>
+  <p>The reason: fixing code does not rewrite <strong>data that is already saved</strong>. These are three forms of it, with real cases.</p>
+  <p class="note">Numbers come from my work logs of 26 August, 3 September and 8 September 2026.</p>  <h3 class="rv" id="c5-s1">1. I loosened a gate, but a “tried already” mark remained (3 September)</h3>
+  <p>A product-matching gate had a mistake. I fixed it and deployed. Yet <strong>12 of the 32 existing articles stayed wrong</strong>.</p>
+  <p>The reason was the “skip mark”. When the gate once says “this pairing is wrong”, the article gets a “tried already” mark and <strong>is not retried for 7 days</strong>. Fixing the judgement does not revisit it while the mark lasts. Among those 12 were <strong>4 open lotteries</strong> closing on 5 and 6 September. Lotteries close in days, so waiting for the mark to expire means they vanish. The same day I found the same shape again (a 14-day cooldown in a process that splits into multiple products).</p>
+  <p>The fix: before skipping because of a mark, <strong>re-check with the current judgement</strong>. If the judgement is a pure function that uses neither AI nor external calls, it costs nothing. If you also store “what material I judged with” (for example whether I looked at the image), you can retry only when new material appears.</p>
+
+  <h3 class="rv" id="c5-s2">2. A state marker was stored in the URL (3 September)</h3>
+  <p>Split articles (children) need a marker saying “already split”. At the time I put it in <strong>a part of the URL</strong> (<code>?_product=product-name</code>): “never split again if this is present”.</p>
+  <p>But this project later <strong>rewrites application URLs</strong> to the store’s official page. The same day I started running that rewrite over everything. Anything stored in the URL is certain to be lost. Of 832 child articles, <strong>111 lost their marker</strong>, looked like “parents not yet split”, and were split again. Broken articles pointing at themselves as the “replacement” went from 8 to 14 in 30 minutes. In the past, the same route had once made 1 article into 18.</p>
+  <p>The fix was to decide using a <strong>field that does not get rewritten</strong>, such as <code>splitFromArticleId</code>. The other lesson: on a day you let “a process that only applied to some” run over everything, <strong>check what depends on the fields that process rewrites</strong>.</p>
+
+  <h3 class="rv" id="c5-s3">3. Removing a key from a table does not remove written values (26 August)</h3>
+  <p>I removed a store chain from the “nearest branch” lookup table. It was gone from the code. But the <strong>“nearest branch key” written on articles stayed</strong>. The app thought “there is a key, so show a distance”, prepared it and got no answer (the server returns 400 for an unresolvable key). Three articles were stuck forever.</p>
+  <p>A change to a table is a change to code; migrating data does not happen automatically. When you remove something from a table, <strong>clean the existing data in the same change</strong>. This pairs with the mistake of adding a new hidden flag and forgetting to add it to the restore step: that is a miss on the adding side, this is a miss on the removing side.</p>
+  <p>Cleaning can reveal new anomalies in audits. Those are real holes that were hidden. I did not restore the key to hide them.</p>
+
+  <h3 class="rv" id="c5-s4">Five reports of one shape (8 September)</h3>
+  <p>On 8 September, five of the seven things found by running all 61 audits had <strong>the same shape</strong>: “a mechanism exists to fix it, but it does not reach the target, or never gets its turn”.</p>
+  <div class="scroll rv"><table>
+    <thead><tr><th>Symptom</th><th>Root</th></tr></thead>
+    <tbody>
+      <tr><td>Opening days mixed into store names (4th report)</td><td>The fixer and the gate were different functions; the comment “same yardstick” was false</td></tr>
+      <tr><td>A notification opens an article that does not exist (322)</td><td>The mark (split) was missing from the target query of the filling job</td></tr>
+      <tr><td>Official events still displayed</td><td>The rejecting gate existed, but its re-apply never got a turn</td></tr>
+      <tr><td>Wrong-unit reference prices (24)</td><td>The fix was buried in a 25-job rotation, one lap 2.5 days</td></tr>
+      <tr><td>“19 deferred to the next run for time budget”</td><td>A cheap fix shared a budget and rotation with an expensive one</td></tr>
+    </tbody>
+  </table></div>
+  <p>A gate protects only new articles. Fixing existing articles is a separate process, and if that does not run, “fixed but not fixed” repeats. When the same report keeps coming, you have usually fixed the entrance but not the exit (existing data).</p>
+  <p>The shared solution was to take “re-apply the save-time gate to existing articles” out of the rotation and run it every time. It reads articles once and passes them through the gate (no AI or external call; at most 20 articles and 50 marks per run).</p>
+
+  <h3 class="rv" id="c5-s5">What I learned</h3>
+  <blockquote>When you fix the entrance, fix the exit (existing data) too.</blockquote>
+  <ul>
+    <li><strong>When you add a gate, check that its re-apply runs every time.</strong> A gate protects only new articles.</li>
+    <li><strong>Re-check “tried already” marks with the current judgement.</strong> Waiting for expiry means the lottery is over.</li>
+    <li><strong>Put state markers in fields that are not rewritten.</strong> URLs get replaced later.</li>
+    <li><strong>When you remove from a table, clean the data.</strong> A code change does not move data.</li>
+    <li><strong>When a report comes twice, suspect the exit.</strong> Fixing the entrance is not enough.</li>
+  </ul>
+  <h2 class="rv" id="s6">Four times my own tools hurt me: a summary dropped conditions, one undefined stopped saving, a check locked out production, alerts that never cleared</h2>
+  <p class="note">Record from 2026-10-17.</p>
+<p>Besides external bugs, my app’s development has had several cases where <strong>something I built, or a check I ran, harmed me</strong>. These are four of them, each fixed once numbers made it visible.</p>
+  <p class="note">Numbers and dates come from my work logs between 28 August and 15 September 2026.</p>  <h3 class="rv" id="c6-s1">1. “About 15 characters” dropped the entry conditions (14 September)</h3>
+  <p>The app asks an AI to summarise lottery entry conditions (follow and repost, membership card needed, etc.) for display. I compared 671 displayed lotteries with the original posts (text and images) using an AI.</p>
+  <p>I found more <strong>omissions</strong> than contradictions.</p>
+  <div class="scroll rv"><table>
+    <thead><tr><th>Missing condition</th><th>Count</th></tr></thead>
+    <tbody>
+      <tr><td>Repost</td><td>23</td></tr>
+      <tr><td>Membership</td><td>20</td></tr>
+      <tr><td>App</td><td>13</td></tr>
+      <tr><td>LivePocket (entry service)</td><td>13</td></tr>
+    </tbody>
+  </table></div>
+  <p>The cause was the prompt. It asked for <strong>“about 15 characters”</strong>, so the AI cut conditions to one or two. A rule “do not write receiving or purchase conditions” was stretched to drop even “membership card checked at purchase”, which is an entry condition because you cannot buy without it.</p>
+  <p>A length limit makes an AI choose what to drop; a drop rule drops boundary conditions too. The fix: <strong>“include everything, up to N characters”, and list what must stay</strong>. In the check itself, I did not stop at counting AI verdicts, but checked representative cases against the original image, since an AI review is noisy.</p>
+
+  <h3 class="rv" id="c6-s2">2. One undefined value made every save fail (28 August)</h3>
+  <p>A job wrote back a whole map of scraping-service settings at once. One day the write failed every time with:</p>
+  <pre><code>Cannot use "undefined" as a Firestore value (found in field "domains.`www.yamada-denkiweb.com`.super")</code></pre>
+  <p>One <code>undefined</code> in one site’s entry made <strong>every later save fail</strong>.</p>
+  <p>The damage showed up elsewhere. A record meaning “pause sites that cannot be fetched with any setting for 6 hours” could not be saved. One site was hit on every patrol with three settings (1 + 10 + 25 = 36 credits), burning <strong>13,183 credits in a day, 41% of that day’s total</strong>. The service spreads its daily budget over time of day, so when one site uses 41% of a day, less is left for the others.</p>
+  <p>The lesson: when you write a whole map back, <strong>one dirty value breaks the whole save</strong>. Strip <code>undefined</code> before writing, and make failed saves loud.</p>
+
+  <h3 class="rv" id="c6-s3">3. My check locked my production IP out (15 September)</h3>
+  <p>I ran a stock-check script from the same server as production. It opened 501 Yahoo Shopping product pages <strong>six at a time</strong> with plain requests. Within minutes the server’s IP address got <strong>HTTP 489</strong> (access denied) and it did not clear for hours.</p>
+  <p>Production imports and stock rechecks read Yahoo from the same IP. <strong>My check blinded production.</strong> The check also sent pages it could not read to the scraping service, burning credits.</p>
+  <p>The rule now: when reading shopping sites in bulk from the production server, <strong>one at a time with a pause after each</strong>. Run a handful first and check the status is still 200. For stock, check the structured data in the page on a small sample and leave the full check to the production recheck job.</p>
+
+  <h3 class="rv" id="c6-s4">4. Four alerts that kept ringing after the fix (29 August)</h3>
+  <p>I have added many alerts. In one night on 29 August, <strong>I fixed three alerts that kept ringing although there was a way to resolve them, and made a fourth myself</strong>: a mark for “AI credit ran out” that stayed for 24 hours even after I topped up.</p>
+  <p>The same shape had appeared before:</p>
+  <ul>
+    <li>A data-fetching cost alert that “always exceeds 80% at month end”.</li>
+    <li>A scraping-service alert that “always has 20% left at month end”.</li>
+    <li>An alert that fires on 0 items when 0 is normal.</li>
+    <li>A cancelled official price that the catalogue wrote back the next morning.</li>
+  </ul>
+  <p>An alert that never clears buries real problems. Now when I write one, I make the condition that clears it at the same time, asking three things:</p>
+  <ol>
+    <li>When the problem is fixed, who clears this alert?</li>
+    <li>Does it fire just because time passes, such as month end?</li>
+    <li>Is 0, or a low value, a normal state?</li>
+  </ol>
+  <p>I do not write an alert nobody clears. The code that clears the mark on success goes into the same change as the alert.</p>
+
+  <h3 class="rv" id="c6-s5">What I learned</h3>
+  <blockquote>My tools work on me too.</blockquote>
+  <ul>
+    <li><strong>A limit makes you choose what to drop.</strong> If you set a length cap, say what must stay.</li>
+    <li><strong>Writing everything at once breaks on one dirty value.</strong> Clean before you write.</li>
+    <li><strong>A check must not disturb production.</strong> Same IP, same limits: go gently.</li>
+    <li><strong>Create an alert together with the way it clears.</strong></li>
+  </ul>
+  <h2 class="rv" id="s7">Notifications cannot be recalled: 19% of the last 72 hours’ notifications were wrong, and the gate worked after the fact</h2>
+  <p class="note">Record from 2026-10-17.</p>
+<p>My iPhone app Toreca Dash collects trading-card lottery information and sends a push notification when something new appears. Collected articles pass a <strong>gate (filter)</strong> that checks “is this a lottery you can really apply to?”: it keeps out winner announcements, buy-back notices, non-card products and so on.</p>
+  <p>But a check on 20 September 2026 showed that <strong>about one notification in five went out for an article the gate should have rejected</strong>. The gate existed; the notifications were not stopped by it.</p>
+  <p class="note">Written from my work log of the 20 September 2026 re-check.</p>  <h3 class="rv" id="c7-s1">I counted every notification of the last 72 hours</h3>
+  <p>The method is simple: take every article notified in the last 72 hours and judge again whether it should have been.</p>
+  <div class="scroll rv"><table>
+    <thead><tr><th>Notified</th><th>Wrong</th><th>Share</th></tr></thead>
+    <tbody><tr><td>644</td><td><strong>122</strong></td><td><strong>19%</strong></td></tr></tbody>
+  </table></div>
+  <div class="scroll rv"><table>
+    <thead><tr><th>Reason</th><th>Count</th></tr></thead>
+    <tbody>
+      <tr><td>Winner-only notice (cannot apply)</td><td>30</td></tr>
+      <tr><td>Old post (days old, notified as if new)</td><td>27</td></tr>
+      <tr><td>Expired</td><td>11</td></tr>
+      <tr><td>No way to apply</td><td>14</td></tr>
+      <tr><td>Not a card product</td><td>10</td></tr>
+      <tr><td>Lottery with entry conditions</td><td>8</td></tr>
+      <tr><td>Other</td><td>22</td></tr>
+    </tbody>
+  </table></div>
+
+  <h3 class="rv" id="c7-s2">The gate decided “show it?” after the fact</h3>
+  <p>The article gate also worked by hiding articles later. But a notification is sent about <strong>0.6 seconds after the article is saved</strong>. Hiding later does not recall it.</p>
+  <p>Of 30 articles the gate hid afterwards, <strong>25 had already been pushed</strong>. They disappeared from the screen, but a notification on a phone cannot be taken back.</p>
+
+  <h3 class="rv" id="c7-s3">A second cause: catch-up made old posts look new</h3>
+  <p>X monitoring had been down for a while. From 12:44 on 19 September a catch-up ran, and <strong>posts from 13 to 18 September were notified as new, 367 at once</strong>.</p>
+  <p>Importing posts made during the outage is right. But if you judge “new” by when I found it rather than the <strong>post date</strong>, week-old posts look like fresh news.</p>
+
+  <h3 class="rv" id="c7-s4">The fix: run the same gate at the sender</h3>
+  <p>Adding gates that act at save time was not enough. A notification cannot be taken back, so I made <strong>the notification function’s entrance</strong> run the same judgement as the article gate.</p>
+  <ul>
+    <li>New judgements go into the pre-save gate (<code>screenArticleBeforeSave</code>); the notification entrance goes through the same function, so the two cannot disagree.</li>
+    <li>Old posts are judged by <strong>post date</strong>, not save date.</li>
+    <li>After a catch-up or restart, always check the breakdown of skipped notifications.</li>
+  </ul>
+
+  <h3 class="rv" id="c7-s5">What I learned</h3>
+  <blockquote>Stop what cannot be taken back before it goes out.</blockquote>
+  <ul>
+    <li><strong>Put the gate before the exit that cannot be undone.</strong> A screen can be lowered later; a notification cannot.</li>
+    <li><strong>Use the same judgement at save time and at the exit.</strong> Adding it to one leaves a path around it.</li>
+    <li><strong>“New” means the post date.</strong> Not the day you found it.</li>
+    <li><strong>Count everything.</strong> Only judging all 644 notifications one by one showed 19%.</li>
+  </ul>
+
+  <h2 class="rv" id="s8">Key points of each</h2>
+  <ul>
+    <li><a href="#s1">A bulk update hit “all articles”</a>: A bulk job hit every article and wrongly restored 18 items. How I reverted them from status history and proved new tests work by breaking rules one at a time.</li>
+    <li><a href="#s2">I counted “duplicates are practically zero,” but the audit reported 112 pairs</a>: A nightly merge job timed out partway through the first genre, so later genres were never reached. My count of zero saw only that genre. Fixed with a rotating budget.</li>
+    <li><a href="#s3">“It gets cleaned up later” hid an entrance bug</a>: Catalogue registration looked up existing products by exact name only, so brackets, spaces and full/half-width differences re-created near-identical products daily: 437 in one day, 410 with no articles. The nightly merge job hid it.</li>
+    <li><a href="#s4">“Weird articles keep multiplying”</a>: 252 displayed lotteries were counted by route. Ended rounds left in an aggregator’s table were imported daily with empty deadlines (33); links to search results or top pages and deadlines disagreeing with the store’s own row were closed at the entrance.</li>
+    <li><a href="#s5">Fixing a gate does not fix existing data</a>: After fixing a judgement, 12 of 32 existing articles stayed wrong (the skip mark lasts 7 days); a marker stored in the URL was lost on link rewrite and 111 articles were split again; removing a table key left written values. Five reports had one shape.</li>
+    <li><a href="#s6">Four times my own tools hurt me</a>: A “15 characters” prompt dropped entry conditions in 671 checked lotteries; one undefined broke every save and burned 41% of a day’s credits; six parallel requests got the production IP blocked; I made alerts that kept ringing after the fix.</li>
+    <li><a href="#s7">Notifications cannot be recalled</a>: Of 644 notifications in 72 hours, 122 (19%) were wrong. The article gate hides articles later, but a notification goes out about 0.6 seconds after saving; 25 of 30 hidden articles had already been pushed. I put the same gate at the notification entrance.</li>
+  </ul>
+  <p class="note">This is the English version of <a href="/notes/data-repair/" hreflang="ja" lang="ja">the original Japanese article</a>.</p>
+  <p>More development logs, by theme: <a href="/en/notes/" hreflang="en" lang="en">Notes</a>. About the app: <a href="/en/works/torecadash/" hreflang="en" lang="en">Toreca Dash</a>.</p>
+</div>
+</main>
+
+<footer class="site"><div class="wrap">
+  <span>© 2026 Koshin Studio</span>
+  <div class="sns-row"></div>
+  <nav><a href="/en/" hreflang="en" lang="en">English</a><a href="/" hreflang="ja" lang="ja">日本語</a><a href="/en/about/#contact" hreflang="en" lang="en">Contact</a><a href="/en/privacy/" hreflang="en" lang="en">Privacy</a></nav>
+</div></footer>
+<script src="/motion.js?v=1e7447ec" defer></script>
+</body>
+</html>

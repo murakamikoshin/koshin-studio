@@ -59,6 +59,6 @@
 
   この話に出てくるもの
 
-- 「減るはず」が、二度外れた (https://koshinstudio.com/notes/torecadash-ai/) — 同じアプリの、数え直した記録
+- 「減るはず」が、二度外れた (https://koshinstudio.com/notes/ai-cost-cutting/#s2) — 同じアプリの、数え直した記録
 
 - 「山は89%で落ち着く」は誤りだった (https://koshinstudio.com/notes/sushi-measure/) — 自分の測定が間違っていた、別の記録
