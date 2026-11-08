@@ -7,6 +7,13 @@
   <language>ja</language>
   <atom:link href="https://koshinstudio.com/feed.xml" rel="self" type="application/rss+xml"/>
   <item>
+    <title>アプリとサーバーの点数がずれた：原因は計算ではなく、「次へ」が 2 回呼ばれてステージが入れ替わっていたこと</title>
+    <link>https://koshinstudio.com/notes/swipe-next-twice/</link>
+    <guid isPermaLink="true">https://koshinstudio.com/notes/swipe-next-twice/</guid>
+    <pubDate>Sun, 08 Nov 2026 15:00:00 GMT</pubDate>
+    <description>スワイプ弾幕で、アプリの点数をサーバーが数え直すと合わない提出が出た。ずれた提出を丸ごと残し、アプリの途中経過と比べて最初にずれた場所を出す仕組みで、結果画面のタップと自動タイマーの二重呼び出しを見つけた。</description>
+  </item>
+  <item>
     <title>弾幕の作り方：放射・自機狙い・雨・渦巻き・追尾の仕組みを、計算式と動く見本で解説</title>
     <link>https://koshinstudio.com/notes/danmaku-patterns/</link>
     <guid isPermaLink="true">https://koshinstudio.com/notes/danmaku-patterns/</guid>

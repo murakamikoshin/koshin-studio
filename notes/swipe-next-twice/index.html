@@ -1,0 +1,221 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>アプリとサーバーの点数がずれた：「次へ」が 2 回呼ばれていた — Koshin Studio</title>
+<meta name="description" content="弾幕メーカーのスワイプ弾幕で、アプリの点数をサーバーが数え直すと合わない提出が出た。ずれた提出を Firestore に残し、アプリの途中経過と比べて「最初にずれた場所」を出す仕組みを作って、結果画面のタップと自動タイマーの二重呼び出しを見つけた記録。コードつき。">
+<meta property="og:title" content="アプリとサーバーの点数がずれた：「次へ」が 2 回呼ばれていた">
+<meta property="og:description" content="スワイプ弾幕の点数がサーバーで合わなかった。ずれた提出を残し、最初にずれた場所を出して、二重の「次へ」を見つけた。">
+<meta property="og:type" content="article">
+<meta name="theme-color" content="#fbfaf7">
+<link rel="icon" href="/favicon.ico?v=1697d589" sizes="48x48">
+<link rel="icon" href="/favicon.svg?v=b9d7922f" type="image/svg+xml" sizes="any">
+<link rel="icon" href="/assets/icon/icon-192.png?v=e2566235" type="image/png" sizes="192x192">
+<link rel="apple-touch-icon" href="/assets/icon/icon-180.png?v=84e7f0e6">
+<link rel="manifest" href="/site.webmanifest">
+<script>document.documentElement.className+=" js"</script>
+<link rel="stylesheet" href="/style.css?v=3d886c33">
+<meta name="google-adsense-account" content="ca-pub-3863314847163872">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3863314847163872" crossorigin="anonymous"></script>
+<link rel="canonical" href="https://koshinstudio.com/notes/swipe-next-twice/">
+<meta property="og:url" content="https://koshinstudio.com/notes/swipe-next-twice/">
+<meta property="og:site_name" content="Koshin Studio">
+<meta property="og:locale" content="ja_JP">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="alternate" type="application/rss+xml" title="Koshin Studio — Notes" href="https://koshinstudio.com/feed.xml">
+<link rel="alternate" type="text/markdown" href="https://koshinstudio.com/notes/swipe-next-twice/index.md">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BlogPosting","headline":"アプリとサーバーの点数がずれた：原因は計算ではなく、「次へ」が 2 回呼ばれてステージが入れ替わっていたこと","url":"https://koshinstudio.com/notes/swipe-next-twice/","description":"スワイプ弾幕で、アプリの点数をサーバーが数え直すと合わない提出が出た。ずれた提出を丸ごと残し、アプリの途中経過と比べて最初にずれた場所を出す仕組みで、結果画面のタップと自動タイマーの二重呼び出しを見つけた。","datePublished":"2026-11-09","dateModified":"2026-11-09","inLanguage":"ja","image":"https://koshinstudio.com/assets/og/og_notes_swipe-next-twice.jpg","author":{"@id":"https://koshinstudio.com#koshin"},"publisher":{"@id":"https://koshinstudio.com#studio"},"mainEntityOfPage":"https://koshinstudio.com/notes/swipe-next-twice/"},{"@type":"Person","@id":"https://koshinstudio.com#koshin","name":"Koshin","jobTitle":"Webエンジニア・アプリエンジニア","url":"https://koshinstudio.com/about/","worksFor":{"@id":"https://koshinstudio.com#studio"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Koshin Studio","item":"https://koshinstudio.com/"},{"@type":"ListItem","position":2,"name":"Notes","item":"https://koshinstudio.com/notes/"},{"@type":"ListItem","position":3,"name":"アプリとサーバーの点数がずれた：原因は計算ではなく、「次へ」が 2 回呼ばれてステージが入れ替わっていたこと","item":"https://koshinstudio.com/notes/swipe-next-twice/"}]}]}</script>
+<meta property="og:image" content="https://koshinstudio.com/assets/og/og_notes_swipe-next-twice.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
+</head>
+<body class="article">
+<canvas id="motes"></canvas>
+
+<header class="site"><div class="wrap">
+  <a class="logo" href="/"><img class="logo-mark" src="/favicon.svg?v=b9d7922f" alt="" width="28" height="28">Koshin Studio</a>
+  <nav><a href="/works/">Works</a><a href="/works/#game">Games</a><a href="/notes/">Notes</a><a href="/picks/">Picks</a><a href="/calc/">Tools</a><a href="/about/">About</a></nav>
+</div></header>
+
+<main><div class="wrap">
+  <nav class="crumbs" aria-label="現在地"><a href="/">Koshin Studio</a><i aria-hidden="true">›</i><a href="/notes/">Notes</a><i aria-hidden="true">›</i><span aria-current="page">アプリとサーバーの点数がずれた：原因は計算ではなく、「次へ」が 2 回呼ばれてステージが入れ替わっていたこと</span></nav>
+  <h1>アプリとサーバーの点数がずれた：原因は計算ではなく、「次へ」が 2 回呼ばれてステージが入れ替わっていたこと</h1>  <div class="rule"></div><!--byline--><p class="note byline">書いた人：<a href="/about/#operator">Koshin</a>（Web エンジニア・アプリエンジニア）　公開：2026-11-09</p><!--/byline--><p class="lead">弾幕メーカー 開発の記録 ／ 2026年11月</p>
+
+  <p>弾幕ゲーム<a href="/works/danmaku-maker/">「弾幕メーカー」</a>に、いま「スワイプ弾幕」というモードを作っています。短いステージ（クリップ）が次々に流れてきて、指でなぞって避け続け、点数を競うモードです。点数はランキングに載るので、<strong>アプリが送った操作の記録を、サーバーが同じ計算で遊び直して、点数を数え直して</strong>います。</p>
+  <p>このとき、<strong>アプリとサーバーの計算が合わない</strong>提出が出ました。まず疑ったのは、計算の食い違い（浮動小数の誤差など）でした。実際の原因は、計算ではなく、<strong>結果画面の「次へ」が 2 回呼ばれて、遊んだクリップがサーバーの選ぶものと入れ替わっていた</strong>ことでした。この記事は、ずれた提出をサーバーに残し、「最初にずれた場所」を出すようにして原因を絞った手順と、直し方の記録です。</p>
+  <p class="note">この記事は、弾幕メーカーのリポジトリのコミット（<code>07a7ecd</code>・<code>8e68064</code>・<code>f19e1cc</code>、2026 年 11 月 9 日）と、そのコードから書いています。スワイプ弾幕は開発中のモードで、名前や仕様は変わるかもしれません。</p>
+<!--toc-->
+  <nav class="toc" aria-label="目次"><p>目次</p><ol><li><a href="#s1">サーバーは、遊びをまるごと計算し直している</a></li><li><a href="#s2">手順 1：ずれた提出を、そのまま保存する</a></li><li><a href="#s3">手順 2：アプリにも途中経過を送らせ、最初にずれた所を出す</a></li><li><a href="#s4">原因：タップと自動の「次へ」が、両方とも効いていた</a></li><li><a href="#s5">直し方：画面と状態の、両方で 1 回に絞る</a></li><li><a href="#s6">サーバーで検算するゲームを作る人へ：確かめる 5 つ</a></li></ol></nav>
+<!--/toc-->
+  <h2 class="rv" id="s1">サーバーは、遊びをまるごと計算し直している</h2>
+  <p>スワイプ弾幕の 1 回のプレイは、こう流れます。</p>
+  <ol>
+    <li>プレイを始めると、サーバーが<strong>種（乱数の元）</strong>を決めてアプリに渡す</li>
+    <li>アプリは、種・何本目か・連続クリア数・もう出たクリップ、から<strong>次のクリップを選ぶ</strong>（<code>SwipeFeed.pick</code>）</li>
+    <li>クリップごとに「GO」の 60 ステップ（0.5 秒）と、プレイの最大 1,200 ステップ（10 秒）を遊ぶ。計算は 1 秒に 120 ステップの固定間隔</li>
+    <li>終わったら、クリップごとの<strong>操作の列</strong>（指の動き）だけをサーバーに送る</li>
+    <li>サーバーは、同じ種から同じ順でクリップを選び直し、送られた操作で 1 本ずつ遊び直して、点数を出す</li>
+  </ol>
+  <p>アプリ（Swift）とサーバー（TypeScript）は、同じ計算を別の言語で持っています。両者が一致することは、Swift の計算から作った正解データを TypeScript のテストで比べて確かめています。<strong>計算そのものは一致するはず</strong>なのに、実際の提出では、サーバーが途中のクリップで「被弾して終わった」と判断し、アプリが送ったクリップの数より少なく終わる（<code>clipsPlayed &lt; clips.length</code>）ことがありました。</p>
+  <p>このずれは、ログに「ずれた」としか出ないと、手元で再現できません。そこで、まず<strong>ずれた提出をそのまま残す</strong>ことから始めました。</p>
+
+  <h2 class="rv" id="s2">手順 1：ずれた提出を、そのまま保存する</h2>
+  <p>サーバーの数え直しがアプリの申告と合わなかったときだけ、送られてきた操作の列と、サーバー側の途中結果を、Firestore の <code>swipeMismatches</code> に 1 件 1 文書で保存するようにしました（<code>07a7ecd</code>）。</p>
+  <pre><code>if (result.invalid || result.clipsPlayed &lt; clips.length) {
+  logger.warn("swipe-submit-mismatch", summary);
+  try {
+    // Firestore の 1 文書は約 1MB まで。収まる分だけ残す
+    const kept = [];
+    let size = 0;
+    for (const c of clips) {
+      size += c.go.length + c.moves.length + 40;
+      if (size &gt; 800_000) break;
+      kept.push(c);
+    }
+    await db().doc(`swipeMismatches/${runId}`).set({
+      seed, poolVersion, sent: clips.length, kept: kept.length,
+      clipIDs: result.clipIDs, clipOutcomes: result.clipOutcomes,
+      scoreAfterEachClip: result.scoreAfterEachClip, clips: kept, ...
+    });
+  } catch (e) { logger.error("swipe-mismatch-save-failed", ...); }  // 保存に失敗しても提出は続ける
+}</code></pre>
+  <p>気をつけたのは、次の 3 つです。</p>
+  <ul>
+    <li><strong>種とクリップの一覧の版（<code>poolVersion</code>）も残す。</strong>操作の列だけあっても、どのクリップを遊んだかが決まらないと再現できません</li>
+    <li><strong>1 文書の上限（約 1MB）を超えないよう、800,000 文字で打ち切る。</strong>上限を超えると書き込み自体が失敗し、何も残りません</li>
+    <li><strong>調べるための保存が失敗しても、プレイの提出は止めない。</strong>セキュリティルールでは、このコレクションをアプリから読み書きできないようにしました（<code>allow read, write: if false</code>）</li>
+  </ul>
+
+  <h2 class="rv" id="s3">手順 2：アプリにも途中経過を送らせ、最初にずれた所を出す</h2>
+  <p>保存した記録を遊び直せば、サーバー側の計算は追えます。でも、<strong>アプリの中で何が起きていたか</strong>は分かりません。そこで、アプリがクリップごとに途中経過を数えて、操作の列と一緒に送るようにしました（<code>8e68064</code>）。サーバーは同じものを自分でも数え、<strong>上から順に比べて、最初に食い違った 1 か所</strong>を返します。</p>
+  <div class="scroll rv"><table>
+    <thead><tr><th>比べる順</th><th>名前</th><th>中身</th></tr></thead>
+    <tbody>
+      <tr><td>1</td><td><code>g0</code></td><td>クリップを始めた時点のゲージ（前のクリップまでの結果）</td></tr>
+      <tr><td>2</td><td><code>grazes</code></td><td>かすり（弾の近くを通った）の回数</td></tr>
+      <tr><td>3</td><td><code>bombs</code></td><td>ボムが出たステップの一覧</td></tr>
+      <tr><td>4</td><td><code>end</code></td><td>クリップが終わったステップ</td></tr>
+      <tr><td>5</td><td><code>cp</code></td><td>120 ステップ（1 秒）ごとの、弾の位置の指紋</td></tr>
+      <tr><td>6</td><td><code>score</code></td><td>クリップを終えた時点の点数</td></tr>
+    </tbody>
+  </table></div>
+  <pre><code>function firstDiff(clips, result) {
+  for (let i = 0; i &lt; Math.min(clips.length, result.diag.length); i++) {
+    const c = clips[i].diag, s = result.diag[i];
+    if (!c) return { clip: i, field: "no-diag" };
+    const same = (a, b) =&gt; JSON.stringify(a) === JSON.stringify(b);
+    const checks = [["g0", c.g0, s.g0], ["grazes", c.grazes, s.grazes], ["bombs", c.bombs, s.bombs],
+      ["end", c.end, s.end], ["cp", c.cp.slice(0, s.cp.length), s.cp], ["score", c.score, result.scoreAfterEachClip[i]]];
+    for (const [field, app, server] of checks) if (!same(app, server)) return { clip: i, field, app, server };
+  }
+  return null;
+}</code></pre>
+  <p>作るときに決めたことを、書いておきます。</p>
+  <ul>
+    <li><strong>弾の位置は、そのままではなく丸めてから指紋にする。</strong>弾の x・y を 1,000 倍して整数に丸め、FNV-1a でまとめた値です（<code>bulletHashCoarse</code>）。小数の最後の桁まで比べる指紋も別にありますが、調べる目的では、丸めた方が「本当に別の動きをしたか」だけを拾えます</li>
+    <li><strong>毎ステップではなく、1 秒ごと。</strong>1 クリップ最大 10 個で済み、送る量が増えません</li>
+    <li><strong>途中経過は、点数に使わない。</strong>アプリの申告なので、信用すれば書き換えられます。形が合わなければ（整数でない、配列が長すぎる等）黙って捨て、比べるだけに使います</li>
+    <li><strong>原因に近いものから比べる。</strong>ゲージがずれていれば、それより後の数字はみな巻き添えでずれます。最初の 1 か所だけを返すのは、そのためです</li>
+  </ul>
+  <p>あわせて、保存された記録を Swift 側の同じ計算で遊び直す調査用のテスト（<code>SwipeMismatchReplayTests</code>）も足しました。環境変数で記録のファイルを渡したときだけ動き、アプリの選び方で出るクリップの順と、サーバーが記録したクリップの順を並べて出します。浮動小数の誤差を疑って、かすりや被弾の判定が「境目ぎりぎり」だった弾の数も数えるようにしています。</p>
+
+  <h2 class="rv" id="s4">原因：タップと自動の「次へ」が、両方とも効いていた</h2>
+  <p>保存と途中経過を入れてから約 40 分後のコミット（<code>f19e1cc</code>）で、原因を直しました。計算の食い違いではなく、<strong>アプリが遊んだクリップと、サーバーが選んだクリップが、別物になっていた</strong>のです。</p>
+  <p>クリップをクリアすると結果が出て、約 1〜1.6 秒で自動的に次のクリップへ進みます。その前にタップ（または上スワイプ）すれば、すぐ次へ進めます。直す前のコードは、こうでした。</p>
+  <pre><code>// SwipeScene（画面）
+private func advance() { resultTimer = 0; onAdvance?() }   // タップでも、タイマーでも、ここを通る
+
+override func update(_ currentTime: TimeInterval) {
+  ...
+  if model.phase == .cleared || model.phase == .failed {
+    if !touching { resultTimer -= dt }
+    if resultTimer &lt;= 0 { advance(); resultTimer = 99 }
+  }
+}
+
+// SwipeModel（遊びの状態）
+func advanceAfterResult() async {
+  switch phase {
+  case .cleared, .go, .playing: await nextClip()   // GO やプレイ中でも、次のクリップを選んでいた
+  case .failed: await finish()
+  default: break
+  }
+}</code></pre>
+  <p>コードから読める流れは、こうです。</p>
+  <ol>
+    <li>結果画面でタップすると、<code>advance()</code> が<strong>タイマーを 0 にしてから</strong>、次へ進む処理（<code>onAdvance</code>）を呼ぶ。この処理は <code>Task</code> で後から走る</li>
+    <li>その処理が走る前の次のフレームでは、状態はまだ「クリア画面」のまま。タイマーは 0 以下なので、<strong>自動の「次へ」がもう一度呼ばれる</strong></li>
+    <li>1 回目の呼び出しでクリップ A が選ばれ、先読みが済んでいれば、すぐ「GO」に進む</li>
+    <li>2 回目の呼び出しは「GO」中に届く。<code>advanceAfterResult</code> は GO 中でも <code>nextClip()</code> を呼ぶので、<strong>もう一度クリップを選ぶ</strong></li>
+    <li>まだクリップ A の記録は付けていないので、「何本目か」は同じ。でも「もう出たクリップ」には A が入っているので、<strong>別のクリップ B が選ばれる</strong></li>
+  </ol>
+  <p>プレイヤーは B を遊び、B の操作の列を送ります。サーバーは同じ種・同じ「何本目か」から A を選び、<strong>B のための指の動きで A を遊び直す</strong>ので、まったく別の弾幕の中で被弾します。アプリでは避けきった記録が、サーバーではそのクリップで終わる、という形になります。</p>
+  <p class="note">2 回呼ばれても、タイミングによっては害がありません。2 回目が「切り替え中」（<code>.transition</code>）に届けば、何もしないで終わります。先読みが済んでいて、1 回目がすぐ「GO」まで進んだときだけ、入れ替わりが起きます。毎回は起きないので、見つけにくい不具合でした。</p>
+
+  <h2 class="rv" id="s5">直し方：画面と状態の、両方で 1 回に絞る</h2>
+  <p>直したのは 2 か所、合わせて 6 行の追加と 3 行の削除です。</p>
+  <pre><code>// 画面：一度進んだら、次の結果画面でタイマーが入れ直されるまで、何度呼ばれても無視する
+private func advance() { guard resultTimer &lt; 90 else { return }; resultTimer = 99; onAdvance?() }
+...
+if resultTimer &lt;= 0 { advance() }
+
+// 状態：次のクリップを選ぶのは、開始直後か、クリア画面のときだけ
+private func nextClip() async {
+  guard phase == .starting || phase == .cleared else { return }
+  ...
+}
+func advanceAfterResult() async {
+  switch phase {
+  case .cleared: await nextClip()   // GO・プレイ中に呼ばれても、選び直さない
+  case .failed: await finish()
+  default: break
+  }
+}</code></pre>
+  <p>画面の側だけ直しても、ほかの入口（別のボタンや、将来足す操作）から 2 回呼ばれれば同じことが起きます。<strong>「クリップを選ぶ」という、記録と結びついた処理の側で、呼ばれてよい状態を限った</strong>のが本命の直しです。画面の側の直しは、余計な呼び出しを入口で減らすためのものです。</p>
+  <p class="note">この記事を書いた時点では、直した版での提出で、ずれが無くなったかを数えた結果はまだありません。<code>swipeMismatches</code> は残してあるので、次に数えるときの材料になります。</p>
+
+  <h2 class="rv" id="s6">サーバーで検算するゲームを作る人へ：確かめる 5 つ</h2>
+  <p>この件から、同じ形の作り（アプリが操作を送り、サーバーが遊び直す）で使えることを、手順にしておきます。</p>
+  <ol>
+    <li><strong>ずれた提出だけ、元の入力ごと残す。</strong>種・データの版・操作の列があれば、手元で何度でも再現できます。保存先の大きさの上限と、保存の失敗で本処理を止めないことに注意</li>
+    <li><strong>アプリにも途中経過を数えさせ、サーバーが「最初にずれた 1 か所」を返す。</strong>点数には使わず、比べるだけ。原因に近い順に並べる</li>
+    <li><strong>「何を遊んだか」を決める処理は、呼ばれてよい状態を限る。</strong>乱数で何かを選ぶ処理が 2 回走ると、計算が完璧でも結果がずれます</li>
+    <li><strong>タップと自動タイマーのように、同じ処理への入口が 2 つあるなら、片方を通ったら、もう片方を閉じる。</strong>「タイマーを 0 にして進む」は、自動の側の条件を満たしてしまうことがあります</li>
+    <li><strong><code>Task</code> で後から走る処理は、その間にも画面のループが回る。</strong>状態が変わるのは処理が走ってからなので、それまでのフレームは古い状態のまま判断されます</li>
+  </ol>
+  <p>サーバーの検算が合わなくなった別の例は、<a href="/notes/rank-verify-mismatch/">すし積むの番付に載らなくなった記録</a>に書いています（こちらは、ゲームの数字を変えて検算の数字を直し忘れた件です）。弾幕そのものの作り方は、<a href="/notes/danmaku-patterns/">弾幕の作り方</a>にまとめています。</p>
+
+
+<!--related-->
+  <div class="rule" style="margin:40px 0 22px"></div>
+  <p class="eyebrow">ほかの記録</p>
+  <ul class="plain">
+    <li><a href="/notes/danmaku-patterns/">弾幕の作り方：放射・自機狙い・雨・渦巻き・追尾の仕組みを、計算式と動く見本で解説</a> — 弾幕は短い計算式でできている。弾幕メーカーで実際に使っている放射・自機狙い（奇数弾と偶数弾）・雨・首ふり扇・渦巻き・追尾の式を、動く見本で確かめられるように書いた。</li>
+    <li><a href="/notes/rank-verify-mismatch/">すし積むの番付に載らなくなった：ゲームの数字を変えて、サーバーの検算を直し忘れていた（しかも二つ）</a> — 番付に、普通に遊んでも載らなくなった。ゲームの数字を変えて、サーバーの検算を直し忘れていた。金の桶の褒美（8,000→25,000）と、降るネタ（3種→5種）の二つ。注意書きでは守れず、同じ種で出題を比べる検査を足した。</li>
+    <li><a href="/notes/tcg-lottery-app-compare/">ポケカ・トレカ抽選アプリを比較：トレカダッシュ・トレゲト・NowPokeca・Pokeka Tracker・トレカの地図のメリットとデメリット</a> — ポケカをはじめトレカの抽選・予約・再販を追うアプリ・サイトを、ジャンル数・通知・地図・料金で比較。作者（トレカダッシュの開発者）による比較で、トレカダッシュの弱いところも書いた。</li>
+  </ul>
+<!--/related-->
+
+<!--comments-->
+  <section class="comments" id="comments" data-repo="murakamikoshin/koshin-studio" data-repo-id="R_kgDOURc3ew"
+    data-category="Announcements" data-category-id="DIC_kwDOURc3e84DHTVr">
+    <h2 id="comments-h">コメント</h2>
+    <p>感想や、記事の間違いの指摘は、ここへ。書くには、GitHub のアカウントが要ります。</p>
+    <p><button type="button" class="btn ghost" id="load-comments">コメントを開く</button></p>
+    <p class="note">押すと、giscus（giscus.app）と GitHub に接続します。押さなければ、接続しません。詳しくは<a href="/privacy/">プライバシーポリシー</a>に書いています。</p>
+    <div id="giscus-box"></div>
+  </section>
+<!--/comments-->
+</div>
+</main>
+
+<footer class="site"><div class="wrap">
+  <span>© 2026 Koshin Studio</span>
+  <div class="sns-row"></div>
+  <nav><a href="/picks/">Picks</a><a href="/calc/">Tools</a><a href="/about/">運営者情報</a><a href="/about/#contact">お問い合わせ</a><a href="/privacy/">プライバシーポリシー</a><a href="/en/" hreflang="en" lang="en">English</a></nav>
+</div></footer>
+<script src="/motion.js?v=1e7447ec" defer></script>
+</body>
+</html>
