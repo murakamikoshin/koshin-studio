@@ -1,0 +1,30 @@
+# ドパガキ脱出！！：このブランチに push されたら、組み立てて Pages（dopagaki）に出す。
+# koshinstudio.com/play/dopagaki/ は、サイト側の worker/ がここ（dopagaki.pages.dev）へ中継する。
+name: deploy-dopagaki
+on:
+  push:
+    branches: [game-dopagaki]
+  workflow_dispatch:
+concurrency: { group: deploy-dopagaki, cancel-in-progress: false }
+env:
+  CLOUDFLARE_ACCOUNT_ID: 819c918e8d9f77952de1623c1b0f1a5c
+  CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 22 }
+      - name: 組み立て
+        run: npm ci && npm run build
+      - name: Pages プロジェクトを用意（初回だけ作られる。本番ブランチは main）
+        run: npx -y wrangler@3 pages project create dopagaki --production-branch main || echo "既にある"
+      - name: 出す（--branch main を落とさない。落とすと preview に入る）
+        run: npx -y wrangler@3 pages deploy dist --project-name dopagaki --branch main --commit-dirty=true
+      - name: 出たか確かめる
+        run: |
+          sleep 20
+          for u in / /game.js; do
+            c=$(curl -s -o /dev/null -w "%{http_code}" "https://dopagaki.pages.dev$u"); echo "$c $u"; [ "$c" = 200 ] || exit 1
+          done

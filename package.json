@@ -1,0 +1,16 @@
+{
+  "name": "dopagaki",
+  "version": "1.0.0",
+  "description": "ドパガキ脱出！！ — 謎を解かずに力技で脱出する3Dブラウザゲーム",
+  "scripts": {
+    "build": "esbuild src/main.js --bundle --minify --format=iife --target=es2020 --outfile=dist/game.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "cannon-es": "^0.20.0",
+    "esbuild": "^0.28.2",
+    "three": "^0.187.0"
+  },
+  "private": true
+}
