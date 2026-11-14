@@ -40,6 +40,8 @@ const check = async (path, want) => {
 };
 await check('/play/sushitsumu/', { status: 200, asked: 'https://sushitsumu.pages.dev/' });
 await check('/play/kaeru-sekai/', { status: 200, asked: 'https://kaeru-sekai.pages.dev/' });
+await check('/play/dopagaki/', { status: 200, asked: 'https://dopagaki-36i.pages.dev/' });
+await check('/play/dopagaki/game.js', { status: 200, asked: 'https://dopagaki-36i.pages.dev/game.js' });
 await check('/play/kaeru-dani/', { status: 301, loc: 'https://koshinstudio.com/play/kaeru-sekai/' });
 await check('/play/sushitsumu/?lang=en', { status: 200, asked: 'https://sushitsumu.pages.dev/?lang=en' });
 await check('/play/sushitsumu', { status: 301, loc: 'https://koshinstudio.com/play/sushitsumu/' });

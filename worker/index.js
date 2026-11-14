@@ -18,6 +18,9 @@ const ROUTES = {
     sushitsumu: 'https://sushitsumu.pages.dev',
     stopwatch10: 'https://stopwatch10.pages.dev',
     'kaeru-sekai': 'https://kaeru-sekai.pages.dev',
+    /* dopagaki.pages.dev は他所の物なので、Pages が割り振った名前になっている。
+       本体はこのリポジトリの game-dopagaki ブランチ（住所はそこの PAGES_HOST） */
+    dopagaki: 'https://dopagaki-36i.pages.dev',
   },
   app: {
     shindananime: 'https://shindananime.pages.dev',

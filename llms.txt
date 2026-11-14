@@ -62,6 +62,7 @@ English: a one-person studio making browser games and an iPhone app, with develo
 - [抽選の当選確率計算機](https://koshinstudio.com/calc/lottery/): 倍率と応募の回数から、ひとつ以上当たる確率を出す。応募先ごとに確率が違っても使える。トレカの抽選販売の考え方つき。
 
 ## Works（作ったもの）
+- [ドパガキ脱出！！](https://koshinstudio.com/works/dopagaki/): 脱出ゲームなのに謎は解かない。殴る・投げる・叫ぶで扉ごと壊して出てくる3Dブラウザゲーム。眠る見張りを起こさない壊し方を考える、全200ステージ・1000コース。
 - [弾幕メーカー](https://koshinstudio.com/works/danmaku-maker/): 弾幕ステージを自分で作って投稿し、世界中のプレイヤーが作ったステージを遊べる iPhone・iPad の弾幕ゲーム。発射台は最大8個、遊び方は4つ。10言語対応、App Store で配信中。
 - [還る世界](https://koshinstudio.com/works/kaeru-sekai/): 灰色に枯れた世界に光の種をまいて緑をよみがえらせる3Dの景色ゲーム。谷・島・砂漠・火山など番号ごとに違う世界が生まれ、人を住まわせて100年を見届けられます。
 - [すし積む](https://koshinstudio.com/works/sushitsumu/): シャリから始めて、同じネタ同士をぶつけて育てる落ち物パズル。行き着く先は金のすし桶。ブラウザだけで遊べます。
