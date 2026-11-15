@@ -159,9 +159,9 @@ Web 版は cardalerthub の VPS が毎時組んで出すので、手元にはこ
    こちらは**履歴**。`Production` 行のブランチ名は、そのデプロイを出した
    ときの名前で、設定を変えても書き換わらない。**設定と混同しない**
    （stopwatch10 で実際に混同して、直っているのに直っていないと思った）
-3. 配る形には `noindex, follow` を入れておく。検索に出すのは
-   `koshinstudio.com/works/<ゲーム名>/` の紹介ページの方で、
-   実物の方が先に拾われると具合が悪い
+3. 配る形（`*.pages.dev`）には `noindex, follow` を入れておいてよい。
+   `koshinstudio.com/play/<ゲーム名>/` を通るときは、中継（`worker/`）が noindex を外し、
+   canonical をその住所に向け直すので、検索に出るのは koshinstudio.com の方だけになる
 
 **このリポジトリで**
 

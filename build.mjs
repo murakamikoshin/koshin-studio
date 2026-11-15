@@ -191,12 +191,8 @@ const opposite = (t) => typeByCode[codeOf(t.letters.map((x, i) =>
 const ctaBtn = (label) => `<p class="rv" style="margin-top:30px"><a class="btn" data-play="shindananime" href="${APP}">${label}</a><a class="btn ghost" href="/works/shindananime/">この診断について</a></p>`;
 const typeChip = (t) => `<a class="type-chip" href="${typeUrl(t.code)}"><b>${t.code}</b><span>${esc(t.nickname)}</span></a>`;
 
-/* タイプ別ページは自動生成で薄い。本人の言葉（data/anime-types.json の note）が
-   入るまでは、検索に載せない（noindex）。入ったものだけ sitemap にも入る */
+/* タイプ別ページも検索に載せる（以前は note が入るまで noindex にしていたが、やめた） */
 const writeAnime = (rel, html) => {
-  const m = rel.match(/^\/anime\/types\/([^/]+)\/index\.html$/);
-  if (m && !(typeByCode[m[1].toUpperCase()] || {}).note)
-    html = html.replace('</head>', '<meta name="robots" content="noindex,follow">\n</head>');
   const f = here + rel;
   mkdirSync(f.slice(0, f.lastIndexOf('/')), { recursive: true });
   writeFileSync(f, html);
