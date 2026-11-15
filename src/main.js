@@ -131,9 +131,13 @@ function disposeTree(o) {
     }
   });
 }
+// The old room is not thrown away until the new one is built and its shaders are ready:
+// releasing the old materials first would drop shader programs the new room needs again,
+// and recompiling them is the stall people see between courses (worst on phones).
+let oldRoom = [];
 function clearRoom() {
   for (const b of [...S.world.bodies]) S.world.removeBody(b);
-  disposeTree(S.roomGroup);
+  oldRoom.push(...S.roomGroup.children);
   S.roomGroup.clear();
   S.props = []; S.debris = []; S.timers = []; S.deferred = []; S.propsDirty = false;
   S.world.addBody(S.kid.pbody);
@@ -151,6 +155,10 @@ function loadRoom(i, retry) {
   buildShell(def); def.setup();
   S.kid.reset(def.start[0], def.start[1]);
   hemi.groundColor.set(def.pal.ground);
+  // get every shader the new room needs ready now, while the screen is covered, then let the old room go
+  try { S.renderer.compile(S.scene, S.camera); } catch (e) { /* compile is only a warm-up */ }
+  for (const o of oldRoom) disposeTree(o);
+  oldRoom = [];
   $('room-no').textContent = `STAGE ${def.code}` + (def.dark ? '・停電' : '') + (def.grav && def.grav < 20 ? '・低重力' : '');
   $('mini-text').textContent = def.mission; $('mini-stamp').textContent = def.stamp;
   $('room-name').textContent = def.name;
@@ -205,7 +213,7 @@ function onExited() {
   const f = $('fade'); f.classList.add('on');
   setTimeout(() => {
     unlock(g.roomIndex + 1); saveBest(ROOMS[g.roomIndex].code, g.roomTime, g.moves);
-    if (g.roomIndex < S.endRoom) { loadRoom(g.roomIndex + 1); g.mode = 'play'; f.classList.remove('on'); }
+    if (g.roomIndex < S.endRoom) { loadRoom(g.roomIndex + 1); g.mode = 'play'; requestAnimationFrame(() => requestAnimationFrame(() => f.classList.remove('on'))); }
     else { showResult(); f.classList.remove('on'); }
   }, 420);
 }
