@@ -72,6 +72,13 @@ function init() {
   S.openExit = openExit; S.onExited = onExited; S.retryRoom = retryRoom;
   resize(); addEventListener('resize', resize);
   if (window.visualViewport) visualViewport.addEventListener('resize', resize);
+  // the play area can still be 0×0 at this point (page not laid out yet): follow its real size
+  if (window.ResizeObserver) new ResizeObserver(() => { const a = $('app'); if (a.clientWidth !== S.vw || a.clientHeight !== S.vh) resize(); }).observe($('app'));
+  // phones drop the GPU context when the tab sleeps or comes back from the back/forward cache;
+  // a dead context draws nothing, so start again cleanly
+  canvas.addEventListener('webglcontextlost', (e) => { e.preventDefault(); });
+  canvas.addEventListener('webglcontextrestored', () => location.reload());
+  addEventListener('pageshow', (e) => { if (e.persisted && renderer.getContext().isContextLost()) location.reload(); });
   bindInput(); bindUi();
   loadRoom(0);
   g.mode = 'title';
@@ -458,8 +465,12 @@ function simStep(raw, quiet) {
   if (S.bubbleT > 0) { S.bubbleT -= raw; if (S.bubbleT <= 0) $('bubble').classList.remove('show'); }
 }
 
+let frameErr = false;
 function frame(now) {
   requestAnimationFrame(frame);
+  try { frameBody(now); } catch (e) { if (!frameErr) { frameErr = true; console.error(e); } }
+}
+function frameBody(now) {
   const raw = Math.min(0.05, (now - lastT) / 1000); lastT = now;
   if (raw <= 0) return;
   musicTick(g.mode === 'play', ROOMS[g.roomIndex] ? ROOMS[g.roomIndex].world : 1);
@@ -569,16 +580,18 @@ function boot(data) {
     if (resumeRoom) unlock(resumeRoom);
     window.__dg = { S, loadRoom, startGame, ROOMS, pickProp, inp, setQuality, step: simStep, pickAt: (p) => { const s = toScreen(p.pos); return [s.x, s.y]; }, pt: (x, y, z) => { const s = toScreen(V(x, y, z)); return [s.x, s.y]; }, scr: (name, i = 0) => { const p = S.props.filter((q) => q.alive && q.name === name)[i]; if (!p) return null; const s = toScreen(p.pos); return [s.x, s.y]; }, kid: () => { const s = toScreen(V(S.kid.x, 0.9, S.kid.z)); return [s.x, s.y]; } };
   };
-  let done = false;
-  const once = () => { if (!done) { done = true; go(); } };
+  // Start the room straight away: waiting for the web fonts left the title with an empty background
+  // for up to two seconds on a slow connection. Signs painted on the walls use those fonts, so the
+  // title room is built again once they arrive.
+  go();
+  const redraw = () => { if (g.mode === 'title' && g.roomIndex === 0) loadRoom(0); };
   try {
     Promise.all([
       document.fonts.load('400 40px "Dela Gothic One"', FONT_SAMPLE),
       document.fonts.load('900 20px "Zen Kaku Gothic New"', FONT_SAMPLE),
       document.fonts.load('500 20px "Zen Kaku Gothic New"', FONT_SAMPLE),
-    ]).then(once, once);
-  } catch (e) { once(); }
-  setTimeout(once, 2200);
+    ]).then(redraw, () => {});
+  } catch (e) { /* no font loading API: the fallback fonts stay */ }
 }
 const hot = window.claude && window.claude.hot;
 if (hot && hot.snapshot) hot.snapshot(() => ({ room: g.mode === 'play' || g.mode === 'trans' ? g.roomIndex : 0 }));
