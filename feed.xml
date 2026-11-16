@@ -7,6 +7,13 @@
   <language>ja</language>
   <atom:link href="https://koshinstudio.com/feed.xml" rel="self" type="application/rss+xml"/>
   <item>
+    <title>「出たか」の確認が、他人のサイトで通っていた：Cloudflare Pages のプロジェクト名と *.pages.dev の住所は、同じとは限らない</title>
+    <link>https://koshinstudio.com/notes/pages-dev-name-taken/</link>
+    <guid isPermaLink="true">https://koshinstudio.com/notes/pages-dev-name-taken/</guid>
+    <pubDate>Sat, 14 Nov 2026 15:00:00 GMT</pubDate>
+    <description>Pages に dopagaki という名前で出したら、住所は dopagaki-36i.pages.dev だった。200 を見るだけの配備確認は、他人のサイトで通っていた。404.html の無い Pages は無い道にも 200 を返す。API で住所を聞き、中身で確かめる直し方。</description>
+  </item>
+  <item>
     <title>アプリとサーバーの点数がずれた：原因は計算ではなく、「次へ」が 2 回呼ばれてステージが入れ替わっていたこと</title>
     <link>https://koshinstudio.com/notes/swipe-next-twice/</link>
     <guid isPermaLink="true">https://koshinstudio.com/notes/swipe-next-twice/</guid>
