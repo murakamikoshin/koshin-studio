@@ -8,6 +8,7 @@
 English: a one-person studio making browser games and an iPhone app, with development logs that report measured numbers and say what could not be confirmed. English index for AI: https://koshinstudio.com/en/llms.txt (full text: https://koshinstudio.com/en/llms-full.txt).
 
 ## Notes（制作の記録。各記事の Markdown 版は、URL の末尾を index.md にした所）
+- [アニメ6,074作を64タイプに振り分けたら、8タイプは0作だった：6つの軸は、独立していなかった](https://koshinstudio.com/notes/anime-64-types/): 診断のデータベース6,074作を、6つの軸で64タイプに振り分けて数えた。上位4タイプで47.3%、8タイプは0作。軸を2本ずつ比べると、3本の軸がほぼ同じ向きを測っていた。数え方と、まだ切り分けられていないことの記録。
 - [「出たか」の確認が、他人のサイトで通っていた：Cloudflare Pages のプロジェクト名と *.pages.dev の住所は、同じとは限らない](https://koshinstudio.com/notes/pages-dev-name-taken/): Pages に dopagaki という名前で出したら、住所は dopagaki-36i.pages.dev だった。200 を見るだけの配備確認は、他人のサイトで通っていた。404.html の無い Pages は無い道にも 200 を返す。API で住所を聞き、中身で確かめる直し方。
 - [アプリとサーバーの点数がずれた：原因は計算ではなく、「次へ」が 2 回呼ばれてステージが入れ替わっていたこと](https://koshinstudio.com/notes/swipe-next-twice/): スワイプ弾幕で、アプリの点数をサーバーが数え直すと合わない提出が出た。ずれた提出を丸ごと残し、アプリの途中経過と比べて最初にずれた場所を出す仕組みで、結果画面のタップと自動タイマーの二重呼び出しを見つけた。
 - [弾幕の作り方：放射・自機狙い・雨・渦巻き・追尾の仕組みを、計算式と動く見本で解説](https://koshinstudio.com/notes/danmaku-patterns/): 弾幕は短い計算式でできている。弾幕メーカーで実際に使っている放射・自機狙い（奇数弾と偶数弾）・雨・首ふり扇・渦巻き・追尾の式を、動く見本で確かめられるように書いた。
