@@ -21,10 +21,13 @@ User-agent: YouBot
 User-agent: cohere-ai
 User-agent: *
 Allow: /
-Disallow: /submit
-Disallow: /top
+# 招待URL（部屋ごとに変わる）と API だけ、検索に載せない
 Disallow: /draft/r/
 Disallow: /draft/api/
+
+# AdSense のロボットには、全ページを開ける（広告の内容を決めるために読むだけ）
+User-agent: Mediapartners-Google
+Allow: /
 
 Sitemap: https://koshinstudio.com/sitemap.xml
 Sitemap: https://koshinstudio.com/draft/sitemap.xml
