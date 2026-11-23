@@ -5,6 +5,657 @@
 
 ---
 
+URL: https://koshinstudio.com/notes/localizedstringkey-interpolation/
+
+# SwiftUI で翻訳キーがそのまま画面に出た：LocalizedStringKey に \(値) を埋め込むと、キーが別物になる（同じ間違いを 2 回）
+  書いた人：Koshin (https://koshinstudio.com/about/#operator)（Web エンジニア・アプリエンジニア）　公開：2026-11-23
+弾幕メーカー 開発の記録 ／ 2026年11月
+
+  iOS アプリ「弾幕メーカー」 (https://koshinstudio.com/works/danmaku-maker/)は、画面の文字を String Catalog（Localizable.xcstrings）で 10 言語に訳しています。そのアプリで、訳した文字の代わりに battle.rank.gold や pattern.twinRing のような「キー」がそのまま画面に出る不具合を、10 月と 11 月の 2 回、同じ原因で出しました。
+
+  原因は、どちらもこの 1 行の形です。
+
+  Text(LocalizedStringKey("battle.rank.\(rank)"))
+  見た目は「battle.rank.gold というキーで翻訳を引く」ですが、実際に引かれるキーは battle.rank.%@ です。そんなキーは無いので、翻訳が見つかりません。この記事は、なぜそうなるのか、どう直したか、そして 2 回目を防げなかった理由と、同じ形をリポジトリから探す方法の記録です。
+
+  この記事は、弾幕メーカーのリポジトリのコミット（0721668：2026 年 10 月 31 日、9d66669：2026 年 11 月 17 日）と、そのコードから書いています。grep の結果は、記事を書くときにそれぞれのコミットで実際に走らせたものです。
+
+## 起きたこと：2 回とも「キーがそのまま出た」
+
+     | 1 回目 | 2 回目
+
+      直した日 | 2026-10-31（0721668） | 2026-11-17（9d66669）
+
+      場所 | ショップの「広告でもらえるパターン」の名前（2 か所）と、通知の設定の種類名（1 か所） | 対戦モード「弾幕バトル」の勝ち・負けの表示（1 か所）と、ランク名（2 か所）
+
+      出ていた文字 | pattern.twinRing のような ID | battle.result.win・battle.rank.gold のようなキー
+
+      本来の表示（日本語） | パターンの名前 | 「勝ち！」「ゴールド」など
+
+  2 回目の 3 か所は、対戦モードの画面を作ったコミット（dbc2f80、2026 年 11 月 11 日）で入ったものです。1.3.0 の公開後の確認で見つかり、11 月 17 日に直しました。
+
+  どちらも、翻訳そのものは String Catalog にちゃんと入っていました。たとえば battle.rank.gold には、日本語の「ゴールド」を含む 10 言語（de・en・es・fr・ja・ko・pt-BR・ru・zh-Hans・zh-Hant）の訳があります。翻訳が無いのではなく、別のキーで引いていたのが原因です。
+
+## なぜキーが別物になるのか
+
+  理由は、Swift の言語の決まりと、SwiftUI の LocalizedStringKey の作りの、2 つが重なったことです。
+
+- 型名("文字列リテラル") は、関数呼び出しではなく「その型のリテラル」として扱われる。Swift 5 からの決まり（SE-0213）で、型が ExpressibleByStringLiteral などに従っていれば、LocalizedStringKey("…") は "…" as LocalizedStringKey と同じ意味になります。String を受け取る初期化（init(_ value: String)）は使われません
+
+- LocalizedStringKey は、文字列補間（\(…)）つきのリテラルを、自分で組み立てる。埋め込んだ値の所を %@ や %lld のような書式指定に置き換えた文字列をキーにし、値は「後で書式に当てはめる引数」として別に持ちます。Text("こんにちは、\(name)") を "こんにちは、%@" というキーで訳せるのは、この仕組みのおかげです
+
+  つまり LocalizedStringKey("battle.rank.\(rank)") は、
+
+- キー："battle.rank.%@"
+
+- 引数：rank の値（たとえば "gold"）
+
+  になります。String Catalog に battle.rank.%@ は無いので、翻訳は見つかりません。見つからないとき、SwiftUI はキーそのものを書式として使い、引数を当てはめて表示します。その結果、battle.rank.%@ に gold が入って、battle.rank.gold という「正しいキーと同じ文字列」が画面に出ます。
+
+  これが見つけにくい点です。画面に出ている文字は、String Catalog に入っているキーと 1 文字も違いません。「キーは合っているのに、なぜ訳されないのか」と見えてしまいます。
+
+## 書き方ごとの、引かれるキー
+
+  rank が "gold" のとき、それぞれの書き方で、どのキーが引かれるかを並べます。
+
+    書き方 | 引かれるキー | 訳されるか
+
+      LocalizedStringKey("battle.rank.\(rank)") | battle.rank.%@ | ✕
+
+      Text("battle.rank.\(rank)") | battle.rank.%@（Text にリテラルを渡すと、LocalizedStringKey として扱われるため同じ） | ✕
+
+      LocalizedStringKey("battle.rank." + rank) | battle.rank.gold（+ でつないだ結果は String なので、init(_ value: String) が使われる） | ○
+
+      let key = "battle.rank.\(rank)"
+Text(LocalizedStringKey(key)) | battle.rank.gold（いったん String の変数に入れている） | ○
+
+      Text(L("pattern.\(p.rawValue)"))
+（L は下のヘルパー） | pattern.twinRing など（L の引数は String なので、補間は普通の文字列になる） | ○
+
+  同じ \(…) でも、その文字列リテラルが「どの型として」読まれるかで結果が変わります。String として読まれれば普通の文字列、LocalizedStringKey として読まれれば書式つきのキーです。
+
+  弾幕メーカーには、Text(LocalizedStringKey(keys[p] ?? "pattern.\(p.rawValue)")) という行もあります。これは ?? の左が String? なので、右のリテラルも String として読まれ、キーは正しく作られます。形が似ていても、型の決まり方で結果が分かれる例です。
+
+## 直し方：キーを String として作ってから渡す
+
+  やることは、キーを String として作ってから、翻訳を引く側に渡すことだけです。弾幕メーカーでは、2 つの書き方で直しました。
+
+  2 回目（9d66669）は、+ でつなぐ形です。
+
+  // 直す前
+Text(LocalizedStringKey("battle.rank.\(s.rank)"))
+Text(LocalizedStringKey("battle.result.\(result.outcome.rawValue)"))
+
+// 直した後
+Text(LocalizedStringKey("battle.rank." + s.rank))
+Text(LocalizedStringKey("battle.result." + result.outcome.rawValue))
+  1 回目（0721668）のショップの 2 か所は、翻訳を引いて String を返すヘルパーに通す形にしました。
+
+  /// 画面に出す文字列（String Catalog 経由）
+func L(_ key: String) -> String {
+    String(localized: String.LocalizationValue(key))
+}
+
+// 直す前
+Text(LocalizedStringKey("pattern.\(p.rawValue)"))
+// 直した後
+Text(L("pattern.\(p.rawValue)"))
+  L の引数は String なので、"pattern.\(p.rawValue)" は普通の文字列 "pattern.twinRing" になり、そのキーで翻訳を引きます。Text には訳し終えた String を渡すので、Text 側でもう一度キーとして扱われることもありません。
+
+  逆に、"%@ に勝った" のように、書式つきのキーを String Catalog に用意して値を当てはめたいときは、\(…) の埋め込みが正しい使い方です。まずいのは、キーの名前の一部を補間で作ることです。
+
+## 2 回目を防げなかった理由と、grep で探す方法
+
+  1 回目を直したとき、通知の設定の種類名を作る所（NotificationService.swift）には、こう注意書きを残していました。
+
+  /// LocalizedStringKey("…\\(rawValue)") と書くと、キーが "settings.notify.%@" になって翻訳が引けないので、文字列をつないで作る
+var titleKey: LocalizedStringKey { LocalizedStringKey("settings.notify." + rawValue) }
+  それでも、11 日後に別のファイル（BattleHomeView.swift）で同じ形を 3 か所書きました。注意書きは、そのファイルを開いた人にしか読まれません。新しい画面を書くときに、別のファイルのコメントを思い出す仕組みはありません。
+
+  この形は、1 行の grep でほぼ拾えます。「LocalizedStringKey(" で始まり、閉じる " の前に \( がある」行を探します。
+
+  git grep -n -E 'LocalizedStringKey\("[^"]*\\\(' -- '*.swift'
+  実際に、弾幕メーカーのリポジトリで、直す前と直した後のコミットに対して走らせた結果です（コメント行は除いて数えています）。
+
+    コミット | 見つかった行
+
+      1 回目を直す前（0721668 の 1 つ前） | 3 行（NotificationService.swift 1・ShopView.swift 2）
+
+      1 回目を直した後（0721668） | 0 行
+
+      2 回目を直す前（9d66669 の 1 つ前） | 3 行（BattleHomeView.swift 3）
+
+      2 回目を直した後（9d66669） | 0 行
+
+  2 回とも、直した場所と grep の結果は一致しました。このコマンドを 2 回目の前に一度走らせていれば、1.3.0 を出す前に 3 か所とも見つかったことになります。
+
+  使うときの注意です。
+
+- Text("battle.rank.\(rank)") のように、Text に直接書いた形は拾いません。こちらは、「キーらしい英小文字とドットで始まる」行を別に探すと絞れます：git grep -n -E 'Text\("[a-z]+\.[a-zA-Z.]*\\\(' -- '*.swift'（弾幕メーカーの 11 月 19 日時点のコード a783da8 では 0 行でした）
+
+- 書式つきのキーを意図して使っている所も拾います。その場合は、String Catalog に %@ を含むキーがあるかを見て、あれば対象から外します。弾幕メーカーの String Catalog（1,188 キー）には、% を含むキーは 1 つもありませんでした。つまり、このアプリでは grep に当たった行は全部まちがい、と言えます
+
+- キーを 1 行で書いていない（途中で改行している）と拾えません。grep は 1 行ずつ見るためです
+
+  この grep を CI やコミット前の検査に入れるかどうかは、この記事を書いた時点ではまだ決めていません。入れるなら、上の 2 本を走らせて、1 行でも出たら止める形が簡単です。
+
+## SwiftUI で翻訳を引く人へ：確かめる 4 つ
+
+- 画面にキーがそのまま出たら、まず「そのキーをどう作ったか」を見る。翻訳ファイルにキーがあるのに訳されないなら、LocalizedStringKey や Text に \(…) つきのリテラルを渡していないかを疑います。画面の文字が正しいキーと同じでも、引いたキーは …%@ かもしれません
+
+- キーの一部を値で変えるときは、String として作ってから渡す。+ でつなぐ、いったん変数に入れる、String(localized:) を通すヘルパーを使う、のどれかです
+
+- 型名とかっこで囲んでも、リテラルはその型として読まれる。LocalizedStringKey("…\(x)") は、String を渡しているように見えて、String を通っていません
+
+- 注意書きより、検査。同じ間違いが 2 回出たら、コメントを増やすより、上の grep のように機械で探せる形にしておく方が確かです
+
+  弾幕メーカーの別の不具合の記録は、アプリとサーバーの点数がずれた記録 (https://koshinstudio.com/notes/swipe-next-twice/)に書いています。SwiftUI で起きた別の不具合は、ボタンが文字の上でしか反応しなかった記録 (https://koshinstudio.com/notes/swiftui-hit-area/)にあります。
+
+
+---
+
+URL: https://koshinstudio.com/notes/anime-64-types/
+
+# アニメ6,074作を64タイプに振り分けたら、8タイプは0作だった：6つの軸は、独立していなかった
+  書いた人：Koshin (https://koshinstudio.com/about/#operator)（Web エンジニア・アプリエンジニア）　公開：2026-11-20
+ガチアニメ診断 開発の記録 ／ 2026年11月
+
+  ガチアニメ診断 (https://koshinstudio.com/works/shindananime/)は、6つの軸のどちら側に寄っているかで、好みを 2×2×2×2×2×2＝64 タイプに分けます。作ったときは、64 タイプそれぞれに、同じくらいの数の作品が当てはまるものだと、なんとなく思っていました。
+
+  数えてみたら、違いました。診断のデータベース 6,074 作を、同じ 6 つの軸で 64 タイプに振り分けると、上位 4 タイプだけで 47.3% を占め、8 タイプには、1 作もありませんでした。
+
+  この記事は、その数え方と結果、そこから分かった「6 つの軸は、互いに独立していなかった」という話を、数字で書いたものです。タイプ分けの診断や、好みの分類を自分で作る人には、同じ落とし穴があるかもしれません。
+
+  この記事の数字は、2026 年 11 月 20 日に、診断のデータベース（6,074 作）を数えたものです。数えるプログラムは koshin-studio リポジトリの tools/anime-types.mjs、結果は data/anime-types.json にあります。作品ごとの軸の値は、あらすじとレビューの言葉から、このサイトが独自に見積もったもので、作品の公式の分類ではありません。
+
+## 数え方
+
+  診断は、作品 1 つずつに、6 つの軸の値（−1 から +1 のあいだの数）を持たせています。この値が 0 以上か、0 未満かで、軸ごとに 1 文字を決めると、作品にも、人と同じ 6 文字のタイプが付きます。
+
+    軸 | 0 以上 | 0 未満
+
+    世界観 | R（リアル） | F（ファンタジー）
+
+    後味・刺激 | D（ダーク） | H（ハッピー）
+
+    構成・テンポ | C（伏線・考察） | S（テンポ・勢い）
+
+    サブテイスト | P（心理戦） | A（アクション）
+
+    視覚・フェチ | V（映像美） | T（ストーリー）
+
+    視聴スタイル | M（熟読・考察） | L（サクッと）
+
+  たとえば、6 つとも 0 以上なら RDCP-VM。これを 6,074 作ぜんぶでやって、タイプごとに数えました。軸の意味は、6つの軸の解説 (https://koshinstudio.com/anime/axes/)に書いています。
+
+## 結果：上位 4 タイプで 47.3%、8 タイプは 0 作
+
+  64 タイプに均等に散らばるなら、1 タイプあたり約 95 作（1.6%）です。実際は、こうでした。
+
+    順位 | タイプ | 二つ名 | 作品数 | 割合
+
+    1 | RHSA-VL (https://koshinstudio.com/anime/types/rhsa-vl/) | 日常を愛する爽快エンタメハンター | 1,112 | 18.3%
+
+    2 | RHSP-VL (https://koshinstudio.com/anime/types/rhsp-vl/) | 日常を愛する直感ドラマハンター | 591 | 9.7%
+
+    3 | FHSA-VL (https://koshinstudio.com/anime/types/fhsa-vl/) | 異世界を駆ける爽快エンタメハンター | 586 | 9.7%
+
+    4 | RHSA-TL (https://koshinstudio.com/anime/types/rhsa-tl/) | 日常を愛する爽快エンタメランナー | 583 | 9.6%
+
+    5 | RDCP-VM (https://koshinstudio.com/anime/types/rdcp-vm/) | 深淵を覗く考察コレクター | 461 | 7.6%
+
+    6 | FDCA-VM (https://koshinstudio.com/anime/types/fdca-vm/) | 異世界を旅するロマン追及者 | 319 | 5.2%
+
+    7 | FDCP-VM (https://koshinstudio.com/anime/types/fdcp-vm/) | 絶望の異界を征く考察コレクター | 267 | 4.4%
+
+    8 | RHCP-VM (https://koshinstudio.com/anime/types/rhcp-vm/) | 日常を愛する考察コレクター | 201 | 3.3%
+
+    9 | RDCP-TM (https://koshinstudio.com/anime/types/rdcp-tm/) | 深淵を覗く考察アナリスト | 188 | 3.1%
+
+    10 | FDSA-VL (https://koshinstudio.com/anime/types/fdsa-vl/) | 絶望の異界を征く爽快エンタメハンター | 145 | 2.4%
+
+- 1 位の RHSA-VL (https://koshinstudio.com/anime/types/rhsa-vl/) だけで 1,112 作（18.3%）。均等な場合の約 12 倍です。
+
+- 上位 10 タイプで、全体の 73.3%。
+
+- 100 作以上あるタイプは 13 つだけ。10 作以下のタイプが 27 つあります。
+
+- 64 タイプの作品数の中央値は 14.5 作。「ふつうのタイプ」には、十数作しかありません。
+
+- 1 作も無いタイプは 8 つ：FDSA-TM (https://koshinstudio.com/anime/types/fdsa-tm/)、FDSP-TL (https://koshinstudio.com/anime/types/fdsp-tl/)、FDSP-TM (https://koshinstudio.com/anime/types/fdsp-tm/)、FDSP-VL (https://koshinstudio.com/anime/types/fdsp-vl/)、FHSA-TM (https://koshinstudio.com/anime/types/fhsa-tm/)、FHSP-TM (https://koshinstudio.com/anime/types/fhsp-tm/)、RDSA-TM (https://koshinstudio.com/anime/types/rdsa-tm/)、RHSA-TM (https://koshinstudio.com/anime/types/rhsa-tm/)。
+
+  1 位のタイプには、「鬼滅の刃」「SPY×FAMILY」「ハイキュー!!」「僕のヒーローアカデミア」など、広く見られている作品が並びます。5 位の RDCP-VM (https://koshinstudio.com/anime/types/rdcp-vm/) には「進撃の巨人」「【推しの子】」「あの日見た花の名前を僕達はまだ知らない。」。作品の多いタイプは、放送されるアニメそのものの多い型、と読めます。
+
+## 片寄りの理由 1：軸ごとに、もう偏っている
+
+  まず、軸を 1 本ずつ見ても、半々にはなっていません。
+
+    軸 | 多い側 | 作品数 | 割合
+
+    世界観 | R（リアル） | 3,996 | 65.8%
+
+    後味・刺激 | H（ハッピー） | 4,045 | 66.6%
+
+    構成・テンポ | S（テンポ・勢い） | 3,974 | 65.4%
+
+    サブテイスト | A（アクション） | 3,692 | 60.8%
+
+    視覚・フェチ | V（映像美） | 4,820 | 79.4%
+
+    視聴スタイル | L（サクッと） | 3,577 | 58.9%
+
+  いちばん偏っているのは「視覚・フェチ」で、V（映像美）側が 79.4%。多い側だけを 6 つ並べると RHSA-VL になり、これが 1 位のタイプと一致します。
+
+  ただ、この偏りだけでは、結果を説明しきれません。6 つの軸が互いに無関係だとして、軸ごとの割合を掛け合わせると、RHSA-VL は約 495 作になるはずです。実際は 1,112 作。倍以上、多いのです。
+
+## 片寄りの理由 2：軸どうしが、つながっている
+
+  そこで、軸を 2 本ずつ組み合わせて、「無関係ならこの数になるはず」と、実際の数を比べました。差の大きいものを、上と下から 4 つずつ。
+
+    組み合わせ | 実際 | 無関係なら | 比
+
+    C（伏線・考察）× M（熟読・考察） | 1,942 | 863 | 2.25 倍
+
+    D（ダーク）× C（伏線・考察） | 1,458 | 701 | 2.08 倍
+
+    D（ダーク）× M（熟読・考察） | 1,711 | 834 | 2.05 倍
+
+    C（伏線・考察）× P（心理戦） | 1,411 | 824 | 1.71 倍
+
+    C（伏線・考察）× L（サクッと） | 158 | 1,237 | 0.13 倍
+
+    D（ダーク）× L（サクッと） | 318 | 1,195 | 0.27 倍
+
+    S（テンポ・勢い）× M（熟読・考察） | 555 | 1,634 | 0.34 倍
+
+    D（ダーク）× S（テンポ・勢い） | 571 | 1,328 | 0.43 倍
+
+  はっきり出ているのは、C（伏線・考察）・M（熟読・考察）・D（ダーク）の 3 つが、まとまって動くことです。
+
+- 伏線・考察（C）の作品は、ほとんどが熟読・考察（M）でもある。C なのに L（サクッと）の作品は 158 作で、無関係な場合の 0.13 倍しかありません。
+
+- ダーク（D）の作品は、伏線・考察（C）と熟読（M）に寄る。D なのに L の作品は、無関係な場合の 0.27 倍。
+
+- 反対側も同じで、テンポ・勢い（S）の作品は、サクッと（L）に寄ります。
+
+  つまり、「構成・テンポ」「視聴スタイル」「後味・刺激」の 3 本は、別々の物差しのつもりで作ったのに、作品の上では、ほぼ同じ向きを測っていました。「重くて、考えさせる、じっくり見る作品」と「軽くて、勢いのある、気楽に見る作品」という 1 本の線に、3 本とも乗っているかたちです。
+
+  0 作だった 8 タイプは、この線に逆らう組み合わせです。6 つは「S（テンポ・勢い）なのに M（熟読・考察）」、残りの 2 つは「D（ダーク）で S（テンポ・勢い）で P（心理戦）」。軸が無関係なら、たとえば RHSA-TM には約 90 作、FDSP-VL には約 83 作あるはずでしたが、どちらも 0 作でした。
+
+## これは作品の性質か、見積もり方のくせか
+
+  正直に言うと、両方が混じっていて、切り分けられていません。
+
+- 作品の性質としては、ありそうな話です。伏線を張る作品は、読み込む見方を求めます。勢いで見せる作品を、一時停止しながら読み込む人は少ないでしょう。
+
+- 見積もり方のくせも、ありえます。軸の値は、あらすじとレビューに出てくる言葉から見積もっています。「考察」「伏線」といった言葉が、「構成・テンポ」と「視聴スタイル」の両方の手がかりになっていれば、2 本は、作る段階で同じ向きに引っ張られます。
+
+- データベースの偏りもあります。年の分かる作品のうち、2020 年代が 42.6%、2010 年代が 32.9% です。最近の作品ほどレビューが多く、手がかりが足りて残りやすいためです（データベースの作り方 (https://koshinstudio.com/notes/anime-db/)に書いています）。
+
+- 0 で切る数え方の粗さ。値が 0 に近い作品は、少しの差でとなりのタイプに入ります。作品ごとの値には誤差があるので、タイプごとの数は、目安です。
+
+  手がかりの言葉を軸ごとに分けて見積もり直せば、どちらが効いているかは確かめられます。まだ、やっていません。
+
+## 診断は、これで困るのか
+
+  困っていない部分と、困っている部分があります。
+
+  困っていない部分。診断が作品を選ぶとき、タイプの 6 文字は使っていません。回答から出した 6 つの数値と、作品の 6 つの数値の近さで選びます。だから、0 作のタイプになった人にも、向きのいちばん近い作品が出ます。作品が出てこない、ということは起きません。
+
+  困っている部分。0 作や数作のタイプの人に出る作品は、「6 つの軸のうち、どれかが合っていない作品」です。合っていない軸が、その人のいちばん大事にしている軸だと、外れに感じるはずです。また、3 本の軸が同じ向きを測っているなら、その 3 本ぶんの質問は、聞き方を変えて、ほぼ同じことを聞いていることになります。
+
+  どのタイプに、どれだけの人が診断されているかは、数えていません。診断は、回答をサーバーに送らずに、端末の中だけで結果を出しているからです。「人は均等に散らばるのに、作品は片寄っている」のか、「人も同じように片寄っている」のかは、いまの作りでは分かりません。
+
+## 直したこと、直していないこと
+
+- 直したこと：64 タイプのページ (https://koshinstudio.com/anime/types/)に、タイプごとの作品数と順位、よく知られた作品、年代の内訳を載せました。自分のタイプに作品がどれだけあるかを、見られるようにするためです。0 作のタイプのページには、0 作だと書いてあります。
+
+- 直していないこと：軸そのものは、変えていません。3 本を 1 本にまとめれば、タイプは 16 に減り、片寄りは小さくなります。ただ、タイプの名前と結果の画面を作り直すことになるので、先に、見積もり方のくせかどうかを確かめたいと考えています。
+
+## タイプ分けを作る人へ：確かめる 3 つ
+
+- 軸を掛け合わせる前に、中身を数える。2 択の軸が 6 本あれば 64 通りですが、「64 通りの中身がある」ことにはなりません。今回は、10 作以下のタイプが 27 つありました。
+
+- 軸を 2 本ずつ組んで、「無関係ならこの数」と比べる。比が 2 倍や 0.1 倍になる組があれば、その 2 本は、同じものを測っています。
+
+- 同じ言葉を、複数の軸の手がかりに使っていないか見る。使っていれば、軸は作る段階でつながります。
+
+  64 タイプと言いながら、実際に作品が集まっているのは十数タイプでした。数えるまで、気づいていませんでした。
+
+  この話に出てくるもの
+
+- 64タイプの一覧 (https://koshinstudio.com/anime/types/) — タイプごとの作品数
+
+- 6つの軸 (https://koshinstudio.com/anime/axes/) — 診断が測っているもの
+
+- 16,177作から6,091作へ (https://koshinstudio.com/notes/anime-db/) — データベースの作り方と偏り
+
+- ガチアニメ診断（作品ページ） (https://koshinstudio.com/works/shindananime/) — 何を作ったのか、画面と数字で
+
+  診断する (https://koshinstudio.com/app/shindananime/)作品ページへ (https://koshinstudio.com/works/shindananime/)
+
+
+---
+
+URL: https://koshinstudio.com/notes/pages-dev-name-taken/
+
+# 「出たか」の確認が、他人のサイトで通っていた：Cloudflare Pages のプロジェクト名と *.pages.dev の住所は、同じとは限らない
+  書いた人：Koshin (https://koshinstudio.com/about/#operator)（Web エンジニア・アプリエンジニア）　公開：2026-11-15
+ドパガキ脱出！！ 開発の記録 ／ 2026年11月
+
+  新しいブラウザゲーム「ドパガキ脱出！！」 (https://koshinstudio.com/works/dopagaki/)を、Cloudflare Pages に出しました。GitHub Actions で、dopagaki という名前の Pages プロジェクトを作って配り、最後に https://dopagaki.pages.dev/ を開いて 状態コードが 200 なら成功、という確認を入れていました。
+
+  確認は通りました。でも、dopagaki.pages.dev は他の人のサイトでした。このプロジェクトに割り振られた住所は dopagaki-36i.pages.dev で、確認は、他人のサイトの 200 を見て「出た」と判断していました。
+
+  この記事は、そのときのログと、あとから測った数字をもとに、何が起きたか・なぜ確認をすり抜けたか・どう直したかを書いたものです。Pages を CI から出している人なら、同じ形の確認を持っているかもしれません。
+
+  この記事は、koshin-studio リポジトリの game-dopagaki ブランチのコミット（60483e4・a52d290、2026 年 11 月 15 日）、その GitHub Actions のログ、2026 年 11 月 15 日に curl で測った結果から書いています。
+
+## 起きたこと：名前は dopagaki、住所は dopagaki-36i
+
+  最初の配備の手順は、この 3 つでした。
+
+  # 1. プロジェクトを作る（2 回目以降は「既にある」で失敗するので、握りつぶす）
+npx -y wrangler@3 pages project create dopagaki --production-branch main || echo "既にある"
+
+# 2. 配る
+npx -y wrangler@3 pages deploy dist --project-name dopagaki --branch main --commit-dirty=true
+
+# 3. 出たか確かめる
+sleep 20
+for u in / /game.js; do
+  c=$(curl -s -o /dev/null -w "%{http_code}" "https://dopagaki.pages.dev$u"); echo "$c $u"; [ "$c" = 200 ] || exit 1
+done
+  Actions のログには、こう出ていました（日時は UTC）。
+
+  22:50:22 ✨ Successfully created the 'dopagaki' project. It will be available at https://dopagaki-36i.pages.dev/ once you create your first deployment.
+22:50:28 ✨ Deployment complete! Take a peek over at https://eb089e13.dopagaki-36i.pages.dev
+22:50:48 200 /
+22:50:48 200 /game.js
+  wrangler は、プロジェクトを作った時点で本当の住所（dopagaki-36i.pages.dev）を表示していました。プロジェクト名の dopagaki はそのまま通りましたが、dopagaki.pages.dev という住所は、すでに他の人が使っていたので、後ろに -36i が付いた住所が割り振られた、という形です。プロジェクトが作れたことと、<名前>.pages.dev が自分の物になることは、別でした。
+
+  そして、確認は成功で終わっています。ジョブは緑のままでした。
+
+## なぜ通ったか：200 は、どのサイトでも返る
+
+  確認は「/ と /game.js が 200 か」だけを見ていました。dopagaki.pages.dev には他の人のサイトが出ているので、/ が 200 なのは当然です。不思議なのは /game.js まで 200 だったことで、他人のサイトに同じ名前のファイルがあるとは限りません。
+
+  あとから（2026 年 11 月 15 日）curl で測ると、こうなりました。
+
+    開いた URL | 状態 | Content-Type | 大きさ | 「ドパガキ脱出」を含むか
+
+      dopagaki.pages.dev/（他人） | 200 | text/html | 1,858 B | 含まない
+
+      dopagaki.pages.dev/game.js（他人） | 200 | text/html | 1,858 B | 含まない
+
+      dopagaki.pages.dev/no-such-file-xyz（他人） | 200 | text/html | 1,858 B | 含まない
+
+      dopagaki-36i.pages.dev/（自分） | 200 | text/html | 25,408 B | 含む
+
+      dopagaki-36i.pages.dev/game.js（自分） | 200 | application/javascript | 1,075,018 B | —
+
+      dopagaki-36i.pages.dev/no-such-file-xyz（自分） | 200 | text/html | 25,408 B | 含む
+
+  他人のサイトの /game.js は、JavaScript ではなく、トップページと同じ 1,858 バイトの HTMLでした。存在しない道（/no-such-file-xyz）も同じものが 200 で返ります。
+
+  これは Pages の決まった動きです。プロジェクトの一番上に 404.html が無いと、Pages はそのサイトをシングルページアプリとして扱い、無い道にもトップの index.html を 200 で返します（Cloudflare のドキュメント「Serving Pages」 (https://developers.cloudflare.com/pages/configuration/serving-pages/)）。表の下の行のとおり、自分のプロジェクトも 404.html を置いていないので、同じ動きをしています。
+
+  つまり、404.html の無い Pages に対しては、「この道が 200 か」はほとんど何も確かめていません。住所を間違えても、ファイルを入れ忘れても、200 が返ります。
+
+## 直し方：住所は聞く、中身で確かめる、書き残す
+
+  直したのは、最初の配備から約 3 分後のコミット（a52d290）です。やったことは 3 つです。
+
+### 1. 住所は推測せず、API で聞く
+
+  Pages のプロジェクトの情報には、割り振られた住所が subdomain として入っています。それを配備のたびに聞いて、後の手順で使います。
+
+  - name: 住所を聞く
+  run: |
+    host=$(curl -s -H "Authorization: Bearer $CLOUDFLARE_API_TOKEN" \
+      "https://api.cloudflare.com/client/v4/accounts/$CLOUDFLARE_ACCOUNT_ID/pages/projects/dopagaki" \
+      | python3 -c "import json,sys; print(json.load(sys.stdin)['result']['subdomain'])")
+    echo "住所: $host"; echo "HOST=$host" >> "$GITHUB_ENV"
+  次の配備のログでは、住所: dopagaki-36i.pages.dev と出ました。トークンは、Pages を配るときに使っているもの（GitHub の Secrets に置いたもの）をそのまま使っています。
+
+### 2. 状態コードだけでなく、中身で確かめる
+
+  確認の行き先を $HOST に変え、さらにトップページに自分のゲームの名前が入っているかを見るようにしました。他人のサイトや、空のページが出ていれば、ここで止まります。
+
+  - name: 出たか確かめる
+  run: |
+    sleep 20
+    for u in / /game.js; do
+      c=$(curl -s -o /dev/null -w "%{http_code}" "https://$HOST$u"); echo "$c $u"; [ "$c" = 200 ] || exit 1
+    done
+    curl -s "https://$HOST/" | grep -q 'ドパガキ脱出' || { echo "別の中身が出ている"; exit 1; }
+
+### 3. 住所をファイルに書き残す
+
+  このサイトは、koshinstudio.com/play/dopagaki/ を Worker で Pages へ中継しています（配り方の別の記録 (https://koshinstudio.com/notes/deploy-gotchas/)）。中継の行き先を書く人が、また dopagaki.pages.dev と書いてしまわないよう、聞いた住所を PAGES_HOST というファイルに書いて、Actions からコミットするようにしました（contents: write の権限を足し、コミットには [skip ci] を付けて、配備が自分を呼び直さないようにしています）。
+
+  $ cat PAGES_HOST
+dopagaki-36i.pages.dev
+  中継の設定（worker/index.js）と、その検査（worker/test.mjs）も、この住所で書いています。
+
+  // worker/index.js
+dopagaki: 'https://dopagaki-36i.pages.dev',
+
+// worker/test.mjs
+await check('/play/dopagaki/', { status: 200, asked: 'https://dopagaki-36i.pages.dev/' });
+await check('/play/dopagaki/game.js', { status: 200, asked: 'https://dopagaki-36i.pages.dev/game.js' });
+
+## まだ残っている穴：/game.js の 200
+
+  直したあとの確認でも、/game.js は状態コードしか見ていません。上の表のとおり、404.html の無い Pages では、game.js を入れ忘れても HTML が 200 で返るので、この行は今も、ほぼ何も確かめていません。トップの中身を見る確認は入ったので、住所の取り違えは捕まりますが、ファイルの入れ忘れは捕まりません。
+
+  塞ぐなら、たとえば Content-Type を見るのが手軽です（このリポジトリには、まだ入れていません）。
+
+  t=$(curl -s -o /dev/null -w "%{content_type}" "https://$HOST/game.js")
+case "$t" in application/javascript*|text/javascript*) ;; *) echo "game.js が JS でない: $t"; exit 1;; esac
+  あるいは、一番上に 404.html を置けば、無い道は 404 を返すようになり、状態コードの確認がそのまま意味を持ちます。ただし、その場合はシングルページアプリとしての扱いも無くなるので、道ごとの HTML を持たない作りでは使えません。
+
+## Pages を CI から出す人へ：確かめる 4 つ
+
+- <プロジェクト名>.pages.dev を、手で組み立てない。pages project create の表示か、API の result.subdomain で、本当の住所を確かめる。
+
+- 404.html が無いなら、200 は「何かが返った」以上の意味を持たない。住所の間違いも、ファイルの入れ忘れも、200 で返る。
+
+- 「自分の物が出ているか」を見る。ページの中の決まった文字、ファイルの Content-Type、大きさなど、他のサイトでは成り立たないものを確かめる。
+
+- 聞いた住所は、書き残す。中継や DNS など、住所を書く場所が他にあるなら、推測で書かれないようにする。
+
+  今回は、wrangler が最初から正しい住所を表示していたのに、確認は自分で組み立てた住所を見ていました。ジョブが緑だったので、ログを読まなければ気づかないところでした。
+
+
+---
+
+URL: https://koshinstudio.com/notes/swipe-next-twice/
+
+# アプリとサーバーの点数がずれた：原因は計算ではなく、「次へ」が 2 回呼ばれてステージが入れ替わっていたこと
+  書いた人：Koshin (https://koshinstudio.com/about/#operator)（Web エンジニア・アプリエンジニア）　公開：2026-11-09
+弾幕メーカー 開発の記録 ／ 2026年11月
+
+  弾幕ゲーム「弾幕メーカー」 (https://koshinstudio.com/works/danmaku-maker/)に、いま「スワイプ弾幕」というモードを作っています。短いステージ（クリップ）が次々に流れてきて、指でなぞって避け続け、点数を競うモードです。点数はランキングに載るので、アプリが送った操作の記録を、サーバーが同じ計算で遊び直して、点数を数え直しています。
+
+  このとき、アプリとサーバーの計算が合わない提出が出ました。まず疑ったのは、計算の食い違い（浮動小数の誤差など）でした。実際の原因は、計算ではなく、結果画面の「次へ」が 2 回呼ばれて、遊んだクリップがサーバーの選ぶものと入れ替わっていたことでした。この記事は、ずれた提出をサーバーに残し、「最初にずれた場所」を出すようにして原因を絞った手順と、直し方の記録です。
+
+  この記事は、弾幕メーカーのリポジトリのコミット（07a7ecd・8e68064・f19e1cc、2026 年 11 月 9 日）と、そのコードから書いています。スワイプ弾幕は開発中のモードで、名前や仕様は変わるかもしれません。
+
+## サーバーは、遊びをまるごと計算し直している
+
+  スワイプ弾幕の 1 回のプレイは、こう流れます。
+
+- プレイを始めると、サーバーが種（乱数の元）を決めてアプリに渡す
+
+- アプリは、種・何本目か・連続クリア数・もう出たクリップ、から次のクリップを選ぶ（SwipeFeed.pick）
+
+- クリップごとに「GO」の 60 ステップ（0.5 秒）と、プレイの最大 1,200 ステップ（10 秒）を遊ぶ。計算は 1 秒に 120 ステップの固定間隔
+
+- 終わったら、クリップごとの操作の列（指の動き）だけをサーバーに送る
+
+- サーバーは、同じ種から同じ順でクリップを選び直し、送られた操作で 1 本ずつ遊び直して、点数を出す
+
+  アプリ（Swift）とサーバー（TypeScript）は、同じ計算を別の言語で持っています。両者が一致することは、Swift の計算から作った正解データを TypeScript のテストで比べて確かめています。計算そのものは一致するはずなのに、実際の提出では、サーバーが途中のクリップで「被弾して終わった」と判断し、アプリが送ったクリップの数より少なく終わる（clipsPlayed < clips.length）ことがありました。
+
+  このずれは、ログに「ずれた」としか出ないと、手元で再現できません。そこで、まずずれた提出をそのまま残すことから始めました。
+
+## 手順 1：ずれた提出を、そのまま保存する
+
+  サーバーの数え直しがアプリの申告と合わなかったときだけ、送られてきた操作の列と、サーバー側の途中結果を、Firestore の swipeMismatches に 1 件 1 文書で保存するようにしました（07a7ecd）。
+
+  if (result.invalid || result.clipsPlayed < clips.length) {
+  logger.warn("swipe-submit-mismatch", summary);
+  try {
+    // Firestore の 1 文書は約 1MB まで。収まる分だけ残す
+    const kept = [];
+    let size = 0;
+    for (const c of clips) {
+      size += c.go.length + c.moves.length + 40;
+      if (size > 800_000) break;
+      kept.push(c);
+    }
+    await db().doc(`swipeMismatches/${runId}`).set({
+      seed, poolVersion, sent: clips.length, kept: kept.length,
+      clipIDs: result.clipIDs, clipOutcomes: result.clipOutcomes,
+      scoreAfterEachClip: result.scoreAfterEachClip, clips: kept, ...
+    });
+  } catch (e) { logger.error("swipe-mismatch-save-failed", ...); }  // 保存に失敗しても提出は続ける
+}
+  気をつけたのは、次の 3 つです。
+
+- 種とクリップの一覧の版（poolVersion）も残す。操作の列だけあっても、どのクリップを遊んだかが決まらないと再現できません
+
+- 1 文書の上限（約 1MB）を超えないよう、800,000 文字で打ち切る。上限を超えると書き込み自体が失敗し、何も残りません
+
+- 調べるための保存が失敗しても、プレイの提出は止めない。セキュリティルールでは、このコレクションをアプリから読み書きできないようにしました（allow read, write: if false）
+
+## 手順 2：アプリにも途中経過を送らせ、最初にずれた所を出す
+
+  保存した記録を遊び直せば、サーバー側の計算は追えます。でも、アプリの中で何が起きていたかは分かりません。そこで、アプリがクリップごとに途中経過を数えて、操作の列と一緒に送るようにしました（8e68064）。サーバーは同じものを自分でも数え、上から順に比べて、最初に食い違った 1 か所を返します。
+
+    比べる順 | 名前 | 中身
+
+      1 | g0 | クリップを始めた時点のゲージ（前のクリップまでの結果）
+
+      2 | grazes | かすり（弾の近くを通った）の回数
+
+      3 | bombs | ボムが出たステップの一覧
+
+      4 | end | クリップが終わったステップ
+
+      5 | cp | 120 ステップ（1 秒）ごとの、弾の位置の指紋
+
+      6 | score | クリップを終えた時点の点数
+
+  function firstDiff(clips, result) {
+  for (let i = 0; i < Math.min(clips.length, result.diag.length); i++) {
+    const c = clips[i].diag, s = result.diag[i];
+    if (!c) return { clip: i, field: "no-diag" };
+    const same = (a, b) => JSON.stringify(a) === JSON.stringify(b);
+    const checks = [["g0", c.g0, s.g0], ["grazes", c.grazes, s.grazes], ["bombs", c.bombs, s.bombs],
+      ["end", c.end, s.end], ["cp", c.cp.slice(0, s.cp.length), s.cp], ["score", c.score, result.scoreAfterEachClip[i]]];
+    for (const [field, app, server] of checks) if (!same(app, server)) return { clip: i, field, app, server };
+  }
+  return null;
+}
+  作るときに決めたことを、書いておきます。
+
+- 弾の位置は、そのままではなく丸めてから指紋にする。弾の x・y を 1,000 倍して整数に丸め、FNV-1a でまとめた値です（bulletHashCoarse）。小数の最後の桁まで比べる指紋も別にありますが、調べる目的では、丸めた方が「本当に別の動きをしたか」だけを拾えます
+
+- 毎ステップではなく、1 秒ごと。1 クリップ最大 10 個で済み、送る量が増えません
+
+- 途中経過は、点数に使わない。アプリの申告なので、信用すれば書き換えられます。形が合わなければ（整数でない、配列が長すぎる等）黙って捨て、比べるだけに使います
+
+- 原因に近いものから比べる。ゲージがずれていれば、それより後の数字はみな巻き添えでずれます。最初の 1 か所だけを返すのは、そのためです
+
+  あわせて、保存された記録を Swift 側の同じ計算で遊び直す調査用のテスト（SwipeMismatchReplayTests）も足しました。環境変数で記録のファイルを渡したときだけ動き、アプリの選び方で出るクリップの順と、サーバーが記録したクリップの順を並べて出します。浮動小数の誤差を疑って、かすりや被弾の判定が「境目ぎりぎり」だった弾の数も数えるようにしています。
+
+## 原因：タップと自動の「次へ」が、両方とも効いていた
+
+  保存と途中経過を入れてから約 40 分後のコミット（f19e1cc）で、原因を直しました。計算の食い違いではなく、アプリが遊んだクリップと、サーバーが選んだクリップが、別物になっていたのです。
+
+  クリップをクリアすると結果が出て、約 1〜1.6 秒で自動的に次のクリップへ進みます。その前にタップ（または上スワイプ）すれば、すぐ次へ進めます。直す前のコードは、こうでした。
+
+  // SwipeScene（画面）
+private func advance() { resultTimer = 0; onAdvance?() }   // タップでも、タイマーでも、ここを通る
+
+override func update(_ currentTime: TimeInterval) {
+  ...
+  if model.phase == .cleared || model.phase == .failed {
+    if !touching { resultTimer -= dt }
+    if resultTimer <= 0 { advance(); resultTimer = 99 }
+  }
+}
+
+// SwipeModel（遊びの状態）
+func advanceAfterResult() async {
+  switch phase {
+  case .cleared, .go, .playing: await nextClip()   // GO やプレイ中でも、次のクリップを選んでいた
+  case .failed: await finish()
+  default: break
+  }
+}
+  コードから読める流れは、こうです。
+
+- 結果画面でタップすると、advance() がタイマーを 0 にしてから、次へ進む処理（onAdvance）を呼ぶ。この処理は Task で後から走る
+
+- その処理が走る前の次のフレームでは、状態はまだ「クリア画面」のまま。タイマーは 0 以下なので、自動の「次へ」がもう一度呼ばれる
+
+- 1 回目の呼び出しでクリップ A が選ばれ、先読みが済んでいれば、すぐ「GO」に進む
+
+- 2 回目の呼び出しは「GO」中に届く。advanceAfterResult は GO 中でも nextClip() を呼ぶので、もう一度クリップを選ぶ
+
+- まだクリップ A の記録は付けていないので、「何本目か」は同じ。でも「もう出たクリップ」には A が入っているので、別のクリップ B が選ばれる
+
+  プレイヤーは B を遊び、B の操作の列を送ります。サーバーは同じ種・同じ「何本目か」から A を選び、B のための指の動きで A を遊び直すので、まったく別の弾幕の中で被弾します。アプリでは避けきった記録が、サーバーではそのクリップで終わる、という形になります。
+
+  2 回呼ばれても、タイミングによっては害がありません。2 回目が「切り替え中」（.transition）に届けば、何もしないで終わります。先読みが済んでいて、1 回目がすぐ「GO」まで進んだときだけ、入れ替わりが起きます。毎回は起きないので、見つけにくい不具合でした。
+
+## 直し方：画面と状態の、両方で 1 回に絞る
+
+  直したのは 2 か所、合わせて 6 行の追加と 3 行の削除です。
+
+  // 画面：一度進んだら、次の結果画面でタイマーが入れ直されるまで、何度呼ばれても無視する
+private func advance() { guard resultTimer < 90 else { return }; resultTimer = 99; onAdvance?() }
+...
+if resultTimer <= 0 { advance() }
+
+// 状態：次のクリップを選ぶのは、開始直後か、クリア画面のときだけ
+private func nextClip() async {
+  guard phase == .starting || phase == .cleared else { return }
+  ...
+}
+func advanceAfterResult() async {
+  switch phase {
+  case .cleared: await nextClip()   // GO・プレイ中に呼ばれても、選び直さない
+  case .failed: await finish()
+  default: break
+  }
+}
+  画面の側だけ直しても、ほかの入口（別のボタンや、将来足す操作）から 2 回呼ばれれば同じことが起きます。「クリップを選ぶ」という、記録と結びついた処理の側で、呼ばれてよい状態を限ったのが本命の直しです。画面の側の直しは、余計な呼び出しを入口で減らすためのものです。
+
+  この記事を書いた時点では、直した版での提出で、ずれが無くなったかを数えた結果はまだありません。swipeMismatches は残してあるので、次に数えるときの材料になります。
+
+## サーバーで検算するゲームを作る人へ：確かめる 5 つ
+
+  この件から、同じ形の作り（アプリが操作を送り、サーバーが遊び直す）で使えることを、手順にしておきます。
+
+- ずれた提出だけ、元の入力ごと残す。種・データの版・操作の列があれば、手元で何度でも再現できます。保存先の大きさの上限と、保存の失敗で本処理を止めないことに注意
+
+- アプリにも途中経過を数えさせ、サーバーが「最初にずれた 1 か所」を返す。点数には使わず、比べるだけ。原因に近い順に並べる
+
+- 「何を遊んだか」を決める処理は、呼ばれてよい状態を限る。乱数で何かを選ぶ処理が 2 回走ると、計算が完璧でも結果がずれます
+
+- タップと自動タイマーのように、同じ処理への入口が 2 つあるなら、片方を通ったら、もう片方を閉じる。「タイマーを 0 にして進む」は、自動の側の条件を満たしてしまうことがあります
+
+- Task で後から走る処理は、その間にも画面のループが回る。状態が変わるのは処理が走ってからなので、それまでのフレームは古い状態のまま判断されます
+
+  サーバーの検算が合わなくなった別の例は、すし積むの番付に載らなくなった記録 (https://koshinstudio.com/notes/rank-verify-mismatch/)に書いています（こちらは、ゲームの数字を変えて検算の数字を直し忘れた件です）。弾幕そのものの作り方は、弾幕の作り方 (https://koshinstudio.com/notes/danmaku-patterns/)にまとめています。
+
+
+---
+
 URL: https://koshinstudio.com/notes/danmaku-patterns/
 
 # 弾幕の作り方：放射・自機狙い・雨・渦巻き・追尾の仕組みを、計算式と動く見本で解説
@@ -7586,6 +8237,62 @@ URL: https://koshinstudio.com/works/tube-drift/
 
 ---
 
+URL: https://koshinstudio.com/works/dopagaki/
+
+# ドパガキ脱出！！
+
+  脱出ゲームなのに、謎は解かない。
+暗号もダイヤルも無視して、扉ごと壊して出てくる。
+
+  遊ぶ (https://koshinstudio.com/play/dopagaki/)
+
+      長押しで溜める。黄色い輪の中まで声が届く
+
+      ケースは叫んで割る。出てきたTNTで金庫を飛ばす
+
+      ステージによって、同じ操作が別の行動になる
+
+    200ステージ
+    1000コース
+    9種類の操作
+
+## どんな遊びか
+
+  部屋に入ると、まず「本来のルール」が出ます。3つのダイヤルを同時に回せ、見張りの交代時刻を割り出せ、壁の暗号と床の模様を照合せよ。主人公はそれを読みません。木の扉は殴って壊し、ガラスは叫んで割り、鉄の扉はTNTで飛ばします。1コースは長くても数十秒です。
+
+  ただし、部屋には居眠りしている見張りがいます。叫び声が届いたり、殴る音が積もったりすると目を覚まし、捕まってやり直しになります。考えるのは謎の答えではなく、どの順番で、どこから、何を壊すかです。1回の操作で関門を2つ以上抜けると、画面がゆっくりになって「2枚抜き」「3枚抜き」と出ます。
+
+## 操作
+
+  基本はタップ・スワイプ・長押しの3つです。タップした場所へ走り、物をタップすると殴ります。スワイプすると、近くの物をその向きへ投げます。長押しで溜めて、離すと叫びます。溜めている間は、床に声の届く範囲が黄色い輪で出ます。
+
+  STAGE 5からは、ステージによって同じ操作が別の行動に変わります。スワイプが「突進」（カートで一直線）「蹴る」（壁で跳ね返る）「引っぱる」（じゅうたんを引き抜く）、長押しが「吹く」（音を立てずに物を吹き飛ばす）、タップが「踏む」（床の板を踏み抜く）。STAGE 3には、スワイプで球を床に「転がす」ボウリング場もあります。今の操作は、いつも画面の下に出ています。
+
+## 壊し方の決まり
+
+  素材ごとの壊し方は、200ステージを通して変えていません。木は殴れば壊れます。ガラスは叫べば割れます。鉄は殴っても投げても効かず、爆発でしか開きません。「ドミノで倒れるなら、殴っても倒れるはず」というような食い違いが出ないように、仕掛けもこの決まりの上に置いています。
+
+  見張りにも決まりがあります。物を当てれば起こさずに気絶させられます。一列に並んでいれば、先頭に当てると後ろもまとめて倒れます。爆発に巻き込まれた見張りは、起きる前に気絶します。ガラスの壁は爆風を止めますが、声は通します。
+
+## ステージの組み立て
+
+  STAGE 1〜4の20コースは手で作りました。殴る・投げる・叫ぶを一つずつ覚え、STAGE 4で「ガラスの壁・見張り・出口」の三つの関門を一度に抜く形を知ります。
+
+  STAGE 5からは、ステージごとに仕掛けか操作が一つずつ増えます。投げても効かない鉄のヘルメットの見張り、カートでの突進、声を遠くへ運ぶマイクとスピーカー、じゅうたん引き、息で吹き飛ばす、床の踏み抜き、蹴り返し。その後は、これらが二つ、三つと重なって出てきます。先へ進むほど見張りが増え、2回叫ばないと割れない二重ガラスや、正面から投げても効かない盾持ちの見張りも加わります。
+
+  1000コースすべてを、自動で遊ぶプログラムに通して、出口までたどり着けることを確かめています。そのときにかかった手数を、各コースの「目標手数」としてクリア画面に出しています。かかる手数の平均は、STAGE 5〜32で約5手、STAGE 173〜200で約9手です。
+
+## 作りについて
+
+  部屋も人も、画像を使わずにその場で組み立てて描いています。物には重さがあり、投げた物の当たり方や、爆風での飛び方は物理計算で決まります。効果音とBGMも、録音ではなくブラウザの中で鳴らしています。スマートフォンでも動くように、端末の速さを見ながら描く細かさを自動で下げます。
+
+  進み具合は、遊んでいる端末のブラウザに保存されます。登録は要らず、全ステージ無料です。
+
+    遊ぶ (https://koshinstudio.com/play/dopagaki/)
+
+
+---
+
 URL: https://koshinstudio.com/works/danmaku-maker/
 
 # 弾幕メーカー
@@ -8232,7 +8939,7 @@ URL: https://koshinstudio.com/anime/
 
   二つ名は、世界観×後味、構成×テイスト、視覚×視聴スタイルの組み合わせから決まります。まずは、よくあるタイプを4つ。
 
-  RDCP-VM深淵を覗く考察コレクター (https://koshinstudio.com/anime/types/rdcp-vm/)FHSA-TL脳汁全開の爽快エンタメハンター (https://koshinstudio.com/anime/types/fhsa-tl/)FDCA-VM異世界を旅するロマン追及者 (https://koshinstudio.com/anime/types/fdca-vm/)RHSP-TL現実逃避のライトファン (https://koshinstudio.com/anime/types/rhsp-tl/)
+  RDCP-VM深淵を覗く考察コレクター・461作 (https://koshinstudio.com/anime/types/rdcp-vm/)FHSA-TL脳汁全開の爽快エンタメハンター・98作 (https://koshinstudio.com/anime/types/fhsa-tl/)FDCA-VM異世界を旅するロマン追及者・319作 (https://koshinstudio.com/anime/types/fdca-vm/)RHSP-TL現実逃避のライトファン・104作 (https://koshinstudio.com/anime/types/rhsp-tl/)
   64タイプの一覧を見る → (https://koshinstudio.com/anime/types/)
 
 

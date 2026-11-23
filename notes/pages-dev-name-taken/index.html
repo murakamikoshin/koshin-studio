@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>「出たか」の確認が、他人のサイトで通っていた：Pages の名前と住所は別 — Koshin Studio</title>
+<meta name="description" content="Cloudflare Pages に dopagaki という名前でプロジェクトを作ったら、住所は dopagaki-36i.pages.dev になった。dopagaki.pages.dev は他の人の物で、配備後の確認（状態コード 200 を見るだけ）は、その他人のサイトで通っていた。原因、API で本当の住所を聞く直し方、状態コードだけの確認の穴を、ログと実測で書いた。">
+<meta property="og:title" content="「出たか」の確認が、他人のサイトで通っていた：Pages の名前と住所は別">
+<meta property="og:description" content="Pages のプロジェクト名 dopagaki の住所は dopagaki-36i.pages.dev だった。200 を見るだけの確認は、他人のサイトで通った。">
+<meta property="og:type" content="article">
+<meta name="theme-color" content="#fbfaf7">
+<link rel="icon" href="/favicon.ico?v=1697d589" sizes="48x48">
+<link rel="icon" href="/favicon.svg?v=b9d7922f" type="image/svg+xml" sizes="any">
+<link rel="icon" href="/assets/icon/icon-192.png?v=e2566235" type="image/png" sizes="192x192">
+<link rel="apple-touch-icon" href="/assets/icon/icon-180.png?v=84e7f0e6">
+<link rel="manifest" href="/site.webmanifest">
+<script>document.documentElement.className+=" js"</script>
+<link rel="stylesheet" href="/style.css?v=d07261d4">
+<meta name="google-adsense-account" content="ca-pub-3863314847163872">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3863314847163872" crossorigin="anonymous"></script>
+<link rel="canonical" href="https://koshinstudio.com/notes/pages-dev-name-taken/">
+<meta property="og:url" content="https://koshinstudio.com/notes/pages-dev-name-taken/">
+<meta property="og:site_name" content="Koshin Studio">
+<meta property="og:locale" content="ja_JP">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="alternate" type="application/rss+xml" title="Koshin Studio — Notes" href="https://koshinstudio.com/feed.xml">
+<link rel="alternate" type="text/markdown" href="https://koshinstudio.com/notes/pages-dev-name-taken/index.md">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BlogPosting","headline":"「出たか」の確認が、他人のサイトで通っていた：Cloudflare Pages のプロジェクト名と *.pages.dev の住所は、同じとは限らない","url":"https://koshinstudio.com/notes/pages-dev-name-taken/","description":"Pages に dopagaki という名前で出したら、住所は dopagaki-36i.pages.dev だった。200 を見るだけの配備確認は、他人のサイトで通っていた。404.html の無い Pages は無い道にも 200 を返す。API で住所を聞き、中身で確かめる直し方。","datePublished":"2026-11-15","dateModified":"2026-11-15","inLanguage":"ja","image":"https://koshinstudio.com/assets/og/og_notes_pages-dev-name-taken.jpg","author":{"@id":"https://koshinstudio.com#koshin"},"publisher":{"@id":"https://koshinstudio.com#studio"},"mainEntityOfPage":"https://koshinstudio.com/notes/pages-dev-name-taken/"},{"@type":"Person","@id":"https://koshinstudio.com#koshin","name":"Koshin","jobTitle":"Webエンジニア・アプリエンジニア","url":"https://koshinstudio.com/about/","worksFor":{"@id":"https://koshinstudio.com#studio"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Koshin Studio","item":"https://koshinstudio.com/"},{"@type":"ListItem","position":2,"name":"Notes","item":"https://koshinstudio.com/notes/"},{"@type":"ListItem","position":3,"name":"「出たか」の確認が、他人のサイトで通っていた：Cloudflare Pages のプロジェクト名と *.pages.dev の住所は、同じとは限らない","item":"https://koshinstudio.com/notes/pages-dev-name-taken/"}]}]}</script>
+<meta property="og:image" content="https://koshinstudio.com/assets/og/og_notes_pages-dev-name-taken.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
+</head>
+<body class="article">
+<canvas id="motes"></canvas>
+
+<header class="site"><div class="wrap">
+  <a class="logo" href="/"><img class="logo-mark" src="/favicon.svg?v=b9d7922f" alt="" width="28" height="28">Koshin Studio</a>
+  <nav><a href="/works/">Works</a><a href="/works/#game">Games</a><a href="/notes/">Notes</a><a href="/picks/">Picks</a><a href="/calc/">Tools</a><a href="/about/">About</a></nav>
+</div></header>
+
+<main><div class="wrap">
+  <nav class="crumbs" aria-label="現在地"><a href="/">Koshin Studio</a><i aria-hidden="true">›</i><a href="/notes/">Notes</a><i aria-hidden="true">›</i><span aria-current="page">「出たか」の確認が、他人のサイトで通っていた：Cloudflare Pages のプロジェクト名と *.pages.dev の住所は、同じとは限らない</span></nav>
+  <h1>「出たか」の確認が、他人のサイトで通っていた：Cloudflare Pages のプロジェクト名と *.pages.dev の住所は、同じとは限らない</h1>  <div class="rule"></div><!--byline--><p class="note byline">書いた人：<a href="/about/#operator">Koshin</a>（Web エンジニア・アプリエンジニア）　公開：2026-11-15</p><!--/byline--><p class="lead">ドパガキ脱出！！ 開発の記録 ／ 2026年11月</p>
+
+  <p>新しいブラウザゲーム<a href="/works/dopagaki/">「ドパガキ脱出！！」</a>を、Cloudflare Pages に出しました。GitHub Actions で、<code>dopagaki</code> という名前の Pages プロジェクトを作って配り、最後に <code>https://dopagaki.pages.dev/</code> を開いて <strong>状態コードが 200 なら成功</strong>、という確認を入れていました。</p>
+  <p>確認は通りました。でも、<code>dopagaki.pages.dev</code> は<strong>他の人のサイト</strong>でした。このプロジェクトに割り振られた住所は <code>dopagaki-36i.pages.dev</code> で、確認は、他人のサイトの 200 を見て「出た」と判断していました。</p>
+  <p>この記事は、そのときのログと、あとから測った数字をもとに、<strong>何が起きたか・なぜ確認をすり抜けたか・どう直したか</strong>を書いたものです。Pages を CI から出している人なら、同じ形の確認を持っているかもしれません。</p>
+  <p class="note">この記事は、koshin-studio リポジトリの game-dopagaki ブランチのコミット（<code>60483e4</code>・<code>a52d290</code>、2026 年 11 月 15 日）、その GitHub Actions のログ、2026 年 11 月 15 日に curl で測った結果から書いています。</p>
+<!--toc-->
+  <nav class="toc" aria-label="目次"><p>目次</p><ol><li><a href="#s1">起きたこと：名前は dopagaki、住所は dopagaki-36i</a></li><li><a href="#s2">なぜ通ったか：200 は、どのサイトでも返る</a></li><li><a href="#s3">直し方：住所は聞く、中身で確かめる、書き残す</a></li><li><a href="#s4">まだ残っている穴：/game.js の 200</a></li><li><a href="#s5">Pages を CI から出す人へ：確かめる 4 つ</a></li></ol></nav>
+<!--/toc-->
+  <h2 class="rv" id="s1">起きたこと：名前は dopagaki、住所は dopagaki-36i</h2>
+  <p>最初の配備の手順は、この 3 つでした。</p>
+  <pre><code># 1. プロジェクトを作る（2 回目以降は「既にある」で失敗するので、握りつぶす）
+npx -y wrangler@3 pages project create dopagaki --production-branch main || echo "既にある"
+
+# 2. 配る
+npx -y wrangler@3 pages deploy dist --project-name dopagaki --branch main --commit-dirty=true
+
+# 3. 出たか確かめる
+sleep 20
+for u in / /game.js; do
+  c=$(curl -s -o /dev/null -w "%{http_code}" "https://dopagaki.pages.dev$u"); echo "$c $u"; [ "$c" = 200 ] || exit 1
+done</code></pre>
+  <p>Actions のログには、こう出ていました（日時は UTC）。</p>
+  <pre><code>22:50:22 ✨ Successfully created the 'dopagaki' project. It will be available at https://dopagaki-36i.pages.dev/ once you create your first deployment.
+22:50:28 ✨ Deployment complete! Take a peek over at https://eb089e13.dopagaki-36i.pages.dev
+22:50:48 200 /
+22:50:48 200 /game.js</code></pre>
+  <p>wrangler は、プロジェクトを作った時点で<strong>本当の住所（<code>dopagaki-36i.pages.dev</code>）を表示していました</strong>。プロジェクト名の <code>dopagaki</code> はそのまま通りましたが、<code>dopagaki.pages.dev</code> という住所は、すでに他の人が使っていたので、後ろに <code>-36i</code> が付いた住所が割り振られた、という形です。<strong>プロジェクトが作れたことと、<code>&lt;名前&gt;.pages.dev</code> が自分の物になることは、別</strong>でした。</p>
+  <p>そして、確認は<strong>成功</strong>で終わっています。ジョブは緑のままでした。</p>
+
+  <h2 class="rv" id="s2">なぜ通ったか：200 は、どのサイトでも返る</h2>
+  <p>確認は「<code>/</code> と <code>/game.js</code> が 200 か」だけを見ていました。<code>dopagaki.pages.dev</code> には他の人のサイトが出ているので、<code>/</code> が 200 なのは当然です。不思議なのは <code>/game.js</code> まで 200 だったことで、他人のサイトに同じ名前のファイルがあるとは限りません。</p>
+  <p>あとから（2026 年 11 月 15 日）curl で測ると、こうなりました。</p>
+  <div class="scroll rv"><table>
+    <thead><tr><th>開いた URL</th><th>状態</th><th>Content-Type</th><th>大きさ</th><th>「ドパガキ脱出」を含むか</th></tr></thead>
+    <tbody>
+      <tr><td><code>dopagaki.pages.dev/</code>（他人）</td><td>200</td><td>text/html</td><td>1,858 B</td><td>含まない</td></tr>
+      <tr><td><code>dopagaki.pages.dev/game.js</code>（他人）</td><td>200</td><td>text/html</td><td>1,858 B</td><td>含まない</td></tr>
+      <tr><td><code>dopagaki.pages.dev/no-such-file-xyz</code>（他人）</td><td>200</td><td>text/html</td><td>1,858 B</td><td>含まない</td></tr>
+      <tr><td><code>dopagaki-36i.pages.dev/</code>（自分）</td><td>200</td><td>text/html</td><td>25,408 B</td><td>含む</td></tr>
+      <tr><td><code>dopagaki-36i.pages.dev/game.js</code>（自分）</td><td>200</td><td>application/javascript</td><td>1,075,018 B</td><td>—</td></tr>
+      <tr><td><code>dopagaki-36i.pages.dev/no-such-file-xyz</code>（自分）</td><td>200</td><td>text/html</td><td>25,408 B</td><td>含む</td></tr>
+    </tbody>
+  </table></div>
+  <p>他人のサイトの <code>/game.js</code> は、<strong>JavaScript ではなく、トップページと同じ 1,858 バイトの HTML</strong>でした。存在しない道（<code>/no-such-file-xyz</code>）も同じものが 200 で返ります。</p>
+  <p>これは Pages の決まった動きです。プロジェクトの一番上に <code>404.html</code> が無いと、Pages はそのサイトを<strong>シングルページアプリとして扱い、無い道にもトップの <code>index.html</code> を 200 で返します</strong>（<a href="https://developers.cloudflare.com/pages/configuration/serving-pages/" rel="noopener">Cloudflare のドキュメント「Serving Pages」</a>）。表の下の行のとおり、自分のプロジェクトも <code>404.html</code> を置いていないので、同じ動きをしています。</p>
+  <p>つまり、<strong>404.html の無い Pages に対しては、「この道が 200 か」はほとんど何も確かめていません</strong>。住所を間違えても、ファイルを入れ忘れても、200 が返ります。</p>
+
+  <h2 class="rv" id="s3">直し方：住所は聞く、中身で確かめる、書き残す</h2>
+  <p>直したのは、最初の配備から約 3 分後のコミット（<code>a52d290</code>）です。やったことは 3 つです。</p>
+
+  <h3>1. 住所は推測せず、API で聞く</h3>
+  <p>Pages のプロジェクトの情報には、割り振られた住所が <code>subdomain</code> として入っています。それを配備のたびに聞いて、後の手順で使います。</p>
+  <pre><code>- name: 住所を聞く
+  run: |
+    host=$(curl -s -H "Authorization: Bearer $CLOUDFLARE_API_TOKEN" \
+      "https://api.cloudflare.com/client/v4/accounts/$CLOUDFLARE_ACCOUNT_ID/pages/projects/dopagaki" \
+      | python3 -c "import json,sys; print(json.load(sys.stdin)['result']['subdomain'])")
+    echo "住所: $host"; echo "HOST=$host" &gt;&gt; "$GITHUB_ENV"</code></pre>
+  <p>次の配備のログでは、<code>住所: dopagaki-36i.pages.dev</code> と出ました。トークンは、Pages を配るときに使っているもの（GitHub の Secrets に置いたもの）をそのまま使っています。</p>
+
+  <h3>2. 状態コードだけでなく、中身で確かめる</h3>
+  <p>確認の行き先を <code>$HOST</code> に変え、さらに<strong>トップページに自分のゲームの名前が入っているか</strong>を見るようにしました。他人のサイトや、空のページが出ていれば、ここで止まります。</p>
+  <pre><code>- name: 出たか確かめる
+  run: |
+    sleep 20
+    for u in / /game.js; do
+      c=$(curl -s -o /dev/null -w "%{http_code}" "https://$HOST$u"); echo "$c $u"; [ "$c" = 200 ] || exit 1
+    done
+    curl -s "https://$HOST/" | grep -q 'ドパガキ脱出' || { echo "別の中身が出ている"; exit 1; }</code></pre>
+
+  <h3>3. 住所をファイルに書き残す</h3>
+  <p>このサイトは、<code>koshinstudio.com/play/dopagaki/</code> を Worker で Pages へ中継しています（<a href="/notes/deploy-gotchas/">配り方の別の記録</a>）。中継の行き先を書く人が、また <code>dopagaki.pages.dev</code> と書いてしまわないよう、聞いた住所を <code>PAGES_HOST</code> というファイルに書いて、Actions からコミットするようにしました（<code>contents: write</code> の権限を足し、コミットには <code>[skip ci]</code> を付けて、配備が自分を呼び直さないようにしています）。</p>
+  <pre><code>$ cat PAGES_HOST
+dopagaki-36i.pages.dev</code></pre>
+  <p>中継の設定（<code>worker/index.js</code>）と、その検査（<code>worker/test.mjs</code>）も、この住所で書いています。</p>
+  <pre><code>// worker/index.js
+dopagaki: 'https://dopagaki-36i.pages.dev',
+
+// worker/test.mjs
+await check('/play/dopagaki/', { status: 200, asked: 'https://dopagaki-36i.pages.dev/' });
+await check('/play/dopagaki/game.js', { status: 200, asked: 'https://dopagaki-36i.pages.dev/game.js' });</code></pre>
+
+  <h2 class="rv" id="s4">まだ残っている穴：/game.js の 200</h2>
+  <p>直したあとの確認でも、<code>/game.js</code> は状態コードしか見ていません。上の表のとおり、404.html の無い Pages では、<code>game.js</code> を入れ忘れても HTML が 200 で返るので、この行は<strong>今も、ほぼ何も確かめていません</strong>。トップの中身を見る確認は入ったので、住所の取り違えは捕まりますが、ファイルの入れ忘れは捕まりません。</p>
+  <p>塞ぐなら、たとえば Content-Type を見るのが手軽です（このリポジトリには、まだ入れていません）。</p>
+  <pre><code>t=$(curl -s -o /dev/null -w "%{content_type}" "https://$HOST/game.js")
+case "$t" in application/javascript*|text/javascript*) ;; *) echo "game.js が JS でない: $t"; exit 1;; esac</code></pre>
+  <p>あるいは、一番上に <code>404.html</code> を置けば、無い道は 404 を返すようになり、状態コードの確認がそのまま意味を持ちます。ただし、その場合はシングルページアプリとしての扱いも無くなるので、道ごとの HTML を持たない作りでは使えません。</p>
+
+  <h2 class="rv" id="s5">Pages を CI から出す人へ：確かめる 4 つ</h2>
+  <ul>
+    <li><strong><code>&lt;プロジェクト名&gt;.pages.dev</code> を、手で組み立てない。</strong><code>pages project create</code> の表示か、API の <code>result.subdomain</code> で、本当の住所を確かめる。</li>
+    <li><strong>404.html が無いなら、200 は「何かが返った」以上の意味を持たない。</strong>住所の間違いも、ファイルの入れ忘れも、200 で返る。</li>
+    <li><strong>「自分の物が出ているか」を見る。</strong>ページの中の決まった文字、ファイルの Content-Type、大きさなど、他のサイトでは成り立たないものを確かめる。</li>
+    <li><strong>聞いた住所は、書き残す。</strong>中継や DNS など、住所を書く場所が他にあるなら、推測で書かれないようにする。</li>
+  </ul>
+  <p>今回は、wrangler が最初から正しい住所を表示していたのに、確認は自分で組み立てた住所を見ていました。ジョブが緑だったので、ログを読まなければ気づかないところでした。</p>
+
+
+<!--related-->
+  <div class="rule" style="margin:40px 0 22px"></div>
+  <p class="eyebrow">ほかの記録</p>
+  <ul class="plain">
+    <li><a href="/notes/swipe-next-twice/">アプリとサーバーの点数がずれた：原因は計算ではなく、「次へ」が 2 回呼ばれてステージが入れ替わっていたこと</a> — スワイプ弾幕で、アプリの点数をサーバーが数え直すと合わない提出が出た。ずれた提出を丸ごと残し、アプリの途中経過と比べて最初にずれた場所を出す仕組みで、結果画面のタップと自動タイマーの二重呼び出しを見つけた。</li>
+    <li><a href="/notes/danmaku-patterns/">弾幕の作り方：放射・自機狙い・雨・渦巻き・追尾の仕組みを、計算式と動く見本で解説</a> — 弾幕は短い計算式でできている。弾幕メーカーで実際に使っている放射・自機狙い（奇数弾と偶数弾）・雨・首ふり扇・渦巻き・追尾の式を、動く見本で確かめられるように書いた。</li>
+    <li><a href="/notes/rank-verify-mismatch/">すし積むの番付に載らなくなった：ゲームの数字を変えて、サーバーの検算を直し忘れていた（しかも二つ）</a> — 番付に、普通に遊んでも載らなくなった。ゲームの数字を変えて、サーバーの検算を直し忘れていた。金の桶の褒美（8,000→25,000）と、降るネタ（3種→5種）の二つ。注意書きでは守れず、同じ種で出題を比べる検査を足した。</li>
+  </ul>
+<!--/related-->
+
+<!--comments-->
+  <section class="comments" id="comments" data-repo="murakamikoshin/koshin-studio" data-repo-id="R_kgDOURc3ew"
+    data-category="Announcements" data-category-id="DIC_kwDOURc3e84DHTVr">
+    <h2 id="comments-h">コメント</h2>
+    <p>感想や、記事の間違いの指摘は、ここへ。書くには、GitHub のアカウントが要ります。</p>
+    <p><button type="button" class="btn ghost" id="load-comments">コメントを開く</button></p>
+    <p class="note">押すと、giscus（giscus.app）と GitHub に接続します。押さなければ、接続しません。詳しくは<a href="/privacy/">プライバシーポリシー</a>に書いています。</p>
+    <div id="giscus-box"></div>
+  </section>
+<!--/comments-->
+</div>
+</main>
+
+<footer class="site"><div class="wrap">
+  <span>© 2026 Koshin Studio</span>
+  <div class="sns-row"></div>
+  <nav><a href="/picks/">Picks</a><a href="/calc/">Tools</a><a href="/about/">運営者情報</a><a href="/about/#contact">お問い合わせ</a><a href="/privacy/">プライバシーポリシー</a><a href="/en/" hreflang="en" lang="en">English</a></nav>
+</div></footer>
+<script src="/motion.js?v=1e7447ec" defer></script>
+</body>
+</html>

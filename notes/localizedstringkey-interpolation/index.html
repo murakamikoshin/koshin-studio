@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SwiftUI で翻訳キーがそのまま画面に出た：LocalizedStringKey に \(値) を埋め込むと、キーが別物になる — Koshin Studio</title>
+<meta name="description" content="SwiftUI の LocalizedStringKey(&quot;battle.rank.\(rank)&quot;) は、キーが &quot;battle.rank.%@&quot; になり、String Catalog の翻訳が引けずに battle.rank.gold のような ID が画面に出る。弾幕メーカーで同じ間違いを 2 回踏んだ記録と、直し方、再発を見つける grep。">
+<meta property="og:title" content="SwiftUI で翻訳キーがそのまま画面に出た：LocalizedStringKey に \(値) を埋め込むと、キーが別物になる">
+<meta property="og:description" content="LocalizedStringKey(&quot;battle.rank.\(rank)&quot;) のキーは &quot;battle.rank.%@&quot;。翻訳が引けず ID が出た。2 回踏んだ記録と、直し方と grep。">
+<meta property="og:type" content="article">
+<meta name="theme-color" content="#fbfaf7">
+<link rel="icon" href="/favicon.ico?v=1697d589" sizes="48x48">
+<link rel="icon" href="/favicon.svg?v=b9d7922f" type="image/svg+xml" sizes="any">
+<link rel="icon" href="/assets/icon/icon-192.png?v=e2566235" type="image/png" sizes="192x192">
+<link rel="apple-touch-icon" href="/assets/icon/icon-180.png?v=84e7f0e6">
+<link rel="manifest" href="/site.webmanifest">
+<script>document.documentElement.className+=" js"</script>
+<link rel="stylesheet" href="/style.css?v=d07261d4">
+<meta name="google-adsense-account" content="ca-pub-3863314847163872">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3863314847163872" crossorigin="anonymous"></script>
+<link rel="canonical" href="https://koshinstudio.com/notes/localizedstringkey-interpolation/">
+<meta property="og:url" content="https://koshinstudio.com/notes/localizedstringkey-interpolation/">
+<meta property="og:site_name" content="Koshin Studio">
+<meta property="og:locale" content="ja_JP">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="alternate" type="application/rss+xml" title="Koshin Studio — Notes" href="https://koshinstudio.com/feed.xml">
+<link rel="alternate" type="text/markdown" href="https://koshinstudio.com/notes/localizedstringkey-interpolation/index.md">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BlogPosting","headline":"SwiftUI で翻訳キーがそのまま画面に出た：LocalizedStringKey に \\(値) を埋め込むと、キーが別物になる（同じ間違いを 2 回）","url":"https://koshinstudio.com/notes/localizedstringkey-interpolation/","description":"LocalizedStringKey(\"battle.rank.\\(rank)\") のキーは \"battle.rank.%@\" になり、翻訳が引けずに battle.rank.gold が画面に出た。Swift の型の決まりから原因を説明し、直し方と、同じ形を探す grep（直す前は 3 行、直した後は 0 行）を書いた。","datePublished":"2026-11-23","dateModified":"2026-11-23","inLanguage":"ja","image":"https://koshinstudio.com/assets/og/og_notes_localizedstringkey-interpolation.jpg","author":{"@id":"https://koshinstudio.com#koshin"},"publisher":{"@id":"https://koshinstudio.com#studio"},"mainEntityOfPage":"https://koshinstudio.com/notes/localizedstringkey-interpolation/"},{"@type":"Person","@id":"https://koshinstudio.com#koshin","name":"Koshin","jobTitle":"Webエンジニア・アプリエンジニア","url":"https://koshinstudio.com/about/","worksFor":{"@id":"https://koshinstudio.com#studio"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Koshin Studio","item":"https://koshinstudio.com/"},{"@type":"ListItem","position":2,"name":"Notes","item":"https://koshinstudio.com/notes/"},{"@type":"ListItem","position":3,"name":"SwiftUI で翻訳キーがそのまま画面に出た：LocalizedStringKey に \\(値) を埋め込むと、キーが別物になる（同じ間違いを 2 回）","item":"https://koshinstudio.com/notes/localizedstringkey-interpolation/"}]}]}</script>
+<meta property="og:image" content="https://koshinstudio.com/assets/og/og_notes_localizedstringkey-interpolation.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
+</head>
+<body class="article">
+<canvas id="motes"></canvas>
+
+<header class="site"><div class="wrap">
+  <a class="logo" href="/"><img class="logo-mark" src="/favicon.svg?v=b9d7922f" alt="" width="28" height="28">Koshin Studio</a>
+  <nav><a href="/works/">Works</a><a href="/works/#game">Games</a><a href="/notes/">Notes</a><a href="/picks/">Picks</a><a href="/calc/">Tools</a><a href="/about/">About</a></nav>
+</div></header>
+
+<main><div class="wrap">
+  <nav class="crumbs" aria-label="現在地"><a href="/">Koshin Studio</a><i aria-hidden="true">›</i><a href="/notes/">Notes</a><i aria-hidden="true">›</i><span aria-current="page">SwiftUI で翻訳キーがそのまま画面に出た：LocalizedStringKey に \(値) を埋め込むと、キーが別物になる（同じ間違いを 2 回）</span></nav>
+  <h1>SwiftUI で翻訳キーがそのまま画面に出た：LocalizedStringKey に \(値) を埋め込むと、キーが別物になる（同じ間違いを 2 回）</h1>  <div class="rule"></div><!--byline--><p class="note byline">書いた人：<a href="/about/#operator">Koshin</a>（Web エンジニア・アプリエンジニア）　公開：2026-11-23</p><!--/byline--><p class="lead">弾幕メーカー 開発の記録 ／ 2026年11月</p>
+
+  <p>iOS アプリ<a href="/works/danmaku-maker/">「弾幕メーカー」</a>は、画面の文字を String Catalog（<code>Localizable.xcstrings</code>）で 10 言語に訳しています。そのアプリで、<strong>訳した文字の代わりに <code>battle.rank.gold</code> や <code>pattern.twinRing</code> のような「キー」がそのまま画面に出る</strong>不具合を、10 月と 11 月の 2 回、同じ原因で出しました。</p>
+  <p>原因は、どちらもこの 1 行の形です。</p>
+  <pre><code>Text(LocalizedStringKey("battle.rank.\(rank)"))</code></pre>
+  <p>見た目は「<code>battle.rank.gold</code> というキーで翻訳を引く」ですが、実際に引かれるキーは <strong><code>battle.rank.%@</code></strong> です。そんなキーは無いので、翻訳が見つかりません。この記事は、なぜそうなるのか、どう直したか、そして 2 回目を防げなかった理由と、同じ形をリポジトリから探す方法の記録です。</p>
+  <p class="note">この記事は、弾幕メーカーのリポジトリのコミット（<code>0721668</code>：2026 年 10 月 31 日、<code>9d66669</code>：2026 年 11 月 17 日）と、そのコードから書いています。grep の結果は、記事を書くときにそれぞれのコミットで実際に走らせたものです。</p>
+<!--toc-->
+  <nav class="toc" aria-label="目次"><p>目次</p><ol><li><a href="#s1">起きたこと：2 回とも「キーがそのまま出た」</a></li><li><a href="#s2">なぜキーが別物になるのか</a></li><li><a href="#s3">書き方ごとの、引かれるキー</a></li><li><a href="#s4">直し方：キーを String として作ってから渡す</a></li><li><a href="#s5">2 回目を防げなかった理由と、grep で探す方法</a></li><li><a href="#s6">SwiftUI で翻訳を引く人へ：確かめる 4 つ</a></li></ol></nav>
+<!--/toc-->
+  <h2 class="rv" id="s1">起きたこと：2 回とも「キーがそのまま出た」</h2>
+  <div class="scroll rv"><table>
+    <thead><tr><th></th><th>1 回目</th><th>2 回目</th></tr></thead>
+    <tbody>
+      <tr><td>直した日</td><td>2026-10-31（<code>0721668</code>）</td><td>2026-11-17（<code>9d66669</code>）</td></tr>
+      <tr><td>場所</td><td>ショップの「広告でもらえるパターン」の名前（2 か所）と、通知の設定の種類名（1 か所）</td><td>対戦モード「弾幕バトル」の勝ち・負けの表示（1 か所）と、ランク名（2 か所）</td></tr>
+      <tr><td>出ていた文字</td><td><code>pattern.twinRing</code> のような ID</td><td><code>battle.result.win</code>・<code>battle.rank.gold</code> のようなキー</td></tr>
+      <tr><td>本来の表示（日本語）</td><td>パターンの名前</td><td>「勝ち！」「ゴールド」など</td></tr>
+    </tbody>
+  </table></div>
+  <p>2 回目の 3 か所は、対戦モードの画面を作ったコミット（<code>dbc2f80</code>、2026 年 11 月 11 日）で入ったものです。1.3.0 の公開後の確認で見つかり、11 月 17 日に直しました。</p>
+  <p>どちらも、<strong>翻訳そのものは String Catalog にちゃんと入っていました</strong>。たとえば <code>battle.rank.gold</code> には、日本語の「ゴールド」を含む 10 言語（de・en・es・fr・ja・ko・pt-BR・ru・zh-Hans・zh-Hant）の訳があります。翻訳が無いのではなく、<strong>別のキーで引いていた</strong>のが原因です。</p>
+
+  <h2 class="rv" id="s2">なぜキーが別物になるのか</h2>
+  <p>理由は、Swift の言語の決まりと、SwiftUI の <code>LocalizedStringKey</code> の作りの、2 つが重なったことです。</p>
+  <ol>
+    <li><strong><code>型名("文字列リテラル")</code> は、関数呼び出しではなく「その型のリテラル」として扱われる。</strong>Swift 5 からの決まり（SE-0213）で、型が <code>ExpressibleByStringLiteral</code> などに従っていれば、<code>LocalizedStringKey("…")</code> は <code>"…" as LocalizedStringKey</code> と同じ意味になります。<code>String</code> を受け取る初期化（<code>init(_ value: String)</code>）は使われません</li>
+    <li><strong><code>LocalizedStringKey</code> は、文字列補間（<code>\(…)</code>）つきのリテラルを、自分で組み立てる。</strong>埋め込んだ値の所を <code>%@</code> や <code>%lld</code> のような書式指定に置き換えた文字列をキーにし、値は「後で書式に当てはめる引数」として別に持ちます。<code>Text("こんにちは、\(name)")</code> を <code>"こんにちは、%@"</code> というキーで訳せるのは、この仕組みのおかげです</li>
+  </ol>
+  <p>つまり <code>LocalizedStringKey("battle.rank.\(rank)")</code> は、</p>
+  <ul>
+    <li>キー：<code>"battle.rank.%@"</code></li>
+    <li>引数：<code>rank</code> の値（たとえば <code>"gold"</code>）</li>
+  </ul>
+  <p>になります。String Catalog に <code>battle.rank.%@</code> は無いので、翻訳は見つかりません。見つからないとき、SwiftUI はキーそのものを書式として使い、引数を当てはめて表示します。その結果、<code>battle.rank.%@</code> に <code>gold</code> が入って、<strong><code>battle.rank.gold</code> という「正しいキーと同じ文字列」が画面に出ます</strong>。</p>
+  <p>これが見つけにくい点です。画面に出ている文字は、String Catalog に入っているキーと 1 文字も違いません。「キーは合っているのに、なぜ訳されないのか」と見えてしまいます。</p>
+
+  <h2 class="rv" id="s3">書き方ごとの、引かれるキー</h2>
+  <p><code>rank</code> が <code>"gold"</code> のとき、それぞれの書き方で、どのキーが引かれるかを並べます。</p>
+  <div class="scroll rv"><table>
+    <thead><tr><th>書き方</th><th>引かれるキー</th><th>訳されるか</th></tr></thead>
+    <tbody>
+      <tr><td><code>LocalizedStringKey("battle.rank.\(rank)")</code></td><td><code>battle.rank.%@</code></td><td>✕</td></tr>
+      <tr><td><code>Text("battle.rank.\(rank)")</code></td><td><code>battle.rank.%@</code>（<code>Text</code> にリテラルを渡すと、<code>LocalizedStringKey</code> として扱われるため同じ）</td><td>✕</td></tr>
+      <tr><td><code>LocalizedStringKey("battle.rank." + rank)</code></td><td><code>battle.rank.gold</code>（<code>+</code> でつないだ結果は <code>String</code> なので、<code>init(_ value: String)</code> が使われる）</td><td>○</td></tr>
+      <tr><td><code>let key = "battle.rank.\(rank)"</code><br><code>Text(LocalizedStringKey(key))</code></td><td><code>battle.rank.gold</code>（いったん <code>String</code> の変数に入れている）</td><td>○</td></tr>
+      <tr><td><code>Text(L("pattern.\(p.rawValue)"))</code><br>（<code>L</code> は下のヘルパー）</td><td><code>pattern.twinRing</code> など（<code>L</code> の引数は <code>String</code> なので、補間は普通の文字列になる）</td><td>○</td></tr>
+    </tbody>
+  </table></div>
+  <p>同じ <code>\(…)</code> でも、<strong>その文字列リテラルが「どの型として」読まれるか</strong>で結果が変わります。<code>String</code> として読まれれば普通の文字列、<code>LocalizedStringKey</code> として読まれれば書式つきのキーです。</p>
+  <p class="note">弾幕メーカーには、<code>Text(LocalizedStringKey(keys[p] ?? "pattern.\(p.rawValue)"))</code> という行もあります。これは <code>??</code> の左が <code>String?</code> なので、右のリテラルも <code>String</code> として読まれ、キーは正しく作られます。形が似ていても、型の決まり方で結果が分かれる例です。</p>
+
+  <h2 class="rv" id="s4">直し方：キーを String として作ってから渡す</h2>
+  <p>やることは、<strong>キーを <code>String</code> として作ってから、翻訳を引く側に渡す</strong>ことだけです。弾幕メーカーでは、2 つの書き方で直しました。</p>
+  <p>2 回目（<code>9d66669</code>）は、<code>+</code> でつなぐ形です。</p>
+  <pre><code>// 直す前
+Text(LocalizedStringKey("battle.rank.\(s.rank)"))
+Text(LocalizedStringKey("battle.result.\(result.outcome.rawValue)"))
+
+// 直した後
+Text(LocalizedStringKey("battle.rank." + s.rank))
+Text(LocalizedStringKey("battle.result." + result.outcome.rawValue))</code></pre>
+  <p>1 回目（<code>0721668</code>）のショップの 2 か所は、翻訳を引いて <code>String</code> を返すヘルパーに通す形にしました。</p>
+  <pre><code>/// 画面に出す文字列（String Catalog 経由）
+func L(_ key: String) -> String {
+    String(localized: String.LocalizationValue(key))
+}
+
+// 直す前
+Text(LocalizedStringKey("pattern.\(p.rawValue)"))
+// 直した後
+Text(L("pattern.\(p.rawValue)"))</code></pre>
+  <p><code>L</code> の引数は <code>String</code> なので、<code>"pattern.\(p.rawValue)"</code> は普通の文字列 <code>"pattern.twinRing"</code> になり、そのキーで翻訳を引きます。<code>Text</code> には訳し終えた <code>String</code> を渡すので、<code>Text</code> 側でもう一度キーとして扱われることもありません。</p>
+  <p class="note">逆に、<code>"%@ に勝った"</code> のように、書式つきのキーを String Catalog に用意して値を当てはめたいときは、<code>\(…)</code> の埋め込みが正しい使い方です。まずいのは、<strong>キーの名前の一部</strong>を補間で作ることです。</p>
+
+  <h2 class="rv" id="s5">2 回目を防げなかった理由と、grep で探す方法</h2>
+  <p>1 回目を直したとき、通知の設定の種類名を作る所（<code>NotificationService.swift</code>）には、こう注意書きを残していました。</p>
+  <pre><code>/// LocalizedStringKey("…\\(rawValue)") と書くと、キーが "settings.notify.%@" になって翻訳が引けないので、文字列をつないで作る
+var titleKey: LocalizedStringKey { LocalizedStringKey("settings.notify." + rawValue) }</code></pre>
+  <p>それでも、11 日後に別のファイル（<code>BattleHomeView.swift</code>）で同じ形を 3 か所書きました。注意書きは、<strong>そのファイルを開いた人にしか読まれません</strong>。新しい画面を書くときに、別のファイルのコメントを思い出す仕組みはありません。</p>
+  <p>この形は、1 行の grep でほぼ拾えます。「<code>LocalizedStringKey("</code> で始まり、閉じる <code>"</code> の前に <code>\(</code> がある」行を探します。</p>
+  <pre><code>git grep -n -E 'LocalizedStringKey\("[^"]*\\\(' -- '*.swift'</code></pre>
+  <p>実際に、弾幕メーカーのリポジトリで、直す前と直した後のコミットに対して走らせた結果です（コメント行は除いて数えています）。</p>
+  <div class="scroll rv"><table>
+    <thead><tr><th>コミット</th><th>見つかった行</th></tr></thead>
+    <tbody>
+      <tr><td>1 回目を直す前（<code>0721668</code> の 1 つ前）</td><td>3 行（<code>NotificationService.swift</code> 1・<code>ShopView.swift</code> 2）</td></tr>
+      <tr><td>1 回目を直した後（<code>0721668</code>）</td><td>0 行</td></tr>
+      <tr><td>2 回目を直す前（<code>9d66669</code> の 1 つ前）</td><td>3 行（<code>BattleHomeView.swift</code> 3）</td></tr>
+      <tr><td>2 回目を直した後（<code>9d66669</code>）</td><td>0 行</td></tr>
+    </tbody>
+  </table></div>
+  <p>2 回とも、直した場所と grep の結果は一致しました。<strong>このコマンドを 2 回目の前に一度走らせていれば、1.3.0 を出す前に 3 か所とも見つかった</strong>ことになります。</p>
+  <p>使うときの注意です。</p>
+  <ul>
+    <li><strong><code>Text("battle.rank.\(rank)")</code> のように、<code>Text</code> に直接書いた形は拾いません。</strong>こちらは、「キーらしい英小文字とドットで始まる」行を別に探すと絞れます：<code>git grep -n -E 'Text\("[a-z]+\.[a-zA-Z.]*\\\(' -- '*.swift'</code>（弾幕メーカーの 11 月 19 日時点のコード <code>a783da8</code> では 0 行でした）</li>
+    <li><strong>書式つきのキーを意図して使っている所も拾います。</strong>その場合は、String Catalog に <code>%@</code> を含むキーがあるかを見て、あれば対象から外します。弾幕メーカーの String Catalog（1,188 キー）には、<code>%</code> を含むキーは 1 つもありませんでした。つまり、このアプリでは grep に当たった行は全部まちがい、と言えます</li>
+    <li><strong>キーを 1 行で書いていない（途中で改行している）と拾えません。</strong>grep は 1 行ずつ見るためです</li>
+  </ul>
+  <p class="note">この grep を CI やコミット前の検査に入れるかどうかは、この記事を書いた時点ではまだ決めていません。入れるなら、上の 2 本を走らせて、1 行でも出たら止める形が簡単です。</p>
+
+  <h2 class="rv" id="s6">SwiftUI で翻訳を引く人へ：確かめる 4 つ</h2>
+  <ol>
+    <li><strong>画面にキーがそのまま出たら、まず「そのキーをどう作ったか」を見る。</strong>翻訳ファイルにキーがあるのに訳されないなら、<code>LocalizedStringKey</code> や <code>Text</code> に <code>\(…)</code> つきのリテラルを渡していないかを疑います。画面の文字が正しいキーと同じでも、引いたキーは <code>…%@</code> かもしれません</li>
+    <li><strong>キーの一部を値で変えるときは、<code>String</code> として作ってから渡す。</strong><code>+</code> でつなぐ、いったん変数に入れる、<code>String(localized:)</code> を通すヘルパーを使う、のどれかです</li>
+    <li><strong>型名とかっこで囲んでも、リテラルはその型として読まれる。</strong><code>LocalizedStringKey("…\(x)")</code> は、<code>String</code> を渡しているように見えて、<code>String</code> を通っていません</li>
+    <li><strong>注意書きより、検査。</strong>同じ間違いが 2 回出たら、コメントを増やすより、上の grep のように機械で探せる形にしておく方が確かです</li>
+  </ol>
+  <p>弾幕メーカーの別の不具合の記録は、<a href="/notes/swipe-next-twice/">アプリとサーバーの点数がずれた記録</a>に書いています。SwiftUI で起きた別の不具合は、<a href="/notes/swiftui-hit-area/">ボタンが文字の上でしか反応しなかった記録</a>にあります。</p>
+
+
+<!--related-->
+  <div class="rule" style="margin:40px 0 22px"></div>
+  <p class="eyebrow">ほかの記録</p>
+  <ul class="plain">
+    <li><a href="/notes/swipe-next-twice/">アプリとサーバーの点数がずれた：原因は計算ではなく、「次へ」が 2 回呼ばれてステージが入れ替わっていたこと</a> — スワイプ弾幕で、アプリの点数をサーバーが数え直すと合わない提出が出た。ずれた提出を丸ごと残し、アプリの途中経過と比べて最初にずれた場所を出す仕組みで、結果画面のタップと自動タイマーの二重呼び出しを見つけた。</li>
+    <li><a href="/notes/danmaku-patterns/">弾幕の作り方：放射・自機狙い・雨・渦巻き・追尾の仕組みを、計算式と動く見本で解説</a> — 弾幕は短い計算式でできている。弾幕メーカーで実際に使っている放射・自機狙い（奇数弾と偶数弾）・雨・首ふり扇・渦巻き・追尾の式を、動く見本で確かめられるように書いた。</li>
+    <li><a href="/notes/anime-64-types/">アニメ6,074作を64タイプに振り分けたら、8タイプは0作だった：6つの軸は、独立していなかった</a> — 診断のデータベース6,074作を、6つの軸で64タイプに振り分けて数えた。上位4タイプで47.3%、8タイプは0作。軸を2本ずつ比べると、3本の軸がほぼ同じ向きを測っていた。数え方と、まだ切り分けられていないことの記録。</li>
+  </ul>
+<!--/related-->
+
+<!--comments-->
+  <section class="comments" id="comments" data-repo="murakamikoshin/koshin-studio" data-repo-id="R_kgDOURc3ew"
+    data-category="Announcements" data-category-id="DIC_kwDOURc3e84DHTVr">
+    <h2 id="comments-h">コメント</h2>
+    <p>感想や、記事の間違いの指摘は、ここへ。書くには、GitHub のアカウントが要ります。</p>
+    <p><button type="button" class="btn ghost" id="load-comments">コメントを開く</button></p>
+    <p class="note">押すと、giscus（giscus.app）と GitHub に接続します。押さなければ、接続しません。詳しくは<a href="/privacy/">プライバシーポリシー</a>に書いています。</p>
+    <div id="giscus-box"></div>
+  </section>
+<!--/comments-->
+</div>
+</main>
+
+<footer class="site"><div class="wrap">
+  <span>© 2026 Koshin Studio</span>
+  <div class="sns-row"></div>
+  <nav><a href="/picks/">Picks</a><a href="/calc/">Tools</a><a href="/about/">運営者情報</a><a href="/about/#contact">お問い合わせ</a><a href="/privacy/">プライバシーポリシー</a><a href="/en/" hreflang="en" lang="en">English</a></nav>
+</div></footer>
+<script src="/motion.js?v=1e7447ec" defer></script>
+</body>
+</html>

@@ -1,0 +1,196 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>アニメ6,074作を64タイプに振り分けたら、8タイプは0作だった：6つの軸は、独立していなかった | Koshin Studio</title>
+<meta name="description" content="診断のデータベース6,074作を、6つの軸で64タイプに振り分けて数えた。上位4タイプで47.3%、8タイプは0作。軸を2本ずつ比べると、3本の軸がほぼ同じ向きを測っていた。数え方と、まだ切り分けられていないことの記録。">
+<meta property="og:title" content="アニメ6,074作を64タイプに振り分けたら、8タイプは0作だった：6つの軸は、独立していなかった | Koshin Studio">
+<meta property="og:description" content="64タイプの診断で、作品を実際に数えたら、タイプは均等ではなかった。数え方と結果の記録。">
+<meta property="og:type" content="article">
+<meta name="theme-color" content="#fbfaf7">
+<link rel="icon" href="/favicon.ico?v=1697d589" sizes="48x48">
+<link rel="icon" href="/favicon.svg?v=b9d7922f" type="image/svg+xml" sizes="any">
+<link rel="icon" href="/assets/icon/icon-192.png?v=e2566235" type="image/png" sizes="192x192">
+<link rel="apple-touch-icon" href="/assets/icon/icon-180.png?v=84e7f0e6">
+<link rel="manifest" href="/site.webmanifest">
+<script>document.documentElement.className+=" js"</script>
+<link rel="stylesheet" href="/style.css?v=d07261d4">
+<meta name="google-adsense-account" content="ca-pub-3863314847163872">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3863314847163872" crossorigin="anonymous"></script>
+<link rel="canonical" href="https://koshinstudio.com/notes/anime-64-types/">
+<meta property="og:url" content="https://koshinstudio.com/notes/anime-64-types/">
+<meta property="og:site_name" content="Koshin Studio">
+<meta property="og:locale" content="ja_JP">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="alternate" type="application/rss+xml" title="Koshin Studio — Notes" href="https://koshinstudio.com/feed.xml">
+<link rel="alternate" type="text/markdown" href="https://koshinstudio.com/notes/anime-64-types/index.md">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BlogPosting","headline":"アニメ6,074作を64タイプに振り分けたら、8タイプは0作だった：6つの軸は、独立していなかった","url":"https://koshinstudio.com/notes/anime-64-types/","description":"診断のデータベース6,074作を、6つの軸で64タイプに振り分けて数えた。上位4タイプで47.3%、8タイプは0作。軸を2本ずつ比べると、3本の軸がほぼ同じ向きを測っていた。数え方と、まだ切り分けられていないことの記録。","datePublished":"2026-11-20","dateModified":"2026-11-20","inLanguage":"ja","image":"https://koshinstudio.com/assets/og/og_notes_anime-64-types.jpg","author":{"@id":"https://koshinstudio.com#koshin"},"publisher":{"@id":"https://koshinstudio.com#studio"},"mainEntityOfPage":"https://koshinstudio.com/notes/anime-64-types/"},{"@type":"Person","@id":"https://koshinstudio.com#koshin","name":"Koshin","jobTitle":"Webエンジニア・アプリエンジニア","url":"https://koshinstudio.com/about/","worksFor":{"@id":"https://koshinstudio.com#studio"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Koshin Studio","item":"https://koshinstudio.com/"},{"@type":"ListItem","position":2,"name":"Notes","item":"https://koshinstudio.com/notes/"},{"@type":"ListItem","position":3,"name":"アニメ6,074作を64タイプに振り分けたら、8タイプは0作だった：6つの軸は、独立していなかった","item":"https://koshinstudio.com/notes/anime-64-types/"}]}]}</script>
+<meta property="og:image" content="https://koshinstudio.com/assets/og/og_notes_anime-64-types.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1">
+</head>
+<body class="article">
+<canvas id="motes"></canvas>
+
+<header class="site"><div class="wrap">
+  <a class="logo" href="/"><img class="logo-mark" src="/favicon.svg?v=b9d7922f" alt="" width="28" height="28">Koshin Studio</a>
+  <nav><a href="/works/">Works</a><a href="/works/#game">Games</a><a href="/notes/">Notes</a><a href="/picks/">Picks</a><a href="/calc/">Tools</a><a href="/about/">About</a></nav>
+</div></header>
+
+<main><div class="wrap">
+  <nav class="crumbs" aria-label="現在地"><a href="/">Koshin Studio</a><i aria-hidden="true">›</i><a href="/notes/">Notes</a><i aria-hidden="true">›</i><span aria-current="page">アニメ6,074作を64タイプに振り分けたら、8タイプは0作だった：6つの軸は、独立していなかった</span></nav>
+  <h1>アニメ6,074作を64タイプに振り分けたら、8タイプは0作だった：6つの軸は、独立していなかった</h1>  <div class="rule"></div><!--byline--><p class="note byline">書いた人：<a href="/about/#operator">Koshin</a>（Web エンジニア・アプリエンジニア）　公開：2026-11-20</p><!--/byline--><p class="lead">ガチアニメ診断 開発の記録 ／ 2026年11月</p>
+
+  <p><a href="/works/shindananime/">ガチアニメ診断</a>は、6つの軸のどちら側に寄っているかで、好みを <strong>2×2×2×2×2×2＝64 タイプ</strong>に分けます。作ったときは、64 タイプそれぞれに、同じくらいの数の作品が当てはまるものだと、なんとなく思っていました。</p>
+  <p>数えてみたら、違いました。診断のデータベース 6,074 作を、同じ 6 つの軸で 64 タイプに振り分けると、<strong>上位 4 タイプだけで 47.3%</strong> を占め、<strong>8 タイプには、1 作もありません</strong>でした。</p>
+  <p>この記事は、その数え方と結果、そこから分かった「6 つの軸は、互いに独立していなかった」という話を、数字で書いたものです。タイプ分けの診断や、好みの分類を自分で作る人には、同じ落とし穴があるかもしれません。</p>
+  <p class="note">この記事の数字は、2026 年 11 月 20 日に、診断のデータベース（6,074 作）を数えたものです。数えるプログラムは koshin-studio リポジトリの <code>tools/anime-types.mjs</code>、結果は <code>data/anime-types.json</code> にあります。作品ごとの軸の値は、あらすじとレビューの言葉から、このサイトが独自に見積もったもので、作品の公式の分類ではありません。</p>
+<!--toc-->
+  <nav class="toc" aria-label="目次"><p>目次</p><ol><li><a href="#s1">数え方</a></li><li><a href="#s2">結果：上位 4 タイプで 47.3%、8 タイプは 0 作</a></li><li><a href="#s3">片寄りの理由 1：軸ごとに、もう偏っている</a></li><li><a href="#s4">片寄りの理由 2：軸どうしが、つながっている</a></li><li><a href="#s5">これは作品の性質か、見積もり方のくせか</a></li><li><a href="#s6">診断は、これで困るのか</a></li><li><a href="#s7">直したこと、直していないこと</a></li><li><a href="#s8">タイプ分けを作る人へ：確かめる 3 つ</a></li></ol></nav>
+<!--/toc-->
+  <h2 class="rv" id="s1">数え方</h2>
+  <p>診断は、作品 1 つずつに、6 つの軸の値（−1 から +1 のあいだの数）を持たせています。この値が 0 以上か、0 未満かで、軸ごとに 1 文字を決めると、作品にも、人と同じ 6 文字のタイプが付きます。</p>
+  <div class="scroll"><table>
+    <tr><th>軸</th><th>0 以上</th><th>0 未満</th></tr>
+    <tr><td>世界観</td><td>R（リアル）</td><td>F（ファンタジー）</td></tr>
+    <tr><td>後味・刺激</td><td>D（ダーク）</td><td>H（ハッピー）</td></tr>
+    <tr><td>構成・テンポ</td><td>C（伏線・考察）</td><td>S（テンポ・勢い）</td></tr>
+    <tr><td>サブテイスト</td><td>P（心理戦）</td><td>A（アクション）</td></tr>
+    <tr><td>視覚・フェチ</td><td>V（映像美）</td><td>T（ストーリー）</td></tr>
+    <tr><td>視聴スタイル</td><td>M（熟読・考察）</td><td>L（サクッと）</td></tr>
+  </table></div>
+  <p>たとえば、6 つとも 0 以上なら <code>RDCP-VM</code>。これを 6,074 作ぜんぶでやって、タイプごとに数えました。軸の意味は、<a href="/anime/axes/">6つの軸の解説</a>に書いています。</p>
+
+  <h2 class="rv" id="s2">結果：上位 4 タイプで 47.3%、8 タイプは 0 作</h2>
+  <p>64 タイプに均等に散らばるなら、1 タイプあたり約 95 作（1.6%）です。実際は、こうでした。</p>
+  <div class="scroll"><table>
+    <tr><th>順位</th><th>タイプ</th><th>二つ名</th><th>作品数</th><th>割合</th></tr>
+    <tr><td>1</td><td><a href="/anime/types/rhsa-vl/"><code>RHSA-VL</code></a></td><td>日常を愛する爽快エンタメハンター</td><td>1,112</td><td>18.3%</td></tr>
+    <tr><td>2</td><td><a href="/anime/types/rhsp-vl/"><code>RHSP-VL</code></a></td><td>日常を愛する直感ドラマハンター</td><td>591</td><td>9.7%</td></tr>
+    <tr><td>3</td><td><a href="/anime/types/fhsa-vl/"><code>FHSA-VL</code></a></td><td>異世界を駆ける爽快エンタメハンター</td><td>586</td><td>9.7%</td></tr>
+    <tr><td>4</td><td><a href="/anime/types/rhsa-tl/"><code>RHSA-TL</code></a></td><td>日常を愛する爽快エンタメランナー</td><td>583</td><td>9.6%</td></tr>
+    <tr><td>5</td><td><a href="/anime/types/rdcp-vm/"><code>RDCP-VM</code></a></td><td>深淵を覗く考察コレクター</td><td>461</td><td>7.6%</td></tr>
+    <tr><td>6</td><td><a href="/anime/types/fdca-vm/"><code>FDCA-VM</code></a></td><td>異世界を旅するロマン追及者</td><td>319</td><td>5.2%</td></tr>
+    <tr><td>7</td><td><a href="/anime/types/fdcp-vm/"><code>FDCP-VM</code></a></td><td>絶望の異界を征く考察コレクター</td><td>267</td><td>4.4%</td></tr>
+    <tr><td>8</td><td><a href="/anime/types/rhcp-vm/"><code>RHCP-VM</code></a></td><td>日常を愛する考察コレクター</td><td>201</td><td>3.3%</td></tr>
+    <tr><td>9</td><td><a href="/anime/types/rdcp-tm/"><code>RDCP-TM</code></a></td><td>深淵を覗く考察アナリスト</td><td>188</td><td>3.1%</td></tr>
+    <tr><td>10</td><td><a href="/anime/types/fdsa-vl/"><code>FDSA-VL</code></a></td><td>絶望の異界を征く爽快エンタメハンター</td><td>145</td><td>2.4%</td></tr>
+  </table></div>
+  <ul>
+    <li>1 位の <a href="/anime/types/rhsa-vl/"><code>RHSA-VL</code></a> だけで <strong>1,112 作（18.3%）</strong>。均等な場合の約 12 倍です。</li>
+    <li>上位 10 タイプで、全体の 73.3%。</li>
+    <li>100 作以上あるタイプは 13 つだけ。<strong>10 作以下のタイプが 27 つ</strong>あります。</li>
+    <li>64 タイプの作品数の中央値は 14.5 作。「ふつうのタイプ」には、十数作しかありません。</li>
+    <li>1 作も無いタイプは 8 つ：<a href="/anime/types/fdsa-tm/"><code>FDSA-TM</code></a>、<a href="/anime/types/fdsp-tl/"><code>FDSP-TL</code></a>、<a href="/anime/types/fdsp-tm/"><code>FDSP-TM</code></a>、<a href="/anime/types/fdsp-vl/"><code>FDSP-VL</code></a>、<a href="/anime/types/fhsa-tm/"><code>FHSA-TM</code></a>、<a href="/anime/types/fhsp-tm/"><code>FHSP-TM</code></a>、<a href="/anime/types/rdsa-tm/"><code>RDSA-TM</code></a>、<a href="/anime/types/rhsa-tm/"><code>RHSA-TM</code></a>。</li>
+  </ul>
+  <p>1 位のタイプには、「鬼滅の刃」「SPY×FAMILY」「ハイキュー!!」「僕のヒーローアカデミア」など、広く見られている作品が並びます。5 位の <a href="/anime/types/rdcp-vm/"><code>RDCP-VM</code></a> には「進撃の巨人」「【推しの子】」「あの日見た花の名前を僕達はまだ知らない。」。作品の多いタイプは、放送されるアニメそのものの多い型、と読めます。</p>
+
+  <h2 class="rv" id="s3">片寄りの理由 1：軸ごとに、もう偏っている</h2>
+  <p>まず、軸を 1 本ずつ見ても、半々にはなっていません。</p>
+  <div class="scroll"><table>
+    <tr><th>軸</th><th>多い側</th><th>作品数</th><th>割合</th></tr>
+    <tr><td>世界観</td><td>R（リアル）</td><td>3,996</td><td>65.8%</td></tr>
+    <tr><td>後味・刺激</td><td>H（ハッピー）</td><td>4,045</td><td>66.6%</td></tr>
+    <tr><td>構成・テンポ</td><td>S（テンポ・勢い）</td><td>3,974</td><td>65.4%</td></tr>
+    <tr><td>サブテイスト</td><td>A（アクション）</td><td>3,692</td><td>60.8%</td></tr>
+    <tr><td>視覚・フェチ</td><td>V（映像美）</td><td>4,820</td><td>79.4%</td></tr>
+    <tr><td>視聴スタイル</td><td>L（サクッと）</td><td>3,577</td><td>58.9%</td></tr>
+  </table></div>
+  <p>いちばん偏っているのは「視覚・フェチ」で、V（映像美）側が 79.4%。多い側だけを 6 つ並べると <code>RHSA-VL</code> になり、これが 1 位のタイプと一致します。</p>
+  <p>ただ、この偏りだけでは、結果を説明しきれません。6 つの軸が互いに無関係だとして、軸ごとの割合を掛け合わせると、<code>RHSA-VL</code> は約 495 作になるはずです。実際は 1,112 作。<strong>倍以上、多い</strong>のです。</p>
+
+  <h2 class="rv" id="s4">片寄りの理由 2：軸どうしが、つながっている</h2>
+  <p>そこで、軸を 2 本ずつ組み合わせて、「無関係ならこの数になるはず」と、実際の数を比べました。差の大きいものを、上と下から 4 つずつ。</p>
+  <div class="scroll"><table>
+    <tr><th>組み合わせ</th><th>実際</th><th>無関係なら</th><th>比</th></tr>
+    <tr><td>C（伏線・考察）× M（熟読・考察）</td><td>1,942</td><td>863</td><td>2.25 倍</td></tr>
+    <tr><td>D（ダーク）× C（伏線・考察）</td><td>1,458</td><td>701</td><td>2.08 倍</td></tr>
+    <tr><td>D（ダーク）× M（熟読・考察）</td><td>1,711</td><td>834</td><td>2.05 倍</td></tr>
+    <tr><td>C（伏線・考察）× P（心理戦）</td><td>1,411</td><td>824</td><td>1.71 倍</td></tr>
+    <tr><td>C（伏線・考察）× L（サクッと）</td><td>158</td><td>1,237</td><td>0.13 倍</td></tr>
+    <tr><td>D（ダーク）× L（サクッと）</td><td>318</td><td>1,195</td><td>0.27 倍</td></tr>
+    <tr><td>S（テンポ・勢い）× M（熟読・考察）</td><td>555</td><td>1,634</td><td>0.34 倍</td></tr>
+    <tr><td>D（ダーク）× S（テンポ・勢い）</td><td>571</td><td>1,328</td><td>0.43 倍</td></tr>
+  </table></div>
+  <p>はっきり出ているのは、<strong>C（伏線・考察）・M（熟読・考察）・D（ダーク）の 3 つが、まとまって動く</strong>ことです。</p>
+  <ul>
+    <li>伏線・考察（C）の作品は、ほとんどが熟読・考察（M）でもある。C なのに L（サクッと）の作品は 158 作で、無関係な場合の 0.13 倍しかありません。</li>
+    <li>ダーク（D）の作品は、伏線・考察（C）と熟読（M）に寄る。D なのに L の作品は、無関係な場合の 0.27 倍。</li>
+    <li>反対側も同じで、テンポ・勢い（S）の作品は、サクッと（L）に寄ります。</li>
+  </ul>
+  <p>つまり、「構成・テンポ」「視聴スタイル」「後味・刺激」の 3 本は、別々の物差しのつもりで作ったのに、作品の上では、<strong>ほぼ同じ向きを測っていました</strong>。「重くて、考えさせる、じっくり見る作品」と「軽くて、勢いのある、気楽に見る作品」という 1 本の線に、3 本とも乗っているかたちです。</p>
+  <p>0 作だった 8 タイプは、この線に逆らう組み合わせです。6 つは「S（テンポ・勢い）なのに M（熟読・考察）」、残りの 2 つは「D（ダーク）で S（テンポ・勢い）で P（心理戦）」。軸が無関係なら、たとえば <code>RHSA-TM</code> には約 90 作、<code>FDSP-VL</code> には約 83 作あるはずでしたが、どちらも 0 作でした。</p>
+
+  <h2 class="rv" id="s5">これは作品の性質か、見積もり方のくせか</h2>
+  <p>正直に言うと、<strong>両方が混じっていて、切り分けられていません</strong>。</p>
+  <ul>
+    <li><strong>作品の性質としては、ありそうな話です。</strong>伏線を張る作品は、読み込む見方を求めます。勢いで見せる作品を、一時停止しながら読み込む人は少ないでしょう。</li>
+    <li><strong>見積もり方のくせも、ありえます。</strong>軸の値は、あらすじとレビューに出てくる言葉から見積もっています。「考察」「伏線」といった言葉が、「構成・テンポ」と「視聴スタイル」の両方の手がかりになっていれば、2 本は、作る段階で同じ向きに引っ張られます。</li>
+    <li><strong>データベースの偏りもあります。</strong>年の分かる作品のうち、2020 年代が 42.6%、2010 年代が 32.9% です。最近の作品ほどレビューが多く、手がかりが足りて残りやすいためです（<a href="/notes/anime-db/">データベースの作り方</a>に書いています）。</li>
+    <li><strong>0 で切る数え方の粗さ。</strong>値が 0 に近い作品は、少しの差でとなりのタイプに入ります。作品ごとの値には誤差があるので、タイプごとの数は、目安です。</li>
+  </ul>
+  <p>手がかりの言葉を軸ごとに分けて見積もり直せば、どちらが効いているかは確かめられます。まだ、やっていません。</p>
+
+  <h2 class="rv" id="s6">診断は、これで困るのか</h2>
+  <p>困っていない部分と、困っている部分があります。</p>
+  <p><strong>困っていない部分。</strong>診断が作品を選ぶとき、タイプの 6 文字は使っていません。回答から出した 6 つの数値と、作品の 6 つの数値の近さで選びます。だから、0 作のタイプになった人にも、向きのいちばん近い作品が出ます。作品が出てこない、ということは起きません。</p>
+  <p><strong>困っている部分。</strong>0 作や数作のタイプの人に出る作品は、「6 つの軸のうち、どれかが合っていない作品」です。合っていない軸が、その人のいちばん大事にしている軸だと、外れに感じるはずです。また、3 本の軸が同じ向きを測っているなら、その 3 本ぶんの質問は、聞き方を変えて、ほぼ同じことを聞いていることになります。</p>
+  <p>どのタイプに、どれだけの人が診断されているかは、数えていません。診断は、回答をサーバーに送らずに、端末の中だけで結果を出しているからです。「人は均等に散らばるのに、作品は片寄っている」のか、「人も同じように片寄っている」のかは、いまの作りでは分かりません。</p>
+
+  <h2 class="rv" id="s7">直したこと、直していないこと</h2>
+  <ul>
+    <li><strong>直したこと：</strong><a href="/anime/types/">64 タイプのページ</a>に、タイプごとの作品数と順位、よく知られた作品、年代の内訳を載せました。自分のタイプに作品がどれだけあるかを、見られるようにするためです。0 作のタイプのページには、0 作だと書いてあります。</li>
+    <li><strong>直していないこと：</strong>軸そのものは、変えていません。3 本を 1 本にまとめれば、タイプは 16 に減り、片寄りは小さくなります。ただ、タイプの名前と結果の画面を作り直すことになるので、先に、見積もり方のくせかどうかを確かめたいと考えています。</li>
+  </ul>
+
+  <h2 class="rv" id="s8">タイプ分けを作る人へ：確かめる 3 つ</h2>
+  <ul>
+    <li><strong>軸を掛け合わせる前に、中身を数える。</strong>2 択の軸が 6 本あれば 64 通りですが、「64 通りの中身がある」ことにはなりません。今回は、10 作以下のタイプが 27 つありました。</li>
+    <li><strong>軸を 2 本ずつ組んで、「無関係ならこの数」と比べる。</strong>比が 2 倍や 0.1 倍になる組があれば、その 2 本は、同じものを測っています。</li>
+    <li><strong>同じ言葉を、複数の軸の手がかりに使っていないか見る。</strong>使っていれば、軸は作る段階でつながります。</li>
+  </ul>
+  <p>64 タイプと言いながら、実際に作品が集まっているのは十数タイプでした。数えるまで、気づいていませんでした。</p>
+
+  <div class="rule" style="margin:40px 0 22px"></div>
+  <p class="eyebrow">この話に出てくるもの</p>
+  <ul class="plain">
+    <li><a href="/anime/types/">64タイプの一覧</a> — タイプごとの作品数</li>
+    <li><a href="/anime/axes/">6つの軸</a> — 診断が測っているもの</li>
+    <li><a href="/notes/anime-db/">16,177作から6,091作へ</a> — データベースの作り方と偏り</li>
+    <li><a href="/works/shindananime/">ガチアニメ診断（作品ページ）</a> — 何を作ったのか、画面と数字で</li>
+  </ul>
+  <p style="margin-top:32px"><a class="btn" data-play="shindananime" href="/app/shindananime/">診断する</a><a class="btn ghost" href="/works/shindananime/">作品ページへ</a></p>
+
+<!--related-->
+  <div class="rule" style="margin:40px 0 22px"></div>
+  <p class="eyebrow">ほかの記録</p>
+  <ul class="plain">
+    <li><a href="/notes/anime-db/">16,177作から6,091作へ：診断のデータベースは、6割以上を落として作った</a> — 診断に使う作品は、Annict・Filmarks・手元の名作をまとめた16,177件のうち、手がかりが足りた6,091作だけ。落とした基準と、残った作品の出どころ・偏りを、数字で書いた記録。</li>
+    <li><a href="/notes/result-screen/">配信ボタンは、見られない作品にも出ていた：診断の結果画面を「本当」に寄せる</a> — 診断の配信ボタンは、全作品に同じ2つだった。実際の配信状況と数え直すと、約29%でどちらかが外れ。配信状況で絞った経緯と、画像の食い違い（http、仮の絵、ロゴ混入）の記録。</li>
+    <li><a href="/notes/match-percent/">「82%より80%が選ばれる」：診断の適合度%が、並び順と食い違っていた</a> — 診断の適合度%は、並び順とは別の物差しで作られていた。旧い表示では、回答者の35〜40%で上位3作の表示が逆転。作り物の回答者1,000人で測り直した記録。</li>
+  </ul>
+<!--/related-->
+
+<!--comments-->
+  <section class="comments" id="comments" data-repo="murakamikoshin/koshin-studio" data-repo-id="R_kgDOURc3ew"
+    data-category="Announcements" data-category-id="DIC_kwDOURc3e84DHTVr">
+    <h2 id="comments-h">コメント</h2>
+    <p>感想や、記事の間違いの指摘は、ここへ。書くには、GitHub のアカウントが要ります。</p>
+    <p><button type="button" class="btn ghost" id="load-comments">コメントを開く</button></p>
+    <p class="note">押すと、giscus（giscus.app）と GitHub に接続します。押さなければ、接続しません。詳しくは<a href="/privacy/">プライバシーポリシー</a>に書いています。</p>
+    <div id="giscus-box"></div>
+  </section>
+<!--/comments-->
+</div>
+</main>
+
+<footer class="site"><div class="wrap">
+  <span>© 2026 Koshin Studio</span>
+  <div class="sns-row"></div>
+  <nav><a href="/picks/">Picks</a><a href="/calc/">Tools</a><a href="/about/">運営者情報</a><a href="/about/#contact">お問い合わせ</a><a href="/privacy/">プライバシーポリシー</a><a href="/en/" hreflang="en" lang="en">English</a></nav>
+</div></footer>
+<script src="/motion.js?v=1e7447ec" defer></script>
+</body>
+</html>

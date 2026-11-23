@@ -133,14 +133,9 @@ writeFileSync(here + '/works/index.html',
   <h1>Works</h1>
   <div class="rule"></div>
   <p class="lead">作ったものの一覧です。</p>
-  <p class="rv">ブラウザですぐ遊べるゲームが 4 つ、診断アプリが 1 つ、iPhone のアプリが 1 つあります。どれも、登録なしで始められます（iPhone のアプリは、App Store から入れます）。それぞれのページに、<strong>遊び方、仕組み、預かる情報、まだ確かめていないこと</strong>を書いています。</p>
+  <p class="rv">ブラウザですぐ遊べるゲームが ${works.filter((w) => w.kind === 'game' && w.play).length} つ、診断が ${works.filter((w) => w.kind === 'app' && w.play).length} つ、iPhone のアプリが ${works.filter((w) => !w.play).length} つあります。ブラウザのものは、登録なしで始められます（iPhone のアプリは、App Store から入れます）。それぞれのページに、<strong>遊び方、仕組み、預かる情報、まだ確かめていないこと</strong>を書いています。</p>
   <ul class="rv">
-    <li><strong>還る世界</strong> — 枯れた世界に光の種をまいて緑をよみがえらせる3Dの景色ゲーム。谷・島・砂漠・火山など、番号ごとに違う世界が生まれる。</li>
-    <li><strong>すし積む</strong> — 寿司のネタを落として、同じものを合体させる、物理演算のパズル。</li>
-    <li><strong>寝返り将棋</strong> — 6×6 の盤で、挟んだ駒が裏返って寝返る将棋。AI 対戦とオンライン対戦があります。</li>
-    <li><strong>10秒ピッタリで止めろ！</strong> — 数字も音も出ない画面で、頭の中で 10 秒を数えて止める。</li>
-    <li><strong>ガチアニメ診断</strong> — 6 つの軸で、64 タイプに分ける診断。</li>
-    <li><strong>トレカダッシュ</strong> — トレカの抽選・予約・先着の情報を集めた iPhone アプリ。</li>
+${works.map((w) => `    <li><a href="/works/${w.slug}/"><strong>${esc(w.title)}</strong></a> — ${esc(w.blurb.split('。')[0])}。</li>`).join('\n')}
   </ul>
   <p class="rv">作り方や、測ったことの記録は、<a href="/notes/">Notes</a> にあります。たとえば、<a href="/notes/negaeri-balance/">寝返り将棋のルールを AI 同士の対局で決めた記録</a>や、<a href="/notes/stopwatch-rank/">10 秒ゲームのランキングを公平にした記録</a>です。</p>
 
@@ -189,14 +184,10 @@ const flip = (t, i) => {
 const opposite = (t) => typeByCode[codeOf(t.letters.map((x, i) =>
   (x === animeAxes[i].pos.l ? animeAxes[i].neg.l : animeAxes[i].pos.l)))];
 const ctaBtn = (label) => `<p class="rv" style="margin-top:30px"><a class="btn" data-play="shindananime" href="${APP}">${label}</a><a class="btn ghost" href="/works/shindananime/">この診断について</a></p>`;
-const typeChip = (t) => `<a class="type-chip" href="${typeUrl(t.code)}"><b>${t.code}</b><span>${esc(t.nickname)}</span></a>`;
+const typeChip = (t) => `<a class="type-chip" href="${typeUrl(t.code)}"><b>${t.code}</b><span>${esc(t.nickname)}${typeof t.count === 'number' ? `・${t.count.toLocaleString('ja-JP')}作` : ''}</span></a>`;
 
-/* タイプ別ページは自動生成で薄い。本人の言葉（data/anime-types.json の note）が
-   入るまでは、検索に載せない（noindex）。入ったものだけ sitemap にも入る */
+/* タイプ別ページも検索に載せる（以前は note が入るまで noindex にしていたが、やめた） */
 const writeAnime = (rel, html) => {
-  const m = rel.match(/^\/anime\/types\/([^/]+)\/index\.html$/);
-  if (m && !(typeByCode[m[1].toUpperCase()] || {}).note)
-    html = html.replace('</head>', '<meta name="robots" content="noindex,follow">\n</head>');
   const f = here + rel;
   mkdirSync(f.slice(0, f.lastIndexOf('/')), { recursive: true });
   writeFileSync(f, html);
@@ -330,6 +321,18 @@ ${animeAxes.map((a) => `
   <p class="rv"><a href="/anime/types/">64タイプの一覧へ →</a></p>
 </div></main>` + foot);
 
+/* 一覧に出す「数えた結果」 */
+const typeSorted = animeTypes.slice().sort((a, b) => b.count - a.count);
+const typeZero = animeTypes.filter((t) => t.count === 0);
+const typeZeroSM = typeZero.filter((t) => t.letters[2] === 'S' && t.letters[5] === 'M').length;
+const typeTop4Share = Math.round(typeSorted.slice(0, 4).reduce((n, t) => n + t.count, 0) / animeData.total * 1000) / 10;
+const axisCounts = animeAxes.map((a, i) => {
+  const p = animeTypes.filter((t) => t.letters[i] === a.pos.l).reduce((n, t) => n + t.count, 0);
+  return { label: a.label, pos: a.pos, neg: a.neg, p, n: animeData.total - p };
+});
+const axisSkew = axisCounts.map((a) => ({ label: a.label, big: a.p >= a.n ? a.pos : a.neg,
+  share: Math.round(Math.max(a.p, a.n) / animeData.total * 1000) / 10 })).sort((x, y) => y.share - x.share)[0];
+
 /* 64 タイプの一覧。世界観×後味の 4 グループに分ける */
 const codeEx = typeByCode['RDCP-VM'];
 const groups = [['R', 'D'], ['R', 'H'], ['F', 'D'], ['F', 'H']].map(([w, m]) => ({
@@ -338,7 +341,7 @@ const groups = [['R', 'D'], ['R', 'H'], ['F', 'D'], ['F', 'H']].map(([w, m]) => 
 }));
 writeAnime('/anime/types/index.html',
   head('64タイプ一覧 — ガチアニメ診断のタイプと二つ名 — Koshin Studio',
-       'ガチアニメ診断の64タイプの一覧。世界観と後味の組み合わせで4つに分けて、二つ名とタイプコードを並べています。気になるタイプから、診断の中身をたどれます。') +
+       'ガチアニメ診断の64タイプの一覧と、タイプごとの作品数。6,074作を数えると、上位4タイプに半分近くが集まり、1作も無いタイプが8つありました。') +
 `<main><div class="wrap">
   <h1>64タイプ</h1>
   <div class="rule"></div>
@@ -352,49 +355,109 @@ ${codeEx.letters.map((l, i) => { const ax = animeAxes[i]; const side = l === ax.
   </table></div>
   <p class="rv">6つの軸は、それぞれ2択です。2の6乗で、<strong>64タイプ</strong>になります。診断の仕組みは<a href="/anime/guide/">アニメ診断の選び方</a>に、軸の意味は<a href="/anime/axes/">6つの軸</a>に書いています。</p>
 ${groups.map((g) => `
-  <h2 class="rv">${esc(g.title)}</h2>
+  <h2 class="rv">${esc(g.title)}（${g.list.reduce((n, t) => n + t.count, 0).toLocaleString('ja-JP')}作）</h2>
   <div class="type-list rv">${g.list.map(typeChip).join('')}</div>`).join('\n')}
+
+  <h2 class="rv">作品の多いタイプ、1作も無いタイプ</h2>
+  <p class="rv">診断のデータベース ${animeData.total.toLocaleString('ja-JP')} 作を、6つの軸の向きで64タイプに振り分けて数えました。作品は、64タイプに均等には散らばっていません。<strong>上位4タイプだけで ${typeTop4Share}%</strong> を占め、反対に <strong>${typeZero.length} タイプには、1作もありません</strong>。</p>
+  <div class="scroll rv"><table>
+    <tr><th>順位</th><th>タイプ</th><th>二つ名</th><th>作品数</th><th>割合</th></tr>
+${typeSorted.slice(0, 10).map((t) => `    <tr><td>${t.rank}</td><td><a href="${typeUrl(t.code)}"><code>${t.code}</code></a></td><td>${esc(t.nickname)}</td><td>${t.count.toLocaleString('ja-JP')}</td><td>${(Math.round(t.share * 10) / 10)}%</td></tr>`).join('\n')}
+  </table></div>
+  <p class="rv">1作も無いのは、${typeZero.map((t) => `<a href="${typeUrl(t.code)}">${t.code}</a>`).join('、')} の ${typeZero.length} タイプです。${typeZeroSM} つは、構成・テンポが S（テンポ・勢い）で、視聴スタイルが M（熟読・考察）の組み合わせでした。勢いで見せる作品に、じっくり読み込む作りは少ない、という偏りに見えます（軸を言葉から見積もっているので、見積もり方のくせが混じっている可能性もあります）。</p>
+  <p class="rv">軸ごとに見ると、いちばん偏っているのは「${esc(axisSkew.label)}」で、${axisSkew.big.l}（${esc(axisSkew.big.name)}）側が ${axisSkew.share}% です。</p>
+  <div class="scroll rv"><table>
+    <tr><th>軸</th><th>こちら側</th><th>作品数</th><th>反対側</th><th>作品数</th></tr>
+${axisCounts.map((a) => `    <tr><td>${esc(a.label)}</td><td>${a.pos.l} ${esc(a.pos.name)}</td><td>${a.p.toLocaleString('ja-JP')}（${Math.round(a.p / animeData.total * 1000) / 10}%）</td><td>${a.neg.l} ${esc(a.neg.name)}</td><td>${a.n.toLocaleString('ja-JP')}（${Math.round(a.n / animeData.total * 1000) / 10}%）</td></tr>`).join('\n')}
+  </table></div>
+  <p class="rv">作品が少ないタイプになっても、診断が出す作品が無くなるわけではありません。診断は、タイプの6文字ではなく、6つの軸の数値そのものの近さで作品を選ぶからです。数え方と、データベースの偏りは、<a href="/notes/anime-db/">データベースの記事</a>に書いています。</p>
   ${ctaBtn('自分のタイプを診断する')}
 </div></main>` + foot);
 
-/* タイプ別 */
+/* タイプ別（2026-11-20 作り直し）
+   以前は、軸の一言と作品 5 つだけの、どの頁もほぼ同じ文の頁だった。
+   いまは data/anime-types.json に入れた「数えた結果」を出す：そのタイプの作品数と順位、
+   よく知られた作品、多いタグ（全体の何倍か）、年代の内訳、軸の向きが近い 20 作。
+   数字の無いタイプ（作品が 0〜少数）は、その節を出さずに、その事実を書く。 */
+const nf = (n) => n.toLocaleString('ja-JP');
+const pct1 = (x) => (Math.round(x * 10) / 10).toString();
+const zeroTypes = animeTypes.filter((t) => t.count === 0).length;
+const overallDec = Object.fromEntries(animeData.overall.decades.map((d) => [d.label, d.share]));
+/* 作品名の下に、年を小さく（作品ごとのタグは、外れが目立つので出さない。数えた表だけに使う）。右端に適合度。style.css を触らずに済むよう、並べ方だけここで指定する
+   （style.css を変えると ?v= が変わって全ページが「更新された」ことになるため） */
+const workLi = (w, right) => `    <li><div>${esc(w.title)}<span style="display:block">${w.year ? `${w.year}年` : ''}</span></div>${right ? `<span>${right}</span>` : ''}</li>`;
 for (const t of animeTypes) {
   const opp = opposite(t);
   const six = t.letters.map((_, i) => {
     const a = animeAxes[i], me = sideOf(t, i), other = t.letters[i] === a.pos.l ? a.neg : a.pos;
     return `    <li><b>${esc(a.label)}　${me.l} ${esc(me.name)}</b><span>${esc(me.desc)}。<i>反対側は${other.l}（${esc(other.name)}）</i></span></li>`;
   }).join('\n');
-  const near = t.works.slice(0, 5).map((w) =>
-    `    <li>${esc(w.title)}${w.year ? `<span>${w.year}</span>` : ''}</li>`).join('\n');
   const nb = animeAxes.map((a, i) => {
     const o = flip(t, i);
-    return `<a class="type-chip" href="${typeUrl(o.code)}"><b>${o.code}</b><span>${esc(a.label)}だけ反対側（${esc(sideOf(o, i).name)}）</span></a>`;
+    return `<a class="type-chip" href="${typeUrl(o.code)}"><b>${o.code}</b><span>${esc(a.label)}だけ反対側（${esc(sideOf(o, i).name)}）・${nf(o.count)}作</span></a>`;
   }).join('');
+  /* 数の一文。0 作・少数・ふつう、で言い方を変える */
+  const countLine = t.count === 0
+    ? `診断のデータベース ${nf(animeData.total)} 作のうち、6つの軸が<strong>すべて ${t.code} と同じ向きの作品は、1作もありません</strong>。こういうタイプは、64のうち ${zeroTypes} つあります。人の好みとしては成り立っても、その組み合わせをそのまま形にした作品が少ない、ということです。このタイプになった人には、軸の向きがいちばん近い作品から選んで出しています。`
+    : `診断のデータベース ${nf(animeData.total)} 作のうち、6つの軸がすべて ${t.code} と同じ向きの作品は <strong>${nf(t.count)} 作（${t.share < 1 ? t.share : pct1(t.share)}%）</strong>。64タイプを作品の多い順に並べると、<strong>${t.rank} 番目</strong>です。${t.count < 30 ? '作品の少ないタイプなので、好みにぴったり合う作品は貴重です。' : t.rank <= 8 ? '作品の多いタイプなので、選ぶ余地が広く、そのぶん絞り込みが大事になります。' : ''}`;
+  const topTag = t.tags[0];
+  const knownSec = t.known.length ? `
+  <h2 class="rv">${t.count > 12 ? `${t.code} のよく知られた作品` : `${t.code} の作品（全 ${t.count} 作）`}</h2>
+  <p class="rv">${t.count > 12
+    ? `6つの軸がすべて ${t.code} と同じ向きの作品を、知名度の高い順に ${t.known.length} 作並べました。同じシリーズは1つにまとめています。知っている作品が多ければ、このタイプの好みに近いはずです。`
+    : `6つの軸がすべて ${t.code} と同じ向きの作品は、これで全部です${t.known.length < t.count ? `（同じシリーズをまとめて ${t.known.length} 作）` : ''}。知名度の高い順に並べています。`}</p>
+  <ul class="near rv">
+${t.known.map((w) => workLi(w)).join('\n')}
+  </ul>` : '';
+  const tagSec = t.tags.length >= 3 ? `
+  <h2 class="rv">${t.code} に多い要素</h2>
+  <p class="rv">このタイプの ${nf(t.count)} 作に付いているタグを数えて、データベース全体と比べました。「全体の何倍」が大きいほど、このタイプらしい要素です。${topTag ? `いちばん偏っているのは「${esc(topTag.tag)}」で、全体の ${topTag.lift} 倍です。` : ''}</p>
+  <div class="scroll rv"><table>
+    <tr><th>タグ</th><th>このタイプでの割合</th><th>作品数</th><th>全体の何倍</th></tr>
+${t.tags.map((g) => `    <tr><td>${esc(g.tag)}</td><td>${pct1(g.share)}%</td><td>${nf(g.count)}</td><td>${g.lift} 倍</td></tr>`).join('\n')}
+  </table></div>` : '';
+  const decSec = t.count >= 20 ? `
+  <h2 class="rv">年代の内訳</h2>
+  <p class="rv">このタイプの作品が、いつの年代に多いか。右の列は、データベース全体での割合です。</p>
+  <div class="scroll rv"><table>
+    <tr><th>年代</th><th>作品数</th><th>このタイプ</th><th>全体</th></tr>
+${t.decades.map((d) => `    <tr><td>${d.label}</td><td>${nf(d.count)}</td><td>${pct1(d.share)}%</td><td>${pct1(overallDec[d.label])}%</td></tr>`).join('\n')}
+  </table></div>` : '';
+  const descBits = [t.count ? `該当 ${nf(t.count)} 作（${nf(animeData.total)} 作中、${t.rank} 番目）` : `6軸すべてが一致する作品は 0 作`,
+    t.known.length ? `代表作は${t.known.slice(0, 3).map((w) => `「${w.title}」`).join('')}など` : '',
+    topTag && t.tags.length >= 3 ? `多い要素は${t.tags.slice(0, 3).map((g) => g.tag).join('・')}` : ''].filter(Boolean).join('。');
   writeAnime(`${typeUrl(t.code)}index.html`,
-    head(`${t.code}「${t.nickname}」 — ガチアニメ診断のタイプ解説 — Koshin Studio`,
-         `ガチアニメ診断のタイプ ${t.code}「${t.nickname}」の特徴。6つの軸の向き、近いアニメ作品、1軸だけ違うタイプを紹介します。`) +
+    head(`${t.code}「${t.nickname}」のアニメ：特徴と、近い作品20選 — ガチアニメ診断 — Koshin Studio`,
+         `ガチアニメ診断のタイプ ${t.code}「${t.nickname}」。${descBits}。軸の向きが近い20作を、適合度つきで載せています。`) +
 `<main><div class="wrap">
   <h1>${t.code}<span class="type-nick">${esc(t.nickname)}</span></h1>
   <div class="rule"></div>
-  <p class="lead">ガチアニメ診断の64タイプのひとつ。<br>6つの軸は、こう向いています。</p>
+  <p class="lead">ガチアニメ診断の64タイプのひとつ。<br>どんな好みで、どんな作品が当てはまるかを、数えた結果で書きます。</p>
 
+  <p class="rv">${countLine}</p>
+
+  <h2 class="rv">6つの軸の向き</h2>
   <ul class="axis-rows rv">
 ${six}
   </ul>
+${knownSec}${tagSec}${decSec}
 
-  <h2 class="rv">このタイプに近い作品</h2>
-  <p class="rv">${t.code} の軸の向きに近い作品を、診断と同じ計算で選んだものです。実際の診断では、画質・年代や好きなジャンルの回答も加わるので、人によって結果は変わります。</p>
+  <h2 class="rv">軸の向きがいちばん近い ${t.works.length} 作</h2>
+  <p class="rv">${t.code} の6つの軸を、すべて端まで振り切った人に、診断が出す順です。診断と同じ計算（軸の向きの近さが主で、知名度と評価を少しだけ足す）で選び、同じシリーズは1つにしています。右の数字が適合度です。${t.known.length ? '上の「よく知られた作品」より、知名度の低い作品が混じります。' : ''}実際の診断では、軸ごとの強さ、画質・年代、好きな要素の回答も加わるので、同じタイプでも人によって結果は変わります。</p>
   <ul class="near rv">
-${near}
+${t.works.map((w) => workLi(w, `${w.match}%`)).join('\n')}
   </ul>
 
   <h2 class="rv">1つだけ違うタイプ</h2>
-  <p class="rv">6つの軸のうち、1つだけ反対側になるタイプです。気分や時期でこちらに動く人も多いはずです。</p>
+  <p class="rv">6つの軸のうち、1つだけ反対側になるタイプと、その作品数です。答えが「どちらでもない」に近い軸があると、気分や時期でこちらに動きます。</p>
   <div class="type-list rv">${nb}</div>
 
   <h2 class="rv">正反対のタイプ</h2>
-  <p class="rv">6軸がすべて反対側になるタイプ。</p>
+  <p class="rv">6軸がすべて反対側になるタイプ（${nf(opp.count)} 作）。</p>
   <div class="type-list rv">${typeChip(opp)}</div>
+
+  <h2 class="rv">この数字について</h2>
+  <p class="rv">作品ごとの6軸の値は、あらすじとレビューに出てくる言葉から、このサイトが独自に見積もったものです。作品の公式の分類ではありません。見積もり方と、データベースの偏り（2000年以降の作品が 90.5%）は、<a href="/notes/anime-db/">データベースの記事</a>に書いています。タグも同じ言葉から自動で付けたもので、外れていることがあります。作品数は、軸の値が0より上か下かだけで数えているので、0に近い作品は、どちらのタイプに入ってもおかしくありません。</p>
 
   ${ctaBtn('診断で確かめる（無料・1分）')}
   <p class="rv"><a href="/anime/types/">64タイプの一覧へ</a>　<a href="/anime/axes/">6つの軸の解説へ</a></p>
@@ -1616,10 +1679,16 @@ writeFileSync(here + '/sitemap.xml',
       + `<priority>${pri}</priority>${alts}</url>`;
   }).join('\n') + '\n</urlset>\n');
 
-/* /submit と /top は、すし積むの番付サーバーへの通信先の名前で、ゲームの
-   プログラムの中に文字列として書いてある（実際の通信先は別のサーバー）。
-   検索ロボットがそれを URL だと思って取りに来て、404 になる（実害は無い）。
-   取りに来なくてよい、と伝えておく。このサイトに、同じ名前のページは無い */
+/* robots.txt（2026-11-20 見直し）
+   ・/submit と /top の Disallow は外した。すし積むの通信先の名前を、検索ロボットが URL と
+     思って取りに来るので塞いでいたが、このサイトに同じ名前のページは無く、取りに来ても
+     404 が返るだけ。塞いでいると Search Console に「robots.txt によりブロック」と出続ける。
+   ・/draft/api/ は API（ページではない）なので、そのまま塞ぐ。
+   ・/draft/r/ は、ドラフト会議ごっこの招待 URL（部屋ごとに変わり、遊んでいる人の入力が
+     出る）。検索には載せたくないので、検索ロボットには塞いだままにする。
+   ・ただし AdSense のロボット（Mediapartners-Google）には、全部開ける。塞いだページには
+     広告が出せず、AdSense に「クローラがブロックされています」と出るため。
+     このロボットは広告の内容を決めるために読むだけで、検索には載せない。 */
 writeFileSync(here + '/robots.txt',
   [
     '# 検索エンジンにも、AI の検索・回答のための取得にも、記事と計算機を読んでもらってかまいません。',
@@ -1628,9 +1697,11 @@ writeFileSync(here + '/robots.txt',
       'PerplexityBot', 'Perplexity-User', 'Google-Extended', 'Applebot-Extended', 'Bingbot', 'Googlebot',
       'Applebot', 'DuckAssistBot', 'MistralAI-User', 'meta-externalagent', 'Amazonbot', 'YouBot', 'cohere-ai']
       .map((ua) => 'User-agent: ' + ua).concat(['User-agent: *']),
-    'Allow: /', 'Disallow: /submit', 'Disallow: /top',
-    /* ドラフト会議ごっこ（/draft/）: 招待URL（部屋ごとに変わる）と API は検索に載せない */
+    'Allow: /',
+    '# 招待URL（部屋ごとに変わる）と API だけ、検索に載せない',
     'Disallow: /draft/r/', 'Disallow: /draft/api/', '',
+    '# AdSense のロボットには、全ページを開ける（広告の内容を決めるために読むだけ）',
+    'User-agent: Mediapartners-Google', 'Allow: /', '',
     'Sitemap: ' + SITE + '/sitemap.xml',
     /* ドラフト会議ごっこ（別の Worker が配信）の sitemap は、向こうが書き出す */
     'Sitemap: ' + SITE + '/draft/sitemap.xml',

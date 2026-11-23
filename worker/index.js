@@ -19,6 +19,9 @@ const ROUTES = {
     stopwatch10: 'https://stopwatch10.pages.dev',
     'kaeru-sekai': 'https://kaeru-sekai.pages.dev',
     'tube-drift': 'https://tube-drift.pages.dev',
+    /* dopagaki.pages.dev は他所の物なので、Pages が割り振った名前になっている。
+       本体はこのリポジトリの game-dopagaki ブランチ（住所はそこの PAGES_HOST） */
+    dopagaki: 'https://dopagaki-36i.pages.dev',
   },
   app: {
     shindananime: 'https://shindananime.pages.dev',
@@ -41,6 +44,7 @@ const MOVED = {
 };
 
 import { MOVED_NOTES } from './moved-notes.js';
+import { aboutHtml } from './about.js';
 
 export default {
   async fetch(request) {
@@ -83,9 +87,25 @@ export default {
     target.pathname = rest;
     target.search = url.search;
 
-    const res = await fetch(new Request(target.toString(), request));
+    let res = await fetch(new Request(target.toString(), request));
+    /* 検索に載せる。作品の側（*.pages.dev）は noindex のままでよい（同じ物が二か所に載らないように）。
+       koshinstudio.com を通ったときだけ、noindex を外し、canonical をこの住所に向け直す */
+    if (typeof HTMLRewriter !== 'undefined' && (res.headers.get('Content-Type') || '').includes('text/html')) {
+      const self = url.origin + '/' + kind + '/' + slug + rest.replace(/index\.html$/, '');
+      let hasCanonical = false;
+      /* 遊ぶ画面の入口にだけ、「遊び方・このゲームについて」を足す（about.js）。
+         文章の無いページにしないため。中のファイルや、表に無い作品には足さない */
+      const about = kind === 'play' && /^\/(index\.html)?$/.test(rest) && res.status === 200 ? aboutHtml(slug) : null;
+      res = new HTMLRewriter()
+        .on('meta[name="robots" i]', { element(e) { if (/noindex/i.test(e.getAttribute('content') || '')) e.remove(); } })
+        .on('link[rel="canonical" i]', { element(e) { hasCanonical = true; e.setAttribute('href', self); } })
+        .on('head', { element(e) { e.onEndTag((end) => { if (!hasCanonical) end.before(`<link rel="canonical" href="${self}">`, { html: true }); }); } })
+        .on('body', { element(e) { if (about) e.append(about, { html: true }); } })
+        .transform(res);
+    }
     /* 中継したことが分かるように、内容はそのまま、頭だけ触る */
     const out = new Response(res.body, res);
+    out.headers.delete('X-Robots-Tag');
     out.headers.set('X-Served-By', 'koshin-studio/' + kind);
     /* 守りの頭。サイト本体（_headers）と揃える。ただし作品の側が決めた物は上書きしない
        （埋め込みの可否や CSP は、作品ごとに事情が違うので、ここでは足さない） */

@@ -2,6 +2,7 @@
        node worker/test.mjs
 */
 import mod from './index.js';
+import { ABOUT, aboutHtml } from './about.js';
 
 let asked = null;
 globalThis.fetch = async (req) => {
@@ -40,6 +41,8 @@ const check = async (path, want) => {
 };
 await check('/play/sushitsumu/', { status: 200, asked: 'https://sushitsumu.pages.dev/' });
 await check('/play/kaeru-sekai/', { status: 200, asked: 'https://kaeru-sekai.pages.dev/' });
+await check('/play/dopagaki/', { status: 200, asked: 'https://dopagaki-36i.pages.dev/' });
+await check('/play/dopagaki/game.js', { status: 200, asked: 'https://dopagaki-36i.pages.dev/game.js' });
 await check('/play/kaeru-dani/', { status: 301, loc: 'https://koshinstudio.com/play/kaeru-sekai/' });
 await check('/play/sushitsumu/?lang=en', { status: 200, asked: 'https://sushitsumu.pages.dev/?lang=en' });
 await check('/play/sushitsumu', { status: 301, loc: 'https://koshinstudio.com/play/sushitsumu/' });
@@ -75,5 +78,26 @@ await check('/notes/tcg-store-matching/', { status: 200, asked: 'https://koshins
     console.error('× 中継の守りの頭が付いていない'); bad = 1;
   }
 }
+
+/* 遊ぶ画面に足す文章（about.js）。中継している遊ぶ作品には全部あること、
+   張ったリンクの先がサイトにあること、文章が薄すぎないことを確かめる */
+{
+  const { existsSync } = await import('node:fs');
+  const root = new URL('..', import.meta.url).pathname;
+  for (const slug of ['sushitsumu', 'stopwatch10', 'kaeru-sekai', 'dopagaki']) {
+    const h = aboutHtml(slug);
+    if (!h) { console.error('× about.js に ' + slug + ' が無い'); bad = 1; continue; }
+    const text = ABOUT[slug].html.replace(/<[^>]+>/g, '').replace(/\s+/g, '');
+    if (text.length < 500) { console.error('× about.js の ' + slug + ' が短い（' + text.length + ' 字）'); bad = 1; }
+    for (const m of ABOUT[slug].html.matchAll(/href="(\/[^"#?]*)"/g)) {
+      const p = root + m[1].replace(/^\//, '');
+      const ok = existsSync(p + (p.endsWith('/') ? 'index.html' : '')) || existsSync(p + '.html');
+      if (!ok) { console.error('× about.js（' + slug + '）のリンク先が無い: ' + m[1]); bad = 1; }
+    }
+    console.log('about ' + slug.padEnd(12) + ' ' + ABOUT[slug].mode.padEnd(5) + ' ' + text.length + ' 字');
+  }
+  if (aboutHtml('shindananime') !== null) { console.error('× 表に無い作品に足している'); bad = 1; }
+}
+
 console.log(bad ? '\n合わないところがあります' : '\n判定はすべて狙いどおり。');
 process.exit(bad);
