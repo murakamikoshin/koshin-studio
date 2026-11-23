@@ -187,20 +187,20 @@
   <section class="band" id="notes-teaser"><div class="wrap">
     <h2 class="sec">制作の記録<span>Notes</span></h2>
     <ul class="notes"><!--notes:start-->
-    <li class="rv" data-delay="0"><a class="note-row" href="/notes/anime-64-types/">
+    <li class="rv" data-delay="0"><a class="note-row" href="/notes/localizedstringkey-interpolation/">
+      <time datetime="2026-11-23">2026.11.23</time>
+      <div><h3>SwiftUI で翻訳キーがそのまま画面に出た：LocalizedStringKey に \(値) を埋め込むと、キーが別物になる（同じ間違いを 2 回）</h3><p>LocalizedStringKey("battle.rank.\(rank)") のキーは "battle.rank.%@" になり、翻訳が引けずに battle.rank.gold が画面に出た。Swift の型の決まりから原因を説明し、直し方と、同じ形を探す grep（直す前は 3 行、直した後は 0 行）を書いた。</p>
+      <div class="tags"><span class="tag">弾幕メーカー</span></div></div>
+    </a></li>
+    <li class="rv" data-delay="70"><a class="note-row" href="/notes/anime-64-types/">
       <time datetime="2026-11-20">2026.11.20</time>
       <div><h3>アニメ6,074作を64タイプに振り分けたら、8タイプは0作だった：6つの軸は、独立していなかった</h3><p>診断のデータベース6,074作を、6つの軸で64タイプに振り分けて数えた。上位4タイプで47.3%、8タイプは0作。軸を2本ずつ比べると、3本の軸がほぼ同じ向きを測っていた。数え方と、まだ切り分けられていないことの記録。</p>
       <div class="tags"><span class="tag">ガチアニメ診断</span></div></div>
     </a></li>
-    <li class="rv" data-delay="70"><a class="note-row" href="/notes/pages-dev-name-taken/">
+    <li class="rv" data-delay="140"><a class="note-row" href="/notes/pages-dev-name-taken/">
       <time datetime="2026-11-15">2026.11.15</time>
       <div><h3>「出たか」の確認が、他人のサイトで通っていた：Cloudflare Pages のプロジェクト名と *.pages.dev の住所は、同じとは限らない</h3><p>Pages に dopagaki という名前で出したら、住所は dopagaki-36i.pages.dev だった。200 を見るだけの配備確認は、他人のサイトで通っていた。404.html の無い Pages は無い道にも 200 を返す。API で住所を聞き、中身で確かめる直し方。</p>
       <div class="tags"><span class="tag">ドパガキ脱出！！</span></div></div>
-    </a></li>
-    <li class="rv" data-delay="140"><a class="note-row" href="/notes/swipe-next-twice/">
-      <time datetime="2026-11-09">2026.11.09</time>
-      <div><h3>アプリとサーバーの点数がずれた：原因は計算ではなく、「次へ」が 2 回呼ばれてステージが入れ替わっていたこと</h3><p>スワイプ弾幕で、アプリの点数をサーバーが数え直すと合わない提出が出た。ずれた提出を丸ごと残し、アプリの途中経過と比べて最初にずれた場所を出す仕組みで、結果画面のタップと自動タイマーの二重呼び出しを見つけた。</p>
-      <div class="tags"><span class="tag">弾幕メーカー</span></div></div>
     </a></li>
     <!--notes:end--></ul>
     <p class="rv" style="margin-top:26px"><a class="btn ghost" href="/notes/">Notes をすべて読む</a></p>

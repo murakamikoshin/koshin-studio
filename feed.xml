@@ -7,6 +7,13 @@
   <language>ja</language>
   <atom:link href="https://koshinstudio.com/feed.xml" rel="self" type="application/rss+xml"/>
   <item>
+    <title>SwiftUI で翻訳キーがそのまま画面に出た：LocalizedStringKey に \(値) を埋め込むと、キーが別物になる（同じ間違いを 2 回）</title>
+    <link>https://koshinstudio.com/notes/localizedstringkey-interpolation/</link>
+    <guid isPermaLink="true">https://koshinstudio.com/notes/localizedstringkey-interpolation/</guid>
+    <pubDate>Sun, 22 Nov 2026 15:00:00 GMT</pubDate>
+    <description>LocalizedStringKey("battle.rank.\(rank)") のキーは "battle.rank.%@" になり、翻訳が引けずに battle.rank.gold が画面に出た。Swift の型の決まりから原因を説明し、直し方と、同じ形を探す grep（直す前は 3 行、直した後は 0 行）を書いた。</description>
+  </item>
+  <item>
     <title>アニメ6,074作を64タイプに振り分けたら、8タイプは0作だった：6つの軸は、独立していなかった</title>
     <link>https://koshinstudio.com/notes/anime-64-types/</link>
     <guid isPermaLink="true">https://koshinstudio.com/notes/anime-64-types/</guid>
