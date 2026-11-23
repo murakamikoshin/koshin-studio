@@ -12,6 +12,8 @@
 
 Development log of Toreca Dash / 8 records in one place
 
+  Toreca Dash ended its service on November 22, 2026. It is no longer available on the App Store. This article stays up as a development log.
+
   Linking each lottery article to the product it is about is the core of Toreca Dash. Product names change shape endlessly: English versus katakana, abbreviations, how sets are written, and typos. These are eight real product-matching failures, with the fixes and the numbers measured, in the order they happened.
 
   Each section was first published as a separate record (from 2026-10). Numbers and sources are as in the work logs of the time. They were gathered into one article per theme on 7 November 2026.

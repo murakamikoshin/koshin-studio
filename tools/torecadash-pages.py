@@ -41,7 +41,6 @@ def page(code):
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>{c['title']}</title>
 <meta name="description" content="{c['desc']}">
-<meta name="apple-itunes-app" content="app-id=6788758920">
 <meta property="og:title" content="{c['h1']}">
 <meta property="og:description" content="{c['og']}">
 <meta property="og:type" content="website">

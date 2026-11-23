@@ -12,6 +12,8 @@
 
 Development log of Torecadash / October 2026
 
+  Toreca Dash ended its service on November 22, 2026. It is no longer available on the App Store. This article stays up as a development log.
+
   I build my iOS app, Torecadash, on a 2017 Mac with Xcode 15.2. In this environment, newer versions of the Firebase iOS SDK and the AdMob (Google Mobile Ads) SDK do not build. This is which version breaks and which version I pinned, written from my hand-over notes (July 2026).
 
   The version numbers are as of July 2026. The situation may be different with the latest versions today.

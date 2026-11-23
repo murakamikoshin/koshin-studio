@@ -12,6 +12,8 @@
 
 Development log of Toreca Dash / 9 records in one place
 
+  Toreca Dash ended its service on November 22, 2026. It is no longer available on the App Store. This article stays up as a development log.
+
   Behind Toreca Dash, hundreds of jobs run hourly and daily. It is a place full of bugs nobody notices: jobs that stopped, and jobs that run far too often. These are nine things that happened with scheduled jobs and server operations, and how they were fixed, in the order they happened.
 
   Each section was first published as a separate record (from 2026-10). Numbers and sources are as in the work logs of the time. They were gathered into one article per theme on 7 November 2026.

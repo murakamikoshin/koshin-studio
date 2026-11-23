@@ -250,17 +250,17 @@ URL: https://koshinstudio.com/notes/tcg-lottery-app-compare/
 書いた人：Koshin (https://koshinstudio.com/about/#operator)（Web エンジニア・アプリエンジニア）　公開：2026-10-23
 トレカダッシュ ／ 比較 ／ 2026年10月
 
+  トレカダッシュは、2026年11月22日にサービスを終了しました。App Store での配信も止めています。この記事は、開発の記録として残しています。
+
   トレカの抽選・予約・再販の情報を追うアプリやサイトは、いくつかあります。この記事は、ポケカをはじめとするトレカの抽選アプリを探している人向けに、トレカダッシュと、ほかのアプリ・サイト 4 つを、同じ項目で並べた比較です。
 
   先に書いておきます。私（Koshin）は、トレカダッシュを作っている本人です。中立な第三者の比較ではありません。ほかのサービスの内容は、2026 年 10 月 23 日に、それぞれの公式ページ・App Store のページで確かめた範囲だけを書き、書かれていなかったことは「記載なし」としています。弱いところも、トレカダッシュについて書きました。
 
-  トレカダッシュを App Store で見る (https://apps.apple.com/jp/app/id6788758920)
-
-  トレカダッシュの App Store のページ：https://apps.apple.com/jp/app/id6788758920 (https://apps.apple.com/jp/app/id6788758920)（無料・iPhone）／ 紹介ページ：https://cardalerthub.web.app/ (https://cardalerthub.web.app/) ／ このサイトの作品ページ (https://koshinstudio.com/works/torecadash/)
+  トレカダッシュの記録：このサイトの作品ページ (https://koshinstudio.com/works/torecadash/)
 
 ## 結論：どれを選ぶか
 
-- ポケカ以外（遊戯王・ワンピース・ガンダムなど）も追いたい／iPhone に通知がほしい → トレカダッシュ (https://apps.apple.com/jp/app/id6788758920)（15 ジャンル）
+- ポケカ以外（遊戯王・ワンピース・ガンダムなど）も追いたい／iPhone に通知がほしい → トレカダッシュ（15 ジャンル。2026年11月22日に終了）
 
 - iPhone ではなく、ブラウザや LINE で十分 → トレゲト（Web と LINE、6 ジャンル）
 
@@ -270,13 +270,13 @@ URL: https://koshinstudio.com/notes/tcg-lottery-app-compare/
 
 - 近くのカードショップを探したい → トレカの地図（抽選の情報や通知は、記載なし）
 
-  併用もできます。たとえば、抽選の通知はトレカダッシュ、相場は別のアプリ、という使い方です。
+  併用もできます。たとえば、抽選の通知と相場を、別のアプリで見る使い方です。なお、トレカダッシュは2026年11月22日にサービスを終了したため、いまは選べません。
 
 ## 5 つの比較表
 
      | トレカダッシュ | トレゲト | NowPokeca | Pokeka Tracker | トレカの地図
 
-      入手先 | App Store (https://apps.apple.com/jp/app/id6788758920) | cardchusen.com (https://cardchusen.com/) | App Store (https://apps.apple.com/us/app/-/id6469001897) | App Store (https://apps.apple.com/es/app/pokeka-tracker-%E3%83%9D%E3%82%B1%E3%82%AB%E4%BE%A1%E6%A0%BC%E3%82%92%E7%A2%BA%E8%AA%8D%E3%81%A7%E3%81%8D%E3%82%8B%E3%82%A2%E3%83%97%E3%83%AA/id6450254728) | torecamap.co.jp (https://torecamap.co.jp/)
+      入手先 | App Store（2026年11月22日に配信終了） | cardchusen.com (https://cardchusen.com/) | App Store (https://apps.apple.com/us/app/-/id6469001897) | App Store (https://apps.apple.com/es/app/pokeka-tracker-%E3%83%9D%E3%82%B1%E3%82%AB%E4%BE%A1%E6%A0%BC%E3%82%92%E7%A2%BA%E8%AA%8D%E3%81%A7%E3%81%8D%E3%82%8B%E3%82%A2%E3%83%97%E3%83%AA/id6450254728) | torecamap.co.jp (https://torecamap.co.jp/)
 
       形 | iPhone アプリ | Web サイト＋LINE 通知 | iPhone アプリ | iPhone / iPad アプリ | Web サイト
 
@@ -416,7 +416,7 @@ URL: https://koshinstudio.com/notes/tcg-lottery-app-compare/
 
 - 間違いに気づいた方は、連絡先 (https://koshinstudio.com/about/#contact)へお知らせください。確かめて、直します。
 
-  トレカダッシュについては、作品ページ (https://koshinstudio.com/works/torecadash/)に機能を、App Store (https://apps.apple.com/jp/app/id6788758920) に配信ページがあります。作った経緯や失敗は、Notes (https://koshinstudio.com/notes/) に書いています。
+  トレカダッシュについては、作品ページ (https://koshinstudio.com/works/torecadash/)に機能を残しています（2026年11月22日にサービス終了）。作った経緯や失敗は、Notes (https://koshinstudio.com/notes/) に書いています。
 
 
 ---
@@ -429,6 +429,8 @@ URL: https://koshinstudio.com/notes/swiftui-hit-area/
 
 書いた人：Koshin (https://koshinstudio.com/about/#operator)（Web エンジニア・アプリエンジニア）　公開：2026-10-17
 トレカダッシュ 開発の記録 ／ 2026年8月
+
+  トレカダッシュは、2026年11月22日にサービスを終了しました。App Store での配信も止めています。この記事は、開発の記録として残しています。
 
   iOS アプリ「トレカダッシュ (https://koshinstudio.com/works/torecadash/)」の応募の記録の画面には、「当選」と「落選」のボタンがあります。「当選と落選の文字の上しか判定が無くて、使いづらい」という報告が来ました。
 
@@ -489,6 +491,8 @@ URL: https://koshinstudio.com/notes/icloud-overwrite/
 
 書いた人：Koshin (https://koshinstudio.com/about/#operator)（Web エンジニア・アプリエンジニア）　公開：2026-10-17
 トレカダッシュ 開発の記録 ／ 2026年8月
+
+  トレカダッシュは、2026年11月22日にサービスを終了しました。App Store での配信も止めています。この記事は、開発の記録として残しています。
 
   iOS アプリ「トレカダッシュ (https://koshinstudio.com/works/torecadash/)」には、利用者が自分で書きためる応募の記録があります。どの抽選に応募したか、結果はどうだったか。手で積み上げた個人の記録なので、失うと取り返せません。
 
@@ -555,6 +559,8 @@ URL: https://koshinstudio.com/notes/test-ads/
 
 書いた人：Koshin (https://koshinstudio.com/about/#operator)（Web エンジニア・アプリエンジニア）　公開：2026-10-17
 トレカダッシュ 開発の記録 ／ 2026年9月
+
+  トレカダッシュは、2026年11月22日にサービスを終了しました。App Store での配信も止めています。この記事は、開発の記録として残しています。
 
   iOS アプリ「トレカダッシュ (https://koshinstudio.com/works/torecadash/)」には、毎日 1 回、おみくじ（抽選）を引ける機能があります。「動画を見て挑戦する」と、動画の広告のあとに、抽選の演出が始まります。
 
@@ -939,6 +945,8 @@ URL: https://koshinstudio.com/notes/tcg-store-matching/
 書いた人：Koshin (https://koshinstudio.com/about/#operator)（Web エンジニア・アプリエンジニア）　公開：2026-10-17
 トレカダッシュ 開発の記録 ／ 4 件のまとめ
 
+  トレカダッシュは、2026年11月22日にサービスを終了しました。App Store での配信も止めています。この記事は、開発の記録として残しています。
+
   トレカダッシュは、店の告知や X の投稿から「どの店の、どの抽選か」を読み取って並べます。いちばん間違えやすいのが店の名前でした。同じ店が別の名前で書かれ、別の店が同じリンクを使い、あいまいな名前は地図で遠くの場所に化けます。ここには、店の照合で実際に起きた 4 つの取り違えと、その直し方を、起きた順にまとめました。
 
   それぞれの節は、もとは別々に公開していた記録です（2026 年 10 月から）。数字と出典は、その時の作業の記録のままです。テーマごとに読めるよう、1 つの記事にまとめ直しました（2026 年 11 月 7 日）。
@@ -1226,6 +1234,8 @@ URL: https://koshinstudio.com/notes/crawl-monitoring/
 
 書いた人：Koshin (https://koshinstudio.com/about/#operator)（Web エンジニア・アプリエンジニア）　公開：2026-10-17
 トレカダッシュ 開発の記録 ／ 7 件のまとめ
+
+  トレカダッシュは、2026年11月22日にサービスを終了しました。App Store での配信も止めています。この記事は、開発の記録として残しています。
 
   抽選や先着販売は、見逃したら終わりです。トレカダッシュは、店のサイトやまとめサイト、X を巡回して監視しています。ここには、その取りこぼしを数えて、減らした 7 つの記録をまとめました。測り方そのものが間違っていた話も入っています。
 
@@ -1778,6 +1788,8 @@ URL: https://koshinstudio.com/notes/scheduled-jobs/
 
 書いた人：Koshin (https://koshinstudio.com/about/#operator)（Web エンジニア・アプリエンジニア）　公開：2026-10-17
 トレカダッシュ 開発の記録 ／ 9 件のまとめ
+
+  トレカダッシュは、2026年11月22日にサービスを終了しました。App Store での配信も止めています。この記事は、開発の記録として残しています。
 
   トレカダッシュの裏では、数百本の処理が毎時・毎日動いています。止まっても誰も気づかない、動きすぎても気づかない、という種類の不具合が多い場所です。ここには、定期実行とサーバーの運用で起きた 9 つのことと、直し方を、起きた順にまとめました。
 
@@ -2544,6 +2556,8 @@ URL: https://koshinstudio.com/notes/xcode152-sdk/
 書いた人：Koshin (https://koshinstudio.com/about/#operator)（Web エンジニア・アプリエンジニア）　公開：2026-10-08
 トレカダッシュ 開発の記録 ／ 2026年10月
 
+  トレカダッシュは、2026年11月22日にサービスを終了しました。App Store での配信も止めています。この記事は、開発の記録として残しています。
+
   iOS アプリ「トレカダッシュ」は、2017 年の古い Mac で、Xcode 15.2 を使って作っています。この環境では、Firebase の iOS SDK と、AdMob（Google Mobile Ads）の SDK を、新しい版にすると、ビルドできません。どの版から使えなくなって、どの版に固定したのか。開発の引き継ぎ記録（2026年7月）に残っている内容で書きます。
 
   このサイトには、トレカダッシュの作品ページがあります（トレカダッシュ (https://koshinstudio.com/works/torecadash/)）。ここに書くのは、開発の記録です。版の番号は、2026 年 7 月の時点のもので、いまの最新版では、事情が違うかもしれません。
@@ -2615,6 +2629,8 @@ URL: https://koshinstudio.com/notes/itms-91064/
 
 書いた人：Koshin (https://koshinstudio.com/about/#operator)（Web エンジニア・アプリエンジニア）　公開：2026-10-08
 トレカダッシュ 開発の記録 ／ 2026年10月
+
+  トレカダッシュは、2026年11月22日にサービスを終了しました。App Store での配信も止めています。この記事は、開発の記録として残しています。
 
   iOS アプリ「トレカダッシュ」をアップロードしたところ、Apple 側の自動審査で、ビルド 877 が「無効なバイナリ」として却下されました。エラーコードは ITMS-91064。原因は、プライバシーマニフェスト（PrivacyInfo.xcprivacy）の、二つの項目の組み合わせでした。コミットの記録で、何が起きて、どう直したかを書きます。
 
@@ -3001,6 +3017,8 @@ URL: https://koshinstudio.com/notes/apple-signin/
 
 書いた人：Koshin (https://koshinstudio.com/about/#operator)（Web エンジニア・アプリエンジニア）　公開：2026-10-08
 トレカダッシュ 開発の記録 ／ 2026年10月
+
+  トレカダッシュは、2026年11月22日にサービスを終了しました。App Store での配信も止めています。この記事は、開発の記録として残しています。
 
   iOS アプリ「トレカダッシュ」で、「アプリを一度落とすと、また Apple のサインインを求められる」という報告がありました。調べると、19 人のうち 17 人が、作られては捨てられた匿名アカウントでした。原因は、アプリを起動した直後の、たった 1 行の確認のしかたでした。HANDOFF とコミット（2026年8月14日）の記録で書きます。
 
@@ -3559,6 +3577,8 @@ URL: https://koshinstudio.com/notes/torecadash-watchdog/
 書いた人：Koshin (https://koshinstudio.com/about/#operator)（Web エンジニア・アプリエンジニア）　公開：2026-10-08
 トレカダッシュ 開発の記録 ／ 2026年10月
 
+  トレカダッシュは、2026年11月22日にサービスを終了しました。App Store での配信も止めています。この記事は、開発の記録として残しています。
+
   iOS アプリ「トレカダッシュ」で、「なんかアプリ、めっちゃクラッシュする」という報告がありました。実機のログを読むと、アプリが固まって、OS に強制終了されていたことが分かりました。原因は、画面を描き直すたびに、951件の記事を毎回数え直していたことでした。コミットの記録で書きます。
 
   このサイトには、トレカダッシュの作品ページはまだありません。ここに書くのは、開発の記録です。
@@ -3615,6 +3635,8 @@ URL: https://koshinstudio.com/notes/torecadash-ci/
 
 書いた人：Koshin (https://koshinstudio.com/about/#operator)（Web エンジニア・アプリエンジニア）　公開：2026-10-08
 トレカダッシュ 開発の記録 ／ 2026年10月
+
+  トレカダッシュは、2026年11月22日にサービスを終了しました。App Store での配信も止めています。この記事は、開発の記録として残しています。
 
   iOS アプリ「トレカダッシュ」の開発で、「TestFlight に新しいビルドが来ない」という不具合が起きました。最初に出した原因は間違っていました。どこで間違えて、どう気づいて、本当の原因は何だったのか。HANDOFF（開発の引き継ぎ記録）とコミットに残っている数字で書きます。
 
@@ -3750,6 +3772,8 @@ URL: https://koshinstudio.com/notes/tcg-product-matching/
 
 書いた人：Koshin (https://koshinstudio.com/about/#operator)（Web エンジニア・アプリエンジニア）　公開：2026-10-08
 トレカダッシュ 開発の記録 ／ 8 件のまとめ
+
+  トレカダッシュは、2026年11月22日にサービスを終了しました。App Store での配信も止めています。この記事は、開発の記録として残しています。
 
   抽選の記事を「どの商品の話か」に結びつけるのは、トレカダッシュの中心の処理です。商品名は、英語とカタカナ、略称、セットの書き方、誤字で、いくらでも形を変えます。ここには、商品の照合で実際に起きた 8 つの失敗と、直し方と、測った数字を、起きた順にまとめました。
 
@@ -4294,6 +4318,8 @@ URL: https://koshinstudio.com/notes/silent-failures/
 
 書いた人：Koshin (https://koshinstudio.com/about/#operator)（Web エンジニア・アプリエンジニア）　公開：2026-10-08
 トレカダッシュ 開発の記録 ／ 7 件のまとめ
+
+  トレカダッシュは、2026年11月22日にサービスを終了しました。App Store での配信も止めています。この記事は、開発の記録として残しています。
 
   いちばん厄介な不具合は、エラーが出ないものです。処理は「成功」と言い、画面には何かが出ているのに、本物の抽選が黙って捨てられていたり、リンク先を一度も読めていなかったりします。ここには、そうした「静かに壊れていた」7 つの実例と、どうやって気づいたか、どう直したかを、起きた順にまとめました。
 
@@ -4871,6 +4897,8 @@ URL: https://koshinstudio.com/notes/data-repair/
 書いた人：Koshin (https://koshinstudio.com/about/#operator)（Web エンジニア・アプリエンジニア）　公開：2026-10-08
 トレカダッシュ 開発の記録 ／ 7 件のまとめ
 
+  トレカダッシュは、2026年11月22日にサービスを終了しました。App Store での配信も止めています。この記事は、開発の記録として残しています。
+
   入口の不具合を直しても、すでに入ってしまったデータは直りません。逆に、後から掃除する仕組みがあると、入口の不具合が見えなくなります。ここには、データの不具合を直すときに実際に踏んだ 7 つの失敗と、そこから決めた手順を、起きた順にまとめました。
 
   それぞれの節は、もとは別々に公開していた記録です（2026 年 10 月から）。数字と出典は、その時の作業の記録のままです。テーマごとに読めるよう、1 つの記事にまとめ直しました（2026 年 11 月 7 日）。
@@ -5402,6 +5430,8 @@ URL: https://koshinstudio.com/notes/app-store-review/
 書いた人：Koshin (https://koshinstudio.com/about/#operator)（Web エンジニア・アプリエンジニア）　公開：2026-10-08
 トレカダッシュ 開発の記録 ／ 2 件のまとめ
 
+  トレカダッシュは、2026年11月22日にサービスを終了しました。App Store での配信も止めています。この記事は、開発の記録として残しています。
+
   はじめて App Store にアプリを出すと、審査で何度か止まります。ここには、トレカダッシュの提出で実際に止まった記録を 2 つまとめました。リジェクトではなく「情報が足りない」と言われた件と、そのあとに止まった 4 つの件です。
 
   それぞれの節は、もとは別々に公開していた記録です（2026 年 10 月から）。数字と出典は、その時の作業の記録のままです。テーマごとに読めるよう、1 つの記事にまとめ直しました（2026 年 11 月 7 日）。
@@ -5868,6 +5898,8 @@ URL: https://koshinstudio.com/notes/ai-cost-cutting/
 
 書いた人：Koshin (https://koshinstudio.com/about/#operator)（Web エンジニア・アプリエンジニア）　公開：2026-10-07
 トレカダッシュ 開発の記録 ／ 5 件のまとめ
+
+  トレカダッシュは、2026年11月22日にサービスを終了しました。App Store での配信も止めています。この記事は、開発の記録として残しています。
 
   個人で作るアプリにとって、毎月の費用は死活問題です。トレカダッシュでは、AI の問い合わせ、データベースの読み取り、ページの取得に、お金がかかります。ここには、削る前に測り直した 5 つの記録をまとめました。「減るはず」が外れた話も、そのまま書いています。
 
@@ -7912,9 +7944,7 @@ URL: https://koshinstudio.com/works/torecadash/
 
   Other languages: English (https://koshinstudio.com/en/works/torecadash/)
 
-  iPhone のアプリです。App Store で配信中です（無料。Pro は有料）。
-
-  App Store で開く (https://apps.apple.com/jp/app/id6788758920)
+  トレカダッシュは、2026年11月22日にサービスを終了しました。App Store での配信も止めています。これまでご利用いただき、ありがとうございました。このページは、作ったものの記録として残しています（以下は、配信していたときの内容です）。
 
     15ジャンルに対応
     3つの販売形式
@@ -7978,9 +8008,9 @@ URL: https://koshinstudio.com/works/torecadash/
 
 ## よくある質問
 
-### どこで手に入りますか？
+### いまも使えますか？
 
-  App Store で配信している iPhone 向けのアプリです。このページの「App Store で開く」から入れます。
+  2026年11月22日にサービスを終了し、App Store での配信も止めました。いまは入手できません。
 
 ### ログインは必要ですか？
 
@@ -8417,7 +8447,7 @@ URL: https://koshinstudio.com/about/
 
 ## 運営者について
 
-  Koshin Studio は、Koshin（ニックネーム）が、個人で運営しています。Web エンジニア、アプリエンジニアとして活動していて、なんでも作っています。ブラウザで遊べるゲーム、診断、iPhone のアプリ（App Store で配信している「トレカダッシュ (https://koshinstudio.com/works/torecadash/)」など）を、自分で作って、公開しています。このサイトに載せているのは、作ったものの紹介と、作る途中で測った数字、起きた不具合と直し方の記録です。
+  Koshin Studio は、Koshin（ニックネーム）が、個人で運営しています。Web エンジニア、アプリエンジニアとして活動していて、なんでも作っています。ブラウザで遊べるゲーム、診断、iPhone のアプリ（2026年11月にサービスを終了した「トレカダッシュ (https://koshinstudio.com/works/torecadash/)」など）を、自分で作って、公開しています。このサイトに載せているのは、作ったものの紹介と、作る途中で測った数字、起きた不具合と直し方の記録です。
 
   記事の数字は、自分のアプリのログ、データ、ソースコード、公式のページで確かめたものです。確かめられなかったことは、確かめられなかったと書きます。ご意見、記事の間違いの指摘、取材やお仕事のご相談は、下の連絡先へお願いします。
 
@@ -8606,6 +8636,8 @@ URL: https://koshinstudio.com/en/notes/swiftui-hit-area/
 Written by Koshin (https://koshinstudio.com/en/about/#operator) (web engineer and app engineer) · published 2026-10-17
 Development log of the Toreca Dash app / August 2026
 
+  Toreca Dash ended its service on November 22, 2026. It is no longer available on the App Store. This article stays up as a development log.
+
   The application-record screen of my app Toreca Dash has “Won” and “Lost” buttons. A report came: “the buttons only respond on the text; hard to use”.
 
   This was the third time I got that report (20 July, 1 August and 27 August). I had thought I had fixed it twice. The code said “fix”. And yet it had never been fixed.
@@ -8663,6 +8695,8 @@ URL: https://koshinstudio.com/en/notes/icloud-overwrite/
 
 Written by Koshin (https://koshinstudio.com/en/about/#operator) (web engineer and app engineer) · published 2026-10-17
 Development log of the Toreca Dash app / August 2026
+
+  Toreca Dash ended its service on November 22, 2026. It is no longer available on the App Store. This article stays up as a development log.
 
   My iPhone app Toreca Dash has a record of applications that users build up themselves: which lotteries they entered and how they turned out. It is a personal record built by hand, and once lost it cannot be recovered.
 
@@ -8727,6 +8761,8 @@ URL: https://koshinstudio.com/en/notes/test-ads/
 
 Written by Koshin (https://koshinstudio.com/en/about/#operator) (web engineer and app engineer) · published 2026-10-17
 Development log of the Toreca Dash app / September 2026
+
+  Toreca Dash ended its service on November 22, 2026. It is no longer available on the App Store. This article stays up as a development log.
 
   My app Toreca Dash has a daily lottery (omikuji) feature. “Watch a video to try” starts the draw animation after a video ad.
 
@@ -9095,6 +9131,8 @@ URL: https://koshinstudio.com/en/notes/itms-91064/
 Written by Koshin (https://koshinstudio.com/en/about/#operator) (web engineer and app engineer) · published 2026-10-08
 Development log of Torecadash / October 2026
 
+  Toreca Dash ended its service on November 22, 2026. It is no longer available on the App Store. This article stays up as a development log.
+
   I uploaded my iOS app, Torecadash, and Apple's automated review rejected build 877 as an “Invalid Binary”. The error code was ITMS-91064. The cause was a combination of two entries in the privacy manifest (PrivacyInfo.xcprivacy). This is what happened and how I fixed it, written from my commit history.
 
 ## What happened
@@ -9355,9 +9393,7 @@ URL: https://koshinstudio.com/en/works/torecadash/
   Lotteries, pre-orders, first-come sales.
 The Japanese card drops that are hard to keep up with, in one place, with alerts.
 
-  Open in the App Store (https://apps.apple.com/jp/app/id6788758920)
-
-  Free to download. Pro is an optional paid upgrade.
+  Toreca Dash ended its service on November 22, 2026, and is no longer available on the App Store. Thank you to everyone who used it. This page stays up as a record of what I made (what follows describes the app as it was).
 
 ## What it is
 
@@ -9421,9 +9457,9 @@ The Japanese card drops that are hard to keep up with, in one place, with alerts
 
 ## FAQ
 
-### Is it free?
+### Can I still use it?
 
-  Yes. The main features are free. Pro is an optional paid plan.
+  No. The service ended on November 22, 2026, and the app is no longer available on the App Store.
 
 ### Do I need an account?
 
@@ -9433,9 +9469,7 @@ The Japanese card drops that are hard to keep up with, in one place, with alerts
 
   No. It is an unofficial app made by an individual, and is not affiliated with any card game publisher or store. Information comes from stores’ public announcements; always confirm the latest details on the store’s official page before you apply or buy.
 
-  Open in the App Store (https://apps.apple.com/jp/app/id6788758920)
-
-  Support (https://cardalerthub.web.app/support.html) / Terms (https://cardalerthub.web.app/terms.html) / Privacy (https://cardalerthub.web.app/privacy.html)
+    Support (https://cardalerthub.web.app/support.html) / Terms (https://cardalerthub.web.app/terms.html) / Privacy (https://cardalerthub.web.app/privacy.html)
 
 
 ---
@@ -9707,7 +9741,7 @@ But the cause was not where I thought.
 
 ## About the operator
 
-  Koshin Studio is run by Koshin (a nickname), alone. I work as a web engineer and an app engineer, and I make all sorts of things. I make and publish browser games, a quiz, and iPhone apps (such as Toreca Dash (https://koshinstudio.com/en/works/torecadash/), available on the App Store). This site carries introductions to what I made, numbers I measured while making it, and records of bugs and how I fixed them.
+  Koshin Studio is run by Koshin (a nickname), alone. I work as a web engineer and an app engineer, and I make all sorts of things. I make and publish browser games, a quiz, and iPhone apps (such as Toreca Dash (https://koshinstudio.com/en/works/torecadash/), which ended its service in November 2026). This site carries introductions to what I made, numbers I measured while making it, and records of bugs and how I fixed them.
 
   The numbers in articles are ones I checked against my own app’s logs, data and source code, or official pages. What I could not confirm, I say I could not confirm. For feedback, corrections, interviews or work enquiries, please use the contact section below.
 
@@ -9755,6 +9789,8 @@ URL: https://koshinstudio.com/en/notes/xcode152-sdk/
 
 Written by Koshin (https://koshinstudio.com/en/about/#operator) (web engineer and app engineer) · published 2026-10-09
 Development log of Torecadash / October 2026
+
+  Toreca Dash ended its service on November 22, 2026. It is no longer available on the App Store. This article stays up as a development log.
 
   I build my iOS app, Torecadash, on a 2017 Mac with Xcode 15.2. In this environment, newer versions of the Firebase iOS SDK and the AdMob (Google Mobile Ads) SDK do not build. This is which version breaks and which version I pinned, written from my hand-over notes (July 2026).
 
@@ -9827,6 +9863,8 @@ URL: https://koshinstudio.com/en/notes/torecadash-watchdog/
 
 Written by Koshin (https://koshinstudio.com/en/about/#operator) (web engineer and app engineer) · published 2026-10-09
 Development log of Torecadash / October 2026
+
+  Toreca Dash ended its service on November 22, 2026. It is no longer available on the App Store. This article stays up as a development log.
 
   For my iOS app, Torecadash, I received a report: “the app crashes a lot.” Reading the device log, I found that the app froze and was force-quit by the OS. The cause was that it recounted 951 articles every time the screen was redrawn. This is written from my commit history.
 
@@ -9963,6 +10001,8 @@ URL: https://koshinstudio.com/en/notes/torecadash-ci/
 Written by Koshin (https://koshinstudio.com/en/about/#operator) (web engineer and app engineer) · published 2026-10-09
 Development log of Torecadash / October 2026
 
+  Toreca Dash ended its service on November 22, 2026. It is no longer available on the App Store. This article stays up as a development log.
+
   While developing my iOS app, Torecadash, I hit a bug: “new builds are not arriving in TestFlight.” The first cause I came up with was wrong. This is where I went wrong, how I noticed, and what the real cause was, written from the numbers in my hand-over notes and commits.
 
 ## The first diagnosis: “[ci skip] is the cause”
@@ -10024,6 +10064,8 @@ URL: https://koshinstudio.com/en/notes/apple-signin/
 
 Written by Koshin (https://koshinstudio.com/en/about/#operator) (web engineer and app engineer) · published 2026-10-09
 Development log of Torecadash / October 2026
+
+  Toreca Dash ended its service on November 22, 2026. It is no longer available on the App Store. This article stays up as a development log.
 
   In my iOS app, Torecadash, a user reported: “once I kill the app, it asks me to sign in with Apple again.” When I looked, 17 of the 19 users were anonymous accounts that had been created and thrown away. The cause was how I checked, with a single line, right after launch. This is from my hand-over notes and the commit record (August 14, 2026).
 
@@ -12382,19 +12424,19 @@ URL: https://koshinstudio.com/en/notes/tcg-lottery-app-compare/
 Written by Koshin (https://koshinstudio.com/en/about/#operator) (web engineer and app engineer) · published 2026-11-07
 Toreca Dash / Comparison / October 2026
 
+  Toreca Dash ended its service on November 22, 2026. It is no longer available on the App Store. This article stays up as a development log.
+
   In Japan, new Pokémon Card Game boxes and other popular trading cards are often sold by lottery (抽選, chūsen): you enter at a store or online shop before a deadline, and only winners can buy. Several apps and sites track these lotteries, pre-orders and restocks. This article puts Toreca Dash and four others side by side on the same items, for anyone looking for a Japanese TCG lottery app.
 
   Disclosure first: I (Koshin) am the developer of Toreca Dash. This is not a neutral third-party comparison. For the other services I wrote only what their official pages and App Store pages said when I checked on October 23, 2026, and marked anything not stated as “not stated.” I also wrote Toreca Dash’s weak points.
 
   For readers outside Japan: all five services cover stores in Japan, and their information is mostly in Japanese. Most lotteries require a Japanese address or in-store pickup, and some stores require a membership. They are most useful if you live in Japan, are visiting, or use a proxy-buying service.
 
-  See Toreca Dash on the App Store (https://apps.apple.com/jp/app/id6788758920)
-
-  Toreca Dash on the App Store: https://apps.apple.com/jp/app/id6788758920 (https://apps.apple.com/jp/app/id6788758920) (free, iPhone) / about page on this site: Toreca Dash (https://koshinstudio.com/en/works/torecadash/)
+  Record of Toreca Dash on this site: Toreca Dash (https://koshinstudio.com/en/works/torecadash/)
 
 ## Short answer: which one to pick
 
-- You follow games other than Pokémon (Yu-Gi-Oh!, One Piece, Gundam and more) or want iPhone push alerts → Toreca Dash (https://apps.apple.com/jp/app/id6788758920) (15 games)
+- You follow games other than Pokémon (Yu-Gi-Oh!, One Piece, Gundam and more) or want iPhone push alerts → Toreca Dash (15 games; ended on November 22, 2026)
 
 - A browser or LINE is enough, not an iPhone app → Toreget (web and LINE, 6 games)
 
@@ -12410,7 +12452,7 @@ Toreca Dash / Comparison / October 2026
 
      | Toreca Dash | Toreget | NowPokeca | Pokeka Tracker | Toreca no Chizu
 
-      Where | App Store (https://apps.apple.com/jp/app/id6788758920) | cardchusen.com (https://cardchusen.com/) | App Store (https://apps.apple.com/us/app/-/id6469001897) | App Store (https://apps.apple.com/es/app/pokeka-tracker-%E3%83%9D%E3%82%B1%E3%82%AB%E4%BE%A1%E6%A0%BC%E3%82%92%E7%A2%BA%E8%AA%8D%E3%81%A7%E3%81%8D%E3%82%8B%E3%82%A2%E3%83%97%E3%83%AA/id6450254728) | torecamap.co.jp (https://torecamap.co.jp/)
+      Where | App Store (removed on November 22, 2026) | cardchusen.com (https://cardchusen.com/) | App Store (https://apps.apple.com/us/app/-/id6469001897) | App Store (https://apps.apple.com/es/app/pokeka-tracker-%E3%83%9D%E3%82%B1%E3%82%AB%E4%BE%A1%E6%A0%BC%E3%82%92%E7%A2%BA%E8%AA%8D%E3%81%A7%E3%81%8D%E3%82%8B%E3%82%A2%E3%83%97%E3%83%AA/id6450254728) | torecamap.co.jp (https://torecamap.co.jp/)
 
       Form | iPhone app | Website + LINE alerts | iPhone app | iPhone / iPad app | Website
 
@@ -13158,6 +13200,8 @@ URL: https://koshinstudio.com/en/notes/tcg-store-matching/
 Written by Koshin (https://koshinstudio.com/en/about/#operator) (web engineer and app engineer) · published 2026-11-07
 Development log of Toreca Dash / 4 records in one place
 
+  Toreca Dash ended its service on November 22, 2026. It is no longer available on the App Store. This article stays up as a development log.
+
   Toreca Dash reads store announcements and posts on X to work out which store is running which lottery. The easiest thing to get wrong was the store’s name: the same store written differently, different stores sharing one link, and vague names turning into a far-away place on the map. These are four real store-matching mistakes and how they were fixed, in the order they happened.
 
   Each section was first published as a separate record (from 2026-10). Numbers and sources are as in the work logs of the time. They were gathered into one article per theme on 7 November 2026.
@@ -13447,6 +13491,8 @@ URL: https://koshinstudio.com/en/notes/tcg-product-matching/
 
 Written by Koshin (https://koshinstudio.com/en/about/#operator) (web engineer and app engineer) · published 2026-11-07
 Development log of Toreca Dash / 8 records in one place
+
+  Toreca Dash ended its service on November 22, 2026. It is no longer available on the App Store. This article stays up as a development log.
 
   Linking each lottery article to the product it is about is the core of Toreca Dash. Product names change shape endlessly: English versus katakana, abbreviations, how sets are written, and typos. These are eight real product-matching failures, with the fixes and the numbers measured, in the order they happened.
 
@@ -13994,6 +14040,8 @@ URL: https://koshinstudio.com/en/notes/silent-failures/
 Written by Koshin (https://koshinstudio.com/en/about/#operator) (web engineer and app engineer) · published 2026-11-07
 Development log of Toreca Dash / 7 records in one place
 
+  Toreca Dash ended its service on November 22, 2026. It is no longer available on the App Store. This article stays up as a development log.
+
   The worst bugs are the ones that raise no error. The job says “success” and something shows on screen, yet real lotteries are being thrown away, or links are never actually read. These are seven such silent failures, how they were noticed and how they were fixed, in the order they happened.
 
   Each section was first published as a separate record (from 2026-10). Numbers and sources are as in the work logs of the time. They were gathered into one article per theme on 7 November 2026.
@@ -14493,6 +14541,8 @@ URL: https://koshinstudio.com/en/notes/crawl-monitoring/
 
 Written by Koshin (https://koshinstudio.com/en/about/#operator) (web engineer and app engineer) · published 2026-11-07
 Development log of Toreca Dash / 7 records in one place
+
+  Toreca Dash ended its service on November 22, 2026. It is no longer available on the App Store. This article stays up as a development log.
 
   Lotteries and first-come sales are over once you miss them. Toreca Dash crawls store sites, aggregator sites and X to watch for them. These are seven records of counting the misses and cutting them, including cases where the measurement itself was wrong.
 
@@ -15045,6 +15095,8 @@ URL: https://koshinstudio.com/en/notes/scheduled-jobs/
 
 Written by Koshin (https://koshinstudio.com/en/about/#operator) (web engineer and app engineer) · published 2026-11-07
 Development log of Toreca Dash / 9 records in one place
+
+  Toreca Dash ended its service on November 22, 2026. It is no longer available on the App Store. This article stays up as a development log.
 
   Behind Toreca Dash, hundreds of jobs run hourly and daily. It is a place full of bugs nobody notices: jobs that stopped, and jobs that run far too often. These are nine things that happened with scheduled jobs and server operations, and how they were fixed, in the order they happened.
 
@@ -15737,6 +15789,8 @@ URL: https://koshinstudio.com/en/notes/ai-cost-cutting/
 Written by Koshin (https://koshinstudio.com/en/about/#operator) (web engineer and app engineer) · published 2026-11-07
 Development log of Toreca Dash / 5 records in one place
 
+  Toreca Dash ended its service on November 22, 2026. It is no longer available on the App Store. This article stays up as a development log.
+
   For an app made by one person, the monthly bill matters. Toreca Dash pays for AI calls, database reads and page fetches. These are five records of measuring again before cutting, including the times “this should go down” turned out wrong.
 
   Each section was first published as a separate record (from 2026-10). Numbers and sources are as in the work logs of the time. They were gathered into one article per theme on 7 November 2026.
@@ -16121,6 +16175,8 @@ URL: https://koshinstudio.com/en/notes/data-repair/
 
 Written by Koshin (https://koshinstudio.com/en/about/#operator) (web engineer and app engineer) · published 2026-11-07
 Development log of Toreca Dash / 7 records in one place
+
+  Toreca Dash ended its service on November 22, 2026. It is no longer available on the App Store. This article stays up as a development log.
 
   Fixing the entry point does not fix data that already got in. And when something cleans up afterwards, the entry bug becomes invisible. These are seven real mistakes made while repairing data, and the procedures decided from them, in the order they happened.
 
@@ -16652,6 +16708,8 @@ URL: https://koshinstudio.com/en/notes/app-store-review/
 
 Written by Koshin (https://koshinstudio.com/en/about/#operator) (web engineer and app engineer) · published 2026-11-07
 Development log of Toreca Dash / 2 records in one place
+
+  Toreca Dash ended its service on November 22, 2026. It is no longer available on the App Store. This article stays up as a development log.
 
   The first time you submit an app to the App Store, review stops you a few times. These are two records of where Toreca Dash actually got stuck: being asked for more information rather than rejected, and the four rejections after that.
 

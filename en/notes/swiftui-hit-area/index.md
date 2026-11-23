@@ -12,6 +12,8 @@
 
 Development log of the Toreca Dash app / August 2026
 
+  Toreca Dash ended its service on November 22, 2026. It is no longer available on the App Store. This article stays up as a development log.
+
   The application-record screen of my app Toreca Dash has “Won” and “Lost” buttons. A report came: “the buttons only respond on the text; hard to use”.
 
   This was the third time I got that report (20 July, 1 August and 27 August). I had thought I had fixed it twice. The code said “fix”. And yet it had never been fixed.

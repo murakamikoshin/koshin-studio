@@ -12,6 +12,8 @@
 
 Development log of Torecadash / October 2026
 
+  Toreca Dash ended its service on November 22, 2026. It is no longer available on the App Store. This article stays up as a development log.
+
   In my iOS app, Torecadash, a user reported: “once I kill the app, it asks me to sign in with Apple again.” When I looked, 17 of the 19 users were anonymous accounts that had been created and thrown away. The cause was how I checked, with a single line, right after launch. This is from my hand-over notes and the commit record (August 14, 2026).
 
 ## The symptom

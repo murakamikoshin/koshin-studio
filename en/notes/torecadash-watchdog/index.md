@@ -12,6 +12,8 @@
 
 Development log of Torecadash / October 2026
 
+  Toreca Dash ended its service on November 22, 2026. It is no longer available on the App Store. This article stays up as a development log.
+
   For my iOS app, Torecadash, I received a report: “the app crashes a lot.” Reading the device log, I found that the app froze and was force-quit by the OS. The cause was that it recounted 951 articles every time the screen was redrawn. This is written from my commit history.
 
 ## What the log showed

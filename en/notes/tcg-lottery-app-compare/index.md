@@ -12,19 +12,19 @@
 
 Toreca Dash / Comparison / October 2026
 
+  Toreca Dash ended its service on November 22, 2026. It is no longer available on the App Store. This article stays up as a development log.
+
   In Japan, new Pokémon Card Game boxes and other popular trading cards are often sold by lottery (抽選, chūsen): you enter at a store or online shop before a deadline, and only winners can buy. Several apps and sites track these lotteries, pre-orders and restocks. This article puts Toreca Dash and four others side by side on the same items, for anyone looking for a Japanese TCG lottery app.
 
   Disclosure first: I (Koshin) am the developer of Toreca Dash. This is not a neutral third-party comparison. For the other services I wrote only what their official pages and App Store pages said when I checked on October 23, 2026, and marked anything not stated as “not stated.” I also wrote Toreca Dash’s weak points.
 
   For readers outside Japan: all five services cover stores in Japan, and their information is mostly in Japanese. Most lotteries require a Japanese address or in-store pickup, and some stores require a membership. They are most useful if you live in Japan, are visiting, or use a proxy-buying service.
 
-  See Toreca Dash on the App Store (https://apps.apple.com/jp/app/id6788758920)
-
-  Toreca Dash on the App Store: https://apps.apple.com/jp/app/id6788758920 (https://apps.apple.com/jp/app/id6788758920) (free, iPhone) / about page on this site: Toreca Dash (https://koshinstudio.com/en/works/torecadash/)
+  Record of Toreca Dash on this site: Toreca Dash (https://koshinstudio.com/en/works/torecadash/)
 
 ## Short answer: which one to pick
 
-- You follow games other than Pokémon (Yu-Gi-Oh!, One Piece, Gundam and more) or want iPhone push alerts → Toreca Dash (https://apps.apple.com/jp/app/id6788758920) (15 games)
+- You follow games other than Pokémon (Yu-Gi-Oh!, One Piece, Gundam and more) or want iPhone push alerts → Toreca Dash (15 games; ended on November 22, 2026)
 
 - A browser or LINE is enough, not an iPhone app → Toreget (web and LINE, 6 games)
 
@@ -40,7 +40,7 @@ Toreca Dash / Comparison / October 2026
 
      | Toreca Dash | Toreget | NowPokeca | Pokeka Tracker | Toreca no Chizu
 
-      Where | App Store (https://apps.apple.com/jp/app/id6788758920) | cardchusen.com (https://cardchusen.com/) | App Store (https://apps.apple.com/us/app/-/id6469001897) | App Store (https://apps.apple.com/es/app/pokeka-tracker-%E3%83%9D%E3%82%B1%E3%82%AB%E4%BE%A1%E6%A0%BC%E3%82%92%E7%A2%BA%E8%AA%8D%E3%81%A7%E3%81%8D%E3%82%8B%E3%82%A2%E3%83%97%E3%83%AA/id6450254728) | torecamap.co.jp (https://torecamap.co.jp/)
+      Where | App Store (removed on November 22, 2026) | cardchusen.com (https://cardchusen.com/) | App Store (https://apps.apple.com/us/app/-/id6469001897) | App Store (https://apps.apple.com/es/app/pokeka-tracker-%E3%83%9D%E3%82%B1%E3%82%AB%E4%BE%A1%E6%A0%BC%E3%82%92%E7%A2%BA%E8%AA%8D%E3%81%A7%E3%81%8D%E3%82%8B%E3%82%A2%E3%83%97%E3%83%AA/id6450254728) | torecamap.co.jp (https://torecamap.co.jp/)
 
       Form | iPhone app | Website + LINE alerts | iPhone app | iPhone / iPad app | Website
 

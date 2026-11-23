@@ -12,6 +12,8 @@
 
 Development log of Toreca Dash / 7 records in one place
 
+  Toreca Dash ended its service on November 22, 2026. It is no longer available on the App Store. This article stays up as a development log.
+
   The worst bugs are the ones that raise no error. The job says “success” and something shows on screen, yet real lotteries are being thrown away, or links are never actually read. These are seven such silent failures, how they were noticed and how they were fixed, in the order they happened.
 
   Each section was first published as a separate record (from 2026-10). Numbers and sources are as in the work logs of the time. They were gathered into one article per theme on 7 November 2026.

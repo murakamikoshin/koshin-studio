@@ -12,6 +12,8 @@
 
 Development log of the Toreca Dash app / August 2026
 
+  Toreca Dash ended its service on November 22, 2026. It is no longer available on the App Store. This article stays up as a development log.
+
   My iPhone app Toreca Dash has a record of applications that users build up themselves: which lotteries they entered and how they turned out. It is a personal record built by hand, and once lost it cannot be recovered.
 
   On 23 August 2026 I read a file I had not yet reviewed (1,076 lines) and found a path where this record could vanish entirely. It began with trusting a function’s name.

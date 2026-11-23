@@ -12,6 +12,8 @@
 
 Development log of Toreca Dash / 5 records in one place
 
+  Toreca Dash ended its service on November 22, 2026. It is no longer available on the App Store. This article stays up as a development log.
+
   For an app made by one person, the monthly bill matters. Toreca Dash pays for AI calls, database reads and page fetches. These are five records of measuring again before cutting, including the times “this should go down” turned out wrong.
 
   Each section was first published as a separate record (from 2026-10). Numbers and sources are as in the work logs of the time. They were gathered into one article per theme on 7 November 2026.

@@ -12,6 +12,8 @@
 
 Development log of Torecadash / October 2026
 
+  Toreca Dash ended its service on November 22, 2026. It is no longer available on the App Store. This article stays up as a development log.
+
   I uploaded my iOS app, Torecadash, and Apple's automated review rejected build 877 as an “Invalid Binary”. The error code was ITMS-91064. The cause was a combination of two entries in the privacy manifest (PrivacyInfo.xcprivacy). This is what happened and how I fixed it, written from my commit history.
 
 ## What happened

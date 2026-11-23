@@ -12,6 +12,8 @@
 
 Development log of Toreca Dash / 7 records in one place
 
+  Toreca Dash ended its service on November 22, 2026. It is no longer available on the App Store. This article stays up as a development log.
+
   Lotteries and first-come sales are over once you miss them. Toreca Dash crawls store sites, aggregator sites and X to watch for them. These are seven records of counting the misses and cutting them, including cases where the measurement itself was wrong.
 
   Each section was first published as a separate record (from 2026-10). Numbers and sources are as in the work logs of the time. They were gathered into one article per theme on 7 November 2026.

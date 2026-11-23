@@ -11,17 +11,17 @@
 
 トレカダッシュ ／ 比較 ／ 2026年10月
 
+  トレカダッシュは、2026年11月22日にサービスを終了しました。App Store での配信も止めています。この記事は、開発の記録として残しています。
+
   トレカの抽選・予約・再販の情報を追うアプリやサイトは、いくつかあります。この記事は、ポケカをはじめとするトレカの抽選アプリを探している人向けに、トレカダッシュと、ほかのアプリ・サイト 4 つを、同じ項目で並べた比較です。
 
   先に書いておきます。私（Koshin）は、トレカダッシュを作っている本人です。中立な第三者の比較ではありません。ほかのサービスの内容は、2026 年 10 月 23 日に、それぞれの公式ページ・App Store のページで確かめた範囲だけを書き、書かれていなかったことは「記載なし」としています。弱いところも、トレカダッシュについて書きました。
 
-  トレカダッシュを App Store で見る (https://apps.apple.com/jp/app/id6788758920)
-
-  トレカダッシュの App Store のページ：https://apps.apple.com/jp/app/id6788758920 (https://apps.apple.com/jp/app/id6788758920)（無料・iPhone）／ 紹介ページ：https://cardalerthub.web.app/ (https://cardalerthub.web.app/) ／ このサイトの作品ページ (https://koshinstudio.com/works/torecadash/)
+  トレカダッシュの記録：このサイトの作品ページ (https://koshinstudio.com/works/torecadash/)
 
 ## 結論：どれを選ぶか
 
-- ポケカ以外（遊戯王・ワンピース・ガンダムなど）も追いたい／iPhone に通知がほしい → トレカダッシュ (https://apps.apple.com/jp/app/id6788758920)（15 ジャンル）
+- ポケカ以外（遊戯王・ワンピース・ガンダムなど）も追いたい／iPhone に通知がほしい → トレカダッシュ（15 ジャンル。2026年11月22日に終了）
 
 - iPhone ではなく、ブラウザや LINE で十分 → トレゲト（Web と LINE、6 ジャンル）
 
@@ -31,13 +31,13 @@
 
 - 近くのカードショップを探したい → トレカの地図（抽選の情報や通知は、記載なし）
 
-  併用もできます。たとえば、抽選の通知はトレカダッシュ、相場は別のアプリ、という使い方です。
+  併用もできます。たとえば、抽選の通知と相場を、別のアプリで見る使い方です。なお、トレカダッシュは2026年11月22日にサービスを終了したため、いまは選べません。
 
 ## 5 つの比較表
 
      | トレカダッシュ | トレゲト | NowPokeca | Pokeka Tracker | トレカの地図
 
-      入手先 | App Store (https://apps.apple.com/jp/app/id6788758920) | cardchusen.com (https://cardchusen.com/) | App Store (https://apps.apple.com/us/app/-/id6469001897) | App Store (https://apps.apple.com/es/app/pokeka-tracker-%E3%83%9D%E3%82%B1%E3%82%AB%E4%BE%A1%E6%A0%BC%E3%82%92%E7%A2%BA%E8%AA%8D%E3%81%A7%E3%81%8D%E3%82%8B%E3%82%A2%E3%83%97%E3%83%AA/id6450254728) | torecamap.co.jp (https://torecamap.co.jp/)
+      入手先 | App Store（2026年11月22日に配信終了） | cardchusen.com (https://cardchusen.com/) | App Store (https://apps.apple.com/us/app/-/id6469001897) | App Store (https://apps.apple.com/es/app/pokeka-tracker-%E3%83%9D%E3%82%B1%E3%82%AB%E4%BE%A1%E6%A0%BC%E3%82%92%E7%A2%BA%E8%AA%8D%E3%81%A7%E3%81%8D%E3%82%8B%E3%82%A2%E3%83%97%E3%83%AA/id6450254728) | torecamap.co.jp (https://torecamap.co.jp/)
 
       形 | iPhone アプリ | Web サイト＋LINE 通知 | iPhone アプリ | iPhone / iPad アプリ | Web サイト
 
@@ -177,4 +177,4 @@
 
 - 間違いに気づいた方は、連絡先 (https://koshinstudio.com/about/#contact)へお知らせください。確かめて、直します。
 
-  トレカダッシュについては、作品ページ (https://koshinstudio.com/works/torecadash/)に機能を、App Store (https://apps.apple.com/jp/app/id6788758920) に配信ページがあります。作った経緯や失敗は、Notes (https://koshinstudio.com/notes/) に書いています。
+  トレカダッシュについては、作品ページ (https://koshinstudio.com/works/torecadash/)に機能を残しています（2026年11月22日にサービス終了）。作った経緯や失敗は、Notes (https://koshinstudio.com/notes/) に書いています。

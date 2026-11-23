@@ -12,6 +12,8 @@
 
 Development log of Torecadash / October 2026
 
+  Toreca Dash ended its service on November 22, 2026. It is no longer available on the App Store. This article stays up as a development log.
+
   While developing my iOS app, Torecadash, I hit a bug: “new builds are not arriving in TestFlight.” The first cause I came up with was wrong. This is where I went wrong, how I noticed, and what the real cause was, written from the numbers in my hand-over notes and commits.
 
 ## The first diagnosis: “[ci skip] is the cause”

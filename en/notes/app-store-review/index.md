@@ -12,6 +12,8 @@
 
 Development log of Toreca Dash / 2 records in one place
 
+  Toreca Dash ended its service on November 22, 2026. It is no longer available on the App Store. This article stays up as a development log.
+
   The first time you submit an app to the App Store, review stops you a few times. These are two records of where Toreca Dash actually got stuck: being asked for more information rather than rejected, and the four rejections after that.
 
   Each section was first published as a separate record (from 2026-10). Numbers and sources are as in the work logs of the time. They were gathered into one article per theme on 7 November 2026.

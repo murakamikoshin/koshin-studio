@@ -12,6 +12,8 @@
 
 Development log of Toreca Dash / 7 records in one place
 
+  Toreca Dash ended its service on November 22, 2026. It is no longer available on the App Store. This article stays up as a development log.
+
   Fixing the entry point does not fix data that already got in. And when something cleans up afterwards, the entry bug becomes invisible. These are seven real mistakes made while repairing data, and the procedures decided from them, in the order they happened.
 
   Each section was first published as a separate record (from 2026-10). Numbers and sources are as in the work logs of the time. They were gathered into one article per theme on 7 November 2026.

@@ -12,6 +12,8 @@
 
 Development log of the Toreca Dash app / September 2026
 
+  Toreca Dash ended its service on November 22, 2026. It is no longer available on the App Store. This article stays up as a development log.
+
   My app Toreca Dash has a daily lottery (omikuji) feature. “Watch a video to try” starts the draw animation after a video ad.
 
   On 11 September 2026, reviewing the real-device checklist revealed a problem: because ads were not being served yet, 25 of the 163 checklist items could not be verified.
